@@ -105,7 +105,7 @@
 </footer>
 
 <!-- Floating WhatsApp Button with Notification Badge (Matches Reference Screenshot 1) -->
-<a href="<?= wa_url('Halo Wahana Totalita, saya ingin bertanya tentang program pelatihan') ?>"
+<a href="<?= wa_url($wa_float_msg ?? ($wa_msg ?? 'Halo Wahana Totalita, saya ingin bertanya tentang program pelatihan')) ?>"
    class="wa-float" target="_blank" rel="noopener" aria-label="Konsultasi WhatsApp">
   <span class="wa-badge" aria-label="1 pesan">1</span>
   <svg viewBox="0 0 24 24" fill="currentColor">

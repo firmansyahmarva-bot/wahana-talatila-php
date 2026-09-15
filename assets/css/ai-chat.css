@@ -15,6 +15,9 @@
   transition: transform .2s, box-shadow .2s;
   animation: wtc-pulse 3s ease-in-out infinite;
 }
+@media (max-width: 768px) {
+  .wtc-btn, .wtc-window { display: none !important; }
+}
 .wtc-btn:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(10,74,46,.5); }
 .wtc-btn svg  { width: 24px; height: 24px; }
 .wtc-btn-label {

@@ -331,12 +331,6 @@ $faq_schema = [
   </div>
 </section>
 
-<!-- STICKY MOBILE CTA (redesign 2026) -->
-<nav class="mcta" aria-label="Aksi cepat">
-  <a href="<?= wa_url('Halo, saya ingin konsultasi program pelatihan K3') ?>" class="mcta-wa" target="_blank" rel="noopener">💬 WhatsApp</a>
-  <a href="/jadwal/" class="mcta-jadwal">📅 Jadwal</a>
-</nav>
-
 <?php require __DIR__ . '/includes/footer.php'; ?>
 <?php require __DIR__ . '/includes/scripts.php'; ?>
 </body>
