@@ -6,21 +6,40 @@
 (function () {
   var bar = document.getElementById('scroll-progress');
   if (!bar) return;
+  var ticking = false;
   window.addEventListener('scroll', function () {
-    var docH  = document.documentElement.scrollHeight - window.innerHeight;
-    var pct   = docH > 0 ? (window.scrollY / docH) * 100 : 0;
-    bar.style.width = Math.min(pct, 100) + '%';
+    if (!ticking) {
+      window.requestAnimationFrame(function () {
+        var docH = document.documentElement.scrollHeight - window.innerHeight;
+        var pct  = docH > 0 ? (window.scrollY / docH) * 100 : 0;
+        bar.style.width = Math.min(pct, 100) + '%';
+        ticking = false;
+      });
+      ticking = true;
+    }
   }, { passive: true });
 })();
 
 // ─── Navbar: transparent → white on scroll ───────────────────
 const navbar = document.getElementById('navbar');
 if (navbar) {
-  const onScroll = () => {
+  let navTicking = false;
+  const updateNav = () => {
     navbar.classList.toggle('scrolled', window.scrollY > 40);
+    navTicking = false;
   };
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+  window.addEventListener('scroll', () => {
+    if (!navTicking) {
+      window.requestAnimationFrame(updateNav);
+      navTicking = true;
+    }
+  }, { passive: true });
+  // Avoid forced synchronous reflow during HTML parsing/script eval; check via rAF
+  if (typeof requestAnimationFrame !== 'undefined') {
+    requestAnimationFrame(() => {
+      if (window.scrollY > 40) navbar.classList.add('scrolled');
+    });
+  }
 }
 
 // ─── Mobile hamburger ────────────────────────────────────────
