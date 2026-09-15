@@ -1,12 +1,27 @@
 <!-- ═══════════════════════════════════════════════════ FOOTER -->
 <footer class="footer">
+  <!-- Quick Contact Strip (Matches Reference Screenshot 2) -->
+  <div class="footer-contact-strip">
+    <div class="container fcs-inner">
+      <a href="mailto:<?= e($s['site_email'] ?? 'info@wahanatotalita.com') ?>" class="fcs-btn">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        <span>Email Kami</span>
+      </a>
+      <a href="<?= wa_url('Halo Wahana Totalita, saya ingin tanya jadwal dan biaya pelatihan K3') ?>" target="_blank" rel="noopener" class="fcs-btn fcs-wa">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+        <span>WhatsApp Konsultasi</span>
+      </a>
+    </div>
+  </div>
+
   <div class="container footer-inner">
+    <!-- Col 1: Brand & Accreditation -->
     <div class="footer-brand">
       <div class="footer-logo">
         <?= theme_logo_html($s) ?>
         <span><strong><?= e($s['site_name'] ?? 'Wahana Totalita Konsultan') ?></strong></span>
       </div>
-      <p><?= e($s['site_tagline'] ?? '') ?></p>
+      <p>Lembaga pelatihan &amp; sertifikasi K3 resmi berlisensi Kemnaker RI &amp; terakreditasi BNSP. Melayani public training di Yogyakarta dan in-house di seluruh Indonesia.</p>
       <div class="footer-socials">
         <?php if (!empty($s['instagram_url'])): ?>
         <a href="<?= e($s['instagram_url']) ?>" target="_blank" rel="noopener" aria-label="Instagram">
@@ -31,107 +46,68 @@
       </div>
     </div>
 
+    <!-- Col 2: Program Sertifikasi Populer -->
     <div class="footer-nav">
-      <h4>Pelatihan K3</h4>
+      <h4>Program Populer</h4>
       <ul>
-        <li><a href="/pelatihan/">🎓 Semua Pelatihan</a></li>
-        <li><a href="/pelatihan/k3/">Pelatihan K3</a></li>
-        <li><a href="/pelatihan/lingkungan/">Pelatihan Lingkungan</a></li>
-        <li><a href="/pelatihan/system-management/">ISO &amp; System Management</a></li>
-        <li><a href="/pelatihan/mining/">Pelatihan Pertambangan</a></li>
-        <li><a href="/pelatihan/pelatihan-operator-k3-sertifikasi-bnsp/">Operator K3 (Sertifikasi BNSP)</a></li>
-        <li><a href="/pelatihan/pelatihan-ahli-k3-umum-fresh-graduate-kemnaker-online/">Ahli K3 Umum Fresh Graduate</a></li>
-        <li><a href="/pelatihan/tkbt-ii-surabaya/">TKBT II Surabaya</a></li>
-        <li><a href="/pelatihan/pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri/">Operator Forklift Kelas II</a></li>
-        <li><a href="/pelatihan/pelatihan-operator-pesawat-tenaga-produksi-ptp/">Operator Pesawat Tenaga Produksi (PTP)</a></li>
-        <li><a href="/pelatihan/pelatihan-dan-sertifikasi-pipe-fitter-sertifikasi-bnsp/">Pipe Fitter BNSP</a></li>
-        <li><a href="/pelatihan/perpanjangan-sertifikasi-bnsp-online/">Perpanjangan Sertifikasi BNSP</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-nav">
-      <h4>Sertifikasi Populer</h4>
-      <ul>
-        <li><a href="/pelatihan/operator-forklift-kelas-2-semarang/">Forklift Kelas II Semarang</a></li>
-        <li><a href="/pelatihan/ahli-k3-umum-balikpapan/">Ahli K3 Umum Balikpapan</a></li>
+        <li><a href="/pelatihan/k3/">Pelatihan K3 Lengkap</a></li>
+        <li><a href="/pelatihan/pelatihan-ahli-k3-umum-fresh-graduate-kemnaker-online/">Ahli K3 Umum Kemnaker</a></li>
         <li><a href="/pelatihan/ak3-bnsp/">Ahli K3 BNSP</a></li>
-        <li><a href="/pelatihan/pelatihan-dan-sertifikasi-welding-technologistsuperintendent-sertifikasi-bnsp/">Welding Technologist</a></li>
-        <li><a href="/pelatihan/pelatihan-internal-auditor-iso-45001-online/">Internal Auditor ISO 45001</a></li>
-        <li><a href="/pelatihan/pelatihan-petugas-p3k-first-aid-online/">Petugas P3K / First Aid</a></li>
+        <li><a href="/pelatihan/pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri/">Operator Forklift Kelas II</a></li>
         <li><a href="/pelatihan/pelatihan-damkar-paralel-kelas-dcba-sertifikasi-kemnaker-ri/">Damkar Kelas D–A</a></li>
-        <li><a href="/pelatihan/pelatihan-dan-sertifikasi-fillet-plate-welder-sertifikasi-bnsp/">Fillet Plate Welder</a></li>
+        <li><a href="/pelatihan/pelatihan-petugas-p3k-first-aid-online/">Petugas P3K / First Aid</a></li>
+        <li><a href="/pelatihan/pelatihan-internal-auditor-iso-45001-online/">Internal Auditor ISO 45001</a></li>
+        <li><a href="/pelatihan/">🎓 Katalog Semua Program</a></li>
       </ul>
     </div>
 
+    <!-- Col 3: Layanan & Fitur Platform -->
     <div class="footer-nav">
-      <h4>Jadwal &amp; Informasi</h4>
+      <h4>Layanan &amp; Fitur</h4>
       <ul>
         <li><a href="/jadwal/">📅 Jadwal Pelatihan <?= date('Y') ?></a></li>
         <li><a href="/jadwal/kalender/">Kalender Pelatihan</a></li>
-        <li><a href="/tools/safety-talk">Safety Talk</a></li>
-        <li><a href="/layanan-pemerintah">Layanan Pemerintah</a></li>
-        <li><a href="/perusahaan">Tentang Perusahaan</a></li>
-        <li><a href="/k3">Tentang K3</a></li>
-        <li><a href="/artikel/syarat-k3-tender-pemerintah-lpse/">Syarat K3 Tender Pemerintah</a></li>
-        <li><a href="/artikel/metode-investigasi-kecelakaan-kerja/">Investigasi Kecelakaan Kerja</a></li>
+        <li><a href="/tools/safety-talk">Safety Talk Generator</a></li>
+        <li><a href="/verifikasi/">Verifikasi Keaslian Sertifikat</a></li>
+        <li><a href="/perusahaan">Layanan In-House Perusahaan</a></li>
+        <li><a href="/artikel/">Artikel &amp; Regulasi K3</a></li>
+        <li><a href="/perusahaan">Tentang Wahana Totalita</a></li>
       </ul>
     </div>
 
-    <div class="footer-nav">
-      <h4>Kota Populer</h4>
-      <ul>
-        <li><a href="/pelatihan-k3-jakarta/">K3 Jakarta</a></li>
-        <li><a href="/pelatihan-k3-surabaya/">K3 Surabaya</a></li>
-        <li><a href="/pelatihan-k3-bandung/">K3 Bandung</a></li>
-        <li><a href="/pelatihan-k3-batam/">K3 Batam</a></li>
-        <li><a href="/pelatihan-k3-pekanbaru/">K3 Pekanbaru</a></li>
-        <li><a href="/pelatihan-k3-semarang/">K3 Semarang</a></li>
-        <li><a href="/pelatihan-k3-malang/">K3 Malang</a></li>
-        <li><a href="/pelatihan-k3-yogyakarta/">K3 Yogyakarta</a></li>
-        <li><a href="/pelatihan-k3-medan/">K3 Medan</a></li>
-        <li><a href="/pelatihan-k3-balikpapan/">K3 Balikpapan</a></li>
-        <li><a href="/pelatihan-k3-makassar/">K3 Makassar</a></li>
-      </ul>
-    </div>
-
+    <!-- Col 4: Wilayah Layanan & Kontak -->
     <div class="footer-contact">
-      <h4>Kontak</h4>
+      <h4>Wilayah &amp; Kontak</h4>
       <ul>
-        <?php if (!empty($s['site_phone'])): ?>
-        <li><a href="<?= wa_url() ?>" target="_blank">📱 WhatsApp</a></li>
-        <?php endif; ?>
-        <?php if (!empty($s['site_email'])): ?>
-        <li><span id="email-kontak" aria-label="Alamat email kontak"></span></li>
-        <?php endif; ?>
+        <li><a href="/pelatihan-k3-jakarta/">K3 Jakarta</a> · <a href="/pelatihan-k3-surabaya/">Surabaya</a></li>
+        <li><a href="/pelatihan-k3-balikpapan/">K3 Balikpapan (IKN)</a></li>
+        <li><a href="/pelatihan-k3-bandung/">K3 Bandung</a> · <a href="/pelatihan-k3-semarang/">Semarang</a></li>
+        <li><a href="/pelatihan-k3-medan/">K3 Medan</a> · <a href="/pelatihan-k3-makassar/">Makassar</a></li>
+        <li><a href="<?= wa_url() ?>" target="_blank">📱 WhatsApp: <?= e($s['wa_number'] ?? '0812-3503-6420') ?></a></li>
         <?php if (!empty($s['site_address'])): ?>
         <li>📍 <?= e($s['site_address']) ?></li>
         <?php endif; ?>
       </ul>
     </div>
   </div>
+
   <div class="footer-bottom">
     <div class="container">
       <p>© <?= date('Y') ?> <?= e($s['site_name'] ?? 'Wahana Totalita Konsultan') ?>. All rights reserved.
-        · <a href="/sitemap.xml" style="opacity:.5;text-decoration:none">Sitemap</a>
-        · <a href="/sitemap-jadwal.xml" style="opacity:.5;text-decoration:none">Sitemap Jadwal</a>
-        · <a href="/verifikasi/" style="opacity:.5;text-decoration:none">Verifikasi Sertifikat</a>
-        · <a href="/kebijakan-privasi" style="opacity:.5;text-decoration:none">Privasi</a>
-        · <a href="/syarat-ketentuan/" style="opacity:.5;text-decoration:none">Syarat &amp; Ketentuan</a>
-      </p>
-      <p style="margin-top:6px;font-size:.7rem;opacity:.45;line-height:1.6">
-        <a href="https://smk3.wahanatotalita.com/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">SMK3</a>
-        · <a href="https://iso.wahanatotalita.com/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">ISO</a>
-        · <a href="https://hse.wahanatotalita.com/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">HSE</a>
-        · <a href="https://training.wahanatotalita.com/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Training</a>
-        · <a href="https://k3umum.wahanatotalita.com/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">K3 Umum</a>
+        · <a href="/sitemap.xml" style="opacity:.6;text-decoration:none">Sitemap</a>
+        · <a href="/sitemap-jadwal.xml" style="opacity:.6;text-decoration:none">Sitemap Jadwal</a>
+        · <a href="/verifikasi/" style="opacity:.6;text-decoration:none">Verifikasi Sertifikat</a>
+        · <a href="/kebijakan-privasi" style="opacity:.6;text-decoration:none">Privasi</a>
+        · <a href="/syarat-ketentuan/" style="opacity:.6;text-decoration:none">Syarat &amp; Ketentuan</a>
       </p>
     </div>
   </div>
 </footer>
 
-<!-- Floating WhatsApp Button -->
-<a href="<?= wa_url('Halo Wahana Totalita, saya ingin bertanya') ?>"
-   class="wa-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+<!-- Floating WhatsApp Button with Notification Badge (Matches Reference Screenshot 1) -->
+<a href="<?= wa_url('Halo Wahana Totalita, saya ingin bertanya tentang program pelatihan') ?>"
+   class="wa-float" target="_blank" rel="noopener" aria-label="Konsultasi WhatsApp">
+  <span class="wa-badge" aria-label="1 pesan">1</span>
   <svg viewBox="0 0 24 24" fill="currentColor">
     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
   </svg>
