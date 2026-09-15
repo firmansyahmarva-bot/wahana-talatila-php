@@ -1,9 +1,51 @@
 <!-- ═══════════════════════════════════════════════════ SCRIPTS -->
 <script src="/assets/js/main.js" defer></script>
 
-<?php if (!empty($s['ga_measurement_id'])): ?>
-<script async src="https://www.googletagmanager.com/gtag/js?id=<?= e($s['ga_measurement_id']) ?>"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','<?= e($s['ga_measurement_id']) ?>');</script>
+<?php 
+$gtm_id = !empty($s['gtm_id']) ? $s['gtm_id'] : '';
+$ga_id  = !empty($s['ga_measurement_id']) ? $s['ga_measurement_id'] : '';
+if ($gtm_id || $ga_id): ?>
+<script>
+(function() {
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  window.gtag = gtag;
+
+  var analyticsLoaded = false;
+  function loadAnalytics() {
+    if (analyticsLoaded) return;
+    analyticsLoaded = true;
+
+    <?php if ($gtm_id): ?>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','<?= e($gtm_id) ?>');
+    <?php endif; ?>
+
+    <?php if ($ga_id && empty($gtm_id)): ?>
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=<?= e($ga_id) ?>';
+    document.head.appendChild(s);
+    gtag('js', new Date());
+    gtag('config', '<?= e($ga_id) ?>');
+    <?php endif; ?>
+  }
+
+  var events = ['scroll', 'touchstart', 'mousemove', 'click', 'keydown'];
+  function onInteraction() {
+    loadAnalytics();
+    events.forEach(function(e) { window.removeEventListener(e, onInteraction, { passive: true }); });
+  }
+  events.forEach(function(e) {
+    window.addEventListener(e, onInteraction, { passive: true, once: true });
+  });
+
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(function() { setTimeout(loadAnalytics, 2500); });
+  } else {
+    setTimeout(loadAnalytics, 3500);
+  }
+})();
+</script>
 <?php endif; ?>
 
 <!-- ── Cookie / Privacy Notice (UU PDP No. 27/2022) ── -->
@@ -100,7 +142,8 @@
 </script>
 
 <!-- AI Training Finder Chat Widget -->
-<link rel="stylesheet" href="/assets/css/ai-chat.css">
+<link rel="stylesheet" href="/assets/css/ai-chat.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="/assets/css/ai-chat.css"></noscript>
 <!-- Catalog: show 12 first, reveal rest on demand (filters/search auto-reveal) -->
 <script>
 (function(){
