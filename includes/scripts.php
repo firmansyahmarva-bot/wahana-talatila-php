@@ -1,5 +1,5 @@
 <!-- ═══════════════════════════════════════════════════ SCRIPTS -->
-<script src="/assets/js/main.js"></script>
+<script src="/assets/js/main.js" defer></script>
 
 <?php if (!empty($s['ga_measurement_id'])): ?>
 <script async src="https://www.googletagmanager.com/gtag/js?id=<?= e($s['ga_measurement_id']) ?>"></script>
