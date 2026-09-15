@@ -1,0 +1,8 @@
+title_template: {page_title} | {brand}
+default_description: Panduan karier, jenjang sertifikasi, dan pengetahuan keselamatan kerja (HSE/K3) di Indonesia.
+schema_type_map:
+  page: WebPage
+  pillar: Article
+  cluster: Article
+  faq: FAQPage
+brand: HSE Wahana

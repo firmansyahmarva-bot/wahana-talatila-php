@@ -1,0 +1,36 @@
+home:
+  type: WebPage
+karier-hse:
+  type: Article
+profesi-hse-di-indonesia:
+  type: Article
+cara-menjadi-hse-officer:
+  type: Article
+tips-cv-dan-interview-hse:
+  type: Article
+jenjang-karier-hse:
+  type: Article
+jenjang-karier-hse-officer-ke-manager:
+  type: Article
+sertifikasi-hse-di-indonesia:
+  type: Article
+spesialisasi-bidang-hse:
+  type: Article
+panduan-keselamatan-kerja:
+  type: Article
+dasar-dasar-k3-di-tempat-kerja:
+  type: Article
+alat-pelindung-diri-ppe:
+  type: Article
+identifikasi-bahaya-dan-penilaian-risiko:
+  type: Article
+pusat-pengetahuan-k3:
+  type: Article
+regulasi-k3-di-indonesia:
+  type: Article
+istilah-istilah-k3:
+  type: Article
+p2k3-panitia-pembina-k3:
+  type: Article
+faq:
+  type: FAQPage

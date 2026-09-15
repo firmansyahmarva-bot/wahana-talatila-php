@@ -1,0 +1,480 @@
+/* ============================================================
+   Wahana Totalita — Pelatihan Detail Page (redesign 2026-07-24)
+   Loaded only by pelatihan.php. All classes prefixed `pd-` so
+   nothing here can collide with the shared `.detail-*` rules in
+   style.css (those stay defined but unused on this page — not
+   deleted, in case anything else still references them).
+
+   Identity: an official safety-certification document made
+   beautiful — ink, amber hazard accent, a certificate seal in
+   the hero, and a "registration ticket" card as the sticky
+   sidebar's signature element (torn-perforation divider, same
+   document vocabulary as the seal, not a repeat of it).
+
+   Tokens declared once below; every rule reads from them.
+   ============================================================ */
+
+.pd-page {
+  --pd-ink:          #14181A;
+  --pd-ink-2:        #1D2224;
+  --pd-paper:        #F1F2ED;
+  --pd-paper-2:      #E7E8E1;
+  --pd-white:        #FFFFFF;
+  --pd-amber:        #FFB200;
+  --pd-amber-ink:    #1A1400;
+  --pd-safety-green: #1B6F52;
+  --pd-safety-green-soft: #E4EFE9;
+  --pd-steel:        #4B5563;
+  --pd-steel-soft:   #8A94A0;
+  --pd-hairline:        rgba(255,255,255,.14);
+  --pd-hairline-soft:   rgba(20,24,26,.12);
+  --pd-shadow-soft:  0 1px 2px rgba(20,24,26,.04), 0 12px 28px -14px rgba(20,24,26,.16);
+  --pd-shadow-lift:  0 1px 2px rgba(20,24,26,.05), 0 20px 40px -16px rgba(20,24,26,.22);
+
+  --pd-font-display: 'Big Shoulders Display', 'Arial Narrow', sans-serif;
+  --pd-font-body:    'Inter', system-ui, sans-serif;
+  --pd-font-mono:    'IBM Plex Mono', 'Courier New', monospace;
+
+  --pd-space-1: 4px;  --pd-space-2: 8px;  --pd-space-3: 12px;
+  --pd-space-4: 20px; --pd-space-5: 32px; --pd-space-6: 48px;
+  --pd-space-7: 72px; --pd-space-8: 104px;
+
+  --pd-nav-offset: 96px; /* sticky sidebar rest distance below fixed navbar */
+  --pd-sidebar-w: 336px;
+}
+
+.pd-page * { box-sizing: border-box; }
+
+/* ─── HERO ──────────────────────────────────────────────────── */
+.pd-hero {
+  position: relative;
+  background: var(--pd-ink);
+  padding: var(--pd-space-7) 0 var(--pd-space-6);
+  overflow: hidden;
+}
+.pd-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(
+    -45deg, rgba(255,178,0,.035) 0 14px, transparent 14px 28px
+  );
+  pointer-events: none;
+}
+.pd-hero-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: var(--pd-space-6);
+  align-items: center;
+}
+.pd-eyebrow {
+  display: inline-flex; align-items: center; gap: var(--pd-space-2);
+  font-family: var(--pd-font-mono); font-weight: 500;
+  font-size: 12.5px; letter-spacing: .09em; text-transform: uppercase;
+  color: var(--pd-amber);
+  margin: 0 0 var(--pd-space-4);
+}
+.pd-eyebrow::before {
+  content: ''; width: 6px; height: 6px; background: var(--pd-amber); border-radius: 50%;
+  flex-shrink: 0;
+}
+.pd-hero h1 {
+  font-family: var(--pd-font-display);
+  font-weight: 900;
+  font-size: clamp(2.1rem, 5.6vw, 3.9rem);
+  line-height: .97;
+  letter-spacing: -.005em;
+  text-transform: uppercase;
+  color: var(--pd-paper);
+  margin: 0 0 var(--pd-space-4);
+  text-wrap: balance;
+}
+.pd-hero-lede {
+  font-family: var(--pd-font-body);
+  font-size: 17px; line-height: 1.65;
+  color: #C8CBC5;
+  max-width: 54ch;
+  margin: 0 0 var(--pd-space-5);
+}
+.pd-hero-lede strong { color: var(--pd-paper); font-weight: 600; }
+
+.pd-hero-badges { display: flex; flex-wrap: wrap; gap: var(--pd-space-2); margin-bottom: var(--pd-space-5); }
+.pd-hero-badge {
+  font-family: var(--pd-font-mono); font-size: 11.5px; font-weight: 500;
+  letter-spacing: .04em; text-transform: uppercase;
+  color: #C8CBC5;
+  border: 1px solid var(--pd-hairline);
+  border-radius: 3px;
+  padding: 5px 10px;
+}
+
+.pd-cta-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--pd-space-4); }
+.pd-cta-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--pd-amber); color: var(--pd-amber-ink);
+  font-family: var(--pd-font-body); font-weight: 700; font-size: 16px;
+  padding: 16px 26px;
+  border: none; border-radius: 3px;
+  text-decoration: none; cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.pd-cta-btn:hover, .pd-cta-btn:focus-visible { transform: translateY(-2px); box-shadow: 0 10px 24px -8px rgba(255,178,0,.45); }
+.pd-cta-btn:focus-visible { outline: 2px solid var(--pd-amber); outline-offset: 3px; }
+.pd-cta-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+.pd-cta-secondary {
+  font-family: var(--pd-font-body); font-size: 13.5px; font-weight: 600;
+  color: var(--pd-paper); text-decoration: underline; text-decoration-color: var(--pd-hairline);
+}
+.pd-cta-secondary:hover { text-decoration-color: var(--pd-amber); }
+
+/* ─── Signature element #1: rotated certificate seal (hero) ──── */
+.pd-seal-wrap { display: flex; justify-content: center; }
+.pd-seal {
+  position: relative;
+  width: 228px; height: 228px;
+  transform: rotate(-9deg);
+  flex-shrink: 0;
+}
+.pd-seal-ring {
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  border: 1.5px solid var(--pd-amber);
+  box-shadow: inset 0 0 0 6px var(--pd-ink), inset 0 0 0 7px rgba(255,178,0,.5);
+}
+.pd-seal-ring::after {
+  content: '';
+  position: absolute; inset: 13px;
+  border-radius: 50%;
+  border: 1px dashed rgba(255,178,0,.55);
+}
+.pd-seal svg.pd-seal-text { position: absolute; inset: 0; width: 100%; height: 100%; }
+.pd-seal svg.pd-seal-text text {
+  font-family: var(--pd-font-mono); font-size: 10.4px; font-weight: 500;
+  letter-spacing: .2em;
+  fill: var(--pd-amber);
+  text-transform: uppercase;
+}
+.pd-seal-center {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center;
+  padding: 0 32px;
+}
+.pd-seal-price-label {
+  font-family: var(--pd-font-mono); font-size: 10px; letter-spacing: .12em;
+  color: var(--pd-steel-soft); text-transform: uppercase; margin-bottom: 3px;
+}
+.pd-seal-price {
+  font-family: var(--pd-font-display); font-weight: 900; font-size: 19px;
+  color: var(--pd-paper); line-height: 1.05; letter-spacing: -.005em;
+  font-variant-numeric: tabular-nums;
+}
+.pd-seal-body {
+  margin-top: 9px;
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: var(--pd-font-mono); font-size: 10.5px; font-weight: 500;
+  letter-spacing: .05em; color: var(--pd-amber);
+  text-align: center;
+}
+.pd-seal-body svg { width: 11px; height: 11px; flex-shrink: 0; }
+
+/* ─── BODY (paper background) ──────────────────────────────────── */
+.pd-body { background: var(--pd-paper); padding: var(--pd-space-7) 0 var(--pd-space-6); }
+
+/* Main + sticky sidebar layout */
+.pd-layout {
+  display: grid;
+  grid-template-columns: 1fr var(--pd-sidebar-w);
+  grid-template-areas: "main sidebar";
+  column-gap: var(--pd-space-7);
+  align-items: start;
+}
+.pd-main { grid-area: main; min-width: 0; }
+.pd-sidebar { grid-area: sidebar; min-width: 0; }
+
+.pd-section { max-width: 68ch; }
+.pd-section + .pd-section { margin-top: var(--pd-space-7); }
+.pd-section-eyebrow {
+  font-family: var(--pd-font-mono); font-size: 11.5px; letter-spacing: .09em; text-transform: uppercase;
+  color: var(--pd-safety-green); font-weight: 500; margin: 0 0 var(--pd-space-2);
+}
+.pd-section h2 {
+  font-family: var(--pd-font-display); font-weight: 800; font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+  text-transform: uppercase; letter-spacing: -.005em;
+  color: var(--pd-ink); margin: 0 0 var(--pd-space-4);
+}
+.pd-desc {
+  font-family: var(--pd-font-body); font-size: 16.5px; line-height: 1.75;
+  color: var(--pd-steel);
+}
+
+/* Long-form rich content, from admin `long_content` field */
+.pd-rich { font-family: var(--pd-font-body); font-size: 16.5px; line-height: 1.8; color: var(--pd-steel); }
+.pd-rich h2 {
+  font-family: var(--pd-font-display); font-weight: 800; font-size: 1.5rem; text-transform: uppercase;
+  color: var(--pd-ink); margin: 2.2rem 0 .8rem; padding-bottom: .6rem;
+  border-bottom: 2px solid var(--pd-amber);
+}
+.pd-rich h3 {
+  font-family: var(--pd-font-body); font-weight: 700; font-size: 1rem; text-transform: uppercase; letter-spacing: .02em;
+  color: var(--pd-ink); margin: 1.6rem 0 .6rem;
+}
+.pd-rich p { margin: 0 0 1.15rem; }
+.pd-rich ul, .pd-rich ol { margin: 0 0 1.15rem; padding-left: 1.4rem; }
+.pd-rich li { margin-bottom: .45rem; }
+.pd-rich strong { font-weight: 700; color: var(--pd-ink); }
+
+/* Curriculum — genuinely sequential list, numbering is earned here */
+.pd-curriculum { display: flex; flex-direction: column; gap: 0; border-top: 1px solid var(--pd-hairline-soft); }
+.pd-curriculum li {
+  display: flex; align-items: baseline; gap: var(--pd-space-4);
+  padding: var(--pd-space-3) 0;
+  border-bottom: 1px solid var(--pd-hairline-soft);
+  font-family: var(--pd-font-body); font-size: 15.5px; color: var(--pd-ink);
+  list-style: none;
+}
+.pd-curriculum li .pd-num {
+  font-family: var(--pd-font-mono); font-size: 13px; font-weight: 500;
+  color: var(--pd-steel-soft); flex-shrink: 0; width: 2ch;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Info table — spec-sheet treatment, mono like an official document */
+.pd-spec { width: 100%; border-collapse: collapse; font-family: var(--pd-font-mono); font-size: 14px; }
+.pd-spec tr { border-bottom: 1px solid var(--pd-hairline-soft); }
+.pd-spec tr:last-child { border-bottom: none; }
+.pd-spec th {
+  text-align: left; font-weight: 500; color: var(--pd-steel-soft);
+  letter-spacing: .04em; text-transform: uppercase; font-size: 11.5px;
+  padding: var(--pd-space-3) var(--pd-space-4) var(--pd-space-3) 0;
+  width: 40%; vertical-align: top;
+}
+.pd-spec td { padding: var(--pd-space-3) 0; color: var(--pd-ink); font-weight: 500; }
+
+/* Related articles */
+.pd-related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--pd-space-4); }
+.pd-related-card {
+  background: var(--pd-white); border: 1px solid var(--pd-hairline-soft); border-radius: 4px; padding: var(--pd-space-4);
+  box-shadow: var(--pd-shadow-soft);
+  transition: border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+}
+.pd-related-card:hover { border-color: var(--pd-safety-green); box-shadow: var(--pd-shadow-lift); transform: translateY(-2px); }
+.pd-related-card h3 { font-family: var(--pd-font-body); font-size: 15px; font-weight: 700; margin: 0 0 var(--pd-space-2); }
+.pd-related-card h3 a { color: var(--pd-ink); text-decoration: none; }
+.pd-related-card p { font-family: var(--pd-font-body); font-size: 13.5px; color: var(--pd-steel); line-height: 1.6; margin: 0 0 var(--pd-space-2); }
+.pd-related-link { font-family: var(--pd-font-mono); font-size: 12px; letter-spacing: .03em; color: var(--pd-safety-green); text-decoration: none; }
+
+/* CTA box — bookends the page in ink, second dark contrast block */
+.pd-cta-box {
+  background: var(--pd-ink); border-radius: 6px; padding: var(--pd-space-6);
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--pd-space-5);
+}
+.pd-cta-box-copy h3 {
+  font-family: var(--pd-font-display); font-weight: 800; font-size: 1.5rem; text-transform: uppercase;
+  color: var(--pd-paper); margin: 0 0 var(--pd-space-2);
+}
+.pd-cta-box-copy p { font-family: var(--pd-font-body); font-size: 14.5px; color: #C8CBC5; margin: 0; max-width: 46ch; }
+
+/* ══════════════════════════════════════════════════════════════
+   Signature element #2: the registration ticket (sticky sidebar)
+   A torn-perforation card — same "official document" vocabulary
+   as the hero seal, without repeating its shape. This is the
+   page's primary conversion surface on desktop.
+   ══════════════════════════════════════════════════════════════ */
+.pd-sidebar {
+  position: sticky;
+  top: var(--pd-nav-offset);
+  align-self: start;
+}
+.pd-ticket {
+  position: relative;
+  background: var(--pd-white);
+  border: 1px solid var(--pd-hairline-soft);
+  border-radius: 8px;
+  box-shadow: var(--pd-shadow-lift);
+  overflow: hidden;
+}
+.pd-ticket::before {
+  /* hazard-amber top edge — the one accent this card is allowed */
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: var(--pd-amber);
+}
+.pd-ticket-inner { padding: var(--pd-space-5) var(--pd-space-4) var(--pd-space-4); }
+
+.pd-ticket-price-row {
+  display: flex; align-items: baseline; gap: var(--pd-space-2); flex-wrap: wrap;
+  margin-bottom: var(--pd-space-1);
+}
+.pd-ticket-label {
+  display: block;
+  font-family: var(--pd-font-mono); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--pd-steel-soft); margin-bottom: 6px;
+}
+.pd-ticket-price {
+  font-family: var(--pd-font-display); font-weight: 900; font-size: 1.85rem;
+  color: var(--pd-ink); line-height: 1; letter-spacing: -.005em;
+  font-variant-numeric: tabular-nums;
+}
+.pd-ticket-unit {
+  font-family: var(--pd-font-body); font-size: 13px; color: var(--pd-steel-soft);
+}
+
+/* Perforation — a dashed tear-line with two punched notches at the
+   card edges, matching the page background so it reads as a real
+   cut. Pure CSS, no images, zero layout shift. */
+.pd-ticket-perf {
+  position: relative;
+  height: 0;
+  margin: var(--pd-space-4) calc(-1 * var(--pd-space-4)) var(--pd-space-4);
+  border-top: 1.5px dashed var(--pd-hairline-soft);
+}
+.pd-ticket-perf::before, .pd-ticket-perf::after {
+  content: '';
+  position: absolute; top: -8px;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--pd-paper);
+  border: 1px solid var(--pd-hairline-soft);
+}
+.pd-ticket-perf::before { left: -8px; }
+.pd-ticket-perf::after  { right: -8px; }
+
+.pd-ticket-specs { display: flex; flex-direction: column; gap: var(--pd-space-3); margin-bottom: var(--pd-space-4); }
+.pd-ticket-row {
+  display: flex; align-items: baseline; justify-content: space-between; gap: var(--pd-space-3);
+  font-family: var(--pd-font-body); font-size: 14px;
+}
+.pd-ticket-k { color: var(--pd-steel-soft); font-family: var(--pd-font-mono); font-size: 11px; letter-spacing: .05em; text-transform: uppercase; }
+.pd-ticket-v { color: var(--pd-ink); font-weight: 600; text-align: right; }
+
+.pd-ticket-cta {
+  display: flex; align-items: center; justify-content: center; gap: 9px;
+  width: 100%;
+  background: var(--pd-amber); color: var(--pd-amber-ink);
+  font-family: var(--pd-font-body); font-weight: 700; font-size: 15px;
+  padding: 14px 18px;
+  border: none; border-radius: 4px;
+  text-decoration: none; cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.pd-ticket-cta svg { width: 17px; height: 17px; flex-shrink: 0; }
+.pd-ticket-cta:hover, .pd-ticket-cta:focus-visible { transform: translateY(-1px); box-shadow: 0 10px 22px -10px rgba(255,178,0,.55); }
+.pd-ticket-cta:focus-visible { outline: 2px solid var(--pd-amber); outline-offset: 3px; }
+
+.pd-ticket-secondary {
+  display: block; text-align: center;
+  font-family: var(--pd-font-body); font-size: 12.5px; font-weight: 600;
+  color: var(--pd-steel); text-decoration: none;
+  margin-top: var(--pd-space-3);
+  border-bottom: 1px solid transparent;
+}
+.pd-ticket-secondary:hover { color: var(--pd-ink); border-bottom-color: var(--pd-hairline-soft); }
+
+.pd-ticket-brochure {
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+  font-family: var(--pd-font-mono); font-size: 12px; letter-spacing: .03em;
+  color: var(--pd-safety-green); text-decoration: none;
+  margin-top: var(--pd-space-3);
+  padding: 9px; border: 1px solid var(--pd-safety-green-soft); border-radius: 4px;
+}
+.pd-ticket-brochure:hover { background: var(--pd-safety-green-soft); }
+.pd-ticket-brochure svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+.pd-ticket-trust {
+  display: flex; flex-direction: column; gap: 7px;
+  margin-top: var(--pd-space-4);
+  padding-top: var(--pd-space-4);
+  border-top: 1px solid var(--pd-hairline-soft);
+}
+.pd-trust-item {
+  display: flex; align-items: center; gap: 7px;
+  font-family: var(--pd-font-body); font-size: 12.5px; color: var(--pd-steel);
+}
+.pd-trust-item svg { width: 13px; height: 13px; flex-shrink: 0; color: var(--pd-safety-green); }
+
+/* ─── Related trainings (separate section, still paper) ────────── */
+.pd-related-trainings { background: var(--pd-paper-2); padding: var(--pd-space-7) 0; }
+.pd-training-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--pd-space-4); margin-top: var(--pd-space-5); }
+.pd-training-card {
+  background: var(--pd-white); border: 1px solid var(--pd-hairline-soft); border-radius: 4px; overflow: hidden;
+  box-shadow: var(--pd-shadow-soft);
+  transition: border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+}
+.pd-training-card:hover { border-color: var(--pd-amber); box-shadow: var(--pd-shadow-lift); transform: translateY(-2px); }
+.pd-training-card img { width: 100%; height: 150px; object-fit: cover; display: block; }
+.pd-training-card-body { padding: var(--pd-space-4); }
+.pd-training-card-meta { display: flex; gap: 6px; margin-bottom: var(--pd-space-2); }
+.pd-training-card-meta span {
+  font-family: var(--pd-font-mono); font-size: 10px; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--pd-steel-soft); border: 1px solid var(--pd-hairline-soft); border-radius: 2px; padding: 2px 6px;
+}
+.pd-training-card h3 { font-family: var(--pd-font-body); font-size: 14.5px; font-weight: 700; margin: 0 0 var(--pd-space-2); }
+.pd-training-card h3 a { color: var(--pd-ink); text-decoration: none; }
+.pd-training-card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: var(--pd-space-2); }
+.pd-training-price { font-family: var(--pd-font-mono); font-size: 13px; font-weight: 500; color: var(--pd-ink); font-variant-numeric: tabular-nums; }
+.pd-training-price small { color: var(--pd-steel-soft); font-weight: 400; }
+.pd-btn-wa-card {
+  font-family: var(--pd-font-body); font-size: 12.5px; font-weight: 700;
+  background: var(--pd-amber); color: var(--pd-amber-ink);
+  padding: 6px 12px; border-radius: 3px; text-decoration: none;
+}
+
+/* ─── Responsive ────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .pd-hero-grid { grid-template-columns: 1fr; gap: var(--pd-space-6); }
+  .pd-seal-wrap { order: -1; justify-content: center; margin-bottom: var(--pd-space-2); }
+  .pd-seal { width: 176px; height: 176px; }
+  .pd-seal-price { font-size: 16px; }
+  .pd-cta-box { flex-direction: column; align-items: flex-start; }
+
+  /* Registration card: unstick, move directly under the hero,
+     ahead of the long-form content. */
+  .pd-layout {
+    grid-template-columns: 1fr;
+    grid-template-areas: "sidebar" "main";
+    row-gap: var(--pd-space-6);
+  }
+  .pd-sidebar { position: static; top: auto; }
+  .pd-ticket-inner { padding: var(--pd-space-4); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pd-cta-btn, .pd-ticket-cta, .pd-related-card, .pd-training-card { transition: none; }
+}
+
+/* ─── WhatsApp float button — hard guarantee ────────────────────
+   Required on every page, every screen size. Made fully
+   self-contained here (position, size, color, icon) so it no
+   longer depends on the shared style.css for its core visibility —
+   only cosmetic overrides from elsewhere can still apply on top. */
+.wa-float {
+  position: fixed !important;
+  right: 20px;
+  bottom: 20px;
+  z-index: 2147483000;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--pd-safety-green, #1B6F52);
+  box-shadow: 0 10px 24px -8px rgba(20,24,26,.45);
+  color: #fff;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.wa-float svg { width: 28px; height: 28px; flex-shrink: 0; }
+.wa-float:hover, .wa-float:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px -8px rgba(20,24,26,.55);
+}
+.wa-float:focus-visible { outline: 2px solid var(--pd-amber); outline-offset: 3px; }
+
+@media (max-width: 480px) {
+  .wa-float { right: 14px; bottom: 14px; width: 52px; height: 52px; }
+  .wa-float svg { width: 26px; height: 26px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wa-float { transition: none; }
+}

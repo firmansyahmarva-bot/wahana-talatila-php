@@ -1,0 +1,16 @@
+Options -Indexes
+
+# Allow all admin PHP files — access controlled by PHP session/role system
+<FilesMatch "\.php$">
+    Require all granted
+</FilesMatch>
+
+# Block direct access to partials (included server-side only)
+<FilesMatch "^(auth|sidebar|header)\.php$">
+    Require all denied
+</FilesMatch>
+
+# Block .htaccess viewing
+<Files ".htaccess">
+    Require all denied
+</Files>

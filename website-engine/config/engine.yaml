@@ -1,0 +1,33 @@
+env: local
+
+paths:
+  subdomains: subdomains
+  themes: themes
+  templates: templates
+
+content_intelligence_provider: manual # manual | ai
+
+routes:
+  home:
+    pattern: "/"
+    layout: home
+  faq:
+    pattern: "/faq"
+    layout: faq
+  category:
+    pattern: "/category/{slug}"
+    layout: category
+  product:
+    pattern: "/product/{category_slug}/{slug}"
+    layout: product
+  page:
+    pattern: "/{slug}"
+    layout: page
+
+seo:
+  default_title_template: "{page_title} | {brand}"
+  default_meta_description_length: 155
+
+cache:
+  manifest_ttl_seconds: 300
+  theme_css_ttl_seconds: 3600

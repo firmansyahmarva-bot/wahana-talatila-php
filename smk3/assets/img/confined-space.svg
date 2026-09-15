@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 480" role="img" aria-label="Confined Space">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#f4f8fb"/><stop offset="1" stop-color="#dcE9f4"/>
+</linearGradient>
+<pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse">
+<circle cx="3" cy="3" r="2" fill="#c7dcee" opacity=".55"/>
+</pattern>
+</defs>
+<rect width="960" height="480" fill="url(#bg)"/>
+<rect width="960" height="480" fill="url(#dots)"/>
+<circle cx="750" cy="240" r="215" fill="#ffffff" opacity=".65"/>
+<circle cx="750" cy="240" r="168" fill="#e8f1f9"/>
+<path d="M0 470 q240 -36 480 0 q240 36 480 0 v10 h-960 z" fill="#0b4f8a" opacity=".12"/>
+<rect x="66" y="118" width="56" height="10" rx="5" fill="#f28c1e"/>
+<text x="70" y="166" font-family="Arial, sans-serif" font-size="21" font-weight="bold" letter-spacing="2" fill="#0b4f8a">K3 PENDUKUNG • RUANG TERBATAS</text>
+<text x="70" y="250" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#083a66">Confined Space</text>
+<rect x="70" y="330" width="140" height="42" rx="21" fill="#0b4f8a" opacity=".1"/>
+<text x="140" y="357" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#083a66">PP 50/2012</text>
+<g transform="translate(630 120) scale(1.2)">
+<ellipse cx="100" cy="150" rx="75" ry="24" fill="#083a66"/>
+<ellipse cx="100" cy="142" rx="60" ry="17" fill="#1c2733"/>
+<circle cx="100" cy="70" r="15" fill="#f28c1e"/>
+<path d="M100 85 v28 M100 92 l-18 12 M100 92 l18 12" stroke="#f28c1e" stroke-width="8" stroke-linecap="round"/>
+<path d="M100 113 l-12 22 M100 113 l12 22" stroke="#f28c1e" stroke-width="8" stroke-linecap="round"/>
+<path d="M40 55 l10 -18 M160 55 l-10 -18" stroke="#0b4f8a" stroke-width="5" stroke-linecap="round"/>
+<circle cx="52" cy="30" r="7" fill="#0b4f8a"/><circle cx="148" cy="30" r="7" fill="#0b4f8a"/>
+</g>
+</svg>

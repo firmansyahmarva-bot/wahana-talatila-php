@@ -1,0 +1,496 @@
+# ============================================================
+#  Wahana Totalita Konsultan — Root .htaccess
+#  CHANGES FROM ORIGINAL:
+#  1. Added /artikel/ routing (new)
+#  2. Added static pelatihan HTML serving at clean URL (fix)
+#  3. Added /api/ routing (new)
+#  4. Custom 404 handler (new)
+#  5. 2026-06-20 FIX: pelatihan static-serve RewriteCond used %1 (empty)
+#     instead of $1 -> every /pelatihan/{slug}/ fell through and 301'd to
+#     the homepage. Corrected to $1 so existing .html pages serve 200.
+#  6. 2026-06-20: removed dead sitemap-cities.xml route (doorway generator).
+# ============================================================
+Options -Indexes -MultiViews
+
+# ─── HTTPS Redirect ──────────────────────────────────────────
+RewriteEngine On
+
+RewriteCond %{HTTP_HOST} ^origen\.wahanatotalita\.com$ [NC]
+RewriteRule ^ https://wahanatotalita.com%{REQUEST_URI} [R=301,L,NE]
+# 301 — Joomla legacy article IDs, recovered from Wayback Machine 2012 snapshots
+# (id=11 "Registration" has no current equivalent -> falls to 410 below, not homepage)
+<IfModule mod_rewrite.c>
+RewriteCond %{QUERY_STRING} option=com_content [NC]
+RewriteCond %{QUERY_STRING} (^|&)id=5(&|$) [NC]
+RewriteRule ^index\.php$ /perusahaan/? [R=301,L]
+
+RewriteCond %{QUERY_STRING} option=com_content [NC]
+RewriteCond %{QUERY_STRING} (^|&)id=8(&|$) [NC]
+RewriteRule ^index\.php$ /klien/? [R=301,L]
+
+RewriteCond %{QUERY_STRING} option=com_content [NC]
+RewriteCond %{QUERY_STRING} (^|&)id=9(&|$) [NC]
+RewriteRule ^index\.php$ /instruktur/? [R=301,L]
+
+RewriteCond %{QUERY_STRING} option=com_content [NC]
+RewriteCond %{QUERY_STRING} (^|&)id=10(&|$) [NC]
+RewriteRule ^index\.php$ /jadwal/? [R=301,L]
+
+RewriteCond %{QUERY_STRING} option=com_content [NC]
+RewriteCond %{QUERY_STRING} (^|&)id=13(&|$) [NC]
+RewriteRule ^index\.php$ /k3-migas/? [R=301,L]
+
+# Any other Joomla com_content query string (unknown/obsolete IDs, incl. id=11) -> 410
+RewriteCond %{QUERY_STRING} option=com_content [NC]
+RewriteRule .* - [G,L]
+</IfModule>
+
+# 301 — WordPress legacy paths (old WP era 2023)
+<IfModule mod_rewrite.c>
+RewriteRule ^wp-(admin|content|includes|login|config|load|json|cron|signup|mail|trackback|comments)(/?|\.php.*)?$ / [R=301,L]
+</IfModule>
+
+# 301 — specific old URLs with real content, redirected to current equivalents
+<IfModule mod_rewrite.c>
+RewriteRule ^news/dasar-hukum-keselamatan-dan-kesehatan-kerja\.html$ /artikel/dasar-hukum-keselamatan-dan-kesehatan-kerja/ [R=301,L]
+RewriteRule ^news/pentingnya-k3-di-tempat-kerja\.html$ /artikel/pentingnya-k3-di-tempat-kerja/ [R=301,L]
+RewriteRule ^profil/tentang-kami\.html$ /perusahaan/ [R=301,L]
+RewriteRule ^sertifikasi\.html$ /pelatihan/ [R=301,L]
+RewriteRule ^partner\.html$ /perusahaan/ [R=301,L]
+RewriteRule ^foto(/.*)?$ / [R=301,L]
+RewriteRule ^video\.html$ / [R=301,L]
+RewriteRule ^info(/.*)?$ /perusahaan/ [R=301,L]
+</IfModule>
+
+# 410 Gone — legacy /news/ URLs removed permanently
+<IfModule mod_rewrite.c>
+RewriteCond %{REQUEST_URI} ^/news/ [NC]
+RewriteRule .* - [G,L]
+</IfModule>
+
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ─── Remove www (canonical) ──────────────────────────────────
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+
+# ─── Block direct access to sensitive files ──────────────────
+<FilesMatch "(config\.php|setup\.php|composer\.json|composer\.lock|\.env|database\.sql|admin_schema\.sql|artikel-schema\.sql)$">
+    Require all denied
+</FilesMatch>
+
+# ─── Noindex static doorway HTML files in /pelatihan/ ───────
+# These .html files are served directly by Apache (bypassing PHP).
+# The dynamic /pelatihan/{slug}/ route via pelatihan.php is NOT affected
+# because it serves .php output, not .html files.
+<IfModule mod_headers.c>
+    <FilesMatch "\.html$">
+        <If "%{REQUEST_URI} =~ m#^/pelatihan/#">
+            Header set X-Robots-Tag "noindex, follow"
+        </If>
+    </FilesMatch>
+</IfModule>
+
+# ─── Custom 404 (NEW) ─────────────────────────────────────────
+ErrorDocument 404 /404.php
+
+# ─── Dedicated pages ─────────────────────────────────────────────
+# 2026-07-13: hub-page batch (35 routes) — 5 already had rules above
+# (k3-kimia, k3-ketinggian, k3-listrik, k3-konstruksi, k3-pertambangan);
+# only the remaining 30 new routes are added here.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^k3-migas/?$ k3-migas.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^smk3/?$ smk3.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^k3-lingkungan/?$ k3-lingkungan.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^k3-pesawat-angkat-angkut/?$ k3-pesawat-angkat-angkut.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^penanggulangan-kebakaran/?$ penanggulangan-kebakaran.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^p3k/?$ p3k.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^k3-pesawat-uap/?$ k3-pesawat-uap.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^operator-alat-berat/?$ operator-alat-berat.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^juru-las/?$ juru-las.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^higiene-industri/?$ higiene-industri.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^pelatihan-iso/?$ pelatihan-iso.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^k3-perkantoran/?$ k3-perkantoran.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^selam/?$ selam.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^outbound/?$ outbound.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^wisata-karyawan/?$ wisata-karyawan.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^event-organizer/?$ event-organizer.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^k3-rumah-sakit/?$ k3-rumah-sakit.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^pelatihan-manajemen-sdm/?$ pelatihan-manajemen-sdm.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^pelatihan-satpam/?$ pelatihan-satpam.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^catering/?$ catering.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^pelatihan-kelautan/?$ pelatihan-kelautan.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^k3-laboratorium/?$ k3-laboratorium.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^k3-transportasi/?$ k3-transportasi.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^akomodasi/?$ akomodasi.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^pelatihan-keuangan-daerah/?$ pelatihan-keuangan-daerah.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^pelatihan-pengadaan-barang-jasa/?$ pelatihan-pengadaan-barang-jasa.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^k3-manufaktur/?$ k3-manufaktur.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^k3-psikososial/?$ k3-psikososial.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^k3-pangan/?$ k3-pangan.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^pelatihan-teknologi-informasi/?$ pelatihan-teknologi-informasi.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ak3u-fresh-graduate/?$ ak3u-fresh-graduate.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ak3u-gratis/?$ ak3u-gratis.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^instruktur/?$ instruktur.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^k3-pertambangan/?$ k3-pertambangan.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^k3-konstruksi/?$ k3-konstruksi.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^k3-listrik/?$ k3-listrik.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^k3-ketinggian/?$ k3-ketinggian.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^k3-kimia/?$ k3-kimia.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^keselamatan-kerja/?$ keselamatan-kerja.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^klien/?$ klien.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^sertifikasi-bnsp/?$ sertifikasi-bnsp.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^perpanjangan-skp/?$ perpanjangan-skp.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^kebijakan-privasi/?$ kebijakan-privasi.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^syarat-ketentuan/?$ syarat-ketentuan.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^jadwal-pelatihan/?$ /jadwal/ [R=301,L]
+
+# Legacy old-site URLs -> article section
+RewriteRule ^news(/.*)?$ /artikel/ [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^csms/?$ csms.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^layanan-pemerintah/?$ layanan-pemerintah.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^perusahaan/?$ perusahaan.php [QSA,L]
+
+# ─── /layanan redirect to /pelatihan/ ─────────────────────
+# The navbar links to /layanan but no page exists yet.
+RewriteRule ^layanan/?$ /pelatihan/ [R=301,L]
+
+# ─── Tools section: /tools/tool-name → /tools/tool-name.php ──
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^tools/([a-z0-9\-]+)/?$ tools/$1.php [QSA,L]
+
+# 2026-07-21 FIX: /pelatihan-k3-{city} and /pelatihan-k3-{city}/ both served
+# 200 with no redirect between them -> GSC indexes + tracks them as two
+# separate URLs, splitting clicks/impressions for the same page (confirmed
+# on Pekanbaru: 7 clicks/189 impr on the no-slash URL vs 2 clicks/69 impr
+# on the slash URL, both ranking worse than their combined signal would).
+# Force the no-slash form to 301 into the canonical slash form first.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^pelatihan-k3-([a-z0-9\-]+)$ /pelatihan-k3-$1/ [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^pelatihan-k3-([a-z0-9\-]+)/?$ kota.php?kota=$1 [QSA,L]
+
+# ─── Landing pages: /lp/k3-umum → /lp/k3-umum.php (clean URLs) ─
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^lp/([a-z0-9\-]+)/?$ lp/$1.php [QSA,L]
+
+# ─── Artikel: /artikel/ → artikel.php (NEW) ──────────────────
+# NOTE: !-d removed from list rule because /artikel/ dir exists
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^artikel/?$ artikel.php [QSA,L]
+
+# ─── Article category indexes — must appear BEFORE the detail catch-all ──
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^artikel/(k3|system-management|lingkungan|mining)/?$ artikel-kategori.php?cat=$1 [QSA,L]
+
+# Artikel detail — skip if static index.html exists (Apache serves it)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^artikel/([a-z0-9\-]+)/?$ artikel-detail.php?slug=$1 [QSA,L]
+
+# ─── Serve static pelatihan HTML at clean URL (FIX 2026-06-20) ──────────
+# If /pelatihan/{slug}/ has a matching .html file → serve it directly.
+# FIXED: was %1 (a RewriteCond backref that does not exist here, so the
+# test resolved to /pelatihan/.html and always failed). Use $1 to reference
+# the RewriteRule capture group.
+RewriteCond %{DOCUMENT_ROOT}/pelatihan/$1.html -f
+RewriteRule ^pelatihan/([a-z0-9\-]+)/?$ /pelatihan/$1.html [L]
+
+# ─── Training catalog: bare /pelatihan/ (no slug) — FIX 2026-07-13 ──────
+# Was previously unmatched by any rule (slug rules below require 1+ char),
+# so Apache tried to serve the raw directory and 403'd (Options -Indexes,
+# no index file). Now routes to pelatihan.php's catalog mode.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^pelatihan/?$ pelatihan.php [QSA,L]
+
+# ─── Training category indexes — must appear BEFORE the detail catch-all ──
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^pelatihan/(k3|system-management|lingkungan|mining)/?$ pelatihan-kategori.php?cat=$1 [QSA,L]
+
+# ─── Dynamic pelatihan pages (DB-driven) ─────────────────────
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^pelatihan/([a-z0-9\-]+)/?$ pelatihan.php?slug=$1 [QSA,L]
+
+# ─── Programmatic city pages: /pelatihan/{training}/{city}/ ──
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^pelatihan/([a-z0-9\-]+)/([a-z0-9\-]+)/?$ city-page.php?training_slug=$1&city_slug=$2 [QSA,L]
+
+# ═══════════════════════════════════════════════════════
+# NEW PLATFORM ROUTES (Task #8)
+# ═══════════════════════════════════════════════════════
+
+# ─── Resource Library ─────────────────────────────────
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^resources/?$ resources/index.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^resources/([a-z0-9\-]+)/?$ resources/detail.php?slug=$1 [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+# 2026-07-14 FIX: resources/kategori.php never existed -> 404 on all 10
+# category filter chips. index.php already reads the same ?slug= param
+# (get_url_slug()) and filters via get_resource_category_by_slug() - route
+# there instead of building a duplicate file.
+RewriteRule ^resources/kategori/([a-z0-9\-]+)/?$ resources/index.php?slug=$1 [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^resources/download/([0-9]+)/?$ resources/download.php?id=$1 [QSA,L]
+
+# ─── Training Schedule ────────────────────────────────
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^jadwal/?$ jadwal-pelatihan.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^jadwal/([0-9]+)/?$ jadwal/detail.php?id=$1 [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^jadwal/daftar/([0-9]+)/?$ jadwal/daftar.php?batch_id=$1 [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^jadwal/kalender/?$ jadwal/kalender.php [QSA,L]
+
+# ─── Forum ────────────────────────────────────────────
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^forum/?$ forum/index.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^forum/([a-z0-9\-]+)/?$ forum/kategori.php?slug=$1 [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^forum/topik/([a-z0-9\-]+)/?$ forum/topik.php?slug=$1 [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^forum/buat/?$ forum/buat.php [QSA,L]
+
+# ─── Certificate Verification ─────────────────────────
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^verifikasi/?$ verifikasi/index.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^verifikasi/([A-Z0-9\-]+)/?$ verifikasi/index.php?cert=$1 [QSA,L]
+
+# ─── Incident Database ────────────────────────────────
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^insiden/?$ insiden/index.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^insiden/([a-z0-9\-]+)/?$ insiden/detail.php?slug=$1 [QSA,L]
+
+# ─── Glossary ─────────────────────────────────────────
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^glosarium/?$ glosarium/index.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^glosarium/([a-z0-9\-]+)/?$ glosarium/detail.php?slug=$1 [QSA,L]
+
+# ─── Job Board ────────────────────────────────────────
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^lowongan/?$ lowongan/index.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^lowongan/([a-z0-9\-]+)/?$ lowongan/detail.php?slug=$1 [QSA,L]
+
+# ─── Workplace Dashboard ──────────────────────────────
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^workplace/?$ workplace/index.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^workplace/login/?$ workplace/login.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^workplace/daftar/?$ workplace/daftar.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^workplace/([a-z0-9\-]+)/?$ workplace/$1.php [QSA,L]
+
+# ─── Newsletter ───────────────────────────────────────
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^newsletter/unsubscribe/?$ newsletter/unsubscribe.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^newsletter/?$ newsletter/subscribe.php [QSA,L]
+
+# ─── AI Document Analyzer ─────────────────────────────
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ai-analyzer/?$ tools/ai-analyzer.php [QSA,L]
+
+# ─── Social Media Generator ───────────────────────────
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^social-generator/?$ tools/social-generator.php [QSA,L]
+
+# ─── API Endpoints ────────────────────────────────────
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^api/([a-z0-9\-]+)/?$ api/$1.php [QSA,L]
+
+# ─── Sitemaps ────────────────────────────────────────────────
+# sitemap-cities.xml route REMOVED 2026-06-20 (was the doorway sitemap).
+# Sitemap index (no ?type param)
+RewriteRule ^sitemap\.xml$ sitemap.php [L]
+
+# Child sitemaps → sitemap.php?type={name}
+RewriteRule ^sitemap-core\.xml$      sitemap.php?type=core [L]
+RewriteRule ^sitemap-pelatihan\.xml$ sitemap.php?type=pelatihan [L]
+RewriteRule ^sitemap-artikel\.xml$   sitemap.php?type=artikel [L]
+RewriteRule ^sitemap-kota\.xml$      sitemap.php?type=kota [L]
+RewriteRule ^sitemap-platform\.xml$  sitemap.php?type=platform [L]
+RewriteRule ^sitemap-glosarium\.xml$ sitemap.php?type=glosarium [L]
+RewriteRule ^sitemap-kota-pelatihan\.xml$ sitemap.php?type=kota-pelatihan [L]
+
+# ─── Security Headers ────────────────────────────────────────
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options  "nosniff"
+    Header always set X-Frame-Options         "SAMEORIGIN"
+    Header always set X-XSS-Protection        "1; mode=block"
+    Header always set Referrer-Policy         "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy      "geolocation=(), microphone=(), camera=()"
+    # 2026-06: HSTS — forces HTTPS for a year (site already 301s to HTTPS).
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    # 2026-07-04 FINAL CSP: connect-src allows ALL https (Google Ads pings use
+    # ad.doubleclick.net + googleadservices + doubleclick variants; Clarity uses
+    # rotating subdomains — per-domain whitelisting kept breaking tracking).
+    # script-src stays restricted = XSS protection intact.
+    # OLD NOTE: Permissive (allows existing inline
+    # scripts/styles + Google Tag Manager/Analytics + Google Fonts + image
+    # CDNs) so it does NOT break the live site, while still earning CSP credit.
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://*.google-analytics.com https://ssl.google-analytics.com https://*.clarity.ms https://www.clarity.ms https://clarity.ms https://c.bing.com https://www.googleadservices.com https://*.doubleclick.net https://*.googlesyndication.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https: https://ad.doubleclick.net; frame-src 'self' https://www.googletagmanager.com https://*.doubleclick.net https://*.google.com; object-src 'none'; base-uri 'self'; form-action 'self' https://wa.me"
+</IfModule>
+
+# ─── Compression ─────────────────────────────────────────────
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css text/javascript
+    AddOutputFilterByType DEFLATE application/javascript application/json
+    AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# ─── Browser Caching ─────────────────────────────────────────
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css              "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType image/jpeg            "access plus 6 months"
+    ExpiresByType image/png             "access plus 6 months"
+    ExpiresByType image/webp            "access plus 6 months"
+    ExpiresByType image/svg+xml         "access plus 1 month"
+    ExpiresByType image/x-icon          "access plus 1 year"
+    ExpiresByType application/manifest+json "access plus 1 week"
+</IfModule>
+
+# ─── Correct MIME for manifest.json ──────────────────────────
+<IfModule mod_mime.c>
+    AddType application/manifest+json .webmanifest
+    AddType application/manifest+json .json
+</IfModule>
+RewriteEngine On
+
+# /k3            -> k3.php  (the one indexed hub)
+RewriteRule ^k3/?$ k3.php [L,QSA]
+
+# /k3/{slug}     -> k3.php?slug={slug}  (served on demand, noindex)
+RewriteRule ^k3/([A-Za-z0-9\-]+)/?$ k3.php?slug=$1 [L,QSA]
+
+
+# ─── Block PHP execution in uploads ──────────────────────────
+<FilesMatch "\.php$">
+    <If "%{REQUEST_URI} =~ m|^/assets/uploads/|">
+        Require all denied
+    </If>
+</FilesMatch>

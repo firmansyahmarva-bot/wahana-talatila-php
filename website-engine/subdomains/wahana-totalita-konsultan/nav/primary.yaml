@@ -1,0 +1,9 @@
+items:
+  - label: Categories
+    path: /#categories
+  - label: Overview
+    path: /overview
+  - label: Getting Started
+    path: /getting-started
+  - label: FAQ
+    path: /faq

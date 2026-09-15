@@ -1,0 +1,13 @@
+{
+    "name": "internal/website-engine",
+    "description": "Manifest-driven, config-only multi-subdomain SEO website engine",
+    "type": "project",
+    "require": {
+        "php": ">=8.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Engine\\": "engine/"
+        }
+    }
+}

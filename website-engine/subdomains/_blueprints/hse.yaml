@@ -1,0 +1,358 @@
+# Hand-authored Blueprint for the "hse" subdomain, consumed by
+# Engine\Strategy\Providers\Manual\ManualBlueprintProvider (blueprint_file
+# mode). Same shape the AI provider would emit — see ai/AI_RULES.md and
+# engine/Strategy/Providers/Ai/AiBlueprintProvider.php's system prompt for
+# the contract this file follows. No fabricated facts, salaries, employer
+# names, testimonials, or statistics anywhere in this file, per AI_RULES.md.
+
+niche_analysis:
+  audience: "Pencari kerja dan profesional yang ingin masuk atau berkembang di bidang HSE/K3 di Indonesia, dari fresh graduate hingga calon HSE manager, serta staf yang butuh referensi dasar keselamatan kerja."
+  business_model: "Hub konten edukasi seputar karier dan pengetahuan K3, bukan job board maupun toko jasa. Memperluas topical authority K3 milik Wahana Totalita Konsultan."
+  value_proposition: "Satu rujukan terstruktur untuk memahami jalur karier HSE, jenjang sertifikasi, dan dasar keselamatan kerja di Indonesia, ditulis mengikuti kerangka regulasi K3 yang berlaku."
+  competitive_notes: "Kompetitor pada niche K3 Indonesia umumnya lembaga pelatihan yang menjual sertifikasi atau portal lowongan kerja generik. Celah topikal ada pada konten jenjang karier dan panduan keselamatan yang disusun lengkap sebagai satu arsitektur pillar/cluster, bukan artikel lepas."
+
+topical_map:
+  pillars:
+    - slug: karier-hse
+      title: "Karier & Profesi HSE"
+      clusters:
+        - slug: profesi-hse-di-indonesia
+          title: "Profesi HSE di Indonesia"
+          intent: informational
+        - slug: cara-menjadi-hse-officer
+          title: "Cara Menjadi HSE Officer"
+          intent: informational
+        - slug: tips-cv-dan-interview-hse
+          title: "Tips CV dan Interview HSE"
+          intent: informational
+    - slug: jenjang-karier-hse
+      title: "Jenjang Karier & Sertifikasi HSE"
+      clusters:
+        - slug: jenjang-karier-hse-officer-ke-manager
+          title: "Jenjang Karier dari HSE Officer ke HSE Manager"
+          intent: informational
+        - slug: sertifikasi-hse-di-indonesia
+          title: "Sertifikasi HSE di Indonesia"
+          intent: informational
+        - slug: spesialisasi-bidang-hse
+          title: "Spesialisasi dalam Bidang HSE"
+          intent: informational
+    - slug: panduan-keselamatan-kerja
+      title: "Panduan Keselamatan Kerja"
+      clusters:
+        - slug: dasar-dasar-k3-di-tempat-kerja
+          title: "Dasar-Dasar K3 di Tempat Kerja"
+          intent: informational
+        - slug: alat-pelindung-diri-ppe
+          title: "Alat Pelindung Diri (APD)"
+          intent: informational
+        - slug: identifikasi-bahaya-dan-penilaian-risiko
+          title: "Identifikasi Bahaya dan Penilaian Risiko"
+          intent: informational
+    - slug: pusat-pengetahuan-k3
+      title: "Pusat Pengetahuan K3"
+      clusters:
+        - slug: regulasi-k3-di-indonesia
+          title: "Regulasi K3 di Indonesia"
+          intent: informational
+        - slug: istilah-istilah-k3
+          title: "Istilah-Istilah Penting dalam K3"
+          intent: informational
+        - slug: p2k3-panitia-pembina-k3
+          title: "Apa Itu P2K3"
+          intent: informational
+
+keyword_architecture:
+  home:
+    primary_keyword: "hse wahana"
+    supporting_keywords: ["karier hse", "pengetahuan k3"]
+    intent: informational
+  karier-hse:
+    primary_keyword: "karier hse"
+    supporting_keywords: ["profesi hse", "kerja di bidang hse"]
+    intent: informational
+  profesi-hse-di-indonesia:
+    primary_keyword: "profesi hse di indonesia"
+    supporting_keywords: ["posisi hse", "pekerjaan hse"]
+    intent: informational
+  cara-menjadi-hse-officer:
+    primary_keyword: "cara menjadi hse officer"
+    supporting_keywords: ["menjadi hse officer", "syarat hse officer"]
+    intent: informational
+  tips-cv-dan-interview-hse:
+    primary_keyword: "tips cv dan interview hse"
+    supporting_keywords: ["cv hse officer", "interview hse"]
+    intent: informational
+  jenjang-karier-hse:
+    primary_keyword: "jenjang karier hse"
+    supporting_keywords: ["jalur karier hse", "hse manager"]
+    intent: informational
+  jenjang-karier-hse-officer-ke-manager:
+    primary_keyword: "jenjang karier hse officer ke manager"
+    supporting_keywords: ["hse supervisor", "hse coordinator"]
+    intent: informational
+  sertifikasi-hse-di-indonesia:
+    primary_keyword: "sertifikasi hse di indonesia"
+    supporting_keywords: ["ak3u", "sertifikasi bnsp k3"]
+    intent: informational
+  spesialisasi-bidang-hse:
+    primary_keyword: "spesialisasi bidang hse"
+    supporting_keywords: ["fire safety officer", "process safety"]
+    intent: informational
+  panduan-keselamatan-kerja:
+    primary_keyword: "panduan keselamatan kerja"
+    supporting_keywords: ["keselamatan kerja", "k3 tempat kerja"]
+    intent: informational
+  dasar-dasar-k3-di-tempat-kerja:
+    primary_keyword: "dasar k3 di tempat kerja"
+    supporting_keywords: ["prinsip k3", "budaya keselamatan kerja"]
+    intent: informational
+  alat-pelindung-diri-ppe:
+    primary_keyword: "alat pelindung diri apd"
+    supporting_keywords: ["jenis apd", "penggunaan apd"]
+    intent: informational
+  identifikasi-bahaya-dan-penilaian-risiko:
+    primary_keyword: "identifikasi bahaya dan penilaian risiko"
+    supporting_keywords: ["hirarc", "penilaian risiko k3"]
+    intent: informational
+  pusat-pengetahuan-k3:
+    primary_keyword: "pengetahuan k3"
+    supporting_keywords: ["regulasi k3", "istilah k3"]
+    intent: informational
+  regulasi-k3-di-indonesia:
+    primary_keyword: "regulasi k3 di indonesia"
+    supporting_keywords: ["undang-undang keselamatan kerja", "permenaker k3"]
+    intent: informational
+  istilah-istilah-k3:
+    primary_keyword: "istilah istilah k3"
+    supporting_keywords: ["glosarium k3", "singkatan k3"]
+    intent: informational
+  p2k3-panitia-pembina-k3:
+    primary_keyword: "p2k3 panitia pembina k3"
+    supporting_keywords: ["panitia pembina k3", "struktur p2k3"]
+    intent: informational
+  faq:
+    primary_keyword: "faq hse wahana"
+    supporting_keywords: ["pertanyaan hse", "tanya jawab k3"]
+    intent: informational
+
+entity_map:
+  - HSE (Health, Safety, Environment)
+  - K3 (Keselamatan dan Kesehatan Kerja)
+  - HSE Officer
+  - HSE Manager
+  - Ahli K3 Umum (AK3U)
+  - P2K3
+  - Alat Pelindung Diri (APD)
+  - HIRARC
+  - ISO 45001
+  - BNSP
+  - Kementerian Ketenagakerjaan
+
+category_structure:
+  - slug: karier-hse
+    title: "Karier & Profesi HSE"
+  - slug: jenjang-karier-hse
+    title: "Jenjang Karier & Sertifikasi HSE"
+  - slug: panduan-keselamatan-kerja
+    title: "Panduan Keselamatan Kerja"
+  - slug: pusat-pengetahuan-k3
+    title: "Pusat Pengetahuan K3"
+
+product_structure: []
+
+page_blueprint:
+  home:
+    title: "HSE Wahana"
+    type: pillar
+    outline: ["Tentang HSE Wahana", "Empat Area yang Dibahas di Sini", "Mulai dari Mana"]
+    primary_keyword: "hse wahana"
+    meta_description: "Panduan karier HSE dan pengetahuan dasar K3 di Indonesia, dari jalur profesi sampai regulasi, disusun sebagai satu peta topik."
+  karier-hse:
+    title: "Karier & Profesi HSE"
+    type: pillar
+    outline: ["Apa itu Profesi HSE", "Jenis-Jenis Peran HSE di Indonesia", "Kualifikasi Dasar yang Dibutuhkan", "Langkah Awal Memulai Karier HSE"]
+    primary_keyword: "karier hse"
+    meta_description: "Ragam profesi HSE di Indonesia, kualifikasi dasar, dan langkah awal memulai karier di bidang keselamatan kerja."
+  profesi-hse-di-indonesia:
+    title: "Profesi HSE di Indonesia"
+    type: cluster
+    outline: ["Ragam Posisi HSE di Berbagai Industri", "Tugas dan Tanggung Jawab Harian", "Industri yang Banyak Membutuhkan HSE"]
+    primary_keyword: "profesi hse di indonesia"
+    meta_description: "Ragam posisi HSE di berbagai industri di Indonesia beserta tugas dan tanggung jawab hariannya."
+  cara-menjadi-hse-officer:
+    title: "Cara Menjadi HSE Officer"
+    type: cluster
+    outline: ["Latar Belakang Pendidikan yang Relevan", "Sertifikasi Dasar yang Perlu Diambil", "Pengalaman dan Portofolio Awal", "Langkah Melamar Posisi Pertama"]
+    primary_keyword: "cara menjadi hse officer"
+    meta_description: "Langkah-langkah menjadi HSE Officer, dari latar belakang pendidikan, sertifikasi dasar, hingga melamar posisi pertama."
+  tips-cv-dan-interview-hse:
+    title: "Tips CV dan Interview HSE"
+    type: cluster
+    outline: ["Menyusun CV yang Menonjolkan Kompetensi K3", "Pertanyaan Interview yang Sering Muncul", "Kesalahan Umum yang Perlu Dihindari"]
+    primary_keyword: "tips cv dan interview hse"
+    meta_description: "Cara menyusun CV dan menjawab pertanyaan interview untuk posisi HSE, lengkap dengan kesalahan umum yang perlu dihindari."
+  jenjang-karier-hse:
+    title: "Jenjang Karier & Sertifikasi HSE"
+    type: pillar
+    outline: ["Struktur Jenjang Karier HSE", "Sertifikasi yang Mendukung Setiap Jenjang", "Spesialisasi yang Bisa Diambil"]
+    primary_keyword: "jenjang karier hse"
+    meta_description: "Struktur jenjang karier HSE dari officer hingga manager beserta sertifikasi yang mendukung tiap tingkatannya."
+  jenjang-karier-hse-officer-ke-manager:
+    title: "Jenjang Karier dari HSE Officer ke HSE Manager"
+    type: cluster
+    outline: ["Tahap Officer dan Supervisor", "Tahap Coordinator dan Spesialis", "Tahap Manager dan di Atasnya", "Faktor yang Mempercepat Kenaikan Jenjang"]
+    primary_keyword: "jenjang karier hse officer ke manager"
+    meta_description: "Tahapan jenjang karier dari HSE Officer, Supervisor, Coordinator, hingga HSE Manager dan faktor yang mempercepatnya."
+  sertifikasi-hse-di-indonesia:
+    title: "Sertifikasi HSE di Indonesia"
+    type: cluster
+    outline: ["Sertifikasi Ahli K3 Umum (AK3U)", "Sertifikasi Berbasis Kompetensi BNSP", "Sertifikasi Spesialis Sesuai Sektor Industri"]
+    primary_keyword: "sertifikasi hse di indonesia"
+    meta_description: "Sertifikasi HSE yang berlaku di Indonesia, dari Ahli K3 Umum (AK3U) hingga sertifikasi berbasis kompetensi BNSP."
+  spesialisasi-bidang-hse:
+    title: "Spesialisasi dalam Bidang HSE"
+    type: cluster
+    outline: ["Spesialisasi Keselamatan Kebakaran", "Spesialisasi Kesehatan Kerja dan Lingkungan", "Spesialisasi Keselamatan Proses"]
+    primary_keyword: "spesialisasi bidang hse"
+    meta_description: "Spesialisasi dalam bidang HSE, mulai dari keselamatan kebakaran, kesehatan kerja, hingga keselamatan proses."
+  panduan-keselamatan-kerja:
+    title: "Panduan Keselamatan Kerja"
+    type: pillar
+    outline: ["Prinsip Dasar Keselamatan Kerja", "Alat dan Prosedur yang Wajib Diketahui", "Identifikasi dan Pengendalian Risiko", "Pelaporan Insiden di Tempat Kerja"]
+    primary_keyword: "panduan keselamatan kerja"
+    meta_description: "Prinsip dasar keselamatan kerja, alat pelindung diri, identifikasi bahaya, dan pelaporan insiden di tempat kerja."
+  dasar-dasar-k3-di-tempat-kerja:
+    title: "Dasar-Dasar K3 di Tempat Kerja"
+    type: cluster
+    outline: ["Definisi dan Tujuan K3", "Hak dan Kewajiban Pekerja serta Pemberi Kerja", "Budaya Keselamatan di Tempat Kerja"]
+    primary_keyword: "dasar k3 di tempat kerja"
+    meta_description: "Definisi, tujuan, serta hak dan kewajiban pekerja dan pemberi kerja dalam penerapan K3 di tempat kerja."
+  alat-pelindung-diri-ppe:
+    title: "Alat Pelindung Diri (APD)"
+    type: cluster
+    outline: ["Jenis-Jenis APD dan Fungsinya", "Cara Memilih APD yang Tepat", "Perawatan dan Penggunaan APD yang Benar"]
+    primary_keyword: "alat pelindung diri apd"
+    meta_description: "Jenis-jenis alat pelindung diri (APD), cara memilih yang tepat, dan cara merawatnya dengan benar."
+  identifikasi-bahaya-dan-penilaian-risiko:
+    title: "Identifikasi Bahaya dan Penilaian Risiko"
+    type: cluster
+    outline: ["Apa itu HIRARC", "Tahapan Identifikasi Bahaya", "Menilai dan Mengendalikan Risiko"]
+    primary_keyword: "identifikasi bahaya dan penilaian risiko"
+    meta_description: "Tahapan identifikasi bahaya dan penilaian risiko (HIRARC) untuk mengendalikan risiko di tempat kerja."
+  pusat-pengetahuan-k3:
+    title: "Pusat Pengetahuan K3"
+    type: pillar
+    outline: ["Landasan Regulasi K3 di Indonesia", "Istilah-Istilah Kunci dalam K3", "Struktur Organisasi K3 di Perusahaan"]
+    primary_keyword: "pengetahuan k3"
+    meta_description: "Landasan regulasi K3 di Indonesia, istilah-istilah penting, dan struktur organisasi K3 seperti P2K3."
+  regulasi-k3-di-indonesia:
+    title: "Regulasi K3 di Indonesia"
+    type: cluster
+    outline: ["Undang-Undang Dasar Keselamatan Kerja", "Peraturan Turunan dari Kementerian Ketenagakerjaan", "Kewajiban Perusahaan Menurut Regulasi K3"]
+    primary_keyword: "regulasi k3 di indonesia"
+    meta_description: "Dasar hukum keselamatan kerja di Indonesia beserta peraturan turunan dari Kementerian Ketenagakerjaan."
+  istilah-istilah-k3:
+    title: "Istilah-Istilah Penting dalam K3"
+    type: cluster
+    outline: ["Istilah Terkait Bahaya dan Risiko", "Istilah Terkait Prosedur dan Dokumen K3", "Singkatan yang Sering Digunakan"]
+    primary_keyword: "istilah istilah k3"
+    meta_description: "Kumpulan istilah dan singkatan penting dalam K3, dari terkait bahaya dan risiko hingga prosedur dan dokumen."
+  p2k3-panitia-pembina-k3:
+    title: "Apa Itu P2K3"
+    type: cluster
+    outline: ["Fungsi dan Tujuan P2K3", "Struktur Keanggotaan P2K3", "Kewajiban Perusahaan Membentuk P2K3"]
+    primary_keyword: "p2k3 panitia pembina k3"
+    meta_description: "Fungsi, struktur keanggotaan, dan kewajiban perusahaan dalam membentuk P2K3 di tempat kerja."
+  faq:
+    title: "FAQ"
+    type: page
+    outline: ["Pertanyaan tentang Karier HSE", "Pertanyaan tentang Jenjang dan Sertifikasi", "Pertanyaan tentang Keselamatan Kerja"]
+    primary_keyword: "faq hse wahana"
+    meta_description: "Jawaban singkat atas pertanyaan umum seputar karier HSE, sertifikasi, dan keselamatan kerja di HSE Wahana."
+
+faq_blueprint:
+  home:
+    - question: "Apa itu HSE Wahana"
+      answer: "HSE Wahana adalah hub konten yang membahas karier, jenjang sertifikasi, dan dasar keselamatan kerja (K3) di Indonesia, dikelola sebagai perluasan topik K3 dari Wahana Totalita Konsultan."
+    - question: "Apakah HSE Wahana menyediakan lowongan kerja"
+      answer: "Tidak. Halaman ini berisi panduan dan pengetahuan seputar karier serta keselamatan kerja, bukan daftar lowongan kerja aktif."
+  karier-hse:
+    - question: "Apa saja posisi HSE yang umum ada di perusahaan"
+      answer: "Posisi umum meliputi HSE Officer, HSE Supervisor, HSE Coordinator, hingga HSE Manager, dengan cakupan tanggung jawab yang meningkat sesuai jenjangnya."
+  jenjang-karier-hse:
+    - question: "Sertifikasi apa yang biasanya dibutuhkan untuk naik jenjang di bidang HSE"
+      answer: "Umumnya dimulai dari sertifikasi Ahli K3 Umum (AK3U), lalu dilengkapi sertifikasi berbasis kompetensi BNSP atau sertifikasi spesialis sesuai sektor industri tempat bekerja."
+  panduan-keselamatan-kerja:
+    - question: "Apa perbedaan identifikasi bahaya dan penilaian risiko"
+      answer: "Identifikasi bahaya adalah proses menemukan sumber potensi bahaya di tempat kerja, sedangkan penilaian risiko adalah proses menilai seberapa besar kemungkinan dan dampak bahaya tersebut agar dapat dikendalikan."
+  pusat-pengetahuan-k3:
+    - question: "Apa dasar hukum utama K3 di Indonesia"
+      answer: "Dasar hukum utama K3 di Indonesia adalah Undang-Undang Nomor 1 Tahun 1970 tentang Keselamatan Kerja, yang kemudian dilengkapi berbagai peraturan turunan dari Kementerian Ketenagakerjaan."
+
+internal_linking_plan:
+  home: [karier-hse, jenjang-karier-hse, panduan-keselamatan-kerja, pusat-pengetahuan-k3]
+  karier-hse: [home, profesi-hse-di-indonesia, cara-menjadi-hse-officer, tips-cv-dan-interview-hse]
+  profesi-hse-di-indonesia: [karier-hse, cara-menjadi-hse-officer, tips-cv-dan-interview-hse]
+  cara-menjadi-hse-officer: [karier-hse, profesi-hse-di-indonesia, tips-cv-dan-interview-hse]
+  tips-cv-dan-interview-hse: [karier-hse, profesi-hse-di-indonesia, cara-menjadi-hse-officer]
+  jenjang-karier-hse: [home, jenjang-karier-hse-officer-ke-manager, sertifikasi-hse-di-indonesia, spesialisasi-bidang-hse]
+  jenjang-karier-hse-officer-ke-manager: [jenjang-karier-hse, sertifikasi-hse-di-indonesia, spesialisasi-bidang-hse]
+  sertifikasi-hse-di-indonesia: [jenjang-karier-hse, jenjang-karier-hse-officer-ke-manager, spesialisasi-bidang-hse]
+  spesialisasi-bidang-hse: [jenjang-karier-hse, jenjang-karier-hse-officer-ke-manager, sertifikasi-hse-di-indonesia]
+  panduan-keselamatan-kerja: [home, dasar-dasar-k3-di-tempat-kerja, alat-pelindung-diri-ppe, identifikasi-bahaya-dan-penilaian-risiko]
+  dasar-dasar-k3-di-tempat-kerja: [panduan-keselamatan-kerja, alat-pelindung-diri-ppe, identifikasi-bahaya-dan-penilaian-risiko]
+  alat-pelindung-diri-ppe: [panduan-keselamatan-kerja, dasar-dasar-k3-di-tempat-kerja, identifikasi-bahaya-dan-penilaian-risiko]
+  identifikasi-bahaya-dan-penilaian-risiko: [panduan-keselamatan-kerja, dasar-dasar-k3-di-tempat-kerja, alat-pelindung-diri-ppe]
+  pusat-pengetahuan-k3: [home, regulasi-k3-di-indonesia, istilah-istilah-k3, p2k3-panitia-pembina-k3]
+  regulasi-k3-di-indonesia: [pusat-pengetahuan-k3, istilah-istilah-k3, p2k3-panitia-pembina-k3]
+  istilah-istilah-k3: [pusat-pengetahuan-k3, regulasi-k3-di-indonesia, p2k3-panitia-pembina-k3]
+  p2k3-panitia-pembina-k3: [pusat-pengetahuan-k3, regulasi-k3-di-indonesia, istilah-istilah-k3]
+  faq: [home]
+
+schema_blueprint:
+  home:
+    type: WebPage
+  karier-hse:
+    type: Article
+  profesi-hse-di-indonesia:
+    type: Article
+  cara-menjadi-hse-officer:
+    type: Article
+  tips-cv-dan-interview-hse:
+    type: Article
+  jenjang-karier-hse:
+    type: Article
+  jenjang-karier-hse-officer-ke-manager:
+    type: Article
+  sertifikasi-hse-di-indonesia:
+    type: Article
+  spesialisasi-bidang-hse:
+    type: Article
+  panduan-keselamatan-kerja:
+    type: Article
+  dasar-dasar-k3-di-tempat-kerja:
+    type: Article
+  alat-pelindung-diri-ppe:
+    type: Article
+  identifikasi-bahaya-dan-penilaian-risiko:
+    type: Article
+  pusat-pengetahuan-k3:
+    type: Article
+  regulasi-k3-di-indonesia:
+    type: Article
+  istilah-istilah-k3:
+    type: Article
+  p2k3-panitia-pembina-k3:
+    type: Article
+  faq:
+    type: FAQPage
+
+seo_metadata:
+  title_template: "{page_title} | {brand}"
+  default_description: "Panduan karier, jenjang sertifikasi, dan pengetahuan keselamatan kerja (HSE/K3) di Indonesia."
+  schema_type_map:
+    page: WebPage
+    pillar: Article
+    cluster: Article
+    faq: FAQPage

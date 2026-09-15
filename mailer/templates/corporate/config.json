@@ -1,0 +1,10 @@
+{
+  "name": "Corporate",
+  "description": "Formal bank-style layout: green accent header, bold headline, body copy, single CTA button. Best for announcements, formal notices, invitations.",
+  "fields": [
+    { "key": "headline", "label": "Headline", "type": "text", "required": true, "max_length": 120 },
+    { "key": "body_html", "label": "Body content", "type": "textarea", "required": true },
+    { "key": "cta_text", "label": "Button text", "type": "text", "required": false, "default": "Selengkapnya" },
+    { "key": "cta_url", "label": "Button link", "type": "url", "required": false, "default": "https://wahanatotalita.com" }
+  ]
+}

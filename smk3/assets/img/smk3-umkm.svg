@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 480" role="img" aria-label="SMK3 untuk UMKM">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#f4f8fb"/><stop offset="1" stop-color="#dcE9f4"/>
+</linearGradient>
+<pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse">
+<circle cx="3" cy="3" r="2" fill="#c7dcee" opacity=".55"/>
+</pattern>
+</defs>
+<rect width="960" height="480" fill="url(#bg)"/>
+<rect width="960" height="480" fill="url(#dots)"/>
+<circle cx="750" cy="240" r="215" fill="#ffffff" opacity=".65"/>
+<circle cx="750" cy="240" r="168" fill="#e8f1f9"/>
+<path d="M0 470 q240 -36 480 0 q240 36 480 0 v10 h-960 z" fill="#0b4f8a" opacity=".12"/>
+<rect x="66" y="118" width="56" height="10" rx="5" fill="#f28c1e"/>
+<text x="70" y="166" font-family="Arial, sans-serif" font-size="21" font-weight="bold" letter-spacing="2" fill="#0b4f8a">INDUSTRI • UMKM</text>
+<text x="70" y="250" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#083a66">SMK3 untuk UMKM</text>
+<rect x="70" y="330" width="140" height="42" rx="21" fill="#0b4f8a" opacity=".1"/>
+<text x="140" y="357" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#083a66">PP 50/2012</text>
+<g transform="translate(630 120) scale(1.2)">
+<rect x="40" y="90" width="120" height="85" rx="6" fill="#ffffff" stroke="#0b4f8a" stroke-width="6"/>
+<path d="M35 90 l12 -40 h106 l12 40 a17 17 0 0 1 -33 3 a17 17 0 0 1 -32 0 a17 17 0 0 1 -32 0 a17 17 0 0 1 -33 -3 z" fill="#f28c1e"/>
+<rect x="55" y="112" width="34" height="63" fill="#0b4f8a"/>
+<rect x="104" y="112" width="42" height="36" rx="4" fill="#c7dcee"/>
+<path d="M104 130 h42" stroke="#ffffff" stroke-width="3"/>
+</g>
+</svg>

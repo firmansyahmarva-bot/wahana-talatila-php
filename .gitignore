@@ -1,0 +1,26 @@
+﻿# OS Files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+__MACOSX/
+*.tmp
+
+# Logs
+*.log
+404-log.txt
+error_log
+
+# Temp & backup files
+*.bak
+*.swp
+*.swo
+
+# Staging archives
+staging-app/Archief.zip
+staging-app/__MACOSX/
+staging-app/dist/__MACOSX/
+
+# IDE / Editor
+.vscode/
+.idea/

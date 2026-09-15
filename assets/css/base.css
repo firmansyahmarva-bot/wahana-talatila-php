@@ -1,0 +1,142 @@
+/* ============================================================
+   Wahana Totalita Konsultan — base.css
+   Merged from style.css + additions.css + redesign26.css (T11).
+   Palette resolved to Redesign 2026: Navy #103A5C + Safety Orange #F06A25.
+   Variable NAMES kept identical to the legacy sheet so no selector or
+   markup needs to change — only the VALUES moved to the navy palette.
+   Fonts: Lexend (headings) + Source Sans 3 (body).
+   ============================================================ */
+
+/* ─── RESET & BASE ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  color: #13202E;
+  background: #fff;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-family: 'Source Sans 3', 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; height: auto; display: block; }
+ul { list-style: none; }
+
+.nav-logo-text strong,
+.hero-title,
+.section-title,
+.sp-card-name,
+h1, h2, h3, h4 {
+  font-family: 'Lexend', 'Plus Jakarta Sans', system-ui, sans-serif;
+  letter-spacing: -.02em;
+}
+
+/* ─── CSS VARIABLES ─────────────────────────────────────────── */
+:root {
+  /* legacy names, repointed to the navy/orange (Redesign 2026) palette */
+  --green:       #103A5C; /* was forest green #0A4A2E */
+  --green-dark:  #0B2C46; /* was #062E1C */
+  --green-mid:   #16486E; /* was #0D5C38 */
+  --green-light: #E8F0F7; /* was #E8F4EE */
+  --orange:      #F06A25; /* was #C6621C */
+  --orange-dark: #C2410C; /* was #A04D12 */
+  --orange-light:#FDE8DA; /* was #FEF3EC */
+  --text:        #13202E;
+  --text-muted:  #5A6B7B;
+  --text-light:  #94a3b8;
+  --border:      #DCE6EE;
+  --shadow-sm:   0 1px 4px rgba(0,0,0,.06);
+  --shadow-md:   0 4px 16px rgba(0,0,0,.10);
+  --shadow-lg:   0 8px 32px rgba(0,0,0,.14);
+  --radius:      12px;
+  --radius-sm:   8px;
+  --container:   1200px;
+  --nav-h:       68px;
+
+  /* Redesign-2026 native names (kept as aliases so appended rules that
+     reference them still resolve without edits) */
+  --n900:#0B2C46; --n800:#103A5C; --n700:#16486E; --n100:#E8F0F7;
+  --o500:#F06A25; --o400:#FF8A3D; --o100:#FDE8DA;
+  --ink:#13202E; --mut:#5A6B7B;
+}
+
+/* ─── CONTAINER ─────────────────────────────────────────────── */
+.container { max-width: var(--container); margin: 0 auto; padding: 0 24px; }
+@media (max-width:768px) { .container { padding: 0 16px; } }
+
+/* ─── BUTTONS ───────────────────────────────────────────────── */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: linear-gradient(135deg, var(--orange), var(--o400)); color: #fff;
+  padding: 13px 26px; border-radius: var(--radius-sm);
+  font-size: 15px; font-weight: 600; border: 2px solid transparent;
+  box-shadow: 0 8px 18px -6px rgba(240,106,37,.5);
+  transition: transform .2s, box-shadow .2s;
+  cursor: pointer;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 26px -6px rgba(240,106,37,.6); }
+.btn-primary:active { transform: scale(.98); }
+
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: var(--green);
+  padding: 11px 24px; border-radius: 8px;
+  font-size: 15px; font-weight: 600; border: 2px solid var(--green);
+  transition: background .2s, color .2s;
+}
+.btn-outline:hover { background: var(--green); color: #fff; }
+
+.btn-outline-light {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,.1); color: #fff;
+  padding: 11px 24px; border-radius: 8px;
+  font-size: 15px; font-weight: 600; border: 2px solid rgba(255,255,255,.4);
+  transition: background .2s;
+}
+.btn-outline-light:hover { background: rgba(255,255,255,.2); }
+
+.btn-outline-small {
+  display: block; text-align: center;
+  padding: 9px 16px; border: 1.5px solid var(--border);
+  border-radius: 7px; font-size: 13px; color: var(--text-muted);
+  transition: border-color .2s, color .2s;
+}
+.btn-outline-small:hover { border-color: var(--green); color: var(--green); }
+
+/* ─── SKIP NAVIGATION (Accessibility / WCAG 2.4.1) ─────────────── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  z-index: 9999;
+  padding: 12px 20px;
+  background: var(--green);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  border-radius: 0 0 8px 0;
+  text-decoration: none;
+  transition: top 0.15s ease;
+  white-space: nowrap;
+}
+.skip-link:focus { top: 0; outline: 3px solid var(--orange); outline-offset: 2px; }
+
+/* ─── FADE-IN ANIMATION (utility) ──────────────────────────── */
+.fade-in {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity .55s ease, transform .55s ease;
+}
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* ─── SCROLL PROGRESS BAR ───────────────────────────────────── */
+#scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--orange), #f59e0b, #4ade80);
+  z-index: 9999;
+  transition: width .1s linear;
+  pointer-events: none;
+}

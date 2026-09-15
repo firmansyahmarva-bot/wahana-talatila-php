@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 480" role="img" aria-label="Ciri-Ciri Konsultan SMK3 Abal-Abal yang Harus Dihindari">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#f4f8fb"/><stop offset="1" stop-color="#dcE9f4"/>
+</linearGradient>
+<pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse">
+<circle cx="3" cy="3" r="2" fill="#c7dcee" opacity=".55"/>
+</pattern>
+</defs>
+<rect width="960" height="480" fill="url(#bg)"/>
+<rect width="960" height="480" fill="url(#dots)"/>
+<circle cx="750" cy="240" r="215" fill="#ffffff" opacity=".65"/>
+<circle cx="750" cy="240" r="168" fill="#e8f1f9"/>
+<path d="M0 470 q240 -36 480 0 q240 36 480 0 v10 h-960 z" fill="#0b4f8a" opacity=".12"/>
+<rect x="66" y="118" width="56" height="10" rx="5" fill="#f28c1e"/>
+<text x="70" y="166" font-family="Arial, sans-serif" font-size="21" font-weight="bold" letter-spacing="2" fill="#0b4f8a">BIAYA • WASPADA</text>
+<text x="70" y="235" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#083a66">Ciri-Ciri Konsultan SMK3 Abal-Abal</text><text x="70" y="275" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#083a66">yang Harus Dihindari</text>
+<rect x="70" y="330" width="140" height="42" rx="21" fill="#0b4f8a" opacity=".1"/>
+<text x="140" y="357" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#083a66">PP 50/2012</text>
+<g transform="translate(630 120) scale(1.2)">
+<circle cx="80" cy="66" r="28" fill="#c7dcee"/>
+<path d="M34 150 a46 40 0 0 1 92 0 v13 h-92 z" fill="#c7dcee"/>
+<path d="M80 54 q10 8 0 24" stroke="#ffffff" stroke-width="4" fill="none"/>
+<path d="M148 60 L186 128 H110 Z" fill="#f28c1e"/>
+<rect x="143" y="82" width="10" height="26" rx="5" fill="#ffffff"/>
+<circle cx="148" cy="118" r="6" fill="#ffffff"/>
+</g>
+</svg>

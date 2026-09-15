@@ -1,0 +1,37 @@
+:root {
+  --color-primary: #D9720B;
+  --color-secondary: #1C1A17;
+  --color-background: #F6F2EA;
+  --color-text: #1C1A17;
+  --color-muted: #6E6656;
+  --color-accent: #D9720B;
+  --color-paper: #F6F2EA;
+  --color-paper-dim: #EFE8DA;
+  --color-ink: #1C1A17;
+  --color-ink-soft: #6E6656;
+  --color-line: rgba(28,26,23,0.14);
+  --color-line-strong: rgba(28,26,23,0.22);
+  --color-card: #FFFDF8;
+  --color-home-accent: #D9720B;
+  --color-accent-ink: #2A1608;
+  --color-accent-soft: rgba(217,114,11,0.12);
+  --color-gold: #A9803D;
+  --color-slate: #35424A;
+  --color-moss: #4B5D3A;
+  --color-rust: #8C3B2E;
+  --font-heading: 'Plex Sans', -apple-system, 'Segoe UI', sans-serif;
+  --font-body: 'Plex Sans', -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Plex Sans', -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'Plex Mono', ui-monospace, 'SF Mono', Consolas, 'Liberation Mono', monospace;
+  --space-xxs: 4px;
+  --space-xs: 8px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 64px;
+  --space-xxl: 96px;
+  --radius: 10px;
+  --radius-sm: 6px;
+  --shadow: 0 1px 2px rgba(28,26,23,0.06), 0 8px 24px rgba(28,26,23,0.06);
+  --shadow-lg: 0 4px 10px rgba(28,26,23,0.05), 0 24px 48px rgba(28,26,23,0.08);
+}

@@ -1,0 +1,156 @@
+# Homepage marketing-section content for the `home` layout. Generic template
+# copy throughout — no claims about Wahana Totalita Konsultan's actual
+# services, certifications, clients, or statistics are made here (those
+# would need to be supplied and verified before this goes live). Only
+# identity/contact facts (in manifest.yaml) are real.
+
+header_cta:
+  secondary:
+    label: "Contact us"
+    href: "/#faq"
+  primary:
+    label: "Chat on WhatsApp"
+    href: "https://wa.me/628122969435"
+
+hero:
+  eyebrow: "· Website Engine Homepage Template"
+  heading_lines:
+    - "Every service,"
+    - "one homepage"
+  heading_accent: "you can configure."
+  lede: "This is the shared homepage template for the Website Engine, rendered here with placeholder section content. Replace each section's data in content/homepage.yaml to make it real."
+  actions:
+    - label: "Explore categories"
+      href: "/#categories"
+      style: primary
+    - label: "See FAQ"
+      href: "/#faq"
+      style: secondary
+  meta:
+    - value: "12"
+      label: "configurable sections"
+    - value: "1"
+      label: "shared template"
+    - value: "0"
+      label: "hardcoded pages"
+
+search:
+  label: "Search"
+  placeholder: "Search programs, guides, or a service name…"
+  cta_label: "Search"
+  quick_links_label: "Popular:"
+  quick_links:
+    - "Add a quick link"
+    - "Add a quick link"
+    - "Add a quick link"
+
+categories:
+  heading: "Browse by category"
+  desc: "Replace with a short description of how categories are organized for this subdomain."
+  link_label: "View all categories →"
+  items:
+    - icon: "🗂️"
+      name: "Category placeholder"
+      desc: "Describe this category's programs or services here."
+    - icon: "📋"
+      name: "Category placeholder"
+      desc: "Describe this category's programs or services here."
+    - icon: "🧭"
+      name: "Category placeholder"
+      desc: "Describe this category's programs or services here."
+
+pillars:
+  heading: "Built around who you are"
+  desc: "Describe the main ways clients engage with this business."
+  items:
+    - tag: "For organizations"
+      name: "Pillar placeholder"
+      desc: "Describe this audience's path and point of contact."
+    - tag: "For individuals"
+      name: "Pillar placeholder"
+      desc: "Describe this audience's path and point of contact."
+    - tag: "For partners"
+      name: "Pillar placeholder"
+      desc: "Describe this audience's path and point of contact."
+
+guides:
+  heading: "Latest guides & resources"
+  desc: "Short, practical reads relevant to this subdomain's audience."
+  link_label: "Visit resource library →"
+  items:
+    - cat: "Getting started"
+      title: "Guide placeholder title"
+      time: "— min read"
+      date: "—"
+    - cat: "Guide"
+      title: "Guide placeholder title"
+      time: "— min read"
+      date: "—"
+
+products:
+  heading: "Services & programs"
+  desc: "Describe how services are delivered and scoped."
+  items:
+    - icon: "🧩"
+      name: "Service placeholder"
+      desc: "Describe this service."
+      price: "Custom quote"
+    - icon: "🛠️"
+      name: "Service placeholder"
+      desc: "Describe this service."
+      price: "Custom quote"
+
+trust:
+  heading: "Trust section placeholder"
+  stats: []
+  clients: []
+  accreditations: []
+
+process:
+  heading: "How an engagement runs"
+  desc: "Describe the stages a client goes through."
+  steps:
+    - name: "Assess"
+      desc: "Describe this stage."
+    - name: "Design"
+      desc: "Describe this stage."
+    - name: "Deliver"
+      desc: "Describe this stage."
+    - name: "Confirm"
+      desc: "Describe this stage."
+
+faq:
+  heading: "Questions, answered"
+  link_label: "See full FAQ →"
+  items:
+    - q: "How do we get started?"
+      a: "Contact us via WhatsApp or the details in the footer and we'll follow up."
+    - q: "Where are you located?"
+      a: "See the address in the footer for this subdomain."
+
+final_cta:
+  heading: "Ready to talk?"
+  body: "Reach out and we'll follow up with next steps."
+  actions:
+    - label: "Chat on WhatsApp"
+      href: "https://wa.me/628122969435"
+      style: primary
+    - label: "Contact details"
+      href: "/#faq"
+      style: secondary
+
+footer:
+  brand_description: "Shared homepage template for the Website Engine — replace this description per subdomain in content/homepage.yaml."
+  columns:
+    - title: "Explore"
+      links:
+        - label: "Categories"
+          href: "/#categories"
+        - label: "FAQ"
+          href: "/faq"
+    - title: "Company"
+      links:
+        - label: "Overview"
+          href: "/overview"
+        - label: "Getting Started"
+          href: "/getting-started"

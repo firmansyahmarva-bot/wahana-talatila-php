@@ -1,0 +1,11 @@
+items:
+  - label: "Karier & Profesi HSE"
+    path: "/karier-hse"
+  - label: "Jenjang Karier & Sertifikasi"
+    path: "/jenjang-karier-hse"
+  - label: "Panduan Keselamatan Kerja"
+    path: "/panduan-keselamatan-kerja"
+  - label: "Pusat Pengetahuan K3"
+    path: "/pusat-pengetahuan-k3"
+  - label: "FAQ"
+    path: "/faq"

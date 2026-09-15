@@ -1,0 +1,89 @@
+# Wahana Totalita Konsultan robots.txt
+
+User-agent: *
+Allow: /
+Allow: /pelatihan/
+Allow: /artikel/
+Allow: /assets/css/
+Allow: /assets/js/
+Allow: /assets/img/
+
+Disallow: /admin/
+Disallow: /setup.php
+Disallow: /config.php
+Disallow: /database.sql
+Disallow: /admin_schema.sql
+Disallow: /artikel-schema.sql
+Disallow: /artikel-functions.php
+Disallow: /api/
+Disallow: /cron/
+Disallow: /assets/uploads/private/
+
+Disallow: /?filter=
+Disallow: /?cat=
+Disallow: /?mode=
+
+Disallow: /?lang=
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /assets/img/
+Allow: /assets/uploads/
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+Allow: /llms.txt
+
+User-agent: OAI-SearchBot
+Allow: /
+Allow: /llms.txt
+
+User-agent: ChatGPT-User
+Allow: /
+Allow: /llms.txt
+
+User-agent: Claude-Web
+Allow: /
+Allow: /llms.txt
+
+User-agent: anthropic-ai
+Allow: /
+Allow: /llms.txt
+
+User-agent: PerplexityBot
+Allow: /
+Allow: /llms.txt
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+Sitemap: https://wahanatotalita.com/sitemap.xml

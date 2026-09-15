@@ -1,0 +1,148 @@
+# Homepage marketing-section content for the `home` layout. This is a
+# content/knowledge hub, not a storefront - no services, prices, clients, or
+# statistics are claimed here (products/trust sections are left empty and
+# auto-hide). Only identity/contact facts (in manifest.yaml) are real.
+
+header_cta:
+  secondary:
+    label: "Lihat FAQ"
+    href: "/#faq"
+  primary:
+    label: "Chat WhatsApp"
+    href: "https://wa.me/628122969435"
+
+hero:
+  eyebrow: "· Hub Karier & Pengetahuan HSE"
+  heading_lines:
+    - "Karier dan keselamatan kerja,"
+  heading_accent: "dalam satu tempat."
+  lede: "Panduan karier HSE, jenjang sertifikasi, dan dasar keselamatan kerja (K3) di Indonesia - disusun sebagai satu peta topik, bukan artikel lepas."
+  actions:
+    - label: "Jelajahi topik"
+      href: "/#categories"
+      style: primary
+    - label: "Lihat FAQ"
+      href: "/#faq"
+      style: secondary
+  meta:
+    - value: "4"
+      label: "area utama"
+    - value: "16"
+      label: "panduan terstruktur"
+    - value: "0"
+      label: "lowongan fiktif"
+
+search:
+  label: "Cari"
+  placeholder: "Cari topik karier atau keselamatan kerja…"
+  cta_label: "Cari"
+  quick_links_label: "Populer:"
+  quick_links:
+    - "Cara Menjadi HSE Officer"
+    - "Sertifikasi HSE di Indonesia"
+    - "Alat Pelindung Diri (APD)"
+
+categories:
+  heading: "Empat area utama"
+  desc: "Konten di HSE Wahana disusun ke dalam empat area topik, dari karier sampai regulasi."
+  link_label: "Lihat semua area →"
+  items:
+    - icon: "💼"
+      name: "Karier & Profesi HSE"
+      desc: "Ragam posisi HSE, cara memulai karier, dan tips melamar posisi pertama."
+    - icon: "📈"
+      name: "Jenjang Karier & Sertifikasi"
+      desc: "Jalur dari HSE Officer ke HSE Manager beserta sertifikasi pendukungnya."
+    - icon: "🦺"
+      name: "Panduan Keselamatan Kerja"
+      desc: "Dasar K3, alat pelindung diri, dan identifikasi bahaya di tempat kerja."
+    - icon: "📚"
+      name: "Pusat Pengetahuan K3"
+      desc: "Regulasi, istilah, dan struktur organisasi K3 seperti P2K3."
+
+pillars:
+  heading: "Dibuat untuk siapa"
+  desc: "HSE Wahana ditulis untuk tiga kelompok pembaca yang paling sering mencari topik ini."
+  items:
+    - tag: "Pencari kerja"
+      name: "Calon HSE Officer"
+      desc: "Ingin tahu cara memulai karier di bidang HSE, dari kualifikasi sampai tips melamar."
+    - tag: "Profesional HSE"
+      name: "HSE Officer & Supervisor"
+      desc: "Ingin memahami jenjang karier dan sertifikasi lanjutan menuju posisi manajerial."
+    - tag: "Tim internal perusahaan"
+      name: "HRD & Tim K3"
+      desc: "Butuh referensi cepat soal dasar keselamatan kerja dan struktur K3 seperti P2K3."
+
+guides:
+  heading: "Mulai dari sini"
+  desc: "Beberapa panduan yang paling sering menjadi titik awal pembaca baru."
+  link_label: "Lihat semua panduan →"
+  items:
+    - cat: "Karier"
+      title: "Cara Menjadi HSE Officer"
+      time: "5 min baca"
+      date: "2026"
+    - cat: "Sertifikasi"
+      title: "Sertifikasi HSE di Indonesia"
+      time: "6 min baca"
+      date: "2026"
+    - cat: "Keselamatan Kerja"
+      title: "Identifikasi Bahaya dan Penilaian Risiko"
+      time: "5 min baca"
+      date: "2026"
+
+products: []
+
+trust:
+  heading: ""
+  stats: []
+  clients: []
+  accreditations: []
+
+process:
+  heading: "Cara memakai hub ini"
+  desc: "Tiga langkah sederhana untuk mulai menjelajah HSE Wahana."
+  steps:
+    - name: "Pilih area"
+      desc: "Mulai dari salah satu dari empat area utama sesuai kebutuhanmu."
+    - name: "Ikuti alur pillar-cluster"
+      desc: "Setiap area punya halaman utama yang terhubung ke panduan-panduan turunannya."
+    - name: "Cek FAQ"
+      desc: "Pertanyaan umum di tiap area dijawab singkat di bagian FAQ halaman terkait."
+
+faq:
+  heading: "Pertanyaan umum"
+  link_label: "Lihat semua FAQ →"
+  items:
+    - q: "Apa itu HSE Wahana?"
+      a: "Hub konten yang membahas karier, jenjang sertifikasi, dan dasar keselamatan kerja (K3) di Indonesia, sebagai perluasan topik K3 dari Wahana Totalita Konsultan."
+    - q: "Apakah HSE Wahana menyediakan lowongan kerja?"
+      a: "Tidak. Isinya panduan dan pengetahuan seputar karier serta keselamatan kerja, bukan daftar lowongan kerja aktif."
+
+final_cta:
+  heading: "Ada pertanyaan soal K3 atau pelatihan?"
+  body: "Hubungi Wahana Totalita Konsultan lewat WhatsApp untuk pertanyaan seputar pelatihan dan sertifikasi K3."
+  actions:
+    - label: "Chat WhatsApp"
+      href: "https://wa.me/628122969435"
+      style: primary
+    - label: "Lihat FAQ"
+      href: "/#faq"
+      style: secondary
+
+footer:
+  brand_description: "Hub karier dan pengetahuan HSE/K3 di Indonesia, dikelola oleh Wahana Totalita Konsultan."
+  columns:
+    - title: "Jelajahi"
+      links:
+        - label: "Karier & Profesi HSE"
+          href: "/karier-hse"
+        - label: "Panduan Keselamatan Kerja"
+          href: "/panduan-keselamatan-kerja"
+    - title: "Lainnya"
+      links:
+        - label: "Pusat Pengetahuan K3"
+          href: "/pusat-pengetahuan-k3"
+        - label: "FAQ"
+          href: "/faq"
