@@ -83,13 +83,9 @@ h1,h2,h3,h4,.section-title,.nav-logo-text{font-family:'Lexend','Plus Jakarta San
 .mcta{display:none}
 @media(max-width:768px){
   .hero26-inner{grid-template-columns:1fr;padding:72px 20px 64px;gap:32px}
-  .hero26-card{padding:24px 22px}
-  .mcta{display:grid;grid-template-columns:1fr 1fr;gap:10px;position:fixed;left:0;right:0;bottom:0;z-index:999;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);padding:10px 14px calc(10px + env(safe-area-inset-bottom));border-top:1px solid rgba(16,58,92,.12);box-shadow:0 -10px 30px -12px rgba(11,44,70,.25)}
-  .mcta a{display:flex;align-items:center;justify-content:center;gap:8px;font-weight:800;font-size:14px;padding:13px;border-radius:13px;text-decoration:none}
-  .mcta-wa{background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;box-shadow:0 8px 18px -6px rgba(34,197,94,.5)}
-  .mcta-jadwal{background:var(--n800);color:#fff}
+  .mcta{display:none!important}
   body{padding-bottom:74px}
-  .wa-float{bottom:86px!important}
+  .wa-float{bottom:calc(74px + env(safe-area-inset-bottom, 0))!important}
 }
 @media (prefers-reduced-motion: reduce){
   .hero26-dot{animation:none}
