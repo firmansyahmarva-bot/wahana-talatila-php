@@ -596,3 +596,95 @@ html, body {
 @media (prefers-reduced-motion: reduce) {
   .wa-float { transition: none; }
 }
+
+/* ─── In-Content WhatsApp CTA Banner ─── */
+.pd-mid-cta {
+  background: linear-gradient(135deg, #0A4A2E 0%, #073822 100%);
+  border-radius: 12px;
+  padding: 24px 28px;
+  color: #fff;
+  margin: 36px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 4px 20px rgba(10,74,46,.15);
+}
+.pd-mid-cta-body h3 {
+  font-family: var(--pd-font-display, inherit);
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 8px;
+  text-transform: uppercase;
+}
+.pd-mid-cta-body p {
+  font-size: 14.5px;
+  color: #e2e8f0;
+  line-height: 1.6;
+  margin: 0;
+}
+.pd-mid-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #25D366;
+  color: #fff;
+  font-weight: 700;
+  font-size: 14.5px;
+  padding: 12px 22px;
+  border-radius: 8px;
+  text-decoration: none;
+  width: fit-content;
+  transition: transform .15s, box-shadow .15s;
+}
+.pd-mid-cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37,211,102,.4);
+  color: #fff;
+}
+.pd-mid-cta-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+/* ─── Contextual Interlinks ─── */
+.pd-interlink-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-left: 4px solid #0A4A2E;
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin: 32px 0;
+}
+.pd-interlink-box h4 {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #0A4A2E;
+  margin: 0 0 12px;
+  letter-spacing: .04em;
+}
+.pd-interlink-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.pd-interlink-list li a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #fff;
+  border: 1px solid #cbd5e1;
+  padding: 7px 15px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e293b;
+  text-decoration: none;
+  transition: border-color .15s, color .15s, background .15s;
+}
+.pd-interlink-list li a:hover {
+  border-color: #0A4A2E;
+  color: #0A4A2E;
+  background: #f0fdf4;
+}

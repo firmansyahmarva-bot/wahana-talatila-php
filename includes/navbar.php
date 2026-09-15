@@ -30,8 +30,7 @@ $is_panduan_active = str_starts_with($_nav_path, '/artikel');
     </form>
 
     <ul class="nav-links" id="nav-links">
-      <li><a href="/layanan">Layanan</a></li>
-      <li><a href="/pelatihan/">Program</a></li>
+      <li><a href="/pelatihan/">Pelatihan</a></li>
       <li><a href="/jadwal/">Jadwal</a></li>
 
       <!-- Platform K3 mega dropdown -->
@@ -91,9 +90,9 @@ $is_panduan_active = str_starts_with($_nav_path, '/artikel');
         </div>
       </li>
 
-      <li><a href="/perusahaan">Untuk Perusahaan</a></li>
+      <li><a href="/perusahaan">Perusahaan</a></li>
       <li><a href="/artikel/">Artikel</a></li>
-      <li><a href="/perusahaan">Tentang</a></li>
+      <li><a href="/perusahaan#kontak">Kontak</a></li>
     </ul>
 
     <div class="nav-actions">
