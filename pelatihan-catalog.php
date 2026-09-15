@@ -86,12 +86,25 @@ $catalogFaqs = [
 <link rel="manifest" href="/manifest.json">
 
 <?php if (!empty($s['gtm_id'])): ?>
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','<?= e($s['gtm_id']) ?>');</script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function initGTM() {
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','<?= e($s['gtm_id']) ?>');
+}
+if ('requestIdleCallback' in window) {
+  requestIdleCallback(initGTM, { timeout: 3000 });
+} else {
+  window.addEventListener('load', initGTM, { passive: true });
+}
+</script>
 <?php endif; ?>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="<?= theme_font_url($s) ?>" rel="stylesheet">
+<link rel="preload" href="<?= theme_font_url($s) ?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+  <link rel="stylesheet" href="<?= theme_font_url($s) ?>">
+</noscript>
 <link rel="stylesheet" href="/assets/css/style.css">
 <link rel="stylesheet" href="/assets/css/additions.css">
 <?= theme_css_vars($s) ?>
@@ -157,6 +170,7 @@ $catalogFaqs = [
 
 <?php require __DIR__ . '/includes/navbar.php'; ?>
 
+<main id="konten-utama">
 <div class="breadcrumb-bar">
   <div class="container">
     <nav aria-label="Breadcrumb">
@@ -322,6 +336,7 @@ $catalogFaqs = [
 </section>
 <?php endif; ?>
 
+</main>
 <?php require __DIR__ . '/includes/footer.php'; ?>
 
 <script>
@@ -364,7 +379,7 @@ if ((document.getElementById('catalog-search').value || '').trim() !== '') {
   filterCatalog();
 }
 </script>
-<script src="/assets/js/main.js"></script>
+<script src="/assets/js/main.js" defer></script>
 <?php if (!empty($s['ga_measurement_id'])): ?>
 <script async src="https://www.googletagmanager.com/gtag/js?id=<?= e($s['ga_measurement_id']) ?>"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','<?= e($s['ga_measurement_id']) ?>');</script>

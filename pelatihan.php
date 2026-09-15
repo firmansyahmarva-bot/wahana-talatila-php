@@ -264,26 +264,36 @@ $hero_name = $training['short_name'] ?: preg_replace('/\s*\([^)]{20,}\)/', '', $
 <meta name="apple-mobile-web-app-title"              content="<?= e($s['site_name'] ?? 'Wahana Totalita') ?>">
 
 <?php if (!empty($s['gtm_id'])): ?>
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','<?= e($s['gtm_id']) ?>');</script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function initGTM() {
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','<?= e($s['gtm_id']) ?>');
+}
+if ('requestIdleCallback' in window) {
+  requestIdleCallback(initGTM, { timeout: 3000 });
+} else {
+  window.addEventListener('load', initGTM, { passive: true });
+}
+</script>
 <?php endif; ?>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="<?= theme_font_url($s) ?>" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/style.css">
-<link rel="stylesheet" href="/assets/css/additions.css">
-<link rel="stylesheet" href="/assets/css/components.min.css">
-<?= theme_css_vars($s) ?>
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+</noscript>
 
-<!-- 2026-07-24: dedicated redesign, this page only. Deliberately its own
-     visual identity (ink/amber/certificate-seal + registration-ticket
-     sidebar), not the sitewide theme tokens above — see
-     assets/css/pelatihan-detail.css for the full rationale. Loads after
-     the shared sheets so it can safely coexist. -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- Primary stylesheet: dedicated design for training detail pages -->
 <link rel="stylesheet" href="/assets/css/pelatihan-detail.css">
+<!-- Deferred non-critical stylesheets for footer and shared components -->
+<link rel="stylesheet" href="/assets/css/components.min.css" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="/assets/css/style.css" media="print" onload="this.media='all'">
+<noscript>
+  <link rel="stylesheet" href="/assets/css/components.min.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
+</noscript>
+<?= theme_css_vars($s) ?>
 
 <!-- Course Schema (JSON-LD) -->
 <script type="application/ld+json"><?= course_schema($training) ?></script>
@@ -310,33 +320,6 @@ $hero_name = $training['short_name'] ?: preg_replace('/\s*\([^)]{20,}\)/', '', $
     ], $faqItems),
 ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?></script>
 <?php endif; ?>
-<style>
-/* Fix: breadcrumb showing literal "1." "2." — <ol> default marker was
-   never suppressed, stacking with the custom › separator li. */
-.breadcrumb-list { list-style: none; padding-left: 0; }
-
-/* Related-training grid: 4 per row desktop, tapering down — was a
-   single unstyled column with no explicit grid-template-columns. */
-.pd-training-grid {
-  display: grid !important;
-  grid-template-columns: repeat(4, 1fr) !important;
-  gap: 20px !important;
-}
-@media (max-width: 1100px) { .pd-training-grid { grid-template-columns: repeat(3, 1fr) !important; } }
-@media (max-width: 760px)  { .pd-training-grid { grid-template-columns: repeat(2, 1fr) !important; } }
-@media (max-width: 480px)  { .pd-training-grid { grid-template-columns: 1fr !important; } }
-
-/* FAQ section (SEO content block) */
-.pd-faq-list { max-width: 100%; }
-.pd-faq-item { background:#fff; border:1.5px solid #e5e7eb; border-radius:12px; margin-bottom:.75rem; overflow:hidden; }
-.pd-faq-q { width:100%; background:none; border:none; text-align:left; padding:16px 20px; font-family:inherit; font-size:15px; font-weight:700; color:#111827; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:12px; }
-.pd-faq-q:hover { background:#f9fafb; }
-.pd-faq-q[aria-expanded="true"] { background:#0A4A2E; color:#fff; }
-.pd-faq-arrow { transition: transform .3s; flex-shrink:0; }
-.pd-faq-q[aria-expanded="true"] .pd-faq-arrow { transform: rotate(180deg); }
-.pd-faq-a { padding:0 20px; max-height:0; overflow:hidden; transition:max-height .3s ease, padding .3s; font-size:14px; color:#374151; line-height:1.75; }
-.pd-faq-a.open { max-height:400px; padding:14px 20px 18px; }
-</style>
 </head>
 <body class="detail-page pd-page">
 <div id="scroll-progress" aria-hidden="true"></div>
@@ -346,6 +329,7 @@ $hero_name = $training['short_name'] ?: preg_replace('/\s*\([^)]{20,}\)/', '', $
 <?php endif; ?>
 
 <?php require __DIR__ . '/includes/navbar.php'; ?>
+<main id="konten-utama">
 <!-- BREADCRUMB -->
 <div class="breadcrumb-bar">
   <div class="container">
@@ -599,6 +583,7 @@ $hero_name = $training['short_name'] ?: preg_replace('/\s*\([^)]{20,}\)/', '', $
 </section>
 <?php endif; ?>
 
+</main>
 <?php require __DIR__ . '/includes/footer.php'; ?>
 
 <script>
@@ -609,7 +594,7 @@ function toggleFaqPelatihan(btn) {
   answer.classList.toggle('open', !expanded);
 }
 </script>
-<script src="/assets/js/main.js"></script>
+<script src="/assets/js/main.js" defer></script>
 <?php if (!empty($s['ga_measurement_id'])): ?>
 <script async src="https://www.googletagmanager.com/gtag/js?id=<?= e($s['ga_measurement_id']) ?>"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','<?= e($s['ga_measurement_id']) ?>');</script>

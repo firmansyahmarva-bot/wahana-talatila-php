@@ -19,6 +19,74 @@ html, body {
   overflow-x: hidden;
 }
 
+/* ─── Base Layout Essentials (zero-dependency for fast FCP/LCP) ─── */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+@media (max-width: 768px) {
+  .container { padding: 0 16px; }
+}
+
+#scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, #C6621C, #f59e0b, #4ade80);
+  z-index: 9999;
+  transition: width .1s linear;
+  pointer-events: none;
+}
+
+.breadcrumb-bar {
+  margin-top: var(--nav-h, 72px);
+  background: #eef7f2;
+  padding: 12px 0;
+  border-bottom: 1px solid #d0e8d8;
+}
+.breadcrumb-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+  font-size: 13px;
+  color: #64748b;
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+.breadcrumb-list a {
+  color: #0A4A2E;
+  text-decoration: none;
+}
+.breadcrumb-list a:hover {
+  text-decoration: underline;
+}
+
+/* Related-training grid */
+.pd-training-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 20px !important;
+}
+@media (max-width: 1100px) { .pd-training-grid { grid-template-columns: repeat(3, 1fr) !important; } }
+@media (max-width: 760px)  { .pd-training-grid { grid-template-columns: repeat(2, 1fr) !important; } }
+@media (max-width: 480px)  { .pd-training-grid { grid-template-columns: 1fr !important; } }
+
+/* FAQ section (SEO content block) */
+.pd-faq-list { max-width: 100%; }
+.pd-faq-item { background: #fff; border: 1.5px solid #e5e7eb; border-radius: 12px; margin-bottom: .75rem; overflow: hidden; }
+.pd-faq-q { width: 100%; background: none; border: none; text-align: left; padding: 16px 20px; font-family: inherit; font-size: 15px; font-weight: 700; color: #111827; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.pd-faq-q:hover { background: #f9fafb; }
+.pd-faq-q[aria-expanded="true"] { background: #0A4A2E; color: #fff; }
+.pd-faq-arrow { transition: transform .3s; flex-shrink: 0; }
+.pd-faq-q[aria-expanded="true"] .pd-faq-arrow { transform: rotate(180deg); }
+.pd-faq-a { padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height .3s ease, padding .3s; font-size: 14px; color: #374151; line-height: 1.75; }
+.pd-faq-a.open { max-height: 400px; padding: 14px 20px 18px; }
+
 .pd-page {
   max-width: 100%;
   overflow-x: hidden;
