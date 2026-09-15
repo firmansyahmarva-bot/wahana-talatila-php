@@ -2,6 +2,7 @@
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/includes/hub-category-map.php';
 
+$pdo = get_pdo();
 $s = get_all_settings();
 $cat_slug = $_GET['cat'] ?? '';
 
@@ -30,10 +31,9 @@ $stmt = $pdo->prepare("
     FROM articles
     WHERE category IN ($placeholders) AND status = 'published'
     ORDER BY published_at DESC
-    LIMIT ? OFFSET ?
+    LIMIT " . (int)$per_page . " OFFSET " . (int)$offset . "
 ");
-$params = array_merge($article_cats, [$per_page, $offset]);
-$stmt->execute($params);
+$stmt->execute($article_cats);
 $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $related_trainings = [];

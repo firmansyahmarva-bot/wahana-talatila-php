@@ -2,6 +2,7 @@
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/includes/hub-category-map.php';
 
+$pdo = get_pdo();
 $s = get_all_settings();
 $cat_slug = $_GET['cat'] ?? '';
 
@@ -37,9 +38,9 @@ $stmt = $pdo->prepare("
     LEFT JOIN categories c ON c.id = t.category_id
     WHERE t.category_id = ? AND t.is_active = 1
     ORDER BY t.sort_order ASC, t.name ASC
-    LIMIT ? OFFSET ?
+    LIMIT " . (int)$per_page . " OFFSET " . (int)$offset . "
 ");
-$stmt->execute([$category['id'], $per_page, $offset]);
+$stmt->execute([$category['id']]);
 $trainings = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $related_articles = [];

@@ -246,9 +246,27 @@ function wa_url(string $message = '', ?string $phoneNumber = null): string {
     $number = preg_replace('/\D/', '', $phoneNumber ?? get_setting('wa_number', '6281235036420'));
     return 'https://wa.me/' . $number . ($message ? '?text=' . rawurlencode($message) : '');
 }
-function training_img_url(?string $path, string $cat_slug = ''): string {
+function training_img_url(?string $path, string $cat_slug = '', string $seed = ''): string {
     if ($path && file_exists(UPLOAD_DIR . basename($path))) {
         return UPLOAD_URL . basename($path);
+    }
+    static $gallery_thumbs = null;
+    if ($gallery_thumbs === null) {
+        $thumb_dir = __DIR__ . '/galeri/thumbs/';
+        if (is_dir($thumb_dir)) {
+            $files = glob($thumb_dir . '*.{jpg,JPG,jpeg,JPEG,png,PNG,webp}', GLOB_BRACE);
+            if (!empty($files)) {
+                $gallery_thumbs = array_values(array_map('basename', $files));
+            }
+        }
+        if (empty($gallery_thumbs)) {
+            $gallery_thumbs = [];
+        }
+    }
+    if (!empty($gallery_thumbs)) {
+        $hash_input = $seed ?: ($path ?: $cat_slug);
+        $idx = abs(crc32($hash_input)) % count($gallery_thumbs);
+        return '/galeri/thumbs/' . rawurlencode($gallery_thumbs[$idx]);
     }
     // Category-specific fallback images from Unsplash CDN
     $fallbacks = [
