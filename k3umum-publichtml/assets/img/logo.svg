@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 48" width="220" height="48">
+  <rect x="0" y="6" width="36" height="36" rx="10" fill="#0B2C46"/>
+  <path d="M18 13 L30 18 V27 C30 34 25 39 18 42 C11 39 6 34 6 27 V18 Z" fill="#fff"/>
+  <path d="M13 26 l4 4 8 -9" stroke="#F06A25" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="46" y="22" font-family="Lexend, sans-serif" font-weight="800" font-size="17" fill="#0B2C46">Ahli K3 Umum</text>
+  <text x="46" y="38" font-family="Source Sans 3, sans-serif" font-weight="600" font-size="10.5" fill="#5A6B7B">wahanatotalita.com</text>
+</svg>

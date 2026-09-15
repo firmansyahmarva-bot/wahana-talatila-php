@@ -1,0 +1,67 @@
+/* ============================================================
+   assets/css/page/static-city.css (T18)
+   Shared stylesheet for the 373 static /pelatihan/{program}-{city}/
+   ranking pages. Extracted from a byte-identical inline <style> block
+   duplicated across all 373 files (md5 ef89e022...). Every class name
+   is unchanged — only the palette moved from the pages' original
+   orange-on-dark-brown scheme to the site's Redesign 2026 navy/orange
+   identity, and the font stack now matches the rest of the site
+   (Lexend headings + Source Sans 3 body) instead of Segoe UI, so a
+   visitor arriving here from Google no longer lands on what reads as
+   a different, older site.
+   ============================================================ */
+:root{--o:#F06A25;--od:#C2410C;--g:#22c55e;--t:#13202E;--tl:#5A6B7B;--b:#f9f9f9;--bd:#DCE6EE;--w:#fff}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Source Sans 3','Plus Jakarta Sans',system-ui,sans-serif;background:var(--b);color:var(--t);line-height:1.6}
+h1,h2{font-family:'Lexend','Plus Jakarta Sans',system-ui,sans-serif}
+.hero{background:linear-gradient(135deg,#0B2C46 0%,#103A5C 50%,var(--o) 100%);color:#fff;padding:60px 5% 70px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;top:-60px;right:-80px;width:350px;height:350px;background:rgba(255,255,255,.04);border-radius:50%}
+.hbadge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);padding:5px 14px;border-radius:100px;font-size:13px;font-weight:600;margin-bottom:18px}
+h1{font-size:clamp(24px,4vw,40px);font-weight:800;line-height:1.2;margin-bottom:14px;max-width:680px}
+h1 em{color:#FF8A3D;font-style:normal}
+.hp{font-size:16px;max-width:560px;opacity:.88;margin-bottom:26px}
+.hbtns{display:flex;gap:12px;flex-wrap:wrap}
+.bp{background:var(--o);color:#fff;padding:13px 26px;border-radius:10px;text-decoration:none;font-weight:700;font-size:15px}
+.bs{background:rgba(255,255,255,.15);color:#fff;padding:13px 22px;border-radius:10px;text-decoration:none;font-weight:600;font-size:14px;border:1px solid rgba(255,255,255,.3)}
+.hs{display:flex;gap:28px;margin-top:32px;flex-wrap:wrap}
+.hsn{font-size:26px;font-weight:800;color:#FF8A3D}
+.hsl{font-size:12px;opacity:.75;margin-top:2px}
+.tb{background:var(--w);border-bottom:1px solid var(--bd);padding:13px 5%;display:flex;align-items:center;gap:18px;flex-wrap:wrap;font-size:13px}
+.ti{display:flex;align-items:center;gap:5px;font-weight:600}
+.td{width:7px;height:7px;border-radius:50%;background:var(--g)}
+.sec{padding:52px 5%}
+.sec-alt{background:#FDF3EE}
+.sl{font-size:12px;font-weight:700;color:var(--o);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+h2{font-size:clamp(20px,3vw,28px);font-weight:800;margin-bottom:10px}
+.ss{color:var(--tl);font-size:15px;max-width:560px;margin-bottom:32px}
+.sg{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.sc{border:2px solid var(--bd);border-radius:14px;padding:18px;background:var(--w);transition:.2s}
+.sc:hover,.sc.feat{border-color:var(--o);background:#FDF3EE}
+.badge{display:inline-block;padding:3px 10px;border-radius:100px;font-size:11px;font-weight:700;margin-bottom:10px}
+.bhot{background:#FDE8DA;color:var(--o)}
+.bavail{background:#f0fdf4;color:#16a34a}
+.bonline{background:#eff6ff;color:#2563eb}
+.sd{font-size:16px;font-weight:700;margin-bottom:5px}
+.sm,.sn2{font-size:13px;color:var(--tl)}
+.sn2{margin-top:5px}
+.wg{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.wc{padding:20px;border-radius:14px;background:var(--w);border:1px solid var(--bd)}
+.wi{width:40px;height:40px;border-radius:10px;background:#FDE8DA;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:12px}
+.wc h3{font-size:15px;font-weight:700;margin-bottom:5px}
+.wc p{font-size:13px;color:var(--tl)}
+.ml{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px}
+.mi{display:flex;align-items:flex-start;gap:9px;padding:11px 14px;border-radius:10px;background:var(--w);border:1px solid var(--bd);font-size:14px}
+.mn{width:22px;height:22px;border-radius:6px;background:var(--o);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;margin-top:2px}
+.faq{max-width:720px}
+.fi{border:1px solid var(--bd);border-radius:12px;margin-bottom:8px}
+.fq{padding:15px 18px;font-weight:600;font-size:14px;cursor:pointer;display:flex;justify-content:space-between;background:var(--w);border-radius:12px}
+.fq:hover{background:#FDF3EE}
+.fa{padding:0 18px;max-height:0;overflow:hidden;font-size:13px;color:var(--tl);transition:max-height .3s,padding .3s}
+.fi.open .fa{max-height:180px;padding:0 18px 14px}
+.fi.open .fq{border-radius:12px 12px 0 0}
+.ct{background:linear-gradient(135deg,#103A5C,var(--o));padding:52px 5%;text-align:center;color:#fff;border-radius:20px;margin:0 5% 52px}
+.ct h2{margin-bottom:10px}
+.ct p{opacity:.88;margin-bottom:22px;font-size:15px}
+.ctbs{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.bc{padding:12px 5%;font-size:13px;color:var(--tl);display:flex;gap:6px;flex-wrap:wrap}
+.bc a{color:var(--o);text-decoration:none}

@@ -1,0 +1,6 @@
+home:
+  type: WebPage
+overview:
+  type: WebPage
+getting-started:
+  type: WebPage

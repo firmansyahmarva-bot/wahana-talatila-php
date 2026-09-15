@@ -1,0 +1,108 @@
+<?php
+/** Program-specific decision content. Page files keep authoritative dates, prices, and claims. */
+$LP_CONTENT = [
+  'k3-umum' => [
+    'fit_h2'=>'Untuk calon dan praktisi K3 yang ingin membuktikan kompetensi',
+    'audience'=>['Staf HSE, safety officer, supervisor, atau pencari kerja bidang K3','Peserta yang ingin mengikuti pelatihan dan asesmen skema Ahli K3 Umum BNSP','Perusahaan yang menyiapkan kompetensi tim keselamatan kerja'],
+    'topics'=>['Identifikasi bahaya dan penilaian risiko K3','Penyusunan tindakan pengendalian risiko','Komunikasi serta dokumentasi penerapan K3','Persiapan bukti untuk asesmen kompetensi'],
+    'requirements'=>['KTP dan pas foto terbaru','Ijazah pendidikan terakhir','CV serta bukti pengalaman kerja bila disyaratkan','Dokumen asesmen akan diarahkan oleh tim'],
+    'outcomes'=>[['Pahami dasar penerapan K3','Pelajari identifikasi bahaya, penilaian risiko, dan pengendalian di lingkungan kerja.'],['Siap menghadapi asesmen','Pahami bukti dan tahapan yang perlu disiapkan untuk proses uji kompetensi.'],['Pilih metode yang sesuai','Konfirmasi pilihan online atau tatap muka Yogyakarta sebelum mendaftar.']],
+  ],
+  'ahli-k3-listrik' => [
+    'fit_h2'=>'Untuk profesional yang menangani risiko dan keselamatan kelistrikan',
+    'audience'=>['Teknisi, engineer, supervisor, atau penanggung jawab pekerjaan listrik','Personel HSE yang mengawasi bahaya dan pengendalian energi listrik','Perusahaan yang ingin meningkatkan kompetensi tim kelistrikan'],
+    'topics'=>['Identifikasi bahaya listrik dan energi berbahaya','Pengendalian risiko sengatan dan arc flash','Inspeksi, prosedur kerja aman, serta alat pelindung','Dokumentasi dan persiapan asesmen kompetensi'],
+    'requirements'=>['KTP, pas foto, dan ijazah terakhir','CV yang menunjukkan pendidikan atau pengalaman kelistrikan','Bukti pengalaman atau surat kerja bila disyaratkan skema','Dokumen asesmen sesuai arahan tim'],
+    'outcomes'=>[['Kenali bahaya listrik','Perkuat kemampuan mengidentifikasi risiko sengatan, arc flash, dan energi berbahaya.'],['Susun pengendalian','Pahami prinsip prosedur kerja aman, inspeksi, dan penggunaan alat pelindung.'],['Persiapan asesmen','Siapkan dokumen dan bukti kompetensi dengan alur yang lebih jelas.']],
+  ],
+  'k3-konstruksi' => [
+    'fit_h2'=>'Untuk personel yang bertanggung jawab atas keselamatan proyek',
+    'audience'=>['Safety officer, site engineer, supervisor, dan pengawas proyek','Profesional konstruksi yang menangani pekerjaan berisiko tinggi','Kontraktor atau perusahaan yang mengembangkan kompetensi tim proyek'],
+    'topics'=>['Identifikasi bahaya pada tahapan proyek konstruksi','Pengendalian pekerjaan berisiko tinggi','Inspeksi lapangan dan komunikasi keselamatan','Pelaporan serta persiapan bukti kompetensi'],
+    'requirements'=>['Identitas, pas foto, dan ijazah terakhir','CV atau surat pengalaman di proyek konstruksi','Bukti pekerjaan atau dokumen pendukung bila diminta','Dokumen asesmen mengikuti skema yang dipilih'],
+    'outcomes'=>[['Pahami risiko proyek','Fokus pada identifikasi bahaya dan pengendalian pekerjaan konstruksi.'],['Terapkan pengawasan','Perkuat pemahaman inspeksi, komunikasi, dan prosedur keselamatan proyek.'],['Siap mengikuti proses','Dapatkan arahan batch, dokumen, pelatihan, dan asesmen.']],
+  ],
+  'forklift' => [
+    'fit_h2'=>'Untuk operator yang membutuhkan pelatihan praktik dan proses SIO',
+    'audience'=>['Calon operator forklift yang membutuhkan kompetensi dasar dan praktik','Operator aktif yang perlu mengecek penerbitan atau perpanjangan SIO','Perusahaan yang membutuhkan kelas operator secara in-house'],
+    'topics'=>['Pemeriksaan forklift sebelum dan sesudah digunakan','Kapasitas beban, pusat gravitasi, dan stabilitas','Manuver aman, area kerja, serta komunikasi operator','Praktik pengoperasian dan evaluasi keterampilan'],
+    'requirements'=>['KTP, pas foto, dan ijazah terakhir','Surat keterangan sehat sesuai ketentuan program','Surat pengalaman atau keterangan perusahaan bila diperlukan','Detail jenis forklift dan kebutuhan baru/perpanjangan'],
+    'outcomes'=>[['Operasi lebih aman','Pahami pemeriksaan awal, kapasitas beban, stabilitas, dan area kerja.'],['Teori plus praktik','Ikuti pembelajaran yang menghubungkan aturan keselamatan dengan pengoperasian nyata.'],['Proses SIO lebih jelas','Konfirmasi jalur, dokumen, masa berlaku, dan penerbitan sebelum mendaftar.']],
+  ],
+  'petugas-p3k' => [
+    'fit_h2'=>'Pilih jalur BNSP atau Kemnaker sesuai kebutuhan Anda',
+    'audience'=>['Karyawan yang ditunjuk sebagai petugas P3K di tempat kerja','Tim HSE, HR, atau operasional yang menangani kesiapsiagaan','Perusahaan yang membutuhkan pelatihan reguler atau in-house'],
+    'topics'=>['Penilaian awal korban dan keamanan lokasi','Penanganan luka, perdarahan, dan cedera dasar','Bantuan hidup dasar serta respons keadaan darurat','Pelaporan dan pengelolaan fasilitas P3K tempat kerja'],
+    'requirements'=>['Identitas, pas foto, dan ijazah terakhir','Surat penugasan perusahaan untuk jalur tertentu','Surat keterangan sehat bila dipersyaratkan','Konfirmasi pilihan BNSP atau Kemnaker sebelum daftar'],
+    'outcomes'=>[['Pilih jalur yang tepat','Tim membantu membedakan tujuan sertifikasi BNSP dan Kemnaker.'],['Latihan penanganan awal','Pelajari respons awal keadaan darurat melalui materi dan praktik.'],['Siap untuk kebutuhan perusahaan','Konfirmasi jumlah peserta, metode, dan kebutuhan pelaksanaan di lokasi.']],
+  ],
+  'k3-lingkungan' => [
+    'fit_h2'=>'Temukan skema lingkungan yang sesuai dengan tanggung jawab kerja',
+    'audience'=>['Personel lingkungan, HSE, utilitas, atau pengelola limbah industri','Calon peserta skema air limbah, emisi udara, AMDAL, atau limbah B3','Perusahaan yang perlu memetakan kebutuhan kompetensi tim lingkungan'],
+    'topics'=>['Pemetaan aspek dan dampak lingkungan kegiatan','Dasar pengendalian air limbah dan emisi udara','Pengelolaan limbah B3 dan dokumentasi terkait','Pemilihan skema kompetensi sesuai tanggung jawab'],
+    'requirements'=>['Identitas dan ijazah pendidikan terakhir','CV serta uraian tugas di bidang lingkungan','Bukti pengalaman sesuai skema yang dituju','Nama skema perlu dikonfirmasi sebelum pendaftaran'],
+    'outcomes'=>[['Tidak salah pilih skema','Cocokkan tugas Anda dengan bidang air, udara, AMDAL, atau limbah B3.'],['Pahami tanggung jawab','Fokus pada kompetensi yang relevan dengan peran pengelola atau operator.'],['Siapkan bukti kerja','Dapatkan arahan dokumen dan bukti yang diperlukan untuk asesmen.']],
+  ],
+  'mplb3-oplb3' => [
+    'fit_h2'=>'Bedakan jalur manajer dan operator pengelolaan limbah B3',
+    'audience'=>['Manajer atau penanggung jawab pengelolaan limbah B3','Operator yang menjalankan kegiatan penyimpanan dan pengelolaan','Tim lingkungan perusahaan yang perlu menentukan skema MPLB3 atau OPLB3'],
+    'topics'=>['Identifikasi karakteristik dan sumber limbah B3','Penyimpanan, pelabelan, dan penanganan operasional','Pencatatan, pelaporan, serta kesiapsiagaan keadaan darurat','Tanggung jawab manajer dan operator pengelolaan limbah'],
+    'requirements'=>['KTP, pas foto, dan ijazah terakhir','CV dan uraian pekerjaan terkait limbah B3','Bukti pengalaman atau portofolio sesuai skema','Konfirmasi jalur MPLB3 atau OPLB3'],
+    'outcomes'=>[['Pilih level tanggung jawab','Bedakan skema manajerial MPLB3 dan operasional OPLB3.'],['Perkuat pengelolaan','Pelajari konteks identifikasi, penyimpanan, penanganan, dan dokumentasi limbah B3.'],['Siapkan asesmen','Susun dokumen awal dan bukti kerja berdasarkan skema yang dipilih.']],
+  ],
+  'pppa-popal' => [
+    'fit_h2'=>'Pilih skema pengendalian atau operasional air limbah',
+    'audience'=>['Penanggung jawab pengendalian pencemaran air','Operator instalasi pengolahan air limbah atau IPAL','Tim lingkungan yang perlu menentukan jalur PPPA atau POPAL'],
+    'topics'=>['Karakteristik air limbah dan proses pengolahan','Pengoperasian serta pemantauan unit IPAL','Pengendalian gangguan dan evaluasi kinerja proses','Pencatatan hasil pemantauan dan pelaporan operasional'],
+    'requirements'=>['Identitas, pas foto, dan ijazah terakhir','CV serta uraian tugas pengelolaan air limbah','Bukti pengalaman atau pekerjaan terkait IPAL','Konfirmasi skema PPPA atau POPAL'],
+    'outcomes'=>[['Bedakan peran','Pahami perbedaan tanggung jawab pengendalian dan operasional pengolahan.'],['Fokus pada pekerjaan nyata','Hubungkan materi dengan pemantauan, proses IPAL, dan pemenuhan operasional.'],['Persiapan lebih terarah','Dapatkan checklist dokumen berdasarkan peran yang dipilih.']],
+  ],
+  'pppu-poippu' => [
+    'fit_h2'=>'Pilih skema pengendalian atau operasional pencemaran udara',
+    'audience'=>['Penanggung jawab pengendalian pencemaran udara','Operator instalasi atau peralatan pengendalian emisi','Personel lingkungan industri yang perlu memilih PPPU atau POIPPU'],
+    'topics'=>['Sumber emisi dan karakteristik pencemar udara','Prinsip kerja alat pengendalian pencemaran udara','Pemantauan operasi dan penanganan gangguan peralatan','Dokumentasi data emisi serta pelaporan operasional'],
+    'requirements'=>['Identitas, pas foto, dan ijazah terakhir','CV serta uraian tugas terkait emisi udara','Bukti pengalaman atau dokumen operasional','Konfirmasi skema PPPU atau POIPPU'],
+    'outcomes'=>[['Cocokkan peran','Bedakan tanggung jawab pengendalian dan pengoperasian instalasi.'],['Pahami konteks emisi','Pelajari pemantauan, pengoperasian, dan pengendalian pencemaran udara.'],['Siapkan bukti','Dapatkan arahan portofolio dan dokumen untuk proses asesmen.']],
+  ],
+  'pertek' => [
+    'fit_h2'=>'Untuk personel yang menangani persetujuan teknis lingkungan',
+    'audience'=>['Staf lingkungan yang menyiapkan atau mengevaluasi dokumen teknis','Konsultan dan penanggung jawab pemenuhan lingkungan perusahaan','Tim yang membutuhkan pemahaman alur persetujuan teknis'],
+    'topics'=>['Ruang lingkup dan alur persetujuan teknis','Identifikasi data teknis yang perlu disiapkan','Penyusunan informasi pendukung dan pemeriksaan awal','Tindak lanjut administrasi serta pemenuhan dokumen'],
+    'requirements'=>['Identitas, pas foto, dan ijazah terakhir','CV atau uraian tugas di bidang lingkungan','Contoh lingkup pekerjaan yang sedang ditangani','Konfirmasi nama dan ruang lingkup skema sebelum daftar'],
+    'outcomes'=>[['Pahami alur teknis','Pelajari konteks dokumen, data, dan tahapan persetujuan teknis.'],['Kurangi kesalahan awal','Kenali informasi yang perlu disiapkan sebelum proses administrasi.'],['Cocokkan program','Pastikan ruang lingkup pelatihan sesuai kebutuhan pekerjaan Anda.']],
+  ],
+  'k3-migas' => [
+    'fit_h2'=>'Program K3 yang dapat disesuaikan untuk operasi migas',
+    'audience'=>['Perusahaan minyak, gas, EPC, dan kontraktor pendukung','Tim HSE dan operasional yang menghadapi bahaya proses atau H2S','HR atau learning team yang membutuhkan pelatihan in-house'],
+    'topics'=>['Pengenalan bahaya operasi minyak dan gas','Process safety serta pengendalian energi berbahaya','Kesadaran H2S dan penggunaan perlindungan yang sesuai','Kesiapsiagaan dan koordinasi tanggap darurat'],
+    'requirements'=>['Profil perusahaan dan lokasi pelaksanaan','Jumlah serta peran peserta','Topik prioritas dan risiko operasi','Pilihan online, Yogyakarta, atau in-house'],
+    'outcomes'=>[['Analisis kebutuhan','Ruang lingkup disusun berdasarkan peserta, lokasi, dan risiko operasi.'],['Materi kontekstual','Pilih fokus process safety, H2S, tanggap darurat, atau kebutuhan lain.'],['Proposal lebih jelas','Terima rincian metode, durasi, fasilitas, dan investasi secara tertulis.']],
+  ],
+  'k3-pertambangan' => [
+    'fit_h2'=>'Tentukan jenjang POP, POM, atau POU sesuai peran Anda',
+    'audience'=>['Calon atau pengawas operasional pertama di area pertambangan','Pengawas tingkat madya yang memenuhi pengalaman untuk jenjang POM','Pimpinan operasional yang perlu memeriksa kelayakan jalur POU'],
+    'topics'=>['Tanggung jawab pengawas operasional pertambangan','Inspeksi, identifikasi bahaya, dan pengendalian risiko','Komunikasi keselamatan serta evaluasi pekerjaan','Penerapan kompetensi sesuai jenjang POP, POM, atau POU'],
+    'requirements'=>['Identitas, ijazah, dan CV terbaru','Bukti pengalaman kerja pertambangan','Surat keterangan posisi atau pengalaman pengawasan','Sertifikat jenjang sebelumnya bila dipersyaratkan'],
+    'outcomes'=>[['Pilih jenjang yang benar','Cocokkan posisi dan pengalaman dengan POP, POM, atau POU.'],['Pahami kompetensi pengawas','Fokus pada keselamatan, inspeksi, tanggung jawab, dan pengawasan operasional.'],['Siapkan dokumen pengalaman','Tim membantu memeriksa bukti awal sebelum Anda memilih batch.']],
+  ],
+  'perusahaan' => [
+    'hero_cta'=>'Minta Proposal Perusahaan','sticky_cta'=>'Konsultasi via WhatsApp','price_cta'=>'Minta Proposal Tertulis',
+    'fit_h2'=>'Untuk HR, HSE, procurement, dan learning team perusahaan',
+    'audience'=>['Perusahaan yang membutuhkan pelatihan K3 untuk beberapa peserta','Tim HSE yang ingin menyusun program sesuai risiko dan kewajiban kerja','HR atau procurement yang membutuhkan proposal dan rincian pelaksanaan'],
+    'topics_h2'=>'Ruang lingkup dapat disesuaikan','topics_intro'=>'Tim menyusun pilihan materi berdasarkan industri, peserta, dan risiko kerja perusahaan.',
+    'topics'=>['Orientasi K3 sesuai profil risiko perusahaan','Materi teknis berdasarkan fungsi dan pekerjaan peserta','Studi kasus, diskusi, atau praktik sesuai metode','Evaluasi pembelajaran dan dokumentasi pelaksanaan'],
+    'requirements'=>['Nama perusahaan, industri, dan lokasi','Program atau risiko kerja yang ingin ditangani','Jumlah peserta dan target waktu','Pilihan online, tatap muka, atau in-house'],
+    'outcomes'=>[['Pemetaan kebutuhan','Cocokkan program dengan industri, peserta, dan tujuan perusahaan.'],['Pelaksanaan fleksibel','Diskusikan metode, lokasi, durasi, serta penyesuaian materi.'],['Proposal tertulis','Terima ruang lingkup, jadwal, fasilitas, dan biaya untuk persetujuan internal.']],
+    'final_h2'=>'Minta proposal pelatihan untuk perusahaan Anda','final_p'=>'Kirim industri, jumlah peserta, lokasi, dan target waktu. Tim akan menyiapkan arahan program serta proposal yang sesuai.'
+  ],
+  'sertifikasi-k3' => [
+    'hero_cta'=>'Bantu Pilih Sertifikasi','sticky_cta'=>'Bantu Pilih via WhatsApp','price_cta'=>'Lihat Pilihan & Biaya',
+    'fit_h2'=>'Belum tahu sertifikasi mana? Mulai dari pekerjaan Anda',
+    'audience'=>['Pencari kerja atau profesional yang ingin memilih jalur K3','Praktisi yang perlu membandingkan BNSP dan Kemnaker','Perusahaan yang membutuhkan satu atau beberapa program untuk tim'],
+    'topics_h2'=>'Pilih berdasarkan bidang pekerjaan','topics_intro'=>'Gunakan kategori berikut sebagai titik awal sebelum tim memeriksa persyaratan Anda.',
+    'topics'=>['Keselamatan kerja umum, konstruksi, listrik, dan operator','Lingkungan: air limbah, emisi, AMDAL, dan limbah B3','Pertambangan, migas, serta pekerjaan berisiko khusus','Pilihan jalur BNSP, Kemnaker, reguler, atau in-house'],
+    'requirements'=>['Pendidikan terakhir','Posisi atau pekerjaan saat ini','Pengalaman kerja yang relevan','Tujuan: karier, kompetensi, atau kebutuhan perusahaan'],
+    'outcomes'=>[['Dipandu memilih program','Mulai dari pekerjaan dan tujuan, bukan sekadar daftar puluhan program.'],['Bandingkan jalur','Pahami perbedaan awal pilihan BNSP, Kemnaker, reguler, dan in-house.'],['Dapatkan rekomendasi','Tim menyarankan opsi program, persyaratan, jadwal, dan kisaran biaya.']],
+    'final_h2'=>'Biar tim membantu memilih sertifikasi','final_p'=>'Kirim pendidikan, pengalaman, dan tujuan Anda. Tim akan menyarankan beberapa pilihan yang paling relevan.'
+  ],
+];

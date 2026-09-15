@@ -1,0 +1,15 @@
+enabled: false
+
+# Any OpenAI-compatible chat-completions endpoint - hosted provider, gateway,
+# or local inference server. No vendor is hardcoded in the engine; this file
+# is the only place a model is chosen.
+endpoint: ""
+model: ""
+
+# Name of the environment variable holding the API key. The key itself is
+# never stored in this file.
+api_key_env: "AI_API_KEY"
+
+temperature: 0.4
+max_tokens: 4000
+timeout_seconds: 60

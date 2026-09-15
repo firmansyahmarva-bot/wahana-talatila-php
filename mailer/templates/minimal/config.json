@@ -1,0 +1,9 @@
+{
+  "name": "Minimal",
+  "description": "Quiet, text-led layout with maximum whitespace and an outline button. Best for short personal-feeling notes: greetings, gentle reminders, simple invitations.",
+  "fields": [
+    { "key": "message", "label": "Message", "type": "textarea", "required": true },
+    { "key": "cta_text", "label": "Button text", "type": "text", "required": false, "default": "Pelajari Lebih Lanjut" },
+    { "key": "cta_url", "label": "Button link", "type": "url", "required": false, "default": "https://wahanatotalita.com" }
+  ]
+}

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 480" role="img" aria-label="Gap Analysis SMK3">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#f4f8fb"/><stop offset="1" stop-color="#dcE9f4"/>
+</linearGradient>
+<pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse">
+<circle cx="3" cy="3" r="2" fill="#c7dcee" opacity=".55"/>
+</pattern>
+</defs>
+<rect width="960" height="480" fill="url(#bg)"/>
+<rect width="960" height="480" fill="url(#dots)"/>
+<circle cx="750" cy="240" r="215" fill="#ffffff" opacity=".65"/>
+<circle cx="750" cy="240" r="168" fill="#e8f1f9"/>
+<path d="M0 470 q240 -36 480 0 q240 36 480 0 v10 h-960 z" fill="#0b4f8a" opacity=".12"/>
+<rect x="66" y="118" width="56" height="10" rx="5" fill="#f28c1e"/>
+<text x="70" y="166" font-family="Arial, sans-serif" font-size="21" font-weight="bold" letter-spacing="2" fill="#0b4f8a">IMPLEMENTASI • GAP ANALYSIS</text>
+<text x="70" y="250" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#083a66">Gap Analysis SMK3</text>
+<rect x="70" y="330" width="140" height="42" rx="21" fill="#0b4f8a" opacity=".1"/>
+<text x="140" y="357" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#083a66">PP 50/2012</text>
+<g transform="translate(630 120) scale(1.2)">
+<rect x="25" y="25" width="150" height="150" rx="10" fill="#ffffff" stroke="#c7dcee" stroke-width="4"/>
+<rect x="45" y="110" width="26" height="50" rx="4" fill="#0b4f8a"/>
+<rect x="85" y="85" width="26" height="75" rx="4" fill="#0b4f8a"/>
+<rect x="125" y="45" width="26" height="115" rx="4" fill="#f28c1e" opacity=".35"/>
+<rect x="125" y="95" width="26" height="65" rx="4" fill="#f28c1e"/>
+<path d="M138 88 v-32" stroke="#083a66" stroke-width="5" stroke-dasharray="6 5"/>
+<path d="M132 62 l6 -10 6 10 z" fill="#083a66"/>
+</g>
+</svg>

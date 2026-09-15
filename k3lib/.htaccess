@@ -1,0 +1,11 @@
+# Block all direct web access to the engine internals (config, src, database).
+# Only /k3.php (at the web root) may include these files server-side.
+Require all denied
+
+# EXCEPTION: allow the one-time/manual browser trigger for refresh.php.
+# It's still protected by its own secret key check (config/settings.php
+# 'refresh_key') — this only lets the request reach PHP, not bypass auth.
+# If you never plan to trigger it via browser (cron-only), delete this block.
+<Files "refresh.php">
+  Require all granted
+</Files>

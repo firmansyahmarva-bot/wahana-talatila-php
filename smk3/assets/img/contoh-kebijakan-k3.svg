@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 480" role="img" aria-label="Contoh Kebijakan K3 Perusahaan yang Memenuhi PP 50/2012">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#f4f8fb"/><stop offset="1" stop-color="#dcE9f4"/>
+</linearGradient>
+<pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse">
+<circle cx="3" cy="3" r="2" fill="#c7dcee" opacity=".55"/>
+</pattern>
+</defs>
+<rect width="960" height="480" fill="url(#bg)"/>
+<rect width="960" height="480" fill="url(#dots)"/>
+<circle cx="750" cy="240" r="215" fill="#ffffff" opacity=".65"/>
+<circle cx="750" cy="240" r="168" fill="#e8f1f9"/>
+<path d="M0 470 q240 -36 480 0 q240 36 480 0 v10 h-960 z" fill="#0b4f8a" opacity=".12"/>
+<rect x="66" y="118" width="56" height="10" rx="5" fill="#f28c1e"/>
+<text x="70" y="166" font-family="Arial, sans-serif" font-size="21" font-weight="bold" letter-spacing="2" fill="#0b4f8a">IMPLEMENTASI • KEBIJAKAN K3</text>
+<text x="70" y="235" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#083a66">Contoh Kebijakan K3 Perusahaan</text><text x="70" y="275" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#083a66">yang Memenuhi PP 50/2012</text>
+<rect x="70" y="330" width="140" height="42" rx="21" fill="#0b4f8a" opacity=".1"/>
+<text x="140" y="357" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#083a66">PP 50/2012</text>
+<g transform="translate(630 120) scale(1.2)">
+<rect x="40" y="18" width="105" height="145" rx="8" fill="#ffffff" stroke="#0b4f8a" stroke-width="6"/>
+<rect x="55" y="40" width="75" height="8" rx="4" fill="#0b4f8a"/>
+<rect x="55" y="60" width="75" height="8" rx="4" fill="#c7dcee"/>
+<rect x="55" y="80" width="55" height="8" rx="4" fill="#c7dcee"/>
+<path d="M60 130 q14 -12 30 0 q10 8 22 -3" stroke="#083a66" stroke-width="4" fill="none"/>
+<g transform="rotate(45 140 130)">
+<rect x="132" y="88" width="16" height="70" rx="4" fill="#f28c1e"/>
+<path d="M132 158 h16 l-8 18 z" fill="#083a66"/>
+<rect x="132" y="80" width="16" height="12" rx="3" fill="#0b4f8a"/>
+</g>
+</g>
+</svg>

@@ -1,0 +1,47 @@
+colors:
+  # Ecosystem palette per ai/PROJECT_MEMORY.md's Wahana Totalita Design System
+  # (WTK-DS-001): warm ink/paper neutrals + one safety-amber accent, retiring
+  # the previous teal home-accent and generic cool grays ecosystem-wide.
+  primary: "#D9720B"
+  secondary: "#1C1A17"
+  background: "#F6F2EA"
+  text: "#1C1A17"
+  muted: "#6E6656"
+  accent: "#D9720B"
+  paper: "#F6F2EA"
+  paper-dim: "#EFE8DA"
+  ink: "#1C1A17"
+  ink-soft: "#6E6656"
+  line: "rgba(28,26,23,0.14)"
+  line-strong: "rgba(28,26,23,0.22)"
+  card: "#FFFDF8"
+  home-accent: "#D9720B"
+  accent-ink: "#2A1608"
+  accent-soft: "rgba(217,114,11,0.12)"
+  gold: "#A9803D"
+  slate: "#35424A"
+  moss: "#4B5D3A"
+  rust: "#8C3B2E"
+
+fonts:
+  heading: "'Plex Sans', -apple-system, 'Segoe UI', sans-serif"
+  body: "'Plex Sans', -apple-system, 'Segoe UI', sans-serif"
+  display: "'Plex Sans', -apple-system, 'Segoe UI', sans-serif"
+  mono: "'Plex Mono', ui-monospace, 'SF Mono', Consolas, 'Liberation Mono', monospace"
+
+spacing:
+  xxs: "4px"
+  xs: "8px"
+  sm: "8px"
+  md: "16px"
+  lg: "32px"
+  xl: "64px"
+  xxl: "96px"
+
+radius:
+  default: "10px"
+  sm: "6px"
+
+shadows:
+  default: "0 1px 2px rgba(28,26,23,0.06), 0 8px 24px rgba(28,26,23,0.06)"
+  lg: "0 4px 10px rgba(28,26,23,0.05), 0 24px 48px rgba(28,26,23,0.08)"

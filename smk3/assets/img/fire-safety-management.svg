@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 480" role="img" aria-label="Fire Safety Management dalam SMK3">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#f4f8fb"/><stop offset="1" stop-color="#dcE9f4"/>
+</linearGradient>
+<pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse">
+<circle cx="3" cy="3" r="2" fill="#c7dcee" opacity=".55"/>
+</pattern>
+</defs>
+<rect width="960" height="480" fill="url(#bg)"/>
+<rect width="960" height="480" fill="url(#dots)"/>
+<circle cx="750" cy="240" r="215" fill="#ffffff" opacity=".65"/>
+<circle cx="750" cy="240" r="168" fill="#e8f1f9"/>
+<path d="M0 470 q240 -36 480 0 q240 36 480 0 v10 h-960 z" fill="#0b4f8a" opacity=".12"/>
+<rect x="66" y="118" width="56" height="10" rx="5" fill="#f28c1e"/>
+<text x="70" y="166" font-family="Arial, sans-serif" font-size="21" font-weight="bold" letter-spacing="2" fill="#0b4f8a">K3 PENDUKUNG • KEBAKARAN</text>
+<text x="70" y="250" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#083a66">Fire Safety Management dalam SMK3</text>
+<rect x="70" y="330" width="140" height="42" rx="21" fill="#0b4f8a" opacity=".1"/>
+<text x="140" y="357" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#083a66">PP 50/2012</text>
+<g transform="translate(630 120) scale(1.2)">
+<path d="M120 40 q30 -14 44 12" stroke="#083a66" stroke-width="7" fill="none"/>
+<rect x="66" y="60" width="52" height="110" rx="16" fill="#e05252"/>
+<rect x="80" y="40" width="24" height="24" rx="6" fill="#083a66"/>
+<rect x="70" y="30" width="44" height="12" rx="6" fill="#0b4f8a"/>
+<rect x="78" y="95" width="28" height="40" rx="6" fill="#ffffff"/>
+<path d="M150 80 q16 -26 -2 -44 q26 10 28 34 a26 26 0 0 1 -50 10 q12 2 24 0z" fill="#f28c1e"/>
+</g>
+</svg>

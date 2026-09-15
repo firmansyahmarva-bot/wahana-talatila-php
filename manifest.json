@@ -1,0 +1,38 @@
+{
+  "name": "Wahana Totalita Konsultan",
+  "short_name": "Wahana Totalita",
+  "description": "Pelatihan Sertifikasi K3, Lingkungan, Mining & ISO — KEMNAKER RI & BNSP",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#062E1C",
+  "theme_color": "#0A4A2E",
+  "lang": "id",
+  "icons": [
+    { "src": "/assets/img/favicon-16.png",  "sizes": "16x16",   "type": "image/png" },
+    { "src": "/assets/img/favicon-32.png",  "sizes": "32x32",   "type": "image/png" },
+    { "src": "/assets/img/favicon-180.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "/assets/img/favicon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "screenshots": [
+    {
+      "src": "/assets/img/og-cover.jpg",
+      "sizes": "1200x630",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "Homepage Wahana Totalita Konsultan"
+    }
+  ],
+  "categories": ["education", "business"],
+  "shortcuts": [
+    {
+      "name": "Program K3",
+      "url": "/#produk",
+      "description": "Lihat semua program pelatihan K3"
+    },
+    {
+      "name": "Hubungi Kami",
+      "url": "https://wa.me/6281235036420",
+      "description": "Chat WhatsApp langsung"
+    }
+  ]
+}

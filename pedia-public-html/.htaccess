@@ -1,0 +1,27 @@
+# pedia.wahanatotalita.com — keep this minimal and boring on purpose.
+
+Options -Indexes
+DirectoryIndex index.php
+
+RewriteEngine On
+
+# Force HTTPS (subdomain has no www variant)
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Serve sitemap.xml from the generator (always in sync with the manifest)
+RewriteRule ^sitemap\.xml$ sitemap.php [L]
+
+# Security headers
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set X-Frame-Options "SAMEORIGIN"
+</IfModule>
+
+# Cache static assets
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 30 days"
+  ExpiresByType image/svg+xml "access plus 30 days"
+</IfModule>

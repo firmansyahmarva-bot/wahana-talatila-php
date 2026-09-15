@@ -1,0 +1,28 @@
+<?php
+
+declare(strict_types=1);
+
+require __DIR__ . '/../engine/bootstrap.php';
+
+use Engine\Content\ContentRepository;
+use Engine\Core\ConfigLoader;
+use Engine\Core\Request;
+use Engine\Core\SubdomainResolver;
+use Engine\SEO\SitemapBuilder;
+
+$rootPath = dirname(__DIR__);
+$request = Request::fromGlobals();
+
+$resolver = new SubdomainResolver($rootPath);
+$slug = $resolver->resolve($request->host);
+
+if ($slug === null) {
+    http_response_code(404);
+    exit;
+}
+
+$manifest = ConfigLoader::manifestFor($rootPath, $slug);
+$content = new ContentRepository($rootPath, $slug);
+
+header('Content-Type: application/xml; charset=utf-8');
+echo (new SitemapBuilder())->build($content, $manifest);

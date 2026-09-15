@@ -1,0 +1,11 @@
+{
+  "name": "Spark",
+  "description": "Bold, punchy layout for short high-energy messages: launches, offers, quick wins, urgent one-liners. Colored header band, big headline, solid CTA. Not for dense or formal announcements — use Corporate for those.",
+  "fields": [
+    { "key": "eyebrow", "label": "Eyebrow label (small tag above headline)", "type": "text", "required": false, "default": "Kabar Baru", "max_length": 30 },
+    { "key": "headline", "label": "Headline", "type": "text", "required": true, "max_length": 60 },
+    { "key": "message", "label": "Message", "type": "textarea", "required": true, "max_length": 400 },
+    { "key": "cta_text", "label": "Button text", "type": "text", "required": false, "default": "Lihat Sekarang" },
+    { "key": "cta_url", "label": "Button link", "type": "url", "required": false, "default": "https://wahanatotalita.com" }
+  ]
+}

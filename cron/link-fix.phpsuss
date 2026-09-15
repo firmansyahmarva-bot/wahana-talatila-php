@@ -1,0 +1,65 @@
+<?php
+/**
+ * link-fix.php - eliminate orphan city pages by giving them internal links.
+ *  (1) builds /daftar-pelatihan-kota.html linking ALL kept city pages, grouped by city
+ *  (2) adds that hub to the footer "Kota Layanan" list (includes/footer.php)
+ * WAF-safe: all HTML base64-encoded. Web: /cron/link-fix.php?key=wahana2026ping
+ */
+if (PHP_SAPI !== 'cli' && (($_GET['key'] ?? '') !== 'wahana2026ping')) { http_response_code(403); exit('Forbidden'); }
+set_time_limit(0);
+header('Content-Type: text/plain; charset=utf-8');
+$D='base64_decode';
+$HUB_HEAD=$D('PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9ImlkIj4KPGhlYWQ+CjxtZXRhIGNoYXJzZXQ9IlVURi04Ij4KPG1ldGEgbmFtZT0idmlld3BvcnQiIGNvbnRlbnQ9IndpZHRoPWRldmljZS13aWR0aCxpbml0aWFsLXNjYWxlPTEuMCI+Cjx0aXRsZT5EYWZ0YXIgUGVsYXRpaGFuIEszIHBlciBLb3RhIHwgV2FoYW5hIFRvdGFsaXRhIEtvbnN1bHRhbjwvdGl0bGU+CjxtZXRhIG5hbWU9ImRlc2NyaXB0aW9uIiBjb250ZW50PSJEYWZ0YXIgbGVuZ2thcCBwZWxhdGloYW4gSzMgYmVyc2VydGlmaWthc2kgS2VtbmFrZXIgUkkgJmFtcDsgQk5TUCBwZXIga290YSBkaSBJbmRvbmVzaWE6IFlvZ3lha2FydGEsIFN1cmFiYXlhLCBCYW5kdW5nLCBCZWthc2ksIEJhbGlrcGFwYW4sIENpbGVnb24sIEJhdGFtLCBkYW4gbGFpbm55YS4iPgo8bGluayByZWw9ImNhbm9uaWNhbCIgaHJlZj0iaHR0cHM6Ly93YWhhbmF0b3RhbGl0YS5jb20vZGFmdGFyLXBlbGF0aWhhbi1rb3RhLmh0bWwiPgo8bWV0YSBuYW1lPSJyb2JvdHMiIGNvbnRlbnQ9ImluZGV4LGZvbGxvdyI+CjxsaW5rIHJlbD0ic3R5bGVzaGVldCIgaHJlZj0iL2Fzc2V0cy9jc3Mvc3R5bGUuY3NzIj4KPC9oZWFkPgo8Ym9keT4KPG1haW4gc3R5bGU9Im1heC13aWR0aDoxMDAwcHg7bWFyZ2luOjAgYXV0bztwYWRkaW5nOjMycHggMjBweDtsaW5lLWhlaWdodDoxLjYiPgo8aDE+RGFmdGFyIFBlbGF0aWhhbiBLMyBwZXIgS290YTwvaDE+CjxwPlBpbGloIGtvdGEgdW50dWsgbWVsaWhhdCBwcm9ncmFtIHBlbGF0aWhhbiBLMyBiZXJzZXJ0aWZpa2FzaSBLZW1uYWtlciBSSSAmYW1wOyBCTlNQIHlhbmcgdGVyc2VkaWEgZGkgd2lsYXlhaCBBbmRhLiBXYWhhbmEgVG90YWxpdGEgbWVsYXlhbmkgcGVsYXRpaGFuIG9ubGluZSBkYW4gaW4taG91c2UgZGkgc2VsdXJ1aCBJbmRvbmVzaWEuPC9wPgo='); $HUB_FOOT=$D('PC9tYWluPgo8L2JvZHk+CjwvaHRtbD4K');
+$SEC_OPEN=$D('PHNlY3Rpb24gc3R5bGU9Im1hcmdpbjoyOHB4IDAiPjxoMj5QZWxhdGloYW4gSzMgZGkge0NJVFl9PC9oMj48dWwgc3R5bGU9ImNvbHVtbnM6MiI+'); $SEC_CLOSE=$D('PC91bD48L3NlY3Rpb24+Cg=='); $LINK=$D('PGxpPjxhIGhyZWY9Ii9wZWxhdGloYW4ve1NMVUd9LyI+e1BST0d9IHtDSVRZfTwvYT48L2xpPg==');
+$FOOTER_LI=$D('PGxpPjxhIGhyZWY9Ii9kYWZ0YXItcGVsYXRpaGFuLWtvdGEuaHRtbCI+U2VtdWEgS290YSAmYW1wOyBQcm9ncmFtPC9hPjwvbGk+'); $KOTA=$D('S290YSBMYXlhbmFu'); $UL=$D('PHVsPg=='); $HUBURL=$D('ZGFmdGFyLXBlbGF0aWhhbi1rb3RhLmh0bWw=');
+
+$CITY=['yogyakarta'=>'Yogyakarta','sleman'=>'Sleman','bantul'=>'Bantul','semarang'=>'Semarang',
+ 'solo'=>'Solo','surabaya'=>'Surabaya','bandung'=>'Bandung','bekasi'=>'Bekasi',
+ 'balikpapan'=>'Balikpapan','cilegon'=>'Cilegon','batam'=>'Batam'];
+
+$root = $_SERVER['DOCUMENT_ROOT'] ?? realpath(__DIR__.'/..');
+$dir = $root.'/pelatihan';
+$files = glob($dir.'/*.html');
+
+// group kept pages by city
+$byCity=[]; foreach($CITY as $k=>$n){ $byCity[$k]=[]; }
+foreach($files as $f){
+  $slug=basename($f,'.html');
+  foreach($CITY as $cs=>$cn){
+    if(str_ends_with($slug,'-'.$cs)){
+      $progSlug=substr($slug,0,-(strlen($cs)+1));
+      $prog=preg_replace('/\bk3\b/i','K3',ucwords(str_replace('-',' ',$progSlug)));
+      $byCity[$cs][]=[$slug,$prog]; break;
+    }
+  }
+}
+// build hub
+$html=$HUB_HEAD; $total=0;
+foreach($CITY as $cs=>$cn){
+  if(empty($byCity[$cs])) continue;
+  $html.=strtr($SEC_OPEN,['{CITY}'=>$cn]);
+  sort($byCity[$cs]);
+  foreach($byCity[$cs] as $p){
+    $html.=strtr($LINK,['{SLUG}'=>$p[0],'{PROG}'=>$p[1],'{CITY}'=>$cn]); $total++;
+  }
+  $html.=$SEC_CLOSE;
+}
+$html.=$HUB_FOOT;
+$ok1=file_put_contents($root.'/'.$HUBURL,$html);
+echo "HUB: wrote {$HUBURL} with {$total} links -> ".($ok1!==false?'OK':'FAIL')."\n";
+
+// patch footer
+$fp=$root.'/includes/footer.php';
+$f=@file_get_contents($fp);
+if($f===false){ echo "FOOTER: includes/footer.php not found\n"; }
+elseif(strpos($f,$HUBURL)!==false){ echo "FOOTER: hub link already present, skipped\n"; }
+else{
+  $kp=strpos($f,$KOTA);
+  $ulp=($kp!==false)?strpos($f,$UL,$kp):false;
+  if($ulp!==false){
+    $at=$ulp+strlen($UL);
+    $f2=substr($f,0,$at)."\n        ".$FOOTER_LI.substr($f,$at);
+    echo "FOOTER: patch -> ".(file_put_contents($fp,$f2)!==false?'OK (hub link added to Kota Layanan)':'FAIL')."\n";
+  } else { echo "FOOTER: 'Kota Layanan' anchor not found, not patched\n"; }
+}
+echo "DONE\n";

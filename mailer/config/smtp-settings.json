@@ -1,0 +1,13 @@
+{
+    "host": "smtp.hostinger.com",
+    "port": 465,
+    "encryption": "ssl",
+    "username": "info@wahanatotalita.com",
+    "password": "+uFTF$p2k36wnww",
+    "from_email": "info@wahanatotalita.com",
+    "from_name": "PT Wahana Totalita Konsultan",
+    "daily_limit_default": 1000,
+    "window_start_default": "12:00",
+    "window_end_default": "13:00",
+    "batch_size": 1
+}

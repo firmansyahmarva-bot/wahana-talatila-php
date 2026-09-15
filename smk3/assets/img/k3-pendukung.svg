@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 480" role="img" aria-label="Topik K3 Pendukung SMK3">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#f4f8fb"/><stop offset="1" stop-color="#dcE9f4"/>
+</linearGradient>
+<pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse">
+<circle cx="3" cy="3" r="2" fill="#c7dcee" opacity=".55"/>
+</pattern>
+</defs>
+<rect width="960" height="480" fill="url(#bg)"/>
+<rect width="960" height="480" fill="url(#dots)"/>
+<circle cx="750" cy="240" r="215" fill="#ffffff" opacity=".65"/>
+<circle cx="750" cy="240" r="168" fill="#e8f1f9"/>
+<path d="M0 470 q240 -36 480 0 q240 36 480 0 v10 h-960 z" fill="#0b4f8a" opacity=".12"/>
+<rect x="66" y="118" width="56" height="10" rx="5" fill="#f28c1e"/>
+<text x="70" y="166" font-family="Arial, sans-serif" font-size="21" font-weight="bold" letter-spacing="2" fill="#0b4f8a">TOPIK K3 PENDUKUNG</text>
+<text x="70" y="250" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#083a66">Topik K3 Pendukung SMK3</text>
+<rect x="70" y="330" width="140" height="42" rx="21" fill="#0b4f8a" opacity=".1"/>
+<text x="140" y="357" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" font-weight="bold" fill="#083a66">PP 50/2012</text>
+<g transform="translate(630 120) scale(1.2)">
+<rect x="35" y="80" width="130" height="85" rx="10" fill="#f28c1e"/>
+<rect x="35" y="80" width="130" height="26" fill="#d97706"/>
+<path d="M80 80 v-16 a10 10 0 0 1 10 -10 h20 a10 10 0 0 1 10 10 v16" stroke="#083a66" stroke-width="8" fill="none"/>
+<rect x="88" y="96" width="24" height="18" rx="4" fill="#ffffff"/>
+<circle cx="60" cy="140" r="10" fill="#e8f1f9"/>
+<path d="M130 130 l24 24 M154 130 l-24 24" stroke="#e8f1f9" stroke-width="7" stroke-linecap="round"/>
+</g>
+</svg>

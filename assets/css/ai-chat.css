@@ -1,0 +1,176 @@
+/* ============================================================
+   ai-chat.css — AI Training Finder Widget
+   Wahana Totalita Konsultan
+   Separate file — do not merge with style.css
+   ============================================================ */
+
+/* ── Toggle Button ───────────────────────────────────────── */
+.wtc-btn {
+  position: fixed; bottom: 88px; right: 20px; z-index: 9990;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: linear-gradient(135deg, #0A4A2E, #1a6b45);
+  color: #fff; border: none; cursor: pointer;
+  box-shadow: 0 4px 20px rgba(10,74,46,.4);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .2s, box-shadow .2s;
+  animation: wtc-pulse 3s ease-in-out infinite;
+}
+.wtc-btn:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(10,74,46,.5); }
+.wtc-btn svg  { width: 24px; height: 24px; }
+.wtc-btn-label {
+  position: absolute; right: 64px; top: 50%; transform: translateY(-50%);
+  background: #1a1a2e; color: #fff; font-size: 12px; font-weight: 700;
+  padding: 5px 10px; border-radius: 6px; white-space: nowrap;
+  pointer-events: none; opacity: 0; transition: opacity .2s;
+}
+.wtc-btn:hover .wtc-btn-label { opacity: 1; }
+
+@keyframes wtc-pulse {
+  0%,100% { box-shadow: 0 4px 20px rgba(10,74,46,.4); }
+  50%      { box-shadow: 0 4px 28px rgba(10,74,46,.7), 0 0 0 8px rgba(10,74,46,.1); }
+}
+
+/* ── Chat Window ─────────────────────────────────────────── */
+.wtc-window {
+  position: fixed; bottom: 158px; right: 20px; z-index: 9991;
+  width: 360px; max-height: 540px;
+  background: #fff; border-radius: 20px;
+  box-shadow: 0 12px 48px rgba(0,0,0,.18);
+  display: flex; flex-direction: column;
+  transform: scale(0.9) translateY(20px);
+  opacity: 0; pointer-events: none;
+  transition: transform .25s cubic-bezier(.34,1.56,.64,1), opacity .2s;
+  overflow: hidden;
+}
+.wtc-window.open {
+  transform: scale(1) translateY(0);
+  opacity: 1; pointer-events: all;
+}
+@media(max-width:420px){
+  .wtc-window { width: calc(100vw - 24px); right: 12px; bottom: 148px; }
+}
+
+/* ── Chat Header ─────────────────────────────────────────── */
+.wtc-header {
+  background: linear-gradient(135deg, #0A4A2E, #1a6b45);
+  color: #fff; padding: 16px 16px 14px;
+  display: flex; align-items: center; gap: 10px;
+  flex-shrink: 0;
+}
+.wtc-header-avatar {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: rgba(255,255,255,.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; flex-shrink: 0;
+}
+.wtc-header-info { flex: 1; min-width: 0; }
+.wtc-header-name { font-size: 14px; font-weight: 700; }
+.wtc-header-status {
+  font-size: 11px; opacity: .75; display: flex; align-items: center; gap: 4px;
+}
+.wtc-online-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #4ade80; animation: blink 1.5s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1}50%{opacity:.4} }
+.wtc-close {
+  background: none; border: none; color: rgba(255,255,255,.7);
+  cursor: pointer; padding: 4px; border-radius: 6px;
+  transition: color .15s; font-size: 20px; line-height: 1;
+}
+.wtc-close:hover { color: #fff; }
+
+/* ── Messages Area ───────────────────────────────────────── */
+.wtc-messages {
+  flex: 1; overflow-y: auto; padding: 14px 14px 8px;
+  display: flex; flex-direction: column; gap: 10px;
+  scroll-behavior: smooth;
+}
+.wtc-messages::-webkit-scrollbar { width: 4px; }
+.wtc-messages::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 2px; }
+
+.wtc-msg { display: flex; gap: 8px; max-width: 100%; }
+.wtc-msg.bot  { align-items: flex-start; }
+.wtc-msg.user { flex-direction: row-reverse; }
+
+.wtc-msg-avatar {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: linear-gradient(135deg, #0A4A2E, #1a6b45);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; flex-shrink: 0; color: #fff; font-weight: 700;
+}
+
+.wtc-bubble {
+  max-width: 85%; padding: 10px 13px;
+  border-radius: 14px; font-size: 13.5px; line-height: 1.55;
+}
+.bot  .wtc-bubble { background: #f3f4f6; color: #1a1a2e; border-radius: 4px 14px 14px 14px; }
+.user .wtc-bubble { background: linear-gradient(135deg, #0A4A2E, #1a6b45); color: #fff; border-radius: 14px 4px 14px 14px; }
+
+/* ── Program Cards in Bot Message ────────────────────────── */
+.wtc-programs { margin-top: 10px; display: flex; flex-direction: column; gap: 7px; }
+.wtc-program-card {
+  background: #fff; border: 1.5px solid #e5e7eb; border-radius: 10px;
+  padding: 10px 12px; text-decoration: none; color: inherit;
+  transition: border-color .15s, box-shadow .15s; display: block;
+}
+.wtc-program-card:hover { border-color: #0A4A2E; box-shadow: 0 2px 12px rgba(10,74,46,.12); }
+.wtc-prog-name { font-size: 12.5px; font-weight: 700; color: #1a1a2e; margin-bottom: 3px; }
+.wtc-prog-meta { font-size: 11px; color: #6b7280; display: flex; gap: 8px; flex-wrap: wrap; }
+.wtc-prog-price { color: #C6621C; font-weight: 700; }
+.wtc-prog-cert  { color: #0A4A2E; }
+.wtc-prog-arrow { float: right; color: #0A4A2E; font-size: 14px; margin-top: -18px; }
+
+/* ── WA Button in Chat ───────────────────────────────────── */
+.wtc-wa-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: #25D366; color: #fff; border: none;
+  padding: 8px 14px; border-radius: 8px; font-size: 12.5px; font-weight: 700;
+  text-decoration: none; margin-top: 8px; cursor: pointer;
+  transition: background .2s;
+}
+.wtc-wa-btn:hover { background: #1ebe5b; }
+
+/* ── Typing Indicator ────────────────────────────────────── */
+.wtc-typing { display: flex; gap: 5px; padding: 8px 4px; }
+.wtc-typing span {
+  width: 8px; height: 8px; border-radius: 50%; background: #9ca3af;
+  animation: wtc-bounce .9s ease-in-out infinite;
+}
+.wtc-typing span:nth-child(2) { animation-delay: .15s; }
+.wtc-typing span:nth-child(3) { animation-delay: .30s; }
+@keyframes wtc-bounce { 0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)} }
+
+/* ── Quick Suggestions ───────────────────────────────────── */
+.wtc-suggestions {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  padding: 4px 14px 10px;
+}
+.wtc-suggestion {
+  background: #f0fdf4; color: #0A4A2E; border: 1px solid #a7f3d0;
+  border-radius: 20px; padding: 5px 12px; font-size: 12px; font-weight: 600;
+  cursor: pointer; transition: background .15s;
+}
+.wtc-suggestion:hover { background: #dcfce7; }
+
+/* ── Input Area ──────────────────────────────────────────── */
+.wtc-input-area {
+  padding: 10px 12px 12px; border-top: 1px solid #f3f4f6;
+  display: flex; gap: 8px; align-items: flex-end; flex-shrink: 0;
+}
+.wtc-input {
+  flex: 1; border: 1.5px solid #e5e7eb; border-radius: 12px;
+  padding: 9px 13px; font-size: 13.5px; font-family: inherit;
+  outline: none; resize: none; max-height: 80px; line-height: 1.5;
+  transition: border-color .15s;
+}
+.wtc-input:focus { border-color: #0A4A2E; }
+.wtc-send {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: linear-gradient(135deg, #0A4A2E, #1a6b45);
+  border: none; cursor: pointer; color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  transition: opacity .15s; flex-shrink: 0;
+}
+.wtc-send:disabled { opacity: .4; cursor: not-allowed; }
+.wtc-send svg { width: 16px; height: 16px; }

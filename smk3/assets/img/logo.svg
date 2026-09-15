@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 80" role="img" aria-label="Wahana Totalita Konsultan">
+<path d="M40 6 L70 17 V44 C70 61 56 73 40 78 C24 73 10 61 10 44 V17 Z" fill="#0b4f8a"/>
+<path d="M40 14 L62 22 V43 C62 56 52 66 40 70 C28 66 18 56 18 43 V22 Z" fill="#ffffff"/>
+<path d="M25 44 C25 34 32 27 40 27 C48 27 55 34 55 44 Z" fill="#f28c1e"/>
+<rect x="22" y="44" width="36" height="5" rx="2.5" fill="#0b4f8a"/>
+<text x="84" y="38" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="#1c2733">WAHANA TOTALITA</text>
+<text x="84" y="62" font-family="Arial, sans-serif" font-size="17" letter-spacing="3" fill="#f28c1e">SMK3 INDONESIA</text>
+</svg>

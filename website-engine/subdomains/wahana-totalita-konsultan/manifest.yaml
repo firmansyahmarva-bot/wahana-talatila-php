@@ -1,0 +1,23 @@
+slug: wahana-totalita-konsultan
+name: Wahana Totalita Konsultan
+brand: Wahana Totalita Konsultan
+domain: wahanatotalita.com
+theme: default
+logo: "https://wahanatotalita.com/assets/img/logo-wt.png"
+component_flags: []
+created_at: 2026-07-20T16:29:19+00:00
+
+# Official identity/contact facts, confirmed live from wahanatotalita.com on
+# 2026-07-20 (phone + email confirmed with the site owner where the live
+# site showed more than one candidate value). No legal registration number
+# was found published on the live site, so it is omitted rather than invented.
+contact:
+  phone: "+62 812-2969-435"
+  phone_href: "628122969435"
+  email: "info@wahanatotalita.com"
+  address: "Yogyakarta, Indonesia"
+
+social:
+  - label: "Instagram"
+    href: "https://instagram.com/wahanatotalita.id"
+    icon: "IG"

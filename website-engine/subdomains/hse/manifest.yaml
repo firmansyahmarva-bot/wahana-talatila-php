@@ -1,0 +1,26 @@
+slug: hse
+name: HSE Wahana
+brand: HSE Wahana
+domain: hse.wahanatotalita.com
+theme: default
+logo: https://wahanatotalita.com/assets/img/logo-wt.png
+component_flags: []
+created_at: 2026-07-21T16:24:29+00:00
+
+# Identity/contact reused from the sibling subdomain
+# subdomains/wahana-totalita-konsultan/manifest.yaml (same company, same
+# verified facts) per AI_RULES.md - never fabricate identity/contact data.
+contact:
+  phone: "+62 812-2969-435"
+  phone_href: "628122969435"
+  email: "info@wahanatotalita.com"
+  address: "Yogyakarta, Indonesia"
+
+social:
+  - label: "Instagram"
+    href: "https://instagram.com/wahanatotalita.id"
+    icon: "IG"
+
+author:
+  name: "Monawaroh, S.E."
+  credential: "Tim Editorial HSE Wahana"
