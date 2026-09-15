@@ -260,7 +260,7 @@ $catalogFaqs = [
                    data-mode="<?= e($t['mode']) ?>"
                    style="--accent: <?= e($t['accent_color'] ?? '#0A4A2E') ?>">
             <a href="/pelatihan/<?= e($t['slug']) ?>/" class="training-card-img-wrap">
-              <img src="<?= training_img_url($t['image_path'], $t['cat_slug'] ?? '') ?>"
+              <img src="<?= training_img_url($t['image_path'], $t['cat_slug'] ?? '', $t['slug'] ?? '') ?>"
                    alt="<?= e($t['name']) ?>" loading="lazy" width="400" height="250" decoding="async">
               <span class="training-card-cat-badge"><?= $t['cat_icon'] ?? '' ?> <?= e($t['cat_name']) ?></span>
             </a>
