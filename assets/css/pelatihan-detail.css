@@ -16,7 +16,7 @@
 
 html, body {
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* ─── Base Layout Essentials (zero-dependency for fast FCP/LCP) ─── */
@@ -89,7 +89,7 @@ html, body {
 
 .pd-page {
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
   --pd-ink:          #14181A;
   --pd-ink-2:        #1D2224;
   --pd-paper:        #F1F2ED;
@@ -362,9 +362,12 @@ html, body {
    page's primary conversion surface on desktop.
    ══════════════════════════════════════════════════════════════ */
 .pd-sidebar {
+  position: -webkit-sticky;
   position: sticky;
-  top: var(--pd-nav-offset);
+  top: var(--pd-nav-offset, 96px);
   align-self: start;
+  height: fit-content;
+  z-index: 10;
 }
 .pd-ticket {
   position: relative;
