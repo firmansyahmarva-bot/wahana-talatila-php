@@ -247,8 +247,15 @@ function wa_url(string $message = '', ?string $phoneNumber = null): string {
     return 'https://wa.me/' . $number . ($message ? '?text=' . rawurlencode($message) : '');
 }
 function training_img_url(?string $path, string $cat_slug = '', string $seed = ''): string {
-    if ($path && file_exists(UPLOAD_DIR . basename($path))) {
-        return UPLOAD_URL . basename($path);
+    if ($path) {
+        $base = basename($path);
+        $nameOnly = pathinfo($base, PATHINFO_FILENAME);
+        if (file_exists(UPLOAD_DIR . $nameOnly . '.webp')) {
+            return UPLOAD_URL . $nameOnly . '.webp';
+        }
+        if (file_exists(UPLOAD_DIR . $base)) {
+            return UPLOAD_URL . $base;
+        }
     }
     static $gallery_thumbs = null;
     if ($gallery_thumbs === null) {
