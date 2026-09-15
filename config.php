@@ -386,7 +386,7 @@ function theme_logo_html(array $s, string $cls = 'nav-logo-icon'): string {
     $text = $s['logo_text'] ?? 'WT';
     $name = e($s['site_name'] ?? 'Logo');
     if ($logo && file_exists($_SERVER['DOCUMENT_ROOT'] . $logo)) {
-        return '<img src="' . e($logo) . '" alt="' . $name . '" class="nav-logo-img" width="44" height="44" style="height:44px;width:auto;display:block;border-radius:8px">';
+        return '<img src="' . e($logo) . '" alt="' . $name . '" class="nav-logo-img" width="44" height="44" decoding="async" style="height:44px;width:auto;display:block;border-radius:8px">';
     }
     return '<span class="' . $cls . '">' . e(strtoupper(substr($text, 0, 2))) . '</span>';
 }
