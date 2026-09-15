@@ -30,14 +30,34 @@ define('UPLOAD_URL',       SITE_URL . '/assets/uploads/');
 define('UPLOAD_MAX_MB',    5);
 define('SESSION_LIFETIME', 7200); // 2 hours
 
-// ─── Session ──────────────────────────────────────────────────────────────
-if (session_status() === PHP_SESSION_NONE) {
-    ini_set('session.cookie_httponly', 1);
-    ini_set('session.cookie_secure',   1);
-    ini_set('session.use_strict_mode', 1);
-    ini_set('session.gc_maxlifetime',  SESSION_LIFETIME);
-    session_cache_limiter('public');
-    session_start();
+// ─── Session Management (Lazy & Context-Aware) ─────────────────────────────
+function ensure_session(): void {
+    if (session_status() === PHP_SESSION_NONE) {
+        ini_set('session.cookie_httponly', 1);
+        ini_set('session.cookie_secure',   1);
+        ini_set('session.use_strict_mode', 1);
+        ini_set('session.gc_maxlifetime',  SESSION_LIFETIME);
+        session_cache_limiter('');
+        session_start();
+        if (!headers_sent() && php_sapi_name() !== 'cli') {
+            header('Cache-Control: private, no-cache, no-store, must-revalidate');
+        }
+    }
+}
+
+// ─── Auto-initialize session for routes & methods that require it ─────────
+$req_uri    = $_SERVER['REQUEST_URI'] ?? '';
+$req_method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
+
+if (
+    $req_method === 'POST' ||
+    preg_match('#^/(admin|workplace|api/ai-chat|jadwal/daftar)#i', $req_uri)
+) {
+    ensure_session();
+}
+
+// ─── Edge & Browser Cache Headers for Public Read-Only Pages ──────────────
+if (session_status() === PHP_SESSION_NONE && !headers_sent() && php_sapi_name() !== 'cli') {
     header('Cache-Control: public, max-age=300, s-maxage=600');
 }
 
@@ -73,12 +93,14 @@ function get_pdo(): PDO {
 
 // ─── CSRF ─────────────────────────────────────────────────────────────────
 function csrf_token(): string {
+    ensure_session();
     if (empty($_SESSION['csrf_token'])) {
         $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
     }
     return $_SESSION['csrf_token'];
 }
 function csrf_verify(string $token): bool {
+    ensure_session();
     return isset($_SESSION['csrf_token']) && hash_equals($_SESSION['csrf_token'], $token);
 }
 function csrf_field(): string {
@@ -244,6 +266,7 @@ function page_title(string $title = ''): string {
 
 // ─── Admin Auth ───────────────────────────────────────────────────────────
 function require_admin(): void {
+    ensure_session();
     if (empty($_SESSION['admin_id'])) {
         redirect(SITE_URL . '/admin/login.php');
     }
@@ -255,13 +278,17 @@ function require_admin(): void {
 
 // ─── Flash Messages ───────────────────────────────────────────────────────
 function flash_set(string $type, string $message): void {
+    ensure_session();
     $_SESSION['flash'] = ['type' => $type, 'message' => $message];
 }
 function flash_get(): ?array {
-    if (!empty($_SESSION['flash'])) {
-        $f = $_SESSION['flash'];
-        unset($_SESSION['flash']);
-        return $f;
+    if (session_status() === PHP_SESSION_ACTIVE || isset($_COOKIE[session_name()])) {
+        ensure_session();
+        if (!empty($_SESSION['flash'])) {
+            $f = $_SESSION['flash'];
+            unset($_SESSION['flash']);
+            return $f;
+        }
     }
     return null;
 }
@@ -359,7 +386,7 @@ function theme_logo_html(array $s, string $cls = 'nav-logo-icon'): string {
     $text = $s['logo_text'] ?? 'WT';
     $name = e($s['site_name'] ?? 'Logo');
     if ($logo && file_exists($_SERVER['DOCUMENT_ROOT'] . $logo)) {
-        return '<img src="' . e($logo) . '" alt="' . $name . '" class="nav-logo-img" style="height:44px;width:auto;display:block;border-radius:8px">';
+        return '<img src="' . e($logo) . '" alt="' . $name . '" class="nav-logo-img" width="44" height="44" style="height:44px;width:auto;display:block;border-radius:8px">';
     }
     return '<span class="' . $cls . '">' . e(strtoupper(substr($text, 0, 2))) . '</span>';
 }

@@ -64,7 +64,9 @@ $_home_title = 'Pelatihan K3 & Sertifikasi BNSP Yogyakarta | Wahana Totalita';
 <meta name="apple-mobile-web-app-title" content="<?= e($s['site_name'] ?? 'Wahana Totalita') ?>">
 
 <!-- Performance: DNS prefetch & preconnect -->
+<?php if ($_is_home): ?>
 <link rel="preload" as="image" href="/assets/img/hero-bg.webp" fetchpriority="high">
+<?php endif; ?>
 <link rel="dns-prefetch" href="https://images.unsplash.com">
 <link rel="dns-prefetch" href="https://www.googletagmanager.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">

@@ -168,7 +168,7 @@ if (!empty($article['thumbnail'])) $article_schema['image'] = artikel_thumb($art
     <div class="container">
       <img src="<?= e(artikel_thumb($article['thumbnail'] ?? '', $article['category'])) ?>"
            alt="<?= e($article['title']) ?>"
-           loading="eager" width="1200" height="630">
+           loading="eager" fetchpriority="high" width="1200" height="630">
     </div>
   </div>
 
