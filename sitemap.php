@@ -42,7 +42,7 @@ if ($type === '') {
     $now = date('c');
     echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
     echo '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
-    foreach (['core','pelatihan','artikel','kota','kota-pelatihan','platform','jadwal','glosarium'] as $child) {
+    foreach (['core','pelatihan','artikel','kota','kota-pelatihan','platform','jadwal','glosarium','regulasi'] as $child) {
         $childUrl = $child === 'jadwal'
             ? $base . '/sitemap-jadwal.xml'
             : $base . '/sitemap-' . $child . '.xml';
@@ -59,7 +59,10 @@ if ($type === '') {
 // CHILD SITEMAPS
 // ════════════════════════════════════════════════════════════════════════════
 
-$pdo = get_pdo();
+$pdo = null;
+if (in_array($type, ['pelatihan','artikel','kota','kota-pelatihan','platform','jadwal','glosarium'])) {
+    $pdo = get_pdo();
+}
 
 switch ($type) {
 
@@ -412,6 +415,23 @@ case 'glosarium':
             echo sm_url($base . '/glosarium/' . htmlspecialchars($g['slug']) . '/', $lm, '0.4');
         }
     } catch (Exception) {}
+
+    echo '</urlset>' . "\n";
+    break;
+
+// ─── REGULASI: regulation hub + individual decrees ──────────────────────────
+case 'regulasi':
+    echo sm_header();
+
+    // Hub index
+    echo sm_url($base . '/regulasi/', date('Y-m-d'), '0.8');
+
+    // Individual regulations
+    require_once __DIR__ . '/includes/regulasi-data.php';
+    $regulasiData = get_regulasi_dataset();
+    foreach ($regulasiData as $item) {
+        echo sm_url($base . '/regulasi/' . htmlspecialchars($item['slug']) . '/', date('Y-m-d'), '0.7');
+    }
 
     echo '</urlset>' . "\n";
     break;

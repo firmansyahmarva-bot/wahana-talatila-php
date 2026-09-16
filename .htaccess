@@ -373,6 +373,13 @@ RewriteRule ^resources/kategori/([a-z0-9\-]+)/?$ resources/index.php?slug=$1 [QS
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^resources/download/([0-9]+)/?$ resources/download.php?id=$1 [QSA,L]
 
+# ─── Regulasi K3 & Ketenagakerjaan Hub ────────────────
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^regulasi/?$ regulasi/index.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^regulasi/([a-z0-9\-]+)/?$ regulasi/detail.php?slug=$1 [QSA,L]
+
 # ─── Training Schedule ────────────────────────────────
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^jadwal/?$ jadwal-pelatihan.php [QSA,L]
@@ -471,6 +478,7 @@ RewriteRule ^sitemap-artikel\.xml$   sitemap.php?type=artikel [L]
 RewriteRule ^sitemap-kota\.xml$      sitemap.php?type=kota [L]
 RewriteRule ^sitemap-platform\.xml$  sitemap.php?type=platform [L]
 RewriteRule ^sitemap-glosarium\.xml$ sitemap.php?type=glosarium [L]
+RewriteRule ^sitemap-regulasi\.xml$  sitemap.php?type=regulasi [L]
 RewriteRule ^sitemap-kota-pelatihan\.xml$ sitemap.php?type=kota-pelatihan [L]
 
 # ─── Security Headers ────────────────────────────────────────
