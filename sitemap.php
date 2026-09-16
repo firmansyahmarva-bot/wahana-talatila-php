@@ -87,6 +87,7 @@ case 'core':
 
     // Pages with trailing-slash canonical
     $with_slash = [
+        'zh'                             => '0.85',
         'sertifikasi-bnsp'               => '0.8',
         'keselamatan-kerja'              => '0.9',
         'klien'                          => '0.8',

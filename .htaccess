@@ -103,6 +103,9 @@ ErrorDocument 404 /404.php
 # (k3-kimia, k3-ketinggian, k3-listrik, k3-konstruksi, k3-pertambangan);
 # only the remaining 30 new routes are added here.
 RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^zh/?$ zh.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^k3-migas/?$ k3-migas.php [QSA,L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
