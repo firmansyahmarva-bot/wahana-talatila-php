@@ -28,23 +28,57 @@ $canonical  = SITE_URL . '/' . trim($hub_slug, '/') . '/';
 $hero_wa_msg = 'Halo Wahana Totalita, saya ingin informasi silabus dan jadwal terdekat pelatihan ' . ($hub_data['title'] ?? 'K3');
 $hero_wa_url = wa_url($hero_wa_msg, $wa_number);
 
-// Breadcrumb Schema
-$breadcrumb_schema = [
-    '@context' => 'https://schema.org',
-    '@type'    => 'BreadcrumbList',
-    'itemListElement' => [
-        ['@type' => 'ListItem', 'position' => 1, 'name' => 'Beranda', 'item' => SITE_URL . '/'],
-        ['@type' => 'ListItem', 'position' => 2, 'name' => 'Keselamatan Kerja', 'item' => SITE_URL . '/keselamatan-kerja/'],
-        ['@type' => 'ListItem', 'position' => 3, 'name' => $hub_data['title'], 'item' => $canonical],
+// Master Structured Data Graph (Organization, Breadcrumbs, WebPage, FAQPage)
+$schema_graph = [
+    [
+        '@type'        => 'Organization',
+        '@id'          => SITE_URL . '/#organization',
+        'name'         => $s['site_name'] ?? 'Wahana Totalita Konsultan',
+        'url'          => SITE_URL,
+        'description'  => 'PJK3 Resmi Berlisensi Kementerian Ketenagakerjaan RI (No. Kep. 312/BINWASPNAK-PNK3/V/2020) & Lembaga Pelatihan Terakreditasi BNSP.',
+        'logo'         => [
+            '@type'  => 'ImageObject',
+            'url'    => SITE_URL . '/assets/img/og-cover.jpg',
+            'width'  => 1200,
+            'height' => 630,
+        ],
+        'contactPoint' => [
+            '@type'             => 'ContactPoint',
+            'telephone'         => $s['site_phone'] ?? '+62-877-5915-1278',
+            'contactType'       => 'customer service',
+            'availableLanguage' => ['Indonesian', 'English', 'Chinese'],
+        ],
+    ],
+    [
+        '@type'    => 'BreadcrumbList',
+        '@id'      => $canonical . '#breadcrumb',
+        'itemListElement' => [
+            ['@type' => 'ListItem', 'position' => 1, 'name' => 'Beranda', 'item' => SITE_URL . '/'],
+            ['@type' => 'ListItem', 'position' => 2, 'name' => 'Keselamatan Kerja', 'item' => SITE_URL . '/keselamatan-kerja/'],
+            ['@type' => 'ListItem', 'position' => 3, 'name' => $hub_data['title'], 'item' => $canonical],
+        ],
+    ],
+    [
+        '@type'       => 'WebPage',
+        '@id'         => $canonical . '#webpage',
+        'url'         => $canonical,
+        'name'        => $page_title,
+        'description' => $meta_desc,
+        'inLanguage'  => 'id-ID',
+        'isPartOf'    => [
+            '@type' => 'WebSite',
+            '@id'   => SITE_URL . '/#website',
+            'name'  => $s['site_name'] ?? 'Wahana Totalita Konsultan',
+            'url'   => SITE_URL . '/',
+        ],
+        'publisher'   => ['@id' => SITE_URL . '/#organization'],
     ],
 ];
 
-// FAQ Schema
-$faq_schema = null;
 if (!empty($hub_data['faqs'])) {
-    $faq_schema = [
-        '@context' => 'https://schema.org',
-        '@type'    => 'FAQPage',
+    $schema_graph[] = [
+        '@type'      => 'FAQPage',
+        '@id'        => $canonical . '#faq',
         'mainEntity' => array_map(fn($f) => [
             '@type' => 'Question',
             'name'  => $f['q'],
@@ -102,6 +136,16 @@ $HUB_DIRECTORY_MESH = [
 <meta property="og:description" content="<?= e($meta_desc) ?>">
 <meta property="og:url" content="<?= htmlspecialchars($canonical) ?>">
 <meta property="og:site_name" content="<?= e($s['site_name'] ?? 'Wahana Totalita') ?>">
+<meta property="og:image" content="<?= SITE_URL . '/assets/img/og-cover.jpg' ?>">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="id_ID">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="<?= e($page_title) ?>">
+<meta name="twitter:description" content="<?= e($meta_desc) ?>">
+<meta name="twitter:image" content="<?= SITE_URL . '/assets/img/og-cover.jpg' ?>">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -116,10 +160,7 @@ $HUB_DIRECTORY_MESH = [
 <?= theme_css_vars($s) ?>
 
 <!-- Structured Data -->
-<script type="application/ld+json"><?= json_encode($breadcrumb_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?></script>
-<?php if ($faq_schema): ?>
-<script type="application/ld+json"><?= json_encode($faq_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?></script>
-<?php endif; ?>
+<script type="application/ld+json"><?= json_encode(['@context' => 'https://schema.org', '@graph' => $schema_graph], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?></script>
 </head>
 <body>
 
