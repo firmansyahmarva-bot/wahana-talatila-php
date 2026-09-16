@@ -27,10 +27,30 @@ $urls = [
   "{$base}/jadwal-pelatihan",
   "{$base}/artikel/",
   "{$base}/glosarium/",
+  "{$base}/regulasi/",
+  "{$base}/skkni/",
   "{$base}/tools/",
   "{$base}/lp/k3-migas", "{$base}/lp/k3-pertambangan", "{$base}/lp/k3-konstruksi",
   "{$base}/lp/k3-umum", "{$base}/lp/k3-lingkungan",
 ];
+
+// ── Regulasi Hub pages ───────────────────────────────────────────────────────
+if (file_exists(__DIR__ . '/includes/regulasi-data.php')) {
+    require_once __DIR__ . '/includes/regulasi-data.php';
+    if (function_exists('get_regulasi_dataset')) {
+        foreach (array_keys(get_regulasi_dataset()) as $r_slug) {
+            $urls[] = "{$base}/regulasi/{$r_slug}/";
+        }
+    }
+}
+
+// ── SKKNI Hub pages ──────────────────────────────────────────────────────────
+$skkni_files = glob(__DIR__ . '/data/skkni/*.php');
+if (!empty($skkni_files)) {
+    foreach ($skkni_files as $f) {
+        $urls[] = "{$base}/skkni/" . basename($f, '.php') . "/";
+    }
+}
 
 // ── Dynamic pages from the database (always current) ───────────────────────
 try {
@@ -49,26 +69,39 @@ try {
 $urls = array_values(array_unique($urls));
 
 $payload = json_encode([
-  'host'    => $host,
-  'key'     => $indexnow_key,
+  'host'        => $host,
+  'key'         => $indexnow_key,
   'keyLocation' => "https://{$host}/{$indexnow_key}.txt",
-  'urlList' => $urls,
+  'urlList'     => $urls,
 ]);
 
-$ch = curl_init('https://api.indexnow.org/indexnow');
-curl_setopt_array($ch, [
-  CURLOPT_POST           => true,
-  CURLOPT_POSTFIELDS     => $payload,
-  CURLOPT_HTTPHEADER     => ['Content-Type: application/json; charset=utf-8'],
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_TIMEOUT        => 15,
-]);
-$response = curl_exec($ch);
-$status   = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-curl_close($ch);
+$endpoints = [
+  'IndexNow Central' => 'https://api.indexnow.org/indexnow',
+  'Bing IndexNow'    => 'https://www.bing.com/indexnow',
+];
 
 header('Content-Type: text/plain');
-echo "IndexNow ping sent.\n";
-echo "HTTP Status: {$status}\n";
-echo "URLs submitted: " . count($urls) . "\n";
-echo "Response: {$response}\n";
+echo "IndexNow & Bing URL submission initiated.\n";
+echo "Total unique URLs: " . count($urls) . "\n\n";
+
+foreach ($endpoints as $name => $endpoint) {
+    $ch = curl_init($endpoint);
+    curl_setopt_array($ch, [
+      CURLOPT_POST           => true,
+      CURLOPT_POSTFIELDS     => $payload,
+      CURLOPT_HTTPHEADER     => ['Content-Type: application/json; charset=utf-8'],
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_TIMEOUT        => 20,
+    ]);
+    $response = curl_exec($ch);
+    $status   = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    echo "[{$name}] {$endpoint}\n";
+    echo "HTTP Status: {$status}\n";
+    if ($response) {
+        echo "Response: {$response}\n";
+    }
+    echo "----------------------------------------\n";
+}
+
