@@ -1,369 +1,183 @@
 <?php
-require_once __DIR__ . '/config.php';
-$s = get_all_settings();
 /**
- * operator-alat-berat.php
- * Operator Alat Berat hub page (excavator, bulldozer, grader, etc).
- * Zero DB dependency, modeled on k3-pesawat-uap.php.
- *
- * Real training slug verified via catalog2026/real_trainings.json —
- * only ONE general product exists, no per-machine-type (excavator/
- * bulldozer/grader) slugs:
- * pelatihan-k3-operator-alat-berat-sertifikasi-kemnaker-ri (Kemnaker RI, Rp6.000.000)
- * The "Program Pelatihan Kami" section below reflects this — a single
- * real card plus a WA-inquiry note for machine-specific certification
- * requests, per the established gap-handling pattern (this hub has
- * fewer real products than the brief assumed, same situation as
- * k3-pesawat-angkat-angkut.php).
- *
- * Regulation: no specific Permenaker number was cited anywhere in the
- * existing site content for alat berat (only generic "alat berat"
- * mentions in k3-pertambangan.php/k3-pesawat-angkat-angkut.php, no
- * regulation number attached). WebSearch verification found heavy
- * equipment (excavator, bulldozer, wheel loader, etc.) operator SIO
- * is governed by the same Permenaker No. 8 Tahun 2020 tentang K3
- * Pesawat Angkat dan Angkut (PAA) used for k3-pesawat-angkat-angkut.php
- * — these machines fall under the PAA regulatory umbrella in
- * Indonesia — under the general framework of UU No. 1 Tahun 1970.
- * SIO validity of 5 years confirmed via the same search.
+ * operator-alat-berat.php — Hub Page
+ * Powered by includes/hub-layout.php
  */
-$wa_number = '6287759151278';
-$wa_msg = rawurlencode('Halo, saya ingin mendaftar pelatihan Operator Alat Berat (Excavator/Bulldozer/Grader). Mohon info jadwal dan biaya?');
-$wa_url = "https://wa.me/{$wa_number}?text={$wa_msg}";
-$year = date('Y');
+require_once __DIR__ . '/config.php';
 
-$jenisAlat = [
-    ['jenis' => 'Excavator / Backhoe', 'fungsi' => 'Penggalian, pemindahan tanah', 'sektor' => 'Konstruksi, pertambangan'],
-    ['jenis' => 'Bulldozer', 'fungsi' => 'Penimbunan, perataan, pendorongan material', 'sektor' => 'Konstruksi, pertambangan, land clearing'],
-    ['jenis' => 'Motor Grader', 'fungsi' => 'Perataan permukaan jalan', 'sektor' => 'Konstruksi jalan, tambang'],
-    ['jenis' => 'Wheel Loader', 'fungsi' => 'Pemuatan material ke truk', 'sektor' => 'Pertambangan, konstruksi, pelabuhan'],
-    ['jenis' => 'Compactor / Vibro Roller', 'fungsi' => 'Pemadatan tanah dan aspal', 'sektor' => 'Konstruksi jalan'],
-    ['jenis' => 'Road Roller', 'fungsi' => 'Pemadatan permukaan jalan', 'sektor' => 'Konstruksi jalan'],
-    ['jenis' => 'Dump Truck (off-road)', 'fungsi' => 'Pengangkutan material dalam site', 'sektor' => 'Pertambangan'],
-];
+$hub_data = array (
+  'badge' => 'Operator Alat Berat',
+  'title' => 'Pelatihan & SIO Operator Alat Berat (Excavator, Loader, Bulldozer) Kemnaker RI',
+  'meta_title' => 'Pelatihan & SIO Operator Alat Berat (Excavator, Loader, Dozer) Kemnaker RI — Wahana Totalita',
+  'meta_desc' => 'Sertifikasi Lisensi SIO Operator Alat Berat resmi Kemnaker RI sesuai Permenaker No. 08 Tahun 2020. Excavator, Wheel Loader, Bulldozer, Forklift. Silabus & jadwal.',
+  'intro_lead' => 'Sertifikasi dan Lisensi SIO resmi Kemnaker RI untuk operator alat berat (Excavator, Loader, Bulldozer, Vibro Roller) sesuai Permenaker No. 08 Tahun 2020.',
+  'intro' => 
+  array (
+    0 => 'Pengoperasian alat berat (heavy equipment) seperti excavator, wheel loader, bulldozer, motor grader, dan vibro roller pada proyek infrastruktur sipil, pertambangan, perkebunan, dan pematangan lahan memiliki potensi bahaya mekanis dan fisik yang sangat tinggi. Kesalahan pengoperasian dapat menyebabkan alat terguling di tebing, kontak dengan instalasi bawah tanah, hingga menabrak pekerja di area blind spot.',
+    1 => 'Berdasarkan Permenaker No. 08 Tahun 2020 tentang Keselamatan dan Kesehatan Kerja Pesawat Angkat dan Pesawat Angkut, setiap operator alat berat wajib memiliki Surat Izin Operator (SIO) dan Lisensi K3 resmi yang diterbitkan oleh Kementerian Ketenagakerjaan RI.',
+  ),
+  'regulasi' => 
+  array (
+    0 => 
+    array (
+      'nomor' => 'Permenaker No. 08 Tahun 2020',
+      'desc' => 'Tentang K3 Pesawat Angkat dan Pesawat Angkut — mengatur syarat keselamatan teknis dan kewajiban SIO operator unit alat berat.',
+    ),
+    1 => 
+    array (
+      'nomor' => 'UU No. 1 Tahun 1970',
+      'desc' => 'Pasal 2 dan 3 mewajibkan syarat keselamatan kerja pada setiap tempat kerja yang menggunakan mesin, pesawat, dan perkakas bertenaga besar.',
+    ),
+    2 => 
+    array (
+      'nomor' => 'Permenaker No. 38 Tahun 2016',
+      'desc' => 'K3 Pesawat Tenaga dan Produksi — mengatur keselamatan mesin penggerak mula dan transmisi mekanis alat berat.',
+    ),
+  ),
+  'comparison' => 
+  array (
+    'headers' => 
+    array (
+      0 => 'Aspek Evaluasi',
+      1 => 'Operator Excavator',
+      2 => 'Operator Wheel Loader',
+      3 => 'Operator Bulldozer',
+    ),
+    'rows' => 
+    array (
+      0 => 
+      array (
+        0 => 'Aplikasi Utama',
+        1 => 'Penggalian tanah dalam, trenching & loading material',
+        2 => 'Pemuatan material lepas (tanah/batu) ke dump truck',
+        3 => 'Pendorongan, perataan lahan & ripping tanah keras',
+      ),
+      1 => 
+      array (
+        0 => 'Risiko Kritis',
+        1 => 'Longsor tebing galian, terguling & pipa bawah tanah',
+        2 => 'Kestabilan bucket penuh & blind spot area manuver',
+        3 => 'Kestabilan lereng curam & kerusakan track link',
+      ),
+      2 => 
+      array (
+        0 => 'Masa Berlaku SIO',
+        1 => 'Lisensi SIO Kemnaker RI berlaku 5 tahun',
+        2 => 'Lisensi SIO Kemnaker RI berlaku 5 tahun',
+        3 => 'Lisensi SIO Kemnaker RI berlaku 5 tahun',
+      ),
+      3 => 
+      array (
+        0 => 'Durasi Pelatihan',
+        1 => '±30–40 Jam Pelatihan (3–4 Hari)',
+        2 => '±30 Jam Pelatihan (3 Hari)',
+        3 => '±30–40 Jam Pelatihan (3–4 Hari)',
+      ),
+      4 => 
+      array (
+        0 => 'Sertifikasi',
+        1 => 'SIO & Lisensi Kemnaker RI',
+        2 => 'SIO & Lisensi Kemnaker RI',
+        3 => 'SIO & Lisensi Kemnaker RI',
+      ),
+    ),
+  ),
+  'programs' => 
+  array (
+    0 => 
+    array (
+      'slug' => 'pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri',
+      'name' => 'Pelatihan & SIO Operator Forklift Kemnaker RI',
+      'cert' => 'Kemnaker RI',
+      'mode' => 'Tatap Muka & Praktik Alat',
+      'duration' => '3 Hari Pelatihan',
+      'desc' => 'Sertifikasi kompetensi dan penerbitan SIO resmi Kemnaker RI untuk operator forklift industri. Mempelajari load chart, inspeksi checklist harian, dan tata kelola keselamatan pergudangan.',
+      'target_peserta' => 'Operator forklift pabrik, staf logistik material, teknisi gudang industri',
+    ),
+    1 => 
+    array (
+      'slug' => 'pelatihan-k3-operator-crane-kelas-3-sertifikasi-kemnaker-ri',
+      'name' => 'Pelatihan & SIO Operator Mobile / Truck Crane Kemnaker RI',
+      'cert' => 'Kemnaker RI',
+      'mode' => 'Tatap Muka & Praktik Unit',
+      'duration' => '4 Hari Pelatihan',
+      'desc' => 'Sertifikasi lisensi SIO resmi untuk operator crane bergerak dan unit alat berat pengangkat di proyek konstruksi dan pelabuhan.',
+      'target_peserta' => 'Operator crane lapangan, teknisi alat berat proyek, driver boom truck',
+    ),
+  ),
+  'syarat' => 
+  array (
+    0 => 'Usia minimal 18 tahun, sehat jasmani dan rohani',
+    1 => 'Ijazah minimal SMP / SMA / SMK sederajat',
+    2 => 'Surat keterangan sehat dari dokter (tidak buta warna dan tidak memiliki gangguan pendengaran)',
+    3 => 'Salinan KTP legalisir, ijazah terakhir, dan pas foto resmi background merah',
+  ),
+  'materi' => 
+  array (
+    0 => 'Kebijakan K3 Nasional & Pemahaman Regulasi Permenaker No. 08 Tahun 2020 tentang PAA',
+    1 => 'Sistem Mekanikal, Hidrolik, Elektrikal, dan Alat Keselamatan (Safety Devices) Alat Berat',
+    2 => 'Pemeriksaan Harian Sebelum Operasi (Daily Pre-Use Inspection Checklist)',
+    3 => 'Kapasitas Beban, Load Chart, dan Prosedur Pengoperasian Aman di Berbagai Medan Kerja',
+    4 => 'Tata Kelola Lalu Lintas Alat Berat (Traffic Management) & Pengenalan Area Titik Buta (Blind Spot)',
+    5 => 'Prosedur Tanggap Darurat: Mesin Mati di Lereng, Bahaya Tanah Ambles & Rem Blong',
+    6 => 'Praktik Manuver Operasional Alat di Lapangan Terbuka',
+    7 => 'Ujian Teori & Praktik Sertifikasi Lisensi Kemnaker RI',
+  ),
+  'faqs' => 
+  array (
+    0 => 
+    array (
+      'q' => 'Apakah operator alat berat wajib memiliki SIO resmi Kemnaker RI?',
+      'a' => 'Ya, mutlak wajib. Menurut Permenaker No. 08 Tahun 2020, perusahaan dilarang mempekerjakan operator alat berat yang tidak memiliki SIO dan Lisensi K3 resmi dari Kementerian Ketenagakerjaan RI.',
+    ),
+    1 => 
+    array (
+      'q' => 'Berapa lama masa berlaku SIO Operator Alat Berat?',
+      'a' => 'Surat Izin Operator (SIO) Kemnaker RI berlaku selama 5 tahun dan dapat diperpanjang sebelum masa berlakunya habis.',
+    ),
+    2 => 
+    array (
+      'q' => 'Apakah pelatihan operator alat berat mencakup praktik unit nyata?',
+      'a' => 'Ya, seluruh peserta wajib mengikuti sesi praktik pengoperasian unit alat berat di lapangan di bawah bimbingan instruktur bersertifikasi resmi.',
+    ),
+    3 => 
+    array (
+      'q' => 'Apakah Wahana Totalita melayani pelatihan SIO secara in-house di site perusahaan?',
+      'a' => 'Ya, kami melayani penyelenggaraan pelatihan in-house di lokasi proyek atau quarry perusahaan Anda di seluruh Indonesia dengan syarat unit alat berat dan area praktik tersedia di lokasi.',
+    ),
+  ),
+  'related_hubs' => 
+  array (
+    0 => 
+    array (
+      'slug' => 'k3-pesawat-angkat-angkut',
+      'name' => 'K3 Pesawat Angkat Angkut',
+      'badge' => 'Kemnaker RI',
+      'desc' => 'Sertifikasi mobile crane, overhead crane, forklift dan juru ikat rigger.',
+    ),
+    1 => 
+    array (
+      'slug' => 'k3-pertambangan',
+      'name' => 'K3 Pertambangan (POP)',
+      'badge' => 'BNSP & ESDM',
+      'desc' => 'Pengawasan keselamatan operasional armada alat berat di pit tambang terbuka.',
+    ),
+    2 => 
+    array (
+      'slug' => 'k3-konstruksi',
+      'name' => 'K3 Konstruksi',
+      'badge' => 'Kemnaker & BNSP',
+      'desc' => 'Manajemen keselamatan operasional alat berat di proyek infrastruktur dan gedung.',
+    ),
+    3 => 
+    array (
+      'slug' => 'k3-transportasi',
+      'name' => 'K3 Transportasi & Logistik',
+      'badge' => 'Kemnaker & BNSP',
+      'desc' => 'Standar keselamatan berkendara defensif (defensive driving) dan manajemen armada.',
+    ),
+  ),
+  'slug' => 'operator-alat-berat',
+);
 
-$wajibSIO = [
-    'Semua operator yang secara langsung mengoperasikan alat berat di proyek konstruksi atau site tambang',
-    'Operator yang mengoperasikan alat berat milik subkontraktor — tanggung jawab tetap pada perusahaan utama',
-    'Operator baru yang belum memiliki SIO wajib dalam pengawasan operator bersertifikat',
-    'Kontraktor yang mengikuti tender pemerintah — dokumen kualifikasi sering mensyaratkan daftar operator bersertifikat',
-];
-
-$syaratPeserta = [
-    'Usia minimal 18 tahun',
-    'Ijazah minimal SMP sederajat (SMA/SMK Teknik diutamakan)',
-    'Sehat jasmani dan rohani — tidak buta warna, penglihatan normal',
-    'Pengalaman mengoperasikan alat berat diutamakan tapi tidak wajib',
-    'Fotokopi KTP, pas foto 3×4 (4 lembar), surat keterangan sehat',
-];
-
-$tujuan = [
-    'Memahami regulasi K3 operator alat berat dan persyaratan SIO Kemnaker RI',
-    'Mengenal komponen utama alat berat dan sistem hidrolik',
-    'Mengoperasikan alat berat dengan teknik yang aman dan efisien',
-    'Melakukan pre-use inspection (P2H — Pemeriksaan dan Perawatan Harian)',
-    'Menerapkan prosedur keselamatan di area kerja: komunikasi, zona aman, rambu alat berat',
-    'Menangani kondisi darurat: alat terperosok, kebakaran alat, kabel listrik tersentuh',
-];
-
-$materiExcavator = [
-    'Regulasi K3 operator alat berat',
-    'Komponen excavator: boom, arm, bucket, undercarriage, swing motor',
-    'Sistem hidrolik dan cara kerjanya',
-    'Teknik penggalian: sudut galian, pembuangan spoil, galian di lereng',
-    'Keselamatan galian dalam: risiko longsor, deteksi utilitas bawah tanah',
-    'Operasi excavator di area sempit dan lereng tidak stabil',
-    'Prosedur pre-use inspection (P2H)',
-    'Komunikasi dengan rigger dan pengawas lapangan',
-];
-$materiBulldozer = [
-    'Komponen bulldozer: blade, ripper, track, final drive',
-    'Teknik pushing, dozing, dan ripping',
-    'Operasi di lereng: maksimal kemiringan aman, teknik naik-turun lereng',
-    'Land clearing: prosedur aman menebang pohon dengan bulldozer',
-    'Keselamatan di tepi jurang dan di dekat galian',
-];
-$materiGrader = [
-    'Komponen grader: moldboard, scarifier, circle drive, tandem drive',
-    'Teknik perataan: rough grading, fine grading, shoulder grading',
-    'Pembentukan cross-section jalan dan superelevasi',
-    'Operasi grader pada material berbeda: tanah, sirtu, base course',
-];
-$materiP2H = [
-    'Prosedur P2H sebelum mulai kerja',
-    'Titik pemeriksaan: oli, coolant, hydraulic oil, ban/track, lampu, alarm mundur',
-    'Pengisian form P2H dan pelaporan kerusakan',
-    'Larangan operasi: kapan alat TIDAK boleh dijalankan',
-];
-
-$metode = [
-    'Pelatihan tatap muka di Yogyakarta — termasuk praktik langsung mengoperasikan alat',
-    'In-house training di site konstruksi atau tambang (minimum 10 peserta) — paling efisien karena peserta berlatih dengan alat yang akan mereka gunakan sehari-hari',
-    'SIO diterbitkan Kemnaker RI setelah lulus ujian teori dan praktik',
-];
-
-$terkait = [
-    ['label' => 'Pelatihan K3 Pertambangan', 'url' => '/k3-pertambangan/'],
-    ['label' => 'Pelatihan K3 Konstruksi', 'url' => '/k3-konstruksi/'],
-    ['label' => 'K3 Pesawat Angkat Angkut', 'url' => '/k3-pesawat-angkat-angkut/'],
-    ['label' => 'Panduan Lengkap K3', 'url' => '/keselamatan-kerja/'],
-];
-
-$faqs = [
-    ['q' => 'Apakah SIO alat berat berlaku untuk semua merek excavator?', 'a' => 'Ya. SIO operator alat berat dari Kemnaker RI tidak terikat pada merek tertentu. Operator excavator bersertifikat dapat mengoperasikan excavator merek Komatsu, Hitachi, Caterpillar, Volvo, atau merek lainnya — selama jenis dan kapasitasnya sesuai dengan SIO yang dimiliki.'],
-    ['q' => 'Berapa lama SIO operator alat berat berlaku?', 'a' => 'SIO operator alat berat berlaku 5 tahun dan dapat diperpanjang melalui uji ulang kompetensi sebelum masa berlaku habis. Perpanjangan dilakukan dengan mengajukan permohonan ke Disnaker setempat disertai bukti pengalaman kerja selama masa berlaku SIO.'],
-    ['q' => 'Apa itu P2H dan mengapa wajib dilakukan setiap hari?', 'a' => 'P2H (Pemeriksaan dan Perawatan Harian) adalah inspeksi rutin yang wajib dilakukan operator sebelum mengoperasikan alat berat setiap shift. Tujuannya: mendeteksi kerusakan sebelum alat dioperasikan — rem blong, kebocoran oli, atau track yang longgar dapat menyebabkan kecelakaan fatal. Di perusahaan yang patuh K3, operator yang skip P2H dapat langsung diskors.'],
-    ['q' => 'Apakah operator excavator bisa langsung mengoperasikan bulldozer?', 'a' => 'Tidak. SIO bersifat spesifik per jenis alat. Operator excavator bersertifikat tidak boleh mengoperasikan bulldozer kecuali memiliki SIO bulldozer tersendiri. Setiap jenis alat berat membutuhkan pelatihan dan SIO yang berbeda karena cara operasi, bahaya, dan tekniknya berbeda.'],
-    ['q' => 'Apakah ada batasan usia untuk menjadi operator alat berat?', 'a' => 'Batas minimum 18 tahun. Tidak ada batas maksimum secara regulasi, namun perusahaan umumnya mensyaratkan surat keterangan sehat dari dokter — terutama untuk pemeriksaan penglihatan, pendengaran, dan kondisi fisik umum yang diperlukan untuk mengoperasikan alat berat dengan aman.'],
-    ['q' => 'Apakah bisa in-house training di site proyek kami yang sedang berjalan?', 'a' => 'Ya, dan ini opsi yang paling efisien. Peserta berlatih langsung dengan alat yang akan mereka gunakan di lapangan yang sudah mereka kenal. Minimum 10 peserta. Tim instruktur dan penguji kami datang ke lokasi. Hubungi kami untuk jadwal koordinasi.'],
-];
-?>
-<?php
-$page_title = 'Pelatihan Operator Alat Berat (Excavator, Bulldozer, Grader) — SIO Kemnaker RI';
-$meta_desc = 'Pelatihan Operator Alat Berat bersertifikat Kemnaker RI. Program SIO Excavator, Bulldozer, Motor Grader, Compactor, dan Wheel Loader. Yogyakarta & in-house. 0877-5915-1278.';
-require __DIR__ . '/includes/head.php';
-?>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
-  {"@type":"ListItem","position":1,"name":"Beranda","item":"https://wahanatotalita.com/"},
-  {"@type":"ListItem","position":2,"name":"Pelatihan","item":"https://wahanatotalita.com/pelatihan/"},
-  {"@type":"ListItem","position":3,"name":"Operator Alat Berat","item":"https://wahanatotalita.com/operator-alat-berat/"}
-]}
-</script>
-<script type="application/ld+json">
-<?php
-echo json_encode([
-    '@context' => 'https://schema.org',
-    '@type'    => 'FAQPage',
-    'mainEntity' => array_map(fn($f) => [
-        '@type' => 'Question', 'name' => $f['q'],
-        'acceptedAnswer' => ['@type' => 'Answer', 'text' => $f['a']],
-    ], $faqs),
-], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-?>
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Wahana Totalita Konsultan",
-  "url": "https://wahanatotalita.com",
-  "telephone": "+6287759151278",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Jl. Wonosari KM 8.5",
-    "addressLocality": "Sleman",
-    "addressRegion": "DIY",
-    "addressCountry": "ID"
-  }
-}
-</script>
-<link rel="stylesheet" href="/assets/css/page/sector.css">
-<style>
-.compare-table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.05);min-width:560px}
-.scheme-grid{display:grid;grid-template-columns:1fr;gap:1rem;max-width:420px}
-.inquiry-card{background:#fff;border:2px dashed #0A4A2E;border-radius:14px;padding:20px;text-align:center;margin-top:14px}
-.inquiry-card p{font-size:13.5px;color:#4b5563;margin-bottom:12px}
-</style>
-<style id="wt-hero-height-fix-2026-07">
-/* wt-hero-height-fix-2026-07: this page's own .hero is a small custom hero, not the
-   homepage full-screen slideshow hero — cancel the global 100vh /
-   flex-centering from style.css so it doesn't leak in here. */
-.hero{min-height:auto!important;display:block!important}
-</style>
-<?php require __DIR__ . '/includes/navbar.php'; ?>
-<section class="hero">
-  <div class="container inner">
-    <div class="hero-badge">🚜 Operator Alat Berat</div>
-    <h1>Pelatihan Operator Alat Berat — SIO Excavator, Bulldozer &amp; Grader Bersertifikat Kemnaker RI</h1>
-    <p class="hero-sub">Sertifikasi resmi Kemnaker RI untuk operator excavator, bulldozer, motor grader, dan alat berat lainnya.</p>
-    <div><a href="<?=$wa_url?>" class="btn-wa" target="_blank" rel="noopener">💬 Konsultasi Jadwal &amp; Biaya</a></div>
-  </div>
-</section>
-
-<section class="white">
-<div class="container">
-  <h2 class="section-title">Apa itu Alat Berat dan Mengapa Operatornya Wajib Bersertifikat?</h2>
-  <p class="intro-text">Alat berat adalah peralatan mekanis bertenaga besar yang digunakan untuk pekerjaan konstruksi, pertambangan, dan infrastruktur — mencakup excavator, bulldozer, motor grader, wheel loader, compactor, dan road roller. Alat berat adalah salah satu sumber kecelakaan kerja paling fatal: tertimpa, terlindas, terbalik, atau jatuh dari tebing. Kemnaker RI mewajibkan setiap operator alat berat memiliki SIO (Surat Ijin Operasi) sebelum mengoperasikan alat — perusahaan yang menggunakan operator tanpa SIO dapat dikenai sanksi pidana.</p>
-</div>
-</section>
-
-<section>
-<div class="container">
-  <h2 class="section-title">Dasar Hukum</h2>
-  <ul class="law-list">
-    <li>UU No. 1 Tahun 1970 tentang Keselamatan Kerja — dasar hukum umum kewajiban SIO bagi operator alat/mesin berisiko</li>
-    <li>Permenaker No. 8 Tahun 2020 tentang K3 Pesawat Angkat dan Angkut (PAA) — mengatur secara rinci kualifikasi dan lisensi operator alat berat seperti excavator, bulldozer, dan wheel loader</li>
-    <li>Setiap operator wajib memiliki SIO sesuai jenis dan kelas alat yang dioperasikan</li>
-    <li>Perusahaan wajib memastikan alat berat diperiksa dan diuji berkala oleh pengawas K3 atau PJK3</li>
-  </ul>
-</div>
-</section>
-
-<section class="white">
-<div class="container">
-  <h2 class="section-title">Jenis Alat Berat dan SIO yang Dibutuhkan</h2>
-  <div class="compare-table-wrap">
-  <table class="compare-table">
-    <thead><tr><th>Jenis Alat Berat</th><th>Fungsi Utama</th><th>Sektor</th></tr></thead>
-    <tbody>
-      <?php foreach ($jenisAlat as $row): ?>
-      <tr><td><?= htmlspecialchars($row['jenis']) ?></td><td><?= htmlspecialchars($row['fungsi']) ?></td><td><?= htmlspecialchars($row['sektor']) ?></td></tr>
-      <?php endforeach; ?>
-    </tbody>
-  </table>
-  </div>
-</div>
-</section>
-
-<section>
-<div class="container">
-  <h2 class="section-title">Siapa yang Wajib Memiliki SIO Alat Berat?</h2>
-  <ul class="plain-list">
-    <?php foreach ($wajibSIO as $w): ?>
-    <li><?= htmlspecialchars($w) ?></li>
-    <?php endforeach; ?>
-  </ul>
-</div>
-</section>
-
-<section class="white">
-<div class="container">
-  <h2 class="section-title">Persyaratan Peserta</h2>
-  <ul class="plain-list">
-    <?php foreach ($syaratPeserta as $s): ?>
-    <li><?= htmlspecialchars($s) ?></li>
-    <?php endforeach; ?>
-  </ul>
-</div>
-</section>
-
-<section>
-<div class="container">
-  <h2 class="section-title">Tujuan Pembelajaran</h2>
-  <ol class="num-list">
-    <?php foreach ($tujuan as $t): ?>
-    <li><?= htmlspecialchars($t) ?></li>
-    <?php endforeach; ?>
-  </ol>
-</div>
-</section>
-
-<section class="white">
-<div class="container">
-  <h2 class="section-title">Kurikulum</h2>
-  <h3 class="sub-title">Operator Excavator (±40 jam)</h3>
-  <ul class="plain-list">
-    <?php foreach ($materiExcavator as $m): ?>
-    <li><?= htmlspecialchars($m) ?></li>
-    <?php endforeach; ?>
-  </ul>
-  <h3 class="sub-title">Operator Bulldozer (±40 jam)</h3>
-  <ul class="plain-list">
-    <?php foreach ($materiBulldozer as $m): ?>
-    <li><?= htmlspecialchars($m) ?></li>
-    <?php endforeach; ?>
-  </ul>
-  <h3 class="sub-title">Operator Motor Grader (±40 jam)</h3>
-  <ul class="plain-list">
-    <?php foreach ($materiGrader as $m): ?>
-    <li><?= htmlspecialchars($m) ?></li>
-    <?php endforeach; ?>
-  </ul>
-  <h3 class="sub-title">P2H — Pemeriksaan dan Perawatan Harian (semua jenis)</h3>
-  <ul class="plain-list">
-    <?php foreach ($materiP2H as $m): ?>
-    <li><?= htmlspecialchars($m) ?></li>
-    <?php endforeach; ?>
-  </ul>
-</div>
-</section>
-
-<section>
-<div class="container">
-  <h2 class="section-title">Metode Pelatihan</h2>
-  <ul class="plain-list">
-    <?php foreach ($metode as $m): ?>
-    <li><?= htmlspecialchars($m) ?></li>
-    <?php endforeach; ?>
-  </ul>
-</div>
-</section>
-
-<section class="white">
-<div class="container">
-  <h2 class="section-title">Program Pelatihan Operator Alat Berat Kami</h2>
-  <div class="scheme-grid">
-    <div class="scheme-card">
-      <div class="scheme-card-media">
-        <img src="<?= training_img_url('', 'k3', 'pelatihan-k3-operator-alat-berat-sertifikasi-kemnaker-ri') ?>" alt="Pelatihan K3 Operator Alat Berat" loading="lazy" width="360" height="170">
-        <span class="scheme-cert">Sertifikasi Kemnaker RI</span>
-      </div>
-      <div class="scheme-card-body">
-        <h3><a href="/pelatihan/pelatihan-k3-operator-alat-berat-sertifikasi-kemnaker-ri/">Pelatihan K3 Operator Alat Berat (Excavator, Loader, Dozer)</a></h3>
-        <div class="scheme-actions">
-          <a href="/pelatihan/pelatihan-k3-operator-alat-berat-sertifikasi-kemnaker-ri/" class="scheme-link">Silabus &amp; Jadwal &rarr;</a>
-          <a href="https://wa.me/<?=$wa_number?>?text=<?=rawurlencode('Halo Wahana Totalita, saya ingin informasi pelatihan Operator Alat Berat')?>" class="scheme-btn-wa" target="_blank" rel="noopener">Chat WA</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="inquiry-card">
-    <p>Membutuhkan sertifikasi khusus per jenis alat (SIO Excavator, Bulldozer, Motor Grader, Wheel Loader, atau Compactor secara terpisah)? Hubungi kami untuk konsultasi jadwal dan penyelenggaraan in-house sesuai kebutuhan armada Anda.</p>
-    <a href="<?=$wa_url?>" class="btn-wa" target="_blank" rel="noopener" style="margin-top:0">💬 Tanya Sertifikasi per Jenis Alat</a>
-  </div>
-</div>
-</section>
-
-<section>
-<div class="container">
-  <h2 class="section-title">Program K3 Terkait</h2>
-  <div class="link-grid">
-    <?php foreach ($terkait as $tk): ?>
-    <div class="link-card"><a href="<?= htmlspecialchars($tk['url']) ?>"><?= htmlspecialchars($tk['label']) ?> &rarr;</a></div>
-    <?php endforeach; ?>
-  </div>
-</div>
-</section>
-
-<section class="white">
-<div class="container-sm">
-  <h2 class="section-title" style="text-align:center">FAQ</h2>
-  <div class="faq-list" style="margin-top:20px">
-    <?php foreach ($faqs as $f): ?>
-    <div class="faq-item">
-      <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
-        <?= htmlspecialchars($f['q']) ?>
-        <svg class="faq-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div class="faq-a"><p><?= htmlspecialchars($f['a']) ?></p></div>
-    </div>
-    <?php endforeach; ?>
-  </div>
-</div>
-</section>
-
-<section class="final-cta">
-  <div class="container-sm">
-    <h2>Daftar &amp; Konsultasi</h2>
-    <p>Hubungi kami untuk info jadwal dan biaya pelatihan Operator Alat Berat (Excavator/Bulldozer/Grader).</p>
-    <a href="<?=$wa_url?>" class="btn-wa" target="_blank" rel="noopener">💬 Konsultasi via WhatsApp</a>
-  </div>
-</section>
-
-<?php
-require_once __DIR__ . '/includes/hub-category-map.php';
-$hub_article_cats = $HUB_CATEGORY_MAP['k3']['article_cats'] ?? [];
-include __DIR__ . '/includes/hub-artikel-terkait.php';
-?>
-<?php require __DIR__ . '/includes/footer.php'; ?>
-<script>
-function toggleFaq(btn) {
-  var expanded = btn.getAttribute('aria-expanded') === 'true';
-  btn.setAttribute('aria-expanded', !expanded);
-  var answer = btn.nextElementSibling;
-  answer.classList.toggle('open', !expanded);
-}
-</script>
-</body>
-</html>
+require __DIR__ . '/includes/hub-layout.php';

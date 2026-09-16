@@ -208,6 +208,11 @@ h2.section-title{font-size:1.5rem;font-weight:800;color:#111827;margin-bottom:8p
   </div>
 </section>
 
+<div class="hub-wrapper">
+  <div class="container hub-grid-layout">
+    <main class="hub-main">
+
+
 <!-- APA ITU K3 -->
 <section class="white">
 <div class="container">
@@ -566,6 +571,48 @@ h2.section-title{font-size:1.5rem;font-weight:800;color:#111827;margin-bottom:8p
 </div>
 </section>
 
+
+    </main>
+
+    <!-- RIGHT COLUMN: DESKTOP STICKY SIDEBAR -->
+    <aside class="hub-sticky-sidebar">
+      <div class="hub-sidebar-card">
+        <div class="hub-sb-status">
+          <span class="hub-sb-status-dot"></span>
+          <span>Konsultan Online &bull; Respon Cepat</span>
+        </div>
+
+        <h3 class="hub-sb-title">Konsultasi Program K3</h3>
+        <p class="hub-sb-sub">Dapatkan informasi jadwal terdekat, rincian biaya, dan silabus lengkap langsung dari konsultan kami.</p>
+
+        <a href="<?= $wa_url ?>" class="hub-sb-btn-wa" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
+          <span>Chat WhatsApp Konsultan</span>
+        </a>
+
+        <a href="<?= wa_url('Halo Wahana, mohon kirimkan PDF silabus dan kalender jadwal pelatihan K3', $wa_number) ?>" class="hub-sb-btn-secondary" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span>Unduh Silabus via WA</span>
+        </a>
+
+        <div class="hub-sb-guarantees">
+          <div class="hub-sb-guarantee-item">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Sertifikat Resmi Kemnaker RI &amp; BNSP</span>
+          </div>
+          <div class="hub-sb-guarantee-item">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Instruktur Senior Berlisensi Resmi</span>
+          </div>
+          <div class="hub-sb-guarantee-item">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Layanan In-House Seluruh Indonesia</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
 <section class="final-cta">
   <div class="container-sm">
     <h2>Butuh Program K3 untuk Perusahaan Anda?</h2>
@@ -591,5 +638,17 @@ function toggleFaq(btn) {
   answer.classList.toggle('open', !expanded);
 }
 </script>
+<!-- MOBILE FLOATING BAR -->
+<div class="hub-mobile-bar">
+  <div class="hub-mb-info">
+    <span class="hub-mb-title">Konsultasi Program K3</span>
+    <span class="hub-mb-sub">Respon Cepat via WhatsApp</span>
+  </div>
+  <a href="<?= $wa_url ?>" class="hub-mb-btn" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
+    <span>Chat WA</span>
+  </a>
+</div>
+
 </body>
 </html>

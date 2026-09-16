@@ -1,393 +1,183 @@
 <?php
-require_once __DIR__ . '/config.php';
-$s = get_all_settings();
 /**
- * higiene-industri.php
- * Higiene Industri & Hiperkes hub page. Zero DB dependency, modeled
- * on juru-las.php.
- *
- * Real training slugs verified via catalog2026/real_trainings.json:
- * pelatihan-ahli-higiene-industri-muda-sertifikasi-bnsp (BNSP, Rp7.000.000)
- * pelatihan-ahli-higiene-industri-madya-sertifikasi-bnsp (BNSP, Rp8.500.000)
- * pelatihan-ahli-higiene-industri-utama-sertifikasi-bnsp (BNSP, Rp8.500.000)
- * pelatihan-higiene-industri-muda-himu-online (BNSP, Rp7.750.000)
- * pelatihan-higiene-industri-madya-hima-online (BNSP, Rp8.750.000)
- * pelatihan-ahli-muda-lingkungan-kerja-sertifikasi-kemnaker-ri (Kemnaker RI, Rp9.000.000)
- * No dedicated "Hiperkes Dokter/Paramedis" or standalone "Pengukuran
- * Kebisingan" product exists — WA-inquiry fallback used for those,
- * per the established gap-handling pattern.
- *
- * Permenaker No. 5/2018 WebSearch-verified: 85 dB(A)/8 jam NAB
- * kebisingan confirmed, and confirmed it replaces Permenaker 13/2011
- * as briefed. One accuracy addition (not a correction): the
- * regulation's scope is broader than "faktor fisika dan kimia" —
- * it covers 5 categories (fisika, kimia, biologi, ergonomi,
- * psikologi), noted in the Dasar Hukum section below.
+ * higiene-industri.php — Hub Page
+ * Powered by includes/hub-layout.php
  */
-$wa_number = '6287759151278';
-$wa_msg = rawurlencode('Halo, saya ingin mendaftar pelatihan Higiene Industri / Hiperkes. Mohon info program dan jadwal yang tersedia.');
-$wa_url = "https://wa.me/{$wa_number}?text={$wa_msg}";
-$year = date('Y');
+require_once __DIR__ . '/config.php';
 
-$faktorBahaya = [
-    ['faktor' => 'Kebisingan', 'sumber' => 'Mesin produksi, kompresor, genset', 'nab' => '85 dB(A) / 8 jam', 'dampak' => 'Ketulian akibat kerja (NIHL)'],
-    ['faktor' => 'Debu Respirable', 'sumber' => 'Penggerindaan, semen, silika, batubara', 'nab' => '3 mg/m³ (debu umum)', 'dampak' => 'Pneumokoniosis, silikosis'],
-    ['faktor' => 'Bahan Kimia di Udara', 'sumber' => 'Pelarut, asam, logam berat', 'nab' => 'Per TLV masing-masing zat', 'dampak' => 'Keracunan organ, kanker'],
-    ['faktor' => 'Suhu (ISBB)', 'sumber' => 'Dapur, peleburan logam, outdoor', 'nab' => '28°C (kerja berat)', 'dampak' => 'Heat stroke, kelelahan panas'],
-    ['faktor' => 'Getaran', 'sumber' => 'Gerinda tangan, kendaraan, bor', 'nab' => '5 m/s² (tangan-lengan)', 'dampak' => 'HAVS, kerusakan sendi'],
-    ['faktor' => 'Pencahayaan', 'sumber' => 'Ruang kerja, gudang', 'nab' => '300 lux (kerja halus)', 'dampak' => 'Kelelahan mata, kecelakaan'],
-    ['faktor' => 'Radiasi UV', 'sumber' => 'Las busur, sinar matahari outdoor', 'nab' => 'Per ACGIH TLV', 'dampak' => 'Katarak, kanker kulit'],
-];
+$hub_data = array (
+  'badge' => 'Higiene Industri',
+  'title' => 'Pelatihan Higiene Industri: Sertifikasi HIMU, HIMA & HIU BNSP',
+  'meta_title' => 'Pelatihan Higiene Industri (HIMU, HIMA, HIU) Sertifikasi BNSP — Wahana Totalita',
+  'meta_desc' => 'Pelatihan Higiene Industri Muda (HIMU) & Madya (HIMA) bersertifikat resmi BNSP sesuai Permenaker No. 05 Tahun 2018. Pengukuran bahaya kerja, silabus & jadwal.',
+  'intro_lead' => 'Sertifikasi kompetensi resmi BNSP untuk Higiene Industri Muda (HIMU), Madya (HIMA), dan Utama (HIU) sesuai standar Permenaker No. 05 Tahun 2018.',
+  'intro' => 
+  array (
+    0 => 'Higiene Industri adalah ilmu dan seni dalam mengantisipasi, mengenali, mengevaluasi, dan mengendalikan faktor-faktor bahaya lingkungan kerja (fisik, kimia, biologi, ergonomi, psikososial) yang dapat menyebabkan penyakit akibat kerja (PAK), gangguan kesehatan, maupun ketidaknyamanan signifikan pada tenaga kerja.',
+    1 => 'Permenaker No. 05 Tahun 2018 tentang Keselamatan dan Kesehatan Kerja Lingkungan Kerja mewajibkan perusahaan melakukan pemantauan dan pengukuran faktor bahaya kerja secara berkala oleh personil yang tersertifikasi kompetensi Higiene Industri resmi dari BNSP.',
+  ),
+  'regulasi' => 
+  array (
+    0 => 
+    array (
+      'nomor' => 'Permenaker No. 05 Tahun 2018',
+      'desc' => 'K3 Lingkungan Kerja — mengatur standar Nilai Ambang Batas (NAB) faktor fisika dan kimia, faktor biologi, ergonomi, dan sanitasi tempat kerja.',
+    ),
+    1 => 
+    array (
+      'nomor' => 'UU No. 1 Tahun 1970',
+      'desc' => 'Pasal 3 dan Pasal 8 mewajibkan pencegahan dan pengendalian penyakit akibat kerja serta pemeliharaan kesehatan lingkungan kerja.',
+    ),
+    2 => 
+    array (
+      'nomor' => 'SKKNI No. 209 Tahun 2008',
+      'desc' => 'Standar Kompetensi Kerja Nasional Indonesia bidang Higiene Industri yang menjadi acuan sertifikasi HIMU, HIMA, dan HIU.',
+    ),
+  ),
+  'comparison' => 
+  array (
+    'headers' => 
+    array (
+      0 => 'Aspek Evaluasi',
+      1 => 'HIMU (Higiene Industri Muda)',
+      2 => 'HIMA (Higiene Industri Madya)',
+      3 => 'HIU (Higiene Industri Utama)',
+    ),
+    'rows' => 
+    array (
+      0 => 
+      array (
+        0 => 'Peran Pokok',
+        1 => 'Teknisi pengukuran & sampling lapangan',
+        2 => 'Evaluator data lingkungan kerja & kontrol',
+        3 => 'Perancang kebijakan, auditor & konsultan HI',
+      ),
+      1 => 
+      array (
+        0 => 'Fokus Keahlian',
+        1 => 'Pengukuran kebisingan, debu, ISBB & lux',
+        2 => 'Analisis paparan, ventilasi & evaluasi PAK',
+        3 => 'Manajemen program komprehensif seluruh plant',
+      ),
+      2 => 
+      array (
+        0 => 'Durasi Kursus',
+        1 => '±32 Jam Pelatihan (4 Hari)',
+        2 => '±40 Jam Pelatihan (5 Hari)',
+        3 => '±40 Jam Pelatihan (5 Hari)',
+      ),
+      3 => 
+      array (
+        0 => 'Pendidikan Minimal',
+        1 => 'D3 / S1 Ilmu Eksakta / Kesehatan / Teknik',
+        2 => 'D3 / S1 + Pengalaman HIMU minimal 2 tahun',
+        3 => 'S1 + Pengalaman HIMA minimal 3 tahun',
+      ),
+      4 => 
+      array (
+        0 => 'Sertifikasi',
+        1 => 'Sertifikat Kompetensi Kerja BNSP',
+        2 => 'Sertifikat Kompetensi Kerja BNSP',
+        3 => 'Sertifikat Kompetensi Kerja BNSP',
+      ),
+    ),
+  ),
+  'programs' => 
+  array (
+    0 => 
+    array (
+      'slug' => 'pelatihan-higiene-industri-muda-himu-sertifikasi-bnsp',
+      'name' => 'Pelatihan Higiene Industri Muda (HIMU) BNSP',
+      'cert' => 'Sertifikasi BNSP',
+      'mode' => 'Blended / Uji Kompetensi',
+      'duration' => '4 Hari Pelatihan',
+      'desc' => 'Sertifikasi kompetensi personil pelaksana pengukuran faktor lingkungan kerja. Mempelajari pengoperasian Sound Level Meter (kebisingan), Lux Meter (pencahayaan), Heat Stress Monitor (iklim kerja), dan personal dust sampler.',
+      'target_peserta' => 'HSE officer, industrial hygienist junior, teknisi laboratorium lingkungan, staf medis perusahaan',
+    ),
+    1 => 
+    array (
+      'slug' => 'pelatihan-higiene-industri-madya-hima-sertifikasi-bnsp',
+      'name' => 'Pelatihan Higiene Industri Madya (HIMA) BNSP',
+      'cert' => 'Sertifikasi BNSP',
+      'mode' => 'Blended / Uji Kompetensi',
+      'duration' => '5 Hari Pelatihan',
+      'desc' => 'Kualifikasi analis dan pengambil keputusan program higiene industri. Fokus pada evaluasi paparan terhadap NAB Permenaker 5/2018, perancangan sistem ventilasi industri (local exhaust), dan audit program pengendalian bahaya kerja.',
+      'target_peserta' => 'HSE supervisor, dokter kesehatan kerja, manajer fasilitas pabrik, konsultan lingkungan industri',
+    ),
+  ),
+  'syarat' => 
+  array (
+    0 => 'Ijazah minimal D3/S1 bidang Teknik, Kesehatan Masyarakat, MIPA, atau bidang eksakta',
+    1 => 'Surat rekomendasi kerja dari instansi atau perusahaan pengutus',
+    2 => 'Curriculum Vitae (CV) portofolio pengalaman di bidang K3/lingkungan kerja',
+    3 => 'Salinan KTP legalisir, ijazah terakhir, transkrip nilai, dan pas foto resmi background merah',
+  ),
+  'materi' => 
+  array (
+    0 => 'Pengantar Higiene Industri & Regulasi K3 Lingkungan Kerja Permenaker No. 05 Tahun 2018',
+    1 => 'Antisipasi dan Pengenalan Bahaya Faktor Fisik: Kebisingan, Getaran, Iklim Kerja (ISBB), Radiasi',
+    2 => 'Teknik Sampling dan Pengukuran Faktor Kimia: Gas Beracun, Uap Organik, dan Debu Respirabel',
+    3 => 'Pemantauan Faktor Biologi, Ergonomi Industri (REBA/RULA), dan Kualitas Udara Dalam Ruangan (IAQ)',
+    4 => 'Prinsip Rekayasa Ventilasi Industri: General Ventilation & Local Exhaust Ventilation (LEV)',
+    5 => 'Program Konservasi Pendengaran (Hearing Conservation Program) & Pemilihan APD Tepat Guna',
+    6 => 'Praktik Kalibrasi & Pengoperasian Instrumen Pengukuran Lingkungan Kerja',
+    7 => 'Penyusunan Laporan Hasil Uji dan Asesmen Sertifikasi Kompetensi BNSP',
+  ),
+  'faqs' => 
+  array (
+    0 => 
+    array (
+      'q' => 'Apakah perusahaan wajib melakukan pengukuran lingkungan kerja berkala?',
+      'a' => 'Ya. Permenaker No. 05 Tahun 2018 mewajibkan pengurus atau pengusaha melakukan pengukuran dan pengendalian lingkungan kerja secara berkala untuk memastikan seluruh faktor bahaya berada di bawah Nilai Ambang Batas (NAB).',
+    ),
+    1 => 
+    array (
+      'q' => 'Apa perbedaan antara HIMU dan HIMA?',
+      'a' => 'HIMU (Muda) berfokus pada keterampilan teknis pengukuran dan pengambilan sampel di lapangan menggunakan instrumen uji. HIMA (Madya) berwenang mengevaluasi data hasil ukur, merancang rekayasa pengendalian teknis (seperti ventilasi), dan mengelola program kesehatan kerja preventif.',
+    ),
+    2 => 
+    array (
+      'q' => 'Berapa lama masa berlaku sertifikat kompetensi BNSP Higiene Industri?',
+      'a' => 'Sertifikat kompetensi yang diterbitkan oleh BNSP berlaku selama 3 tahun dan dapat diperpanjang melalui proses resertifikasi / asesmen portofolio.',
+    ),
+    3 => 
+    array (
+      'q' => 'Apakah pelatihan Higiene Industri bisa dilakukan secara daring?',
+      'a' => 'Pelatihan teori dapat dilaksanakan secara interaktif daring, sedangkan sesi simulasi instrumen dan uji asesmen kompetensi dilakukan melalui demonstrasi metode asesmen BNSP resmi.',
+    ),
+  ),
+  'related_hubs' => 
+  array (
+    0 => 
+    array (
+      'slug' => 'k3-lingkungan',
+      'name' => 'K3 Lingkungan Kerja',
+      'badge' => 'Kemnaker & BNSP',
+      'desc' => 'Pengujian baku mutu emisi, pengelolaan limbah B3, dan amdal industri.',
+    ),
+    1 => 
+    array (
+      'slug' => 'k3-kimia',
+      'name' => 'K3 Kimia',
+      'badge' => 'Kemnaker RI',
+      'desc' => 'Pengendalian uap bahan kimia beracun, SDS, dan sistem penyimpanan aman.',
+    ),
+    2 => 
+    array (
+      'slug' => 'k3-laboratorium',
+      'name' => 'K3 Laboratorium',
+      'badge' => 'Kemnaker & BNSP',
+      'desc' => 'Standar biosafety level, biological safety cabinet, dan kalibrasi alat ukur.',
+    ),
+    3 => 
+    array (
+      'slug' => 'k3-psikososial',
+      'name' => 'K3 Psikososial & Ergonomi',
+      'badge' => 'Kemnaker & BNSP',
+      'desc' => 'Mitigasi kelelahan kerja, stres lingkungan kerja, dan penilaian ergonomi manual handling.',
+    ),
+  ),
+  'slug' => 'higiene-industri',
+);
 
-$programInfo = [
-    ['t' => 'Ahli Higiene Industri', 'd' => 'Kompetensi identifikasi, pengukuran, dan pengendalian bahaya lingkungan kerja jenjang Muda, Madya, Utama.', 'slug' => 'pelatihan-ahli-higiene-industri-muda-sertifikasi-bnsp', 'cert' => 'Sertifikasi BNSP'],
-    ['t' => 'Hiperkes untuk Dokter Perusahaan', 'd' => 'Kompetensi kedokteran kerja wajib bagi dokter yang bertugas di klinik perusahaan.', 'slug' => null, 'cert' => null],
-    ['t' => 'Hiperkes untuk Paramedis / Perawat Perusahaan', 'd' => 'Kompetensi wajib bagi perawat/bidan yang bertugas di klinik perusahaan.', 'slug' => null, 'cert' => null],
-    ['t' => 'Pengukuran dan Pengendalian Kebisingan', 'd' => 'Teknik pengukuran kebisingan dengan Sound Level Meter dan program konservasi pendengaran.', 'slug' => null, 'cert' => null],
-    ['t' => 'Pengukuran Kualitas Udara Tempat Kerja', 'd' => 'Sampling dan analisis debu, gas, dan uap bahan kimia di lingkungan kerja.', 'slug' => null, 'cert' => null],
-];
-
-$wajibIkut = [
-    'HSE Officer yang bertanggung jawab atas program kesehatan kerja',
-    'Dokter dan perawat perusahaan (wajib Hiperkes sesuai Permenaker 01/1976 dan 01/1979)',
-    'Petugas K3 di pabrik yang terpapar kebisingan, debu, atau bahan kimia',
-    'Laboratorium atau PJK3 yang melakukan jasa pengukuran lingkungan kerja',
-    'Manajer HR yang mengelola program MCU (Medical Check-Up) dan PAK',
-];
-
-$tujuan = [
-    'Memahami Permenaker 5/2018 dan nilai ambang batas (NAB) faktor fisika dan kimia',
-    'Mengidentifikasi bahaya higiene industri di tempat kerja: anticipation → recognition',
-    'Melakukan pengukuran kebisingan, debu, kimia, suhu, dan pencahayaan dengan instrumen yang benar',
-    'Mengevaluasi hasil pengukuran terhadap NAB dan regulasi',
-    'Merekomendasikan pengendalian bahaya: eliminasi, substitusi, engineering control, APD',
-    'Menyusun laporan pengukuran lingkungan kerja untuk Disnaker',
-];
-
-$modul = [
-    ['t' => 'Modul 1 — Dasar Higiene Industri', 'items' => [
-        'Sejarah dan ruang lingkup Higiene Industri',
-        'Regulasi: Permenaker 5/2018, UU 1/1970, Kepmenaker 187/1999',
-        'Konsep anticipation, recognition, evaluation, control (AREC)',
-        'Penyakit Akibat Kerja (PAK): klasifikasi, pelaporan, kompensasi BPJSTK',
-    ]],
-    ['t' => 'Modul 2 — Bahaya Fisika', 'items' => [
-        'Kebisingan: pengukuran dengan Sound Level Meter dan dosimeter, TWA calculation, hearing conservation program',
-        'Getaran: hand-arm vibration syndrome (HAVS), whole-body vibration',
-        'Suhu lingkungan: ISBB (Indeks Suhu Bola Basah), kerja di panas dan dingin',
-        'Pencahayaan: lux meter, standar pencahayaan per jenis pekerjaan',
-        'Radiasi non-ionisasi: UV, inframerah, gelombang mikro',
-    ]],
-    ['t' => 'Modul 3 — Bahaya Kimia', 'items' => [
-        'Klasifikasi bahan kimia berbahaya di udara',
-        'Teknik sampling: personal sampling vs area sampling',
-        'Alat sampling: impinger, filter cassette, charcoal tube, ORBO tube',
-        'Analisis laboratorium: kromatografi, spektrofotometri',
-        'IDLH, TLV-TWA, TLV-STEL — pengertian dan penerapan',
-    ]],
-    ['t' => 'Modul 4 — Pengendalian Bahaya', 'items' => [
-        'Hirarki pengendalian: eliminasi → substitusi → engineering → APD',
-        'Ventilasi industri: LEV (Local Exhaust Ventilation) dan dilution ventilation',
-        'Hearing conservation program: audiometri baseline dan periodik',
-        'Program monitoring biologis (biological monitoring)',
-    ]],
-    ['t' => 'Modul 5 — Pengukuran dan Pelaporan', 'items' => [
-        'Perencanaan survei higiene industri',
-        'Teknik sampling yang valid: jumlah sampel, durasi, lokasi',
-        'Interpretasi hasil dan perbandingan dengan NAB',
-        'Format laporan pengukuran lingkungan kerja (Permenaker 5/2018)',
-        'Praktik: pengukuran kebisingan dan pencahayaan langsung',
-    ]],
-];
-
-$metode = [
-    'Pelatihan tatap muka di Yogyakarta — termasuk praktik penggunaan Sound Level Meter, Lux Meter, dan alat sampling udara',
-    'In-house training di fasilitas perusahaan (minimum 10 peserta)',
-    'Sertifikasi Kemnaker RI/BNSP diterbitkan setelah lulus ujian teori dan praktik',
-];
-
-$skemas = [
-    ['name' => 'Pelatihan Ahli Higiene Industri Muda', 'cert' => 'Sertifikasi BNSP', 'slug' => 'pelatihan-ahli-higiene-industri-muda-sertifikasi-bnsp'],
-    ['name' => 'Pelatihan Ahli Higiene Industri Madya', 'cert' => 'Sertifikasi BNSP', 'slug' => 'pelatihan-ahli-higiene-industri-madya-sertifikasi-bnsp'],
-    ['name' => 'Pelatihan Ahli Higiene Industri Utama', 'cert' => 'Sertifikasi BNSP', 'slug' => 'pelatihan-ahli-higiene-industri-utama-sertifikasi-bnsp'],
-    ['name' => 'Pelatihan Higiene Industri Muda (HIMU)', 'cert' => 'Sertifikasi BNSP', 'slug' => 'pelatihan-higiene-industri-muda-himu-online'],
-    ['name' => 'Pelatihan Higiene Industri Madya (HIMA)', 'cert' => 'Sertifikasi BNSP', 'slug' => 'pelatihan-higiene-industri-madya-hima-online'],
-    ['name' => 'Pelatihan Ahli Muda Lingkungan Kerja', 'cert' => 'Sertifikasi KEMNAKER RI', 'slug' => 'pelatihan-ahli-muda-lingkungan-kerja-sertifikasi-kemnaker-ri'],
-];
-
-$terkait = [
-    ['label' => 'Pelatihan K3 Kimia', 'url' => '/k3-kimia/'],
-    ['label' => 'SMK3 & ISO 45001', 'url' => '/smk3/'],
-    ['label' => 'Panduan Lengkap K3', 'url' => '/keselamatan-kerja/'],
-    ['label' => 'Sertifikasi BNSP', 'url' => '/sertifikasi-bnsp/'],
-];
-
-$faqs = [
-    ['q' => 'Apa beda Higiene Industri dengan K3 secara umum?', 'a' => 'K3 secara umum berfokus pada pencegahan kecelakaan (accident prevention). Higiene Industri berfokus pada pencegahan penyakit akibat kerja (PAK) yang timbul dari paparan jangka panjang terhadap bahaya kimia, fisika, dan biologi — yang sering tidak terasa akut tapi merusak kesehatan selama bertahun-tahun. Keduanya merupakan bagian dari sistem EHS yang komprehensif.'],
-    ['q' => 'Apa itu NAB dan mengapa penting?', 'a' => 'NAB (Nilai Ambang Batas) adalah konsentrasi atau intensitas faktor bahaya di lingkungan kerja yang dianggap masih aman untuk paparan 8 jam/hari selama 40 jam/minggu. Jika pengukuran menunjukkan paparan di atas NAB, perusahaan wajib mengambil tindakan pengendalian. Permenaker 5/2018 menetapkan NAB untuk faktor fisika, kimia, biologi, ergonomi, dan psikologi di tempat kerja.'],
-    ['q' => 'Seberapa sering pengukuran lingkungan kerja wajib dilakukan?', 'a' => 'Permenaker 5/2018 tidak menetapkan frekuensi tunggal — tergantung jenis bahaya dan hasil pengukuran sebelumnya. Umumnya: minimal setahun sekali untuk area dengan potensi paparan. Jika hasil mendekati atau melebihi NAB, frekuensi harus ditingkatkan dan tindakan pengendalian segera dilakukan.'],
-    ['q' => 'Apakah dokter perusahaan wajib ikut Hiperkes?', 'a' => 'Ya. Permenaker No. PER.01/MEN/1976 mewajibkan setiap dokter yang bekerja di perusahaan untuk memiliki sertifikat Hiperkes. Tanpa sertifikat ini, dokter tidak dapat menjalankan fungsi kedokteran kerja secara legal — termasuk menandatangani hasil MCU dan menetapkan diagnosis PAK.'],
-    ['q' => 'Apakah perusahaan kecil perlu mengukur kebisingan?', 'a' => 'Ya, jika area kerjanya bising. Permenaker 5/2018 tidak membedakan skala perusahaan. Bengkel kecil dengan gerinda atau kompresor bisa mengekspos karyawannya pada kebisingan di atas 85 dB — melebihi NAB. Paparan selama 5-10 tahun dapat menyebabkan ketulian permanen yang menjadi tanggung jawab perusahaan.'],
-    ['q' => 'Apa itu HAVS dan siapa yang berisiko?', 'a' => 'HAVS (Hand-Arm Vibration Syndrome) adalah penyakit akibat paparan getaran tangan-lengan jangka panjang — dari gerinda, bor, gergaji rantai, atau kendaraan. Gejala: Raynaud\'s phenomenon (jari memutih saat dingin), mati rasa, nyeri sendi. Berisiko: operator gerinda, tukang las, operator chainsaw, pengemudi alat berat. Tidak bisa disembuhkan — hanya bisa dicegah dengan mengurangi waktu paparan.'],
-];
-?>
-<?php
-$page_title = 'Pelatihan Higiene Industri & Hiperkes — Pengukuran NAB & Sertifikasi Kemnaker RI';
-$meta_desc = 'Pelatihan Higiene Industri dan Hiperkes bersertifikat Kemnaker RI. Program Ahli Higiene Industri, pengukuran NAB kebisingan, debu, kimia, dan pencahayaan sesuai Permenaker No. 5 Tahun 2018. 0877-5915-1278.';
-require __DIR__ . '/includes/head.php';
-?>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
-  {"@type":"ListItem","position":1,"name":"Beranda","item":"https://wahanatotalita.com/"},
-  {"@type":"ListItem","position":2,"name":"Pelatihan","item":"https://wahanatotalita.com/pelatihan/"},
-  {"@type":"ListItem","position":3,"name":"Higiene Industri","item":"https://wahanatotalita.com/higiene-industri/"}
-]}
-</script>
-<script type="application/ld+json">
-<?php
-echo json_encode([
-    '@context' => 'https://schema.org',
-    '@type'    => 'FAQPage',
-    'mainEntity' => array_map(fn($f) => [
-        '@type' => 'Question', 'name' => $f['q'],
-        'acceptedAnswer' => ['@type' => 'Answer', 'text' => $f['a']],
-    ], $faqs),
-], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-?>
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Wahana Totalita Konsultan",
-  "url": "https://wahanatotalita.com",
-  "telephone": "+6287759151278",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Jl. Wonosari KM 8.5",
-    "addressLocality": "Sleman",
-    "addressRegion": "DIY",
-    "addressCountry": "ID"
-  }
-}
-</script>
-<link rel="stylesheet" href="/assets/css/page/sector.css">
-<style>
-.compare-table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.05);min-width:640px}
-.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-@media(max-width:900px){.info-grid{grid-template-columns:1fr}}
-.info-card{background:#fff;border:1.5px solid #e5e7eb;border-radius:12px;padding:16px 18px}
-.info-card h3{font-size:14.5px;font-weight:700;color:#0A4A2E;margin-bottom:6px}
-.info-card p{font-size:13px;color:#4b5563;margin-bottom:8px}
-.info-card .no-slug{font-size:12px;color:#C6621C;font-weight:700}
-.module-grid{display:flex;flex-direction:column;gap:14px}
-.module-card{background:#fff;border:1.5px solid #e5e7eb;border-radius:12px;padding:18px 20px}
-.module-card h3{font-size:14.5px;font-weight:700;color:#0A4A2E;margin-bottom:10px}
-</style>
-<style id="wt-hero-height-fix-2026-07">
-/* wt-hero-height-fix-2026-07: this page's own .hero is a small custom hero, not the
-   homepage full-screen slideshow hero — cancel the global 100vh /
-   flex-centering from style.css so it doesn't leak in here. */
-.hero{min-height:auto!important;display:block!important}
-</style>
-<?php require __DIR__ . '/includes/navbar.php'; ?>
-<section class="hero">
-  <div class="container inner">
-    <div class="hero-badge">🔬 Higiene Industri</div>
-    <h1>Pelatihan Higiene Industri dan Hiperkes — Pengukuran NAB Bersertifikat Kemnaker RI</h1>
-    <p class="hero-sub">Sertifikasi resmi Kemnaker RI/BNSP sesuai Permenaker No. 5 Tahun 2018.</p>
-    <div><a href="<?=$wa_url?>" class="btn-wa" target="_blank" rel="noopener">💬 Konsultasi Jadwal &amp; Biaya</a></div>
-  </div>
-</section>
-
-<section class="white">
-<div class="container">
-  <h2 class="section-title">Apa itu Higiene Industri?</h2>
-  <p class="intro-text">Higiene Industri (Industrial Hygiene) adalah ilmu yang mengidentifikasi, mengukur, mengevaluasi, dan mengendalikan bahaya lingkungan kerja yang dapat menyebabkan penyakit akibat kerja (PAK) — bukan kecelakaan fisik, melainkan gangguan kesehatan jangka panjang. Bahaya yang diukur: kebisingan (noise), debu industri, bahan kimia di udara, getaran, pencahayaan, suhu ekstrem, dan radiasi non-ionisasi. Di Indonesia, Higiene Industri dipadukan dengan Hiperkes (Higiene Perusahaan dan Kesehatan Kerja) — keduanya diatur oleh Permenaker No. 5 Tahun 2018.</p>
-</div>
-</section>
-
-<section>
-<div class="container">
-  <h2 class="section-title">Dasar Hukum — Permenaker No. 5 Tahun 2018</h2>
-  <ul class="law-list">
-    <li>Menggantikan Permenaker 13/2011 tentang NAB Faktor Fisika dan Kimia</li>
-    <li>Mewajibkan pengukuran faktor bahaya lingkungan kerja secara berkala — mencakup 5 kategori: fisika, kimia, biologi, ergonomi, dan psikologi</li>
-    <li>Menetapkan NAB (Nilai Ambang Batas) untuk berbagai faktor: kebisingan (85 dB untuk 8 jam), debu respirable, suhu ISBB, pencahayaan, getaran, radiasi UV</li>
-    <li>Pengukuran wajib dilakukan oleh personel kompeten atau PJK3 bidang pemeriksaan/pengujian</li>
-    <li>Hasil pengukuran wajib dilaporkan ke Disnaker setempat</li>
-  </ul>
-</div>
-</section>
-
-<section class="white">
-<div class="container">
-  <h2 class="section-title">Faktor Bahaya Lingkungan Kerja yang Wajib Diukur</h2>
-  <div class="compare-table-wrap">
-  <table class="compare-table">
-    <thead><tr><th>Faktor</th><th>Contoh Sumber</th><th>NAB/Standar</th><th>Dampak Kesehatan</th></tr></thead>
-    <tbody>
-      <?php foreach ($faktorBahaya as $row): ?>
-      <tr><td><?= htmlspecialchars($row['faktor']) ?></td><td><?= htmlspecialchars($row['sumber']) ?></td><td><?= htmlspecialchars($row['nab']) ?></td><td><?= htmlspecialchars($row['dampak']) ?></td></tr>
-      <?php endforeach; ?>
-    </tbody>
-  </table>
-  </div>
-</div>
-</section>
-
-<section>
-<div class="container">
-  <h2 class="section-title">Program Sertifikasi Higiene Industri</h2>
-  <div class="info-grid">
-    <?php foreach ($programInfo as $p): ?>
-    <div class="info-card">
-      <h3><?= htmlspecialchars($p['t']) ?></h3>
-      <p><?= htmlspecialchars($p['d']) ?></p>
-      <?php if ($p['slug']): ?>
-      <a href="/pelatihan/<?= htmlspecialchars($p['slug']) ?>/" class="scheme-link"><?= htmlspecialchars($p['cert']) ?> &rarr;</a>
-      <?php else: ?>
-      <a href="<?=$wa_url?>" class="no-slug" target="_blank" rel="noopener">💬 Hubungi Kami</a>
-      <?php endif; ?>
-    </div>
-    <?php endforeach; ?>
-  </div>
-</div>
-</section>
-
-<section class="white">
-<div class="container">
-  <h2 class="section-title">Siapa yang Membutuhkan Pelatihan Ini?</h2>
-  <ul class="plain-list">
-    <?php foreach ($wajibIkut as $w): ?>
-    <li><?= htmlspecialchars($w) ?></li>
-    <?php endforeach; ?>
-  </ul>
-</div>
-</section>
-
-<section>
-<div class="container">
-  <h2 class="section-title">Hiperkes untuk Dokter dan Paramedis Perusahaan</h2>
-  <p class="intro-text">Berdasarkan Permenaker No. PER.01/MEN/1976 (dokter) dan No. PER.01/MEN/1979 (paramedis), setiap dokter dan perawat/bidan yang bekerja di perusahaan wajib mengikuti pelatihan Hiperkes. Sertifikat Hiperkes adalah syarat wajib untuk mendapatkan izin praktik di klinik perusahaan dan menjadi dasar pelaksanaan Medical Check-Up (MCU) karyawan.</p>
-</div>
-</section>
-
-<section class="white">
-<div class="container">
-  <h2 class="section-title">Tujuan Pembelajaran</h2>
-  <ol class="num-list">
-    <?php foreach ($tujuan as $t): ?>
-    <li><?= htmlspecialchars($t) ?></li>
-    <?php endforeach; ?>
-  </ol>
-</div>
-</section>
-
-<section>
-<div class="container">
-  <h2 class="section-title">Kurikulum — Ahli Higiene Industri (±40 jam)</h2>
-  <div class="module-grid">
-    <?php foreach ($modul as $m): ?>
-    <div class="module-card">
-      <h3><?= htmlspecialchars($m['t']) ?></h3>
-      <ul class="plain-list">
-        <?php foreach ($m['items'] as $item): ?>
-        <li><?= htmlspecialchars($item) ?></li>
-        <?php endforeach; ?>
-      </ul>
-    </div>
-    <?php endforeach; ?>
-  </div>
-</div>
-</section>
-
-<section class="white">
-<div class="container">
-  <h2 class="section-title">Metode Pelatihan</h2>
-  <ul class="plain-list">
-    <?php foreach ($metode as $m): ?>
-    <li><?= htmlspecialchars($m) ?></li>
-    <?php endforeach; ?>
-  </ul>
-</div>
-</section>
-
-<section>
-<div class="container">
-  <h2 class="section-title">Program Pelatihan Higiene Industri Kami</h2>
-  <div class="scheme-grid">
-    <?php foreach ($skemas as $sk): 
-      $img = training_img_url('', 'k3', $sk['slug']);
-      $wa_link = "https://wa.me/{$wa_number}?text=" . rawurlencode('Halo Wahana Totalita, saya ingin informasi pelatihan ' . $sk['name']);
-    ?>
-    <div class="scheme-card">
-      <div class="scheme-card-media">
-        <img src="<?= htmlspecialchars($img) ?>" alt="<?= htmlspecialchars($sk['name']) ?>" loading="lazy" width="360" height="170">
-        <span class="scheme-cert"><?= htmlspecialchars($sk['cert']) ?></span>
-      </div>
-      <div class="scheme-card-body">
-        <h3><a href="/pelatihan/<?= htmlspecialchars($sk['slug']) ?>/"><?= htmlspecialchars($sk['name']) ?></a></h3>
-        <div class="scheme-actions">
-          <a href="/pelatihan/<?= htmlspecialchars($sk['slug']) ?>/" class="scheme-link">Silabus &amp; Jadwal &rarr;</a>
-          <a href="<?= $wa_link ?>" class="scheme-btn-wa" target="_blank" rel="noopener">Chat WA</a>
-        </div>
-      </div>
-    </div>
-    <?php endforeach; ?>
-  </div>
-</div>
-</section>
-
-<section class="white">
-<div class="container">
-  <h2 class="section-title">Program K3 Terkait</h2>
-  <div class="link-grid">
-    <?php foreach ($terkait as $tk): ?>
-    <div class="link-card"><a href="<?= htmlspecialchars($tk['url']) ?>"><?= htmlspecialchars($tk['label']) ?> &rarr;</a></div>
-    <?php endforeach; ?>
-  </div>
-</div>
-</section>
-
-<section>
-<div class="container-sm">
-  <h2 class="section-title" style="text-align:center">FAQ</h2>
-  <div class="faq-list" style="margin-top:20px">
-    <?php foreach ($faqs as $f): ?>
-    <div class="faq-item">
-      <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
-        <?= htmlspecialchars($f['q']) ?>
-        <svg class="faq-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div class="faq-a"><p><?= htmlspecialchars($f['a']) ?></p></div>
-    </div>
-    <?php endforeach; ?>
-  </div>
-</div>
-</section>
-
-<section class="final-cta">
-  <div class="container-sm">
-    <h2>Daftar &amp; Konsultasi</h2>
-    <p>Hubungi kami untuk info program dan jadwal pelatihan Higiene Industri / Hiperkes.</p>
-    <a href="<?=$wa_url?>" class="btn-wa" target="_blank" rel="noopener">💬 Konsultasi via WhatsApp</a>
-  </div>
-</section>
-
-<?php
-require_once __DIR__ . '/includes/hub-category-map.php';
-$hub_article_cats = $HUB_CATEGORY_MAP['k3']['article_cats'] ?? [];
-include __DIR__ . '/includes/hub-artikel-terkait.php';
-?>
-<?php require __DIR__ . '/includes/footer.php'; ?>
-<script>
-function toggleFaq(btn) {
-  var expanded = btn.getAttribute('aria-expanded') === 'true';
-  btn.setAttribute('aria-expanded', !expanded);
-  var answer = btn.nextElementSibling;
-  answer.classList.toggle('open', !expanded);
-}
-</script>
-</body>
-</html>
+require __DIR__ . '/includes/hub-layout.php';
