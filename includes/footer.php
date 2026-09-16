@@ -175,7 +175,8 @@
         <li><a href="/pelatihan/pelatihan-damkar-paralel-kelas-dcba-sertifikasi-kemnaker-ri/">Damkar Kelas D–A</a></li>
         <li><a href="/pelatihan/pelatihan-petugas-p3k-first-aid-online/">Petugas P3K / First Aid</a></li>
         <li><a href="/pelatihan/pelatihan-internal-auditor-iso-45001-online/">Internal Auditor ISO 45001</a></li>
-        <li><a href="/pelatihan/">🎓 Katalog Semua Program</a></li>
+        <li><a href="/keselamatan-kerja/">Direktori 23 Bidang K3</a></li>
+        <li><a href="/pelatihan/">Katalog Semua Program</a></li>
       </ul>
     </div>
 
@@ -183,7 +184,7 @@
     <div class="footer-nav">
       <h4>Layanan &amp; Fitur</h4>
       <ul>
-        <li><a href="/jadwal/">📅 Jadwal Pelatihan <?= date('Y') ?></a></li>
+        <li><a href="/jadwal/">Jadwal Pelatihan <?= date('Y') ?></a></li>
         <li><a href="/jadwal/kalender/">Kalender Pelatihan</a></li>
         <li><a href="/tools/safety-talk">Safety Talk Generator</a></li>
         <li><a href="/verifikasi/">Verifikasi Keaslian Sertifikat</a></li>
