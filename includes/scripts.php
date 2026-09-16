@@ -144,23 +144,6 @@ if ($gtm_id || $ga_id): ?>
 <!-- AI Training Finder Chat Widget -->
 <link rel="stylesheet" href="/assets/css/ai-chat.css" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="/assets/css/ai-chat.css"></noscript>
-<!-- Catalog: show 12 first, reveal rest on demand (filters/search auto-reveal) -->
-<script>
-(function(){
-  var grid=document.getElementById('training-grid'); if(!grid) return;
-  var cards=[].slice.call(grid.querySelectorAll('.training-card'));
-  var LIMIT=12; if(cards.length<=LIMIT) return;
-  cards.slice(LIMIT).forEach(function(c){c.classList.add('tc-hidden');});
-  var btn=document.createElement('button');
-  btn.className='btn-load-more'; btn.type='button';
-  btn.textContent='Lihat Semua '+cards.length+' Program ↓';
-  grid.parentNode.insertBefore(btn, grid.nextSibling);
-  function reveal(){cards.forEach(function(c){c.classList.remove('tc-hidden');}); if(btn.parentNode) btn.remove();}
-  btn.addEventListener('click', reveal);
-  document.querySelectorAll('.filter-btn,.filter-mode,.mobile-chip').forEach(function(el){el.addEventListener('click', reveal, {once:true});});
-  var s=document.getElementById('catalog-search'); if(s) s.addEventListener('input', reveal, {once:true});
-})();
-</script>
 <script>window.wtcWA = '<?= e(get_setting("wa_number","6281235036420")) ?>';</script>
 <script src="/assets/js/ai-chat.js" defer></script>
 
