@@ -120,6 +120,9 @@ RewriteRule ^zh/juru-las/?$ zh-welder.php [QSA,L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^zh/in-house-training/?$ zh-inhouse.php [QSA,L]
 
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^zh/factory-roadmap/?$ zh-factory.php [QSA,L]
+
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^k3-migas/?$ k3-migas.php [QSA,L]
