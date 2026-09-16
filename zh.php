@@ -60,7 +60,7 @@ $canonical = SITE_URL . '/zh/';
             "url": "https://wahanatotalita.com",
             "logo": {
                 "@type": "ImageObject",
-                "url": "https://wahanatotalita.com/assets/img/logo.png"
+                "url": "https://wahanatotalita.com/assets/img/logo-wt.png"
             },
             "description": "印尼劳工部官方授权综合安全技术与培训机构 (PJK3 No. Kep. 312/BINWASPNAK-PNK3/V/2020)",
             "contactPoint": {
@@ -680,7 +680,7 @@ body {
 <header class="zh-nav">
   <div class="zh-nav-inner">
     <a href="/zh/" class="zh-logo">
-      <img src="/assets/img/logo-light.svg" alt="Wahana Totalita Konsultan" width="160" height="38">
+      <img src="/assets/img/logo-wt.webp" alt="Wahana Totalita Logo" width="160" height="38" onerror="this.onerror=null;this.src='/assets/img/logo-wt.png'">
       <span class="zh-lang-badge">中文版 / 中资企业合规指南</span>
     </a>
     <a href="<?= $wa_url ?>" class="zh-nav-contact" target="_blank" rel="noopener">
