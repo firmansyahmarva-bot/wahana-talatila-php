@@ -228,15 +228,15 @@ if ('requestIdleCallback' in window) {
   <div class="container">
     <div class="section-header">
       <p class="section-eyebrow">Direktori Kategori</p>
-      <h2 class="section-title">Panduan Lengkap per Topik K3</h2>
-      <p class="pcat-dir-intro">Baca panduan lengkap tiap topik K3 — regulasi, siapa yang wajib mengikuti, dan program terkait — sebelum memilih pelatihan.</p>
+      <h2 class="section-title">Kategori Program Pelatihan</h2>
+      <p class="pcat-dir-intro">Pilih kategori pelatihan untuk melihat silabus lengkap, jadwal, dan sertifikasi resmi Kemnaker RI &amp; BNSP.</p>
     </div>
     <div class="services-grid">
       <?php foreach ($HUB_CATEGORY_MAP as $catSlug => $hub): ?>
-      <a href="<?= e($hub['hub_url']) ?>" class="service-card" style="--accent: <?= e($hubAccent[$catSlug] ?? '#0A4A2E') ?>; text-decoration:none;">
+      <a href="/pelatihan/<?= e($catSlug) ?>/" class="service-card" style="--accent: <?= e($hubAccent[$catSlug] ?? '#0A4A2E') ?>; text-decoration:none;">
         <div class="service-card-icon"><?= $hubIcons[$catSlug] ?? '📄' ?></div>
         <div class="service-card-title"><?= e($hub['hub_name']) ?></div>
-        <div class="service-card-desc">Panduan lengkap, dasar hukum, dan program pelatihan terkait <?= e($hub['hub_name']) ?>.</div>
+        <div class="service-card-desc">Daftar lengkap program pelatihan dan sertifikasi <?= e($hub['hub_name']) ?>.</div>
         <div class="service-card-arrow">→</div>
       </a>
       <?php endforeach; ?>

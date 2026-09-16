@@ -597,55 +597,70 @@ if ('requestIdleCallback' in window) {
     <!-- REGISTRATION SIDEBAR — sticky on desktop, moves below hero on mobile -->
     <aside class="pd-sidebar">
       <div class="pd-ticket">
+        <div class="pd-ticket-header">
+          <span class="pd-ticket-header-badge">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13" aria-hidden="true"><path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5zm-2 16l-4-4 1.41-1.41L10 15.17l6.59-6.59L18 10l-8 8z"/></svg>
+            Sertifikasi Resmi <?= e($training['certification']) ?>
+          </span>
+        </div>
+
         <div class="pd-ticket-inner">
 
-          <div class="pd-ticket-price-row">
-            <div>
-              <span class="pd-ticket-label">Investasi</span>
+          <div class="pd-ticket-price-box">
+            <span class="pd-ticket-label">Investasi Pelatihan</span>
+            <div class="pd-ticket-price-row">
               <span class="pd-ticket-price"><?= format_price((int)$training['price']) ?></span>
               <span class="pd-ticket-unit">/ orang</span>
             </div>
           </div>
 
-          <div class="pd-ticket-perf" aria-hidden="true"></div>
-
           <div class="pd-ticket-specs">
             <?php if (!empty($training['duration_days'])): ?>
             <div class="pd-ticket-row"><span class="pd-ticket-k">Durasi</span><span class="pd-ticket-v"><?= (int)$training['duration_days'] ?> Hari</span></div>
             <?php endif; ?>
-            <?php if (!empty($training['schedule'])): ?>
-            <div class="pd-ticket-row"><span class="pd-ticket-k">Jadwal</span><span class="pd-ticket-v"><?= e($training['schedule']) ?></span></div>
-            <?php endif; ?>
+            <div class="pd-ticket-row"><span class="pd-ticket-k">Jadwal</span><span class="pd-ticket-v"><?= e(!empty($training['schedule']) ? $training['schedule'] : 'Reguler Bulanan & In-House') ?></span></div>
             <div class="pd-ticket-row"><span class="pd-ticket-k">Sertifikat</span><span class="pd-ticket-v"><?= e($training['certification']) ?></span></div>
             <div class="pd-ticket-row"><span class="pd-ticket-k">Mode</span><span class="pd-ticket-v"><?= e(mode_label($training['mode'])) ?></span></div>
           </div>
 
-          <a href="<?= wa_url($wa_msg) ?>" class="pd-ticket-cta" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
-            Daftar Sekarang
-          </a>
+          <!-- 2 DISTINCT CTAS: 1 FOR PROGRAM REGISTRATION, 1 FOR IN-HOUSE QUOTATION -->
+          <div class="pd-ticket-cta-group">
+            <a href="<?= wa_url('Halo Wahana Totalita, saya ingin daftar/konsultasi program: ' . $training['name']) ?>" class="pd-ticket-cta pd-ticket-cta-primary" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
+              <div class="pd-ticket-cta-text">
+                <span class="pd-ticket-cta-title">Daftar Program Ini</span>
+                <span class="pd-ticket-cta-sub">Konsultasi jadwal &amp; pendaftaran via WA</span>
+              </div>
+            </a>
 
-          <a href="<?= wa_url('Halo, saya ingin info jadwal ' . $training['name']) ?>" class="pd-ticket-secondary" target="_blank" rel="noopener">Tanya jadwal &amp; ketersediaan</a>
+            <a href="<?= wa_url('Halo Wahana Totalita, saya mewakili perusahaan ingin meminta proposal & penawaran resmi In-House Training untuk topik: ' . $training['name']) ?>" class="pd-ticket-cta pd-ticket-cta-inhouse" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 21h18M3 7v14M21 7v14M6 11h4M6 15h4M14 11h4M14 15h4M9 3h6v4H9z"/></svg>
+              <div class="pd-ticket-cta-text">
+                <span class="pd-ticket-cta-title">Minta Penawaran In-House</span>
+                <span class="pd-ticket-cta-sub">Proposal teknis &amp; tarif rombongan B2B</span>
+              </div>
+            </a>
+          </div>
 
           <?php if (!empty($training['brochure_url'])): ?>
           <a href="<?= e($training['brochure_url']) ?>" class="pd-ticket-brochure" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16"/></svg>
-            Unduh Brosur
+            Unduh Brosur Pelatihan
           </a>
           <?php endif; ?>
 
           <div class="pd-ticket-trust">
             <span class="pd-trust-item">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
-              Sertifikat resmi <?= e($training['certification']) ?>
+              Sertifikat resmi diakui Kemnaker / BNSP
             </span>
             <span class="pd-trust-item">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
-              Pendaftaran &amp; konsultasi via WhatsApp
+              Tersedia In-House di lokasi perusahaan Anda
             </span>
             <span class="pd-trust-item">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
-              Kategori <?= e($training['cat_name']) ?>
+              Proposal resmi &amp; konsultasi teknis gratis
             </span>
           </div>
 
