@@ -42,7 +42,7 @@ if ($type === '') {
     $now = date('c');
     echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
     echo '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
-    foreach (['core','pelatihan','artikel','kota','kota-pelatihan','platform','jadwal','glosarium','regulasi'] as $child) {
+    foreach (['core','pelatihan','artikel','kota','kota-pelatihan','platform','jadwal','glosarium','regulasi','skkni'] as $child) {
         $childUrl = $child === 'jadwal'
             ? $base . '/sitemap-jadwal.xml'
             : $base . '/sitemap-' . $child . '.xml';
@@ -431,6 +431,24 @@ case 'regulasi':
     $regulasiData = get_regulasi_dataset();
     foreach ($regulasiData as $item) {
         echo sm_url($base . '/regulasi/' . htmlspecialchars($item['slug']) . '/', date('Y-m-d'), '0.7');
+    }
+
+    echo '</urlset>' . "\n";
+    break;
+
+// ─── SKKNI: competency standards hub + individual professions ──────────────
+case 'skkni':
+    echo sm_header();
+
+    // Hub index
+    echo sm_url($base . '/skkni/', date('Y-m-d'), '0.8');
+
+    // Individual professions
+    require_once __DIR__ . '/includes/skkni-functions.php';
+    $skkniData = get_all_skkni_items();
+    foreach ($skkniData as $item) {
+        $lm = date('Y-m-d');
+        echo sm_url($base . '/skkni/' . htmlspecialchars($item['slug']) . '/', $lm, '0.7');
     }
 
     echo '</urlset>' . "\n";
