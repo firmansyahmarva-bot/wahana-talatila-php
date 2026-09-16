@@ -819,6 +819,38 @@ body {
         </div>
       </article>
 
+      <!-- SECTION 5: 五大专题合规指引与实操手册 -->
+      <article class="zh-card">
+        <span class="zh-sec-badge">合规专题深入</span>
+        <h2 class="zh-sec-title">五、中资企业安全生产法定合规专题专栏 (深度实操手册)</h2>
+        <p class="zh-text">
+          针对特定岗位配置、设备年检、焊接资质及体系审核，我们为您整理了以下细分领域的专业合规指引：
+        </p>
+
+        <div class="zh-law-grid">
+          <div class="zh-law-card" style="background:#f0fdf4;border-color:#bbf7d0;">
+            <strong style="font-size:15px;"><a href="/zh/ahli-k3-umum/" style="color:#0A4A2E;text-decoration:none;">1. 注册安全官 (AK3U) 与 P2K3 设立指引 &rarr;</a></strong>
+            <p>满100人强制设岗、企业安全生产委员会印尼劳工部官方备案与法定安全生产季报报送全流程。</p>
+          </div>
+          <div class="zh-law-card" style="background:#f0fdf4;border-color:#bbf7d0;">
+            <strong style="font-size:15px;"><a href="/zh/sio-alat-berat/" style="color:#0A4A2E;text-decoration:none;">2. 特种设备 SIO 操作证与 SIA 检验全解 &rarr;</a></strong>
+            <p>叉车、天车、流动吊、锅炉与压力容器的个人持证与机械设备合法开机准用年检双重合规。</p>
+          </div>
+          <div class="zh-law-card" style="background:#f0fdf4;border-color:#bbf7d0;">
+            <strong style="font-size:15px;"><a href="/zh/smk3/" style="color:#0A4A2E;text-decoration:none;">3. SMK3 安全体系审核与金牌认证指南 &rarr;</a></strong>
+            <p>PP 50/2012国家级法定安全体系、166项高级审核准则及大型央企/PLN/Pertamina招投标金牌门槛。</p>
+          </div>
+          <div class="zh-law-card" style="background:#f0fdf4;border-color:#bbf7d0;">
+            <strong style="font-size:15px;"><a href="/zh/juru-las/" style="color:#0A4A2E;text-decoration:none;">4. 承压管道与结构特种焊工等级规范 &rarr;</a></strong>
+            <p>印尼劳工部 Kelas 1、Kelas 2、Kelas 3 资质划分、X射线探伤抽检及承压特种焊接规范。</p>
+          </div>
+          <div class="zh-law-card" style="background:#f0fdf4;border-color:#bbf7d0;">
+            <strong style="font-size:15px;"><a href="/zh/in-house-training/" style="color:#0A4A2E;text-decoration:none;">5. 偏远工区驻厂培训与双语考证方案 &rarr;</a></strong>
+            <p>苏拉威西青山(IMIP)、德龙(VDNI)、纬达贝(IWIP)及矿山现场考官驻厂直考，省去高额差旅与停工损失。</p>
+          </div>
+        </div>
+      </article>
+
     </main>
 
     <!-- RIGHT: STICKY CONTACT SIDEBAR -->
@@ -837,6 +869,17 @@ body {
           <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
           <span>WhatsApp 在线沟通</span>
         </a>
+
+        <div class="zh-sb-divider"></div>
+
+        <div style="font-size:13px;font-weight:800;color:var(--hub-dark);text-transform:uppercase;letter-spacing:0.04em;margin:18px 0 8px;">合规专题指引手册</div>
+        <ul style="list-style:none;padding:0;margin:0 0 18px;">
+          <li style="margin-bottom:6px;"><a href="/zh/ahli-k3-umum/" style="font-size:13px;color:var(--hub-primary);text-decoration:none;display:flex;align-items:center;gap:6px;line-height:1.45;padding:5px 8px;border-radius:6px;">&bull; 注册安全官 (AK3U) 与 P2K3</a></li>
+          <li style="margin-bottom:6px;"><a href="/zh/sio-alat-berat/" style="font-size:13px;color:var(--hub-primary);text-decoration:none;display:flex;align-items:center;gap:6px;line-height:1.45;padding:5px 8px;border-radius:6px;">&bull; 特种设备操作证 (SIO/SIA)</a></li>
+          <li style="margin-bottom:6px;"><a href="/zh/smk3/" style="font-size:13px;color:var(--hub-primary);text-decoration:none;display:flex;align-items:center;gap:6px;line-height:1.45;padding:5px 8px;border-radius:6px;">&bull; SMK3 安全体系金牌认证</a></li>
+          <li style="margin-bottom:6px;"><a href="/zh/juru-las/" style="font-size:13px;color:var(--hub-primary);text-decoration:none;display:flex;align-items:center;gap:6px;line-height:1.45;padding:5px 8px;border-radius:6px;">&bull; 特种焊工 (Juru Las) 规范</a></li>
+          <li style="margin-bottom:6px;"><a href="/zh/in-house-training/" style="font-size:13px;color:var(--hub-primary);text-decoration:none;display:flex;align-items:center;gap:6px;line-height:1.45;padding:5px 8px;border-radius:6px;">&bull; 偏远工区驻厂双语内训</a></li>
+        </ul>
 
         <div class="zh-sb-divider"></div>
 

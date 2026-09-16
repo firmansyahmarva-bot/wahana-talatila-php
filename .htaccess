@@ -106,6 +106,22 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^zh/?$ zh.php [QSA,L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^zh/ahli-k3-umum/?$ zh-ak3u.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^zh/sio-alat-berat/?$ zh-sio.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^zh/smk3/?$ zh-smk3.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^zh/juru-las/?$ zh-welder.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^zh/in-house-training/?$ zh-inhouse.php [QSA,L]
+
+
+RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^k3-migas/?$ k3-migas.php [QSA,L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
