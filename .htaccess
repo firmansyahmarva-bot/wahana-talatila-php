@@ -17,6 +17,9 @@ RewriteEngine On
 
 RewriteCond %{HTTP_HOST} ^origen\.wahanatotalita\.com$ [NC]
 RewriteRule ^ https://wahanatotalita.com%{REQUEST_URI} [R=301,L,NE]
+
+# Route SMK3 Hub directly to smk3.php (prevents physical smk3/ directory index interception)
+RewriteRule ^smk3(/index\.php)?/?$ /smk3.php [QSA,L]
 # 301 — Joomla legacy article IDs, recovered from Wayback Machine 2012 snapshots
 # (id=11 "Registration" has no current equivalent -> falls to 410 below, not homepage)
 <IfModule mod_rewrite.c>
@@ -102,11 +105,9 @@ ErrorDocument 404 /404.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^k3-migas/?$ k3-migas.php [QSA,L]
 
-RewriteRule ^smk3/?$ smk3.php [QSA,L]
-
-
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^k3-lingkungan/?$ k3-lingkungan.php [QSA,L]
+
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^k3-pesawat-angkat-angkut/?$ k3-pesawat-angkat-angkut.php [QSA,L]
