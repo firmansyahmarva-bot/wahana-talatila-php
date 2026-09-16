@@ -51,7 +51,7 @@ $wa_url = 'https://wa.me/6287759151278?text=' . rawurlencode('您好，我们是
             "url": "https://wahanatotalita.com",
             "logo": {
                 "@type": "ImageObject",
-                "url": "https://wahanatotalita.com/assets/img/logo.png"
+                "url": "https://wahanatotalita.com/assets/img/logo-wt.png"
             },
             "description": "印尼劳工部官方授权综合安全技术与培训机构 (PJK3 No. Kep. 312/BINWASPNAK-PNK3/V/2020)",
             "contactPoint": {
@@ -642,7 +642,7 @@ body {
 <nav class="zh-nav">
   <div class="zh-nav-inner">
     <a href="/zh/" class="zh-logo">
-      <img src="/assets/img/logo.png" alt="Wahana Totalita Logo" onerror="this.style.display='none'">
+      <img src="/assets/img/logo-wt.webp" alt="Wahana Totalita Logo" width="160" height="38" onerror="this.onerror=null;this.src='/assets/img/logo-wt.png'">
       <span style="font-weight:800;font-size:16px;color:var(--hub-primary);">WAHANA TOTALITA</span>
       <span class="zh-lang-badge">中文合规指引</span>
     </a>
