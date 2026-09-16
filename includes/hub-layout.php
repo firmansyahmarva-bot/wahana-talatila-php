@@ -231,51 +231,60 @@ $HUB_DIRECTORY_MESH = [
             $prog_url = '/pelatihan/' . trim($prog['slug'], '/') . '/';
             $prog_wa_msg = $prog['wa_text'] ?? ('Halo Wahana Totalita, saya ingin informasi biaya dan jadwal terdekat pelatihan ' . $prog['name']);
             $prog_wa_url = wa_url($prog_wa_msg, $wa_number);
+            $prog_img = training_img_url('', 'k3', $prog['slug']);
           ?>
           <article class="hub-prog-card">
-            <div class="hub-prog-card-top">
-              <div class="hub-prog-badges">
-                <span class="hub-prog-badge-cert">
+            <div class="hub-prog-card-media">
+              <img src="<?= e($prog_img) ?>" alt="<?= e($prog['name']) ?>" loading="lazy" width="400" height="180">
+              <div class="hub-prog-media-overlay">
+                <span class="hub-prog-pill-cert">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                   <?= e($prog['cert']) ?>
                 </span>
-                <?php if (!empty($prog['mode'])): ?>
-                <span class="hub-prog-badge-mode"><?= e($prog['mode']) ?></span>
-                <?php endif; ?>
                 <?php if (!empty($prog['duration'])): ?>
-                <span class="hub-prog-badge-duration"><?= e($prog['duration']) ?></span>
+                <span class="hub-prog-pill-dur"><?= e($prog['duration']) ?></span>
                 <?php endif; ?>
               </div>
             </div>
 
-            <h3 class="hub-prog-title">
-              <a href="<?= e($prog_url) ?>"><?= e($prog['name']) ?></a>
-            </h3>
-
-            <p class="hub-prog-desc"><?= e($prog['desc']) ?></p>
-
-            <?php if (!empty($prog['target_peserta'])): ?>
-            <div class="hub-prog-meta-specs">
-              <div class="hub-meta-spec-item">
-                <strong>Sasaran Peserta</strong>
-                <span><?= e($prog['target_peserta']) ?></span>
+            <div class="hub-prog-card-content">
+              <div style="font-size:11px;font-weight:700;color:var(--hub-orange);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:6px;">
+                <?= e($prog['mode'] ?? 'Sertifikasi Resmi Kemnaker RI') ?>
               </div>
-              <div class="hub-meta-spec-item">
-                <strong>Legalitas Lisensi</strong>
-                <span>Sertifikat Resmi &amp; SKP KEMNAKER / BNSP RI</span>
-              </div>
-            </div>
-            <?php endif; ?>
 
-            <div class="hub-prog-actions">
-              <a href="<?= e($prog_url) ?>" class="hub-btn-prog-detail">
-                <span>Lihat Silabus &amp; Jadwal Lengkap</span>
-                <span aria-hidden="true">&rarr;</span>
-              </a>
-              <a href="<?= e($prog_wa_url) ?>" class="hub-btn-prog-wa" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
-                <span>Konsultasi WA</span>
-              </a>
+              <h3 class="hub-prog-title">
+                <a href="<?= e($prog_url) ?>"><?= e($prog['name']) ?></a>
+              </h3>
+
+              <p class="hub-prog-desc"><?= e($prog['desc']) ?></p>
+
+              <ul class="hub-prog-checklist">
+                <li>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>Lisensi &amp; SKP Resmi <?= e($prog['cert']) ?></span>
+                </li>
+                <?php if (!empty($prog['target_peserta'])): ?>
+                <li>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="7" r="4"/><path d="M5.5 21a6.5 6.5 0 0 1 13 0"/></svg>
+                  <span>Sasaran: <?= e($prog['target_peserta']) ?></span>
+                </li>
+                <?php endif; ?>
+                <li>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>
+                  <span>Fasilitas Modul, Ujian Kompetensi &amp; E-Certificate</span>
+                </li>
+              </ul>
+
+              <div class="hub-prog-card-footer">
+                <a href="<?= e($prog_url) ?>" class="hub-btn-prog-primary">
+                  <span>Silabus &amp; Jadwal</span>
+                  <span aria-hidden="true">&rarr;</span>
+                </a>
+                <a href="<?= e($prog_wa_url) ?>" class="hub-btn-prog-wa-icon" target="_blank" rel="noopener" title="Konsultasi WhatsApp">
+                  <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
+                  <span>Chat WA</span>
+                </a>
+              </div>
             </div>
           </article>
           <?php endforeach; ?>
@@ -283,7 +292,7 @@ $HUB_DIRECTORY_MESH = [
       </section>
       <?php endif; ?>
 
-      <!-- SECTION: PERBANDINGAN LEVEL (JIKA ADA) -->
+      <!-- SECTION: PERBANDINGAN LEVEL (MODERN CARDS) -->
       <?php if (!empty($hub_data['comparison'])): ?>
       <section class="hub-card-section">
         <div class="hub-sec-header">
@@ -292,26 +301,48 @@ $HUB_DIRECTORY_MESH = [
             Panduan Kualifikasi
           </span>
           <h2 class="hub-sec-title">Perbandingan Jenjang &amp; Kewenangan</h2>
+          <p style="font-size:14px;color:var(--hub-muted);margin:4px 0 0;">Pahami perbedaan peran, lingkup kerja, dan persyaratan pendidikan sebelum mendaftar.</p>
         </div>
-        <div class="hub-table-wrap">
-          <table class="hub-table">
-            <thead>
-              <tr>
-                <?php foreach ($hub_data['comparison']['headers'] as $th): ?>
-                <th><?= e($th) ?></th>
-                <?php endforeach; ?>
-              </tr>
-            </thead>
-            <tbody>
-              <?php foreach ($hub_data['comparison']['rows'] as $row): ?>
-              <tr>
-                <?php foreach ($row as $cell): ?>
-                <td><?= e($cell) ?></td>
-                <?php endforeach; ?>
-              </tr>
-              <?php endforeach; ?>
-            </tbody>
-          </table>
+
+        <div class="hub-compare-grid">
+          <?php 
+          $headers = $hub_data['comparison']['headers'] ?? [];
+          $col1_title = $headers[1] ?? 'Jenjang 1';
+          $col2_title = $headers[2] ?? 'Jenjang 2';
+          ?>
+          <!-- Card 1 -->
+          <div class="hub-compare-card">
+            <span class="hub-compare-badge">Pelaksana Lapangan</span>
+            <h3><?= e($col1_title) ?></h3>
+            <?php foreach ($hub_data['comparison']['rows'] as $row): ?>
+            <div class="hub-compare-row">
+              <span class="hub-compare-label"><?= e($row[0] ?? '') ?></span>
+              <span class="hub-compare-val"><?= e($row[1] ?? '') ?></span>
+            </div>
+            <?php endforeach; ?>
+            <div style="margin-top:20px;">
+              <a href="<?= e($hero_wa_url) ?>" class="hub-btn-prog-primary" style="width:100%;text-align:center;" target="_blank" rel="noopener">
+                <span>Daftar <?= e($col1_title) ?> &rarr;</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="hub-compare-card featured">
+            <span class="hub-compare-badge" style="background:#fef3c7;color:#92400e;">Penanggung Jawab / Ahli</span>
+            <h3><?= e($col2_title) ?></h3>
+            <?php foreach ($hub_data['comparison']['rows'] as $row): ?>
+            <div class="hub-compare-row">
+              <span class="hub-compare-label"><?= e($row[0] ?? '') ?></span>
+              <span class="hub-compare-val"><?= e($row[2] ?? '') ?></span>
+            </div>
+            <?php endforeach; ?>
+            <div style="margin-top:20px;">
+              <a href="<?= e($hero_wa_url) ?>" class="hub-btn-prog-primary" style="width:100%;text-align:center;background:#C6621C;" target="_blank" rel="noopener">
+                <span>Daftar <?= e($col2_title) ?> &rarr;</span>
+              </a>
+            </div>
+          </div>
         </div>
       </section>
       <?php endif; ?>
