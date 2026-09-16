@@ -2,7 +2,7 @@
 // Kebijakan Privasi — standalone, zero-DB (same self-contained pattern as the
 // other marketing pages). Indexable. Required for Google Ads transparency.
 $year   = date('Y');
-$wa      = '6281235036420';
+$wa      = '6287759151278';
 $email   = 'info@wahanatotalita.com';
 $gtm_id  = 'GTM-MMZHD3HN';
 ?><?php
@@ -81,7 +81,7 @@ require __DIR__ . '/includes/head.php';
   <h2>7. Hubungi Kami</h2>
   <p>Untuk pertanyaan atau permintaan terkait data pribadi Anda, hubungi:</p>
   <ul>
-    <li>WhatsApp: <a href="https://wa.me/<?=$wa?>">0812-3503-6420</a></li>
+    <li>WhatsApp: <a href="https://wa.me/<?=$wa?>">0877-5915-1278</a></li>
     <li>Email: <a href="mailto:<?=$email?>"><?=$email?></a></li>
     <li>Alamat: Yogyakarta, Indonesia</li>
   </ul>

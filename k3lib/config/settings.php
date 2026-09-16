@@ -1,10 +1,10 @@
 <?php
 // Shared constants — kept in sync with the main site's tracking setup
-// (CLAUDE.md: GTM-MMZHD3HN, WA 628122969435).
+// (CLAUDE.md: GTM-MMZHD3HN, WA 6287759151278).
 return [
     'canonical_base' => 'https://wahanatotalita.com',
     'hub_path'       => '/k3',
-    'wa_number'      => '628122969435',
+    'wa_number'      => '6287759151278',
     'gtm_id'         => 'GTM-MMZHD3HN',
     'org_name'       => 'Wahana Totalita Konsultan',
     // Real main-site program URL pattern (CLAUDE.md: pelatihan.php → /pelatihan/{slug}/)

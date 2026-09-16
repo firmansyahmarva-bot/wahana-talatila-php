@@ -22,7 +22,7 @@ require_once __DIR__ . '/includes/hub-category-map.php';
 
 $categories = get_categories();
 $s          = get_all_settings();
-$wa_number  = $s['wa_number'] ?? '628122969435';
+$wa_number  = $s['wa_number'] ?? '6287759151278';
 
 $meta_title = 'Katalog Pelatihan K3 — Semua Program Sertifikasi Kemnaker RI & BNSP | Wahana Totalita';
 $meta_desc  = 'Katalog lengkap pelatihan K3 Wahana Totalita: konstruksi, pertambangan, migas, lingkungan, ISO, dan puluhan program lain. Sertifikasi Kemnaker RI & BNSP. Yogyakarta & in-house.';

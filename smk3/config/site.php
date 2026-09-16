@@ -21,7 +21,7 @@ return [
   'org_country'=> 'ID',
 
   // Contact & CTA
-  'wa_number'    => '6281235036420',            // digits only, for wa.me link
+  'wa_number'    => '6287759151278',            // digits only, for wa.me link
   'wa_display'   => '+62 812-3503-6420',
   'wa_prefill'   => 'Halo, saya ingin konsultasi mengenai SMK3 untuk perusahaan kami.',
   'email'        => 'info@wahanatotalita.com',

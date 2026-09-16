@@ -7,7 +7,7 @@ $s = get_all_settings();
  * queries currently being captured by a third-party tag page (bnsp.net).
  * Zero DB dependency, modeled on perpanjangan-skp.php.
  */
-$wa_number = '628122969435';
+$wa_number = '6287759151278';
 $wa_konsul = rawurlencode('Halo, saya ingin konsultasi sertifikasi BNSP di Wahana Totalita');
 $wa_konsul_url = "https://wa.me/{$wa_number}?text={$wa_konsul}";
 $year = date('Y');
@@ -46,7 +46,7 @@ $faqs = [
 ?>
 <?php
 $page_title = 'Sertifikasi & Uji Kompetensi BNSP di Wahana Totalita Konsultan Yogyakarta';
-$meta_desc = 'Lembaga pelatihan K3 resmi bersertifikat BNSP dan Kemnaker RI. Uji kompetensi dan sertifikasi K3 di Yogyakarta sejak 2006. Konsultasi gratis 0812-2969-435.';
+$meta_desc = 'Lembaga pelatihan K3 resmi bersertifikat BNSP dan Kemnaker RI. Uji kompetensi dan sertifikasi K3 di Yogyakarta sejak 2006. Konsultasi gratis 0877-5915-1278.';
 require __DIR__ . '/includes/head.php';
 ?>
 <script type="application/ld+json">
@@ -57,7 +57,7 @@ require __DIR__ . '/includes/head.php';
   "alternateName": "Wahana Totalita",
   "description": "Lembaga pelatihan dan uji kompetensi K3 bersertifikat BNSP dan terdaftar Kemnaker RI di Yogyakarta sejak 2006.",
   "url": "https://wahanatotalita.com/sertifikasi-bnsp/",
-  "telephone": "+628122969435",
+  "telephone": "+6287759151278",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Jl. Wonosari KM 8.5",
@@ -185,11 +185,22 @@ h2.section-title{font-size:1.6rem;font-weight:800;color:#111827;margin-bottom:8p
   <h2 class="section-title">Skema Sertifikasi yang Kami Selenggarakan</h2>
   <p class="section-subtitle">Pilih skema sesuai kebutuhan kompetensi K3 Anda</p>
   <div class="scheme-grid">
-    <?php foreach ($skemas as $sk): ?>
+    <?php foreach ($skemas as $sk): 
+      $img = training_img_url('', 'k3', $sk['slug']);
+      $wa_link = "https://wa.me/{$wa_number}?text=" . rawurlencode('Halo Wahana Totalita, saya ingin informasi pelatihan ' . $sk['name']);
+    ?>
     <div class="scheme-card">
-      <span class="scheme-cert"><?= htmlspecialchars($sk['cert']) ?></span>
-      <h3><a href="/pelatihan/<?= htmlspecialchars($sk['slug']) ?>/"><?= htmlspecialchars($sk['name']) ?></a></h3>
-      <a href="/pelatihan/<?= htmlspecialchars($sk['slug']) ?>/" class="scheme-link">Lihat Program &rarr;</a>
+      <div class="scheme-card-media">
+        <img src="<?= htmlspecialchars($img) ?>" alt="<?= htmlspecialchars($sk['name']) ?>" loading="lazy" width="360" height="170">
+        <span class="scheme-cert"><?= htmlspecialchars($sk['cert']) ?></span>
+      </div>
+      <div class="scheme-card-body">
+        <h3><a href="/pelatihan/<?= htmlspecialchars($sk['slug']) ?>/"><?= htmlspecialchars($sk['name']) ?></a></h3>
+        <div class="scheme-actions">
+          <a href="/pelatihan/<?= htmlspecialchars($sk['slug']) ?>/" class="scheme-link">Silabus &amp; Jadwal &rarr;</a>
+          <a href="<?= $wa_link ?>" class="scheme-btn-wa" target="_blank" rel="noopener">Chat WA</a>
+        </div>
+      </div>
     </div>
     <?php endforeach; ?>
   </div>

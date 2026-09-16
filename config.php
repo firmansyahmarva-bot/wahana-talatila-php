@@ -244,7 +244,7 @@ function get_training_by_slug(string $slug): ?array {
     } catch (Exception) { return null; }
 }
 function wa_url(string $message = '', ?string $phoneNumber = null): string {
-    $number = preg_replace('/\D/', '', $phoneNumber ?? get_setting('wa_number', '6281235036420'));
+    $number = preg_replace('/\D/', '', $phoneNumber ?? get_setting('wa_number', '6287759151278'));
     return 'https://wa.me/' . $number . ($message ? '?text=' . rawurlencode($message) : '');
 }
 function training_img_url(?string $path, string $cat_slug = '', string $seed = ''): string {

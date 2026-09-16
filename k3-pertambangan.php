@@ -14,7 +14,7 @@ $s = get_all_settings();
  * instead of a fabricated slug (same gap-handling precedent as
  * k3-ketinggian.php / k3-konstruksi.php).
  */
-$wa_number = '628122969435';
+$wa_number = '6287759151278';
 $wa_msg = rawurlencode('Halo, saya ingin mendaftar pelatihan K3 Pertambangan (POP/POM/POU). Mohon info jadwal dan biaya?');
 $wa_url = "https://wa.me/{$wa_number}?text={$wa_msg}";
 $year = date('Y');
@@ -115,7 +115,7 @@ $faqs = [
 ?>
 <?php
 $page_title = 'Pelatihan K3 Pertambangan (POP, POM, POU & Juru Ledak) — Sertifikasi BNSP';
-$meta_desc = 'Pelatihan K3 Pertambangan bersertifikat BNSP. Program POP, POM, POU, dan Juru Ledak sesuai Kepmen ESDM 1827/2018. Wajib untuk industri tambang. Yogyakarta & in-house. 0812-2969-435.';
+$meta_desc = 'Pelatihan K3 Pertambangan bersertifikat BNSP. Program POP, POM, POU, dan Juru Ledak sesuai Kepmen ESDM 1827/2018. Wajib untuk industri tambang. Yogyakarta & in-house. 0877-5915-1278.';
 require __DIR__ . '/includes/head.php';
 ?>
 <script type="application/ld+json">
@@ -143,7 +143,7 @@ echo json_encode([
   "@type": "Organization",
   "name": "Wahana Totalita Konsultan",
   "url": "https://wahanatotalita.com",
-  "telephone": "+628122969435",
+  "telephone": "+6287759151278",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Jl. Wonosari KM 8.5",
@@ -320,11 +320,22 @@ echo json_encode([
 <div class="container">
   <h2 class="section-title">Program Pelatihan K3 Pertambangan Kami</h2>
   <div class="scheme-grid">
-    <?php foreach ($skemas as $sk): ?>
+    <?php foreach ($skemas as $sk): 
+      $img = training_img_url('', 'k3', $sk['slug']);
+      $wa_link = "https://wa.me/{$wa_number}?text=" . rawurlencode('Halo Wahana Totalita, saya ingin informasi pelatihan ' . $sk['name']);
+    ?>
     <div class="scheme-card">
-      <span class="scheme-cert"><?= htmlspecialchars($sk['cert']) ?></span>
-      <h3><a href="/pelatihan/<?= htmlspecialchars($sk['slug']) ?>/"><?= htmlspecialchars($sk['name']) ?></a></h3>
-      <a href="/pelatihan/<?= htmlspecialchars($sk['slug']) ?>/" class="scheme-link">Lihat Program &rarr;</a>
+      <div class="scheme-card-media">
+        <img src="<?= htmlspecialchars($img) ?>" alt="<?= htmlspecialchars($sk['name']) ?>" loading="lazy" width="360" height="170">
+        <span class="scheme-cert"><?= htmlspecialchars($sk['cert']) ?></span>
+      </div>
+      <div class="scheme-card-body">
+        <h3><a href="/pelatihan/<?= htmlspecialchars($sk['slug']) ?>/"><?= htmlspecialchars($sk['name']) ?></a></h3>
+        <div class="scheme-actions">
+          <a href="/pelatihan/<?= htmlspecialchars($sk['slug']) ?>/" class="scheme-link">Silabus &amp; Jadwal &rarr;</a>
+          <a href="<?= $wa_link ?>" class="scheme-btn-wa" target="_blank" rel="noopener">Chat WA</a>
+        </div>
+      </div>
     </div>
     <?php endforeach; ?>
   </div>

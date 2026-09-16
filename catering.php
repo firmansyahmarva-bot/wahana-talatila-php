@@ -57,7 +57,7 @@ $schema = [
     '@type'    => 'Organization',
     'name'     => 'Wahana Totalita Konsultan',
     'url'      => 'https://wahanatotalita.com',
-    'telephone'=> '+628122969435',
+    'telephone'=> '+6287759151278',
     'address'  => ['@type'=>'PostalAddress','addressLocality'=>'Yogyakarta','addressRegion'=>'DI Yogyakarta','addressCountry'=>'ID'],
   ],
 ];
@@ -103,7 +103,7 @@ $schema = [
       <span style="background:rgba(255,255,255,0.18);padding:6px 14px;border-radius:20px;font-size:0.85rem;">✓ Pengadaan Langsung &lt; Rp 200 juta</span>
       <span style="background:rgba(255,255,255,0.18);padding:6px 14px;border-radius:20px;font-size:0.85rem;">✓ Min. 20 box</span>
     </div>
-    <a href="https://wa.me/628122969435?text=Halo%2C+saya+ingin+info+jasa+catering+untuk+kegiatan+instansi+kami+di+Yogyakarta.+Mohon+kirim+harga+dan+menu."
+    <a href="https://wa.me/6287759151278?text=Halo%2C+saya+ingin+info+jasa+catering+untuk+kegiatan+instansi+kami+di+Yogyakarta.+Mohon+kirim+harga+dan+menu."
        target="_blank" rel="noopener"
        style="display:inline-block;background:#fff;color:#0A4A2E;padding:14px 32px;border-radius:6px;font-weight:700;text-decoration:none;font-size:1rem;">
       Minta Penawaran Harga
@@ -275,10 +275,10 @@ $schema = [
       Hubungi kami sekarang untuk penawaran harga dan RAB resmi yang dapat langsung digunakan untuk pengajuan anggaran.
     </p>
     <p style="opacity:0.75;font-size:0.9rem;margin:0 0 24px;">Respon penawaran dalam 2 jam kerja · Dokumen SPJ lengkap</p>
-    <a href="https://wa.me/628122969435?text=Halo%2C+saya+ingin+pesan+catering+untuk+kegiatan+instansi+kami.+Mohon+kirim+menu+dan+harga+beserta+info+pengadaan+LPSE."
+    <a href="https://wa.me/6287759151278?text=Halo%2C+saya+ingin+pesan+catering+untuk+kegiatan+instansi+kami.+Mohon+kirim+menu+dan+harga+beserta+info+pengadaan+LPSE."
        target="_blank" rel="noopener"
        style="display:inline-block;background:#fff;color:#0A4A2E;padding:14px 36px;border-radius:6px;font-weight:700;text-decoration:none;font-size:1.05rem;">
-      WhatsApp: 0812-2969-435
+      WhatsApp: 0877-5915-1278
     </a>
   </section>
 

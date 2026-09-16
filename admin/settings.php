@@ -197,7 +197,7 @@ textarea.form-input{resize:vertical;min-height:80px}
               <?php endif; ?>
               <?php if ($key==='gtm_id'): ?><div class="form-text">Contoh: GTM-XXXXXXX</div><?php endif; ?>
               <?php if ($key==='ga_measurement_id'): ?><div class="form-text">Contoh: G-XXXXXXXXXX</div><?php endif; ?>
-              <?php if ($key==='wa_number'): ?><div class="form-text">Tanpa tanda + dan tanpa strip. Contoh: 6281235036420</div><?php endif; ?>
+              <?php if ($key==='wa_number'): ?><div class="form-text">Tanpa tanda + dan tanpa strip. Contoh: 6287759151278</div><?php endif; ?>
             </div>
             <?php endforeach; ?>
           </div>

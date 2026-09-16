@@ -33,7 +33,7 @@ if (empty($message) || mb_strlen($message) > 500) {
     http_response_code(400); echo json_encode(['error' => 'Pesan tidak valid.']); exit;
 }
 
-$wa_number = get_setting('wa_number', '628122969435');
+$wa_number = get_setting('wa_number', '6287759151278');
 
 // ── Load all trainings ─────────────────────────────────────
 $trainings = [];

@@ -4,7 +4,7 @@ $s = get_all_settings();
 // Hub: Paket Wisata Karyawan & Instansi
 $canonical = 'https://wahanatotalita.com/wisata-karyawan/';
 $meta_title = 'Paket Wisata Karyawan & Instansi Yogyakarta — BUMN, Dinas & Korporasi | Wahana Totalita';
-$meta_desc  = 'Paket wisata tahunan karyawan untuk instansi pemerintah, BUMN, dan korporasi. Yogyakarta & destinasi seluruh Indonesia. Terdaftar LPSE & PADI UMKM. Hubungi: 0812-2969-435.';
+$meta_desc  = 'Paket wisata tahunan karyawan untuk instansi pemerintah, BUMN, dan korporasi. Yogyakarta & destinasi seluruh Indonesia. Terdaftar LPSE & PADI UMKM. Hubungi: 0877-5915-1278.';
 
 $schema = [
   [
@@ -57,7 +57,7 @@ $schema = [
     '@type'    => 'Organization',
     'name'     => 'Wahana Totalita Konsultan',
     'url'      => 'https://wahanatotalita.com',
-    'telephone'=> '+628122969435',
+    'telephone'=> '+6287759151278',
     'address'  => [
       '@type'           => 'PostalAddress',
       'addressLocality' => 'Yogyakarta',
@@ -107,7 +107,7 @@ $schema = [
     <p style="font-size:0.92rem;opacity:0.8;margin:0 0 28px;">
       ✅ Terdaftar LPSE &amp; PADI UMKM &nbsp;|&nbsp; ✅ Pengadaan langsung &lt; Rp 200 juta &nbsp;|&nbsp; ✅ Dipercaya 70+ instansi sejak 2012
     </p>
-    <a href="https://wa.me/628122969435?text=Halo%2C+saya+ingin+info+paket+wisata+karyawan+untuk+instansi%2Fperusahaan+kami.+Mohon+kirimkan+proposal+dan+penawaran+harga."
+    <a href="https://wa.me/6287759151278?text=Halo%2C+saya+ingin+info+paket+wisata+karyawan+untuk+instansi%2Fperusahaan+kami.+Mohon+kirimkan+proposal+dan+penawaran+harga."
        target="_blank" rel="noopener"
        style="display:inline-block;background:#C6621C;color:#fff;padding:14px 32px;border-radius:6px;font-weight:700;text-decoration:none;font-size:1rem;">
       Minta Proposal Wisata Karyawan
@@ -209,7 +209,7 @@ $schema = [
           <div style="font-size:0.82rem;color:#0A4A2E;font-style:italic;border-top:1px solid #eee;padding-top:8px;"><?php echo $p['note']; ?></div>
         </div>
         <div style="padding:0 16px 14px;background:#fff;">
-          <a href="https://wa.me/628122969435?text=Halo%2C+saya+ingin+info+paket+wisata+<?php echo urlencode(strip_tags($p['title'])); ?>+untuk+karyawan+kami."
+          <a href="https://wa.me/6287759151278?text=Halo%2C+saya+ingin+info+paket+wisata+<?php echo urlencode(strip_tags($p['title'])); ?>+untuk+karyawan+kami."
              target="_blank" rel="noopener"
              style="display:block;text-align:center;background:#C6621C;color:#fff;padding:9px;border-radius:5px;text-decoration:none;font-weight:600;font-size:0.88rem;">
             Tanya Harga Paket Ini
@@ -277,7 +277,7 @@ $schema = [
          style="display:inline-block;background:#0A4A2E;color:#fff;padding:11px 24px;border-radius:6px;font-weight:600;text-decoration:none;font-size:0.9rem;margin-right:12px;">
         Lihat Program Outbound Training
       </a>
-      <a href="https://wa.me/628122969435?text=Halo%2C+saya+ingin+konsultasi+paket+kombinasi+wisata+dan+outbound+training+untuk+karyawan+kami."
+      <a href="https://wa.me/6287759151278?text=Halo%2C+saya+ingin+konsultasi+paket+kombinasi+wisata+dan+outbound+training+untuk+karyawan+kami."
          target="_blank" rel="noopener"
          style="display:inline-block;background:#C6621C;color:#fff;padding:11px 24px;border-radius:6px;font-weight:600;text-decoration:none;font-size:0.9rem;">
         Konsultasi Paket Combo
@@ -405,10 +405,10 @@ $schema = [
     <p style="opacity:0.9;margin:0 0 28px;line-height:1.7;max-width:600px;margin-left:auto;margin-right:auto;">
       Ceritakan jumlah peserta, destinasi, dan anggaran Anda — kami kirimkan proposal dan itinerary lengkap dalam 1×24 jam kerja.
     </p>
-    <a href="https://wa.me/628122969435?text=Halo%2C+saya+ingin+konsultasi+paket+wisata+karyawan+untuk+instansi%2Fperusahaan+kami.+Mohon+kirimkan+proposal."
+    <a href="https://wa.me/6287759151278?text=Halo%2C+saya+ingin+konsultasi+paket+wisata+karyawan+untuk+instansi%2Fperusahaan+kami.+Mohon+kirimkan+proposal."
        target="_blank" rel="noopener"
        style="display:inline-block;background:#C6621C;color:#fff;padding:14px 36px;border-radius:6px;font-weight:700;text-decoration:none;font-size:1.05rem;margin-right:12px;">
-      WhatsApp: 0812-2969-435
+      WhatsApp: 0877-5915-1278
     </a>
     <a href="/outbound/"
        style="display:inline-block;background:transparent;color:#fff;padding:14px 28px;border-radius:6px;font-weight:600;text-decoration:none;font-size:1rem;border:2px solid rgba(255,255,255,0.6);margin-top:10px;">

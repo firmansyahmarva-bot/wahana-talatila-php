@@ -364,7 +364,7 @@ footer-note{display:block;text-align:center;margin:24px 0 0;font-size:14px;color
 <!-- NOTICE -->
 <div class="notice-bar">
   <div class="container">
-    ℹ️ Jadwal dapat berubah sewaktu-waktu. Konfirmasi via WhatsApp: <a href="<?=$wa_link?>" target="_blank" rel="noopener">0812-3503-6420</a>
+    ℹ️ Jadwal dapat berubah sewaktu-waktu. Konfirmasi via WhatsApp: <a href="<?=$wa_link?>" target="_blank" rel="noopener">0877-5915-1278</a>
   </div>
 </div>
 

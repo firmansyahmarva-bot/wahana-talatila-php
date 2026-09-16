@@ -152,7 +152,7 @@
         hideTyping();
         isLoading = false;
         addBotMessage('Koneksi bermasalah. Silakan hubungi kami via WhatsApp.', [],
-          'https://wa.me/' + (window.wtcWA || '6281235036420'));
+          'https://wa.me/' + (window.wtcWA || '6287759151278'));
       });
   }
 

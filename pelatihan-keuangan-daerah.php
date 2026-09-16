@@ -57,7 +57,7 @@ $schema = [
     '@type'    => 'Organization',
     'name'     => 'Wahana Totalita Konsultan',
     'url'      => 'https://wahanatotalita.com',
-    'telephone'=> '+628122969435',
+    'telephone'=> '+6287759151278',
     'address'  => ['@type'=>'PostalAddress','addressLocality'=>'Yogyakarta','addressRegion'=>'DI Yogyakarta','addressCountry'=>'ID'],
   ],
 ];
@@ -104,7 +104,7 @@ $schema = [
       <span style="background:rgba(255,255,255,0.16);padding:6px 14px;border-radius:20px;font-size:0.85rem;">✓ LPSE &amp; PADI Terdaftar</span>
       <span style="background:rgba(255,255,255,0.16);padding:6px 14px;border-radius:20px;font-size:0.85rem;">✓ Instruktur berpengalaman</span>
     </div>
-    <a href="https://wa.me/628122969435?text=Halo%2C+saya+ingin+info+pelatihan+keuangan+daerah+dan+akuntansi+pemerintahan+untuk+instansi+kami+di+Yogyakarta."
+    <a href="https://wa.me/6287759151278?text=Halo%2C+saya+ingin+info+pelatihan+keuangan+daerah+dan+akuntansi+pemerintahan+untuk+instansi+kami+di+Yogyakarta."
        target="_blank" rel="noopener"
        style="display:inline-block;background:#C6621C;color:#fff;padding:14px 32px;border-radius:6px;font-weight:700;text-decoration:none;font-size:1rem;">
       Konsultasi Program Pelatihan
@@ -186,7 +186,7 @@ $schema = [
         <div style="font-weight:700;color:#0A4A2E;margin-bottom:6px;font-size:0.93rem;"><?php echo $p[0]; ?></div>
         <div style="font-size:0.82rem;color:#C6621C;font-weight:600;margin-bottom:6px;"><?php echo $p[1]; ?></div>
         <div style="font-size:0.83rem;color:#666;margin-bottom:14px;line-height:1.5;"><?php echo $p[2]; ?></div>
-        <a href="https://wa.me/628122969435?text=Halo%2C+saya+tertarik+pelatihan+<?php echo urlencode($p[0]); ?>+untuk+instansi+kami.+Mohon+info+jadwal+dan+harga."
+        <a href="https://wa.me/6287759151278?text=Halo%2C+saya+tertarik+pelatihan+<?php echo urlencode($p[0]); ?>+untuk+instansi+kami.+Mohon+info+jadwal+dan+harga."
            target="_blank" rel="noopener"
            style="display:inline-block;background:#0A4A2E;color:#fff;padding:7px 16px;border-radius:4px;text-decoration:none;font-size:0.82rem;font-weight:600;">
           Tanya via WhatsApp →
@@ -330,10 +330,10 @@ $schema = [
       Hubungi kami untuk mendapatkan proposal pelatihan keuangan daerah yang disesuaikan dengan kebutuhan dan anggaran instansi Anda — dilengkapi dokumen pengadaan langsung yang siap digunakan.
     </p>
     <p style="opacity:0.75;font-size:0.9rem;margin:0 0 24px;">LPSE &amp; PADI terdaftar · Pengadaan langsung &lt; Rp 200 juta · Dokumen SPJ lengkap</p>
-    <a href="https://wa.me/628122969435?text=Halo%2C+saya+ingin+proposal+pelatihan+keuangan+daerah+untuk+instansi+kami.+Mohon+info+program+dan+harga."
+    <a href="https://wa.me/6287759151278?text=Halo%2C+saya+ingin+proposal+pelatihan+keuangan+daerah+untuk+instansi+kami.+Mohon+info+program+dan+harga."
        target="_blank" rel="noopener"
        style="display:inline-block;background:#C6621C;color:#fff;padding:14px 36px;border-radius:6px;font-weight:700;text-decoration:none;font-size:1.05rem;">
-      WhatsApp: 0812-2969-435
+      WhatsApp: 0877-5915-1278
     </a>
   </section>
 

@@ -4,7 +4,7 @@ $s = get_all_settings();
 // Hub: Pelatihan Selam & Scuba Diving
 $canonical = 'https://wahanatotalita.com/selam/';
 $meta_title = 'Pelatihan Selam & Scuba Diving — CMAS, NAUI & Commercial Diving | Wahana Totalita';
-$meta_desc  = 'Pelatihan selam profesional dan rekreasional: CMAS, NAUI, Scientific Diving, Commercial Diving. Untuk oil & gas, penyelamatan, riset bawah laut. Yogyakarta. Hubungi: 0812-2969-435.';
+$meta_desc  = 'Pelatihan selam profesional dan rekreasional: CMAS, NAUI, Scientific Diving, Commercial Diving. Untuk oil & gas, penyelamatan, riset bawah laut. Yogyakarta. Hubungi: 0877-5915-1278.';
 
 $schema = [
   [
@@ -57,7 +57,7 @@ $schema = [
     '@type'    => 'Organization',
     'name'     => 'Wahana Totalita Konsultan',
     'url'      => 'https://wahanatotalita.com',
-    'telephone'=> '+628122969435',
+    'telephone'=> '+6287759151278',
     'address'  => [
       '@type'           => 'PostalAddress',
       'addressLocality' => 'Yogyakarta',
@@ -104,7 +104,7 @@ $schema = [
     <p style="font-size:1.1rem;opacity:0.92;max-width:720px;margin:0 0 28px;line-height:1.7;">
       Dari selam rekreasional hingga commercial diving untuk industri oil &amp; gas, maritim, dan riset kelautan. Wahana Totalita menyediakan pelatihan selam bersertifikat internasional dengan instruktur berpengalaman dan standar keselamatan tertinggi.
     </p>
-    <a href="https://wa.me/628122969435?text=Halo%2C+saya+ingin+info+program+pelatihan+selam+(CMAS%2FNAUI%2FCommercial+Diving).+Mohon+info+jadwal+dan+biaya."
+    <a href="https://wa.me/6287759151278?text=Halo%2C+saya+ingin+info+program+pelatihan+selam+(CMAS%2FNAUI%2FCommercial+Diving).+Mohon+info+jadwal+dan+biaya."
        target="_blank" rel="noopener"
        style="display:inline-block;background:#C6621C;color:#fff;padding:14px 32px;border-radius:6px;font-weight:700;text-decoration:none;font-size:1rem;">
       Tanya Info Pelatihan Selam
@@ -325,7 +325,7 @@ $schema = [
           <div style="font-size:0.85rem;color:#555;">⏱️ Durasi: <strong><?php echo $p[2]; ?></strong></div>
         </div>
         <div style="padding:0 16px 16px;">
-          <a href="https://wa.me/628122969435?text=<?php echo $wa; ?>"
+          <a href="https://wa.me/6287759151278?text=<?php echo $wa; ?>"
              target="_blank" rel="noopener"
              style="display:block;text-align:center;background:#C6621C;color:#fff;padding:10px;border-radius:5px;text-decoration:none;font-weight:600;font-size:0.9rem;">
             Tanya Jadwal &amp; Harga
@@ -417,10 +417,10 @@ $schema = [
     <p style="opacity:0.9;margin:0 0 28px;line-height:1.7;max-width:600px;margin-left:auto;margin-right:auto;">
       Dari CMAS Open Water hingga Commercial Diving — Wahana Totalita siap mendampingi dengan instruktur berpengalaman, standar keselamatan internasional, dan sertifikat yang diakui secara global.
     </p>
-    <a href="https://wa.me/628122969435?text=Halo%2C+saya+ingin+info+program+pelatihan+selam+di+Wahana+Totalita.+Mohon+info+jadwal+dan+biaya."
+    <a href="https://wa.me/6287759151278?text=Halo%2C+saya+ingin+info+program+pelatihan+selam+di+Wahana+Totalita.+Mohon+info+jadwal+dan+biaya."
        target="_blank" rel="noopener"
        style="display:inline-block;background:#C6621C;color:#fff;padding:14px 36px;border-radius:6px;font-weight:700;text-decoration:none;font-size:1.05rem;">
-      WhatsApp: 0812-2969-435
+      WhatsApp: 0877-5915-1278
     </a>
   </section>
 

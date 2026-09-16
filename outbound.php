@@ -4,7 +4,7 @@ $s = get_all_settings();
 // Hub: Outbound Training & Team Building
 $canonical = 'https://wahanatotalita.com/outbound/';
 $meta_title = 'Outbound Training & Team Building Yogyakarta — untuk Instansi & BUMN | Wahana Totalita';
-$meta_desc  = 'Outbound training dan team building profesional di Yogyakarta untuk instansi pemerintah, BUMN, dan korporasi. Program kepemimpinan, team cohesion, dan pengembangan SDM. Hubungi: 0812-2969-435.';
+$meta_desc  = 'Outbound training dan team building profesional di Yogyakarta untuk instansi pemerintah, BUMN, dan korporasi. Program kepemimpinan, team cohesion, dan pengembangan SDM. Hubungi: 0877-5915-1278.';
 
 $schema = [
   [
@@ -57,7 +57,7 @@ $schema = [
     '@type'    => 'Organization',
     'name'     => 'Wahana Totalita Konsultan',
     'url'      => 'https://wahanatotalita.com',
-    'telephone'=> '+628122969435',
+    'telephone'=> '+6287759151278',
     'address'  => [
       '@type'           => 'PostalAddress',
       'addressLocality' => 'Yogyakarta',
@@ -107,7 +107,7 @@ $schema = [
     <p style="font-size:0.92rem;opacity:0.8;margin:0 0 28px;">
       ✅ Terdaftar LPSE &amp; PADI UMKM &nbsp;|&nbsp; ✅ Pengadaan langsung &lt; Rp 200 juta &nbsp;|&nbsp; ✅ Dokumen administrasi lengkap
     </p>
-    <a href="https://wa.me/628122969435?text=Halo%2C+saya+ingin+konsultasi+program+outbound+training%2Fteam+building+untuk+instansi+kami.+Mohon+info+jadwal+dan+penawaran."
+    <a href="https://wa.me/6287759151278?text=Halo%2C+saya+ingin+konsultasi+program+outbound+training%2Fteam+building+untuk+instansi+kami.+Mohon+info+jadwal+dan+penawaran."
        target="_blank" rel="noopener"
        style="display:inline-block;background:#C6621C;color:#fff;padding:14px 32px;border-radius:6px;font-weight:700;text-decoration:none;font-size:1rem;">
       Minta Proposal &amp; Penawaran Harga
@@ -424,10 +424,10 @@ $schema = [
     <p style="opacity:0.9;margin:0 0 28px;line-height:1.7;max-width:600px;margin-left:auto;margin-right:auto;">
       Ceritakan kebutuhan Anda — jumlah peserta, tujuan, dan anggaran. Kami kirimkan proposal dan penawaran harga dalam 1×24 jam kerja.
     </p>
-    <a href="https://wa.me/628122969435?text=Halo%2C+saya+ingin+konsultasi+program+outbound+training%2Fteam+building+untuk+instansi%2Fperusahaan+kami.+Mohon+info+program+dan+penawaran+harga."
+    <a href="https://wa.me/6287759151278?text=Halo%2C+saya+ingin+konsultasi+program+outbound+training%2Fteam+building+untuk+instansi%2Fperusahaan+kami.+Mohon+info+program+dan+penawaran+harga."
        target="_blank" rel="noopener"
        style="display:inline-block;background:#C6621C;color:#fff;padding:14px 36px;border-radius:6px;font-weight:700;text-decoration:none;font-size:1.05rem;margin-right:12px;">
-      WhatsApp: 0812-2969-435
+      WhatsApp: 0877-5915-1278
     </a>
     <a href="/pelatihan/"
        style="display:inline-block;background:transparent;color:#fff;padding:14px 28px;border-radius:6px;font-weight:600;text-decoration:none;font-size:1rem;border:2px solid rgba(255,255,255,0.6);margin-top:10px;">

@@ -6,7 +6,7 @@
  *   "penyedia pelatihan K3 LPSE", "pengadaan pelatihan K3 Dinas"
  * Zero DB dependency. Sales WhatsApp number.
  */
-$wa_number = '628122969435';
+$wa_number = '6287759151278';
 $wa_tender = rawurlencode('Halo Wahana Totalita, kami dari instansi pemerintah/BUMN ingin berdiskusi mengenai pengadaan pelatihan K3. Mohon informasinya.');
 $wa_url    = "https://wa.me/{$wa_number}?text={$wa_tender}";
 $year = date('Y');
@@ -31,7 +31,7 @@ require __DIR__ . '/includes/head.php';
     "name": "Wahana Totalita Konsultan",
     "url": "https://wahanatotalita.com",
     "address": {"@type": "PostalAddress", "addressLocality": "Yogyakarta", "addressRegion": "DIY", "addressCountry": "ID"},
-    "telephone": "+628122969435"
+    "telephone": "+6287759151278"
   },
   "areaServed": {"@type": "AdministrativeArea", "name": "Daerah Istimewa Yogyakarta"},
   "description": "Penyedia jasa pelatihan K3 bersertifikasi BNSP & KEMNAKER RI untuk instansi pemerintah, Dinas, dan BUMN. Mendukung proses pengadaan langsung maupun melalui LPSE sesuai ketentuan yang berlaku."

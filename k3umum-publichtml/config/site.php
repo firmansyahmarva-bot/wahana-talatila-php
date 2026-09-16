@@ -19,7 +19,7 @@ return [
 
   // Contact & lead capture — verified LIVE on wahanatotalita.com homepage 2026-07-20
   // (differs from an older number recorded in project notes; live site wins)
-  'wa_number'  => '628122969435',
+  'wa_number'  => '6287759151278',
   'wa_display' => '+62 812-2969-435',
   'wa_prefill' => 'Halo, saya ingin tanya seputar Ahli K3 Umum.',
   'email'      => 'info@wahanatotalita.com',

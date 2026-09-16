@@ -57,7 +57,7 @@ $schema = [
     '@type'    => 'Organization',
     'name'     => 'Wahana Totalita Konsultan',
     'url'      => 'https://wahanatotalita.com',
-    'telephone'=> '+628122969435',
+    'telephone'=> '+6287759151278',
     'address'  => [
       '@type'           => 'PostalAddress',
       'addressLocality' => 'Yogyakarta',
@@ -107,7 +107,7 @@ $schema = [
     <p style="font-size:0.9rem;opacity:0.8;margin:0 0 28px;">
       Dasar hukum: Permenkes No. 66/2016 &nbsp;|&nbsp; UU No. 44/2009 &nbsp;|&nbsp; UU No. 1/1970 &nbsp;|&nbsp; PP No. 50/2012
     </p>
-    <a href="https://wa.me/628122969435?text=Halo%2C+saya+ingin+konsultasi+program+pelatihan+K3+Rumah+Sakit+(K3RS).+Mohon+info+program+dan+biaya."
+    <a href="https://wa.me/6287759151278?text=Halo%2C+saya+ingin+konsultasi+program+pelatihan+K3+Rumah+Sakit+(K3RS).+Mohon+info+program+dan+biaya."
        target="_blank" rel="noopener"
        style="display:inline-block;background:#C6621C;color:#fff;padding:14px 32px;border-radius:6px;font-weight:700;text-decoration:none;font-size:1rem;">
       Konsultasi Program K3RS
@@ -299,7 +299,7 @@ $schema = [
           $btn_label = $p[3];
           $btn_bg = '#0A4A2E';
         } else {
-          $btn_href = 'https://wa.me/628122969435?text=Halo%2C+saya+ingin+info+program+' . urlencode($p[0]) . '+untuk+fasilitas+kesehatan.';
+          $btn_href = 'https://wa.me/6287759151278?text=Halo%2C+saya+ingin+info+program+' . urlencode($p[0]) . '+untuk+fasilitas+kesehatan.';
           $btn_target = ' target="_blank" rel="noopener"';
           $btn_label = 'Tanya via WhatsApp';
           $btn_bg = '#C6621C';
@@ -379,10 +379,10 @@ $schema = [
     <p style="opacity:0.9;margin:0 0 28px;line-height:1.7;max-width:600px;margin-left:auto;margin-right:auto;">
       Dari pelatihan K3 untuk seluruh staf hingga pendampingan penyusunan program K3RS dan audit SMK3 — Wahana Totalita siap mendampingi fasilitas kesehatan Anda memenuhi seluruh kewajiban regulasi.
     </p>
-    <a href="https://wa.me/628122969435?text=Halo%2C+saya+ingin+konsultasi+program+K3+Rumah+Sakit+(K3RS)+untuk+fasilitas+kesehatan+kami."
+    <a href="https://wa.me/6287759151278?text=Halo%2C+saya+ingin+konsultasi+program+K3+Rumah+Sakit+(K3RS)+untuk+fasilitas+kesehatan+kami."
        target="_blank" rel="noopener"
        style="display:inline-block;background:#C6621C;color:#fff;padding:14px 36px;border-radius:6px;font-weight:700;text-decoration:none;font-size:1.05rem;">
-      WhatsApp: 0812-2969-435
+      WhatsApp: 0877-5915-1278
     </a>
   </section>
 

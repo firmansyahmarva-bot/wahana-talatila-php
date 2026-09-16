@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/config.php';
-$wa_number = preg_replace('/\D/', '', get_setting('wa_number', '628122969435'));
+$wa_number = preg_replace('/\D/', '', get_setting('wa_number', '6287759151278'));
 $year      = date('Y');
 $gtm_id    = 'GTM-MMZHD3HN';
 $wa_consult = "https://wa.me/{$wa_number}?text=" . rawurlencode('Halo, saya ingin konsultasi pendampingan CSMS dan program pelatihan K3');

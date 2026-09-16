@@ -57,7 +57,7 @@ $schema = [
     '@type'    => 'Organization',
     'name'     => 'Wahana Totalita Konsultan',
     'url'      => 'https://wahanatotalita.com',
-    'telephone'=> '+628122969435',
+    'telephone'=> '+6287759151278',
     'address'  => ['@type'=>'PostalAddress','addressLocality'=>'Yogyakarta','addressRegion'=>'DI Yogyakarta','addressCountry'=>'ID'],
   ],
 ];
@@ -103,7 +103,7 @@ $schema = [
       <span style="background:rgba(255,255,255,0.16);padding:6px 14px;border-radius:20px;font-size:0.85rem;">✓ Bintang 1–5 tersedia</span>
       <span style="background:rgba(255,255,255,0.16);padding:6px 14px;border-radius:20px;font-size:0.85rem;">✓ Paket all-in tersedia</span>
     </div>
-    <a href="https://wa.me/628122969435?text=Halo%2C+saya+ingin+info+jasa+akomodasi+dan+hotel+arrangement+untuk+kegiatan+dinas+instansi+kami+di+Yogyakarta."
+    <a href="https://wa.me/6287759151278?text=Halo%2C+saya+ingin+info+jasa+akomodasi+dan+hotel+arrangement+untuk+kegiatan+dinas+instansi+kami+di+Yogyakarta."
        target="_blank" rel="noopener"
        style="display:inline-block;background:#C6621C;color:#fff;padding:14px 32px;border-radius:6px;font-weight:700;text-decoration:none;font-size:1rem;">
       Minta Penawaran Hotel
@@ -262,10 +262,10 @@ $schema = [
       Hubungi kami sekarang — kami kirimkan pilihan hotel sesuai anggaran dan ketentuan SBM, lengkap dengan penawaran harga resmi yang siap digunakan untuk pengajuan anggaran.
     </p>
     <p style="opacity:0.75;font-size:0.9rem;margin:0 0 24px;">Respon penawaran dalam 2 jam kerja · Dokumen SPJ lengkap dari satu vendor</p>
-    <a href="https://wa.me/628122969435?text=Halo%2C+saya+ingin+info+akomodasi+hotel+untuk+kegiatan+dinas+instansi+kami+di+Yogyakarta.+Mohon+kirim+pilihan+dan+harga."
+    <a href="https://wa.me/6287759151278?text=Halo%2C+saya+ingin+info+akomodasi+hotel+untuk+kegiatan+dinas+instansi+kami+di+Yogyakarta.+Mohon+kirim+pilihan+dan+harga."
        target="_blank" rel="noopener"
        style="display:inline-block;background:#C6621C;color:#fff;padding:14px 36px;border-radius:6px;font-weight:700;text-decoration:none;font-size:1.05rem;">
-      WhatsApp: 0812-2969-435
+      WhatsApp: 0877-5915-1278
     </a>
   </section>
 

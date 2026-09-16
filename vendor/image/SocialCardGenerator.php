@@ -132,7 +132,7 @@ class SocialCardGenerator {
     ctx.fillStyle = 'rgba(255,255,255,0.6)';
     ctx.font = '<?= $isStory ? 40 : 30 ?>px "Arial", sans-serif';
     ctx.fillText('🌐 <?= self::SITE_URL ?>', 80, H - <?= $isStory ? 200 : 155 ?>);
-    ctx.fillText('📞 WA: 0812-3503-6420', 80, H - <?= $isStory ? 145 : 115 ?>);
+    ctx.fillText('📞 WA: 0877-5915-1278', 80, H - <?= $isStory ? 145 : 115 ?>);
 
     // Hashtags
     ctx.fillStyle = ACC;

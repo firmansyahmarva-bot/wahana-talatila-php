@@ -6,7 +6,7 @@ $s = get_all_settings();
  * SEO landing page targeting fresh-graduate queries about Ahli K3 Umum (AK3U).
  * Zero DB dependency, modeled on sertifikasi-bnsp.php.
  */
-$wa_number = '628122969435';
+$wa_number = '6287759151278';
 $wa_msg = rawurlencode('Halo, saya fresh graduate dan ingin tanya tentang pelatihan Ahli K3 Umum');
 $wa_url = "https://wa.me/{$wa_number}?text={$wa_msg}";
 $year = date('Y');
@@ -56,7 +56,7 @@ require __DIR__ . '/includes/head.php';
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   "name": "Wahana Totalita Konsultan",
-  "telephone": "+628122969435",
+  "telephone": "+6287759151278",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Jl. Wonosari KM 8.5",

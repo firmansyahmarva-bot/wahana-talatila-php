@@ -57,7 +57,7 @@ $schema = [
     '@type'    => 'Organization',
     'name'     => 'Wahana Totalita Konsultan',
     'url'      => 'https://wahanatotalita.com',
-    'telephone'=> '+628122969435',
+    'telephone'=> '+6287759151278',
     'address'  => [
       '@type'           => 'PostalAddress',
       'addressLocality' => 'Yogyakarta',
@@ -110,7 +110,7 @@ $schema = [
       <span style="background:rgba(255,255,255,0.15);padding:6px 14px;border-radius:20px;font-size:0.85rem;">✓ Sertifikat Resmi + Laporan</span>
       <span style="background:rgba(255,255,255,0.15);padding:6px 14px;border-radius:20px;font-size:0.85rem;">✓ Pengadaan Langsung &lt; Rp 200 juta</span>
     </div>
-    <a href="https://wa.me/628122969435?text=Halo%2C+saya+ingin+konsultasi+program+pelatihan+manajemen+dan+pengembangan+SDM+untuk+instansi+kami."
+    <a href="https://wa.me/6287759151278?text=Halo%2C+saya+ingin+konsultasi+program+pelatihan+manajemen+dan+pengembangan+SDM+untuk+instansi+kami."
        target="_blank" rel="noopener"
        style="display:inline-block;background:#C6621C;color:#fff;padding:14px 32px;border-radius:6px;font-weight:700;text-decoration:none;font-size:1rem;">
       Konsultasi Program Gratis
@@ -267,7 +267,7 @@ $schema = [
           <p style="color:#555;font-size:0.87rem;line-height:1.6;margin:0;"><?php echo $p[1]; ?></p>
         </div>
         <div style="padding:0 16px 16px;">
-          <a href="<?php echo 'https://wa.me/628122969435?text=Halo%2C+saya+ingin+info+program+' . urlencode($p[0]) . '+untuk+instansi+kami.+Mohon+kirim+proposal+dan+harga.'; ?>"
+          <a href="<?php echo 'https://wa.me/6287759151278?text=Halo%2C+saya+ingin+info+program+' . urlencode($p[0]) . '+untuk+instansi+kami.+Mohon+kirim+proposal+dan+harga.'; ?>"
              target="_blank" rel="noopener"
              style="display:block;text-align:center;background:#C6621C;color:#fff;padding:10px;border-radius:5px;text-decoration:none;font-weight:600;font-size:0.88rem;">
             Minta Proposal &amp; Harga
@@ -405,10 +405,10 @@ $schema = [
       Konsultasikan kebutuhan pelatihan instansi Anda. Kami bantu identifikasi gap kompetensi, susun proposal yang sesuai anggaran, dan pastikan proses SPJ berjalan lancar.
     </p>
     <p style="opacity:0.75;font-size:0.9rem;margin:0 0 24px;">Minimum 15 peserta untuk in-house · Respon proposal dalam 1 hari kerja</p>
-    <a href="https://wa.me/628122969435?text=Halo%2C+saya+ingin+konsultasi+program+pelatihan+manajemen+dan+pengembangan+SDM+untuk+instansi+kami.+Mohon+kirim+proposal."
+    <a href="https://wa.me/6287759151278?text=Halo%2C+saya+ingin+konsultasi+program+pelatihan+manajemen+dan+pengembangan+SDM+untuk+instansi+kami.+Mohon+kirim+proposal."
        target="_blank" rel="noopener"
        style="display:inline-block;background:#C6621C;color:#fff;padding:14px 36px;border-radius:6px;font-weight:700;text-decoration:none;font-size:1.05rem;">
-      WhatsApp: 0812-2969-435
+      WhatsApp: 0877-5915-1278
     </a>
   </section>
 

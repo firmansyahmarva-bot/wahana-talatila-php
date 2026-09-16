@@ -57,7 +57,7 @@ $schema = [
     '@type'    => 'Organization',
     'name'     => 'Wahana Totalita Konsultan',
     'url'      => 'https://wahanatotalita.com',
-    'telephone'=> '+628122969435',
+    'telephone'=> '+6287759151278',
     'address'  => [
       '@type'           => 'PostalAddress',
       'addressLocality' => 'Yogyakarta',
@@ -104,7 +104,7 @@ $schema = [
     <p style="font-size:1.1rem;opacity:0.92;max-width:700px;margin:0 0 28px;line-height:1.7;">
       Kantor bukan zona bebas risiko. Ergonomi buruk, kualitas udara dalam ruangan, bahaya kebakaran, dan psychosocial hazard memengaruhi produktivitas dan kesehatan ribuan pekerja kantoran setiap hari. Permenaker No. 5 Tahun 2018 dan UU 1/1970 berlaku untuk semua tempat kerja — termasuk kantor Anda.
     </p>
-    <a href="https://wa.me/628122969435?text=Halo%2C+saya+ingin+konsultasi+pelatihan+K3+Perkantoran+untuk+tim+kami.+Mohon+info+program+dan+biaya."
+    <a href="https://wa.me/6287759151278?text=Halo%2C+saya+ingin+konsultasi+pelatihan+K3+Perkantoran+untuk+tim+kami.+Mohon+info+program+dan+biaya."
        target="_blank" rel="noopener"
        style="display:inline-block;background:#C6621C;color:#fff;padding:14px 32px;border-radius:6px;font-weight:700;text-decoration:none;font-size:1rem;">
       Konsultasi Program K3 Kantor
@@ -313,7 +313,7 @@ $schema = [
       foreach ($certs as $c):
         $href = $c['slug']
           ? $c['slug']
-          : 'https://wa.me/628122969435?text=Halo%2C+saya+ingin+info+program+' . urlencode($c['title']) . '+untuk+kantor+kami.';
+          : 'https://wa.me/6287759151278?text=Halo%2C+saya+ingin+info+program+' . urlencode($c['title']) . '+untuk+kantor+kami.';
         $target = $c['slug'] ? '' : ' target="_blank" rel="noopener"';
         $btn_bg = $c['slug'] ? '#0A4A2E' : '#C6621C';
       ?>
@@ -391,10 +391,10 @@ $schema = [
     <p style="opacity:0.9;margin:0 0 28px;line-height:1.7;max-width:600px;margin-left:auto;margin-right:auto;">
       Dari pelatihan P3K, ergonomi, hingga pembentukan P2K3 dan sertifikasi Ahli K3 Umum — Wahana Totalita siap mendampingi kantor Anda memenuhi semua kewajiban K3.
     </p>
-    <a href="https://wa.me/628122969435?text=Halo%2C+saya+ingin+konsultasi+program+K3+Perkantoran+untuk+instansi%2Fperusahaan+kami.+Mohon+info+lebih+lanjut."
+    <a href="https://wa.me/6287759151278?text=Halo%2C+saya+ingin+konsultasi+program+K3+Perkantoran+untuk+instansi%2Fperusahaan+kami.+Mohon+info+lebih+lanjut."
        target="_blank" rel="noopener"
        style="display:inline-block;background:#C6621C;color:#fff;padding:14px 36px;border-radius:6px;font-weight:700;text-decoration:none;font-size:1.05rem;">
-      WhatsApp: 0812-2969-435
+      WhatsApp: 0877-5915-1278
     </a>
   </section>
 

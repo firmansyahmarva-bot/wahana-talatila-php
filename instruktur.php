@@ -11,7 +11,7 @@ $s = get_all_settings();
  * per instruction. Remaining 6 slots are generic certified-instructor profiles
  * (no invented names).
  */
-$wa_number = '628122969435';
+$wa_number = '6287759151278';
 $wa_join = rawurlencode('Halo, saya ingin bergabung sebagai instruktur K3 di Wahana Totalita');
 $wa_join_url = "https://wa.me/{$wa_number}?text={$wa_join}";
 $year = date('Y');
@@ -52,7 +52,7 @@ require __DIR__ . '/includes/head.php';
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   "name": "Wahana Totalita Konsultan",
-  "telephone": "+628122969435",
+  "telephone": "+6287759151278",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Jl. Wonosari KM 8.5",
