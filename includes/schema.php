@@ -86,27 +86,6 @@ function build_schema_graph(): string {
         'sameAs' => $same_as,
     ];
 
-    $trainings = get_trainings();
-    foreach ($trainings as $t) {
-        $graph[] = [
-            '@type'       => 'Course',
-            'name'        => $t['name'],
-            'description' => $t['description'] ?? $t['name'],
-            'url'         => SITE_URL . '/pelatihan/' . $t['slug'] . '/',
-            'provider'    => ['@id' => SITE_URL . '/#organization'],
-            'educationalCredentialAwarded' => $t['certification'],
-            'courseMode'  => $t['mode'] === 'offline' ? 'onsite' : 'online',
-            'inLanguage'  => 'id',
-            'offers'      => [
-                '@type'        => 'Offer',
-                'price'        => (string)(int)$t['price'],
-                'priceCurrency'=> 'IDR',
-                'availability' => 'https://schema.org/InStock',
-                'url'          => SITE_URL . '/pelatihan/' . $t['slug'] . '/',
-            ],
-        ];
-    }
-
     $cache = json_encode(
         ['@context' => 'https://schema.org', '@graph' => $graph],
         JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES

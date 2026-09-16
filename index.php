@@ -3,11 +3,18 @@ require_once __DIR__ . '/config.php';
 
 $s          = get_all_settings();
 $categories = get_categories();
-$trainings  = get_trainings();
+$all_trainings = get_trainings();
 $wa_number  = $s['wa_number'] ?? '6281235036420';
 
-$by_cat = [];
-foreach ($trainings as $t) { $by_cat[$t['cat_slug']][] = $t; }
+$cat_counts = [];
+$trainings  = [];
+foreach ($all_trainings as $t) {
+    $cs = $t['cat_slug'] ?? 'other';
+    $cat_counts[$cs] = ($cat_counts[$cs] ?? 0) + 1;
+    if ($cat_counts[$cs] <= 5) {
+        $trainings[] = $t;
+    }
+}
 
 $meta_desc = !empty($s['meta_description']) ? $s['meta_description'] : 'Wahana Totalita Konsultan menyediakan pelatihan K3, Lingkungan, Mining & ISO terakreditasi resmi KEMNAKER RI dan BNSP. Online & offline. Berbasis di Yogyakarta.';
 ?>
@@ -200,6 +207,13 @@ $meta_desc = !empty($s['meta_description']) ? $s['meta_description'] : 'Wahana T
         </div>
       </article>
       <?php endforeach; ?>
+    </div>
+    <div class="catalog-cta-wrap" style="text-align:center;margin:40px 0 20px;">
+      <a href="/pelatihan/" class="btn-primary" style="display:inline-flex;align-items:center;gap:10px;padding:15px 32px;font-size:1.05rem;font-weight:700;border-radius:12px;text-decoration:none;box-shadow:0 6px 20px rgba(10,74,46,0.22);transition:all .2s ease;">
+        <span>Lihat Semua 140+ Program di Katalog Lengkap</span>
+        <span aria-hidden="true" style="font-size:1.2rem;">&rarr;</span>
+      </a>
+      <p style="color:#64748b;font-size:0.875rem;margin-top:12px;">Cari silabus lengkap, jadwal terdekat, dan sertifikasi Kemnaker RI &amp; BNSP</p>
     </div>
     <p class="filter-empty" id="filter-empty" style="display:none">Tidak ada program yang cocok dengan filter ini.</p>
   </div>

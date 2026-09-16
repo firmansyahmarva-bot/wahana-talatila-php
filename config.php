@@ -58,7 +58,7 @@ if (
 
 // ─── Edge & Browser Cache Headers for Public Read-Only Pages ──────────────
 if (session_status() === PHP_SESSION_NONE && !headers_sent() && php_sapi_name() !== 'cli') {
-    header('Cache-Control: public, max-age=300, s-maxage=600');
+    header('Cache-Control: public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800');
 }
 
 // ─── PDO Singleton ────────────────────────────────────────────────────────
@@ -71,6 +71,7 @@ function get_pdo(): PDO {
             PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
             PDO::ATTR_EMULATE_PREPARES   => false,
+            PDO::ATTR_PERSISTENT         => true,
         ]);
     } catch (PDOException $e) {
         // Always log so you can see DB blips in Hostinger error logs.
