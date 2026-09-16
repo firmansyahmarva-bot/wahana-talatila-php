@@ -63,6 +63,20 @@ function related_cta(string $cta_type, string $context_key): string {
                     ['href' => '/pelatihan/pelatihan-operator-pesawat-tenaga-produksi-ptp/', 'label' => 'Operator Pesawat Tenaga & Produksi (PTP)', 'cert' => 'Kemnaker RI'],
                     ['href' => '/pelatihan/ak3-bnsp/', 'label' => 'Ahli K3 Pertambangan BNSP', 'cert' => 'BNSP'],
                 ],
+                'Sertifikasi' => [
+                    ['href' => '/pelatihan/pelatihan-dan-sertifikasi-fillet-plate-welder-sertifikasi-bnsp/', 'label' => 'Fillet Plate Welder BNSP', 'cert' => 'BNSP'],
+                    ['href' => '/pelatihan/pelatihan-dan-sertifikasi-pipe-fitter-sertifikasi-bnsp/', 'label' => 'Pipe Fitter Sertifikasi BNSP', 'cert' => 'BNSP'],
+                    ['href' => '/pelatihan/ak3-bnsp/', 'label' => 'Ahli K3 Muda/Madya/Utama BNSP', 'cert' => 'BNSP'],
+                    ['href' => '/pelatihan/pelatihan-operator-pesawat-tenaga-produksi-ptp/', 'label' => 'Operator Pesawat Tenaga & Produksi (PTP)', 'cert' => 'Kemnaker RI'],
+                    ['href' => '/pelatihan/pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri/', 'label' => 'Operator Forklift Kelas 2 Kemnaker RI', 'cert' => 'Kemnaker RI'],
+                ],
+                'Regulasi' => [
+                    ['href' => '/pelatihan/ak3-bnsp/', 'label' => 'Ahli K3 Muda/Madya/Utama BNSP', 'cert' => 'BNSP'],
+                    ['href' => '/pelatihan/pelatihan-teknisi-bejana-tekan-sertifikasi-kemnaker-ri/', 'label' => 'Teknisi Bejana Tekan & Tangki Timbun', 'cert' => 'Kemnaker RI'],
+                    ['href' => '/pelatihan/pelatihan-damkar-paralel-kelas-dcba-sertifikasi-kemnaker-ri/', 'label' => 'Pelatihan Damkar Kelas D/C/B/A', 'cert' => 'Kemnaker RI'],
+                    ['href' => '/pelatihan/tkbt-ii-surabaya/', 'label' => 'TKBT Tingkat II (K3 Ketinggian)', 'cert' => 'Kemnaker RI'],
+                    ['href' => '/pelatihan/pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri/', 'label' => 'Operator Forklift Kelas 2 Kemnaker RI', 'cert' => 'Kemnaker RI'],
+                ],
                 'ISO' => [
                     ['href' => '/pelatihan/pelatihan-internal-auditor-iso-45001-online/', 'label' => 'Internal Auditor ISO 45001:2018', 'cert' => 'Sertifikat'],
                     ['href' => '/pelatihan/ak3-bnsp/', 'label' => 'Ahli K3 BNSP', 'cert' => 'BNSP'],
