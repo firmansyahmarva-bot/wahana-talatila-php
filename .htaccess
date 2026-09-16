@@ -123,6 +123,21 @@ RewriteRule ^zh/in-house-training/?$ zh-inhouse.php [QSA,L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^zh/factory-roadmap/?$ zh-factory.php [QSA,L]
 
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^zh/kecelakaan-kerja/?$ zh-accident.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^zh/k3-kimia/?$ zh-kimia.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^zh/k3-kebakaran/?$ zh-fire.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^zh/k3-pertambangan/?$ zh-mining.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^zh/checklist/?$ zh-checklist.php [QSA,L]
+
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^k3-migas/?$ k3-migas.php [QSA,L]

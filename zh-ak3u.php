@@ -609,13 +609,17 @@ body {
         <div class="zh-sb-nav-title">合规指引与专题手册</div>
         <ul class="zh-sb-nav-list">
           <li><a href="/zh/">&bull; 合规全景总纲 (主页)</a></li>
-<li><a href="/zh/factory-roadmap/">&bull; 从零建厂到投产路线图</a></li>
-<li><a href="/zh/ahli-k3-umum/" class="active">&bull; 注册安全官 (AK3U) 与 P2K3</a></li>
-<li><a href="/zh/sio-alat-berat/">&bull; 特种设备操作证 (SIO/SIA)</a></li>
-<li><a href="/zh/smk3/">&bull; SMK3 安全体系金牌认证</a></li>
-<li><a href="/zh/juru-las/">&bull; 特种焊工 (Juru Las) 等级规范</a></li>
-<li><a href="/zh/in-house-training/">&bull; 偏远工区驻厂双语内训</a></li>
-
+          <li><a href="/zh/factory-roadmap/">&bull; 从零建厂到投产路线图</a></li>
+          <li><a href="/zh/checklist/">&bull; 中资企业安全合规自查清单</a></li>
+          <li><a href="/zh/ahli-k3-umum/" class="active">&bull; 注册安全官 (AK3U) 与 P2K3</a></li>
+          <li><a href="/zh/sio-alat-berat/">&bull; 特种设备操作证 (SIO/SIA)</a></li>
+          <li><a href="/zh/kecelakaan-kerja/">&bull; 工伤事故处置与调查应对</a></li>
+          <li><a href="/zh/k3-kimia/">&bull; 冶炼危化品 (K3 Kimia) 合规</a></li>
+          <li><a href="/zh/k3-kebakaran/">&bull; 厂区消防与管网年检 (Damkar)</a></li>
+          <li><a href="/zh/k3-pertambangan/">&bull; 矿山安全 KTT 与 POP/POM</a></li>
+          <li><a href="/zh/smk3/">&bull; SMK3 安全体系金牌认证</a></li>
+          <li><a href="/zh/juru-las/">&bull; 特种焊工 (Juru Las) 规范</a></li>
+          <li><a href="/zh/in-house-training/">&bull; 偏远工区驻厂双语内训</a></li>
         </ul>
       </div>
     </aside>
