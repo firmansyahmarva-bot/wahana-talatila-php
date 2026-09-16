@@ -117,6 +117,207 @@
       overflow-x: auto;
     }
   }
+
+  /* Self-contained Footer & Navigation Styles */
+  .footer {
+    background: #061810;
+    color: #9DB8CE;
+    padding: 0 0 0;
+    font-family: inherit;
+    position: relative;
+    z-index: 10;
+  }
+  .footer-contact-strip {
+    background: #092015;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 18px 0;
+  }
+  .fcs-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .fcs-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    color: #fff !important;
+    font-size: 13.5px;
+    font-weight: 600;
+    padding: 10px 22px;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .fcs-btn:hover {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
+    color: #fff !important;
+  }
+  .fcs-btn.fcs-wa {
+    background: #25D366;
+    border-color: #25D366;
+    color: #fff !important;
+  }
+  .fcs-btn.fcs-wa:hover {
+    background: #20BA5A;
+  }
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 36px;
+    padding: 48px 20px 36px;
+    max-width: 1140px;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  @media (max-width: 900px) {
+    .footer-inner {
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      padding: 36px 20px 28px;
+    }
+  }
+  @media (max-width: 540px) {
+    .footer-inner {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      padding: 32px 16px 24px;
+    }
+  }
+  .footer-brand p {
+    font-size: 13.5px;
+    color: #9DB8CE;
+    margin: 12px 0 18px;
+    line-height: 1.65;
+    max-width: 320px;
+  }
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 800;
+  }
+  .footer-socials {
+    display: flex;
+    gap: 10px;
+  }
+  .footer-socials a {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9DB8CE;
+    transition: background 0.2s, color 0.2s;
+  }
+  .footer-socials a:hover {
+    background: #C6621C;
+    color: #fff;
+  }
+  .footer-socials svg {
+    width: 16px;
+    height: 16px;
+  }
+  .footer h4 {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+  .footer-nav ul, .footer-contact ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  .footer-nav ul li, .footer-contact ul li {
+    font-size: 13px;
+    color: #9DB8CE;
+    line-height: 1.5;
+  }
+  .footer-nav ul li a, .footer-contact ul li a {
+    color: #9DB8CE;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  .footer-nav ul li a:hover, .footer-contact ul li a:hover {
+    color: #fff;
+  }
+  .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 18px 20px;
+    background: #04100b;
+  }
+  .footer-bottom p {
+    font-size: 12.5px;
+    color: #7A95A8;
+    text-align: center;
+    margin: 0;
+  }
+  .footer-bottom a {
+    color: #7A95A8;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  .footer-bottom a:hover {
+    color: #fff;
+  }
+  .wa-float {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 999;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #25D366;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.45);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none;
+  }
+  .wa-float:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 26px rgba(37, 211, 102, 0.6);
+  }
+  .wa-float svg {
+    width: 28px;
+    height: 28px;
+  }
+  .wa-badge {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    background: #C6621C;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #fff;
+  }
   </style>
   <!-- Quick Contact Strip (Matches Reference Screenshot 2) -->
   <div class="footer-contact-strip">
