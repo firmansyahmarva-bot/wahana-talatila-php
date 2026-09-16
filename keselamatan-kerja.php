@@ -6,7 +6,7 @@ $s = get_all_settings();
  * Seasonal SEO hub page targeting the broad "keselamatan kerja" query.
  * Zero DB dependency, modeled on sertifikasi-bnsp.php.
  */
-$wa_number = '628122969435';
+$wa_number = '6287759151278';
 $wa_msg = rawurlencode('Halo, saya ingin konsultasi program pelatihan K3 untuk perusahaan kami');
 $wa_url = "https://wa.me/{$wa_number}?text={$wa_msg}";
 $year = date('Y');
@@ -115,7 +115,7 @@ require __DIR__ . '/includes/head.php';
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   "name": "Wahana Totalita Konsultan",
-  "telephone": "+628122969435",
+  "telephone": "+6287759151278",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Jl. Wonosari KM 8.5",

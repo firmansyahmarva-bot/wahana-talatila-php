@@ -474,7 +474,7 @@ section.hero, .hero {
     <div class="cta-strip">
       <h3>🎓 Tingkatkan Kompetensi Memimpin Toolbox Meeting &amp; Safety Leadership</h3>
       <p>Sertifikasi Ahli K3 Umum KEMNAKER RI / BNSP mengajarkan komunikasi K3 efektif, risk assessment, dan budaya K3 industri.</p>
-      <a href="https://wa.me/6281235036420?text=Halo%20Wahana%2C%20saya%20gunakan%20materi%20100%20safety%20talk%20dan%20ingin%20tanya%20pelatihan%20K3" target="_blank" rel="noopener"
+      <a href="https://wa.me/6287759151278?text=Halo%20Wahana%2C%20saya%20gunakan%20materi%20100%20safety%20talk%20dan%20ingin%20tanya%20pelatihan%20K3" target="_blank" rel="noopener"
          style="background:#25D366;color:#fff;padding:9px 22px;border-radius:8px;font-weight:700;display:inline-flex;align-items:center;gap:8px;font-size:.85rem">
         📱 Tanya Pelatihan K3 Resmi
       </a>
@@ -631,7 +631,7 @@ function openModal(idx){
     </a>
     <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:18px">
       <button onclick="printTalk(${idx})" style="background:var(--primary);color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:.85rem;font-weight:600;cursor:pointer">🖨 Print Materi & Absensi</button>
-      <a href="https://wa.me/6281235036420?text=Halo%20Wahana%2C%20saya%20gunakan%20materi%20safety%20talk%20dan%20ingin%20tanya%20pelatihan%20K3" target="_blank" style="background:#25D366;color:#fff;border-radius:8px;padding:9px 18px;font-size:.85rem;font-weight:600;display:inline-flex;align-items:center;gap:6px">📱 Tanya Pelatihan K3</a>
+      <a href="https://wa.me/6287759151278?text=Halo%20Wahana%2C%20saya%20gunakan%20materi%20safety%20talk%20dan%20ingin%20tanya%20pelatihan%20K3" target="_blank" style="background:#25D366;color:#fff;border-radius:8px;padding:9px 18px;font-size:.85rem;font-weight:600;display:inline-flex;align-items:center;gap:6px">📱 Tanya Pelatihan K3</a>
     </div>
   `;
   document.getElementById('modalOverlay').classList.add('show');

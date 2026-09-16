@@ -27,7 +27,7 @@ $s = get_all_settings();
  * Indonesia — under the general framework of UU No. 1 Tahun 1970.
  * SIO validity of 5 years confirmed via the same search.
  */
-$wa_number = '628122969435';
+$wa_number = '6287759151278';
 $wa_msg = rawurlencode('Halo, saya ingin mendaftar pelatihan Operator Alat Berat (Excavator/Bulldozer/Grader). Mohon info jadwal dan biaya?');
 $wa_url = "https://wa.me/{$wa_number}?text={$wa_msg}";
 $year = date('Y');
@@ -120,7 +120,7 @@ $faqs = [
 ?>
 <?php
 $page_title = 'Pelatihan Operator Alat Berat (Excavator, Bulldozer, Grader) — SIO Kemnaker RI';
-$meta_desc = 'Pelatihan Operator Alat Berat bersertifikat Kemnaker RI. Program SIO Excavator, Bulldozer, Motor Grader, Compactor, dan Wheel Loader. Yogyakarta & in-house. 0812-2969-435.';
+$meta_desc = 'Pelatihan Operator Alat Berat bersertifikat Kemnaker RI. Program SIO Excavator, Bulldozer, Motor Grader, Compactor, dan Wheel Loader. Yogyakarta & in-house. 0877-5915-1278.';
 require __DIR__ . '/includes/head.php';
 ?>
 <script type="application/ld+json">
@@ -148,7 +148,7 @@ echo json_encode([
   "@type": "Organization",
   "name": "Wahana Totalita Konsultan",
   "url": "https://wahanatotalita.com",
-  "telephone": "+628122969435",
+  "telephone": "+6287759151278",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Jl. Wonosari KM 8.5",
@@ -295,9 +295,17 @@ echo json_encode([
   <h2 class="section-title">Program Pelatihan Operator Alat Berat Kami</h2>
   <div class="scheme-grid">
     <div class="scheme-card">
-      <span class="scheme-cert">Sertifikasi KEMNAKER RI</span>
-      <h3><a href="/pelatihan/pelatihan-k3-operator-alat-berat-sertifikasi-kemnaker-ri/">Pelatihan K3 Operator Alat Berat</a></h3>
-      <a href="/pelatihan/pelatihan-k3-operator-alat-berat-sertifikasi-kemnaker-ri/" class="scheme-link">Lihat Program &rarr;</a>
+      <div class="scheme-card-media">
+        <img src="<?= training_img_url('', 'k3', 'pelatihan-k3-operator-alat-berat-sertifikasi-kemnaker-ri') ?>" alt="Pelatihan K3 Operator Alat Berat" loading="lazy" width="360" height="170">
+        <span class="scheme-cert">Sertifikasi Kemnaker RI</span>
+      </div>
+      <div class="scheme-card-body">
+        <h3><a href="/pelatihan/pelatihan-k3-operator-alat-berat-sertifikasi-kemnaker-ri/">Pelatihan K3 Operator Alat Berat (Excavator, Loader, Dozer)</a></h3>
+        <div class="scheme-actions">
+          <a href="/pelatihan/pelatihan-k3-operator-alat-berat-sertifikasi-kemnaker-ri/" class="scheme-link">Silabus &amp; Jadwal &rarr;</a>
+          <a href="https://wa.me/<?=$wa_number?>?text=<?=rawurlencode('Halo Wahana Totalita, saya ingin informasi pelatihan Operator Alat Berat')?>" class="scheme-btn-wa" target="_blank" rel="noopener">Chat WA</a>
+        </div>
+      </div>
     </div>
   </div>
   <div class="inquiry-card">

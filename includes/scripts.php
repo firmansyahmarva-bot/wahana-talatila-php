@@ -144,6 +144,6 @@ if ($gtm_id || $ga_id): ?>
 <!-- AI Training Finder Chat Widget -->
 <link rel="stylesheet" href="/assets/css/ai-chat.css" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="/assets/css/ai-chat.css"></noscript>
-<script>window.wtcWA = '<?= e(get_setting("wa_number","6281235036420")) ?>';</script>
+<script>window.wtcWA = '<?= e(get_setting("wa_number","6287759151278")) ?>';</script>
 <script src="/assets/js/ai-chat.js" defer></script>
 

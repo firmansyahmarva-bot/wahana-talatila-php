@@ -189,7 +189,7 @@ if (str_contains($haystack, 'forklift')) {
 $faqItems = array_merge($faqUniversal, $topicFaqs);
 
 $s         = get_all_settings();
-$wa_number = $s['wa_number'] ?? '6281235036420';
+$wa_number = $s['wa_number'] ?? '6287759151278';
 $wa_msg    = $training['wa_text'] ?: 'Halo, saya ingin info ' . $training['name'];
 
 // SEO title: strip long parenthetical, target ≤65 chars

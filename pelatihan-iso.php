@@ -4,7 +4,7 @@ $s = get_all_settings();
 // Hub: Pelatihan ISO 9001 / ISO 14001 / ISO 45001
 $canonical = 'https://wahanatotalita.com/pelatihan-iso/';
 $meta_title = 'Pelatihan ISO 9001, ISO 14001 & ISO 45001 — Internal & Lead Auditor | Wahana Totalita';
-$meta_desc  = 'Pelatihan sertifikasi ISO 9001:2015, ISO 14001:2015, dan ISO 45001:2018 untuk Internal Auditor dan Lead Auditor. Diakui internasional. Yogyakarta & in-house. Hubungi: 0812-2969-435.';
+$meta_desc  = 'Pelatihan sertifikasi ISO 9001:2015, ISO 14001:2015, dan ISO 45001:2018 untuk Internal Auditor dan Lead Auditor. Diakui internasional. Yogyakarta & in-house. Hubungi: 0877-5915-1278.';
 
 $schema = [
   [
@@ -57,7 +57,7 @@ $schema = [
     '@type'    => 'Organization',
     'name'     => 'Wahana Totalita Konsultan',
     'url'      => 'https://wahanatotalita.com',
-    'telephone'=> '+628122969435',
+    'telephone'=> '+6287759151278',
     'address'  => [
       '@type'           => 'PostalAddress',
       'addressLocality' => 'Yogyakarta',
@@ -105,7 +105,7 @@ $schema = [
     <p style="font-size:1.1rem;opacity:0.92;max-width:700px;margin:0 0 28px;line-height:1.7;">
       Sertifikasi <strong>Internal Auditor</strong> dan <strong>Lead Auditor</strong> untuk tiga standar ISO utama. Diakui internasional — wajib bagi perusahaan yang memasok BUMN, mengikuti tender, atau beroperasi di pasar ekspor.
     </p>
-    <a href="https://wa.me/628122969435?text=Halo%2C+saya+ingin+mendaftar+pelatihan+ISO+(9001%2F14001%2F45001).+Mohon+info+jadwal+dan+biaya."
+    <a href="https://wa.me/6287759151278?text=Halo%2C+saya+ingin+mendaftar+pelatihan+ISO+(9001%2F14001%2F45001).+Mohon+info+jadwal+dan+biaya."
        target="_blank" rel="noopener"
        style="display:inline-block;background:#C6621C;color:#fff;padding:14px 32px;border-radius:6px;font-weight:700;text-decoration:none;font-size:1rem;">
       Daftar Sekarang via WhatsApp
@@ -332,7 +332,7 @@ $schema = [
           <div style="font-size:0.85rem;color:#555;">📜 Sertifikat pelatihan resmi</div>
         </div>
         <div style="padding:0 16px 16px;">
-          <a href="https://wa.me/628122969435?text=<?php echo $wa_text; ?>"
+          <a href="https://wa.me/6287759151278?text=<?php echo $wa_text; ?>"
              target="_blank" rel="noopener"
              style="display:block;text-align:center;background:#C6621C;color:#fff;padding:10px;border-radius:5px;text-decoration:none;font-weight:600;font-size:0.9rem;">
             Tanya Jadwal &amp; Harga
@@ -445,10 +445,10 @@ $schema = [
     <p style="opacity:0.9;margin:0 0 28px;line-height:1.7;max-width:600px;margin-left:auto;margin-right:auto;">
       Hubungi tim Wahana Totalita untuk informasi jadwal, biaya, dan opsi in-house training. Kami siap menyesuaikan program dengan kebutuhan industri dan skala perusahaan Anda.
     </p>
-    <a href="https://wa.me/628122969435?text=Halo%2C+saya+ingin+mendaftar+pelatihan+ISO+(9001%2F14001%2F45001).+Mohon+info+jadwal+dan+biaya."
+    <a href="https://wa.me/6287759151278?text=Halo%2C+saya+ingin+mendaftar+pelatihan+ISO+(9001%2F14001%2F45001).+Mohon+info+jadwal+dan+biaya."
        target="_blank" rel="noopener"
        style="display:inline-block;background:#C6621C;color:#fff;padding:14px 36px;border-radius:6px;font-weight:700;text-decoration:none;font-size:1.05rem;margin-right:12px;">
-      WhatsApp: 0812-2969-435
+      WhatsApp: 0877-5915-1278
     </a>
     <a href="/pelatihan/"
        style="display:inline-block;background:transparent;color:#fff;padding:14px 28px;border-radius:6px;font-weight:600;text-decoration:none;font-size:1rem;border:2px solid rgba(255,255,255,0.6);margin-top:10px;">

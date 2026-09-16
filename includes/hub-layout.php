@@ -17,7 +17,7 @@ if (!isset($hub_data)) {
 }
 
 $s = get_all_settings();
-$wa_number = $s['wa_number'] ?? '6281235036420';
+$wa_number = $s['wa_number'] ?? '6287759151278';
 
 $hub_slug   = $hub_data['slug'] ?? '';
 $page_title = $hub_data['meta_title'] ?? ($hub_data['title'] . ' — Wahana Totalita');

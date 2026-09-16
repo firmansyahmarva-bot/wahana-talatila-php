@@ -202,7 +202,7 @@
         <li><a href="/pelatihan-k3-balikpapan/">K3 Balikpapan (IKN)</a></li>
         <li><a href="/pelatihan-k3-bandung/">K3 Bandung</a> · <a href="/pelatihan-k3-semarang/">Semarang</a></li>
         <li><a href="/pelatihan-k3-medan/">K3 Medan</a> · <a href="/pelatihan-k3-makassar/">Makassar</a></li>
-        <li><a href="<?= wa_url() ?>" target="_blank">📱 WhatsApp: <?= e($s['wa_number'] ?? '0812-3503-6420') ?></a></li>
+        <li><a href="<?= wa_url() ?>" target="_blank">📱 WhatsApp: <?= e($s['wa_number'] ?? '0877-5915-1278') ?></a></li>
         <?php if (!empty($s['site_address'])): ?>
         <li>📍 <?= e($s['site_address']) ?></li>
         <?php endif; ?>

@@ -10,7 +10,7 @@ require_once __DIR__ . '/config.php';
 
 $s = get_all_settings();
 
-$wa_number  = preg_replace('/\D/', '', get_setting('wa_number', '6281235036420'));
+$wa_number  = preg_replace('/\D/', '', get_setting('wa_number', '6287759151278'));
 $phone_disp = '0' . substr($wa_number, 2);
 $phone_disp = trim(chunk_split($phone_disp, 4, '-'), '-');
 $wa_diskusi = "https://wa.me/{$wa_number}?text=" . rawurlencode('Halo, saya dari perusahaan dan ingin konsultasi kebutuhan training K3 untuk tim kami. Mohon dibantu.');

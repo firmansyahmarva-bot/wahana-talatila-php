@@ -57,7 +57,7 @@ $schema = [
     '@type'    => 'Organization',
     'name'     => 'Wahana Totalita Konsultan',
     'url'      => 'https://wahanatotalita.com',
-    'telephone'=> '+628122969435',
+    'telephone'=> '+6287759151278',
     'address'  => ['@type'=>'PostalAddress','addressLocality'=>'Yogyakarta','addressRegion'=>'DI Yogyakarta','addressCountry'=>'ID'],
   ],
 ];
@@ -103,7 +103,7 @@ $schema = [
       <span style="background:rgba(255,255,255,0.15);padding:6px 14px;border-radius:20px;font-size:0.85rem;">✓ Sertifikat BNSP / Kemnaker</span>
       <span style="background:rgba(255,255,255,0.15);padding:6px 14px;border-radius:20px;font-size:0.85rem;">✓ In-house di pabrik Anda</span>
     </div>
-    <a href="https://wa.me/628122969435?text=Halo%2C+saya+ingin+info+pelatihan+K3+manufaktur+dan+pabrik+untuk+perusahaan+kami."
+    <a href="https://wa.me/6287759151278?text=Halo%2C+saya+ingin+info+pelatihan+K3+manufaktur+dan+pabrik+untuk+perusahaan+kami."
        target="_blank" rel="noopener"
        style="display:inline-block;background:#C6621C;color:#fff;padding:14px 32px;border-radius:6px;font-weight:700;text-decoration:none;font-size:1rem;">
       Konsultasi Program K3 Pabrik
@@ -252,7 +252,7 @@ $schema = [
         <?php if ($p[3] && $p[0]): ?>
         <a href="<?php echo $p[0]; ?>" style="display:inline-block;background:#0A4A2E;color:#fff;padding:7px 16px;border-radius:4px;text-decoration:none;font-size:0.82rem;font-weight:600;">Lihat Program →</a>
         <?php else: ?>
-        <a href="https://wa.me/628122969435?text=Halo%2C+saya+tertarik+pelatihan+<?php echo urlencode($p[1]); ?>+untuk+pabrik+kami.+Mohon+info+jadwal+dan+harga."
+        <a href="https://wa.me/6287759151278?text=Halo%2C+saya+tertarik+pelatihan+<?php echo urlencode($p[1]); ?>+untuk+pabrik+kami.+Mohon+info+jadwal+dan+harga."
            target="_blank" rel="noopener"
            style="display:inline-block;background:#0A4A2E;color:#fff;padding:7px 16px;border-radius:4px;text-decoration:none;font-size:0.82rem;font-weight:600;">
           Tanya via WhatsApp →
@@ -313,10 +313,10 @@ $schema = [
       Wahana Totalita menyediakan pelatihan K3 in-house langsung di pabrik Anda — melatih tim produksi, supervisor, dan safety officer dengan materi yang relevan dengan kondisi lapangan aktual.
     </p>
     <p style="opacity:0.75;font-size:0.9rem;margin:0 0 24px;">Sertifikat BNSP &amp; Kemnaker RI · Instruktur K3 berpengalaman industri · Materi disesuaikan jenis pabrik Anda</p>
-    <a href="https://wa.me/628122969435?text=Halo%2C+saya+ingin+konsultasi+pelatihan+K3+manufaktur+untuk+pabrik+kami.+Mohon+info+program+dan+harga."
+    <a href="https://wa.me/6287759151278?text=Halo%2C+saya+ingin+konsultasi+pelatihan+K3+manufaktur+untuk+pabrik+kami.+Mohon+info+program+dan+harga."
        target="_blank" rel="noopener"
        style="display:inline-block;background:#C6621C;color:#fff;padding:14px 36px;border-radius:6px;font-weight:700;text-decoration:none;font-size:1.05rem;">
-      WhatsApp: 0812-2969-435
+      WhatsApp: 0877-5915-1278
     </a>
   </section>
 

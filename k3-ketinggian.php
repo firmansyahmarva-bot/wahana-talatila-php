@@ -14,7 +14,7 @@ $s = get_all_settings();
  * that real training plus a WhatsApp inquiry card instead of
  * fabricating Tingkat 1/2/3 product slugs that don't exist yet.
  */
-$wa_number = '628122969435';
+$wa_number = '6287759151278';
 $wa_msg = rawurlencode('Halo, saya ingin mendaftar pelatihan K3 Ketinggian (Tingkat 1/2/3). Mohon info jadwal dan biaya?');
 $wa_url = "https://wa.me/{$wa_number}?text={$wa_msg}";
 $year = date('Y');
@@ -111,7 +111,7 @@ $faqs = [
 ?>
 <?php
 $page_title = 'Pelatihan K3 Bekerja pada Ketinggian (Tingkat 1, 2 & 3) — Sertifikasi Kemnaker RI';
-$meta_desc = 'Pelatihan K3 Bekerja pada Ketinggian resmi bersertifikat Kemnaker RI. Program Tingkat 1, 2, dan 3 sesuai Permenaker No. 9 Tahun 2016. Yogyakarta & in-house. Hubungi: 0812-2969-435.';
+$meta_desc = 'Pelatihan K3 Bekerja pada Ketinggian resmi bersertifikat Kemnaker RI. Program Tingkat 1, 2, dan 3 sesuai Permenaker No. 9 Tahun 2016. Yogyakarta & in-house. Hubungi: 0877-5915-1278.';
 require __DIR__ . '/includes/head.php';
 ?>
 <script type="application/ld+json">
@@ -139,7 +139,7 @@ echo json_encode([
   "@type": "Organization",
   "name": "Wahana Totalita Konsultan",
   "url": "https://wahanatotalita.com",
-  "telephone": "+628122969435",
+  "telephone": "+6287759151278",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Jl. Wonosari KM 8.5",

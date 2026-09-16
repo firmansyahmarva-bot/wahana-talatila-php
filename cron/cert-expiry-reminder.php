@@ -31,7 +31,7 @@ foreach ($days_list as $days) {
         $stmt->execute([$days]);
         $certs = $stmt->fetchAll();
         foreach ($certs as $cert) {
-            $message = "⚠️ *Reminder Sertifikasi K3* ⚠️\n\nYth. {$cert['name']},\n\nSertifikasi *{$cert['training_name']}* Anda akan berakhir dalam *{$days} hari* ({$cert['expiry_date']}).\n\nRenewal sekarang untuk tetap compliance! Hub: wa.me/6281235036420\n\n_Wahana Totalita Konsultan_";
+            $message = "⚠️ *Reminder Sertifikasi K3* ⚠️\n\nYth. {$cert['name']},\n\nSertifikasi *{$cert['training_name']}* Anda akan berakhir dalam *{$days} hari* ({$cert['expiry_date']}).\n\nRenewal sekarang untuk tetap compliance! Hub: wa.me/6287759151278\n\n_Wahana Totalita Konsultan_";
             if (!empty($cert['phone'])) {
                 send_wa_notification($cert['phone'], $message);
                 log_wa_sent($cert['phone'], $message, true);

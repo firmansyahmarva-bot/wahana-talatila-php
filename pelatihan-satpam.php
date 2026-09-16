@@ -57,7 +57,7 @@ $schema = [
     '@type'    => 'Organization',
     'name'     => 'Wahana Totalita Konsultan',
     'url'      => 'https://wahanatotalita.com',
-    'telephone'=> '+628122969435',
+    'telephone'=> '+6287759151278',
     'address'  => ['@type'=>'PostalAddress','addressLocality'=>'Yogyakarta','addressRegion'=>'DI Yogyakarta','addressCountry'=>'ID'],
   ],
 ];
@@ -103,7 +103,7 @@ $schema = [
       <span style="background:rgba(255,255,255,0.15);padding:6px 14px;border-radius:20px;font-size:0.85rem;">✓ Bisa In-house di Fasilitas Anda</span>
       <span style="background:rgba(255,255,255,0.15);padding:6px 14px;border-radius:20px;font-size:0.85rem;">✓ Min. 10 peserta</span>
     </div>
-    <a href="https://wa.me/628122969435?text=Halo%2C+saya+ingin+info+pelatihan+K3+untuk+satuan+pengamanan+(satpam)+kami."
+    <a href="https://wa.me/6287759151278?text=Halo%2C+saya+ingin+info+pelatihan+K3+untuk+satuan+pengamanan+(satpam)+kami."
        target="_blank" rel="noopener"
        style="display:inline-block;background:#C6621C;color:#fff;padding:14px 32px;border-radius:6px;font-weight:700;text-decoration:none;font-size:1rem;">
       Konsultasi Program
@@ -160,7 +160,7 @@ $schema = [
         if ($p[1]) {
           $btn_href = $p[1]; $btn_target = ''; $btn_label = $p[3]; $btn_bg = '#0A4A2E';
         } else {
-          $btn_href = 'https://wa.me/628122969435?text=Halo%2C+saya+ingin+info+program+'.urlencode($p[0]).'+untuk+satuan+pengamanan+kami.';
+          $btn_href = 'https://wa.me/6287759151278?text=Halo%2C+saya+ingin+info+program+'.urlencode($p[0]).'+untuk+satuan+pengamanan+kami.';
           $btn_target = ' target="_blank" rel="noopener"';
           $btn_label = 'Tanya via WhatsApp';
           $btn_bg = '#C6621C';
@@ -235,10 +235,10 @@ $schema = [
     <p style="opacity:0.9;margin:0 0 28px;line-height:1.7;max-width:600px;margin-left:auto;margin-right:auto;">
       Satpam yang terlatih K3 adalah aset — bukan beban. Hubungi kami untuk konsultasi program pelatihan K3 yang sesuai profil risiko fasilitas dan jumlah satpam Anda.
     </p>
-    <a href="https://wa.me/628122969435?text=Halo%2C+saya+ingin+info+pelatihan+K3+untuk+satuan+pengamanan+(satpam)+kami.+Mohon+kirim+info+program+dan+biaya."
+    <a href="https://wa.me/6287759151278?text=Halo%2C+saya+ingin+info+pelatihan+K3+untuk+satuan+pengamanan+(satpam)+kami.+Mohon+kirim+info+program+dan+biaya."
        target="_blank" rel="noopener"
        style="display:inline-block;background:#C6621C;color:#fff;padding:14px 36px;border-radius:6px;font-weight:700;text-decoration:none;font-size:1.05rem;">
-      WhatsApp: 0812-2969-435
+      WhatsApp: 0877-5915-1278
     </a>
   </section>
 

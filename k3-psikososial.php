@@ -57,7 +57,7 @@ $schema = [
     '@type'    => 'Organization',
     'name'     => 'Wahana Totalita Konsultan',
     'url'      => 'https://wahanatotalita.com',
-    'telephone'=> '+628122969435',
+    'telephone'=> '+6287759151278',
     'address'  => ['@type'=>'PostalAddress','addressLocality'=>'Yogyakarta','addressRegion'=>'DI Yogyakarta','addressCountry'=>'ID'],
   ],
 ];
@@ -104,7 +104,7 @@ $schema = [
       <span style="background:rgba(255,255,255,0.16);padding:6px 14px;border-radius:20px;font-size:0.85rem;">✓ WHO Burnout Framework</span>
       <span style="background:rgba(255,255,255,0.16);padding:6px 14px;border-radius:20px;font-size:0.85rem;">✓ Untuk semua sektor</span>
     </div>
-    <a href="https://wa.me/628122969435?text=Halo%2C+saya+ingin+info+pelatihan+K3+psikososial+dan+kesehatan+mental+kerja+untuk+perusahaan%2Finstansi+kami."
+    <a href="https://wa.me/6287759151278?text=Halo%2C+saya+ingin+info+pelatihan+K3+psikososial+dan+kesehatan+mental+kerja+untuk+perusahaan%2Finstansi+kami."
        target="_blank" rel="noopener"
        style="display:inline-block;background:#C6621C;color:#fff;padding:14px 32px;border-radius:6px;font-weight:700;text-decoration:none;font-size:1rem;">
       Konsultasi Program K3 Psikososial
@@ -245,7 +245,7 @@ $schema = [
         <div style="font-weight:700;color:#0A4A2E;margin-bottom:6px;font-size:0.93rem;"><?php echo $p[0]; ?></div>
         <div style="font-size:0.82rem;color:#C6621C;font-weight:600;margin-bottom:6px;"><?php echo $p[1]; ?></div>
         <div style="font-size:0.83rem;color:#666;margin-bottom:14px;line-height:1.5;"><?php echo $p[2]; ?></div>
-        <a href="https://wa.me/628122969435?text=Halo%2C+saya+tertarik+pelatihan+<?php echo urlencode($p[0]); ?>+untuk+perusahaan%2Finstansi+kami."
+        <a href="https://wa.me/6287759151278?text=Halo%2C+saya+tertarik+pelatihan+<?php echo urlencode($p[0]); ?>+untuk+perusahaan%2Finstansi+kami."
            target="_blank" rel="noopener"
            style="display:inline-block;background:#1a0a3a;color:#fff;padding:7px 16px;border-radius:4px;text-decoration:none;font-size:0.82rem;font-weight:600;">
           Tanya via WhatsApp →
@@ -326,10 +326,10 @@ $schema = [
       Kepmenaker 4/2026 sudah berlaku — mulai program K3 psikososial sekarang sebelum menjadi kewajiban yang terlambat dipenuhi. Hubungi kami untuk gap analysis dan proposal program yang sesuai skala perusahaan Anda.
     </p>
     <p style="opacity:0.75;font-size:0.9rem;margin:0 0 24px;">Berlaku untuk semua sektor · Instansi pemerintah &amp; swasta · In-house di lokasi Anda</p>
-    <a href="https://wa.me/628122969435?text=Halo%2C+saya+ingin+info+pelatihan+K3+psikososial+dan+kesehatan+mental+kerja.+Tolong+kirim+info+program+dan+harga."
+    <a href="https://wa.me/6287759151278?text=Halo%2C+saya+ingin+info+pelatihan+K3+psikososial+dan+kesehatan+mental+kerja.+Tolong+kirim+info+program+dan+harga."
        target="_blank" rel="noopener"
        style="display:inline-block;background:#C6621C;color:#fff;padding:14px 36px;border-radius:6px;font-weight:700;text-decoration:none;font-size:1.05rem;">
-      WhatsApp: 0812-2969-435
+      WhatsApp: 0877-5915-1278
     </a>
   </section>
 

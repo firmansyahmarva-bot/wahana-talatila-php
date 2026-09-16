@@ -352,7 +352,7 @@ if ($faqs) {
 
 <footer class="foot"><div class="wrap">
   <div class="links"><a href="/">Beranda</a>&middot;<a href="/#produk">Semua Program</a>&middot;<a href="/jadwal/">Jadwal</a>&middot;<a href="<?= e($settings['hub_path']) ?>">Pusat K3</a></div>
-  &#128241; 0812-2969-435 &middot; &#9993;&#65039; info@wahanatotalita.com &middot; &#128205; Yogyakarta<br>
+  &#128241; 0877-5915-1278 &middot; &#9993;&#65039; info@wahanatotalita.com &middot; &#128205; Yogyakarta<br>
   <span style="opacity:.65">&copy; <?= $year ?> <?= e($settings['org_name']) ?></span>
 </div></footer>
 

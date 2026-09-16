@@ -57,7 +57,7 @@ $schema = [
     '@type'    => 'Organization',
     'name'     => 'Wahana Totalita Konsultan',
     'url'      => 'https://wahanatotalita.com',
-    'telephone'=> '+628122969435',
+    'telephone'=> '+6287759151278',
     'address'  => ['@type'=>'PostalAddress','addressLocality'=>'Yogyakarta','addressRegion'=>'DI Yogyakarta','addressCountry'=>'ID'],
   ],
 ];
@@ -98,7 +98,7 @@ $schema = [
       Laboratorium menyimpan kombinasi bahaya yang jarang ada di tempat kerja lain: bahan kimia korosif, agen biologis infeksius, radiasi, gas bertekanan tinggi, dan kriogenik — semua dalam satu ruang kerja yang sering kali berukuran kecil. K3 laboratorium adalah disiplin tersendiri yang membutuhkan pemahaman teknis mendalam tentang sifat setiap bahaya yang ada.
     </p>
     <p style="font-size:0.88rem;opacity:0.75;margin:0 0 24px;">Regulasi: UU 1/1970 &nbsp;|&nbsp; SNI ISO/IEC 17025 &nbsp;|&nbsp; Permenkes 7/2019 &nbsp;|&nbsp; Perka BAPETEN 4/2013</p>
-    <a href="https://wa.me/628122969435?text=Halo%2C+saya+ingin+konsultasi+program+K3+Laboratorium+dari+Wahana+Totalita."
+    <a href="https://wa.me/6287759151278?text=Halo%2C+saya+ingin+konsultasi+program+K3+Laboratorium+dari+Wahana+Totalita."
        target="_blank" rel="noopener"
        style="display:inline-block;background:#C6621C;color:#fff;padding:14px 32px;border-radius:6px;font-weight:700;text-decoration:none;font-size:1rem;">
       Konsultasi Program K3 Lab
@@ -219,7 +219,7 @@ $schema = [
           <p style="color:#555;font-size:0.87rem;line-height:1.6;margin:0;"><?php echo $p[1]; ?></p>
         </div>
         <div style="padding:0 16px 16px;">
-          <a href="<?php echo 'https://wa.me/628122969435?text=Halo%2C+saya+ingin+info+program+'.urlencode($p[0]).' untuk laboratorium kami.'; ?>"
+          <a href="<?php echo 'https://wa.me/6287759151278?text=Halo%2C+saya+ingin+info+program+'.urlencode($p[0]).' untuk laboratorium kami.'; ?>"
              target="_blank" rel="noopener"
              style="display:block;text-align:center;background:#C6621C;color:#fff;padding:10px;border-radius:5px;text-decoration:none;font-weight:600;font-size:0.88rem;">
             Tanya via WhatsApp
@@ -280,10 +280,10 @@ $schema = [
     <p style="opacity:0.9;margin:0 0 28px;line-height:1.7;max-width:600px;margin-left:auto;margin-right:auto;">
       Dari orientasi K3 untuk peneliti baru hingga audit keselamatan dan penyusunan SOP laboratorium — Wahana Totalita siap mendampingi institusi Anda.
     </p>
-    <a href="https://wa.me/628122969435?text=Halo%2C+saya+ingin+konsultasi+program+K3+Laboratorium+untuk+institusi+kami."
+    <a href="https://wa.me/6287759151278?text=Halo%2C+saya+ingin+konsultasi+program+K3+Laboratorium+untuk+institusi+kami."
        target="_blank" rel="noopener"
        style="display:inline-block;background:#C6621C;color:#fff;padding:14px 36px;border-radius:6px;font-weight:700;text-decoration:none;font-size:1.05rem;">
-      WhatsApp: 0812-2969-435
+      WhatsApp: 0877-5915-1278
     </a>
   </section>
 

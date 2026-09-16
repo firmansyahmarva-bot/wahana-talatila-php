@@ -4,7 +4,7 @@ require_once __DIR__ . '/config.php';
 $s          = get_all_settings();
 $categories = get_categories();
 $all_trainings = get_trainings();
-$wa_number  = $s['wa_number'] ?? '6281235036420';
+$wa_number  = $s['wa_number'] ?? '6287759151278';
 
 $by_cat     = [];
 $cat_counts = [];

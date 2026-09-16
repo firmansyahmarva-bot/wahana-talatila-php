@@ -413,11 +413,11 @@ section{padding:64px 0}
   <div class="header-inner">
     <a href="/" class="brand">Wahana <span>Totalita</span></a>
     <div class="header-actions">
-      <a href="tel:+628122969435" class="header-phone">
+      <a href="tel:+6287759151278" class="header-phone">
         <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        0812-2969-435
+        0877-5915-1278
       </a>
-      <a href="https://wa.me/628122969435?text=Halo%2C%20saya%20ingin%20perpanjang%20SKP%20Ahli%20K3%20saya.%20Mohon%20info%20prosedurnya." class="btn-wa-header" target="_blank" rel="noopener">
+      <a href="https://wa.me/6287759151278?text=Halo%2C%20saya%20ingin%20perpanjang%20SKP%20Ahli%20K3%20saya.%20Mohon%20info%20prosedurnya." class="btn-wa-header" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a6.47 6.47 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
         WhatsApp
       </a>
@@ -431,11 +431,11 @@ section{padding:64px 0}
     <h1>Perpanjang SKP & Lisensi K3 <em>dengan Mudah</em> — Resmi Kemnaker & BNSP</h1>
     <p class="hero-sub">Proses administratif ke Kemnaker/Disnaker, tanpa pelatihan ulang selama SKP masih dalam toleransi. Dibantu sampai SKP baru terbit di tangan Anda.</p>
     <div class="hero-actions">
-      <a href="https://wa.me/628122969435?text=Halo%2C%20saya%20ingin%20perpanjang%20SKP%20Ahli%20K3%20saya.%20Mohon%20info%20prosedur%20dan%20biayanya." class="btn btn-wa" target="_blank" rel="noopener">
+      <a href="https://wa.me/6287759151278?text=Halo%2C%20saya%20ingin%20perpanjang%20SKP%20Ahli%20K3%20saya.%20Mohon%20info%20prosedur%20dan%20biayanya." class="btn btn-wa" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a6.47 6.47 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
         Konsultasi Gratis via WhatsApp
       </a>
-      <a href="https://wa.me/628122969435?text=Halo%2C%20saya%20ingin%20tanya%20soal%20perpanjangan%20SKP%20K3." class="btn btn-ghost" target="_blank" rel="noopener">Tanya Jadwal & Biaya</a>
+      <a href="https://wa.me/6287759151278?text=Halo%2C%20saya%20ingin%20tanya%20soal%20perpanjangan%20SKP%20K3." class="btn btn-ghost" target="_blank" rel="noopener">Tanya Jadwal & Biaya</a>
     </div>
     <div class="hero-trust">
       <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Proses Administratif</span>
@@ -450,7 +450,7 @@ section{padding:64px 0}
     <span class="eyebrow">Pengenalan</span>
     <h2>Apa Itu Perpanjangan SKP & Lisensi K3?</h2>
     <p>Surat Keterangan Pengalaman (SKP) dan Lisensi Ahli K3 adalah dokumen wajib yang membuktikan kewenangan Anda sebagai tenaga ahli keselamatan dan kesehatan kerja. Setiap SKP dan Lisensi Ahli K3 yang diterbitkan Kemnaker RI maupun BNSP memiliki masa berlaku 3 tahun, dan wajib diperpanjang sebelum tanggal kadaluarsa tiba. Perpanjangan SKP adalah proses administratif ke Kemnaker atau Dinas Ketenagakerjaan setempat, bukan pelatihan, selama dokumen Anda belum melewati batas toleransi expired.</p>
-    <p style="margin-top:14px">Bagi Anda yang masih memegang SKP dan Lisensi K3 dalam masa berlakunya, proses perpanjangan jauh lebih ringan dibandingkan mengulang dari awal. Tidak perlu mengikuti pelatihan ulang atau Refreshing K3 berhari-hari. Cukup siapkan dokumen, kami bantu ajukan ke instansi berwenang, dan pantau prosesnya sampai SKP baru terbit di tangan Anda. <a href="https://wa.me/628122969435?text=Halo%2C%20saya%20ingin%20perpanjang%20SKP%20Ahli%20K3%20saya.%20Mohon%20info%20prosedurnya." style="color:var(--gold-dark);font-weight:700;text-decoration:underline" target="_blank" rel="noopener">Konsultasikan status SKP Anda via WhatsApp</a> — tim kami merespons dalam 1×24 jam.</p>
+    <p style="margin-top:14px">Bagi Anda yang masih memegang SKP dan Lisensi K3 dalam masa berlakunya, proses perpanjangan jauh lebih ringan dibandingkan mengulang dari awal. Tidak perlu mengikuti pelatihan ulang atau Refreshing K3 berhari-hari. Cukup siapkan dokumen, kami bantu ajukan ke instansi berwenang, dan pantau prosesnya sampai SKP baru terbit di tangan Anda. <a href="https://wa.me/6287759151278?text=Halo%2C%20saya%20ingin%20perpanjang%20SKP%20Ahli%20K3%20saya.%20Mohon%20info%20prosedurnya." style="color:var(--gold-dark);font-weight:700;text-decoration:underline" target="_blank" rel="noopener">Konsultasikan status SKP Anda via WhatsApp</a> — tim kami merespons dalam 1×24 jam.</p>
   </div>
 </section>
 
@@ -468,14 +468,14 @@ section{padding:64px 0}
         <span class="stamp stamp-green">Belum Kadaluarsa</span>
         <h3>SKP saya masih berlaku</h3>
         <p>Anda hanya perlu mengajukan perpanjangan administratif. Prosesnya jauh lebih ringan, lebih murah, dan kewenangan K3 Anda tidak terputus.</p>
-        <a href="https://wa.me/628122969435?text=Halo%2C%20saya%20ingin%20perpanjang%20SKP%20Ahli%20K3%20saya.%20Mohon%20info%20prosedurnya." class="btn btn-wa btn-block" target="_blank" rel="noopener">Ajukan Perpanjangan SKP</a>
+        <a href="https://wa.me/6287759151278?text=Halo%2C%20saya%20ingin%20perpanjang%20SKP%20Ahli%20K3%20saya.%20Mohon%20info%20prosedurnya." class="btn btn-wa btn-block" target="_blank" rel="noopener">Ajukan Perpanjangan SKP</a>
       </div>
       <div class="decision-or">ATAU</div>
       <div class="decision-card card-bad">
         <span class="stamp stamp-red">Sudah Kadaluarsa</span>
         <h3>SKP saya sudah lewat tanggal</h3>
         <p>Jika expired lebih dari 1 tahun, biasanya wajib mengikuti Refreshing K3 atau pelatihan ulang terlebih dahulu sebelum perpanjangan bisa diproses.</p>
-        <a href="https://wa.me/628122969435?text=Halo%2C%20saya%20ingin%20tanya%20soal%20perpanjangan%20SKP%20K3.%20Kapan%20SKP%20saya%20harus%20diperpanjang%3F" class="btn btn-ghost btn-block" target="_blank" rel="noopener" style="color:var(--ink);border-color:var(--line)">Tanya Opsi Pelatihan Ulang</a>
+        <a href="https://wa.me/6287759151278?text=Halo%2C%20saya%20ingin%20tanya%20soal%20perpanjangan%20SKP%20K3.%20Kapan%20SKP%20saya%20harus%20diperpanjang%3F" class="btn btn-ghost btn-block" target="_blank" rel="noopener" style="color:var(--ink);border-color:var(--line)">Tanya Opsi Pelatihan Ulang</a>
       </div>
     </div>
   </div>
@@ -563,7 +563,7 @@ section{padding:64px 0}
         <p style="font-size:14px;color:var(--ink-soft);margin-top:6px">Sesuai bidang spesialisasi masing-masing.</p>
       </div>
     </div>
-    <p style="margin-top:22px;font-size:14px;color:var(--ink-soft)">Jika Anda tidak yakin skema mana yang Anda miliki, <a href="https://wa.me/628122969435?text=Halo%2C%20saya%20ingin%20cek%20skema%20SKP%20saya%20dan%20tanya%20perpanjangannya." style="color:var(--gold-dark);font-weight:700;text-decoration:underline" target="_blank" rel="noopener">kirimkan scan SKP dan Lisensi lama Anda</a> — tim kami akan memverifikasi jenis lisensi dan prosedur yang sesuai.</p>
+    <p style="margin-top:22px;font-size:14px;color:var(--ink-soft)">Jika Anda tidak yakin skema mana yang Anda miliki, <a href="https://wa.me/6287759151278?text=Halo%2C%20saya%20ingin%20cek%20skema%20SKP%20saya%20dan%20tanya%20perpanjangannya." style="color:var(--gold-dark);font-weight:700;text-decoration:underline" target="_blank" rel="noopener">kirimkan scan SKP dan Lisensi lama Anda</a> — tim kami akan memverifikasi jenis lisensi dan prosedur yang sesuai.</p>
   </div>
 </section>
 
@@ -593,7 +593,7 @@ section{padding:64px 0}
         </li>
       </ul>
     </div>
-    <p style="margin-top:18px;font-size:14px;color:var(--ink-soft)">Informasi di atas mengacu pada praktik pengelolaan SKP dan Lisensi Ahli K3 oleh Kemnaker RI. Untuk kepastian status spesifik Anda, silakan <a href="https://wa.me/628122969435?text=Halo%2C%20saya%20ingin%20cek%20status%20SKP%20saya%20dan%20tanya%20batas%20toleransi%20expirednya." style="color:var(--gold-dark);font-weight:700;text-decoration:underline" target="_blank" rel="noopener">konsultasikan langsung</a> dengan menyertakan scan dokumen lama.</p>
+    <p style="margin-top:18px;font-size:14px;color:var(--ink-soft)">Informasi di atas mengacu pada praktik pengelolaan SKP dan Lisensi Ahli K3 oleh Kemnaker RI. Untuk kepastian status spesifik Anda, silakan <a href="https://wa.me/6287759151278?text=Halo%2C%20saya%20ingin%20cek%20status%20SKP%20saya%20dan%20tanya%20batas%20toleransi%20expirednya." style="color:var(--gold-dark);font-weight:700;text-decoration:underline" target="_blank" rel="noopener">konsultasikan langsung</a> dengan menyertakan scan dokumen lama.</p>
   </div>
 </section>
 
@@ -628,7 +628,7 @@ section{padding:64px 0}
       </tbody>
     </table>
     <div class="price-note">
-      <p><strong>Catatan penting:</strong> Harga di atas adalah estimasi pasar 2025–2026. Harga pasti dapat berbeda tergantung skema keahlian, wilayah Dinas Ketenagakerjaan, dan kelengkapan dokumen Anda. Untuk penawaran resmi, silakan <a href="https://wa.me/628122969435?text=Halo%2C%20saya%20ingin%20tanya%20biaya%20perpanjangan%20SKP%20saya." style="color:var(--gold-dark);font-weight:700;text-decoration:underline" target="_blank" rel="noopener">konsultasi via WhatsApp</a> dengan menyertakan scan SKP dan Lisensi lama.</p>
+      <p><strong>Catatan penting:</strong> Harga di atas adalah estimasi pasar 2025–2026. Harga pasti dapat berbeda tergantung skema keahlian, wilayah Dinas Ketenagakerjaan, dan kelengkapan dokumen Anda. Untuk penawaran resmi, silakan <a href="https://wa.me/6287759151278?text=Halo%2C%20saya%20ingin%20tanya%20biaya%20perpanjangan%20SKP%20saya." style="color:var(--gold-dark);font-weight:700;text-decoration:underline" target="_blank" rel="noopener">konsultasi via WhatsApp</a> dengan menyertakan scan SKP dan Lisensi lama.</p>
       <p style="margin-top:10px">Jika SKP Anda sudah expired lebih dari 1 tahun, biasanya wajib mengikuti Refreshing K3 terlebih dahulu. Lihat detail program dan jadwal Refreshing K3 di halaman <a href="/refreshing-k3" style="color:var(--gold-dark);font-weight:700;text-decoration:underline">Refreshing K3</a>.</p>
     </div>
   </div>
@@ -750,22 +750,22 @@ section{padding:64px 0}
     <h2>Jangan Tunggu Sampai Tanggalnya Lewat</h2>
     <p>SKP Anda adalah aset profesional. Perpanjang tepat waktu, hemat biaya, dan jaga kewenangan K3 Anda tetap berjalan.</p>
     <div class="final-actions">
-      <a href="https://wa.me/628122969435?text=Halo%2C%20saya%20ingin%20perpanjang%20SKP%20Ahli%20K3%20saya.%20Mohon%20info%20prosedur%20dan%20biayanya." class="btn btn-wa" target="_blank" rel="noopener">
+      <a href="https://wa.me/6287759151278?text=Halo%2C%20saya%20ingin%20perpanjang%20SKP%20Ahli%20K3%20saya.%20Mohon%20info%20prosedur%20dan%20biayanya." class="btn btn-wa" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a6.47 6.47 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
         Konsultasi Gratis via WhatsApp
       </a>
-      <a href="https://wa.me/628122969435?text=Halo%2C%20saya%20ingin%20tanya%20soal%20perpanjangan%20SKP%20K3." class="btn btn-ghost" target="_blank" rel="noopener">Tanya Jadwal & Biaya</a>
+      <a href="https://wa.me/6287759151278?text=Halo%2C%20saya%20ingin%20tanya%20soal%20perpanjangan%20SKP%20K3." class="btn btn-ghost" target="_blank" rel="noopener">Tanya Jadwal & Biaya</a>
     </div>
   </div>
 </section>
 
 <footer class="site-footer">
-  <p>© 2026 <a href="/">Wahana Totalita Konsultan</a> &nbsp;|&nbsp; wahanatotalita.com &nbsp;|&nbsp; Yogyakarta, Indonesia &nbsp;|&nbsp; <a href="tel:+628122969435">+62 812-2969-435</a></p>
+  <p>© 2026 <a href="/">Wahana Totalita Konsultan</a> &nbsp;|&nbsp; wahanatotalita.com &nbsp;|&nbsp; Yogyakarta, Indonesia &nbsp;|&nbsp; <a href="tel:+6287759151278">+62 812-2969-435</a></p>
   <p style="margin-top:6px">Layanan: <a href="/">Beranda</a> &nbsp;·&nbsp; <a href="/pelatihan-ahli-k3-umum">Pelatihan Ahli K3 Umum</a> &nbsp;·&nbsp; <a href="/refreshing-k3">Refreshing K3</a></p>
 </footer>
 
 <div class="sticky-cta">
-  <a href="https://wa.me/628122969435?text=Halo%2C%20saya%20ingin%20perpanjang%20SKP%20Ahli%20K3%20saya.%20Mohon%20info%20prosedur%20dan%20biayanya." class="btn btn-wa btn-block" target="_blank" rel="noopener">
+  <a href="https://wa.me/6287759151278?text=Halo%2C%20saya%20ingin%20perpanjang%20SKP%20Ahli%20K3%20saya.%20Mohon%20info%20prosedur%20dan%20biayanya." class="btn btn-wa btn-block" target="_blank" rel="noopener">
     <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a6.47 6.47 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
     Konsultasi Gratis via WhatsApp
   </a>

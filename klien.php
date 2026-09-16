@@ -7,7 +7,7 @@ $s = get_all_settings();
  * recovered from historical site content (2012-2023 Wayback archive).
  * Zero DB dependency, modeled on sertifikasi-bnsp.php.
  */
-$wa_number = '628122969435';
+$wa_number = '6287759151278';
 $wa_join = rawurlencode('Halo, saya ingin mendiskusikan program pelatihan untuk perusahaan kami');
 $wa_join_url = "https://wa.me/{$wa_number}?text={$wa_join}";
 $year = date('Y');
@@ -51,7 +51,7 @@ require __DIR__ . '/includes/head.php';
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   "name": "Wahana Totalita Konsultan",
-  "telephone": "+628122969435",
+  "telephone": "+6287759151278",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Jl. Wonosari KM 8.5",

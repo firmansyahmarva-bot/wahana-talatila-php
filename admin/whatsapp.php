@@ -78,7 +78,7 @@ $all_clients = $pdo->query(
      ORDER BY cl.name ASC"
 )->fetchAll();
 
-$wa_number = get_setting('wa_number', '6281235036420');
+$wa_number = get_setting('wa_number', '6287759151278');
 $flash = flash_get();
 ?>
 <!DOCTYPE html>
@@ -179,11 +179,11 @@ $flash = flash_get();
                 $badge = $days < 0 ? 'badge-expired' : ($days <= 7 ? 'badge-expired' : 'badge-expiring');
                 // Build WA message
                 if ($days < 0) {
-                  $msg = "Halo {$ec['client_name']}, sertifikasi *{$ec['course_name']}* Anda telah *kedaluwarsa* sejak " . date('d M Y', strtotime($ec['expiry_date'])) . ".\n\nSegera perpanjang:\n🌐 wahanatotalita.com\n📱 wa.me/6281235036420";
+                  $msg = "Halo {$ec['client_name']}, sertifikasi *{$ec['course_name']}* Anda telah *kedaluwarsa* sejak " . date('d M Y', strtotime($ec['expiry_date'])) . ".\n\nSegera perpanjang:\n🌐 wahanatotalita.com\n📱 wa.me/6287759151278";
                 } elseif ($days <= 7) {
-                  $msg = "Halo {$ec['client_name']}, PENGINGAT PENTING ⚠️\n\nSertifikasi *{$ec['course_name']}* Anda akan kedaluwarsa dalam *{$days} hari* (" . date('d M Y', strtotime($ec['expiry_date'])) . ").\n\nJangan sampai terlambat!\n🌐 wahanatotalita.com\n📱 wa.me/6281235036420";
+                  $msg = "Halo {$ec['client_name']}, PENGINGAT PENTING ⚠️\n\nSertifikasi *{$ec['course_name']}* Anda akan kedaluwarsa dalam *{$days} hari* (" . date('d M Y', strtotime($ec['expiry_date'])) . ").\n\nJangan sampai terlambat!\n🌐 wahanatotalita.com\n📱 wa.me/6287759151278";
                 } else {
-                  $msg = "Halo {$ec['client_name']}, sertifikasi *{$ec['course_name']}* Anda akan kedaluwarsa pada " . date('d M Y', strtotime($ec['expiry_date'])) . " ({$days} hari lagi).\n\nSegera perpanjang:\n🌐 wahanatotalita.com\n📱 wa.me/6281235036420";
+                  $msg = "Halo {$ec['client_name']}, sertifikasi *{$ec['course_name']}* Anda akan kedaluwarsa pada " . date('d M Y', strtotime($ec['expiry_date'])) . " ({$days} hari lagi).\n\nSegera perpanjang:\n🌐 wahanatotalita.com\n📱 wa.me/6287759151278";
                 }
               ?>
               <tr data-phone="<?= e($ec['phone']) ?>" data-msg="<?= e(addslashes($msg)) ?>">
@@ -218,7 +218,7 @@ $flash = flash_get();
             <tbody>
               <?php foreach ($unpaid_clients as $uc):
                 $sisa = $uc['total_amount'] - $uc['paid_amount'];
-                $msg = "Halo {$uc['recipient']}, pembayaran *Invoice {$uc['invoice_number']}* sebesar *Rp " . number_format($sisa,0,',','.') . "* belum lunas.\n\nMohon segera selesaikan pembayaran untuk melanjutkan proses sertifikasi.\n\nTerima kasih 🙏\n\n📱 wa.me/6281235036420";
+                $msg = "Halo {$uc['recipient']}, pembayaran *Invoice {$uc['invoice_number']}* sebesar *Rp " . number_format($sisa,0,',','.') . "* belum lunas.\n\nMohon segera selesaikan pembayaran untuk melanjutkan proses sertifikasi.\n\nTerima kasih 🙏\n\n📱 wa.me/6287759151278";
               ?>
               <tr>
                 <td><strong><?= e($uc['recipient']) ?></strong><div style="font-size:11px;color:#6b7280"><?= e($uc['phone']) ?></div></td>

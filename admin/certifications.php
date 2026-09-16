@@ -192,7 +192,7 @@ $flash = flash_get();
                 $wa_msg = "Halo {$c['client_name']}, sertifikasi *{$c['course_name']}* Anda " .
                   ($days < 0 ? "telah kedaluwarsa sejak " . date('d M Y', strtotime($c['expiry_date'])) :
                    "akan kedaluwarsa pada " . date('d M Y', strtotime($c['expiry_date'])) . " ({$days} hari lagi)") .
-                  ".\n\nSegera perpanjang di:\n🌐 wahanatotalita.com\n📱 wa.me/6281235036420";
+                  ".\n\nSegera perpanjang di:\n🌐 wahanatotalita.com\n📱 wa.me/6287759151278";
               ?>
               <tr data-status="<?= $status_badge ?>"
                   data-search="<?= e(strtolower($c['client_name'].' '.$c['course_name'].' '.($c['cert_number']??''))) ?>">
