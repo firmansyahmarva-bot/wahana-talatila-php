@@ -1,4 +1,4 @@
-﻿# OS Files
+# OS Files
 Thumbs.db
 ehthumbs.db
 Desktop.ini
@@ -21,6 +21,19 @@ staging-app/Archief.zip
 staging-app/__MACOSX/
 staging-app/dist/__MACOSX/
 
+# Subdomains & Landing Pages (Hostinger public_html decoupling)
+k3umum-publichtml/
+smk3/
+lp/
+pedia-public-html/
+staging-app/
+website-engine/
+iso/
+hse/
+k3umum/
+pedia/
+
 # IDE / Editor
 .vscode/
 .idea/
+

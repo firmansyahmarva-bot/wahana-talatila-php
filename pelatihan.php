@@ -439,18 +439,97 @@ if ('requestIdleCallback' in window) {
         </a>
       </div>
 
-      <!-- CONTEXTUAL SEO INTERLINKS -->
-      <div class="pd-interlink-box">
-        <h4>Program Pelatihan &amp; Referensi Terkait</h4>
-        <ul class="pd-interlink-list">
-          <li><a href="<?= e($hub_link) ?>">📁 Semua <?= e($training['cat_name']) ?></a></li>
-          <li><a href="/jadwal/">📅 Jadwal Pelatihan Bulan Ini</a></li>
-          <li><a href="/tools/jsa-builder">🛠️ JSA Builder Online</a></li>
-          <li><a href="/tools/kalkulator-k3">🧮 Kalkulator K3 (FR &amp; SR)</a></li>
-          <li><a href="/tools/safety-talk">📋 Materi Safety Talk 5 Menit</a></li>
-          <li><a href="/verifikasi/">✅ Cek Keaslian Sertifikat</a></li>
-          <li><a href="/glosarium/">📖 Glosarium Istilah K3</a></li>
-        </ul>
+      <?php
+      // Option A: Core Pillar Program Interlinks
+      $all_pillars = [
+          [
+              'slug'  => 'ak3-bnsp',
+              'url'   => '/pelatihan/ak3-bnsp/',
+              'name'  => 'Sertifikasi Ahli K3 BNSP',
+              'desc'  => 'Standarisasi kompetensi personil K3 profesional bersertifikasi Badan Nasional Sertifikasi Profesi berbasis SKKNI.',
+              'badge' => 'BNSP',
+          ],
+          [
+              'slug'  => 'pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri',
+              'url'   => '/pelatihan/pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri/',
+              'name'  => 'Pelatihan K3 Operator Forklift Kelas 2 Kemnaker RI',
+              'desc'  => 'Lisensi K3 resmi (SIO) operator forklift untuk operasional pergudangan, logistik, dan industri manufaktur.',
+              'badge' => 'Kemnaker RI',
+          ],
+          [
+              'slug'  => 'pelatihan-teknisi-bejana-tekan-sertifikasi-kemnaker-ri',
+              'url'   => '/pelatihan/pelatihan-teknisi-bejana-tekan-sertifikasi-kemnaker-ri/',
+              'name'  => 'Pelatihan Teknisi Bejana Tekan Kemnaker RI',
+              'desc'  => 'Kualifikasi teknisi inspeksi dan pengoperasian bejana tekan serta tangki timbun bertekanan tinggi.',
+              'badge' => 'Kemnaker RI',
+          ],
+          [
+              'slug'  => 'pelatihan-dan-sertifikasi-pelaksanaan-reklamasi-pada-kegiatan-petambangan-mineral-dan-batubara-sertifikasi-bnsp',
+              'url'   => '/pelatihan/pelatihan-dan-sertifikasi-pelaksanaan-reklamasi-pada-kegiatan-petambangan-mineral-dan-batubara-sertifikasi-bnsp/',
+              'name'  => 'Pelatihan Reklamasi Pertambangan Minerba BNSP',
+              'desc'  => 'Kompetensi teknis perencanaan dan pelaksanaan reklamasi lingkungan pada area tambang mineral dan batubara.',
+              'badge' => 'BNSP',
+          ],
+          [
+              'slug'  => 'pelatihan-operator-pesawat-tenaga-produksi-ptp',
+              'url'   => '/pelatihan/pelatihan-operator-pesawat-tenaga-produksi-ptp/',
+              'name'  => 'Pelatihan Operator Pesawat Tenaga & Produksi (PTP)',
+              'desc'  => 'Lisensi K3 operator mesin perkakas, mesin produksi, dan penggerak mula sesuai Permenaker No. 38 Tahun 2016.',
+              'badge' => 'Kemnaker RI',
+          ],
+          [
+              'slug'  => 'pelatihan-dan-sertifikasi-fillet-plate-welder-sertifikasi-bnsp',
+              'url'   => '/pelatihan/pelatihan-dan-sertifikasi-fillet-plate-welder-sertifikasi-bnsp/',
+              'name'  => 'Pelatihan & Sertifikasi Fillet Plate Welder BNSP',
+              'desc'  => 'Uji kompetensi juru las sambungan fillet pelat industri konstruksi, fabrikasi baja, dan manufaktur.',
+              'badge' => 'BNSP',
+          ],
+          [
+              'slug'  => 'pelatihan-damkar-paralel-kelas-dcba-sertifikasi-kemnaker-ri',
+              'url'   => '/pelatihan/pelatihan-damkar-paralel-kelas-dcba-sertifikasi-kemnaker-ri/',
+              'name'  => 'Pelatihan Damkar Paralel Kelas D, C, B, A Kemnaker RI',
+              'desc'  => 'Sertifikasi regu penanggulangan kebakaran di tempat kerja berjenjang sesuai standar Kepmenaker 186/1999.',
+              'badge' => 'Kemnaker RI',
+          ],
+          [
+              'slug'  => 'pelatihan-dan-sertifikasi-pipe-fitter-sertifikasi-bnsp',
+              'url'   => '/pelatihan/pelatihan-dan-sertifikasi-pipe-fitter-sertifikasi-bnsp/',
+              'name'  => 'Pelatihan & Sertifikasi Pipe Fitter BNSP',
+              'desc'  => 'Sertifikasi kompetensi teknisi pemasangan, pemotongan, dan fabrikasi sistem perpipaan industri proses & migas.',
+              'badge' => 'BNSP',
+          ],
+          [
+              'slug'  => 'tkbt-ii-surabaya',
+              'url'   => '/pelatihan/tkbt-ii-surabaya/',
+              'name'  => 'Pelatihan Bekerja di Ketinggian (TKBT Tingkat II)',
+              'desc'  => 'Lisensi K3 teknisi keselamatan bekerja pada ketinggian, struktur bangunan tinggi, dan scaffolding.',
+              'badge' => 'Kemnaker RI',
+          ],
+      ];
+
+      // Exclude self, pick up to 4 complementary pillar programs
+      $current_slug = $training['slug'] ?? '';
+      $filtered_pillars = array_values(array_filter($all_pillars, fn($p) => $p['slug'] !== $current_slug));
+      $display_pillars = array_slice($filtered_pillars, 0, 4);
+      ?>
+
+      <!-- REKOMENDASI LISENSI & SERTIFIKASI TERKAIT (OPTION A PILLAR INTERLINKS) -->
+      <div class="pd-section pd-pillar-recommendations">
+        <p class="pd-section-eyebrow">Pengembangan Kompetensi</p>
+        <h2>Rekomendasi Sertifikasi &amp; Lisensi K3 Terkait</h2>
+        <p class="pd-pillar-intro">
+          Untuk melengkapi kualifikasi kerja di industri dan memenuhi kepatuhan regulasi keselamatan kerja, tenaga kerja dan pengawas juga disarankan melengkapi portofolio sertifikasi kompetensi terkait berikut:
+        </p>
+        <div class="pd-pillar-grid">
+          <?php foreach ($display_pillars as $p): ?>
+          <article class="pd-pillar-card">
+            <span class="pd-pillar-badge"><?= e($p['badge']) ?></span>
+            <h3><a href="<?= e($p['url']) ?>"><?= e($p['name']) ?></a></h3>
+            <p><?= e($p['desc']) ?></p>
+            <a href="<?= e($p['url']) ?>" class="pd-pillar-link">Lihat Silabus &amp; Jadwal &rarr;</a>
+          </article>
+          <?php endforeach; ?>
+        </div>
       </div>
 
       <div class="pd-section">

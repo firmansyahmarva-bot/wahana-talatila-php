@@ -97,11 +97,33 @@ function get_related_articles(int $exclude_id, string $category, int $limit = 3)
 }
 
 // ─── Article thumbnail fallback ───────────────────────────────────────────
-function artikel_thumb(string $thumb = '', string $category = ''): string {
-    if ($thumb && filter_var($thumb, FILTER_VALIDATE_URL)) return $thumb;
+function artikel_thumb(string $thumb = '', string $category = '', string $seed = ''): string {
+    if (!empty($thumb)) {
+        if (filter_var($thumb, FILTER_VALIDATE_URL) || str_starts_with($thumb, '/') || str_starts_with($thumb, 'assets/') || str_starts_with($thumb, 'images/')) {
+            return $thumb;
+        }
+    }
 
-    $real = trust_photo($category);
-    if ($real !== '') return $real;
+    $hash_seed = $seed !== '' ? $seed : $category;
+    if (function_exists('trust_photo')) {
+        $real = trust_photo($hash_seed);
+        if ($real !== '') return $real;
+    }
+
+    static $gal_thumbs = null;
+    if ($gal_thumbs === null) {
+        $td = __DIR__ . '/galeri/thumbs/';
+        if (is_dir($td)) {
+            $files = glob($td . '*.{jpg,JPG,jpeg,JPEG,png,PNG,webp}', GLOB_BRACE);
+            $gal_thumbs = !empty($files) ? array_values(array_map('basename', $files)) : [];
+        } else {
+            $gal_thumbs = [];
+        }
+    }
+    if (!empty($gal_thumbs)) {
+        $idx = abs(crc32($hash_seed)) % count($gal_thumbs);
+        return '/galeri/thumbs/' . rawurlencode($gal_thumbs[$idx]);
+    }
 
     $fallbacks = [
         'K3'          => 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80&auto=format&fit=crop',

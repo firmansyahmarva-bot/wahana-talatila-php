@@ -146,7 +146,7 @@ if ($cat) {
       <?php foreach ($articles as $i => $a): ?>
       <article class="ak-card <?= $i === 0 && !$offset ? 'ak-card-featured' : '' ?>">
         <a href="/artikel/<?= e($a['slug']) ?>/" class="ak-card-img-wrap">
-          <img src="<?= e(artikel_thumb($a['thumbnail'] ?? '', $a['category'])) ?>"
+          <img src="<?= e(artikel_thumb($a['thumbnail'] ?? '', $a['category'], $a['slug'] ?? '')) ?>"
                alt="<?= e($a['title']) ?>"
                loading="<?= $i < 3 ? 'eager' : 'lazy' ?>"
                width="600" height="340">

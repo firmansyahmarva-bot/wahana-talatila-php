@@ -63,7 +63,7 @@ $article_schema = [
     'articleSection'   => $article['category'],
     'inLanguage'       => 'id',
 ];
-if (!empty($article['thumbnail'])) $article_schema['image'] = artikel_thumb($article['thumbnail'], $article['category']);
+if (!empty($article['thumbnail'])) $article_schema['image'] = artikel_thumb($article['thumbnail'], $article['category'], $article['slug'] ?? '');
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -80,7 +80,7 @@ if (!empty($article['thumbnail'])) $article_schema['image'] = artikel_thumb($art
 <meta property="og:title"       content="<?= e($article['title']) ?>">
 <meta property="og:description" content="<?= e($meta_desc) ?>">
 <meta property="og:url"         content="<?= e($canon) ?>">
-<meta property="og:image"       content="<?= e(artikel_thumb($article['thumbnail'] ?? '', $article['category'])) ?>">
+<meta property="og:image"       content="<?= e(artikel_thumb($article['thumbnail'] ?? '', $article['category'], $article['slug'] ?? '')) ?>">
 <meta property="og:image:width"  content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:site_name"   content="<?= e($s['site_name'] ?? '') ?>">
@@ -166,7 +166,7 @@ if (!empty($article['thumbnail'])) $article_schema['image'] = artikel_thumb($art
   <!-- ARTICLE FEATURED IMAGE -->
   <div class="ak-article-hero-img">
     <div class="container">
-      <img src="<?= e(artikel_thumb($article['thumbnail'] ?? '', $article['category'])) ?>"
+      <img src="<?= e(artikel_thumb($article['thumbnail'] ?? '', $article['category'], $article['slug'] ?? '')) ?>"
            alt="<?= e($article['title']) ?>"
            loading="eager" fetchpriority="high" width="1200" height="630">
     </div>
@@ -229,13 +229,7 @@ if (!empty($article['thumbnail'])) $article_schema['image'] = artikel_thumb($art
       </section>
       <?php endif; ?>
 
-      <!-- TRUST PHOTO STRIP (T17f / T7b) -->
-      <?php
-        require_once __DIR__ . '/includes/trust-photo.php';
-        echo trust_photo_strip($article['category'] ?? '', 4);
-      ?>
-
-      <!-- RELATED PROGRAM CTA (T17f) -->
+      <!-- RELATED PROGRAM RECOMMENDATIONS -->
       <?php
         require_once __DIR__ . '/includes/related-cta.php';
         echo related_cta('article', $article['category'] ?? '');
@@ -266,7 +260,7 @@ if (!empty($article['thumbnail'])) $article_schema['image'] = artikel_thumb($art
         <?php foreach ($related as $r): ?>
         <article class="ak-card">
           <a href="/artikel/<?= e($r['slug']) ?>/" class="ak-card-img-wrap">
-            <img src="<?= e(artikel_thumb($r['thumbnail'] ?? '', $r['category'])) ?>"
+            <img src="<?= e(artikel_thumb($r['thumbnail'] ?? '', $r['category'], $r['slug'] ?? '')) ?>"
                  alt="<?= e($r['title']) ?>"
                  loading="lazy" width="400" height="225">
             <span class="ak-card-cat" style="background:<?= e(artikel_cat_color($r['category'])) ?>"><?= e($r['category']) ?></span>

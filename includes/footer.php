@@ -1,5 +1,123 @@
+<!-- ═══════════════════════════════════════════════════ MOVING PHOTO STRIP (Above Footer) -->
+<section class="footer-photo-strip" aria-label="Dokumentasi Pelatihan K3 Wahana Totalita">
+  <div class="footer-photo-track">
+    <div class="footer-photo-group">
+      <?php
+        $footer_photos = [1, 3, 5, 8, 11, 14, 17, 20, 24, 28, 32, 36, 41, 45, 50, 55, 60, 64];
+        foreach ($footer_photos as $fp_num):
+          $fp_img = sprintf('/images/pelatihan-%03d.webp', $fp_num);
+      ?>
+      <a href="/galeri/" class="footer-photo-item" title="Dokumentasi Pelatihan K3 Wahana Totalita">
+        <img src="<?= $fp_img ?>" alt="Dokumentasi Pelatihan K3" width="220" height="135" loading="lazy" decoding="async">
+      </a>
+      <?php endforeach; ?>
+    </div>
+    <div class="footer-photo-group" aria-hidden="true">
+      <?php foreach ($footer_photos as $fp_num):
+          $fp_img = sprintf('/images/pelatihan-%03d.webp', $fp_num);
+      ?>
+      <a href="/galeri/" class="footer-photo-item" tabindex="-1">
+        <img src="<?= $fp_img ?>" alt="" width="220" height="135" loading="lazy" decoding="async">
+      </a>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</section>
+
 <!-- ═══════════════════════════════════════════════════ FOOTER -->
 <footer class="footer">
+  <style>
+  .footer-photo-strip {
+    width: 100%;
+    overflow: hidden;
+    background: #061810;
+    padding: 24px 0 18px;
+    position: relative;
+    user-select: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .footer-photo-strip::before,
+  .footer-photo-strip::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 80px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .footer-photo-strip::before {
+    left: 0;
+    background: linear-gradient(to right, #061810 15%, transparent);
+  }
+  .footer-photo-strip::after {
+    right: 0;
+    background: linear-gradient(to left, #061810 15%, transparent);
+  }
+  .footer-photo-track {
+    display: flex;
+    width: max-content;
+    gap: 16px;
+    animation: footerPhotoScroll 42s linear infinite;
+    will-change: transform;
+  }
+  .footer-photo-track:hover {
+    animation-play-state: paused;
+  }
+  .footer-photo-group {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  .footer-photo-item {
+    display: block;
+    flex: 0 0 220px;
+    height: 135px;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1.5px solid rgba(255, 255, 255, 0.12);
+    background: #0c261a;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    cursor: pointer;
+  }
+  .footer-photo-item:hover {
+    transform: translateY(-4px) scale(1.03);
+    border-color: rgba(240, 106, 37, 0.8);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.5);
+  }
+  .footer-photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+  }
+  @keyframes footerPhotoScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  @media (max-width: 768px) {
+    .footer-photo-strip {
+      padding: 16px 0 12px;
+    }
+    .footer-photo-item {
+      flex: 0 0 160px;
+      height: 100px;
+      border-radius: 10px;
+    }
+    .footer-photo-strip::before,
+    .footer-photo-strip::after {
+      width: 35px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .footer-photo-track {
+      animation: none;
+      overflow-x: auto;
+    }
+  }
+  </style>
   <!-- Quick Contact Strip (Matches Reference Screenshot 2) -->
   <div class="footer-contact-strip">
     <div class="container fcs-inner">
