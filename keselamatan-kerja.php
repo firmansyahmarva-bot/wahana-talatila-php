@@ -200,6 +200,193 @@ h2.section-title{font-size:1.5rem;font-weight:800;color:#111827;margin-bottom:8p
 </div>
 </section>
 
+<!-- DIREKTORI 23 BIDANG KEAHLIAN K3 -->
+<section class="white" id="direktori-bidang" style="border-top:1px solid #e5e7eb;padding:52px 0;">
+<div class="container">
+  <div class="section-header" style="text-align:center;max-width:760px;margin:0 auto 36px;">
+    <p class="section-eyebrow" style="color:#C6621C;font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:0.05em;margin-bottom:6px;">Pilar Kompetensi Nasional</p>
+    <h2 class="section-title" style="font-size:1.8rem;font-weight:800;color:#111827;margin-bottom:8px;">Direktori 23 Bidang Keahlian K3 &amp; Sertifikasi Industri</h2>
+    <p class="section-subtitle" style="font-size:15px;color:#6b7280;line-height:1.6;">Pusat pelatihan dan sertifikasi resmi KEMNAKER RI &amp; BNSP yang terbagi dalam 4 sektor industri utama di Indonesia.</p>
+  </div>
+
+  <div class="hub-directory-container" style="display:flex;flex-direction:column;gap:36px;">
+
+    <!-- Sektor 1: Konstruksi & Kelistrikan -->
+    <div class="hub-sector-block">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #E8F4EE;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A4A2E" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        <h3 style="font-size:1.25rem;font-weight:800;color:#0A4A2E;margin:0;">Sektor Konstruksi, Kelistrikan &amp; Mekanikal</h3>
+      </div>
+      <div class="scheme-grid">
+        <div class="scheme-card">
+          <span class="scheme-cert">Kemnaker RI</span>
+          <h3><a href="/k3-listrik/">K3 Listrik (Teknisi &amp; Ahli)</a></h3>
+          <p style="font-size:13px;color:#6b7280;margin:6px 0 10px;line-height:1.5;">Kepatuhan Permenaker 12/2015 &amp; PUIL. Lisensi operasional teknisi dan pengawas instalasi listrik pabrik &amp; gedung.</p>
+          <a href="/k3-listrik/" class="scheme-link">Buka Halaman Hub &rarr;</a>
+        </div>
+        <div class="scheme-card">
+          <span class="scheme-cert">Kemnaker &amp; BNSP</span>
+          <h3><a href="/k3-konstruksi/">K3 Konstruksi</a></h3>
+          <p style="font-size:13px;color:#6b7280;margin:6px 0 10px;line-height:1.5;">Pengawasan keselamatan proyek sipil, struktur gedung tinggi, dan kepatuhan standar Permenaker 01/1980.</p>
+          <a href="/k3-konstruksi/" class="scheme-link">Buka Halaman Hub &rarr;</a>
+        </div>
+        <div class="scheme-card">
+          <span class="scheme-cert">Kemnaker RI</span>
+          <h3><a href="/k3-ketinggian/">K3 Bekerja di Ketinggian (TKBT)</a></h3>
+          <p style="font-size:13px;color:#6b7280;margin:6px 0 10px;line-height:1.5;">Sertifikasi Tenaga Kerja Bangunan Tinggi (TKBT I &amp; II) dan Rope Access (TKPK) Permenaker 09/2016.</p>
+          <a href="/k3-ketinggian/" class="scheme-link">Buka Halaman Hub &rarr;</a>
+        </div>
+        <div class="scheme-card">
+          <span class="scheme-cert">Kemnaker RI</span>
+          <h3><a href="/k3-pesawat-angkat-angkut/">K3 Pesawat Angkat &amp; Angkut</a></h3>
+          <p style="font-size:13px;color:#6b7280;margin:6px 0 10px;line-height:1.5;">Lisensi resmi operator forklift, mobile crane, tower crane, overhead crane, dan rigger industri.</p>
+          <a href="/k3-pesawat-angkat-angkut/" class="scheme-link">Buka Halaman Hub &rarr;</a>
+        </div>
+        <div class="scheme-card">
+          <span class="scheme-cert">Kemnaker RI</span>
+          <h3><a href="/k3-pesawat-uap/">K3 Pesawat Uap &amp; Bejana Tekan</a></h3>
+          <p style="font-size:13px;color:#6b7280;margin:6px 0 10px;line-height:1.5;">Sertifikasi operator boiler/ketel uap Kelas I &amp; II dan teknisi bejana tekan industri.</p>
+          <a href="/k3-pesawat-uap/" class="scheme-link">Buka Halaman Hub &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sektor 2: Industri & Manufaktur -->
+    <div class="hub-sector-block">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #E8F4EE;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A4A2E" stroke-width="2.5"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/></svg>
+        <h3 style="font-size:1.25rem;font-weight:800;color:#0A4A2E;margin:0;">Sektor Pabrik, Manufaktur &amp; Kimia</h3>
+      </div>
+      <div class="scheme-grid">
+        <div class="scheme-card">
+          <span class="scheme-cert">Kemnaker RI</span>
+          <h3><a href="/k3-kimia/">K3 Kimia (Petugas &amp; Ahli)</a></h3>
+          <p style="font-size:13px;color:#6b7280;margin:6px 0 10px;line-height:1.5;">Pengendalian bahan kimia berbahaya di tempat kerja sesuai Kepmenaker 187/1999 dan penanganan B3.</p>
+          <a href="/k3-kimia/" class="scheme-link">Buka Halaman Hub &rarr;</a>
+        </div>
+        <div class="scheme-card">
+          <span class="scheme-cert">BNSP &amp; Kemnaker</span>
+          <h3><a href="/higiene-industri/">Higiene Industri (HIMU &amp; HIMA)</a></h3>
+          <p style="font-size:13px;color:#6b7280;margin:6px 0 10px;line-height:1.5;">Pengukuran faktor fisik, kimia, dan biologi di lingkungan kerja sesuai Permenaker 05/2018.</p>
+          <a href="/higiene-industri/" class="scheme-link">Buka Halaman Hub &rarr;</a>
+        </div>
+        <div class="scheme-card">
+          <span class="scheme-cert">Kemnaker RI</span>
+          <h3><a href="/penanggulangan-kebakaran/">Penanggulangan Kebakaran</a></h3>
+          <p style="font-size:13px;color:#6b7280;margin:6px 0 10px;line-height:1.5;">Petugas peran kebakaran Kelas D, regu C, koordinator B, hingga Ahli K3 Kebakaran Kelas A.</p>
+          <a href="/penanggulangan-kebakaran/" class="scheme-link">Buka Halaman Hub &rarr;</a>
+        </div>
+        <div class="scheme-card">
+          <span class="scheme-cert">Kemnaker &amp; BNSP</span>
+          <h3><a href="/p3k/">P3K di Tempat Kerja</a></h3>
+          <p style="font-size:13px;color:#6b7280;margin:6px 0 10px;line-height:1.5;">Pelatihan pertolongan pertama pada kecelakaan kerja bersertifikat resmi Permenaker 15/2008.</p>
+          <a href="/p3k/" class="scheme-link">Buka Halaman Hub &rarr;</a>
+        </div>
+        <div class="scheme-card">
+          <span class="scheme-cert">BNSP</span>
+          <h3><a href="/k3-manufaktur/">K3 Manufaktur &amp; Pabrik</a></h3>
+          <p style="font-size:13px;color:#6b7280;margin:6px 0 10px;line-height:1.5;">Standardisasi proteksi mesin industri, ergonomi jalur produksi, dan manajemen keselamatan pabrik.</p>
+          <a href="/k3-manufaktur/" class="scheme-link">Buka Halaman Hub &rarr;</a>
+        </div>
+        <div class="scheme-card">
+          <span class="scheme-cert">Kemnaker &amp; BNSP</span>
+          <h3><a href="/juru-las/">Juru Las (Welder 1G–6G)</a></h3>
+          <p style="font-size:13px;color:#6b7280;margin:6px 0 10px;line-height:1.5;">Sertifikasi kualifikasi juru las plat dan pipa SMAW, GTAW, GMAW sesuai standar Permenaker 02/1982.</p>
+          <a href="/juru-las/" class="scheme-link">Buka Halaman Hub &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sektor 3: Migas, Tambang & Energi -->
+    <div class="hub-sector-block">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #E8F4EE;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A4A2E" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        <h3 style="font-size:1.25rem;font-weight:800;color:#0A4A2E;margin:0;">Sektor Minyak &amp; Gas, Tambang, dan Alat Berat</h3>
+      </div>
+      <div class="scheme-grid">
+        <div class="scheme-card">
+          <span class="scheme-cert">BNSP</span>
+          <h3><a href="/k3-migas/">K3 Industri Migas</a></h3>
+          <p style="font-size:13px;color:#6b7280;margin:6px 0 10px;line-height:1.5;">Pengawas dan operator keselamatan migas hulu/hilir bersertifikasi BNSP berbasis SKKNI.</p>
+          <a href="/k3-migas/" class="scheme-link">Buka Halaman Hub &rarr;</a>
+        </div>
+        <div class="scheme-card">
+          <span class="scheme-cert">BNSP &amp; ESDM</span>
+          <h3><a href="/k3-pertambangan/">K3 Pertambangan (POP &amp; POM)</a></h3>
+          <p style="font-size:13px;color:#6b7280;margin:6px 0 10px;line-height:1.5;">Pengawas Operasional Pratama (POP) dan Madya (POM) mineral &amp; batubara.</p>
+          <a href="/k3-pertambangan/" class="scheme-link">Buka Halaman Hub &rarr;</a>
+        </div>
+        <div class="scheme-card">
+          <span class="scheme-cert">Kemnaker RI</span>
+          <h3><a href="/operator-alat-berat/">Operator Alat Berat</a></h3>
+          <p style="font-size:13px;color:#6b7280;margin:6px 0 10px;line-height:1.5;">Sertifikasi operator excavator, wheel loader, bulldozer, dan dump truck tambang.</p>
+          <a href="/operator-alat-berat/" class="scheme-link">Buka Halaman Hub &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sektor 4: Fasilitas Publik & Sektor Spesifik -->
+    <div class="hub-sector-block">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #E8F4EE;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A4A2E" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <h3 style="font-size:1.25rem;font-weight:800;color:#0A4A2E;margin:0;">Sektor Fasilitas Publik, Kesehatan &amp; Sistem Manajemen</h3>
+      </div>
+      <div class="scheme-grid">
+        <div class="scheme-card">
+          <span class="scheme-cert">Kemnaker &amp; BNSP</span>
+          <h3><a href="/k3-rumah-sakit/">K3 Rumah Sakit &amp; Faskes</a></h3>
+          <p style="font-size:13px;color:#6b7280;margin:6px 0 10px;line-height:1.5;">Standar keselamatan fasilitas kesehatan, pengelolaan limbah B3 medis, dan akreditasi RS.</p>
+          <a href="/k3-rumah-sakit/" class="scheme-link">Buka Halaman Hub &rarr;</a>
+        </div>
+        <div class="scheme-card">
+          <span class="scheme-cert">BNSP</span>
+          <h3><a href="/k3-laboratorium/">K3 Laboratorium</a></h3>
+          <p style="font-size:13px;color:#6b7280;margin:6px 0 10px;line-height:1.5;">Protokol biosafety, chemical safety, dan penanganan reagen berbahaya di lab uji &amp; riset.</p>
+          <a href="/k3-laboratorium/" class="scheme-link">Buka Halaman Hub &rarr;</a>
+        </div>
+        <div class="scheme-card">
+          <span class="scheme-cert">Kemnaker RI</span>
+          <h3><a href="/k3-perkantoran/">K3 Perkantoran &amp; Gedung</a></h3>
+          <p style="font-size:13px;color:#6b7280;margin:6px 0 10px;line-height:1.5;">Kepatuhan Permenaker 48/2016 untuk ergonomi kerja, sirkulasi udara, dan keselamatan gedung tinggi.</p>
+          <a href="/k3-perkantoran/" class="scheme-link">Buka Halaman Hub &rarr;</a>
+        </div>
+        <div class="scheme-card">
+          <span class="scheme-cert">BNSP</span>
+          <h3><a href="/k3-transportasi/">K3 Transportasi &amp; Logistik</a></h3>
+          <p style="font-size:13px;color:#6b7280;margin:6px 0 10px;line-height:1.5;">Defensive driving, keselamatan armada darat, dan kepatuhan distribusi logistik B3.</p>
+          <a href="/k3-transportasi/" class="scheme-link">Buka Halaman Hub &rarr;</a>
+        </div>
+        <div class="scheme-card">
+          <span class="scheme-cert">BNSP</span>
+          <h3><a href="/k3-pangan/">K3 Industri Pangan &amp; HACCP</a></h3>
+          <p style="font-size:13px;color:#6b7280;margin:6px 0 10px;line-height:1.5;">Sistem sanitasi higienis, Good Manufacturing Practice (GMP), dan analisis bahaya HACCP.</p>
+          <a href="/k3-pangan/" class="scheme-link">Buka Halaman Hub &rarr;</a>
+        </div>
+        <div class="scheme-card">
+          <span class="scheme-cert">BNSP</span>
+          <h3><a href="/k3-psikososial/">K3 Psikososial &amp; Ergonomi</a></h3>
+          <p style="font-size:13px;color:#6b7280;margin:6px 0 10px;line-height:1.5;">Manajemen stres kerja, pencegahan kelelahan (fatigue), dan ergonomi fisik tempat kerja.</p>
+          <a href="/k3-psikososial/" class="scheme-link">Buka Halaman Hub &rarr;</a>
+        </div>
+        <div class="scheme-card">
+          <span class="scheme-cert">ISO Internasional</span>
+          <h3><a href="/pelatihan-iso/">Pelatihan ISO &amp; QHSE</a></h3>
+          <p style="font-size:13px;color:#6b7280;margin:6px 0 10px;line-height:1.5;">Lead Auditor &amp; Internal Auditor ISO 45001 (K3), ISO 9001 (Mutu), ISO 14001 (Lingkungan).</p>
+          <a href="/pelatihan-iso/" class="scheme-link">Buka Halaman Hub &rarr;</a>
+        </div>
+        <div class="scheme-card">
+          <span class="scheme-cert">Kemnaker RI</span>
+          <h3><a href="/smk3/">Penerapan &amp; Audit SMK3 PP 50</a></h3>
+          <p style="font-size:13px;color:#6b7280;margin:6px 0 10px;line-height:1.5;">Pelatihan Auditor Internal dan persiapan sertifikasi bendera emas SMK3 PP No. 50 Tahun 2012.</p>
+          <a href="/smk3/" class="scheme-link">Buka Halaman Hub &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</section>
+
 <!-- SMK3 -->
 <section class="white">
 <div class="container">

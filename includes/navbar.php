@@ -32,6 +32,7 @@ $is_panduan_active = str_starts_with($_nav_path, '/artikel');
     <ul class="nav-links" id="nav-links">
       <li><a href="/pelatihan/">Pelatihan</a></li>
       <li><a href="/jadwal/">Jadwal</a></li>
+      <li><a href="/keselamatan-kerja/">Bidang K3</a></li>
 
       <!-- Platform K3 mega dropdown -->
       <li class="nav-dropdown">
