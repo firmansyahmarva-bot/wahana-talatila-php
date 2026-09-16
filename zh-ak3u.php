@@ -609,6 +609,7 @@ body {
         <div class="zh-sb-nav-title">合规指引与专题手册</div>
         <ul class="zh-sb-nav-list">
           <li><a href="/zh/">&bull; 合规全景总纲 (主页)</a></li>
+<li><a href="/zh/factory-roadmap/">&bull; 从零建厂到投产路线图</a></li>
 <li><a href="/zh/ahli-k3-umum/" class="active">&bull; 注册安全官 (AK3U) 与 P2K3</a></li>
 <li><a href="/zh/sio-alat-berat/">&bull; 特种设备操作证 (SIO/SIA)</a></li>
 <li><a href="/zh/smk3/">&bull; SMK3 安全体系金牌认证</a></li>

@@ -828,6 +828,10 @@ body {
         </p>
 
         <div class="zh-law-grid">
+          <div class="zh-law-card" style="background:#f0fdf4;border-color:#bbf7d0;grid-column:1/-1;">
+            <strong style="font-size:16px;"><a href="/zh/factory-roadmap/" style="color:#0A4A2E;text-decoration:none;">★ 从零建厂到合法投产：在印尼办厂安全合规全流程实操指南 &rarr;</a></strong>
+            <p>一文通晓从规划设计图审、土建施工持证、特种设备进口检验准用（SIA/Riksa Uji）、安全官AK3U配置到SMK3体系认证的五阶段完整全景路线图。</p>
+          </div>
           <div class="zh-law-card" style="background:#f0fdf4;border-color:#bbf7d0;">
             <strong style="font-size:15px;"><a href="/zh/ahli-k3-umum/" style="color:#0A4A2E;text-decoration:none;">1. 注册安全官 (AK3U) 与 P2K3 设立指引 &rarr;</a></strong>
             <p>满100人强制设岗、企业安全生产委员会印尼劳工部官方备案与法定安全生产季报报送全流程。</p>
@@ -874,6 +878,7 @@ body {
 
         <div style="font-size:13px;font-weight:800;color:var(--hub-dark);text-transform:uppercase;letter-spacing:0.04em;margin:18px 0 8px;">合规专题指引手册</div>
         <ul style="list-style:none;padding:0;margin:0 0 18px;">
+          <li style="margin-bottom:6px;"><a href="/zh/factory-roadmap/" style="font-size:13px;color:var(--hub-primary);font-weight:700;text-decoration:none;display:flex;align-items:center;gap:6px;line-height:1.45;padding:5px 8px;border-radius:6px;background:#e8f4ee;">&bull; 从零建厂到投产路线图</a></li>
           <li style="margin-bottom:6px;"><a href="/zh/ahli-k3-umum/" style="font-size:13px;color:var(--hub-primary);text-decoration:none;display:flex;align-items:center;gap:6px;line-height:1.45;padding:5px 8px;border-radius:6px;">&bull; 注册安全官 (AK3U) 与 P2K3</a></li>
           <li style="margin-bottom:6px;"><a href="/zh/sio-alat-berat/" style="font-size:13px;color:var(--hub-primary);text-decoration:none;display:flex;align-items:center;gap:6px;line-height:1.45;padding:5px 8px;border-radius:6px;">&bull; 特种设备操作证 (SIO/SIA)</a></li>
           <li style="margin-bottom:6px;"><a href="/zh/smk3/" style="font-size:13px;color:var(--hub-primary);text-decoration:none;display:flex;align-items:center;gap:6px;line-height:1.45;padding:5px 8px;border-radius:6px;">&bull; SMK3 安全体系金牌认证</a></li>
