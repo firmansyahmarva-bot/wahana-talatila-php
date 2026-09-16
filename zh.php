@@ -24,15 +24,144 @@ $canonical = SITE_URL . '/zh/';
 <meta name="description" content="<?= htmlspecialchars($meta_desc, ENT_QUOTES, 'UTF-8') ?>">
 <link rel="canonical" href="<?= htmlspecialchars($canonical, ENT_QUOTES, 'UTF-8') ?>">
 <meta name="robots" content="index, follow">
+<meta name="keywords" content="印尼安全生产法规,印尼K3合规,印尼安全官AK3U,印尼特种设备年检SIA,印尼特种作业操作证SIO,印尼SMK3金牌认证,P2K3委员会设立,中资企业印尼办厂">
+<meta name="author" content="PT Wahana Totalita Konsultan">
 
-<!-- Open Graph -->
+<!-- Open Graph / Social Media -->
 <meta property="og:type" content="article">
+<meta property="og:site_name" content="Wahana Totalita Konsultan">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:title" content="<?= htmlspecialchars($page_title, ENT_QUOTES, 'UTF-8') ?>">
 <meta property="og:description" content="<?= htmlspecialchars($meta_desc, ENT_QUOTES, 'UTF-8') ?>">
 <meta property="og:url" content="<?= htmlspecialchars($canonical, ENT_QUOTES, 'UTF-8') ?>">
-<meta property="og:site_name" content="Wahana Totalita Konsultan">
-<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wahanatotalita.com/assets/img/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Wahana Totalita Konsultan - 印尼安全合规">
 
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="<?= htmlspecialchars($page_title, ENT_QUOTES, 'UTF-8') ?>">
+<meta name="twitter:description" content="<?= htmlspecialchars($meta_desc, ENT_QUOTES, 'UTF-8') ?>">
+<meta name="twitter:image" content="https://wahanatotalita.com/assets/img/og-cover.jpg">
+
+<!-- Structured Data (JSON-LD) -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "Organization",
+            "@id": "https://wahanatotalita.com/#organization",
+            "name": "PT Wahana Totalita Konsultan",
+            "url": "https://wahanatotalita.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://wahanatotalita.com/assets/img/logo.png"
+            },
+            "description": "印尼劳工部官方授权综合安全技术与培训机构 (PJK3 No. Kep. 312/BINWASPNAK-PNK3/V/2020)",
+            "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+62-877-5915-1278",
+                "contactType": "customer service",
+                "availableLanguage": [
+                    "Chinese",
+                    "Indonesian",
+                    "English"
+                ]
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": "<?= htmlspecialchars($canonical, ENT_QUOTES, 'UTF-8') ?>#breadcrumb",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "首页",
+                    "item": "https://wahanatotalita.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "中文合规指引",
+                    "item": "https://wahanatotalita.com/zh/"
+                }
+            ]
+        },
+        {
+            "@type": "WebPage",
+            "@id": "<?= htmlspecialchars($canonical, ENT_QUOTES, 'UTF-8') ?>#webpage",
+            "url": "<?= htmlspecialchars($canonical, ENT_QUOTES, 'UTF-8') ?>",
+            "name": "<?= htmlspecialchars($page_title, ENT_QUOTES, 'UTF-8') ?>",
+            "description": "<?= htmlspecialchars($meta_desc, ENT_QUOTES, 'UTF-8') ?>",
+            "inLanguage": "zh-Hans",
+            "isPartOf": {
+                "@type": "WebSite",
+                "@id": "https://wahanatotalita.com/#website",
+                "name": "Wahana Totalita Konsultan",
+                "url": "https://wahanatotalita.com/"
+            },
+            "publisher": {
+                "@id": "https://wahanatotalita.com/#organization"
+            },
+            "datePublished": "2026-09-01T08:00:00+07:00",
+            "dateModified": "2026-09-16T13:30:00+07:00"
+        },
+        {
+            "@type": "FAQPage",
+            "@id": "<?= htmlspecialchars($canonical, ENT_QUOTES, 'UTF-8') ?>#faq",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "1. 中方管理人员或技术人员，能否直接考取印尼劳工部法定证书？",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "原则上不可以。 印尼劳工部（Kemnaker RI）颁发的法定资格证书（如 Ahli K3 Umum 注册安全工程师、叉车/吊车 SIO 操作证）明确要求持有印尼身份证（KTP）的印尼籍合法公民。 实务解决方案： 企业应选拔优秀的印尼籍主管、领班或安全助理参加正规考证，企业获得法定安全团队的设立资质；中方管理人员及技术骨干可作为旁听人员协同培训，以深入掌握印尼当地的安全法规与管理接口。"
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "2. 从中国国内采购进口的全新或二手机械设备，如何合法在印尼投产？",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "机械设备清关进入印尼现场并完成安装后，不可直接带电带压投产。印尼法律规定，起重机械、叉车、锅炉、空压机、储气罐及发电机组等设备，必须委托具备印尼劳工部特种检验资质的机构（PJK3 Riksa Uji）进行现场无损探伤、负荷试验及安全阀校验。 检验合格后，由劳工部颁发设备合法准用证（Surat Keterangan K3 / Buku Akte Pengesahan），方属于合法合规投产。未取得准用证的设备擅自运行，一旦遭遇突击检查将被查封甚至断电。"
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "3. 劳工部劳动监察大队 (Pengawas) 进厂突击检查，主要查验哪些材料？",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "劳动监察通常不会走过场，其核查重点非常聚焦： 人员资质： 特种设备操作人员的 SIO 执照是否在 3 年有效期内；现场是否有全职 Ahli K3 Umum 履职。 组织机构： 是否在劳工部完成安全生产委员会（P2K3）备案，并按季度提交安全季报。 设备年检： 叉车、行车、压力容器的安全年检标签是否在有效期内。 工伤保险： 员工是否已全额缴纳印尼国家社保（BPJS Ketenagakerjaan）。"
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "4. 什么是 SMK3 认证？为什么参与印尼国家工程和矿山投标必须具备？",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "SMK3（Sistem Manajemen Keselamatan dan Kesehatan Kerja）是印尼依据 2012 年第 50 号政府条例（PP 50/2012）推行的国家级职业健康安全管理体系。与自愿性质的 ISO 45001 不同，SMK3 是印尼政府的法定强制性认证。 在印尼国家电力公司（PLN）、印尼国家石油公司（Pertamina）以及各类大型矿企、冶炼厂的工程分包和供应商准入审核（CSMS）中，出具劳工部认可的 SMK3 审核证书（尤其是 85% 以上合规率的金牌认证 Bendera Emas）是绝大部分标段的前置硬性门槛。"
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "5. 偏远岛屿项目（如苏拉威西青山、纬达贝、加里曼丹）如何开展培训？",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Wahana Totalita 具备承接全印尼各省驻厂定制内训（In-House Corporate Training）的完整资质。对于岛屿或偏远工区企业，我司资深印尼劳工部注册督导与实操考官团队可直接派遣至客户矿山或厂区现场： 理论部分： 支持采用在线互动授课或现场集中授课，最大限度减少停产工时损失。 实操与考核： 在客户现场现有设备上直接开展合规实操、盲区测试及国家级考试，免去大批员工远赴大城市的差旅交通成本与考勤风险。"
+                    }
+                }
+            ]
+        }
+    ]
+}
+</script>
+
+<!-- Open Graph -->
+">
+">
+">
 <!-- Fonts & Master Stylesheet -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
