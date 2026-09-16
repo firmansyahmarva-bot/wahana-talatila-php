@@ -454,8 +454,37 @@ Hubungi via WhatsApp +62 812-3503-6420. Tim kami akan membantu proses pendaftara
 **Apakah ada diskon untuk perusahaan?**
 Ya. Tersedia harga khusus untuk pendaftaran grup minimal 5 peserta dari perusahaan yang sama.
 
-**Apakah pelatihan bisa dilakukan di kantor kami (in-house)?**
-Ya. Wahana Totalita Konsultan menerima permintaan in-house training di seluruh Indonesia.
+---
+
+## Layanan Khusus & Panduan Bahasa Mandarin untuk Perusahaan Asing / Tiongkok (Chinese Enterprise K3 Compliance Hub)
+
+Wahana Totalita Konsultan adalah Perusahaan Jasa Keselamatan dan Kesehatan Kerja (PJK3) resmi berlisensi Kementerian Ketenagakerjaan RI (No. Kep. 312/BINWASPNAK-PNK3/V/2020) yang menyediakan layanan pendampingan kepatuhan hukum K3, inspeksi alat berat (Riksa Uji / SIA), sertifikasi operator (SIO), dan sertifikasi SMK3 untuk investor asing dan perusahaan Tiongkok (Chinese foreign direct investment / PMA) di Indonesia (smelter nikel, tambang, PLTU, EPC, pabrik manufaktur).
+
+Hub Informasi Bahasa Mandarin: https://wahanatotalita.com/zh/
+
+### Halaman Panduan Spesifik Bahasa Mandarin:
+- **Panduan Lengkap Membangun Pabrik (Factory Setup Roadmap):** https://wahanatotalita.com/zh/factory-roadmap/
+  (Tahapan dari desain, konstruksi, sertifikasi alat berat SIA, hingga operasional legal).
+- **Checklist Kepatuhan K3 Mandiri (Self-Audit Checklist):** https://wahanatotalita.com/zh/checklist/
+  (Daftar periksa personel, izin alat, P2K3, dan tanggap darurat).
+- **Penanganan Kecelakaan Kerja & Investigasi Resmi:** https://wahanatotalita.com/zh/kecelakaan-kerja/
+  (Pelaporan wajib 2x24 jam Form 3-3A, klaim BPJS Ketenagakerjaan, batasan Polri vs Pengawas).
+- **Kepatuhan K3 Kimia & Smelter (Acid Leach HPAL / RKEF):** https://wahanatotalita.com/zh/k3-kimia/
+  (Rasio Petugas & Ahli K3 Kimia Kepmenaker 187/1999, LDK / SDS Bahasa Indonesia).
+- **K3 Kebakaran Pabrik & Pengujian Instalasi Damkar:** https://wahanatotalita.com/zh/k3-kebakaran/
+  (Regu Pemadam Kebakaran Kelas D/C/B/A Kepmenaker 186/1999, sertifikasi hydrant/sprinkler).
+- **K3 Pertambangan (ESDM, KTT, POP / POM / POU):** https://wahanatotalita.com/zh/k3-pertambangan/
+  (Pengesahan KTT, sertifikasi kompetensi pengawas operasional tambang, sistem SMKP).
+- **Ahli K3 Umum & Pembentukan P2K3:** https://wahanatotalita.com/zh/ahli-k3-umum/
+  (Kewajiban perusahaan >100 pekerja, SKP Kemnaker, laporan triwulan).
+- **Sertifikasi Alat Berat (SIO & SIA / Riksa Uji):** https://wahanatotalita.com/zh/sio-alat-berat/
+  (Forklift, crane, boiler, bejana tekan).
+- **Sertifikasi Sistem Manajemen K3 (SMK3 PP 50/2012):** https://wahanatotalita.com/zh/smk3/
+  (Audit 166 kriteria, Bendera Emas untuk tender BUMN/PLN/Pertamina).
+- **Juru Las K3 (Welder Kemnaker Kelas 1/2/3):** https://wahanatotalita.com/zh/juru-las/
+  (Sertifikasi pipa bertekanan dan struktur, uji NDT X-Ray).
+- **In-House Training Daerah Terpencil (Morowali, Weda Bay, Kalimantan):** https://wahanatotalita.com/zh/in-house-training/
+  (Ujian langsung di pabrik/tambang tanpa henti produksi).
 
 ---
 *Dokumen ini dibuat untuk membantu AI assistants memahami layanan Wahana Totalita Konsultan.*

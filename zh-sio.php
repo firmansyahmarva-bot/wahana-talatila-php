@@ -7,15 +7,101 @@
 <meta name="description" content="详尽梳理印尼叉车、吊车、挖掘机、锅炉与压力容器的特种人员持证 (SIO) 与机械准用检验 (SIA / Riksa Uji) 流程，助中资企业化解无证作业停机与安全罚款风险。">
 <link rel="canonical" href="https://wahanatotalita.com/zh/sio-alat-berat/">
 <meta name="robots" content="index, follow">
+<meta name="keywords" content="印尼特种设备操作证SIO,印尼机械准用证SIA,叉车证SIO,天车证Crane,锅炉年检,储气罐压力容器检验,Riksa Uji Kemnaker">
+<meta name="author" content="PT Wahana Totalita Konsultan">
 
-<!-- Open Graph -->
+<!-- Open Graph / Social Media -->
 <meta property="og:type" content="article">
+<meta property="og:site_name" content="Wahana Totalita Konsultan">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:title" content="印尼特种设备操作员执照 (SIO) 与机械安全年检 (SIA) 合规全解 — Wahana Totalita">
 <meta property="og:description" content="详尽梳理印尼叉车、吊车、挖掘机、锅炉与压力容器的特种人员持证 (SIO) 与机械准用检验 (SIA / Riksa Uji) 流程，助中资企业化解无证作业停机与安全罚款风险。">
 <meta property="og:url" content="https://wahanatotalita.com/zh/sio-alat-berat/">
-<meta property="og:site_name" content="Wahana Totalita Konsultan">
-<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wahanatotalita.com/assets/img/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Wahana Totalita Konsultan - 印尼安全合规">
 
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="印尼特种设备操作员执照 (SIO) 与机械安全年检 (SIA) 合规全解 — Wahana Totalita">
+<meta name="twitter:description" content="详尽梳理印尼叉车、吊车、挖掘机、锅炉与压力容器的特种人员持证 (SIO) 与机械准用检验 (SIA / Riksa Uji) 流程，助中资企业化解无证作业停机与安全罚款风险。">
+<meta name="twitter:image" content="https://wahanatotalita.com/assets/img/og-cover.jpg">
+
+<!-- Structured Data (JSON-LD) -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "Organization",
+            "@id": "https://wahanatotalita.com/#organization",
+            "name": "PT Wahana Totalita Konsultan",
+            "url": "https://wahanatotalita.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://wahanatotalita.com/assets/img/logo.png"
+            },
+            "description": "印尼劳工部官方授权综合安全技术与培训机构 (PJK3 No. Kep. 312/BINWASPNAK-PNK3/V/2020)",
+            "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+62-877-5915-1278",
+                "contactType": "customer service",
+                "availableLanguage": [
+                    "Chinese",
+                    "Indonesian",
+                    "English"
+                ]
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": "https://wahanatotalita.com/zh/sio-alat-berat/#breadcrumb",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "首页",
+                    "item": "https://wahanatotalita.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "中文合规指引",
+                    "item": "https://wahanatotalita.com/zh/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "特种设备操作证 (SIO) 与机械准用检验 (SIA) 全解",
+                    "item": "https://wahanatotalita.com/zh/sio-alat-berat/"
+                }
+            ]
+        },
+        {
+            "@type": "Article",
+            "@id": "https://wahanatotalita.com/zh/sio-alat-berat/#webpage",
+            "url": "https://wahanatotalita.com/zh/sio-alat-berat/",
+            "name": "印尼特种设备操作员执照 (SIO) 与机械安全年检 (SIA) 合规全解 — Wahana Totalita",
+            "description": "详尽梳理印尼叉车、吊车、挖掘机、锅炉与压力容器的特种人员持证 (SIO) 与机械准用检验 (SIA / Riksa Uji) 流程，助中资企业化解无证作业停机与安全罚款风险。",
+            "inLanguage": "zh-Hans",
+            "isPartOf": {
+                "@type": "WebSite",
+                "@id": "https://wahanatotalita.com/#website",
+                "name": "Wahana Totalita Konsultan",
+                "url": "https://wahanatotalita.com/"
+            },
+            "publisher": {
+                "@id": "https://wahanatotalita.com/#organization"
+            },
+            "datePublished": "2026-09-01T08:00:00+07:00",
+            "dateModified": "2026-09-16T13:30:00+07:00"
+        }
+    ]
+}
+</script>
+
+<!-- Open Graph -->
 <!-- Fonts & Master Stylesheet -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

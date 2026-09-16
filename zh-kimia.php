@@ -18,14 +18,103 @@ $wa_url = 'https://wa.me/6287759151278?text=' . rawurlencode('您好，我们是
 <meta name="description" content="<?= htmlspecialchars($meta_desc, ENT_QUOTES, 'UTF-8') ?>">
 <link rel="canonical" href="<?= htmlspecialchars($canonical, ENT_QUOTES, 'UTF-8') ?>">
 <meta name="robots" content="index, follow">
+<meta name="keywords" content="印尼危化品合规,印尼湿法冶炼安全,HPAL高压酸浸,RKEF镍冶炼,Petugas K3 Kimia,Ahli K3 Kimia,Kepmenaker 187/1999,印尼语LDK说明书">
+<meta name="author" content="PT Wahana Totalita Konsultan">
 
+<!-- Open Graph / Social Media -->
 <meta property="og:type" content="article">
+<meta property="og:site_name" content="Wahana Totalita Konsultan">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:title" content="<?= htmlspecialchars($page_title, ENT_QUOTES, 'UTF-8') ?>">
 <meta property="og:description" content="<?= htmlspecialchars($meta_desc, ENT_QUOTES, 'UTF-8') ?>">
 <meta property="og:url" content="<?= htmlspecialchars($canonical, ENT_QUOTES, 'UTF-8') ?>">
-<meta property="og:site_name" content="Wahana Totalita Konsultan">
-<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wahanatotalita.com/assets/img/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Wahana Totalita Konsultan - 印尼安全合规">
 
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="<?= htmlspecialchars($page_title, ENT_QUOTES, 'UTF-8') ?>">
+<meta name="twitter:description" content="<?= htmlspecialchars($meta_desc, ENT_QUOTES, 'UTF-8') ?>">
+<meta name="twitter:image" content="https://wahanatotalita.com/assets/img/og-cover.jpg">
+
+<!-- Structured Data (JSON-LD) -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "Organization",
+            "@id": "https://wahanatotalita.com/#organization",
+            "name": "PT Wahana Totalita Konsultan",
+            "url": "https://wahanatotalita.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://wahanatotalita.com/assets/img/logo.png"
+            },
+            "description": "印尼劳工部官方授权综合安全技术与培训机构 (PJK3 No. Kep. 312/BINWASPNAK-PNK3/V/2020)",
+            "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+62-877-5915-1278",
+                "contactType": "customer service",
+                "availableLanguage": [
+                    "Chinese",
+                    "Indonesian",
+                    "English"
+                ]
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": "<?= htmlspecialchars($canonical, ENT_QUOTES, 'UTF-8') ?>#breadcrumb",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "首页",
+                    "item": "https://wahanatotalita.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "中文合规指引",
+                    "item": "https://wahanatotalita.com/zh/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "印尼危化品与湿法冶炼(K3 Kimia)安全合规",
+                    "item": "<?= htmlspecialchars($canonical, ENT_QUOTES, 'UTF-8') ?>"
+                }
+            ]
+        },
+        {
+            "@type": "Article",
+            "@id": "<?= htmlspecialchars($canonical, ENT_QUOTES, 'UTF-8') ?>#webpage",
+            "url": "<?= htmlspecialchars($canonical, ENT_QUOTES, 'UTF-8') ?>",
+            "name": "<?= htmlspecialchars($page_title, ENT_QUOTES, 'UTF-8') ?>",
+            "description": "<?= htmlspecialchars($meta_desc, ENT_QUOTES, 'UTF-8') ?>",
+            "inLanguage": "zh-Hans",
+            "isPartOf": {
+                "@type": "WebSite",
+                "@id": "https://wahanatotalita.com/#website",
+                "name": "Wahana Totalita Konsultan",
+                "url": "https://wahanatotalita.com/"
+            },
+            "publisher": {
+                "@id": "https://wahanatotalita.com/#organization"
+            },
+            "datePublished": "2026-09-01T08:00:00+07:00",
+            "dateModified": "2026-09-16T13:30:00+07:00"
+        }
+    ]
+}
+</script>
+
+">
+">
+">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;800&display=swap" rel="stylesheet">

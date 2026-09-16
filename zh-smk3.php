@@ -7,15 +7,101 @@
 <meta name="description" content="系统解读印尼2012年第50号政府条例(PP 50/2012)强制性SMK3审核标准、64/122/166项准则划分、金牌认证门槛及大型央企矿业招投标前置资质。">
 <link rel="canonical" href="https://wahanatotalita.com/zh/smk3/">
 <meta name="robots" content="index, follow">
+<meta name="keywords" content="印尼SMK3认证,PP 50/2012,印尼金牌认证Bendera Emas,SMK3 166项准则,PLN招标门槛,Pertamina供应商准入,CSMS合规">
+<meta name="author" content="PT Wahana Totalita Konsultan">
 
-<!-- Open Graph -->
+<!-- Open Graph / Social Media -->
 <meta property="og:type" content="article">
+<meta property="og:site_name" content="Wahana Totalita Konsultan">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:title" content="印尼国家职业安全健康体系 (SMK3) 审核与金牌认证 (Bendera Emas) 指南 — Wahana Totalita">
 <meta property="og:description" content="系统解读印尼2012年第50号政府条例(PP 50/2012)强制性SMK3审核标准、64/122/166项准则划分、金牌认证门槛及大型央企矿业招投标前置资质。">
 <meta property="og:url" content="https://wahanatotalita.com/zh/smk3/">
-<meta property="og:site_name" content="Wahana Totalita Konsultan">
-<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wahanatotalita.com/assets/img/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Wahana Totalita Konsultan - 印尼安全合规">
 
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="印尼国家职业安全健康体系 (SMK3) 审核与金牌认证 (Bendera Emas) 指南 — Wahana Totalita">
+<meta name="twitter:description" content="系统解读印尼2012年第50号政府条例(PP 50/2012)强制性SMK3审核标准、64/122/166项准则划分、金牌认证门槛及大型央企矿业招投标前置资质。">
+<meta name="twitter:image" content="https://wahanatotalita.com/assets/img/og-cover.jpg">
+
+<!-- Structured Data (JSON-LD) -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "Organization",
+            "@id": "https://wahanatotalita.com/#organization",
+            "name": "PT Wahana Totalita Konsultan",
+            "url": "https://wahanatotalita.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://wahanatotalita.com/assets/img/logo.png"
+            },
+            "description": "印尼劳工部官方授权综合安全技术与培训机构 (PJK3 No. Kep. 312/BINWASPNAK-PNK3/V/2020)",
+            "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+62-877-5915-1278",
+                "contactType": "customer service",
+                "availableLanguage": [
+                    "Chinese",
+                    "Indonesian",
+                    "English"
+                ]
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": "https://wahanatotalita.com/zh/smk3/#breadcrumb",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "首页",
+                    "item": "https://wahanatotalita.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "中文合规指引",
+                    "item": "https://wahanatotalita.com/zh/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "SMK3 安全体系审核与金牌认证指南",
+                    "item": "https://wahanatotalita.com/zh/smk3/"
+                }
+            ]
+        },
+        {
+            "@type": "Article",
+            "@id": "https://wahanatotalita.com/zh/smk3/#webpage",
+            "url": "https://wahanatotalita.com/zh/smk3/",
+            "name": "印尼国家职业安全健康体系 (SMK3) 审核与金牌认证 (Bendera Emas) 指南 — Wahana Totalita",
+            "description": "系统解读印尼2012年第50号政府条例(PP 50/2012)强制性SMK3审核标准、64/122/166项准则划分、金牌认证门槛及大型央企矿业招投标前置资质。",
+            "inLanguage": "zh-Hans",
+            "isPartOf": {
+                "@type": "WebSite",
+                "@id": "https://wahanatotalita.com/#website",
+                "name": "Wahana Totalita Konsultan",
+                "url": "https://wahanatotalita.com/"
+            },
+            "publisher": {
+                "@id": "https://wahanatotalita.com/#organization"
+            },
+            "datePublished": "2026-09-01T08:00:00+07:00",
+            "dateModified": "2026-09-16T13:30:00+07:00"
+        }
+    ]
+}
+</script>
+
+<!-- Open Graph -->
 <!-- Fonts & Master Stylesheet -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
