@@ -6,10 +6,12 @@ $categories = get_categories();
 $all_trainings = get_trainings();
 $wa_number  = $s['wa_number'] ?? '6281235036420';
 
+$by_cat     = [];
 $cat_counts = [];
 $trainings  = [];
 foreach ($all_trainings as $t) {
     $cs = $t['cat_slug'] ?? 'other';
+    $by_cat[$cs][] = $t;
     $cat_counts[$cs] = ($cat_counts[$cs] ?? 0) + 1;
     if ($cat_counts[$cs] <= 5) {
         $trainings[] = $t;
@@ -138,8 +140,17 @@ $meta_desc = !empty($s['meta_description']) ? $s['meta_description'] : 'Wahana T
       <p class="section-subtitle">Empat bidang utama pelatihan bersertifikasi resmi KEMNAKER RI, BNSP, dan kompetensi.</p>
     </div>
     <div class="services-grid">
-      <?php foreach ($categories as $cat): ?>
-      <a href="#produk" class="service-card fade-in" onclick="filterCategory('<?= e($cat['slug']) ?>')" style="--accent: <?= e($cat['accent_color']) ?>">
+      <?php 
+      $hub_urls = [
+        'k3'                => '/keselamatan-kerja/',
+        'lingkungan'        => '/k3-lingkungan/',
+        'system-management' => '/pelatihan-iso/',
+        'mining'            => '/k3-pertambangan/',
+      ];
+      foreach ($categories as $cat): 
+        $hub_target = $hub_urls[$cat['slug']] ?? '#produk';
+      ?>
+      <a href="<?= e($hub_target) ?>" class="service-card fade-in" style="--accent: <?= e($cat['accent_color']) ?>">
         <div class="service-card-icon"><?= $cat['icon'] ?></div>
         <h3 class="service-card-title"><?= e($cat['name']) ?></h3>
         <p class="service-card-desc"><?= e($cat['description']??'') ?></p>

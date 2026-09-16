@@ -25,12 +25,60 @@ $sertifikasi = [
 ];
 
 $skemas = [
-    ['name' => 'Ahli K3 Umum', 'cert' => 'Sertifikasi BNSP', 'slug' => 'pelatihan-ahli-k3-umum-sertifikasi-bnsp'],
-    ['name' => 'Ahli Muda K3 Konstruksi', 'cert' => 'Sertifikasi BNSP', 'slug' => 'pelatihan-ahli-muda-k3-konstruksi-online'],
-    ['name' => 'Pengawas K3 Industri Migas', 'cert' => 'Sertifikasi BNSP', 'slug' => 'pelatihan-pengawas-k3-industri-migas-sertifikasi-bnsp'],
-    ['name' => 'Operator Forklift Kelas 2', 'cert' => 'Sertifikasi Kemnaker RI', 'slug' => 'pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri'],
-    ['name' => 'Petugas P3K', 'cert' => 'Sertifikasi BNSP', 'slug' => 'pelatihan-petugas-p3k-sertifikasi-bnsp'],
-    ['name' => 'Auditor Sistem Manajemen K3', 'cert' => 'Sertifikasi BNSP', 'slug' => 'pelatihan-auditor-sistem-manajemen-k3-sertifikasi-bnsp'],
+    [
+        'name'     => 'Ahli K3 Umum Kemnaker RI & BNSP',
+        'cert'     => 'Kemnaker RI / BNSP',
+        'slug'     => 'pelatihan-ahli-k3-umum-sertifikasi-bnsp',
+        'mode'     => 'Sertifikasi Resmi Nasional',
+        'duration' => '12 Hari Pelatihan',
+        'desc'     => 'Program pembinaan calon Ahli K3 Umum untuk mengawasi kepatuhan UU No. 1/1970 di tempat kerja dan merancang sistem manajemen K3 perusahaan.',
+        'target'   => 'HSE Officer, Supervisor Pabrik, Fresh Graduate D3/S1',
+    ],
+    [
+        'name'     => 'Ahli Muda K3 Konstruksi BNSP',
+        'cert'     => 'Sertifikasi BNSP',
+        'slug'     => 'pelatihan-ahli-muda-k3-konstruksi-online',
+        'mode'     => 'Uji Kompetensi BNSP',
+        'duration' => '5 Hari Pelatihan',
+        'desc'     => 'Pelatihan pengawasan keselamatan proyek konstruksi, identifikasi bahaya struktural lapangan, dan penyusunan dokumen SMKK/HIRADC.',
+        'target'   => 'Site Engineer, Pelaksana Proyek Sipil, Safety Officer',
+    ],
+    [
+        'name'     => 'Pengawas K3 Industri Migas BNSP',
+        'cert'     => 'Sertifikasi BNSP',
+        'slug'     => 'pelatihan-pengawas-k3-industri-migas-sertifikasi-bnsp',
+        'mode'     => 'Sertifikasi SKKNI Migas',
+        'duration' => '4 Hari Pelatihan',
+        'desc'     => 'Standarisasi kompetensi pengawas keselamatan operasi migas hulu/hilir, pengendalian gas H2S, dan prosedur izin kerja aman (PTW).',
+        'target'   => 'Safety Inspector, Rig Crew, Operator Migas',
+    ],
+    [
+        'name'     => 'Operator Forklift Kelas 2 Kemnaker RI',
+        'cert'     => 'Kemnaker RI',
+        'slug'     => 'pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri',
+        'mode'     => 'Lisensi K3 Kemnaker RI',
+        'duration' => '3 Hari Pelatihan',
+        'desc'     => 'Lisensi resmi KEMNAKER RI pengoperasian unit forklift industri di bawah kapasitas 15 ton sesuai Permenaker No. 08 Tahun 2020.',
+        'target'   => 'Operator Forklift, Staf Gudang & Logistik',
+    ],
+    [
+        'name'     => 'Petugas P3K di Tempat Kerja BNSP',
+        'cert'     => 'Sertifikasi BNSP',
+        'slug'     => 'pelatihan-petugas-p3k-sertifikasi-bnsp',
+        'mode'     => 'Sertifikasi BNSP',
+        'duration' => '3 Hari Pelatihan',
+        'desc'     => 'Pelatihan tanggap darurat medis tempat kerja, prosedur resusitasi jantung paru (RJP), pertolongan luka, dan regulasi Permenaker 15/2008.',
+        'target'   => 'Tim Tanggap Darurat, HRGA, Paramedis Perusahaan',
+    ],
+    [
+        'name'     => 'Auditor Sistem Manajemen K3 (SMK3)',
+        'cert'     => 'Sertifikasi BNSP',
+        'slug'     => 'pelatihan-auditor-sistem-manajemen-k3-sertifikasi-bnsp',
+        'mode'     => 'Sertifikasi BNSP',
+        'duration' => '4 Hari Pelatihan',
+        'desc'     => 'Kualifikasi auditor internal untuk evaluasi penerapan SMK3 PP No. 50 Tahun 2012 dan ISO 45001 menuju sertifikasi bendera emas.',
+        'target'   => 'Internal Auditor, QHSE Manager, Tim SMK3',
+    ],
 ];
 
 $elemenSmk3 = [
@@ -90,6 +138,7 @@ echo json_encode([
 ?>
 </script>
 <link rel="stylesheet" href="/assets/css/page/sector.css">
+<link rel="stylesheet" href="/assets/css/page/hub-master.css">
 <style>
 .hero h1{font-size:clamp(1.6rem,4.5vw,2.6rem);font-weight:800;line-height:1.2;margin-bottom:14px;letter-spacing:-.02em}
 section{padding:48px 0;background:#f5f5f2}
@@ -122,6 +171,18 @@ h2.section-title{font-size:1.5rem;font-weight:800;color:#111827;margin-bottom:8p
 .prevent-list li::before{content:'✓';color:#0A4A2E;font-weight:800;flex-shrink:0}
 .faq-a{padding:0 20px;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s;font-size:14.5px;color:#374151;line-height:1.75}
 .final-cta h2{font-size:1.8rem;font-weight:800;margin-bottom:10px}
+
+/* Enhanced Scheme Grid & Modern Cards */
+.scheme-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.scheme-card{background:#fff;border:1.5px solid #e2e8f0;border-radius:12px;padding:20px;display:flex;flex-direction:column;box-shadow:0 2px 8px rgba(0,0,0,.03);transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.scheme-card:hover{transform:translateY(-3px);border-color:#0A4A2E;box-shadow:0 10px 24px rgba(10,74,46,.1)}
+.scheme-cert{display:inline-flex;align-items:center;gap:4px;background:#e8f4ee;color:#0A4A2E;font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px;width:fit-content}
+.scheme-card h3{font-size:1.05rem;font-weight:800;margin:0 0 8px;line-height:1.4}
+.scheme-card h3 a{color:#0f172a;text-decoration:none;transition:color .15s ease}
+.scheme-card h3 a:hover{color:#0A4A2E}
+.scheme-card p{font-size:13px;color:#64748b;line-height:1.6;margin:0 0 14px;flex-grow:1}
+.scheme-link{margin-top:auto;padding-top:12px;border-top:1px solid #f1f5f9;color:#0A4A2E;font-weight:700;font-size:13px;text-decoration:none;display:inline-flex;align-items:center;justify-content:space-between;transition:color .15s ease}
+.scheme-link:hover{color:#C6621C}
 </style>
 <style id="wt-hero-height-fix-2026-07">
 /* wt-hero-height-fix-2026-07: this page's own .hero is a small custom hero, not the
@@ -132,10 +193,18 @@ h2.section-title{font-size:1.5rem;font-weight:800;color:#111827;margin-bottom:8p
 <?php require __DIR__ . '/includes/navbar.php'; ?>
 <section class="hero">
   <div class="container inner">
-    <div class="hero-badge">📘 Panduan Lengkap</div>
+    <div class="hero-badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      Panduan Lengkap
+    </div>
     <h1>Keselamatan dan Kesehatan Kerja (K3) di Indonesia: Panduan Lengkap</h1>
     <p class="hero-sub">Dasar hukum, program sertifikasi, penerapan SMK3, dan pelatihan K3 resmi bersertifikat Kemnaker RI di Yogyakarta.</p>
-    <div><a href="<?=$wa_url?>" class="btn-wa" target="_blank" rel="noopener">💬 Konsultasi Program K3</a></div>
+    <div>
+      <a href="<?=$wa_url?>" class="btn-wa" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
+        Konsultasi Program K3
+      </a>
+    </div>
   </div>
 </section>
 
@@ -184,17 +253,78 @@ h2.section-title{font-size:1.5rem;font-weight:800;color:#111827;margin-bottom:8p
 </section>
 
 <!-- PROGRAM PELATIHAN -->
-<section>
+<section style="background:#f8fafc;padding:56px 0;">
 <div class="container">
-  <h2 class="section-title">Program Pelatihan K3 Kami</h2>
-  <p class="section-subtitle">Pilih skema sesuai kebutuhan kompetensi K3 Anda</p>
-  <div class="scheme-grid">
-    <?php foreach ($skemas as $sk): ?>
-    <div class="scheme-card">
-      <span class="scheme-cert"><?= htmlspecialchars($sk['cert']) ?></span>
-      <h3><a href="/pelatihan/<?= htmlspecialchars($sk['slug']) ?>/"><?= htmlspecialchars($sk['name']) ?></a></h3>
-      <a href="/pelatihan/<?= htmlspecialchars($sk['slug']) ?>/" class="scheme-link">Lihat Program &rarr;</a>
-    </div>
+  <div style="text-align:center;max-width:760px;margin:0 auto 36px;">
+    <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:#C6621C;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      Program Pelatihan Unggulan
+    </span>
+    <h2 class="section-title" style="font-size:1.8rem;font-weight:800;color:#111827;margin-bottom:8px;">Program Pelatihan K3 &amp; Sertifikasi Resmi</h2>
+    <p class="section-subtitle" style="font-size:15px;color:#64748b;margin:0;">Pilih skema kompetensi KEMNAKER RI &amp; BNSP sesuai kebutuhan lisensi dan tanggung jawab kerja Anda.</p>
+  </div>
+
+  <div class="hub-program-cards">
+    <?php foreach ($skemas as $sk): 
+      $prog_url = '/pelatihan/' . trim($sk['slug'], '/') . '/';
+      $prog_wa_msg = 'Halo Wahana Totalita, saya ingin informasi biaya dan jadwal terdekat pelatihan ' . $sk['name'];
+      $prog_wa_url = "https://wa.me/{$wa_number}?text=" . rawurlencode($prog_wa_msg);
+      $prog_img = training_img_url('', 'k3', $sk['slug']);
+    ?>
+    <article class="hub-prog-card">
+      <div class="hub-prog-card-media">
+        <img src="<?= htmlspecialchars($prog_img) ?>" alt="<?= htmlspecialchars($sk['name']) ?>" loading="lazy" width="400" height="180">
+        <div class="hub-prog-media-overlay">
+          <span class="hub-prog-pill-cert">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <?= htmlspecialchars($sk['cert']) ?>
+          </span>
+          <?php if (!empty($sk['duration'])): ?>
+          <span class="hub-prog-pill-dur"><?= htmlspecialchars($sk['duration']) ?></span>
+          <?php endif; ?>
+        </div>
+      </div>
+
+      <div class="hub-prog-card-content">
+        <div style="font-size:11px;font-weight:700;color:var(--hub-orange, #C6621C);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:6px;">
+          <?= htmlspecialchars($sk['mode'] ?? 'Sertifikasi Resmi') ?>
+        </div>
+
+        <h3 class="hub-prog-title">
+          <a href="<?= htmlspecialchars($prog_url) ?>"><?= htmlspecialchars($sk['name']) ?></a>
+        </h3>
+
+        <p class="hub-prog-desc"><?= htmlspecialchars($sk['desc']) ?></p>
+
+        <ul class="hub-prog-checklist">
+          <li>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Lisensi &amp; Sertifikat Resmi <?= htmlspecialchars($sk['cert']) ?></span>
+          </li>
+          <?php if (!empty($sk['target'])): ?>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="7" r="4"/><path d="M5.5 21a6.5 6.5 0 0 1 13 0"/></svg>
+            <span>Sasaran: <?= htmlspecialchars($sk['target']) ?></span>
+          </li>
+          <?php endif; ?>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>
+            <span>Modul Pelatihan, Ujian Kompetensi &amp; Konsultasi</span>
+          </li>
+        </ul>
+
+        <div class="hub-prog-card-footer">
+          <a href="<?= htmlspecialchars($prog_url) ?>" class="hub-btn-prog-primary">
+            <span>Silabus &amp; Jadwal</span>
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+          <a href="<?= htmlspecialchars($prog_wa_url) ?>" class="hub-btn-prog-wa-icon" target="_blank" rel="noopener" title="Konsultasi WhatsApp">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
+            <span>Chat WA</span>
+          </a>
+        </div>
+      </div>
+    </article>
     <?php endforeach; ?>
   </div>
 </div>
@@ -440,7 +570,10 @@ h2.section-title{font-size:1.5rem;font-weight:800;color:#111827;margin-bottom:8p
   <div class="container-sm">
     <h2>Butuh Program K3 untuk Perusahaan Anda?</h2>
     <p>Konsultasikan kebutuhan pelatihan dan sertifikasi K3 perusahaan Anda dengan tim kami.</p>
-    <a href="<?=$wa_url?>" class="btn-wa" target="_blank" rel="noopener">💬 Konsultasi Program K3</a>
+    <a href="<?=$wa_url?>" class="btn-wa" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
+      Konsultasi Program K3
+    </a>
   </div>
 </section>
 
