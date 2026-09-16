@@ -380,6 +380,13 @@ RewriteRule ^regulasi/?$ regulasi/index.php [QSA,L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^regulasi/([a-z0-9\-]+)/?$ regulasi/detail.php?slug=$1 [QSA,L]
 
+# ─── Standar Kompetensi SKKNI & Profesi Hub ───────────
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^skkni/?$ skkni/index.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^skkni/([a-z0-9\-]+)/?$ skkni/detail.php?slug=$1 [QSA,L]
+
 # ─── Training Schedule ────────────────────────────────
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^jadwal/?$ jadwal-pelatihan.php [QSA,L]
@@ -479,6 +486,7 @@ RewriteRule ^sitemap-kota\.xml$      sitemap.php?type=kota [L]
 RewriteRule ^sitemap-platform\.xml$  sitemap.php?type=platform [L]
 RewriteRule ^sitemap-glosarium\.xml$ sitemap.php?type=glosarium [L]
 RewriteRule ^sitemap-regulasi\.xml$  sitemap.php?type=regulasi [L]
+RewriteRule ^sitemap-skkni\.xml$     sitemap.php?type=skkni [L]
 RewriteRule ^sitemap-kota-pelatihan\.xml$ sitemap.php?type=kota-pelatihan [L]
 
 # ─── Security Headers ────────────────────────────────────────
