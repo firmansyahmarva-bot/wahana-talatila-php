@@ -28,6 +28,9 @@ $_home_title = 'Pelatihan K3 & Sertifikasi BNSP Yogyakarta | Wahana Totalita';
 <?php $canonical = 'https://wahanatotalita.com' . strtok($_SERVER['REQUEST_URI'], '?'); ?>
 <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
 <link rel="alternate" hreflang="id" href="<?= htmlspecialchars($canonical) ?>" />
+<?php if ($_is_home): ?>
+<link rel="alternate" hreflang="zh-Hans" href="https://wahanatotalita.com/zh/" />
+<?php endif; ?>
 <link rel="alternate" hreflang="x-default" href="<?= htmlspecialchars($canonical) ?>" />
 
 <!-- Open Graph -->
@@ -36,7 +39,7 @@ $_home_title = 'Pelatihan K3 & Sertifikasi BNSP Yogyakarta | Wahana Totalita';
 <meta property="og:title"       content="<?= $_is_home ? e($_home_title) : e(($s['site_name'] ?? '') . ' | Pelatihan K3 & Sertifikasi BNSP') ?>">
 <meta property="og:description" content="<?= e($meta_desc) ?>">
 <meta property="og:url"         content="<?= htmlspecialchars($canonical) ?>">
-<meta property="og:image"       content="<?= SITE_URL . e($s['og_image'] ?? '/assets/img/og-cover.svg') ?>">
+<meta property="og:image"       content="<?= SITE_URL . e($s['og_image'] ?? '/assets/img/og-cover.jpg') ?>">
 <meta name="twitter:card"       content="summary_large_image">
 <meta name="twitter:title"      content="<?= $_is_home ? e($_home_title) : e($s['site_name'] ?? '') ?>">
 <meta name="theme-color"        content="<?= e(is_valid_hex($s['theme_color_primary'] ?? '') ? $s['theme_color_primary'] : '#0A4A2E') ?>">
