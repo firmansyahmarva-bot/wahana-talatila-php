@@ -18,8 +18,21 @@ if (!$item) {
 $s = get_all_settings();
 
 $canonical = SITE_URL . '/skkni/' . $item['slug'] . '/';
-$metaTitle = $item['judul'] . ' - Standar Kompetensi SKKNI & Sertifikasi BNSP | Wahana Totalita';
-$metaDesc  = 'Pelajari standar kompetensi SKKNI ' . $item['judul'] . ' (' . $item['skkni_nomor'] . '). Meliputi unit kompetensi BNSP, syarat asesmen, tugas kerja, dan standar gaji industri.';
+
+// SERP-optimized Title (under 65 chars) & Meta Description (140-158 chars)
+$judul = $item['judul'];
+if (mb_strlen($judul) <= 38) {
+    $metaTitle = $judul . ' - SKKNI & BNSP';
+} elseif (mb_strlen($judul) <= 50) {
+    $metaTitle = $judul . ' | SKKNI BNSP';
+} else {
+    $metaTitle = mb_strimwidth($judul, 0, 48, '...') . ' | SKKNI BNSP';
+}
+
+$metaDesc = 'Standar kompetensi SKKNI ' . $judul . '. Pelajari daftar unit BNSP, syarat asesmen, uraian tugas kerja, dan standar gaji industri terverifikasi.';
+if (mb_strlen($metaDesc) > 158) {
+    $metaDesc = mb_strimwidth($metaDesc, 0, 155, '...');
+}
 
 // Related professions
 $related = get_related_skkni($item['slug'], $item['sektor'], 4);
