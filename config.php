@@ -58,7 +58,7 @@ if (
 
 // ─── Edge & Browser Cache Headers for Public Read-Only Pages ──────────────
 if (session_status() === PHP_SESSION_NONE && !headers_sent() && php_sapi_name() !== 'cli') {
-    header('Cache-Control: public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800');
+    header('Cache-Control: public, max-age=60, s-maxage=120, must-revalidate');
 }
 
 // ─── PDO Singleton ────────────────────────────────────────────────────────
