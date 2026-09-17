@@ -31,7 +31,7 @@ $metaTitle = $r['nomor'] . ': ' . $r['tentang'] . ' — Ringkasan & Kepatuhan';
 $metaDesc  = 'Ulasan hukum lengkap ' . $r['nomor'] . ' tentang ' . $r['tentang'] . '. Pahami pasal penting, kewajiban industri, sanksi pelanggaran, dan sertifikasi K3 resmi.';
 
 // WA consultation link
-$waNumber = '6281211119530';
+$waNumber = $s['wa_number'] ?? '6287759151278';
 $waText   = urlencode("Halo Wahana Totalita, kami ingin konsultasi kepatuhan hukum dan pelatihan in-house terkait " . $r['nomor']);
 $waUrl    = "https://wa.me/{$waNumber}?text={$waText}";
 
@@ -297,8 +297,17 @@ $jsonLd = [
 
 /* Sidebar */
 .reg-sidebar {
+    position: -webkit-sticky;
     position: sticky;
-    top: 24px;
+    top: 90px;
+    align-self: start;
+    height: fit-content;
+}
+@media (max-width: 960px) {
+    .reg-sidebar {
+        position: static;
+        top: auto;
+    }
 }
 .side-card {
     background: #ffffff;

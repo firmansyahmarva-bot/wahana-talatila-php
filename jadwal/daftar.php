@@ -156,8 +156,7 @@ $s = get_all_settings();
       </form>
 
       <div style="margin-top:20px;text-align:center;font-size:.85rem;color:#999">
-        Dengan mendaftar, Anda menyetujui <a href="/syarat-ketentuan/" style="color:var(--green)">syarat dan ketentuan</a> kami.
-        Butuh bantuan? <a href="<?= wa_url('Halo, saya butuh bantuan mendaftar pelatihan '.$batch['training_name'], '6287759151278') ?>" style="color:var(--green)">Chat WhatsApp</a>
+        Butuh bantuan pendaftaran? <a href="<?= wa_url('Halo, saya butuh bantuan mendaftar pelatihan '.$batch['training_name'], '6287759151278') ?>" style="color:var(--green)">Chat WhatsApp</a>
       </div>
     </div>
   </div>

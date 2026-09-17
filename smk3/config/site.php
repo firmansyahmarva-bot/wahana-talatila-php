@@ -22,7 +22,7 @@ return [
 
   // Contact & CTA
   'wa_number'    => '6287759151278',            // digits only, for wa.me link
-  'wa_display'   => '+62 812-3503-6420',
+  'wa_display'   => '+62 877-5915-1278',
   'wa_prefill'   => 'Halo, saya ingin konsultasi mengenai SMK3 untuk perusahaan kami.',
   'email'        => 'info@wahanatotalita.com',
 

@@ -38,7 +38,7 @@ if (mb_strlen($metaDesc) > 158) {
 $related = get_related_skkni($item['slug'], $item['sektor'], 4);
 
 // WA consultation link
-$waNumber = '6281211119530';
+$waNumber = $s['wa_number'] ?? '6287759151278';
 $waText   = urlencode("Halo Wahana Totalita, kami ingin konsultasi pelatihan dan uji kompetensi BNSP untuk profesi: " . $item['judul']);
 $waUrl    = "https://wa.me/{$waNumber}?text={$waText}";
 
@@ -352,6 +352,20 @@ $jsonLd = [
 }
 
 /* Sidebar Styling */
+.skkni-sidebar {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 90px;
+    align-self: start;
+    height: fit-content;
+    z-index: 30;
+}
+@media (max-width: 960px) {
+    .skkni-sidebar {
+        position: static;
+        top: auto;
+    }
+}
 .skkni-sidebar-card {
     background: #ffffff;
     border-radius: 14px;
