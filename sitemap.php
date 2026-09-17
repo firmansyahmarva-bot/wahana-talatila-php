@@ -143,10 +143,20 @@ case 'core':
         'k3-psikososial'                 => '0.8',
         'k3-pangan'                      => '0.8',
         'pelatihan-teknologi-informasi'  => '0.8',
+        'in-house-training'              => '0.9',
+        'in-house-training/balikpapan-ikn' => '0.85',
+        'in-house-training/cilegon-karawang' => '0.85',
+        'in-house-training/morowali-weda-bay' => '0.85',
     ];
     foreach ($with_slash as $slug => $pri) {
-        $file = __DIR__ . '/' . $slug . '.php';
-        $lm = file_exists($file) ? date('Y-m-d', filemtime($file)) : '';
+        if ($slug === 'in-house-training') {
+            $file = __DIR__ . '/in-house/index.php';
+        } elseif (str_starts_with($slug, 'in-house-training/')) {
+            $file = __DIR__ . '/in-house/' . substr($slug, 19) . '.php';
+        } else {
+            $file = __DIR__ . '/' . $slug . '.php';
+        }
+        $lm = file_exists($file) ? date('Y-m-d', filemtime($file)) : date('Y-m-d');
         echo sm_url($base . '/' . $slug . '/', $lm, $pri);
     }
 

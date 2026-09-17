@@ -389,6 +389,7 @@
         <li><a href="/jadwal/kalender/">Kalender Pelatihan</a></li>
         <li><a href="/regulasi/">Pusat Regulasi K3 RI</a></li>
         <li><a href="/skkni/">Standar Profesi SKKNI</a></li>
+        <li><a href="/in-house-training/">In-House Training Perusahaan</a></li>
         <li><a href="/tools/safety-talk">Safety Talk Generator</a></li>
         <li><a href="/verifikasi/">Verifikasi Keaslian Sertifikat</a></li>
         <li><a href="/artikel/">Artikel &amp; Panduan K3</a></li>
@@ -398,12 +399,13 @@
 
     <!-- Col 4: Wilayah Layanan & Kontak -->
     <div class="footer-contact">
-      <h4>Wilayah &amp; Kontak</h4>
+      <h4>Hub In-House &amp; Kontak</h4>
       <ul>
-        <li><a href="/pelatihan-k3-jakarta/">K3 Jakarta</a> · <a href="/pelatihan-k3-surabaya/">Surabaya</a></li>
-        <li><a href="/pelatihan-k3-balikpapan/">K3 Balikpapan (IKN)</a></li>
-        <li><a href="/pelatihan-k3-bandung/">K3 Bandung</a> · <a href="/pelatihan-k3-semarang/">Semarang</a></li>
-        <li><a href="/pelatihan-k3-medan/">K3 Medan</a> · <a href="/pelatihan-k3-makassar/">Makassar</a></li>
+        <li><a href="/in-house-training/balikpapan-ikn/">In-House Balikpapan &amp; IKN</a></li>
+        <li><a href="/in-house-training/cilegon-karawang/">In-House Cilegon &amp; Karawang</a></li>
+        <li><a href="/in-house-training/morowali-weda-bay/">In-House Morowali &amp; Weda Bay</a></li>
+        <li><a href="/pelatihan-k3-jakarta/">Jakarta</a> · <a href="/pelatihan-k3-surabaya/">Surabaya</a> · <a href="/pelatihan-k3-bandung/">Bandung</a></li>
+        <li><a href="/pelatihan-k3-medan/">Medan</a> · <a href="/pelatihan-k3-semarang/">Semarang</a> · <a href="/pelatihan-k3-makassar/">Makassar</a></li>
         <li><a href="<?= wa_url() ?>" target="_blank">📱 WhatsApp: <?= e($s['wa_number'] ?? '0877-5915-1278') ?></a></li>
         <?php if (!empty($s['site_address'])): ?>
         <li>📍 <?= e($s['site_address']) ?></li>
