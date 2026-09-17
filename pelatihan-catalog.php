@@ -142,7 +142,59 @@ if ('requestIdleCallback' in window) {
 /* Category directory intro line inside the services section */
 .pcat-dir-intro { text-align: center; max-width: 760px; margin: 0 auto 8px; color: var(--text-muted, #555); font-size: 14.5px; line-height: 1.7; }
 
-.pcat-filter-row { display: flex; justify-content: center; padding: 28px 0 8px; }
+.pcat-filter-row { display: flex; flex-direction: column; align-items: center; padding: 24px 0 8px; }
+
+/* Quick Category Filter Pills */
+.pcat-cat-pills-wrap { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; width: 100%; max-width: 820px; }
+.pcat-cat-pill { padding: 8px 18px; border-radius: 999px; border: 1.5px solid #d0e8d8; background: #fff; color: #334155; font-size: 13px; font-weight: 600; cursor: pointer; transition: all .2s; }
+.pcat-cat-pill:hover { border-color: var(--green, #0A4A2E); color: var(--green, #0A4A2E); }
+.pcat-cat-pill.active { background: var(--green, #0A4A2E); color: #fff; border-color: var(--green, #0A4A2E); box-shadow: 0 2px 8px rgba(10,74,46,0.25); }
+
+/* Comparison Kemnaker vs BNSP */
+.pcat-compare-section { padding: 48px 0; background: #ffffff; border-bottom: 1px solid #e8e8e8; }
+.pcat-compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
+@media (max-width: 768px) { .pcat-compare-grid { grid-template-columns: 1fr; } }
+.pcat-compare-card { border-radius: 14px; padding: 26px; border: 1.5px solid #e2e8f0; background: #fafcff; display: flex; flex-direction: column; transition: transform .2s, box-shadow .2s; }
+.pcat-compare-card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0,0,0,0.06); }
+.pcat-compare-kemnaker { border-top: 4px solid var(--green, #0A4A2E); }
+.pcat-compare-bnsp { border-top: 4px solid #0284c7; }
+.pcat-comp-tag { display: inline-block; font-size: 11.5px; font-weight: 700; text-transform: uppercase; padding: 4px 10px; border-radius: 6px; margin-bottom: 12px; align-self: flex-start; }
+.tag-kemnaker { background: #dcfce7; color: #166534; }
+.tag-bnsp { background: #e0f2fe; color: #0369a1; }
+.pcat-compare-card h3 { font-size: 1.25rem; font-weight: 800; color: #0f172a; margin: 0 0 10px; }
+.pcat-compare-card p { font-size: 14px; color: #475569; line-height: 1.6; margin-bottom: 16px; }
+.pcat-comp-points { list-style: none; padding: 0; margin: 0 0 20px; display: flex; flex-direction: column; gap: 9px; font-size: 13.5px; color: #334155; }
+.pcat-comp-points li { display: flex; align-items: flex-start; gap: 8px; line-height: 1.5; }
+
+/* 4 Steps Process */
+.pcat-steps-section { padding: 54px 0; background: #f8fafc; border-bottom: 1px solid #e2e8f0; }
+.pcat-steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 28px; }
+.pcat-step-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; position: relative; display: flex; flex-direction: column; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
+.pcat-step-num { width: 34px; height: 34px; border-radius: 50%; background: var(--green, #0A4A2E); color: #fff; font-weight: 800; font-size: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+.pcat-step-card h3 { font-size: 1.05rem; font-weight: 700; color: #0f172a; margin: 0 0 8px; }
+.pcat-step-card p { font-size: 13.5px; color: #64748b; line-height: 1.55; margin: 0; }
+
+/* In-House B2B Banner */
+.pcat-b2b-box { background: linear-gradient(135deg, #092015 0%, #0F3826 100%); color: #fff; border-radius: 16px; padding: 36px 40px; margin: 48px auto; max-width: 1060px; box-shadow: 0 16px 36px rgba(10,74,46,0.15); border: 1px solid rgba(255,255,255,0.1); }
+.pcat-b2b-inner { display: grid; grid-template-columns: 1.4fr 1fr; gap: 36px; align-items: center; }
+@media (max-width: 800px) { .pcat-b2b-inner { grid-template-columns: 1fr; gap: 24px; } .pcat-b2b-box { padding: 28px 20px; } }
+.pcat-b2b-box h2 { font-size: clamp(1.4rem, 2.5vw, 1.85rem); font-weight: 800; margin: 0 0 10px; color: #fff; }
+.pcat-b2b-box p { font-size: 14px; line-height: 1.65; color: #bbf7d0; margin-bottom: 18px; }
+.pcat-b2b-features { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; font-size: 13.5px; }
+.pcat-b2b-features li { display: flex; align-items: center; gap: 10px; color: #f0fdf4; }
+.pcat-b2b-features li span { color: #4ade80; font-weight: 700; }
+.pcat-b2b-actions { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+@media (max-width: 800px) { .pcat-b2b-actions { align-items: stretch; } }
+.btn-b2b-wa { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: #25D366; color: #fff !important; padding: 13px 24px; border-radius: 10px; font-weight: 700; font-size: 14px; text-decoration: none; box-shadow: 0 4px 16px rgba(37,211,102,0.3); transition: all .2s; }
+.btn-b2b-wa:hover { background: #20ba5a; transform: translateY(-2px); }
+
+/* Trust Pillars Grid */
+.pcat-trust-section { padding: 48px 0; background: #ffffff; border-top: 1px solid #e2e8f0; }
+.pcat-trust-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; margin-top: 24px; }
+.pcat-trust-item { display: flex; gap: 14px; align-items: flex-start; padding: 18px; border-radius: 12px; background: #f8fafc; border: 1px solid #e2e8f0; }
+.pcat-trust-icon { font-size: 1.8rem; line-height: 1; flex-shrink: 0; }
+.pcat-trust-item h4 { font-size: 14.5px; font-weight: 700; color: #0f172a; margin: 0 0 4px; }
+.pcat-trust-item p { font-size: 12.5px; color: #64748b; line-height: 1.5; margin: 0; }
 
 /* Navbar visibility fix: this page's hero is light (pcat-hero), not the
    dark hero the shared navbar assumes by default (transparent bg +
@@ -245,8 +297,82 @@ if ('requestIdleCallback' in window) {
 </section>
 <?php endif; ?>
 
-<!-- SEARCH + MODE FILTER -->
+<!-- JALUR SERTIFIKASI: KEMNAKER VS BNSP -->
+<section class="pcat-compare-section">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:20px;">
+      <p class="section-eyebrow">Panduan Jalur Sertifikasi</p>
+      <h2 class="section-title">Memilih Antara Kemnaker RI dan BNSP</h2>
+      <p class="pcat-dir-intro">Pahami perbedaan legalitas, kewajiban regulasi, dan peruntukan sertifikasi agar Anda memilih program yang tepat bagi karir maupun kepatuhan perusahaan.</p>
+    </div>
+    <div class="pcat-compare-grid">
+      <!-- Kemnaker Card -->
+      <div class="pcat-compare-card pcat-compare-kemnaker">
+        <span class="pcat-comp-tag tag-kemnaker">Kewajiban Regulasi &amp; Lisensi Legal</span>
+        <h3>Sertifikasi Kemnaker RI</h3>
+        <p>Diterbitkan langsung melalui Kementerian Ketenagakerjaan RI, menghasilkan Surat Keputusan Penunjukan (SKP) dan Lisensi K3 (SIO/Buku Kerja).</p>
+        <ul class="pcat-comp-points">
+          <li><span class="icon">✅</span> <span><strong>Wajib Regulasi:</strong> Payung hukum UU No. 1/1970 untuk pemenuhan syarat audit Pengawas Ketenagakerjaan.</span></li>
+          <li><span class="icon">✅</span> <span><strong>Output Lisensi:</strong> Mendapatkan SKP dan Kartu Kewenangan Ahli/Operator resmi pemerintah.</span></li>
+          <li><span class="icon">✅</span> <span><strong>Contoh Skema:</strong> Ahli K3 Umum Kemnaker, Operator Forklift (Kelas 1 &amp; 2), Damkar (Kelas D/C/B/A), Operator Boiler &amp; Crane.</span></li>
+        </ul>
+      </div>
+      <!-- BNSP Card -->
+      <div class="pcat-compare-card pcat-compare-bnsp">
+        <span class="pcat-comp-tag tag-bnsp">Standar Kompetensi Kerja (SKKNI)</span>
+        <h3>Sertifikasi BNSP (Badan Nasional Sertifikasi Profesi)</h3>
+        <p>Diterbitkan melalui Lembaga Sertifikasi Profesi (LSP) berlisensi BNSP mengacu pada standar unit kompetensi SKKNI nasional.</p>
+        <ul class="pcat-comp-points">
+          <li><span class="icon">✅</span> <span><strong>Pengakuan Kompetensi:</strong> Berlogo Garuda Emas, mengukur keterampilan terstandar industri nasional.</span></li>
+          <li><span class="icon">✅</span> <span><strong>Syarat Tender &amp; Proyek:</strong> Kerap menjadi syarat teknis dalam dokumen lelang BUMN, kontraktor EPC, dan migas.</span></li>
+          <li><span class="icon">✅</span> <span><strong>Contoh Skema:</strong> Pengawas K3 Migas, POP/POM Pertambangan, Penanggung Jawab Air Limbah (POPAL), Auditor SMK3 &amp; ISO.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 LANGKAH PROSES PENDAFTARAN -->
+<section class="pcat-steps-section">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:20px;">
+      <p class="section-eyebrow">Alur Sertifikasi</p>
+      <h2 class="section-title">4 Langkah Mudah Mengikuti Pelatihan</h2>
+      <p class="pcat-dir-intro">Proses pendaftaran cepat, transparan, dan dibimbing langsung oleh tim konsultan kami dari awal hingga sertifikat resmi terbit.</p>
+    </div>
+    <div class="pcat-steps-grid">
+      <div class="pcat-step-card">
+        <div class="pcat-step-num">1</div>
+        <h3>Pilih Program &amp; Jadwal</h3>
+        <p>Cari program di katalog ini, lalu hubungi kami via WhatsApp untuk mendapatkan silabus dan tanggal batch terdekat.</p>
+      </div>
+      <div class="pcat-step-card">
+        <div class="pcat-step-num">2</div>
+        <h3>Registrasi Dokumen</h3>
+        <p>Kirim kelengkapan berkas persyaratan peserta (KTP, ijazah terakhir, pas foto, atau surat penugasan kerja).</p>
+      </div>
+      <div class="pcat-step-card">
+        <div class="pcat-step-num">3</div>
+        <h3>Pembinaan &amp; Praktik</h3>
+        <p>Ikuti sesi pembinaan materi interaktif dan simulasi studi kasus dipandu praktisi industri (Online Zoom atau Tatap Muka).</p>
+      </div>
+      <div class="pcat-step-card">
+        <div class="pcat-step-num">4</div>
+        <h3>Asesmen &amp; Sertifikat</h3>
+        <p>Uji kompetensi resmi. Sertifikat kelulusan fisik dan digital resmi ber-SKP/barcode diterbitkan dan dikirim ke alamat Anda.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEARCH + MODE FILTER + CATEGORY PILLS -->
 <div class="container pcat-filter-row">
+  <div class="pcat-cat-pills-wrap">
+    <button class="pcat-cat-pill active" data-cat="all" onclick="setCatFilter(this)">Semua Kategori (<?= $totalPrograms ?>)</button>
+    <?php foreach ($groups as $group): $cat = $group['cat']; ?>
+    <button class="pcat-cat-pill" data-cat="<?= e($cat['slug']) ?>" onclick="setCatFilter(this)"><?= $cat['icon'] ?? '' ?> <?= e($cat['name']) ?> (<?= count($group['trainings']) ?>)</button>
+    <?php endforeach; ?>
+  </div>
   <div class="filter-bar" style="width:100%;max-width:780px;">
     <div class="catalog-search-wrap">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -304,10 +430,67 @@ if ('requestIdleCallback' in window) {
         Tidak ada program yang cocok dengan pencarian Anda. Coba kata kunci lain, atau hubungi kami langsung via WhatsApp.
       </div>
 
-      <div class="detail-cta-box">
-        <h3>Tidak menemukan program yang Anda cari?</h3>
-        <p>Hubungi tim kami via WhatsApp — kami juga menyediakan program in-house yang disesuaikan kebutuhan perusahaan Anda.</p>
-        <a href="<?= wa_url('Halo, saya ingin konsultasi program pelatihan K3 untuk perusahaan kami.') ?>" class="btn-primary" target="_blank" rel="noopener">Konsultasi via WhatsApp</a>
+      <!-- IN-HOUSE B2B BANNER -->
+      <div class="pcat-b2b-box">
+        <div class="pcat-b2b-inner">
+          <div>
+            <h2>🏢 Solusi Pelatihan In-House untuk Perusahaan &amp; Industri</h2>
+            <p>Ingin melatih tim dalam jumlah besar tanpa mengganggu operasional harian pabrik, tambang, atau proyek Anda? Wahana Totalita menyediakan program in-house training dengan fleksibilitas penuh di seluruh Indonesia.</p>
+            <ul class="pcat-b2b-features">
+              <li><span>✔</span> Instruktur senior dikirim langsung ke lokasi site/fasilitas perusahaan Anda.</li>
+              <li><span>✔</span> Jadwal dan durasi pelatihan fleksibel sesuai shift operasional kerja tim.</li>
+              <li><span>✔</span> Kurikulum disesuaikan dengan studi kasus dan potensi bahaya riil di tempat kerja.</li>
+              <li><span>✔</span> Penawaran harga corporate khusus dan efisien untuk rombongan minimal 5–10 peserta.</li>
+            </ul>
+          </div>
+          <div class="pcat-b2b-actions">
+            <a href="<?= wa_url('Halo Wahana Totalita, kami dari perusahaan ingin meminta penawaran in-house training.') ?>" class="btn-b2b-wa" target="_blank" rel="noopener">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+              Konsultasi In-House via WhatsApp
+            </a>
+            <a href="/in-house-training/" style="color:#bbf7d0; font-size:13.5px; text-decoration:underline; text-align:center; padding:4px;">
+              Lihat Portal &amp; Hub Regional In-House &rarr;
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRUST & QUALITY GUARANTEE -->
+      <div class="pcat-trust-section">
+        <div class="section-header" style="margin-bottom:10px;">
+          <p class="section-eyebrow">Standar Kualitas</p>
+          <h2 class="section-title">Keunggulan Pelatihan Wahana Totalita</h2>
+        </div>
+        <div class="pcat-trust-grid">
+          <div class="pcat-trust-item">
+            <div class="pcat-trust-icon">🏛️</div>
+            <div>
+              <h4>PJK3 Resmi Berlisensi</h4>
+              <p>Terdaftar resmi di Kemnaker RI dengan SKP Penunjukan sah dan berlisensi LSP terakreditasi BNSP.</p>
+            </div>
+          </div>
+          <div class="pcat-trust-item">
+            <div class="pcat-trust-icon">👨‍🏫</div>
+            <div>
+              <h4>Instruktur Praktisi Senior</h4>
+              <p>Materi diampu langsung oleh praktisi berpengalaman 10+ tahun di sektor migas, tambang, dan industri.</p>
+            </div>
+          </div>
+          <div class="pcat-trust-item">
+            <div class="pcat-trust-icon">🔍</div>
+            <div>
+              <h4>Sertifikat Resmi &amp; Terverifikasi</h4>
+              <p>Sertifikat resmi ber-SKP atau berlogo Garuda Emas, dapat divalidasi keasliannya di portal resmi.</p>
+            </div>
+          </div>
+          <div class="pcat-trust-item">
+            <div class="pcat-trust-icon">🤝</div>
+            <div>
+              <h4>Dipercaya 500+ Korporasi</h4>
+              <p>Telah melatih dan menyertifikasi ribuan profesional dari berbagai BUMN, multinasional, dan swasta.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -350,13 +533,26 @@ function setModeFilter(btn) {
   filterCatalog();
 }
 
+function setCatFilter(btn) {
+  document.querySelectorAll('.pcat-cat-pill').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  filterCatalog();
+}
+
 function filterCatalog() {
   var q = (document.getElementById('catalog-search').value || '').trim().toLowerCase();
   var activeBtn = document.querySelector('.filter-mode.active');
   var mode = activeBtn ? activeBtn.dataset.mode : 'all';
+  var activeCatBtn = document.querySelector('.pcat-cat-pill.active');
+  var selCat = activeCatBtn ? activeCatBtn.dataset.cat : 'all';
   var anyVisible = false;
 
   document.querySelectorAll('.detail-section[id^="cat-"]').forEach(function(section){
+    var catId = section.id.replace('cat-', '');
+    if (selCat !== 'all' && catId !== selCat) {
+      section.style.display = 'none';
+      return;
+    }
     var sectionHasVisible = false;
     section.querySelectorAll('.training-card').forEach(function(card){
       var titleEl = card.querySelector('.training-card-title');

@@ -284,6 +284,25 @@ RewriteRule ^layanan-pemerintah/?$ layanan-pemerintah.php [QSA,L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^perusahaan/?$ perusahaan.php [QSA,L]
 
+# ─── In-House Training Hubs ─────────────────────────────────────
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^in-house-training$ /in-house-training/ [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^in-house-training/?$ in-house/index.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^in-house-training/([a-z0-9\-]+)$ /in-house-training/$1/ [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^in-house-training/balikpapan-ikn/?$ in-house/balikpapan-ikn.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^in-house-training/cilegon-karawang/?$ in-house/cilegon-karawang.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^in-house-training/morowali-weda-bay/?$ in-house/morowali-weda-bay.php [QSA,L]
+
 # ─── /layanan redirect to /pelatihan/ ─────────────────────
 # The navbar links to /layanan but no page exists yet.
 RewriteRule ^layanan/?$ /pelatihan/ [R=301,L]
