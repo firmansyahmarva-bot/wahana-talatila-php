@@ -387,10 +387,11 @@
       <ul>
         <li><a href="/jadwal/">Jadwal Pelatihan <?= date('Y') ?></a></li>
         <li><a href="/jadwal/kalender/">Kalender Pelatihan</a></li>
+        <li><a href="/regulasi/">Pusat Regulasi K3 RI</a></li>
+        <li><a href="/skkni/">Standar Profesi SKKNI</a></li>
         <li><a href="/tools/safety-talk">Safety Talk Generator</a></li>
         <li><a href="/verifikasi/">Verifikasi Keaslian Sertifikat</a></li>
-        <li><a href="/perusahaan">Layanan In-House Perusahaan</a></li>
-        <li><a href="/artikel/">Artikel &amp; Regulasi K3</a></li>
+        <li><a href="/artikel/">Artikel &amp; Panduan K3</a></li>
         <li><a href="/perusahaan">Tentang Wahana Totalita</a></li>
       </ul>
     </div>
@@ -418,7 +419,7 @@
         · <a href="/sitemap-jadwal.xml" style="opacity:.6;text-decoration:none">Sitemap Jadwal</a>
         · <a href="/verifikasi/" style="opacity:.6;text-decoration:none">Verifikasi Sertifikat</a>
         · <a href="/kebijakan-privasi" style="opacity:.6;text-decoration:none">Privasi</a>
-        · <a href="/syarat-ketentuan/" style="opacity:.6;text-decoration:none">Syarat &amp; Ketentuan</a>
+        · <a href="/zh/" style="opacity:.6;text-decoration:none">中文 (ZH)</a>
       </p>
     </div>
   </div>

@@ -221,15 +221,6 @@ if ($__path === '/galeri/index') {
     exit;
 }
 
-if ($__path === '/syarat-ketentuan/') {
-    header('Location: /event-organizer', true, 301);
-    exit;
-}
-
-if ($__path === '/syarat-ketentuan') {
-    header('Location: /event-organizer', true, 301);
-    exit;
-}
 
 if ($__path === '/dafter') {
     header('Location: /jadwal/', true, 301);
