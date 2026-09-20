@@ -29,8 +29,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['email'])) {
 $page_title = 'Newsletter K3 — Tips HSE Gratis Setiap Minggu';
 $meta_desc = 'Subscribe newsletter K3 gratis. Dapatkan tips HSE, info pelatihan terbaru, update regulasi K3 Indonesia langsung di inbox Anda.';
 require __DIR__ . '/../includes/head.php';
-?>
-<link rel="stylesheet" href="<?= SITE_URL ?>/assets/css/style.css">
 <?= theme_css_vars($s) ?>
 <style>
 .nl-page{max-width:580px;margin:80px auto;padding:0 20px 80px;text-align:center}

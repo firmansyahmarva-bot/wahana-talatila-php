@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * perusahaan.php — B2B corporate training landing page (Google Ads ready).
  * Target: HSE/HR/GA managers & corporate decision makers (NOT individual students).
@@ -277,7 +277,7 @@ if (is_file($_core_css_file)) {
     </div>
     <div class="pr-grid pr-grid-3">
       <?php foreach ($pains as $i => $p): ?>
-      <div class="pr-card pr-problem">
+      <div class="pr-card pr-problem" data-reveal="up" data-reveal-delay="<?= ($i % 4) + 1 ?>">
         <div class="pr-ic pr-ic-warn"><?= $p[0] ?></div>
         <h3><?= $p[1] ?></h3>
         <p><?= $p[2] ?></p>
@@ -305,7 +305,7 @@ if (is_file($_core_css_file)) {
     </div>
     <div class="pr-grid pr-grid-4">
       <?php foreach ($services as $i => $sv): ?>
-      <div class="pr-card pr-service">
+      <div class="pr-card pr-service" data-reveal="up" data-reveal-delay="<?= ($i % 4) + 1 ?>">
         <div class="pr-ic"><?= $sv[0] ?></div>
         <h3><?= $sv[1] ?></h3>
         <p><?= $sv[2] ?></p>
@@ -344,7 +344,7 @@ if (is_file($_core_css_file)) {
     </div>
     <div class="pr-grid pr-grid-4">
       <?php foreach ($programs as $i => $pg): ?>
-      <div class="pr-card pr-program">
+      <div class="pr-card pr-program" data-reveal="up" data-reveal-delay="<?= ($i % 4) + 1 ?>">
         <h3><?= $pg[0] ?></h3>
         <p><?= $pg[1] ?></p>
         <a class="pr-link" href="<?= e($wa_service($pg[2])) ?>" target="_blank" rel="noopener">Minta Silabus &amp; Harga
@@ -365,7 +365,7 @@ if (is_file($_core_css_file)) {
     </div>
     <div class="pr-grid pr-grid-4">
       <?php foreach ($reasons as $i => $r): ?>
-      <div class="pr-card pr-reason">
+      <div class="pr-card pr-reason" data-reveal="up" data-reveal-delay="<?= ($i % 4) + 1 ?>">
         <div class="pr-ic"><?= $r[0] ?></div>
         <h3><?= $r[1] ?></h3>
         <p><?= $r[2] ?></p>
@@ -429,7 +429,7 @@ if (is_file($_core_css_file)) {
     </div>
     <div class="pr-grid pr-grid-3 pr-packages">
       <?php foreach ($packages as $i => $pk): ?>
-      <div class="pr-package<?= $pk[5] ? ' pr-package-featured' : '' ?>">
+      <div class="pr-package<?= $pk[5] ? ' pr-package-featured' : '' ?>" data-reveal="up" data-reveal-delay="<?= ($i % 4) + 1 ?>">
         <?php if ($pk[5]): ?><span class="pr-badge">Paling Populer</span><?php endif; ?>
         <h3><?= $pk[0] ?></h3>
         <p class="pr-pkg-for"><strong>Best for:</strong> <?= $pk[1] ?></p>
@@ -455,7 +455,7 @@ if (is_file($_core_css_file)) {
     </div>
     <div class="pr-grid pr-grid-3">
       <?php foreach ($testimonials as $i => $t): ?>
-      <figure class="pr-testi">
+      <figure class="pr-testi" data-reveal="up" data-reveal-delay="<?= ($i % 4) + 1 ?>">
         <div class="pr-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
         <blockquote><?= $t[1] ?></blockquote>
         <p class="pr-outcome"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> <?= $t[5] ?></p>
@@ -478,7 +478,7 @@ if (is_file($_core_css_file)) {
     </div>
     <div class="pr-faq">
       <?php foreach ($faqs as $k => $f): ?>
-      <details<?= $k === 0 ? ' open' : '' ?>>
+      <details<?= $k === 0 ? ' open' : '' ?> data-reveal="up" data-reveal-delay="<?= ($k % 4) + 1 ?>">
         <summary><?= e($f[0]) ?></summary>
         <p><?= e($f[1]) ?></p>
       </details>

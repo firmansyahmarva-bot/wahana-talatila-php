@@ -110,11 +110,22 @@ if (!empty($article['thumbnail'])) $article_schema['image'] = artikel_thumb($art
 <?php endif; ?>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" href="<?= theme_font_url($s) ?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="<?= theme_font_url($s) ?>">
+<link rel="stylesheet" href="<?= theme_font_url($s) ?>" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="<?= theme_font_url($s) ?>"></noscript>
-<link rel="stylesheet" href="<?= asset_v('/assets/css/core.min.css') ?>">
-<link rel="stylesheet" href="<?= asset_v('/assets/css/components.min.css') ?>">
-<link rel="stylesheet" href="<?= asset_v('/assets/css/artikel.css') ?>">
+<style><?php
+$_core_css_file = __DIR__ . '/assets/css/core.min.css';
+if (is_file($_core_css_file)) {
+    readfile($_core_css_file);
+} else {
+    readfile(__DIR__ . '/assets/css/tokens.css');
+    readfile(__DIR__ . '/assets/css/core.css');
+}
+?></style>
+<link rel="stylesheet" href="<?= asset_v('/assets/css/components.min.css') ?>" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="<?= asset_v('/assets/css/components.min.css') ?>"></noscript>
+<link rel="stylesheet" href="<?= asset_v('/assets/css/artikel.css') ?>" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="<?= asset_v('/assets/css/artikel.css') ?>"></noscript>
 <?= theme_css_vars($s) ?>
 </head>
 <body class="artikel-single-page">
@@ -217,7 +228,7 @@ if (!empty($article['thumbnail'])) $article_schema['image'] = artikel_thumb($art
         <div class="ak-faq-list">
           <?php foreach ($faqs as $i => $faq): ?>
           <?php if (empty($faq['q'])) continue; ?>
-          <div class="ak-faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <div class="ak-faq-item" data-reveal="up" data-reveal-delay="<?= ($i % 4) + 1 ?>" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
             <button class="ak-faq-q" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-answer-<?= $i ?>">
               <span itemprop="name"><?= e($faq['q']) ?></span>
               <svg class="ak-faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
@@ -259,8 +270,8 @@ if (!empty($article['thumbnail'])) $article_schema['image'] = artikel_thumb($art
     <div class="container">
       <h2 id="related-heading">Artikel Terkait</h2>
       <div class="ak-related-grid">
-        <?php foreach ($related as $r): ?>
-        <article class="ak-card">
+        <?php foreach ($related as $r_idx => $r): ?>
+        <article class="ak-card" data-reveal="up" data-reveal-delay="<?= ($r_idx % 4) + 1 ?>">
           <a href="/artikel/<?= e($r['slug']) ?>/" class="ak-card-img-wrap">
             <img src="<?= e(artikel_thumb($r['thumbnail'] ?? '', $r['category'], $r['slug'] ?? '')) ?>"
                  alt="<?= e($r['title']) ?>"

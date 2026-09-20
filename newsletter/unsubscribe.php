@@ -42,7 +42,17 @@ $s = get_settings();
 <title>Berhenti Berlangganan Newsletter — <?= e($s['site_name'] ?? 'Wahana Totalita') ?></title>
 <meta name="robots" content="noindex,nofollow">
 <link rel="canonical" href="<?= SITE_URL ?>/newsletter/unsubscribe/">
-<link rel="stylesheet" href="<?= SITE_URL ?>/assets/css/style.css">
+<style><?php
+$_core_css_file = __DIR__ . '/../assets/css/core.min.css';
+if (is_file($_core_css_file)) {
+    readfile($_core_css_file);
+} else {
+    readfile(__DIR__ . '/../assets/css/tokens.css');
+    readfile(__DIR__ . '/../assets/css/core.css');
+}
+?></style>
+<link rel="stylesheet" href="<?= asset_v('/assets/css/components.min.css') ?>" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="<?= asset_v('/assets/css/components.min.css') ?>"></noscript>
 <style>
 .unsub-wrap{min-height:80vh;display:flex;align-items:center;justify-content:center;padding:40px 16px;background:#f8fafc}
 .unsub-card{background:#fff;border-radius:16px;border:1px solid #e5e7eb;padding:48px 40px;max-width:480px;width:100%;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,.06)}

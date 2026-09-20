@@ -770,7 +770,8 @@ if ($city_type === 'energy_mining') {
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','<?=$gtm_id?>');</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" href="<?= theme_font_url($s) ?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="<?= theme_font_url($s) ?>">
+<link rel="stylesheet" href="<?= theme_font_url($s) ?>" media="print" onload="this.media='all'">
 <noscript>
   <link rel="stylesheet" href="<?= theme_font_url($s) ?>">
 </noscript>
@@ -882,7 +883,7 @@ if (is_file($_core_css_file)) {
 
     <!-- Pilihan Metode: Online vs Tatap Muka -->
     <div class="method-grid">
-      <div class="method-card">
+      <div class="method-card" data-reveal="up" data-reveal-delay="1">
         <h3>💻 Pelatihan K3 Online (Webinar Zoom)</h3>
         <p>Solusi hemat biaya dan waktu bagi peserta di <?=htmlspecialchars($c['name'])?> dan <?=htmlspecialchars($c['province'])?>. Belajar interaktif langsung bersama trainer praktisi dari mana saja.</p>
         <ul>
@@ -892,7 +893,7 @@ if (is_file($_core_css_file)) {
         </ul>
         <a href="https://wa.me/<?=$wa_number?>?text=<?=rawurlencode("Halo Wahana Totalita, saya ingin daftar Pelatihan K3 Online untuk wilayah {$c['name']}")?>" target="_blank" rel="noopener" style="font-weight:700;font-size:13.5px;color:#063b22">Tanya Kelas Online →</a>
       </div>
-      <div class="method-card">
+      <div class="method-card" data-reveal="up" data-reveal-delay="2">
         <h3>🏢 Pelatihan Tatap Muka &amp; In-House</h3>
         <p>Praktek langsung dan simulasi studi kasus di fasilitas training center kami atau langsung di lokasi pabrik/kantor perusahaan Anda di <?=htmlspecialchars($c['name'])?>.</p>
         <ul>
@@ -905,8 +906,8 @@ if (is_file($_core_css_file)) {
     </div>
 
     <div class="programs-grid" id="program">
-      <?php foreach($programs as $p): ?>
-      <div class="prog-card">
+      <?php foreach($programs as $p_idx => $p): ?>
+      <div class="prog-card" data-reveal="up" data-reveal-delay="<?= ($p_idx % 4) + 1 ?>">
         <div class="prog-icon"><?=$p[0]?></div>
         <div class="prog-body">
           <h3><?=$p[1]?></h3>
@@ -1076,22 +1077,22 @@ if (is_file($_core_css_file)) {
     <h2>Alur Pendaftaran &amp; Sertifikasi K3 <?=htmlspecialchars($c['name'])?></h2>
     <p class="lead">4 langkah mudah memperoleh sertifikat resmi KEMNAKER RI &amp; BNSP tanpa prosedur berbelit.</p>
     <div class="process-grid">
-      <div class="process-step">
+      <div class="process-step" data-reveal="up" data-reveal-delay="1">
         <div class="step-num">1</div>
         <h4>Konsultasi Program</h4>
         <p>Diskusikan kebutuhan pelatihan personal atau tim perusahaan dengan tim konsultan kami via WhatsApp.</p>
       </div>
-      <div class="process-step">
+      <div class="process-step" data-reveal="up" data-reveal-delay="2">
         <div class="step-num">2</div>
         <h4>Registrasi &amp; Berkas</h4>
         <p>Pengiriman salinan KTP, ijazah terakhir, dan pas foto secara online tanpa perlu datang langsung.</p>
       </div>
-      <div class="process-step">
+      <div class="process-step" data-reveal="up" data-reveal-delay="3">
         <div class="step-num">3</div>
         <h4>Pembinaan &amp; Praktik</h4>
         <p>Mengikuti sesi teori regulasi, studi kasus bahaya kerja, dan simulasi pengujian bersama instruktur ahli.</p>
       </div>
-      <div class="process-step">
+      <div class="process-step" data-reveal="up" data-reveal-delay="4">
         <div class="step-num">4</div>
         <h4>Penerbitan Lisensi Sah</h4>
         <p>Sertifikat resmi Kemnaker RI / BNSP dan lisensi Surat Keputusan Penunjukan (SKP) terbit sah berlaku nasional.</p>
@@ -1107,8 +1108,8 @@ if (is_file($_core_css_file)) {
     <h2>Testimoni Alumni Pelatihan K3 <?=htmlspecialchars($c['name'])?></h2>
     <p class="lead">Pengalaman nyata para praktisi HSE, engineer, dan manajer perusahaan yang telah tersertifikasi.</p>
     <div class="testimonials-grid">
-      <?php foreach($testimonials as $t): ?>
-      <div class="testi-card">
+      <?php foreach($testimonials as $t_idx => $t): ?>
+      <div class="testi-card" data-reveal="up" data-reveal-delay="<?= ($t_idx % 4) + 1 ?>">
         <div>
           <div class="testi-stars">★★★★★</div>
           <p class="testi-text">"<?=htmlspecialchars($t['text'])?>"</p>
@@ -1178,8 +1179,8 @@ if (is_file($_core_css_file)) {
         ];
       }
 
-      foreach($why_cards as $w): ?>
-      <div class="why-card">
+      foreach($why_cards as $w_idx => $w): ?>
+      <div class="why-card" data-reveal="up" data-reveal-delay="<?= ($w_idx % 4) + 1 ?>">
         <div class="why-icon"><?=$w[0]?></div>
         <h4><?=$w[1]?></h4>
         <p><?=$w[2]?></p>
@@ -1214,8 +1215,8 @@ if (is_file($_core_css_file)) {
   <div class="container">
     <h2>Pertanyaan Umum Seputar Biaya &amp; Pelatihan K3 <?=htmlspecialchars($c['name'])?></h2>
     <div class="faq-list">
-      <?php foreach($faq_data as $faq): ?>
-      <div class="faq-item">
+      <?php foreach($faq_data as $fi => $faq): ?>
+      <div class="faq-item" data-reveal="up" data-reveal-delay="<?= ($fi % 4) + 1 ?>">
         <h3><?=htmlspecialchars($faq['q'])?></h3>
         <p><?=htmlspecialchars($faq['a'])?></p>
       </div>
@@ -1256,5 +1257,6 @@ function handleCalcSubmit(e) {
 </script>
 
 <?php require __DIR__ . '/includes/footer.php'; ?>
+<?php require __DIR__ . '/includes/scripts.php'; ?>
 </body>
 </html>

@@ -149,14 +149,25 @@ $HUB_DIRECTORY_MESH = [
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="<?= theme_font_url($s ?? []) ?>">
+<link rel="stylesheet" href="<?= theme_font_url($s ?? []) ?>" media="print" onload="this.media='all'">
 <noscript>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="<?= theme_font_url($s ?? []) ?>">
 </noscript>
 
-<link rel="stylesheet" href="<?= asset_v('/assets/css/core.min.css') ?>">
-<link rel="stylesheet" href="<?= asset_v('/assets/css/components.min.css') ?>">
-<link rel="stylesheet" href="<?= asset_v('/assets/css/page/hub-master.css') ?>">
+<style><?php
+$_core_css_file = __DIR__ . '/../assets/css/core.min.css';
+if (is_file($_core_css_file)) {
+    readfile($_core_css_file);
+} else {
+    readfile(__DIR__ . '/../assets/css/tokens.css');
+    readfile(__DIR__ . '/../assets/css/core.css');
+}
+?></style>
+<link rel="stylesheet" href="<?= asset_v('/assets/css/components.min.css') ?>" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="<?= asset_v('/assets/css/components.min.css') ?>"></noscript>
+<link rel="stylesheet" href="<?= asset_v('/assets/css/page/hub-master.css') ?>" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="<?= asset_v('/assets/css/page/hub-master.css') ?>"></noscript>
 <?= theme_css_vars($s) ?>
 
 <!-- Structured Data -->
@@ -239,8 +250,8 @@ $HUB_DIRECTORY_MESH = [
           <h2 class="hub-sec-title">Dasar Hukum &amp; Standar Regulasi</h2>
         </div>
         <div class="hub-regulasi-grid">
-          <?php foreach ($hub_data['regulasi'] as $reg): ?>
-          <div class="hub-regulasi-item">
+          <?php foreach ($hub_data['regulasi'] as $reg_idx => $reg): ?>
+          <div class="hub-regulasi-item" data-reveal="up" data-reveal-delay="<?= ($reg_idx % 4) + 1 ?>">
             <div class="hub-regulasi-title">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
               <span><?= e($reg['nomor']) ?></span>
@@ -268,13 +279,13 @@ $HUB_DIRECTORY_MESH = [
         </div>
 
         <div class="hub-program-cards">
-          <?php foreach ($hub_data['programs'] as $prog): 
+          <?php foreach ($hub_data['programs'] as $p_idx => $prog): 
             $prog_url = '/pelatihan/' . trim($prog['slug'], '/') . '/';
             $prog_wa_msg = $prog['wa_text'] ?? ('Halo Wahana Totalita, saya ingin informasi biaya dan jadwal terdekat pelatihan ' . $prog['name']);
             $prog_wa_url = wa_url($prog_wa_msg, $wa_number);
             $prog_img = training_img_url('', 'k3', $prog['slug']);
           ?>
-          <article class="hub-prog-card">
+          <article class="hub-prog-card" data-reveal="up" data-reveal-delay="<?= ($p_idx % 4) + 1 ?>">
             <div class="hub-prog-card-media">
               <img src="<?= e($prog_img) ?>" alt="<?= e($prog['name']) ?>" loading="lazy" width="400" height="180">
               <div class="hub-prog-media-overlay">
@@ -352,7 +363,7 @@ $HUB_DIRECTORY_MESH = [
           $col2_title = $headers[2] ?? 'Jenjang 2';
           ?>
           <!-- Card 1 -->
-          <div class="hub-compare-card">
+          <div class="hub-compare-card" data-reveal="up" data-reveal-delay="1">
             <span class="hub-compare-badge">Pelaksana Lapangan</span>
             <h3><?= e($col1_title) ?></h3>
             <?php foreach ($hub_data['comparison']['rows'] as $row): ?>
@@ -369,7 +380,7 @@ $HUB_DIRECTORY_MESH = [
           </div>
 
           <!-- Card 2 -->
-          <div class="hub-compare-card featured">
+          <div class="hub-compare-card featured" data-reveal="up" data-reveal-delay="2">
             <span class="hub-compare-badge" style="background:#fef3c7;color:#92400e;">Penanggung Jawab / Ahli</span>
             <h3><?= e($col2_title) ?></h3>
             <?php foreach ($hub_data['comparison']['rows'] as $row): ?>
@@ -452,7 +463,7 @@ $HUB_DIRECTORY_MESH = [
         </div>
         <div class="hub-faq-list">
           <?php foreach ($hub_data['faqs'] as $idx => $faq): ?>
-          <div class="hub-faq-item">
+          <div class="hub-faq-item" data-reveal="up" data-reveal-delay="<?= ($idx % 4) + 1 ?>">
             <button class="hub-faq-question" type="button" aria-expanded="false" onclick="toggleHubFaq(this)">
               <span><?= e($faq['q']) ?></span>
               <svg class="hub-faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
@@ -477,8 +488,8 @@ $HUB_DIRECTORY_MESH = [
           <h2 class="hub-sec-title">Bidang Keahlian K3 Terkait Lainnya</h2>
         </div>
         <div class="hub-sibling-grid">
-          <?php foreach ($hub_data['related_hubs'] as $sh): ?>
-          <a href="/<?= trim($sh['slug'], '/') ?>/" class="hub-sibling-card">
+          <?php foreach ($hub_data['related_hubs'] as $sh_idx => $sh): ?>
+          <a href="/<?= trim($sh['slug'], '/') ?>/" class="hub-sibling-card" data-reveal="up" data-reveal-delay="<?= ($sh_idx % 4) + 1 ?>">
             <span class="hub-sibling-badge"><?= e($sh['badge'] ?? 'Sertifikasi K3') ?></span>
             <h3 class="hub-sibling-title"><?= e($sh['name']) ?></h3>
             <p class="hub-sibling-desc"><?= e($sh['desc']) ?></p>

@@ -12,8 +12,8 @@
    ============================================================ */
 :root{--o:#F06A25;--od:#C2410C;--g:#22c55e;--t:#13202E;--tl:#5A6B7B;--b:#f9f9f9;--bd:#DCE6EE;--w:#fff}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Source Sans 3','Plus Jakarta Sans',system-ui,sans-serif;background:var(--b);color:var(--t);line-height:1.6}
-h1,h2{font-family:'Lexend','Plus Jakarta Sans',system-ui,sans-serif}
+body{font-family:'Source Sans 3',system-ui,sans-serif;background:var(--b);color:var(--t);line-height:1.6}
+h1,h2{font-family:'Lexend',system-ui,sans-serif}
 .hero{background:linear-gradient(135deg,#0B2C46 0%,#103A5C 50%,var(--o) 100%);color:#fff;padding:60px 5% 70px;position:relative;overflow:hidden}
 .hero::after{content:'';position:absolute;top:-60px;right:-80px;width:350px;height:350px;background:rgba(255,255,255,.04);border-radius:50%}
 .hbadge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);padding:5px 14px;border-radius:100px;font-size:13px;font-weight:600;margin-bottom:18px}

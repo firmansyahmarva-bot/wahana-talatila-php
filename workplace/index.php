@@ -19,8 +19,6 @@ $s = get_all_settings();
 $page_title = 'Workplace K3 — Dashboard HSE, HR & CEO Perusahaan';
 $meta_desc = 'Kelola K3 perusahaan Anda dengan Workplace Dashboard. Tracking sertifikat, K3 Score karyawan, laporan HSE real-time. Gratis untuk semua perusahaan.';
 require __DIR__ . '/../includes/head.php';
-?>
-<link rel="stylesheet" href="<?= SITE_URL ?>/assets/css/style.css">
 <?= theme_css_vars($s) ?>
 <style>
 .wp-hero{background:linear-gradient(135deg,#1e3a5f,#2d5282);padding:80px 0;text-align:center;color:#fff}

@@ -39,8 +39,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $page_title = 'Daftar Workplace K3 Dashboard — Gratis';
 $meta_desc = 'Daftar akun Workplace K3 Dashboard gratis — kelola sertifikat, K3 Score, dan laporan HSE perusahaan Anda.';
 require __DIR__ . '/../includes/head.php';
-?>
-<link rel="stylesheet" href="<?= SITE_URL ?>/assets/css/style.css">
 <?= theme_css_vars($s) ?>
 <style>
 .reg-page{max-width:620px;margin:60px auto;padding:0 20px 80px}

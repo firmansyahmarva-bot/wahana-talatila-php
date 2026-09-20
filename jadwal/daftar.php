@@ -63,8 +63,17 @@ $s = get_all_settings();
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Daftar Pelatihan <?= e($batch['training_name']) ?> | Wahana Totalita</title>
 <meta name="robots" content="noindex, follow">
-<link rel="stylesheet" href="<?= asset_v('/assets/css/core.min.css') ?>">
-<link rel="stylesheet" href="<?= asset_v('/assets/css/style.css') ?>">
+<style><?php
+$_core_css_file = __DIR__ . '/../assets/css/core.min.css';
+if (is_file($_core_css_file)) {
+    readfile($_core_css_file);
+} else {
+    readfile(__DIR__ . '/../assets/css/tokens.css');
+    readfile(__DIR__ . '/../assets/css/core.css');
+}
+?></style>
+<link rel="stylesheet" href="<?= asset_v('/assets/css/components.min.css') ?>" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="<?= asset_v('/assets/css/components.min.css') ?>"></noscript>
 <?= theme_css_vars($s) ?>
 <style>
 .reg-page{max-width:680px;margin:60px auto;padding:0 20px}

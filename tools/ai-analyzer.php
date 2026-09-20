@@ -93,7 +93,17 @@ require __DIR__ . '/../includes/head.php';
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Apakah hasil analisis AI ini 100% akurat dan bisa menggantikan Ahli K3?","acceptedAnswer":{"@type":"Answer","text":"Tidak. Alat ini menggunakan analisis berbasis kata kunci dan pola dokumen untuk memberikan gambaran awal kelengkapan dokumen K3 Anda. Untuk kepastian hukum dan kelengkapan sesuai regulasi, dokumen tetap perlu ditinjau oleh Ahli K3 Umum bersertifikat atau HSE Manager."}},{"@type":"Question","name":"Jenis dokumen apa saja yang bisa dianalisis?","acceptedAnswer":{"@type":"Answer","text":"Tool ini mendukung dokumen K3 umum, JSA, HIRARC/identifikasi bahaya, SOP/prosedur kerja, prosedur APAR/kebakaran, prosedur APD, dokumen SMK3, dan laporan kecelakaan kerja."}},{"@type":"Question","name":"Apakah data dokumen yang saya paste disimpan atau dibagikan?","acceptedAnswer":{"@type":"Answer","text":"Teks dokumen digunakan hanya untuk proses analisis pada saat itu juga dan tidak ditujukan untuk publikasi. Untuk dokumen yang bersifat rahasia perusahaan, tetap disarankan menghapus data sensitif (nama klien, angka finansial) sebelum menempelkannya ke tool ini."}}]}
 </script>
-<link rel="stylesheet" href="<?= SITE_URL ?>/assets/css/style.css">
+<style><?php
+$_core_css_file = __DIR__ . '/../assets/css/core.min.css';
+if (is_file($_core_css_file)) {
+    readfile($_core_css_file);
+} else {
+    readfile(__DIR__ . '/../assets/css/tokens.css');
+    readfile(__DIR__ . '/../assets/css/core.css');
+}
+?></style>
+<link rel="stylesheet" href="<?= asset_v('/assets/css/components.min.css') ?>" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="<?= asset_v('/assets/css/components.min.css') ?>"></noscript>
 <?= theme_css_vars($s) ?>
 <style>
 .tool-hero{background:linear-gradient(135deg,#1e1b4b,#312e81);padding:56px 0;color:#fff;text-align:center}

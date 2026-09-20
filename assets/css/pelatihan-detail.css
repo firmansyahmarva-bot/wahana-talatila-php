@@ -107,7 +107,7 @@ html, body {
   --pd-shadow-lift:  0 1px 2px rgba(20,24,26,.05), 0 20px 40px -16px rgba(20,24,26,.22);
 
   --pd-font-display: 'Lexend', system-ui, sans-serif;
-  --pd-font-body:    'Source Sans 3', 'Plus Jakarta Sans', system-ui, sans-serif;
+  --pd-font-body:    'Source Sans 3', system-ui, sans-serif;
   --pd-font-mono:    ui-monospace, monospace;
 
   --pd-space-1: 4px;  --pd-space-2: 8px;  --pd-space-3: 12px;

@@ -44,7 +44,7 @@ $categories = get_categories();
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Program Pelatihan — Admin</title>
 <meta name="robots" content="noindex,nofollow">
-<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/admin/assets/admin.css">
 <style>
 .table-wrap{overflow-x:auto}
 table{width:100%;border-collapse:collapse;font-size:13.5px}

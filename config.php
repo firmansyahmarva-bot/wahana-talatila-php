@@ -422,10 +422,8 @@ function asset_v(string $path): string {
     return $path;
 }
 
-function theme_font_url(array $s): string {
-    $chosen = $s['theme_font'] ?? 'Plus Jakarta Sans';
-    $param  = THEME_FONTS[$chosen] ?? THEME_FONTS['Plus Jakarta Sans'];
-    return 'https://fonts.googleapis.com/css2?family=' . $param . '&display=swap';
+function theme_font_url(array $s = []): string {
+    return 'https://fonts.googleapis.com/css2?family=Lexend:wght@500;600;700;800&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&display=swap';
 }
 
 function theme_css_vars(array $s): string {

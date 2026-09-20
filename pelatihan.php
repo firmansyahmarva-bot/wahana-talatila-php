@@ -530,8 +530,8 @@ if (is_file($_core_css_file)) {
           Untuk melengkapi kualifikasi kerja di industri dan memenuhi kepatuhan regulasi keselamatan kerja, tenaga kerja dan pengawas juga disarankan melengkapi portofolio sertifikasi kompetensi terkait berikut:
         </p>
         <div class="pd-pillar-grid">
-          <?php foreach ($display_pillars as $p): ?>
-          <article class="pd-pillar-card">
+          <?php foreach ($display_pillars as $p_idx => $p): ?>
+          <article class="pd-pillar-card" data-reveal="up" data-reveal-delay="<?= ($p_idx % 4) + 1 ?>">
             <span class="pd-pillar-badge"><?= e($p['badge']) ?></span>
             <h3><a href="<?= e($p['url']) ?>"><?= e($p['name']) ?></a></h3>
             <p><?= e($p['desc']) ?></p>
@@ -562,7 +562,7 @@ if (is_file($_core_css_file)) {
         <h2>Pertanyaan Seputar <?= e($hero_name) ?></h2>
         <div class="pd-faq-list">
           <?php foreach ($faqItems as $fi => $f): ?>
-          <div class="pd-faq-item">
+          <div class="pd-faq-item" data-reveal="up" data-reveal-delay="<?= ($fi % 4) + 1 ?>">
             <button class="pd-faq-q" aria-expanded="false" onclick="toggleFaqPelatihan(this)">
               <span><?= e($f['q']) ?></span>
               <svg class="pd-faq-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
@@ -579,8 +579,8 @@ if (is_file($_core_css_file)) {
         <p class="pd-section-eyebrow">Baca Juga</p>
         <h2>Artikel Seputar Topik Ini</h2>
         <div class="pd-related-grid">
-          <?php foreach ($relatedArticles as $ra): $snippet = mb_substr($ra['meta_desc'] ?? '', 0, 100); ?>
-          <div class="pd-related-card">
+          <?php foreach ($relatedArticles as $ra_idx => $ra): $snippet = mb_substr($ra['meta_desc'] ?? '', 0, 100); ?>
+          <div class="pd-related-card" data-reveal="up" data-reveal-delay="<?= ($ra_idx % 4) + 1 ?>">
             <h3><a href="/artikel/<?= e($ra['slug']) ?>/"><?= e($ra['title']) ?></a></h3>
             <p><?= e($snippet) ?><?= mb_strlen($ra['meta_desc'] ?? '') > 100 ? '...' : '' ?></p>
             <a href="/artikel/<?= e($ra['slug']) ?>/" class="pd-related-link">Baca Artikel &rarr;</a>
@@ -687,8 +687,8 @@ if (is_file($_core_css_file)) {
     <p class="pd-section-eyebrow">Lainnya</p>
     <h2>Program Lainnya dalam <?= e($training['cat_name']) ?></h2>
     <div class="pd-training-grid">
-      <?php foreach ($related as $t): ?>
-      <article class="pd-training-card">
+      <?php foreach ($related as $t_idx => $t): ?>
+      <article class="pd-training-card" data-reveal="up" data-reveal-delay="<?= ($t_idx % 4) + 1 ?>">
         <a href="/pelatihan/<?= e($t['slug']) ?>/">
           <img src="<?= training_img_url($t['image_path'], $t['cat_slug'] ?? '') ?>"
                alt="<?= e($t['name']) ?>" loading="lazy" width="400" height="250" decoding="async">

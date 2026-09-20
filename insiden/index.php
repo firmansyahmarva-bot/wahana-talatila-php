@@ -44,7 +44,17 @@ $schema = json_encode([
 <title><?= e($metaTitle) ?></title>
 <meta name="description" content="<?= e($metaDesc) ?>">
 <link rel="canonical" href="<?= SITE_URL ?>/insiden/">
-<link rel="stylesheet" href="<?= asset_v('/assets/css/style.css') ?>">
+<style><?php
+$_core_css_file = __DIR__ . '/../assets/css/core.min.css';
+if (is_file($_core_css_file)) {
+    readfile($_core_css_file);
+} else {
+    readfile(__DIR__ . '/../assets/css/tokens.css');
+    readfile(__DIR__ . '/../assets/css/core.css');
+}
+?></style>
+<link rel="stylesheet" href="<?= asset_v('/assets/css/components.min.css') ?>" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="<?= asset_v('/assets/css/components.min.css') ?>"></noscript>
 <script type="application/ld+json"><?= $schema ?></script>
 <?= theme_css_vars($s) ?>
 <style>

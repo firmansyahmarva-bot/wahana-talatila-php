@@ -14,11 +14,10 @@ $page_title = 'Kebijakan Privasi';
 $meta_desc = 'Kebijakan Privasi Wahana Totalita Konsultan — bagaimana kami mengumpulkan, menggunakan, dan melindungi data pribadi Anda sesuai UU PDP No. 27 Tahun 2022.';
 require __DIR__ . '/includes/head.php';
 ?>
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <style>
   :root{--green:#0A4A2E;--ink:#1f2937;--muted:#5a6b62}
   *{box-sizing:border-box}
-  body{margin:0;font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:var(--ink);line-height:1.7;background:#fff}
+  body{margin:0;font-family:'Source Sans 3',system-ui,sans-serif;color:var(--ink);line-height:1.7;background:#fff}
   .pp-top{background:var(--green);padding:14px 20px}
   .pp-top a{color:#fff;text-decoration:none;font-weight:800;font-size:18px}
   .pp-wrap{max-width:820px;margin:0 auto;padding:40px 20px 60px}

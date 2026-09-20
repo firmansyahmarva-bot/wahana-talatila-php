@@ -64,7 +64,7 @@ require __DIR__ . '/includes/head.php';
 </script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:#1a1a2e;line-height:1.7;-webkit-font-smoothing:antialiased}
+body{font-family:'Source Sans 3',system-ui,sans-serif;color:#1a1a2e;line-height:1.7;-webkit-font-smoothing:antialiased}
 .container{max-width:1000px;margin:0 auto;padding:0 20px}
 .container-sm{max-width:680px;margin:0 auto;padding:0 20px}
 .hero{background:linear-gradient(160deg,#0A4A2E 0%,#1a6b45 60%,#0d5535 100%);color:#fff;padding:64px 0 56px;position:relative;overflow:hidden;text-align:center}

@@ -79,13 +79,23 @@ $accent = $category['accent_color'] ?? '#0A4A2E';
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="<?= theme_font_url($s ?? []) ?>">
+<link rel="stylesheet" href="<?= theme_font_url($s ?? []) ?>" media="print" onload="this.media='all'">
 <noscript>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="<?= theme_font_url($s ?? []) ?>">
 </noscript>
 
-<link rel="stylesheet" href="<?= asset_v('/assets/css/core.min.css') ?>">
-<link rel="stylesheet" href="<?= asset_v('/assets/css/components.min.css') ?>">
+<style><?php
+$_core_css_file = __DIR__ . '/assets/css/core.min.css';
+if (is_file($_core_css_file)) {
+    readfile($_core_css_file);
+} else {
+    readfile(__DIR__ . '/assets/css/tokens.css');
+    readfile(__DIR__ . '/assets/css/core.css');
+}
+?></style>
+<link rel="stylesheet" href="<?= asset_v('/assets/css/components.min.css') ?>" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="<?= asset_v('/assets/css/components.min.css') ?>"></noscript>
 <?= theme_css_vars($s) ?>
 
 <style>

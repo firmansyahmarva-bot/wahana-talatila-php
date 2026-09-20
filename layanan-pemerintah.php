@@ -39,7 +39,7 @@ require __DIR__ . '/includes/head.php';
 </script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:#1a1a2e;line-height:1.7;-webkit-font-smoothing:antialiased;background:#f5f5f2}
+body{font-family:'Source Sans 3',system-ui,sans-serif;color:#1a1a2e;line-height:1.7;-webkit-font-smoothing:antialiased;background:#f5f5f2}
 .container{max-width:980px;margin:0 auto;padding:0 20px}
 img{max-width:100%}
 a{color:inherit}

@@ -24,7 +24,17 @@ $metaDesc  = 'Buat poster dan konten K3 untuk Instagram, LinkedIn, dan Facebook 
   "offers": {"@type": "Offer", "price": "0", "priceCurrency": "IDR"}
 }
 </script>
-<link rel="stylesheet" href="<?= SITE_URL ?>/assets/css/style.css">
+<style><?php
+$_core_css_file = __DIR__ . '/../assets/css/core.min.css';
+if (is_file($_core_css_file)) {
+    readfile($_core_css_file);
+} else {
+    readfile(__DIR__ . '/../assets/css/tokens.css');
+    readfile(__DIR__ . '/../assets/css/core.css');
+}
+?></style>
+<link rel="stylesheet" href="<?= asset_v('/assets/css/components.min.css') ?>" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="<?= asset_v('/assets/css/components.min.css') ?>"></noscript>
 <?= theme_css_vars($s) ?>
 <style>
 .tool-hero{background:linear-gradient(135deg,#0f172a,#1e293b);padding:52px 0;color:#fff;text-align:center}

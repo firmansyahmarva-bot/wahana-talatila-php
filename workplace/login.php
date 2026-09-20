@@ -30,8 +30,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $page_title = 'Login Workplace K3 Dashboard';
 $meta_desc = 'Login ke Workplace K3 Dashboard Wahana Totalita.';
 require __DIR__ . '/../includes/head.php';
-?>
-<link rel="stylesheet" href="<?= SITE_URL ?>/assets/css/style.css">
 <?= theme_css_vars($s) ?>
 <style>
 body{background:#f0f9f0;min-height:100vh;display:flex;flex-direction:column}
