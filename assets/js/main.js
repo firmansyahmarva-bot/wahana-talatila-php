@@ -214,6 +214,9 @@ document.querySelectorAll('.faq-question').forEach(function (btn) {
       triggered = true;
       wa.classList.add('is-cueing');
       window.removeEventListener('scroll', onScrollCue);
+      wa.addEventListener('animationend', function () {
+        wa.classList.remove('is-cueing');
+      }, { once: true });
     }
   }
   window.addEventListener('scroll', onScrollCue, { passive: true });

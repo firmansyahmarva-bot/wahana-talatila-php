@@ -81,7 +81,9 @@ $page_css = ['home'];
       require_once __DIR__ . '/includes/jadwal-functions.php';
       $home_batches = get_public_schedules(['upcoming' => 1, 'limit' => 4]);
       $hb_m = ['','Jan','Feb','Mar','Apr','Mei','Jun','Jul','Ags','Sep','Okt','Nov','Des'];
+      $hb_idx = 0;
       foreach ($home_batches as $hb):
+        $hb_idx++;
         $hs = strtotime($hb['start_date']); $he = strtotime($hb['end_date'] ?: $hb['start_date']);
         if (date('nY',$hs) === date('nY',$he)) {
             $hb_date = ($hs===$he ? date('j',$hs) : date('j',$hs).'-'.date('j',$he)).' '.$hb_m[(int)date('n',$hs)].' '.date('Y',$hs);
@@ -94,7 +96,7 @@ $page_css = ['home'];
         $hb_low    = $hb_seats > 0 && $hb_seats <= 8;
         $hb_name   = $hb['batch_name'] ?: $hb['training_name'];
       ?>
-      <div class="jcard">
+      <div class="jcard" data-reveal="up" data-reveal-delay="<?= min($hb_idx, 4) ?>">
         <span class="jcard-date"><?= e($hb_date) ?></span>
         <a class="jcard-title" href="/pelatihan/<?= e($hb['training_slug']) ?>/"><?= e($hb_name) ?></a>
         <span class="jcard-meta"><?= e($hb_city) ?> · <?= $hb_online ? 'Online' : 'Tatap Muka' ?> · <?php if ($hb_low): ?><span class="hot">⚡ <?= $hb_seats ?> kursi tersisa</span><?php else: ?>✅ <?= $hb_seats ?> kursi<?php endif; ?></span>
@@ -148,10 +150,12 @@ $page_css = ['home'];
         'system-management' => '/pelatihan-iso/',
         'mining'            => '/k3-pertambangan/',
       ];
+      $srv_idx = 0;
       foreach ($categories as $cat): 
+        $srv_idx++;
         $hub_target = $hub_urls[$cat['slug']] ?? '#produk';
       ?>
-      <a href="<?= e($hub_target) ?>" class="service-card fade-in" style="--accent: <?= e($cat['accent_color']) ?>">
+      <a href="<?= e($hub_target) ?>" class="service-card" data-reveal="up" data-reveal-delay="<?= min($srv_idx, 4) ?>" style="--accent: <?= e($cat['accent_color']) ?>">
         <div class="service-card-icon"><?= $cat['icon'] ?></div>
         <h3 class="service-card-title"><?= e($cat['name']) ?></h3>
         <p class="service-card-desc"><?= e($cat['description']??'') ?></p>
@@ -189,8 +193,8 @@ $page_css = ['home'];
       </div>
     </div>
     <div class="training-grid" id="training-grid">
-      <?php foreach ($trainings as $t): ?>
-      <article class="training-card fade-in" data-cat="<?= e($t['cat_slug']) ?>" data-mode="<?= e($t['mode']) ?>" style="--accent: <?= e($t['accent_color']??'#0A4A2E') ?>">
+      <?php $t_idx = 0; foreach ($trainings as $t): $t_idx++; ?>
+      <article class="training-card" <?php if ($t_idx <= 4): ?>data-reveal="up" data-reveal-delay="<?= $t_idx ?>"<?php endif; ?> data-cat="<?= e($t['cat_slug']) ?>" data-mode="<?= e($t['mode']) ?>" style="--accent: <?= e($t['accent_color']??'#0A4A2E') ?>">
         <a href="/pelatihan/<?= e($t['slug']) ?>/" class="training-card-img-wrap">
           <img src="<?= training_img_url($t['image_path'], $t['cat_slug'] ?? '', $t['slug'] ?? '') ?>"
                alt="<?php $cat_ctx=['k3'=>'keselamatan dan kesehatan kerja industri','lingkungan'=>'pengelolaan lingkungan hidup','system-management'=>'sistem manajemen QHSE','mining'=>'pertambangan dan operasional tambang']; echo e($t['name'].' bersertifikasi '.$t['certification'].' — ilustrasi '.($cat_ctx[$t['cat_slug']]??'pelatihan sertifikasi')); ?>"
@@ -233,7 +237,7 @@ $page_css = ['home'];
 
 <!-- B2G BAND (redesign 2026) -->
 <div class="container">
-  <div class="b2g-band">
+  <div class="b2g-band" data-reveal="scale">
     <div>
       <h2>🏛️ Vendor Resmi Pengadaan Pemerintah</h2>
       <p>Terdaftar di LPSE dan PADI UMKM — siap melayani pengadaan langsung maupun tender pelatihan K3 untuk Dinas, OPD, dan BUMN.</p>
@@ -272,25 +276,25 @@ $page_css = ['home'];
       <p class="section-subtitle">Proses pendaftaran sederhana, tanpa birokrasi rumit. Sertifikat terbit tepat waktu.</p>
     </div>
     <div class="how-steps">
-      <div class="how-step">
+      <div class="how-step" data-reveal="up" data-reveal-delay="1">
         <span class="how-step-num">Langkah 01</span>
         <div class="how-step-icon">📋</div>
         <h3>Pilih Program</h3>
         <p>Browse katalog 40+ program pelatihan K3, Lingkungan, Mining, dan ISO. Filter sesuai kategori dan mode pelatihan.</p>
       </div>
-      <div class="how-step">
+      <div class="how-step" data-reveal="up" data-reveal-delay="2">
         <span class="how-step-num">Langkah 02</span>
         <div class="how-step-icon">💬</div>
         <h3>Hubungi via WhatsApp</h3>
         <p>Klik tombol Daftar Sekarang. Tim kami merespons dalam 1×24 jam untuk konfirmasi jadwal dan biaya.</p>
       </div>
-      <div class="how-step">
+      <div class="how-step" data-reveal="up" data-reveal-delay="3">
         <span class="how-step-num">Langkah 03</span>
         <div class="how-step-icon">📚</div>
         <h3>Ikuti Pelatihan</h3>
         <p>Pelatihan online via Zoom atau tatap muka di Yogyakarta. Materi terstruktur, instruktur praktisi berpengalaman.</p>
       </div>
-      <div class="how-step">
+      <div class="how-step" data-reveal="up" data-reveal-delay="4">
         <span class="how-step-num">Langkah 04</span>
         <div class="how-step-icon">🏆</div>
         <h3>Terima Sertifikat</h3>
@@ -350,9 +354,9 @@ $faq_schema = [
       <div class="sp-stat"><span class="sp-stat-num">Sejak 2008</span><span class="sp-stat-desc">Berpengalaman</span></div>
     </div>
     <div class="sp-testimonials">
-      <article class="sp-card"><span class="sp-card-program">Ahli K3 Umum</span><blockquote class="sp-card-quote">Materi sangat relevan dan instruktur berpengalaman di lapangan. Sertifikasi BNSP yang saya dapat langsung diakui perusahaan dan mempercepat karier saya di bidang HSE.</blockquote><div class="sp-card-footer"><div class="sp-card-avatar" aria-hidden="true">BS</div><div><div class="sp-card-name">Budi S.</div><div class="sp-card-meta">HSE Manager &middot; Industri Manufaktur, Jawa Tengah</div></div></div></article>
-      <article class="sp-card"><span class="sp-card-program">POPAL</span><blockquote class="sp-card-quote">Pelatihan online sangat fleksibel dan tidak mengganggu jadwal kerja. Modul lengkap dan tim Wahana Totalita sangat responsif merespon pertanyaan peserta.</blockquote><div class="sp-card-footer"><div class="sp-card-avatar" aria-hidden="true">SR</div><div><div class="sp-card-name">Sari R.</div><div class="sp-card-meta">Environmental Coordinator &middot; Sektor Energi</div></div></div></article>
-      <article class="sp-card"><span class="sp-card-program">POP Mining</span><blockquote class="sp-card-quote">Daftar mudah lewat WhatsApp, sertifikat BNSP terbit tepat waktu. Pelatihan POP ini benar-benar mendukung persiapan saya naik jabatan pengawas lapangan.</blockquote><div class="sp-card-footer"><div class="sp-card-avatar" aria-hidden="true">AF</div><div><div class="sp-card-name">Ahmad F.</div><div class="sp-card-meta">Mining Supervisor &middot; Tambang Batubara, Kalimantan</div></div></div></article>
+      <article class="sp-card" data-reveal="up" data-reveal-delay="1"><span class="sp-card-program">Ahli K3 Umum</span><blockquote class="sp-card-quote">Materi sangat relevan dan instruktur berpengalaman di lapangan. Sertifikasi BNSP yang saya dapat langsung diakui perusahaan dan mempercepat karier saya di bidang HSE.</blockquote><div class="sp-card-footer"><div class="sp-card-avatar" aria-hidden="true">BS</div><div><div class="sp-card-name">Budi S.</div><div class="sp-card-meta">HSE Manager &middot; Industri Manufaktur, Jawa Tengah</div></div></div></article>
+      <article class="sp-card" data-reveal="up" data-reveal-delay="2"><span class="sp-card-program">POPAL</span><blockquote class="sp-card-quote">Pelatihan online sangat fleksibel dan tidak mengganggu jadwal kerja. Modul lengkap dan tim Wahana Totalita sangat responsif merespon pertanyaan peserta.</blockquote><div class="sp-card-footer"><div class="sp-card-avatar" aria-hidden="true">SR</div><div><div class="sp-card-name">Sari R.</div><div class="sp-card-meta">Environmental Coordinator &middot; Sektor Energi</div></div></div></article>
+      <article class="sp-card" data-reveal="up" data-reveal-delay="3"><span class="sp-card-program">POP Mining</span><blockquote class="sp-card-quote">Daftar mudah lewat WhatsApp, sertifikat BNSP terbit tepat waktu. Pelatihan POP ini benar-benar mendukung persiapan saya naik jabatan pengawas lapangan.</blockquote><div class="sp-card-footer"><div class="sp-card-avatar" aria-hidden="true">AF</div><div><div class="sp-card-name">Ahmad F.</div><div class="sp-card-meta">Mining Supervisor &middot; Tambang Batubara, Kalimantan</div></div></div></article>
     </div>
   </div>
 </section>
