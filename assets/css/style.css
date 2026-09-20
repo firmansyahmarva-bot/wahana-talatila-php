@@ -1,3 +1,5 @@
+@import './core.min.css';
+
 /* ============================================================
    Wahana Totalita Konsultan — style.css
    Palette: Forest Green #0A4A2E + Burnt Orange #C6621C
@@ -21,17 +23,18 @@ ul { list-style: none; }
 
 /* ─── CSS VARIABLES ─────────────────────────────────────────── */
 :root {
-  --green:       #0A4A2E;
-  --green-dark:  #062E1C;
-  --green-mid:   #0D5C38;
-  --green-light: #E8F4EE;
-  --orange:      #C6621C;
-  --orange-dark: #A04D12;
-  --orange-light:#FEF3EC;
-  --text:        #1a1a1a;
-  --text-muted:  #666;
-  --text-light:  #999;
-  --border:      #e8e8e8;
+  /* legacy names, repointed to the navy/orange (Redesign 2026) palette */
+  --green:       #103A5C; /* was forest green #0A4A2E */
+  --green-dark:  #0B2C46; /* was #062E1C */
+  --green-mid:   #16486E; /* was #0D5C38 */
+  --green-light: #E8F0F7; /* was #E8F4EE */
+  --orange:      #F06A25; /* was #C6621C */
+  --orange-dark: #C2410C; /* was #A04D12 */
+  --orange-light:#FDE8DA; /* was #FEF3EC */
+  --text:        #13202E;
+  --text-muted:  #5A6B7B;
+  --text-light:  #94a3b8;
+  --border:      #DCE6EE;
   --shadow-sm:   0 1px 4px rgba(0,0,0,.06);
   --shadow-md:   0 4px 16px rgba(0,0,0,.10);
   --shadow-lg:   0 8px 32px rgba(0,0,0,.14);
@@ -39,6 +42,11 @@ ul { list-style: none; }
   --radius-sm:   8px;
   --container:   1200px;
   --nav-h:       68px;
+
+  /* Redesign-2026 native names (kept as aliases) */
+  --n900:#0B2C46; --n800:#103A5C; --n700:#16486E; --n100:#E8F0F7;
+  --o500:#F06A25; --o400:#FF8A3D; --o100:#FDE8DA;
+  --ink:#13202E; --mut:#5A6B7B;
 }
 
 /* ─── CONTAINER ─────────────────────────────────────────────── */

@@ -23,7 +23,7 @@ $daysInMonth = (int)date('t', mktime(0,0,0,$month,1,$year));
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kalender Pelatihan K3 <?= $monthNames[$month] ?> <?= $year ?> | Wahana Totalita</title>
-<link rel="stylesheet" href="<?= SITE_URL ?>/assets/css/style.css">
+<link rel="stylesheet" href="<?= asset_v('/assets/css/style.css') ?>">
 <?= theme_css_vars($s) ?>
 <style>
 .cal-page{padding:40px 0}

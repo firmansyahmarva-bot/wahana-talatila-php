@@ -63,7 +63,7 @@ $s = get_all_settings();
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Daftar Pelatihan <?= e($batch['training_name']) ?> | Wahana Totalita</title>
 <meta name="robots" content="noindex, follow">
-<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="<?= asset_v('/assets/css/style.css') ?>">
 <?= theme_css_vars($s) ?>
 <style>
 .reg-page{max-width:680px;margin:60px auto;padding:0 20px}

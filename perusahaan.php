@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * perusahaan.php — B2B corporate training landing page (Google Ads ready).
  * Target: HSE/HR/GA managers & corporate decision makers (NOT individual students).
@@ -192,11 +192,20 @@ $faqs = [
 <?php endif; ?>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://images.unsplash.com">
-<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/style.css">
-<link rel="stylesheet" href="/assets/css/perusahaan.css?v=2">
-<link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" media="print" onload="this.media='all'">
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap">
+</noscript>
+
+<style><?php
+$_core_css_file = __DIR__ . '/assets/css/core.min.css';
+if (is_file($_core_css_file)) {
+    readfile($_core_css_file);
+} else {
+    readfile(__DIR__ . '/assets/css/core.css');
+}
+?></style>
+<link rel="stylesheet" href="<?= asset_v('/assets/css/perusahaan.css') ?>">
 <?= theme_css_vars($s) ?>
 </head>
 <body>
@@ -211,7 +220,7 @@ $faqs = [
 <!-- ═══ 1 · HERO ═══ -->
 <section class="pr-hero">
   <div class="container pr-hero-inner">
-    <div class="pr-hero-copy" data-aos="fade-up">
+    <div class="pr-hero-copy">
       <span class="pr-eyebrow">Training K3 Perusahaan · In House &amp; Public</span>
       <h1>Training K3 &amp; Sertifikasi Resmi untuk <em>Perusahaan Anda</em> — di Seluruh Indonesia</h1>
       <p class="pr-lead">In house training K3, corporate HSE training, sertifikasi KEMNAKER RI &amp; BNSP, dan konsultasi ISO. Dipercaya 200+ perusahaan manufaktur, tambang, konstruksi, dan migas untuk memenuhi regulasi dan mencapai zero accident.</p>
@@ -221,7 +230,7 @@ $faqs = [
       </div>
       <p class="pr-reassure">&#10003; Proposal dalam 24 jam &nbsp;·&nbsp; &#10003; Resmi KEMNAKER RI &amp; BNSP &nbsp;·&nbsp; &#10003; Tanpa komitmen</p>
     </div>
-    <div class="pr-hero-media" data-aos="fade-up" data-aos-delay="100">
+    <div class="pr-hero-media">
       <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=760&q=70"
            alt="Tim HSE mengikuti training K3 perusahaan di lingkungan industri Indonesia"
            width="760" height="507" fetchpriority="high" decoding="async">
@@ -232,13 +241,13 @@ $faqs = [
 <!-- ═══ 2 · TRUST ═══ -->
 <section class="pr-trustband" aria-label="Kredibilitas Wahana Totalita">
   <div class="container">
-    <div class="pr-trustnum" data-aos="fade-up">
+    <div class="pr-trustnum">
       <div class="pr-tn"><b>200+</b><span>Perusahaan Dilayani</span></div>
       <div class="pr-tn"><b>5000+</b><span>Peserta Dilatih</span></div>
       <div class="pr-tn"><b>15+</b><span>Tahun Pengalaman</span></div>
       <div class="pr-tn"><b>30+</b><span>Provinsi Terjangkau</span></div>
     </div>
-    <div class="pr-clients" data-aos="fade-up" data-aos-delay="80">
+    <div class="pr-clients">
       <p>Dipercaya tim HSE &amp; HRD dari:</p>
       <div class="pr-client-chips">
         <span>PT Badak NGL</span><span>Pupuk Kujang</span><span>Indonesia Power</span><span>Pertamina</span><span>PT Itokoh Ceperindo</span><span>+ ratusan perusahaan lainnya</span>
@@ -250,7 +259,7 @@ $faqs = [
 <!-- ═══ 2.5 · FOUNDING STORY ═══ -->
 <section class="pr-section">
   <div class="container">
-    <div class="pr-head" data-aos="fade-up">
+    <div class="pr-head">
       <span class="pr-eyebrow">Perjalanan Kami</span>
       <h2>Berdiri sejak 2001, Wahana Totalita resmi berbadan hukum pada 2006</h2>
       <p>Berawal sebagai praktik pelatihan Keselamatan dan Kesehatan Kerja di Yogyakarta pada 2001, kami resmi berbadan hukum pada 2006 melalui Akte Notaris No. 01 tanggal 3 Agustus 2006 (Notaris H. Hamdani, SH), dengan Tanda Daftar Perusahaan (TDP) 120237001899 dan SIUP 503/0347/Mkr/XI/2011. Sejak saat itu, kami terus melayani perusahaan di seluruh Indonesia dengan pelatihan dan sertifikasi K3 yang resmi dan diakui.</p>
@@ -261,14 +270,14 @@ $faqs = [
 <!-- ═══ 3 · PAIN POINTS ═══ -->
 <section class="pr-section">
   <div class="container">
-    <div class="pr-head" data-aos="fade-up">
+    <div class="pr-head">
       <span class="pr-eyebrow">Masalah yang Kami Selesaikan</span>
       <h2>Tantangan Ini Sedang Dihadapi Perusahaan Anda?</h2>
       <p>Setiap minggu kami menerima pertanyaan yang sama dari HSE Manager dan HRD di seluruh Indonesia. Mungkin salah satunya sedang ada di meja Anda:</p>
     </div>
     <div class="pr-grid pr-grid-3">
       <?php foreach ($pains as $i => $p): ?>
-      <div class="pr-card pr-problem" data-aos="fade-up" data-aos-delay="<?= ($i % 3) * 70 ?>">
+      <div class="pr-card pr-problem">
         <div class="pr-ic pr-ic-warn"><?= $p[0] ?></div>
         <h3><?= $p[1] ?></h3>
         <p><?= $p[2] ?></p>
@@ -280,7 +289,7 @@ $faqs = [
 
 <!-- CTA strip -->
 <section class="pr-ctastrip" aria-label="Ajakan konsultasi">
-  <div class="container pr-ctastrip-inner" data-aos="fade-up">
+  <div class="container pr-ctastrip-inner">
     <p><b>Sedang menghadapi salah satu masalah di atas?</b> Ceritakan situasinya — kami balas dengan solusi &amp; proposal dalam 24 jam.</p>
     <a class="btn-primary" href="<?= e($wa_diskusi) ?>" target="_blank" rel="noopener">Konsultasi Gratis via WhatsApp</a>
   </div>
@@ -289,14 +298,14 @@ $faqs = [
 <!-- ═══ 4 · LAYANAN ═══ -->
 <section class="pr-section pr-section-alt" id="layanan">
   <div class="container">
-    <div class="pr-head" data-aos="fade-up">
+    <div class="pr-head">
       <span class="pr-eyebrow">Solusi Wahana Totalita</span>
       <h2>Satu Partner untuk Seluruh Kebutuhan Corporate Safety Training</h2>
       <p>Dari pelatihan karyawan hingga lulus audit — satu vendor, satu standar layanan, satu penanggung jawab.</p>
     </div>
     <div class="pr-grid pr-grid-4">
       <?php foreach ($services as $i => $sv): ?>
-      <div class="pr-card pr-service" data-aos="fade-up" data-aos-delay="<?= ($i % 4) * 60 ?>">
+      <div class="pr-card pr-service">
         <div class="pr-ic"><?= $sv[0] ?></div>
         <h3><?= $sv[1] ?></h3>
         <p><?= $sv[2] ?></p>
@@ -328,14 +337,14 @@ $faqs = [
 <!-- ═══ 5 · PROGRAM ═══ -->
 <section class="pr-section" id="program">
   <div class="container">
-    <div class="pr-head" data-aos="fade-up">
+    <div class="pr-head">
       <span class="pr-eyebrow">Kategori Program</span>
       <h2>100+ Program Training Kemnaker, BNSP, ISO &amp; Soft Skills</h2>
       <p>Semua program tersedia sebagai public training maupun in house training di lokasi perusahaan Anda. Lihat juga <a href="/jadwal/">jadwal pelatihan terdekat</a>.</p>
     </div>
     <div class="pr-grid pr-grid-4">
       <?php foreach ($programs as $i => $pg): ?>
-      <div class="pr-card pr-program" data-aos="fade-up" data-aos-delay="<?= ($i % 4) * 60 ?>">
+      <div class="pr-card pr-program">
         <h3><?= $pg[0] ?></h3>
         <p><?= $pg[1] ?></p>
         <a class="pr-link" href="<?= e($wa_service($pg[2])) ?>" target="_blank" rel="noopener">Minta Silabus &amp; Harga
@@ -350,13 +359,13 @@ $faqs = [
 <!-- ═══ 6 · WHY CHOOSE US ═══ -->
 <section class="pr-section pr-section-alt">
   <div class="container">
-    <div class="pr-head" data-aos="fade-up">
+    <div class="pr-head">
       <span class="pr-eyebrow">Kenapa Dipilih Perusahaan</span>
       <h2>Standar Layanan yang Dirancang untuk Kebutuhan Korporasi</h2>
     </div>
     <div class="pr-grid pr-grid-4">
       <?php foreach ($reasons as $i => $r): ?>
-      <div class="pr-card pr-reason" data-aos="fade-up" data-aos-delay="<?= ($i % 4) * 60 ?>">
+      <div class="pr-card pr-reason">
         <div class="pr-ic"><?= $r[0] ?></div>
         <h3><?= $r[1] ?></h3>
         <p><?= $r[2] ?></p>
@@ -369,11 +378,11 @@ $faqs = [
 <!-- ═══ 7 · INDUSTRI ═══ -->
 <section class="pr-section pr-section-dark">
   <div class="container">
-    <div class="pr-head" data-aos="fade-up">
+    <div class="pr-head">
       <span class="pr-eyebrow">Bidang Industri</span>
       <h2>Berpengalaman Melayani Berbagai Sektor Industri</h2>
     </div>
-    <div class="pr-industries" data-aos="fade-up" data-aos-delay="80">
+    <div class="pr-industries">
       <?php foreach ($industries as $ind): ?>
       <div class="pr-industry"><span class="pr-ind-ic"><?= $ind[0] ?></span><span><?= $ind[1] ?></span></div>
       <?php endforeach; ?>
@@ -383,7 +392,7 @@ $faqs = [
 
 <!-- CTA strip -->
 <section class="pr-ctastrip" aria-label="Ajakan proposal">
-  <div class="container pr-ctastrip-inner" data-aos="fade-up">
+  <div class="container pr-ctastrip-inner">
     <p><b>Industri Anda ada di daftar?</b> Kami sudah punya kurikulum &amp; instruktur yang memahami risiko sektor Anda.</p>
     <a class="btn-primary" href="<?= e($wa_proposal) ?>" target="_blank" rel="noopener">Minta Proposal Sekarang</a>
   </div>
@@ -392,20 +401,20 @@ $faqs = [
 <!-- ═══ 8 · PROSES ═══ -->
 <section class="pr-section">
   <div class="container">
-    <div class="pr-head" data-aos="fade-up">
+    <div class="pr-head">
       <span class="pr-eyebrow">Corporate Training Process</span>
       <h2>Dari Konsultasi hingga After Sales — Proses yang Jelas</h2>
     </div>
     <ol class="pr-timeline pr-timeline-8">
       <?php foreach ($process as $i => $st): ?>
-      <li data-aos="fade-up" data-aos-delay="<?= ($i % 4) * 70 ?>">
+      <li>
         <span class="pr-step-num"><?= $i + 1 ?></span>
         <h3><?= $st[0] ?></h3>
         <p><?= $st[1] ?></p>
       </li>
       <?php endforeach; ?>
     </ol>
-    <div class="pr-center" data-aos="fade-up">
+    <div class="pr-center">
       <a class="btn-primary pr-btn-lg" href="<?= e($wa_diskusi) ?>" target="_blank" rel="noopener">Mulai dari Langkah 1 — Konsultasi Gratis</a>
     </div>
   </div>
@@ -414,13 +423,13 @@ $faqs = [
 <!-- ═══ 9 · PAKET ═══ -->
 <section class="pr-section pr-section-alt" id="paket">
   <div class="container">
-    <div class="pr-head" data-aos="fade-up">
+    <div class="pr-head">
       <span class="pr-eyebrow">Corporate Packages</span>
       <h2>Pilih Skema yang Sesuai Kebutuhan Perusahaan</h2>
     </div>
     <div class="pr-grid pr-grid-3 pr-packages">
       <?php foreach ($packages as $i => $pk): ?>
-      <div class="pr-package<?= $pk[5] ? ' pr-package-featured' : '' ?>" data-aos="fade-up" data-aos-delay="<?= $i * 80 ?>">
+      <div class="pr-package<?= $pk[5] ? ' pr-package-featured' : '' ?>">
         <?php if ($pk[5]): ?><span class="pr-badge">Paling Populer</span><?php endif; ?>
         <h3><?= $pk[0] ?></h3>
         <p class="pr-pkg-for"><strong>Best for:</strong> <?= $pk[1] ?></p>
@@ -440,13 +449,13 @@ $faqs = [
 <!-- ═══ 10 · SUCCESS STORIES ═══ -->
 <section class="pr-section">
   <div class="container">
-    <div class="pr-head" data-aos="fade-up">
+    <div class="pr-head">
       <span class="pr-eyebrow">Success Stories</span>
       <h2>Dampak Nyata bagi Bisnis Klien Kami</h2>
     </div>
     <div class="pr-grid pr-grid-3">
       <?php foreach ($testimonials as $i => $t): ?>
-      <figure class="pr-testi" data-aos="fade-up" data-aos-delay="<?= $i * 80 ?>">
+      <figure class="pr-testi">
         <div class="pr-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
         <blockquote><?= $t[1] ?></blockquote>
         <p class="pr-outcome"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> <?= $t[5] ?></p>
@@ -463,11 +472,11 @@ $faqs = [
 <!-- ═══ 11 · FAQ ═══ -->
 <section class="pr-section pr-section-alt" id="faq">
   <div class="container">
-    <div class="pr-head" data-aos="fade-up">
+    <div class="pr-head">
       <span class="pr-eyebrow">Pertanyaan Umum</span>
       <h2>Yang Sering Ditanyakan HRD &amp; Tim HSE</h2>
     </div>
-    <div class="pr-faq" data-aos="fade-up" data-aos-delay="60">
+    <div class="pr-faq">
       <?php foreach ($faqs as $k => $f): ?>
       <details<?= $k === 0 ? ' open' : '' ?>>
         <summary><?= e($f[0]) ?></summary>
@@ -480,7 +489,7 @@ $faqs = [
 
 <!-- ═══ 12 · FINAL CTA ═══ -->
 <section class="pr-final">
-  <div class="container pr-final-inner" data-aos="fade-up">
+  <div class="container pr-final-inner">
     <h2>Siap Meningkatkan Kompetensi Tim HSE Perusahaan Anda?</h2>
     <p>Diskusikan kebutuhan training K3 perusahaan, sertifikasi, dan kepatuhan Anda — gratis, tanpa komitmen, proposal dalam 24 jam.</p>
     <div class="pr-final-cta">
@@ -521,9 +530,7 @@ $faqs = [
 </div>
 
 <?php require __DIR__ . '/includes/scripts.php'; ?>
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js" defer></script>
 <script>
-window.addEventListener('load',function(){if(window.AOS)AOS.init({duration:600,easing:'ease-out',once:true,offset:60});});
 (function(){
   var bar=document.getElementById('pr-sticky'),shown=false;
   window.addEventListener('scroll',function(){
@@ -534,3 +541,4 @@ window.addEventListener('load',function(){if(window.AOS)AOS.init({duration:600,e
 </script>
 </body>
 </html>
+

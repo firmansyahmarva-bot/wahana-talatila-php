@@ -80,8 +80,8 @@ $canonical = SITE_URL . '/artikel/' . $cat_slug . '/' . ($page > 1 ? '?page=' . 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap">
 </noscript>
 
-<link rel="stylesheet" href="/assets/css/base.css">
-<link rel="stylesheet" href="/assets/css/components.min.css">
+<link rel="stylesheet" href="<?= asset_v('/assets/css/base.css') ?>">
+<link rel="stylesheet" href="<?= asset_v('/assets/css/components.min.css') ?>">
 <?= theme_css_vars($s) ?>
 
 <style>

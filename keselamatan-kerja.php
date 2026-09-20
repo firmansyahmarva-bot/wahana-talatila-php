@@ -137,8 +137,8 @@ echo json_encode([
 ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 ?>
 </script>
-<link rel="stylesheet" href="/assets/css/page/sector.css">
-<link rel="stylesheet" href="/assets/css/page/hub-master.css">
+<link rel="stylesheet" href="<?= asset_v('/assets/css/page/sector.css') ?>">
+<link rel="stylesheet" href="<?= asset_v('/assets/css/page/hub-master.css') ?>">
 <style>
 .hero h1{font-size:clamp(1.6rem,4.5vw,2.6rem);font-weight:800;line-height:1.2;margin-bottom:14px;letter-spacing:-.02em}
 section{padding:48px 0;background:#f5f5f2}

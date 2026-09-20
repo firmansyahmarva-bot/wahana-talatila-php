@@ -19,6 +19,7 @@ foreach ($all_trainings as $t) {
 }
 
 $meta_desc = !empty($s['meta_description']) ? $s['meta_description'] : 'Wahana Totalita Konsultan menyediakan pelatihan K3, Lingkungan, Mining & ISO terakreditasi resmi KEMNAKER RI dan BNSP. Online & offline. Berbasis di Yogyakarta.';
+$page_css = ['home'];
 ?>
 <?php require __DIR__ . '/includes/head.php'; ?>
 <?php require __DIR__ . '/includes/navbar.php'; ?>

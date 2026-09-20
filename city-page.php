@@ -83,7 +83,7 @@ $schema = json_encode([
 <title><?= e($metaTitle) ?></title>
 <meta name="description" content="<?= e($metaDesc) ?>">
 <link rel="canonical" href="<?= SITE_URL ?>/pelatihan/<?= e($trainingSlug) ?>/<?= e($citySlug) ?>/">
-<link rel="stylesheet" href="<?= SITE_URL ?>/assets/css/style.css">
+<link rel="stylesheet" href="<?= asset_v('/assets/css/style.css') ?>">
 <script type="application/ld+json"><?= $schema ?></script>
 <?= theme_css_vars($s) ?>
 <style>

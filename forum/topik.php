@@ -46,7 +46,7 @@ $metaDesc  = mb_substr(strip_tags($topic['content'] ?? ''), 0, 160);
 <title><?= $metaTitle ?></title>
 <meta name="description" content="<?= e($metaDesc) ?>">
 <link rel="canonical" href="<?= SITE_URL ?>/forum/topik/<?= e($topic['slug']) ?>/">
-<link rel="stylesheet" href="<?= SITE_URL ?>/assets/css/style.css">
+<link rel="stylesheet" href="<?= asset_v('/assets/css/style.css') ?>">
 <?= theme_css_vars($s) ?>
 <style>
 .topic-page{padding:40px 0}

@@ -1,0 +1,51 @@
+﻿/* ============================================================
+   Wahana Totalita — tokens.css
+   Semantic Design Tokens (Redesign 2026: Navy #103A5C + Orange #F06A25)
+   ============================================================ */
+:root {
+  /* Semantic Brand Tokens */
+  --brand:          #103A5C;
+  --brand-dark:     #0B2C46;
+  --brand-mid:      #16486E;
+  --brand-light:    #E8F0F7;
+  --accent:         #F06A25;
+  --accent-dark:    #C2410C;
+  --accent-light:   #FDE8DA;
+  --surface:        #FFFFFF;
+  --surface-subtle: #F8FAFC;
+  --ink:            #13202E;
+  --mut:            #5A6B7B;
+  --border:         #DCE6EE;
+
+  /* Legacy Name Aliases (kept for 100% backward compatibility) */
+  --green:          #103A5C;
+  --green-dark:     #0B2C46;
+  --green-mid:      #16486E;
+  --green-light:    #E8F0F7;
+  --orange:         #F06A25;
+  --orange-dark:    #C2410C;
+  --orange-light:   #FDE8DA;
+  --text:           #13202E;
+  --text-muted:     #5A6B7B;
+  --text-light:     #94a3b8;
+
+  /* Redesign 2026 Palette Aliases */
+  --n900:           #0B2C46;
+  --n800:           #103A5C;
+  --n700:           #16486E;
+  --n100:           #E8F0F7;
+  --o500:           #F06A25;
+  --o400:           #FF8A3D;
+  --o100:           #FDE8DA;
+
+  /* Layout & Elevations */
+  --container:      1200px;
+  --nav-h:          68px;
+  --radius:         12px;
+  --radius-sm:      8px;
+  --radius-lg:      18px;
+  --radius-full:    9999px;
+  --shadow-sm:      0 1px 4px rgba(0,0,0,.06);
+  --shadow-md:      0 4px 16px rgba(0,0,0,.10);
+  --shadow-lg:      0 8px 32px rgba(0,0,0,.14);
+}

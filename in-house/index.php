@@ -137,8 +137,8 @@ $schema_graph = [
 <?= json_encode(['@context' => 'https://schema.org', '@graph' => $schema_graph], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) ?>
 </script>
 
-<link rel="stylesheet" href="/assets/css/style.css">
-<link rel="stylesheet" href="/assets/css/additions.css">
+<link rel="stylesheet" href="<?= asset_v('/assets/css/style.css') ?>">
+<link rel="stylesheet" href="<?= asset_v('/assets/css/additions.css') ?>">
 <style>
 /* In-House Directory Styles */
 .ih-hero {
