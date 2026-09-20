@@ -101,12 +101,22 @@ if ('requestIdleCallback' in window) {
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" href="<?= theme_font_url($s) ?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="<?= theme_font_url($s) ?>">
+<link rel="stylesheet" href="<?= theme_font_url($s) ?>" media="print" onload="this.media='all'">
 <noscript>
   <link rel="stylesheet" href="<?= theme_font_url($s) ?>">
 </noscript>
-<link rel="stylesheet" href="<?= asset_v('/assets/css/core.min.css') ?>">
-<link rel="stylesheet" href="<?= asset_v('/assets/css/components.min.css') ?>">
+<style><?php
+$_core_css_file = __DIR__ . '/assets/css/core.min.css';
+if (is_file($_core_css_file)) {
+    readfile($_core_css_file);
+} else {
+    readfile(__DIR__ . '/assets/css/tokens.css');
+    readfile(__DIR__ . '/assets/css/core.css');
+}
+?></style>
+<link rel="stylesheet" href="<?= asset_v('/assets/css/components.min.css') ?>" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="<?= asset_v('/assets/css/components.min.css') ?>"></noscript>
 <?= theme_css_vars($s) ?>
 
 <script type="application/ld+json"><?= json_encode([
@@ -284,8 +294,8 @@ if ('requestIdleCallback' in window) {
       <p class="pcat-dir-intro">Pilih kategori pelatihan untuk melihat silabus lengkap, jadwal, dan sertifikasi resmi Kemnaker RI &amp; BNSP.</p>
     </div>
     <div class="services-grid">
-      <?php foreach ($HUB_CATEGORY_MAP as $catSlug => $hub): ?>
-      <a href="/pelatihan/<?= e($catSlug) ?>/" class="service-card" style="--accent: <?= e($hubAccent[$catSlug] ?? '#0A4A2E') ?>; text-decoration:none;">
+      <?php $c_idx = 0; foreach ($HUB_CATEGORY_MAP as $catSlug => $hub): $c_idx++; ?>
+      <a href="/pelatihan/<?= e($catSlug) ?>/" class="service-card" data-reveal="up" data-reveal-delay="<?= (($c_idx - 1) % 4) + 1 ?>" style="--accent: <?= e($hubAccent[$catSlug] ?? '#0A4A2E') ?>; text-decoration:none;">
         <div class="service-card-icon"><?= $hubIcons[$catSlug] ?? '📄' ?></div>
         <div class="service-card-title"><?= e($hub['hub_name']) ?></div>
         <div class="service-card-desc">Daftar lengkap program pelatihan dan sertifikasi <?= e($hub['hub_name']) ?>.</div>
@@ -307,7 +317,7 @@ if ('requestIdleCallback' in window) {
     </div>
     <div class="pcat-compare-grid">
       <!-- Kemnaker Card -->
-      <div class="pcat-compare-card pcat-compare-kemnaker">
+      <div class="pcat-compare-card pcat-compare-kemnaker" data-reveal="up" data-reveal-delay="1">
         <span class="pcat-comp-tag tag-kemnaker">Kewajiban Regulasi &amp; Lisensi Legal</span>
         <h3>Sertifikasi Kemnaker RI</h3>
         <p>Diterbitkan langsung melalui Kementerian Ketenagakerjaan RI, menghasilkan Surat Keputusan Penunjukan (SKP) dan Lisensi K3 (SIO/Buku Kerja).</p>
@@ -318,7 +328,7 @@ if ('requestIdleCallback' in window) {
         </ul>
       </div>
       <!-- BNSP Card -->
-      <div class="pcat-compare-card pcat-compare-bnsp">
+      <div class="pcat-compare-card pcat-compare-bnsp" data-reveal="up" data-reveal-delay="2">
         <span class="pcat-comp-tag tag-bnsp">Standar Kompetensi Kerja (SKKNI)</span>
         <h3>Sertifikasi BNSP (Badan Nasional Sertifikasi Profesi)</h3>
         <p>Diterbitkan melalui Lembaga Sertifikasi Profesi (LSP) berlisensi BNSP mengacu pada standar unit kompetensi SKKNI nasional.</p>
@@ -341,22 +351,22 @@ if ('requestIdleCallback' in window) {
       <p class="pcat-dir-intro">Proses pendaftaran cepat, transparan, dan dibimbing langsung oleh tim konsultan kami dari awal hingga sertifikat resmi terbit.</p>
     </div>
     <div class="pcat-steps-grid">
-      <div class="pcat-step-card">
+      <div class="pcat-step-card" data-reveal="up" data-reveal-delay="1">
         <div class="pcat-step-num">1</div>
         <h3>Pilih Program &amp; Jadwal</h3>
         <p>Cari program di katalog ini, lalu hubungi kami via WhatsApp untuk mendapatkan silabus dan tanggal batch terdekat.</p>
       </div>
-      <div class="pcat-step-card">
+      <div class="pcat-step-card" data-reveal="up" data-reveal-delay="2">
         <div class="pcat-step-num">2</div>
         <h3>Registrasi Dokumen</h3>
         <p>Kirim kelengkapan berkas persyaratan peserta (KTP, ijazah terakhir, pas foto, atau surat penugasan kerja).</p>
       </div>
-      <div class="pcat-step-card">
+      <div class="pcat-step-card" data-reveal="up" data-reveal-delay="3">
         <div class="pcat-step-num">3</div>
         <h3>Pembinaan &amp; Praktik</h3>
         <p>Ikuti sesi pembinaan materi interaktif dan simulasi studi kasus dipandu praktisi industri (Online Zoom atau Tatap Muka).</p>
       </div>
-      <div class="pcat-step-card">
+      <div class="pcat-step-card" data-reveal="up" data-reveal-delay="4">
         <div class="pcat-step-num">4</div>
         <h3>Asesmen &amp; Sertifikat</h3>
         <p>Uji kompetensi resmi. Sertifikat kelulusan fisik dan digital resmi ber-SKP/barcode diterbitkan dan dikirim ke alamat Anda.</p>
@@ -462,28 +472,28 @@ if ('requestIdleCallback' in window) {
           <h2 class="section-title">Keunggulan Pelatihan Wahana Totalita</h2>
         </div>
         <div class="pcat-trust-grid">
-          <div class="pcat-trust-item">
+          <div class="pcat-trust-item" data-reveal="up" data-reveal-delay="1">
             <div class="pcat-trust-icon">🏛️</div>
             <div>
               <h4>PJK3 Resmi Berlisensi</h4>
               <p>Terdaftar resmi di Kemnaker RI dengan SKP Penunjukan sah dan berlisensi LSP terakreditasi BNSP.</p>
             </div>
           </div>
-          <div class="pcat-trust-item">
+          <div class="pcat-trust-item" data-reveal="up" data-reveal-delay="2">
             <div class="pcat-trust-icon">👨‍🏫</div>
             <div>
               <h4>Instruktur Praktisi Senior</h4>
               <p>Materi diampu langsung oleh praktisi berpengalaman 10+ tahun di sektor migas, tambang, dan industri.</p>
             </div>
           </div>
-          <div class="pcat-trust-item">
+          <div class="pcat-trust-item" data-reveal="up" data-reveal-delay="3">
             <div class="pcat-trust-icon">🔍</div>
             <div>
               <h4>Sertifikat Resmi &amp; Terverifikasi</h4>
               <p>Sertifikat resmi ber-SKP atau berlogo Garuda Emas, dapat divalidasi keasliannya di portal resmi.</p>
             </div>
           </div>
-          <div class="pcat-trust-item">
+          <div class="pcat-trust-item" data-reveal="up" data-reveal-delay="4">
             <div class="pcat-trust-icon">🤝</div>
             <div>
               <h4>Dipercaya 500+ Korporasi</h4>
@@ -505,8 +515,8 @@ if ('requestIdleCallback' in window) {
       <h2 class="section-title">Pertanyaan Umum Seputar Pelatihan K3</h2>
     </div>
     <div class="faq-grid">
-      <?php foreach ($catalogFaqs as $f): ?>
-      <div class="faq-item">
+      <?php foreach ($catalogFaqs as $f_idx => $f): ?>
+      <div class="faq-item" data-reveal="up" data-reveal-delay="<?= ($f_idx % 4) + 1 ?>">
         <button class="faq-question" onclick="toggleCatalogFaq(this)">
           <span><?= e($f['q']) ?></span>
           <span class="faq-icon">+</span>

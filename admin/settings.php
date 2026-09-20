@@ -110,7 +110,7 @@ $font_opts   = array_keys(THEME_FONTS);
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pengaturan Website — Admin</title>
 <meta name="robots" content="noindex,nofollow">
-<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/admin/assets/admin.css">
 <style>
 body{background:#f5f6fa}
 .form-label{font-size:13px;font-weight:600;color:#374151;margin-bottom:5px;display:block}

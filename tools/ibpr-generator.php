@@ -37,10 +37,6 @@ require __DIR__ . '/../includes/head.php';
 {"@type":"Question","name":"Apakah hasil dari tool ini bisa langsung dipakai untuk audit SMK3?","acceptedAnswer":{"@type":"Answer","text":"Tool ini membantu menyusun draf tabel IBPR dengan format dan perhitungan risiko yang konsisten. Sebelum digunakan sebagai dokumen resmi audit, hasilnya tetap perlu ditinjau dan divalidasi oleh Ahli K3 Umum atau HSE Manager yang memahami kondisi aktual pekerjaan, prosedur perusahaan, dan peraturan yang berlaku, karena tool ini bersifat alat bantu, bukan pengganti penilaian pihak yang berkompeten."}}
 ]}
 </script>
-<link rel="manifest" href="/manifest.json">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --primary:#0f4d33;--primary-d:#0a3826;--primary-soft:#e8f3ee;
@@ -52,8 +48,8 @@ require __DIR__ . '/../includes/head.php';
   --high:#c2540c;--high-bg:#fdece0;
   --ext:#c0301f;--ext-bg:#fbe6e3;
   --radius:10px;--radius-sm:6px;
-  --font-head:'Space Grotesk',system-ui,sans-serif;
-  --font-body:'Inter',system-ui,sans-serif;
+  --font-head:var(--font-heading, 'Lexend', system-ui, sans-serif);
+  --font-body:var(--font-body, 'Source Sans 3', system-ui, sans-serif);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}

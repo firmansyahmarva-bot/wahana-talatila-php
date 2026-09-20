@@ -156,16 +156,18 @@ if ($faqs) {
 (function(){var l=false;function g(){if(l)return;l=true;(function(w,d,s,i){w.dataLayer=w.dataLayer||[];w.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s);j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i;f.parentNode.insertBefore(j,f);})(window,document,'script','<?= $GTM ?>');}
 ['scroll','touchstart','mousemove','keydown','click'].forEach(function(e){window.addEventListener(e,g,{once:true,passive:true});});setTimeout(g,3500);})();
 </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-<noscript><link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;600;700;800&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;600;700;800&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;600;700;800&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&display=swap"></noscript>
 <?php if ($lpCss): ?><style><?= $lpCss ?></style><?php else: ?><link rel="stylesheet" href="/k3lib/assets/lp-glass.css"><?php endif; ?>
 <style>
 .k3-search{display:flex;gap:10px;max-width:560px;margin:22px auto 0;flex-wrap:wrap}
 .k3-search input{flex:1;min-width:200px;padding:14px 18px;border-radius:12px;border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.9);font-size:15px}
 .k3-search button{border:none;cursor:pointer}
 .prog-group{margin-bottom:34px}
-.prog-group h3{font-family:'Sora';font-size:1.15rem;color:#0b5d4a;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.prog-group h3{font-family:'Lexend',sans-serif;font-size:1.15rem;color:#0b5d4a;margin-bottom:14px;display:flex;align-items:center;gap:10px}
 .prog-group h3 .cnt{font-size:12px;font-weight:600;background:rgba(13,148,136,.15);color:#0b5d4a;padding:3px 10px;border-radius:20px}
 .prog-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
 .prog-item{border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:6px}
@@ -177,7 +179,7 @@ if ($faqs) {
 .mini-out{background:rgba(6,78,59,.08);color:var(--green);font-weight:700;text-decoration:none;display:inline-flex;align-items:center;padding:8px 14px;border-radius:9px;font-size:13px}
 .kw-index{columns:2;column-gap:26px;max-width:900px;margin:0 auto}
 .kw-index .kw-mod{break-inside:avoid;margin-bottom:18px}
-.kw-index h4{font-family:'Sora';font-size:14px;color:#0b5d4a;text-transform:capitalize;margin-bottom:8px}
+.kw-index h4{font-family:'Lexend',sans-serif;font-size:14px;color:#0b5d4a;text-transform:capitalize;margin-bottom:8px}
 .kw-index a{display:block;font-size:13.5px;color:#33514a;text-decoration:none;padding:3px 0}
 .kw-index a:hover{color:var(--green2)}
 @media(max-width:560px){.kw-index{columns:1}}

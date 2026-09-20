@@ -185,7 +185,6 @@ function fv_raw(array $t, string $key, $default = ''): string {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title><?= $is_edit ? 'Edit' : 'Tambah' ?> Program — Admin</title>
 <meta name="robots" content="noindex,nofollow">
-<link rel="stylesheet" href="/assets/css/style.css">
 <link rel="stylesheet" href="/admin/assets/admin.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 <style>

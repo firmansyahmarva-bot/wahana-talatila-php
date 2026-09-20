@@ -63,7 +63,7 @@ require __DIR__ . '/includes/head.php';
 </script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:#1a1a2e;line-height:1.7;-webkit-font-smoothing:antialiased}
+body{font-family:'Source Sans 3',system-ui,sans-serif;color:#1a1a2e;line-height:1.7;-webkit-font-smoothing:antialiased}
 .container{max-width:1000px;margin:0 auto;padding:0 20px}
 .container-sm{max-width:680px;margin:0 auto;padding:0 20px}
 /* NAV */

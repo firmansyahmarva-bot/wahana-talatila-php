@@ -137,9 +137,21 @@ echo json_encode([
 ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 ?>
 </script>
-<link rel="stylesheet" href="<?= asset_v('/assets/css/core.min.css') ?>">
-<link rel="stylesheet" href="<?= asset_v('/assets/css/page/sector.css') ?>">
-<link rel="stylesheet" href="<?= asset_v('/assets/css/page/hub-master.css') ?>">
+<style><?php
+$_core_css_file = __DIR__ . '/assets/css/core.min.css';
+if (is_file($_core_css_file)) {
+    readfile($_core_css_file);
+} else {
+    readfile(__DIR__ . '/assets/css/tokens.css');
+    readfile(__DIR__ . '/assets/css/core.css');
+}
+?></style>
+<link rel="stylesheet" href="<?= asset_v('/assets/css/components.min.css') ?>" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="<?= asset_v('/assets/css/components.min.css') ?>"></noscript>
+<link rel="stylesheet" href="<?= asset_v('/assets/css/page/sector.css') ?>" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="<?= asset_v('/assets/css/page/sector.css') ?>"></noscript>
+<link rel="stylesheet" href="<?= asset_v('/assets/css/page/hub-master.css') ?>" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="<?= asset_v('/assets/css/page/hub-master.css') ?>"></noscript>
 <style>
 .hero h1{font-size:clamp(1.6rem,4.5vw,2.6rem);font-weight:800;line-height:1.2;margin-bottom:14px;letter-spacing:-.02em}
 section{padding:48px 0;background:#f5f5f2}

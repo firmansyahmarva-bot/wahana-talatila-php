@@ -48,7 +48,6 @@ $_home_title = 'Pelatihan K3 & Sertifikasi BNSP Yogyakarta | Wahana Totalita';
 <meta name="google-site-verification" content="<?= e($s['google_verify']) ?>">
 <?php endif; ?>
 
-<!-- Fonts: Space Grotesk (high-tech) + Syne (display headings) -->
 <meta property="og:locale"       content="id_ID">
 <meta property="og:image:width"   content="1200">
 <meta property="og:image:height"  content="630">
@@ -67,9 +66,10 @@ $_home_title = 'Pelatihan K3 & Sertifikasi BNSP Yogyakarta | Wahana Totalita';
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <!-- Google Fonts (Non-blocking async load with font-display: swap) -->
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;600;700;800&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;600;700;800&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&display=swap" media="print" onload="this.media='all'">
 <noscript>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;600;700;800&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&display=swap">
 </noscript>
 
 <style><?php
