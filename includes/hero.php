@@ -1,5 +1,4 @@
-<!-- ═══════════════════════════════════════ HERO 2026 (navy redesign) -->
-<section class="hero hero26" id="konten-utama">
+<section class="hero hero26">
   <div class="hero26-bg" aria-hidden="true"></div>
   <div class="hero26-glow hero26-glow-a" aria-hidden="true"></div>
   <div class="hero26-glow hero26-glow-b" aria-hidden="true"></div>

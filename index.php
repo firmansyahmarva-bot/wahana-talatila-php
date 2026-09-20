@@ -23,6 +23,7 @@ $page_css = ['home'];
 ?>
 <?php require __DIR__ . '/includes/head.php'; ?>
 <?php require __DIR__ . '/includes/navbar.php'; ?>
+<main id="konten-utama">
 <?php require __DIR__ . '/includes/hero.php'; ?>
 
 <!-- TRUST BAR -->
@@ -30,23 +31,33 @@ $page_css = ['home'];
   <div class="container trust-bar-inner">
     <span class="trust-bar-label">Terakreditasi &amp; Diakui</span>
     <div class="trust-logo">
-      <div class="trust-logo-icon">🏛️</div>
+      <div class="trust-logo-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M3 10h18M5 10v11M9 10v11M15 10v11M19 10v11M12 2L2 7h20L12 2z"/></svg>
+      </div>
       <div><span class="trust-logo-name">KEMNAKER RI</span><span class="trust-logo-sub">Kementerian Ketenagakerjaan</span></div>
     </div>
     <div class="trust-logo">
-      <div class="trust-logo-icon">📋</div>
+      <div class="trust-logo-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><path d="M9 14l2 2 4-4"/></svg>
+      </div>
       <div><span class="trust-logo-name">BNSP</span><span class="trust-logo-sub">Badan Nasional Sertifikasi Profesi</span></div>
     </div>
     <div class="trust-logo">
-      <div class="trust-logo-icon">⛏️</div>
+      <div class="trust-logo-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18h20v-2a8 8 0 0 0-16 0v2z"/><path d="M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5"/><path d="M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1"/></svg>
+      </div>
       <div><span class="trust-logo-name">ESDM</span><span class="trust-logo-sub">Kementerian ESDM</span></div>
     </div>
     <div class="trust-logo">
-      <div class="trust-logo-icon">🌿</div>
+      <div class="trust-logo-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+      </div>
       <div><span class="trust-logo-name">KLHK</span><span class="trust-logo-sub">Kementerian Lingkungan Hidup</span></div>
     </div>
     <div class="trust-logo">
-      <div class="trust-logo-icon">✅</div>
+      <div class="trust-logo-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+      </div>
       <div><span class="trust-logo-name">ISO 9001</span><span class="trust-logo-sub">Sistem Manajemen Mutu</span></div>
     </div>
   </div>
@@ -335,7 +346,7 @@ $faq_schema = [
           <?= e($faq['name']) ?>
           <span class="faq-icon" aria-hidden="true">+</span>
         </button>
-        <div class="faq-answer"><?= e($faq['acceptedAnswer']['text']) ?></div>
+        <div class="faq-answer"><div class="faq-answer-inner"><?= e($faq['acceptedAnswer']['text']) ?></div></div>
       </div>
       <?php endforeach; ?>
     </div>
@@ -360,6 +371,7 @@ $faq_schema = [
     </div>
   </div>
 </section>
+</main>
 
 <?php require __DIR__ . '/includes/footer.php'; ?>
 <?php require __DIR__ . '/includes/scripts.php'; ?>
