@@ -1719,7 +1719,7 @@ h1, h2, h3 {
   .nav-logo-text strong { font-size: 13px; }
 
   /* Sticky category strip sits right under the slimmer header */
-  .mobile-cat-scroll { top: 52px; }
+  .mobile-cat-scroll { top: 56px; }
 
   /* ── Footer: 2 compact columns instead of one very tall stack ── */
   .footer { padding-top: 32px; }

@@ -492,9 +492,9 @@ if (count($featured) < 3) $featured = array_slice($trainings, 0, 6);
 <?php endif; ?>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" href="<?= theme_font_url($s) ?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="<?= theme_font_url($s) ?>"></noscript>
 <link rel="stylesheet" href="<?= asset_v('/assets/css/core.min.css') ?>">
-<link rel="stylesheet" href="<?= asset_v('/assets/css/style.css') ?>">
 <?= theme_css_vars($s) ?>
 <style>
 .e404-hero{background:var(--green,#0A4A2E);color:#fff;padding:80px 0 60px;text-align:center}

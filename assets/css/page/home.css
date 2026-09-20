@@ -80,6 +80,6 @@
 }
 
 @media (max-width: 768px) {
-  .mobile-cat-scroll { display: block; top: 52px; }
+  .mobile-cat-scroll { display: block; top: var(--nav-h); }
   .mobile-promo      { display: flex; }
 }

@@ -110,9 +110,10 @@ if (!empty($article['thumbnail'])) $article_schema['image'] = artikel_thumb($art
 <?php endif; ?>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" href="<?= theme_font_url($s) ?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="<?= theme_font_url($s) ?>"></noscript>
 <link rel="stylesheet" href="<?= asset_v('/assets/css/core.min.css') ?>">
 <link rel="stylesheet" href="<?= asset_v('/assets/css/components.min.css') ?>">
-<link rel="stylesheet" href="<?= asset_v('/assets/css/style.css') ?>">
 <link rel="stylesheet" href="<?= asset_v('/assets/css/artikel.css') ?>">
 <?= theme_css_vars($s) ?>
 </head>
