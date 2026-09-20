@@ -137,6 +137,7 @@ echo json_encode([
 ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 ?>
 </script>
+<link rel="stylesheet" href="<?= asset_v('/assets/css/core.min.css') ?>">
 <link rel="stylesheet" href="<?= asset_v('/assets/css/page/sector.css') ?>">
 <link rel="stylesheet" href="<?= asset_v('/assets/css/page/hub-master.css') ?>">
 <style>

@@ -105,6 +105,8 @@ if ('requestIdleCallback' in window) {
 <noscript>
   <link rel="stylesheet" href="<?= theme_font_url($s) ?>">
 </noscript>
+<link rel="stylesheet" href="<?= asset_v('/assets/css/core.min.css') ?>">
+<link rel="stylesheet" href="<?= asset_v('/assets/css/components.min.css') ?>">
 <link rel="stylesheet" href="<?= asset_v('/assets/css/style.css') ?>">
 <link rel="stylesheet" href="<?= asset_v('/assets/css/additions.css') ?>">
 <?= theme_css_vars($s) ?>
