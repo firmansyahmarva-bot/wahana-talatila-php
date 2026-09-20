@@ -11,8 +11,8 @@
     if (!ticking) {
       window.requestAnimationFrame(function () {
         var docH = document.documentElement.scrollHeight - window.innerHeight;
-        var pct  = docH > 0 ? (window.scrollY / docH) * 100 : 0;
-        bar.style.width = Math.min(pct, 100) + '%';
+        var progress = docH > 0 ? Math.min(window.scrollY / docH, 1) : 0;
+        bar.style.transform = 'scaleX(' + progress + ')';
         ticking = false;
       });
       ticking = true;
@@ -175,26 +175,46 @@ document.querySelectorAll('.faq-question').forEach(function (btn) {
   counterEls.forEach(function (el) { obs.observe(el); });
 })();
 
-// ─── Fade-in on scroll (IntersectionObserver) ────────────────
-const fadeEls = document.querySelectorAll('.fade-in');
-if (fadeEls.length && 'IntersectionObserver' in window) {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 60);
-        observer.unobserve(entry.target);
-      }
-    });
-  // threshold:0 fires as soon as ANY part enters. Tall sections (e.g. the
-  // catalog with 46 cards) can never reach a 0.1 ratio, which previously
-  // left them stuck at opacity:0 (the blank-white-gap bug). rootMargin
-  // pre-triggers slightly before the element scrolls into view.
-  }, { threshold: 0, rootMargin: '0px 0px -5% 0px' });
-  fadeEls.forEach(el => observer.observe(el));
-  // Safety net: if the observer ever misses an element (back/forward cache,
-  // resize, very fast scroll), force everything visible after 2s so nothing
-  // can stay permanently blank.
-  setTimeout(() => fadeEls.forEach(el => el.classList.add('visible')), 2000);
-} else {
-  fadeEls.forEach(el => el.classList.add('visible'));
-}
+// ─── Scroll Reveal & Fade-in (IntersectionObserver) ─────────
+(function () {
+  const revealEls = document.querySelectorAll('[data-reveal], .fade-in');
+  if (!revealEls.length) return;
+
+  if ('IntersectionObserver' in window && window.matchMedia('(min-width: 769px)').matches) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible', 'visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
+
+    revealEls.forEach(el => observer.observe(el));
+
+    // Safety net: force visible after 2s so nothing stays blank
+    setTimeout(() => {
+      revealEls.forEach(el => el.classList.add('is-visible', 'visible'));
+    }, 2000);
+  } else {
+    revealEls.forEach(el => el.classList.add('is-visible', 'visible'));
+  }
+})();
+
+// ─── WA Float Cueing at 40% Scroll Depth ─────────────────────
+(function () {
+  var wa = document.querySelector('.wa-float');
+  if (!wa) return;
+  var triggered = false;
+  function onScrollCue() {
+    if (triggered) return;
+    var scrollY = window.pageYOffset || document.documentElement.scrollTop;
+    var docH = document.documentElement.scrollHeight - window.innerHeight;
+    if (docH > 0 && (scrollY / docH) >= 0.4) {
+      triggered = true;
+      wa.classList.add('is-cueing');
+      window.removeEventListener('scroll', onScrollCue);
+    }
+  }
+  window.addEventListener('scroll', onScrollCue, { passive: true });
+})();
