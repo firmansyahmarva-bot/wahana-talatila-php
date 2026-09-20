@@ -33,6 +33,7 @@ $waRegister = wa_url("Halo, saya ingin mendaftar pelatihan:\n*{$batch['training_
 <meta name="description" content="<?= e($metaDesc) ?>">
 <meta name="robots" content="<?= $robots ?>">
 <link rel="canonical" href="<?= SITE_URL ?>/jadwal/<?= $id ?>/">
+<link rel="stylesheet" href="<?= asset_v('/assets/css/core.min.css') ?>">
 <link rel="stylesheet" href="<?= asset_v('/assets/css/style.css') ?>">
 <?= theme_css_vars($s) ?>
 <?php if (!$isEnded): ?><script type="application/ld+json"><?= json_encode([

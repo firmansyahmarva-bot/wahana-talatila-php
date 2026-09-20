@@ -27,6 +27,7 @@ $metaDesc  = 'Lihat jadwal pelatihan K3, safety, lingkungan & AMDAL. Sertifikasi
 <title><?= e($metaTitle) ?></title>
 <meta name="description" content="<?= e($metaDesc) ?>">
 <link rel="canonical" href="<?= SITE_URL ?>/jadwal/">
+<link rel="stylesheet" href="<?= asset_v('/assets/css/core.min.css') ?>">
 <link rel="stylesheet" href="<?= asset_v('/assets/css/style.css') ?>">
 <?= theme_css_vars($s) ?>
 <style>
