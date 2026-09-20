@@ -1,0 +1,85 @@
+﻿/* ============================================================
+   Wahana Totalita — Homepage-specific styles
+   ============================================================ */
+
+/* ── MOBILE CATEGORY CHIP STRIP ─────────────────────────────── */
+.mobile-cat-scroll {
+  display: none;
+  background: #fff;
+  padding: 10px 0 9px;
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 56px;
+  z-index: 40;
+}
+.mobile-cat-inner {
+  display: flex;
+  gap: 7px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 0 12px;
+}
+.mobile-cat-inner::-webkit-scrollbar { display: none; }
+.mobile-chip {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 13px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  background: #f1f3f5;
+  color: #6b7280;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: inherit;
+  transition: all .15s;
+}
+.mobile-chip.active,
+.mobile-chip:active { background: var(--brand, #103A5C); color: #fff; }
+
+/* ── MOBILE PROMO BANNER ───────────────────────────────────── */
+.mobile-promo {
+  display: none;
+  margin: 10px 12px 4px;
+  background: linear-gradient(135deg, var(--accent, #F06A25) 0%, #f59e0b 100%);
+  border-radius: 14px;
+  padding: 13px 14px;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  overflow: hidden;
+}
+.mobile-promo::after {
+  content: '';
+  position: absolute;
+  right: -20px; top: -20px;
+  width: 90px; height: 90px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.1);
+}
+.mobile-promo-icon { font-size: 26px; flex-shrink: 0; }
+.mobile-promo-text { display: flex; flex-direction: column; gap: 1px; }
+.mobile-promo-text strong { font-size: 12px; color: #fff; font-weight: 800; }
+.mobile-promo-text span  { font-size: 10px; color: rgba(255,255,255,.85); }
+.mobile-promo-btn {
+  margin-left: auto;
+  flex-shrink: 0;
+  background: #fff;
+  color: #103A5C;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 7px 11px;
+  border-radius: 8px;
+  white-space: nowrap;
+  z-index: 1;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-cat-scroll { display: block; top: 52px; }
+  .mobile-promo      { display: flex; }
+}

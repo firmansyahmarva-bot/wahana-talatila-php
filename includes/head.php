@@ -62,10 +62,6 @@ $_home_title = 'Pelatihan K3 & Sertifikasi BNSP Yogyakarta | Wahana Totalita';
 <meta name="apple-mobile-web-app-title" content="<?= e($s['site_name'] ?? 'Wahana Totalita') ?>">
 
 <!-- Performance: DNS prefetch & preconnect -->
-<?php if ($_is_home): ?>
-<link rel="preload" as="image" href="/assets/img/hero-bg.webp" fetchpriority="high">
-<?php endif; ?>
-<link rel="dns-prefetch" href="https://images.unsplash.com">
 <link rel="dns-prefetch" href="https://www.googletagmanager.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -76,10 +72,20 @@ $_home_title = 'Pelatihan K3 & Sertifikasi BNSP Yogyakarta | Wahana Totalita';
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap">
 </noscript>
 
-<link rel="stylesheet" href="/assets/css/base.css">
-<link rel="stylesheet" href="/assets/css/components.min.css">
+<style><?php
+$_core_css_file = __DIR__ . '/../assets/css/core.min.css';
+if (is_file($_core_css_file)) {
+    readfile($_core_css_file);
+} else {
+    readfile(__DIR__ . '/../assets/css/core.css');
+}
+?></style>
+<link rel="stylesheet" href="<?= asset_v('/assets/css/components.min.css') ?>" media="print" onload="this.media='all'">
+<noscript>
+  <link rel="stylesheet" href="<?= asset_v('/assets/css/components.min.css') ?>">
+</noscript>
 <?php if (!empty($page_css) && is_array($page_css)): foreach ($page_css as $__pc): ?>
-<link rel="stylesheet" href="/assets/css/page/<?= e($__pc) ?>.css">
+<link rel="stylesheet" href="<?= asset_v('/assets/css/page/' . e($__pc) . '.css') ?>">
 <?php endforeach; endif; ?>
 <?= theme_css_vars($s) ?>
 

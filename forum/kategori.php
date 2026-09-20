@@ -39,7 +39,7 @@ $metaDesc  = ($cat['description'] ?: 'Diskusi ' . $cat['name'] . ' bersama profe
 <title><?= e($metaTitle) ?></title>
 <meta name="description" content="<?= e($metaDesc) ?>">
 <link rel="canonical" href="<?= SITE_URL ?>/forum/<?= e($cat['slug']) ?>/">
-<link rel="stylesheet" href="<?= SITE_URL ?>/assets/css/style.css">
+<link rel="stylesheet" href="<?= asset_v('/assets/css/style.css') ?>">
 <?= theme_css_vars($s) ?>
 <style>
 .cat-hero{background:linear-gradient(135deg,var(--green),#1a5c3a);padding:48px 0;color:#fff}

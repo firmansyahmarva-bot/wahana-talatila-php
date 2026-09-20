@@ -493,7 +493,7 @@ if (count($featured) < 3) $featured = array_slice($trainings, 0, 6);
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="<?= asset_v('/assets/css/style.css') ?>">
 <?= theme_css_vars($s) ?>
 <style>
 .e404-hero{background:var(--green,#0A4A2E);color:#fff;padding:80px 0 60px;text-align:center}

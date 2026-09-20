@@ -413,6 +413,15 @@ const THEME_FONTS = [
     'Inter'             => 'Inter:wght@400;500;600;700;800',
 ];
 
+function asset_v(string $path): string {
+    $doc_root = !empty($_SERVER['DOCUMENT_ROOT']) ? $_SERVER['DOCUMENT_ROOT'] : __DIR__;
+    $local_path = rtrim($doc_root, '/\\') . '/' . ltrim($path, '/\\');
+    if (file_exists($local_path)) {
+        return $path . '?v=' . filemtime($local_path);
+    }
+    return $path;
+}
+
 function theme_font_url(array $s): string {
     $chosen = $s['theme_font'] ?? 'Plus Jakarta Sans';
     $param  = THEME_FONTS[$chosen] ?? THEME_FONTS['Plus Jakarta Sans'];
@@ -420,8 +429,8 @@ function theme_font_url(array $s): string {
 }
 
 function theme_css_vars(array $s): string {
-    $prim   = is_valid_hex($s['theme_color_primary'] ?? '') ? $s['theme_color_primary'] : '#0A4A2E';
-    $accent = is_valid_hex($s['theme_color_accent']  ?? '') ? $s['theme_color_accent']  : '#C6621C';
+    $prim   = is_valid_hex($s['theme_color_primary'] ?? '') ? $s['theme_color_primary'] : '#103A5C';
+    $accent = is_valid_hex($s['theme_color_accent']  ?? '') ? $s['theme_color_accent']  : '#F06A25';
     $font   = array_key_exists($s['theme_font'] ?? '', THEME_FONTS)
               ? $s['theme_font'] : 'Plus Jakarta Sans';
 
@@ -440,7 +449,6 @@ function theme_css_vars(array $s): string {
   --green-light:{$prim_light};
   --orange:{$accent};--orange-dark:{$acc_dark};--orange-light:{$acc_light};
 }
-body{font-family:'{$font}',system-ui,sans-serif;}
 </style>";
 }
 

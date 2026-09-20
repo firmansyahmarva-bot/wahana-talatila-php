@@ -60,7 +60,7 @@ $jsonLd = [
 <title><?= e($metaTitle) ?></title>
 <meta name="description" content="<?= e($metaDesc) ?>">
 <link rel="canonical" href="<?= $canonical ?>">
-<link rel="stylesheet" href="<?= SITE_URL ?>/assets/css/style.css">
+<link rel="stylesheet" href="<?= asset_v('/assets/css/style.css') ?>">
 <?= theme_css_vars($s) ?>
 <script type="application/ld+json"><?= json_encode($jsonLd, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?></script>
 <style>

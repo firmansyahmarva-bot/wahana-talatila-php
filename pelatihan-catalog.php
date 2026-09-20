@@ -105,8 +105,8 @@ if ('requestIdleCallback' in window) {
 <noscript>
   <link rel="stylesheet" href="<?= theme_font_url($s) ?>">
 </noscript>
-<link rel="stylesheet" href="/assets/css/style.css">
-<link rel="stylesheet" href="/assets/css/additions.css">
+<link rel="stylesheet" href="<?= asset_v('/assets/css/style.css') ?>">
+<link rel="stylesheet" href="<?= asset_v('/assets/css/additions.css') ?>">
 <?= theme_css_vars($s) ?>
 
 <script type="application/ld+json"><?= json_encode([

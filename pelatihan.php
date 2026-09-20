@@ -279,19 +279,27 @@ if ('requestIdleCallback' in window) {
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap">
 </noscript>
 
+<!-- Critical base styles (tokens, reset, typography, navbar, footer) -->
+<style><?php
+$_core_css_file = __DIR__ . '/assets/css/core.min.css';
+if (is_file($_core_css_file)) {
+    readfile($_core_css_file);
+} else {
+    readfile(__DIR__ . '/assets/css/core.css');
+}
+?></style>
+
 <!-- Primary stylesheet: dedicated design for training detail pages -->
-<link rel="stylesheet" href="/assets/css/pelatihan-detail.css">
-<!-- Deferred non-critical stylesheets for footer and shared components -->
-<link rel="stylesheet" href="/assets/css/components.min.css" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="/assets/css/style.css" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="<?= asset_v('/assets/css/pelatihan-detail.css') ?>">
+<!-- Deferred non-critical stylesheet for shared components -->
+<link rel="stylesheet" href="<?= asset_v('/assets/css/components.min.css') ?>" media="print" onload="this.media='all'">
 <noscript>
-  <link rel="stylesheet" href="/assets/css/components.min.css">
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="<?= asset_v('/assets/css/components.min.css') ?>">
 </noscript>
 <?= theme_css_vars($s) ?>
 

@@ -39,7 +39,7 @@ $page_title = 'Buat Topik Forum K3';
 $meta_desc = 'Buat topik diskusi baru di Forum K3 Wahana Totalita. Tanya jawab seputar keselamatan dan kesehatan kerja.';
 require __DIR__ . '/../includes/head.php';
 ?>
-<link rel="stylesheet" href="<?= SITE_URL ?>/assets/css/style.css">
+<link rel="stylesheet" href="<?= asset_v('/assets/css/style.css') ?>">
 <?= theme_css_vars($s) ?>
 <style>
 .form-page{max-width:680px;margin:60px auto;padding:0 20px}

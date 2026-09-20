@@ -25,7 +25,7 @@ $metaDesc  = 'Temukan lowongan kerja K3, HSE Officer, Safety Manager, QHSE Engin
 <title><?= e($metaTitle) ?></title>
 <meta name="description" content="<?= e($metaDesc) ?>">
 <link rel="canonical" href="<?= SITE_URL ?>/lowongan/">
-<link rel="stylesheet" href="<?= SITE_URL ?>/assets/css/style.css">
+<link rel="stylesheet" href="<?= asset_v('/assets/css/style.css') ?>">
 <?= theme_css_vars($s) ?>
 <style>
 .job-hero{background:linear-gradient(135deg,#1e3a5f,#2d5282);padding:56px 0;color:#fff;text-align:center}
