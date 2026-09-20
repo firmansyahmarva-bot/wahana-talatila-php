@@ -21,6 +21,17 @@ ul { list-style: none; }
 
 /* ─── CSS VARIABLES ─────────────────────────────────────────── */
 :root {
+  /* Brand & Accent tokens */
+  --brand:          #103A5C;
+  --brand-dark:     #0B2C46;
+  --brand-mid:      #16486E;
+  --brand-light:    #E8F0F7;
+  --accent:         #F06A25;
+  --accent-dark:    #C2410C;
+  --accent-light:   #FDE8DA;
+  --surface:        #FFFFFF;
+  --surface-subtle: #F8FAFC;
+
   /* legacy names, repointed to the navy/orange (Redesign 2026) palette */
   --green:       #103A5C; /* was forest green #0A4A2E */
   --green-dark:  #0B2C46; /* was #062E1C */
