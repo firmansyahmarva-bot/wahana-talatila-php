@@ -42,7 +42,7 @@ $_home_title = 'Pelatihan K3 & Sertifikasi BNSP Yogyakarta | Wahana Totalita';
 <meta property="og:image"       content="<?= SITE_URL . e($s['og_image'] ?? '/assets/img/og-cover.jpg') ?>">
 <meta name="twitter:card"       content="summary_large_image">
 <meta name="twitter:title"      content="<?= $_is_home ? e($_home_title) : e($s['site_name'] ?? '') ?>">
-<meta name="theme-color"        content="<?= e(is_valid_hex($s['theme_color_primary'] ?? '') ? $s['theme_color_primary'] : '#0A4A2E') ?>">
+<meta name="theme-color"        content="<?= e(is_valid_hex($s['theme_color_primary'] ?? '') ? $s['theme_color_primary'] : '#103A5C') ?>">
 
 <?php if (!empty($s['google_verify'])): ?>
 <meta name="google-site-verification" content="<?= e($s['google_verify']) ?>">
@@ -77,6 +77,7 @@ $_core_css_file = __DIR__ . '/../assets/css/core.min.css';
 if (is_file($_core_css_file)) {
     readfile($_core_css_file);
 } else {
+    readfile(__DIR__ . '/../assets/css/tokens.css');
     readfile(__DIR__ . '/../assets/css/core.css');
 }
 ?></style>
@@ -84,8 +85,11 @@ if (is_file($_core_css_file)) {
 <noscript>
   <link rel="stylesheet" href="<?= asset_v('/assets/css/components.min.css') ?>">
 </noscript>
-<?php if (!empty($page_css) && is_array($page_css)): foreach ($page_css as $__pc): ?>
-<link rel="stylesheet" href="<?= asset_v('/assets/css/page/' . e($__pc) . '.css') ?>">
+<?php if (!empty($page_css) && is_array($page_css)): foreach ($page_css as $__pc):
+    $__pc_clean = e($__pc);
+    $__pc_file = is_file(__DIR__ . "/../assets/css/page/{$__pc_clean}.min.css") ? "{$__pc_clean}.min.css" : "{$__pc_clean}.css";
+?>
+<link rel="stylesheet" href="<?= asset_v('/assets/css/page/' . $__pc_file) ?>">
 <?php endforeach; endif; ?>
 <?= theme_css_vars($s) ?>
 

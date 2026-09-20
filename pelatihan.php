@@ -290,6 +290,7 @@ $_core_css_file = __DIR__ . '/assets/css/core.min.css';
 if (is_file($_core_css_file)) {
     readfile($_core_css_file);
 } else {
+    readfile(__DIR__ . '/assets/css/tokens.css');
     readfile(__DIR__ . '/assets/css/core.css');
 }
 ?></style>
