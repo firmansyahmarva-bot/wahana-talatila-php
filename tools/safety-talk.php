@@ -198,358 +198,1183 @@ $related_trainings = [
 </script>
 <link rel="manifest" href="/manifest.json">
 <style>
-:root{--primary:#1a6b3a;--primary-d:#145530;--accent:#f5a623;--bg:#f8fafc;--card:#fff;--text:#1a202c;--muted:#6b7280;--radius:12px;--shadow:0 2px 16px rgba(0,0,0,.08)}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Source Sans 3',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
-a{color:var(--primary);text-decoration:none}
-.container{max-width:1140px;margin:0 auto;padding:0 20px}
-
-section.hero, .hero {
-  background: linear-gradient(135deg,#0d4023,#1a6b3a) !important;
-  color: #fff !important;
-  padding: 16px 0 14px !important;
-  min-height: 0 !important;
-  height: auto !important;
-  max-height: none !important;
-  display: block !important;
-  text-align: center !important;
-  box-shadow: 0 4px 12px rgba(0,0,0,.15);
-}
-.hero-badge {
-  background: rgba(255,255,255,.18);
-  border: 1px solid rgba(255,255,255,.3);
-  border-radius: 50px;
-  padding: 2px 12px;
-  font-size: .75rem;
-  font-weight: 700;
-  display: inline-block;
-  margin-bottom: 6px;
-  letter-spacing: .3px;
-}
-.hero h1 {
-  font-size: clamp(1.2rem, 2.2vw, 1.6rem) !important;
-  font-weight: 800 !important;
-  line-height: 1.2 !important;
-  margin: 0 0 4px 0 !important;
-  color: #fff !important;
-}
-.hero h1 span { color: #f5a623 !important; }
-.hero p {
-  opacity: .92;
-  max-width: 620px;
-  margin: 0 auto 12px auto !important;
-  font-size: .8rem !important;
-  line-height: 1.35 !important;
+/* ==========================================================
+   2026 MODERN ENTERPRISE K3 TOOL DESIGN SYSTEM
+   ========================================================== */
+:root {
+  --st-forest: #06402B;
+  --st-forest-dark: #04291B;
+  --st-forest-light: #0A5C3E;
+  --st-emerald: #059669;
+  --st-emerald-dark: #047857;
+  --st-lime: #C8EF84;
+  --st-lime-soft: #EEFAD4;
+  --st-slate-50: #F8FAFC;
+  --st-slate-100: #F1F5F9;
+  --st-slate-200: #E2E8F0;
+  --st-slate-300: #CBD5E1;
+  --st-slate-600: #475569;
+  --st-slate-700: #334155;
+  --st-slate-800: #1E293B;
+  --st-slate-900: #0F172A;
+  --st-card-bg: #FFFFFF;
+  --st-radius-sm: 8px;
+  --st-radius-md: 12px;
+  --st-radius-lg: 16px;
+  --st-radius-xl: 24px;
+  --st-shadow-card: 0 4px 16px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -2px rgba(15, 23, 42, 0.03);
+  --st-shadow-hover: 0 20px 30px -6px rgba(6, 64, 43, 0.12), 0 8px 12px -4px rgba(6, 64, 43, 0.06);
 }
 
-.hero-search-wrapper {
-  max-width: 640px;
-  margin: 0 auto;
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Source Sans 3', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--st-slate-50);
+  color: var(--st-slate-900);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* ─── HERO SECTION (HIGH CTR) ───────────────────────────── */
+.st-hero {
   position: relative;
+  background: radial-gradient(circle at 85% 15%, rgba(200, 239, 132, 0.18), transparent 32%),
+              radial-gradient(circle at 15% 85%, rgba(10, 92, 62, 0.35), transparent 36%),
+              linear-gradient(145deg, #032115 0%, #06402B 55%, #084D34 100%);
+  color: #fff;
+  padding: 68px 0 54px;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(200, 239, 132, 0.15);
 }
-.hero-search-wrapper input {
-  width: 100%;
-  padding: 10px 16px 10px 42px;
-  border-radius: 50px;
-  border: 2px solid rgba(255,255,255,.35);
-  background: rgba(255,255,255,.96);
-  font-size: .88rem;
-  color: #1a202c;
-  box-shadow: 0 4px 14px rgba(0,0,0,.15);
-  transition: all .2s;
-}
-.hero-search-wrapper input:focus {
-  background: #fff;
-  border-color: #f5a623;
-  outline: none;
-  box-shadow: 0 6px 20px rgba(0,0,0,.25);
-}
-.hero-search-icon {
+.st-hero::before {
+  content: "";
   position: absolute;
-  left: 15px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 1.05rem;
-  opacity: .6;
+  inset: 0;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(circle at 50% 50%, #000 60%, transparent 100%);
   pointer-events: none;
 }
+.st-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.75fr);
+  gap: 48px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+.st-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(200, 239, 132, 0.12);
+  border: 1px solid rgba(200, 239, 132, 0.35);
+  border-radius: 999px;
+  color: var(--st-lime);
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.st-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--st-lime);
+  box-shadow: 0 0 0 0 rgba(200, 239, 132, 0.7);
+  animation: pulseDot 2s infinite;
+}
+@keyframes pulseDot {
+  0% { box-shadow: 0 0 0 0 rgba(200, 239, 132, 0.7); }
+  70% { box-shadow: 0 0 0 8px rgba(200, 239, 132, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(200, 239, 132, 0); }
+}
+.st-hero h1 {
+  font-family: 'Lexend', sans-serif;
+  font-size: clamp(2rem, 4.2vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  color: #FFFFFF;
+  margin-bottom: 16px;
+}
+.st-hero h1 span {
+  color: var(--st-lime);
+  display: block;
+}
+.st-hero p.st-lead {
+  font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 26px;
+  max-width: 650px;
+}
 
-.main{padding:16px 0 60px}
-.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
-.stat-box{background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:8px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,.04)}
-.stat-box strong{display:block;font-size:1.05rem;font-weight:800;color:var(--primary)}
-.stat-box span{font-size:.7rem;color:var(--muted);font-weight:600}
+/* Hero Search Bar (Modern Elevated) */
+.st-search-box {
+  background: #FFFFFF;
+  border-radius: 16px;
+  padding: 6px 8px 6px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28), 0 0 0 1px rgba(255, 255, 255, 0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+  max-width: 680px;
+}
+.st-search-box:focus-within {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35), 0 0 0 3px var(--st-lime);
+}
+.st-search-icon {
+  color: var(--st-slate-600);
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.st-search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1rem;
+  color: var(--st-slate-900);
+  font-weight: 500;
+  background: transparent;
+  min-width: 0;
+}
+.st-search-input::placeholder { color: var(--st-slate-600); }
+.st-search-btn {
+  background: var(--st-forest);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 20px;
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.18s, transform 0.18s;
+  flex-shrink: 0;
+}
+.st-search-btn:hover { background: var(--st-forest-light); transform: scale(1.02); }
 
-.filter-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;align-items:center}
-.cat-btn{background:#fff;border:1px solid #d1d5db;border-radius:50px;padding:5px 12px;font-size:.76rem;font-weight:600;cursor:pointer;color:var(--muted);transition:all .15s;white-space:nowrap}
-.cat-btn.active,.cat-btn:hover{background:var(--primary);border-color:var(--primary);color:#fff}
+/* Quick Action Chips (High CTR Boost) */
+.st-quick-chips {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+.st-quick-label {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.65);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.st-chip {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s;
+  backdrop-filter: blur(8px);
+}
+.st-chip:hover {
+  background: var(--st-lime);
+  color: var(--st-forest-dark);
+  border-color: var(--st-lime);
+  transform: translateY(-1px);
+}
 
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
-.card{background:var(--card);border-radius:var(--radius);border:1px solid #e5e7eb;box-shadow:var(--shadow);overflow:hidden;cursor:pointer;display:flex;flex-direction:column;transition:transform .18s,box-shadow .18s}
-.card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.11)}
-.card-header{padding:12px 14px 8px;display:flex;gap:8px;align-items:flex-start}
-.week-badge{background:var(--primary);color:#fff;border-radius:6px;padding:3px 7px;font-size:.72rem;font-weight:700;white-space:nowrap;flex-shrink:0}
-.card-header h3{font-size:.88rem;font-weight:700;line-height:1.35}
-.card-body{padding:0 14px 10px;font-size:.78rem;color:var(--muted);line-height:1.45;flex:1}
-.card-tags{padding:0 14px 10px;display:flex;gap:4px;flex-wrap:wrap}
-.tag{background:#f3f4f6;color:var(--muted);border-radius:50px;padding:2px 7px;font-size:.68rem;font-weight:600}
-.card-related{display:block;margin:0 14px 10px;padding:8px 10px;border-radius:7px;background:#f0fdf4;border:1px solid #d1fae5;color:var(--primary-d);font-size:.72rem;font-weight:700;line-height:1.35}
-.card-related:hover{background:#dcfce7;color:var(--primary)}
-.card-footer{border-top:1px solid #f3f4f6;padding:8px 14px;display:flex;justify-content:space-between;align-items:center;background:#fafafa}
-.btn-expand{background:var(--primary);color:#fff;border:none;border-radius:6px;padding:5px 11px;font-size:.76rem;font-weight:600;cursor:pointer}
-.btn-print-card{background:#e5e7eb;color:var(--text);border:none;border-radius:6px;padding:5px 11px;font-size:.76rem;font-weight:600;cursor:pointer}
+/* Trust Row */
+.st-trust-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 600;
+}
+.st-trust-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.st-trust-item svg { color: var(--st-lime); }
 
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;display:none;align-items:center;justify-content:center;padding:16px}
-.modal-overlay.show{display:flex}
-.modal{background:#fff;border-radius:14px;max-width:680px;width:100%;max-height:88vh;overflow-y:auto;padding:24px}
-.modal-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}
-.modal h2{font-size:1.1rem;font-weight:800;flex:1;padding-right:12px;line-height:1.3}
-.btn-close{background:#f3f4f6;border:none;border-radius:8px;padding:5px 10px;font-size:.82rem;cursor:pointer;font-weight:600}
-.modal-section{margin-bottom:14px}
-.modal-section h4{font-size:.85rem;font-weight:700;color:var(--primary);margin-bottom:6px}
-.modal-section ul,.modal-section ol{padding-left:18px;font-size:.83rem;line-height:1.7;color:#374151}
-.modal-section p{font-size:.83rem;color:#374151;line-height:1.6}
-.discuss-item{background:#f9fafb;border-radius:6px;padding:7px 10px;margin-bottom:5px;font-size:.8rem;border-left:3px solid var(--primary)}
-.modal-related{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#fff7ed;border:1px solid #fed7aa;border-radius:9px;padding:11px 13px;margin-top:15px;color:#7c2d12;font-size:.82rem;font-weight:700}
-.modal-related span{color:#9a3412}.modal-related:hover{background:#ffedd5}
+/* Hero Stat Panel Card */
+.st-hero-panel {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--st-radius-xl);
+  padding: 28px 24px;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.22);
+}
+.st-panel-eyebrow {
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--st-lime);
+  margin-bottom: 8px;
+}
+.st-hero-panel h2 {
+  font-family: 'Lexend', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #fff;
+  margin-bottom: 20px;
+}
+.st-stat-matrix {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.st-stat-cell {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--st-radius-md);
+  padding: 12px 14px;
+}
+.st-stat-cell strong {
+  display: block;
+  font-family: 'Lexend', sans-serif;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--st-lime);
+  line-height: 1.1;
+}
+.st-stat-cell span {
+  font-size: 0.76rem;
+  color: rgba(255, 255, 255, 0.75);
+  font-weight: 500;
+}
+.st-panel-cta {
+  display: block;
+  text-align: center;
+  background: var(--st-lime);
+  color: var(--st-forest-dark);
+  padding: 11px 16px;
+  border-radius: var(--st-radius-md);
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  transition: transform 0.18s, box-shadow 0.18s;
+}
+.st-panel-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(200, 239, 132, 0.3);
+}
 
-.cta-strip{background:linear-gradient(135deg,#0d4023,#1a6b3a);color:#fff;border-radius:12px;padding:20px;text-align:center;margin:26px 0}
-.cta-strip h3{font-size:1rem;font-weight:800;margin-bottom:4px}
-.cta-strip p{opacity:.9;font-size:.82rem;margin-bottom:12px}
+/* ─── STICKY DISCOVERY & CATEGORY TABS ───────────────────── */
+.st-discovery {
+  position: sticky;
+  top: 68px;
+  z-index: 40;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--st-slate-200);
+  padding: 14px 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+.st-filter-bar {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+.st-filter-bar::-webkit-scrollbar { display: none; }
+.st-cat-btn {
+  flex: 0 0 auto;
+  border: 1px solid var(--st-slate-200);
+  background: #FFFFFF;
+  color: var(--st-slate-700);
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.84rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.st-cat-btn:hover {
+  background: var(--st-slate-100);
+  border-color: var(--st-slate-300);
+  color: var(--st-forest);
+}
+.st-cat-btn.active {
+  background: var(--st-forest);
+  border-color: var(--st-forest);
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(6, 64, 43, 0.25);
+}
 
-@media print{nav,.filter-bar,footer,.cta-strip,.btn-expand,.btn-print-card,.card-footer,.modal-overlay,.tools-training-cta,.tool-article,.related-trainings{display:none!important}}
+/* ─── SECTION CONTENT AREA ──────────────────────────────── */
+.st-main-content {
+  padding: 36px 0 60px;
+}
+.st-results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.st-eyebrow {
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--st-emerald-dark);
+  margin-bottom: 4px;
+}
+.st-results-header h2 {
+  font-family: 'Lexend', sans-serif;
+  font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+  font-weight: 800;
+  color: var(--st-slate-900);
+  letter-spacing: -0.02em;
+}
+.st-results-count {
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--st-forest);
+  background: var(--st-lime-soft);
+  border: 1px solid rgba(200, 239, 132, 0.6);
+  padding: 6px 14px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
 
-.tool-article{padding:8px 0}
-.tool-article h2{font-size:1.05rem;font-weight:800;color:var(--primary);margin:20px 0 10px}
-.tool-article p{font-size:.85rem;color:#374151;line-height:1.7;margin-bottom:10px}
-.faq-item{margin-bottom:12px}
-.faq-item h3{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:3px}
-.faq-item p{font-size:.83rem;color:#374151;margin:0}
-.guide-link{display:flex;justify-content:space-between;align-items:center;gap:18px;margin:22px 0 8px;padding:16px 18px;border:1px solid #d1fae5;background:#f0fdf4;border-radius:10px;color:var(--primary-d)}
-.guide-link strong{display:block;font-size:.9rem}.guide-link span{display:block;font-size:.78rem;color:#4b6356;margin-top:3px}.guide-link b{font-size:1.2rem}
+/* ─── CARDS GRID (MODERN 2026 SAAS STYLE) ────────────────── */
+.st-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+.st-card {
+  background: var(--st-card-bg);
+  border: 1px solid var(--st-slate-200);
+  border-radius: var(--st-radius-lg);
+  box-shadow: var(--st-shadow-card);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s, border-color 0.22s;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+}
+.st-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--st-shadow-hover);
+  border-color: rgba(6, 64, 43, 0.3);
+}
+.st-card.is-hidden { display: none; }
 
-/* Related trainings — internal links block at bottom of page */
-.related-trainings{padding:20px 0 4px}
-.related-trainings h2{font-size:1.05rem;font-weight:800;color:var(--primary);margin-bottom:12px}
-.related-trainings ul{list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px 16px}
-.related-trainings li{border-left:3px solid var(--primary);padding:6px 10px;background:#fff;border-radius:0 6px 6px 0;border-top:1px solid #e5e7eb;border-right:1px solid #e5e7eb;border-bottom:1px solid #e5e7eb}
-.related-trainings a{font-size:.85rem;font-weight:600;color:var(--text)}
-.related-trainings a:hover{color:var(--primary);text-decoration:underline}
+.st-card-top {
+  padding: 18px 20px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+.st-cat-badge {
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+}
+.st-topic-id {
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--st-slate-600);
+}
 
-/* ==========================================================
-   PREMIUM SAFETY TALK EXPERIENCE — presentation only.
-   All 100 topics remain server-rendered for crawlability.
-   ========================================================== */
-.st-page{--st-ink:#10251c;--st-muted:#607168;--st-green:#075b3b;--st-green-2:#0a7650;--st-lime:#c8ef84;--st-cream:#f4f6f1;--st-line:#dce6df;background:var(--st-cream);color:var(--st-ink);overflow:hidden}
-.st-page .container{max-width:1180px;padding-inline:24px}
-.st-page .hero{padding:88px 0 64px!important;min-height:auto!important;background:radial-gradient(circle at 82% 12%,rgba(200,239,132,.18),transparent 28%),radial-gradient(circle at 18% 80%,rgba(89,180,132,.16),transparent 26%),linear-gradient(145deg,#053d2a,#075b3b 58%,#064a34)!important;box-shadow:none!important;text-align:left!important;position:relative}
-.st-page .hero::before{content:"";position:absolute;inset:0;opacity:.18;background-image:linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);background-size:56px 56px;mask-image:linear-gradient(to right,transparent,#000 35%,#000)}
-.st-page .hero .container{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr);gap:70px;align-items:center}
-.st-page .hero-copy{max-width:790px}.st-page .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;margin:0 0 22px;border:1px solid rgba(200,239,132,.36);background:rgba(200,239,132,.1);color:#e3ffb6;border-radius:999px;font:750 12px/1 'Lexend',sans-serif;letter-spacing:.07em;text-transform:uppercase}
-.st-page .hero h1{font-family:'Lexend',sans-serif;font-size:clamp(2.45rem,5.5vw,5.1rem)!important;line-height:1.02!important;letter-spacing:-.055em!important;margin:0 0 24px!important;max-width:820px;color:#fff!important}
-.st-page .hero h1 span{color:var(--st-lime)!important}.st-page .hero p{font-size:clamp(1rem,1.5vw,1.18rem)!important;line-height:1.7!important;max-width:700px;margin:0 0 30px!important;color:rgba(255,255,255,.78)!important;opacity:1}
-.st-page .hero-search-wrapper{max-width:720px;margin:0;position:relative}.st-page .hero-search-wrapper input{height:62px;padding:0 22px 0 54px;border:1px solid rgba(255,255,255,.5);border-radius:16px;background:#fff;font:600 16px/1 'Source Sans 3',sans-serif;box-shadow:0 20px 55px rgba(0,22,13,.25)}
-.st-page .hero-search-wrapper input:focus{border-color:var(--st-lime);box-shadow:0 0 0 4px rgba(200,239,132,.22),0 20px 55px rgba(0,22,13,.28)}.st-page .hero-search-icon{left:20px;font-size:1.15rem}
-.st-hero-panel{border:1px solid rgba(255,255,255,.17);border-radius:26px;background:rgba(255,255,255,.09);backdrop-filter:blur(14px);padding:26px;color:#fff;box-shadow:0 30px 75px rgba(0,25,15,.22)}
-.st-panel-kicker{margin:0 0 16px!important;color:#bce7d0!important;font-size:11px!important;font-weight:800;letter-spacing:.1em;text-transform:uppercase}.st-hero-panel h2{margin:0 0 20px;color:#fff;font:750 23px/1.35 'Lexend',sans-serif;letter-spacing:-.025em}.st-panel-metrics{margin-bottom:19px;border-top:1px solid rgba(255,255,255,.13);border-bottom:1px solid rgba(255,255,255,.13)}.st-panel-metrics div{display:grid;grid-template-columns:54px 1fr;align-items:baseline;gap:12px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.1)}.st-panel-metrics div:last-child{border-bottom:0}.st-panel-metrics strong{color:#d7f68f;font:800 21px/1 'Lexend',sans-serif}.st-panel-metrics span{color:rgba(255,255,255,.75);font-size:14px}.st-panel-note{margin:0!important;color:rgba(255,255,255,.66)!important;font-size:14px!important;line-height:1.55!important}
-.st-hero-panel-label{font:750 11px/1 'Lexend',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#dfffaa;margin-bottom:18px}.st-hero-metric{display:flex;align-items:end;justify-content:space-between;padding:15px 0;border-bottom:1px solid rgba(255,255,255,.13)}.st-hero-metric:last-child{border:0}.st-hero-metric strong{font:750 2rem/1 'Lexend',sans-serif}.st-hero-metric span{font-size:13px;color:rgba(255,255,255,.68);text-align:right;max-width:110px}
-.st-trust-row{display:flex;flex-wrap:wrap;gap:18px;margin-top:22px;color:rgba(255,255,255,.7);font-size:13px;font-weight:650}.st-trust-row span{display:flex;align-items:center;gap:7px}.st-trust-row i{display:grid;place-items:center;width:19px;height:19px;border-radius:50%;background:var(--st-lime);color:#173c25;font-style:normal;font-size:11px;font-weight:900}
-.st-page .main{padding:0 0 84px;background:var(--st-cream)}
-.st-discovery{position:sticky;top:68px;z-index:40;background:rgba(244,246,241,.92);border-bottom:1px solid rgba(7,91,59,.1);backdrop-filter:blur(16px);padding:16px 0 14px;margin-bottom:34px}
-.st-page .stats-bar{display:none}.st-page .filter-bar{gap:8px;margin:0;overflow-x:auto;flex-wrap:nowrap;padding-bottom:2px;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-behavior:smooth}.st-page .filter-bar::-webkit-scrollbar{display:none}.st-page .cat-btn{flex:0 0 auto;padding:9px 15px;border:1px solid var(--st-line);border-radius:999px;background:#fff;color:#53645b;font:700 13px/1 'Source Sans 3',sans-serif;transition:background .18s,color .18s,border-color .18s,transform .18s}.st-page .cat-btn:hover{transform:translateY(-1px);background:#e9f4e8;color:var(--st-green);border-color:#b9d7c3}.st-page .cat-btn.active{background:var(--st-green);border-color:var(--st-green);color:#fff;box-shadow:0 7px 18px rgba(7,91,59,.18)}
-.st-results-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:22px}.st-results-head h2{font:750 clamp(1.55rem,3vw,2.3rem)/1.15 'Lexend',sans-serif;letter-spacing:-.035em;margin:0;color:var(--st-ink)}.st-results-head p{font-size:14px;color:var(--st-muted);margin:7px 0 0}.st-results-count{font:750 13px/1 'Lexend',sans-serif;color:var(--st-green);background:#e8f3e6;padding:9px 13px;border-radius:999px;white-space:nowrap}
-.st-page .grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.st-page .card{border-radius:20px;border:1px solid var(--st-line);box-shadow:0 8px 30px rgba(25,55,40,.055);cursor:pointer;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;background:#fff}.st-page .card:hover{transform:translateY(-4px);box-shadow:0 18px 45px rgba(25,55,40,.11);border-color:#b8d1c0}.st-page .card.is-hidden{display:none}
-.st-page .card-header{padding:20px 20px 10px;gap:10px}.st-page .week-badge{border-radius:999px;padding:6px 9px;background:#e7f3e5;color:var(--st-green);font:750 10px/1 'Lexend',sans-serif}.st-page .card-header h3{font:750 1.02rem/1.35 'Lexend',sans-serif;letter-spacing:-.015em;color:var(--st-ink)}.st-page .card-body{padding:0 20px 14px;font-size:14px;line-height:1.6;color:var(--st-muted);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;min-height:67px}.st-page .card-tags{padding:0 20px 15px;gap:6px}.st-page .tag{padding:5px 9px;background:#f2f5f1;color:#66766e;font-size:10px;border:1px solid #e5ebe6}
-.st-page .card-related{margin:0 20px 16px;padding:12px 13px;border-radius:12px;background:#eff8e8;border:1px solid #d8edc6;color:#285e34;font-size:12px;line-height:1.45;transition:background .18s,border-color .18s,transform .18s}.st-page .card-related:hover{background:#e4f5d6;border-color:#bddf9f;transform:translateX(2px)}
-.st-page .card-footer{padding:13px 20px 18px;gap:8px;background:#fff;border-top:1px solid #edf1ed;justify-content:flex-start}.st-page .btn-expand,.st-page .btn-print-card{border-radius:10px;padding:9px 12px;font:750 12px/1 'Source Sans 3',sans-serif;cursor:pointer}.st-page .btn-expand{background:var(--st-green);box-shadow:0 6px 14px rgba(7,91,59,.16)}.st-page .btn-expand:hover{background:var(--st-green-2)}.st-page .btn-print-card{background:#f0f3f0;color:#506158}.st-page .btn-print-card:hover{background:#e6ebe7}
-.st-load-more{display:flex;align-items:center;justify-content:center;gap:9px;margin:28px auto 0;padding:14px 24px;border:1px solid #bfd2c4;border-radius:999px;background:#fff;color:var(--st-green);font:750 14px/1 'Lexend',sans-serif;cursor:pointer;box-shadow:0 8px 24px rgba(25,55,40,.07);transition:transform .18s,box-shadow .18s,background .18s}.st-load-more:hover{transform:translateY(-2px);box-shadow:0 13px 32px rgba(25,55,40,.12);background:#f5fbf2}.st-load-more[hidden]{display:none}
-.st-page .cta-strip{margin:48px 0 0;border-radius:24px;padding:38px;background:linear-gradient(135deg,#073e2d,#086544);box-shadow:0 22px 55px rgba(7,70,45,.16)}.st-page .cta-strip h3{font:750 clamp(1.25rem,2.4vw,1.85rem)/1.25 'Lexend',sans-serif;margin-bottom:9px}.st-page .cta-strip p{font-size:15px;margin-bottom:18px}
-.st-page .tool-article{padding:72px 0;background:#fff}.st-page .tool-article .container{max-width:900px}.st-page .tool-article h2{font:750 clamp(1.45rem,2.6vw,2rem)/1.25 'Lexend',sans-serif;color:var(--st-ink);letter-spacing:-.025em;margin:44px 0 14px}.st-page .tool-article h2:first-child{margin-top:0}.st-page .tool-article p,.st-page .tool-article li{font-size:16px;line-height:1.8;color:#4c5e54}.st-page .faq-item{padding:18px 0;border-bottom:1px solid var(--st-line);margin:0}.st-page .faq-item h3{font:700 16px/1.4 'Lexend',sans-serif;color:var(--st-ink)}.st-page .faq-item p{font-size:15px;line-height:1.7;color:var(--st-muted)}.st-page .faq-item a{color:var(--st-green);font-weight:700;text-decoration:underline;text-underline-offset:2px;transition:color .18s}.st-page .faq-item a:hover{color:var(--st-green-2)}.st-page .guide-link{border-radius:16px;padding:18px 20px;margin-top:28px}
-.st-page .related-trainings{padding:68px 0;background:var(--st-cream)}.st-page .related-trainings h2{font:750 clamp(1.45rem,2.7vw,2rem)/1.2 'Lexend',sans-serif;color:var(--st-ink);letter-spacing:-.025em;margin-bottom:22px}.st-page .related-trainings ul{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.st-page .related-trainings li{border:1px solid var(--st-line);border-radius:14px;padding:15px 17px;background:#fff;transition:transform .18s,border-color .18s}.st-page .related-trainings li:hover{transform:translateY(-2px);border-color:#b5cfbd}.st-page .related-trainings a{font:700 14px/1.4 'Source Sans 3',sans-serif;color:var(--st-ink)}
-.st-page .modal-overlay{backdrop-filter:blur(8px);background:rgba(4,25,16,.66);padding:22px}.st-page .modal{max-width:760px;border-radius:24px;padding:30px;box-shadow:0 35px 100px rgba(0,0,0,.3)}.st-page .modal h2{font:750 clamp(1.35rem,3vw,2rem)/1.2 'Lexend',sans-serif;color:var(--st-ink)}.st-page .btn-close{border-radius:999px}.st-page .modal-section h4{font:750 13px/1 'Lexend',sans-serif;letter-spacing:.02em}.st-page .discuss-item{border-radius:10px;padding:10px 12px}.st-page .modal-related{border-radius:14px;padding:14px 16px}
-@media(max-width:960px){.st-page .hero .container{grid-template-columns:1fr}.st-hero-panel{display:none}.st-page .grid{grid-template-columns:repeat(2,minmax(0,1fr))}.st-discovery{top:62px}}
-@media(max-width:640px){.st-page .container{padding-inline:16px}.st-page .hero{padding:62px 0 46px!important;text-align:left!important}.st-page .hero h1{font-size:clamp(2.15rem,12vw,3.15rem)!important}.st-page .hero-search-wrapper input{height:56px;font-size:14px}.st-trust-row{gap:10px 16px}.st-discovery{top:58px;margin-bottom:26px}.st-page .grid{grid-template-columns:1fr;gap:14px}.st-results-head{align-items:flex-start}.st-results-head h2{font-size:1.55rem}.st-page .card-header{padding:18px 18px 9px}.st-page .card-body{padding-inline:18px;min-height:0}.st-page .card-tags{padding-inline:18px}.st-page .card-related{margin-inline:18px}.st-page .card-footer{padding-inline:18px}.st-page .cta-strip{padding:28px 22px;margin-top:38px}.st-page .related-trainings ul{grid-template-columns:1fr}.st-page .modal-overlay{padding:0;align-items:flex-end}.st-page .modal{border-radius:24px 24px 0 0;max-height:92vh;padding:24px 18px}.st-results-count{display:none}}
-@media(prefers-reduced-motion:reduce){.st-page *{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
-@media print{.st-page .card.is-hidden{display:flex!important}}
+/* Category-specific pill badges */
+.cat-umum { background: #ECFDF5; color: #047857; border-color: #A7F3D0; }
+.cat-ketinggian { background: #FFFBEB; color: #B45309; border-color: #FDE68A; }
+.cat-kebakaran { background: #FEF2F2; color: #B91C1C; border-color: #FECACA; }
+.cat-listrik { background: #FEFCE8; color: #A16207; border-color: #FEF08A; }
+.cat-kimia { background: #FAF5FF; color: #7E22CE; border-color: #E9D5FF; }
+.cat-alatberat { background: #F0FDF4; color: #15803D; border-color: #BBF7D0; }
+.cat-kesehatan { background: #F0FDF4; color: #047857; border-color: #86EFAC; }
+.cat-konstruksi { background: #FFF7ED; color: #C2410C; border-color: #FED7AA; }
+.cat-tambang { background: #F8FAFC; color: #475569; border-color: #CBD5E1; }
+.cat-lingkungan { background: #F0FDF4; color: #166534; border-color: #BBF7D0; }
+.cat-teknologi { background: #EFF6FF; color: #1D4ED8; border-color: #BFDBFE; }
+
+.st-card-header {
+  padding: 12px 20px 8px;
+}
+.st-card-header h3 {
+  font-family: 'Lexend', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--st-slate-900);
+  letter-spacing: -0.01em;
+}
+.st-card-body {
+  padding: 0 20px 14px;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: var(--st-slate-600);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex: 1;
+}
+.st-card-tags {
+  padding: 0 20px 14px;
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+.st-tag {
+  background: var(--st-slate-100);
+  color: var(--st-slate-600);
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+/* Card Related Link */
+.st-card-related {
+  margin: 0 20px 14px;
+  padding: 9px 12px;
+  border-radius: 10px;
+  background: #F0FDF4;
+  border: 1px solid #DCFCE7;
+  color: #166534;
+  font-size: 0.76rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  transition: all 0.18s;
+}
+.st-card-related:hover {
+  background: #DCFCE7;
+  color: #14532D;
+  transform: translateX(2px);
+}
+
+/* Card Action Footer */
+.st-card-footer {
+  border-top: 1px solid var(--st-slate-100);
+  padding: 12px 20px 16px;
+  display: flex;
+  gap: 8px;
+  background: #FAFBFB;
+}
+.st-btn-detail {
+  flex: 1;
+  background: var(--st-forest);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 10px;
+  padding: 9px 12px;
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: background 0.18s, transform 0.15s;
+}
+.st-btn-detail:hover {
+  background: var(--st-forest-light);
+  transform: translateY(-1px);
+}
+.st-btn-print {
+  background: #FFFFFF;
+  color: var(--st-slate-700);
+  border: 1px solid var(--st-slate-200);
+  border-radius: 10px;
+  padding: 9px 12px;
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.18s;
+}
+.st-btn-print:hover {
+  background: var(--st-slate-100);
+  border-color: var(--st-slate-300);
+  color: var(--st-slate-900);
+}
+
+/* ─── LOAD MORE BUTTON ──────────────────────────────────── */
+.st-load-more-wrapper {
+  text-align: center;
+  margin: 32px 0 16px;
+}
+.st-load-more-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 13px 26px;
+  background: #FFFFFF;
+  color: var(--st-forest);
+  border: 1.5px solid var(--st-forest);
+  border-radius: 999px;
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(6, 64, 43, 0.08);
+  transition: all 0.2s;
+}
+.st-load-more-btn:hover {
+  background: var(--st-forest);
+  color: #FFFFFF;
+  box-shadow: 0 8px 24px rgba(6, 64, 43, 0.2);
+  transform: translateY(-2px);
+}
+.st-load-more-btn[hidden] { display: none; }
+
+/* ─── CTA STRIP (HIGH CONVERSION) ────────────────────────── */
+.st-cta-strip {
+  background: radial-gradient(circle at 90% 20%, rgba(200, 239, 132, 0.15), transparent 40%),
+              linear-gradient(135deg, #032115 0%, #06402B 100%);
+  color: #FFFFFF;
+  border-radius: var(--st-radius-xl);
+  padding: 40px 36px;
+  margin-top: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  box-shadow: 0 20px 45px rgba(6, 64, 43, 0.16);
+}
+.st-cta-content h3 {
+  font-family: 'Lexend', sans-serif;
+  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+  font-weight: 800;
+  line-height: 1.25;
+  margin-bottom: 8px;
+  color: #FFFFFF;
+}
+.st-cta-content p {
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 620px;
+}
+.st-btn-wa {
+  background: #25D366;
+  color: #FFFFFF;
+  border-radius: 12px;
+  padding: 13px 24px;
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  white-space: nowrap;
+  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.35);
+  transition: transform 0.18s, box-shadow 0.18s;
+  flex-shrink: 0;
+}
+.st-btn-wa:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(37, 211, 102, 0.45);
+}
+
+/* ─── TOOL ARTICLE & FAQ SECTION ────────────────────────── */
+.st-tool-article {
+  background: #FFFFFF;
+  padding: 64px 0;
+  border-top: 1px solid var(--st-slate-200);
+}
+.st-article-inner { max-width: 880px; margin: 0 auto; }
+.st-tool-article h2 {
+  font-family: 'Lexend', sans-serif;
+  font-size: clamp(1.35rem, 2.5vw, 1.85rem);
+  font-weight: 800;
+  color: var(--st-slate-900);
+  margin: 40px 0 14px;
+  letter-spacing: -0.02em;
+}
+.st-tool-article h2:first-child { margin-top: 0; }
+.st-tool-article p {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--st-slate-700);
+  margin-bottom: 16px;
+}
+.st-steps-list {
+  padding-left: 20px;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--st-slate-700);
+  margin-bottom: 24px;
+}
+.st-steps-list li { margin-bottom: 8px; }
+
+/* FAQ Cards */
+.st-faq-grid {
+  display: grid;
+  gap: 12px;
+  margin: 16px 0 32px;
+}
+.st-faq-card {
+  border: 1px solid var(--st-slate-200);
+  border-radius: var(--st-radius-md);
+  padding: 18px 22px;
+  background: var(--st-slate-50);
+  transition: border-color 0.2s, background 0.2s;
+}
+.st-faq-card:hover {
+  border-color: var(--st-emerald);
+  background: #FFFFFF;
+}
+.st-faq-card h3 {
+  font-family: 'Lexend', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--st-slate-900);
+  margin-bottom: 6px;
+}
+.st-faq-card p {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--st-slate-600);
+  margin: 0;
+}
+.st-faq-card a {
+  color: var(--st-emerald-dark);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.18s;
+}
+.st-faq-card a:hover { color: var(--st-forest); }
+
+/* Related Guide Banners */
+.st-guide-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin: 16px 0;
+  padding: 18px 22px;
+  border: 1px solid #DCFCE7;
+  background: #F0FDF4;
+  border-radius: var(--st-radius-md);
+  color: #166534;
+  transition: transform 0.18s, background 0.18s;
+}
+.st-guide-card:hover {
+  background: #DCFCE7;
+  transform: translateY(-2px);
+}
+.st-guide-card strong {
+  display: block;
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.95rem;
+  color: #14532D;
+}
+.st-guide-card span {
+  display: block;
+  font-size: 0.82rem;
+  color: #166534;
+  margin-top: 3px;
+}
+
+/* Related Trainings Grid */
+.st-related-trainings {
+  background: var(--st-slate-50);
+  padding: 56px 0;
+  border-top: 1px solid var(--st-slate-200);
+}
+.st-related-trainings h2 {
+  font-family: 'Lexend', sans-serif;
+  font-size: clamp(1.35rem, 2.5vw, 1.85rem);
+  font-weight: 800;
+  color: var(--st-slate-900);
+  margin-bottom: 20px;
+}
+.st-trainings-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.st-training-item a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: #FFFFFF;
+  border: 1px solid var(--st-slate-200);
+  border-radius: var(--st-radius-md);
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--st-slate-800);
+  transition: all 0.18s;
+}
+.st-training-item a:hover {
+  border-color: var(--st-emerald);
+  color: var(--st-emerald-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+}
+
+/* ─── MODERN MODAL DIALOG ───────────────────────────────── */
+.st-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(8px);
+  z-index: 999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.2s ease;
+}
+.st-modal-overlay.show { display: flex; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.st-modal-dialog {
+  background: #FFFFFF;
+  border-radius: var(--st-radius-xl);
+  max-width: 720px;
+  width: 100%;
+  max-height: 88vh;
+  overflow-y: auto;
+  padding: 28px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+  animation: slideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes slideUp { from { transform: translateY(18px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+.st-modal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--st-slate-200);
+}
+.st-modal-head h2 {
+  font-family: 'Lexend', sans-serif;
+  font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+  font-weight: 800;
+  color: var(--st-slate-900);
+  line-height: 1.3;
+}
+.st-btn-close {
+  background: var(--st-slate-100);
+  border: none;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--st-slate-700);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.st-btn-close:hover { background: var(--st-slate-200); color: var(--st-slate-900); }
+
+.st-stat-box {
+  background: #F0FDF4;
+  border: 1px solid #BBF7D0;
+  border-radius: var(--st-radius-md);
+  padding: 12px 16px;
+  margin-bottom: 18px;
+  font-size: 0.88rem;
+  color: #14532D;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.st-modal-section { margin-bottom: 18px; }
+.st-modal-section h4 {
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--st-forest);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.st-modal-section p { font-size: 0.92rem; color: var(--st-slate-700); line-height: 1.6; }
+.st-discuss-box {
+  background: var(--st-slate-50);
+  border-left: 3px solid var(--st-forest);
+  border-radius: 6px;
+  padding: 9px 13px;
+  margin-bottom: 6px;
+  font-size: 0.88rem;
+  color: var(--st-slate-800);
+}
+.st-action-steps {
+  padding-left: 18px;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--st-slate-700);
+}
+.st-action-steps li { margin-bottom: 4px; }
+
+.st-modal-related {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: #FFF7ED;
+  border: 1px solid #FFEDD5;
+  border-radius: var(--st-radius-md);
+  padding: 12px 16px;
+  margin-top: 18px;
+  color: #9A3412;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.st-modal-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 22px;
+  padding-top: 16px;
+  border-top: 1px solid var(--st-slate-100);
+}
+
+/* ─── RESPONSIVE RULES ──────────────────────────────────── */
+@media (max-width: 992px) {
+  .st-hero-grid { grid-template-columns: 1fr; gap: 36px; }
+  .st-hero-panel { display: none; }
+  .st-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .st-trainings-grid { grid-template-columns: 1fr; }
+  .st-discovery { top: 62px; }
+}
+@media (max-width: 640px) {
+  .container { padding: 0 16px; }
+  .st-hero { padding: 50px 0 40px; }
+  .st-grid { grid-template-columns: 1fr; gap: 16px; }
+  .st-cta-strip { flex-direction: column; align-items: flex-start; padding: 28px 20px; }
+  .st-btn-wa { width: 100%; justify-content: center; }
+  .st-search-btn { padding: 10px 14px; }
+  .st-modal-dialog { padding: 20px 16px; border-radius: 20px 20px 0 0; max-height: 92vh; }
+  .st-modal-overlay { padding: 0; align-items: flex-end; }
+}
 </style>
 
 <?php require __DIR__ . '/../includes/navbar.php'; ?>
 <main class="st-page" id="konten-utama">
 
-<section class="hero">
+<!-- ══════════════════════════════════════════════════════════
+     HERO SECTION (HIGH CONVERTING CTR + TRUST PROOFS)
+     ══════════════════════════════════════════════════════════ -->
+<section class="st-hero">
   <div class="container">
-    <div class="hero-copy">
-      <div class="hero-badge">Kamus &amp; Database Safety Talk K3 2026</div>
-      <h1><span>100 Materi Safety Talk Harian</span><br>Toolbox Meeting Singkat &amp; Jelas</h1>
-      <p>Topik K3 harian terlengkap — fakta statistik, poin diskusi, teknologi K3 &amp; AI, serta lembar daftar hadir siap cetak.</p>
+    <div class="st-hero-grid">
+      <div class="st-hero-content">
+        <div class="st-hero-badge">
+          <span class="st-pulse-dot"></span>
+          Kamus &amp; Database Safety Talk K3 2026
+        </div>
+        <h1>
+          <span>100 Materi Safety Talk Harian</span>
+          Toolbox Meeting Singkat &amp; Jelas
+        </h1>
+        <p class="st-lead">
+          Topik K3 harian terlengkap — fakta statistik, poin diskusi, teknologi K3 &amp; AI, serta lembar daftar hadir siap cetak.
+        </p>
 
-      <div class="hero-search-wrapper">
-        <span class="hero-search-icon" aria-hidden="true">⌕</span>
-        <input type="search" id="stSearch" placeholder="Cari topik: forklift, listrik, APD, atau AI..." aria-label="Cari materi safety talk" oninput="filterTalks()">
+        <!-- Elevated Search Bar -->
+        <div class="st-search-box">
+          <span class="st-search-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </span>
+          <input type="search" id="stSearch" class="st-search-input" placeholder="Cari topik: ketinggian, listrik, APD, atau AI..." aria-label="Cari materi safety talk" oninput="filterTalks()">
+          <button type="button" class="st-search-btn" onclick="filterTalks()">
+            <span>Cari Topik</span>
+          </button>
+        </div>
+
+        <!-- High-CTR Quick Topic Chips -->
+        <div class="st-quick-chips" aria-label="Topik Populer">
+          <span class="st-quick-label">⚡ Topik Cepat:</span>
+          <button type="button" class="st-chip" onclick="quickSearch('Ketinggian')">Ketinggian</button>
+          <button type="button" class="st-chip" onclick="quickSearch('APD')">APD Wajib</button>
+          <button type="button" class="st-chip" onclick="quickSearch('Kebakaran')">APAR &amp; Api</button>
+          <button type="button" class="st-chip" onclick="quickSearch('Listrik')">LOTO &amp; Listrik</button>
+          <button type="button" class="st-chip" onclick="quickSearch('Confined Space')">Ruang Terbatas</button>
+          <button type="button" class="st-chip" onclick="quickSearch('Forklift')">Forklift</button>
+        </div>
+
+        <!-- Trust Badges -->
+        <div class="st-trust-row" aria-label="Keunggulan materi">
+          <div class="st-trust-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>100% Gratis &amp; Siap Cetak</span>
+          </div>
+          <div class="st-trust-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Format Ringkas 5–10 Menit</span>
+          </div>
+          <div class="st-trust-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Disertai Lembar Absensi (TBM)</span>
+          </div>
+        </div>
       </div>
-      <div class="st-trust-row" aria-label="Keunggulan materi">
-        <span>✓ Gratis digunakan</span><span>✓ Siap cetak</span><span>✓ Untuk briefing 5–10 menit</span>
-      </div>
+
+      <!-- Right Stat Card -->
+      <aside class="st-hero-panel" aria-label="Ringkasan database">
+        <p class="st-panel-eyebrow">Pusat Materi Praktis</p>
+        <h2>Satu database lengkap untuk briefing K3 setahun penuh.</h2>
+        <div class="st-stat-matrix">
+          <div class="st-stat-cell">
+            <strong>100</strong>
+            <span>Topik Terkurasi</span>
+          </div>
+          <div class="st-stat-cell">
+            <strong>11</strong>
+            <span>Kategori Sektor</span>
+          </div>
+          <div class="st-stat-cell">
+            <strong>AI &amp; IoT</strong>
+            <span>Materi Era Baru</span>
+          </div>
+          <div class="st-stat-cell">
+            <strong>100%</strong>
+            <span>Lembar Hadir TBM</span>
+          </div>
+        </div>
+        <a href="#talkGrid" class="st-panel-cta">Jelajahi 100 Topik ↓</a>
+      </aside>
     </div>
-    <aside class="st-hero-panel" aria-label="Ringkasan database">
-      <p class="st-panel-kicker">Pusat materi praktis</p>
-      <h2>Satu halaman untuk briefing K3 sepanjang tahun.</h2>
-      <div class="st-panel-metrics">
-        <div><strong>100</strong><span>topik terkurasi</span></div>
-        <div><strong>11</strong><span>kategori kerja</span></div>
-        <div><strong>18</strong><span>program terkait</span></div>
-      </div>
-      <p class="st-panel-note">Pilih topik, buka panduan diskusi, lalu cetak bersama daftar hadir.</p>
-    </aside>
   </div>
 </section>
 
-<section class="main">
-  <div class="st-discovery">
-    <div class="container">
-      <div class="filter-bar" aria-label="Filter kategori materi">
-        <button class="cat-btn active" onclick="filterCat(this,'all')">Semua</button>
-        <button class="cat-btn" onclick="filterCat(this,'umum')">Umum</button>
-        <button class="cat-btn" onclick="filterCat(this,'ketinggian')">Ketinggian</button>
-        <button class="cat-btn" onclick="filterCat(this,'kebakaran')">Kebakaran</button>
-        <button class="cat-btn" onclick="filterCat(this,'listrik')">Listrik</button>
-        <button class="cat-btn" onclick="filterCat(this,'kimia')">B3 &amp; Kimia</button>
-        <button class="cat-btn" onclick="filterCat(this,'alatberat')">Alat Berat</button>
-        <button class="cat-btn" onclick="filterCat(this,'kesehatan')">Kesehatan</button>
-        <button class="cat-btn" onclick="filterCat(this,'konstruksi')">Konstruksi</button>
-        <button class="cat-btn" onclick="filterCat(this,'tambang')">Tambang</button>
-        <button class="cat-btn" onclick="filterCat(this,'lingkungan')">Lingkungan</button>
-        <button class="cat-btn" onclick="filterCat(this,'teknologi')">Teknologi &amp; AI</button>
-      </div>
+<!-- ══════════════════════════════════════════════════════════
+     CATEGORY DISCOVERY TABS (SMOOTH STICKY BAR)
+     ══════════════════════════════════════════════════════════ -->
+<div class="st-discovery">
+  <div class="container">
+    <div class="st-filter-bar" aria-label="Filter kategori materi">
+      <button class="st-cat-btn active" onclick="filterCat(this,'all')">Semua (100)</button>
+      <button class="st-cat-btn" onclick="filterCat(this,'umum')">Umum</button>
+      <button class="st-cat-btn" onclick="filterCat(this,'ketinggian')">Ketinggian</button>
+      <button class="st-cat-btn" onclick="filterCat(this,'kebakaran')">Kebakaran</button>
+      <button class="st-cat-btn" onclick="filterCat(this,'listrik')">Listrik</button>
+      <button class="st-cat-btn" onclick="filterCat(this,'kimia')">B3 &amp; Kimia</button>
+      <button class="st-cat-btn" onclick="filterCat(this,'alatberat')">Alat Berat</button>
+      <button class="st-cat-btn" onclick="filterCat(this,'kesehatan')">Kesehatan</button>
+      <button class="st-cat-btn" onclick="filterCat(this,'konstruksi')">Konstruksi</button>
+      <button class="st-cat-btn" onclick="filterCat(this,'tambang')">Tambang</button>
+      <button class="st-cat-btn" onclick="filterCat(this,'lingkungan')">Lingkungan</button>
+      <button class="st-cat-btn" onclick="filterCat(this,'teknologi')">Teknologi &amp; AI</button>
     </div>
   </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     MAIN CARDS GRID (100 TOPICS)
+     ══════════════════════════════════════════════════════════ -->
+<section class="st-main-content">
   <div class="container">
-
-    <div class="stats-bar">
-      <div class="stat-box"><strong>100</strong><span>Topik Safety Talk</span></div>
-      <div class="stat-box"><strong>11</strong><span>Kategori Industri</span></div>
-      <div class="stat-box"><strong>AI &amp; Tech</strong><span>Materi Era Baru</span></div>
-      <div class="stat-box"><strong>100%</strong><span>Gratis + Absensi</span></div>
-    </div>
-
-    <div class="st-results-head">
+    <div class="st-results-header">
       <div>
-        <p class="st-eyebrow">Pilih materi</p>
-        <h2>Materi untuk briefing hari ini</h2>
-        <p>Cari berdasarkan risiko pekerjaan, lalu buka detail untuk poin diskusi dan lembar absensi.</p>
+        <p class="st-eyebrow">Pilih Materi Hari Ini</p>
+        <h2>Materi untuk Briefing Shift Kerja</h2>
       </div>
       <span class="st-results-count" id="stResultsCount" aria-live="polite">100 topik</span>
     </div>
 
-    <!-- ==========================================================
-         SERVER-RENDERED CARDS (the fix)
-         These come straight from PHP on first response, so all
-         100 titles/descriptions/tags are in the raw HTML Google
-         sees on first crawl — no dependency on JS execution.
-         The JS below re-renders this same grid for search/filter/
-         modal interactivity once the page is loaded.
-    =========================================================== -->
-    <div class="grid" id="talkGrid">
+    <div class="st-grid" id="talkGrid">
       <?php foreach ($talks as $i => $t): ?>
-      <div class="card<?= $i >= 12 ? ' is-hidden' : '' ?>" data-cat="<?= htmlspecialchars($t['cat']) ?>" onclick="openModal(<?= $i ?>)">
-        <div class="card-header">
-          <span class="week-badge">Topik <?= (int)$t['w'] ?></span>
+      <div class="st-card<?= $i >= 12 ? ' is-hidden' : '' ?>" data-cat="<?= htmlspecialchars($t['cat']) ?>" onclick="openModal(<?= $i ?>)">
+        <div class="st-card-top">
+          <span class="st-cat-badge cat-<?= htmlspecialchars($t['cat']) ?>"><?= htmlspecialchars(ucfirst($t['cat'])) ?></span>
+          <span class="st-topic-id">Topik #<?= (int)$t['w'] ?></span>
+        </div>
+        <div class="st-card-header">
           <h3><?= htmlspecialchars($t['title']) ?></h3>
         </div>
-        <div class="card-body"><?= htmlspecialchars($t['desc']) ?></div>
-        <div class="card-tags">
+        <div class="st-card-body"><?= htmlspecialchars($t['desc']) ?></div>
+        <div class="st-card-tags">
           <?php foreach ($t['tags'] as $tag): ?>
-            <span class="tag"><?= htmlspecialchars($tag) ?></span>
+            <span class="st-tag"><?= htmlspecialchars($tag) ?></span>
           <?php endforeach; ?>
         </div>
-        <a class="card-related" href="<?= htmlspecialchars($t['related']['url']) ?>" onclick="event.stopPropagation()">Pelajari: <?= htmlspecialchars($t['related']['label']) ?> →</a>
-        <div class="card-footer">
-          <button class="btn-expand" onclick="event.stopPropagation();openModal(<?= $i ?>)">📖 Lihat Detail</button>
-          <button class="btn-print-card" onclick="event.stopPropagation();printTalk(<?= $i ?>)">🖨 Print</button>
+        <a class="st-card-related" href="<?= htmlspecialchars($t['related']['url']) ?>" onclick="event.stopPropagation()">
+          <span>Pelajari: <?= htmlspecialchars($t['related']['label']) ?></span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <div class="st-card-footer">
+          <button class="st-btn-detail" onclick="event.stopPropagation();openModal(<?= $i ?>)" type="button">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            <span>Lihat Detail</span>
+          </button>
+          <button class="st-btn-print" onclick="event.stopPropagation();printTalk(<?= $i ?>)" type="button" title="Cetak materi dan lembar absensi">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            <span>Cetak</span>
+          </button>
         </div>
       </div>
       <?php endforeach; ?>
     </div>
 
-    <noscript><style>.st-page .card.is-hidden{display:flex}</style></noscript>
-    <button class="st-load-more" id="stLoadMore" type="button">Tampilkan 12 topik lagi <span style="opacity:0.75;font-size:12px;font-weight:600">(88 tersisa)</span> <span aria-hidden="true">↓</span></button>
+    <!-- Fallback for noscript -->
+    <noscript><style>.st-card.is-hidden{display:flex}</style></noscript>
 
-    <div class="cta-strip">
-      <h3>🎓 Tingkatkan Kompetensi Memimpin Toolbox Meeting &amp; Safety Leadership</h3>
-      <p>Sertifikasi Ahli K3 Umum KEMNAKER RI / BNSP mengajarkan komunikasi K3 efektif, risk assessment, dan budaya K3 industri.</p>
-      <a href="https://wa.me/6287759151278?text=Halo%20Wahana%2C%20saya%20gunakan%20materi%20100%20safety%20talk%20dan%20ingin%20tanya%20pelatihan%20K3" target="_blank" rel="noopener"
-         style="background:#25D366;color:#fff;padding:9px 22px;border-radius:8px;font-weight:700;display:inline-flex;align-items:center;gap:8px;font-size:.85rem">
-        📱 Tanya Pelatihan K3 Resmi
+    <!-- Load More Button with remaining topic indicator -->
+    <div class="st-load-more-wrapper">
+      <button class="st-load-more-btn" id="stLoadMore" type="button">
+        <span>Tampilkan 12 Topik Lagi (88 tersisa)</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+      </button>
+    </div>
+
+    <!-- High-Converting CTA Banner -->
+    <div class="st-cta-strip">
+      <div class="st-cta-content">
+        <h3>Tingkatkan Kompetensi Memimpin Toolbox Meeting &amp; Safety Leadership</h3>
+        <p>Sertifikasi Ahli K3 Umum KEMNAKER RI / BNSP mengajarkan komunikasi K3 efektif, risk assessment, dan budaya K3 industri.</p>
+      </div>
+      <a href="https://wa.me/6287759151278?text=Halo%20Wahana%2C%20saya%20gunakan%20materi%20100%20safety%20talk%20dan%20ingin%20tanya%20pelatihan%20K3" target="_blank" rel="noopener" class="st-btn-wa">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.97.53 1.871.815 2.795.815 3.183 0 5.769-2.587 5.77-5.767 0-3.181-2.587-5.766-5.769-5.766zm3.376 8.21c-.14.394-.712.723-1.026.768-.314.045-.697.07-2.008-.475-1.583-.658-2.607-2.274-2.686-2.38-.079-.105-.634-.844-.634-1.611 0-.767.4-1.144.542-1.299.143-.155.314-.194.42-.194.105 0 .211.002.303.007.098.005.228-.037.356.27.132.316.45 1.097.489 1.176.04.079.066.172.013.277-.053.106-.079.172-.158.264-.079.092-.167.206-.238.277-.08.079-.163.165-.07.324.093.159.412.68.884 1.101.608.542 1.121.71 1.28.789.158.079.251.066.344-.04.092-.106.396-.462.502-.62.106-.159.211-.132.356-.079.145.053.924.436 1.082.515.158.08.264.119.303.185.04.066.04.382-.1.776zM12 2C6.477 2 2 6.477 2 12c0 1.891.524 3.662 1.435 5.178L2 22l4.957-1.398A9.957 9.957 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+        <span>Tanya Pelatihan K3 Resmi</span>
       </a>
     </div>
   </div>
 </section>
 
-<section class="tool-article">
+<!-- ══════════════════════════════════════════════════════════
+     GUIDE & FAQ SECTION (PRESERVED CONTENT + NATURAL BACKLINK)
+     ══════════════════════════════════════════════════════════ -->
+<section class="st-tool-article">
   <div class="container">
-    <h2>Cara Menggunakan Database 100 Materi Safety Talk</h2>
-    <p>Database ini dirancang agar praktis digunakan oleh HSE Officer, Supervisor, Foreman, dan pimpinan rapat keselamatan (TBM/P5M) harian:</p>
-    <ol style="padding-left:18px;font-size:.85rem;line-height:1.75;color:#374151;margin-bottom:12px">
-      <li><strong>Pencarian Cepat:</strong> Ketik kata kunci pekerjaan hari ini (seperti <em>harian, ketinggian, alat berat, AI, listrik</em>) pada kolom pencarian.</li>
-      <li><strong>Filter Kategori:</strong> Gunakan tombol chip kategori untuk memfilter topik spesifik industri (Konstruksi, Tambang, Manufaktur, B3, Teknologi AI K3).</li>
-      <li><strong>Poin Diskusi Dua Arah:</strong> Manfaatkan 4 pertanyaan diskusi agar peserta toolbox meeting berpartisipasi aktif, bukan mendengarkan ceramah pasif.</li>
-      <li><strong>Cetak Langsung + Lembar Absensi:</strong> Klik tombol "Print" untuk mengunduh materi lengkap yang menyatu dengan lembar formulir Daftar Hadir Toolbox Meeting.</li>
-    </ol>
+    <div class="st-article-inner">
+      <h2>Cara Menggunakan Database 100 Materi Safety Talk</h2>
+      <p>Database ini dirancang agar praktis digunakan oleh HSE Officer, Supervisor, Foreman, dan pimpinan rapat keselamatan (TBM/P5M) harian:</p>
+      <ol class="st-steps-list">
+        <li><strong>Pencarian Cepat:</strong> Ketik kata kunci pekerjaan hari ini (seperti <em>harian, ketinggian, alat berat, AI, listrik</em>) pada kolom pencarian di bagian atas atau klik tombol topik cepat.</li>
+        <li><strong>Filter Kategori:</strong> Gunakan tombol chip kategori untuk memfilter topik spesifik industri (Konstruksi, Tambang, Manufaktur, B3, Teknologi AI K3).</li>
+        <li><strong>Poin Diskusi Dua Arah:</strong> Manfaatkan 4 pertanyaan diskusi agar peserta toolbox meeting berpartisipasi aktif, bukan mendengarkan ceramah pasif.</li>
+        <li><strong>Cetak Langsung + Lembar Absensi:</strong> Klik tombol "Cetak" untuk mengunduh materi lengkap yang menyatu dengan lembar formulir Daftar Hadir Toolbox Meeting.</li>
+      </ol>
 
-    <h2>Teknologi &amp; AI dalam Era Baru Safety Talk K3</h2>
-    <p>Implementasi Keselamatan dan Kesehatan Kerja (K3) kini memasuki era kecerdasan buatan (AI) dan IoT. Penggunaan kamera computer vision untuk deteksi APD otomatis, sensor kelelahan (fatigue smartwatch), inspeksi drone di ketinggian, serta e-PTW berbasis sensor IoT membantu mengantisipasi bahaya sebelum insiden terjadi. Topik 53–57 dan 97–99 dirancang khusus untuk membawa wawasan keselamatan modern ini ke lapangan Anda.</p>
+      <h2>Teknologi &amp; AI dalam Era Baru Safety Talk K3</h2>
+      <p>Implementasi Keselamatan dan Kesehatan Kerja (K3) kini memasuki era kecerdasan buatan (AI) dan IoT. Penggunaan kamera computer vision untuk deteksi APD otomatis, sensor kelelahan (fatigue smartwatch), inspeksi drone di ketinggian, serta e-PTW berbasis sensor IoT membantu mengantisipasi bahaya sebelum insiden terjadi. Topik 53–57 dan 97–99 dirancang khusus untuk membawa wawasan keselamatan modern ini ke lapangan Anda.</p>
 
-    <h2>Pertanyaan Umum (FAQ)</h2>
-    <div class="faq-item">
-      <h3>Berapa lama durasi ideal satu sesi Safety Talk / Toolbox Meeting?</h3>
-      <p>Idealnya 5 hingga 10 menit di awal shift. Sampaikan 1 topik utama, ajukan 2-3 pertanyaan diskusi, dan tutup dengan komitmen tindakan K3 hari itu.</p>
+      <h2>Pertanyaan Umum (FAQ)</h2>
+      <div class="st-faq-grid">
+        <div class="st-faq-card">
+          <h3>Berapa lama durasi ideal satu sesi Safety Talk / Toolbox Meeting?</h3>
+          <p>Idealnya 5 hingga 10 menit di awal shift. Sampaikan 1 topik utama, ajukan 2-3 pertanyaan diskusi, dan tutup dengan komitmen tindakan K3 hari itu.</p>
+        </div>
+        <div class="st-faq-card">
+          <h3>Siapa yang seharusnya memimpin safety talk harian?</h3>
+          <p>Idealnya dipimpin langsung oleh supervisor, foreman, atau tim HSE di lapangan untuk menunjukkan kepemimpinan K3 operasional. Dalam pelaksanaannya, materi dan pengawasan keselamatan kerja dikoordinasikan oleh <a href="https://www.ak3u.my.id/ahli-k3-umum/" target="_blank" rel="noopener">Ahli K3 Umum</a> sebagai penanggung jawab implementasi K3 di perusahaan.</p>
+        </div>
+        <div class="st-faq-card">
+          <h3>Apakah materi dan lembar absensi ini boleh didownload dan dicetak gratis?</h3>
+          <p>Ya, 100% gratis digunakan oleh perusahaan, HSE officer, maupun supervisor operasional di seluruh Indonesia.</p>
+        </div>
+      </div>
+
+      <a class="st-guide-card" href="/artikel/perbedaan-safety-talk-toolbox-meeting-tbm-safety-briefing/">
+        <span>
+          <strong>Safety Talk, Toolbox Meeting, TBM, dan Safety Briefing: Apa Bedanya?</strong>
+          <span>Pilih bentuk komunikasi K3 yang tepat untuk setiap situasi kerja.</span>
+        </span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a class="st-guide-card" href="/artikel/cara-membawakan-safety-talk-5-menit/">
+        <span>
+          <strong>Cara Membawakan Safety Talk 5 Menit yang Menarik</strong>
+          <span>Gunakan struktur sederhana agar briefing singkat menghasilkan tindakan nyata.</span>
+        </span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
     </div>
-    <div class="faq-item">
-      <h3>Siapa yang seharusnya memimpin safety talk harian?</h3>
-      <p>Idealnya dipimpin langsung oleh supervisor, foreman, atau tim HSE di lapangan untuk menunjukkan kepemimpinan K3 operasional. Dalam pelaksanaannya, materi dan pengawasan keselamatan kerja dikoordinasikan oleh <a href="https://www.ak3u.my.id/ahli-k3-umum/" target="_blank" rel="noopener">Ahli K3 Umum</a> sebagai penanggung jawab implementasi K3 di perusahaan.</p>
-    </div>
-    <div class="faq-item">
-      <h3>Apakah materi dan lembar absensi ini boleh didownload dan dicetak gratis?</h3>
-      <p>Ya, 100% gratis digunakan oleh perusahaan, HSE officer, maupun supervisor operasional di seluruh Indonesia.</p>
-    </div>
-    <a class="guide-link" href="/artikel/perbedaan-safety-talk-toolbox-meeting-tbm-safety-briefing/">
-      <span><strong>Safety Talk, Toolbox Meeting, TBM, dan Safety Briefing: Apa Bedanya?</strong><span>Pilih bentuk komunikasi K3 yang tepat untuk setiap situasi kerja.</span></span><b>→</b>
-    </a>
-    <a class="guide-link" href="/artikel/cara-membawakan-safety-talk-5-menit/">
-      <span><strong>Cara Membawakan Safety Talk 5 Menit yang Menarik</strong><span>Gunakan struktur sederhana agar briefing singkat menghasilkan tindakan nyata.</span></span><b>→</b>
-    </a>
   </div>
 </section>
 
-<!-- ==============================================================
-     RELATED TRAININGS — internal links block added at the bottom
-     of the page, above the footer. Plain server-rendered <a>
-     tags for crawlability and internal link equity to the
-     pelatihan/ pages.
-=============================================================== -->
-<section class="related-trainings">
+<!-- ══════════════════════════════════════════════════════════
+     RELATED TRAININGS (CRAWLABLE INTERNAL LINKS)
+     ══════════════════════════════════════════════════════════ -->
+<section class="st-related-trainings">
   <div class="container">
     <h2>Pelatihan K3 Terkait</h2>
-    <ul>
+    <ul class="st-trainings-grid">
       <?php foreach ($related_trainings as $rt): ?>
-      <li><a href="<?= htmlspecialchars($rt['url']) ?>"><?= htmlspecialchars($rt['label']) ?></a></li>
+      <li class="st-training-item">
+        <a href="<?= htmlspecialchars($rt['url']) ?>">
+          <span><?= htmlspecialchars($rt['label']) ?></span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </li>
       <?php endforeach; ?>
     </ul>
   </div>
 </section>
 
-<!-- MODAL -->
-<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
-  <div class="modal" id="modalContent"></div>
+<!-- ══════════════════════════════════════════════════════════
+     MODAL DIALOG (BLUR BACKDROP + CLEAN CARD DESIGN)
+     ══════════════════════════════════════════════════════════ -->
+<div class="st-modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="st-modal-dialog" id="modalContent"></div>
 </div>
 
 </main>
 <?php require __DIR__ . '/../includes/footer.php'; ?>
 
 <script>
-// Same data as the PHP $talks array above, encoded once so there is
-// a single source of truth — used only for search/filter/modal/print
-// interactivity on top of the already-rendered server HTML.
+// Single source of truth from PHP array
 const talks = <?php echo json_encode($talks, JSON_UNESCAPED_UNICODE); ?>;
 
 let activeCat = 'all';
@@ -563,38 +1388,85 @@ function renderTalks(list, resetLimit = false){
   const resultsCount = document.getElementById('stResultsCount');
   const loadMore = document.getElementById('stLoadMore');
   resultsCount.textContent = `${list.length} topik`;
+  
   if(!list.length){
-    grid.innerHTML = '<div style="color:var(--muted);text-align:center;padding:44px 20px;grid-column:1/-1;background:#fff;border-radius:16px;border:1px dashed var(--st-line);"><p style="font-size:1.05rem;font-weight:700;color:var(--st-ink);margin-bottom:6px">Topik tidak ditemukan</p><p style="font-size:0.88rem;margin-bottom:14px">Coba kata kunci lain atau bersihkan pencarian untuk melihat seluruh materi.</p><button type="button" onclick="resetFilter()" style="background:var(--st-green);color:#fff;border:none;border-radius:999px;padding:8px 18px;font-weight:700;font-size:0.82rem;cursor:pointer">Tampilkan Semua Topik</button></div>';
+    grid.innerHTML = `
+      <div style="color:var(--st-slate-600);text-align:center;padding:50px 20px;grid-column:1/-1;background:#fff;border-radius:16px;border:1px dashed var(--st-slate-300);">
+        <p style="font-family:'Lexend',sans-serif;font-size:1.15rem;font-weight:700;color:var(--st-slate-900);margin-bottom:6px">Topik Tidak Ditemukan</p>
+        <p style="font-size:0.9rem;margin-bottom:16px">Coba kata kunci lain atau bersihkan pencarian untuk melihat seluruh 100 topik.</p>
+        <button type="button" onclick="resetFilter()" style="background:var(--st-forest);color:#fff;border:none;border-radius:999px;padding:9px 20px;font-family:'Lexend',sans-serif;font-weight:700;font-size:0.82rem;cursor:pointer">Tampilkan Semua Topik</button>
+      </div>`;
     loadMore.hidden = true;
     return;
   }
+  
   grid.innerHTML = list.slice(0, visibleLimit).map(t=>`
-    <div class="card" data-cat="${t.cat}" onclick="openModal(${t.w-1})">
-      <div class="card-header">
-        <span class="week-badge">Topik ${t.w}</span>
+    <div class="st-card" data-cat="${t.cat}" onclick="openModal(${t.w-1})">
+      <div class="st-card-top">
+        <span class="st-cat-badge cat-${t.cat}">${t.cat.toUpperCase()}</span>
+        <span class="st-topic-id">Topik #${t.w}</span>
+      </div>
+      <div class="st-card-header">
         <h3>${t.title}</h3>
       </div>
-      <div class="card-body">${t.desc}</div>
-      <div class="card-tags">${t.tags.map(tg=>`<span class="tag">${tg}</span>`).join('')}</div>
-      <a class="card-related" href="${t.related.url}" onclick="event.stopPropagation()">Pelajari: ${t.related.label} →</a>
-      <div class="card-footer">
-        <button class="btn-expand" onclick="event.stopPropagation();openModal(${t.w-1})">📖 Lihat Detail</button>
-        <button class="btn-print-card" onclick="event.stopPropagation();printTalk(${t.w-1})">🖨 Print</button>
+      <div class="st-card-body">${t.desc}</div>
+      <div class="st-card-tags">
+        ${t.tags.map(tg=>`<span class="st-tag">${tg}</span>`).join('')}
+      </div>
+      <a class="st-card-related" href="${t.related.url}" onclick="event.stopPropagation()">
+        <span>Pelajari: ${t.related.label}</span>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+      <div class="st-card-footer">
+        <button class="st-btn-detail" onclick="event.stopPropagation();openModal(${t.w-1})" type="button">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          <span>Lihat Detail</span>
+        </button>
+        <button class="st-btn-print" onclick="event.stopPropagation();printTalk(${t.w-1})" type="button" title="Cetak materi dan lembar absensi">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          <span>Cetak</span>
+        </button>
       </div>
     </div>
   `).join('');
+  
   const remaining = Math.max(0, list.length - visibleLimit);
   loadMore.hidden = remaining === 0;
-  if(remaining) loadMore.innerHTML = `Tampilkan ${Math.min(12, remaining)} topik lagi <span style="opacity:0.75;font-size:12px;font-weight:600">(${remaining} tersisa)</span> <span aria-hidden="true">↓</span>`;
+  if(remaining){
+    loadMore.innerHTML = `
+      <span>Tampilkan ${Math.min(12, remaining)} Topik Lagi (${remaining} tersisa)</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+    `;
+  }
 }
 
 function resetFilter(){
   document.getElementById('stSearch').value = '';
-  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
-  const allBtn = document.querySelector('.cat-btn');
+  document.querySelectorAll('.st-cat-btn').forEach(b=>b.classList.remove('active'));
+  const allBtn = document.querySelector('.st-cat-btn');
   if(allBtn) allBtn.classList.add('active');
   activeCat = 'all';
   filterTalks();
+}
+
+function quickSearch(keyword){
+  const input = document.getElementById('stSearch');
+  input.value = keyword;
+  document.querySelectorAll('.st-cat-btn').forEach(b=>b.classList.remove('active'));
+  const allBtn = document.querySelector('.st-cat-btn');
+  if(allBtn) allBtn.classList.add('active');
+  activeCat = 'all';
+  filterTalks();
+  
+  const target = document.getElementById('talkGrid');
+  if(target){
+    const offset = 140;
+    const bodyRect = document.body.getBoundingClientRect().top;
+    const elementRect = target.getBoundingClientRect().top;
+    const elementPosition = elementRect - bodyRect;
+    const offsetPosition = elementPosition - offset;
+    window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+  }
 }
 
 function filterTalks(){
@@ -606,7 +1478,7 @@ function filterTalks(){
 }
 
 function filterCat(btn, cat){
-  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.st-cat-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   activeCat = cat;
   filterTalks();
@@ -621,31 +1493,50 @@ function openModal(idx){
   const t = talks[idx];
   const modal = document.getElementById('modalContent');
   modal.innerHTML = `
-    <div class="modal-header">
-      <h2>Topik ${t.w}: ${t.title}</h2>
-      <button class="btn-close" onclick="closeModal()">✕ Tutup</button>
+    <div class="st-modal-head">
+      <div>
+        <span class="st-cat-badge cat-${t.cat}" style="margin-bottom:6px;display:inline-block">${t.cat.toUpperCase()}</span>
+        <h2>Topik ${t.w}: ${t.title}</h2>
+      </div>
+      <button class="st-btn-close" onclick="closeModal()" type="button">✕ Tutup</button>
     </div>
-    <div style="background:#f0fdf4;border-radius:8px;padding:10px 14px;margin-bottom:16px;font-size:.85rem;color:#374151;border:1px solid #bbf7d0">
-      📊 <strong>Fakta / Statistik K3:</strong> ${t.stat}
+    
+    <div class="st-stat-box">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:2px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <div>
+        <strong>Fakta &amp; Statistik K3:</strong> ${t.stat}
+      </div>
     </div>
-    <div class="modal-section">
-      <h4>📋 Materi Singkat</h4>
+    
+    <div class="st-modal-section">
+      <h4>Ringkasan Materi</h4>
       <p>${t.desc}</p>
     </div>
-    <div class="modal-section">
-      <h4>❓ Poin Diskusi Toolbox Meeting</h4>
-      ${t.points.map((p,i)=>`<div class="discuss-item"><strong>${i+1}.</strong> ${p}</div>`).join('')}
+    
+    <div class="st-modal-section">
+      <h4>Poin Diskusi Toolbox Meeting (2 Arah)</h4>
+      ${t.points.map((p,i)=>`<div class="st-discuss-box"><strong>${i+1}.</strong> ${p}</div>`).join('')}
     </div>
-    <div class="modal-section">
-      <h4>✅ Langkah Tindakan (Action Points)</h4>
-      <ol>${t.steps.map(s=>`<li>${s}</li>`).join('')}</ol>
+    
+    <div class="st-modal-section">
+      <h4>Langkah Tindakan Lapangan (Action Points)</h4>
+      <ol class="st-action-steps">${t.steps.map(s=>`<li>${s}</li>`).join('')}</ol>
     </div>
-    <a class="modal-related" href="${t.related.url}">
-      <span>Program terkait materi ini</span> ${t.related.label} →
+    
+    <a class="st-modal-related" href="${t.related.url}">
+      <span>Program Pelatihan Terkait: <strong>${t.related.label}</strong></span>
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
     </a>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:18px">
-      <button onclick="printTalk(${idx})" style="background:var(--primary);color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:.85rem;font-weight:600;cursor:pointer">🖨 Print Materi & Absensi</button>
-      <a href="https://wa.me/6287759151278?text=Halo%20Wahana%2C%20saya%20gunakan%20materi%20safety%20talk%20dan%20ingin%20tanya%20pelatihan%20K3" target="_blank" style="background:#25D366;color:#fff;border-radius:8px;padding:9px 18px;font-size:.85rem;font-weight:600;display:inline-flex;align-items:center;gap:6px">📱 Tanya Pelatihan K3</a>
+    
+    <div class="st-modal-actions">
+      <button onclick="printTalk(${idx})" class="st-btn-detail" type="button" style="padding:11px 20px;font-size:0.84rem">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        <span>Print Materi &amp; Lembar Absensi</span>
+      </button>
+      <a href="https://wa.me/6287759151278?text=Halo%20Wahana%2C%20saya%20gunakan%20materi%20safety%20talk%20dan%20ingin%20tanya%20pelatihan%20K3" target="_blank" rel="noopener" class="st-btn-wa" style="padding:11px 20px;font-size:0.84rem">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.97.53 1.871.815 2.795.815 3.183 0 5.769-2.587 5.77-5.767 0-3.181-2.587-5.766-5.769-5.766zm3.376 8.21c-.14.394-.712.723-1.026.768-.314.045-.697.07-2.008-.475-1.583-.658-2.607-2.274-2.686-2.38-.079-.105-.634-.844-.634-1.611 0-.767.4-1.144.542-1.299.143-.155.314-.194.42-.194.105 0 .211.002.303.007.098.005.228-.037.356.27.132.316.45 1.097.489 1.176.04.079.066.172.013.277-.053.106-.079.172-.158.264-.079.092-.167.206-.238.277-.08.079-.163.165-.07.324.093.159.412.68.884 1.101.608.542 1.121.71 1.28.789.158.079.251.066.344-.04.092-.106.396-.462.502-.62.106-.159.211-.132.356-.079.145.053.924.436 1.082.515.158.08.264.119.303.185.04.066.04.382-.1.776zM12 2C6.477 2 2 6.477 2 12c0 1.891.524 3.662 1.435 5.178L2 22l4.957-1.398A9.957 9.957 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+        <span>Tanya Pelatihan K3</span>
+      </a>
     </div>
   `;
   document.getElementById('modalOverlay').classList.add('show');
@@ -659,33 +1550,43 @@ function closeModal(e){
   }
 }
 
-document.addEventListener('keydown', e=>{ if(e.key==='Escape') { document.getElementById('modalOverlay').classList.remove('show'); document.body.style.overflow = ''; } });
+document.addEventListener('keydown', e=>{
+  if(e.key==='Escape') {
+    document.getElementById('modalOverlay').classList.remove('show');
+    document.body.style.overflow = '';
+  }
+});
 
 function printTalk(idx){
   const t = talks[idx];
   const win = window.open('','_blank');
   win.document.write(`<!DOCTYPE html><html><head><title>Safety Talk Topik ${t.w}: ${t.title}</title>
-  <style>body{font-family:Arial,sans-serif;padding:20px;max-width:680px;margin:0 auto;color:#111}
-  h1{font-size:15pt;border-bottom:2px solid #1a6b3a;padding-bottom:6px;margin-bottom:10px}
-  h3{font-size:10.5pt;color:#1a6b3a;margin-top:14px;margin-bottom:6px}
-  .stat{background:#f0fdf4;padding:8px 12px;border-radius:4px;font-size:8.5pt;margin:10px 0;border:1px solid #bbf7d0}
-  ol,ul{padding-left:18px;line-height:1.6;font-size:9.5pt}
-  .footer{margin-top:24px;border-top:1px solid #e5e7eb;padding-top:6px;font-size:7.5pt;color:#666;text-align:center}
+  <style>
+  body{font-family:'Segoe UI',Arial,sans-serif;padding:24px;max-width:720px;margin:0 auto;color:#1e293b;line-height:1.5}
+  h1{font-size:16pt;border-bottom:2px solid #06402B;padding-bottom:8px;margin-bottom:12px;color:#06402B}
+  h3{font-size:11pt;color:#06402B;margin-top:16px;margin-bottom:6px}
+  .stat{background:#F0FDF4;padding:10px 14px;border-radius:6px;font-size:9pt;margin:12px 0;border:1px solid #BBF7D0;color:#14532D}
+  ol,ul{padding-left:20px;line-height:1.6;font-size:9.5pt}
+  li{margin-bottom:4px}
+  .footer{margin-top:28px;border-top:1px solid #E2E8F0;padding-top:8px;font-size:8pt;color:#64748B;text-align:center}
+  table{width:100%;margin-top:10px;border-collapse:collapse;font-size:8.5pt}
+  th{border:1px solid #CBD5E1;padding:6px;background:#F8FAFC;text-align:left}
+  td{border:1px solid #CBD5E1;padding:6px;height:24px}
   </style></head><body>
   <h1>Safety Talk — Topik ${t.w}: ${t.title}</h1>
-  <div class="stat">📊 Fakta K3: ${t.stat}</div>
-  <p style="font-size:9.5pt;line-height:1.5">${t.desc}</p>
-  <h3>Poin Diskusi Toolbox Meeting</h3>
+  <div class="stat"><strong>Fakta K3:</strong> ${t.stat}</div>
+  <p style="font-size:9.5pt;line-height:1.6">${t.desc}</p>
+  <h3>Poin Diskusi Toolbox Meeting (2 Arah)</h3>
   <ol>${t.points.map(p=>`<li>${p}</li>`).join('')}</ol>
-  <h3>Langkah Tindakan (Action Steps)</h3>
+  <h3>Langkah Tindakan Lapangan (Action Steps)</h3>
   <ol>${t.steps.map(s=>`<li>${s}</li>`).join('')}</ol>
-  <div style="margin-top:16px;border:1px solid #ccc;border-radius:4px;padding:10px">
-    <strong style="font-size:9.5pt">Daftar Hadir Toolbox Meeting (TBM)</strong><br>
-    <div style="margin-top:6px;font-size:8.5pt;color:#444">
-      Tanggal: _______________ | Lokasi/Dept: _______________ | Fasilitator: _______________<br>
-      <table style="width:100%;margin-top:8px;border-collapse:collapse;font-size:8pt">
-        <tr><th style="border:1px solid #ccc;padding:4px;width:30px">No</th><th style="border:1px solid #ccc;padding:4px">Nama Pekerja</th><th style="border:1px solid #ccc;padding:4px">Jabatan</th><th style="border:1px solid #ccc;padding:4px;width:100px">Tanda Tangan</th></tr>
-        ${[1,2,3,4,5,6,7,8,9,10].map(n=>`<tr><td style="border:1px solid #ccc;padding:4px;text-align:center">${n}</td><td style="border:1px solid #ccc;padding:4px">&nbsp;</td><td style="border:1px solid #ccc;padding:4px">&nbsp;</td><td style="border:1px solid #ccc;padding:4px">&nbsp;</td></tr>`).join('')}
+  <div style="margin-top:18px;border:1px solid #CBD5E1;border-radius:6px;padding:12px">
+    <strong style="font-size:10pt;color:#06402B">Daftar Hadir Toolbox Meeting (TBM)</strong><br>
+    <div style="margin-top:6px;font-size:8.5pt;color:#475569">
+      Tanggal: _______________ | Departemen/Area: _______________ | Pengawas/Fasilitator: _______________<br>
+      <table>
+        <tr><th style="width:36px;text-align:center">No</th><th>Nama Pekerja</th><th>Jabatan</th><th style="width:120px">Tanda Tangan</th></tr>
+        ${[1,2,3,4,5,6,7,8,9,10].map(n=>`<tr><td style="text-align:center">${n}</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>`).join('')}
       </table>
     </div>
   </div>
