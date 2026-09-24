@@ -194,7 +194,7 @@ $related_trainings = [
 }
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Berapa lama satu sesi safety talk / toolbox meeting idealnya?","acceptedAnswer":{"@type":"Answer","text":"Idealnya 5-10 menit agar pekerja tetap fokus dan tidak mengganggu jadwal kerja. Sampaikan satu topik utama, ajukan 2-3 poin diskusi, dan tutup dengan penegasan tindakan K3."}},{"@type":"Question","name":"Siapa yang seharusnya memimpin safety talk harian?","acceptedAnswer":{"@type":"Answer","text":"Idealnya dipimpin langsung oleh supervisor, foreman, atau tim HSE di lapangan untuk menunjukkan kepemimpinan K3 operasional."}},{"@type":"Question","name":"Apakah 100 topik safety talk ini gratis dan siap cetak?","acceptedAnswer":{"@type":"Answer","text":"Ya, 100% gratis! Setiap topik dilengkapi tombol cetak langsung yang mencakup lembar daftar hadir (absensi) toolbox meeting."}}]}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Berapa lama satu sesi safety talk / toolbox meeting idealnya?","acceptedAnswer":{"@type":"Answer","text":"Idealnya 5-10 menit agar pekerja tetap fokus dan tidak mengganggu jadwal kerja. Sampaikan satu topik utama, ajukan 2-3 poin diskusi, dan tutup dengan penegasan tindakan K3."}},{"@type":"Question","name":"Siapa yang seharusnya memimpin safety talk harian?","acceptedAnswer":{"@type":"Answer","text":"Idealnya dipimpin langsung oleh supervisor, foreman, atau tim HSE di lapangan untuk menunjukkan kepemimpinan K3 operasional. Dalam pelaksanaannya, materi dan pengawasan keselamatan kerja dikoordinasikan oleh Ahli K3 Umum sebagai penanggung jawab implementasi K3 di perusahaan."}},{"@type":"Question","name":"Apakah 100 topik safety talk ini gratis dan siap cetak?","acceptedAnswer":{"@type":"Answer","text":"Ya, 100% gratis! Setiap topik dilengkapi tombol cetak langsung yang mencakup lembar daftar hadir (absensi) toolbox meeting."}}]}
 </script>
 <link rel="manifest" href="/manifest.json">
 <style>
@@ -356,15 +356,15 @@ section.hero, .hero {
 .st-trust-row{display:flex;flex-wrap:wrap;gap:18px;margin-top:22px;color:rgba(255,255,255,.7);font-size:13px;font-weight:650}.st-trust-row span{display:flex;align-items:center;gap:7px}.st-trust-row i{display:grid;place-items:center;width:19px;height:19px;border-radius:50%;background:var(--st-lime);color:#173c25;font-style:normal;font-size:11px;font-weight:900}
 .st-page .main{padding:0 0 84px;background:var(--st-cream)}
 .st-discovery{position:sticky;top:68px;z-index:40;background:rgba(244,246,241,.92);border-bottom:1px solid rgba(7,91,59,.1);backdrop-filter:blur(16px);padding:16px 0 14px;margin-bottom:34px}
-.st-page .stats-bar{display:none}.st-page .filter-bar{gap:8px;margin:0;overflow-x:auto;flex-wrap:nowrap;padding-bottom:2px;scrollbar-width:none}.st-page .filter-bar::-webkit-scrollbar{display:none}.st-page .cat-btn{flex:0 0 auto;padding:9px 15px;border:1px solid var(--st-line);border-radius:999px;background:#fff;color:#53645b;font:700 13px/1 'Source Sans 3',sans-serif;transition:background .18s,color .18s,border-color .18s,transform .18s}.st-page .cat-btn:hover{transform:translateY(-1px);background:#e9f4e8;color:var(--st-green);border-color:#b9d7c3}.st-page .cat-btn.active{background:var(--st-green);border-color:var(--st-green);color:#fff;box-shadow:0 7px 18px rgba(7,91,59,.18)}
+.st-page .stats-bar{display:none}.st-page .filter-bar{gap:8px;margin:0;overflow-x:auto;flex-wrap:nowrap;padding-bottom:2px;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-behavior:smooth}.st-page .filter-bar::-webkit-scrollbar{display:none}.st-page .cat-btn{flex:0 0 auto;padding:9px 15px;border:1px solid var(--st-line);border-radius:999px;background:#fff;color:#53645b;font:700 13px/1 'Source Sans 3',sans-serif;transition:background .18s,color .18s,border-color .18s,transform .18s}.st-page .cat-btn:hover{transform:translateY(-1px);background:#e9f4e8;color:var(--st-green);border-color:#b9d7c3}.st-page .cat-btn.active{background:var(--st-green);border-color:var(--st-green);color:#fff;box-shadow:0 7px 18px rgba(7,91,59,.18)}
 .st-results-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:22px}.st-results-head h2{font:750 clamp(1.55rem,3vw,2.3rem)/1.15 'Lexend',sans-serif;letter-spacing:-.035em;margin:0;color:var(--st-ink)}.st-results-head p{font-size:14px;color:var(--st-muted);margin:7px 0 0}.st-results-count{font:750 13px/1 'Lexend',sans-serif;color:var(--st-green);background:#e8f3e6;padding:9px 13px;border-radius:999px;white-space:nowrap}
-.st-page .grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.st-page .card{border-radius:20px;border:1px solid var(--st-line);box-shadow:0 8px 30px rgba(25,55,40,.055);cursor:default;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;background:#fff}.st-page .card:hover{transform:translateY(-4px);box-shadow:0 18px 45px rgba(25,55,40,.11);border-color:#b8d1c0}.st-page .card.is-hidden{display:none}
+.st-page .grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.st-page .card{border-radius:20px;border:1px solid var(--st-line);box-shadow:0 8px 30px rgba(25,55,40,.055);cursor:pointer;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;background:#fff}.st-page .card:hover{transform:translateY(-4px);box-shadow:0 18px 45px rgba(25,55,40,.11);border-color:#b8d1c0}.st-page .card.is-hidden{display:none}
 .st-page .card-header{padding:20px 20px 10px;gap:10px}.st-page .week-badge{border-radius:999px;padding:6px 9px;background:#e7f3e5;color:var(--st-green);font:750 10px/1 'Lexend',sans-serif}.st-page .card-header h3{font:750 1.02rem/1.35 'Lexend',sans-serif;letter-spacing:-.015em;color:var(--st-ink)}.st-page .card-body{padding:0 20px 14px;font-size:14px;line-height:1.6;color:var(--st-muted);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;min-height:67px}.st-page .card-tags{padding:0 20px 15px;gap:6px}.st-page .tag{padding:5px 9px;background:#f2f5f1;color:#66766e;font-size:10px;border:1px solid #e5ebe6}
 .st-page .card-related{margin:0 20px 16px;padding:12px 13px;border-radius:12px;background:#eff8e8;border:1px solid #d8edc6;color:#285e34;font-size:12px;line-height:1.45;transition:background .18s,border-color .18s,transform .18s}.st-page .card-related:hover{background:#e4f5d6;border-color:#bddf9f;transform:translateX(2px)}
-.st-page .card-footer{padding:13px 20px 18px;gap:8px;background:#fff;border-top:1px solid #edf1ed;justify-content:flex-start}.st-page .btn-expand,.st-page .btn-print-card{border-radius:10px;padding:9px 12px;font:750 12px/1 'Source Sans 3',sans-serif}.st-page .btn-expand{background:var(--st-green);box-shadow:0 6px 14px rgba(7,91,59,.16)}.st-page .btn-expand:hover{background:var(--st-green-2)}.st-page .btn-print-card{background:#f0f3f0;color:#506158}.st-page .btn-print-card:hover{background:#e6ebe7}
-.st-load-more{display:flex;align-items:center;justify-content:center;gap:9px;margin:34px auto 0;padding:14px 22px;border:1px solid #bfd2c4;border-radius:999px;background:#fff;color:var(--st-green);font:750 14px/1 'Lexend',sans-serif;cursor:pointer;box-shadow:0 8px 24px rgba(25,55,40,.07);transition:transform .18s,box-shadow .18s,background .18s}.st-load-more:hover{transform:translateY(-2px);box-shadow:0 13px 32px rgba(25,55,40,.12);background:#f5fbf2}.st-load-more[hidden]{display:none}
-.st-page .cta-strip{margin:56px 0 0;border-radius:24px;padding:38px;background:linear-gradient(135deg,#073e2d,#086544);box-shadow:0 22px 55px rgba(7,70,45,.16)}.st-page .cta-strip h3{font:750 clamp(1.25rem,2.4vw,1.85rem)/1.25 'Lexend',sans-serif;margin-bottom:9px}.st-page .cta-strip p{font-size:15px;margin-bottom:18px}
-.st-page .tool-article{padding:72px 0;background:#fff}.st-page .tool-article .container{max-width:900px}.st-page .tool-article h2{font:750 clamp(1.45rem,2.6vw,2rem)/1.25 'Lexend',sans-serif;color:var(--st-ink);letter-spacing:-.025em;margin:44px 0 14px}.st-page .tool-article h2:first-child{margin-top:0}.st-page .tool-article p,.st-page .tool-article li{font-size:16px;line-height:1.8;color:#4c5e54}.st-page .faq-item{padding:18px 0;border-bottom:1px solid var(--st-line);margin:0}.st-page .faq-item h3{font:700 16px/1.4 'Lexend',sans-serif;color:var(--st-ink)}.st-page .faq-item p{font-size:15px;line-height:1.7;color:var(--st-muted)}.st-page .guide-link{border-radius:16px;padding:18px 20px;margin-top:28px}
+.st-page .card-footer{padding:13px 20px 18px;gap:8px;background:#fff;border-top:1px solid #edf1ed;justify-content:flex-start}.st-page .btn-expand,.st-page .btn-print-card{border-radius:10px;padding:9px 12px;font:750 12px/1 'Source Sans 3',sans-serif;cursor:pointer}.st-page .btn-expand{background:var(--st-green);box-shadow:0 6px 14px rgba(7,91,59,.16)}.st-page .btn-expand:hover{background:var(--st-green-2)}.st-page .btn-print-card{background:#f0f3f0;color:#506158}.st-page .btn-print-card:hover{background:#e6ebe7}
+.st-load-more{display:flex;align-items:center;justify-content:center;gap:9px;margin:28px auto 0;padding:14px 24px;border:1px solid #bfd2c4;border-radius:999px;background:#fff;color:var(--st-green);font:750 14px/1 'Lexend',sans-serif;cursor:pointer;box-shadow:0 8px 24px rgba(25,55,40,.07);transition:transform .18s,box-shadow .18s,background .18s}.st-load-more:hover{transform:translateY(-2px);box-shadow:0 13px 32px rgba(25,55,40,.12);background:#f5fbf2}.st-load-more[hidden]{display:none}
+.st-page .cta-strip{margin:48px 0 0;border-radius:24px;padding:38px;background:linear-gradient(135deg,#073e2d,#086544);box-shadow:0 22px 55px rgba(7,70,45,.16)}.st-page .cta-strip h3{font:750 clamp(1.25rem,2.4vw,1.85rem)/1.25 'Lexend',sans-serif;margin-bottom:9px}.st-page .cta-strip p{font-size:15px;margin-bottom:18px}
+.st-page .tool-article{padding:72px 0;background:#fff}.st-page .tool-article .container{max-width:900px}.st-page .tool-article h2{font:750 clamp(1.45rem,2.6vw,2rem)/1.25 'Lexend',sans-serif;color:var(--st-ink);letter-spacing:-.025em;margin:44px 0 14px}.st-page .tool-article h2:first-child{margin-top:0}.st-page .tool-article p,.st-page .tool-article li{font-size:16px;line-height:1.8;color:#4c5e54}.st-page .faq-item{padding:18px 0;border-bottom:1px solid var(--st-line);margin:0}.st-page .faq-item h3{font:700 16px/1.4 'Lexend',sans-serif;color:var(--st-ink)}.st-page .faq-item p{font-size:15px;line-height:1.7;color:var(--st-muted)}.st-page .faq-item a{color:var(--st-green);font-weight:700;text-decoration:underline;text-underline-offset:2px;transition:color .18s}.st-page .faq-item a:hover{color:var(--st-green-2)}.st-page .guide-link{border-radius:16px;padding:18px 20px;margin-top:28px}
 .st-page .related-trainings{padding:68px 0;background:var(--st-cream)}.st-page .related-trainings h2{font:750 clamp(1.45rem,2.7vw,2rem)/1.2 'Lexend',sans-serif;color:var(--st-ink);letter-spacing:-.025em;margin-bottom:22px}.st-page .related-trainings ul{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.st-page .related-trainings li{border:1px solid var(--st-line);border-radius:14px;padding:15px 17px;background:#fff;transition:transform .18s,border-color .18s}.st-page .related-trainings li:hover{transform:translateY(-2px);border-color:#b5cfbd}.st-page .related-trainings a{font:700 14px/1.4 'Source Sans 3',sans-serif;color:var(--st-ink)}
 .st-page .modal-overlay{backdrop-filter:blur(8px);background:rgba(4,25,16,.66);padding:22px}.st-page .modal{max-width:760px;border-radius:24px;padding:30px;box-shadow:0 35px 100px rgba(0,0,0,.3)}.st-page .modal h2{font:750 clamp(1.35rem,3vw,2rem)/1.2 'Lexend',sans-serif;color:var(--st-ink)}.st-page .btn-close{border-radius:999px}.st-page .modal-section h4{font:750 13px/1 'Lexend',sans-serif;letter-spacing:.02em}.st-page .discuss-item{border-radius:10px;padding:10px 12px}.st-page .modal-related{border-radius:14px;padding:14px 16px}
 @media(max-width:960px){.st-page .hero .container{grid-template-columns:1fr}.st-hero-panel{display:none}.st-page .grid{grid-template-columns:repeat(2,minmax(0,1fr))}.st-discovery{top:62px}}
@@ -471,6 +471,9 @@ section.hero, .hero {
       <?php endforeach; ?>
     </div>
 
+    <noscript><style>.st-page .card.is-hidden{display:flex}</style></noscript>
+    <button class="st-load-more" id="stLoadMore" type="button">Tampilkan 12 topik lagi <span style="opacity:0.75;font-size:12px;font-weight:600">(88 tersisa)</span> <span aria-hidden="true">↓</span></button>
+
     <div class="cta-strip">
       <h3>🎓 Tingkatkan Kompetensi Memimpin Toolbox Meeting &amp; Safety Leadership</h3>
       <p>Sertifikasi Ahli K3 Umum KEMNAKER RI / BNSP mengajarkan komunikasi K3 efektif, risk assessment, dan budaya K3 industri.</p>
@@ -502,11 +505,13 @@ section.hero, .hero {
       <p>Idealnya 5 hingga 10 menit di awal shift. Sampaikan 1 topik utama, ajukan 2-3 pertanyaan diskusi, dan tutup dengan komitmen tindakan K3 hari itu.</p>
     </div>
     <div class="faq-item">
+      <h3>Siapa yang seharusnya memimpin safety talk harian?</h3>
+      <p>Idealnya dipimpin langsung oleh supervisor, foreman, atau tim HSE di lapangan untuk menunjukkan kepemimpinan K3 operasional. Dalam pelaksanaannya, materi dan pengawasan keselamatan kerja dikoordinasikan oleh <a href="https://www.ak3u.my.id/ahli-k3-umum/" target="_blank" rel="noopener">Ahli K3 Umum</a> sebagai penanggung jawab implementasi K3 di perusahaan.</p>
+    </div>
+    <div class="faq-item">
       <h3>Apakah materi dan lembar absensi ini boleh didownload dan dicetak gratis?</h3>
       <p>Ya, 100% gratis digunakan oleh perusahaan, HSE officer, maupun supervisor operasional di seluruh Indonesia.</p>
     </div>
-    <noscript><style>.st-page .card.is-hidden{display:flex}</style></noscript>
-    <button class="st-load-more" id="stLoadMore" type="button">Tampilkan 12 topik lagi <span aria-hidden="true">↓</span></button>
     <a class="guide-link" href="/artikel/perbedaan-safety-talk-toolbox-meeting-tbm-safety-briefing/">
       <span><strong>Safety Talk, Toolbox Meeting, TBM, dan Safety Briefing: Apa Bedanya?</strong><span>Pilih bentuk komunikasi K3 yang tepat untuk setiap situasi kerja.</span></span><b>→</b>
     </a>
@@ -559,7 +564,7 @@ function renderTalks(list, resetLimit = false){
   const loadMore = document.getElementById('stLoadMore');
   resultsCount.textContent = `${list.length} topik`;
   if(!list.length){
-    grid.innerHTML = '<p style="color:var(--muted);text-align:center;padding:40px;grid-column:1/-1">Tidak ada hasil untuk pencarian ini.</p>';
+    grid.innerHTML = '<div style="color:var(--muted);text-align:center;padding:44px 20px;grid-column:1/-1;background:#fff;border-radius:16px;border:1px dashed var(--st-line);"><p style="font-size:1.05rem;font-weight:700;color:var(--st-ink);margin-bottom:6px">Topik tidak ditemukan</p><p style="font-size:0.88rem;margin-bottom:14px">Coba kata kunci lain atau bersihkan pencarian untuk melihat seluruh materi.</p><button type="button" onclick="resetFilter()" style="background:var(--st-green);color:#fff;border:none;border-radius:999px;padding:8px 18px;font-weight:700;font-size:0.82rem;cursor:pointer">Tampilkan Semua Topik</button></div>';
     loadMore.hidden = true;
     return;
   }
@@ -580,7 +585,16 @@ function renderTalks(list, resetLimit = false){
   `).join('');
   const remaining = Math.max(0, list.length - visibleLimit);
   loadMore.hidden = remaining === 0;
-  if(remaining) loadMore.firstChild.textContent = `Tampilkan ${Math.min(12, remaining)} topik lagi `;
+  if(remaining) loadMore.innerHTML = `Tampilkan ${Math.min(12, remaining)} topik lagi <span style="opacity:0.75;font-size:12px;font-weight:600">(${remaining} tersisa)</span> <span aria-hidden="true">↓</span>`;
+}
+
+function resetFilter(){
+  document.getElementById('stSearch').value = '';
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+  const allBtn = document.querySelector('.cat-btn');
+  if(allBtn) allBtn.classList.add('active');
+  activeCat = 'all';
+  filterTalks();
 }
 
 function filterTalks(){
@@ -635,14 +649,17 @@ function openModal(idx){
     </div>
   `;
   document.getElementById('modalOverlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
 }
 
 function closeModal(e){
-  if(!e || e.target === document.getElementById('modalOverlay'))
+  if(!e || e.target === document.getElementById('modalOverlay')){
     document.getElementById('modalOverlay').classList.remove('show');
+    document.body.style.overflow = '';
+  }
 }
 
-document.addEventListener('keydown', e=>{ if(e.key==='Escape') document.getElementById('modalOverlay').classList.remove('show'); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') { document.getElementById('modalOverlay').classList.remove('show'); document.body.style.overflow = ''; } });
 
 function printTalk(idx){
   const t = talks[idx];
