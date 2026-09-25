@@ -3,17 +3,36 @@
   <div class="footer-photo-track">
     <div class="footer-photo-group">
       <?php
-        $footer_photos = [1, 3, 5, 8, 11, 14, 17, 20, 24, 28, 32, 36, 41, 45, 50, 55, 60, 64];
-        foreach ($footer_photos as $fp_num):
+        $footer_photos = [
+          1  => 'Pelatihan Ahli K3 Umum Sertifikasi Kemnaker RI',
+          3  => 'Praktik Kerja Lapangan Peserta Pelatihan K3 Industri',
+          5  => 'Uji Kompetensi & Sertifikasi BNSP K3 Wahana Totalita',
+          8  => 'Simulasi Tanggap Darurat & Penanggulangan Kebakaran K3',
+          11 => 'Pembinaan Calon Ahli K3 Umum Resmi Kemnaker RI',
+          14 => 'Sesi Evaluasi & Ujian Sertifikasi K3 Kemnaker',
+          17 => 'Pelatihan K3 Bekerja di Ketinggian & Ruang Terbatas',
+          20 => 'Pemeriksaan Alat Keselamatan Kerja & Audit CSMS',
+          24 => 'In-House Training Pelatihan K3 Korporasi Nasional',
+          28 => 'Pemberian Lisensi & Surat Keputusan Penunjukan Ahli K3',
+          32 => 'Pelatihan Sertifikasi POPAL & Lingkungan Hidup BNSP',
+          36 => 'Praktik Inspeksi K3 & Identifikasi Bahaya Lapangan',
+          41 => 'Pelatihan Auditor SMK3 PP 50 Tahun 2012 Kemnaker RI',
+          45 => 'Kegiatan Pembinaan Keselamatan dan Kesehatan Kerja K3',
+          50 => 'Dokumentasi Kelulusan Calon Ahli K3 Umum Wahana Totalita',
+          55 => 'Pelatihan K3 Listrik & Teknisi K3 Industri Kemnaker',
+          60 => 'Workshop Contractor Safety Management System CSMS',
+          64 => 'Sertifikasi Petugas P3K & K3 Lingkungan Kerja Kemnaker RI',
+        ];
+        foreach ($footer_photos as $fp_num => $fp_alt):
           $fp_img = sprintf('/images/pelatihan-%03d.webp', $fp_num);
       ?>
-      <a href="/galeri/" class="footer-photo-item" title="Dokumentasi Pelatihan K3 Wahana Totalita">
-        <img src="<?= $fp_img ?>" alt="Dokumentasi Pelatihan K3" width="220" height="135" loading="lazy" decoding="async">
+      <a href="/galeri/" class="footer-photo-item" title="<?= e($fp_alt) ?>">
+        <img src="<?= $fp_img ?>" alt="<?= e($fp_alt) ?>" width="220" height="135" loading="lazy" decoding="async">
       </a>
       <?php endforeach; ?>
     </div>
     <div class="footer-photo-group" aria-hidden="true">
-      <?php foreach ($footer_photos as $fp_num):
+      <?php foreach (array_keys($footer_photos) as $fp_num):
           $fp_img = sprintf('/images/pelatihan-%03d.webp', $fp_num);
       ?>
       <a href="/galeri/" class="footer-photo-item" tabindex="-1">

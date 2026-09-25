@@ -81,7 +81,7 @@ $catalogFaqs = [
 <meta property="og:url"         content="<?= e($page_url) ?>">
 <meta property="og:site_name"   content="<?= e($s['site_name'] ?? 'Wahana Totalita Konsultan') ?>">
 <meta property="og:locale"      content="id_ID">
-<meta name="theme-color"        content="<?= e(is_valid_hex($s['theme_color_primary'] ?? '') ? $s['theme_color_primary'] : '#0A4A2E') ?>">
+<meta name="theme-color"        content="<?= e(is_valid_hex($s['theme_color_primary'] ?? '') ? $s['theme_color_primary'] : '#103A5C') ?>">
 <meta name="robots"             content="index,follow">
 <link rel="manifest" href="/manifest.json">
 
@@ -411,7 +411,7 @@ if (is_file($_core_css_file)) {
                    style="--accent: <?= e($t['accent_color'] ?? '#0A4A2E') ?>">
             <a href="/pelatihan/<?= e($t['slug']) ?>/" class="training-card-img-wrap">
               <img src="<?= training_img_url($t['image_path'], $t['cat_slug'] ?? '', $t['slug'] ?? '') ?>"
-                   alt="<?= e($t['name']) ?>" loading="lazy" width="400" height="250" decoding="async">
+                   alt="<?= e((stripos($t['name'], 'pelatihan') === false ? 'Pelatihan ' : '') . $t['name'] . (!empty($t['certification']) ? ' Sertifikasi ' . $t['certification'] : '')) ?>" loading="lazy" width="400" height="250" decoding="async">
               <span class="training-card-cat-badge"><?= $t['cat_icon'] ?? '' ?> <?= e($t['cat_name']) ?></span>
             </a>
             <div class="training-card-body">

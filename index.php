@@ -208,7 +208,7 @@ $page_css = ['home'];
       <article class="training-card" <?php if ($t_idx <= 4): ?>data-reveal="up" data-reveal-delay="<?= $t_idx ?>"<?php endif; ?> data-cat="<?= e($t['cat_slug']) ?>" data-mode="<?= e($t['mode']) ?>" style="--accent: <?= e($t['accent_color']??'#0A4A2E') ?>">
         <a href="/pelatihan/<?= e($t['slug']) ?>/" class="training-card-img-wrap">
           <img src="<?= training_img_url($t['image_path'], $t['cat_slug'] ?? '', $t['slug'] ?? '') ?>"
-               alt="<?php $cat_ctx=['k3'=>'keselamatan dan kesehatan kerja industri','lingkungan'=>'pengelolaan lingkungan hidup','system-management'=>'sistem manajemen QHSE','mining'=>'pertambangan dan operasional tambang']; echo e($t['name'].' bersertifikasi '.$t['certification'].' — ilustrasi '.($cat_ctx[$t['cat_slug']]??'pelatihan sertifikasi')); ?>"
+               alt="<?php $cat_ctx=['k3'=>'keselamatan dan kesehatan kerja industri','lingkungan'=>'pengelolaan lingkungan hidup','system-management'=>'sistem manajemen QHSE','mining'=>'pertambangan dan operasional tambang']; $pfx = (stripos($t['name'], 'pelatihan') === false ? 'Pelatihan ' : ''); echo e($pfx . $t['name'] . ' Sertifikasi ' . $t['certification'] . ' — ' . ($cat_ctx[$t['cat_slug']] ?? 'Pelatihan K3 Resmi')); ?>"
                loading="lazy" decoding="async" width="400" height="250">
           <span class="training-card-cat-badge"><?= $t['cat_icon'] ?> <?= e($t['cat_name']) ?></span>
         </a>

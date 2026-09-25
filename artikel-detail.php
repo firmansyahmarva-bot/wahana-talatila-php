@@ -90,7 +90,7 @@ if (!empty($article['thumbnail'])) $article_schema['image'] = artikel_thumb($art
 <meta name="twitter:card"        content="summary_large_image">
 <meta name="twitter:title"       content="<?= e($article['title']) ?>">
 <meta name="twitter:description" content="<?= e($meta_desc) ?>">
-<meta name="theme-color"         content="#0A4A2E">
+<meta name="theme-color"         content="<?= e(is_valid_hex($s['theme_color_primary'] ?? '') ? $s['theme_color_primary'] : '#103A5C') ?>">
 <script type="application/ld+json"><?= json_encode($article_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?></script>
 <?php if ($faq_schema): ?>
 <script type="application/ld+json"><?= json_encode($faq_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?></script>
@@ -180,7 +180,7 @@ if (is_file($_core_css_file)) {
   <div class="ak-article-hero-img">
     <div class="container">
       <img src="<?= e(artikel_thumb($article['thumbnail'] ?? '', $article['category'], $article['slug'] ?? '')) ?>"
-           alt="<?= e($article['title']) ?>"
+           alt="<?= e($article['title'] . (stripos($article['title'], 'k3') === false ? ' — Panduan Pelatihan K3 & Sertifikasi Kemnaker BNSP' : ' — Wahana Totalita Konsultan K3')) ?>"
            loading="eager" fetchpriority="high" width="1200" height="630">
     </div>
   </div>
@@ -274,7 +274,7 @@ if (is_file($_core_css_file)) {
         <article class="ak-card" data-reveal="up" data-reveal-delay="<?= ($r_idx % 4) + 1 ?>">
           <a href="/artikel/<?= e($r['slug']) ?>/" class="ak-card-img-wrap">
             <img src="<?= e(artikel_thumb($r['thumbnail'] ?? '', $r['category'], $r['slug'] ?? '')) ?>"
-                 alt="<?= e($r['title']) ?>"
+                 alt="<?= e($r['title'] . (stripos($r['title'], 'k3') === false ? ' — Info Pelatihan & Sertifikasi K3' : ' — Wahana Totalita')) ?>"
                  loading="lazy" width="400" height="225">
             <span class="ak-card-cat" style="background:<?= e(artikel_cat_color($r['category'])) ?>"><?= e($r['category']) ?></span>
           </a>

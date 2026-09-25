@@ -21,7 +21,7 @@ $wa_consult = "https://wa.me/{$wa_number}?text=" . rawurlencode('Halo, saya ingi
 <meta property="og:locale"      content="id_ID">
 <meta name="twitter:card"       content="summary_large_image">
 <meta name="robots"             content="index, follow, max-image-preview:large">
-<meta name="theme-color"        content="#0A4A2E">
+<meta name="theme-color"        content="#103A5C">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png">
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','<?=$gtm_id?>');</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -208,10 +208,10 @@ $wa_consult = "https://wa.me/{$wa_number}?text=" . rawurlencode('Halo, saya ingi
       <p>Dokumentasi pelatihan, simulasi keadaan darurat, pemeriksaan peralatan, dan diskusi penerapan sistem K3 perusahaan.</p>
     </div>
     <div class="csms-photo-row">
-      <figure class="csms-photo"><img src="/galeri/PELATIHAN%20DAMKAR.JPG" alt="Simulasi tanggap darurat untuk kesiapan CSMS"><span>Simulasi tanggap darurat</span></figure>
-      <figure class="csms-photo"><img src="/galeri/IMG_1945.JPG" alt="Praktik pemeriksaan peralatan keselamatan"><span>Pemeriksaan peralatan</span></figure>
-      <figure class="csms-photo"><img src="/galeri/DSC_0282.JPG" alt="Diskusi peserta pelatihan K3"><span>Diskusi implementasi</span></figure>
-      <figure class="csms-photo"><img src="/galeri/IMG_1910.JPG" alt="Dokumentasi peserta pelatihan"><span>Bukti kegiatan</span></figure>
+      <figure class="csms-photo"><img src="/galeri/thumbs/PELATIHAN%20DAMKAR.JPG" alt="Simulasi tanggap darurat dan keselamatan kerja untuk sertifikasi CSMS K3" width="640" height="427" loading="lazy" decoding="async"><span>Simulasi tanggap darurat</span></figure>
+      <figure class="csms-photo"><img src="/galeri/thumbs/IMG_1945.JPG" alt="Pemeriksaan peralatan keselamatan kerja industri sertifikasi Kemnaker RI" width="640" height="427" loading="lazy" decoding="async"><span>Pemeriksaan peralatan</span></figure>
+      <figure class="csms-photo"><img src="/galeri/thumbs/DSC_0282.JPG" alt="Diskusi peserta pelatihan Ahli K3 Umum dan implementasi CSMS" width="640" height="427" loading="lazy" decoding="async"><span>Diskusi implementasi</span></figure>
+      <figure class="csms-photo"><img src="/galeri/thumbs/IMG_1910.JPG" alt="Dokumentasi peserta pembinaan sertifikasi K3 Wahana Totalita" width="640" height="427" loading="lazy" decoding="async"><span>Bukti kegiatan</span></figure>
     </div>
   </div>
 </section>

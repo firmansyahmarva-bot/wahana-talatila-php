@@ -291,7 +291,7 @@ h2.section-title{font-size:1.5rem;font-weight:800;color:#111827;margin-bottom:8p
     ?>
     <article class="hub-prog-card">
       <div class="hub-prog-card-media">
-        <img src="<?= htmlspecialchars($prog_img) ?>" alt="<?= htmlspecialchars($sk['name']) ?>" loading="lazy" width="400" height="180">
+        <img src="<?= htmlspecialchars($prog_img) ?>" alt="<?= htmlspecialchars((stripos($sk['name'], 'pelatihan') === false ? 'Pelatihan ' : '') . $sk['name'] . (!empty($sk['cert']) ? ' Sertifikasi ' . $sk['cert'] : '')) ?>" loading="lazy" width="400" height="180">
         <div class="hub-prog-media-overlay">
           <span class="hub-prog-pill-cert">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>

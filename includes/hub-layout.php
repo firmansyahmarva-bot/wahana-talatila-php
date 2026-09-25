@@ -287,7 +287,7 @@ if (is_file($_core_css_file)) {
           ?>
           <article class="hub-prog-card" data-reveal="up" data-reveal-delay="<?= ($p_idx % 4) + 1 ?>">
             <div class="hub-prog-card-media">
-              <img src="<?= e($prog_img) ?>" alt="<?= e($prog['name']) ?>" loading="lazy" width="400" height="180">
+              <img src="<?= e($prog_img) ?>" alt="<?= e((stripos($prog['name'], 'pelatihan') === false ? 'Pelatihan ' : '') . $prog['name'] . (!empty($prog['cert']) ? ' Sertifikasi ' . $prog['cert'] : '')) ?>" loading="lazy" width="400" height="180">
               <div class="hub-prog-media-overlay">
                 <span class="hub-prog-pill-cert">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>

@@ -826,7 +826,7 @@ if (is_file($_core_css_file)) {
         </div>
       </div>
       <div class="hero-img-wrap">
-        <img src="<?=htmlspecialchars($c['img'])?>" alt="Dokumentasi Pelatihan K3 Wahana Totalita di <?=htmlspecialchars($c['name'])?>" width="380" height="285" loading="eager" fetchpriority="high">
+        <img src="<?=htmlspecialchars($c['img'])?>" alt="Pelatihan K3 &amp; Pembinaan Ahli K3 Umum di <?=htmlspecialchars($c['name'])?> — Sertifikasi Kemnaker RI Wahana Totalita" width="380" height="285" loading="eager" fetchpriority="high">
         <div class="hero-img-caption">Dokumentasi Pelatihan &amp; Sertifikasi K3 Wahana Totalita</div>
       </div>
     </div>
@@ -1130,7 +1130,7 @@ if (is_file($_core_css_file)) {
     <div class="gallery-strip-grid">
       <?php foreach($strip_photos as $sp): ?>
       <div class="gallery-strip-item">
-        <img src="<?=htmlspecialchars($sp)?>" alt="Dokumentasi Sertifikasi K3" width="280" height="210" loading="lazy">
+        <img src="<?=htmlspecialchars($sp)?>" alt="Dokumentasi Pelatihan K3 &amp; Uji Kompetensi Sertifikasi Kemnaker RI BNSP — <?=htmlspecialchars($c['name'])?>" width="280" height="210" loading="lazy">
       </div>
       <?php endforeach; ?>
     </div>

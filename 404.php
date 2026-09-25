@@ -566,7 +566,7 @@ if (is_file($_core_css_file)) {
       <?php foreach ($featured as $t): ?>
       <a href="/pelatihan/<?= e($t['slug']) ?>/" class="e404-card">
         <img src="<?= training_img_url($t['image_path'] ?? null, $t['cat_slug'] ?? '') ?>"
-             alt="<?= e($t['name']) ?>" loading="lazy" width="400" height="225">
+             alt="<?= e((stripos($t['name'], 'pelatihan') === false ? 'Pelatihan ' : '') . $t['name'] . (!empty($t['certification']) ? ' Sertifikasi ' . $t['certification'] : '')) ?>" loading="lazy" width="400" height="225">
         <div class="e404-card-body">
           <div class="e404-card-name"><?= e($t['name']) ?></div>
           <div class="e404-card-price"><?= format_price((int)$t['price']) ?> /orang</div>
