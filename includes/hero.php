@@ -10,10 +10,10 @@
         PJK3 · KEMNAKER RI · BNSP · Vendor LPSE
       </p>
       <h1 class="hero26-title">
-        Pelatihan &amp; Sertifikasi K3<br>
-        <em>Yogyakarta — Diakui Nasional</em>
+        Pelatihan K3 &amp; Sertifikasi Kemnaker RI – BNSP<br>
+        <em>Wahana Totalita Konsultan K3</em>
       </h1>
-      <p class="hero26-sub"><?= e($s['hero_subtitle'] ?? 'Wahana Totalita Konsultan — 125+ program K3, Lingkungan, ISO, dan Mining bersertifikasi BNSP & KEMNAKER RI. Kelas online dan tatap muka, melayani perusahaan dan instansi pemerintah di seluruh Indonesia.') ?></p>
+      <p class="hero26-sub"><?= e($s['hero_subtitle'] ?? 'Lembaga Pelatihan & Konsultan K3 Resmi — 125+ program K3, Lingkungan, ISO, dan Mining bersertifikasi BNSP & KEMNAKER RI. Kelas online interaktif via Zoom dan tatap muka, melayani pelatihan perusahaan, instansi, dan perorangan di seluruh Indonesia.') ?></p>
 
       <div class="hero26-actions">
         <a href="<?= wa_url('Halo, saya ingin konsultasi program pelatihan K3') ?>" class="btn26 btn26-primary" target="_blank" rel="noopener">

@@ -19,11 +19,12 @@ Disallow: /api/
 Disallow: /cron/
 Disallow: /assets/uploads/private/
 
-Disallow: /?filter=
-Disallow: /?cat=
-Disallow: /?mode=
+# Block raw unrewritten sitemap queries (canonical URLs are /sitemap-*.xml)
+Disallow: /sitemap.php?
 
-Disallow: /?lang=
+# Block internal search query URLs to preserve crawl budget
+Disallow: /*?q=
+Disallow: /*?s=
 
 User-agent: Googlebot
 Allow: /

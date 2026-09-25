@@ -276,7 +276,7 @@
 }
 
 /* ─── ABOUT SECTION ─────────────────────────────────────────── */
-.section-about { padding: 80px 0; background: #fff; }
+.section-about { padding: 48px 0; background: #fff; }
 .about-inner { display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: start; }
 @media (max-width:768px) { .about-inner { grid-template-columns: 1fr; } }
 .about-text p { font-size: 16px; color: var(--text-muted); margin-bottom: 28px; max-width: 580px; }
@@ -792,7 +792,7 @@
   .trust-logo { padding: 4px 12px; }
 }
 
-.section-how { padding: 80px 0; background: #0B2C46; position: relative; overflow: hidden; }
+.section-how { padding: 56px 0; background: #0B2C46; position: relative; overflow: hidden; }
 .section-how::before {
   content: '';
   position: absolute; inset: 0;
@@ -807,7 +807,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
   gap: 16px;
-  margin-top: 48px;
+  margin-top: 32px;
   position: relative;
   z-index: 1;
 }
@@ -1031,7 +1031,7 @@
 }
 
 /* v2 polish: section depth + load-more */
-.section-how,.section-faq { background: #F6F9FC; }
+.section-faq { background: #F6F9FC; }
 .training-card,.jcard,.service-card { border: 1px solid rgba(16,58,92,.08); }
 .tc-hidden { display: none !important; }
 .btn-load-more {

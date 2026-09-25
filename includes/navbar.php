@@ -10,7 +10,7 @@ $is_panduan_active = str_starts_with($_nav_path, '/artikel');
 <nav class="navbar <?= $is_home_active ? '' : 'on-light-hero' ?>" id="navbar">
   <div class="container nav-inner">
 
-    <a href="/" class="nav-logo">
+    <a href="/" class="nav-logo" aria-label="Wahana Totalita Konsultan — Pelatihan K3 &amp; Sertifikasi Resmi">
       <?= theme_logo_html($s) ?>
       <span class="nav-logo-text">
         <strong><?= e($s['site_name'] ?? 'Wahana Totalita') ?></strong>

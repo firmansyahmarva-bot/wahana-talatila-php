@@ -21,7 +21,7 @@
 // while inner pages keep using page_title() as before.
 $_head_uri   = strtok($_SERVER['REQUEST_URI'] ?? '/', '?');
 $_is_home    = ($_head_uri === '/' || $_head_uri === '');
-$_home_title = 'Pelatihan K3 & Sertifikasi BNSP Yogyakarta | Wahana Totalita';
+$_home_title = 'Pelatihan K3 Resmi Kemnaker & BNSP | Wahana Konsultan K3';
 ?>
 <title><?= $_is_home ? e($_home_title) : page_title() ?></title>
 <meta name="description" content="<?= e($meta_desc) ?>">

@@ -323,9 +323,6 @@ function flash_get(): ?array {
 function course_schema(array $t): string {
     $site = get_setting('site_name', 'Wahana Totalita Konsultan');
     $url  = SITE_URL . '/pelatihan/' . ($t['slug'] ?? '') . '/';
-    $seed = crc32($t['slug'] ?? 'course');
-    $ratingVal = number_format(4.8 + (($seed % 20) / 100), 1, '.', '');
-    $reviewCount = (string)(42 + ($seed % 56));
 
     $schema = [
         '@context'   => 'https://schema.org',
@@ -335,6 +332,7 @@ function course_schema(array $t): string {
         'url'        => $url,
         'provider'   => [
             '@type' => 'EducationalOrganization',
+            '@id'   => SITE_URL . '/#organization',
             'name'  => $site,
             'url'   => SITE_URL,
         ],
@@ -348,14 +346,59 @@ function course_schema(array $t): string {
             'availability'  => 'https://schema.org/InStock',
             'url'           => $url,
         ],
-        'aggregateRating' => [
-            '@type'       => 'AggregateRating',
-            'ratingValue' => $ratingVal,
-            'bestRating'  => '5',
-            'worstRating' => '1',
-            'reviewCount' => $reviewCount,
-        ],
-        'hasCourseInstance' => [
+    ];
+
+    $instances = [];
+    if (!empty($t['id'])) {
+        try {
+            $stmt = get_pdo()->prepare("SELECT id, batch_name, start_date, end_date, venue, mode, price 
+                                        FROM training_batches 
+                                        WHERE course_id = ? AND is_public = 1 AND status IN ('planned','ongoing') AND start_date >= CURDATE() 
+                                        ORDER BY start_date ASC LIMIT 5");
+            $stmt->execute([(int)$t['id']]);
+            $batches = $stmt->fetchAll();
+            foreach ($batches as $b) {
+                $bMode = ($b['mode'] ?? '') === 'online' ? 'online' : (($b['mode'] ?? '') === 'both' ? ['online', 'onsite'] : 'onsite');
+                $inst = [
+                    '@type'          => 'CourseInstance',
+                    'courseMode'     => $bMode,
+                    'startDate'      => $b['start_date'],
+                    'courseWorkload' => !empty($t['duration_days']) ? 'P' . (int)$t['duration_days'] . 'D' : 'P3D',
+                ];
+                if (!empty($b['end_date']) && $b['end_date'] !== '0000-00-00') {
+                    $inst['endDate'] = $b['end_date'];
+                }
+                $venue = !empty($b['venue']) ? $b['venue'] : 'Training Center Wahana Totalita Yogyakarta & In-House';
+                $inst['location'] = [
+                    '@type'   => 'Place',
+                    'name'    => $venue,
+                    'address' => [
+                        '@type'           => 'PostalAddress',
+                        'addressLocality' => 'Yogyakarta',
+                        'addressRegion'   => 'DI Yogyakarta',
+                        'addressCountry'  => 'ID',
+                    ],
+                ];
+                $bPrice = !empty($b['price']) ? (int)$b['price'] : (int)($t['price'] ?? 0);
+                if ($bPrice > 0) {
+                    $inst['offers'] = [
+                        '@type'         => 'Offer',
+                        'category'      => 'Paid',
+                        'price'         => (string)$bPrice,
+                        'priceCurrency' => 'IDR',
+                        'availability'  => 'https://schema.org/InStock',
+                        'url'           => $url,
+                    ];
+                }
+                $instances[] = $inst;
+            }
+        } catch (Exception) {}
+    }
+
+    if (!empty($instances)) {
+        $schema['hasCourseInstance'] = count($instances) === 1 ? $instances[0] : $instances;
+    } else {
+        $schema['hasCourseInstance'] = [
             '@type'          => 'CourseInstance',
             'courseMode'     => ($t['mode'] ?? '') === 'both' ? ['online', 'onsite'] : (($t['mode'] ?? '') === 'online' ? 'online' : 'onsite'),
             'courseWorkload' => !empty($t['duration_days']) ? 'P' . (int)$t['duration_days'] . 'D' : 'P3D',
@@ -369,8 +412,8 @@ function course_schema(array $t): string {
                     'addressCountry'  => 'ID',
                 ],
             ],
-        ],
-    ];
+        ];
+    }
     if (!empty($t['duration_days'])) {
         $schema['timeRequired'] = 'P' . (int)$t['duration_days'] . 'D';
     }
