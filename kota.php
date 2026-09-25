@@ -680,13 +680,6 @@ if ($city_type === 'energy_mining') {
     ['@type' => 'City', 'name' => $c['name']],
     ['@type' => 'AdministrativeArea', 'name' => $c['province']]
   ],
-  'aggregateRating' => [
-    '@type'       => 'AggregateRating',
-    'ratingValue' => '4.9',
-    'reviewCount' => '485',
-    'bestRating'  => '5',
-    'worstRating' => '1'
-  ],
   'hasOfferCatalog' => [
     '@type' => 'OfferCatalog',
     'name'  => "Program Pelatihan K3 {$c['name']}",

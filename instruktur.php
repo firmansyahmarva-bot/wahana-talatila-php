@@ -48,11 +48,45 @@ $meta_desc = 'Wahana Totalita Konsultan didukung oleh instruktur K3 nasional dar
 require __DIR__ . '/includes/head.php';
 ?>
 <script type="application/ld+json">
+<?= json_encode([
+  '@context' => 'https://schema.org',
+  '@type'    => 'ItemList',
+  'name'     => 'Daftar Instruktur dan Tenaga Ahli K3 Wahana Totalita',
+  'itemListElement' => array_map(function($ins, $i) {
+      $p = [
+          '@type'    => 'Person',
+          'name'     => $ins['name'],
+          'jobTitle' => 'Instruktur ' . $ins['spec'],
+          'worksFor' => [
+              '@type' => 'Organization',
+              '@id'   => SITE_URL . '/#organization',
+              'name'  => 'Wahana Totalita Konsultan',
+          ],
+          'knowsAbout' => $ins['spec'],
+      ];
+      if (!empty($ins['cred'])) {
+          $p['hasCredential'] = [
+              '@type'              => 'EducationalOccupationalCredential',
+              'name'               => $ins['cred'],
+              'credentialCategory' => 'Gelar Akademik / Sertifikasi Profesi',
+          ];
+      }
+      return [
+          '@type'    => 'ListItem',
+          'position' => $i + 1,
+          'item'     => $p,
+      ];
+  }, array_slice($instruktur, 0, 14), array_keys(array_slice($instruktur, 0, 14)))
+], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) ?>
+</script>
+<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
+  "@id": "<?= SITE_URL ?>/#organization",
   "name": "Wahana Totalita Konsultan",
   "telephone": "+6287759151278",
+  "url": "<?= SITE_URL ?>/instruktur/",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Jl. Wonosari KM 8.5",

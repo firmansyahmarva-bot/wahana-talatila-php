@@ -42,6 +42,26 @@ function build_schema_graph(): string {
             'Riksa Uji Alat Berat (SIA)',
             'Surat Izin Operator (SIO)'
         ],
+        'hasCredential' => [
+            [
+                '@type' => 'EducationalOccupationalCredential',
+                'name'  => 'PJK3 Resmi Berlisensi Kementerian Ketenagakerjaan RI (No. Kep. 312/BINWASPNAK-PNK3/V/2020)',
+                'credentialCategory' => 'SK Penunjukan PJK3 Bidang Pembinaan K3',
+                'recognizedBy' => [
+                    '@type' => 'GovernmentOrganization',
+                    'name'  => 'Kementerian Ketenagakerjaan Republik Indonesia (Kemnaker RI)',
+                ],
+            ],
+            [
+                '@type' => 'EducationalOccupationalCredential',
+                'name'  => 'Lembaga Pelatihan Terakreditasi BNSP',
+                'credentialCategory' => 'Sertifikasi Profesi K3',
+                'recognizedBy' => [
+                    '@type' => 'GovernmentOrganization',
+                    'name'  => 'Badan Nasional Sertifikasi Profesi (BNSP)',
+                ],
+            ],
+        ],
         'sameAs' => $same_as,
     ];
 
@@ -50,15 +70,17 @@ function build_schema_graph(): string {
 
     if (!$is_home) {
         $cache = json_encode([
-            '@context'    => 'https://schema.org',
-            '@type'       => 'Organization',
-            '@id'         => $org['@id'],
-            'name'        => $org['name'],
-            'url'         => $org['url'],
-            'description' => $org['description'],
-            'logo'        => $org['logo'],
-            'contactPoint'=> $org['contactPoint'],
-            'sameAs'      => $org['sameAs'],
+            '@context'      => 'https://schema.org',
+            '@type'         => 'Organization',
+            '@id'           => $org['@id'],
+            'name'          => $org['name'],
+            'url'           => $org['url'],
+            'description'   => $org['description'],
+            'logo'          => $org['logo'],
+            'contactPoint'  => $org['contactPoint'],
+            'knowsAbout'    => $org['knowsAbout'],
+            'hasCredential' => $org['hasCredential'],
+            'sameAs'        => $org['sameAs'],
         ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
         return $cache;
     }

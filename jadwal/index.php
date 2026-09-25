@@ -27,6 +27,73 @@ $metaDesc  = 'Lihat jadwal pelatihan K3, safety, lingkungan & AMDAL. Sertifikasi
 <title><?= e($metaTitle) ?></title>
 <meta name="description" content="<?= e($metaDesc) ?>">
 <link rel="canonical" href="<?= SITE_URL ?>/jadwal/">
+<?php
+$eventSchemas = [];
+foreach ($batches as $b) {
+    $evMode = ($b['mode'] ?? '') === 'online'
+        ? 'https://schema.org/OnlineEventAttendanceMode'
+        : (($b['mode'] ?? '') === 'both'
+            ? 'https://schema.org/MixedEventAttendanceMode'
+            : 'https://schema.org/OfflineEventAttendanceMode');
+
+    $location = ($b['mode'] ?? '') === 'online'
+        ? [
+            '@type' => 'VirtualLocation',
+            'url'   => SITE_URL . '/jadwal/' . $b['id'] . '/',
+          ]
+        : [
+            '@type'   => 'Place',
+            'name'    => !empty($b['location']) ? $b['location'] : 'Training Center Wahana Totalita Yogyakarta & In-House',
+            'address' => [
+                '@type'           => 'PostalAddress',
+                'addressLocality' => 'Yogyakarta',
+                'addressRegion'   => 'DI Yogyakarta',
+                'addressCountry'  => 'ID',
+            ],
+          ];
+
+    $ev = [
+        '@context'            => 'https://schema.org',
+        '@type'               => 'EducationalEvent',
+        'name'                => 'Pelatihan ' . ($b['training_name'] ?? 'K3') . ' - ' . ($b['batch_code'] ?? 'Batch Terdekat'),
+        'description'         => 'Jadwal resmi ' . ($b['training_name'] ?? 'Pelatihan K3') . (!empty($b['certification']) ? ' sertifikasi ' . $b['certification'] : '') . '.',
+        'startDate'           => $b['start_date'],
+        'eventAttendanceMode' => $evMode,
+        'eventStatus'         => 'https://schema.org/EventScheduled',
+        'location'            => $location,
+        'organizer'           => [
+            '@type' => 'Organization',
+            '@id'   => SITE_URL . '/#organization',
+            'name'  => 'Wahana Totalita Konsultan',
+            'url'   => SITE_URL,
+        ],
+        'offers' => [
+            '@type'         => 'Offer',
+            'price'         => (string)(int)($b['price'] ?? 0),
+            'priceCurrency' => 'IDR',
+            'availability'  => 'https://schema.org/InStock',
+            'url'           => SITE_URL . '/jadwal/' . $b['id'] . '/',
+            'validFrom'     => date('Y-m-d'),
+        ],
+    ];
+    if (!empty($b['end_date']) && $b['end_date'] !== '0000-00-00') {
+        $ev['endDate'] = $b['end_date'];
+    }
+    if (!empty($b['training_slug'])) {
+        $ev['about'] = [
+            '@type' => 'Course',
+            'name'  => $b['training_name'],
+            'url'   => SITE_URL . '/pelatihan/' . $b['training_slug'] . '/',
+        ];
+    }
+    $eventSchemas[] = $ev;
+}
+?>
+<?php if (!empty($eventSchemas)): ?>
+<script type="application/ld+json">
+<?= json_encode($eventSchemas, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) ?>
+</script>
+<?php endif; ?>
 <style><?php
 $_core_css_file = __DIR__ . '/../assets/css/core.min.css';
 if (is_file($_core_css_file)) {
