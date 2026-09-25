@@ -255,7 +255,7 @@ $hero_name = $training['short_name'] ?: preg_replace('/\s*\([^)]{20,}\)/', '', $
 <meta name="twitter:title"         content="<?= e($meta_title) ?>">
 <meta name="twitter:description"   content="<?= e($meta_desc) ?>">
 <meta name="twitter:image"         content="<?= training_img_url($training['image_path'], $training['cat_slug'] ?? '') ?>">
-<meta name="theme-color"           content="<?= e(is_valid_hex($s['theme_color_primary'] ?? '') ? $s['theme_color_primary'] : '#0A4A2E') ?>">
+<meta name="theme-color"           content="<?= e(is_valid_hex($s['theme_color_primary'] ?? '') ? $s['theme_color_primary'] : '#103A5C') ?>">
 <meta name="robots"                content="index,follow">
 <!-- PWA -->
 <link rel="manifest" href="/manifest.json">
@@ -691,7 +691,7 @@ if (is_file($_core_css_file)) {
       <article class="pd-training-card" data-reveal="up" data-reveal-delay="<?= ($t_idx % 4) + 1 ?>">
         <a href="/pelatihan/<?= e($t['slug']) ?>/">
           <img src="<?= training_img_url($t['image_path'], $t['cat_slug'] ?? '') ?>"
-               alt="<?= e($t['name']) ?>" loading="lazy" width="400" height="250" decoding="async">
+               alt="<?= e((stripos($t['name'], 'pelatihan') === false ? 'Pelatihan ' : '') . $t['name'] . (!empty($t['certification']) ? ' Sertifikasi ' . $t['certification'] : '')) ?>" loading="lazy" width="400" height="250" decoding="async">
         </a>
         <div class="pd-training-card-body">
           <div class="pd-training-card-meta">

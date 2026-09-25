@@ -329,7 +329,7 @@ if (is_file($_core_css_file)) {
       <article class="article-card">
         <a href="/artikel/<?= e($art['slug']) ?>/" class="article-card-img-wrap">
           <img src="<?= !empty($art['thumbnail']) ? e($art['thumbnail']) : training_img_url(null, $cat_slug, $art['slug']) ?>"
-               alt="<?= e($art['title']) ?>"
+               alt="<?= e($art['title'] . (stripos($art['title'], 'k3') === false ? ' — Info Pelatihan & Sertifikasi K3' : ' — Wahana Totalita')) ?>"
                loading="lazy" decoding="async" width="400" height="250">
         </a>
         <div class="article-card-body">
@@ -386,7 +386,7 @@ if (is_file($_core_css_file)) {
       <article class="training-card fade-in" data-cat="<?= e($t['cat_slug']) ?>" data-mode="<?= e($t['mode']) ?>" style="--accent: <?= e($t['accent_color'] ?? '#0A4A2E') ?>">
         <a href="/pelatihan/<?= e($t['slug']) ?>/" class="training-card-img-wrap">
           <img src="<?= training_img_url($t['image_path'], $t['cat_slug'] ?? '', $t['slug'] ?? '') ?>"
-               alt="<?= e($t['name'] . ' bersertifikasi ' . $t['certification']) ?>"
+               alt="<?= e((stripos($t['name'], 'pelatihan') === false ? 'Pelatihan ' : '') . $t['name'] . (!empty($t['certification']) ? ' Sertifikasi ' . $t['certification'] : '')) ?>"
                loading="lazy" decoding="async" width="400" height="250">
           <span class="training-card-cat-badge"><?= $t['cat_icon'] ?? '🦺' ?> <?= e($t['cat_name'] ?? $cat_label) ?></span>
         </a>

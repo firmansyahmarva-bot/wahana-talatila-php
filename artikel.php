@@ -44,7 +44,7 @@ if ($cat) {
 <meta property="og:url"         content="<?= e($canon_url) ?>">
 <meta property="og:image"       content="<?= SITE_URL . e($s['og_image'] ?? '/assets/img/og-cover.jpg') ?>">
 <meta name="twitter:card"       content="summary_large_image">
-<meta name="theme-color"        content="<?= e($s['brand_color'] ?? '#0A4A2E') ?>">
+<meta name="theme-color"        content="<?= e(is_valid_hex($s['theme_color_primary'] ?? '') ? $s['theme_color_primary'] : ($s['brand_color'] ?? '#103A5C')) ?>">
 <script type="application/ld+json"><?= json_encode([
   '@context'      => 'https://schema.org',
   '@type'         => 'Blog',
@@ -160,7 +160,7 @@ if (is_file($_core_css_file)) {
       <article class="ak-card <?= $i === 0 && !$offset ? 'ak-card-featured' : '' ?>">
         <a href="/artikel/<?= e($a['slug']) ?>/" class="ak-card-img-wrap">
           <img src="<?= e(artikel_thumb($a['thumbnail'] ?? '', $a['category'], $a['slug'] ?? '')) ?>"
-               alt="<?= e($a['title']) ?>"
+               alt="<?= e($a['title'] . (stripos($a['title'], 'k3') === false ? ' — Panduan Pelatihan K3 & Sertifikasi' : ' — Pelatihan K3 Wahana Totalita')) ?>"
                loading="<?= $i < 3 ? 'eager' : 'lazy' ?>"
                width="600" height="340">
           <span class="ak-card-cat" style="background:<?= e(artikel_cat_color($a['category'])) ?>">

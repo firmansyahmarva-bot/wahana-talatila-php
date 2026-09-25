@@ -89,12 +89,37 @@ if (is_dir($galeri_dir)) {
         $tw = $info ? $info[0] : 640;
         $th = $info ? $info[1] : 480;
 
+        $raw_fn = pathinfo($file, PATHINFO_FILENAME);
+        $is_raw_name = preg_match('/^(dsc|img|file|photo|wp|whatsapp|\d+)/i', $raw_fn) || is_numeric($raw_fn);
+        if ($is_raw_name) {
+            $seo_topics = [
+                'Pelatihan Ahli K3 Umum Kemnaker RI — Wahana Totalita',
+                'Praktik Simulasi Tanggap Darurat & Kebakaran Pelatihan K3',
+                'Uji Kompetensi & Sertifikasi BNSP K3 Wahana Totalita',
+                'Pembinaan Calon Ahli K3 Umum Sertifikasi Kemnaker RI',
+                'Praktik Lapangan & Identifikasi Bahaya Pelatihan K3',
+                'Sertifikasi Petugas K3 & Lisensi Kemnaker RI',
+                'In-House Training K3 Korporasi & Sertifikasi Industri',
+                'Sesi Teori & Evaluasi Regulasi K3 Wahana Totalita',
+                'Pelatihan K3 Bekerja di Ketinggian & Ruang Terbatas',
+                'Pelatihan & Sertifikasi Auditor SMK3 Kemnaker RI',
+                'Dokumentasi Pembinaan K3 Lingkungan & Laboratorium',
+                'Ujian Evaluasi & Pembekalan Calon Ahli K3 Umum',
+            ];
+            $cap = $seo_topics[abs(crc32($file)) % count($seo_topics)];
+        } else {
+            $clean = ucwords(str_replace(['-', '_'], ' ', $raw_fn));
+            $cap = (stripos($clean, 'k3') === false && stripos($clean, 'pelatihan') === false)
+                ? 'Pelatihan K3 — ' . $clean . ' Sertifikasi Kemnaker RI / BNSP'
+                : $clean . ' — Wahana Totalita';
+        }
+
         $photos[] = [
             'url'       => $galeri_url . '/' . rawurlencode($file),
             'thumb_url' => file_exists($thumb_path)
                 ? $thumb_url . '/' . rawurlencode($file)
                 : $galeri_url . '/' . rawurlencode($file),
-            'caption'   => ucwords(str_replace(['-', '_'], ' ', pathinfo($file, PATHINFO_FILENAME))),
+            'caption'   => $cap,
             'mtime'     => filemtime($full_path),
             'width'     => $tw,
             'height'    => $th,
@@ -121,7 +146,7 @@ $canon_url  = SITE_URL . '/galeri/';
 <meta property="og:url"         content="<?= e($canon_url) ?>">
 <meta property="og:image"       content="<?= SITE_URL . e($s['og_image'] ?? '/assets/img/og-cover.jpg') ?>">
 <meta name="twitter:card"       content="summary_large_image">
-<meta name="theme-color"        content="<?= e($s['brand_color'] ?? '#0A4A2E') ?>">
+<meta name="theme-color"        content="<?= e(is_valid_hex($s['theme_color_primary'] ?? '') ? $s['theme_color_primary'] : ($s['brand_color'] ?? '#103A5C')) ?>">
 <?php if (!empty($s['gtm_id'])): ?>
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','<?= e($s['gtm_id']) ?>');</script>
 <?php endif; ?>
@@ -257,7 +282,7 @@ if (is_file($_core_css_file)) {
 <div class="gal-lightbox" id="galLightbox">
   <div class="gal-lb-close" id="galClose">&times;</div>
   <div class="gal-lb-prev" id="galPrev">&#8249;</div>
-  <img src="" alt="" id="galLbImg">
+  <img src="" alt="Dokumentasi Pelatihan K3 &amp; Sertifikasi Kemnaker RI Wahana Totalita" id="galLbImg">
   <div class="gal-lb-cap" id="galLbCap"></div>
   <div class="gal-lb-next" id="galNext">&#8250;</div>
 </div>

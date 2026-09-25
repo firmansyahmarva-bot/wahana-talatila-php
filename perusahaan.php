@@ -138,7 +138,7 @@ $faqs = [
 <meta name="twitter:title"       content="<?= e($page_title) ?>">
 <meta name="twitter:description" content="<?= e($meta_desc) ?>">
 <meta name="twitter:image"       content="<?= SITE_URL . e($s['og_image'] ?? '/assets/img/og-cover.svg') ?>">
-<meta name="theme-color"        content="<?= e(is_valid_hex($s['theme_color_primary'] ?? '') ? $s['theme_color_primary'] : '#0A4A2E') ?>">
+<meta name="theme-color"        content="<?= e(is_valid_hex($s['theme_color_primary'] ?? '') ? $s['theme_color_primary'] : '#103A5C') ?>">
 <script type="application/ld+json"><?= json_encode([
   '@context' => 'https://schema.org',
   '@type'    => 'Organization',
@@ -232,7 +232,7 @@ if (is_file($_core_css_file)) {
     </div>
     <div class="pr-hero-media">
       <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=760&q=70"
-           alt="Tim HSE mengikuti training K3 perusahaan di lingkungan industri Indonesia"
+           alt="Konsultan K3 dan Tim HSE Mengikuti Pelatihan K3 Perusahaan & Sertifikasi Kemnaker RI"
            width="760" height="507" fetchpriority="high" decoding="async">
     </div>
   </div>
