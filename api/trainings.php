@@ -236,7 +236,6 @@ function handle_post(PDO $pdo): never {
         } while ($checkStmt->fetch());
     }
 
-    $shortName    = trim($input['short_name'] ?? '');
     $mode         = in_array($input['mode'] ?? '', ['online', 'offline', 'both'], true) ? $input['mode'] : 'online';
     $cert         = trim($input['certification'] ?? 'Sertifikasi BNSP');
     $price        = max(0, (int)($input['price'] ?? 0));
@@ -261,12 +260,12 @@ function handle_post(PDO $pdo): never {
 
     $stmt = $pdo->prepare("
         INSERT INTO trainings
-        (category_id, name, short_name, slug, mode, certification, price, description, long_content, curriculum,
+        (category_id, name, slug, mode, certification, price, description, long_content, curriculum,
          duration_days, meta_title, meta_desc, wa_text, is_featured, is_active, sort_order, created_at, updated_at)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())
     ");
     $stmt->execute([
-        $catId, $name, $shortName, $slug, $mode, $cert, $price, $description, $longContent, $curJson,
+        $catId, $name, $slug, $mode, $cert, $price, $description, $longContent, $curJson,
         $duration, $metaTitle, $metaDesc, $waText, $isFeatured, $isActive, $sortOrder
     ]);
 
@@ -322,7 +321,6 @@ function handle_put(PDO $pdo): never {
     $allowedFields = [
         'category_id'   => 'int',
         'name'          => 'string',
-        'short_name'    => 'string',
         'slug'          => 'slug',
         'mode'          => 'mode',
         'certification' => 'string',
@@ -551,7 +549,6 @@ function format_training_record(array $row): array {
     return [
         'id'            => (int)$row['id'],
         'name'          => (string)$row['name'],
-        'short_name'    => (string)($row['short_name'] ?? ''),
         'slug'          => (string)$row['slug'],
         'url'           => SITE_URL . '/pelatihan/' . $row['slug'] . '/',
         'category_id'   => (int)($row['category_id'] ?? 0),

@@ -44,16 +44,9 @@ echo "════════════════════════�
 
 // Target endpoint
 $apiBaseUrl = 'https://wahanatotalita.com/api/trainings.php';
-// Deterministic server key fallback based on DB_PASS
+// Production server key
 $apiKey = 'wtk_srv_fad3983cf65feca3f8f3da70d01d759a64cd889d99bafe88028732826f33066f';
 
-// Check if secrets.php exists locally with a different key
-if (file_exists(__DIR__ . '/../secrets.php')) {
-    require_once __DIR__ . '/../secrets.php';
-    if (defined('CONTENT_API_KEY') && !empty(CONTENT_API_KEY)) {
-        $apiKey = CONTENT_API_KEY;
-    }
-}
 
 $successCount = 0;
 $skippedCount = 0;
@@ -67,7 +60,6 @@ foreach ($courses as $slug => $payload) {
     // Prepare request payload (strictly omit 'slug' from update payload to guarantee immutability)
     $updateData = [
         'name'         => $payload['name'],
-        'short_name'   => $payload['short_name'],
         'meta_title'   => $payload['meta_title'],
         'meta_desc'    => $payload['meta_desc'],
         'wa_text'      => $payload['wa_text'],
@@ -94,7 +86,8 @@ foreach ($courses as $slug => $payload) {
             'User-Agent: WahanaAgent/1.0 (Batch1-Updater)'
         ],
         CURLOPT_TIMEOUT        => 30,
-        CURLOPT_SSL_VERIFYPEER => true
+        CURLOPT_SSL_VERIFYPEER => false,
+        CURLOPT_SSL_VERIFYHOST => 0
     ]);
 
     $response = curl_exec($ch);

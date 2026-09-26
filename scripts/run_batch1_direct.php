@@ -36,7 +36,7 @@ echo "Direct PDO Batch 1 Runner starting...\n";
 $stmtCheck = $pdo->prepare("SELECT id, slug, name FROM trainings WHERE slug = ? LIMIT 1");
 $stmtUpdate = $pdo->prepare("
     UPDATE trainings 
-    SET name = ?, short_name = ?, meta_title = ?, meta_desc = ?, wa_text = ?, 
+    SET name = ?, meta_title = ?, meta_desc = ?, wa_text = ?, 
         description = ?, curriculum = ?, long_content = ?, updated_at = NOW()
     WHERE slug = ?
 ");
@@ -57,7 +57,6 @@ foreach ($courses as $slug => $c) {
 
     $stmtUpdate->execute([
         $c['name'],
-        $c['short_name'],
         $c['meta_title'],
         $c['meta_desc'],
         $c['wa_text'],
