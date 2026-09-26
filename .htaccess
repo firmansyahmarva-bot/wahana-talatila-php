@@ -15,6 +15,9 @@ Options -Indexes -MultiViews
 # ─── HTTPS Redirect ──────────────────────────────────────────
 RewriteEngine On
 
+# Pass Authorization header to PHP environment (prevents Apache from stripping Bearer tokens)
+SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
+
 RewriteCond %{HTTP_HOST} ^origen\.wahanatotalita\.com$ [NC]
 RewriteRule ^ https://wahanatotalita.com%{REQUEST_URI} [R=301,L,NE]
 
@@ -79,7 +82,7 @@ RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
 RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
 
 # ─── Block direct access to sensitive files ──────────────────
-<FilesMatch "(config\.php|setup\.php|composer\.json|composer\.lock|\.env|database\.sql|admin_schema\.sql|artikel-schema\.sql)$">
+<FilesMatch "(config\.php|setup\.php|secrets\.php|secrets\.example\.php|composer\.json|composer\.lock|\.env|database\.sql|admin_schema\.sql|artikel-schema\.sql)$">
     Require all denied
 </FilesMatch>
 
@@ -359,6 +362,16 @@ RewriteRule ^pelatihan/([a-z0-9\-]+)/?$ pelatihan.php?slug=$1 [QSA,L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^pelatihan/([a-z0-9\-]+)/([a-z0-9\-]+)/?$ city-page.php?training_slug=$1&city_slug=$2 [QSA,L]
+
+# ─── Secure Content Management APIs ───────────────────────────
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^api/trainings/?$ api/trainings.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^api/articles/?$ api/articles.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^api/content/?$ api/content.php [QSA,L]
 
 # ═══════════════════════════════════════════════════════
 # NEW PLATFORM ROUTES (Task #8)

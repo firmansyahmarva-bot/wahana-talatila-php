@@ -1,0 +1,139 @@
+<?php
+/**
+ * scripts/apply_batch1.php
+ * Automated updater for Batch 1 (Courses 1 - 10)
+ * 
+ * STRICT INVARIANT: Slugs are 100% IMMUTABLE.
+ * Flow: Reads batch1_content_data.php -> Sends authenticated update -> Verifies response.
+ */
+
+$batchDataFile = __DIR__ . '/batch1_content_data.php';
+if (!file_exists($batchDataFile)) {
+    die("Error: $batchDataFile not found.\n");
+}
+
+$courses = require $batchDataFile;
+if (!is_array($courses) || count($courses) !== 10) {
+    die("Error: Expected exactly 10 courses in batch data, found " . count($courses) . "\n");
+}
+
+// 10 Whitelisted Slugs for Batch 1 — NEVER MODIFY
+$expectedSlugs = [
+    'pelatihan-operator-k3-sertifikasi-bnsp',
+    'pelatihan-sertifikasi-peralatan-pendukung-water-truck-sertifikasi-bnsp',
+    'pelatihan-sertifikasi-peralatan-pendukung-bulldozer-sertifikasi-bnsp',
+    'pelatihan-dan-sertifikasi-pengoperasian-alat-gali-muat-excavator-back-hoe-sertifikasi-bnsp',
+    'pelatihan-dan-sertifikasi-pengambil-contoh-uji-emisi-sumber-tidak-bergerak-jenjang-kualifikasi-3',
+    'sosial-media-marketing-training-reguler',
+    'perpanjangan-sertifikasi-bnsp-online',
+    'pelatihan-sertifikasi-peralatan-pendukung-motor-grader-sertifikasi-bnsp',
+    'pelatihan-ahli-k3-umum-fresh-graduate-kemnaker-online',
+    'pelatihan-ahli-k3-umum-sertifikasi-bnsp-online'
+];
+
+// Safety assertion 1: Verify data keys strictly match whitelist
+$dataSlugs = array_keys($courses);
+if ($dataSlugs !== $expectedSlugs) {
+    die("CRITICAL ERROR: Data keys do not exactly match the 10 immutable slugs!\n");
+}
+
+echo "══════════════════════════════════════════════════════════════════════\n";
+echo "BATCH 1 CONTENT UPDATE RUNNER (10 PROGRAMS)\n";
+echo "Rule: Slugs are 100% IMMUTABLE. Target: Hostinger Production via API\n";
+echo "══════════════════════════════════════════════════════════════════════\n\n";
+
+// Target endpoint
+$apiBaseUrl = 'https://wahanatotalita.com/api/trainings.php';
+// Deterministic server key fallback based on DB_PASS
+$apiKey = 'wtk_srv_fad3983cf65feca3f8f3da70d01d759a64cd889d99bafe88028732826f33066f';
+
+// Check if secrets.php exists locally with a different key
+if (file_exists(__DIR__ . '/../secrets.php')) {
+    require_once __DIR__ . '/../secrets.php';
+    if (defined('CONTENT_API_KEY') && !empty(CONTENT_API_KEY)) {
+        $apiKey = CONTENT_API_KEY;
+    }
+}
+
+$successCount = 0;
+$skippedCount = 0;
+$failCount = 0;
+
+$index = 1;
+foreach ($courses as $slug => $payload) {
+    echo "[$index/10] Processing: {$slug}\n";
+    echo "       Title : {$payload['name']}\n";
+
+    // Prepare request payload (strictly omit 'slug' from update payload to guarantee immutability)
+    $updateData = [
+        'name'         => $payload['name'],
+        'short_name'   => $payload['short_name'],
+        'meta_title'   => $payload['meta_title'],
+        'meta_desc'    => $payload['meta_desc'],
+        'wa_text'      => $payload['wa_text'],
+        'description'  => $payload['description'],
+        'curriculum'   => $payload['curriculum'],
+        'long_content' => $payload['long_content'],
+        'actor'        => 'batch1_seo_rewrite'
+    ];
+
+    $jsonBody = json_encode($updateData, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+
+    // Call API via cURL
+    $url = $apiBaseUrl . '?slug=' . urlencode($slug) . '&api_key=' . urlencode($apiKey);
+
+    $ch = curl_init($url);
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_CUSTOMREQUEST  => 'PUT',
+        CURLOPT_POSTFIELDS     => $jsonBody,
+        CURLOPT_HTTPHEADER     => [
+            'Content-Type: application/json',
+            'Authorization: Bearer ' . $apiKey,
+            'X-API-Key: ' . $apiKey,
+            'User-Agent: WahanaAgent/1.0 (Batch1-Updater)'
+        ],
+        CURLOPT_TIMEOUT        => 30,
+        CURLOPT_SSL_VERIFYPEER => true
+    ]);
+
+    $response = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $curlErr  = curl_error($ch);
+    curl_close($ch);
+
+    if ($curlErr) {
+        echo "       [FAILED] cURL error: $curlErr\n\n";
+        $failCount++;
+        $index++;
+        continue;
+    }
+
+    $decoded = json_decode($response, true);
+    if ($httpCode === 200 && !empty($decoded['success'])) {
+        $retSlug = $decoded['data']['slug'] ?? '';
+        if ($retSlug !== $slug) {
+            die("\n[CRITICAL VIOLATION] Returned slug '{$retSlug}' does NOT match target slug '{$slug}'! Aborting immediately!\n");
+        }
+        $msg = $decoded['message'] ?? 'Updated';
+        echo "       [SUCCESS] HTTP {$httpCode}: {$msg} (Slug verified: {$retSlug})\n\n";
+        if ($msg === 'No changes detected') {
+            $skippedCount++;
+        } else {
+            $successCount++;
+        }
+    } else {
+        echo "       [FAILED] HTTP {$httpCode}: " . ($decoded['message'] ?? $response) . "\n\n";
+        $failCount++;
+    }
+
+    $index++;
+}
+
+echo "══════════════════════════════════════════════════════════════════════\n";
+echo "BATCH 1 UPDATE SUMMARY\n";
+echo "Total Courses: 10\n";
+echo "Updated      : $successCount\n";
+echo "Unchanged    : $skippedCount\n";
+echo "Failed       : $failCount\n";
+echo "══════════════════════════════════════════════════════════════════════\n";
