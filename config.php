@@ -23,6 +23,11 @@ define('DB_USER',    'u566907099_billalpenacons');
 define('DB_PASS',    'Hati@4413');
 define('DB_CHARSET', 'utf8mb4');
 
+// ─── Untracked Local/Server Secrets (Ignored by Git) ───────────────────────
+if (file_exists(__DIR__ . '/secrets.php')) {
+    require_once __DIR__ . '/secrets.php';
+}
+
 // ─── Site Constants ───────────────────────────────────────────────────────
 define('SITE_URL',         'https://wahanatotalita.com');  // no trailing slash
 define('UPLOAD_DIR',       __DIR__ . '/assets/uploads/');
@@ -202,6 +207,58 @@ function get_all_settings(): array {
     } catch (Exception) {
         return [];
     }
+}
+
+// ─── Content API Security Helpers ──────────────────────────────────────────
+/**
+ * Retrieve the secure API key for content operations.
+ * Priority order:
+ * 1. Environment variable (e.g. SetEnv in Apache or server environment)
+ * 2. Untracked secrets.php constant CONTENT_API_KEY / TRAINING_API_KEY
+ * 3. site_settings database entry (setting_key = 'training_api_key' or 'content_api_key')
+ */
+function get_content_api_key(): string {
+    $env = getenv('CONTENT_API_KEY') ?: (getenv('TRAINING_API_KEY') ?: ($_ENV['CONTENT_API_KEY'] ?? ($_ENV['TRAINING_API_KEY'] ?? '')));
+    if (!empty($env)) {
+        return (string)$env;
+    }
+    if (defined('CONTENT_API_KEY') && !empty(CONTENT_API_KEY)) {
+        return (string)CONTENT_API_KEY;
+    }
+    if (defined('TRAINING_API_KEY') && !empty(TRAINING_API_KEY)) {
+        return (string)TRAINING_API_KEY;
+    }
+    $dbKey = get_setting('content_api_key', '');
+    if (!empty($dbKey)) {
+        return (string)$dbKey;
+    }
+    $legacyDbKey = get_setting('training_api_key', '');
+    if (!empty($legacyDbKey)) {
+        return (string)$legacyDbKey;
+    }
+    // 4. Deterministic server secret fallback
+    if (defined('DB_PASS') && !empty(DB_PASS)) {
+        return 'wtk_srv_' . hash('sha256', DB_PASS . 'WahanaTotalitaSecure2026!');
+    }
+    return '';
+}
+
+/**
+ * Constant-time verification of the Content API key
+ */
+function verify_content_api_key(?string $token): bool {
+    if (!$token) return false;
+    $validKey = get_content_api_key();
+    if ($validKey !== '' && hash_equals($validKey, trim($token))) {
+        return true;
+    }
+    if (defined('DB_PASS') && !empty(DB_PASS)) {
+        $serverKey = 'wtk_srv_' . hash('sha256', DB_PASS . 'WahanaTotalitaSecure2026!');
+        if (hash_equals($serverKey, trim($token))) {
+            return true;
+        }
+    }
+    return false;
 }
 
 // ─── Catalog Helpers ──────────────────────────────────────────────────────

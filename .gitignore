@@ -37,3 +37,11 @@ pedia/
 .vscode/
 .idea/
 
+# Environment & Server Secrets (Never commit secrets to git)
+.env
+.env.*
+secrets.php
+config.local.php
+*.secret
+
+
