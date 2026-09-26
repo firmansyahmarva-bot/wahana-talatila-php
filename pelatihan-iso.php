@@ -8,9 +8,10 @@ require_once __DIR__ . '/config.php';
 $hub_data = array (
   'badge' => 'Sertifikasi ISO & QHSE',
   'title' => 'Pelatihan ISO: Lead Auditor & Internal Auditor ISO 45001, 9001 & 14001',
-  'meta_title' => 'Pelatihan ISO 45001, 9001, 14001 (Internal & Lead Auditor) — Wahana Totalita',
+  'meta_title' => 'Pelatihan ISO 45001, 9001, 14001 Auditor | Wahana Totalita',
   'meta_desc' => 'Pelatihan ISO resmi terakreditasi: ISO 45001 (K3), ISO 9001 (Mutu), ISO 14001 (Lingkungan). Awareness, Internal Auditor, Lead Auditor. Silabus & jadwal.',
   'intro_lead' => 'Pelatihan pemahaman, implementasi, dan audit sertifikasi ISO 45001:2018 (K3), ISO 9001:2015 (Mutu), dan ISO 14001:2015 (Lingkungan) berstandar internasional.',
+
   'intro' => 
   array (
     0 => 'Sistem Manajemen Mutu, Lingkungan, serta Keselamatan dan Kesehatan Kerja (QHSE) berbasis ISO 9001, ISO 14001, dan ISO 45001 merupakan standar tata kelola korporasi paling diakui di pasar global. Penerapan integrasi ISO (Integrated Management System - IMS) membuktikan keandalan operasional perusahaan dalam memenuhi ekspektasi pelanggan, melindungi kelestarian lingkungan, dan menjamin nol kecelakaan (zero harm) bagi pekerja.',

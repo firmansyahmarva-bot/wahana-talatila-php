@@ -24,9 +24,10 @@ $categories = get_categories();
 $s          = get_all_settings();
 $wa_number  = $s['wa_number'] ?? '6287759151278';
 
-$meta_title = 'Katalog Pelatihan K3 — Semua Program Sertifikasi Kemnaker RI & BNSP | Wahana Totalita';
-$meta_desc  = 'Katalog lengkap pelatihan K3 Wahana Totalita: konstruksi, pertambangan, migas, lingkungan, ISO, dan puluhan program lain. Sertifikasi Kemnaker RI & BNSP. Yogyakarta & in-house.';
+$meta_title = 'Katalog Pelatihan K3 Resmi Kemnaker & BNSP | Wahana Totalita';
+$meta_desc  = 'Katalog lengkap pelatihan K3 resmi Kemnaker RI & BNSP: Ahli K3 Umum, alat berat, lingkungan & ISO. Kelas online & offline batch terdekat. Daftar via WhatsApp!';
 $page_url   = SITE_URL . '/pelatihan/';
+
 
 // Build category groups up front so empty categories are skipped cleanly.
 $groups = [];
@@ -248,8 +249,9 @@ if (is_file($_core_css_file)) {
 <!-- HERO -->
 <section class="pcat-hero">
   <div class="container">
-    <h1>Katalog Pelatihan K3</h1>
-    <p>Semua program sertifikasi K3 Wahana Totalita — Kemnaker RI &amp; BNSP, siap tatap muka di Yogyakarta maupun in-house di lokasi perusahaan Anda di seluruh Indonesia.</p>
+    <h1>Katalog Pelatihan K3 &amp; Sertifikasi Resmi</h1>
+    <p>Semua program sertifikasi K3 resmi Kemnaker RI &amp; BNSP — tersedia kelas online, tatap muka di Yogyakarta, maupun in-house training perusahaan di seluruh Indonesia.</p>
+
     <div class="pcat-badges">
       <span class="pcat-badge">✔ Kemnaker RI &amp; BNSP</span>
       <span class="pcat-badge">✔ Online &amp; Offline</span>

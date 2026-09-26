@@ -106,8 +106,9 @@ $faqs = [
 ];
 ?>
 <?php
-$page_title = 'Keselamatan dan Kesehatan Kerja (K3) — Panduan Lengkap & Program Sertifikasi Yogyakarta';
-$meta_desc = 'Panduan lengkap Keselamatan dan Kesehatan Kerja (K3): dasar hukum, program sertifikasi, SMK3, dan pelatihan K3 resmi bersertifikat Kemnaker RI di Yogyakarta.';
+$page_title = 'Pelatihan K3 & Keselamatan Kerja Resmi | Wahana Totalita';
+$meta_desc = 'Panduan lengkap Keselamatan dan Kesehatan Kerja (K3), dasar hukum UU 1/1970, program sertifikasi resmi Kemnaker RI & BNSP, dan implementasi SMK3 perusahaan.';
+
 require __DIR__ . '/includes/head.php';
 ?>
 <script type="application/ld+json">

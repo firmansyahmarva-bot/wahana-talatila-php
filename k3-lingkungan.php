@@ -8,9 +8,10 @@ require_once __DIR__ . '/config.php';
 $hub_data = array (
   'badge' => 'K3 Lingkungan Hidup & AMDAL',
   'title' => 'Pelatihan K3 Lingkungan: Penanggung Jawab Pengendalian Pencemaran (PPPA & POPA) BNSP',
-  'meta_title' => 'Pelatihan K3 Lingkungan (PPPA, POPA, PLB3) Sertifikasi BNSP — Wahana Totalita',
-  'meta_desc' => 'Pelatihan Pengendalian Pencemaran Air (PPPA), Udara (POPA) & Limbah B3 (PLB3) bersertifikat resmi BNSP sesuai regulasi KLHK & Permenaker 5/2018. Silabus & jadwal.',
+  'meta_title' => 'Pelatihan K3 Lingkungan (PPPA & PLB3) BNSP | Wahana Totalita',
+  'meta_desc' => 'Pelatihan Pengendalian Pencemaran Air (PPPA), Udara (POPA) & Limbah B3 (PLB3) bersertifikat resmi BNSP sesuai regulasi KLHK & Permenaker 5/2018. Daftar via WA.',
   'intro_lead' => 'Sertifikasi kompetensi resmi BNSP untuk Penanggung Jawab Pengendalian Pencemaran Air (PPPA), Udara (POPA), dan Pengelolaan Limbah B3 (PLB3).',
+
   'intro' => 
   array (
     0 => 'Pengelolaan lingkungan industri menjadi parameter keberlanjutan bisnis dan kepatuhan hukum paling disorot oleh Kementerian Lingkungan Hidup dan Kehutanan (KLHK) serta Dinas Lingkungan Hidup. Pelanggaran baku mutu air limbah, emisi cerobong gas, atau pembuangan limbah B3 ilegal dapat berujung pada sanksi administratif pembekuan izin hingga tuntutan pidana lingkungan.',
