@@ -64,10 +64,11 @@ if ($isDemand) {
     // The one indexed hub.
     $robots = 'index,follow';
     $canonical = $hubUrl;
-    $h1 = 'Pusat Pelatihan &amp; Sertifikasi K3, BNSP &amp; Kemnaker';
-    $title = 'Pelatihan & Sertifikasi K3, BNSP & Kemnaker — Semua Program | ' . $settings['org_name'];
-    $metaDesc = 'Direktori lengkap pelatihan & sertifikasi K3, BNSP, dan Kemnaker: Ahli K3 Umum, K3 Migas, P3K, lingkungan, dan puluhan program lain. Biaya transparan, sertifikat resmi, konsultasi via WhatsApp.';
+    $h1 = 'Pusat Pelatihan K3 Resmi Kemnaker RI &amp; BNSP';
+    $title = 'Pelatihan K3 Resmi Kemnaker RI & BNSP | ' . $settings['org_name'];
+    $metaDesc = 'Pusat pelatihan K3 resmi bersertifikasi Kemnaker RI & BNSP: Ahli K3 Umum, teknisi, alat berat & K3 industri. Jadwal batch terdekat & konsultasi via WhatsApp.';
 }
+
 
 // --- Content data ------------------------------------------------------------
 $grouped = $programRepo->groupedByCertification();

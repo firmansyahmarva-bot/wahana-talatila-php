@@ -56,10 +56,36 @@ if (!empty($hub['article_cats'])) {
     $related_articles = $art_stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-$page_title = 'Pelatihan ' . $category['name'] . ' Bersertifikasi Kemnaker & BNSP — Wahana Totalita';
-$page_desc = 'Daftar ' . $total . ' program pelatihan ' . $category['name'] . ' resmi berlisensi Kemnaker RI & BNSP. Tersedia kelas online, tatap muka di Yogyakarta, dan in-house training.';
-$canonical = SITE_URL . '/pelatihan/' . $cat_slug . '/' . ($page > 1 ? '?page=' . $page : '');
-$accent = $category['accent_color'] ?? '#0A4A2E';
+$CATEGORY_SEO = [
+    'k3' => [
+        'title' => 'Pelatihan K3 Resmi Kemnaker RI & BNSP | Wahana Totalita',
+        'h1'    => 'Pelatihan K3 & Sertifikasi Keselamatan Kerja',
+        'desc'  => 'Daftar ' . $total . ' program pelatihan K3 bersertifikasi resmi Kemnaker RI & BNSP. Pembinaan kompetensi keselamatan kerja industri, kelas online & tatap muka.',
+    ],
+    'lingkungan' => [
+        'title' => 'Pelatihan K3 Lingkungan & Limbah BNSP | Wahana Totalita',
+        'h1'    => 'Pelatihan Pengelolaan Lingkungan & Limbah',
+        'desc'  => 'Program pelatihan dan sertifikasi kompetensi lingkungan hidup & limbah B3 berlisensi BNSP resmi (' . $total . ' program: PPPA, POPAL, PLB3). Daftar via WA.',
+    ],
+    'mining' => [
+        'title' => 'Pelatihan K3 Pertambangan & Mining BNSP | Wahana Totalita',
+        'h1'    => 'Pelatihan K3 Pertambangan (Minerba)',
+        'desc'  => 'Sertifikasi kompetensi pengawas operasional pertambangan berlisensi BNSP (' . $total . ' program: POP, POM, POU minerba). Hubungi tim kami via WhatsApp.',
+    ],
+    'system-management' => [
+        'title' => 'Pelatihan ISO & Sistem Manajemen SMK3 | Wahana Totalita',
+        'h1'    => 'Pelatihan ISO & Sistem Manajemen (SMK3)',
+        'desc'  => 'Pelatihan dan konsultasi sistem manajemen (' . $total . ' program: SMK3 PP 50/2012, ISO 9001, 14001, 45001). Sertifikasi resmi & pendampingan audit.',
+    ],
+];
+
+$seo_info   = $CATEGORY_SEO[$cat_slug] ?? null;
+$page_title = $seo_info['title'] ?? ('Pelatihan ' . $category['name'] . ' Resmi | Wahana Totalita');
+$page_h1    = $seo_info['h1']    ?? ('Pelatihan ' . $category['name']);
+$page_desc  = $seo_info['desc']  ?? ('Daftar ' . $total . ' program pelatihan ' . $category['name'] . ' resmi berlisensi Kemnaker RI & BNSP. Tersedia kelas online & offline.');
+$canonical  = SITE_URL . '/pelatihan/' . $cat_slug . '/' . ($page > 1 ? '?page=' . $page : '');
+$accent     = $category['accent_color'] ?? '#0A4A2E';
+
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -297,7 +323,8 @@ if (is_file($_core_css_file)) {
     <?php if (!empty($category['icon'])): ?>
       <span class="cat-hero-icon"><?= $category['icon'] ?></span>
     <?php endif; ?>
-    <h1 class="cat-hero-title">Pelatihan <?= e($category['name']) ?></h1>
+    <h1 class="cat-hero-title"><?= e($page_h1) ?></h1>
+
     <p class="cat-hero-sub"><?= $total ?> program pelatihan bersertifikasi resmi Kemnaker RI &amp; BNSP, siap tatap muka di Yogyakarta maupun in-house di lokasi perusahaan Anda di seluruh Indonesia.</p>
     <div class="cat-hero-badges">
       <span class="cat-hero-badge">🏛️ Sertifikasi Resmi Kemnaker &amp; BNSP</span>

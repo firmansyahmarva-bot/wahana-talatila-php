@@ -8,9 +8,10 @@ require_once __DIR__ . '/config.php';
 $hub_data = array (
   'badge' => 'Audit & Penerapan SMK3 PP 50',
   'title' => 'Pelatihan SMK3 PP 50 Tahun 2012: Auditor Internal & Implementasi Sistem',
-  'meta_title' => 'Pelatihan Auditor Internal SMK3 PP No. 50 Tahun 2012 — Wahana Totalita',
+  'meta_title' => 'Pelatihan Auditor SMK3 PP 50/2012 Resmi | Wahana Totalita',
   'meta_desc' => 'Pelatihan Auditor Internal SMK3 PP No. 50 Tahun 2012 resmi bersertifikat. Persiapan audit 64, 122 & 166 kriteria menuju bendera emas Kemnaker RI. Silabus & jadwal.',
   'intro_lead' => 'Pelatihan implementasi dan sertifikasi Auditor Internal SMK3 PP No. 50 Tahun 2012 untuk persiapan audit sertifikasi bendera emas Kemnaker RI.',
+
   'intro' => 
   array (
     0 => 'Sistem Manajemen Keselamatan dan Kesehatan Kerja (SMK3) diatur dalam Peraturan Pemerintah No. 50 Tahun 2012 dan merupakan kewajiban hukum mutlak bagi setiap perusahaan yang mempekerjakan 100 orang pekerja atau lebih, atau memiliki potensi bahaya tinggi.',

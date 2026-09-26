@@ -8,9 +8,10 @@ require_once __DIR__ . '/config.php';
 $hub_data = array (
   'badge' => 'K3 Pertambangan',
   'title' => 'Pelatihan K3 Pertambangan: Pengawas Operasional Pratama (POP) & Madya (POM) BNSP',
-  'meta_title' => 'Pelatihan Pengawas Operasional Tambang (POP & POM) BNSP — Wahana Totalita',
+  'meta_title' => 'Pelatihan K3 Pertambangan (POP & POM) BNSP | Wahana Totalita',
   'meta_desc' => 'Pelatihan Pengawas Operasional Pratama (POP) & Madya (POM) Tambang bersertifikat resmi BNSP sesuai Kepmen ESDM No. 1827/2018. Silabus, jadwal & biaya.',
   'intro_lead' => 'Sertifikasi kompetensi resmi BNSP untuk Pengawas Operasional Pratama (POP) dan Madya (POM) sesuai regulasi Kepmen ESDM No. 1827 K/30/MEM/2018.',
+
   'intro' => 
   array (
     0 => 'Industri pertambangan mineral dan batubara memiliki karakteristik operasional berskala masif dengan potensi bahaya tinggi, mulai dari kestabilan lereng tambang terbuka (open pit), operasional alat berat raksasa (heavy dump truck & excavator), bahaya ledakan bahan peledak (blasting), hingga terowongan tambang bawah tanah (underground mining).',
