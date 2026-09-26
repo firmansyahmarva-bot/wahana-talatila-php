@@ -128,9 +128,8 @@ function handle_get(PDO $pdo): never {
     $params = [];
 
     if ($search !== '') {
-        $where[] = "(t.name LIKE ? OR t.slug LIKE ? OR t.short_name LIKE ? OR t.description LIKE ?)";
+        $where[] = "(t.name LIKE ? OR t.slug LIKE ? OR t.description LIKE ?)";
         $wild = "%$search%";
-        $params[] = $wild;
         $params[] = $wild;
         $params[] = $wild;
         $params[] = $wild;
@@ -167,7 +166,7 @@ function handle_get(PDO $pdo): never {
     // Select rows
     $selectCols = ($fields === 'full')
         ? "t.*, c.name AS cat_name, c.slug AS cat_slug, c.icon AS cat_icon, c.accent_color"
-        : "t.id, t.name, t.short_name, t.slug, t.mode, t.certification, t.price, t.duration_days,
+        : "t.id, t.name, t.slug, t.mode, t.certification, t.price, t.duration_days,
            t.is_featured, t.is_active, t.sort_order, t.view_count, t.updated_at,
            c.name AS cat_name, c.slug AS cat_slug";
 
