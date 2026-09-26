@@ -319,15 +319,143 @@ function flash_get(): ?array {
     return null;
 }
 
+function clean_program_name(string $raw_name): string {
+    $clean = trim($raw_name);
+    if (strcasecmp($clean, 'ak3-bnsp') === 0) {
+        return 'Pelatihan Ahli K3 Umum';
+    }
+    // If entire name is uppercase, normalize to Title Case
+    if (mb_strtoupper($clean) === $clean && preg_match('/[A-Z]/', $clean)) {
+        $clean = ucwords(mb_strtolower($clean));
+        $clean = preg_replace('/\bk3\b/i', 'K3', $clean);
+        $clean = preg_replace('/\bak3u\b/i', 'AK3U', $clean);
+        $clean = preg_replace('/\bbnsp\b/i', 'BNSP', $clean);
+        $clean = preg_replace('/\bkemnaker\b/i', 'Kemnaker', $clean);
+    }
+
+    // Strip trailing pipes, status, modes, and certification clutter
+    $clean = preg_replace('/\s*\|\s*(offline|oflline|online|tatap\s*muka|blended|sertifikas?i?\s*(bnsp|kemnaker\s*ri?)|training\s+reguler).*$/i', '', $clean);
+    $clean = preg_replace('/\s*\|\s*$/', '', $clean);
+
+    // Strip redundant "Pelatihan dan Sertifikasi" or "Pelatihan & Sertifikasi" at start
+    $clean = preg_replace('/^Pelatihan\s+(&|dan)\s+Sertifikasi\s+/i', 'Pelatihan ', $clean);
+    // Normalize abbreviations
+    $clean = preg_replace('/\bKeb\.?\s*/i', 'Kebakaran ', $clean);
+    $clean = preg_replace('/\bAhli\s+K3\s+Penanggulangan\s+Kebakaran\b/i', 'Ahli K3 Kebakaran', $clean);
+
+    // Equipment patterns: convert awkward admin titles to high-volume user search terms
+    if (preg_match('/Peralatan\s+Pendukung\s*\(([^)]+)\)/i', $clean, $m)) {
+        $clean = "Pelatihan Operator " . trim($m[1]);
+    }
+    if (preg_match('/Pengoperasian\s+Alat\s+Gali\s+Muat\s*\(([^)]+)\)/i', $clean, $m)) {
+        $clean = "Pelatihan Operator " . trim($m[1]);
+    }
+    if (preg_match('/Pengoperasian\s+Alat\s+Angkut\s*\(([^)]+)\)/i', $clean, $m)) {
+        $clean = "Pelatihan Operator " . trim($m[1]);
+    }
+    if (preg_match('/Pengoperasian\s+Alat\s+Angkat\s*\(([^)]+)\)/i', $clean, $m)) {
+        $clean = "Pelatihan Operator " . trim($m[1]);
+    }
+
+    // Mining POP / POM / POU
+    if (preg_match('/^(Pelatihan\s+)?POP\s*\((.*?)\)/i', $clean, $m)) {
+        $clean = "Pelatihan POP (Pengawas Operasional Pertama)";
+    }
+    if (preg_match('/^(Pelatihan\s+)?POM\s*\((.*?)\)/i', $clean, $m)) {
+        $clean = "Pelatihan POM (Pengawas Operasional Madya)";
+    }
+    if (preg_match('/^(Pelatihan\s+)?POU\s*\((.*?)\)/i', $clean, $m)) {
+        $clean = "Pelatihan POU (Pengawas Operasional Utama)";
+    }
+
+    // Environmental acronyms: PPPA, POPAL, PPPU, POIPPU, etc.
+    if (preg_match('/^(.*?)\s*\(([A-Z0-9\s]{2,12})\)$/i', $clean, $m)) {
+        $long_phrase = $m[1];
+        $acronym = $m[2];
+        if (mb_strlen($long_phrase) > 22 && !preg_match('/(POP|POM|POU)/', $clean)) {
+            $short_desc = preg_replace('/^Pelatihan\s+(Penanggung\s+Jawab\s+(Operasional\s+)?)?/i', '', $long_phrase);
+            $clean = "Pelatihan {$acronym} ({$short_desc})";
+        }
+    }
+
+    // Always ensure front-loaded "Pelatihan" intent keyword
+    if (!preg_match('/^(pelatihan|sertifikasi|pembinaan|training|kursus)/i', $clean)) {
+        $clean = 'Pelatihan ' . $clean;
+    }
+    
+    $clean = preg_replace('/\s*\|\s*/', ' - ', $clean);
+    return preg_replace('/\s+/', ' ', trim($clean));
+}
+
+function clean_cert(string $raw_cert): string {
+    $c = trim($raw_cert);
+    if (stripos($c, 'kemnaker') !== false) return 'Kemnaker RI';
+    if (stripos($c, 'bnsp') !== false) return 'BNSP';
+    if (stripos($c, 'klhk') !== false) return 'KLHK';
+    return $c ?: 'Resmi';
+}
+
+function build_training_title(array $training): string {
+    if (!empty($training['meta_title'])) {
+        return $training['meta_title'];
+    }
+    $rawName = $training['short_name'] ?? $training['name'] ?? '';
+    $cleanName = clean_program_name($rawName);
+    $cert = clean_cert($training['certification'] ?? 'BNSP');
+    $brand = 'Wahana Totalita';
+
+    $hasCert = (stripos($cleanName, $cert) !== false) || 
+               (stripos($cleanName, 'BNSP') !== false && $cert === 'BNSP') || 
+               (stripos($cleanName, 'Kemnaker') !== false && stripos($cert, 'Kemnaker') !== false);
+
+    // Option 1: CleanName + Cert + Brand
+    $t1 = $hasCert ? "{$cleanName} | {$brand}" : "{$cleanName} {$cert} | {$brand}";
+    if (mb_strlen($t1) <= 65) return $t1;
+
+    // Option 2: Strip parenthetical description (e.g. "Pelatihan PPPA (Pengendalian Pencemaran Air)" -> "Pelatihan PPPA")
+    if (preg_match('/^(.*?)\s*\([^)]+\)$/', $cleanName, $m)) {
+        $short = $m[1];
+        $t2 = $hasCert ? "{$short} | {$brand}" : "{$short} {$cert} | {$brand}";
+        if (mb_strlen($t2) <= 65) return $t2;
+    }
+
+    // Option 3: CleanName without cert
+    $t3 = "{$cleanName} | {$brand}";
+    if (mb_strlen($t3) <= 65) return $t3;
+
+    // Option 4: Word-boundary truncation strictly ≤65 chars
+    $maxLen = 65 - mb_strlen(" | {$brand}");
+    $sub = mb_substr($cleanName, 0, $maxLen);
+    $sub = preg_replace('/\s+[\S\-]*$/', '', $sub);
+    return "{$sub} | {$brand}";
+}
+
+function build_training_meta_desc(array $training): string {
+    if (!empty($training['meta_desc'])) {
+        return $training['meta_desc'];
+    }
+    $rawName = $training['short_name'] ?? $training['name'] ?? '';
+    $cleanName = clean_program_name($rawName);
+    $cert = clean_cert($training['certification'] ?? 'BNSP');
+    $modeLabel = mode_label($training['mode'] ?? '');
+    $dur = !empty($training['duration_days']) ? (int)$training['duration_days'] . ' hari' : '';
+    $price = (!empty($training['price']) && (int)$training['price'] > 0) ? ', investasi ' . format_price((int)$training['price']) : '';
+    $details = $dur ? " ({$dur}, {$modeLabel})" : " ({$modeLabel})";
+
+    return "Daftar {$cleanName} bersertifikasi resmi {$cert}{$details}{$price}. Kurikulum resmi, materi lengkap & sertifikat terdaftar. Daftar batch via WhatsApp!";
+}
+
+
 // ─── JSON Schema Builder ──────────────────────────────────────────────────
 function course_schema(array $t): string {
     $site = get_setting('site_name', 'Wahana Totalita Konsultan');
     $url  = SITE_URL . '/pelatihan/' . ($t['slug'] ?? '') . '/';
+    $cleanTitle = clean_program_name($t['name'] ?? '') . ' ' . clean_cert($t['certification'] ?? 'BNSP');
 
     $schema = [
         '@context'   => 'https://schema.org',
         '@type'      => 'Course',
-        'name'       => $t['name'] ?? '',
+        'name'       => $cleanTitle,
         'description'=> strip_tags($t['description'] ?? ''),
         'url'        => $url,
         'provider'   => [

@@ -186,28 +186,68 @@ if (str_contains($haystack, 'forklift')) {
     ]);
 }
 
-$faqItems = array_merge($faqUniversal, $topicFaqs);
+if (str_contains($haystack, 'kebakaran') || str_contains($haystack, 'keb.') || str_contains($haystack, 'damkar') || str_contains($haystack, 'fire')) {
+    $topicFaqs = array_merge($topicFaqs, [
+        ['q' => 'Apa saja tingkatan sertifikasi K3 Penanggulangan Kebakaran Kemnaker RI?', 'a' => 'Sesuai Kepmenaker No. KEP.186/MEN/1999, sertifikasi kebakaran terbagi dalam 4 tingkat: Petugas Peran Kebakaran (Kelas D), Regu Penanggulangan Kebakaran (Kelas C), Koordinator Unit Penanggulangan Kebakaran (Kelas B), dan Ahli K3 Spesialis Penanggulangan Kebakaran (Kelas A) sebagai penanggung jawab teknis keselamatan kebakaran tertinggi.'],
+        ['q' => 'Berapa jumlah personil K3 Kebakaran yang wajib disediakan di perusahaan?', 'a' => 'Sesuai Kepmenaker 186/1999, perusahaan wajib memiliki sekurang-kurangnya 2 orang Petugas Peran Kebakaran Kelas D untuk setiap 20 orang tenaga kerja, serta Regu Kelas C dan Koordinator Kelas B disesuaikan dengan tingkat klasifikasi bahaya kebakaran tempat kerja.'],
+    ]);
+}
+
+if (str_contains($haystack, 'pppa') || str_contains($haystack, 'popal') || str_contains($haystack, 'pppu') || str_contains($haystack, 'poippu') || str_contains($haystack, 'limbah') || str_contains($haystack, 'amdal') || str_contains($haystack, 'lingkungan')) {
+    $topicFaqs = array_merge($topicFaqs, [
+        ['q' => 'Siapa yang wajib memiliki sertifikasi kompetensi pengendalian pencemaran (PPPA / POPAL / PPPU)?', 'a' => 'Sesuai Permen LHK No. P.05/2018 dan P.06/2018, setiap industri penghasil air limbah dan emisi gas buang wajib mempekerjakan personil yang tersertifikasi kompetensi BNSP di bidang pengelolaan lingkungan hidup, seperti POPAL (Penanggung Jawab Operasional Pengolahan Air Limbah) dan PPPA (Penanggung Jawab Pengendalian Pencemaran Air).'],
+        ['q' => 'Apa perbedaan antara sertifikasi POPAL dan PPPA?', 'a' => 'POPAL berfokus pada tataran teknis operasional harian Instalasi Pengolahan Air Limbah (IPAL), troubleshooting, dan perawatan unit. Sedangkan PPPA bertanggung jawab pada level manajerial pengendalian pencemaran air secara menyeluruh, pemantauan baku mutu, evaluasi kinerja IPAL, dan pelaporan berkala ke dinas lingkungan hidup.'],
+    ]);
+}
+
+if (str_contains($haystack, 'pop') || str_contains($haystack, 'pom') || str_contains($haystack, 'pou') || str_contains($haystack, 'tambang') || str_contains($haystack, 'mining')) {
+    $topicFaqs = array_merge($topicFaqs, [
+        ['q' => 'Apa syarat mengikuti uji kompetensi POP (Pengawas Operasional Pertama) Pertambangan?', 'a' => 'Syarat sertifikasi POP BNSP mengacu pada Kepmen ESDM No. 1827 K/30/MEM/2018: minimal pendidikan D3/S1 pengalaman kerja minimal 1 tahun di pertambangan minerba, atau pendidikan SMA/SMK dengan pengalaman minimal 10 tahun di industri pertambangan, dibuktikan dengan surat keterangan kerja dari KTT (Kepala Teknik Tambang).'],
+        ['q' => 'Apa perbedaan tingkatan POP, POM, dan POU di pertambangan?', 'a' => 'POP (Pengawas Operasional Pertama) ditujukan untuk level foreman/frontline supervisor yang mengawasi operasional harian. POM (Pengawas Operasional Madya) untuk level superintendent/middle management. POU (Pengawas Operasional Utama) untuk pimpinan tertinggi operasional tambang/KTT.'],
+    ]);
+}
+
+if (str_contains($haystack, 'excavator') || str_contains($haystack, 'crane') || str_contains($haystack, 'rigger') || str_contains($haystack, 'loader') || str_contains($haystack, 'alat-berat') || str_contains($haystack, 'grader') || str_contains($haystack, 'compactor')) {
+    $topicFaqs = array_merge($topicFaqs, [
+        ['q' => 'Berapa lama masa berlaku Lisensi K3 (SIO) Operator Alat Berat?', 'a' => 'Berdasarkan Permenaker No. 8 Tahun 2020 tentang Keselamatan dan Kesehatan Kerja Pesawat Angkat dan Pesawat Angkut, Lisensi K3 / SIO (Surat Ijin Operator) berlaku selama 5 tahun sejak tanggal diterbitkan dan dapat diperpanjang kembali.'],
+        ['q' => 'Apa saja syarat penerbitan Lisensi K3 (SIO) Alat Berat Kemnaker RI?', 'a' => 'Persyaratan utama: usia minimal 18 tahun, pendidikan formal minimal SMP/SMA sederajat (tergantung kelas alat), surat keterangan sehat jasmani, pas foto background merah, serta dinyatakan lulus evaluasi teori dan praktik oleh Kemnaker RI.'],
+    ]);
+}
+
+if (str_contains($haystack, 'listrik') || str_contains($haystack, 'electrical')) {
+    $topicFaqs = array_merge($topicFaqs, [
+        ['q' => 'Kapan perusahaan wajib memiliki Teknisi K3 Listrik dan Ahli K3 Listrik?', 'a' => 'Berdasarkan Permenaker No. 12 Tahun 2015, tempat kerja dengan pembangkitan, transmisi, distribusi, atau pemanfaatan listrik dengan kapasitas lebih dari 200 kVA wajib memiliki Teknisi K3 Listrik dan/atau Ahli K3 Listrik yang ditunjuk oleh Menteri Ketenagakerjaan.'],
+    ]);
+}
+
+if (str_contains($haystack, 'p3k') || str_contains($haystack, 'first aid')) {
+    $topicFaqs = array_merge($topicFaqs, [
+        ['q' => 'Berapa rasio petugas P3K yang wajib disediakan di tempat kerja?', 'a' => 'Sesuai Permenaker No. 15 Tahun 2008, untuk tempat kerja dengan potensi bahaya rendah rasio petugas P3K adalah 1 orang per 150 pekerja. Untuk tempat kerja dengan potensi bahaya tinggi (konstruksi, pertambangan, pabrik kimia), rasio wajib adalah minimal 1 orang petugas P3K per 100 pekerja.'],
+    ]);
+}
+
+// 2026-09-26: Dynamic course-specific FAQ items
+$hero_name  = clean_program_name($training['short_name'] ?: $training['name']);
+$courseFaqs = [
+    [
+        'q' => 'Kapan jadwal pelaksanaan ' . $hero_name . ' batch terdekat?',
+        'a' => 'Jadwal ' . $hero_name . ' diselenggarakan secara berkala setiap bulan untuk kelas reguler publik (online maupun tatap muka) dan in-house training di perusahaan Anda. Hubungi tim kami via WhatsApp di nomor 0877-5915-1278 untuk mendapatkan jadwal batch dan silabus terbaru.',
+    ],
+    [
+        'q' => 'Berapa biaya investasi dan apa saja fasilitas pelatihan ini?',
+        'a' => 'Investasi pelatihan ' . $hero_name . (!empty($training['price']) && (int)$training['price'] > 0 ? ' adalah ' . format_price((int)$training['price']) . '/peserta' : ' dapat dikonsultasikan secara gratis') . '. Fasilitas mencakup sertifikat resmi, modul materi lengkap, pembinaan oleh instruktur profesional berpengalaman, dan konsultasi pra-pelatihan.',
+    ],
+];
+
+$faqItems = array_merge($courseFaqs, $topicFaqs, $faqUniversal);
 
 $s         = get_all_settings();
 $wa_number = $s['wa_number'] ?? '6287759151278';
-$wa_msg    = $training['wa_text'] ?: 'Halo, saya ingin info ' . $training['name'];
+$wa_msg    = $training['wa_text'] ?: ('Halo Wahana Totalita, saya ingin konsultasi pendaftaran ' . $hero_name);
 
-// SEO title: strip long parenthetical, target ≤65 chars
-$meta_title = $training['meta_title'] ?: (function() use ($training) {
-    // Use short_name if set, else strip (long parenthetical) from name
-    $name = $training['short_name'] ?? preg_replace('/\s*\([^)]{20,}\)/', '', $training['name']);
-    $cert = $training['certification'] ?? 'BNSP';
-    $mode = $training['mode'] === 'offline' ? 'Offline' : 'Online';
-    // Try with Yogyakarta first, fall back to shorter brand
-    foreach (['Wahana Totalita Yogyakarta', 'Wahana Totalita'] as $brand) {
-        $title = trim($name) . ' ' . $cert . ' ' . $mode . ' | ' . $brand;
-        if (mb_strlen($title) <= 65) return $title;
-    }
-    // Last resort: truncate name
-    $suffix = ' ' . $cert . ' ' . $mode . ' | Wahana Totalita';
-    return mb_substr(trim($name), 0, 65 - mb_strlen($suffix)) . $suffix;
-})();
-$meta_desc  = $training['meta_desc']  ?: 'Daftar ' . $training['name'] . ' bersertifikasi ' . $training['certification'] . '. Mode: ' . mode_label($training['mode']) . '. Harga ' . format_price((int)$training['price']) . '/orang. Hubungi kami via WhatsApp.';
+// 2026-09-26 SEO Overhaul: dynamic keyword optimization strictly ≤65 chars
+$meta_title = build_training_title($training);
+$meta_desc  = build_training_meta_desc($training);
 $page_url   = SITE_URL . '/pelatihan/' . $training['slug'] . '/';
 
 // Cross-silo link (Fix 7): breadcrumb + schema should point at the real
@@ -217,14 +257,6 @@ if (isset($HUB_CATEGORY_MAP[$training['cat_slug'] ?? ''])) {
     $hub_link = $HUB_CATEGORY_MAP[$training['cat_slug']]['hub_url'];
 }
 
-// 2026-07-23: real training names run long ("Pelatihan dan Sertifikasi
-// Pengambil Contoh Uji Emisi Sumber Tidak Bergerak Jenjang Kualifikasi
-// 3") — fine for the H1 at normal size, but the new hero sets the H1 in
-// a large condensed display face where a name that long would overflow
-// or force a tiny clamped size. Prefer short_name (same field meta_title
-// already uses for the same reason); strip the same long parenthetical
-// pattern as a fallback so this doesn't need a new admin field.
-$hero_name = $training['short_name'] ?: preg_replace('/\s*\([^)]{20,}\)/', '', $training['name']);
 
 // 2026-07-24: sidebar "registration ticket" reads two optional fields that
 // don't appear elsewhere in this file — `schedule` (free-text next batch /
@@ -314,7 +346,7 @@ if (is_file($_core_css_file)) {
         ['@type'=>'ListItem','position'=>1,'name'=>'Beranda','item'=>SITE_URL.'/'],
         ['@type'=>'ListItem','position'=>2,'name'=>'Pelatihan','item'=>SITE_URL.'/pelatihan/'],
         ['@type'=>'ListItem','position'=>3,'name'=>$training['cat_name'],'item'=>SITE_URL.$hub_link],
-        ['@type'=>'ListItem','position'=>4,'name'=>$training['name'],'item'=>$page_url],
+        ['@type'=>'ListItem','position'=>4,'name'=>$hero_name,'item'=>$page_url],
     ]
 ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?></script>
 <?php if (!empty($faqItems)): ?>
@@ -350,7 +382,7 @@ if (is_file($_core_css_file)) {
         <li aria-hidden="true">›</li>
         <li><a href="<?= e($hub_link) ?>"><?= e($training['cat_name']) ?></a></li>
         <li aria-hidden="true">›</li>
-        <li aria-current="page"><?= e($training['name']) ?></li>
+        <li aria-current="page"><?= e($hero_name) ?></li>
       </ol>
     </nav>
   </div>
