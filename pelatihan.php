@@ -244,6 +244,7 @@ $faqItems = array_merge($courseFaqs, $topicFaqs, $faqUniversal);
 $s         = get_all_settings();
 $wa_number = $s['wa_number'] ?? '6287759151278';
 $wa_msg    = $training['wa_text'] ?: ('Halo Wahana Totalita, saya ingin konsultasi pendaftaran ' . $hero_name);
+$wa_inhouse_msg = 'Halo Wahana Totalita, kami dari perusahaan ingin meminta proposal & penawaran resmi In-House Training untuk topik: ' . $hero_name;
 
 // 2026-09-26 SEO Overhaul: dynamic keyword optimization strictly ≤65 chars
 $meta_title = build_training_title($training);
@@ -389,42 +390,68 @@ if (is_file($_core_css_file)) {
 </div>
 
 <!-- DETAIL HERO -->
+<?php
+$cert_raw = trim($training['certification'] ?? '');
+$cert_clean = preg_replace('/^sertifikasi\s+/i', '', $cert_raw);
+$cat_name_clean = trim($training['cat_name'] ?? '');
+?>
 <section class="pd-hero">
   <div class="container pd-hero-grid">
     <div class="pd-hero-copy">
-      <p class="pd-eyebrow">Sertifikasi <?= e($training['certification']) ?> &middot; <?= e($training['cat_name']) ?></p>
+      <div class="pd-eyebrow">
+        <span class="pd-eyebrow-pill">PJK3 Resmi Kemnaker RI</span>
+        <span class="pd-eyebrow-dot" aria-hidden="true">&middot;</span>
+        <span class="pd-eyebrow-cert">Sertifikasi <?= e($cert_clean ?: $cert_raw) ?></span>
+        <span class="pd-eyebrow-dot" aria-hidden="true">&middot;</span>
+        <span class="pd-eyebrow-cat"><?= e($cat_name_clean) ?></span>
+      </div>
       <h1><?= e($hero_name) ?></h1>
-      <p class="pd-hero-lede"><?= e(mb_strimwidth(strip_tags($training['description'] ?? ''), 0, 180, '…')) ?: 'Sertifikasi resmi ' . e($training['certification']) . ', diselenggarakan Wahana Totalita Konsultan.' ?></p>
+      <p class="pd-hero-lede"><?= e(mb_strimwidth(strip_tags($training['description'] ?? ''), 0, 220, '…')) ?: 'Sertifikasi resmi ' . e($training['certification']) . ', diselenggarakan Wahana Totalita Konsultan secara komprehensif.' ?></p>
       <div class="pd-hero-badges">
         <?php if (!empty($training['duration_days'])): ?>
-        <span class="pd-hero-badge"><?= (int)$training['duration_days'] ?> Hari</span>
+        <span class="pd-hero-badge"><span class="badge-icon">⏱️</span> <?= (int)$training['duration_days'] ?> Hari Pelatihan</span>
         <?php endif; ?>
-        <span class="pd-hero-badge"><?= e(mode_label($training['mode'])) ?></span>
-        <span class="pd-hero-badge"><?= e($training['cat_name']) ?></span>
+        <span class="pd-hero-badge"><span class="badge-icon">🌐</span> <?= e(mode_label($training['mode'])) ?></span>
+        <span class="pd-hero-badge pd-badge-inhouse"><span class="badge-icon">🏢</span> Tersedia In-House Training</span>
+        <span class="pd-hero-badge pd-badge-accredited"><span class="badge-icon">✓</span> Terakreditasi Resmi</span>
       </div>
       <div class="pd-cta-row">
-        <a href="<?= wa_url($wa_msg) ?>" class="pd-cta-btn" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
-          Daftar via WhatsApp
+        <a href="<?= wa_url($wa_msg) ?>" class="pd-cta-btn pd-cta-primary" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
+          <span>Daftar via WhatsApp</span>
         </a>
-        <a href="<?= wa_url('Halo, saya ingin info jadwal ' . $training['name']) ?>" class="pd-cta-secondary" target="_blank" rel="noopener">Tanya jadwal &amp; info lebih &rarr;</a>
+        <a href="<?= wa_url($wa_inhouse_msg) ?>" class="pd-cta-btn pd-cta-inhouse" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" aria-hidden="true"><path d="M3 21h18M3 7v14M21 7v14M6 11h4M6 15h4M14 11h4M14 15h4M9 3h6v4H9z"/></svg>
+          <span>Penawaran In-House Training</span>
+        </a>
+        <a href="<?= wa_url('Halo, saya ingin info jadwal batch terdekat ' . $training['name']) ?>" class="pd-cta-secondary" target="_blank" rel="noopener">Tanya jadwal &amp; info lebih &rarr;</a>
       </div>
     </div>
 
-    <div class="pd-seal-wrap">
-      <div class="pd-seal">
-        <div class="pd-seal-ring"></div>
-        <svg class="pd-seal-text" viewBox="0 0 252 252" aria-hidden="true">
-          <defs><path id="pd-seal-arc" d="M 31,126 A 95,95 0 0 1 221,126" fill="none"/></defs>
-          <text><textPath href="#pd-seal-arc" startOffset="50%" text-anchor="middle">TERSERTIFIKASI &middot; RESMI &middot;</textPath></text>
-        </svg>
-        <div class="pd-seal-center">
-          <span class="pd-seal-price-label">Investasi</span>
-          <span class="pd-seal-price"><?= format_price((int)$training['price']) ?></span>
-          <span class="pd-seal-body">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
-            <?= e($training['certification']) ?>
-          </span>
+    <div class="pd-hero-card-wrap">
+      <div class="pd-hero-card">
+        <div class="pd-card-header">
+          <span class="pd-card-badge-top">🛡️ Terakreditasi Resmi</span>
+          <span class="pd-card-cert"><?= e($training['certification']) ?></span>
+        </div>
+        <div class="pd-card-price-block">
+          <span class="pd-card-price-label">Biaya Investasi Mulai</span>
+          <div class="pd-card-price-val">
+            <?= format_price((int)$training['price']) ?>
+            <span class="pd-card-price-sub">/ orang</span>
+          </div>
+        </div>
+        <div class="pd-card-inhouse-tag">
+          <span class="tag-icon">🏢</span>
+          <span>Tersedia Penawaran Khusus In-House &amp; Grup Perusahaan</span>
+        </div>
+        <ul class="pd-card-perks">
+          <li><svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Sertifikat Resmi &amp; SKP Kemnaker / BNSP</li>
+          <li><svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Modul Materi &amp; Bimbingan Instruktur Ahli</li>
+          <li><svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Pelatihan Tatap Muka, Online, &amp; In-House</li>
+        </ul>
+        <div class="pd-card-footer">
+          <span class="pd-card-response">⚡ Konsultasi Gratis &amp; Respon Cepat via WhatsApp</span>
         </div>
       </div>
     </div>
