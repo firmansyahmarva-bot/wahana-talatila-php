@@ -96,6 +96,7 @@
     <div class="footer-nav">
       <h4>Program Populer</h4>
       <ul>
+        <li><a href="/ahli-k3-umum/"><strong>Ahli K3 Umum (AK3U)</strong></a></li>
         <li><a href="/pelatihan/k3/">Pelatihan K3 Lengkap</a></li>
         <li><a href="/pelatihan/pelatihan-ahli-k3-umum-fresh-graduate-kemnaker-online/">Ahli K3 Umum Kemnaker</a></li>
         <li><a href="/pelatihan/ak3-bnsp/">Ahli K3 BNSP</a></li>
