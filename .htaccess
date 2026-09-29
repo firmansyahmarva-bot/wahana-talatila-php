@@ -220,6 +220,9 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^pelatihan-teknologi-informasi/?$ pelatihan-teknologi-informasi.php [QSA,L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ahli-k3-umum/?$ ahli-k3-umum.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^ak3u-fresh-graduate/?$ ak3u-fresh-graduate.php [QSA,L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
