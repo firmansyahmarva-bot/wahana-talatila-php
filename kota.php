@@ -300,6 +300,314 @@ $cities = [
 // Routing and 404 validation
 $slug = strtolower(trim($_GET['kota'] ?? ''));
 
+// ─── MASTER DIRECTORY: /kota/ ──────────────────────────────────────────────
+if ($slug === 'all' || $slug === '' || $slug === 'index') {
+  $page_title = 'Direktori Kota Pelatihan K3 Indonesia — 20 Wilayah Industri Resmi | Wahana Totalita';
+  $meta_desc  = 'Daftar lengkap 20 kota pusat pelatihan dan sertifikasi K3 resmi Kemnaker RI & BNSP di Indonesia. Layanan public training & in-house corporate di seluruh Nusantara.';
+  $canonical  = SITE_URL . '/kota/';
+
+  require __DIR__ . '/includes/head.php';
+  ?>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "@id": "<?= $canonical ?>#page",
+        "name": "Direktori Wilayah Pelatihan K3 Indonesia",
+        "description": "<?= e($meta_desc) ?>",
+        "url": "<?= $canonical ?>"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "<?= $canonical ?>#breadcrumb",
+        "itemListElement": [
+          {"@type": "ListItem", "position": 1, "name": "Beranda", "item": "<?= SITE_URL ?>/"},
+          {"@type": "ListItem", "position": 2, "name": "Kota Pelatihan", "item": "<?= $canonical ?>"}
+        ]
+      },
+      {
+        "@type": "ItemList",
+        "name": "Daftar 20 Kota Pusat Pelatihan K3 Wahana Totalita",
+        "itemListElement": [
+          <?php $ci_idx = 1; foreach ($cities as $ck => $ci): ?>
+          {
+            "@type": "ListItem",
+            "position": <?= $ci_idx++ ?>,
+            "name": "Pelatihan K3 <?= e($ci['name']) ?>",
+            "url": "<?= SITE_URL ?>/pelatihan-k3-<?= $ck ?>/"
+          }<?= $ci_idx <= count($cities) ? ',' : '' ?>
+          <?php endforeach; ?>
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <style>
+  .dir-hero {
+    background: linear-gradient(135deg, #0A253B 0%, #103A5C 60%, #164e7d 100%);
+    color: #fff;
+    padding: 56px 0 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .dir-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 20% 30%, rgba(240, 106, 37, 0.15), transparent 45%);
+    pointer-events: none;
+  }
+  .dir-eyebrow {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #FFD54F;
+    margin-bottom: 16px;
+  }
+  .dir-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 900;
+    line-height: 1.22;
+    margin-bottom: 14px;
+    color: #fff;
+  }
+  .dir-title em { font-style: normal; color: #FFB74D; }
+  .dir-sub {
+    font-size: 16px;
+    line-height: 1.65;
+    color: #E2E8F0;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .dir-section {
+    padding: 56px 0;
+    background: #F8FAFC;
+  }
+  .dir-region-group {
+    margin-bottom: 48px;
+  }
+  .dir-region-heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #0A253B;
+    margin-bottom: 22px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #E2E8F0;
+  }
+  .dir-region-heading span {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #64748B;
+    background: #E2E8F0;
+    padding: 3px 10px;
+    border-radius: 999px;
+  }
+  .dir-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .dir-card {
+    background: #fff;
+    border: 1.5px solid #E2E8F0;
+    border-radius: 12px;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .dir-card:hover {
+    transform: translateY(-4px);
+    border-color: #103A5C;
+    box-shadow: 0 10px 24px rgba(16, 58, 92, 0.12);
+  }
+  .dir-card-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .dir-card-name {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #103A5C;
+    margin: 0;
+  }
+  .dir-card-prov {
+    font-size: 12px;
+    font-weight: 700;
+    color: #475569;
+    background: #F1F5F9;
+    padding: 3px 8px;
+    border-radius: 6px;
+  }
+  .dir-card-tag {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #D97706;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .dir-card-desc {
+    font-size: 13.5px;
+    color: #64748B;
+    line-height: 1.6;
+    margin-bottom: 18px;
+    flex-grow: 1;
+  }
+  .dir-card-link {
+    font-size: 13.5px;
+    font-weight: 800;
+    color: #103A5C;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 12px;
+    border-top: 1px solid #F1F5F9;
+  }
+  .dir-card:hover .dir-card-link {
+    color: #F06A25;
+  }
+  .dir-inhouse-box {
+    background: linear-gradient(135deg, #103A5C 0%, #0A253B 100%);
+    color: #fff;
+    border-radius: 14px;
+    padding: 36px 32px;
+    margin-top: 48px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .dir-inhouse-box h3 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    color: #fff;
+  }
+  .dir-inhouse-box p {
+    font-size: 14.5px;
+    color: #CBD5E1;
+    margin: 0;
+    max-width: 600px;
+    line-height: 1.6;
+  }
+  .dir-btn-inhouse {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #25D366;
+    color: #fff !important;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 800;
+    font-size: 15px;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(37,211,102,0.35);
+  }
+  </style>
+
+  <?php require __DIR__ . '/includes/navbar.php'; ?>
+
+  <header class="dir-hero">
+    <div class="container">
+      <span class="dir-eyebrow">📍 Jangkauan Layanan Nasional · 20 Pusat Kota</span>
+      <h1 class="dir-title">Direktori Kota Pelatihan K3 <em>Seluruh Indonesia</em></h1>
+      <p class="dir-sub">
+        Pusat informasi penyelenggaraan pelatihan dan sertifikasi K3 resmi Kemnaker RI &amp; BNSP di 20 kawasan industri utama. 
+        Tersedia pilihan Public Training, Blended Online via Zoom, dan In-House Training langsung di lokasi perusahaan Anda.
+      </p>
+    </div>
+  </header>
+
+  <main class="dir-section">
+    <div class="container">
+
+      <?php
+      $regions = [
+        'Pulau Jawa' => [
+          'title'  => 'Pulau Jawa & DIY',
+          'cities' => ['jakarta', 'surabaya', 'bandung', 'semarang', 'yogyakarta', 'cilegon', 'bekasi', 'solo', 'malang'],
+        ],
+        'Sumatera' => [
+          'title'  => 'Sumatera & Kepulauan Riau',
+          'cities' => ['medan', 'palembang', 'pekanbaru', 'batam'],
+        ],
+        'Kalimantan' => [
+          'title'  => 'Kalimantan & Pusat Energi/IKN',
+          'cities' => ['balikpapan', 'samarinda', 'banjarmasin', 'pontianak'],
+        ],
+        'Indonesia Timur' => [
+          'title'  => 'Sulawesi & Bali',
+          'cities' => ['makassar', 'manado', 'denpasar'],
+        ],
+      ];
+      ?>
+
+      <?php foreach ($regions as $rk => $reg): ?>
+      <div class="dir-region-group">
+        <div class="dir-region-heading">
+          <span><?= e($rk) ?></span>
+          <div><?= e($reg['title']) ?></div>
+        </div>
+        <div class="dir-grid">
+          <?php foreach ($reg['cities'] as $cslug): 
+            if (!isset($cities[$cslug])) continue;
+            $ct = $cities[$cslug];
+          ?>
+          <a href="/pelatihan-k3-<?= $cslug ?>/" class="dir-card">
+            <div class="dir-card-head">
+              <h2 class="dir-card-name"><?= e($ct['name']) ?></h2>
+              <span class="dir-card-prov"><?= e($ct['province']) ?></span>
+            </div>
+            <span class="dir-card-tag"><?= e($ct['highlight']) ?></span>
+            <p class="dir-card-desc"><?= e($ct['demand']) ?></p>
+            <div class="dir-card-link">
+              <span>Lihat Jadwal &amp; Biaya</span>
+              <span aria-hidden="true">&rarr;</span>
+            </div>
+          </a>
+          <?php endforeach; ?>
+        </div>
+      </div>
+      <?php endforeach; ?>
+
+      <!-- In-house training corporate callout -->
+      <div class="dir-inhouse-box">
+        <div>
+          <h3>Pelatihan K3 In-House di Kota/Site Anda</h3>
+          <p>Butuh pelatihan untuk rombongan karyawan pabrik atau site tambang di luar daftar kota di atas? Tim instruktur kami siap hadir langsung ke seluruh penjuru Nusantara.</p>
+        </div>
+        <a href="/in-house-training/" class="dir-btn-inhouse">
+          <span>Konsultasi In-House &rarr;</span>
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <?php
+  require __DIR__ . '/includes/footer.php';
+  exit;
+}
+
 if (!isset($cities[$slug])) {
   http_response_code(404);
   include '404.php';
@@ -740,6 +1048,12 @@ if ($city_type === 'energy_mining') {
     [
       '@type' => 'ListItem',
       'position' => 2,
+      'name' => 'Kota Pelatihan',
+      'item' => 'https://wahanatotalita.com/kota/'
+    ],
+    [
+      '@type' => 'ListItem',
+      'position' => 3,
       'name' => "Pelatihan K3 {$c['name']}",
       'item' => "https://wahanatotalita.com/pelatihan-k3-{$slug}/"
     ]
@@ -795,6 +1109,7 @@ if (is_file($_core_css_file)) {
     <?php
     $breadcrumb_trail = [
       ['label' => 'Beranda', 'url' => '/'],
+      ['label' => 'Kota Pelatihan', 'url' => '/kota/'],
       ['label' => 'K3 ' . $c['name'], 'url' => null],
     ];
     include __DIR__ . '/includes/breadcrumb.php';

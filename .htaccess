@@ -319,6 +319,10 @@ RewriteRule ^pelatihan-k3-([a-z0-9\-]+)$ /pelatihan-k3-$1/ [R=301,L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^pelatihan-k3-([a-z0-9\-]+)/?$ kota.php?kota=$1 [QSA,L]
 
+# ─── Master city directory: /kota/ ────────────────────────────
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^kota/?$ kota.php?kota=all [QSA,L]
+
 # ─── Landing pages: /lp/k3-umum → /lp/k3-umum.php (clean URLs) ─
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^lp/([a-z0-9\-]+)/?$ lp/$1.php [QSA,L]

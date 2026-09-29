@@ -33,7 +33,96 @@ $is_panduan_active = str_starts_with($_nav_path, '/artikel');
       <li><a href="/pelatihan/">Pelatihan</a></li>
       <li><a href="/ahli-k3-umum/">Ahli K3 Umum</a></li>
       <li><a href="/jadwal/">Jadwal</a></li>
-      <li><a href="/keselamatan-kerja/">Bidang K3</a></li>
+      <!-- Bidang & Wilayah K3 mega dropdown -->
+      <li class="nav-dropdown">
+        <a href="/keselamatan-kerja/" class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+          Bidang &amp; Kota
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="vertical-align:middle;margin-left:3px"><polyline points="6 9 12 15 18 9"/></svg>
+        </a>
+        <div class="nav-dropdown-menu" role="menu" style="min-width:540px;">
+          <div class="nav-dropdown-grid" style="grid-template-columns: repeat(2, 1fr);">
+            <div class="nav-dropdown-col">
+              <div class="nav-dropdown-heading">🏭 Sektor Keahlian K3</div>
+              <a href="/k3-konstruksi/" class="nav-dropdown-item">
+                <span class="nav-di-icon">🏗️</span>
+                <span><strong>K3 Konstruksi</strong><br><small>Gedung, sipil &amp; infrastruktur</small></span>
+              </a>
+              <a href="/k3-migas/" class="nav-dropdown-item">
+                <span class="nav-di-icon">🛢️</span>
+                <span><strong>K3 Minyak &amp; Gas</strong><br><small>Hulu-hilir &amp; petrokimia</small></span>
+              </a>
+              <a href="/k3-listrik/" class="nav-dropdown-item">
+                <span class="nav-di-icon">⚡</span>
+                <span><strong>K3 Listrik &amp; Energi</strong><br><small>Pembangkit &amp; instalasi</small></span>
+              </a>
+              <a href="/k3-kimia/" class="nav-dropdown-item">
+                <span class="nav-di-icon">🧪</span>
+                <span><strong>K3 Kimia &amp; B3</strong><br><small>Hazardous material &amp; lab</small></span>
+              </a>
+              <a href="/k3-ketinggian/" class="nav-dropdown-item">
+                <span class="nav-di-icon">🧗</span>
+                <span><strong>Bekerja di Ketinggian</strong><br><small>TKBT, TKPK &amp; scaffolding</small></span>
+              </a>
+              <a href="/k3-pertambangan/" class="nav-dropdown-item">
+                <span class="nav-di-icon">⛏️</span>
+                <span><strong>K3 Pertambangan</strong><br><small>POP, POM, POU &amp; minerba</small></span>
+              </a>
+              <a href="/k3-lingkungan/" class="nav-dropdown-item">
+                <span class="nav-di-icon">🌿</span>
+                <span><strong>K3 Lingkungan &amp; AMDAL</strong><br><small>POPAL, PLB3 &amp; limbah</small></span>
+              </a>
+              <a href="/k3-rumah-sakit/" class="nav-dropdown-item">
+                <span class="nav-di-icon">🏥</span>
+                <span><strong>K3 Rumah Sakit &amp; Faskes</strong><br><small>Akreditasi &amp; biosafety</small></span>
+              </a>
+              <a href="/keselamatan-kerja/" class="nav-dropdown-item" style="margin-top:6px;border-top:1px solid #e2e8f0;padding-top:8px;">
+                <span class="nav-di-icon">👉</span>
+                <span><strong>Semua 23 Bidang K3 &rarr;</strong><br><small>Direktori lengkap sektor</small></span>
+              </a>
+            </div>
+
+            <div class="nav-dropdown-col">
+              <div class="nav-dropdown-heading">📍 Kota Pelatihan Resmi</div>
+              <a href="/pelatihan-k3-yogyakarta/" class="nav-dropdown-item">
+                <span class="nav-di-icon">🏢</span>
+                <span><strong>Yogyakarta (Pusat)</strong><br><small>Training Center &amp; Tatap Muka</small></span>
+              </a>
+              <a href="/pelatihan-k3-jakarta/" class="nav-dropdown-item">
+                <span class="nav-di-icon">🌆</span>
+                <span><strong>DKI Jakarta</strong><br><small>Konstruksi, Migas &amp; Korporasi</small></span>
+              </a>
+              <a href="/pelatihan-k3-surabaya/" class="nav-dropdown-item">
+                <span class="nav-di-icon">🚢</span>
+                <span><strong>Surabaya</strong><br><small>Maritim, Manufaktur &amp; Crane</small></span>
+              </a>
+              <a href="/pelatihan-k3-bandung/" class="nav-dropdown-item">
+                <span class="nav-di-icon">🏭</span>
+                <span><strong>Bandung</strong><br><small>Tekstil, Farmasi &amp; Industri</small></span>
+              </a>
+              <a href="/pelatihan-k3-cilegon/" class="nav-dropdown-item">
+                <span class="nav-di-icon">⚙️</span>
+                <span><strong>Cilegon &amp; Serang</strong><br><small>Baja, Petrokimia &amp; Pelabuhan</small></span>
+              </a>
+              <a href="/pelatihan-k3-balikpapan/" class="nav-dropdown-item">
+                <span class="nav-di-icon">🛢️</span>
+                <span><strong>Balikpapan &amp; IKN</strong><br><small>Migas, Logistik &amp; Tambang</small></span>
+              </a>
+              <a href="/pelatihan-k3-semarang/" class="nav-dropdown-item">
+                <span class="nav-di-icon">🏗️</span>
+                <span><strong>Semarang</strong><br><small>Kawasan Kendal &amp; Pelabuhan</small></span>
+              </a>
+              <a href="/pelatihan-k3-medan/" class="nav-dropdown-item">
+                <span class="nav-di-icon">🌴</span>
+                <span><strong>Medan &amp; Sumatera</strong><br><small>Perkebunan Sawit &amp; Pabrik</small></span>
+              </a>
+              <a href="/kota/" class="nav-dropdown-item" style="margin-top:6px;border-top:1px solid #e2e8f0;padding-top:8px;">
+                <span class="nav-di-icon">📍</span>
+                <span><strong>Semua 20 Kota Pelatihan &rarr;</strong><br><small>Buka direktori lengkap kota</small></span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </li>
 
       <!-- Platform K3 mega dropdown -->
       <li class="nav-dropdown">

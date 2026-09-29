@@ -144,6 +144,7 @@ case 'core':
         'k3-pangan'                      => '0.8',
         'pelatihan-teknologi-informasi'  => '0.8',
         'ahli-k3-umum'                   => '0.9',
+        'kota'                           => '0.85',
         'in-house-training'              => '0.9',
         'in-house-training/balikpapan-ikn' => '0.85',
         'in-house-training/cilegon-karawang' => '0.85',
