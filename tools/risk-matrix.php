@@ -18,7 +18,7 @@ echo $shared_head;
   "itemListElement": [
     { "@type": "ListItem", "position": 1, "name": "Beranda", "item": "https://wahanatotalita.com/" },
     { "@type": "ListItem", "position": 2, "name": "Tools K3", "item": "https://wahanatotalita.com/tools/" },
-    { "@type": "ListItem", "position": 3, "name": "Risk Matrix 5x5", "item": "https://wahanatotalita.com/tools/risk-matrix.php" }
+    { "@type": "ListItem", "position": 3, "name": "Risk Matrix 5x5", "item": "https://wahanatotalita.com/tools/risk-matrix/" }
   ]
 }
 </script>
@@ -27,7 +27,7 @@ echo $shared_head;
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "Kalkulator Matriks Risiko 5x5 K3 Online",
-  "url": "https://wahanatotalita.com/tools/risk-matrix.php",
+  "url": "https://wahanatotalita.com/tools/risk-matrix/",
   "description": "Aplikasi evaluasi matriks risiko 5x5 standar ISO 31000 dan HIRARC dengan fitur pembuatan dan pencetakan dokumen Risk Register K3.",
   "applicationCategory": "BusinessApplication",
   "operatingSystem": "All",

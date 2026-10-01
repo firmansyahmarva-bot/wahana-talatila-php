@@ -13,7 +13,7 @@ echo $shared_head;
 
 $allTools = [
   [
-    "url" => "safety-talk.php",
+    "url" => "/tools/safety-talk/",
     "title" => "100 Materi Safety Talk & Toolbox Meeting (TBM)",
     "desc" => "Database 100 topik materi safety talk harian K3 terlengkap dengan poin diskusi 2 arah, fakta statistik, dan lembar daftar hadir absensi siap cetak.",
     "cat" => "edukasi",
@@ -22,7 +22,7 @@ $allTools = [
     "tags" => ["Toolbox Meeting", "Absensi TBM", "100 Topik"]
   ],
   [
-    "url" => "kalkulator-k3.php",
+    "url" => "/tools/kalkulator-k3/",
     "title" => "Kalkulator Statistik K3 (FR, SR, IR & Safe T-Score)",
     "desc" => "Hitung indikator kinerja K3 resmi: Frequency Rate (FR), Severity Rate (SR), Incident Rate, dan Piramida Heinrich sesuai Kepmenaker 372/1989 & OSHA.",
     "cat" => "kalkulator",
@@ -31,7 +31,7 @@ $allTools = [
     "tags" => ["Kepmenaker 372/1989", "OSHA 1904", "Laporan P2K3"]
   ],
   [
-    "url" => "jsa-builder.php",
+    "url" => "/tools/jsa-builder/",
     "title" => "JSA Builder (Job Safety Analysis Generator)",
     "desc" => "Generator penyusun formulir analisis keselamatan kerja langkah demi langkah dengan 6 template pekerjaan risiko tinggi dan cetak form tanda tangan resmi.",
     "cat" => "lapangan",
@@ -40,7 +40,7 @@ $allTools = [
     "tags" => ["Izin Kerja PTW", "Hierarki Kontrol", "Format Resmi"]
   ],
   [
-    "url" => "risk-matrix.php",
+    "url" => "/tools/risk-matrix/",
     "title" => "Matriks Risiko 5x5 K3 (ISO 31000 & HIRARC)",
     "desc" => "Kalkulator evaluasi matriks risiko 5x5 interaktif berdasarkan Peluang (Likelihood) dan Keparahan (Consequence) serta pembuatan tabel Risk Register.",
     "cat" => "lapangan",
@@ -49,7 +49,7 @@ $allTools = [
     "tags" => ["Low to Extreme", "ALARP", "Risk Register"]
   ],
   [
-    "url" => "kalkulator-kebisingan.php",
+    "url" => "/tools/kalkulator-kebisingan/",
     "title" => "Kalkulator Paparan Kebisingan Permenaker 5/2018",
     "desc" => "Hitung Dosis Kebisingan Kumulatif (%), TWA 8-Jam (dBA), batas pajanan waktu kerja maksimal, serta uji proteksi riil APD telinga (NRR Derating).",
     "cat" => "kalkulator",
@@ -58,7 +58,7 @@ $allTools = [
     "tags" => ["NAB 85 dBA", "TWA 8 Jam", "Earplug & Earmuff"]
   ],
   [
-    "url" => "kalkulator-biaya-k3.php",
+    "url" => "/tools/kalkulator-biaya-k3/",
     "title" => "Kalkulator Biaya Kecelakaan Kerja (Heinrich & Bird)",
     "desc" => "Analisis total kerugian finansial akibat kecelakaan kerja berdasarkan Teori Gunung Es K3 (biaya langsung vs biaya tersembunyi) dan ROI program K3.",
     "cat" => "kalkulator",
@@ -67,7 +67,7 @@ $allTools = [
     "tags" => ["Rasio 1:4 & 1:10", "Hidden Costs", "ROI Safety"]
   ],
   [
-    "url" => "regulasi-k3.php",
+    "url" => "/tools/regulasi-k3/",
     "title" => "Database Regulasi K3 Indonesia Terlengkap",
     "desc" => "Koleksi peraturan perundang-undangan K3 lengkap: UU No. 1/1970, PP No. 50/2012, Permenaker, dan Kepmenaker dengan pasal krusial dan sanksi hukum.",
     "cat" => "regulasi",
@@ -76,7 +76,7 @@ $allTools = [
     "tags" => ["UU 1/1970", "PP 50/2012", "Sanksi Pidana"]
   ],
   [
-    "url" => "apd-selector.php",
+    "url" => "/tools/apd-selector/",
     "title" => "Panduan Pemilihan APD K3 (SNI & Permenaker 08/2010)",
     "desc" => "Spesifikasi teknis alat pelindung diri 7 organ tubuh sesuai Permenaker No. 08/2010, standar SNI, ANSI, & EN lengkap dengan panduan inspeksi kelayakan pra-pakai.",
     "cat" => "lapangan",
@@ -85,7 +85,7 @@ $allTools = [
     "tags" => ["Standar SNI/ANSI", "7 Organ Tubuh", "Inspeksi Pra-Pakai"]
   ],
   [
-    "url" => "laporan-insiden.php",
+    "url" => "/tools/laporan-insiden/",
     "title" => "Formulir Laporan Insiden K3 & Investigasi 5-Why",
     "desc" => "Dokumentasikan insiden kecelakaan kerja resmi Permenaker 03/1998 dengan analisis rantai akar penyebab 5-Why, penyebab langsung SCAT, dan matriks CAPA.",
     "cat" => "lapangan",
@@ -94,7 +94,7 @@ $allTools = [
     "tags" => ["5-Why Analysis", "SCAT Model", "Format Disnaker"]
   ],
   [
-    "url" => "ibpr-generator.php",
+    "url" => "/tools/ibpr-generator/",
     "title" => "Generator IBPR / HIRADC K3 (SMK3 PP 50/2012)",
     "desc" => "Buat tabel Identifikasi Bahaya dan Penilaian Risiko (IBPR) terpadu dengan klasifikasi kondisi Rutin/Non-Rutin/Darurat dan evaluasi risiko awal vs sisa.",
     "cat" => "lapangan",
@@ -103,7 +103,7 @@ $allTools = [
     "tags" => ["Elemen 2 SMK3", "ISO 45001", "Export CSV"]
   ],
   [
-    "url" => "social-generator.php",
+    "url" => "/tools/social-generator/",
     "title" => "Generator Poster & Banner K3 (Bulan K3 Nasional)",
     "desc" => "Desain grafis promosi keselamatan kerja dan spanduk Bulan K3 Nasional dengan template slogan motivasi siap download dalam resolusi tinggi PNG.",
     "cat" => "edukasi",
@@ -112,7 +112,7 @@ $allTools = [
     "tags" => ["Bulan K3", "Poster Mading", "Banner 16:9"]
   ],
   [
-    "url" => "ai-analyzer.php",
+    "url" => "/tools/ai-analyzer/",
     "title" => "AI K3 Document Analyzer (Cek Kepatuhan SMK3)",
     "desc" => "Pindai kepatuhan dokumen Kebijakan K3, SOP, dan JSA Anda terhadap regulasi audit PP No. 50 Tahun 2012 dan temukan celah ketidaksesuaian secara instan.",
     "cat" => "regulasi",

@@ -18,7 +18,7 @@ echo $shared_head;
   "itemListElement": [
     { "@type": "ListItem", "position": 1, "name": "Beranda", "item": "https://wahanatotalita.com/" },
     { "@type": "ListItem", "position": 2, "name": "Tools K3", "item": "https://wahanatotalita.com/tools/" },
-    { "@type": "ListItem", "position": 3, "name": "Kalkulator K3", "item": "https://wahanatotalita.com/tools/kalkulator-k3.php" }
+    { "@type": "ListItem", "position": 3, "name": "Kalkulator K3", "item": "https://wahanatotalita.com/tools/kalkulator-k3/" }
   ]
 }
 </script>
@@ -27,7 +27,7 @@ echo $shared_head;
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "Kalkulator Statistik K3 Online Indonesia",
-  "url": "https://wahanatotalita.com/tools/kalkulator-k3.php",
+  "url": "https://wahanatotalita.com/tools/kalkulator-k3/",
   "description": "Perhitungan statistik K3 resmi Kemnaker RI (Kepmenaker 372/1989) & OSHA: FR, SR, IR, LTIFR, Safe T-Score, dan Piramida Heinrich.",
   "applicationCategory": "BusinessApplication",
   "operatingSystem": "All",
@@ -974,7 +974,7 @@ function copyResultSummary(){
   const altr = document.getElementById('outALTR').textContent;
   const basis = currentMultiplier.toLocaleString('id-ID');
   
-  const text = `=== REKAP LAPORAN STATISTIK K3 (Wahana Totalita) ===\nBasis Multiplier: ${basis} Jam Kerja\nFrequency Rate (FR): ${fr}\nSeverity Rate (SR): ${sr}\nIncident Rate (IR): ${ir}\nAverage Lost Time (ALTR): ${altr} Hari/Kasus\nSumber Kalkulator: https://wahanatotalita.com/tools/kalkulator-k3.php`;
+  const text = `=== REKAP LAPORAN STATISTIK K3 (Wahana Totalita) ===\nBasis Multiplier: ${basis} Jam Kerja\nFrequency Rate (FR): ${fr}\nSeverity Rate (SR): ${sr}\nIncident Rate (IR): ${ir}\nAverage Lost Time (ALTR): ${altr} Hari/Kasus\nSumber Kalkulator: https://wahanatotalita.com/tools/kalkulator-k3/`;
   
   navigator.clipboard.writeText(text).then(()=>{
     alert('Ringkasan statistik K3 berhasil disalin ke clipboard!');

@@ -18,7 +18,7 @@ echo $shared_head;
   "itemListElement": [
     { "@type": "ListItem", "position": 1, "name": "Beranda", "item": "https://wahanatotalita.com/" },
     { "@type": "ListItem", "position": 2, "name": "Tools K3", "item": "https://wahanatotalita.com/tools/" },
-    { "@type": "ListItem", "position": 3, "name": "Generator IBPR", "item": "https://wahanatotalita.com/tools/ibpr-generator.php" }
+    { "@type": "ListItem", "position": 3, "name": "Generator IBPR", "item": "https://wahanatotalita.com/tools/ibpr-generator/" }
   ]
 }
 </script>
@@ -27,7 +27,7 @@ echo $shared_head;
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "Generator Tabel IBPR & HIRADC K3 Online",
-  "url": "https://wahanatotalita.com/tools/ibpr-generator.php",
+  "url": "https://wahanatotalita.com/tools/ibpr-generator/",
   "description": "Generator formulir Identifikasi Bahaya, Penilaian Risiko, dan Pengendalian Risiko (IBPR / HIRADC) resmi standar SMK3 PP 50/2012 dan ISO 45001.",
   "applicationCategory": "BusinessApplication",
   "operatingSystem": "All",

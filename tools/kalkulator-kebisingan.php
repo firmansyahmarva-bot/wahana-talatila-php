@@ -18,7 +18,7 @@ echo $shared_head;
   "itemListElement": [
     { "@type": "ListItem", "position": 1, "name": "Beranda", "item": "https://wahanatotalita.com/" },
     { "@type": "ListItem", "position": 2, "name": "Tools K3", "item": "https://wahanatotalita.com/tools/" },
-    { "@type": "ListItem", "position": 3, "name": "Kalkulator Kebisingan", "item": "https://wahanatotalita.com/tools/kalkulator-kebisingan.php" }
+    { "@type": "ListItem", "position": 3, "name": "Kalkulator Kebisingan", "item": "https://wahanatotalita.com/tools/kalkulator-kebisingan/" }
   ]
 }
 </script>
@@ -27,7 +27,7 @@ echo $shared_head;
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "Kalkulator Paparan Kebisingan K3 Online",
-  "url": "https://wahanatotalita.com/tools/kalkulator-kebisingan.php",
+  "url": "https://wahanatotalita.com/tools/kalkulator-kebisingan/",
   "description": "Perhitungan dosis kebisingan kumulatif, Time Weighted Average (TWA), dan uji efektivitas APD pendengaran sesuai Permenaker No. 5 Tahun 2018.",
   "applicationCategory": "BusinessApplication",
   "operatingSystem": "All",

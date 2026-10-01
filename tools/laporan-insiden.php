@@ -18,7 +18,7 @@ echo $shared_head;
   "itemListElement": [
     { "@type": "ListItem", "position": 1, "name": "Beranda", "item": "https://wahanatotalita.com/" },
     { "@type": "ListItem", "position": 2, "name": "Tools K3", "item": "https://wahanatotalita.com/tools/" },
-    { "@type": "ListItem", "position": 3, "name": "Laporan Insiden", "item": "https://wahanatotalita.com/tools/laporan-insiden.php" }
+    { "@type": "ListItem", "position": 3, "name": "Laporan Insiden", "item": "https://wahanatotalita.com/tools/laporan-insiden/" }
   ]
 }
 </script>
@@ -27,7 +27,7 @@ echo $shared_head;
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "Generator Laporan & Investigasi Insiden K3 Online",
-  "url": "https://wahanatotalita.com/tools/laporan-insiden.php",
+  "url": "https://wahanatotalita.com/tools/laporan-insiden/",
   "description": "Aplikasi formulir laporan kecelakaan kerja dan analisis akar penyebab 5-Why serta SCAT model sesuai regulasi Permenaker No. 03/1998.",
   "applicationCategory": "BusinessApplication",
   "operatingSystem": "All",
