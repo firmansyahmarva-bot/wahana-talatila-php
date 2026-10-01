@@ -1,529 +1,898 @@
 <?php
 require_once __DIR__ . '/../config.php';
 $s = get_all_settings();
-?>
-<?php
-$page_title = 'JSA Builder Online Gratis — Buat Job Safety Analysis';
-$meta_desc = 'Buat JSA (Job Safety Analysis) online gratis. Isi form langkah pekerjaan, potensi bahaya, risk level dan tindakan pencegahan — langsung cetak ke PDF. Untuk HSE officer Indonesia.';
+
+$page_title = 'JSA Builder Online 2026: Generator Job Safety Analysis & JHA Indonesia';
+$meta_desc = 'Buat dokumen Job Safety Analysis (JSA / JHA) K3 standar industri secara instan online. Dilengkapi 6 template pekerjaan risiko tinggi, hirarki pengendalian, dan cetak form resmi.';
+
+ob_start();
 require __DIR__ . '/../includes/head.php';
+$shared_head = ob_get_clean();
+$shared_head = preg_replace('~<title>.*?</title>~s', '<title>' . e($page_title) . '</title>', $shared_head, 1);
+echo $shared_head;
 ?>
-<link rel="manifest" href="/manifest.json">
-<style>
-:root{--primary:#1a6b3a;--primary-d:#145530;--accent:#f5a623;--bg:#f8fafc;--card:#fff;--text:#1a202c;--muted:#6b7280;--radius:12px;--shadow:0 2px 16px rgba(0,0,0,.09)}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
-a{color:var(--primary);text-decoration:none}
-.container{max-width:1080px;margin:0 auto;padding:0 20px}
-nav{background:#fff;border-bottom:1px solid #e5e7eb;padding:14px 0;position:sticky;top:0;z-index:100;box-shadow:0 1px 6px rgba(0,0,0,.06)}
-.nav-inner{display:flex;align-items:center;justify-content:space-between}
-.nav-logo{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--primary);font-size:1rem}
-.nav-logo svg{width:32px;height:32px}
-.nav-cta{background:var(--primary);color:#fff;padding:8px 18px;border-radius:8px;font-size:.85rem;font-weight:600}
-.hero{background:linear-gradient(135deg,#0f4c2a,#1a6b3a);color:#fff;padding:44px 0 32px;text-align:center}
-.hero-badge{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:50px;padding:5px 16px;font-size:.8rem;font-weight:600;display:inline-block;margin-bottom:14px}
-.hero h1{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;margin-bottom:10px}
-.hero h1 span{color:var(--accent)}
-.hero p{opacity:.88;max-width:540px;margin:0 auto}
-.main{padding:36px 0 80px}
-.form-section{background:var(--card);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow);border:1px solid #e5e7eb;margin-bottom:24px}
-.form-section h2{font-size:1rem;font-weight:700;margin-bottom:18px;color:var(--primary);display:flex;align-items:center;gap:8px}
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
-.form-group{margin-bottom:14px}
-.form-group label{display:block;font-size:.85rem;font-weight:600;margin-bottom:5px;color:#374151}
-.form-group input,.form-group select,.form-group textarea{width:100%;padding:9px 13px;border:2px solid #e5e7eb;border-radius:7px;font-size:.88rem;font-family:inherit;color:var(--text);background:#fff;transition:border .2s}
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--primary);outline:none}
-.form-group textarea{min-height:60px;resize:vertical}
-/* STEP TABLE */
-.step-table-wrap{overflow-x:auto;margin-top:8px}
-.step-table{width:100%;border-collapse:collapse;font-size:.83rem}
-.step-table th{background:var(--primary);color:#fff;padding:10px 12px;text-align:left;font-size:.78rem;white-space:nowrap}
-.step-table td{padding:8px;border-bottom:1px solid #f3f4f6;vertical-align:top}
-.step-table td input,.step-table td select,.step-table td textarea{width:100%;border:1px solid #e5e7eb;border-radius:5px;padding:7px;font-size:.82rem;font-family:inherit;background:#fff;color:var(--text)}
-.step-table td input:focus,.step-table td select:focus,.step-table td textarea:focus{border-color:var(--primary);outline:none}
-.step-table td textarea{min-height:52px;resize:vertical}
-.step-num{width:36px;text-align:center;font-weight:700;color:var(--muted)}
-.btn-del{background:#fee2e2;color:#dc2626;border:none;border-radius:5px;padding:5px 10px;cursor:pointer;font-size:.8rem}
-.risk-low{color:#16a34a;font-weight:700}
-.risk-medium{color:#d97706;font-weight:700}
-.risk-high{color:#c2410c;font-weight:700}
-.risk-extreme{color:#dc2626;font-weight:700}
-.btn-add-step{background:#f0fdf4;color:var(--primary);border:2px dashed #86efac;border-radius:8px;padding:12px;width:100%;font-size:.9rem;font-weight:600;cursor:pointer;margin-top:12px;transition:all .2s}
-.btn-add-step:hover{background:#dcfce7}
-/* ACTIONS BAR */
-.actions-bar{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px;align-items:center}
-.btn-primary{background:var(--primary);color:#fff;border:none;border-radius:8px;padding:12px 24px;font-size:.92rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;transition:background .2s}
-.btn-primary:hover{background:var(--primary-d)}
-.btn-secondary{background:#f3f4f6;color:var(--text);border:1px solid #e5e7eb;border-radius:8px;padding:12px 20px;font-size:.88rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px}
-.btn-secondary:hover{background:#e5e7eb}
-.btn-wa{background:#25D366;color:#fff;border:none;border-radius:8px;padding:12px 20px;font-size:.88rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px}
-/* SIGNATURE */
-.sig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:8px}
-.sig-box{border:1px solid #e5e7eb;border-radius:8px;padding:16px;text-align:center}
-.sig-box .sig-line{border-bottom:1px solid #374151;height:40px;margin-bottom:8px}
-.sig-box p{font-size:.78rem;color:var(--muted)}
-/* PRINT PREVIEW */
-#printArea{display:none}
-@media print{
-  body{background:#fff}
-  nav,.actions-bar,.form-section:not(#printPreviewSection),.cta-strip,footer,.tools-training-cta,.tool-article,a[href^="https://wa"]{display:none!important}
-  #printArea{display:block!important}
-  .print-jsa{font-family:Arial,sans-serif;padding:20px;font-size:9pt}
-  .print-header{text-align:center;border-bottom:2px solid #000;padding-bottom:10px;margin-bottom:16px}
-  .print-header h2{font-size:14pt;margin-bottom:4px}
-  .print-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px;font-size:8pt}
-  .print-meta-item{border:1px solid #ccc;padding:6px 10px;border-radius:4px}
-  .print-meta-item strong{display:block;font-size:7pt;color:#666;margin-bottom:2px}
-  .print-steps{width:100%;border-collapse:collapse;font-size:8pt}
-  .print-steps th{background:#1a6b3a;color:#fff;padding:7px 10px;text-align:left}
-  .print-steps td{padding:7px 10px;border:1px solid #e5e7eb;vertical-align:top}
-  .print-steps tr:nth-child(even) td{background:#f9fafb}
-  .print-sigs{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:24px}
-  .print-sig-box{border-top:1px solid #000;padding-top:6px;text-align:center;font-size:8pt}
-  .print-footer{text-align:center;font-size:7pt;color:#999;margin-top:20px;border-top:1px solid #e5e7eb;padding-top:8px}
-}
-.cta-strip{background:var(--primary);color:#fff;border-radius:12px;padding:28px;text-align:center;margin:40px 0}
-.cta-strip h3{font-size:1.1rem;font-weight:700;margin-bottom:8px}
-.cta-strip p{opacity:.88;font-size:.88rem;margin-bottom:16px}
-footer{background:#111827;color:#9ca3af;padding:30px 0;text-align:center;font-size:.83rem}
-footer a{color:#6ee7b7}
-.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);background:#1a6b3a;color:#fff;padding:10px 24px;border-radius:50px;font-size:.88rem;font-weight:600;opacity:0;transition:all .3s;pointer-events:none;z-index:999}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-@media(max-width:768px){
-  .grid-2,.grid-3,.sig-grid{grid-template-columns:1fr}
-  .step-table th:nth-child(4),.step-table td:nth-child(4){display:none}
-}
-.tools-training-cta{padding:40px 0}
-.tools-training-cta h2{font-size:1.3rem;font-weight:800;margin:0 0 16px;text-align:center;color:#0A4A2E}
-.tools-training-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
-.tools-training-card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:18px;display:flex;flex-direction:column}
-.tools-training-card h3{font-size:.95rem;font-weight:700;margin:0 0 8px}
-.tools-training-card h3 a{color:#0A4A2E;text-decoration:none}
-.tools-training-card p{font-size:.85rem;color:#555;line-height:1.6;margin:0 0 12px;flex:1}
-.tools-training-btn{display:inline-block;background:#0A4A2E;color:#fff;font-weight:700;font-size:.85rem;padding:8px 14px;border-radius:8px;text-decoration:none;text-align:center}
-.tool-article{padding:12px 0 8px}
-.tool-article h2{font-size:1.15rem;font-weight:800;color:var(--primary);margin:28px 0 14px}
-.tool-article h2:first-child{margin-top:0}
-.tool-article p{font-size:.92rem;color:#374151;line-height:1.8;margin-bottom:14px}
-.tool-article ol{padding-left:20px;font-size:.92rem;line-height:1.9;color:#374151;margin-bottom:8px}
-.tool-article ol li{margin-bottom:8px}
-.faq-item{margin-bottom:16px}
-.faq-item h3{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:6px}
-.faq-item p{font-size:.9rem;color:#374151;margin:0}
-</style>
 <script type="application/ld+json">
 {
-  "@context":"https://schema.org",
-  "@type":"SoftwareApplication",
-  "name":"JSA Builder Online",
-  "applicationCategory":"BusinessApplication",
-  "operatingSystem":"Web",
-  "offers":{"@type":"Offer","price":"0","priceCurrency":"IDR"},
-  "description":"Buat Job Safety Analysis (JSA) online gratis. Isi form, cetak PDF.",
-  "url":"https://wahanatotalita.com/tools/jsa-builder",
-  "provider":{"@type":"Organization","name":"Wahana Totalita Konsultan"}
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Beranda", "item": "https://wahanatotalita.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Tools K3", "item": "https://wahanatotalita.com/tools/" },
+    { "@type": "ListItem", "position": 3, "name": "JSA Builder", "item": "https://wahanatotalita.com/tools/jsa-builder.php" }
+  ]
 }
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Apa bedanya JSA dengan IBPR?","acceptedAnswer":{"@type":"Answer","text":"IBPR menilai risiko pada tingkat aktivitas atau proses kerja secara umum, sedangkan JSA memecah satu aktivitas menjadi langkah-langkah kerja yang lebih rinci dan menganalisis bahaya di setiap langkahnya. Keduanya saling melengkapi — IBPR untuk pemetaan risiko menyeluruh, JSA untuk panduan kerja aman langkah demi langkah."}},{"@type":"Question","name":"Kapan JSA wajib dibuat sebelum bekerja?","acceptedAnswer":{"@type":"Answer","text":"JSA sebaiknya dibuat untuk semua pekerjaan berisiko tinggi atau non-rutin, seperti bekerja di ketinggian, pekerjaan panas (hot work), confined space entry, pekerjaan listrik, dan pekerjaan yang memerlukan izin kerja (Permit to Work)."}},{"@type":"Question","name":"Apakah JSA yang dibuat di tool ini bisa langsung digunakan sebagai dasar penerbitan Permit to Work?","acceptedAnswer":{"@type":"Answer","text":"Ya, dokumen JSA yang dicetak dari tool ini sudah mencakup identitas pekerjaan, langkah kerja, bahaya, level risiko, pengendalian, dan tanda tangan — cukup lengkap untuk dilampirkan sebagai dasar PTW. Pastikan tetap ditinjau dan disetujui oleh supervisor/HSE Manager sebelum pekerjaan dimulai."}}]}
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "JSA & JHA Builder Online K3 Indonesia",
+  "url": "https://wahanatotalita.com/tools/jsa-builder.php",
+  "description": "Generator dokumen Job Safety Analysis (JSA) dan Job Hazard Analysis (JHA) standar SMK3 PP 50/2012 dan ISO 45001 dengan fitur cetak formulir resmi.",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "All",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "IDR" }
+}
 </script>
-<nav>
-  <div class="container nav-inner">
-    <a href="/" class="nav-logo">
-      <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#1a6b3a"/><path d="M20 8l3 9h9l-7 5 3 9-8-6-8 6 3-9-7-5h9z" fill="#f5a623"/></svg>
-      Wahana Totalita
-    </a>
-    <a href="/tools/" style="color:var(--muted);font-size:.88rem">← Semua Tools</a>
-    <a href="https://wa.me/6287759151278" target="_blank" class="nav-cta">📱 Konsultasi</a>
-  </div>
-</nav>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Apa perbedaan antara JSA (Job Safety Analysis) dan HIRADC / IBPR?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "HIRADC / IBPR adalah identifikasi bahaya dan penilaian risiko makro yang mencakup seluruh aktivitas, fasilitas, dan proses operasional perusahaan secara menyeluruh. Sedangkan JSA (Job Safety Analysis) bersifat mikro dan taktis, berfokus menganalisis langkah demi langkah dari satu pekerjaan spesifik, terutama pekerjaan berisiko tinggi atau non-rutin sebelum izin kerja (PTW) diterbitkan."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Siapa yang wajib menyusun dan menyetujui dokumen JSA di lapangan?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "JSA idealnya disusun oleh pengawas langsung atau supervisor pekerjaan bersama tim pekerja pelaksana yang memahami teknis lapangan, lalu ditinjau dan divalidasi oleh Petugas / Ahli K3 Umum (HSE Officer), serta disahkan oleh Pimpinan Proyek atau Site Manager sebelum pekerjaan dimulai."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kapan suatu pekerjaan wajib dilengkapi dokumen JSA?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Dokumen JSA wajib dibuat untuk pekerjaan yang memiliki potensi risiko tinggi (seperti bekerja di ketinggian, ruang terbatas, pekerjaan panas, pengangkatan crane, penggalian dalam), pekerjaan non-rutin yang belum memiliki SOP baku, atau pekerjaan baru dengan perubahan metode/alat kerja."
+      }
+    }
+  ]
+}
+</script>
 
-<section class="hero">
+<style>
+:root {
+  --navy-dark: #071524;
+  --navy: #0D233A;
+  --navy-light: #183654;
+  --orange: #E8611A;
+  --orange-hover: #cf5213;
+  --orange-light: #fff2ea;
+  --slate-50: #F8FAFC;
+  --slate-100: #F1F5F9;
+  --slate-200: #E2E8F0;
+  --slate-300: #CBD5E1;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-900: #0F172A;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 2px 8px rgba(13,35,58,0.06);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Source Sans 3', system-ui, -apple-system, sans-serif;
+  background: var(--slate-50);
+  color: var(--slate-900);
+  line-height: 1.6;
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* HERO */
+.jsa-hero {
+  background: linear-gradient(135deg, #071524 0%, #0D233A 60%, #183654 100%);
+  color: #fff;
+  padding: 58px 0 44px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 3px solid var(--orange);
+}
+.jsa-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 36px 36px;
+  pointer-events: none;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(232, 97, 26, 0.18);
+  border: 1px solid rgba(232, 97, 26, 0.4);
+  padding: 6px 14px;
+  border-radius: 999px;
+  color: #FFA573;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 14px;
+}
+.jsa-hero h1 {
+  font-family: 'Lexend', sans-serif;
+  font-size: clamp(1.8rem, 3.6vw, 2.7rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+.jsa-hero h1 span { color: var(--orange); }
+.jsa-hero p {
+  color: #CBD5E1;
+  font-size: 1.05rem;
+  max-width: 760px;
+  margin-bottom: 20px;
+}
+.hero-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.hero-tag {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  color: #E2E8F0;
+}
+
+/* JSA WORKSPACE */
+.jsa-wrapper { padding: 40px 0 60px; }
+.card-box {
+  background: #fff;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 28px;
+  margin-bottom: 28px;
+}
+.card-header-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--slate-100);
+  padding-bottom: 16px;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.card-title {
+  font-family: 'Lexend', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* TEMPLATES PRESET */
+.preset-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.preset-btn {
+  background: var(--slate-100);
+  border: 1px solid var(--slate-200);
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--slate-700);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.preset-btn:hover, .preset-btn.active {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #fff;
+}
+
+/* HEADER METADATA FORM */
+.meta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  background: var(--slate-50);
+  padding: 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--slate-200);
+  margin-bottom: 26px;
+}
+.form-field { margin-bottom: 0; }
+.form-label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.form-input {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1.5px solid var(--slate-200);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: var(--slate-900);
+  background: #fff;
+}
+.form-input:focus {
+  outline: none;
+  border-color: var(--orange);
+}
+
+/* JSA STEPS TABLE */
+.jsa-table-container {
+  overflow-x: auto;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-md);
+  margin-bottom: 22px;
+}
+.jsa-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 860px;
+  font-size: 0.88rem;
+}
+.jsa-table th {
+  background: var(--navy);
+  color: #fff;
+  padding: 12px 14px;
+  text-align: left;
+  font-weight: 700;
+  font-size: 0.84rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.jsa-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--slate-200);
+  vertical-align: top;
+  background: #fff;
+}
+.jsa-table tr:hover td { background: var(--slate-50); }
+.jsa-table textarea {
+  width: 100%;
+  border: 1px solid var(--slate-200);
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 0.86rem;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 64px;
+}
+.jsa-table textarea:focus {
+  outline: none;
+  border-color: var(--orange);
+}
+.risk-select {
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  border: 1px solid var(--slate-300);
+}
+.risk-low { background: #DCFCE7; color: #166534; }
+.risk-med { background: #FEF3C7; color: #92400E; }
+.risk-high { background: #FEE2E2; color: #991B1B; }
+
+.btn-del-step {
+  background: #FEE2E2;
+  border: 1px solid #FCA5A5;
+  color: #991B1B;
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+.btn-del-step:hover { background: #EF4444; color: #fff; }
+
+/* ACTIONS */
+.action-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.btn-add-step {
+  background: var(--navy-light);
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-add-step:hover { background: var(--navy); }
+
+.export-group { display: flex; gap: 10px; }
+.btn-export {
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  text-decoration: none;
+}
+.btn-print { background: var(--orange); color: #fff; }
+.btn-print:hover { background: var(--orange-hover); }
+.btn-csv { background: var(--slate-100); color: var(--navy); border: 1.5px solid var(--slate-300); }
+.btn-csv:hover { background: var(--slate-200); }
+
+/* EDITORIAL ARTICLE */
+.editorial-box {
+  background: #fff;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+  margin-bottom: 32px;
+}
+.editorial-title {
+  font-family: 'Lexend', sans-serif;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 16px;
+  border-left: 4px solid var(--orange);
+  padding-left: 14px;
+}
+.editorial-p {
+  color: var(--slate-700);
+  font-size: 0.96rem;
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+/* FAQ */
+.faq-item {
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-md);
+  margin-bottom: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+.faq-q {
+  width: 100%;
+  padding: 16px 20px;
+  text-align: left;
+  background: #fff;
+  border: none;
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--navy);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.faq-q:hover { background: var(--slate-50); }
+.faq-a {
+  padding: 0 20px 18px;
+  color: var(--slate-700);
+  font-size: 0.92rem;
+  line-height: 1.65;
+  display: none;
+}
+.faq-item.active .faq-a { display: block; }
+.faq-item.active .faq-icon { transform: rotate(180deg); }
+.faq-icon { transition: transform 0.2s; }
+</style>
+
+<?php require __DIR__ . '/../includes/navbar.php'; ?>
+
+<main class="jsa-page" id="konten-utama">
+
+<!-- HERO -->
+<section class="jsa-hero">
   <div class="container">
-    <div class="hero-badge">📋 JSA Tool Gratis</div>
-    <h1><span>JSA Builder</span> Online<br>Job Safety Analysis Otomatis</h1>
-    <p>Isi form, tambah langkah pekerjaan, potensi bahaya dan tindakan pencegahan — langsung cetak ke PDF. Gratis, tanpa daftar.</p>
+    <div class="hero-badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      Sesuai SMK3 PP 50/2012 &amp; ISO 45001
+    </div>
+    <h1>JSA Builder <span>Online 2026</span></h1>
+    <p>Susun formulir Job Safety Analysis (JSA) &amp; Job Hazard Analysis (JHA) profesional langkah demi langkah. Pilih template risiko tinggi, sesuaikan hierarki kontrol, dan cetak form resmi untuk Izin Kerja (PTW).</p>
+    <div class="hero-tags">
+      <span class="hero-tag">6 Template Industri Siap Pakai</span>
+      <span class="hero-tag">Hirarki Kontrol 5 Tingkat</span>
+      <span class="hero-tag">Matriks Tingkat Risiko L/M/H</span>
+      <span class="hero-tag">Format Cetak Tanda Tangan Lapangan</span>
+    </div>
   </div>
 </section>
 
-<section class="main">
+<!-- BUILDER WORKSPACE -->
+<section class="jsa-wrapper">
   <div class="container">
+    
+    <div class="card-box">
+      
+      <!-- TEMPLATE SELECTOR -->
+      <div class="card-header-line">
+        <h2 class="card-title">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Pilih Template Pekerjaan Berisiko Tinggi
+        </h2>
+        <span style="font-size:0.8rem;color:var(--slate-600)">Klik untuk memuat langkah kerja standar:</span>
+      </div>
 
-    <!-- ACTIONS BAR -->
-    <div class="actions-bar">
-      <button class="btn-primary" onclick="printJSA()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-        Cetak / Simpan PDF
-      </button>
-      <button class="btn-secondary" onclick="addStep()">+ Tambah Langkah</button>
-      <button class="btn-secondary" onclick="clearAll()">↺ Baru / Reset</button>
-      <a href="https://wa.me/6287759151278?text=Halo%20Wahana%2C%20saya%20ingin%20konsultasi%20JSA%20dan%20prosedur%20K3" target="_blank" class="btn-wa">
-        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-        Konsultasi JSA
-      </a>
-    </div>
+      <div class="preset-bar">
+        <button class="preset-btn active" type="button" onclick="loadTemplate('ketinggian')">
+          🪜 Bekerja di Ketinggian / Scaffolding
+        </button>
+        <button class="preset-btn" type="button" onclick="loadTemplate('hotwork')">
+          🔥 Pekerjaan Panas (Welding &amp; Cutting)
+        </button>
+        <button class="preset-btn" type="button" onclick="loadTemplate('confined')">
+          🕳️ Ruang Terbatas (Confined Space)
+        </button>
+        <button class="preset-btn" type="button" onclick="loadTemplate('lifting')">
+          🏗️ Pengangkatan Beban Berat (Crane Lifting)
+        </button>
+        <button class="preset-btn" type="button" onclick="loadTemplate('galian')">
+          ⛏️ Pekerjaan Penggalian Tanah Dalam
+        </button>
+        <button class="preset-btn" type="button" onclick="loadTemplate('listrik')">
+          ⚡ Perbaikan Panel &amp; Trafo Listrik
+        </button>
+      </div>
 
-    <!-- HEADER INFO -->
-    <div class="form-section">
-      <h2>📄 Informasi Umum JSA</h2>
-      <div class="grid-2">
-        <div class="form-group">
-          <label>Nama / Judul Pekerjaan</label>
-          <input type="text" id="jobTitle" placeholder="cth: Pekerjaan Pengelasan di Ketinggian">
+      <!-- METADATA FORM -->
+      <div class="meta-grid">
+        <div class="form-field">
+          <label class="form-label" for="inpJudulKerja">Nama Pekerjaan (Job Title)</label>
+          <input type="text" id="inpJudulKerja" class="form-input" value="Pemasangan &amp; Inspeksi Perancah Scaffolding">
         </div>
-        <div class="form-group">
-          <label>Nomor Dokumen JSA</label>
-          <input type="text" id="docNumber" placeholder="cth: JSA-K3-2025-001">
+        <div class="form-field">
+          <label class="form-label" for="inpLokasi">Lokasi / Area Proyek</label>
+          <input type="text" id="inpLokasi" class="form-input" value="Area Workshop Gedung B">
         </div>
-        <div class="form-group">
-          <label>Departemen / Bagian</label>
-          <input type="text" id="department" placeholder="cth: Maintenance Dept.">
+        <div class="form-field">
+          <label class="form-label" for="inpSupervisor">Pengawas Lapangan (Supervisor)</label>
+          <input type="text" id="inpSupervisor" class="form-input" value="Ahmad Farhan">
         </div>
-        <div class="form-group">
-          <label>Lokasi Pekerjaan</label>
-          <input type="text" id="location" placeholder="cth: Workshop Area B, Lantai 3">
+        <div class="form-field">
+          <label class="form-label" for="inpHse">Ahli K3 / HSE Officer</label>
+          <input type="text" id="inpHse" class="form-input" value="Rian Pratama, S.T.">
         </div>
-        <div class="form-group">
-          <label>Tanggal Berlaku</label>
-          <input type="date" id="jsaDate" value="<?php echo date('Y-m-d'); ?>">
+        <div class="form-field">
+          <label class="form-label" for="inpPtw">No. Izin Kerja (PTW)</label>
+          <input type="text" id="inpPtw" class="form-input" value="PTW-WAHANA-2026-042">
         </div>
-        <div class="form-group">
-          <label>Supervisor / PIC</label>
-          <input type="text" id="supervisor" placeholder="cth: Budi Santoso">
-        </div>
-        <div class="form-group">
-          <label>Perusahaan</label>
-          <input type="text" id="company" placeholder="cth: PT. Karya Maju Bersama">
-        </div>
-        <div class="form-group">
-          <label>Nomor Izin Kerja / PTW (jika ada)</label>
-          <input type="text" id="ptwNumber" placeholder="cth: PTW-2025-0241">
+        <div class="form-field">
+          <label class="form-label" for="inpTanggal">Tanggal Pelaksanaan</label>
+          <input type="date" id="inpTanggal" class="form-input">
         </div>
       </div>
-      <div class="form-group">
-        <label>APD Wajib untuk Pekerjaan Ini</label>
-        <input type="text" id="ppe" placeholder="cth: Helm K3, Safety Harness, Kacamata Las, Sarung Tangan Kulit, Sepatu Safety, APAR">
-      </div>
-      <div class="form-group">
-        <label>Kondisi / Persyaratan Khusus</label>
-        <input type="text" id="conditions" placeholder="cth: Hanya boleh dilakukan saat cuaca cerah, wajib ada pengawas di bawah">
-      </div>
-    </div>
 
-    <!-- STEPS TABLE -->
-    <div class="form-section">
-      <h2>📝 Langkah Pekerjaan, Bahaya & Pengendalian</h2>
-      <div class="step-table-wrap">
-        <table class="step-table">
+      <!-- JSA STEPS TABLE -->
+      <div class="jsa-table-container">
+        <table class="jsa-table" id="jsaTable">
           <thead>
             <tr>
-              <th style="width:40px">#</th>
-              <th style="min-width:160px">Langkah Pekerjaan</th>
-              <th style="min-width:180px">Potensi Bahaya</th>
-              <th style="min-width:80px">Level Risiko</th>
-              <th style="min-width:200px">Tindakan Pencegahan / Pengendalian</th>
-              <th style="min-width:100px">APD Spesifik</th>
-              <th style="width:50px">Hapus</th>
+              <th style="width:45px;text-align:center">No</th>
+              <th style="width:24%">Urutan Langkah Kerja</th>
+              <th style="width:24%">Potensi Bahaya &amp; Dampak</th>
+              <th style="width:130px;text-align:center">Tingkat Risiko</th>
+              <th>Tindakan Pengendalian (Hirarki K3)</th>
+              <th style="width:14%">Penanggung Jawab (PIC)</th>
+              <th style="width:40px;text-align:center">Aksi</th>
             </tr>
           </thead>
-          <tbody id="stepsBody">
-            <!-- steps added by JS -->
+          <tbody id="jsaBody">
+            <!-- Dynamically populated -->
           </tbody>
         </table>
       </div>
-      <button class="btn-add-step" onclick="addStep()">+ Tambah Langkah Pekerjaan</button>
-    </div>
 
-    <!-- EMERGENCY & CONTACTS -->
-    <div class="form-section">
-      <h2>🚒 Kontak Darurat & Prosedur Emergency</h2>
-      <div class="grid-3">
-        <div class="form-group">
-          <label>No. Emergency / P3K</label>
-          <input type="text" id="emerPhone" placeholder="cth: 119 / ext 112">
-        </div>
-        <div class="form-group">
-          <label>Lokasi APAR Terdekat</label>
-          <input type="text" id="aparLoc" placeholder="cth: Koridor Area B, 20m dari area kerja">
-        </div>
-        <div class="form-group">
-          <label>Lokasi Kotak P3K</label>
-          <input type="text" id="p3kLoc" placeholder="cth: Pos Security, Lantai 1">
+      <!-- ACTION BUTTONS -->
+      <div class="action-bar">
+        <button class="btn-add-step" type="button" onclick="addJsaStep()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Tambah Baris Langkah Kerja
+        </button>
+
+        <div class="export-group">
+          <button class="btn-export btn-csv" type="button" onclick="exportCsv()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Export CSV
+          </button>
+          <button class="btn-export btn-print" type="button" onclick="printOfficialJsa()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            Cetak Formulir JSA Resmi
+          </button>
         </div>
       </div>
-      <div class="form-group">
-        <label>Prosedur Darurat Singkat</label>
-        <textarea id="emerProc" placeholder="cth: 1) Hentikan pekerjaan. 2) Amankan area. 3) Hubungi supervisior dan medical. 4) Jangan pindahkan korban sampai medical tiba."></textarea>
+
+    </div>
+
+    <!-- IN-DEPTH EDUCATIONAL GUIDE (SEO DEPTH) -->
+    <div class="editorial-box">
+      <h2 class="editorial-title">Panduan Lengkap Penyusunan Job Safety Analysis (JSA) Sesuai Standar K3</h2>
+      <p class="editorial-p">
+        <strong>Job Safety Analysis (JSA)</strong>, yang juga dikenal sebagai <em>Job Hazard Analysis (JHA)</em>, adalah teknik manajemen keselamatan kerja sistematis untuk mengidentifikasi bahaya fisik, kimia, biologis, ergonomi, dan mekanis pada setiap urutan tahapan kerja, guna menetapkan langkah pencegahan sebelum kecelakaan terjadi.
+      </p>
+
+      <h3 style="color:var(--navy);font-family:'Lexend',sans-serif;font-size:1.15rem;margin:22px 0 10px">4 Tahap Utama Pembuatan JSA yang Efektif</h3>
+      <ol style="padding-left:22px;color:var(--slate-700);line-height:1.75;margin-bottom:18px">
+        <li><strong>Memilih Pekerjaan yang Dianalisis:</strong> Prioritaskan pekerjaan dengan tingkat frekuensi atau keparahan insiden tinggi, pekerjaan baru tanpa instruksi kerja baku, atau pekerjaan berisiko kritis (misal: hot work, confined space, ketinggian).</li>
+        <li><strong>Memecah Pekerjaan Menjadi Urutan Langkah:</strong> Uraikan tugas dari awal persiapan hingga penyelesaian. Hindari membuat urutan terlalu detail (lebih dari 15 langkah) atau terlalu umum (kurang dari 3 langkah).</li>
+        <li><strong>Mengidentifikasi Potensi Bahaya pada Tiap Langkah:</strong> Teliti potensi terjatuh, tertimpa, tersengat listrik, terpapar zat kimia, titik jepit (pinch point), atau postur janggal.</li>
+        <li><strong>Menetapkan Tindakan Pengendalian Bahaya:</strong> Gunakan hierarki kontrol (eliminasi hingga APD) untuk merancang perlindungan yang reliabel.</li>
+      </ol>
+
+      <h3 style="color:var(--navy);font-family:'Lexend',sans-serif;font-size:1.15rem;margin:22px 0 10px">Penerapan Hirarki Pengendalian Bahaya (Hierarchy of Controls)</h3>
+      <p class="editorial-p">
+        Saat mengisi kolom tindakan pengendalian pada JSA, Ahli K3 dan Supervisor dilarang langsung meloncat ke pemakaian APD. Wajib memprioritaskan kontrol dari tingkat teratas:
+      </p>
+      <ul style="padding-left:22px;color:var(--slate-700);line-height:1.75;margin-bottom:24px">
+        <li><strong>1. Eliminasi:</strong> Menghilangkan sumber bahaya secara fisik (misal: memindahkan panel listrik bertegangan sebelum dikerjakan).</li>
+        <li><strong>2. Substitusi:</strong> Mengganti bahan atau alat beracun/berbahaya dengan yang lebih aman (misal: mengganti solvent berbasis benzena dengan pembersih berbasis air).</li>
+        <li><strong>3. Rekayasa Teknik (Engineering Controls):</strong> Memasang pelindung mesin, exhaust ventilation, scaffolding berpagar ganda.</li>
+        <li><strong>4. Pengendalian Administratif:</strong> Pemberlakuan Izin Kerja (PTW), rotasi shift kerja, safety briefing / TBM sebelum kerja.</li>
+        <li><strong>5. Alat Pelindung Diri (APD):</strong> Garis pertahanan terakhir (harness, kacamata goggle, respirator N95, sepatu safety).</li>
+      </ul>
+
+      <!-- FAQ ACCORDION -->
+      <h3 style="color:var(--navy);font-family:'Lexend',sans-serif;font-size:1.25rem;margin:28px 0 16px">Tanya Jawab Seputar JSA / JHA (FAQ)</h3>
+      <div class="faq-box">
+        
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>Apa perbedaan mendasar antara JSA dan IBPR / HIRADC?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-a">
+            HIRADC (Hazard Identification, Risk Assessment and Determining Control) atau IBPR bersifat makro di tingkat fasilitas dan mencakup seluruh siklus operasional bisnis perusahaan secara periodik (tahunan). Sedangkan JSA bersifat mikro, operasional, dan dibuat spesifik untuk satu jenis pekerjaan tertentu sebelum pekerjaan fisik dilakukan di lapangan, biasanya menjadi lampiran wajib dokumen Surat Izin Kerja Aman (SIKA / PTW).
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>Siapa yang wajib menandatangani formulir JSA sebelum pekerjaan dimulai?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-a">
+            Formulir JSA resmi wajib ditandatangani oleh:
+            <ol style="padding-left:20px;margin-top:6px">
+              <li><strong>Pelaksana / Mandor:</strong> Memahami langkah dan berkomitmen menerapkan kontrol.</li>
+              <li><strong>Pengawas Pekerjaan / Supervisor:</strong> Memverifikasi kesiapan alat dan keselamatan lapangan.</li>
+              <li><strong>Petugas HSE / Ahli K3 Umum:</strong> Mereview kepatuhan regulasi dan standar K3 perusahaan.</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>Berapa lama masa berlaku suatu dokumen JSA?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-a">
+            Dokumen JSA berlaku selama durasi pekerjaan tersebut berlangsung (sesuai masa aktif PTW, umumnya 1 shift kerja atau maksimal 1 minggu untuk pekerjaan proyek berkelanjutan). Jika terdapat perubahan kondisi lapangan, cuaca ekstrem, pergantian mesin/metode, atau terjadi insiden, JSA wajib ditinjau ulang (review) dan direvisi seketika.
+          </div>
+        </div>
+
       </div>
+
     </div>
 
-    <!-- SIGNATURES -->
-    <div class="form-section">
-      <h2>✍️ Tanda Tangan & Persetujuan</h2>
-      <div class="sig-grid">
-        <div class="sig-box">
-          <div class="sig-line"></div>
-          <p><strong>Dibuat oleh</strong><br>HSE Officer</p>
-          <input type="text" id="sig1name" placeholder="Nama" style="margin-top:8px;width:100%;border:1px solid #e5e7eb;border-radius:5px;padding:6px;font-size:.82rem">
-        </div>
-        <div class="sig-box">
-          <div class="sig-line"></div>
-          <p><strong>Disetujui oleh</strong><br>Supervisor / Foreman</p>
-          <input type="text" id="sig2name" placeholder="Nama" style="margin-top:8px;width:100%;border:1px solid #e5e7eb;border-radius:5px;padding:6px;font-size:.82rem">
-        </div>
-        <div class="sig-box">
-          <div class="sig-line"></div>
-          <p><strong>Mengetahui</strong><br>HSE Manager</p>
-          <input type="text" id="sig3name" placeholder="Nama" style="margin-top:8px;width:100%;border:1px solid #e5e7eb;border-radius:5px;padding:6px;font-size:.82rem">
-        </div>
-      </div>
-    </div>
-
-    <div class="actions-bar">
-      <button class="btn-primary" onclick="printJSA()">🖨 Cetak / Simpan PDF</button>
-      <button class="btn-secondary" onclick="addStep()">+ Tambah Langkah</button>
-    </div>
-
-    <div class="cta-strip">
-      <h3>🎓 Pelajari Cara Membuat JSA yang Benar</h3>
-      <p>Pelatihan K3 Umum kami mencakup praktik JSA, IBPR, dan prosedur kerja aman sesuai standar KEMNAKER.</p>
-      <a href="https://wa.me/6287759151278?text=Halo%20Wahana%2C%20saya%20pakai%20JSA%20Builder%20dan%20ingin%20tanya%20pelatihan%20K3" target="_blank" rel="noopener"
-         style="background:#25D366;color:#fff;padding:12px 28px;border-radius:8px;font-weight:700;display:inline-flex;align-items:center;gap:8px">
-        📱 Tanya Jadwal Pelatihan K3
-      </a>
-    </div>
   </div>
 </section>
 
-<section class="tool-article">
-  <div class="container">
-    <h2>Cara Menggunakan JSA Builder</h2>
-    <ol>
-      <li>Isi Informasi Umum JSA — nama/judul pekerjaan, nomor dokumen, departemen, lokasi, tanggal berlaku, supervisor/PIC, perusahaan, dan nomor izin kerja (PTW) jika ada.</li>
-      <li>Cantumkan APD wajib dan kondisi/persyaratan khusus untuk pekerjaan tersebut pada kolom yang tersedia.</li>
-      <li>Klik "+ Tambah Langkah Pekerjaan" untuk memecah pekerjaan menjadi tahapan-tahapan kecil dan berurutan.</li>
-      <li>Untuk setiap langkah, isi Potensi Bahaya, pilih Level Risiko (Low/Medium/High/Extreme), lalu isi Tindakan Pencegahan/Pengendalian dan APD spesifik yang dibutuhkan pada langkah tersebut.</li>
-      <li>Lengkapi kontak darurat, lokasi APAR dan P3K, serta prosedur darurat singkat pada bagian Kontak Darurat & Prosedur Emergency.</li>
-      <li>Isi nama pada bagian tanda tangan (dibuat oleh, disetujui oleh, mengetahui), lalu klik "Cetak / Simpan PDF" untuk menghasilkan dokumen JSA siap tanda tangan basah.</li>
-    </ol>
+</main>
 
-    <h2>Manfaat JSA Builder untuk Keselamatan Kerja</h2>
-    <p>JSA (Job Safety Analysis) adalah metode sistematis untuk memecah sebuah pekerjaan menjadi langkah-langkah kecil, lalu mengidentifikasi bahaya spesifik di setiap langkah beserta cara mengendalikannya. Berbeda dengan IBPR yang menilai risiko pada level aktivitas atau proses, JSA berfokus pada urutan langkah kerja yang lebih rinci — sehingga sangat cocok digunakan sebelum pekerjaan berisiko tinggi seperti bekerja di ketinggian, pekerjaan panas, atau confined space entry.</p>
-    <p>Dengan JSA Builder ini, supervisor atau HSE Officer dapat menyusun dokumen JSA langsung di lokasi kerja tanpa perlu template Word atau Excel terpisah. Setiap langkah pekerjaan, bahaya, level risiko, dan tindakan pengendalian tersusun rapi dalam satu tabel, lengkap dengan kolom APD spesifik per langkah — bukan sekadar APD umum di awal dokumen.</p>
-    <p>JSA yang dibuat sebelum pekerjaan dimulai juga menjadi alat komunikasi penting dalam toolbox meeting atau safety briefing. Pekerja yang terlibat bisa memahami urutan kerja yang aman, bahaya apa yang mengintai di setiap tahap, dan apa yang harus dilakukan untuk mencegahnya — bukan hanya membaca dokumen setelah insiden terjadi.</p>
-    <p>Dokumen JSA yang ditandatangani oleh pembuat, penyetuju, dan yang mengetahui juga menjadi bukti akuntabilitas dan kepatuhan saat terjadi audit K3 atau investigasi insiden, sekaligus menjadi syarat pendukung sebelum penerbitan izin kerja (Permit to Work) untuk pekerjaan berisiko tinggi.</p>
-
-    <h2>Dasar Hukum yang Relevan</h2>
-    <p>JSA merupakan bagian dari implementasi Sistem Manajemen Keselamatan dan Kesehatan Kerja (SMK3) yang diwajibkan dalam PP No. 50 Tahun 2012, khususnya pada elemen pengendalian operasional yang mengharuskan setiap pekerjaan berisiko memiliki prosedur kerja aman. Kewajiban dasar penyediaan lingkungan kerja yang aman juga merujuk pada UU No. 1 Tahun 1970 tentang Keselamatan Kerja, yang mewajibkan pengurus tempat kerja memberi petunjuk yang diperlukan sesuai pekerjaan yang akan dilakukan.</p>
-
-    <h2>Pertanyaan Umum</h2>
-    <div class="faq-item">
-      <h3>Apa bedanya JSA dengan IBPR?</h3>
-      <p>IBPR menilai risiko pada tingkat aktivitas atau proses kerja secara umum, sedangkan JSA memecah satu aktivitas menjadi langkah-langkah kerja yang lebih rinci dan menganalisis bahaya di setiap langkahnya. Keduanya saling melengkapi — IBPR untuk pemetaan risiko menyeluruh, JSA untuk panduan kerja aman langkah demi langkah.</p>
-    </div>
-    <div class="faq-item">
-      <h3>Kapan JSA wajib dibuat sebelum bekerja?</h3>
-      <p>JSA sebaiknya dibuat untuk semua pekerjaan berisiko tinggi atau non-rutin, seperti bekerja di ketinggian, pekerjaan panas (hot work), confined space entry, pekerjaan listrik, dan pekerjaan yang memerlukan izin kerja (Permit to Work).</p>
-    </div>
-    <div class="faq-item">
-      <h3>Apakah JSA yang dibuat di tool ini bisa langsung digunakan sebagai dasar penerbitan Permit to Work?</h3>
-      <p>Ya, dokumen JSA yang dicetak dari tool ini sudah mencakup identitas pekerjaan, langkah kerja, bahaya, level risiko, pengendalian, dan tanda tangan — cukup lengkap untuk dilampirkan sebagai dasar PTW. Pastikan tetap ditinjau dan disetujui oleh supervisor/HSE Manager sebelum pekerjaan dimulai.</p>
-    </div>
-  </div>
-</section>
-
-<section class="tools-training-cta">
-  <div class="container">
-    <h2>Tingkatkan Kompetensi K3 Anda</h2>
-    <div class="tools-training-grid">
-      <div class="tools-training-card">
-        <h3><a href="/pelatihan/pelatihan-ahli-k3-umum-sertifikasi-bnsp-online/">Pelatihan Ahli K3 Umum</a></h3>
-        <p>Sertifikasi wajib bagi praktisi K3 perusahaan, resmi BNSP, materi regulasi &amp; manajemen risiko.</p>
-        <a href="/pelatihan/pelatihan-ahli-k3-umum-sertifikasi-bnsp-online/" class="tools-training-btn">Lihat Program &rarr;</a>
-      </div>
-      <div class="tools-training-card">
-        <h3><a href="/pelatihan/pelatihan-petugas-p3k-sertifikasi-bnsp/">Pelatihan Petugas P3K | Sertifikasi BNSP</a></h3>
-        <p>Pelatihan penanganan darurat dan P3K di tempat kerja, sertifikasi BNSP, wajib untuk perusahaan.</p>
-        <a href="/pelatihan/pelatihan-petugas-p3k-sertifikasi-bnsp/" class="tools-training-btn">Lihat Program &rarr;</a>
-      </div>
-      <div class="tools-training-card">
-        <h3><a href="/pelatihan/pelatihan-operator-k3-sertifikasi-bnsp/">Pelatihan Operator K3 | Sertifikasi BNSP</a></h3>
-        <p>Kompetensi dasar keselamatan kerja untuk operator, sertifikasi resmi BNSP, untuk semua industri.</p>
-        <a href="/pelatihan/pelatihan-operator-k3-sertifikasi-bnsp/" class="tools-training-btn">Lihat Program &rarr;</a>
-      </div>
-      <div class="tools-training-card">
-        <h3><a href="/jadwal/">Jadwal Pelatihan Terdekat</a></h3>
-        <p>Lihat jadwal batch pelatihan K3 terbaru — online dan offline di berbagai kota.</p>
-        <a href="/jadwal/" class="tools-training-btn">Lihat Jadwal &rarr;</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PRINT AREA (hidden on screen, shown in print) -->
-<div id="printArea">
-  <div class="print-jsa" id="printJsaContent"></div>
-</div>
-
-<footer>
-  <div class="container">
-    <p><a href="/tools/">← Semua Tools K3</a> | <a href="/tools/risk-matrix">Risk Matrix</a> | <a href="/tools/ibpr-generator">IBPR Generator</a> | <a href="/">Wahana Totalita</a></p>
-    <p style="margin-top:8px">© <?php echo date('Y'); ?> Wahana Totalita Konsultan, Yogyakarta</p>
-  </div>
-</footer>
-
-<a href="https://wa.me/6287759151278" target="_blank" style="position:fixed;bottom:24px;right:24px;background:#25D366;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(37,211,102,.4);z-index:999">
-  <svg viewBox="0 0 24 24" fill="white" width="26" height="26"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-</a>
-<div class="toast" id="toast"></div>
+<?php require __DIR__ . '/../includes/footer.php'; ?>
 
 <script>
-let stepCount = 0;
+// Templates database for instant high-value generation
+const jsaTemplates = {
+  ketinggian: {
+    title: "Pemasangan & Inspeksi Perancah Scaffolding (Ketinggian > 2m)",
+    steps: [
+      { step: "Pemeriksaan kondisi fisik komponen scaffolding (pipa, clamp, baseplate, catwalk)", hazard: "Pipa retak/bengkok, clamp aus berisiko patah saat menahan beban", risk: "HIGH", control: "Inspeksi visual pra-pakai, singkirkan material cacat, gunakan scaffolder berlisensi Kemnaker", pic: "Scaffolder Inspector" },
+      { step: "Perataan dan pemadatan tanah landasan pemasangan baseplate", hazard: "Struktur perancah amblas atau miring akibat tanah lunak", risk: "HIGH", control: "Gunakan sole plate papan kayu solid minimal tebal 5 cm, pasang jack base waterpass", pic: "Supervisor Lapangan" },
+      { step: "Ereksi rangka scaffolding, ledger, transom, dan cross-bracing", hazard: "Pekerja terjatuh dari ketinggian saat memasang pipa atas", risk: "HIGH", control: "Wajib memakai Full Body Harness double lanyard 100% tie-off ke anchor point independen", pic: "Mandor & Pekerja" },
+      { step: "Pemasangan papan lantai kerja (catwalk) dan toeboard penahan", hazard: "Papan patah atau bergeser, celah longgar menyebabkan tersandung", risk: "MED", control: "Pasang lantai kerja rapat tanpa celah (> 20mm), pasang toeboard minimal tinggi 15 cm", pic: "Tim Scaffolder" },
+      { step: "Pemasangan guardrail (top rail 110cm & mid rail 60cm)", hazard: "Pekerja tergelincir jatuh dari tepi perancah", risk: "HIGH", control: "Pasang railing ganda sesuai standar Permenaker No. 09/2016, pasang jaring safety net", pic: "Scaffolder" },
+      { step: "Inspeksi akhir dan pemasangan Scafftag (Tag Hijau / Merah)", hazard: "Pekerja umum menggunakan perancah belum selesai / tidak aman", risk: "MED", control: "Inspeksi Ahli K3 / Scaffolder Bersertifikat, pasang Tag Hijau jika lulus, Tag Merah jika belum aman", pic: "HSE Officer" }
+    ]
+  },
+  hotwork: {
+    title: "Pekerjaan Pengelasan dan Pemotongan Besi (Hot Work)",
+    steps: [
+      { step: "Pemeriksaan area kerja radius 11 meter dari bahan mudah terbakar", hazard: "Percikan bunga api las menyambar solar, thinner, kayu, atau kardus", risk: "HIGH", control: "Singkirkan semua bahan B3 mudah terbakar radius 11m, tutup celah dengan fire blanket tahan api", pic: "Fire Watcher" },
+      { step: "Inspeksi kabel mesin las, trafo, stang las, dan grounding clamp", hazard: "Kabel terkelupas menyebabkan sengatan listrik 380V atau korsleting", risk: "HIGH", control: "Gunakan mesin las yang telah diuji tagging bulanan, pasang grounding rapat pada benda kerja", pic: "Welder / Teknisi" },
+      { step: "Penyiapan tabung gas asetilen & oksigen untuk proses cutting", hazard: "Kebocoran gas LPG/asetilen memicu ledakan tabung silinder", risk: "HIGH", control: "Pastikan tabung berdiri tegak terikat rantai, pasang flash back arrestor di regulator dan torch", pic: "Fitter" },
+      { step: "Pelaksanaan proses pengelasan benda kerja", hazard: "Radiasi sinar UV/IR menyilaukan mata, asap beracun (fume) terhirup", risk: "MED", control: "Gunakan welding helmet auto-darkening shade 10-12, gunakan respirator khusus asap las (particulate filter)", pic: "Welder" },
+      { step: "Pemantauan pasca pengelasan (Fire Watch Standby 30 menit)", hazard: "Bara tersembunyi menyala menjadi api setelah pekerja meninggalkan lokasi", risk: "HIGH", control: "Fire watcher standby dengan APAR powder 6kg minimal 30 menit setelah pekerjaan selesai", pic: "Petugas Fire Watch" }
+    ]
+  },
+  confined: {
+    title: "Pembersihan & Inspeksi Tangki Ruang Terbatas (Confined Space)",
+    steps: [
+      { step: "Isolasi energi mekanis, perpipaan, dan listrik (LOTO)", hazard: "Cairan kimia masuk atau mixer tangki menyala otomatis secara mendadak", risk: "HIGH", control: "Pasang blind flange fisik pada pipa masuk, pasang padlock dan Tag LOTO pada breaker listrik", pic: "Mekanik & HSE" },
+      { step: "Pengujian atmosfer gas berbahaya (Gas Testing) pra-masuk", hazard: "Kekurangan oksigen (< 19.5%), paparan gas beracun (H2S, CO), ledakan LEL", risk: "HIGH", control: "Uji dengan 4-gas detector terkalibrasi di 3 level ketinggian (atas, tengah, bawah tangki)", pic: "Petugas Gas Tester" },
+      { step: "Ventilasi udara paksa dengan blower mekanis", hazard: "Akumulasi gas beracun selama pekerjaan pembersihan berlangsung", risk: "HIGH", control: "Nyalakan blower udara segar terus menerus, arahkan exhaust jauh dari pintu masuk", pic: "Attendant" },
+      { step: "Personel masuk ke dalam tangki menggunakan APD lengkap", hazard: "Pekerja pingsan atau terjebak di dalam tangki", risk: "HIGH", control: "Wajib kenakan harness dengan retrieval lifeline, sediakan breathing apparatus (SCBA/airline)", pic: "Entrant" },
+      { step: "Pengawasan kontinu oleh Petugas Jaga Ruang Terbatas (Attendant)", hazard: "Keterlambatan tindakan evakuasi saat entrant mengalami kondisi darurat", risk: "HIGH", control: "Attendant standby 100% di luar manhole, catat log waktu masuk-keluar, siapkan tripot rescue", pic: "Standby Attendant" }
+    ]
+  },
+  lifting: {
+    title: "Pengangkatan Generator 10 Ton Menggunakan Mobile Crane",
+    steps: [
+      { step: "Pemeriksaan dokumen sertifikasi crane (SILO) dan lisensi operator (SIO)", hazard: "Kegagalan mekanis crane, ketidakmampuan operator mengendalikan beban", risk: "HIGH", control: "Pastikan SILO Kemnaker masih aktif, operator memiliki SIO Crane Kelas 1 / 2 resmi", pic: "HSE Inspector" },
+      { step: "Inspeksi outrigger crane dan kestabilan landasan tanah", hazard: "Tanah amblas menyebabkan crane terguling (tip-over)", risk: "HIGH", control: "Pasang outrigger full extend, pasang pelat baja/kayu keras tebal di bawah ponton outrigger", pic: "Rigging Supervisor" },
+      { step: "Inspeksi alat bantu angkat (webbing sling, shackle, spreader bar)", hazard: "Sling putus, shackle bengkok meluncurkan beban jatuh ke bawah", risk: "HIGH", control: "Cek SWL (Safe Working Load), tolak sling yang sobek/terpotong, gunakan safety latch pada hook", pic: "Rigger Bersertifikat" },
+      { step: "Sterilisasi area radius putar crane (Swing Radius Barricade)", hazard: "Pekerja tertimpa beban ayun atau terjepit counterweight crane", risk: "HIGH", control: "Pasang barikade pita merah-putih di sekeliling radius putar, dilarang melintas di bawah beban", pic: "Safety Man" },
+      { step: "Pengangkatan beban dan pemanduan arah menggunakan tagline", hazard: "Beban berputar tak terkendali mengenai struktur gedung sekitar", risk: "MED", control: "Gunakan tali pemandu (tagline) minimal 2 sisi, komando hanya dari 1 orang rigger berompi terang", pic: "Rigger & Tagman" }
+    ]
+  },
+  galian: {
+    title: "Pekerjaan Penggalian Tanah Pondasi Kedalaman > 2 Meter",
+    steps: [
+      { step: "Pengecekan jalur utilitas bawah tanah (kabel listrik, pipa gas, air)", hazard: "Mengenai kabel tegangan tinggi memicu ledakan atau pipa air pecah", risk: "HIGH", control: "Survei utilitas bawah tanah dengan cable locator, gali manual hati-hati di titik kritis", pic: "Surveyor & Pengawas" },
+      { step: "Penggalian menggunakan excavator dan pembentukan kemiringan (sloping)", hazard: "Pekerja tertabrak swing excavator atau tanah longsor mendadak", risk: "HIGH", control: "Jaga jarak 5 meter dari excavator, buat kemiringan (bench/slope) rasio 1:1 sesuai jenis tanah", pic: "Operator & Mandor" },
+      { step: "Pemasangan proteksi dinding penahan tanah (shoring/sheet pile)", hazard: "Dinding galian runtuh menimbun pekerja di dasar lubang", risk: "HIGH", control: "Pasang sistem penahan tanah (shoring) untuk galian > 1.5m, inspeksi pasca hujan", pic: "Supervisor Sipil" },
+      { step: "Penyediaan tangga akses keluar masuk lubang galian", hazard: "Pekerja terpeleset jatuh ke lubang atau terjebak saat kondisi darurat", risk: "MED", control: "Sediakan tangga akses setiap jarak 7.5 meter, ujung tangga menonjol 1 meter di atas tanah", pic: "Mandor" },
+      { step: "Penempatan tumpukan tanah galian (spoil pile)", hazard: "Beban tanah di tepi galian memicu keruntuhan dinding", risk: "HIGH", control: "Tempatkan tumpukan tanah minimal 1 meter dari bibir tepi galian", pic: "Pengawas Lapangan" }
+    ]
+  },
+  listrik: {
+    title: "Perbaikan & Perawatan Panel Listrik Tegangan Menengah (20kV)",
+    steps: [
+      { step: "Penerbitan Izin Kerja Listrik dan Prosedur LOTO (Lock Out Tag Out)", hazard: "Pekerja lain menyalakan breaker utama saat teknisi bekerja", risk: "HIGH", control: "Putus breaker utama, pasang pad-lock pribadi dan danger tag, simpan kunci di lockbox", pic: "Teknisi Listrik & HSE" },
+      { step: "Verifikasi kondisi Nol Energi (Zero Voltage Testing)", hazard: "Tegangan sisa pada kapasitor atau kesalahan pemutusan jalur kabel", risk: "HIGH", control: "Uji dengan voltage detector terkalibrasi, lakukan pelepasan arus tanah (grounding discharge)", pic: "Ahli K3 Listrik" },
+      { step: "Pemasangan Grounding Portabel Sementara", hazard: "Tegangan induksi dari kabel berdekatan yang masih aktif", risk: "HIGH", control: "Pasang portable earthing lead pada ketiga fasa kabel sebelum disentuh tangan", pic: "Teknisi Listrik" },
+      { step: "Pembersihan isolator dan pengencangan baut busbar", hazard: "Paparan debu partikel atau bahaya Arc Flash jika alat terjatuh", risk: "HIGH", control: "Wajib kenakan APD Arc Flash Kit (face shield, sarung tangan isolasi 20kV, pakaian FR)", pic: "Teknisi Listrik" },
+      { step: "Pelepasan gembok LOTO dan uji coba penyalaan kembali", hazard: "Peralatan/personel tertinggal di dalam panel saat tegangan dimasukkan", risk: "HIGH", control: "Inspeksi housekeeping (pastikan tidak ada kunci pas tertinggal), tutup panel rapat sebelum ON", pic: "Supervisor Listrik" }
+    ]
+  }
+};
 
-function g(id){ return document.getElementById(id)?.value?.trim()||''; }
+let currentSteps = [];
 
-function addStep(){
-  stepCount++;
-  const tbody = document.getElementById('stepsBody');
-  const tr = document.createElement('tr');
-  tr.id = `step-${stepCount}`;
-  tr.innerHTML = `
-    <td class="step-num">${stepCount}</td>
-    <td><textarea placeholder="cth: Pasang scaffolding, nyalakan mesin las..." rows="2"></textarea></td>
-    <td><textarea placeholder="cth: Terjatuh dari ketinggian, percikan api, asap las..." rows="2"></textarea></td>
-    <td>
-      <select onchange="updateRiskColor(this)">
-        <option value="">— Pilih —</option>
-        <option value="low" class="risk-low">Low</option>
-        <option value="medium" class="risk-medium">Medium</option>
-        <option value="high" class="risk-high">High</option>
-        <option value="extreme" class="risk-extreme">Extreme</option>
-      </select>
-    </td>
-    <td><textarea placeholder="cth: Gunakan full body harness, periksa scaffolding, sediakan fire watch..." rows="2"></textarea></td>
-    <td><textarea placeholder="cth: Safety harness, helm, kacamata las" rows="2"></textarea></td>
-    <td><button class="btn-del" onclick="removeStep(${stepCount})">✕</button></td>
-  `;
-  tbody.appendChild(tr);
-  tr.querySelector('textarea').focus();
+function loadTemplate(key){
+  const t = jsaTemplates[key];
+  if(!t) return;
+  document.querySelectorAll('.preset-bar .preset-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+
+  document.getElementById('inpJudulKerja').value = t.title;
+  currentSteps = JSON.parse(JSON.stringify(t.steps));
+  renderSteps();
 }
 
-function removeStep(n){
-  const el = document.getElementById(`step-${n}`);
-  if(el) el.remove();
-  renumberSteps();
-}
+function renderSteps(){
+  const tbody = document.getElementById('jsaBody');
+  tbody.innerHTML = '';
 
-function renumberSteps(){
-  document.querySelectorAll('#stepsBody tr').forEach((tr,i)=>{
-    const numCell = tr.querySelector('.step-num');
-    if(numCell) numCell.textContent = i+1;
+  currentSteps.forEach((s, idx) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td style="text-align:center;font-weight:bold;color:var(--slate-600)">${idx + 1}</td>
+      <td><textarea onchange="updateStep(${idx}, 'step', this.value)">${escapeHtml(s.step)}</textarea></td>
+      <td><textarea onchange="updateStep(${idx}, 'hazard', this.value)">${escapeHtml(s.hazard)}</textarea></td>
+      <td style="text-align:center">
+        <select class="risk-select ${s.risk === 'HIGH' ? 'risk-high' : (s.risk === 'MED' ? 'risk-med' : 'risk-low')}" onchange="updateRisk(${idx}, this)">
+          <option value="HIGH" ${s.risk === 'HIGH' ? 'selected' : ''}>TINGGI (H)</option>
+          <option value="MED" ${s.risk === 'MED' ? 'selected' : ''}>SEDANG (M)</option>
+          <option value="LOW" ${s.risk === 'LOW' ? 'selected' : ''}>RENDAH (L)</option>
+        </select>
+      </td>
+      <td><textarea onchange="updateStep(${idx}, 'control', this.value)">${escapeHtml(s.control)}</textarea></td>
+      <td><input type="text" class="form-input" style="font-size:0.84rem" value="${escapeHtml(s.pic)}" onchange="updateStep(${idx}, 'pic', this.value)"></td>
+      <td style="text-align:center">
+        <button class="btn-del-step" type="button" onclick="deleteStep(${idx})" title="Hapus Baris">✕</button>
+      </td>
+    `;
+    tbody.appendChild(tr);
   });
 }
 
-function updateRiskColor(sel){
-  sel.className = sel.value ? `risk-${sel.value}` : '';
-}
-
-function getStepsData(){
-  const rows = [];
-  document.querySelectorAll('#stepsBody tr').forEach((tr,i)=>{
-    const tds = tr.querySelectorAll('td');
-    if(tds.length >= 6){
-      rows.push({
-        no: i+1,
-        step:  tds[1].querySelector('textarea')?.value || '',
-        hazard:tds[2].querySelector('textarea')?.value || '',
-        risk:  tds[3].querySelector('select')?.value || '',
-        control:tds[4].querySelector('textarea')?.value || '',
-        ppe:   tds[5].querySelector('textarea')?.value || '',
-      });
-    }
+function addJsaStep(){
+  currentSteps.push({
+    step: "Langkah kerja baru...",
+    hazard: "Potensi bahaya teridentifikasi...",
+    risk: "MED",
+    control: "Tindakan pengendalian hierarki K3...",
+    pic: "Petugas Terkait"
   });
-  return rows;
+  renderSteps();
 }
 
-function printJSA(){
-  const steps = getStepsData();
-  const riskColors = {low:'#16a34a',medium:'#d97706',high:'#c2410c',extreme:'#dc2626'};
-
-  const html = `
-    <div class="print-header">
-      <h2>JOB SAFETY ANALYSIS (JSA)</h2>
-      <p style="font-size:10pt;color:#666">Form No. Dok: ${g('docNumber')||'—'}</p>
-    </div>
-    <div class="print-meta">
-      <div class="print-meta-item"><strong>NAMA PEKERJAAN</strong>${g('jobTitle')||'—'}</div>
-      <div class="print-meta-item"><strong>DEPARTEMEN</strong>${g('department')||'—'}</div>
-      <div class="print-meta-item"><strong>TANGGAL</strong>${g('jsaDate')||'—'}</div>
-      <div class="print-meta-item"><strong>LOKASI</strong>${g('location')||'—'}</div>
-      <div class="print-meta-item"><strong>SUPERVISOR</strong>${g('supervisor')||'—'}</div>
-      <div class="print-meta-item"><strong>NO. PTW</strong>${g('ptwNumber')||'—'}</div>
-      <div class="print-meta-item" style="grid-column:1/-1"><strong>PERUSAHAAN</strong>${g('company')||'—'}</div>
-      <div class="print-meta-item" style="grid-column:1/-1"><strong>APD WAJIB</strong>${g('ppe')||'—'}</div>
-    </div>
-    <table class="print-steps">
-      <thead>
-        <tr>
-          <th style="width:32px">#</th>
-          <th>Langkah Pekerjaan</th>
-          <th>Potensi Bahaya</th>
-          <th style="width:70px">Risk Level</th>
-          <th>Tindakan Pencegahan</th>
-          <th>APD Spesifik</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${steps.map(s=>`
-          <tr>
-            <td style="text-align:center">${s.no}</td>
-            <td>${s.step||'—'}</td>
-            <td>${s.hazard||'—'}</td>
-            <td style="text-align:center;color:${riskColors[s.risk]||'#374151'};font-weight:700">${s.risk?s.risk.toUpperCase():'—'}</td>
-            <td>${s.control||'—'}</td>
-            <td>${s.ppe||'—'}</td>
-          </tr>
-        `).join('')}
-        ${!steps.length ? '<tr><td colspan="6" style="text-align:center;color:#999;padding:20px">Tidak ada langkah pekerjaan</td></tr>' : ''}
-      </tbody>
-    </table>
-    ${g('emerPhone')||g('aparLoc') ? `
-    <div style="margin-top:16px;padding:10px;border:1px solid #e5e7eb;border-radius:4px;font-size:8pt">
-      <strong>KONTAK DARURAT:</strong> ${g('emerPhone')} &nbsp;|&nbsp;
-      <strong>APAR:</strong> ${g('aparLoc')} &nbsp;|&nbsp;
-      <strong>P3K:</strong> ${g('p3kLoc')}
-      ${g('emerProc') ? `<br><strong>PROSEDUR DARURAT:</strong> ${g('emerProc')}` : ''}
-    </div>` : ''}
-    <div class="print-sigs">
-      <div class="print-sig-box">Dibuat oleh: ${g('sig1name')||'_________________'}<br>HSE Officer</div>
-      <div class="print-sig-box">Disetujui oleh: ${g('sig2name')||'_________________'}<br>Supervisor</div>
-      <div class="print-sig-box">Mengetahui: ${g('sig3name')||'_________________'}<br>HSE Manager</div>
-    </div>
-    <div class="print-footer">Dibuat menggunakan JSA Builder Online Gratis — wahanatotalita.com/tools/jsa-builder</div>
-  `;
-
-  document.getElementById('printJsaContent').innerHTML = html;
-  window.print();
-}
-
-function clearAll(){
-  if(confirm('Reset semua data JSA?')){
-    ['jobTitle','docNumber','department','location','jsaDate','supervisor','company','ptwNumber','ppe','conditions','emerPhone','aparLoc','p3kLoc','emerProc','sig1name','sig2name','sig3name'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value = id==='jsaDate'?new Date().toISOString().split('T')[0]:''; });
-    document.getElementById('stepsBody').innerHTML = '';
-    stepCount = 0;
-    addStep(); addStep(); addStep();
+function updateStep(idx, field, val){
+  if(currentSteps[idx]){
+    currentSteps[idx][field] = val;
   }
 }
 
-function showToast(msg){
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'), 2500);
+function updateRisk(idx, selectEl){
+  const val = selectEl.value;
+  if(currentSteps[idx]){
+    currentSteps[idx].risk = val;
+    selectEl.className = 'risk-select ' + (val === 'HIGH' ? 'risk-high' : (val === 'MED' ? 'risk-med' : 'risk-low'));
+  }
 }
 
-// Init with 3 empty steps
-addStep(); addStep(); addStep();
+function deleteStep(idx){
+  if(currentSteps.length <= 1){
+    alert('Minimal harus ada 1 langkah kerja dalam JSA!');
+    return;
+  }
+  currentSteps.splice(idx, 1);
+  renderSteps();
+}
+
+function escapeHtml(text){
+  return String(text).replace(/[&<>"']/g, function(m){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m];
+  });
+}
+
+function exportCsv(){
+  const title = document.getElementById('inpJudulKerja').value;
+  let csv = 'No,Urutan Langkah Kerja,Potensi Bahaya,Tingkat Risiko,Tindakan Pengendalian,Penanggung Jawab\n';
+  currentSteps.forEach((s, idx) => {
+    csv += `"${idx+1}","${s.step.replace(/"/g, '""')}","${s.hazard.replace(/"/g, '""')}","${s.risk}","${s.control.replace(/"/g, '""')}","${s.pic.replace(/"/g, '""')}"\n`;
+  });
+
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = `JSA_${title.replace(/[^a-zA-Z0-9]/g, '_')}.csv`;
+  link.click();
+}
+
+function printOfficialJsa(){
+  const title = document.getElementById('inpJudulKerja').value;
+  const lokasi = document.getElementById('inpLokasi').value;
+  const supervisor = document.getElementById('inpSupervisor').value;
+  const hse = document.getElementById('inpHse').value;
+  const ptw = document.getElementById('inpPtw').value;
+  const tgl = document.getElementById('inpTanggal').value || new Date().toLocaleDateString('id-ID');
+
+  const win = window.open('', '_blank');
+  win.document.write(`<!DOCTYPE html><html><head><title>JSA Form - ${title}</title>
+  <style>
+    body{font-family:'Segoe UI',Arial,sans-serif;padding:24px;max-width:960px;margin:0 auto;color:#0F172A;line-height:1.4}
+    .header{border-bottom:3px solid #0D233A;padding-bottom:12px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:flex-end}
+    h1{font-size:16pt;margin:0;color:#0D233A}
+    .sub{font-size:8.5pt;color:#64748B}
+    table.meta{width:100%;border-collapse:collapse;margin-bottom:16px;font-size:9pt}
+    table.meta td{padding:4px 8px;border:1px solid #CBD5E1}
+    table.meta th{background:#F1F5F9;text-align:left;padding:4px 8px;border:1px solid #CBD5E1;width:18%}
+    table.data{width:100%;border-collapse:collapse;margin:12px 0;font-size:8.5pt}
+    table.data th{background:#0D233A;color:#fff;padding:8px;border:1px solid #0D233A;text-align:left}
+    table.data td{padding:8px;border:1px solid #CBD5E1;vertical-align:top}
+    .badge-h{background:#FEE2E2;color:#991B1B;padding:2px 6px;border-radius:4px;font-weight:bold;font-size:8pt}
+    .badge-m{background:#FEF3C7;color:#92400E;padding:2px 6px;border-radius:4px;font-weight:bold;font-size:8pt}
+    .badge-l{background:#DCFCE7;color:#166534;padding:2px 6px;border-radius:4px;font-weight:bold;font-size:8pt}
+    .sig-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-top:28px;text-align:center;font-size:8.5pt}
+    .sig-line{margin-top:50px;border-top:1px solid #000;font-weight:bold;padding-top:4px}
+  </style>
+  </head><body>
+  <div class="header">
+    <div>
+      <h1>JOB SAFETY ANALYSIS (JSA) / ANALISIS KESELAMATAN KERJA</h1>
+      <div class="sub">Standar Operasional Keselamatan Kerja &amp; Lampiran Izin Kerja (PTW)</div>
+    </div>
+    <div style="text-align:right">
+      <span style="background:#E8611A;color:#fff;padding:3px 8px;border-radius:4px;font-weight:bold;font-size:8pt">FORMULIR K3 RESMI</span>
+    </div>
+  </div>
+
+  <table class="meta">
+    <tr>
+      <th>Nama Pekerjaan</th><td><strong>${title}</strong></td>
+      <th>No. Izin Kerja (PTW)</th><td><strong>${ptw}</strong></td>
+    </tr>
+    <tr>
+      <th>Lokasi / Proyek</th><td>${lokasi}</td>
+      <th>Tanggal Pelaksanaan</th><td>${tgl}</td>
+    </tr>
+    <tr>
+      <th>Pengawas Pekerjaan</th><td>${supervisor}</td>
+      <th>Ahli K3 / HSE Officer</th><td>${hse}</td>
+    </tr>
+  </table>
+
+  <table class="data">
+    <thead>
+      <tr>
+        <th style="width:30px;text-align:center">No</th>
+        <th style="width:25%">Urutan Langkah Kerja</th>
+        <th style="width:25%">Potensi Bahaya Teridentifikasi</th>
+        <th style="width:65px;text-align:center">Risiko</th>
+        <th>Tindakan Pengendalian (Hierarki K3)</th>
+        <th style="width:15%">Penanggung Jawab</th>
+      </tr>
+    </thead>
+    <tbody>
+      ${currentSteps.map((s, idx) => `
+        <tr>
+          <td style="text-align:center">${idx + 1}</td>
+          <td>${escapeHtml(s.step)}</td>
+          <td>${escapeHtml(s.hazard)}</td>
+          <td style="text-align:center">
+            <span class="${s.risk === 'HIGH' ? 'badge-h' : (s.risk === 'MED' ? 'badge-m' : 'badge-l')}">${s.risk}</span>
+          </td>
+          <td>${escapeHtml(s.control)}</td>
+          <td>${escapeHtml(s.pic)}</td>
+        </tr>
+      `).join('')}
+    </tbody>
+  </table>
+
+  <div class="sig-grid">
+    <div>
+      Disusun &amp; Dilaksanakan oleh,<br>
+      <strong>Pengawas Lapangan / Supervisor</strong>
+      <div class="sig-line">${supervisor}</div>
+    </div>
+    <div>
+      Diverifikasi oleh,<br>
+      <strong>Ahli K3 Umum / HSE Officer</strong>
+      <div class="sig-line">${hse}</div>
+    </div>
+    <div>
+      Disetujui oleh,<br>
+      <strong>Pimpinan Proyek / Site Manager</strong>
+      <div class="sig-line">( ___________________________ )</div>
+    </div>
+  </div>
+  </body></html>`);
+  win.document.close();
+  win.print();
+}
+
+function toggleFaq(btn){
+  btn.parentElement.classList.toggle('active');
+}
+
+// Initial load
+window.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('inpTanggal').valueAsDate = new Date();
+  loadTemplate('ketinggian');
+});
 </script>
+
+<?php require __DIR__ . '/../includes/scripts.php'; ?>
 </body>
 </html>

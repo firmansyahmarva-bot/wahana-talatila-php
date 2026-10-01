@@ -1,343 +1,522 @@
 <?php
 require_once __DIR__ . '/../config.php';
 $s = get_all_settings();
-?>
-<?php
-$page_title = 'Panduan Pemilihan APD Online Gratis — Alat Pelindung Diri K3';
-$meta_desc = 'Panduan interaktif pemilihan APD (Alat Pelindung Diri) online gratis. Pilih jenis bahaya atau pekerjaan — sistem rekomendasikan APD yang wajib dipakai sesuai standar K3 Indonesia.';
+
+$page_title = 'Panduan Pemilihan APD K3 2026: Standar Permenaker 08/2010, SNI & ANSI';
+$meta_desc = 'Panduan lengkap pemilihan Alat Pelindung Diri (APD) K3 sesuai Permenaker No. 08/2010, standar SNI, ANSI, & EN. Evaluasi spesifikasi teknis 7 organ tubuh dan checklist inspeksi.';
+
+ob_start();
 require __DIR__ . '/../includes/head.php';
+$shared_head = ob_get_clean();
+$shared_head = preg_replace('~<title>.*?</title>~s', '<title>' . e($page_title) . '</title>', $shared_head, 1);
+echo $shared_head;
+
+// Master database of PPE specifications
+$apdList = [
+  [
+    "id" => "kepala",
+    "kategori" => "Pelindung Kepala (Head Protection)",
+    "nama" => "Safety Helmet (Helm Keselamatan)",
+    "standar" => "SNI ISO 3873:2012 / ANSI Z89.1 (Tipe I & II, Kelas E, G, C)",
+    "bahaya" => "Tertimpa benda jatuh, benturan struktur rendah, kontak listrik tegangan tinggi.",
+    "spesifikasi" => "Cangkang HDPE / ABS tahan benturan, suspensi 4 atau 6 titik, chin strap elastis, tahan voltase listrik hingga 20.000V (Kelas E).",
+    "masa_pakai" => "Umur pakai maksimal 3 - 5 tahun dari tanggal pembuatan, atau langsung diganti jika pernah terkena benturan keras.",
+    "inspeksi" => "Periksa retakan mikro pada cangkang, kelenturan suspensi harness, dan elastisitas tali dagu."
+  ],
+  [
+    "id" => "mata",
+    "kategori" => "Pelindung Mata & Wajah (Eye & Face Protection)",
+    "nama" => "Safety Goggles & Face Shield",
+    "standar" => "SNI 16-0158-1987 / ANSI Z87.1+ / EN 166",
+    "bahaya" => "Percikan bahan kimia asam/basa, partikel gerinda kecepatan tinggi, radiasi sinar UV/las.",
+    "spesifikasi" => "Lensa polikarbonat anti-fog & anti-scratch dengan proteksi samping (side shield), pelindung wajah transparan asetat untuk cairan kimia.",
+    "masa_pakai" => "Ganti saat lensa tergores buram atau pita karet pengikat mengendur.",
+    "inspeksi" => "Pastikan kejernihan pandangan bebas distorsi dan segel bantalan silikon menempel rapat pada lekuk wajah."
+  ],
+  [
+    "id" => "pernapasan",
+    "kategori" => "Pelindung Pernapasan (Respiratory Protection)",
+    "nama" => "Respirator Partikulat & Gas (Half/Full Face)",
+    "standar" => "SNI 19-3998-1995 / NIOSH 42 CFR 84 (N95, P100) / EN 14387",
+    "bahaya" => "Inhalasi debu silika, uap pelarut organik (VOC), gas beracun (H2S, CO, NH3), asap logam (fume).",
+    "spesifikasi" => "Bodi silikon food-grade hypoallergenic, katup ekshalasi ganda, cartridge kombinasi filter partikulat + adsorben karbon aktif.",
+    "masa_pakai" => "Cartridge gas wajib diganti saat tercium bau kimia atau sesuai batas jam jenuh (breakthrough time).",
+    "inspeksi" => "Uji segel tekanan positif (hembus napas) dan tekanan negatif (tarik napas) sebelum memasuki area kerja terkontaminasi."
+  ],
+  [
+    "id" => "telinga",
+    "kategori" => "Pelindung Pendengaran (Hearing Protection)",
+    "nama" => "Earplug & Earmuff (Sumbat & Tutup Telinga)",
+    "standar" => "ANSI S3.19 / EN 352-1 (Earmuff) & EN 352-2 (Earplug)",
+    "bahaya" => "Kebisingan mesin di atas NAB 85 dBA, suara letupan mendadak impulsif.",
+    "spesifikasi" => "Earplug busa poliuretan expand perlahan (NRR 28-33 dB), earmuff berkantong busa kedap dengan headband pegas baja (NRR 22-30 dB).",
+    "masa_pakai" => "Earplug sekali pakai dibuang setelah 1 shift; Earmuff diganti bantalan busanya setiap 6 bulan.",
+    "inspeksi" => "Pastikan bantalan earmuff tidak pecah/kaku dan busa earplug kembali ke bentuk semula saat diremas."
+  ],
+  [
+    "id" => "tangan",
+    "kategori" => "Pelindung Tangan (Hand Protection)",
+    "nama" => "Sarung Tangan K3 (Safety Gloves)",
+    "standar" => "SNI 06-0652-2005 / EN 388 (Mekanik) / EN 374 (Kimia) / EN 407 (Panas)",
+    "bahaya" => "Tergores plat besi tajam, tersiram asam pekat, panas lelehan logam, sengatan arus listrik.",
+    "spesifikasi" => "Sarung tangan anti-potong serat Kevlar/HPPE (Cut Level 5), sarung tangan nitril tebal tahan kimia, sarung tangan kulit las, sarung tangan isolasi listrik berlabel kelas tegangan.",
+    "masa_pakai" => "Ganti saat lapisan nitril melar/tembus kimia atau serat kain berlubang pada ujung jari.",
+    "inspeksi" => "Uji tiup udara untuk mendeteksi kebocoran jarum mikro pada sarung tangan kimia dan isolasi listrik."
+  ],
+  [
+    "id" => "kaki",
+    "kategori" => "Pelindung Kaki (Foot Protection)",
+    "nama" => "Safety Shoes / Safety Boots",
+    "standar" => "SNI 7079:2009 / SNI 0111:2009 / ASTM F2413 / EN ISO 20345 (S1P, S3)",
+    "bahaya" => "Tertimpa benda berat hingga 200 Joule, tertusuk paku lantai, tergelincir oli, sengatan listrik tanah.",
+    "spesifikasi" => "Pelindung jari baja/komposit (Steel/Composite Toe Cap), pelat sol baja anti-tusuk (Steel Midsole), sol poliuretan tahan minyak dan licin (Anti-slip / Oil Resistant).",
+    "masa_pakai" => "Maksimal 1 - 2 tahun tergantung keausan kembangan sol tapak luar.",
+    "inspeksi" => "Periksa keausan sol bawah, pastikan tutup baja tidak menonjol menembus kulit sepatu."
+  ],
+  [
+    "id" => "ketinggian",
+    "kategori" => "Perlindungan Jatuh (Fall Protection)",
+    "nama" => "Full Body Harness & Lanyard Shock Absorber",
+    "standar" => "SNI 0420:2018 / ANSI Z359.11 / EN 361 & EN 355",
+    "bahaya" => "Terjatuh dari ketinggian > 1.8 meter, benturan fatal ke tanah atau struktur bawah.",
+    "spesifikasi" => "Anyaman serat poliester kekuatan tarik minimal 22 kN, D-ring punggung (dorsal) baja tempa, double lanyard dengan energy absorber peredam kejut benturan.",
+    "masa_pakai" => "Maksimal 5 tahun dari tanggal perakitan pabrik, atau langsung dimusnahkan jika pernah menahan beban orang jatuh.",
+    "inspeksi" => "Periksa jahitan webbing dari benang putus, karat pada D-ring, dan pastikan sobekan indikator jatuh (fall indicator) masih utuh."
+  ]
+];
 ?>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "applicationCategory": "BusinessApplication",
-  "name": "Panduan Pemilihan APD Online Gratis — Alat Pelindung Diri K3",
-  "description": "Panduan interaktif pemilihan APD (Alat Pelindung Diri) online gratis. Pilih jenis bahaya atau pekerjaan — sistem rekomendasikan APD yang wajib dipakai sesuai standar K3 Indonesia.",
-  "url": "https://wahanatotalita.com/tools/apd-selector/",
-  "provider": {"@type": "Organization", "name": "Wahana Totalita", "url": "https://wahanatotalita.com"},
-  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "IDR"}
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Beranda", "item": "https://wahanatotalita.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Tools K3", "item": "https://wahanatotalita.com/tools/" },
+    { "@type": "ListItem", "position": 3, "name": "Panduan APD", "item": "https://wahanatotalita.com/tools/apd-selector.php" }
+  ]
 }
 </script>
-<link rel="manifest" href="/manifest.json">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Panduan Pemilihan APD K3 Standar SNI & Permenaker 08/2010",
+  "url": "https://wahanatotalita.com/tools/apd-selector.php",
+  "description": "Pedoman teknis pemilihan dan inspeksi kelayakan Alat Pelindung Diri (APD) K3 untuk seluruh organ tubuh sesuai standar SNI, ANSI, dan EN.",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "All",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "IDR" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Bolehkah perusahaan memotong gaji pekerja untuk pembelian APD?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "TIDAK BOLEH. Pasal 2 Permenaker No. 08/MEN/VII/2010 secara tegas mewajibkan pengusaha untuk menyediakan Alat Pelindung Diri (APD) bagi pekerja/buruh di tempat kerja secara CUMA-CUMA (gratis). Pemotongan gaji untuk pembelian APD wajib merupakan pelanggaran hukum ketenagakerjaan."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kapan helm safety (safety helmet) harus diganti meskipun tidak terlihat retak?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Safety helmet memiliki masa pakai pabrikan rata-rata 3 hingga 5 tahun karena paparan radiasi sinar UV matahari dan perubahan suhu lingkungan dapat menyebabkan degradasi polimer plastik menjadi getas. Selain itu, jika helm pernah terbentur keras oleh benda jatuh, helm wajib segera dimusnahkan dan diganti baru seketika."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Mengapa sabuk pengaman pinggang (safety belt) dilarang untuk pekerjaan ketinggian?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sabuk pengaman pinggang (waist belt) dilarang digunakan sebagai penahan jatuh (fall arrest) berdasarkan Permenaker 09/2016 dan standar internasional karena saat pekerja terjatuh bebas, gaya sentakan mendadak akan terpusat di pinggang dan tulang belakang, yang dapat menyebabkan patah tulang punggung atau kerusakan organ dalam fatal. Pekerjaan ketinggian wajib menggunakan Full Body Harness."
+      }
+    }
+  ]
+}
+</script>
+
 <style>
-:root{--primary:#1a6b3a;--primary-d:#145530;--accent:#f5a623;--bg:#f8fafc;--card:#fff;--text:#1a202c;--muted:#6b7280;--radius:12px;--shadow:0 2px 16px rgba(0,0,0,.09)}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
-a{color:var(--primary);text-decoration:none}
-.container{max-width:1040px;margin:0 auto;padding:0 20px}
-nav{background:#fff;border-bottom:1px solid #e5e7eb;padding:14px 0;position:sticky;top:0;z-index:100;box-shadow:0 1px 6px rgba(0,0,0,.06)}
-.nav-inner{display:flex;align-items:center;justify-content:space-between}
-.nav-logo{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--primary);font-size:1rem}
-.nav-logo svg{width:32px;height:32px}
-.nav-cta{background:var(--primary);color:#fff;padding:8px 18px;border-radius:8px;font-size:.85rem;font-weight:600}
-.hero{background:linear-gradient(135deg,#0f4c2a,#1a6b3a);color:#fff;padding:44px 0 32px;text-align:center}
-.hero-badge{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:50px;padding:5px 16px;font-size:.8rem;font-weight:600;display:inline-block;margin-bottom:14px}
-.hero h1{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;margin-bottom:10px}
-.hero h1 span{color:var(--accent)}
-.hero p{opacity:.88;max-width:560px;margin:0 auto}
-.main{padding:36px 0 80px}
-.hazard-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:32px}
-.hazard-btn{background:var(--card);border:2px solid #e5e7eb;border-radius:12px;padding:18px 12px;text-align:center;cursor:pointer;transition:all .2s;font-size:.88rem;font-weight:600}
-.hazard-btn:hover{border-color:var(--primary);background:#f0fdf4}
-.hazard-btn.active{border-color:var(--primary);background:#f0fdf4;color:var(--primary)}
-.hazard-btn .icon{font-size:1.8rem;display:block;margin-bottom:6px}
-.result-section{display:none}
-.result-section.show{display:block}
-.apd-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-bottom:24px}
-.apd-card{background:var(--card);border-radius:12px;border:1px solid #e5e7eb;padding:18px;box-shadow:var(--shadow)}
-.apd-card.mandatory{border-color:#16a34a;border-width:2px}
-.apd-card.recommended{border-color:#d97706}
-.apd-header{display:flex;align-items:center;gap:10px;margin-bottom:8px}
-.apd-icon{font-size:1.6rem}
-.apd-name{font-size:.92rem;font-weight:700}
-.apd-badge{font-size:.72rem;padding:2px 10px;border-radius:50px;font-weight:700;display:inline-block;margin-bottom:6px}
-.badge-mandatory{background:#dcfce7;color:#16a34a}
-.badge-recommended{background:#fef3c7;color:#d97706}
-.apd-desc{font-size:.8rem;color:var(--muted);line-height:1.5}
-.apd-standard{font-size:.75rem;color:#9ca3af;margin-top:6px;font-style:italic}
-.risk-alert{background:#fee2e2;border-left:4px solid #dc2626;border-radius:8px;padding:14px 18px;margin-bottom:20px;font-size:.88rem}
-.risk-alert strong{color:#dc2626}
-.inspection-checklist{background:#f0fdf4;border-radius:10px;padding:18px;margin-top:16px}
-.inspection-checklist h4{font-size:.9rem;font-weight:700;color:var(--primary);margin-bottom:10px}
-.chk-item{display:flex;align-items:center;gap:8px;font-size:.83rem;margin-bottom:8px;cursor:pointer}
-.chk-item input[type=checkbox]{width:16px;height:16px;accent-color:var(--primary);cursor:pointer}
-.chk-item.checked{text-decoration:line-through;color:var(--muted)}
-.info-box{background:#f0fdf4;border-left:4px solid var(--primary);border-radius:8px;padding:16px 20px;margin-top:20px}
-.info-box h4{font-size:.9rem;font-weight:700;color:var(--primary);margin-bottom:8px}
-.info-box li{font-size:.82rem;color:#374151;line-height:1.7}
-.info-box ul{padding-left:16px}
-.cta-strip{background:var(--primary);color:#fff;border-radius:12px;padding:24px;text-align:center;margin:36px 0}
-.cta-strip h3{font-size:1rem;font-weight:700;margin-bottom:8px}
-.cta-strip p{opacity:.88;font-size:.85rem;margin-bottom:14px}
-footer{background:#111827;color:#9ca3af;padding:30px 0;text-align:center;font-size:.83rem}
-footer a{color:#6ee7b7}
-.tools-training-cta{padding:40px 0}
-.tools-training-cta h2{font-size:1.3rem;font-weight:800;margin:0 0 16px;text-align:center;color:#0A4A2E}
-.tools-training-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
-.tools-training-card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:18px;display:flex;flex-direction:column}
-.tools-training-card h3{font-size:.95rem;font-weight:700;margin:0 0 8px}
-.tools-training-card h3 a{color:#0A4A2E;text-decoration:none}
-.tools-training-card p{font-size:.85rem;color:#555;line-height:1.6;margin:0 0 12px;flex:1}
-.tools-training-btn{display:inline-block;background:#0A4A2E;color:#fff;font-weight:700;font-size:.85rem;padding:8px 14px;border-radius:8px;text-decoration:none;text-align:center}
+:root {
+  --navy-dark: #071524;
+  --navy: #0D233A;
+  --navy-light: #183654;
+  --orange: #E8611A;
+  --orange-hover: #cf5213;
+  --orange-light: #fff2ea;
+  --slate-50: #F8FAFC;
+  --slate-100: #F1F5F9;
+  --slate-200: #E2E8F0;
+  --slate-300: #CBD5E1;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-900: #0F172A;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 2px 8px rgba(13,35,58,0.06);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Source Sans 3', system-ui, -apple-system, sans-serif;
+  background: var(--slate-50);
+  color: var(--slate-900);
+  line-height: 1.6;
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* HERO */
+.apd-hero {
+  background: linear-gradient(135deg, #071524 0%, #0D233A 60%, #183654 100%);
+  color: #fff;
+  padding: 58px 0 44px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 3px solid var(--orange);
+}
+.apd-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 36px 36px;
+  pointer-events: none;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(232, 97, 26, 0.18);
+  border: 1px solid rgba(232, 97, 26, 0.4);
+  padding: 6px 14px;
+  border-radius: 999px;
+  color: #FFA573;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 14px;
+}
+.apd-hero h1 {
+  font-family: 'Lexend', sans-serif;
+  font-size: clamp(1.8rem, 3.6vw, 2.7rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+.apd-hero h1 span { color: var(--orange); }
+.apd-hero p {
+  color: #CBD5E1;
+  font-size: 1.05rem;
+  max-width: 760px;
+  margin-bottom: 20px;
+}
+.hero-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.hero-tag {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  color: #E2E8F0;
+}
+
+/* WORKSPACE LAYOUT */
+.apd-wrapper { padding: 40px 0 60px; }
+
+/* FILTER PILLS */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+.filter-btn {
+  background: #fff;
+  border: 1.5px solid var(--slate-300);
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--slate-700);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.filter-btn:hover, .filter-btn.active {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #fff;
+}
+
+/* APD CARDS GRID */
+.apd-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+@media (max-width: 600px) {
+  .apd-cards-grid { grid-template-columns: 1fr; }
+}
+
+.apd-card {
+  background: #fff;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.apd-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(13,35,58,0.08);
+}
+.apd-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--orange);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  letter-spacing: 0.04em;
+}
+.apd-title {
+  font-family: 'Lexend', sans-serif;
+  font-size: 1.18rem;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+.apd-standard {
+  background: var(--slate-100);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--slate-700);
+  margin-bottom: 14px;
+  display: inline-block;
+}
+.apd-spec-list {
+  font-size: 0.86rem;
+  color: var(--slate-700);
+  line-height: 1.6;
+  margin-bottom: 16px;
+  flex-grow: 1;
+}
+.apd-spec-list div { margin-bottom: 8px; }
+.apd-spec-list strong { color: var(--navy); }
+
+.apd-inspect-box {
+  background: var(--slate-50);
+  border: 1px solid var(--slate-200);
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 0.8rem;
+  color: var(--slate-600);
+  margin-top: auto;
+}
+.apd-inspect-box strong { color: var(--navy); }
+
+/* EDITORIAL ARTICLE */
+.editorial-box {
+  background: #fff;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+  margin-bottom: 32px;
+}
+.editorial-title {
+  font-family: 'Lexend', sans-serif;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 16px;
+  border-left: 4px solid var(--orange);
+  padding-left: 14px;
+}
+.editorial-p {
+  color: var(--slate-700);
+  font-size: 0.96rem;
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+/* FAQ */
+.faq-item {
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-md);
+  margin-bottom: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+.faq-q {
+  width: 100%;
+  padding: 16px 20px;
+  text-align: left;
+  background: #fff;
+  border: none;
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--navy);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.faq-q:hover { background: var(--slate-50); }
+.faq-a {
+  padding: 0 20px 18px;
+  color: var(--slate-700);
+  font-size: 0.92rem;
+  line-height: 1.65;
+  display: none;
+}
+.faq-item.active .faq-a { display: block; }
+.faq-item.active .faq-icon { transform: rotate(180deg); }
+.faq-icon { transition: transform 0.2s; }
 </style>
-<nav>
-  <div class="container nav-inner">
-    <a href="/" class="nav-logo">
-      <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#1a6b3a"/><path d="M20 8l3 9h9l-7 5 3 9-8-6-8 6 3-9-7-5h9z" fill="#f5a623"/></svg>
-      Wahana Totalita
-    </a>
-    <a href="/tools/" style="color:var(--muted);font-size:.88rem">← Semua Tools</a>
-    <a href="https://wa.me/6287759151278" target="_blank" class="nav-cta">📱 Konsultasi</a>
-  </div>
-</nav>
 
-<section class="hero">
+<?php require __DIR__ . '/../includes/navbar.php'; ?>
+
+<main class="apd-page" id="konten-utama">
+
+<!-- HERO -->
+<section class="apd-hero">
   <div class="container">
-    <div class="hero-badge">🦺 Panduan APD Gratis</div>
-    <h1><span>Panduan Pemilihan APD</span><br>Interaktif Online</h1>
-    <p>Pilih jenis bahaya atau jenis pekerjaan — sistem langsung rekomendasikan APD yang wajib dan disarankan beserta cara inspeksinya.</p>
+    <div class="hero-badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Permenaker No. 08/MEN/VII/2010 &amp; SNI
+    </div>
+    <h1>Panduan Pemilihan APD K3 <span>Lengkap 2026</span></h1>
+    <p>Pedoman standar spesifikasi teknis Alat Pelindung Diri (APD) untuk seluruh organ tubuh manusia. Memenuhi standar SNI, ANSI, dan EN Eropa lengkap dengan panduan inspeksi kelayakan pra-pakai.</p>
+    <div class="hero-tags">
+      <span class="hero-tag">7 Kategori Perlindungan Organ Tubuh</span>
+      <span class="hero-tag">Standar SNI &amp; ANSI / EN Terverifikasi</span>
+      <span class="hero-tag">Checklist Pra-Pakai &amp; Masa Kadaluarsa</span>
+      <span class="hero-tag">Kewajiban Pengusaha Menyediakan Cuma-Cuma</span>
+    </div>
   </div>
 </section>
 
-<section class="main">
+<!-- MAIN WORKSPACE -->
+<section class="apd-wrapper">
   <div class="container">
-    <h2 style="font-size:1.1rem;font-weight:700;margin-bottom:16px">Pilih Jenis Bahaya atau Jenis Pekerjaan:</h2>
-
-    <div class="hazard-grid" id="hazardGrid">
-      <!-- filled by JS -->
+    
+    <!-- FILTER BAR -->
+    <div class="filter-bar">
+      <button class="filter-btn active" type="button" onclick="filterApd('all', this)">Semua APD (7 Organ Tubuh)</button>
+      <button class="filter-btn" type="button" onclick="filterApd('kepala', this)">Kepala (Helmet)</button>
+      <button class="filter-btn" type="button" onclick="filterApd('mata', this)">Mata &amp; Wajah</button>
+      <button class="filter-btn" type="button" onclick="filterApd('pernapasan', this)">Pernapasan (Respirator)</button>
+      <button class="filter-btn" type="button" onclick="filterApd('telinga', this)">Pendengaran (Earplug)</button>
+      <button class="filter-btn" type="button" onclick="filterApd('tangan', this)">Tangan (Gloves)</button>
+      <button class="filter-btn" type="button" onclick="filterApd('kaki', this)">Kaki (Safety Shoes)</button>
+      <button class="filter-btn" type="button" onclick="filterApd('ketinggian', this)">Ketinggian (Harness)</button>
     </div>
 
-    <div class="result-section" id="resultSection">
-      <!-- filled by JS -->
+    <!-- SERVER-RENDERED APD SPECIFICATION CARDS -->
+    <div class="apd-cards-grid" id="apdCards">
+      <?php foreach ($apdList as $a): ?>
+      <div class="apd-card" data-cat="<?php echo e($a['id']); ?>">
+        <div class="apd-badge"><?php echo e($a['kategori']); ?></div>
+        <h3 class="apd-title"><?php echo e($a['nama']); ?></h3>
+        <div class="apd-standard">Standar: <?php echo e($a['standar']); ?></div>
+        
+        <div class="apd-spec-list">
+          <div><strong>Potensi Bahaya:</strong> <?php echo e($a['bahaya']); ?></div>
+          <div><strong>Spesifikasi Wajib:</strong> <?php echo e($a['spesifikasi']); ?></div>
+          <div><strong>Masa Pakai / Kadaluarsa:</strong> <?php echo e($a['masa_pakai']); ?></div>
+        </div>
+
+        <div class="apd-inspect-box">
+          <strong>Poin Kritis Inspeksi Pra-Pakai:</strong><br>
+          <?php echo e($a['inspeksi']); ?>
+        </div>
+      </div>
+      <?php endforeach; ?>
     </div>
 
-    <div class="info-box">
-      <h4>📋 Hierarki Pengendalian Risiko (HIRARKI APD = Terakhir)</h4>
-      <ul>
-        <li><strong>1. Eliminasi</strong> — hilangkan bahaya dari sumbernya</li>
-        <li><strong>2. Substitusi</strong> — ganti dengan bahan/proses yang lebih aman</li>
-        <li><strong>3. Engineering Control</strong> — rekayasa teknik (guard, ventilasi, enclosure)</li>
-        <li><strong>4. Administratif</strong> — prosedur kerja, rotasi, pelatihan, tanda peringatan</li>
-        <li><strong>5. APD</strong> — hanya sebagai LINI TERAKHIR, bukan pengganti kontrol yang lebih tinggi</li>
+    <!-- IN-DEPTH EDITORIAL ARTICLE (SEO DEPTH) -->
+    <div class="editorial-box">
+      <h2 class="editorial-title">Kewajiban Hukum Penyediaan Alat Pelindung Diri di Tempat Kerja</h2>
+      <p class="editorial-p">
+        Berdasarkan <strong>Peraturan Menteri Tenaga Kerja dan Transmigrasi RI No. PER.08/MEN/VII/2010 tentang Alat Pelindung Diri</strong>, pengusaha diwajibkan menyediakan APD bagi pekerja/buruh di tempat kerja secara CUMA-CUMA, wajib mencantumkan Standar Nasional Indonesia (SNI) atau standar internasional yang setara, serta wajib mengumumkan instruksi tertulis dan memasang rambu-rambu APD di lokasi kerja.
+      </p>
+
+      <h3 style="color:var(--navy);font-family:'Lexend',sans-serif;font-size:1.15rem;margin:22px 0 10px">Prinsip Hirarki Pengendalian Bahaya: Mengapa APD Adalah Garis Terakhir?</h3>
+      <p class="editorial-p">
+        Dalam ilmu Keselamatan Kerja modern, pemakaian APD menempati peringkat terbawah (garis pertahanan terakhir / <em>last line of defense</em>). Alasan utama mengapa APD berada di tingkat terbawah adalah:
+      </p>
+      <ul style="padding-left:22px;color:var(--slate-700);line-height:1.75;margin-bottom:20px">
+        <li><strong>Bahaya Tetap Ada:</strong> APD tidak menghilangkan atau mengurangi sumber bahaya itu sendiri, melainkan hanya membangun perisai sementara pada tubuh pekerja.</li>
+        <li><strong>Faktor Kesalahan Manusia (Human Factor):</strong> Jika APD dipakai dengan ukuran longgar, terpasang miring, atau dilepas sesaat karena gerah, pekerja seketika kehilangan seluruh perlindungan dan rentan terkena bahaya fatal.</li>
+        <li><strong>Menimbulkan Ketidaknyamanan Fisik:</strong> Penggunaan APD yang lama dapat meningkatkan beban panas tubuh (heat stress), membatasi bidang pandang mata, atau mengurangi kelincahan pergerakan jari tangan.</li>
       </ul>
+
+      <!-- FAQ ACCORDION -->
+      <h3 style="color:var(--navy);font-family:'Lexend',sans-serif;font-size:1.25rem;margin:28px 0 16px">Tanya Jawab Seputar Pemilihan APD K3 (FAQ)</h3>
+      <div class="faq-box">
+        
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>Bagaimana jika pekerja menolak menggunakan APD yang sudah disediakan?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-a">
+            Pasal 12 huruf b UU No. 1 Tahun 1970 menyatakan bahwa tenaga kerja WAJIB memakai alat-alat perlindungan diri yang diwajibkan. Jika pekerja menolak memakai APD setelah diberikan pembinaan, manajemen berhak memberikan sanksi indisipliner (Surat Peringatan / SP) hingga menonaktifkan pekerja dari area bahaya demi keselamatan bersama.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>Apakah APD bekas pekerja lama boleh dihibahkan ke pekerja baru?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-a">
+            Untuk APD yang bersentuhan langsung dengan kulit dan bersifat higienis (seperti earplug, sepatu safety, sarung tangan kain, dan masker respirator), APD TIDAK BOLEH dipindahtangankan karena risiko penularan infeksi dermatologis dan saluran napas. Namun untuk APD struktural (seperti safety helmet atau full body harness), pemindahtanganan diperbolehkan asalkan telah melalui proses dekontaminasi dan inspeksi kelayakan fisik oleh Petugas K3.
+          </div>
+        </div>
+
+      </div>
+
     </div>
 
-    <div class="cta-strip">
-      <h3>🎓 Pelajari APD dan Higiene Industri Secara Mendalam</h3>
-      <p>Pelatihan K3 Umum KEMNAKER RI mencakup pemilihan APD, fit test, program higiene industri, dan audit SMK3.</p>
-      <a href="https://wa.me/6287759151278?text=Halo%20Wahana%2C%20saya%20pakai%20panduan%20APD%20gratis%20dan%20ingin%20tanya%20pelatihan%20K3" target="_blank" rel="noopener"
-         style="background:#25D366;color:#fff;padding:11px 24px;border-radius:8px;font-weight:700;display:inline-flex;align-items:center;gap:8px">
-        📱 Tanya Pelatihan K3
-      </a>
-    </div>
   </div>
 </section>
 
-<section class="tools-training-cta">
-  <div class="container">
-    <h2>Tingkatkan Kompetensi K3 Anda</h2>
-    <div class="tools-training-grid">
-      <div class="tools-training-card">
-        <h3><a href="/pelatihan/pelatihan-ahli-k3-umum-sertifikasi-bnsp-online/">Pelatihan Ahli K3 Umum</a></h3>
-        <p>Sertifikasi wajib bagi praktisi K3 perusahaan, resmi BNSP, materi regulasi &amp; manajemen risiko.</p>
-        <a href="/pelatihan/pelatihan-ahli-k3-umum-sertifikasi-bnsp-online/" class="tools-training-btn">Lihat Program &rarr;</a>
-      </div>
-      <div class="tools-training-card">
-        <h3><a href="/pelatihan/pelatihan-petugas-p3k-sertifikasi-bnsp/">Pelatihan Petugas P3K | Sertifikasi BNSP</a></h3>
-        <p>Pelatihan penanganan darurat dan P3K di tempat kerja, sertifikasi BNSP, wajib untuk perusahaan.</p>
-        <a href="/pelatihan/pelatihan-petugas-p3k-sertifikasi-bnsp/" class="tools-training-btn">Lihat Program &rarr;</a>
-      </div>
-      <div class="tools-training-card">
-        <h3><a href="/pelatihan/pelatihan-operator-k3-sertifikasi-bnsp/">Pelatihan Operator K3 | Sertifikasi BNSP</a></h3>
-        <p>Kompetensi dasar keselamatan kerja untuk operator, sertifikasi resmi BNSP, untuk semua industri.</p>
-        <a href="/pelatihan/pelatihan-operator-k3-sertifikasi-bnsp/" class="tools-training-btn">Lihat Program &rarr;</a>
-      </div>
-      <div class="tools-training-card">
-        <h3><a href="/jadwal/">Jadwal Pelatihan Terdekat</a></h3>
-        <p>Lihat jadwal batch pelatihan K3 terbaru — online dan offline di berbagai kota.</p>
-        <a href="/jadwal/" class="tools-training-btn">Lihat Jadwal &rarr;</a>
-      </div>
-    </div>
-  </div>
-</section>
+</main>
 
-<footer>
-  <div class="container">
-    <p><a href="/tools/">← Semua Tools K3</a> | <a href="/tools/kalkulator-k3">Kalkulator LTIR</a> | <a href="/tools/risk-matrix">Risk Matrix</a> | <a href="/">Wahana Totalita</a></p>
-    <p style="margin-top:8px">© <?php echo date('Y'); ?> Wahana Totalita Konsultan, Yogyakarta</p>
-  </div>
-</footer>
-
-<a href="https://wa.me/6287759151278" target="_blank" style="position:fixed;bottom:24px;right:24px;background:#25D366;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(37,211,102,.4);z-index:999">
-  <svg viewBox="0 0 24 24" fill="white" width="26" height="26"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-</a>
+<?php require __DIR__ . '/../includes/footer.php'; ?>
 
 <script>
-const hazards = [
-  {id:'konstruksi',icon:'🏗️',label:'Konstruksi',risk:'HIGH',alert:'Area konstruksi memiliki risiko tinggi benda jatuh, jatuh dari ketinggian, dan paparan debu.',
-    apd:[
-      {icon:'⛑️',name:'Helm Keselamatan',type:'mandatory',desc:'Helm kelas A atau B untuk perlindungan dari benda jatuh. Wajib di seluruh area konstruksi.',standard:'SNI 0339:2021'},
-      {icon:'👟',name:'Sepatu Safety',type:'mandatory',desc:'Sepatu dengan toe cap baja dan anti-slip. Wajib setiap saat di area konstruksi.',standard:'SNI 7037:2022'},
-      {icon:'🥽',name:'Kacamata Pelindung',type:'mandatory',desc:'Safety glasses atau goggles untuk perlindungan dari debu, serpihan, dan puing.',standard:'ANSI Z87.1'},
-      {icon:'🧤',name:'Sarung Tangan',type:'mandatory',desc:'Sarung tangan kulit atau impact-resistant untuk perlindungan tangan.',standard:'EN 388'},
-      {icon:'🦺',name:'Rompi Reflektif',type:'mandatory',desc:'High-visibility vest kelas 2 minimum. Wajib di area dengan lalu lintas kendaraan.',standard:'ANSI 107'},
-      {icon:'😷',name:'Masker Debu',type:'recommended',desc:'Respirator N95 atau P2 untuk pekerjaan yang menghasilkan debu (cutting, grinding, demolisi).',standard:'NIOSH N95'},
-      {icon:'🪝',name:'Full Body Harness',type:'mandatory',desc:'Wajib untuk pekerjaan di atas 1.8 meter. Harus di-inspect sebelum dipakai.',standard:'SNI 7823:2022'},
-    ],
-    checks:['Helm tidak ada retak atau penyok besar','Tali harness tidak ada abrasi atau potongan','Kaca kacamata tidak baret parah','Sepatu safety sol tidak terlepas','Sarung tangan tidak ada lubang besar']
-  },
-  {id:'las',icon:'🔥',label:'Pengelasan / Las',risk:'HIGH',alert:'Bahaya percikan api, radiasi UV, asap las, dan kebakaran.',
-    apd:[
-      {icon:'⛑️',name:'Helm/Topeng Las',type:'mandatory',desc:'Auto-darkening welding helmet atau topeng las dengan filter lens yang sesuai untuk melindungi mata dan wajah dari radiasi UV/IR.',standard:'ANSI Z87.1'},
-      {icon:'🧤',name:'Sarung Tangan Las',type:'mandatory',desc:'Sarung tangan kulit lengan panjang untuk perlindungan dari percikan api dan panas.',standard:'EN 12477'},
-      {icon:'🥽',name:'Kacamata Pelindung',type:'mandatory',desc:'Safety glasses di bawah topeng las untuk perlindungan saat mengangkat topeng.',standard:'EN 169'},
-      {icon:'👟',name:'Sepatu Safety',type:'mandatory',desc:'Sepatu kulit dengan toe cap baja, tahan percikan api.',standard:'SNI 7037'},
-      {icon:'😷',name:'Respirator Las',type:'mandatory',desc:'Half-face respirator dengan filter asap las (OV/P100) untuk area berventilasi buruk.',standard:'NIOSH'},
-      {icon:'🧥',name:'Apron/Jaket Las',type:'mandatory',desc:'Apron kulit atau flame-resistant jacket untuk perlindungan dari percikan api dan radiasi panas.',standard:'ANSI/ISEA 105'},
-    ],
-    checks:['Lens topeng las tidak retak dan shading sesuai','Sarung tangan kulit tidak bolong atau terbakar','Jaket/apron tidak ada sobekan besar','Respirator filter tidak expired','Tidak ada bahan mudah terbakar dalam radius 10 meter']
-  },
-  {id:'kimia',icon:'⚗️',label:'Bahan Kimia / B3',risk:'HIGH',alert:'Paparan bahan kimia berbahaya dapat menyebabkan iritasi, keracunan, atau penyakit kronis. Selalu baca SDS/MSDS.',
-    apd:[
-      {icon:'🥽',name:'Kacamata/Face Shield',type:'mandatory',desc:'Chemical splash goggles atau face shield untuk perlindungan mata dan wajah dari percikan kimia.',standard:'ANSI Z87.1'},
-      {icon:'🧤',name:'Sarung Tangan Kimia',type:'mandatory',desc:'Pilih material sesuai bahan kimia: nitrile (solvents), neoprene (asam/basa), butyl (keton/ester). Periksa chemical resistance chart.',standard:'EN 374'},
-      {icon:'😷',name:'Respirator Kimia',type:'mandatory',desc:'Half-face atau full-face respirator dengan kartrid OV (Organic Vapor) atau acid gas sesuai jenis bahan kimia.',standard:'NIOSH'},
-      {icon:'🥼',name:'Apron/Baju Kimia',type:'mandatory',desc:'Chemical resistant apron atau coverall sesuai tingkat risiko. Untuk highly hazardous: full chemical suit.',standard:'EN 13982'},
-      {icon:'👟',name:'Sepatu/Boot Kimia',type:'mandatory',desc:'Chemical resistant boots untuk pekerjaan dengan risiko tumpahan kimia besar.',standard:'EN 13287'},
-    ],
-    checks:['Baca SDS untuk APD yang tepat sebelum kerja','Integritas sarung tangan tidak ada lubang atau retakan','Filter respirator belum expired','Eye wash station berfungsi di area kimia','Spill kit tersedia dan lengkap']
-  },
-  {id:'ketinggian',icon:'🪜',label:'Bekerja di Ketinggian',risk:'EXTREME',alert:'WAJIB: Full body harness + anchor point + izin kerja di ketinggian untuk setiap pekerjaan di atas 1.8 meter.',
-    apd:[
-      {icon:'🪝',name:'Full Body Harness',type:'mandatory',desc:'Full body harness kelas A (work positioning) atau kelas B (fall arrest). Wajib untuk pekerjaan di atas 1.8m.',standard:'SNI 7823:2022 / EN 361'},
-      {icon:'🔗',name:'Lanyard / Energy Absorber',type:'mandatory',desc:'Lanyard dengan shock absorber untuk perlindungan fall arrest. Panjang max 1.8m. Twin-tail lanyard untuk pindah anchor.',standard:'EN 354 / EN 355'},
-      {icon:'⛑️',name:'Helm Keselamatan',type:'mandatory',desc:'Helm dengan chin strap yang terpasang. Wajib di semua area ketinggian.',standard:'SNI 0339:2021'},
-      {icon:'👟',name:'Sepatu Anti-Slip',type:'mandatory',desc:'Sepatu dengan grip outsole yang baik. Khusus untuk bekerja di atap: sepatu khusus roofing.',standard:'EN ISO 20345'},
-      {icon:'🧤',name:'Sarung Tangan Grip',type:'recommended',desc:'Sarung tangan anti-slip untuk pekerjaan di tangga atau scaffolding.',standard:'EN 388'},
-    ],
-    checks:['Strap harness tidak ada abrasi, sobekan, atau jahitan terlepas','Karabiner/hook berfungsi dengan mulus, tidak ada karat','Energy absorber belum pernah terguncang (hanya sekali pakai setelah fall event)','Lanyard tidak ada potongan atau kerusakan','Anchor point memiliki kekuatan min 15 kN']
-  },
-  {id:'listrik',icon:'⚡',label:'Pekerjaan Listrik',risk:'HIGH',alert:'Bahaya sengatan listrik, arc flash, dan kebakaran. Wajib LOTO sebelum pekerjaan listrik apapun.',
-    apd:[
-      {icon:'🧤',name:'Sarung Tangan Insulated',type:'mandatory',desc:'Electrical insulating gloves sesuai voltage class. Class 00 (500V), Class 0 (1000V), Class 2 (17kV). Wajib di pekerjaan listrik.',standard:'IEC 60903'},
-      {icon:'🥽',name:'Safety Glasses / Arc Flash',type:'mandatory',desc:'Safety glasses untuk pekerjaan umum listrik. Arc flash face shield (min 8 cal/cm²) untuk pekerjaan pada panel bertegangan.',standard:'ANSI Z87.1 / NFPA 70E'},
-      {icon:'⛑️',name:'Helm Non-Konduktif',type:'mandatory',desc:'Helm kelas E (Electrical) yang diuji hingga 20.000V. Hindari helm dengan lubang ventilasi logam.',standard:'ANSI/ISEA Z89.1 Class E'},
-      {icon:'🧥',name:'Pakaian FR / Arc Flash',type:'mandatory',desc:'Flame-resistant clothing dengan rating arc flash sesuai NFPA 70E Hazard Risk Category (HRC). Untuk HRC 2+: coverall FR min 8 cal/cm².',standard:'NFPA 70E'},
-      {icon:'👟',name:'Sepatu Dielektrik',type:'mandatory',desc:'Sepatu dengan insole dielektrik yang diuji sesuai standar listrik.',standard:'ASTM F2413'},
-    ],
-    checks:['Cek tanggal expired sarung tangan listrik (max 6 bulan setelah test date)','Tidak ada lubang kecil pun di sarung tangan (inflate test)','Helm kelas E - tidak ada keretakan','Pakaian FR tidak terkontaminasi minyak/bahan mudah terbakar','LOTO sudah terpasang dan diverifikasi sebelum kerja']
-  },
-  {id:'kebisingan',icon:'🔊',label:'Area Bising',risk:'MEDIUM',alert:'NAB kebisingan = 85 dB(A) untuk 8 jam. Paparan di atas NAB wajib APD pendengaran.',
-    apd:[
-      {icon:'👂',name:'Ear Plug',type:'mandatory',desc:'Ear plug foam disposable NRR 29-33 dB atau reusable ear plug. Cara pasang: gulung, tarik daun telinga ke atas-belakang, masukkan.',standard:'ANSI S3.19 / SNI'},
-      {icon:'🎧',name:'Ear Muff',type:'recommended',desc:'Ear muff untuk area di atas 95 dB atau untuk pemakaian di atas 4 jam. NRR 25-31 dB. Lebih mudah dipakai dengan benar.',standard:'ANSI S3.19'},
-      {icon:'⛑️',name:'Helm dengan Ear Muff',type:'recommended',desc:'Helmet-mounted ear muff untuk area konstruksi/industri berat. Kombinasi perlindungan kepala dan pendengaran.',standard:'EN 352-3'},
-    ],
-    checks:['Ear plug tidak keras/kaku (harus lentur dan bisa kembali ke bentuk semula)','Ear muff bantalan tidak robek atau kering/retak','Pastikan ear plug dipasang dengan benar (gulung tipis, masukkan sampai flush)','Hearing test / audiometri dilakukan minimal setahun sekali untuk pekerja terdampak']
-  },
-  {id:'debu',icon:'💨',label:'Debu & Partikel',risk:'MEDIUM',alert:'Paparan debu silika, asbes, atau debu logam dapat menyebabkan penyakit paru permanen.',
-    apd:[
-      {icon:'😷',name:'Respirator N95/P2',type:'mandatory',desc:'Respirator minimal N95 (95% filter) untuk debu partikel umum. P100 untuk debu logam, silika, atau debu radioaktif.',standard:'NIOSH N95 / AS/NZS 1716'},
-      {icon:'🥽',name:'Safety Glasses',type:'mandatory',desc:'Safety glasses dengan side shield untuk perlindungan mata dari debu.',standard:'ANSI Z87.1'},
-      {icon:'⛑️',name:'Helm',type:'recommended',desc:'Helm dengan pelindung wajah untuk proses sandblasting atau demolisi.',standard:'SNI 0339'},
-      {icon:'🥼',name:'Coverall / Tyvek',type:'recommended',desc:'Disposable coverall Tyvek untuk pekerjaan asbes atau debu tinggi. Jangan bawa pakaian kerja berdebu ke rumah.',standard:'EN 13982 Type 5/6'},
-    ],
-    checks:['Respirator fit dengan baik — tidak ada celah di sekitar hidung','Seal check sebelum memasuki area berdebu (negative pressure test)','Filter respirator tidak basah atau berdebu lebat (ganti jika sukar bernapas)','Tidak ada tanda abrasion pada seal area respirator']
-  },
-  {id:'panas',icon:'🌡️',label:'Panas / Radiasi Panas',risk:'MEDIUM',alert:'Heat stress berbahaya terutama di area outdoor atau dekat furnace/boiler. Hidrasi dan istirahat sangat penting.',
-    apd:[
-      {icon:'🧢',name:'Topi Pelindung Matahari',type:'mandatory',desc:'Wide-brim sun hat atau helm dengan pelindung leher untuk outdoor. UV protection rating 50+.',standard:'AS/NZS 4399'},
-      {icon:'🧥',name:'Pakaian Terang / Breathable',type:'recommended',desc:'Pakaian berwarna terang, breathable (polyester mesh atau katun). Hindari pakaian gelap di outdoor panas.',standard:'—'},
-      {icon:'🥽',name:'Kacamata Anti-UV',type:'recommended',desc:'Safety glasses dengan UV 400 filter untuk outdoor. Melindungi dari UV yang merusak mata.',standard:'ANSI Z87.1'},
-      {icon:'🧤',name:'Sarung Tangan Panas',type:'mandatory',desc:'Heat-resistant gloves untuk area dekat sumber panas (furnace, oven, boiler). Rating sesuai suhu operasi.',standard:'EN 407'},
-      {icon:'🦺',name:'Rompi Pendingin',type:'recommended',desc:'Cooling vest dengan ice pack atau evaporative untuk pekerja di area sangat panas (>35°C WBGT).',standard:'—'},
-    ],
-    checks:['Pakaian bersih dan tidak terkontaminasi bahan mudah terbakar','Sarung tangan panas tidak bolong atau retak','Cooling vest ice pack masih dingin (ganti setiap 2-3 jam)','Suplai air minum cukup di area kerja']
-  },
-  {id:'confined',icon:'🕳️',label:'Ruang Terbatas',risk:'EXTREME',alert:'WAJIB: Test gas, permit entry, attendant standby, retrieval system. JANGAN masuk confined space sendirian.',
-    apd:[
-      {icon:'😷',name:'SCBA / Supplied Air',type:'mandatory',desc:'Self-Contained Breathing Apparatus untuk confined space yang tidak aman (O2 defisiensi, toxic atmosphere). TIDAK BISA diganti respirator biasa.',standard:'NIOSH / EN 137'},
-      {icon:'🪝',name:'Full Body Harness + Retrieval',type:'mandatory',desc:'Full body harness kelas D (confined space rescue) dengan tripod retrieval system. Wajib untuk confined space vertical entry.',standard:'EN 361'},
-      {icon:'⛑️',name:'Helm dengan Chin Strap',type:'mandatory',desc:'Helm dengan chin strap kencang untuk confined space. Penting untuk proses retrieval.',standard:'SNI 0339'},
-      {icon:'🔦',name:'Lampu Intrinsically Safe',type:'mandatory',desc:'Lampu senter atau headlamp yang intrinsically safe (Ex-rated) untuk confined space berpotensi explosive atmosphere.',standard:'ATEX / IECEx'},
-      {icon:'📱',name:'Gas Detector',type:'mandatory',desc:'Personal gas detector (O2, LEL, H2S, CO) wajib dibawa ke dalam confined space dan dikalibrasi sebelum entry.',standard:'IEC 60079'},
-    ],
-    checks:['SCBA cylinder terisi penuh (min 90% atau sesuai SOP)','Face piece SCBA tidak ada retak, seal bersih','Gas detector dikalibrasi dan bump-test sehari sebelumnya','Retrieval system terpasang dan attendant siap','SEMUA langkah permit entry sudah selesai sebelum masuk']
-  },
-  {id:'medis',icon:'🏥',label:'Kesehatan / Medis',risk:'MEDIUM',alert:'Perlindungan dari paparan darah, cairan tubuh, dan patogen (Bloodborne Pathogens).',
-    apd:[
-      {icon:'🧤',name:'Sarung Tangan Latex/Nitrile',type:'mandatory',desc:'Sarung tangan sekali pakai untuk penanganan pasien atau sampel biologis. Nitrile lebih baik (bebas latex allergy).',standard:'EN 455'},
-      {icon:'😷',name:'Masker Bedah / N95',type:'mandatory',desc:'Masker bedah untuk proteksi dasar. N95 untuk prosedur aerosol-generating atau risiko airborne disease.',standard:'ASTM F2100 / NIOSH N95'},
-      {icon:'🥽',name:'Eye Protection / Face Shield',type:'mandatory',desc:'Safety glasses atau face shield untuk prosedur dengan risiko percikan darah/cairan tubuh.',standard:'ANSI Z87.1'},
-      {icon:'🥼',name:'Gown / Apron',type:'mandatory',desc:'Disposable gown atau apron impermeable untuk prosedur dengan risiko percikan atau kontaminasi pakaian.',standard:'EN 14126'},
-    ],
-    checks:['Sarung tangan tidak ada lubang dan tidak expired','Masker tidak rusak atau basah','Sarung tangan SELALU dilepas dengan teknik yang benar (don\'t touch outer surface)','Hand hygiene sebelum dan sesudah melepas APD']
-  },
-];
+function filterApd(cat, btn){
+  document.querySelectorAll('.filter-bar .filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
 
-function buildHazardGrid(){
-  const grid = document.getElementById('hazardGrid');
-  grid.innerHTML = hazards.map(h=>`
-    <div class="hazard-btn" id="hbtn-${h.id}" onclick="selectHazard('${h.id}')">
-      <span class="icon">${h.icon}</span>
-      ${h.label}
-    </div>
-  `).join('');
+  const cards = document.querySelectorAll('.apd-card');
+  cards.forEach(card => {
+    if(cat === 'all' || card.getAttribute('data-cat') === cat){
+      card.style.display = 'flex';
+    } else {
+      card.style.display = 'none';
+    }
+  });
 }
 
-function selectHazard(id){
-  document.querySelectorAll('.hazard-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById(`hbtn-${id}`).classList.add('active');
-
-  const h = hazards.find(x=>x.id===id);
-  const section = document.getElementById('resultSection');
-  section.className = 'result-section show';
-
-  section.innerHTML = `
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
-      <span style="font-size:2rem">${h.icon}</span>
-      <div>
-        <h2 style="font-size:1.2rem;font-weight:800">${h.label} — Rekomendasi APD</h2>
-        <span style="font-size:.78rem;background:${h.risk==='EXTREME'?'#fee2e2':h.risk==='HIGH'?'#ffedd5':'#fef3c7'};color:${h.risk==='EXTREME'?'#dc2626':h.risk==='HIGH'?'#c2410c':'#b45309'};padding:2px 12px;border-radius:50px;font-weight:700">Risk Level: ${h.risk}</span>
-      </div>
-    </div>
-    <div class="risk-alert"><strong>⚠️ Perhatian:</strong> ${h.alert}</div>
-    <div class="apd-grid">
-      ${h.apd.map(a=>`
-        <div class="apd-card ${a.type}">
-          <div class="apd-header">
-            <span class="apd-icon">${a.icon}</span>
-            <span class="apd-name">${a.name}</span>
-          </div>
-          <span class="apd-badge badge-${a.type}">${a.type==='mandatory'?'⚠️ WAJIB':'✓ Disarankan'}</span>
-          <div class="apd-desc">${a.desc}</div>
-          <div class="apd-standard">Standar: ${a.standard}</div>
-        </div>
-      `).join('')}
-    </div>
-    <div class="inspection-checklist">
-      <h4>✅ Checklist Inspeksi APD Sebelum Kerja</h4>
-      ${h.checks.map((c,i)=>`
-        <label class="chk-item" id="chk-${i}">
-          <input type="checkbox" onchange="toggleCheck('chk-${i}')"> ${c}
-        </label>
-      `).join('')}
-    </div>
-    <div style="display:flex;gap:12px;margin-top:16px;flex-wrap:wrap">
-      <button onclick="window.print()" style="background:var(--primary);color:#fff;border:none;border-radius:8px;padding:10px 20px;font-size:.85rem;font-weight:600;cursor:pointer">🖨 Print Checklist</button>
-      <a href="https://wa.me/6287759151278?text=Halo%20Wahana%2C%20saya%20pakai%20panduan%20APD%20untuk%20${encodeURIComponent(h.label)}%20dan%20ingin%20konsultasi%20K3" target="_blank" style="background:#25D366;color:#fff;border-radius:8px;padding:10px 20px;font-size:.85rem;font-weight:600;display:inline-flex;align-items:center;gap:6px">📱 Konsultasi K3</a>
-    </div>
-  `;
-  section.scrollIntoView({behavior:'smooth',block:'start'});
+function toggleFaq(btn){
+  btn.parentElement.classList.toggle('active');
 }
-
-function toggleCheck(id){
-  const label = document.getElementById(id);
-  label.classList.toggle('checked');
-}
-
-buildHazardGrid();
 </script>
+
+<?php require __DIR__ . '/../includes/scripts.php'; ?>
 </body>
 </html>

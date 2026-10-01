@@ -1,562 +1,837 @@
 <?php
 require_once __DIR__ . '/../config.php';
 $s = get_all_settings();
-?>
-<?php
-$page_title = 'Risk Matrix 5x5 Interaktif Online Gratis — Kalkulator Risiko K3';
-$meta_desc = 'Risk matrix 5x5 interaktif online gratis. Klik likelihood dan severity — langsung dapat risk level, warna indikator dan rekomendasi pengendalian. Untuk IBPR, HIRARC, SMK3.';
+
+$page_title = 'Matriks Risiko 5x5 K3 Online 2026: Kalkulator ISO 31000 & HIRARC';
+$meta_desc = 'Kalkulator Matriks Risiko 5x5 interaktif standar ISO 31000:2018 dan HIRARC K3. Evaluasi skor keparahan, peluang, level risiko Low-Extreme, serta buat Risk Register online.';
+
+ob_start();
 require __DIR__ . '/../includes/head.php';
+$shared_head = ob_get_clean();
+$shared_head = preg_replace('~<title>.*?</title>~s', '<title>' . e($page_title) . '</title>', $shared_head, 1);
+echo $shared_head;
 ?>
-<link rel="manifest" href="/manifest.json">
-<style>
-:root{--primary:#1a6b3a;--primary-d:#145530;--accent:#f5a623;--bg:#f8fafc;--card:#fff;--text:#1a202c;--muted:#6b7280;--radius:12px;--shadow:0 2px 16px rgba(0,0,0,.09);
-  --low:#22c55e;--medium:#f59e0b;--high:#f97316;--extreme:#ef4444}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
-a{color:var(--primary);text-decoration:none}
-.container{max-width:1000px;margin:0 auto;padding:0 20px}
-nav{background:#fff;border-bottom:1px solid #e5e7eb;padding:14px 0;position:sticky;top:0;z-index:100;box-shadow:0 1px 6px rgba(0,0,0,.06)}
-.nav-inner{display:flex;align-items:center;justify-content:space-between}
-.nav-logo{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--primary);font-size:1rem}
-.nav-logo svg{width:32px;height:32px}
-.nav-cta{background:var(--primary);color:#fff;padding:8px 18px;border-radius:8px;font-size:.85rem;font-weight:600}
-.hero{background:linear-gradient(135deg,#0f4c2a,#1a6b3a);color:#fff;padding:48px 0 36px;text-align:center}
-.hero-badge{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:50px;padding:5px 16px;font-size:.8rem;font-weight:600;display:inline-block;margin-bottom:16px}
-.hero h1{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;margin-bottom:12px}
-.hero h1 span{color:var(--accent)}
-.hero p{opacity:.88;max-width:560px;margin:0 auto}
-.main{padding:40px 0 80px}
-.layout{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
-.panel{background:var(--card);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow);border:1px solid #e5e7eb}
-.panel h2{font-size:1.05rem;font-weight:700;margin-bottom:18px}
-/* MATRIX */
-.matrix-wrap{overflow-x:auto}
-.matrix-table{border-collapse:separate;border-spacing:3px;margin:0 auto}
-.matrix-table td,.matrix-table th{padding:10px 8px;text-align:center;border-radius:6px;font-size:.8rem;cursor:pointer;transition:all .2s;min-width:70px}
-.matrix-table .corner{background:transparent;cursor:default}
-.matrix-table .row-label{background:#f3f4f6;font-weight:700;font-size:.75rem;cursor:default;color:var(--muted);min-width:80px;text-align:right;padding-right:12px}
-.matrix-table .col-label{background:#f3f4f6;font-weight:700;font-size:.75rem;cursor:default;color:var(--muted)}
-.cell-low{background:#bbf7d0;color:#14532d}
-.cell-medium{background:#fde68a;color:#78350f}
-.cell-high{background:#fed7aa;color:#9a3412}
-.cell-extreme{background:#fecaca;color:#7f1d1d}
-.cell-low:hover,.cell-medium:hover,.cell-high:hover,.cell-extreme:hover{filter:brightness(.88);transform:scale(1.06)}
-.cell-selected{outline:3px solid #1a6b3a;outline-offset:1px;transform:scale(1.1);z-index:10;position:relative}
-.score-num{font-weight:800;font-size:1rem}
-.score-label{font-size:.68rem;margin-top:1px}
-/* RESULT CARD */
-.risk-result{display:none;margin-top:20px}
-.risk-result.show{display:block}
-.risk-level-card{border-radius:12px;padding:24px;text-align:center;color:#fff}
-.risk-level-card.low{background:linear-gradient(135deg,#16a34a,#22c55e)}
-.risk-level-card.medium{background:linear-gradient(135deg,#d97706,#f59e0b)}
-.risk-level-card.high{background:linear-gradient(135deg,#ea580c,#f97316)}
-.risk-level-card.extreme{background:linear-gradient(135deg,#dc2626,#ef4444)}
-.risk-score-big{font-size:4rem;font-weight:900;line-height:1}
-.risk-level-name{font-size:1.4rem;font-weight:800;margin:8px 0 4px}
-.risk-level-id{font-size:.9rem;opacity:.9}
-.action-list{background:rgba(0,0,0,.15);border-radius:8px;padding:16px;margin-top:16px;text-align:left}
-.action-list h4{font-size:.88rem;font-weight:700;margin-bottom:10px}
-.action-list ul{list-style:none;font-size:.83rem;display:flex;flex-direction:column;gap:6px}
-.action-list li::before{content:"→ "}
-/* INPUT FORM */
-.form-group{margin-bottom:16px}
-.form-group label{display:block;font-size:.88rem;font-weight:600;margin-bottom:6px}
-.form-group input,.form-group select,.form-group textarea{width:100%;padding:10px 14px;border:2px solid #e5e7eb;border-radius:8px;font-size:.88rem;background:#fff;color:var(--text)}
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--primary);outline:none}
-.form-group textarea{min-height:60px;resize:vertical;font-family:inherit}
-.btn-add{background:var(--primary);color:#fff;border:none;border-radius:8px;padding:10px 20px;font-size:.88rem;font-weight:600;cursor:pointer;margin-top:4px;width:100%}
-.btn-wa{background:#25D366;color:#fff;border:none;border-radius:8px;padding:10px 20px;font-size:.88rem;font-weight:600;cursor:pointer;width:100%;margin-top:8px;text-align:center;display:block}
-/* REGISTER TABLE */
-.register-wrap{margin-top:40px}
-.register-wrap h3{font-size:1.1rem;font-weight:700;margin-bottom:16px}
-.register-table{width:100%;border-collapse:collapse;font-size:.82rem}
-.register-table th{background:var(--primary);color:#fff;padding:10px 12px;text-align:left;font-size:.78rem}
-.register-table td{padding:9px 12px;border-bottom:1px solid #f3f4f6;vertical-align:top}
-.register-table tr:hover td{background:#f9fafb}
-.badge-low{background:#dcfce7;color:#16a34a;padding:2px 10px;border-radius:50px;font-weight:700;font-size:.75rem;white-space:nowrap}
-.badge-medium{background:#fef3c7;color:#d97706;padding:2px 10px;border-radius:50px;font-weight:700;font-size:.75rem;white-space:nowrap}
-.badge-high{background:#ffedd5;color:#c2410c;padding:2px 10px;border-radius:50px;font-weight:700;font-size:.75rem;white-space:nowrap}
-.badge-extreme{background:#fee2e2;color:#dc2626;padding:2px 10px;border-radius:50px;font-weight:700;font-size:.75rem;white-space:nowrap}
-.empty-state{text-align:center;padding:40px;color:var(--muted);font-size:.88rem}
-.btn-actions{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
-.btn-secondary{background:#f3f4f6;color:var(--text);border:1px solid #e5e7eb;border-radius:8px;padding:9px 18px;font-size:.85rem;font-weight:600;cursor:pointer}
-.btn-secondary:hover{background:#e5e7eb}
-.btn-danger{background:#fee2e2;color:#dc2626;border:1px solid #fecaca;border-radius:8px;padding:9px 18px;font-size:.85rem;font-weight:600;cursor:pointer}
-/* LEGEND */
-.legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
-.legend-item{display:flex;align-items:center;gap:6px;font-size:.8rem}
-.legend-dot{width:14px;height:14px;border-radius:3px}
-.info-box{background:#f0fdf4;border-left:4px solid var(--primary);border-radius:8px;padding:16px 20px;margin-top:24px}
-.info-box h4{font-size:.9rem;font-weight:700;color:var(--primary);margin-bottom:8px}
-.info-box p,.info-box li{font-size:.83rem;color:#374151;line-height:1.6}
-.info-box ul{padding-left:16px}
-.cta-strip{background:var(--primary);color:#fff;border-radius:12px;padding:28px;text-align:center;margin:40px 0}
-.cta-strip h3{font-size:1.1rem;font-weight:700;margin-bottom:8px}
-.cta-strip p{opacity:.88;font-size:.88rem;margin-bottom:16px}
-footer{background:#111827;color:#9ca3af;padding:30px 0;text-align:center;font-size:.83rem}
-footer a{color:#6ee7b7}
-.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);background:#1a6b3a;color:#fff;padding:10px 24px;border-radius:50px;font-size:.88rem;font-weight:600;opacity:0;transition:all .3s;pointer-events:none;z-index:999}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-@media(max-width:768px){
-  .layout{grid-template-columns:1fr}
-  .matrix-table td,.matrix-table th{min-width:52px;padding:8px 4px;font-size:.7rem}
-  .score-num{font-size:.85rem}
-}
-@media print{
-  nav,footer,.cta-strip,.btn-actions,.btn-add,.btn-wa,.tools-training-cta{display:none!important}
-  body{background:#fff}
-}
-.tools-training-cta{padding:40px 0}
-.tools-training-cta h2{font-size:1.3rem;font-weight:800;margin:0 0 16px;text-align:center;color:#0A4A2E}
-.tools-training-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
-.tools-training-card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:18px;display:flex;flex-direction:column}
-.tools-training-card h3{font-size:.95rem;font-weight:700;margin:0 0 8px}
-.tools-training-card h3 a{color:#0A4A2E;text-decoration:none}
-.tools-training-card p{font-size:.85rem;color:#555;line-height:1.6;margin:0 0 12px;flex:1}
-.tools-training-btn{display:inline-block;background:#0A4A2E;color:#fff;font-weight:700;font-size:.85rem;padding:8px 14px;border-radius:8px;text-decoration:none;text-align:center}
-</style>
 <script type="application/ld+json">
 {
-  "@context":"https://schema.org",
-  "@type":"SoftwareApplication",
-  "name":"Risk Matrix 5x5 Interaktif Online",
-  "applicationCategory":"BusinessApplication",
-  "operatingSystem":"Web",
-  "offers":{"@type":"Offer","price":"0","priceCurrency":"IDR"},
-  "description":"Risk matrix 5x5 online gratis untuk HSE officer — klik likelihood dan severity, dapat risk level, warna, dan rekomendasi pengendalian.",
-  "url":"https://wahanatotalita.com/tools/risk-matrix",
-  "provider":{"@type":"Organization","name":"Wahana Totalita Konsultan"}
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Beranda", "item": "https://wahanatotalita.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Tools K3", "item": "https://wahanatotalita.com/tools/" },
+    { "@type": "ListItem", "position": 3, "name": "Risk Matrix 5x5", "item": "https://wahanatotalita.com/tools/risk-matrix.php" }
+  ]
 }
 </script>
-<nav>
-  <div class="container nav-inner">
-    <a href="/" class="nav-logo">
-      <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#1a6b3a"/><path d="M20 8l3 9h9l-7 5 3 9-8-6-8 6 3-9-7-5h9z" fill="#f5a623"/></svg>
-      Wahana Totalita
-    </a>
-    <a href="/tools/" style="color:var(--muted);font-size:.88rem">← Semua Tools</a>
-    <a href="https://wa.me/6287759151278" target="_blank" class="nav-cta">📱 Konsultasi</a>
-  </div>
-</nav>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Kalkulator Matriks Risiko 5x5 K3 Online",
+  "url": "https://wahanatotalita.com/tools/risk-matrix.php",
+  "description": "Aplikasi evaluasi matriks risiko 5x5 standar ISO 31000 dan HIRARC dengan fitur pembuatan dan pencetakan dokumen Risk Register K3.",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "All",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "IDR" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Apa itu Matriks Risiko 5x5 dalam K3?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Matriks Risiko 5x5 adalah alat visual penilaian risiko yang memetakan probabilitas atau peluang terjadinya suatu bahaya (Likelihood skala 1-5) dengan tingkat keparahan konsekuensi dampaknya (Consequence skala 1-5) untuk menghasilkan skor risiko total (1 hingga 25), yang terbagi dalam kategori Rendah (Low), Sedang (Medium), Tinggi (High), hingga Ekstrem (Extreme)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Apa yang dimaksud dengan prinsip ALARP (As Low As Reasonably Practicable)?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ALARP adalah prinsip penilaian keselamatan di mana risiko harus diturunkan sampai ke level terendah yang dapat dicapai secara praktis, mempertimbangkan perbandingan biaya finansial, waktu, dan upaya teknis terhadap manfaat penurunan risiko yang diperoleh."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kapan suatu pekerjaan harus segera dihentikan berdasarkan Matriks Risiko?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pekerjaan wajib segera dihentikan seketika (Stop Work Authority) jika penilaian risiko awal (Initial Risk) menghasilkan level Ekstrem / Kritis (skor 15-25). Pekerjaan sama sekali tidak boleh dilanjutkan sampai tindakan pengendalian fisik tingkat tinggi diterapkan dan risiko sisa (Residual Risk) turun ke level Sedang atau Rendah."
+      }
+    }
+  ]
+}
+</script>
 
-<section class="hero">
+<style>
+:root {
+  --navy-dark: #071524;
+  --navy: #0D233A;
+  --navy-light: #183654;
+  --orange: #E8611A;
+  --orange-hover: #cf5213;
+  --orange-light: #fff2ea;
+  --slate-50: #F8FAFC;
+  --slate-100: #F1F5F9;
+  --slate-200: #E2E8F0;
+  --slate-300: #CBD5E1;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-900: #0F172A;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 2px 8px rgba(13,35,58,0.06);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Source Sans 3', system-ui, -apple-system, sans-serif;
+  background: var(--slate-50);
+  color: var(--slate-900);
+  line-height: 1.6;
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* HERO */
+.rm-hero {
+  background: linear-gradient(135deg, #071524 0%, #0D233A 60%, #183654 100%);
+  color: #fff;
+  padding: 58px 0 44px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 3px solid var(--orange);
+}
+.rm-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 36px 36px;
+  pointer-events: none;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(232, 97, 26, 0.18);
+  border: 1px solid rgba(232, 97, 26, 0.4);
+  padding: 6px 14px;
+  border-radius: 999px;
+  color: #FFA573;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 14px;
+}
+.rm-hero h1 {
+  font-family: 'Lexend', sans-serif;
+  font-size: clamp(1.8rem, 3.6vw, 2.7rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+.rm-hero h1 span { color: var(--orange); }
+.rm-hero p {
+  color: #CBD5E1;
+  font-size: 1.05rem;
+  max-width: 760px;
+  margin-bottom: 20px;
+}
+.hero-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.hero-tag {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  color: #E2E8F0;
+}
+
+/* WORKSPACE LAYOUT */
+.rm-wrapper { padding: 40px 0 60px; }
+.rm-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 32px;
+  align-items: start;
+}
+@media (max-width: 992px) {
+  .rm-grid { grid-template-columns: 1fr; }
+}
+
+.card-box {
+  background: #fff;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 28px;
+  margin-bottom: 28px;
+}
+.card-header-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--slate-100);
+  padding-bottom: 16px;
+  margin-bottom: 22px;
+}
+.card-title {
+  font-family: 'Lexend', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 5x5 MATRIX GRID */
+.matrix-container {
+  display: grid;
+  grid-template-columns: 80px repeat(5, 1fr);
+  gap: 6px;
+  margin: 16px 0 24px;
+}
+.matrix-cell {
+  aspect-ratio: 1.25;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-weight: 800;
+  font-family: 'Lexend', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  user-select: none;
+  font-size: 1.1rem;
+}
+.matrix-cell small { font-size: 0.68rem; font-weight: 600; opacity: 0.9; }
+.matrix-cell:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  z-index: 2;
+}
+.matrix-cell.selected {
+  outline: 3px solid #000;
+  box-shadow: 0 0 0 4px #fff, 0 8px 20px rgba(0,0,0,0.25);
+  transform: scale(1.08);
+  z-index: 3;
+}
+
+/* Risk Colors */
+.cell-low { background: #86EFAC; color: #14532D; }
+.cell-med { background: #FDE047; color: #713F12; }
+.cell-high { background: #FDBA74; color: #7C2D12; }
+.cell-ext { background: #FCA5A5; color: #7F1D1D; }
+
+.matrix-header-y {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--slate-600);
+  text-align: center;
+  line-height: 1.2;
+}
+.matrix-header-x {
+  grid-column: 2 / span 5;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--navy);
+  padding: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* CONTROLS SLIDERS / SELECTORS */
+.control-row { margin-bottom: 20px; }
+.control-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+.select-styled {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid var(--slate-200);
+  border-radius: var(--radius-md);
+  font-size: 0.92rem;
+  color: var(--slate-900);
+  background: #fff;
+}
+.select-styled:focus {
+  outline: none;
+  border-color: var(--orange);
+}
+
+/* RESULT DETAILS */
+.risk-score-display {
+  background: var(--slate-50);
+  border: 2px solid var(--slate-200);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  text-align: center;
+  margin-bottom: 24px;
+}
+.score-badge {
+  display: inline-block;
+  font-family: 'Lexend', sans-serif;
+  font-size: 2.8rem;
+  font-weight: 900;
+  line-height: 1;
+  padding: 12px 28px;
+  border-radius: var(--radius-md);
+  margin-bottom: 12px;
+}
+.score-cat {
+  font-family: 'Lexend', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+.score-timeframe {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--slate-700);
+  background: rgba(0,0,0,0.04);
+  padding: 6px 14px;
+  border-radius: 999px;
+  display: inline-block;
+}
+
+/* RISK REGISTER TABLE */
+.register-table-wrapper {
+  overflow-x: auto;
+  margin-top: 16px;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-md);
+}
+.reg-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.86rem;
+}
+.reg-table th {
+  background: var(--navy);
+  color: #fff;
+  padding: 10px 12px;
+  text-align: left;
+  font-size: 0.82rem;
+}
+.reg-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--slate-200);
+  background: #fff;
+}
+.reg-table tr:hover td { background: var(--slate-50); }
+
+/* EDITORIAL ARTICLE */
+.editorial-box {
+  background: #fff;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+  margin-bottom: 32px;
+}
+.editorial-title {
+  font-family: 'Lexend', sans-serif;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 16px;
+  border-left: 4px solid var(--orange);
+  padding-left: 14px;
+}
+.editorial-p {
+  color: var(--slate-700);
+  font-size: 0.96rem;
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+/* FAQ */
+.faq-item {
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-md);
+  margin-bottom: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+.faq-q {
+  width: 100%;
+  padding: 16px 20px;
+  text-align: left;
+  background: #fff;
+  border: none;
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--navy);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.faq-q:hover { background: var(--slate-50); }
+.faq-a {
+  padding: 0 20px 18px;
+  color: var(--slate-700);
+  font-size: 0.92rem;
+  line-height: 1.65;
+  display: none;
+}
+.faq-item.active .faq-a { display: block; }
+.faq-item.active .faq-icon { transform: rotate(180deg); }
+.faq-icon { transition: transform 0.2s; }
+</style>
+
+<?php require __DIR__ . '/../includes/navbar.php'; ?>
+
+<main class="rm-page" id="konten-utama">
+
+<!-- HERO -->
+<section class="rm-hero">
   <div class="container">
-    <div class="hero-badge">📊 Risk Assessment Tool</div>
-    <h1>Risk Matrix <span>5×5 Interaktif</span><br>Gratis Online</h1>
-    <p>Klik likelihood dan severity — langsung dapat risk level, warna indikator, dan rekomendasi pengendalian risiko.</p>
+    <div class="hero-badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg>
+      Standar ISO 31000:2018 &amp; HIRARC K3
+    </div>
+    <h1>Matriks Risiko 5x5 <span>K3 Online 2026</span></h1>
+    <p>Hitung evaluasi risiko bahaya kerja secara akurat menggunakan matriks 5x5 interaktif. Tentukan nilai Peluang (Likelihood) dan Dampak Keparahan (Consequence), peroleh kategori risiko, dan susun dokumen Risk Register resmi.</p>
+    <div class="hero-tags">
+      <span class="hero-tag">Skala Likelihood 1 - 5</span>
+      <span class="hero-tag">Skala Consequence 1 - 5</span>
+      <span class="hero-tag">Level Risiko Low, Medium, High, Extreme</span>
+      <span class="hero-tag">Tindakan Pengendalian ALARP</span>
+    </div>
   </div>
 </section>
 
-<section class="main">
+<!-- MAIN MATRIX WORKSPACE -->
+<section class="rm-wrapper">
   <div class="container">
-    <div class="layout">
-
-      <!-- LEFT: MATRIX -->
+    
+    <div class="rm-grid">
+      
+      <!-- INTERACTIVE MATRIX COLUMN -->
       <div>
-        <div class="panel">
-          <h2>📊 Klik Sel untuk Menghitung Risiko</h2>
-          <div class="matrix-wrap">
-            <table class="matrix-table" id="riskMatrix">
-              <tr id="matrixHeader"></tr>
-              <!-- rows filled by JS -->
-            </table>
+        <div class="card-box">
+          <div class="card-header-line">
+            <h2 class="card-title">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+              Tabel Matriks Risiko 5x5
+            </h2>
+            <span style="font-size:0.8rem;color:var(--slate-600)">Klik salah satu sel untuk evaluasi instan:</span>
           </div>
 
-          <div class="legend">
-            <div class="legend-item"><div class="legend-dot" style="background:#bbf7d0"></div>Low (1-4)</div>
-            <div class="legend-item"><div class="legend-dot" style="background:#fde68a"></div>Medium (5-9)</div>
-            <div class="legend-item"><div class="legend-dot" style="background:#fed7aa"></div>High (10-16)</div>
-            <div class="legend-item"><div class="legend-dot" style="background:#fecaca"></div>Extreme (17-25)</div>
+          <!-- 5x5 GRID -->
+          <div class="matrix-container" id="matrixGrid">
+            <!-- Headers and cells generated dynamically -->
           </div>
 
-          <div class="risk-result" id="riskResult"></div>
-        </div>
+          <!-- SLIDERS / SELECTORS -->
+          <div class="control-row">
+            <div class="control-label">
+              <span>Peluang Terjadi (Likelihood)</span>
+              <strong id="labelL" style="color:var(--orange)">Tingkat 3 - Mungkin Terjadi</strong>
+            </div>
+            <select id="selL" class="select-styled" onchange="onSelectChange()">
+              <option value="1">1 - Sangat Jarang / Hampir Mustahil (Terjadi 1x > 5 tahun)</option>
+              <option value="2">2 - Jarang Terjadi (Terjadi 1x dalam 2 - 5 tahun)</option>
+              <option value="3" selected>3 - Mungkin / Sedang (Terjadi 1x dalam 1 tahun)</option>
+              <option value="4">4 - Sering Terjadi (Terjadi beberapa kali per tahun)</option>
+              <option value="5">5 - Hampir Pasti Terjadi (Terjadi rutin mingguan / bulanan)</option>
+            </select>
+          </div>
 
-        <div class="info-box">
-          <h4>📐 Cara Membaca Risk Matrix</h4>
-          <ul>
-            <li><strong>Likelihood</strong> (Kemungkinan): 1=Rare sampai 5=Almost Certain</li>
-            <li><strong>Severity</strong> (Keparahan): 1=Insignificant sampai 5=Catastrophic</li>
-            <li><strong>Risk Score</strong> = Likelihood × Severity</li>
-            <li>Low (hijau): cukup prosedur standar</li>
-            <li>Medium (kuning): tindakan perbaikan dalam 30 hari</li>
-            <li>High (oranye): tindakan segera, max 7 hari</li>
-            <li>Extreme (merah): hentikan pekerjaan, tindakan segera</li>
-          </ul>
+          <div class="control-row">
+            <div class="control-label">
+              <span>Keparahan Dampak (Consequence / Severity)</span>
+              <strong id="labelC" style="color:var(--orange)">Tingkat 3 - Cedera Sedang (LTI)</strong>
+            </div>
+            <select id="selC" class="select-styled" onchange="onSelectChange()">
+              <option value="1">1 - Tidak Signifikan (Tidak ada cedera, kerugian finansial nihil)</option>
+              <option value="2">2 - Ringan (Perawatan P3K, tidak ada hari kerja hilang)</option>
+              <option value="3" selected>3 - Sedang (Cedera LTI, rawat inap medis, hilang hari kerja)</option>
+              <option value="4">4 - Berat (Cacat tetap permanen, kerusakan properti parah)</option>
+              <option value="5">5 - Katastropik (Kematian / Fatalitas, pencemaran meluas)</option>
+            </select>
+          </div>
+
         </div>
       </div>
 
-      <!-- RIGHT: INPUT + REGISTER -->
+      <!-- EVALUATION & ACTION SUMMARY -->
       <div>
-        <div class="panel">
-          <h2>📋 Tambah ke Risk Register</h2>
-          <div class="form-group">
-            <label>Aktivitas / Pekerjaan</label>
-            <input type="text" id="rActivity" placeholder="cth: Pekerjaan Pengelasan di Ketinggian">
+        <div class="card-box">
+          <div class="card-header-line">
+            <h2 class="card-title">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Hasil Evaluasi Risiko
+            </h2>
+            <span style="font-size:0.78rem;font-weight:700;color:var(--navy)">ISO 31000:2018</span>
           </div>
-          <div class="form-group">
-            <label>Identifikasi Bahaya</label>
-            <input type="text" id="rHazard" placeholder="cth: Percikan api, terjatuh dari ketinggian">
+
+          <div class="risk-score-display" id="scoreBox">
+            <div class="score-badge cell-med" id="scoreNum">9</div>
+            <div class="score-cat" id="scoreCat" style="color:#713F12">SEDANG (MEDIUM RISK)</div>
+            <div class="score-timeframe" id="scoreTime">Tindakan mitigasi diperlukan dalam waktu 7 hari kerja</div>
           </div>
-          <div class="form-group">
-            <label>Konsekuensi / Risiko</label>
-            <input type="text" id="rConsequence" placeholder="cth: Kebakaran, cedera berat, kematian">
+
+          <div style="background:var(--slate-50);border:1px solid var(--slate-200);border-radius:var(--radius-md);padding:18px;margin-bottom:20px">
+            <h4 style="font-size:0.9rem;font-weight:700;color:var(--navy);margin-bottom:8px">Ketentuan Pengendalian Wajib:</h4>
+            <p id="actionGuide" style="font-size:0.86rem;color:var(--slate-700);line-height:1.6">
+              Pekerjaan dapat dijalankan dengan pengawasan supervisor dan penerapan Standard Operating Procedure (SOP) yang diperketat serta APD standar.
+            </p>
           </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-            <div class="form-group">
-              <label>Likelihood (1-5)</label>
-              <select id="rLikelihood" onchange="updateRegisterPreview()">
-                <option value="1">1 — Rare</option>
-                <option value="2">2 — Unlikely</option>
-                <option value="3" selected>3 — Possible</option>
-                <option value="4">4 — Likely</option>
-                <option value="5">5 — Almost Certain</option>
-              </select>
+
+          <div style="border-top:1px dashed var(--slate-300);padding-top:18px">
+            <h4 style="font-size:0.9rem;font-weight:700;color:var(--navy);margin-bottom:12px">Tambahkan ke Risk Register:</h4>
+            <div style="margin-bottom:10px">
+              <input type="text" id="regActivity" class="select-styled" placeholder="Aktivitas / Bahaya (cth: Pekerjaan Las di Ketinggian)">
             </div>
-            <div class="form-group">
-              <label>Severity (1-5)</label>
-              <select id="rSeverity" onchange="updateRegisterPreview()">
-                <option value="1">1 — Insignificant</option>
-                <option value="2">2 — Minor</option>
-                <option value="3" selected>3 — Moderate</option>
-                <option value="4">4 — Major</option>
-                <option value="5">5 — Catastrophic</option>
-              </select>
+            <div style="margin-bottom:14px">
+              <input type="text" id="regControl" class="select-styled" placeholder="Rencana Pengendalian (cth: Pasang fire blanket & full body harness)">
             </div>
+            <button class="select-styled" type="button" onclick="addToRiskRegister()" style="background:var(--orange);color:#fff;border:none;font-weight:700;cursor:pointer">
+              + Tambah ke Tabel Risk Register
+            </button>
           </div>
-          <div class="form-group">
-            <label>Pengendalian yang Ada</label>
-            <textarea id="rExisting" placeholder="cth: APD standar, briefing K3 sebelum kerja"></textarea>
-          </div>
-          <div class="form-group">
-            <label>Pengendalian Tambahan</label>
-            <textarea id="rAdditional" placeholder="cth: Perancah bersertifikat, safety harness, izin kerja PTW"></textarea>
-          </div>
-          <div class="form-group">
-            <label>PIC / Penanggung Jawab</label>
-            <input type="text" id="rPIC" placeholder="cth: Supervisor Area, HSE Officer">
-          </div>
-          <button class="btn-add" onclick="addToRegister()">+ Tambah ke Risk Register</button>
-          <a href="https://wa.me/6287759151278?text=Halo%20Wahana%2C%20saya%20butuh%20bantuan%20IBPR%20dan%20risk%20assessment" target="_blank" class="btn-wa">📱 Konsultasi Risk Assessment K3</a>
+
         </div>
       </div>
+
     </div>
 
-    <!-- REGISTER TABLE -->
-    <div class="register-wrap">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:12px">
-        <h3>📋 Risk Register (<span id="regCount">0</span> item)</h3>
-        <div class="btn-actions" style="margin:0">
-          <button class="btn-secondary" onclick="printRegister()">🖨 Print</button>
-          <button class="btn-secondary" onclick="copyRegister()">📋 Copy CSV</button>
-          <button class="btn-danger" onclick="clearRegister()">🗑 Clear All</button>
+    <!-- RISK REGISTER LIST -->
+    <div class="card-box" id="regCard">
+      <div class="card-header-line">
+        <h2 class="card-title">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Daftar Rekapitulasi Risiko (Risk Register)
+        </h2>
+        <div style="display:flex;gap:8px">
+          <button class="select-styled" type="button" onclick="printRiskRegister()" style="padding:6px 14px;font-size:0.82rem;font-weight:700;background:var(--navy);color:#fff;cursor:pointer">
+            Cetak Risk Register
+          </button>
         </div>
       </div>
-      <div style="overflow-x:auto">
-        <table class="register-table">
+
+      <div class="register-table-wrapper">
+        <table class="reg-table" id="regTable">
           <thead>
             <tr>
-              <th>#</th>
-              <th>Aktivitas</th>
-              <th>Bahaya</th>
-              <th>Konsekuensi</th>
-              <th>L</th>
-              <th>S</th>
-              <th>Score</th>
-              <th>Level</th>
-              <th>Kontrol Tambahan</th>
-              <th>PIC</th>
+              <th style="width:36px;text-align:center">No</th>
+              <th>Aktivitas Kerja / Potensi Bahaya</th>
+              <th style="width:50px;text-align:center">L</th>
+              <th style="width:50px;text-align:center">C</th>
+              <th style="width:80px;text-align:center">Skor</th>
+              <th style="width:110px;text-align:center">Level</th>
+              <th>Rencana Tindakan Pengendalian</th>
+              <th style="width:40px;text-align:center">Aksi</th>
             </tr>
           </thead>
-          <tbody id="registerBody">
-            <tr><td colspan="10" class="empty-state">Belum ada data. Isi form di atas dan klik "+ Tambah ke Risk Register"</td></tr>
+          <tbody id="regBody">
+            <!-- Dynamic items -->
           </tbody>
         </table>
       </div>
     </div>
 
-    <div class="cta-strip">
-      <h3>🎓 Kuasai Risk Assessment Secara Profesional</h3>
-      <p>Pelatihan Ahli K3 Umum mencakup metodologi IBPR, risk matrix, hierarki pengendalian, dan implementasi SMK3 PP 50/2012.</p>
-      <a href="https://wa.me/6287759151278?text=Halo%20Wahana%2C%20saya%20gunakan%20risk%20matrix%20tool%20dan%20ingin%20tanya%20pelatihan%20K3" target="_blank" rel="noopener" class="btn-wa" style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:8px;font-weight:700">
-        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-        Tanya Pelatihan Risk Assessment K3
-      </a>
+    <!-- IN-DEPTH EDITORIAL REFERENCE (SEO DEPTH) -->
+    <div class="editorial-box">
+      <h2 class="editorial-title">Panduan Lengkap Penilaian Risiko K3 Menggunakan Matriks 5x5</h2>
+      <p class="editorial-p">
+        Penilaian risiko keselamatan kerja merupakan fondasi utama sistem manajemen K3 modern sesuai dengan <strong>SNI ISO 31000:2018 (Manajemen Risiko — Pedoman)</strong> dan Lampiran Peraturan Pemerintah No. 50 Tahun 2012 tentang Penerapan SMK3. Matriks 5x5 menggabungkan probabilitas kemunculan bahaya dengan tingkat keparahan konsekuensi yang ditimbulkan.
+      </p>
+
+      <h3 style="color:var(--navy);font-family:'Lexend',sans-serif;font-size:1.15rem;margin:22px 0 10px">1. Klasifikasi 4 Tingkat Risiko (Risk Levels)</h3>
+      <ul style="padding-left:22px;color:var(--slate-700);line-height:1.75;margin-bottom:18px">
+        <li><strong>Ekstrem / Kritis (Skor 15 - 25):</strong> Risiko tidak dapat ditoleransi. Pekerjaan harus segera dihentikan seketika sampai tindakan rekayasa teknik dipasang. Wajib persetujuan Direktur Operasional.</li>
+        <li><strong>Tinggi / High (Skor 10 - 14):</strong> Risiko signifikan yang memerlukan tindakan perbaikan mendesak dalam kurun waktu 24 jam. Wajib izin kerja khusus (PTW) dan pengawasan intensif HSE.</li>
+        <li><strong>Sedang / Medium (Skor 5 - 9):</strong> Risiko dapat diterima dengan syarat pengendalian operasional, SOP, dan APD dipatuhi secara ketat. Mitigasi dijadwalkan dalam 7 hari kerja.</li>
+        <li><strong>Rendah / Low (Skor 1 - 4):</strong> Risiko dapat diterima (Broadly Acceptable). Tindakan pencegahan rutin dan pemantauan berkala saat inspeksi K3 triwulanan.</li>
+      </ul>
+
+      <h3 style="color:var(--navy);font-family:'Lexend',sans-serif;font-size:1.15rem;margin:22px 0 10px">2. Konsep ALARP (As Low As Reasonably Practicable)</h3>
+      <p class="editorial-p">
+        Prinsip ALARP menetapkan bahwa tidak semua risiko di tempat kerja dapat diturunkan hingga nol mutlak (zero risk), namun setiap bahaya harus ditekan hingga ke titik di mana biaya tambahan untuk menurunkannya lagi akan sangat tidak proporsional dibanding penurunan risiko yang dicapai.
+      </p>
+
+      <!-- FAQ ACCORDION -->
+      <h3 style="color:var(--navy);font-family:'Lexend',sans-serif;font-size:1.25rem;margin:28px 0 16px">Pertanyaan Sering Diajukan Seputar Matriks Risiko K3 (FAQ)</h3>
+      <div class="faq-box">
+        
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>Apa perbedaan antara Initial Risk (Risiko Awal) dan Residual Risk (Risiko Sisa)?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-a">
+            Initial Risk adalah tingkat risiko murni dari suatu aktivitas kerja sebelum diterapkannya tindakan pengendalian keselamatan apa pun. Sedangkan Residual Risk (Risiko Sisa) adalah tingkat risiko yang masih tersisa setelah seluruh tindakan pencegahan (rekayasa teknik, SOP, APD) telah diimplementasikan secara efektif di lapangan.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>Mengapa matriks risiko 5x5 lebih dianjurkan dibanding matriks 3x3?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-a">
+            Matriks 3x3 cenderung menghasilkan pengelompokan yang terlalu kasar (banyak bahaya menumpuk di kategori Sedang). Matriks 5x5 memberikan diferensiasi yang jauh lebih presisi dan terukur antara cedera ringan P3K, rawat inap medis (LTI), cacat permanen, hingga fatalitas, sehingga alokasi anggaran K3 perusahaan dapat diarahkan tepat sasaran pada bahaya paling kritis.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>Siapa yang harus melakukan evaluasi matriks risiko di perusahaan?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-a">
+            Evaluasi matriks risiko wajib dilakukan secara multidisiplin oleh tim HIRADC yang terdiri dari: Penanggung jawab area kerja (Supervisor/Manager), Teknisi pelaksana pekerjaan yang memahami detail bahaya fisik, serta Ahli K3 Umum yang menguasai metodologi evaluasi risiko dan regulasi keselamatan nasional.
+          </div>
+        </div>
+
+      </div>
+
     </div>
+
   </div>
 </section>
 
-<section class="tools-training-cta">
-  <div class="container">
-    <h2>Tingkatkan Kompetensi K3 Anda</h2>
-    <div class="tools-training-grid">
-      <div class="tools-training-card">
-        <h3><a href="/pelatihan/pelatihan-ahli-k3-umum-sertifikasi-bnsp-online/">Pelatihan Ahli K3 Umum</a></h3>
-        <p>Sertifikasi wajib bagi praktisi K3 perusahaan, resmi BNSP, materi regulasi &amp; manajemen risiko.</p>
-        <a href="/pelatihan/pelatihan-ahli-k3-umum-sertifikasi-bnsp-online/" class="tools-training-btn">Lihat Program &rarr;</a>
-      </div>
-      <div class="tools-training-card">
-        <h3><a href="/pelatihan/pelatihan-petugas-p3k-sertifikasi-bnsp/">Pelatihan Petugas P3K | Sertifikasi BNSP</a></h3>
-        <p>Pelatihan penanganan darurat dan P3K di tempat kerja, sertifikasi BNSP, wajib untuk perusahaan.</p>
-        <a href="/pelatihan/pelatihan-petugas-p3k-sertifikasi-bnsp/" class="tools-training-btn">Lihat Program &rarr;</a>
-      </div>
-      <div class="tools-training-card">
-        <h3><a href="/pelatihan/pelatihan-operator-k3-sertifikasi-bnsp/">Pelatihan Operator K3 | Sertifikasi BNSP</a></h3>
-        <p>Kompetensi dasar keselamatan kerja untuk operator, sertifikasi resmi BNSP, untuk semua industri.</p>
-        <a href="/pelatihan/pelatihan-operator-k3-sertifikasi-bnsp/" class="tools-training-btn">Lihat Program &rarr;</a>
-      </div>
-      <div class="tools-training-card">
-        <h3><a href="/jadwal/">Jadwal Pelatihan Terdekat</a></h3>
-        <p>Lihat jadwal batch pelatihan K3 terbaru — online dan offline di berbagai kota.</p>
-        <a href="/jadwal/" class="tools-training-btn">Lihat Jadwal &rarr;</a>
-      </div>
-    </div>
-  </div>
-</section>
+</main>
 
-<footer>
-  <div class="container">
-    <p><a href="/tools/">← Semua Tools K3</a> | <a href="/tools/ibpr-generator">IBPR Generator</a> | <a href="/tools/jsa-builder">JSA Builder</a> | <a href="/">Wahana Totalita</a></p>
-    <p style="margin-top:8px">© <?php echo date('Y'); ?> Wahana Totalita Konsultan, Yogyakarta</p>
-  </div>
-</footer>
-
-<a href="https://wa.me/6287759151278" target="_blank" style="position:fixed;bottom:24px;right:24px;background:#25D366;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(37,211,102,.4);z-index:999">
-  <svg viewBox="0 0 24 24" fill="white" width="26" height="26"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-</a>
-
-<div class="toast" id="toast"></div>
+<?php require __DIR__ . '/../includes/footer.php'; ?>
 
 <script>
-const likelihoods = [
-  {id:5, label:'5 — Almost Certain', id_label:'Hampir Pasti'},
-  {id:4, label:'4 — Likely', id_label:'Kemungkinan Besar'},
-  {id:3, label:'3 — Possible', id_label:'Mungkin Terjadi'},
-  {id:2, label:'2 — Unlikely', id_label:'Kecil Kemungkinan'},
-  {id:1, label:'1 — Rare', id_label:'Sangat Jarang'},
-];
-const severities = [
-  {id:1, label:'1 — Insignificant', id_label:'Tidak Signifikan'},
-  {id:2, label:'2 — Minor', id_label:'Ringan'},
-  {id:3, label:'3 — Moderate', id_label:'Sedang'},
-  {id:4, label:'4 — Major', id_label:'Besar'},
-  {id:5, label:'5 — Catastrophic', id_label:'Katastropik'},
-];
+let curL = 3;
+let curC = 3;
 
-const controls = {
-  low: {
-    title:'LOW RISK — Risiko Rendah',
-    id_title:'Risiko Rendah',
-    color:'low',
-    actions:[
-      'Kelola dengan prosedur standar yang sudah ada',
-      'Pastikan semua pekerja paham prosedur kerja',
-      'Review berkala minimal 1 tahun sekali',
-      'Catat dalam risk register untuk monitoring',
-    ]
-  },
-  medium: {
-    title:'MEDIUM RISK — Risiko Sedang',
-    id_title:'Risiko Sedang',
-    color:'medium',
-    actions:[
-      'Buat rencana aksi pengendalian dalam 30 hari',
-      'Pastikan APD sesuai dipakai semua waktu',
-      'Sertakan dalam agenda rapat K3 bulanan',
-      'Pertimbangkan engineering control tambahan',
-      'Lakukan inspeksi area minimal 2x per minggu',
-    ]
-  },
-  high: {
-    title:'HIGH RISK — Risiko Tinggi',
-    id_title:'Risiko Tinggi',
-    color:'high',
-    actions:[
-      'Ambil tindakan segera, maksimal 7 hari kerja',
-      'Supervisor wajib hadir dan mengawasi langsung',
-      'Buat Izin Kerja (PTW) sebelum memulai',
-      'Tambah engineering control / eliminasi bahaya',
-      'Lakukan JSA ulang sebelum setiap shift',
-      'Lapor ke manajemen dan HSE Manager',
-    ]
-  },
-  extreme: {
-    title:'EXTREME RISK — Risiko Ekstrem',
-    id_title:'Risiko Ekstrem',
-    color:'extreme',
-    actions:[
-      '⛔ HENTIKAN PEKERJAAN SEGERA',
-      'Jangan lanjutkan sampai risiko dikurangi',
-      'Lapor langsung ke Direktur / Top Management',
-      'Butuh sign-off dari HSE Manager dan Site Manager',
-      'Evaluasi eliminasi total bahaya jika memungkinkan',
-      'Siapkan rencana darurat sebelum memulai kembali',
-    ]
+const matrixDefinitions = {
+  // Score mapping: L x C
+  getScore: (l, c) => l * c,
+  getLevel: (score) => {
+    if(score >= 15) return { cat: 'EKSTREM (EXTREME RISK)', cls: 'cell-ext', time: 'Hentikan pekerjaan seketika! Tindakan segera wajib.', text: 'Pekerjaan dilarang dimulai atau dilanjutkan. Sumber bahaya wajib diisolasi atau dieliminasi segera. Diperlukan otorisasi level Direksi untuk melanjutkan.' };
+    if(score >= 10) return { cat: 'TINGGI (HIGH RISK)', cls: 'cell-high', time: 'Mitigasi wajib diterapkan dalam 24 jam kerja.', text: 'Diperlukan tindakan mitigasi spesifik, Izin Kerja Khusus (PTW), instruksi kerja ketat, dan supervisi langsung oleh HSE Officer.' };
+    if(score >= 5)  return { cat: 'SEDANG (MEDIUM RISK)', cls: 'cell-med', time: 'Mitigasi diperlukan dalam 7 hari kerja.', text: 'Pekerjaan dapat dijalankan dengan pengawasan supervisor dan kepatuhan terhadap SOP operasional serta kelengkapan APD standar.' };
+    return { cat: 'RENDAH (LOW RISK)', cls: 'cell-low', time: 'Tinjauan rutin saat inspeksi berkala.', text: 'Risiko dapat diterima secara luas (Broadly Acceptable). Lakukan pemantauan berkala dan pastikan pekerja memahami dasar keselamatan kerja.' };
   }
 };
 
-let selectedL = null, selectedS = null;
-let riskRegister = [];
+let riskRegister = [
+  { activity: "Pengelasan pipa di atas perancah ketinggian 6 meter", l: 4, c: 4, score: 16, cat: "EKSTREM", control: "Pasang Full Body Harness 100% tie-off, fire blanket, & fire watch standby" },
+  { activity: "Pengoperasian forklift di area lorong gudang bahan baku", l: 3, c: 3, score: 9, cat: "SEDANG", control: "Marka jalur pejalan kaki, batas kecepatan 10 km/jam, klakson blind spot" },
+  { activity: "Penyusunan kardus arsip dokumen di lemari kantor", l: 2, c: 1, score: 2, cat: "RENDAH", control: "Gunakan tangga pijak step stool berkaki karet stabil" }
+];
 
-function getRiskLevel(score){
-  if(score <= 4) return 'low';
-  if(score <= 9) return 'medium';
-  if(score <= 16) return 'high';
-  return 'extreme';
-}
-function getRiskClass(score){
-  if(score <= 4) return 'cell-low';
-  if(score <= 9) return 'cell-medium';
-  if(score <= 16) return 'cell-high';
-  return 'cell-extreme';
+function initMatrix(){
+  const grid = document.getElementById('matrixGrid');
+  grid.innerHTML = '';
+
+  // Top labels (Consequence 1 to 5)
+  const headerX = document.createElement('div');
+  headerX.className = 'matrix-header-x';
+  headerX.textContent = 'KEPARAHAN DAMPAK (CONSEQUENCE) →';
+  grid.appendChild(headerX);
+
+  // Rows from L=5 down to L=1
+  const lLabels = {
+    5: '5 - Hampir Pasti',
+    4: '4 - Sering',
+    3: '3 - Mungkin',
+    2: '2 - Jarang',
+    1: '1 - S. Jarang'
+  };
+
+  for(let l = 5; l >= 1; l--){
+    const yHeader = document.createElement('div');
+    yHeader.className = 'matrix-header-y';
+    yHeader.textContent = lLabels[l];
+    grid.appendChild(yHeader);
+
+    for(let c = 1; c <= 5; c++){
+      const score = l * c;
+      const info = matrixDefinitions.getLevel(score);
+      const cell = document.createElement('div');
+      cell.className = `matrix-cell ${info.cls}`;
+      cell.id = `cell-${l}-${c}`;
+      cell.innerHTML = `<span>${score}</span><small>L${l}xC${c}</small>`;
+      cell.onclick = () => selectCell(l, c);
+      grid.appendChild(cell);
+    }
+  }
+
+  updateSelection();
+  renderRiskRegister();
 }
 
-function buildMatrix(){
-  const table = document.getElementById('riskMatrix');
-  // Header row
-  const header = document.getElementById('matrixHeader');
-  header.innerHTML = '<th class="corner">L \\ S</th>';
-  severities.forEach(s=>{
-    const th = document.createElement('th');
-    th.className = 'col-label';
-    th.innerHTML = `S${s.id}<br><span style="font-weight:400">${s.id_label}</span>`;
-    header.appendChild(th);
+function selectCell(l, c){
+  curL = l;
+  curC = c;
+  document.getElementById('selL').value = l;
+  document.getElementById('selC').value = c;
+  updateSelection();
+}
+
+function onSelectChange(){
+  curL = parseInt(document.getElementById('selL').value);
+  curC = parseInt(document.getElementById('selC').value);
+  updateSelection();
+}
+
+function updateSelection(){
+  document.querySelectorAll('.matrix-cell').forEach(c => c.classList.remove('selected'));
+  const activeCell = document.getElementById(`cell-${curL}-${curC}`);
+  if(activeCell) activeCell.classList.add('selected');
+
+  const score = curL * curC;
+  const info = matrixDefinitions.getLevel(score);
+
+  const numEl = document.getElementById('scoreNum');
+  numEl.textContent = score;
+  numEl.className = `score-badge ${info.cls}`;
+
+  const catEl = document.getElementById('scoreCat');
+  catEl.textContent = info.cat;
+
+  document.getElementById('scoreTime').textContent = info.time;
+  document.getElementById('actionGuide').textContent = info.text;
+
+  // Labels
+  document.getElementById('labelL').textContent = `Tingkat ${curL}`;
+  document.getElementById('labelC').textContent = `Tingkat ${curC}`;
+}
+
+function addToRiskRegister(){
+  const act = document.getElementById('regActivity').value.trim();
+  const ctrl = document.getElementById('regControl').value.trim();
+  if(!act || !ctrl){
+    alert('Mohon isi nama aktivitas dan rencana tindakan pengendalian!');
+    return;
+  }
+
+  const score = curL * curC;
+  const info = matrixDefinitions.getLevel(score);
+
+  riskRegister.push({
+    activity: act,
+    l: curL,
+    c: curC,
+    score: score,
+    cat: info.cat.split(' ')[0],
+    control: ctrl
   });
 
-  likelihoods.forEach(l=>{
+  document.getElementById('regActivity').value = '';
+  document.getElementById('regControl').value = '';
+  renderRiskRegister();
+}
+
+function deleteRegItem(idx){
+  riskRegister.splice(idx, 1);
+  renderRiskRegister();
+}
+
+function renderRiskRegister(){
+  const tbody = document.getElementById('regBody');
+  tbody.innerHTML = '';
+
+  riskRegister.forEach((item, idx) => {
+    const info = matrixDefinitions.getLevel(item.score);
     const tr = document.createElement('tr');
-    const rowTh = document.createElement('th');
-    rowTh.className = 'row-label';
-    rowTh.innerHTML = `L${l.id} ${l.id_label}`;
-    tr.appendChild(rowTh);
-
-    severities.forEach(s=>{
-      const score = l.id * s.id;
-      const td = document.createElement('td');
-      td.className = getRiskClass(score);
-      td.id = `cell-${l.id}-${s.id}`;
-      td.innerHTML = `<div class="score-num">${score}</div><div class="score-label">${getRiskLevel(score).toUpperCase()}</div>`;
-      td.onclick = ()=>selectCell(l.id, s.id, score);
-      tr.appendChild(td);
-    });
-    table.appendChild(tr);
+    tr.innerHTML = `
+      <td style="text-align:center;font-weight:bold;color:var(--slate-600)">${idx + 1}</td>
+      <td><strong>${escapeHtml(item.activity)}</strong></td>
+      <td style="text-align:center">${item.l}</td>
+      <td style="text-align:center">${item.c}</td>
+      <td style="text-align:center;font-weight:bold">${item.score}</td>
+      <td style="text-align:center"><span style="padding:2px 8px;border-radius:4px;font-size:0.75rem;font-weight:bold" class="${info.cls}">${item.cat}</span></td>
+      <td>${escapeHtml(item.control)}</td>
+      <td style="text-align:center">
+        <button style="border:none;background:#FEE2E2;color:#991B1B;padding:2px 8px;border-radius:4px;cursor:pointer;font-weight:bold" onclick="deleteRegItem(${idx})">✕</button>
+      </td>
+    `;
+    tbody.appendChild(tr);
   });
 }
 
-function selectCell(l, s, score){
-  // Remove previous selection
-  document.querySelectorAll('.cell-selected').forEach(el=>el.classList.remove('cell-selected'));
-  document.getElementById(`cell-${l}-${s}`).classList.add('cell-selected');
-  selectedL = l; selectedS = s;
-
-  // Update dropdowns
-  document.getElementById('rLikelihood').value = l;
-  document.getElementById('rSeverity').value = s;
-
-  const level = getRiskLevel(score);
-  const ctrl = controls[level];
-  const lLabel = likelihoods.find(x=>x.id===l);
-  const sLabel = severities.find(x=>x.id===s);
-
-  const result = document.getElementById('riskResult');
-  result.className = 'risk-result show';
-  result.innerHTML = `
-    <div class="risk-level-card ${level}">
-      <div class="risk-score-big">${score}</div>
-      <div class="risk-level-name">${ctrl.title}</div>
-      <div class="risk-level-id">Likelihood: L${l} (${lLabel.id_label}) × Severity: S${s} (${sLabel.id_label})</div>
-      <div class="action-list">
-        <h4>Tindakan yang Diperlukan:</h4>
-        <ul>
-          ${ctrl.actions.map(a=>`<li>${a}</li>`).join('')}
-        </ul>
-      </div>
-    </div>
-  `;
+function escapeHtml(text){
+  return String(text).replace(/[&<>"']/g, function(m){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m];
+  });
 }
 
-function updateRegisterPreview(){
-  const l = parseInt(document.getElementById('rLikelihood').value);
-  const s = parseInt(document.getElementById('rSeverity').value);
-  if(l && s) selectCell(l,s,l*s);
+function printRiskRegister(){
+  const win = window.open('', '_blank');
+  win.document.write(`<!DOCTYPE html><html><head><title>Risk Register K3 - ISO 31000</title>
+  <style>
+    body{font-family:'Segoe UI',Arial,sans-serif;padding:32px;max-width:860px;margin:0 auto;color:#0F172A;line-height:1.5}
+    h1{font-size:16pt;margin:0;color:#0D233A;border-bottom:2px solid #0D233A;padding-bottom:8px}
+    .sub{font-size:8.5pt;color:#64748B;margin:6px 0 16px}
+    table{width:100%;border-collapse:collapse;margin-top:12px;font-size:9pt}
+    th,td{border:1px solid #CBD5E1;padding:8px 10px;text-align:left}
+    th{background:#F1F5F9;color:#0D233A}
+    .sig{margin-top:40px;display:grid;grid-template-columns:1fr 1fr;gap:40px;text-align:center;font-size:9pt}
+    .line{margin-top:60px;border-top:1px solid #000;font-weight:bold}
+  </style>
+  </head><body>
+  <h1>DOKUMEN RISK REGISTER K3 (HIRARC)</h1>
+  <div class="sub">Berdasarkan Standar Evaluasi Matriks 5x5 ISO 31000:2018 &amp; SMK3 PP 50/2012</div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:30px">No</th>
+        <th>Aktivitas Kerja / Potensi Bahaya</th>
+        <th style="width:40px">L</th>
+        <th style="width:40px">C</th>
+        <th style="width:50px">Skor</th>
+        <th style="width:90px">Level</th>
+        <th>Rencana Tindakan Pengendalian</th>
+      </tr>
+    </thead>
+    <tbody>
+      ${riskRegister.map((r, i) => `
+        <tr>
+          <td style="text-align:center">${i+1}</td>
+          <td><strong>${escapeHtml(r.activity)}</strong></td>
+          <td style="text-align:center">${r.l}</td>
+          <td style="text-align:center">${r.c}</td>
+          <td style="text-align:center"><strong>${r.score}</strong></td>
+          <td style="text-align:center">${r.cat}</td>
+          <td>${escapeHtml(r.control)}</td>
+        </tr>
+      `).join('')}
+    </tbody>
+  </table>
+  <div class="sig">
+    <div>Divalidasi oleh,<br><strong>Ahli K3 Umum / HSE Manager</strong><div class="line">( ___________________________ )</div></div>
+    <div>Disetujui oleh,<br><strong>General Manager / Kepala Operasi</strong><div class="line">( ___________________________ )</div></div>
+  </div>
+  </body></html>`);
+  win.document.close();
+  win.print();
 }
 
-function addToRegister(){
-  const activity = document.getElementById('rActivity').value.trim();
-  const hazard   = document.getElementById('rHazard').value.trim();
-  const consequence = document.getElementById('rConsequence').value.trim();
-  const l = parseInt(document.getElementById('rLikelihood').value);
-  const s = parseInt(document.getElementById('rSeverity').value);
-  const existing    = document.getElementById('rExisting').value.trim();
-  const additional  = document.getElementById('rAdditional').value.trim();
-  const pic         = document.getElementById('rPIC').value.trim();
-
-  if(!activity || !hazard){
-    showToast('⚠️ Isi minimal Aktivitas dan Bahaya');
-    return;
-  }
-
-  const score = l * s;
-  const level = getRiskLevel(score);
-  riskRegister.push({activity, hazard, consequence, l, s, score, level, existing, additional, pic});
-  renderRegister();
-  showToast('✅ Ditambahkan ke Risk Register!');
-
-  // Clear fields
-  ['rActivity','rHazard','rConsequence','rExisting','rAdditional','rPIC'].forEach(id=>document.getElementById(id).value='');
+function toggleFaq(btn){
+  btn.parentElement.classList.toggle('active');
 }
 
-function renderRegister(){
-  const tbody = document.getElementById('registerBody');
-  document.getElementById('regCount').textContent = riskRegister.length;
-  if(!riskRegister.length){
-    tbody.innerHTML = '<tr><td colspan="10" class="empty-state">Belum ada data.</td></tr>';
-    return;
-  }
-  tbody.innerHTML = riskRegister.map((r,i)=>`
-    <tr>
-      <td>${i+1}</td>
-      <td>${r.activity}</td>
-      <td>${r.hazard}</td>
-      <td>${r.consequence||'—'}</td>
-      <td style="text-align:center">${r.l}</td>
-      <td style="text-align:center">${r.s}</td>
-      <td style="text-align:center;font-weight:800">${r.score}</td>
-      <td><span class="badge-${r.level}">${r.level.toUpperCase()}</span></td>
-      <td>${r.additional||'—'}</td>
-      <td>${r.pic||'—'}</td>
-    </tr>
-  `).join('');
-}
-
-function clearRegister(){
-  if(!riskRegister.length) return;
-  if(confirm('Hapus semua data risk register?')){ riskRegister=[]; renderRegister(); }
-}
-
-function printRegister(){ window.print(); }
-
-function copyRegister(){
-  if(!riskRegister.length){ showToast('Belum ada data'); return; }
-  const header = 'No,Aktivitas,Bahaya,Konsekuensi,L,S,Score,Level,Kontrol Tambahan,PIC';
-  const rows = riskRegister.map((r,i)=>
-    `${i+1},"${r.activity}","${r.hazard}","${r.consequence||''}",${r.l},${r.s},${r.score},${r.level},"${r.additional||''}","${r.pic||''}"`
-  );
-  navigator.clipboard.writeText([header,...rows].join('\n'))
-    .then(()=>showToast('✅ Risk Register disalin sebagai CSV!'));
-}
-
-function showToast(msg){
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'), 2800);
-}
-
-buildMatrix();
-// Pre-select a cell to show example
-selectCell(3,3,9);
+window.addEventListener('DOMContentLoaded', initMatrix);
 </script>
+
+<?php require __DIR__ . '/../includes/scripts.php'; ?>
 </body>
 </html>

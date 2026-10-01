@@ -1,295 +1,669 @@
 <?php
 require_once __DIR__ . '/../config.php';
 $s = get_all_settings();
-?>
-<?php
-$page_title = 'Kalkulator Biaya Kecelakaan Kerja Online Gratis — Rasio Heinrich';
-$meta_desc = 'Kalkulator biaya kecelakaan kerja online gratis. Hitung biaya langsung dan tidak langsung menggunakan Rasio Heinrich (1:4). Justifikasi anggaran K3 dengan data nyata.';
+
+$page_title = 'Kalkulator Biaya Kecelakaan Kerja 2026: Teori Gunung Es Heinrich & Bird';
+$meta_desc = 'Hitung total kerugian finansial akibat kecelakaan kerja berdasarkan Teori Gunung Es K3 (Heinrich 1:4 & Bird 1:10). Analisis biaya langsung, biaya tak langsung, dan ROI program K3.';
+
+ob_start();
 require __DIR__ . '/../includes/head.php';
+$shared_head = ob_get_clean();
+$shared_head = preg_replace('~<title>.*?</title>~s', '<title>' . e($page_title) . '</title>', $shared_head, 1);
+echo $shared_head;
 ?>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "applicationCategory": "BusinessApplication",
-  "name": "Kalkulator Biaya Kecelakaan Kerja Online Gratis — Rasio Heinrich",
-  "description": "Kalkulator biaya kecelakaan kerja online gratis. Hitung biaya langsung dan tidak langsung menggunakan Rasio Heinrich (1:4). Justifikasi anggaran K3 dengan data nyata.",
-  "url": "https://wahanatotalita.com/tools/kalkulator-biaya-k3/",
-  "provider": {"@type": "Organization", "name": "Wahana Totalita", "url": "https://wahanatotalita.com"},
-  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "IDR"}
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Beranda", "item": "https://wahanatotalita.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Tools K3", "item": "https://wahanatotalita.com/tools/" },
+    { "@type": "ListItem", "position": 3, "name": "Kalkulator Biaya K3", "item": "https://wahanatotalita.com/tools/kalkulator-biaya-k3.php" }
+  ]
 }
 </script>
-<link rel="manifest" href="/manifest.json">
-<style>
-:root{--primary:#1a6b3a;--primary-d:#145530;--accent:#f5a623;--bg:#f8fafc;--card:#fff;--text:#1a202c;--muted:#6b7280;--radius:12px;--shadow:0 2px 16px rgba(0,0,0,.09)}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
-a{color:var(--primary);text-decoration:none}
-.container{max-width:900px;margin:0 auto;padding:0 20px}
-nav{background:#fff;border-bottom:1px solid #e5e7eb;padding:14px 0;position:sticky;top:0;z-index:100;box-shadow:0 1px 6px rgba(0,0,0,.06)}
-.nav-inner{display:flex;align-items:center;justify-content:space-between}
-.nav-logo{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--primary);font-size:1rem}
-.nav-logo svg{width:32px;height:32px}
-.nav-cta{background:var(--primary);color:#fff;padding:8px 18px;border-radius:8px;font-size:.85rem;font-weight:600}
-.hero{background:linear-gradient(135deg,#0f4c2a,#1a6b3a);color:#fff;padding:44px 0 32px;text-align:center}
-.hero-badge{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:50px;padding:5px 16px;font-size:.8rem;font-weight:600;display:inline-block;margin-bottom:14px}
-.hero h1{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;margin-bottom:10px}
-.hero h1 span{color:var(--accent)}
-.hero p{opacity:.88;max-width:560px;margin:0 auto}
-.main{padding:36px 0 80px}
-.layout{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
-.panel{background:var(--card);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow);border:1px solid #e5e7eb}
-.panel h2{font-size:1rem;font-weight:700;margin-bottom:16px;color:var(--primary)}
-.form-group{margin-bottom:14px}
-.form-group label{display:block;font-size:.85rem;font-weight:600;margin-bottom:5px}
-.form-group label span{font-size:.78rem;color:var(--muted);font-weight:400}
-.form-group input{width:100%;padding:10px 14px;border:2px solid #e5e7eb;border-radius:7px;font-size:.92rem;background:#fff;color:var(--text)}
-.form-group input:focus{border-color:var(--primary);outline:none}
-.ratio-toggle{display:flex;gap:0;background:#f3f4f6;border-radius:8px;padding:3px;margin-bottom:16px}
-.ratio-btn{flex:1;padding:8px;border:none;background:transparent;border-radius:6px;font-size:.82rem;font-weight:600;cursor:pointer;color:var(--muted);transition:all .2s}
-.ratio-btn.active{background:var(--primary);color:#fff}
-.btn-calc{width:100%;background:var(--primary);color:#fff;border:none;border-radius:9px;padding:13px;font-size:.95rem;font-weight:700;cursor:pointer;margin-top:8px}
-.btn-calc:hover{background:var(--primary-d)}
-.result-panel{display:none}
-.result-panel.show{display:block}
-.total-cost{background:linear-gradient(135deg,#1a6b3a,#2d8a52);color:#fff;border-radius:12px;padding:24px;text-align:center;margin-bottom:16px}
-.total-amount{font-size:2.4rem;font-weight:900;line-height:1}
-.total-label{font-size:.85rem;opacity:.85;margin-top:4px}
-.cost-breakdown{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
-.cost-card{background:#f9fafb;border-radius:10px;padding:16px;border:1px solid #e5e7eb}
-.cost-card .amount{font-size:1.5rem;font-weight:800}
-.cost-card .label{font-size:.78rem;color:var(--muted);margin-top:3px}
-.cost-card.direct .amount{color:#dc2626}
-.cost-card.indirect .amount{color:#d97706}
-.iceberg{background:#eff6ff;border-radius:10px;padding:16px;margin-bottom:14px;text-align:center}
-.iceberg-title{font-size:.88rem;font-weight:700;color:#1d4ed8;margin-bottom:10px}
-.ice-above{background:#3b82f6;color:#fff;padding:10px;border-radius:6px 6px 0 0;font-size:.82rem}
-.ice-below{background:#1e3a8a;color:#fff;padding:10px;border-radius:0 0 6px 6px;font-size:.82rem}
-.roi-box{background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:16px;margin-bottom:14px}
-.roi-box h4{font-size:.88rem;font-weight:700;color:var(--primary);margin-bottom:8px}
-.roi-box p{font-size:.82rem;color:#374151}
-.info-box{background:#f0fdf4;border-left:4px solid var(--primary);border-radius:8px;padding:16px 20px;margin-top:20px}
-.info-box h4{font-size:.9rem;font-weight:700;color:var(--primary);margin-bottom:8px}
-.info-box li{font-size:.82rem;color:#374151;line-height:1.7}
-.info-box ul{padding-left:16px}
-.cta-strip{background:var(--primary);color:#fff;border-radius:12px;padding:24px;text-align:center;margin:36px 0}
-.cta-strip h3{font-size:1rem;font-weight:700;margin-bottom:8px}
-.cta-strip p{opacity:.88;font-size:.85rem;margin-bottom:14px}
-footer{background:#111827;color:#9ca3af;padding:30px 0;text-align:center;font-size:.83rem}
-footer a{color:#6ee7b7}
-@media(max-width:768px){.layout{grid-template-columns:1fr}.cost-breakdown{grid-template-columns:1fr}}
-.tools-training-cta{padding:40px 0}
-.tools-training-cta h2{font-size:1.3rem;font-weight:800;margin:0 0 16px;text-align:center;color:#0A4A2E}
-.tools-training-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
-.tools-training-card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:18px;display:flex;flex-direction:column}
-.tools-training-card h3{font-size:.95rem;font-weight:700;margin:0 0 8px}
-.tools-training-card h3 a{color:#0A4A2E;text-decoration:none}
-.tools-training-card p{font-size:.85rem;color:#555;line-height:1.6;margin:0 0 12px;flex:1}
-.tools-training-btn{display:inline-block;background:#0A4A2E;color:#fff;font-weight:700;font-size:.85rem;padding:8px 14px;border-radius:8px;text-decoration:none;text-align:center}
-</style>
-<nav>
-  <div class="container nav-inner">
-    <a href="/" class="nav-logo">
-      <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#1a6b3a"/><path d="M20 8l3 9h9l-7 5 3 9-8-6-8 6 3-9-7-5h9z" fill="#f5a623"/></svg>
-      Wahana Totalita
-    </a>
-    <a href="/tools/" style="color:var(--muted);font-size:.88rem">← Semua Tools</a>
-    <a href="https://wa.me/6287759151278" target="_blank" class="nav-cta">📱 Konsultasi</a>
-  </div>
-</nav>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Kalkulator Biaya Kecelakaan Kerja & ROI K3",
+  "url": "https://wahanatotalita.com/tools/kalkulator-biaya-k3.php",
+  "description": "Kalkulator analisis biaya kecelakaan kerja langsung vs tersembunyi menggunakan teori gunung es Heinrich dan Frank Bird beserta estimasi ROI pencegahan K3.",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "All",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "IDR" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Apa itu Teori Gunung Es (Iceberg Theory) dalam biaya kecelakaan K3?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Teori Gunung Es mengilustrasikan bahwa biaya langsung kecelakaan (biaya medis dan klaim asuransi) hanyalah puncak gunung es yang terlihat di atas permukaan laut. Bagian terbesar dari kerugian finansial perusahaan (biaya tersembunyi/tak langsung) berada di bawah permukaan laut dengan nilai 4 hingga 10 kali lipat lebih besar, seperti terhentinya lini produksi, jam kerja investigasi, denda regulasi, dan hilangnya reputasi bisnis."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Berapa rasio perbandingan biaya langsung dan tidak langsung menurut Heinrich dan Frank Bird?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "H.W. Heinrich (1931) menetapkan rasio biaya langsung dibanding biaya tidak langsung adalah 1 : 4. Sedangkan penelitian lanjutan oleh Frank E. Bird Jr. (1969) dan studi modern menunjukkan rasio kerugian terselubung bisa mencapai 1 : 10 hingga 1 : 50 tergantung jenis industri dan dampak terhadap aset operasional."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Bagaimana cara meyakinkan manajemen puncak (C-Level) untuk berinvestasi dalam program K3?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Gunakan kalkulasi Return on Investment (ROI) K3: tunjukkan bahwa setiap Rp 1 yang diinvestasikan pada pencegahan keselamatan kerja rata-rata menghemat Rp 4 hingga Rp 6 dari potensi kerugian kecelakaan kerja tersembunyi yang dapat mengancam kelangsungan arus kas perusahaan."
+      }
+    }
+  ]
+}
+</script>
 
-<section class="hero">
+<style>
+:root {
+  --navy-dark: #071524;
+  --navy: #0D233A;
+  --navy-light: #183654;
+  --orange: #E8611A;
+  --orange-hover: #cf5213;
+  --orange-light: #fff2ea;
+  --slate-50: #F8FAFC;
+  --slate-100: #F1F5F9;
+  --slate-200: #E2E8F0;
+  --slate-300: #CBD5E1;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-900: #0F172A;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 2px 8px rgba(13,35,58,0.06);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Source Sans 3', system-ui, -apple-system, sans-serif;
+  background: var(--slate-50);
+  color: var(--slate-900);
+  line-height: 1.6;
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* HERO */
+.cost-hero {
+  background: linear-gradient(135deg, #071524 0%, #0D233A 60%, #183654 100%);
+  color: #fff;
+  padding: 58px 0 44px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 3px solid var(--orange);
+}
+.cost-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 36px 36px;
+  pointer-events: none;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(232, 97, 26, 0.18);
+  border: 1px solid rgba(232, 97, 26, 0.4);
+  padding: 6px 14px;
+  border-radius: 999px;
+  color: #FFA573;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 14px;
+}
+.cost-hero h1 {
+  font-family: 'Lexend', sans-serif;
+  font-size: clamp(1.8rem, 3.6vw, 2.7rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+.cost-hero h1 span { color: var(--orange); }
+.cost-hero p {
+  color: #CBD5E1;
+  font-size: 1.05rem;
+  max-width: 760px;
+  margin-bottom: 20px;
+}
+.hero-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.hero-tag {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  color: #E2E8F0;
+}
+
+/* WORKSPACE LAYOUT */
+.cost-wrapper { padding: 40px 0 60px; }
+.cost-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 32px;
+  align-items: start;
+}
+@media (max-width: 992px) {
+  .cost-grid { grid-template-columns: 1fr; }
+}
+
+.card-box {
+  background: #fff;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 28px;
+  margin-bottom: 28px;
+}
+.card-header-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--slate-100);
+  padding-bottom: 16px;
+  margin-bottom: 22px;
+}
+.card-title {
+  font-family: 'Lexend', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* FORM FIELDS */
+.form-field { margin-bottom: 16px; }
+.form-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+.form-label small { color: var(--slate-600); font-weight: 400; }
+.form-input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid var(--slate-200);
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+  color: var(--slate-900);
+  background: #fff;
+}
+.form-input:focus { outline: none; border-color: var(--orange); }
+
+.ratio-toggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  background: var(--slate-100);
+  padding: 6px;
+  border-radius: var(--radius-md);
+  margin-bottom: 20px;
+}
+.ratio-btn {
+  padding: 10px;
+  border: none;
+  background: transparent;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--slate-700);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+.ratio-btn.active {
+  background: #fff;
+  color: var(--navy);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+/* ICEBERG VISUAL BOX */
+.iceberg-box {
+  background: linear-gradient(180deg, #E0F2FE 0%, #BAE6FD 30%, #0284C7 60%, #0369A1 100%);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 24px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+.ice-surface-line {
+  border-bottom: 2px dashed rgba(255,255,255,0.7);
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ice-top {
+  background: rgba(255,255,255,0.9);
+  color: var(--navy);
+  padding: 14px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-shadow: none;
+}
+.ice-bottom {
+  background: rgba(3, 105, 161, 0.7);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 16px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+/* RESULTS */
+.stat-card {
+  background: var(--slate-50);
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  margin-bottom: 14px;
+}
+.stat-card.featured {
+  background: linear-gradient(145deg, #0D233A 0%, #183654 100%);
+  color: #fff;
+  border-color: #0D233A;
+}
+.stat-card.featured .stat-meta { color: #FFA573; }
+.stat-card.featured .stat-val { color: #fff; }
+.stat-card.featured .stat-desc { color: #CBD5E1; }
+.stat-meta {
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--slate-600);
+  margin-bottom: 4px;
+}
+.stat-val {
+  font-family: 'Lexend', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+.stat-desc { font-size: 0.8rem; color: var(--slate-600); }
+
+/* EDITORIAL ARTICLE */
+.editorial-box {
+  background: #fff;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+  margin-bottom: 32px;
+}
+.editorial-title {
+  font-family: 'Lexend', sans-serif;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 16px;
+  border-left: 4px solid var(--orange);
+  padding-left: 14px;
+}
+.editorial-p {
+  color: var(--slate-700);
+  font-size: 0.96rem;
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+/* FAQ */
+.faq-item {
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-md);
+  margin-bottom: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+.faq-q {
+  width: 100%;
+  padding: 16px 20px;
+  text-align: left;
+  background: #fff;
+  border: none;
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--navy);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.faq-q:hover { background: var(--slate-50); }
+.faq-a {
+  padding: 0 20px 18px;
+  color: var(--slate-700);
+  font-size: 0.92rem;
+  line-height: 1.65;
+  display: none;
+}
+.faq-item.active .faq-a { display: block; }
+.faq-item.active .faq-icon { transform: rotate(180deg); }
+.faq-icon { transition: transform 0.2s; }
+</style>
+
+<?php require __DIR__ . '/../includes/navbar.php'; ?>
+
+<main class="cost-page" id="konten-utama">
+
+<!-- HERO -->
+<section class="cost-hero">
   <div class="container">
-    <div class="hero-badge">💰 Kalkulator Biaya K3</div>
-    <h1>Kalkulator <span>Biaya Kecelakaan</span><br>Kerja Online Gratis</h1>
-    <p>Hitung total biaya kecelakaan kerja (langsung + tidak langsung) menggunakan Rasio Heinrich. Gunakan untuk justifikasi anggaran K3 ke manajemen.</p>
+    <div class="hero-badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      Teori Heinrich &amp; Frank Bird Jr.
+    </div>
+    <h1>Kalkulator Biaya Kecelakaan Kerja <span>2026</span></h1>
+    <p>Hitung total kerugian finansial tersembunyi (Hidden Indirect Costs) akibat kecelakaan kerja menggunakan Teori Gunung Es K3, serta susun analisis Return on Investment (ROI) program keselamatan untuk jajaran Direksi.</p>
+    <div class="hero-tags">
+      <span class="hero-tag">Rasio Heinrich 1 : 4</span>
+      <span class="hero-tag">Rasio Frank Bird 1 : 10</span>
+      <span class="hero-tag">Direct vs Indirect Cost Breakdown</span>
+      <span class="hero-tag">Cost-Benefit Analysis K3</span>
+    </div>
   </div>
 </section>
 
-<section class="main">
+<!-- MAIN WORKSPACE -->
+<section class="cost-wrapper">
   <div class="container">
-    <div class="layout">
+    
+    <div class="cost-grid">
+      
+      <!-- INPUT COLUMN -->
       <div>
-        <div class="panel">
-          <h2>💰 Input Data Kecelakaan</h2>
+        <div class="card-box">
+          
+          <div class="card-header-line">
+            <h2 class="card-title">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 6v2m0 8v2"/></svg>
+              Input Biaya Langsung (Direct Costs)
+            </h2>
+            <button type="button" class="ratio-btn" onclick="resetCostForm()" style="padding:4px 10px;font-size:0.8rem">Reset</button>
+          </div>
 
-          <div class="form-group">
-            <label>Model Perhitungan</label>
-            <div class="ratio-toggle">
-              <button class="ratio-btn active" id="btnHeinrich" onclick="setModel('heinrich')">Heinrich (1:4)</button>
-              <button class="ratio-btn" id="btnBird" onclick="setModel('bird')">Bird (1:5)</button>
-              <button class="ratio-btn" id="btnOsha" onclick="setModel('osha')">OSHA (1:4.5)</button>
+          <label class="form-label">Pilih Model Rasio Gunung Es K3</label>
+          <div class="ratio-toggle">
+            <button type="button" id="btnHeinrich" class="ratio-btn active" onclick="setRatio(4)">
+              Heinrich Ratio (1 : 4)<br><small>Manufaktur &amp; Umum</small>
+            </button>
+            <button type="button" id="btnBird" class="ratio-btn" onclick="setRatio(10)">
+              Frank Bird Ratio (1 : 10)<br><small>Konstruksi, Migas &amp; Tambang</small>
+            </button>
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="inpMedis">
+              Biaya Perawatan Medis &amp; Rumah Sakit
+              <small>Rupiah (IDR)</small>
+            </label>
+            <input type="number" id="inpMedis" class="form-input" value="15000000" min="0" oninput="calcCost()">
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="inpSantunan">
+              Santunan / Kompensasi di Luar BPJS Ketenagakerjaan
+              <small>Rupiah (IDR)</small>
+            </label>
+            <input type="number" id="inpSantunan" class="form-input" value="10000000" min="0" oninput="calcCost()">
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="inpKerusakanAlat">
+              Biaya Perbaikan / Penggantian Mesin &amp; Fasilitas Rusak
+              <small>Rupiah (IDR)</small>
+            </label>
+            <input type="number" id="inpKerusakanAlat" class="form-input" value="25000000" min="0" oninput="calcCost()">
+          </div>
+
+          <div style="border-top:1px dashed var(--slate-300);padding-top:16px;margin-top:16px">
+            <label class="form-label">
+              Anggaran Investasi Program Pencegahan K3 (Untuk Analisis ROI)
+              <small>Rupiah (IDR)</small>
+            </label>
+            <input type="number" id="inpInvestasi" class="form-input" value="30000000" min="0" oninput="calcCost()">
+          </div>
+
+        </div>
+      </div>
+
+      <!-- RESULTS COLUMN -->
+      <div>
+        <div class="card-box">
+          
+          <div class="card-header-line">
+            <h2 class="card-title">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+              Visualisasi Teori Gunung Es K3
+            </h2>
+            <span id="ratioLabel" style="font-size:0.78rem;font-weight:700;color:var(--orange);background:var(--orange-light);padding:4px 8px;border-radius:4px">
+              Rasio 1 : 4
+            </span>
+          </div>
+
+          <!-- ICEBERG BOX -->
+          <div class="iceberg-box">
+            <div class="ice-surface-line">
+              <span style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.04em">Permukaan Laut (Visible)</span>
+              <strong id="iceDirectLabel">Biaya Langsung</strong>
+            </div>
+            
+            <div class="ice-top">
+              <div style="font-size:0.75rem;color:var(--slate-600);text-transform:uppercase">Biaya Langsung (Terlihat)</div>
+              <div style="font-size:1.3rem;font-weight:800;color:var(--navy)" id="iceDirectVal">Rp 50.000.000</div>
+              <div style="font-size:0.78rem;color:var(--slate-600);margin-top:4px">Kompensasi, medis, perbaikan mesin langsung</div>
+            </div>
+
+            <div class="ice-bottom">
+              <div style="font-size:0.75rem;color:#E0F2FE;text-transform:uppercase;margin-bottom:2px">Biaya Tersembunyi (Di Bawah Permukaan)</div>
+              <div style="font-size:1.6rem;font-weight:900;color:#fff" id="iceIndirectVal">Rp 200.000.000</div>
+              <div style="font-size:0.8rem;color:#E0F2FE;margin-top:6px;line-height:1.5">
+                • Waktu terbuang pekerja &amp; pengawas<br>
+                • Gangguan jadwal &amp; keterlambatan produksi<br>
+                • Biaya rekrutmen &amp; pelatihan pengganti<br>
+                • Penurunan moral tim &amp; denda regulasi
+              </div>
             </div>
           </div>
 
-          <div class="form-group">
-            <label>Biaya Langsung (Direct Cost) <span>— biaya medis, kompensasi, kerusakan peralatan terlihat</span></label>
-            <input type="number" id="directCost" placeholder="cth: 50000000" min="0" oninput="autoCalc()">
+          <!-- TOTAL RESULTS -->
+          <div class="stat-card featured">
+            <div class="stat-meta">Total Estimasi Kerugian Finansial</div>
+            <div class="stat-val" id="outTotalCost">Rp 250.000.000</div>
+            <div class="stat-desc">Biaya Langsung + Biaya Tersembunyi</div>
           </div>
 
-          <p style="font-size:.8rem;color:var(--muted);margin-bottom:12px;font-weight:600">Komponen Biaya Langsung (opsional — untuk rincian)</p>
-
-          <div class="form-group">
-            <label>Biaya Pengobatan / Rumah Sakit</label>
-            <input type="number" id="medical" placeholder="0" min="0" oninput="syncDirect()">
-          </div>
-          <div class="form-group">
-            <label>Kompensasi / Santunan Kecelakaan</label>
-            <input type="number" id="compensation" placeholder="0" min="0" oninput="syncDirect()">
-          </div>
-          <div class="form-group">
-            <label>Kerusakan Peralatan / Properti</label>
-            <input type="number" id="equipment" placeholder="0" min="0" oninput="syncDirect()">
+          <div class="stat-card">
+            <div class="stat-meta">Estimasi Return on Investment (ROI) K3</div>
+            <div class="stat-val" id="outRoi" style="color:#166534">566.7%</div>
+            <div class="stat-desc" id="outRoiDesc">Setiap Rp 1 investasi K3 menghemat Rp 6.67 potensi kerugian</div>
           </div>
 
-          <button class="btn-calc" onclick="calculate()">💰 Hitung Total Biaya</button>
-        </div>
+          <button type="button" class="form-input" onclick="printCostReport()" style="background:var(--orange);color:#fff;border:none;font-weight:700;padding:12px;cursor:pointer;margin-top:10px">
+            Cetak Executive Summary untuk Direksi
+          </button>
 
-        <div class="info-box" style="margin-top:20px">
-          <h4>📐 Penjelasan Rasio Biaya Kecelakaan</h4>
-          <ul>
-            <li><strong>Heinrich (1:4):</strong> 1 bagian biaya langsung = 4 bagian biaya tidak langsung → total 1:5</li>
-            <li><strong>Bird (1:5):</strong> lebih konservatif untuk industri berat</li>
-            <li><strong>OSHA (1:4.5):</strong> standar yang digunakan OSHA untuk justifikasi program K3</li>
-            <li>Biaya tidak langsung termasuk: kehilangan produktivitas, waktu investigasi, pelatihan pengganti, dampak moral karyawan, denda regulator</li>
-          </ul>
         </div>
       </div>
 
-      <div>
-        <div id="placeholder" style="background:var(--card);border-radius:var(--radius);padding:60px 24px;text-align:center;color:var(--muted);box-shadow:var(--shadow);border:1px solid #e5e7eb">
-          <div style="font-size:3rem;margin-bottom:12px">💰</div>
-          <p>Masukkan biaya langsung kecelakaan dan klik <strong>Hitung</strong> untuk melihat estimasi total biaya nyata</p>
-        </div>
-        <div class="result-panel" id="resultPanel"></div>
-
-        <div class="cta-strip" style="margin-top:24px">
-          <h3>📈 Anggaran K3 Selalu Lebih Murah</h3>
-          <p>Program K3 yang baik mencegah kecelakaan. Biaya pelatihan jauh lebih kecil dari total kerugian kecelakaan kerja.</p>
-          <a href="https://wa.me/6287759151278?text=Halo%20Wahana%2C%20saya%20pakai%20kalkulator%20biaya%20kecelakaan%20dan%20ingin%20konsultasi%20program%20K3" target="_blank" rel="noopener"
-             style="background:#25D366;color:#fff;padding:11px 24px;border-radius:8px;font-weight:700;display:inline-flex;align-items:center;gap:8px">
-            📱 Konsultasi Program K3
-          </a>
-        </div>
-      </div>
     </div>
+
+    <!-- IN-DEPTH EDITORIAL ARTICLE (SEO DEPTH) -->
+    <div class="editorial-box">
+      <h2 class="editorial-title">Memahami Teori Gunung Es Biaya Kecelakaan Kerja (Iceberg Theory)</h2>
+      <p class="editorial-p">
+        Dalam manajemen keuangan dan K3, banyak pengusaha beranggapan bahwa kecelakaan kerja telah ditanggung sepenuhnya oleh asuransi (seperti BPJS Ketenagakerjaan). Pandangan keliru ini dibantah secara empiris oleh <strong>Herbert William Heinrich (1931)</strong> dan dilanjutkan oleh <strong>Frank E. Bird Jr. (1969)</strong> melalui model Teori Gunung Es (<em>The Iceberg Principle of Accident Costs</em>).
+      </p>
+
+      <h3 style="color:var(--navy);font-family:'Lexend',sans-serif;font-size:1.15rem;margin:22px 0 10px">Rincian Komponen Biaya Tidak Langsung (Indirect Costs)</h3>
+      <p class="editorial-p">
+        Biaya tersembunyi yang ditanggung langsung oleh kas perusahaan (tanpa dapat diklaim asuransi) meliputi:
+      </p>
+      <ul style="padding-left:22px;color:var(--slate-700);line-height:1.75;margin-bottom:18px">
+        <li><strong>Biaya Waktu Kerja yang Hilang:</strong> Saat insiden terjadi, seluruh lini produksi berhenti. Puluhan rekan kerja berhenti bekerja untuk menonton atau menolong korban.</li>
+        <li><strong>Biaya Waktu Pengawas &amp; Manajemen:</strong> Jam kerja manajer dan supervisor tersita untuk investigasi TKP, menyusun Berita Acara, berkoordinasi dengan kepolisian/Disnaker, dan hadir di sidang hukum.</li>
+        <li><strong>Biaya Keterlambatan Pengiriman (Penalty Deliveries):</strong> Terhentinya mesin pabrik memicu kegagalan tenggat waktu kontrak, denda penalti keterlambatan, hingga pembatalan PO dari klien.</li>
+        <li><strong>Biaya Rekrutmen &amp; Pelatihan Pengganti:</strong> Biaya mencari tenaga kerja pengganti sementara (temporary worker) dan waktu transfer keahlian (learning curve) yang lambat.</li>
+        <li><strong>Kerusakan Reputasi Bisnis (Reputational Damage):</strong> Kehilangan sertifikasi, skor penilaian tender CSMS (Contractor Safety Management System) anjlok, sehingga didiskualifikasi dari proyek bernilai miliaran rupiah.</li>
+      </ul>
+
+      <!-- FAQ ACCORDION -->
+      <h3 style="color:var(--navy);font-family:'Lexend',sans-serif;font-size:1.25rem;margin:28px 0 16px">Tanya Jawab Seputar Biaya Kecelakaan Kerja (FAQ)</h3>
+      <div class="faq-box">
+        
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>Apakah benar seluruh biaya kecelakaan kerja ditanggung oleh BPJS Ketenagakerjaan?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-a">
+            Tidak. BPJS Ketenagakerjaan hanya menanggung biaya medis pengobatan rumah sakit (sesuai plafon) dan santunan cacat/kematian normatif. BPJS sama sekali tidak menanggung kerugian waktu produksi pabrik yang terhenti, kerusakan mesin produksi, denda keterlambatan proyek, investigasi forensik K3, maupun penurunan harga saham/reputasi bisnis perusahaan.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>Bagaimana cara menghitung Return on Investment (ROI) dari program K3?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-a">
+            Rumus ROI K3 adalah: <code>ROI = [(Estimasi Total Biaya Kecelakaan yang Dicegah - Anggaran Biaya K3) / Anggaran Biaya K3] × 100%</code>. Dengan membuktikan bahwa program K3 menghasilkan rasio penghematan finansial nyata, manajemen keselamatan bertransformasi dari sekadar "pusat biaya" (cost center) menjadi pelindung profitabilitas bisnis (value protector).
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
 </section>
 
-<section class="tools-training-cta">
-  <div class="container">
-    <h2>Tingkatkan Kompetensi K3 Anda</h2>
-    <div class="tools-training-grid">
-      <div class="tools-training-card">
-        <h3><a href="/pelatihan/pelatihan-ahli-k3-umum-sertifikasi-bnsp-online/">Pelatihan Ahli K3 Umum</a></h3>
-        <p>Sertifikasi wajib bagi praktisi K3 perusahaan, resmi BNSP, materi regulasi &amp; manajemen risiko.</p>
-        <a href="/pelatihan/pelatihan-ahli-k3-umum-sertifikasi-bnsp-online/" class="tools-training-btn">Lihat Program &rarr;</a>
-      </div>
-      <div class="tools-training-card">
-        <h3><a href="/pelatihan/pelatihan-petugas-p3k-sertifikasi-bnsp/">Pelatihan Petugas P3K | Sertifikasi BNSP</a></h3>
-        <p>Pelatihan penanganan darurat dan P3K di tempat kerja, sertifikasi BNSP, wajib untuk perusahaan.</p>
-        <a href="/pelatihan/pelatihan-petugas-p3k-sertifikasi-bnsp/" class="tools-training-btn">Lihat Program &rarr;</a>
-      </div>
-      <div class="tools-training-card">
-        <h3><a href="/pelatihan/pelatihan-operator-k3-sertifikasi-bnsp/">Pelatihan Operator K3 | Sertifikasi BNSP</a></h3>
-        <p>Kompetensi dasar keselamatan kerja untuk operator, sertifikasi resmi BNSP, untuk semua industri.</p>
-        <a href="/pelatihan/pelatihan-operator-k3-sertifikasi-bnsp/" class="tools-training-btn">Lihat Program &rarr;</a>
-      </div>
-      <div class="tools-training-card">
-        <h3><a href="/jadwal/">Jadwal Pelatihan Terdekat</a></h3>
-        <p>Lihat jadwal batch pelatihan K3 terbaru — online dan offline di berbagai kota.</p>
-        <a href="/jadwal/" class="tools-training-btn">Lihat Jadwal &rarr;</a>
-      </div>
-    </div>
-  </div>
-</section>
+</main>
 
-<footer>
-  <div class="container">
-    <p><a href="/tools/">← Semua Tools K3</a> | <a href="/tools/kalkulator-k3">Kalkulator LTIR</a> | <a href="/">Wahana Totalita</a></p>
-    <p style="margin-top:8px">© <?php echo date('Y'); ?> Wahana Totalita Konsultan, Yogyakarta</p>
-  </div>
-</footer>
-
-<a href="https://wa.me/6287759151278" target="_blank" style="position:fixed;bottom:24px;right:24px;background:#25D366;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(37,211,102,.4);z-index:999">
-  <svg viewBox="0 0 24 24" fill="white" width="26" height="26"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-</a>
+<?php require __DIR__ . '/../includes/footer.php'; ?>
 
 <script>
-let model = 'heinrich';
-let multiplier = 4;
+let currentRatio = 4;
 
-function setModel(m){
-  model = m;
-  multiplier = m==='bird' ? 5 : m==='osha' ? 4.5 : 4;
-  document.getElementById('btnHeinrich').classList.toggle('active', m==='heinrich');
-  document.getElementById('btnBird').classList.toggle('active', m==='bird');
-  document.getElementById('btnOsha').classList.toggle('active', m==='osha');
-  if(parseFloat(document.getElementById('directCost').value) > 0) calculate();
+function setRatio(val){
+  currentRatio = val;
+  document.getElementById('btnHeinrich').classList.toggle('active', val === 4);
+  document.getElementById('btnBird').classList.toggle('active', val === 10);
+  document.getElementById('ratioLabel').textContent = val === 4 ? 'Rasio 1 : 4 (Heinrich)' : 'Rasio 1 : 10 (Frank Bird)';
+  calcCost();
 }
 
-function syncDirect(){
-  const med = parseFloat(document.getElementById('medical').value)||0;
-  const comp = parseFloat(document.getElementById('compensation').value)||0;
-  const equip = parseFloat(document.getElementById('equipment').value)||0;
-  const total = med + comp + equip;
-  if(total > 0) document.getElementById('directCost').value = total;
+function resetCostForm(){
+  document.getElementById('inpMedis').value = 10000000;
+  document.getElementById('inpSantunan').value = 5000000;
+  document.getElementById('inpKerusakanAlat').value = 15000000;
+  document.getElementById('inpInvestasi').value = 25000000;
+  calcCost();
 }
 
-function autoCalc(){
-  if(parseFloat(document.getElementById('directCost').value) > 0) calculate();
+function formatRupiah(num){
+  return 'Rp ' + Math.round(num).toLocaleString('id-ID');
 }
 
-function fmt(n){
-  if(n >= 1000000000) return 'Rp ' + (n/1000000000).toFixed(1) + ' M';
-  if(n >= 1000000) return 'Rp ' + (n/1000000).toFixed(1) + ' jt';
-  return 'Rp ' + n.toLocaleString('id-ID');
+function calcCost(){
+  const medis = parseFloat(document.getElementById('inpMedis').value) || 0;
+  const santunan = parseFloat(document.getElementById('inpSantunan').value) || 0;
+  const alat = parseFloat(document.getElementById('inpKerusakanAlat').value) || 0;
+  const investasi = parseFloat(document.getElementById('inpInvestasi').value) || 1;
+
+  const directTotal = medis + santunan + alat;
+  const indirectTotal = directTotal * currentRatio;
+  const totalCost = directTotal + indirectTotal;
+
+  document.getElementById('iceDirectVal').textContent = formatRupiah(directTotal);
+  document.getElementById('iceIndirectVal').textContent = formatRupiah(indirectTotal);
+  document.getElementById('outTotalCost').textContent = formatRupiah(totalCost);
+
+  // ROI calculation
+  if(investasi > 0){
+    const netSavings = totalCost - investasi;
+    const roiPercent = (netSavings / investasi) * 100;
+    const multiplier = (totalCost / investasi).toFixed(2);
+
+    document.getElementById('outRoi').textContent = (roiPercent > 0 ? '+' : '') + roiPercent.toFixed(1) + '%';
+    document.getElementById('outRoiDesc').textContent = `Setiap Rp 1 investasi K3 menghemat Rp ${multiplier} potensi kerugian`;
+  }
 }
-function fmtFull(n){ return 'Rp ' + n.toLocaleString('id-ID'); }
 
-function calculate(){
-  const direct = parseFloat(document.getElementById('directCost').value)||0;
-  if(!direct){ alert('Masukkan biaya langsung terlebih dahulu'); return; }
+function printCostReport(){
+  const directVal = document.getElementById('iceDirectVal').textContent;
+  const indirectVal = document.getElementById('iceIndirectVal').textContent;
+  const totalVal = document.getElementById('outTotalCost').textContent;
+  const roiVal = document.getElementById('outRoi').textContent;
+  const ratioText = currentRatio === 4 ? 'Heinrich (1 : 4)' : 'Frank Bird Jr. (1 : 10)';
 
-  const indirect = direct * multiplier;
-  const total = direct + indirect;
-  const modelLabel = model==='bird' ? 'Bird (1:5)' : model==='osha' ? 'OSHA (1:4.5)' : 'Heinrich (1:4)';
-
-  document.getElementById('placeholder').style.display = 'none';
-  const panel = document.getElementById('resultPanel');
-  panel.className = 'result-panel show';
-  panel.innerHTML = `
-    <div class="total-cost">
-      <div class="total-amount">${fmt(total)}</div>
-      <div class="total-label">Total Biaya Nyata Kecelakaan (Model: ${modelLabel})</div>
-    </div>
-
-    <div class="cost-breakdown">
-      <div class="cost-card direct">
-        <div class="amount">${fmt(direct)}</div>
-        <div class="label">💸 Biaya Langsung<br><small>${fmtFull(direct)}</small></div>
-      </div>
-      <div class="cost-card indirect">
-        <div class="amount">${fmt(indirect)}</div>
-        <div class="label">🔍 Biaya Tidak Langsung (${multiplier}x)<br><small>${fmtFull(indirect)}</small></div>
-      </div>
-    </div>
-
-    <div class="iceberg">
-      <div class="iceberg-title">🧊 Teori Gunung Es Biaya Kecelakaan</div>
-      <div class="ice-above">Di Atas Air (Terlihat): Biaya Langsung = ${fmt(direct)}<br>Medis, kompensasi, kerusakan terlihat</div>
-      <div class="ice-below">Di Bawah Air (Tersembunyi): Biaya Tidak Langsung = ${fmt(indirect)}<br>Kehilangan produktivitas · Waktu investigasi · Pelatihan pengganti · Dampak moral · Denda · Reputasi</div>
-    </div>
-
-    <div class="roi-box">
-      <h4>📈 ROI Program K3</h4>
-      <p>Jika pelatihan K3 mencegah 1 kecelakaan seperti ini, maka program K3 dengan biaya Rp 5-50 juta menghasilkan ROI <strong>${Math.round(total / 25000000 * 100)}x-${Math.round(total / 5000000 * 100)}x lipat.</strong></p>
-      <p style="margin-top:8px">Total kerugian <strong>${fmtFull(total)}</strong> ini bisa dicegah dengan investasi K3 yang jauh lebih kecil.</p>
-    </div>
-
-    <button onclick="window.print()" style="width:100%;background:var(--primary);color:#fff;border:none;border-radius:8px;padding:11px;font-size:.88rem;font-weight:600;cursor:pointer">🖨 Cetak / Simpan PDF</button>
-  `;
+  const win = window.open('', '_blank');
+  win.document.write(`<!DOCTYPE html><html><head><title>Executive Brief: Analisis Biaya Kecelakaan K3</title>
+  <style>
+    body{font-family:'Segoe UI',Arial,sans-serif;padding:32px;max-width:760px;margin:0 auto;color:#0F172A;line-height:1.5}
+    h1{font-size:16pt;margin:0;color:#0D233A;border-bottom:2px solid #0D233A;padding-bottom:8px}
+    .sub{font-size:8.5pt;color:#64748B;margin:6px 0 16px}
+    table{width:100%;border-collapse:collapse;margin:16px 0;font-size:10pt}
+    th,td{border:1px solid #CBD5E1;padding:8px 12px;text-align:left}
+    th{background:#F1F5F9;color:#0D233A}
+    .sig{margin-top:40px;display:grid;grid-template-columns:1fr 1fr;gap:40px;text-align:center;font-size:9pt}
+    .line{margin-top:60px;border-top:1px solid #000;font-weight:bold}
+  </style>
+  </head><body>
+  <h1>EXECUTIVE REPORT: ANALISIS KERUGIAN BIAYA KECELAKAAN KERJA</h1>
+  <div class="sub">Kajian Teori Gunung Es K3 (Iceberg Principle) &amp; Cost-Benefit Analysis</div>
+  <table>
+    <tr><th>Komponen Biaya</th><th>Estimasi Nilai Kerugian</th><th>Keterangan</th></tr>
+    <tr><td>Biaya Langsung (Direct Cost)</td><td><strong>${directVal}</strong></td><td>Medis, kompensasi &amp; perbaikan fisik alat</td></tr>
+    <tr><td>Biaya Tersembunyi (Indirect Cost)</td><td><strong style="color:#C2410C">${indirectVal}</strong></td><td>Model Rasio ${ratioText}</td></tr>
+    <tr style="background:#F8FAFC"><td><strong>TOTAL KERUGIAN FINANSIAL</strong></td><td style="font-size:12pt;font-weight:bold;color:#0D233A">${totalVal}</td><td>Beban langsung terhadap kas operasional</td></tr>
+    <tr><td>Return on Investment (ROI) Pencegahan</td><td style="font-weight:bold;color:#166534">${roiVal}</td><td>Potensi proteksi kerugian per Rp 1 biaya K3</td></tr>
+  </table>
+  <div class="sig">
+    <div>Disusun oleh,<br><strong>Ahli K3 Umum / HSE Manager</strong><div class="line">( ___________________________ )</div></div>
+    <div>Menyetujui,<br><strong>Direktur Keuangan / Direktur Operasional</strong><div class="line">( ___________________________ )</div></div>
+  </div>
+  </body></html>`);
+  win.document.close();
+  win.print();
 }
+
+function toggleFaq(btn){
+  btn.parentElement.classList.toggle('active');
+}
+
+window.addEventListener('DOMContentLoaded', calcCost);
 </script>
+
+<?php require __DIR__ . '/../includes/scripts.php'; ?>
 </body>
 </html>

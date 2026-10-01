@@ -1,582 +1,605 @@
 <?php
 require_once __DIR__ . '/../config.php';
 $s = get_all_settings();
-?>
-<?php
-$page_title = 'Tools K3 Gratis Online — Kalkulator, Template & Generator';
-$meta_desc = 'Kumpulan tools K3 gratis: kalkulator LTIR/TRIR online, risk matrix interaktif, JSA builder, IBPR generator, pemilih APD, kalkulatot kebisingan. Digunakan lebih dari 5.000 HSE officer Indonesia.';
+
+$page_title = 'Kumpulan Tools K3 Online 2026: Kalkulator, Generator & Regulasi K3';
+$meta_desc = 'Pusat tools dan kalkulator K3 online terlengkap 2026: Safety Talk, Kalkulator Statistik K3 (FR/SR), JSA Builder, Matriks Risiko 5x5, Kebisingan, Regulasi K3, dan IBPR gratis.';
+
+ob_start();
 require __DIR__ . '/../includes/head.php';
+$shared_head = ob_get_clean();
+$shared_head = preg_replace('~<title>.*?</title>~s', '<title>' . e($page_title) . '</title>', $shared_head, 1);
+echo $shared_head;
+
+$allTools = [
+  [
+    "url" => "safety-talk.php",
+    "title" => "100 Materi Safety Talk & Toolbox Meeting (TBM)",
+    "desc" => "Database 100 topik materi safety talk harian K3 terlengkap dengan poin diskusi 2 arah, fakta statistik, dan lembar daftar hadir absensi siap cetak.",
+    "cat" => "edukasi",
+    "badge" => "Paling Populer",
+    "icon" => "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253",
+    "tags" => ["Toolbox Meeting", "Absensi TBM", "100 Topik"]
+  ],
+  [
+    "url" => "kalkulator-k3.php",
+    "title" => "Kalkulator Statistik K3 (FR, SR, IR & Safe T-Score)",
+    "desc" => "Hitung indikator kinerja K3 resmi: Frequency Rate (FR), Severity Rate (SR), Incident Rate, dan Piramida Heinrich sesuai Kepmenaker 372/1989 & OSHA.",
+    "cat" => "kalkulator",
+    "badge" => "Standar Kemnaker",
+    "icon" => "M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z",
+    "tags" => ["Kepmenaker 372/1989", "OSHA 1904", "Laporan P2K3"]
+  ],
+  [
+    "url" => "jsa-builder.php",
+    "title" => "JSA Builder (Job Safety Analysis Generator)",
+    "desc" => "Generator penyusun formulir analisis keselamatan kerja langkah demi langkah dengan 6 template pekerjaan risiko tinggi dan cetak form tanda tangan resmi.",
+    "cat" => "lapangan",
+    "badge" => "Siap Cetak",
+    "icon" => "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4",
+    "tags" => ["Izin Kerja PTW", "Hierarki Kontrol", "Format Resmi"]
+  ],
+  [
+    "url" => "risk-matrix.php",
+    "title" => "Matriks Risiko 5x5 K3 (ISO 31000 & HIRARC)",
+    "desc" => "Kalkulator evaluasi matriks risiko 5x5 interaktif berdasarkan Peluang (Likelihood) dan Keparahan (Consequence) serta pembuatan tabel Risk Register.",
+    "cat" => "lapangan",
+    "badge" => "ISO 31000",
+    "icon" => "M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z",
+    "tags" => ["Low to Extreme", "ALARP", "Risk Register"]
+  ],
+  [
+    "url" => "kalkulator-kebisingan.php",
+    "title" => "Kalkulator Paparan Kebisingan Permenaker 5/2018",
+    "desc" => "Hitung Dosis Kebisingan Kumulatif (%), TWA 8-Jam (dBA), batas pajanan waktu kerja maksimal, serta uji proteksi riil APD telinga (NRR Derating).",
+    "cat" => "kalkulator",
+    "badge" => "Permenaker 5/2018",
+    "icon" => "M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z",
+    "tags" => ["NAB 85 dBA", "TWA 8 Jam", "Earplug & Earmuff"]
+  ],
+  [
+    "url" => "kalkulator-biaya-k3.php",
+    "title" => "Kalkulator Biaya Kecelakaan Kerja (Heinrich & Bird)",
+    "desc" => "Analisis total kerugian finansial akibat kecelakaan kerja berdasarkan Teori Gunung Es K3 (biaya langsung vs biaya tersembunyi) dan ROI program K3.",
+    "cat" => "kalkulator",
+    "badge" => "Teori Gunung Es",
+    "icon" => "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
+    "tags" => ["Rasio 1:4 & 1:10", "Hidden Costs", "ROI Safety"]
+  ],
+  [
+    "url" => "regulasi-k3.php",
+    "title" => "Database Regulasi K3 Indonesia Terlengkap",
+    "desc" => "Koleksi peraturan perundang-undangan K3 lengkap: UU No. 1/1970, PP No. 50/2012, Permenaker, dan Kepmenaker dengan pasal krusial dan sanksi hukum.",
+    "cat" => "regulasi",
+    "badge" => "Database Hukum",
+    "icon" => "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253",
+    "tags" => ["UU 1/1970", "PP 50/2012", "Sanksi Pidana"]
+  ],
+  [
+    "url" => "apd-selector.php",
+    "title" => "Panduan Pemilihan APD K3 (SNI & Permenaker 08/2010)",
+    "desc" => "Spesifikasi teknis alat pelindung diri 7 organ tubuh sesuai Permenaker No. 08/2010, standar SNI, ANSI, & EN lengkap dengan panduan inspeksi kelayakan pra-pakai.",
+    "cat" => "lapangan",
+    "badge" => "Permenaker 08/2010",
+    "icon" => "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
+    "tags" => ["Standar SNI/ANSI", "7 Organ Tubuh", "Inspeksi Pra-Pakai"]
+  ],
+  [
+    "url" => "laporan-insiden.php",
+    "title" => "Formulir Laporan Insiden K3 & Investigasi 5-Why",
+    "desc" => "Dokumentasikan insiden kecelakaan kerja resmi Permenaker 03/1998 dengan analisis rantai akar penyebab 5-Why, penyebab langsung SCAT, dan matriks CAPA.",
+    "cat" => "lapangan",
+    "badge" => "Permenaker 03/1998",
+    "icon" => "M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z",
+    "tags" => ["5-Why Analysis", "SCAT Model", "Format Disnaker"]
+  ],
+  [
+    "url" => "ibpr-generator.php",
+    "title" => "Generator IBPR / HIRADC K3 (SMK3 PP 50/2012)",
+    "desc" => "Buat tabel Identifikasi Bahaya dan Penilaian Risiko (IBPR) terpadu dengan klasifikasi kondisi Rutin/Non-Rutin/Darurat dan evaluasi risiko awal vs sisa.",
+    "cat" => "lapangan",
+    "badge" => "SMK3 PP 50/2012",
+    "icon" => "M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z",
+    "tags" => ["Elemen 2 SMK3", "ISO 45001", "Export CSV"]
+  ],
+  [
+    "url" => "social-generator.php",
+    "title" => "Generator Poster & Banner K3 (Bulan K3 Nasional)",
+    "desc" => "Desain grafis promosi keselamatan kerja dan spanduk Bulan K3 Nasional dengan template slogan motivasi siap download dalam resolusi tinggi PNG.",
+    "cat" => "edukasi",
+    "badge" => "Download HD",
+    "icon" => "M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z",
+    "tags" => ["Bulan K3", "Poster Mading", "Banner 16:9"]
+  ],
+  [
+    "url" => "ai-analyzer.php",
+    "title" => "AI K3 Document Analyzer (Cek Kepatuhan SMK3)",
+    "desc" => "Pindai kepatuhan dokumen Kebijakan K3, SOP, dan JSA Anda terhadap regulasi audit PP No. 50 Tahun 2012 dan temukan celah ketidaksesuaian secara instan.",
+    "cat" => "regulasi",
+    "badge" => "AI Scanner",
+    "icon" => "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
+    "tags" => ["Gap Analysis", "Klausul Audit", "Evaluasi Otomatis"]
+  ]
+];
 ?>
-<link rel="manifest" href="/manifest.json">
-<style>
-:root{--primary:#1a6b3a;--primary-d:#145530;--accent:#f5a623;--bg:#f8fafc;--card:#fff;--text:#1a202c;--muted:#6b7280;--radius:12px;--shadow:0 2px 16px rgba(0,0,0,.09)}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
-a{color:inherit;text-decoration:none}
-.container{max-width:1140px;margin:0 auto;padding:0 20px}
-/* NAV */
-nav{background:#fff;border-bottom:1px solid #e5e7eb;padding:14px 0;position:sticky;top:0;z-index:100;box-shadow:0 1px 6px rgba(0,0,0,.06)}
-.nav-inner{display:flex;align-items:center;justify-content:space-between}
-.nav-logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.05rem;color:var(--primary)}
-.nav-logo svg{width:36px;height:36px}
-.nav-links{display:flex;gap:24px;font-size:.9rem}
-.nav-links a{color:var(--muted);font-weight:500;transition:color .2s}
-.nav-links a:hover,.nav-links a.active{color:var(--primary)}
-.nav-cta{background:var(--primary);color:#fff;padding:8px 20px;border-radius:8px;font-size:.88rem;font-weight:600;transition:background .2s}
-.nav-cta:hover{background:var(--primary-d);color:#fff}
-/* HERO */
-.hero{background:linear-gradient(135deg,#0f4c2a 0%,#1a6b3a 60%,#2d8a52 100%);color:#fff;padding:60px 0 50px;text-align:center}
-.hero-badge{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:50px;padding:6px 18px;font-size:.82rem;font-weight:600;letter-spacing:.5px;margin-bottom:20px;text-transform:uppercase}
-.hero h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;line-height:1.2;margin-bottom:16px}
-.hero h1 span{color:var(--accent)}
-.hero p{font-size:1.05rem;opacity:.88;max-width:620px;margin:0 auto 30px}
-.hero-stats{display:flex;gap:32px;justify-content:center;flex-wrap:wrap;margin-top:32px}
-.hero-stat{text-align:center}
-.hero-stat strong{display:block;font-size:1.8rem;font-weight:800;color:var(--accent)}
-.hero-stat span{font-size:.82rem;opacity:.8}
-/* SEARCH BAR */
-.search-wrap{background:#fff;max-width:560px;margin:-24px auto 0;border-radius:50px;box-shadow:0 8px 30px rgba(0,0,0,.15);display:flex;align-items:center;padding:6px 6px 6px 20px;position:relative;z-index:10}
-.search-wrap input{flex:1;border:none;outline:none;font-size:.95rem;color:var(--text);background:transparent}
-.search-wrap button{background:var(--primary);color:#fff;border:none;border-radius:50px;padding:10px 24px;font-size:.88rem;font-weight:600;cursor:pointer;white-space:nowrap}
-/* CATEGORIES */
-.cats{padding:60px 0 20px}
-.cats h2{font-size:1.6rem;font-weight:800;text-align:center;margin-bottom:8px}
-.cats-sub{text-align:center;color:var(--muted);margin-bottom:40px}
-.cat-tabs{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:40px}
-.cat-tab{background:#fff;border:2px solid #e5e7eb;border-radius:50px;padding:8px 20px;font-size:.88rem;font-weight:600;cursor:pointer;transition:all .2s;color:var(--muted)}
-.cat-tab:hover,.cat-tab.active{background:var(--primary);border-color:var(--primary);color:#fff}
-/* TOOLS GRID */
-.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px}
-.tool-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;transition:transform .2s,box-shadow .2s;border:1px solid #e5e7eb;display:flex;flex-direction:column}
-.tool-card:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(0,0,0,.14)}
-.tool-card-header{padding:24px 24px 16px;display:flex;align-items:flex-start;gap:16px}
-.tool-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0}
-.tool-icon.green{background:#dcfce7}
-.tool-icon.blue{background:#dbeafe}
-.tool-icon.orange{background:#ffedd5}
-.tool-icon.purple{background:#ede9fe}
-.tool-icon.red{background:#fee2e2}
-.tool-icon.yellow{background:#fef9c3}
-.tool-icon.teal{background:#ccfbf1}
-.tool-icon.pink{background:#fce7f3}
-.tool-card h3{font-size:1rem;font-weight:700;margin-bottom:4px}
-.tool-card .tag{display:inline-block;font-size:.72rem;padding:2px 10px;border-radius:50px;font-weight:600;margin-bottom:4px}
-.tag-online{background:#dcfce7;color:#16a34a}
-.tag-download{background:#dbeafe;color:#2563eb}
-.tag-template{background:#ffedd5;color:#c2410c}
-.tool-card p{font-size:.88rem;color:var(--muted);line-height:1.5;padding:0 24px 16px}
-.tool-card-footer{margin-top:auto;padding:16px 24px;border-top:1px solid #f3f4f6;display:flex;align-items:center;justify-content:space-between}
-.btn-tool{background:var(--primary);color:#fff;border-radius:8px;padding:9px 20px;font-size:.85rem;font-weight:600;transition:background .2s;display:inline-flex;align-items:center;gap:6px}
-.btn-tool:hover{background:var(--primary-d);color:#fff}
-.btn-tool-ghost{color:var(--primary);font-size:.85rem;font-weight:600}
-.tool-meta{font-size:.78rem;color:var(--muted);display:flex;align-items:center;gap:4px}
-/* SECTION TITLES */
-.section{padding:60px 0}
-.section-title{font-size:1.5rem;font-weight:800;margin-bottom:8px}
-.section-sub{color:var(--muted);margin-bottom:36px}
-/* FEATURED TOOL */
-.featured-tool{background:linear-gradient(135deg,#1a6b3a,#2d8a52);border-radius:16px;color:#fff;padding:40px;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;margin-bottom:40px}
-.featured-tool h3{font-size:1.4rem;font-weight:800;margin-bottom:10px}
-.featured-tool p{opacity:.88;font-size:.95rem;margin-bottom:20px}
-.featured-features{list-style:none;display:flex;flex-direction:column;gap:8px;font-size:.88rem;opacity:.9}
-.featured-features li::before{content:"✓ "}
-.featured-preview{background:rgba(0,0,0,.2);border-radius:12px;padding:20px;min-width:200px;text-align:center}
-.featured-preview .big-num{font-size:3rem;font-weight:900;color:var(--accent);line-height:1}
-.featured-preview .big-label{font-size:.8rem;opacity:.8;margin-top:4px}
-.btn-featured{background:#fff;color:var(--primary);padding:12px 28px;border-radius:8px;font-weight:700;font-size:.95rem;display:inline-block;transition:opacity .2s}
-.btn-featured:hover{opacity:.92;color:var(--primary)}
-/* DOWNLOAD SECTION */
-.download-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
-.dl-card{background:#fff;border-radius:12px;border:1px solid #e5e7eb;padding:20px;display:flex;gap:16px;align-items:flex-start;transition:box-shadow .2s}
-.dl-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.1)}
-.dl-icon{width:44px;height:44px;border-radius:10px;background:#dcfce7;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
-.dl-card h4{font-size:.92rem;font-weight:700;margin-bottom:4px}
-.dl-card p{font-size:.8rem;color:var(--muted);margin-bottom:10px}
-.dl-card a{color:var(--primary);font-size:.82rem;font-weight:600}
-/* CTA BANNER */
-.cta-banner{background:var(--accent);border-radius:16px;padding:40px;text-align:center;margin:60px 0}
-.cta-banner h3{font-size:1.5rem;font-weight:800;margin-bottom:10px}
-.cta-banner p{font-size:.95rem;margin-bottom:24px;max-width:500px;margin-left:auto;margin-right:auto}
-.btn-wa{background:#25D366;color:#fff;padding:14px 32px;border-radius:10px;font-weight:700;font-size:1rem;display:inline-flex;align-items:center;gap:10px;transition:opacity .2s}
-.btn-wa:hover{opacity:.9;color:#fff}
-/* FOOTER */
-footer{background:#111827;color:#9ca3af;padding:40px 0;margin-top:80px;text-align:center;font-size:.85rem}
-footer a{color:#6ee7b7}
-footer .footer-links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
-/* SEARCH HIDE */
-.tool-card.hidden{display:none}
-@media(max-width:768px){
-  .hero{padding:40px 0 36px}
-  .featured-tool{grid-template-columns:1fr}
-  .featured-preview{display:none}
-  .nav-links{display:none}
-  .hero-stats{gap:20px}
-}
-.tools-training-cta{padding:40px 0}
-.tools-training-cta h2{font-size:1.3rem;font-weight:800;margin:0 0 16px;text-align:center;color:#0A4A2E}
-.tools-training-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
-.tools-training-card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:18px;display:flex;flex-direction:column}
-.tools-training-card h3{font-size:.95rem;font-weight:700;margin:0 0 8px}
-.tools-training-card h3 a{color:#0A4A2E;text-decoration:none}
-.tools-training-card p{font-size:.85rem;color:#555;line-height:1.6;margin:0 0 12px;flex:1}
-.tools-training-btn{display:inline-block;background:#0A4A2E;color:#fff;font-weight:700;font-size:.85rem;padding:8px 14px;border-radius:8px;text-decoration:none;text-align:center}
-</style>
-<!-- Schema: SoftwareApplication Collection -->
 <script type="application/ld+json">
 {
-  "@context":"https://schema.org",
-  "@type":"CollectionPage",
-  "name":"Tools K3 Gratis Online",
-  "description":"Kumpulan tools K3 gratis untuk HSE officer Indonesia: kalkulator statistik K3, risk matrix interaktif, JSA builder, IBPR generator, template dokumen dan lebih banyak lagi.",
-  "url":"https://wahanatotalita.com/tools/",
-  "provider":{
-    "@type":"Organization",
-    "name":"Wahana Totalita Konsultan",
-    "url":"https://wahanatotalita.com"
-  }
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Beranda", "item": "https://wahanatotalita.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Tools K3", "item": "https://wahanatotalita.com/tools/" }
+  ]
 }
 </script>
-<nav>
-  <div class="container nav-inner">
-    <a href="/" class="nav-logo">
-      <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#1a6b3a"/><path d="M20 8l3 9h9l-7 5 3 9-8-6-8 6 3-9-7-5h9z" fill="#f5a623"/></svg>
-      Wahana Totalita
-    </a>
-    <div class="nav-links">
-      <a href="/">Beranda</a>
-      <a href="/jadwal-pelatihan">Jadwal</a>
-      <a href="/csms">Dokumen K3</a>
-      <a href="/tools/" class="active">Tools Gratis</a>
-      <a href="/artikel/">Artikel</a>
-    </div>
-    <a href="https://wa.me/6287759151278?text=Halo%20Wahana%2C%20saya%20ingin%20konsultasi%20pelatihan%20K3" target="_blank" rel="noopener" class="nav-cta">📱 Konsultasi Gratis</a>
-  </div>
-</nav>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Kumpulan Tools K3 Online 2026: Kalkulator, Generator & Regulasi",
+  "url": "https://wahanatotalita.com/tools/",
+  "description": "Direktori lengkap aplikasi dan kalkulator keselamatan kerja K3 online gratis: Safety Talk, Kalkulator K3, JSA, Matriks Risiko, Kebisingan, dan IBPR.",
+  "inLanguage": "id-ID"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Apakah seluruh tools dan kalkulator K3 di situs ini gratis?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ya, 100% gratis dan dapat digunakan secara bebas oleh praktisi HSE, Ahli K3 Umum, mahasiswa, dan manajemen perusahaan di seluruh Indonesia tanpa perlu registrasi."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Apakah hasil perhitungan kalkulator K3 sesuai dengan standar regulasi pemerintah?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Seluruh formula perhitungan dan dokumen yang dihasilkan mengacu langsung pada peraturan perundang-undangan resmi Republik Indonesia, seperti Kepmenaker No. KEP.372/MEN/1989, Permenaker No. 5 Tahun 2018, Permenaker No. 03/MEN/1998, dan PP No. 50 Tahun 2012 tentang Penerapan SMK3."
+      }
+    }
+  ]
+}
+</script>
 
-<section class="hero">
+<style>
+:root {
+  --navy-dark: #071524;
+  --navy: #0D233A;
+  --navy-light: #183654;
+  --orange: #E8611A;
+  --orange-hover: #cf5213;
+  --orange-light: #fff2ea;
+  --slate-50: #F8FAFC;
+  --slate-100: #F1F5F9;
+  --slate-200: #E2E8F0;
+  --slate-300: #CBD5E1;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-900: #0F172A;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 2px 8px rgba(13,35,58,0.06);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Source Sans 3', system-ui, -apple-system, sans-serif;
+  background: var(--slate-50);
+  color: var(--slate-900);
+  line-height: 1.6;
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* HERO */
+.hub-hero {
+  background: linear-gradient(135deg, #071524 0%, #0D233A 60%, #183654 100%);
+  color: #fff;
+  padding: 64px 0 48px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 3px solid var(--orange);
+}
+.hub-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 36px 36px;
+  pointer-events: none;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(232, 97, 26, 0.18);
+  border: 1px solid rgba(232, 97, 26, 0.4);
+  padding: 6px 14px;
+  border-radius: 999px;
+  color: #FFA573;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 14px;
+}
+.hub-hero h1 {
+  font-family: 'Lexend', sans-serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 14px;
+}
+.hub-hero h1 span { color: var(--orange); }
+.hub-hero p {
+  color: #CBD5E1;
+  font-size: 1.1rem;
+  max-width: 780px;
+  margin-bottom: 24px;
+}
+
+/* SEARCH & FILTER BAR */
+.hub-wrapper { padding: 40px 0 60px; }
+.search-card {
+  background: #fff;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 36px;
+}
+.search-input-box {
+  position: relative;
+  margin-bottom: 18px;
+}
+.search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--slate-600);
+}
+.hub-search-input {
+  width: 100%;
+  padding: 14px 16px 14px 48px;
+  border: 2px solid var(--slate-200);
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  color: var(--slate-900);
+  transition: all 0.2s;
+}
+.hub-search-input:focus {
+  outline: none;
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(232,97,26,0.12);
+}
+
+.category-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.cat-btn {
+  background: var(--slate-100);
+  border: 1px solid var(--slate-200);
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--slate-700);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.cat-btn:hover, .cat-btn.active {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #fff;
+}
+
+/* TOOLS GRID */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 26px;
+  margin-bottom: 48px;
+}
+@media (max-width: 600px) {
+  .tools-grid { grid-template-columns: 1fr; }
+}
+
+.tool-card {
+  background: #fff;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-lg);
+  padding: 26px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  position: relative;
+}
+.tool-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(13,35,58,0.1);
+  border-color: var(--orange);
+}
+.tool-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.tool-icon-box {
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  background: var(--orange-light);
+  color: var(--orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tool-badge {
+  background: #DCFCE7;
+  color: #166534;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+.tool-title {
+  font-family: 'Lexend', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 10px;
+  line-height: 1.35;
+}
+.tool-card:hover .tool-title { color: var(--orange); }
+.tool-desc {
+  font-size: 0.88rem;
+  color: var(--slate-600);
+  line-height: 1.6;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+.tool-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--slate-100);
+  padding-top: 14px;
+}
+.tag-list { display: flex; flex-wrap: wrap; gap: 6px; }
+.tool-tag {
+  background: var(--slate-100);
+  color: var(--slate-600);
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+.tool-arrow {
+  color: var(--orange);
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* EDITORIAL ARTICLE */
+.editorial-box {
+  background: #fff;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+  margin-bottom: 32px;
+}
+.editorial-title {
+  font-family: 'Lexend', sans-serif;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 16px;
+  border-left: 4px solid var(--orange);
+  padding-left: 14px;
+}
+.editorial-p {
+  color: var(--slate-700);
+  font-size: 0.96rem;
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+/* FAQ */
+.faq-item {
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-md);
+  margin-bottom: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+.faq-q {
+  width: 100%;
+  padding: 16px 20px;
+  text-align: left;
+  background: #fff;
+  border: none;
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--navy);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.faq-q:hover { background: var(--slate-50); }
+.faq-a {
+  padding: 0 20px 18px;
+  color: var(--slate-700);
+  font-size: 0.92rem;
+  line-height: 1.65;
+  display: none;
+}
+.faq-item.active .faq-a { display: block; }
+.faq-item.active .faq-icon { transform: rotate(180deg); }
+.faq-icon { transition: transform 0.2s; }
+</style>
+
+<?php require __DIR__ . '/../includes/navbar.php'; ?>
+
+<main class="hub-page" id="konten-utama">
+
+<!-- HERO -->
+<section class="hub-hero">
   <div class="container">
-    <div class="hero-badge">🔧 Tools K3 100% Gratis</div>
-    <h1>Semua Tools HSE yang Kamu<br><span>Butuhkan Ada di Sini</span></h1>
-    <p>Kalkulator LTIR/TRIR, Risk Matrix interaktif, JSA Builder, IBPR Generator, template Excel, database regulasi — gratis selamanya untuk HSE officer Indonesia.</p>
-
-    <div class="search-wrap">
-      <input type="text" id="toolSearch" placeholder="Cari tool... (contoh: LTIR, risk matrix, JSA)" oninput="searchTools(this.value)">
-      <button onclick="searchTools(document.getElementById('toolSearch').value)">Cari</button>
+    <div class="hero-badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+      Pusat Aplikasi K3 Digital Indonesia 2026
     </div>
-
-    <div class="hero-stats">
-      <div class="hero-stat"><strong>11</strong><span>Tools Online</span></div>
-      <div class="hero-stat"><strong>15+</strong><span>Template Download</span></div>
-      <div class="hero-stat"><strong>100%</strong><span>Gratis</span></div>
-      <div class="hero-stat"><strong>No Login</strong><span>Langsung Pakai</span></div>
-    </div>
+    <h1>Kumpulan Tools &amp; Kalkulator <span>K3 Online</span></h1>
+    <p>Akses 12 alat bantu dan kalkulator keselamatan kerja profesional gratis: dari materi Safety Talk harian, perhitungan statistik K3 (FR/SR), JSA Builder, Matriks Risiko 5x5, hingga database regulasi resmi Kemnaker RI.</p>
   </div>
 </section>
 
-<section class="cats">
+<!-- MAIN DIRECTORY -->
+<section class="hub-wrapper">
   <div class="container">
-    <h2>Tools K3 Berdasarkan Kategori</h2>
-    <p class="cats-sub">Pilih kategori atau gunakan pencarian di atas untuk menemukan tool yang kamu butuhkan</p>
-
-    <div class="cat-tabs">
-      <button class="cat-tab active" onclick="filterCat(this,'all')">Semua Tools</button>
-      <button class="cat-tab" onclick="filterCat(this,'kalkulator')">🧮 Kalkulator</button>
-      <button class="cat-tab" onclick="filterCat(this,'generator')">⚙️ Generator & Builder</button>
-      <button class="cat-tab" onclick="filterCat(this,'referensi')">📚 Referensi</button>
-      <button class="cat-tab" onclick="filterCat(this,'template')">📄 Template Download</button>
-    </div>
-
-    <!-- FEATURED TOOL -->
-    <a href="/tools/kalkulator-k3" style="display:block">
-    <div class="featured-tool">
-      <div>
-        <span style="background:rgba(255,255,255,.2);border-radius:50px;padding:4px 14px;font-size:.78rem;font-weight:700;display:inline-block;margin-bottom:14px">⭐ PALING POPULER</span>
-        <h3>Kalkulator Statistik K3 — LTIR, TRIR, SR, FR</h3>
-        <p>Hitung LTIR, TRIR, LTISR, Frequency Rate dan Severity Rate secara otomatis. Masukkan data jam kerja, jumlah kecelakaan, hari hilang — langsung dapat semua angka + interpretasi.</p>
-        <ul class="featured-features">
-          <li>Dukungan standar OSHA (200.000 jam) dan International (1.000.000 jam)</li>
-          <li>Laporan bulanan & tahunan otomatis</li>
-          <li>Interpretasi warna: aman / waspada / bahaya</li>
-          <li>Copy hasil langsung ke clipboard / print laporan</li>
-        </ul>
-        <br>
-        <span class="btn-featured">Buka Kalkulator →</span>
+    
+    <!-- SEARCH & FILTER -->
+    <div class="search-card">
+      <div class="search-input-box">
+        <svg class="search-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="hubSearch" class="hub-search-input" placeholder="Cari tool K3 (contoh: safety talk, statistik fr sr, jsa, kebisingan, matriks risiko, regulasi)..." oninput="filterTools()">
       </div>
-      <div class="featured-preview">
-        <div class="big-num">2.45</div>
-        <div class="big-label">LTIR</div>
-        <div style="margin-top:16px;font-size:.75rem;opacity:.7">1.000.000 jam kerja</div>
+
+      <div class="category-pills">
+        <button class="cat-btn active" type="button" onclick="setHubCategory('all', this)">Semua Tools (<?php echo count($allTools); ?>)</button>
+        <button class="cat-btn" type="button" onclick="setHubCategory('lapangan', this)">Manajemen Risiko &amp; Lapangan</button>
+        <button class="cat-btn" type="button" onclick="setHubCategory('kalkulator', this)">Kalkulator K3 &amp; Finansial</button>
+        <button class="cat-btn" type="button" onclick="setHubCategory('regulasi', this)">Regulasi &amp; Dokumen K3</button>
+        <button class="cat-btn" type="button" onclick="setHubCategory('edukasi', this)">Edukasi &amp; Kampanye K3</button>
       </div>
     </div>
-    </a>
 
-    <!-- TOOLS GRID -->
+    <!-- SERVER-RENDERED TOOLS CARDS GRID -->
     <div class="tools-grid" id="toolsGrid">
-
-      <!-- KALKULATOR -->
-      <div class="tool-card" data-cat="kalkulator" data-name="kalkulator statistik k3 ltir trir ltisr severity rate frequency rate kecelakaan">
-        <div class="tool-card-header">
-          <div class="tool-icon green">🧮</div>
-          <div>
-            <span class="tag tag-online">Online Tool</span>
-            <h3>Kalkulator LTIR / TRIR / SR</h3>
+      <?php foreach ($allTools as $t): ?>
+      <a href="<?php echo e($t['url']); ?>" class="tool-card" data-cat="<?php echo e($t['cat']); ?>" data-text="<?php echo strtolower(e($t['title'] . ' ' . $t['desc'] . ' ' . implode(' ', $t['tags']))); ?>">
+        <div class="tool-header">
+          <div class="tool-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="<?php echo e($t['icon']); ?>"/></svg>
           </div>
+          <span class="tool-badge"><?php echo e($t['badge']); ?></span>
         </div>
-        <p>Hitung semua KPI keselamatan kerja sekaligus: LTIR, TRIR, LTISR, Frequency Rate, Severity Rate. Standar OSHA & International.</p>
-        <div class="tool-card-footer">
-          <a href="/tools/kalkulator-k3" class="btn-tool">Buka Tool →</a>
-          <span class="tool-meta">⚡ Langsung pakai</span>
-        </div>
-      </div>
-
-      <div class="tool-card" data-cat="kalkulator" data-name="kalkulator kebisingan nab noise exposure db jam">
-        <div class="tool-card-header">
-          <div class="tool-icon blue">🔊</div>
-          <div>
-            <span class="tag tag-online">Online Tool</span>
-            <h3>Kalkulator Paparan Kebisingan</h3>
+        <h2 class="tool-title"><?php echo e($t['title']); ?></h2>
+        <p class="tool-desc"><?php echo e($t['desc']); ?></p>
+        <div class="tool-footer">
+          <div class="tag-list">
+            <?php foreach ($t['tags'] as $tag): ?>
+            <span class="tool-tag"><?php echo e($tag); ?></span>
+            <?php endforeach; ?>
           </div>
+          <span class="tool-arrow">Buka Tool →</span>
         </div>
-        <p>Hitung dosis paparan kebisingan berdasarkan tingkat dB dan jam kerja. Bandingkan dengan NAB Kepmennaker 5/2018 (85 dB).</p>
-        <div class="tool-card-footer">
-          <a href="/tools/kalkulator-kebisingan" class="btn-tool">Buka Tool →</a>
-          <span class="tool-meta">⚡ Langsung pakai</span>
-        </div>
-      </div>
-
-      <div class="tool-card" data-cat="kalkulator" data-name="kalkulator biaya kecelakaan kerja heinrich ratio langsung tidak langsung">
-        <div class="tool-card-header">
-          <div class="tool-icon orange">💰</div>
-          <div>
-            <span class="tag tag-online">Online Tool</span>
-            <h3>Kalkulator Biaya Kecelakaan</h3>
-          </div>
-        </div>
-        <p>Estimasi biaya kecelakaan kerja menggunakan Rasio Heinrich (1:4). Hitung biaya langsung + tidak langsung untuk justifikasi anggaran K3.</p>
-        <div class="tool-card-footer">
-          <a href="/tools/kalkulator-biaya-k3" class="btn-tool">Buka Tool →</a>
-          <span class="tool-meta">⚡ Langsung pakai</span>
-        </div>
-      </div>
-
-      <!-- GENERATOR / BUILDER -->
-      <div class="tool-card" data-cat="generator" data-name="risk matrix risiko matriks likelihod severity level warna">
-        <div class="tool-card-header">
-          <div class="tool-icon red">📊</div>
-          <div>
-            <span class="tag tag-online">Online Tool</span>
-            <h3>Risk Matrix 5×5 Interaktif</h3>
-          </div>
-        </div>
-        <p>Klik likelihood × severity — langsung dapat risk level (Low/Medium/High/Extreme), warna indikator, dan rekomendasi kontrol. Bisa print / simpan.</p>
-        <div class="tool-card-footer">
-          <a href="/tools/risk-matrix" class="btn-tool">Buka Tool →</a>
-          <span class="tool-meta">⚡ Langsung pakai</span>
-        </div>
-      </div>
-
-      <div class="tool-card" data-cat="generator" data-name="jsa job safety analysis builder form langkah hazard kontrol cetak">
-        <div class="tool-card-header">
-          <div class="tool-icon purple">📋</div>
-          <div>
-            <span class="tag tag-online">Online Tool</span>
-            <h3>JSA Builder — Form Otomatis</h3>
-          </div>
-        </div>
-        <p>Isi form JSA online — langkah pekerjaan, potensi bahaya, level risiko, tindakan pencegahan, APD. Langsung cetak ke PDF atau simpan.</p>
-        <div class="tool-card-footer">
-          <a href="/tools/jsa-builder" class="btn-tool">Buka Tool →</a>
-          <span class="tool-meta">⚡ Print ke PDF</span>
-        </div>
-      </div>
-
-      <div class="tool-card" data-cat="generator" data-name="ibpr hirarc identifikasi bahaya penilaian risiko pengendalian generator online">
-        <div class="tool-card-header">
-          <div class="tool-icon teal">🔍</div>
-          <div>
-            <span class="tag tag-online">Online Tool</span>
-            <h3>IBPR / HIRARC Generator</h3>
-          </div>
-        </div>
-        <p>Buat tabel IBPR (Identifikasi Bahaya Penilaian Risiko) atau HIRARC online. Input aktivitas, bahaya, risiko, kontrol → hasilkan dokumen siap pakai.</p>
-        <div class="tool-card-footer">
-          <a href="/tools/ibpr-generator" class="btn-tool">Buka Tool →</a>
-          <span class="tool-meta">⚡ Print ke PDF</span>
-        </div>
-      </div>
-
-      <div class="tool-card" data-cat="generator" data-name="laporan near miss incident report generator form">
-        <div class="tool-card-header">
-          <div class="tool-icon yellow">⚠️</div>
-          <div>
-            <span class="tag tag-online">Online Tool</span>
-            <h3>Form Laporan Insiden / Near Miss</h3>
-          </div>
-        </div>
-        <p>Isi form laporan insiden atau near miss secara digital. Sistem panduan langkah demi langkah — cocok untuk investigasi 5-Why dan laporan ke manajemen.</p>
-        <div class="tool-card-footer">
-          <a href="/tools/laporan-insiden" class="btn-tool">Buka Tool →</a>
-          <span class="tool-meta">⚡ Print ke PDF</span>
-        </div>
-      </div>
-
-      <!-- REFERENSI -->
-      <div class="tool-card" data-cat="referensi" data-name="apd alat pelindung diri pemilih selector hazard jenis pekerjaan">
-        <div class="tool-card-header">
-          <div class="tool-icon orange">🦺</div>
-          <div>
-            <span class="tag tag-online">Online Tool</span>
-            <h3>Panduan Pemilihan APD</h3>
-          </div>
-        </div>
-        <p>Pilih jenis bahaya / pekerjaan → sistem langsung rekomendasikan APD yang wajib dipakai, standar yang berlaku, dan tips inspeksi APD.</p>
-        <div class="tool-card-footer">
-          <a href="/tools/apd-selector" class="btn-tool">Buka Tool →</a>
-          <span class="tool-meta">⚡ Langsung pakai</span>
-        </div>
-      </div>
-
-      <div class="tool-card" data-cat="referensi" data-name="regulasi k3 database undang undang peraturan permenaker pp smk3">
-        <div class="tool-card-header">
-          <div class="tool-icon blue">⚖️</div>
-          <div>
-            <span class="tag tag-online">Referensi</span>
-            <h3>Database Regulasi K3 Indonesia</h3>
-          </div>
-        </div>
-        <p>Cari peraturan K3 — UU, PP, Permenaker, Kepmenaker — beserta ringkasan isi, pasal penting, dan sanksi. Update 2024.</p>
-        <div class="tool-card-footer">
-          <a href="/tools/regulasi-k3" class="btn-tool">Buka Tool →</a>
-          <span class="tool-meta">📚 100+ Regulasi</span>
-        </div>
-      </div>
-
-      <div class="tool-card" data-cat="referensi" data-name="safety talk materi toolbox meeting k3 topik mingguan">
-        <div class="tool-card-header">
-          <div class="tool-icon green">🎤</div>
-          <div>
-            <span class="tag tag-online">Referensi</span>
-            <h3>52 Materi Safety Talk / TBM</h3>
-          </div>
-        </div>
-        <p>Satu tahun penuh topik safety talk siap pakai — 52 tema, setiap minggu ada materi lengkap + poin diskusi untuk toolbox meeting.</p>
-        <div class="tool-card-footer">
-          <a href="/tools/safety-talk" class="btn-tool">Buka Tool →</a>
-          <span class="tool-meta">📅 52 Topik</span>
-        </div>
-      </div>
-
-      <div class="tool-card" data-cat="referensi" data-name="nab nilai ambang batas kebisingan kimia suhu tabel referensi">
-        <div class="tool-card-header">
-          <div class="tool-icon purple">📏</div>
-          <div>
-            <span class="tag tag-online">Referensi</span>
-            <h3>Tabel NAB — Nilai Ambang Batas</h3>
-          </div>
-        </div>
-        <p>Referensi NAB lengkap: kebisingan, bahan kimia, suhu, getaran, radiasi. Berdasarkan Permenaker No.5 Tahun 2018. Bisa dicari dan difilter.</p>
-        <div class="tool-card-footer">
-          <a href="/tools/kalkulator-kebisingan" class="btn-tool">Buka Tool →</a>
-          <span class="tool-meta">📚 Permenaker 5/2018</span>
-        </div>
-      </div>
-
-      <!-- TEMPLATES DOWNLOAD -->
-      <div class="tool-card" data-cat="template" data-name="hse dashboard excel download gratis project tracking">
-        <div class="tool-card-header">
-          <div class="tool-icon green">📊</div>
-          <div>
-            <span class="tag tag-download">Download Excel</span>
-            <h3>HSE Dashboard Excel — Gratis</h3>
-          </div>
-        </div>
-        <p>Dashboard HSE lengkap: incident tracking, LTIR/TRIR chart otomatis, risk register, audit tracker, training matrix. Setara produk berbayar di pasaran.</p>
-        <div class="tool-card-footer">
-          <a href="https://wa.me/6287759151278?text=Halo%20Wahana%2C%20saya%20minta%20HSE%20Dashboard%20Excel%20gratis" target="_blank" rel="noopener" class="btn-tool">Download Gratis →</a>
-          <span class="tool-meta">📁 Via WhatsApp</span>
-        </div>
-      </div>
-
-      <div class="tool-card" data-cat="template" data-name="template jsa excel download format kosong">
-        <div class="tool-card-header">
-          <div class="tool-icon blue">📄</div>
-          <div>
-            <span class="tag tag-download">Download Excel</span>
-            <h3>Template JSA Excel</h3>
-          </div>
-        </div>
-        <p>Format JSA siap pakai dalam Excel — header sudah terisi, formula risk level otomatis, tinggal isi langkah pekerjaan dan bahaya.</p>
-        <div class="tool-card-footer">
-          <a href="/assets/downloads/template-jsa.csv" download class="btn-tool">Download CSV →</a>
-          <span class="tool-meta">📁 CSV/Excel</span>
-        </div>
-      </div>
-
-      <div class="tool-card" data-cat="template" data-name="template ibpr hirarc excel download format kosong">
-        <div class="tool-card-header">
-          <div class="tool-icon teal">📄</div>
-          <div>
-            <span class="tag tag-download">Download Excel</span>
-            <h3>Template IBPR / HIRARC Excel</h3>
-          </div>
-        </div>
-        <p>Format IBPR/HIRARC lengkap dengan kolom likelihood, severity, risk score, existing control, dan residual risk. Sesuai standar SMK3 PP 50/2012.</p>
-        <div class="tool-card-footer">
-          <a href="/assets/downloads/template-ibpr.csv" download class="btn-tool">Download CSV →</a>
-          <span class="tool-meta">📁 CSV/Excel</span>
-        </div>
-      </div>
-
-    </div><!-- end tools-grid -->
-  </div>
-</section>
-
-<!-- DOWNLOAD SECTION -->
-<section style="background:#f0fdf4;padding:60px 0">
-  <div class="container">
-    <div class="section-title">📥 Template & Dokumen Download Gratis</div>
-    <p class="section-sub">File Excel, Word, dan PDF siap pakai — download langsung, tanpa daftar</p>
-
-    <div class="download-grid">
-      <div class="dl-card">
-        <div class="dl-icon">📊</div>
-        <div>
-          <h4>HSE Dashboard Excel All-in-One</h4>
-          <p>6 sheet: Incident Log, LTIR Chart, Risk Register, Audit Tracker, Training Matrix, KPI Summary</p>
-          <a href="https://wa.me/6287759151278?text=Minta%20HSE%20Dashboard%20Excel" target="_blank">📱 Minta via WhatsApp →</a>
-        </div>
-      </div>
-      <div class="dl-card">
-        <div class="dl-icon">📋</div>
-        <div>
-          <h4>Template JSA (Job Safety Analysis)</h4>
-          <p>Format Excel siap pakai, risk matrix formula otomatis</p>
-          <a href="/assets/downloads/template-jsa.csv" download>⬇ Download Template JSA →</a>
-        </div>
-      </div>
-      <div class="dl-card">
-        <div class="dl-icon">🔍</div>
-        <div>
-          <h4>Template IBPR / HIRARC</h4>
-          <p>Identifikasi bahaya penilaian risiko sesuai PP 50/2012</p>
-          <a href="/assets/downloads/template-ibpr.csv" download>⬇ Download Template IBPR →</a>
-        </div>
-      </div>
-      <div class="dl-card">
-        <div class="dl-icon">📝</div>
-        <div>
-          <h4>Form Ijin Kerja / Permit To Work</h4>
-          <p>Hot Work, Confined Space, Working at Height, Electrical — 4 format</p>
-          <a href="/csms#ptw">📄 Lihat di halaman CSMS →</a>
-        </div>
-      </div>
-      <div class="dl-card">
-        <div class="dl-icon">🚒</div>
-        <div>
-          <h4>Prosedur Tanggap Darurat</h4>
-          <p>ERP template: kebakaran, tumpahan kimia, gempa, kecelakaan besar</p>
-          <a href="/csms#tanggap-darurat">📄 Lihat di halaman CSMS →</a>
-        </div>
-      </div>
-      <div class="dl-card">
-        <div class="dl-icon">🎤</div>
-        <div>
-          <h4>52 Materi Safety Talk PDF</h4>
-          <p>Satu tahun topik toolbox meeting siap cetak — update 2024</p>
-          <a href="/tools/safety-talk">📖 Lihat semua topik →</a>
-        </div>
-      </div>
-      <div class="dl-card">
-        <div class="dl-icon">📈</div>
-        <div>
-          <h4>Template Laporan K3 Bulanan</h4>
-          <p>Format laporan P2K3 bulanan sesuai persyaratan Disnaker</p>
-          <a href="https://wa.me/6287759151278?text=Minta%20template%20laporan%20K3%20bulanan" target="_blank">📱 Minta via WhatsApp →</a>
-        </div>
-      </div>
-      <div class="dl-card">
-        <div class="dl-icon">⚙️</div>
-        <div>
-          <h4>Checklist Inspeksi K3 Umum</h4>
-          <p>40+ item inspeksi: APAR, APD, housekeeping, mekanikal, elektrikal</p>
-          <a href="/assets/downloads/checklist-inspeksi-k3.csv" download>⬇ Download Checklist →</a>
-        </div>
-      </div>
+      </a>
+      <?php endforeach; ?>
     </div>
-  </div>
-</section>
 
-<!-- CTA BANNER -->
-<section class="container">
-  <div class="cta-banner">
-    <h3>🎓 Ingin Sertifikasi K3 Resmi?</h3>
-    <p>Tools ini gratis selamanya. Kalau kamu ingin naik level dengan sertifikat K3 KEMNAKER / BNSP yang diakui nasional, konsultasi dulu — gratis!</p>
-    <a href="https://wa.me/6287759151278?text=Halo%20Wahana%2C%20saya%20pakai%20tools%20K3%20gratis%20dan%20ingin%20tanya%20soal%20pelatihan%20sertifikasi" target="_blank" rel="noopener" class="btn-wa">
-      <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-      Konsultasi Pelatihan K3 — Gratis
-    </a>
-  </div>
-</section>
+    <!-- IN-DEPTH EDITORIAL ARTICLE (SEO DEPTH) -->
+    <div class="editorial-box">
+      <h2 class="editorial-title">Pentingnya Digitalisasi Tools K3 dalam Penerapan SMK3 PP 50/2012</h2>
+      <p class="editorial-p">
+        Transformasi digital dalam pengelolaan Keselamatan dan Kesehatan Kerja (K3) kini menjadi kebutuhan fundamental bagi perusahaan di Indonesia. Penggunaan kalkulator dan generator otomatis memungkinkan Ahli K3 Umum, pengawas lapangan, dan komite P2K3 untuk melakukan evaluasi risiko kuantitatif secara cepat, akurat, dan terstandarisasi sesuai regulasi nasional.
+      </p>
 
-<section class="tools-training-cta">
-  <div class="container">
-    <h2>Tingkatkan Kompetensi K3 Anda</h2>
-    <div class="tools-training-grid">
-      <div class="tools-training-card">
-        <h3><a href="/pelatihan/pelatihan-ahli-k3-umum-sertifikasi-bnsp-online/">Pelatihan Ahli K3 Umum</a></h3>
-        <p>Sertifikasi wajib bagi praktisi K3 perusahaan, resmi BNSP, materi regulasi &amp; manajemen risiko.</p>
-        <a href="/pelatihan/pelatihan-ahli-k3-umum-sertifikasi-bnsp-online/" class="tools-training-btn">Lihat Program &rarr;</a>
+      <h3 style="color:var(--navy);font-family:'Lexend',sans-serif;font-size:1.15rem;margin:22px 0 10px">Keunggulan Implementasi Tools K3 Berbasis Standar Resmi</h3>
+      <ul style="padding-left:22px;color:var(--slate-700);line-height:1.75;margin-bottom:18px">
+        <li><strong>Akurasi Perhitungan Hukum:</strong> Menghilangkan risiko kesalahan rumus manual dalam perhitungan Frequency Rate (FR) dan Severity Rate (SR) pada pelaporan triwulan P2K3 ke Dinas Tenaga Kerja.</li>
+        <li><strong>Standardisasi Form Lapangan:</strong> Menjamin format dokumen Job Safety Analysis (JSA) dan Risk Register mematuhi ketentuan hierarki pengendalian ISO 45001:2018.</li>
+        <li><strong>Efisiensi Waktu Kerja:</strong> Mempersingkat waktu pembuatan materi Toolbox Meeting harian dan verifikasi kepatuhan dokumen audit SMK3.</li>
+      </ul>
+
+      <!-- FAQ ACCORDION -->
+      <h3 style="color:var(--navy);font-family:'Lexend',sans-serif;font-size:1.25rem;margin:28px 0 16px">Tanya Jawab Seputar Tools K3 (FAQ)</h3>
+      <div class="faq-box">
+        
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>Apakah seluruh tools dan kalkulator K3 di situs ini gratis?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-a">
+            Ya, 100% gratis dan dapat digunakan secara bebas oleh praktisi HSE, Ahli K3 Umum, mahasiswa, dan manajemen perusahaan di seluruh Indonesia tanpa perlu registrasi.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>Apakah hasil perhitungan kalkulator K3 sesuai dengan standar regulasi pemerintah?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-a">
+            Seluruh formula perhitungan dan dokumen yang dihasilkan mengacu langsung pada peraturan perundang-undangan resmi Republik Indonesia, seperti Kepmenaker No. KEP.372/MEN/1989, Permenaker No. 5 Tahun 2018, Permenaker No. 03/MEN/1998, dan PP No. 50 Tahun 2012 tentang Penerapan SMK3.
+          </div>
+        </div>
+
       </div>
-      <div class="tools-training-card">
-        <h3><a href="/pelatihan/pelatihan-petugas-p3k-sertifikasi-bnsp/">Pelatihan Petugas P3K | Sertifikasi BNSP</a></h3>
-        <p>Pelatihan penanganan darurat dan P3K di tempat kerja, sertifikasi BNSP, wajib untuk perusahaan.</p>
-        <a href="/pelatihan/pelatihan-petugas-p3k-sertifikasi-bnsp/" class="tools-training-btn">Lihat Program &rarr;</a>
-      </div>
-      <div class="tools-training-card">
-        <h3><a href="/pelatihan/pelatihan-operator-k3-sertifikasi-bnsp/">Pelatihan Operator K3 | Sertifikasi BNSP</a></h3>
-        <p>Kompetensi dasar keselamatan kerja untuk operator, sertifikasi resmi BNSP, untuk semua industri.</p>
-        <a href="/pelatihan/pelatihan-operator-k3-sertifikasi-bnsp/" class="tools-training-btn">Lihat Program &rarr;</a>
-      </div>
+
     </div>
+
   </div>
 </section>
 
-<footer>
-  <div class="container">
-    <div class="footer-links">
-      <a href="/">Beranda</a>
-      <a href="/tools/">Tools K3 Gratis</a>
-      <a href="/csms">Template CSMS</a>
-      <a href="/jadwal-pelatihan">Jadwal Pelatihan</a>
-      <a href="/artikel/">Artikel K3</a>
-      <a href="https://wa.me/6287759151278" target="_blank">WhatsApp</a>
-    </div>
-    <p>© <?php echo date('Y'); ?> Wahana Totalita Konsultan — Jl. Kaliurang KM 8, Yogyakarta | Tools K3 gratis untuk HSE officer Indonesia</p>
-  </div>
-</footer>
+</main>
 
-<!-- Floating WA -->
-<a href="https://wa.me/6287759151278?text=Halo%20Wahana%2C%20saya%20pakai%20tools%20K3%20gratis%20dan%20ingin%20konsultasi" target="_blank" rel="noopener"
-   style="position:fixed;bottom:24px;right:24px;background:#25D366;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,.4);z-index:999;transition:transform .2s"
-   onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-  <svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-</a>
+<?php require __DIR__ . '/../includes/footer.php'; ?>
 
 <script>
-function searchTools(q){
-  q = q.toLowerCase().trim();
-  document.querySelectorAll('.tool-card').forEach(card=>{
-    const name = (card.dataset.name||'').toLowerCase();
-    card.classList.toggle('hidden', q && !name.includes(q));
+let currentHubCat = 'all';
+
+function setHubCategory(cat, btn){
+  currentHubCat = cat;
+  document.querySelectorAll('.category-pills .cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  filterTools();
+}
+
+function filterTools(){
+  const q = document.getElementById('hubSearch').value.toLowerCase().trim();
+  const cards = document.querySelectorAll('.tool-card');
+
+  cards.forEach(c => {
+    const cat = c.getAttribute('data-cat');
+    const text = c.getAttribute('data-text');
+
+    const matchCat = (currentHubCat === 'all' || cat === currentHubCat);
+    const matchQuery = (q === '' || text.includes(q));
+
+    if(matchCat && matchQuery){
+      c.style.display = 'flex';
+    } else {
+      c.style.display = 'none';
+    }
   });
 }
-function filterCat(btn, cat){
-  document.querySelectorAll('.cat-tab').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('.tool-card').forEach(card=>{
-    card.classList.toggle('hidden', cat !== 'all' && card.dataset.cat !== cat);
-  });
+
+function toggleFaq(btn){
+  btn.parentElement.classList.toggle('active');
 }
 </script>
+
+<?php require __DIR__ . '/../includes/scripts.php'; ?>
 </body>
 </html>

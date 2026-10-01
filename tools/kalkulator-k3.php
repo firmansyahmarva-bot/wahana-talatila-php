@@ -1,499 +1,1070 @@
 <?php
 require_once __DIR__ . '/../config.php';
 $s = get_all_settings();
-?>
-<?php
-$page_title = 'Kalkulator LTIR TRIR Statistik K3 Online Gratis';
-$meta_desc = 'Kalkulator statistik K3 online gratis: hitung LTIR, TRIR, LTISR, Frequency Rate, Severity Rate otomatis. Standar OSHA & International. Cocok untuk laporan bulanan HSE officer.';
+
+$page_title = 'Kalkulator K3 Online 2026: Hitung FR, SR, IR, AFR & Safe T-Score (Kepmenaker & OSHA)';
+$meta_desc = 'Kalkulator statistik K3 terlengkap sesuai Kepmenaker No. KEP.372/MEN/1989 dan OSHA 1904. Hitung Frequency Rate (FR), Severity Rate (SR), Safe T-Score, dan cetak laporan P2K3 gratis.';
+
+ob_start();
 require __DIR__ . '/../includes/head.php';
+$shared_head = ob_get_clean();
+$shared_head = preg_replace('~<title>.*?</title>~s', '<title>' . e($page_title) . '</title>', $shared_head, 1);
+echo $shared_head;
 ?>
-<link rel="manifest" href="/manifest.json">
-<style>
-:root{--primary:#1a6b3a;--primary-d:#145530;--accent:#f5a623;--bg:#f8fafc;--card:#fff;--text:#1a202c;--muted:#6b7280;--radius:12px;--shadow:0 2px 16px rgba(0,0,0,.09)}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
-a{color:var(--primary);text-decoration:none}
-.container{max-width:1000px;margin:0 auto;padding:0 20px}
-nav{background:#fff;border-bottom:1px solid #e5e7eb;padding:14px 0;position:sticky;top:0;z-index:100;box-shadow:0 1px 6px rgba(0,0,0,.06)}
-.nav-inner{display:flex;align-items:center;justify-content:space-between}
-.nav-logo{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--primary);font-size:1rem}
-.nav-logo svg{width:32px;height:32px}
-.nav-back{color:var(--muted);font-size:.88rem;display:flex;align-items:center;gap:6px}
-.nav-cta{background:var(--primary);color:#fff;padding:8px 18px;border-radius:8px;font-size:.85rem;font-weight:600}
-.hero{background:linear-gradient(135deg,#0f4c2a,#1a6b3a);color:#fff;padding:48px 0 36px;text-align:center}
-.hero-badge{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:50px;padding:5px 16px;font-size:.8rem;font-weight:600;display:inline-block;margin-bottom:16px}
-.hero h1{font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:800;margin-bottom:12px}
-.hero h1 span{color:var(--accent)}
-.hero p{opacity:.88;max-width:580px;margin:0 auto}
-.main{padding:40px 0 80px}
-.calc-layout{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
-/* INPUT PANEL */
-.panel{background:var(--card);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow);border:1px solid #e5e7eb}
-.panel h2{font-size:1.1rem;font-weight:700;margin-bottom:20px;display:flex;align-items:center;gap:8px}
-.panel h2 svg{width:20px;height:20px;color:var(--primary)}
-.form-group{margin-bottom:18px}
-.form-group label{display:block;font-size:.88rem;font-weight:600;color:var(--text);margin-bottom:6px}
-.form-group label span{font-size:.78rem;color:var(--muted);font-weight:400}
-.form-group input,.form-group select{width:100%;padding:10px 14px;border:2px solid #e5e7eb;border-radius:8px;font-size:.92rem;color:var(--text);transition:border .2s;background:#fff}
-.form-group input:focus,.form-group select:focus{border-color:var(--primary);outline:none}
-.divider{border:none;border-top:1px solid #f3f4f6;margin:20px 0}
-.standard-toggle{display:flex;gap:0;background:#f3f4f6;border-radius:8px;padding:3px}
-.std-btn{flex:1;padding:8px;border:none;background:transparent;border-radius:6px;font-size:.85rem;font-weight:600;cursor:pointer;color:var(--muted);transition:all .2s}
-.std-btn.active{background:var(--primary);color:#fff}
-.btn-calc{width:100%;background:var(--primary);color:#fff;border:none;border-radius:10px;padding:14px;font-size:1rem;font-weight:700;cursor:pointer;margin-top:8px;transition:background .2s;display:flex;align-items:center;justify-content:center;gap:8px}
-.btn-calc:hover{background:var(--primary-d)}
-.btn-reset{width:100%;background:#f3f4f6;color:var(--muted);border:none;border-radius:10px;padding:10px;font-size:.88rem;font-weight:600;cursor:pointer;margin-top:8px}
-/* RESULTS PANEL */
-.results{display:flex;flex-direction:column;gap:16px}
-.result-card{background:var(--card);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);border:1px solid #e5e7eb}
-.result-card.highlight{border-color:var(--primary)}
-.result-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px}
-.result-name{font-size:.88rem;font-weight:600;color:var(--muted)}
-.result-value{font-size:2.4rem;font-weight:900;line-height:1}
-.result-value.safe{color:#16a34a}
-.result-value.warn{color:#d97706}
-.result-value.danger{color:#dc2626}
-.result-badge{font-size:.75rem;padding:3px 10px;border-radius:50px;font-weight:700}
-.badge-safe{background:#dcfce7;color:#16a34a}
-.badge-warn{background:#fef3c7;color:#d97706}
-.badge-danger{background:#fee2e2;color:#dc2626}
-.badge-neutral{background:#f3f4f6;color:#6b7280}
-.result-desc{font-size:.8rem;color:var(--muted);margin-top:8px;line-height:1.5}
-.result-formula{font-size:.75rem;color:#9ca3af;margin-top:6px;font-family:monospace;background:#f9fafb;padding:4px 8px;border-radius:4px}
-.results-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-/* PLACEHOLDER */
-.placeholder{text-align:center;padding:60px 20px;color:var(--muted)}
-.placeholder svg{width:60px;height:60px;opacity:.3;margin-bottom:16px}
-.placeholder p{font-size:.9rem}
-/* ACTIONS */
-.result-actions{display:flex;gap:10px;margin-top:16px}
-.btn-copy{background:#f3f4f6;color:var(--text);border:1px solid #e5e7eb;border-radius:8px;padding:9px 18px;font-size:.85rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .2s}
-.btn-copy:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
-.btn-print{background:var(--primary);color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:.85rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px}
-/* INFO BOX */
-.info-box{background:#f0fdf4;border-left:4px solid var(--primary);border-radius:8px;padding:16px 20px;margin:24px 0}
-.info-box h4{font-size:.9rem;font-weight:700;color:var(--primary);margin-bottom:8px}
-.info-box p,.info-box li{font-size:.83rem;color:#374151;line-height:1.6}
-.info-box ul{padding-left:16px}
-/* REFERENCE TABLE */
-.ref-table{width:100%;border-collapse:collapse;font-size:.85rem;margin-top:16px}
-.ref-table th{background:var(--primary);color:#fff;padding:10px 14px;text-align:left;font-size:.8rem}
-.ref-table td{padding:9px 14px;border-bottom:1px solid #f3f4f6}
-.ref-table tr:hover td{background:#f9fafb}
-.ref-table .good{color:#16a34a;font-weight:700}
-.ref-table .avg{color:#d97706;font-weight:700}
-.ref-table .bad{color:#dc2626;font-weight:700}
-/* CTA */
-.cta-strip{background:var(--primary);color:#fff;border-radius:12px;padding:28px;text-align:center;margin:40px 0}
-.cta-strip h3{font-size:1.1rem;font-weight:700;margin-bottom:8px}
-.cta-strip p{opacity:.88;font-size:.88rem;margin-bottom:16px}
-.btn-wa{background:#25D366;color:#fff;padding:12px 28px;border-radius:8px;font-weight:700;font-size:.9rem;display:inline-flex;align-items:center;gap:8px}
-footer{background:#111827;color:#9ca3af;padding:30px 0;text-align:center;font-size:.83rem}
-footer a{color:#6ee7b7}
-.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);background:#1a6b3a;color:#fff;padding:10px 24px;border-radius:50px;font-size:.88rem;font-weight:600;opacity:0;transition:all .3s;pointer-events:none;z-index:999}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-@media(max-width:768px){
-  .calc-layout{grid-template-columns:1fr}
-  .results-grid{grid-template-columns:1fr}
-}
-@media print{
-  nav,footer,.btn-calc,.btn-reset,.result-actions,.cta-strip,.tools-training-cta,.wa-float{display:none!important}
-  .calc-layout{grid-template-columns:1fr}
-  .panel{box-shadow:none;border:1px solid #ccc}
-  body{background:#fff}
-}
-.tools-training-cta{padding:40px 0}
-.tools-training-cta h2{font-size:1.3rem;font-weight:800;margin:0 0 16px;text-align:center;color:#0A4A2E}
-.tools-training-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
-.tools-training-card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:18px;display:flex;flex-direction:column}
-.tools-training-card h3{font-size:.95rem;font-weight:700;margin:0 0 8px}
-.tools-training-card h3 a{color:#0A4A2E;text-decoration:none}
-.tools-training-card p{font-size:.85rem;color:#555;line-height:1.6;margin:0 0 12px;flex:1}
-.tools-training-btn{display:inline-block;background:#0A4A2E;color:#fff;font-weight:700;font-size:.85rem;padding:8px 14px;border-radius:8px;text-decoration:none;text-align:center}
-</style>
 <script type="application/ld+json">
 {
-  "@context":"https://schema.org",
-  "@type":"SoftwareApplication",
-  "name":"Kalkulator LTIR TRIR Statistik K3",
-  "applicationCategory":"BusinessApplication",
-  "operatingSystem":"Web",
-  "offers":{"@type":"Offer","price":"0","priceCurrency":"IDR"},
-  "description":"Kalkulator statistik K3 online gratis: LTIR, TRIR, LTISR, Frequency Rate, Severity Rate. Standar OSHA dan International.",
-  "url":"https://wahanatotalita.com/tools/kalkulator-k3",
-  "provider":{"@type":"Organization","name":"Wahana Totalita Konsultan","url":"https://wahanatotalita.com"}
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Beranda", "item": "https://wahanatotalita.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Tools K3", "item": "https://wahanatotalita.com/tools/" },
+    { "@type": "ListItem", "position": 3, "name": "Kalkulator K3", "item": "https://wahanatotalita.com/tools/kalkulator-k3.php" }
+  ]
 }
 </script>
-<nav>
-  <div class="container nav-inner">
-    <a href="/" class="nav-logo">
-      <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#1a6b3a"/><path d="M20 8l3 9h9l-7 5 3 9-8-6-8 6 3-9-7-5h9z" fill="#f5a623"/></svg>
-      Wahana Totalita
-    </a>
-    <a href="/tools/" class="nav-back">← Semua Tools</a>
-    <a href="https://wa.me/6287759151278?text=Halo%20Wahana%2C%20ingin%20konsultasi%20K3" target="_blank" rel="noopener" class="nav-cta">📱 Konsultasi</a>
-  </div>
-</nav>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Kalkulator Statistik K3 Online Indonesia",
+  "url": "https://wahanatotalita.com/tools/kalkulator-k3.php",
+  "description": "Perhitungan statistik K3 resmi Kemnaker RI (Kepmenaker 372/1989) & OSHA: FR, SR, IR, LTIFR, Safe T-Score, dan Piramida Heinrich.",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "All",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "IDR" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Apa perbedaan standar pengali 1.000.000 jam kerja dan 200.000 jam kerja?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Standar 1.000.000 jam kerja adalah standar resmi Depnaker/Kemnaker RI berdasarkan Kepmenaker No. KEP.372/MEN/1989 dan ILO, mewakili sekitar 500 pekerja penuh waktu selama 1 tahun. Sedangkan standar 200.000 jam kerja mengacu pada US OSHA (Occupational Safety and Health Administration), mewakili 100 pekerja penuh waktu selama 1 tahun (100 pekerja x 40 jam/minggu x 50 minggu kerja)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Bagaimana cara membaca nilai Safe T-Score?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Safe T-Score digunakan untuk membandingkan kinerja K3 periode saat ini dengan periode sebelumnya. Jika nilai Safe T-Score di antara -2.00 hingga +2.00, perbedaannya dianggap fluktuasi normal. Jika skor lebih kecil dari -2.00, performa K3 membaik secara signifikan. Jika skor lebih besar dari +2.00, performa K3 memburuk secara signifikan dan memerlukan investigasi akar penyebab segera."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Berapa hari kerja hilang yang dihitung untuk kasus kecelakaan fatal atau cacat tetap total?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sesuai Kepmenaker KEP.372/MEN/1989 dan ANSI Z16.1, untuk kasus kecelakaan fatal (kematian) dan cacat total permanen (kehilangan fungsi kedua mata, kedua tangan, atau kelumpuhan total), beban hari kerja hilang yang dibebankan adalah 6.000 hari kerja (man-days lost)."
+      }
+    }
+  ]
+}
+</script>
 
-<section class="hero">
+<style>
+:root {
+  --navy-dark: #071524;
+  --navy: #0D233A;
+  --navy-light: #183654;
+  --orange: #E8611A;
+  --orange-hover: #cf5213;
+  --orange-light: #fff2ea;
+  --slate-50: #F8FAFC;
+  --slate-100: #F1F5F9;
+  --slate-200: #E2E8F0;
+  --slate-300: #CBD5E1;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-900: #0F172A;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 2px 8px rgba(13,35,58,0.06);
+  --shadow-md: 0 8px 24px rgba(13,35,58,0.1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Source Sans 3', system-ui, -apple-system, sans-serif;
+  background: var(--slate-50);
+  color: var(--slate-900);
+  line-height: 1.6;
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* HERO */
+.calc-hero {
+  background: linear-gradient(135deg, #071524 0%, #0D233A 60%, #183654 100%);
+  color: #fff;
+  padding: 60px 0 46px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 3px solid var(--orange);
+}
+.calc-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 36px 36px;
+  pointer-events: none;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(232, 97, 26, 0.18);
+  border: 1px solid rgba(232, 97, 26, 0.4);
+  padding: 6px 14px;
+  border-radius: 999px;
+  color: #FFA573;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 14px;
+}
+.calc-hero h1 {
+  font-family: 'Lexend', sans-serif;
+  font-size: clamp(1.8rem, 3.6vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+.calc-hero h1 span { color: var(--orange); }
+.calc-hero p {
+  color: #CBD5E1;
+  font-size: 1.05rem;
+  max-width: 760px;
+  margin-bottom: 24px;
+}
+.hero-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.hero-tag {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  color: #E2E8F0;
+}
+
+/* LAYOUT */
+.calc-wrapper { padding: 40px 0 60px; }
+.calc-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 32px;
+  align-items: start;
+}
+@media (max-width: 992px) {
+  .calc-grid { grid-template-columns: 1fr; }
+}
+
+/* CARDS */
+.card-box {
+  background: #fff;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 28px;
+  margin-bottom: 28px;
+}
+.card-header-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--slate-100);
+  padding-bottom: 16px;
+  margin-bottom: 22px;
+}
+.card-title {
+  font-family: 'Lexend', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* FORM STYLES */
+.preset-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.pill-btn {
+  background: var(--slate-100);
+  border: 1px solid var(--slate-200);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--slate-700);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.pill-btn:hover, .pill-btn.active {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #fff;
+}
+
+.form-group-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+@media (max-width: 600px) {
+  .form-group-grid { grid-template-columns: 1fr; }
+}
+.form-field { margin-bottom: 16px; }
+.form-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+.form-label small { color: var(--slate-600); font-weight: 400; }
+.form-input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid var(--slate-200);
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+  color: var(--slate-900);
+  background: #fff;
+  transition: border-color 0.2s;
+}
+.form-input:focus {
+  outline: none;
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(232,97,26,0.12);
+}
+.unit-toggle {
+  display: flex;
+  background: var(--slate-100);
+  padding: 4px;
+  border-radius: var(--radius-md);
+  margin-bottom: 20px;
+}
+.unit-opt {
+  flex: 1;
+  text-align: center;
+  padding: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--slate-700);
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  transition: all 0.2s;
+}
+.unit-opt.active {
+  background: #fff;
+  color: var(--navy);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+/* RESULTS PANEL */
+.result-stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+.stat-card {
+  background: var(--slate-50);
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.stat-card.featured {
+  background: linear-gradient(145deg, #0D233A 0%, #183654 100%);
+  color: #fff;
+  border-color: #0D233A;
+}
+.stat-card.featured .stat-meta { color: #FFA573; }
+.stat-card.featured .stat-val { color: #fff; }
+.stat-card.featured .stat-desc { color: #CBD5E1; }
+.stat-card::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px; height: 100%;
+  background: var(--orange);
+}
+.stat-meta {
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--slate-600);
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+.stat-val {
+  font-family: 'Lexend', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+.stat-desc { font-size: 0.8rem; color: var(--slate-600); }
+
+/* SAFE T-SCORE GAUGE */
+.safe-t-box {
+  background: #fff;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-bottom: 20px;
+}
+.safe-t-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-top: 6px;
+}
+.safe-t-good { background: #DCFCE7; color: #166534; }
+.safe-t-normal { background: #FEF3C7; color: #92400E; }
+.safe-t-bad { background: #FEE2E2; color: #991B1B; }
+
+/* HEINRICH PYRAMID SVG */
+.pyramid-box {
+  background: #fff;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  text-align: center;
+  margin-bottom: 22px;
+}
+.pyramid-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 12px;
+}
+.pyramid-level {
+  padding: 8px 12px;
+  margin: 4px auto;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.2s;
+}
+.pyr-1 { width: 45%; background: #EF4444; color: #fff; }
+.pyr-2 { width: 62%; background: #F97316; color: #fff; }
+.pyr-3 { width: 80%; background: #FBBF24; color: #78350F; }
+.pyr-4 { width: 100%; background: #E2E8F0; color: #1E293B; }
+
+/* ACTION BUTTONS */
+.btn-row { display: flex; gap: 12px; margin-top: 14px; }
+.btn-calc-action {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+.btn-primary-k3 {
+  background: var(--orange);
+  color: #fff;
+}
+.btn-primary-k3:hover {
+  background: var(--orange-hover);
+  color: #fff;
+}
+.btn-outline-k3 {
+  background: #fff;
+  color: var(--navy);
+  border: 1.5px solid var(--slate-300);
+}
+.btn-outline-k3:hover {
+  background: var(--slate-100);
+}
+
+/* REFERENCE & CONTENT SECTIONS */
+.k3-editorial-section {
+  background: #fff;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+  margin-bottom: 32px;
+}
+.editorial-title {
+  font-family: 'Lexend', sans-serif;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 16px;
+  border-left: 4px solid var(--orange);
+  padding-left: 14px;
+}
+.editorial-p {
+  color: var(--slate-700);
+  font-size: 0.96rem;
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+.ref-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  margin: 20px 0;
+}
+.ref-table th {
+  background: var(--navy);
+  color: #fff;
+  padding: 10px 14px;
+  text-align: left;
+  font-weight: 600;
+}
+.ref-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--slate-200);
+  color: var(--slate-700);
+}
+.ref-table tr:nth-child(even) td { background: var(--slate-50); }
+
+/* FAQ ACCORDION */
+.faq-box { margin-top: 20px; }
+.faq-item {
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-md);
+  margin-bottom: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+.faq-q {
+  width: 100%;
+  padding: 16px 20px;
+  text-align: left;
+  background: #fff;
+  border: none;
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--navy);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.faq-q:hover { background: var(--slate-50); }
+.faq-a {
+  padding: 0 20px 18px;
+  color: var(--slate-700);
+  font-size: 0.92rem;
+  line-height: 1.65;
+  display: none;
+}
+.faq-item.active .faq-a { display: block; }
+.faq-item.active .faq-icon { transform: rotate(180deg); }
+.faq-icon { transition: transform 0.2s; font-size: 0.8rem; }
+
+/* PRINT STYLES */
+@media print {
+  body { background: #fff; color: #000; }
+  .calc-hero, .pill-btn, .btn-row, nav, footer, .faq-box, .unit-toggle, .form-input, .k3-editorial-section { display: none !important; }
+  .calc-wrapper { padding: 0; }
+  .calc-grid { display: block; }
+  .card-box { border: none; box-shadow: none; padding: 0; }
+  .print-header { display: block !important; border-bottom: 2px solid #000; padding-bottom: 12px; margin-bottom: 20px; }
+}
+.print-header { display: none; }
+</style>
+
+<?php require __DIR__ . '/../includes/navbar.php'; ?>
+
+<main class="calc-page" id="konten-utama">
+
+<!-- HERO -->
+<section class="calc-hero">
   <div class="container">
-    <div class="hero-badge">🧮 Kalkulator K3 Gratis</div>
-    <h1>Kalkulator <span>LTIR · TRIR · LTISR</span><br>Statistik K3 Online</h1>
-    <p>Masukkan data jam kerja dan kecelakaan — semua KPI keselamatan dihitung otomatis. Gratis, tanpa daftar, tanpa download.</p>
+    <div class="hero-badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      Standar Kemnaker RI &amp; OSHA 1904
+    </div>
+    <h1>Kalkulator Statistik K3 <span>Online 2026</span></h1>
+    <p>Hitung Tingkat Kekerapan (FR), Tingkat Keparahan (SR), Incident Rate (IR), Safe T-Score, dan Piramida Heinrich otomatis untuk keperluan audit SMK3 PP 50/2012 dan pelaporan P2K3.</p>
+    <div class="hero-tags">
+      <span class="hero-tag">Kepmenaker KEP.372/MEN/1989</span>
+      <span class="hero-tag">OSHA 29 CFR 1904</span>
+      <span class="hero-tag">ISO 45001:2018 Cl. 9.1</span>
+      <span class="hero-tag">Laporan Triwulan P2K3</span>
+    </div>
   </div>
 </section>
 
-<section class="main">
+<!-- MAIN CALCULATOR -->
+<section class="calc-wrapper">
   <div class="container">
-    <div class="calc-layout">
+    
+    <div class="calc-grid">
+      
+      <!-- FORM INPUT COLUMN -->
+      <div class="calc-form-col">
+        <div class="card-box">
+          <div class="card-header-line">
+            <h2 class="card-title">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="12" y1="12" x2="12" y2="18"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+              Parameter Data Kerja
+            </h2>
+            <button class="pill-btn" type="button" onclick="resetForm()">Reset Nilai</button>
+          </div>
 
-      <!-- INPUT PANEL -->
-      <div>
-        <div class="panel">
-          <h2>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="11" y2="15"/></svg>
-            Data Input
-          </h2>
+          <!-- INDUSTRY PRESETS -->
+          <div class="preset-pills">
+            <span style="font-size:0.8rem;font-weight:700;color:var(--slate-600);align-self:center">Preset Industri:</span>
+            <button class="pill-btn active" type="button" onclick="loadPreset('manufaktur')">Manufaktur (150 Pekerja)</button>
+            <button class="pill-btn" type="button" onclick="loadPreset('konstruksi')">Konstruksi (300 Pekerja)</button>
+            <button class="pill-btn" type="button" onclick="loadPreset('migas')">Migas &amp; Energi (500 Pekerja)</button>
+            <button class="pill-btn" type="button" onclick="loadPreset('gudang')">Gudang &amp; Logistik (80 Pekerja)</button>
+          </div>
 
-          <div class="form-group">
-            <label>Standar Perhitungan</label>
-            <div class="standard-toggle">
-              <button class="std-btn active" id="btnIntl" onclick="setStd('intl')">🌍 International (1.000.000)</button>
-              <button class="std-btn" id="btnOsha" onclick="setStd('osha')">🇺🇸 OSHA (200.000)</button>
+          <!-- BASIS MULTIPLIER TOGGLE -->
+          <label class="form-label">Standar Basis Jam Kerja (Multiplier)</label>
+          <div class="unit-toggle">
+            <button class="unit-opt active" id="btnKemnaker" type="button" onclick="setMultiplier(1000000)">
+              Kemnaker / ILO (1.000.000 Jam)
+            </button>
+            <button class="unit-opt" id="btnOsha" type="button" onclick="setMultiplier(200000)">
+              OSHA / Internasional (200.000 Jam)
+            </button>
+          </div>
+
+          <!-- INPUT FIELDS -->
+          <div class="form-group-grid">
+            <div class="form-field">
+              <label class="form-label" for="inpJumlahPekerja">
+                Jumlah Pekerja (Rata-rata)
+                <small>Orang</small>
+              </label>
+              <input type="number" id="inpJumlahPekerja" class="form-input" value="150" min="1" oninput="calculateK3()">
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="inpJamKerjaOrang">
+                Total Jam Kerja Selamat (JKO)
+                <small>Man-Hours</small>
+              </label>
+              <input type="number" id="inpJamKerjaOrang" class="form-input" value="312000" min="1" oninput="calculateK3()">
             </div>
           </div>
 
-          <div class="form-group">
-            <label>Periode <span>— pilih untuk konteks interpretasi</span></label>
-            <select id="periode">
-              <option value="bulan">Bulan ini</option>
-              <option value="triwulan">Triwulan</option>
-              <option value="semester">Semester</option>
-              <option value="tahunan" selected>Tahunan</option>
-            </select>
+          <div class="form-group-grid">
+            <div class="form-field">
+              <label class="form-label" for="inpJumlahKasusLTI">
+                Kasus Kecelakaan Hilang Hari (LTI)
+                <small>Kasus</small>
+              </label>
+              <input type="number" id="inpJumlahKasusLTI" class="form-input" value="2" min="0" oninput="calculateK3()">
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="inpHariHilang">
+                Total Hari Kerja Hilang (LTD)
+                <small>Hari Kerja</small>
+              </label>
+              <input type="number" id="inpHariHilang" class="form-input" value="14" min="0" oninput="calculateK3()">
+            </div>
           </div>
 
-          <hr class="divider">
-
-          <div class="form-group">
-            <label>Total Jam Kerja (Man-Hours) <span>— jam kerja seluruh karyawan</span></label>
-            <input type="number" id="manHours" placeholder="cth: 1200000" min="0" oninput="autoCalc()">
+          <div class="form-group-grid">
+            <div class="form-field">
+              <label class="form-label" for="inpKasusNonLTI">
+                Kecelakaan Ringan / Medis (FAC/MTC)
+                <small>Tanpa Hari Hilang</small>
+              </label>
+              <input type="number" id="inpKasusNonLTI" class="form-input" value="5" min="0" oninput="calculateK3()">
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="inpNearMiss">
+                Kejadian Hampir Celaka (Near Miss)
+                <small>Laporan Lapangan</small>
+              </label>
+              <input type="number" id="inpNearMiss" class="form-input" value="28" min="0" oninput="calculateK3()">
+            </div>
           </div>
 
-          <div class="form-group">
-            <label>Jumlah Karyawan <span>— opsional, untuk referensi</span></label>
-            <input type="number" id="employees" placeholder="cth: 500" min="0">
+          <div style="border-top:1px dashed var(--slate-300);padding-top:16px;margin-top:10px">
+            <label class="form-label">
+              Komparasi Safe T-Score (Periode Sebelumnya)
+              <small>Opsional</small>
+            </label>
+            <div class="form-group-grid">
+              <div class="form-field">
+                <input type="number" id="inpFrLalu" class="form-input" placeholder="FR Periode Lalu (cth: 8.5)" value="9.6" step="0.1" oninput="calculateK3()">
+              </div>
+              <div class="form-field">
+                <input type="number" id="inpHoursLalu" class="form-input" placeholder="JKO Periode Lalu (cth: 300000)" value="300000" oninput="calculateK3()">
+              </div>
+            </div>
           </div>
 
-          <hr class="divider">
-          <p style="font-size:.82rem;color:var(--muted);margin-bottom:12px;font-weight:600">Jenis Kecelakaan/Insiden</p>
-
-          <div class="form-group">
-            <label>Fatality (Meninggal) <span>— kasus kematian akibat kerja</span></label>
-            <input type="number" id="fatality" placeholder="0" min="0" value="0" oninput="autoCalc()">
+          <div class="btn-row">
+            <button class="btn-calc-action btn-primary-k3" type="button" onclick="printOfficialReport()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+              Cetak Rekap Laporan P2K3
+            </button>
+            <button class="btn-calc-action btn-outline-k3" type="button" onclick="copyResultSummary()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Salin Ringkasan
+            </button>
           </div>
 
-          <div class="form-group">
-            <label>LTI — Lost Time Injury <span>— absen ≥1 hari kerja</span></label>
-            <input type="number" id="lti" placeholder="0" min="0" value="0" oninput="autoCalc()">
-          </div>
-
-          <div class="form-group">
-            <label>Total Hari Hilang (Lost Days) <span>— total hari tidak masuk akibat LTI</span></label>
-            <input type="number" id="lostDays" placeholder="0" min="0" value="0" oninput="autoCalc()">
-          </div>
-
-          <div class="form-group">
-            <label>RWC — Restricted Work Case <span>— kerja terbatas/dipindah tugas</span></label>
-            <input type="number" id="rwc" placeholder="0" min="0" value="0" oninput="autoCalc()">
-          </div>
-
-          <div class="form-group">
-            <label>MTC — Medical Treatment Case <span>— diobati lebih dari P3K</span></label>
-            <input type="number" id="mtc" placeholder="0" min="0" value="0" oninput="autoCalc()">
-          </div>
-
-          <div class="form-group">
-            <label>FAC — First Aid Case <span>— hanya P3K, tidak absen</span></label>
-            <input type="number" id="fac" placeholder="0" min="0" value="0" oninput="autoCalc()">
-          </div>
-
-          <div class="form-group">
-            <label>Near Miss / Hampir Celaka <span>— insiden tanpa cedera</span></label>
-            <input type="number" id="nearMiss" placeholder="0" min="0" value="0" oninput="autoCalc()">
-          </div>
-
-          <button class="btn-calc" onclick="calculate()">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M9 9l3 3m0 0l3-3m-3 3V4m0 12a9 9 0 1 1 0-18 9 9 0 0 1 0 18z"/></svg>
-            Hitung Sekarang
-          </button>
-          <button class="btn-reset" onclick="resetForm()">↺ Reset</button>
-        </div>
-
-        <div class="info-box" style="margin-top:20px">
-          <h4>💡 Apa itu Man-Hours?</h4>
-          <p>Man-Hours = Jumlah Karyawan × Jam Kerja per Hari × Hari Kerja per Tahun</p>
-          <p style="margin-top:6px">Contoh: 500 orang × 8 jam × 300 hari = <strong>1.200.000 man-hours</strong></p>
         </div>
       </div>
 
-      <!-- RESULTS PANEL -->
-      <div class="results" id="resultsPanel">
-        <div class="placeholder" id="placeholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 7H6a2 2 0 00-2 2v9a2 2 0 002 2h9a2 2 0 002-2v-3M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2M9 7h6M9 12h6m-3-3v6"/></svg>
-          <p>Isi data di kiri dan klik <strong>Hitung Sekarang</strong><br>untuk melihat hasil statistik K3</p>
+      <!-- RESULTS COLUMN -->
+      <div class="calc-result-col">
+        <div class="card-box">
+          
+          <div class="card-header-line">
+            <h2 class="card-title">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+              Hasil Evaluasi Kinerja K3
+            </h2>
+            <span id="labelBasis" style="font-size:0.75rem;font-weight:700;color:var(--orange);background:var(--orange-light);padding:4px 8px;border-radius:4px">
+              Basis: 1.000.000 Jam
+            </span>
+          </div>
+
+          <div class="result-stat-grid">
+            
+            <div class="stat-card featured">
+              <div class="stat-meta">Frequency Rate (FR)</div>
+              <div class="stat-val" id="outFR">6.41</div>
+              <div class="stat-desc">Kecelakaan per unit jam kerja standar</div>
+            </div>
+
+            <div class="stat-card featured">
+              <div class="stat-meta">Severity Rate (SR)</div>
+              <div class="stat-val" id="outSR">44.87</div>
+              <div class="stat-desc">Hari kerja hilang per unit jam kerja</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-meta">Incident Rate (IR)</div>
+              <div class="stat-val" id="outIR">1.33%</div>
+              <div class="stat-desc">Rasio pekerja mengalami insiden</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-meta">Avg. Lost Time (ALTR)</div>
+              <div class="stat-val" id="outALTR">7.00</div>
+              <div class="stat-desc">Rata-rata hari hilang per kasus LTI</div>
+            </div>
+
+          </div>
+
+          <!-- SAFE T-SCORE EVALUATION -->
+          <div class="safe-t-box">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div>
+                <strong style="font-size:0.92rem;color:var(--navy)">Analisis Safe T-Score:</strong>
+                <div style="font-size:0.8rem;color:var(--slate-600)">Komparasi tren performa keselamatan</div>
+              </div>
+              <div style="text-align:right">
+                <span id="outSafeTScore" style="font-size:1.4rem;font-weight:800;font-family:'Lexend',sans-serif;color:var(--navy)">-0.58</span>
+              </div>
+            </div>
+            <div id="badgeSafeT" class="safe-t-badge safe-t-normal">
+              Fluktuasi Normal (Tidak ada perubahan signifikan)
+            </div>
+          </div>
+
+          <!-- HEINRICH PYRAMID -->
+          <div class="pyramid-box">
+            <div class="pyramid-title">Piramida Rasio Heinrich Periode Ini</div>
+            <div class="pyramid-level pyr-1" title="Kecelakaan Fatal / Akibat Parah">
+              <span>Fatal / Cacat:</span>
+              <strong id="pyrFatal">0 Kasus</strong>
+            </div>
+            <div class="pyramid-level pyr-2" title="Kecelakaan Hilang Hari (LTI)">
+              <span>LTI / Hari Hilang:</span>
+              <strong id="pyrLTI">2 Kasus</strong>
+            </div>
+            <div class="pyramid-level pyr-3" title="Kecelakaan Ringan / P3K">
+              <span>Non-LTI / Medis:</span>
+              <strong id="pyrNonLTI">5 Kasus</strong>
+            </div>
+            <div class="pyramid-level pyr-4" title="Near Miss / Hampir Celaka">
+              <span>Near Miss:</span>
+              <strong id="pyrNearMiss">28 Kejadian</strong>
+            </div>
+          </div>
+
+          <div style="font-size:0.8rem;color:var(--slate-600);line-height:1.5;background:var(--slate-100);padding:12px;border-radius:8px">
+            <strong>Catatan Audit SMK3:</strong> Data statistik wajib direkapitulasi secara berkala per triwulan dan dilaporkan kepada Dinas Tenaga Kerja setempat melalui lembar formulir Laporan P2K3 sesuai format Permenaker 04/MEN/1987.
+          </div>
+
         </div>
-        <!-- Results inject here -->
       </div>
+
     </div>
 
-    <!-- REFERENCE TABLE -->
-    <div class="info-box" style="margin-top:40px">
-      <h4>📊 Tabel Referensi — Nilai LTIR per Industri (Indonesia)</h4>
+    <!-- IN-DEPTH EDITORIAL REFERENCE GUIDE (INDEXABLE SEO DEPTH) -->
+    <div class="k3-editorial-section">
+      <h2 class="editorial-title">Panduan Lengkap Rumus &amp; Perhitungan Statistik K3 Resmi Indonesia</h2>
+      <p class="editorial-p">
+        Pengukuran kinerja Keselamatan dan Kesehatan Kerja (K3) berbasis data numerik merupakan instrumen krusial dalam pemenuhan Klausul 9 ISO 45001:2018 dan Lampiran II PP 50/2012 tentang Penerapan SMK3. Di Indonesia, acuan resmi perhitungan statistik kecelakaan kerja diatur dalam <strong>Keputusan Menteri Tenaga Kerja RI Nomor: KEP.372/MEN/1989</strong> mengenai Petunjuk Pelaksanaan Tarif Premi Asuransi Kecelakaan Kerja.
+      </p>
+
+      <h3 style="color:var(--navy);font-family:'Lexend',sans-serif;font-size:1.15rem;margin:22px 0 10px">1. Rumus Frequency Rate (Tingkat Kekerapan Kecelakaan)</h3>
+      <p class="editorial-p">
+        Frequency Rate (FR) menunjukkan berapa frekuensi kasus kecelakaan kerja yang menyebabkan hilang hari kerja (LTI) untuk setiap satu juta (atau dua ratus ribu) jam kerja orang yang ditempuh oleh pekerja.
+      </p>
+      <div style="background:var(--slate-100);padding:14px 18px;border-radius:8px;font-family:monospace;font-size:0.95rem;color:var(--navy);margin-bottom:16px">
+        FR = (Jumlah Kasus Kecelakaan LTI × Multiplier) / Total Jam Kerja Orang (JKO)
+      </div>
+
+      <h3 style="color:var(--navy);font-family:'Lexend',sans-serif;font-size:1.15rem;margin:22px 0 10px">2. Rumus Severity Rate (Tingkat Keparahan Kecelakaan)</h3>
+      <p class="editorial-p">
+        Severity Rate (SR) mengindikasikan tingkat keparahan dampak kecelakaan yang tercermin dari banyaknya jumlah hari kerja hilang (man-days lost) yang dialami perusahaan.
+      </p>
+      <div style="background:var(--slate-100);padding:14px 18px;border-radius:8px;font-family:monospace;font-size:0.95rem;color:var(--navy);margin-bottom:16px">
+        SR = (Total Hari Kerja Hilang × Multiplier) / Total Jam Kerja Orang (JKO)
+      </div>
+
+      <h3 style="color:var(--navy);font-family:'Lexend',sans-serif;font-size:1.15rem;margin:22px 0 10px">3. Tabel Standar Hari Kerja Hilang untuk Cacat Tetap (Kepmenaker 372/1989)</h3>
+      <p class="editorial-p">
+        Jika kecelakaan kerja mengakibatkan cacat permanen sebagian atau kematian, perhitungan hari hilang tidak dihitung berdasarkan hari kalender rawat inap, melainkan menggunakan tabel tarif pembebanan hari kerja hilang resmi berikut:
+      </p>
+
       <table class="ref-table">
         <thead>
-          <tr><th>Industri</th><th>LTIR Sangat Baik</th><th>LTIR Rata-rata</th><th>LTIR Perlu Perhatian</th></tr>
+          <tr>
+            <th>Jenis Cedera / Cacat Permanen</th>
+            <th>Persentase Cacat</th>
+            <th>Standar Beban Hari Kerja Hilang</th>
+          </tr>
         </thead>
         <tbody>
-          <tr><td>Konstruksi</td><td class="good">&lt; 1.0</td><td class="avg">1.0 – 3.5</td><td class="bad">&gt; 3.5</td></tr>
-          <tr><td>Pertambangan</td><td class="good">&lt; 0.8</td><td class="avg">0.8 – 2.5</td><td class="bad">&gt; 2.5</td></tr>
-          <tr><td>Migas / Oil & Gas</td><td class="good">&lt; 0.5</td><td class="avg">0.5 – 1.5</td><td class="bad">&gt; 1.5</td></tr>
-          <tr><td>Manufaktur</td><td class="good">&lt; 1.5</td><td class="avg">1.5 – 4.0</td><td class="bad">&gt; 4.0</td></tr>
-          <tr><td>Kesehatan / Rumah Sakit</td><td class="good">&lt; 2.0</td><td class="avg">2.0 – 5.0</td><td class="bad">&gt; 5.0</td></tr>
-          <tr><td>Logistik / Transportasi</td><td class="good">&lt; 2.0</td><td class="avg">2.0 – 4.5</td><td class="bad">&gt; 4.5</td></tr>
+          <tr>
+            <td><strong>Kematian (Fatal Accident)</strong></td>
+            <td>100%</td>
+            <td><strong>6.000 Hari</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Cacat Tetap Total</strong> (Kehilangan kedua mata/lengan/kaki)</td>
+            <td>100%</td>
+            <td><strong>6.000 Hari</strong></td>
+          </tr>
+          <tr>
+            <td>Kehilangan satu lengan dari atau di atas siku</td>
+            <td>75%</td>
+            <td>4.500 Hari</td>
+          </tr>
+          <tr>
+            <td>Kehilangan satu tangan dari atau di atas pergelangan</td>
+            <td>50%</td>
+            <td>3.000 Hari</td>
+          </tr>
+          <tr>
+            <td>Kehilangan satu kaki dari atau di atas lutut</td>
+            <td>75%</td>
+            <td>4.500 Hari</td>
+          </tr>
+          <tr>
+            <td>Kehilangan penglihatan satu mata total</td>
+            <td>30%</td>
+            <td>1.800 Hari</td>
+          </tr>
+          <tr>
+            <td>Kehilangan satu ibu jari tangan</td>
+            <td>10%</td>
+            <td>600 Hari</td>
+          </tr>
+          <tr>
+            <td>Kehilangan satu jari telunjuk tangan</td>
+            <td>5%</td>
+            <td>300 Hari</td>
+          </tr>
         </tbody>
       </table>
-      <p style="margin-top:10px;font-size:.78rem;color:var(--muted)">Catatan: nilai referensi bersifat indikatif. Setiap perusahaan memiliki target LTIR yang berbeda sesuai standar industri dan persyaratan klien.</p>
+
+      <!-- FAQ ACCORDION -->
+      <h3 style="color:var(--navy);font-family:'Lexend',sans-serif;font-size:1.25rem;margin:32px 0 16px">Pertanyaan Sering Diajukan Seputar Statistik K3 (FAQ)</h3>
+      <div class="faq-box">
+        
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>Apa perbedaan standar pengali 1.000.000 jam kerja dan 200.000 jam kerja?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-a">
+            Standar 1.000.000 jam kerja adalah standar resmi Depnaker/Kemnaker RI berdasarkan Kepmenaker No. KEP.372/MEN/1989 dan International Labour Organization (ILO), mewakili skala sekitar 500 pekerja penuh waktu selama 1 tahun kerja (500 org × 40 jam × 50 minggu). Sedangkan standar 200.000 jam kerja mengacu pada regulasi US OSHA (Occupational Safety and Health Administration), mewakili skala 100 pekerja penuh waktu selama 1 tahun (100 org × 40 jam × 50 minggu).
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>Bagaimana cara membaca dan menginterpretasikan nilai Safe T-Score?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-a">
+            Safe T-Score digunakan untuk menguji secara statistik apakah perbedaan angka Frequency Rate (FR) saat ini dibanding periode lalu murni kebetulan acak atau merupakan perubahan kinerja yang nyata:
+            <ul style="padding-left:20px;margin-top:8px">
+              <li><strong>Skor antara -2.00 s/d +2.00:</strong> Variasi normal / acak. Kinerja K3 dinilai relatif stabil.</li>
+              <li><strong>Skor &lt; -2.00:</strong> Kinerja keselamatan MEMBAIK secara signifikan (kemungkinan program pencegahan berhasil).</li>
+              <li><strong>Skor &gt; +2.00:</strong> Kinerja keselamatan MEMBURUK secara signifikan (indikasi bahaya sistemik, perlu audit investigasi).</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>Kapan suatu kecelakaan dikategorikan sebagai Lost Time Injury (LTI)?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-a">
+            Menurut standar Kepmenaker 372/1989 dan OSHA 1904, kecelakaan kerja diklasifikasikan sebagai Lost Time Injury (LTI) jika cedera yang dialami menyebabkan pekerja tidak mampu kembali bekerja atau menjalankan tugas normalnya pada jadwal giliran kerja berikutnya (minimal 1 x 24 jam setelah kejadian), berdasarkan surat rekomendasi dokter pemeriksa.
+          </div>
+        </div>
+
+      </div>
+
     </div>
 
-    <div class="info-box">
-      <h4>📐 Rumus Perhitungan</h4>
-      <ul>
-        <li><strong>LTIR</strong> = (LTI + Fatality) × Faktor ÷ Man-Hours</li>
-        <li><strong>TRIR</strong> = (Fatality + LTI + RWC + MTC) × Faktor ÷ Man-Hours</li>
-        <li><strong>LTISR / Severity Rate</strong> = Total Lost Days × Faktor ÷ Man-Hours</li>
-        <li><strong>Frequency Rate (FR)</strong> = (LTI + Fatality) × Faktor ÷ Man-Hours</li>
-        <li><strong>Faktor OSHA</strong> = 200.000 | <strong>Faktor International</strong> = 1.000.000</li>
-      </ul>
-    </div>
-
-    <div class="cta-strip">
-      <h3>🎓 Ingin Belajar Lebih Dalam tentang Statistik K3?</h3>
-      <p>Ikuti Pelatihan Ahli K3 Umum KEMNAKER RI — materi mencakup analisis statistik K3, investigasi insiden, dan manajemen K3 komprehensif.</p>
-      <a href="https://wa.me/6287759151278?text=Halo%20Wahana%2C%20saya%20pakai%20kalkulator%20K3%20dan%20ingin%20tanya%20pelatihan%20Ahli%20K3%20Umum" target="_blank" rel="noopener" class="btn-wa">
-        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-        Tanya Jadwal Pelatihan K3
-      </a>
-    </div>
   </div>
 </section>
 
-<section class="tools-training-cta">
-  <div class="container">
-    <h2>Tingkatkan Kompetensi K3 Anda</h2>
-    <div class="tools-training-grid">
-      <div class="tools-training-card">
-        <h3><a href="/pelatihan/pelatihan-ahli-k3-umum-sertifikasi-bnsp-online/">Pelatihan Ahli K3 Umum</a></h3>
-        <p>Sertifikasi wajib bagi praktisi K3 perusahaan, resmi BNSP, materi regulasi &amp; manajemen risiko.</p>
-        <a href="/pelatihan/pelatihan-ahli-k3-umum-sertifikasi-bnsp-online/" class="tools-training-btn">Lihat Program &rarr;</a>
-      </div>
-      <div class="tools-training-card">
-        <h3><a href="/pelatihan/pelatihan-petugas-p3k-sertifikasi-bnsp/">Pelatihan Petugas P3K | Sertifikasi BNSP</a></h3>
-        <p>Pelatihan penanganan darurat dan P3K di tempat kerja, sertifikasi BNSP, wajib untuk perusahaan.</p>
-        <a href="/pelatihan/pelatihan-petugas-p3k-sertifikasi-bnsp/" class="tools-training-btn">Lihat Program &rarr;</a>
-      </div>
-      <div class="tools-training-card">
-        <h3><a href="/pelatihan/pelatihan-operator-k3-sertifikasi-bnsp/">Pelatihan Operator K3 | Sertifikasi BNSP</a></h3>
-        <p>Kompetensi dasar keselamatan kerja untuk operator, sertifikasi resmi BNSP, untuk semua industri.</p>
-        <a href="/pelatihan/pelatihan-operator-k3-sertifikasi-bnsp/" class="tools-training-btn">Lihat Program &rarr;</a>
-      </div>
-      <div class="tools-training-card">
-        <h3><a href="/jadwal/">Jadwal Pelatihan Terdekat</a></h3>
-        <p>Lihat jadwal batch pelatihan K3 terbaru — online dan offline di berbagai kota.</p>
-        <a href="/jadwal/" class="tools-training-btn">Lihat Jadwal &rarr;</a>
-      </div>
-    </div>
-  </div>
-</section>
+</main>
 
-<footer>
-  <div class="container">
-    <p><a href="/tools/">← Kembali ke Semua Tools K3</a> &nbsp;|&nbsp; <a href="/">Wahana Totalita Konsultan</a> &nbsp;|&nbsp; <a href="https://wa.me/6287759151278" target="_blank">WhatsApp</a></p>
-    <p style="margin-top:8px">© <?php echo date('Y'); ?> Wahana Totalita Konsultan, Yogyakarta</p>
-  </div>
-</footer>
-
-<a href="https://wa.me/6287759151278" target="_blank" rel="noopener" class="wa-float"
-   style="position:fixed;bottom:24px;right:24px;background:#25D366;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(37,211,102,.4);z-index:999">
-  <svg viewBox="0 0 24 24" fill="white" width="26" height="26"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-</a>
-
-<div class="toast" id="toast"></div>
+<?php require __DIR__ . '/../includes/footer.php'; ?>
 
 <script>
-let standard = 'intl';
-let factor = 1000000;
+let currentMultiplier = 1000000;
 
-function setStd(s){
-  standard = s;
-  factor = s === 'osha' ? 200000 : 1000000;
-  document.getElementById('btnIntl').classList.toggle('active', s==='intl');
-  document.getElementById('btnOsha').classList.toggle('active', s==='osha');
-  if(document.getElementById('placeholder').style.display==='none') calculate();
+const presets = {
+  manufaktur: { workers: 150, hours: 312000, lti: 2, days: 14, nonLti: 5, nearMiss: 28, frPast: 9.6, hoursPast: 300000 },
+  konstruksi: { workers: 300, hours: 624000, lti: 4, days: 38, nonLti: 12, nearMiss: 64, frPast: 7.2, hoursPast: 600000 },
+  migas:       { workers: 500, hours: 1040000, lti: 0, days: 0, nonLti: 3, nearMiss: 110, frPast: 1.1, hoursPast: 1000000 },
+  gudang:      { workers: 80,  hours: 166400, lti: 1, days: 6, nonLti: 4, nearMiss: 19, frPast: 5.8, hoursPast: 160000 }
+};
+
+function loadPreset(key){
+  const p = presets[key];
+  if(!p) return;
+  document.querySelectorAll('.preset-pills .pill-btn').forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+  
+  document.getElementById('inpJumlahPekerja').value = p.workers;
+  document.getElementById('inpJamKerjaOrang').value = p.hours;
+  document.getElementById('inpJumlahKasusLTI').value = p.lti;
+  document.getElementById('inpHariHilang').value = p.days;
+  document.getElementById('inpKasusNonLTI').value = p.nonLti;
+  document.getElementById('inpNearMiss').value = p.nearMiss;
+  document.getElementById('inpFrLalu').value = p.frPast;
+  document.getElementById('inpHoursLalu').value = p.hoursPast;
+  calculateK3();
 }
 
-function getVal(id){ return parseFloat(document.getElementById(id).value)||0; }
-
-function autoCalc(){
-  if(getVal('manHours') > 0) calculate();
-}
-
-function calculate(){
-  const mh = getVal('manHours');
-  if(!mh || mh <= 0){
-    showToast('⚠️ Masukkan Total Jam Kerja terlebih dahulu');
-    return;
-  }
-
-  const fatal = getVal('fatality');
-  const lti   = getVal('lti');
-  const ld    = getVal('lostDays');
-  const rwc   = getVal('rwc');
-  const mtc   = getVal('mtc');
-  const fac   = getVal('fac');
-  const nm    = getVal('nearMiss');
-
-  const ltir  = ((lti + fatal) * factor) / mh;
-  const trir  = ((fatal + lti + rwc + mtc) * factor) / mh;
-  const ltisr = (ld * factor) / mh;
-  const fr    = ltir; // same as LTIR in most standards
-  const sr    = ltisr;
-  const totalInc = fatal + lti + rwc + mtc + fac;
-
-  // Determine status
-  function ltirStatus(v){
-    if(v <= 0) return 'safe';
-    if(v <= 2) return 'safe';
-    if(v <= 5) return 'warn';
-    return 'danger';
-  }
-  function ltirBadge(v){
-    if(v <= 0) return {cls:'badge-neutral',txt:'No Incident'};
-    if(v <= 2) return {cls:'badge-safe',txt:'✓ Baik'};
-    if(v <= 5) return {cls:'badge-warn',txt:'⚠ Perlu Perhatian'};
-    return {cls:'badge-danger',txt:'⛔ Tinggi'};
-  }
-
-  function fmt(n){ return n.toFixed(2); }
-
-  const ltirB = ltirBadge(ltir);
-  const trirB = ltirBadge(trir);
-  const periode = document.getElementById('periode').value;
-  const stdLabel = standard === 'osha' ? 'OSHA (200.000 MH)' : 'International (1.000.000 MH)';
-
-  document.getElementById('placeholder').style.display = 'none';
-
-  document.getElementById('resultsPanel').innerHTML = `
-    <div class="result-card highlight">
-      <div class="result-header">
-        <div>
-          <div class="result-name">LTIR — Lost Time Injury Rate</div>
-          <div class="result-value ${ltirStatus(ltir)}">${fmt(ltir)}</div>
-          <div class="result-formula">(${lti+fatal} × ${factor.toLocaleString()}) ÷ ${mh.toLocaleString()}</div>
-        </div>
-        <span class="result-badge ${ltirB.cls}">${ltirB.txt}</span>
-      </div>
-      <div class="result-desc">Jumlah insiden yang menyebabkan kehilangan waktu kerja per ${factor.toLocaleString()} jam kerja. Standar: ${stdLabel}</div>
-    </div>
-
-    <div class="results-grid">
-      <div class="result-card">
-        <div class="result-name">TRIR — Total Recordable Incident Rate</div>
-        <div class="result-value ${ltirStatus(trir)}">${fmt(trir)}</div>
-        <div class="result-formula">${fatal+lti+rwc+mtc} kasus × ${factor.toLocaleString()} ÷ ${mh.toLocaleString()}</div>
-        <div class="result-desc">Semua insiden tercatat (Fatality+LTI+RWC+MTC)</div>
-        <span class="result-badge ${trirB.cls}" style="display:inline-block;margin-top:6px">${trirB.txt}</span>
-      </div>
-      <div class="result-card">
-        <div class="result-name">LTISR — Severity Rate</div>
-        <div class="result-value ${ld>0?'warn':'safe'}">${fmt(ltisr)}</div>
-        <div class="result-formula">${ld} hari × ${factor.toLocaleString()} ÷ ${mh.toLocaleString()}</div>
-        <div class="result-desc">Tingkat keparahan — hari kerja hilang per ${factor.toLocaleString()} jam</div>
-      </div>
-      <div class="result-card">
-        <div class="result-name">Frequency Rate (FR)</div>
-        <div class="result-value ${ltirStatus(fr)}">${fmt(fr)}</div>
-        <div class="result-formula">FR = LTIR (${stdLabel})</div>
-        <div class="result-desc">Frekuensi kecelakaan per ${factor.toLocaleString()} jam</div>
-      </div>
-      <div class="result-card">
-        <div class="result-name">Total Insiden Tercatat</div>
-        <div class="result-value ${totalInc>0?'warn':'safe'}">${totalInc}</div>
-        <div class="result-desc">Fatal:${fatal} · LTI:${lti} · RWC:${rwc} · MTC:${mtc} · FAC:${fac}</div>
-      </div>
-    </div>
-
-    <div class="result-card">
-      <div class="result-name" style="margin-bottom:12px;font-size:.9rem;font-weight:700">Near Miss Ratio — Rasio Piramida Heinrich</div>
-      <div style="display:flex;gap:12px;flex-wrap:wrap;font-size:.85rem">
-        <div style="text-align:center;padding:12px;background:#f9fafb;border-radius:8px;flex:1">
-          <div style="font-size:1.4rem;font-weight:800;color:#1a6b3a">${nm}</div>
-          <div style="color:var(--muted)">Near Miss</div>
-        </div>
-        <div style="text-align:center;padding:12px;background:#f9fafb;border-radius:8px;flex:1">
-          <div style="font-size:1.4rem;font-weight:800;color:#d97706">${lti+fatal}</div>
-          <div style="color:var(--muted)">LTI+Fatal</div>
-        </div>
-        <div style="text-align:center;padding:12px;background:#f9fafb;border-radius:8px;flex:1">
-          <div style="font-size:1.4rem;font-weight:800;color:var(--muted)">${nm > 0 ? (nm/(lti+fatal||1)).toFixed(1)+'x' : 'N/A'}</div>
-          <div style="color:var(--muted)">Rasio</div>
-        </div>
-      </div>
-      <p class="result-desc" style="margin-top:12px">Teori Heinrich: untuk setiap 1 LTI terdapat ~29 insiden minor dan ~300 hampir celaka. Rasio tinggi = budaya laporan baik.</p>
-    </div>
-
-    <div style="background:#f9fafb;border-radius:10px;padding:16px;font-size:.83rem;color:var(--muted)">
-      <strong>Ringkasan — ${periode.toUpperCase()} | ${stdLabel}</strong><br>
-      Man-Hours: <strong>${mh.toLocaleString()}</strong> | Karyawan: <strong>${getVal('employees')||'—'}</strong><br>
-      LTIR: <strong>${fmt(ltir)}</strong> | TRIR: <strong>${fmt(trir)}</strong> | LTISR: <strong>${fmt(ltisr)}</strong>
-    </div>
-
-    <div class="result-actions">
-      <button class="btn-copy" onclick="copyResult()">📋 Copy Hasil</button>
-      <button class="btn-print" onclick="window.print()">🖨 Print Laporan</button>
-    </div>
-  `;
-}
-
-function copyResult(){
-  const mh = getVal('manHours');
-  const fatal = getVal('fatality');
-  const lti   = getVal('lti');
-  const ld    = getVal('lostDays');
-  const rwc   = getVal('rwc');
-  const mtc   = getVal('mtc');
-  if(!mh) return;
-  const ltir  = (((lti+fatal)*factor)/mh).toFixed(2);
-  const trir  = (((fatal+lti+rwc+mtc)*factor)/mh).toFixed(2);
-  const ltisr = ((ld*factor)/mh).toFixed(2);
-  const text = `=== STATISTIK K3 ===\nMan-Hours: ${mh.toLocaleString()}\nLTIR: ${ltir}\nTRIR: ${trir}\nLTISR: ${ltisr}\nStandar: ${standard==='osha'?'OSHA (200.000)':'International (1.000.000)'}\nSumber: wahanatotalita.com/tools/kalkulator-k3`;
-  navigator.clipboard.writeText(text).then(()=>showToast('✅ Hasil disalin ke clipboard!'));
+function setMultiplier(val){
+  currentMultiplier = val;
+  document.getElementById('btnKemnaker').classList.toggle('active', val === 1000000);
+  document.getElementById('btnOsha').classList.toggle('active', val === 200000);
+  document.getElementById('labelBasis').textContent = val === 1000000 ? 'Basis: 1.000.000 Jam' : 'Basis: 200.000 Jam';
+  calculateK3();
 }
 
 function resetForm(){
-  ['manHours','employees','fatality','lti','lostDays','rwc','mtc','fac','nearMiss'].forEach(id=>{
-    document.getElementById(id).value = ['fatality','lti','lostDays','rwc','mtc','fac','nearMiss'].includes(id) ? '0' : '';
-  });
-  document.getElementById('resultsPanel').innerHTML = document.getElementById('placeholder').outerHTML;
-  document.getElementById('placeholder').style.display = '';
+  document.getElementById('inpJumlahPekerja').value = 100;
+  document.getElementById('inpJamKerjaOrang').value = 200000;
+  document.getElementById('inpJumlahKasusLTI').value = 0;
+  document.getElementById('inpHariHilang').value = 0;
+  document.getElementById('inpKasusNonLTI').value = 0;
+  document.getElementById('inpNearMiss').value = 0;
+  document.getElementById('inpFrLalu').value = '';
+  document.getElementById('inpHoursLalu').value = '';
+  calculateK3();
 }
 
-function showToast(msg){
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'), 2800);
+function calculateK3(){
+  const workers = parseFloat(document.getElementById('inpJumlahPekerja').value) || 1;
+  const hours = parseFloat(document.getElementById('inpJamKerjaOrang').value) || 1;
+  const lti = parseFloat(document.getElementById('inpJumlahKasusLTI').value) || 0;
+  const days = parseFloat(document.getElementById('inpHariHilang').value) || 0;
+  const nonLti = parseFloat(document.getElementById('inpKasusNonLTI').value) || 0;
+  const nearMiss = parseFloat(document.getElementById('inpNearMiss').value) || 0;
+
+  // FR & SR
+  const fr = (lti * currentMultiplier) / hours;
+  const sr = (days * currentMultiplier) / hours;
+  
+  // Incident Rate (% per 100 workers)
+  const ir = (lti / workers) * 100;
+  
+  // Average Lost Time Rate
+  const altr = lti > 0 ? (days / lti) : 0;
+
+  document.getElementById('outFR').textContent = fr.toFixed(2);
+  document.getElementById('outSR').textContent = sr.toFixed(2);
+  document.getElementById('outIR').textContent = ir.toFixed(2) + '%';
+  document.getElementById('outALTR').textContent = altr.toFixed(2);
+
+  // Safe T-Score calculation
+  const frPast = parseFloat(document.getElementById('inpFrLalu').value);
+  const hoursPast = parseFloat(document.getElementById('inpHoursLalu').value);
+
+  if(!isNaN(frPast) && !isNaN(hoursPast) && hoursPast > 0){
+    const diff = fr - frPast;
+    const denominator = Math.sqrt((frPast / hours) * currentMultiplier);
+    let safeT = 0;
+    if(denominator > 0){
+      safeT = diff / Math.sqrt((frPast / (hours / currentMultiplier)));
+    }
+    const scoreVal = safeT.toFixed(2);
+    document.getElementById('outSafeTScore').textContent = (safeT > 0 ? '+' : '') + scoreVal;
+    
+    const badge = document.getElementById('badgeSafeT');
+    if(safeT < -2.0){
+      badge.className = 'safe-t-badge safe-t-good';
+      badge.textContent = 'Membaik Signifikan (Safe T-Score < -2.0)';
+    } else if(safeT > 2.0){
+      badge.className = 'safe-t-badge safe-t-bad';
+      badge.textContent = 'Memburuk Signifikan (Safe T-Score > +2.0)';
+    } else {
+      badge.className = 'safe-t-badge safe-t-normal';
+      badge.textContent = 'Fluktuasi Normal (-2.0 s/d +2.0)';
+    }
+  } else {
+    document.getElementById('outSafeTScore').textContent = 'N/A';
+    document.getElementById('badgeSafeT').className = 'safe-t-badge safe-t-normal';
+    document.getElementById('badgeSafeT').textContent = 'Masukkan data periode lalu untuk Safe T-Score';
+  }
+
+  // Heinrich Pyramid levels
+  document.getElementById('pyrFatal').textContent = '0 Kasus';
+  document.getElementById('pyrLTI').textContent = `${lti} Kasus`;
+  document.getElementById('pyrNonLTI').textContent = `${nonLti} Kasus`;
+  document.getElementById('pyrNearMiss').textContent = `${nearMiss} Kejadian`;
 }
+
+function copyResultSummary(){
+  const fr = document.getElementById('outFR').textContent;
+  const sr = document.getElementById('outSR').textContent;
+  const ir = document.getElementById('outIR').textContent;
+  const altr = document.getElementById('outALTR').textContent;
+  const basis = currentMultiplier.toLocaleString('id-ID');
+  
+  const text = `=== REKAP LAPORAN STATISTIK K3 (Wahana Totalita) ===\nBasis Multiplier: ${basis} Jam Kerja\nFrequency Rate (FR): ${fr}\nSeverity Rate (SR): ${sr}\nIncident Rate (IR): ${ir}\nAverage Lost Time (ALTR): ${altr} Hari/Kasus\nSumber Kalkulator: https://wahanatotalita.com/tools/kalkulator-k3.php`;
+  
+  navigator.clipboard.writeText(text).then(()=>{
+    alert('Ringkasan statistik K3 berhasil disalin ke clipboard!');
+  });
+}
+
+function printOfficialReport(){
+  const workers = document.getElementById('inpJumlahPekerja').value;
+  const hours = document.getElementById('inpJamKerjaOrang').value;
+  const lti = document.getElementById('inpJumlahKasusLTI').value;
+  const days = document.getElementById('inpHariHilang').value;
+  const fr = document.getElementById('outFR').textContent;
+  const sr = document.getElementById('outSR').textContent;
+  const ir = document.getElementById('outIR').textContent;
+  const altr = document.getElementById('outALTR').textContent;
+  const basis = currentMultiplier.toLocaleString('id-ID');
+
+  const win = window.open('', '_blank');
+  win.document.write(`<!DOCTYPE html><html><head><title>Laporan Statistik K3 - Rekap P2K3</title>
+  <style>
+    body{font-family:'Segoe UI',Arial,sans-serif;padding:32px;max-width:760px;margin:0 auto;color:#0F172A;line-height:1.6}
+    .header{border-bottom:3px solid #0D233A;padding-bottom:12px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:flex-end}
+    h1{font-size:18pt;margin:0;color:#0D233A}
+    .sub{font-size:9pt;color:#64748B}
+    table{width:100%;border-collapse:collapse;margin:16px 0;font-size:10pt}
+    th,td{border:1px solid #CBD5E1;padding:8px 12px;text-align:left}
+    th{background:#F1F5F9;color:#0D233A}
+    .badge{display:inline-block;padding:2px 8px;border-radius:4px;font-weight:bold;background:#E8611A;color:#fff;font-size:8.5pt}
+    .sig-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:40px;text-align:center}
+    .sig-line{margin-top:60px;border-top:1px solid #000;font-weight:bold}
+  </style>
+  </head><body>
+  <div class="header">
+    <div>
+      <h1>LEMBAR REKAPITULASI STATISTIK K3</h1>
+      <div class="sub">Berdasarkan Kepmenaker No. KEP.372/MEN/1989 &amp; Format Evaluasi P2K3</div>
+    </div>
+    <div style="text-align:right">
+      <span class="badge">RESMI P2K3</span><br>
+      <span class="sub">Dicetak: ${new Date().toLocaleDateString('id-ID')}</span>
+    </div>
+  </div>
+
+  <h3>I. Data Operasional &amp; Jam Kerja Orang (JKO)</h3>
+  <table>
+    <tr><th style="width:50%">Parameter</th><th>Nilai Tercatat</th></tr>
+    <tr><td>Jumlah Tenaga Kerja Rata-rata</td><td><strong>${workers} Orang</strong></td></tr>
+    <tr><td>Total Jam Kerja Orang (JKO) Selamat</td><td><strong>${Number(hours).toLocaleString('id-ID')} Jam</strong></td></tr>
+    <tr><td>Kasus Kecelakaan Hilang Hari (LTI)</td><td><strong>${lti} Kasus</strong></td></tr>
+    <tr><td>Total Hari Kerja Hilang (LTD)</td><td><strong>${days} Hari</strong></td></tr>
+    <tr><td>Standar Pengali (Basis Multiplier)</td><td><strong>${basis} Jam Kerja</strong></td></tr>
+  </table>
+
+  <h3>II. Indikator Kinerja K3 (OHS Lagging Indicators)</h3>
+  <table>
+    <tr><th>Indikator Statistik</th><th>Hasil Perhitungan</th><th>Keterangan / Interpretasi</th></tr>
+    <tr><td><strong>Frequency Rate (FR)</strong></td><td style="font-size:12pt;font-weight:bold;color:#E8611A">${fr}</td><td>Frekuensi LTI per unit jam kerja</td></tr>
+    <tr><td><strong>Severity Rate (SR)</strong></td><td style="font-size:12pt;font-weight:bold;color:#0D233A">${sr}</td><td>Tingkat keparahan hari kerja hilang</td></tr>
+    <tr><td><strong>Incident Rate (IR)</strong></td><td><strong>${ir}</strong></td><td>Persentase pekerja terkena insiden</td></tr>
+    <tr><td><strong>Average Lost Time (ALTR)</strong></td><td><strong>${altr} Hari/Kasus</strong></td><td>Rata-rata hari hilang per peristiwa LTI</td></tr>
+  </table>
+
+  <div class="sig-grid">
+    <div>
+      Dibuat oleh,<br>
+      <strong>Sekretaris P2K3 / Ahli K3 Umum</strong>
+      <div class="sig-line">( _____________________________ )</div>
+      No. Reg SKP: ___________________
+    </div>
+    <div>
+      Disetujui oleh,<br>
+      <strong>Ketua P2K3 / Pimpinan Perusahaan</strong>
+      <div class="sig-line">( _____________________________ )</div>
+      Tanggal: _______________________
+    </div>
+  </div>
+  </body></html>`);
+  win.document.close();
+  win.print();
+}
+
+function toggleFaq(btn){
+  const item = btn.parentElement;
+  item.classList.toggle('active');
+}
+
+// Initial calculation on load
+window.addEventListener('DOMContentLoaded', calculateK3);
 </script>
+
+<?php require __DIR__ . '/../includes/scripts.php'; ?>
 </body>
 </html>
