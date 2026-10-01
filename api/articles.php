@@ -221,31 +221,35 @@ function handle_article_post(PDO $pdo): never {
     }
     $faqJson = !empty($faq) ? json_encode($faq, JSON_UNESCAPED_UNICODE) : null;
 
-    $stmt = $pdo->prepare("
-        INSERT INTO articles
-        (title, slug, category, thumbnail, meta_title, meta_desc, keywords, content, faq, author, status, published_at, created_at, updated_at)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())
-    ");
-    $stmt->execute([
-        $title, $slug, $category, $thumbnail, $metaTitle, $metaDesc, $keywords, $content, $faqJson, $author, $status, $pubAt
-    ]);
+    try {
+        $stmt = $pdo->prepare("
+            INSERT INTO articles
+            (title, slug, category, thumbnail, meta_title, meta_desc, keywords, content, faq_data, author, status, published_at, created_at, updated_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())
+        ");
+        $stmt->execute([
+            $title, $slug, $category, $thumbnail, $metaTitle, $metaDesc, $keywords, $content, $faqJson, $author, $status, $pubAt
+        ]);
 
-    $newId = (int)$pdo->lastInsertId();
+        $newId = (int)$pdo->lastInsertId();
 
-    log_content_audit($pdo, 'article', $newId, $slug, 'create', [
-        'created_data' => [
-            'title'    => $title,
-            'slug'     => $slug,
-            'category' => $category,
-            'status'   => $status,
-        ]
-    ], $actor);
+        log_content_audit($pdo, 'article', $newId, $slug, 'create', [
+            'created_data' => [
+                'title'    => $title,
+                'slug'     => $slug,
+                'category' => $category,
+                'status'   => $status,
+            ]
+        ], $actor);
 
-    $fetch = $pdo->prepare("SELECT * FROM articles WHERE id = ?");
-    $fetch->execute([$newId]);
-    $created = format_article_record($fetch->fetch());
+        $fetch = $pdo->prepare("SELECT * FROM articles WHERE id = ?");
+        $fetch->execute([$newId]);
+        $created = format_article_record($fetch->fetch());
 
-    api_success($created, 'Article created successfully', 201);
+        api_success($created, 'Article created successfully', 201);
+    } catch (Throwable $e) {
+        api_error('Database error creating article: ' . $e->getMessage(), 500, [], 'DATABASE_ERROR');
+    }
 }
 
 // ─── HANDLER: PUT / PATCH (Update Article) ─────────────────────────────────
@@ -323,9 +327,10 @@ function handle_article_put(PDO $pdo): never {
                 break;
         }
 
-        $curr = $existing[$field];
+        $dbField = ($field === 'faq') ? 'faq_data' : $field;
+        $curr = $existing[$dbField] ?? ($existing[$field] ?? null);
         if ($curr !== $val) {
-            $updates[] = "`$field` = ?";
+            $updates[] = "`$dbField` = ?";
             $params[] = $val;
             $diff[$field] = ['old' => $curr, 'new' => $val];
         }
@@ -439,8 +444,9 @@ function handle_article_delete(PDO $pdo): never {
 // ─── HELPER: Format Article Record ─────────────────────────────────────────
 function format_article_record(array $row): array {
     $faq = [];
-    if (!empty($row['faq'])) {
-        $dec = json_decode($row['faq'], true);
+    $rawFaq = $row['faq_data'] ?? ($row['faq'] ?? '');
+    if (!empty($rawFaq)) {
+        $dec = json_decode($rawFaq, true);
         if (is_array($dec)) $faq = $dec;
     }
 
