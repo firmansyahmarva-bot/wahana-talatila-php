@@ -1,342 +1,639 @@
 <?php
 require_once __DIR__ . '/../config.php';
 $s = get_all_settings();
-?>
-<?php
-$page_title = 'Form Laporan Insiden / Near Miss Online Gratis — Generator K3';
-$meta_desc = 'Form laporan insiden dan near miss online gratis. Panduan langkah demi langkah investigasi 5-Why. Isi form, cetak ke PDF. Untuk HSE officer Indonesia.';
+
+$page_title = 'Formulir Laporan Insiden K3 Online 2026: Investigasi 5-Why & SCAT Model';
+$meta_desc = 'Buat formulir laporan investigasi kecelakaan kerja K3 resmi sesuai Permenaker 03/1998. Dilengkapi analisis akar masalah 5-Why, SCAT model, matriks CAPA, dan cetak form gratis.';
+
+ob_start();
 require __DIR__ . '/../includes/head.php';
+$shared_head = ob_get_clean();
+$shared_head = preg_replace('~<title>.*?</title>~s', '<title>' . e($page_title) . '</title>', $shared_head, 1);
+echo $shared_head;
 ?>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "applicationCategory": "BusinessApplication",
-  "name": "Form Laporan Insiden / Near Miss Online Gratis — Generator K3",
-  "description": "Form laporan insiden dan near miss online gratis. Panduan langkah demi langkah investigasi 5-Why. Isi form, cetak ke PDF. Untuk HSE officer Indonesia.",
-  "url": "https://wahanatotalita.com/tools/laporan-insiden/",
-  "provider": {"@type": "Organization", "name": "Wahana Totalita", "url": "https://wahanatotalita.com"},
-  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "IDR"}
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Beranda", "item": "https://wahanatotalita.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Tools K3", "item": "https://wahanatotalita.com/tools/" },
+    { "@type": "ListItem", "position": 3, "name": "Laporan Insiden", "item": "https://wahanatotalita.com/tools/laporan-insiden.php" }
+  ]
 }
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Apakah near miss (hampir celaka) wajib dilaporkan meskipun tidak ada cedera?","acceptedAnswer":{"@type":"Answer","text":"Ya. Near miss justru sangat penting dilaporkan karena menjadi sinyal peringatan dini sebelum kecelakaan sesungguhnya terjadi. Perusahaan dengan budaya pelaporan near miss yang kuat umumnya memiliki tingkat kecelakaan serius yang jauh lebih rendah."}},{"@type":"Question","name":"Apa itu metode 5-Why dan mengapa penting dalam investigasi insiden?","acceptedAnswer":{"@type":"Answer","text":"Metode 5-Why adalah teknik menanyakan \"mengapa\" secara berulang (biasanya lima kali) terhadap suatu masalah untuk menemukan akar penyebabnya, bukan hanya gejala permukaan. Metode ini penting agar tindakan perbaikan menyasar penyebab sistemik, bukan sekadar menyalahkan individu."}},{"@type":"Question","name":"Berapa lama batas waktu pelaporan kecelakaan kerja ke Disnaker?","acceptedAnswer":{"@type":"Answer","text":"Berdasarkan Permenaker No. 3/1998, kecelakaan kerja yang mengakibatkan korban meninggal atau cedera berat wajib dilaporkan ke Disnaker/Kemnaker setempat maksimal dalam waktu 2x24 jam sejak kejadian."}}]}
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Generator Laporan & Investigasi Insiden K3 Online",
+  "url": "https://wahanatotalita.com/tools/laporan-insiden.php",
+  "description": "Aplikasi formulir laporan kecelakaan kerja dan analisis akar penyebab 5-Why serta SCAT model sesuai regulasi Permenaker No. 03/1998.",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "All",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "IDR" }
+}
 </script>
-<link rel="manifest" href="/manifest.json">
-<style>
-:root{--primary:#1a6b3a;--primary-d:#145530;--accent:#f5a623;--bg:#f8fafc;--card:#fff;--text:#1a202c;--muted:#6b7280;--radius:12px;--shadow:0 2px 16px rgba(0,0,0,.09)}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
-a{color:var(--primary);text-decoration:none}
-.container{max-width:860px;margin:0 auto;padding:0 20px}
-nav{background:#fff;border-bottom:1px solid #e5e7eb;padding:14px 0;position:sticky;top:0;z-index:100;box-shadow:0 1px 6px rgba(0,0,0,.06)}
-.nav-inner{display:flex;align-items:center;justify-content:space-between}
-.nav-logo{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--primary);font-size:1rem}
-.nav-logo svg{width:32px;height:32px}
-.nav-cta{background:var(--primary);color:#fff;padding:8px 18px;border-radius:8px;font-size:.85rem;font-weight:600}
-.hero{background:linear-gradient(135deg,#0f4c2a,#1a6b3a);color:#fff;padding:40px 0 30px;text-align:center}
-.hero-badge{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:50px;padding:5px 16px;font-size:.8rem;font-weight:600;display:inline-block;margin-bottom:14px}
-.hero h1{font-size:clamp(1.4rem,3vw,2rem);font-weight:800;margin-bottom:10px}
-.hero h1 span{color:var(--accent)}
-.hero p{opacity:.88;max-width:520px;margin:0 auto}
-.main{padding:32px 0 80px}
-.panel{background:var(--card);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow);border:1px solid #e5e7eb;margin-bottom:20px}
-.panel h2{font-size:1rem;font-weight:700;margin-bottom:16px;color:var(--primary)}
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
-.form-group{margin-bottom:14px}
-.form-group label{display:block;font-size:.85rem;font-weight:600;margin-bottom:5px}
-.form-group input,.form-group select,.form-group textarea{width:100%;padding:9px 13px;border:2px solid #e5e7eb;border-radius:7px;font-size:.88rem;font-family:inherit;background:#fff;color:var(--text)}
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--primary);outline:none}
-.form-group textarea{min-height:68px;resize:vertical}
-.type-tabs{display:flex;gap:0;background:#f3f4f6;border-radius:8px;padding:3px;margin-bottom:16px}
-.type-tab{flex:1;padding:9px 8px;border:none;background:transparent;border-radius:6px;font-size:.82rem;font-weight:600;cursor:pointer;color:var(--muted);transition:all .2s;text-align:center}
-.type-tab.active{background:var(--primary);color:#fff}
-.why-item{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px}
-.why-num{background:var(--primary);color:#fff;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:.82rem;font-weight:700;flex-shrink:0;margin-top:8px}
-.why-item input{flex:1;padding:9px 13px;border:2px solid #e5e7eb;border-radius:7px;font-size:.88rem;background:#fff}
-.why-item input:focus{border-color:var(--primary);outline:none}
-.actions-bar{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0}
-.btn-primary{background:var(--primary);color:#fff;border:none;border-radius:8px;padding:11px 22px;font-size:.9rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:7px}
-.btn-primary:hover{background:var(--primary-d)}
-.btn-secondary{background:#f3f4f6;color:var(--text);border:1px solid #e5e7eb;border-radius:8px;padding:11px 18px;font-size:.88rem;font-weight:600;cursor:pointer}
-.cta-strip{background:var(--primary);color:#fff;border-radius:12px;padding:24px;text-align:center;margin:32px 0}
-.cta-strip h3{font-size:1rem;font-weight:700;margin-bottom:8px}
-.cta-strip p{opacity:.88;font-size:.85rem;margin-bottom:14px}
-footer{background:#111827;color:#9ca3af;padding:30px 0;text-align:center;font-size:.83rem}
-footer a{color:#6ee7b7}
-@media(max-width:640px){.grid-2,.grid-3{grid-template-columns:1fr}}
-@media print{nav,.actions-bar,footer,.cta-strip,.tools-training-cta,.tool-article{display:none!important}body{background:#fff}}
-.tools-training-cta{padding:40px 0}
-.tools-training-cta h2{font-size:1.3rem;font-weight:800;margin:0 0 16px;text-align:center;color:#0A4A2E}
-.tools-training-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
-.tools-training-card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:18px;display:flex;flex-direction:column}
-.tools-training-card h3{font-size:.95rem;font-weight:700;margin:0 0 8px}
-.tools-training-card h3 a{color:#0A4A2E;text-decoration:none}
-.tools-training-card p{font-size:.85rem;color:#555;line-height:1.6;margin:0 0 12px;flex:1}
-.tools-training-btn{display:inline-block;background:#0A4A2E;color:#fff;font-weight:700;font-size:.85rem;padding:8px 14px;border-radius:8px;text-decoration:none;text-align:center}
-.tool-article{padding:12px 0 8px}
-.tool-article h2{font-size:1.15rem;font-weight:800;color:var(--primary);margin:28px 0 14px}
-.tool-article h2:first-child{margin-top:0}
-.tool-article p{font-size:.92rem;color:#374151;line-height:1.8;margin-bottom:14px}
-.tool-article ol{padding-left:20px;font-size:.92rem;line-height:1.9;color:#374151;margin-bottom:8px}
-.tool-article ol li{margin-bottom:8px}
-.faq-item{margin-bottom:16px}
-.faq-item h3{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:6px}
-.faq-item p{font-size:.9rem;color:#374151;margin:0}
-</style>
-<nav>
-  <div class="container nav-inner">
-    <a href="/" class="nav-logo">
-      <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#1a6b3a"/><path d="M20 8l3 9h9l-7 5 3 9-8-6-8 6 3-9-7-5h9z" fill="#f5a623"/></svg>
-      Wahana Totalita
-    </a>
-    <a href="/tools/" style="color:var(--muted);font-size:.88rem">← Semua Tools</a>
-    <a href="https://wa.me/6287759151278" target="_blank" class="nav-cta">📱 Konsultasi</a>
-  </div>
-</nav>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Berapa batas waktu wajib pelaporan kecelakaan kerja ke Dinas Tenaga Kerja?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Berdasarkan Permenaker No. 03/MEN/1998 Pasal 3, pengurus atau pengusaha wajib melaporkan tiap kecelakaan kerja yang terjadi di tempat kerja kepada Kepala Kantor Departemen Tenaga Kerja setempat dalam waktu tidak lebih dari 2 x 24 jam terhitung sejak terjadinya kecelakaan."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Apa tujuan utama investigasi kecelakaan kerja?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Tujuan utama investigasi kecelakaan K3 bukanlah untuk mencari kesalahan atau menghukum individu (blame culture), melainkan untuk menemukan kelemahan sistem manajemen dan akar penyebab mendasar (root cause) guna merancang tindakan korektif dan pencegahan (CAPA) agar kecelakaan serupa tidak terulang kembali di masa depan."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Bagaimana cara melakukan analisis akar masalah menggunakan metode 5-Why?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Metode 5-Why dilakukan dengan menanyakan pertanyaan 'Mengapa?' secara beruntun minimal 5 kali terhadap suatu peristiwa. Pertanyaan pertama mengidentifikasi penyebab langsung (immediate cause), dan pertanyaan-pertanyaan berikutnya menggali lebih dalam hingga menemukan kegagalan sistemik (manajemen, pelatihan, SOP, atau pemeliharaan) sebagai akar masalah."
+      }
+    }
+  ]
+}
+</script>
 
-<section class="hero">
+<style>
+:root {
+  --navy-dark: #071524;
+  --navy: #0D233A;
+  --navy-light: #183654;
+  --orange: #E8611A;
+  --orange-hover: #cf5213;
+  --orange-light: #fff2ea;
+  --slate-50: #F8FAFC;
+  --slate-100: #F1F5F9;
+  --slate-200: #E2E8F0;
+  --slate-300: #CBD5E1;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-900: #0F172A;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 2px 8px rgba(13,35,58,0.06);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Source Sans 3', system-ui, -apple-system, sans-serif;
+  background: var(--slate-50);
+  color: var(--slate-900);
+  line-height: 1.6;
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* HERO */
+.inc-hero {
+  background: linear-gradient(135deg, #071524 0%, #0D233A 60%, #183654 100%);
+  color: #fff;
+  padding: 58px 0 44px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 3px solid var(--orange);
+}
+.inc-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 36px 36px;
+  pointer-events: none;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(232, 97, 26, 0.18);
+  border: 1px solid rgba(232, 97, 26, 0.4);
+  padding: 6px 14px;
+  border-radius: 999px;
+  color: #FFA573;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 14px;
+}
+.inc-hero h1 {
+  font-family: 'Lexend', sans-serif;
+  font-size: clamp(1.8rem, 3.6vw, 2.7rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+.inc-hero h1 span { color: var(--orange); }
+.inc-hero p {
+  color: #CBD5E1;
+  font-size: 1.05rem;
+  max-width: 760px;
+  margin-bottom: 20px;
+}
+.hero-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.hero-tag {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  color: #E2E8F0;
+}
+
+/* WORKSPACE LAYOUT */
+.inc-wrapper { padding: 40px 0 60px; }
+.card-box {
+  background: #fff;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 28px;
+  margin-bottom: 28px;
+}
+.card-header-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--slate-100);
+  padding-bottom: 16px;
+  margin-bottom: 22px;
+}
+.card-title {
+  font-family: 'Lexend', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* FORM FIELDS */
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.form-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+@media (max-width: 768px) {
+  .form-grid-2, .form-grid-3 { grid-template-columns: 1fr; }
+}
+.form-field { margin-bottom: 14px; }
+.form-label {
+  display: block;
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+.form-input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid var(--slate-200);
+  border-radius: var(--radius-md);
+  font-size: 0.92rem;
+  color: var(--slate-900);
+  background: #fff;
+}
+.form-input:focus { outline: none; border-color: var(--orange); }
+textarea.form-input { min-height: 80px; resize: vertical; }
+
+/* 5-WHY CHAIN */
+.why-step-box {
+  background: var(--slate-50);
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  margin-bottom: 12px;
+  position: relative;
+}
+.why-label {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--orange);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+/* CAPA TABLE */
+.capa-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  margin: 16px 0;
+}
+.capa-table th {
+  background: var(--navy);
+  color: #fff;
+  padding: 10px 12px;
+  text-align: left;
+}
+.capa-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--slate-200);
+  vertical-align: top;
+}
+
+/* ACTIONS */
+.btn-submit-inc {
+  background: var(--orange);
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-submit-inc:hover { background: var(--orange-hover); }
+
+/* EDITORIAL ARTICLE */
+.editorial-box {
+  background: #fff;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+  margin-bottom: 32px;
+}
+.editorial-title {
+  font-family: 'Lexend', sans-serif;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 16px;
+  border-left: 4px solid var(--orange);
+  padding-left: 14px;
+}
+.editorial-p {
+  color: var(--slate-700);
+  font-size: 0.96rem;
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+/* FAQ */
+.faq-item {
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-md);
+  margin-bottom: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+.faq-q {
+  width: 100%;
+  padding: 16px 20px;
+  text-align: left;
+  background: #fff;
+  border: none;
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--navy);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.faq-q:hover { background: var(--slate-50); }
+.faq-a {
+  padding: 0 20px 18px;
+  color: var(--slate-700);
+  font-size: 0.92rem;
+  line-height: 1.65;
+  display: none;
+}
+.faq-item.active .faq-a { display: block; }
+.faq-item.active .faq-icon { transform: rotate(180deg); }
+.faq-icon { transition: transform 0.2s; }
+</style>
+
+<?php require __DIR__ . '/../includes/navbar.php'; ?>
+
+<main class="inc-page" id="konten-utama">
+
+<!-- HERO -->
+<section class="inc-hero">
   <div class="container">
-    <div class="hero-badge">⚠️ Form Laporan K3</div>
-    <h1>Form <span>Laporan Insiden & Near Miss</span><br>Online Gratis</h1>
-    <p>Panduan langkah demi langkah investigasi insiden. Isi form, analisis akar masalah dengan 5-Why, cetak laporan.</p>
+    <div class="hero-badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      Permenaker No. 03/MEN/1998 &amp; SCAT Model
+    </div>
+    <h1>Formulir Laporan Insiden K3 <span>&amp; 5-Why</span></h1>
+    <p>Dokumentasikan kejadian kecelakaan kerja dan near miss secara profesional. Lakukan investigasi akar masalah sistemik menggunakan metode 5-Why, tetapkan Corrective &amp; Preventive Action (CAPA), dan cetak formulir resmi.</p>
+    <div class="hero-tags">
+      <span class="hero-tag">Kewajiban Lapor 2x24 Jam</span>
+      <span class="hero-tag">SCAT Unsafe Acts &amp; Conditions</span>
+      <span class="hero-tag">Analisis 5-Why Root Cause</span>
+      <span class="hero-tag">Matriks Tindakan Koreksi (CAPA)</span>
+    </div>
   </div>
 </section>
 
-<section class="main">
+<!-- MAIN WORKSPACE -->
+<section class="inc-wrapper">
   <div class="container">
-    <div class="actions-bar">
-      <button class="btn-primary" onclick="window.print()">🖨 Print / Simpan PDF</button>
-      <button class="btn-secondary" onclick="clearForm()">↺ Form Baru</button>
-    </div>
-
-    <!-- JENIS LAPORAN -->
-    <div class="panel">
-      <h2>⚠️ Jenis Laporan</h2>
-      <div class="type-tabs">
-        <button class="type-tab active" id="tab-near-miss" onclick="setType('near-miss')">⚡ Near Miss / Hampir Celaka</button>
-        <button class="type-tab" id="tab-first-aid" onclick="setType('first-aid')">🩹 First Aid Case (FAC)</button>
-        <button class="type-tab" id="tab-lti" onclick="setType('lti')">🏥 LTI / Kecelakaan Serius</button>
-        <button class="type-tab" id="tab-property" onclick="setType('property')">⚙️ Kerusakan Properti</button>
-      </div>
-      <div id="typeDesc" style="background:#f0fdf4;border-radius:8px;padding:12px;font-size:.83rem;color:#374151">
-        <strong>Near Miss:</strong> Kejadian yang hampir menyebabkan cedera atau kerugian, namun tidak terjadi karena keberuntungan. Wajib dilaporkan untuk mencegah insiden sesungguhnya.
-      </div>
-    </div>
-
-    <!-- INFORMASI INSIDEN -->
-    <div class="panel">
-      <h2>📋 Informasi Insiden</h2>
-      <div class="grid-3">
-        <div class="form-group"><label>Tanggal Kejadian</label><input type="date" id="incDate" value="<?php echo date('Y-m-d'); ?>"></div>
-        <div class="form-group"><label>Waktu Kejadian</label><input type="time" id="incTime"></div>
-        <div class="form-group"><label>No. Laporan</label><input type="text" id="reportNo" placeholder="cth: INC-2025-001"></div>
-      </div>
-      <div class="grid-2">
-        <div class="form-group"><label>Lokasi Kejadian</label><input type="text" id="location" placeholder="cth: Area Produksi B, mesin press no. 5"></div>
-        <div class="form-group"><label>Departemen</label><input type="text" id="dept" placeholder="cth: Departemen Produksi"></div>
-      </div>
-      <div class="form-group">
-        <label>Deskripsi Kejadian (Apa yang terjadi? Urutan kejadian?)</label>
-        <textarea id="description" placeholder="Deskripsikan urutan kejadian secara kronologis. Apa yang sedang dilakukan, apa yang terjadi, apa konsekuensinya..."></textarea>
-      </div>
-      <div class="grid-2">
-        <div class="form-group"><label>Kondisi Cuaca / Lingkungan</label><input type="text" id="weather" placeholder="cth: Cuaca cerah, lantai kering, pencahayaan baik"></div>
-        <div class="form-group"><label>Saksi (nama)</label><input type="text" id="witnesses" placeholder="cth: Budi Santoso, Ahmad Rahman"></div>
-      </div>
-    </div>
-
-    <!-- DATA KORBAN -->
-    <div class="panel" id="victimSection">
-      <h2>🧑 Data Korban / Orang yang Terlibat</h2>
-      <div class="grid-3">
-        <div class="form-group"><label>Nama</label><input type="text" id="victimName" placeholder="Nama korban"></div>
-        <div class="form-group"><label>Jabatan / Pekerjaan</label><input type="text" id="victimJob" placeholder="cth: Operator Mesin"></div>
-        <div class="form-group"><label>Masa Kerja</label><input type="text" id="victimTenure" placeholder="cth: 2 tahun 3 bulan"></div>
-      </div>
-      <div class="grid-2">
-        <div class="form-group"><label>Cedera yang Diderita (jika ada)</label><input type="text" id="injury" placeholder="cth: Luka lecet di tangan kiri, 3 cm"></div>
-        <div class="form-group"><label>Bagian Tubuh yang Terkena</label><input type="text" id="bodyPart" placeholder="cth: Tangan kiri, jari telunjuk"></div>
-      </div>
-      <div class="grid-2">
-        <div class="form-group"><label>Penanganan Medis yang Diberikan</label><input type="text" id="medTreatment" placeholder="cth: P3K di klinik perusahaan, bebat luka"></div>
-        <div class="form-group"><label>APD yang Dipakai Saat Kejadian</label><input type="text" id="ppeWorn" placeholder="cth: Helm, sepatu safety (tidak pakai sarung tangan)"></div>
-      </div>
-    </div>
-
-    <!-- ANALISIS AKAR MASALAH 5-WHY -->
-    <div class="panel">
-      <h2>🔍 Analisis Akar Masalah — Metode 5-Why</h2>
-      <p style="font-size:.82rem;color:var(--muted);margin-bottom:16px">Mulai dari masalah, tanyakan "mengapa?" hingga menemukan akar masalah sesungguhnya.</p>
-
-      <div class="form-group">
-        <label>Masalah / Insiden (titik awal)</label>
-        <input type="text" id="problem" placeholder="cth: Pekerja terpeleset dan jatuh di area produksi">
+    
+    <div class="card-box">
+      
+      <!-- STEP 1: INCIDENT METADATA -->
+      <div class="card-header-line">
+        <h2 class="card-title">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          1. Data Umum &amp; Klasifikasi Insiden
+        </h2>
+        <span style="font-size:0.8rem;color:var(--slate-600)">Format Standar Disnaker &amp; BPJS TK</span>
       </div>
 
-      <div id="whyContainer">
-        <div class="why-item"><div class="why-num">1</div><input type="text" id="why1" placeholder="Mengapa kejadian ini bisa terjadi?"></div>
-        <div class="why-item"><div class="why-num">2</div><input type="text" id="why2" placeholder="Mengapa hal pada #1 bisa terjadi?"></div>
-        <div class="why-item"><div class="why-num">3</div><input type="text" id="why3" placeholder="Mengapa hal pada #2 bisa terjadi?"></div>
-        <div class="why-item"><div class="why-num">4</div><input type="text" id="why4" placeholder="Mengapa hal pada #3 bisa terjadi?"></div>
-        <div class="why-item"><div class="why-num">5</div><input type="text" id="why5" placeholder="Mengapa hal pada #4 bisa terjadi? (Akar Masalah)"></div>
+      <div class="form-grid-3">
+        <div class="form-field">
+          <label class="form-label" for="inpTipeInsiden">Kategori Tingkat Keparahan</label>
+          <select id="inpTipeInsiden" class="form-input">
+            <option value="LTI">Lost Time Injury (LTI - Ada Hari Hilang)</option>
+            <option value="NonLTI">Medical Treatment Case (Rawat Medis / Non-LTI)</option>
+            <option value="FAC">First Aid Case (Pertolongan Pertama / P3K)</option>
+            <option value="NearMiss">Near Miss (Hampir Celaka / Nyaris Celaka)</option>
+            <option value="Property">Kerusakan Aset / Properti</option>
+            <option value="Fatal">Kecelakaan Fatal / Meninggal Dunia</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="inpTglWaktu">Tanggal &amp; Waktu Kejadian</label>
+          <input type="datetime-local" id="inpTglWaktu" class="form-input">
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="inpLokasiTKP">Lokasi Spesifik TKP</label>
+          <input type="text" id="inpLokasiTKP" class="form-input" value="Lantai 2 Area Mesin Pemotong Plat, Workshop A">
+        </div>
       </div>
 
-      <div class="form-group" style="margin-top:16px">
-        <label>Akar Masalah / Root Cause (kesimpulan)</label>
-        <textarea id="rootCause" placeholder="Simpulkan akar masalah sesungguhnya dari analisis 5-Why di atas..."></textarea>
+      <div class="form-grid-3">
+        <div class="form-field">
+          <label class="form-label" for="inpNamaKorban">Nama Lengkap Korban</label>
+          <input type="text" id="inpNamaKorban" class="form-input" value="Budi Santoso">
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="inpJabatanKorban">Jabatan / Departemen</label>
+          <input type="text" id="inpJabatanKorban" class="form-input" value="Operator Fabrikasi / Produksi">
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="inpBagianTubuh">Bagian Tubuh yang Mengalami Cedera</label>
+          <input type="text" id="inpBagianTubuh" class="form-input" value="Telapak Tangan Kiri (Luka Robek 4 cm)">
+        </div>
       </div>
-    </div>
 
-    <!-- TINDAKAN PERBAIKAN -->
-    <div class="panel">
-      <h2>✅ Tindakan Perbaikan & Pencegahan (CAPA)</h2>
-      <div class="form-group">
-        <label>Corrective Action — Tindakan untuk memperbaiki yang sudah terjadi</label>
-        <textarea id="corrective" placeholder="cth: 1) Bersihkan tumpahan oli segera. 2) Pasang rambu lantai licin. 3) Audit APD pekerja area tersebut..."></textarea>
+      <div class="form-field">
+        <label class="form-label" for="inpKronologi">Kronologi Singkat Peristiwa</label>
+        <textarea id="inpKronologi" class="form-input">Saat memotong plat baja tipis berukuran 2 meter menggunakan mesin shearing hidrolik, korban mencoba menahan posisi plat yang miring dengan tangan kiri tanpa mengenakan sarung tangan tahan potong. Tangan korban terselip di bawah penjepit mesin saat pedal diinjak.</textarea>
       </div>
-      <div class="form-group">
-        <label>Preventive Action — Tindakan untuk mencegah kejadian serupa</label>
-        <textarea id="preventive" placeholder="cth: 1) Buat prosedur pembersihan tumpahan dalam 15 menit. 2) Inspeksi mingguan kondisi lantai. 3) Sediakan absorbent di setiap mesin..."></textarea>
+
+      <!-- STEP 2: SCAT DIRECT CAUSES -->
+      <div class="card-header-line" style="margin-top:30px">
+        <h2 class="card-title">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          2. Penyebab Langsung (Direct Causes - SCAT Model)
+        </h2>
       </div>
-      <div class="grid-3">
-        <div class="form-group"><label>PIC CAPA</label><input type="text" id="capaPIC" placeholder="Nama PIC"></div>
-        <div class="form-group"><label>Target Selesai</label><input type="date" id="capaTarget"></div>
-        <div class="form-group"><label>Status</label>
-          <select id="capaStatus">
-            <option value="open">Open</option>
-            <option value="in-progress">In Progress</option>
-            <option value="closed">Closed</option>
+
+      <div class="form-grid-2">
+        <div class="form-field">
+          <label class="form-label" for="inpUnsafeAct">Tindakan Tidak Aman (Unsafe Acts)</label>
+          <select id="inpUnsafeAct" class="form-input">
+            <option value="Tidak Memakai APD yang Diwajibkan">Tidak Memakai APD yang Diwajibkan (Sarung Tangan)</option>
+            <option value="Melepas / Melumpuhkan Pelindung Mesin">Melepas / Melumpuhkan Pelindung Mesin (Guard)</option>
+            <option value="Bekerja Tergesa-gesa / Mengambil Jalan Pintas">Bekerja Tergesa-gesa / Mengambil Jalan Pintas</option>
+            <option value="Mengoperasikan Alat Tanpa Wewenang/SIO">Mengoperasikan Alat Tanpa Wewenang/SIO</option>
+            <option value="Posisi / Postur Kerja Salah / Janggal">Posisi / Postur Kerja Salah / Janggal</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="inpUnsafeCond">Kondisi Tidak Aman (Unsafe Conditions)</label>
+          <select id="inpUnsafeCond" class="form-input">
+            <option value="Pelindung Mesin (Safety Guard) Tidak Terpasang">Pelindung Mesin (Safety Guard) Tidak Terpasang</option>
+            <option value="Penerangan Lampu Kurang Memadai di Area Kerja">Penerangan Lampu Kurang Memadai di Area Kerja</option>
+            <option value="Lantai Kerja Licin / Ceceran Oli">Lantai Kerja Licin / Ceceran Oli</option>
+            <option value="Peralatan Rusak / Aus / Modifikasi">Peralatan Rusak / Aus / Modifikasi</option>
+            <option value="Housekeeping Berantakan / Celah Sempit">Housekeeping Berantakan / Celah Sempit</option>
           </select>
         </div>
       </div>
-    </div>
 
-    <!-- APPROVALS -->
-    <div class="panel">
-      <h2>✍️ Dibuat & Disetujui Oleh</h2>
-      <div class="grid-3">
-        <div class="form-group"><label>Dilaporkan Oleh</label><input type="text" id="reportedBy" placeholder="Nama + Jabatan"></div>
-        <div class="form-group"><label>Supervisor / Atasan Langsung</label><input type="text" id="supervisorName" placeholder="Nama + Jabatan"></div>
-        <div class="form-group"><label>HSE Officer / Manager</label><input type="text" id="hseOfficer" placeholder="Nama + Jabatan"></div>
+      <!-- STEP 3: 5-WHY ROOT CAUSE ANALYSIS -->
+      <div class="card-header-line" style="margin-top:30px">
+        <h2 class="card-title">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          3. Analisis Rantai Akar Masalah (5-Why Analysis)
+        </h2>
       </div>
+
+      <div class="why-step-box">
+        <div class="why-label">Why 1: Mengapa tangan korban mengalami luka robek?</div>
+        <input type="text" id="why1" class="form-input" value="Karena tangan korban terjepit plat baja yang terpotong pisau hidrolik.">
+      </div>
+      <div class="why-step-box">
+        <div class="why-label">Why 2: Mengapa tangan korban bisa mendekat ke area pisau pemotong?</div>
+        <input type="text" id="why2" class="form-input" value="Karena korban menahan plat baja secara manual dengan tangan, bukan menggunakan alat bantu penjepit (clamp tool).">
+      </div>
+      <div class="why-step-box">
+        <div class="why-label">Why 3: Mengapa korban menahan secara manual tanpa alat penjepit?</div>
+        <input type="text" id="why3" class="form-input" value="Karena alat penjepit magnetik sedang rusak dan belum ada penggantinya di bengkel.">
+      </div>
+      <div class="why-step-box">
+        <div class="why-label">Why 4: Mengapa alat penjepit rusak tidak segera diganti oleh supervisor?</div>
+        <input type="text" id="why4" class="form-input" value="Karena tidak ada prosedur inspeksi pra-operasional (pre-use check) sebelum shift dimulai.">
+      </div>
+      <div class="why-step-box" style="border:2px solid var(--orange);background:var(--orange-light)">
+        <div class="why-label" style="color:var(--orange-hover)">Why 5 (Akar Masalah Sistemik / Root Cause):</div>
+        <input type="text" id="why5" class="form-input" style="font-weight:700" value="Kelemahan sistem pemeliharaan perkakas kerja dan ketiadaan verifikasi JSA/SOP pra-kerja oleh supervisor.">
+      </div>
+
+      <!-- STEP 4: CAPA TABLE -->
+      <div class="card-header-line" style="margin-top:30px">
+        <h2 class="card-title">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          4. Tindakan Koreksi &amp; Pencegahan (CAPA)
+        </h2>
+      </div>
+
+      <table class="capa-table">
+        <thead>
+          <tr>
+            <th>Rencana Tindakan Korektif &amp; Preventif</th>
+            <th style="width:180px">Penanggung Jawab (PIC)</th>
+            <th style="width:140px">Target Selesai</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Pengadaan unit clamp penahan plat baja magnetik baru yang terstandarisir.</td>
+            <td><strong>Dept. Procurement</strong></td>
+            <td>3 Hari Kerja</td>
+          </tr>
+          <tr>
+            <td>Pemasangan sensor interlock guard pada mesin shearing (mesin otomatis mati jika tangan mendekat).</td>
+            <td><strong>Tim Maintenance</strong></td>
+            <td>7 Hari Kerja</td>
+          </tr>
+          <tr>
+            <td>Re-training SOP pemotongan plat dan kewajiban sarung tangan Cut Level 5 bagi seluruh operator.</td>
+            <td><strong>HSE Officer</strong></td>
+            <td>1 Minggu</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- BUTTONS -->
+      <div style="display:flex;gap:12px;margin-top:24px">
+        <button class="btn-submit-inc" type="button" onclick="printIncidentReport()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          Cetak Formulir Laporan Investigasi Resmi
+        </button>
+      </div>
+
     </div>
 
-    <div class="actions-bar">
-      <button class="btn-primary" onclick="window.print()">🖨 Print / Simpan PDF</button>
-      <button class="btn-secondary" onclick="clearForm()">↺ Form Baru</button>
+    <!-- IN-DEPTH EDITORIAL ARTICLE (SEO DEPTH) -->
+    <div class="editorial-box">
+      <h2 class="editorial-title">Prosedur Investigasi Kecelakaan Kerja Sesuai Standar K3 Nasional</h2>
+      <p class="editorial-p">
+        Berdasarkan <strong>Peraturan Menteri Tenaga Kerja RI No. PER.03/MEN/1998 tentang Tata Cara Pelaporan dan Pemeriksaan Kecelakaan Kerja</strong>, setiap kecelakaan yang menimpa tenaga kerja wajib dilaporkan kepada Kantor Departemen Tenaga Kerja setempat dalam kurun waktu <strong>2 x 24 jam</strong> sejak terjadinya kecelakaan.
+      </p>
+
+      <h3 style="color:var(--navy);font-family:'Lexend',sans-serif;font-size:1.15rem;margin:22px 0 10px">Prinsip Analisis SCAT (Systematic Cause Analysis Technique)</h3>
+      <p class="editorial-p">
+        Model SCAT membagi penyebab kecelakaan menjadi 3 lapisan kausalitas:
+      </p>
+      <ol style="padding-left:22px;color:var(--slate-700);line-height:1.75;margin-bottom:18px">
+        <li><strong>Gejala / Dampak (Incident):</strong> Kerusakan raga, cedera fisik, atau kerugian properti.</li>
+        <li><strong>Penyebab Langsung (Immediate Causes):</strong> Terdiri dari Tindakan Tidak Aman (<em>Unsafe Acts</em>) dan Kondisi Tidak Aman (<em>Unsafe Conditions</em>) di tempat kejadian perkara.</li>
+        <li><strong>Akar Penyebab Dasar (Basic Causes):</strong> Faktor personal pekerja (kurang kompetensi, stres, motivasi salah) dan faktor pekerjaan (standar kerja minim, pengadaan alat kurang layak, pemeliharaan buruk).</li>
+      </ol>
+
+      <!-- FAQ ACCORDION -->
+      <h3 style="color:var(--navy);font-family:'Lexend',sans-serif;font-size:1.25rem;margin:28px 0 16px">Tanya Jawab Seputar Investigasi Insiden K3 (FAQ)</h3>
+      <div class="faq-box">
+        
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>Mengapa bukti fisik di Tempat Kejadian Perkara (TKP) tidak boleh diubah sebelum difoto?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-a">
+            Mengubah posisi alat, membersihkan tumpahan oli, atau membuang material di TKP sebelum diinspeksi oleh Ahli K3 atau Pengawas Ketenagakerjaan dapat menghilangkan bukti kunci mekanis dan fisik. Pasal 5 Permenaker 03/1998 melarang mengubah keadaan tempat kecelakaan kecuali untuk pertolongan darurat korban atau mencegah bahaya yang lebih besar.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>Siapa saja anggota tim investigasi kecelakaan kerja di perusahaan?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-a">
+            Tim investigasi idealnya dipimpin oleh Ahli K3 Umum bersama Pengawas Lapangan (Supervisor area kejadian), teknisi ahli mesin terkait, perwakilan serikat pekerja/rekan kerja, serta didukung oleh Pimpinan P2K3 perusahaan.
+          </div>
+        </div>
+
+      </div>
+
     </div>
 
-    <div class="cta-strip">
-      <h3>🎓 Pelajari Investigasi Insiden Secara Profesional</h3>
-      <p>Pelatihan Ahli K3 Umum KEMNAKER RI mencakup metodologi investigasi kecelakaan, CAPA, dan pelaporan K3 yang benar.</p>
-      <a href="https://wa.me/6287759151278?text=Halo%20Wahana%2C%20saya%20pakai%20form%20laporan%20insiden%20dan%20ingin%20tanya%20pelatihan%20K3" target="_blank" rel="noopener"
-         style="background:#25D366;color:#fff;padding:11px 24px;border-radius:8px;font-weight:700;display:inline-flex;align-items:center;gap:8px">
-        📱 Tanya Pelatihan Investigasi K3
-      </a>
-    </div>
   </div>
 </section>
 
-<section class="tool-article">
-  <div class="container">
-    <h2>Cara Menggunakan Form Laporan Insiden</h2>
-    <ol>
-      <li>Pilih Jenis Laporan yang sesuai — Near Miss, First Aid Case, LTI/Kecelakaan Serius, atau Kerusakan Properti.</li>
-      <li>Isi Informasi Insiden: tanggal, waktu, nomor laporan, lokasi kejadian, departemen, deskripsi kronologis, kondisi lingkungan, dan saksi.</li>
-      <li>Jika ada korban, lengkapi Data Korban — nama, jabatan, masa kerja, cedera yang diderita, bagian tubuh terkena, penanganan medis, dan APD yang dipakai saat kejadian.</li>
-      <li>Lakukan Analisis Akar Masalah dengan metode 5-Why — mulai dari masalah, lalu tanyakan "mengapa?" hingga lima tingkat untuk menemukan akar masalah sesungguhnya.</li>
-      <li>Tuliskan Tindakan Perbaikan (Corrective Action) dan Tindakan Pencegahan (Preventive Action), lengkap dengan PIC, target selesai, dan status CAPA.</li>
-      <li>Lengkapi bagian tanda tangan (dilaporkan oleh, supervisor, HSE Officer), lalu klik "Print / Simpan PDF" untuk mencetak laporan resmi.</li>
-    </ol>
+</main>
 
-    <h2>Manfaat Form Laporan Insiden untuk Keselamatan Kerja</h2>
-    <p>Melaporkan insiden — termasuk near miss sekalipun — adalah fondasi dari budaya K3 yang proaktif. Statistik keselamatan kerja menunjukkan bahwa untuk setiap satu kecelakaan serius, ada ratusan near miss yang mendahuluinya. Form Laporan Insiden ini membantu perusahaan menangkap kejadian-kejadian kecil sebelum berkembang menjadi kecelakaan fatal.</p>
-    <p>Dengan struktur form yang konsisten, setiap insiden dicatat dengan detail yang sama — kronologi, korban, kondisi lingkungan, dan saksi — sehingga data insiden bisa dianalisis secara agregat untuk melihat pola atau area berisiko tinggi dari waktu ke waktu.</p>
-    <p>Fitur analisis 5-Why yang terintegrasi mendorong tim K3 untuk tidak berhenti pada penyebab permukaan (misalnya "pekerja lalai"), melainkan menggali hingga akar masalah sistemik — seperti kurangnya prosedur, pelatihan, atau perawatan alat — yang jika tidak diperbaiki akan terus menyebabkan insiden berulang.</p>
-    <p>Dokumentasi CAPA (Corrective and Preventive Action) yang lengkap dengan PIC dan target waktu juga memastikan tindak lanjut investigasi benar-benar dijalankan, bukan hanya menjadi laporan yang berhenti di atas kertas — sekaligus menjadi bukti kepatuhan saat audit SMK3.</p>
-
-    <h2>Dasar Hukum yang Relevan</h2>
-    <p>Kewajiban pelaporan dan investigasi kecelakaan kerja diatur dalam Permenaker No. 3 Tahun 1998 tentang Tata Cara Pelaporan dan Pemeriksaan Kecelakaan, yang mewajibkan pengusaha melaporkan kecelakaan kerja ke Disnaker setempat maksimal 2x24 jam untuk kasus fatal/berat. Kewajiban dasar penyediaan sistem pelaporan dan investigasi insiden juga menjadi bagian dari elemen pemantauan dan evaluasi dalam PP No. 50 Tahun 2012 tentang SMK3. Keterlambatan atau kelalaian pelaporan dapat berakibat sanksi administratif bagi perusahaan, sehingga sistem pencatatan insiden yang rapi dan tepat waktu menjadi bagian penting dari kepatuhan hukum K3.</p>
-
-    <h2>Pertanyaan Umum</h2>
-    <div class="faq-item">
-      <h3>Apakah near miss (hampir celaka) wajib dilaporkan meskipun tidak ada cedera?</h3>
-      <p>Ya. Near miss justru sangat penting dilaporkan karena menjadi sinyal peringatan dini sebelum kecelakaan sesungguhnya terjadi. Perusahaan dengan budaya pelaporan near miss yang kuat umumnya memiliki tingkat kecelakaan serius yang jauh lebih rendah.</p>
-    </div>
-    <div class="faq-item">
-      <h3>Apa itu metode 5-Why dan mengapa penting dalam investigasi insiden?</h3>
-      <p>Metode 5-Why adalah teknik menanyakan "mengapa" secara berulang (biasanya lima kali) terhadap suatu masalah untuk menemukan akar penyebabnya, bukan hanya gejala permukaan. Metode ini penting agar tindakan perbaikan menyasar penyebab sistemik, bukan sekadar menyalahkan individu.</p>
-    </div>
-    <div class="faq-item">
-      <h3>Berapa lama batas waktu pelaporan kecelakaan kerja ke Disnaker?</h3>
-      <p>Berdasarkan Permenaker No. 3/1998, kecelakaan kerja yang mengakibatkan korban meninggal atau cedera berat wajib dilaporkan ke Disnaker/Kemnaker setempat maksimal dalam waktu 2x24 jam sejak kejadian. Laporan awal dapat menyusul dengan laporan lengkap setelah investigasi selesai dilakukan.</p>
-    </div>
-  </div>
-</section>
-
-<section class="tools-training-cta">
-  <div class="container">
-    <h2>Tingkatkan Kompetensi K3 Anda</h2>
-    <div class="tools-training-grid">
-      <div class="tools-training-card">
-        <h3><a href="/pelatihan/pelatihan-ahli-k3-umum-sertifikasi-bnsp-online/">Pelatihan Ahli K3 Umum</a></h3>
-        <p>Sertifikasi wajib bagi praktisi K3 perusahaan, resmi BNSP, materi regulasi &amp; manajemen risiko.</p>
-        <a href="/pelatihan/pelatihan-ahli-k3-umum-sertifikasi-bnsp-online/" class="tools-training-btn">Lihat Program &rarr;</a>
-      </div>
-      <div class="tools-training-card">
-        <h3><a href="/pelatihan/pelatihan-petugas-p3k-sertifikasi-bnsp/">Pelatihan Petugas P3K | Sertifikasi BNSP</a></h3>
-        <p>Pelatihan penanganan darurat dan P3K di tempat kerja, sertifikasi BNSP, wajib untuk perusahaan.</p>
-        <a href="/pelatihan/pelatihan-petugas-p3k-sertifikasi-bnsp/" class="tools-training-btn">Lihat Program &rarr;</a>
-      </div>
-      <div class="tools-training-card">
-        <h3><a href="/pelatihan/pelatihan-operator-k3-sertifikasi-bnsp/">Pelatihan Operator K3 | Sertifikasi BNSP</a></h3>
-        <p>Kompetensi dasar keselamatan kerja untuk operator, sertifikasi resmi BNSP, untuk semua industri.</p>
-        <a href="/pelatihan/pelatihan-operator-k3-sertifikasi-bnsp/" class="tools-training-btn">Lihat Program &rarr;</a>
-      </div>
-      <div class="tools-training-card">
-        <h3><a href="/jadwal/">Jadwal Pelatihan Terdekat</a></h3>
-        <p>Lihat jadwal batch pelatihan K3 terbaru — online dan offline di berbagai kota.</p>
-        <a href="/jadwal/" class="tools-training-btn">Lihat Jadwal &rarr;</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="container">
-    <p><a href="/tools/">← Semua Tools K3</a> | <a href="/tools/risk-matrix">Risk Matrix</a> | <a href="/tools/jsa-builder">JSA Builder</a> | <a href="/">Wahana Totalita</a></p>
-    <p style="margin-top:8px">© <?php echo date('Y'); ?> Wahana Totalita Konsultan, Yogyakarta</p>
-  </div>
-</footer>
-
-<a href="https://wa.me/6287759151278" target="_blank" style="position:fixed;bottom:24px;right:24px;background:#25D366;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(37,211,102,.4);z-index:999">
-  <svg viewBox="0 0 24 24" fill="white" width="26" height="26"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-</a>
+<?php require __DIR__ . '/../includes/footer.php'; ?>
 
 <script>
-const typeDescs = {
-  'near-miss': '<strong>Near Miss:</strong> Kejadian yang hampir menyebabkan cedera atau kerugian, namun tidak terjadi. Wajib dilaporkan untuk mencegah insiden sesungguhnya.',
-  'first-aid': '<strong>First Aid Case (FAC):</strong> Cedera ringan yang ditangani dengan P3K, tidak memerlukan penanganan medis lebih lanjut dan tidak absen.',
-  'lti': '<strong>LTI (Lost Time Injury):</strong> Cedera yang menyebabkan korban tidak dapat bekerja minimal 1 hari kerja setelah kejadian. Wajib investigasi mendalam.',
-  'property': '<strong>Kerusakan Properti:</strong> Insiden yang menyebabkan kerusakan peralatan, mesin, atau aset perusahaan tanpa cedera manusia.',
-};
+function printIncidentReport(){
+  const tipe = document.getElementById('inpTipeInsiden').value;
+  const tgl = document.getElementById('inpTglWaktu').value || new Date().toLocaleString('id-ID');
+  const tkp = document.getElementById('inpLokasiTKP').value;
+  const korban = document.getElementById('inpNamaKorban').value;
+  const jabatan = document.getElementById('inpJabatanKorban').value;
+  const cedera = document.getElementById('inpBagianTubuh').value;
+  const kronologi = document.getElementById('inpKronologi').value;
+  const unsafeAct = document.getElementById('inpUnsafeAct').value;
+  const unsafeCond = document.getElementById('inpUnsafeCond').value;
+  const w1 = document.getElementById('why1').value;
+  const w2 = document.getElementById('why2').value;
+  const w3 = document.getElementById('why3').value;
+  const w4 = document.getElementById('why4').value;
+  const w5 = document.getElementById('why5').value;
 
-function setType(t){
-  document.querySelectorAll('.type-tab').forEach(b=>b.classList.remove('active'));
-  document.getElementById(`tab-${t}`).classList.add('active');
-  document.getElementById('typeDesc').innerHTML = typeDescs[t];
+  const win = window.open('', '_blank');
+  win.document.write(`<!DOCTYPE html><html><head><title>Laporan Investigasi Insiden K3</title>
+  <style>
+    body{font-family:'Segoe UI',Arial,sans-serif;padding:32px;max-width:860px;margin:0 auto;color:#0F172A;line-height:1.5}
+    h1{font-size:16pt;margin:0;color:#0D233A;border-bottom:2px solid #0D233A;padding-bottom:8px}
+    .sub{font-size:8.5pt;color:#64748B;margin:6px 0 16px}
+    table{width:100%;border-collapse:collapse;margin:12px 0;font-size:9pt}
+    th,td{border:1px solid #CBD5E1;padding:8px 10px;text-align:left}
+    th{background:#F1F5F9;color:#0D233A;width:24%}
+    .why-box{background:#F8FAFC;border:1px solid #CBD5E1;padding:10px;margin:6px 0;font-size:8.5pt}
+    .sig{margin-top:40px;display:grid;grid-template-columns:1fr 1fr;gap:40px;text-align:center;font-size:9pt}
+    .line{margin-top:60px;border-top:1px solid #000;font-weight:bold}
+  </style>
+  </head><body>
+  <h1>FORMULIR LAPORAN INVESTIGASI KECELAKAAN KERJA (K3)</h1>
+  <div class="sub">Standar Permenaker No. PER.03/MEN/1998 &amp; Format Evaluasi P2K3</div>
+  <table>
+    <tr><th>Kategori Insiden</th><td><strong>${tipe}</strong></td></tr>
+    <tr><th>Waktu &amp; Lokasi TKP</th><td>${tgl} | ${tkp}</td></tr>
+    <tr><th>Data Korban</th><td><strong>${korban}</strong> (${jabatan})</td></tr>
+    <tr><th>Dampak Cedera Tubuh</th><td>${cedera}</td></tr>
+    <tr><th>Kronologi Peristiwa</th><td>${kronologi}</td></tr>
+    <tr><th>Penyebab Langsung</th><td>Tindakan: ${unsafeAct}<br>Kondisi: ${unsafeCond}</td></tr>
+  </table>
+
+  <h3>Rantai Analisis 5-Why (Root Cause Analysis):</h3>
+  <div class="why-box"><strong>Why 1:</strong> ${w1}</div>
+  <div class="why-box"><strong>Why 2:</strong> ${w2}</div>
+  <div class="why-box"><strong>Why 3:</strong> ${w3}</div>
+  <div class="why-box"><strong>Why 4:</strong> ${w4}</div>
+  <div class="why-box" style="background:#FFF2EA;border-color:#E8611A"><strong>Akar Masalah (Why 5):</strong> <strong>${w5}</strong></div>
+
+  <div class="sig">
+    <div>Investigator Lapangan,<br><strong>Ahli K3 Umum / Sekretaris P2K3</strong><div class="line">( ___________________________ )</div></div>
+    <div>Mengetahui &amp; Menyetujui,<br><strong>Ketua P2K3 / Site Manager</strong><div class="line">( ___________________________ )</div></div>
+  </div>
+  </body></html>`);
+  win.document.close();
+  win.print();
 }
 
-function clearForm(){
-  if(!confirm('Reset semua data form?')) return;
-  document.querySelectorAll('input,select,textarea').forEach(el=>{
-    if(el.type==='date') el.value=new Date().toISOString().split('T')[0];
-    else if(el.tagName==='SELECT') el.selectedIndex=0;
-    else el.value='';
-  });
+function toggleFaq(btn){
+  btn.parentElement.classList.toggle('active');
 }
+
+window.addEventListener('DOMContentLoaded', () => {
+  const now = new Date();
+  now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+  document.getElementById('inpTglWaktu').value = now.toISOString().slice(0,16);
+});
 </script>
+
+<?php require __DIR__ . '/../includes/scripts.php'; ?>
 </body>
 </html>

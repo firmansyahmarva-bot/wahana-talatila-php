@@ -1,355 +1,812 @@
 <?php
 require_once __DIR__ . '/../config.php';
 $s = get_all_settings();
-?>
-<?php
-$page_title = 'Kalkulator Paparan Kebisingan Online Gratis — NAB Kebisingan K3';
-$meta_desc = 'Kalkulator paparan kebisingan online gratis. Hitung dosis paparan berdasarkan tingkat dB dan jam kerja. Bandingkan dengan NAB Permenaker No.5/2018 (85 dB/8 jam). Gratis untuk HSE officer.';
+
+$page_title = 'Kalkulator Kebisingan K3 2026: Dosis Paparan Permenaker 5/2018 & TWA';
+$meta_desc = 'Kalkulator dosis paparan kebisingan tempat kerja sesuai Permenaker No. 5/2018 & OSHA. Hitung Dosis Harian (%), TWA 8 Jam (dBA), batas waktu pajanan, serta proteksi NRR earplug & earmuff.';
+
+ob_start();
 require __DIR__ . '/../includes/head.php';
+$shared_head = ob_get_clean();
+$shared_head = preg_replace('~<title>.*?</title>~s', '<title>' . e($page_title) . '</title>', $shared_head, 1);
+echo $shared_head;
 ?>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "applicationCategory": "BusinessApplication",
-  "name": "Kalkulator Paparan Kebisingan Online Gratis — NAB Kebisingan K3",
-  "description": "Kalkulator paparan kebisingan online gratis. Hitung dosis paparan berdasarkan tingkat dB dan jam kerja. Bandingkan dengan NAB Permenaker No.5/2018 (85 dB/8 jam). Gratis untuk HSE officer.",
-  "url": "https://wahanatotalita.com/tools/kalkulator-kebisingan/",
-  "provider": {"@type": "Organization", "name": "Wahana Totalita", "url": "https://wahanatotalita.com"},
-  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "IDR"}
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Beranda", "item": "https://wahanatotalita.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Tools K3", "item": "https://wahanatotalita.com/tools/" },
+    { "@type": "ListItem", "position": 3, "name": "Kalkulator Kebisingan", "item": "https://wahanatotalita.com/tools/kalkulator-kebisingan.php" }
+  ]
 }
 </script>
-<link rel="manifest" href="/manifest.json">
-<style>
-:root{--primary:#1a6b3a;--primary-d:#145530;--accent:#f5a623;--bg:#f8fafc;--card:#fff;--text:#1a202c;--muted:#6b7280;--radius:12px;--shadow:0 2px 16px rgba(0,0,0,.09)}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
-a{color:var(--primary);text-decoration:none}
-.container{max-width:920px;margin:0 auto;padding:0 20px}
-nav{background:#fff;border-bottom:1px solid #e5e7eb;padding:14px 0;position:sticky;top:0;z-index:100;box-shadow:0 1px 6px rgba(0,0,0,.06)}
-.nav-inner{display:flex;align-items:center;justify-content:space-between}
-.nav-logo{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--primary);font-size:1rem}
-.nav-logo svg{width:32px;height:32px}
-.nav-cta{background:var(--primary);color:#fff;padding:8px 18px;border-radius:8px;font-size:.85rem;font-weight:600}
-.hero{background:linear-gradient(135deg,#0f4c2a,#1a6b3a);color:#fff;padding:44px 0 32px;text-align:center}
-.hero-badge{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:50px;padding:5px 16px;font-size:.8rem;font-weight:600;display:inline-block;margin-bottom:14px}
-.hero h1{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;margin-bottom:10px}
-.hero h1 span{color:var(--accent)}
-.hero p{opacity:.88;max-width:560px;margin:0 auto}
-.main{padding:36px 0 80px}
-.layout{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
-.panel{background:var(--card);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow);border:1px solid #e5e7eb}
-.panel h2{font-size:1rem;font-weight:700;margin-bottom:16px;color:var(--primary)}
-.form-group{margin-bottom:14px}
-.form-group label{display:block;font-size:.85rem;font-weight:600;margin-bottom:5px}
-.form-group input,.form-group select{width:100%;padding:9px 13px;border:2px solid #e5e7eb;border-radius:7px;font-size:.88rem;background:#fff;color:var(--text)}
-.form-group input:focus,.form-group select:focus{border-color:var(--primary);outline:none}
-.expo-table{width:100%;border-collapse:collapse;margin-bottom:12px}
-.expo-table th{background:#f3f4f6;padding:8px 10px;text-align:left;font-size:.8rem;font-weight:600;color:var(--muted)}
-.expo-table td{padding:8px;border-bottom:1px solid #f3f4f6;vertical-align:middle}
-.expo-table td input{width:100%;border:1px solid #e5e7eb;border-radius:5px;padding:6px;font-size:.85rem;background:#fff}
-.btn-add{background:#f0fdf4;color:var(--primary);border:2px dashed #86efac;border-radius:7px;padding:9px;width:100%;font-size:.85rem;font-weight:600;cursor:pointer;margin-bottom:14px}
-.btn-add:hover{background:#dcfce7}
-.btn-del{background:#fee2e2;color:#dc2626;border:none;border-radius:4px;padding:4px 8px;cursor:pointer;font-size:.78rem}
-.btn-calc{width:100%;background:var(--primary);color:#fff;border:none;border-radius:9px;padding:13px;font-size:.95rem;font-weight:700;cursor:pointer}
-.btn-calc:hover{background:var(--primary-d)}
-/* RESULT */
-.result-panel{display:none}
-.result-panel.show{display:block}
-.dose-meter{background:#f9fafb;border-radius:12px;padding:20px;text-align:center;margin-bottom:16px;border:2px solid #e5e7eb}
-.dose-meter.safe{border-color:#16a34a;background:#f0fdf4}
-.dose-meter.warn{border-color:#d97706;background:#fffbeb}
-.dose-meter.danger{border-color:#dc2626;background:#fef2f2}
-.dose-value{font-size:3rem;font-weight:900;line-height:1}
-.dose-label{font-size:.85rem;color:var(--muted);margin-top:4px}
-.dose-verdict{font-size:1rem;font-weight:700;margin-top:12px;padding:8px 16px;border-radius:50px;display:inline-block}
-.verdict-safe{background:#dcfce7;color:#16a34a}
-.verdict-warn{background:#fef3c7;color:#d97706}
-.verdict-danger{background:#fee2e2;color:#dc2626}
-.result-detail{display:flex;flex-direction:column;gap:10px}
-.result-row{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:#f9fafb;border-radius:8px;font-size:.85rem}
-.result-row strong{font-weight:700}
-.nab-table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:20px}
-.nab-table th{background:var(--primary);color:#fff;padding:9px 12px;text-align:left;font-size:.78rem}
-.nab-table td{padding:8px 12px;border-bottom:1px solid #f3f4f6}
-.nab-table tr:hover td{background:#f9fafb}
-.info-box{background:#f0fdf4;border-left:4px solid var(--primary);border-radius:8px;padding:16px 20px;margin-top:20px}
-.info-box h4{font-size:.9rem;font-weight:700;color:var(--primary);margin-bottom:8px}
-.info-box p,.info-box li{font-size:.82rem;color:#374151;line-height:1.6}
-.info-box ul{padding-left:16px}
-.cta-strip{background:var(--primary);color:#fff;border-radius:12px;padding:24px;text-align:center;margin:36px 0}
-.cta-strip h3{font-size:1rem;font-weight:700;margin-bottom:8px}
-.cta-strip p{opacity:.88;font-size:.85rem;margin-bottom:14px}
-footer{background:#111827;color:#9ca3af;padding:30px 0;text-align:center;font-size:.83rem}
-footer a{color:#6ee7b7}
-@media(max-width:768px){.layout{grid-template-columns:1fr}}
-@media print{nav,footer,.cta-strip,.tools-training-cta,.btn-calc,.btn-add{display:none!important}}
-.tools-training-cta{padding:40px 0}
-.tools-training-cta h2{font-size:1.3rem;font-weight:800;margin:0 0 16px;text-align:center;color:#0A4A2E}
-.tools-training-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
-.tools-training-card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:18px;display:flex;flex-direction:column}
-.tools-training-card h3{font-size:.95rem;font-weight:700;margin:0 0 8px}
-.tools-training-card h3 a{color:#0A4A2E;text-decoration:none}
-.tools-training-card p{font-size:.85rem;color:#555;line-height:1.6;margin:0 0 12px;flex:1}
-.tools-training-btn{display:inline-block;background:#0A4A2E;color:#fff;font-weight:700;font-size:.85rem;padding:8px 14px;border-radius:8px;text-decoration:none;text-align:center}
-</style>
-<nav>
-  <div class="container nav-inner">
-    <a href="/" class="nav-logo">
-      <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#1a6b3a"/><path d="M20 8l3 9h9l-7 5 3 9-8-6-8 6 3-9-7-5h9z" fill="#f5a623"/></svg>
-      Wahana Totalita
-    </a>
-    <a href="/tools/" style="color:var(--muted);font-size:.88rem">← Semua Tools</a>
-    <a href="https://wa.me/6287759151278" target="_blank" class="nav-cta">📱 Konsultasi</a>
-  </div>
-</nav>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Kalkulator Paparan Kebisingan K3 Online",
+  "url": "https://wahanatotalita.com/tools/kalkulator-kebisingan.php",
+  "description": "Perhitungan dosis kebisingan kumulatif, Time Weighted Average (TWA), dan uji efektivitas APD pendengaran sesuai Permenaker No. 5 Tahun 2018.",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "All",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "IDR" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Berapa Nilai Ambang Batas (NAB) kebisingan resmi di Indonesia?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Berdasarkan Permenaker No. 5 Tahun 2018 tentang K3 Lingkungan Kerja, Nilai Ambang Batas (NAB) kebisingan untuk waktu kerja 8 jam per hari atau 40 jam per minggu adalah 85 dBA dengan exchange rate 3 dB."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Bagaimana aturan penggandaan waktu pajanan kebisingan (3 dB exchange rate)?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Setiap kenaikan intensitas suara sebesar 3 dBA, batas waktu pemaparan yang diizinkan dipotong menjadi setengahnya. Sebagai contoh: 85 dBA diizinkan 8 jam, 88 dBA diizinkan 4 jam, 91 dBA diizinkan 2 jam, 94 dBA diizinkan 1 jam, dan pada 100 dBA hanya diizinkan maksimal 15 menit per hari tanpa APD."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Mengapa nilai NRR pada kemasan earplug / earmuff harus dikurangi (derated)?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nilai NRR (Noise Reduction Rating) dari pabrikan diuji di laboratorium ideal. Standar OSHA dan NIOSH mensyaratkan derating karena di lapangan terdapat kebocoran pemasangan, rambut, kacamata, dan pergerakan rahang. Rumus OSHA mengoreksi NRR earplug dengan derating 50% setelah dikurangi 7 dB: Proteksi Riil = (NRR - 7) × 0.5."
+      }
+    }
+  ]
+}
+</script>
 
-<section class="hero">
+<style>
+:root {
+  --navy-dark: #071524;
+  --navy: #0D233A;
+  --navy-light: #183654;
+  --orange: #E8611A;
+  --orange-hover: #cf5213;
+  --orange-light: #fff2ea;
+  --slate-50: #F8FAFC;
+  --slate-100: #F1F5F9;
+  --slate-200: #E2E8F0;
+  --slate-300: #CBD5E1;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-900: #0F172A;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 2px 8px rgba(13,35,58,0.06);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Source Sans 3', system-ui, -apple-system, sans-serif;
+  background: var(--slate-50);
+  color: var(--slate-900);
+  line-height: 1.6;
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* HERO */
+.noise-hero {
+  background: linear-gradient(135deg, #071524 0%, #0D233A 60%, #183654 100%);
+  color: #fff;
+  padding: 58px 0 44px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 3px solid var(--orange);
+}
+.noise-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 36px 36px;
+  pointer-events: none;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(232, 97, 26, 0.18);
+  border: 1px solid rgba(232, 97, 26, 0.4);
+  padding: 6px 14px;
+  border-radius: 999px;
+  color: #FFA573;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 14px;
+}
+.noise-hero h1 {
+  font-family: 'Lexend', sans-serif;
+  font-size: clamp(1.8rem, 3.6vw, 2.7rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+.noise-hero h1 span { color: var(--orange); }
+.noise-hero p {
+  color: #CBD5E1;
+  font-size: 1.05rem;
+  max-width: 760px;
+  margin-bottom: 20px;
+}
+.hero-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.hero-tag {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  color: #E2E8F0;
+}
+
+/* WORKSPACE LAYOUT */
+.noise-wrapper { padding: 40px 0 60px; }
+.noise-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 32px;
+  align-items: start;
+}
+@media (max-width: 992px) {
+  .noise-grid { grid-template-columns: 1fr; }
+}
+
+.card-box {
+  background: #fff;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 28px;
+  margin-bottom: 28px;
+}
+.card-header-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--slate-100);
+  padding-bottom: 16px;
+  margin-bottom: 22px;
+}
+.card-title {
+  font-family: 'Lexend', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* NOISE EXPOSURE TABLE */
+.noise-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 18px;
+  font-size: 0.9rem;
+}
+.noise-table th {
+  background: var(--navy);
+  color: #fff;
+  padding: 10px 12px;
+  text-align: left;
+  font-size: 0.82rem;
+}
+.noise-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--slate-200);
+  vertical-align: middle;
+}
+.noise-input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1.5px solid var(--slate-200);
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+.noise-input:focus { outline: none; border-color: var(--orange); }
+
+.btn-add-source {
+  background: var(--slate-100);
+  border: 1.5px solid var(--slate-300);
+  color: var(--navy);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn-add-source:hover { background: var(--slate-200); }
+
+/* APD DERATING CALCULATOR */
+.apd-box {
+  background: var(--slate-50);
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  margin-top: 20px;
+}
+.apd-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 12px;
+}
+@media (max-width: 600px) {
+  .apd-grid { grid-template-columns: 1fr; }
+}
+
+/* RESULTS PANEL */
+.result-stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+.stat-card {
+  background: var(--slate-50);
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.stat-card.featured {
+  background: linear-gradient(145deg, #0D233A 0%, #183654 100%);
+  color: #fff;
+  border-color: #0D233A;
+}
+.stat-card.featured .stat-meta { color: #FFA573; }
+.stat-card.featured .stat-val { color: #fff; }
+.stat-card.featured .stat-desc { color: #CBD5E1; }
+.stat-card::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px; height: 100%;
+  background: var(--orange);
+}
+.stat-meta {
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--slate-600);
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+.stat-val {
+  font-family: 'Lexend', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+.stat-desc { font-size: 0.8rem; color: var(--slate-600); }
+
+.status-box {
+  padding: 14px 18px;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.92rem;
+}
+.status-safe { background: #DCFCE7; color: #166534; border: 1px solid #BBF7D0; }
+.status-warn { background: #FEF3C7; color: #92400E; border: 1px solid #FDE68A; }
+.status-danger { background: #FEE2E2; color: #991B1B; border: 1px solid #FECACA; }
+
+/* EDITORIAL ARTICLE */
+.editorial-box {
+  background: #fff;
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+  margin-bottom: 32px;
+}
+.editorial-title {
+  font-family: 'Lexend', sans-serif;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 16px;
+  border-left: 4px solid var(--orange);
+  padding-left: 14px;
+}
+.editorial-p {
+  color: var(--slate-700);
+  font-size: 0.96rem;
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+.ref-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  margin: 20px 0;
+}
+.ref-table th {
+  background: var(--navy);
+  color: #fff;
+  padding: 10px 14px;
+  text-align: left;
+}
+.ref-table td {
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--slate-200);
+  color: var(--slate-700);
+}
+.ref-table tr:nth-child(even) td { background: var(--slate-50); }
+
+/* FAQ */
+.faq-item {
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-md);
+  margin-bottom: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+.faq-q {
+  width: 100%;
+  padding: 16px 20px;
+  text-align: left;
+  background: #fff;
+  border: none;
+  font-family: 'Lexend', sans-serif;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--navy);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.faq-q:hover { background: var(--slate-50); }
+.faq-a {
+  padding: 0 20px 18px;
+  color: var(--slate-700);
+  font-size: 0.92rem;
+  line-height: 1.65;
+  display: none;
+}
+.faq-item.active .faq-a { display: block; }
+.faq-item.active .faq-icon { transform: rotate(180deg); }
+.faq-icon { transition: transform 0.2s; }
+</style>
+
+<?php require __DIR__ . '/../includes/navbar.php'; ?>
+
+<main class="noise-page" id="konten-utama">
+
+<!-- HERO -->
+<section class="noise-hero">
   <div class="container">
-    <div class="hero-badge">🔊 Kalkulator Kebisingan</div>
-    <h1>Kalkulator Paparan <span>Kebisingan</span><br>NAB Sesuai Permenaker 5/2018</h1>
-    <p>Hitung dosis paparan kebisingan kumulatif dan bandingkan dengan Nilai Ambang Batas (NAB) Indonesia. Gratis, langsung pakai.</p>
+    <div class="hero-badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+      Permenaker No. 5 Tahun 2018 &amp; OSHA 1910.95
+    </div>
+    <h1>Kalkulator Paparan Kebisingan <span>K3 2026</span></h1>
+    <p>Hitung Dosis Kebisingan Kumulatif (Noise Dose %), Time-Weighted Average (TWA 8-Jam), batas durasi pajanan maksimal yang diizinkan, serta evaluasi perlindungan riil APD pendengaran (NRR Derating).</p>
+    <div class="hero-tags">
+      <span class="hero-tag">NAB Resmi: 85 dBA / 8 Jam</span>
+      <span class="hero-tag">Exchange Rate 3 dB</span>
+      <span class="hero-tag">Dosis D = Σ (C / T) × 100%</span>
+      <span class="hero-tag">OSHA NRR Derating Earplug &amp; Earmuff</span>
+    </div>
   </div>
 </section>
 
-<section class="main">
+<!-- MAIN WORKSPACE -->
+<section class="noise-wrapper">
   <div class="container">
-    <div class="layout">
+    
+    <div class="noise-grid">
+      
+      <!-- INPUT COLUMN -->
       <div>
-        <div class="panel">
-          <h2>🔊 Input Data Paparan Kebisingan</h2>
-          <p style="font-size:.82rem;color:var(--muted);margin-bottom:16px">Tambahkan setiap sumber kebisingan dengan tingkat dB dan durasi paparan per hari kerja.</p>
+        <div class="card-box">
+          <div class="card-header-line">
+            <h2 class="card-title">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+              Tabel Sumber &amp; Durasi Paparan
+            </h2>
+            <button class="btn-add-source" type="button" onclick="addNoiseRow()">
+              + Tambah Sumber Kebisingan
+            </button>
+          </div>
 
-          <table class="expo-table">
+          <table class="noise-table" id="noiseTable">
             <thead>
               <tr>
-                <th>Sumber Kebisingan</th>
-                <th style="width:80px">dB(A)</th>
-                <th style="width:70px">Jam/Hari</th>
-                <th style="width:40px"></th>
+                <th>Area / Mesin Operasional</th>
+                <th style="width:110px">Tingkat (dBA)</th>
+                <th style="width:110px">Durasi (Jam)</th>
+                <th style="width:110px">Batas Izin (T)</th>
+                <th style="width:36px;text-align:center">Hapus</th>
               </tr>
             </thead>
-            <tbody id="noiseBody"></tbody>
-          </table>
-          <button class="btn-add" onclick="addNoiseRow()">+ Tambah Sumber Kebisingan</button>
-
-          <div class="form-group">
-            <label>Nama Pekerja / Area (opsional)</label>
-            <input type="text" id="workerName" placeholder="cth: Operator Mesin Produksi, Area A">
-          </div>
-          <div class="form-group">
-            <label>Jam Kerja per Hari</label>
-            <select id="workHours">
-              <option value="8" selected>8 jam (standar)</option>
-              <option value="10">10 jam</option>
-              <option value="12">12 jam</option>
-            </select>
-          </div>
-          <button class="btn-calc" onclick="calculate()">🔊 Hitung Dosis Paparan</button>
-        </div>
-
-        <div class="info-box">
-          <h4>📏 Tabel NAB Kebisingan Indonesia (Permenaker 5/2018)</h4>
-          <table class="nab-table">
-            <thead><tr><th>Tingkat Kebisingan</th><th>Durasi Maks/Hari</th></tr></thead>
-            <tbody>
-              <tr><td>85 dB(A)</td><td>8 jam</td></tr>
-              <tr><td>88 dB(A)</td><td>4 jam</td></tr>
-              <tr><td>91 dB(A)</td><td>2 jam</td></tr>
-              <tr><td>94 dB(A)</td><td>1 jam</td></tr>
-              <tr><td>97 dB(A)</td><td>30 menit</td></tr>
-              <tr><td>100 dB(A)</td><td>15 menit</td></tr>
-              <tr><td>103 dB(A)</td><td>7.5 menit</td></tr>
-              <tr><td>≥ 140 dB(A)</td><td>Sesaat (impulsif)</td></tr>
+            <tbody id="noiseBody">
+              <!-- Dynamically populated -->
             </tbody>
           </table>
-          <p style="margin-top:10px;font-size:.78rem">NAB = Nilai Ambang Batas. Paparan di atas NAB wajib dilengkapi Hearing Protection Device (HPD) dan program Hearing Conservation.</p>
+
+          <!-- APD DERATING CALCULATOR -->
+          <div class="apd-box">
+            <div style="font-weight:700;color:var(--navy);font-size:0.92rem;display:flex;align-items:center;gap:8px">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+              Kalkulator Efektivitas Alat Pelindung Diri (HPD NRR)
+            </div>
+            
+            <div class="apd-grid">
+              <div>
+                <label style="display:block;font-size:0.8rem;font-weight:700;color:var(--slate-700);margin-bottom:4px">Jenis Pelindung Telinga</label>
+                <select id="hpdType" class="noise-input" onchange="calcNoise()">
+                  <option value="plug">Earplug Sumbat Telinga (OSHA 50% Derate)</option>
+                  <option value="muff">Earmuff Tutup Telinga (OSHA 70% Derate)</option>
+                  <option value="dual">Dual Protection (Earplug + Earmuff)</option>
+                </select>
+              </div>
+              <div>
+                <label style="display:block;font-size:0.8rem;font-weight:700;color:var(--slate-700);margin-bottom:4px">Label NRR Pabrikan (dB)</label>
+                <input type="number" id="hpdNrr" class="noise-input" value="28" min="0" max="40" oninput="calcNoise()">
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
 
+      <!-- RESULTS COLUMN -->
       <div>
-        <div class="result-panel" id="resultPanel">
-          <!-- filled by JS -->
-        </div>
-        <div id="placeholder" style="background:var(--card);border-radius:var(--radius);padding:50px 24px;text-align:center;color:var(--muted);box-shadow:var(--shadow);border:1px solid #e5e7eb">
-          <div style="font-size:3rem;margin-bottom:12px">🔊</div>
-          <p>Tambahkan sumber kebisingan dan klik <strong>Hitung</strong> untuk melihat dosis paparan dan status NAB</p>
-        </div>
+        <div class="card-box">
+          <div class="card-header-line">
+            <h2 class="card-title">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              Hasil Evaluasi Pajanan
+            </h2>
+            <span style="font-size:0.78rem;font-weight:700;color:var(--orange);background:var(--orange-light);padding:4px 8px;border-radius:4px">
+              Permenaker 5/2018
+            </span>
+          </div>
 
-        <div class="info-box" style="margin-top:20px">
-          <h4>💡 Cara Mengurangi Paparan Kebisingan (Hierarki Pengendalian)</h4>
-          <ul>
-            <li><strong>Eliminasi:</strong> hentikan sumber kebisingan jika tidak esensial</li>
-            <li><strong>Substitusi:</strong> ganti mesin bising dengan yang lebih senyap</li>
-            <li><strong>Engineering:</strong> buat enclosure, peredam suara, insulasi getaran</li>
-            <li><strong>Administratif:</strong> rotasi kerja, kurangi jam paparan</li>
-            <li><strong>APD:</strong> Ear Plug (SNR ~27dB) atau Ear Muff (SNR ~30dB)</li>
-          </ul>
-        </div>
+          <div id="statusBadge" class="status-box status-safe">
+            <span id="statusIcon">✓</span>
+            <span id="statusText">Paparan kebisingan masih berada dalam batas aman NAB.</span>
+          </div>
 
-        <div class="cta-strip">
-          <h3>🎓 Pelajari Higiene Industri & K3 Kesehatan Kerja</h3>
-          <p>Sertifikasi HSE Officer mencakup pengukuran NAB, higiene industri, dan program Hearing Conservation sesuai Permenaker 5/2018.</p>
-          <a href="https://wa.me/6287759151278?text=Halo%20Wahana%2C%20saya%20pakai%20kalkulator%20kebisingan%20dan%20ingin%20tanya%20pelatihan%20HSE%20Officer" target="_blank" rel="noopener"
-             style="background:#25D366;color:#fff;padding:11px 24px;border-radius:8px;font-weight:700;display:inline-flex;align-items:center;gap:8px">
-            📱 Tanya Pelatihan HSE Officer
-          </a>
+          <div class="result-stat-grid">
+            
+            <div class="stat-card featured">
+              <div class="stat-meta">Dosis Kebisingan (D)</div>
+              <div class="stat-val" id="outDose">68.5%</div>
+              <div class="stat-desc">Batas maksimum aman: 100% per 8 jam</div>
+            </div>
+
+            <div class="stat-card featured">
+              <div class="stat-meta">Equivalent TWA 8-Jam</div>
+              <div class="stat-val" id="outTwa">82.3 dBA</div>
+              <div class="stat-desc">NAB Permenaker: 85 dBA</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-meta">Proteksi Riil APD</div>
+              <div class="stat-val" id="outHpdProt">10.5 dBA</div>
+              <div class="stat-desc">Setelah derating koreksi OSHA</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-meta">Paparan di Telinga</div>
+              <div class="stat-val" id="outAtEar">71.8 dBA</div>
+              <div class="stat-desc">Tingkat suara yang masuk gendang telinga</div>
+            </div>
+
+          </div>
+
+          <div style="background:var(--slate-50);border:1px solid var(--slate-200);border-radius:var(--radius-md);padding:16px;font-size:0.84rem;color:var(--slate-700);line-height:1.6">
+            <strong>Rekomendasi Tindakan K3:</strong>
+            <ul style="padding-left:18px;margin-top:6px" id="rekomendasiList">
+              <li>Lakukan pemantauan lingkungan kerja periodik 6 bulan sekali.</li>
+              <li>Wajibkan audiometri berkala tahunan untuk pekerja di zona kebisingan > 85 dBA.</li>
+            </ul>
+          </div>
+
+          <button class="noise-input" type="button" onclick="printNoiseReport()" style="margin-top:18px;background:var(--orange);color:#fff;border:none;font-weight:700;padding:12px;cursor:pointer">
+            Cetak Laporan Penilaian Kebisingan
+          </button>
+
         </div>
       </div>
+
     </div>
+
+    <!-- IN-DEPTH EDITORIAL ARTICLE (SEO DEPTH) -->
+    <div class="editorial-box">
+      <h2 class="editorial-title">Dasar Hukum &amp; Standar Kebisingan Tempat Kerja di Indonesia</h2>
+      <p class="editorial-p">
+        Pengendalian faktor fisik kebisingan diatur secara mengikat melalui <strong>Peraturan Menteri Ketenagakerjaan RI No. 5 Tahun 2018 tentang Keselamatan dan Kesehatan Kerja Lingkungan Kerja</strong>. Kebisingan diartikan sebagai semua suara yang tidak dikehendaki yang bersumber dari alat-alat proses produksi dan/atau alat-alat kerja yang pada tingkat tertentu dapat menimbulkan gangguan pendengaran.
+      </p>
+
+      <h3 style="color:var(--navy);font-family:'Lexend',sans-serif;font-size:1.15rem;margin:22px 0 10px">Tabel Resmi Batas Waktu Pemaparan Kebisingan (Permenaker 5/2018)</h3>
+      <table class="ref-table">
+        <thead>
+          <tr>
+            <th>Intensitas Kebisingan (dBA)</th>
+            <th>Waktu Pemaparan Maksimal per Hari Kerja</th>
+            <th>Keterangan Kategori</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>85 dBA</td><td><strong>8 Jam</strong></td><td>Nilai Ambang Batas Standar (NAB)</td></tr>
+          <tr><td>88 dBA</td><td><strong>4 Jam</strong></td><td>Kenaikan 3 dB = Waktu Berkurang 50%</td></tr>
+          <tr><td>91 dBA</td><td><strong>2 Jam</strong></td><td>Wajib APD &amp; Audiometri Tahunan</td></tr>
+          <tr><td>94 dBA</td><td><strong>1 Jam</strong></td><td>Wajib Rotasi Kerja</td></tr>
+          <tr><td>97 dBA</td><td><strong>30 Menit</strong></td><td>Zona Kebisingan Tinggi</td></tr>
+          <tr><td>100 dBA</td><td><strong>15 Menit</strong></td><td>Area Sangat Bising</td></tr>
+          <tr><td>103 dBA</td><td><strong>7.5 Menit</strong></td><td>Batas Sangat Kritis</td></tr>
+          <tr><td>115 dBA</td><td><strong>28.12 Detik</strong></td><td>Bahaya Langsung Pendengaran</td></tr>
+          <tr><td>140 dBA</td><td><strong>Tidak Boleh Terpapar (0 Detik)</strong></td><td>Batas Maksimum Mutlak (Impulsif)</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="color:var(--navy);font-family:'Lexend',sans-serif;font-size:1.15rem;margin:22px 0 10px">Rumus Perhitungan Dosis Kebisingan Kumulatif</h3>
+      <p class="editorial-p">
+        Apabila seorang tenaga kerja bekerja di berbagai ruangan dengan intensitas bising yang bervariasi sepanjang giliran kerja (shift), maka dosis paparan kumulatif dihitung dengan rumus:
+      </p>
+      <div style="background:var(--slate-100);padding:14px 18px;border-radius:8px;font-family:monospace;font-size:0.95rem;color:var(--navy);margin-bottom:16px">
+        Dosis (D) = [ (C1 / T1) + (C2 / T2) + ... + (Cn / Tn) ] × 100%
+      </div>
+      <p class="editorial-p">
+        Di mana <em>C</em> adalah durasi aktual pekerja berada di area bising tersebut (dalam jam), dan <em>T</em> adalah batas waktu paparan maksimum yang diizinkan untuk intensitas kebisingan tersebut berdasarkan tabel Permenaker 5/2018. Jika nilai <strong>Dosis (D) melebihi 100%</strong>, maka paparan dinyatakan MELAMPAUI Nilai Ambang Batas.
+      </p>
+
+      <!-- FAQ ACCORDION -->
+      <h3 style="color:var(--navy);font-family:'Lexend',sans-serif;font-size:1.25rem;margin:28px 0 16px">Tanya Jawab Seputar Kebisingan Tempat Kerja (FAQ)</h3>
+      <div class="faq-box">
+        
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>Apa itu Noise Induced Hearing Loss (NIHL)?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-a">
+            Noise Induced Hearing Loss (NIHL) atau Tuli Akibat Kebisingan (TAK) adalah penyakit akibat kerja (PAK) yang menyebabkan kerusakan permanen pada sel-sel rambut sensorik di dalam koklea telinga bagian dalam akibat paparan suara keras secara terus menerus dalam jangka panjang. NIHL bersifat menetap, tidak dapat disembuhkan secara medis, namun 100% dapat dicegah dengan manajemen K3 yang tepat.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>Kapan perusahaan wajib menyelenggarakan program Hearing Conservation Program (HCP)?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-a">
+            Program Konservasi Pendengaran (HCP) wajib diterapkan oleh perusahaan apabila hasil pengukuran lingkungan kerja menunjukkan tingkat kebisingan mencapai atau melampaui Action Level 82 dBA (atau 85 dBA TWA 8-jam). Komponen HCP meliputi: survei pemetaan kebisingan, pengendalian teknik/mesin, uji audiometri berkala bagi pekerja, penyediaan APD yang teruji, serta edukasi K3.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
 </section>
 
-<section class="tools-training-cta">
-  <div class="container">
-    <h2>Tingkatkan Kompetensi K3 Anda</h2>
-    <div class="tools-training-grid">
-      <div class="tools-training-card">
-        <h3><a href="/pelatihan/pelatihan-ahli-k3-umum-sertifikasi-bnsp-online/">Pelatihan Ahli K3 Umum</a></h3>
-        <p>Sertifikasi wajib bagi praktisi K3 perusahaan, resmi BNSP, materi regulasi &amp; manajemen risiko.</p>
-        <a href="/pelatihan/pelatihan-ahli-k3-umum-sertifikasi-bnsp-online/" class="tools-training-btn">Lihat Program &rarr;</a>
-      </div>
-      <div class="tools-training-card">
-        <h3><a href="/pelatihan/pelatihan-petugas-p3k-sertifikasi-bnsp/">Pelatihan Petugas P3K | Sertifikasi BNSP</a></h3>
-        <p>Pelatihan penanganan darurat dan P3K di tempat kerja, sertifikasi BNSP, wajib untuk perusahaan.</p>
-        <a href="/pelatihan/pelatihan-petugas-p3k-sertifikasi-bnsp/" class="tools-training-btn">Lihat Program &rarr;</a>
-      </div>
-      <div class="tools-training-card">
-        <h3><a href="/pelatihan/pelatihan-operator-k3-sertifikasi-bnsp/">Pelatihan Operator K3 | Sertifikasi BNSP</a></h3>
-        <p>Kompetensi dasar keselamatan kerja untuk operator, sertifikasi resmi BNSP, untuk semua industri.</p>
-        <a href="/pelatihan/pelatihan-operator-k3-sertifikasi-bnsp/" class="tools-training-btn">Lihat Program &rarr;</a>
-      </div>
-      <div class="tools-training-card">
-        <h3><a href="/jadwal/">Jadwal Pelatihan Terdekat</a></h3>
-        <p>Lihat jadwal batch pelatihan K3 terbaru — online dan offline di berbagai kota.</p>
-        <a href="/jadwal/" class="tools-training-btn">Lihat Jadwal &rarr;</a>
-      </div>
-    </div>
-  </div>
-</section>
+</main>
 
-<footer>
-  <div class="container">
-    <p><a href="/tools/">← Semua Tools K3</a> | <a href="/tools/kalkulator-k3">Kalkulator LTIR</a> | <a href="/">Wahana Totalita</a></p>
-    <p style="margin-top:8px">© <?php echo date('Y'); ?> Wahana Totalita Konsultan, Yogyakarta</p>
-  </div>
-</footer>
-
-<a href="https://wa.me/6287759151278" target="_blank" style="position:fixed;bottom:24px;right:24px;background:#25D366;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(37,211,102,.4);z-index:999">
-  <svg viewBox="0 0 24 24" fill="white" width="26" height="26"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-</a>
+<?php require __DIR__ . '/../includes/footer.php'; ?>
 
 <script>
-let noiseCount = 0;
+let noiseRows = [
+  { area: "Ruang Genset / Kompresor", dba: 91, hours: 1.5 },
+  { area: "Lantai Produksi Mesin Stamping", dba: 88, hours: 3.0 },
+  { area: "Ruang Kontrol / Office", dba: 70, hours: 3.5 }
+];
 
-// NAB durations based on Permenaker 5/2018 (OSHA formula: T = 8/(2^((L-85)/3)))
-function getNABDuration(dB){
-  if(dB < 85) return 999; // no limit
-  return 8 / Math.pow(2, (dB - 85) / 3);
+// Reference T for Permenaker 5/2018 (3dB exchange rate, 85dB = 8h)
+function getAllowedTime(dba){
+  if(dba <= 80) return 24;
+  return 8 / Math.pow(2, (dba - 85) / 3);
+}
+
+function initNoiseTable(){
+  const tbody = document.getElementById('noiseBody');
+  tbody.innerHTML = '';
+
+  noiseRows.forEach((r, idx) => {
+    const tAllowed = getAllowedTime(r.dba);
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><input type="text" class="noise-input" value="${escapeHtml(r.area)}" onchange="updateNoiseRow(${idx}, 'area', this.value)"></td>
+      <td><input type="number" class="noise-input" value="${r.dba}" min="50" max="140" oninput="updateNoiseRow(${idx}, 'dba', this.value)"></td>
+      <td><input type="number" class="noise-input" value="${r.hours}" min="0" max="24" step="0.25" oninput="updateNoiseRow(${idx}, 'hours', this.value)"></td>
+      <td style="font-weight:bold;color:var(--navy)">${formatHours(tAllowed)}</td>
+      <td style="text-align:center">
+        <button style="border:none;background:#FEE2E2;color:#991B1B;padding:4px 8px;border-radius:4px;cursor:pointer;font-weight:bold" onclick="delNoiseRow(${idx})">✕</button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  calcNoise();
+}
+
+function updateNoiseRow(idx, field, val){
+  if(noiseRows[idx]){
+    noiseRows[idx][field] = field === 'area' ? val : parseFloat(val) || 0;
+    initNoiseTable();
+  }
 }
 
 function addNoiseRow(){
-  noiseCount++;
-  const tbody = document.getElementById('noiseBody');
-  const tr = document.createElement('tr');
-  tr.id = `nr-${noiseCount}`;
-  tr.innerHTML = `
-    <td><input type="text" placeholder="cth: Mesin CNC" id="ns-${noiseCount}"></td>
-    <td><input type="number" placeholder="85" min="0" max="200" id="nd-${noiseCount}" oninput="calcRow(${noiseCount})"></td>
-    <td><input type="number" placeholder="8" min="0" max="24" step="0.5" id="nh-${noiseCount}" oninput="calcRow(${noiseCount})"></td>
-    <td><button class="btn-del" onclick="delNoise(${noiseCount})">✕</button></td>
-  `;
-  tbody.appendChild(tr);
+  noiseRows.push({ area: "Area Kerja Baru", dba: 85, hours: 2 });
+  initNoiseTable();
 }
 
-function delNoise(n){
-  const el = document.getElementById(`nr-${n}`);
-  if(el) el.remove();
+function delNoiseRow(idx){
+  if(noiseRows.length <= 1){
+    alert('Minimal harus ada 1 sumber kebisingan!');
+    return;
+  }
+  noiseRows.splice(idx, 1);
+  initNoiseTable();
 }
 
-function calcRow(n){}
+function formatHours(h){
+  if(h >= 24) return "> 24 Jam";
+  if(h >= 1) return h.toFixed(2) + " Jam";
+  const mins = h * 60;
+  if(mins >= 1) return mins.toFixed(1) + " Menit";
+  return (mins * 60).toFixed(0) + " Detik";
+}
 
-function calculate(){
-  const rows = document.querySelectorAll('#noiseBody tr');
-  if(!rows.length){ alert('Tambahkan minimal satu sumber kebisingan'); return; }
+function calcNoise(){
+  let totalDose = 0;
+  let maxDba = 0;
 
-  let dose = 0;
-  let details = [];
-
-  rows.forEach(tr=>{
-    const idMatch = tr.id.match(/nr-(\d+)/);
-    if(!idMatch) return;
-    const n = idMatch[1];
-    const src = document.getElementById(`ns-${n}`)?.value || `Sumber ${n}`;
-    const dB  = parseFloat(document.getElementById(`nd-${n}`)?.value || 0);
-    const hrs = parseFloat(document.getElementById(`nh-${n}`)?.value || 0);
-    if(!dB || !hrs) return;
-
-    const T = getNABDuration(dB); // allowed hours
-    const contribution = hrs / T;
-    dose += contribution;
-    details.push({src, dB, hrs, T, contribution});
+  noiseRows.forEach(r => {
+    const tAllowed = getAllowedTime(r.dba);
+    if(tAllowed > 0){
+      totalDose += (r.hours / tAllowed);
+    }
+    if(r.dba > maxDba) maxDba = r.dba;
   });
 
-  const dosePercent = dose * 100;
-  const status = dose < 0.5 ? 'safe' : dose < 1.0 ? 'warn' : 'danger';
-  const statusText = dose < 0.5 ? '✅ Aman' : dose < 1.0 ? '⚠️ Mendekati Batas' : '⛔ Melebihi NAB!';
-  const statusBadge = dose < 0.5 ? 'verdict-safe' : dose < 1.0 ? 'verdict-warn' : 'verdict-danger';
+  const dosePercent = totalDose * 100;
+  
+  // Equivalent TWA 8h
+  let twa = 0;
+  if(totalDose > 0){
+    twa = 16.61 * Math.log10(totalDose) + 85;
+  } else {
+    twa = 0;
+  }
 
-  const rec = dose >= 1.0
-    ? '<li><strong>Wajib gunakan APD kebisingan (Ear Plug/Ear Muff)</strong></li><li>Evaluasi engineering control (enclosure, peredam)</li><li>Kurangi jam paparan / rotasi pekerja</li><li>Lakukan audiometri berkala untuk pekerja terdampak</li>'
-    : dose >= 0.5
-    ? '<li>Pertimbangkan penggunaan Ear Plug sebagai tindakan preventif</li><li>Monitor secara berkala — masih dalam batas tapi mendekati</li><li>Lakukan pengukuran NAB ulang secara periodik</li>'
-    : '<li>Paparan masih dalam batas aman</li><li>Tetap pertahankan kondisi ini</li><li>Lakukan pengukuran berkala setiap 6 bulan</li>';
+  // APD Derating
+  const hpdType = document.getElementById('hpdType').value;
+  const nrr = parseFloat(document.getElementById('hpdNrr').value) || 0;
+  let prot = 0;
 
-  document.getElementById('placeholder').style.display = 'none';
-  const panel = document.getElementById('resultPanel');
-  panel.className = 'result-panel show';
-  panel.innerHTML = `
-    <div class="panel">
-      <h2>📊 Hasil Perhitungan Dosis Paparan</h2>
-      <div class="dose-meter ${status}">
-        <div class="dose-value">${dosePercent.toFixed(1)}%</div>
-        <div class="dose-label">Dosis Paparan Kumulatif (NAB = 100%)</div>
-        <div class="dose-verdict ${statusBadge}">${statusText}</div>
-      </div>
+  if(hpdType === 'plug'){
+    prot = Math.max(0, (nrr - 7) * 0.5);
+  } else if(hpdType === 'muff'){
+    prot = Math.max(0, (nrr - 7) * 0.7);
+  } else if(hpdType === 'dual'){
+    prot = Math.max(0, (nrr - 7) * 0.7) + 5;
+  }
 
-      <div class="result-detail">
-        ${details.map(d=>`
-          <div class="result-row">
-            <span><strong>${d.src}</strong> — ${d.dB} dB(A) × ${d.hrs} jam</span>
-            <span style="color:${d.contribution>=1?'#dc2626':d.contribution>=0.5?'#d97706':'#16a34a'};font-weight:700">${(d.contribution*100).toFixed(1)}%</span>
-          </div>
-        `).join('')}
-      </div>
+  const atEar = Math.max(0, maxDba - prot);
 
-      <div style="background:#f9fafb;border-radius:8px;padding:14px;margin-top:14px;font-size:.82rem">
-        <strong>Formula:</strong> Dosis = Σ(C₁/T₁ + C₂/T₂ + ...) × 100%<br>
-        C = durasi paparan aktual | T = durasi maksimal yang diperbolehkan (NAB)<br>
-        <strong>Referensi:</strong> Permenaker No.5 Tahun 2018 tentang K3 Lingkungan Kerja
-      </div>
+  document.getElementById('outDose').textContent = dosePercent.toFixed(1) + '%';
+  document.getElementById('outTwa').textContent = twa.toFixed(1) + ' dBA';
+  document.getElementById('outHpdProt').textContent = prot.toFixed(1) + ' dBA';
+  document.getElementById('outAtEar').textContent = atEar.toFixed(1) + ' dBA';
 
-      <div style="background:#f0fdf4;border-left:4px solid var(--primary);border-radius:8px;padding:14px;margin-top:14px">
-        <strong style="font-size:.88rem;color:var(--primary)">Rekomendasi Tindakan:</strong>
-        <ul style="padding-left:16px;margin-top:8px;font-size:.82rem;line-height:1.7">
-          ${rec}
-        </ul>
-      </div>
+  const badge = document.getElementById('statusBadge');
+  const txt = document.getElementById('statusText');
+  const icon = document.getElementById('statusIcon');
+  const reco = document.getElementById('rekomendasiList');
 
-      <button onclick="window.print()" style="width:100%;background:var(--primary);color:#fff;border:none;border-radius:8px;padding:11px;font-size:.88rem;font-weight:600;cursor:pointer;margin-top:14px">🖨 Cetak Laporan</button>
-    </div>
-  `;
+  if(dosePercent > 100 || twa > 85){
+    badge.className = 'status-box status-danger';
+    icon.textContent = '⚠️';
+    txt.textContent = 'BAHAYA: Dosis paparan kebisingan MELAMPAUI Nilai Ambang Batas (NAB)!';
+    reco.innerHTML = `
+      <li>Wajib pasang rambu peringatan kewajiban APD pendengaran (Hearing Protection Zone).</li>
+      <li>Terapkan pengendalian teknis (enclosure mesin bising, isolasi getaran, silencer).</li>
+      <li>Batasi waktu kerja / rotasi tenaga kerja agar dosis harian di bawah 100%.</li>
+      <li>Lakukan pemeriksaan audiometri berkala setiap tahun bagi pekerja terpapar.</li>
+    `;
+  } else if(dosePercent > 50 || twa >= 82){
+    badge.className = 'status-box status-warn';
+    icon.textContent = '⚡';
+    txt.textContent = 'WASPADA: Paparan mendekati batas NAB (Action Level > 82 dBA).';
+    reco.innerHTML = `
+      <li>Sediakan APD penutup telinga dan pastikan dipakai dengan benar.</li>
+      <li>Lakukan pemeliharaan rutin pada mesin untuk mengurangi getaran suara.</li>
+      <li>Lakukan monitoring lingkungan kerja secara periodik.</li>
+    `;
+  } else {
+    badge.className = 'status-box status-safe';
+    icon.textContent = '✓';
+    txt.textContent = 'AMAN: Paparan kebisingan berada di bawah Nilai Ambang Batas (NAB).';
+    reco.innerHTML = `
+      <li>Tingkat kebisingan aman untuk shift kerja standar 8 jam/hari.</li>
+      <li>Pertahankan pemeliharaan mesin secara berkala.</li>
+    `;
+  }
 }
 
-// Init 2 rows
-addNoiseRow(); addNoiseRow();
-// Pre-fill example
-document.getElementById('nd-1').value = 88;
-document.getElementById('nh-1').value = 6;
-document.getElementById('ns-1').value = 'Mesin Press';
-document.getElementById('nd-2').value = 92;
-document.getElementById('nh-2').value = 2;
-document.getElementById('ns-2').value = 'Kompresor';
+function escapeHtml(text){
+  return String(text).replace(/[&<>"']/g, function(m){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m];
+  });
+}
+
+function printNoiseReport(){
+  const dose = document.getElementById('outDose').textContent;
+  const twa = document.getElementById('outTwa').textContent;
+  const prot = document.getElementById('outHpdProt').textContent;
+  const atEar = document.getElementById('outAtEar').textContent;
+
+  const win = window.open('', '_blank');
+  win.document.write(`<!DOCTYPE html><html><head><title>Laporan Penilaian Paparan Kebisingan</title>
+  <style>
+    body{font-family:'Segoe UI',Arial,sans-serif;padding:32px;max-width:760px;margin:0 auto;color:#0F172A;line-height:1.5}
+    h1{font-size:16pt;margin:0;color:#0D233A;border-bottom:2px solid #0D233A;padding-bottom:8px}
+    .sub{font-size:8.5pt;color:#64748B;margin:6px 0 16px}
+    table{width:100%;border-collapse:collapse;margin:16px 0;font-size:9pt}
+    th,td{border:1px solid #CBD5E1;padding:8px 10px;text-align:left}
+    th{background:#F1F5F9;color:#0D233A}
+    .sig{margin-top:40px;display:grid;grid-template-columns:1fr 1fr;gap:40px;text-align:center;font-size:9pt}
+    .line{margin-top:60px;border-top:1px solid #000;font-weight:bold}
+  </style>
+  </head><body>
+  <h1>LAPORAN EVALUASI PAPARAN KEBISINGAN TEMPAT KERJA</h1>
+  <div class="sub">Standar Permenaker RI No. 5 Tahun 2018 tentang K3 Lingkungan Kerja</div>
+  <table>
+    <tr><th>Area / Sumber Mesin</th><th>Tingkat Bising (dBA)</th><th>Durasi Paparan</th><th>Batas Waktu Izin</th></tr>
+    ${noiseRows.map(r => `<tr><td>${escapeHtml(r.area)}</td><td>${r.dba} dBA</td><td>${r.hours} Jam</td><td>${formatHours(getAllowedTime(r.dba))}</td></tr>`).join('')}
+  </table>
+  <h3>Hasil Evaluasi Kumulatif:</h3>
+  <table>
+    <tr><td>Total Dosis Paparan Kebisingan (D)</td><td><strong>${dose}</strong></td></tr>
+    <tr><td>Time-Weighted Average 8-Jam (TWA)</td><td><strong>${twa}</strong></td></tr>
+    <tr><td>Proteksi Riil APD (NRR Derated)</td><td><strong>${prot}</strong></td></tr>
+    <tr><td>Tingkat Kebisingan Efektif di Telinga</td><td><strong>${atEar}</strong></td></tr>
+  </table>
+  <div class="sig">
+    <div>Diperiksa oleh,<br><strong>Ahli K3 Lingkungan Kerja</strong><div class="line">( ___________________________ )</div></div>
+    <div>Mengetahui,<br><strong>Pimpinan Pabrik / HSE Manager</strong><div class="line">( ___________________________ )</div></div>
+  </div>
+  </body></html>`);
+  win.document.close();
+  win.print();
+}
+
+function toggleFaq(btn){
+  btn.parentElement.classList.toggle('active');
+}
+
+window.addEventListener('DOMContentLoaded', initNoiseTable);
 </script>
+
+<?php require __DIR__ . '/../includes/scripts.php'; ?>
 </body>
 </html>
