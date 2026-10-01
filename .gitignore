@@ -45,3 +45,8 @@ config.local.php
 *.secret
 
 
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.class
