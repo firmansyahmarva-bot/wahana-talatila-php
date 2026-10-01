@@ -289,6 +289,7 @@ function handle_article_put(PDO $pdo): never {
         'keywords'     => 'string',
         'content'      => 'string',
         'faq'          => 'faq',
+        'faq_data'     => 'faq',
         'author'       => 'string',
         'status'       => 'status',
         'published_at' => 'string',
@@ -327,7 +328,7 @@ function handle_article_put(PDO $pdo): never {
                 break;
         }
 
-        $dbField = ($field === 'faq') ? 'faq_data' : $field;
+        $dbField = in_array($field, ['faq', 'faq_data']) ? 'faq_data' : $field;
         $curr = $existing[$dbField] ?? ($existing[$field] ?? null);
         if ($curr !== $val) {
             $updates[] = "`$dbField` = ?";
