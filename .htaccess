@@ -302,7 +302,20 @@ RewriteRule ^in-house-training/morowali-weda-bay/?$ in-house/morowali-weda-bay.p
 # The navbar links to /layanan but no page exists yet.
 RewriteRule ^layanan/?$ /pelatihan/ [R=301,L]
 
-# ─── Tools section: /tools/tool-name → /tools/tool-name.php ──
+# ─── Tools section: Clean URLs ───────────────────────────────
+# 1. 301 Redirect /tools/*.php directly to clean URL /tools/*/
+RewriteCond %{THE_REQUEST} \s/+tools/index\.php[\s?] [NC]
+RewriteRule ^tools/index\.php$ /tools/ [R=301,L]
+
+RewriteCond %{THE_REQUEST} \s/+tools/([a-z0-9\-]+)\.php[\s?] [NC]
+RewriteRule ^tools/([a-z0-9\-]+)\.php$ /tools/$1/ [R=301,L]
+
+# 2. Force trailing slash on /tools/tool-name -> /tools/tool-name/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^tools/([a-z0-9\-]+)$ /tools/$1/ [R=301,L]
+
+# 3. Route clean URL /tools/tool-name/ to tools/tool-name.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^tools/([a-z0-9\-]+)/?$ tools/$1.php [QSA,L]

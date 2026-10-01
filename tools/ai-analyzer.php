@@ -18,7 +18,7 @@ echo $shared_head;
   "itemListElement": [
     { "@type": "ListItem", "position": 1, "name": "Beranda", "item": "https://wahanatotalita.com/" },
     { "@type": "ListItem", "position": 2, "name": "Tools K3", "item": "https://wahanatotalita.com/tools/" },
-    { "@type": "ListItem", "position": 3, "name": "AI Document Analyzer", "item": "https://wahanatotalita.com/tools/ai-analyzer.php" }
+    { "@type": "ListItem", "position": 3, "name": "AI Document Analyzer", "item": "https://wahanatotalita.com/tools/ai-analyzer/" }
   ]
 }
 </script>
@@ -27,7 +27,7 @@ echo $shared_head;
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "AI K3 Document Compliance Analyzer",
-  "url": "https://wahanatotalita.com/tools/ai-analyzer.php",
+  "url": "https://wahanatotalita.com/tools/ai-analyzer/",
   "description": "Pemeriksaan kepatuhan otomatis dokumen kebijakan K3, SOP, dan prosedur kerja terhadap standar audit SMK3 PP 50/2012.",
   "applicationCategory": "BusinessApplication",
   "operatingSystem": "All",

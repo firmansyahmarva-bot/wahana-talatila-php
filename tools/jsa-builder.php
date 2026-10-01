@@ -18,7 +18,7 @@ echo $shared_head;
   "itemListElement": [
     { "@type": "ListItem", "position": 1, "name": "Beranda", "item": "https://wahanatotalita.com/" },
     { "@type": "ListItem", "position": 2, "name": "Tools K3", "item": "https://wahanatotalita.com/tools/" },
-    { "@type": "ListItem", "position": 3, "name": "JSA Builder", "item": "https://wahanatotalita.com/tools/jsa-builder.php" }
+    { "@type": "ListItem", "position": 3, "name": "JSA Builder", "item": "https://wahanatotalita.com/tools/jsa-builder/" }
   ]
 }
 </script>
@@ -27,7 +27,7 @@ echo $shared_head;
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "JSA & JHA Builder Online K3 Indonesia",
-  "url": "https://wahanatotalita.com/tools/jsa-builder.php",
+  "url": "https://wahanatotalita.com/tools/jsa-builder/",
   "description": "Generator dokumen Job Safety Analysis (JSA) dan Job Hazard Analysis (JHA) standar SMK3 PP 50/2012 dan ISO 45001 dengan fitur cetak formulir resmi.",
   "applicationCategory": "BusinessApplication",
   "operatingSystem": "All",

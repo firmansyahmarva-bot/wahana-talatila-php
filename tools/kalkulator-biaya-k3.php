@@ -18,7 +18,7 @@ echo $shared_head;
   "itemListElement": [
     { "@type": "ListItem", "position": 1, "name": "Beranda", "item": "https://wahanatotalita.com/" },
     { "@type": "ListItem", "position": 2, "name": "Tools K3", "item": "https://wahanatotalita.com/tools/" },
-    { "@type": "ListItem", "position": 3, "name": "Kalkulator Biaya K3", "item": "https://wahanatotalita.com/tools/kalkulator-biaya-k3.php" }
+    { "@type": "ListItem", "position": 3, "name": "Kalkulator Biaya K3", "item": "https://wahanatotalita.com/tools/kalkulator-biaya-k3/" }
   ]
 }
 </script>
@@ -27,7 +27,7 @@ echo $shared_head;
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "Kalkulator Biaya Kecelakaan Kerja & ROI K3",
-  "url": "https://wahanatotalita.com/tools/kalkulator-biaya-k3.php",
+  "url": "https://wahanatotalita.com/tools/kalkulator-biaya-k3/",
   "description": "Kalkulator analisis biaya kecelakaan kerja langsung vs tersembunyi menggunakan teori gunung es Heinrich dan Frank Bird beserta estimasi ROI pencegahan K3.",
   "applicationCategory": "BusinessApplication",
   "operatingSystem": "All",

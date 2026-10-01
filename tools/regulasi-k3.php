@@ -162,7 +162,7 @@ $regulasi = [
   "itemListElement": [
     { "@type": "ListItem", "position": 1, "name": "Beranda", "item": "https://wahanatotalita.com/" },
     { "@type": "ListItem", "position": 2, "name": "Tools K3", "item": "https://wahanatotalita.com/tools/" },
-    { "@type": "ListItem", "position": 3, "name": "Database Regulasi K3", "item": "https://wahanatotalita.com/tools/regulasi-k3.php" }
+    { "@type": "ListItem", "position": 3, "name": "Database Regulasi K3", "item": "https://wahanatotalita.com/tools/regulasi-k3/" }
   ]
 }
 </script>
@@ -171,7 +171,7 @@ $regulasi = [
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   "name": "Database Regulasi K3 Indonesia Terlengkap",
-  "url": "https://wahanatotalita.com/tools/regulasi-k3.php",
+  "url": "https://wahanatotalita.com/tools/regulasi-k3/",
   "description": "Kompilasi peraturan keselamatan dan kesehatan kerja (UU No 1/1970, PP 50/2012, Permenaker, Kepmenaker) beserta ringkasan pasal krusial dan sanksi pidana.",
   "inLanguage": "id-ID"
 }

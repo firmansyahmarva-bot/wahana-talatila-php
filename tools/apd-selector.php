@@ -92,7 +92,7 @@ $apdList = [
   "itemListElement": [
     { "@type": "ListItem", "position": 1, "name": "Beranda", "item": "https://wahanatotalita.com/" },
     { "@type": "ListItem", "position": 2, "name": "Tools K3", "item": "https://wahanatotalita.com/tools/" },
-    { "@type": "ListItem", "position": 3, "name": "Panduan APD", "item": "https://wahanatotalita.com/tools/apd-selector.php" }
+    { "@type": "ListItem", "position": 3, "name": "Panduan APD", "item": "https://wahanatotalita.com/tools/apd-selector/" }
   ]
 }
 </script>
@@ -101,7 +101,7 @@ $apdList = [
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "Panduan Pemilihan APD K3 Standar SNI & Permenaker 08/2010",
-  "url": "https://wahanatotalita.com/tools/apd-selector.php",
+  "url": "https://wahanatotalita.com/tools/apd-selector/",
   "description": "Pedoman teknis pemilihan dan inspeksi kelayakan Alat Pelindung Diri (APD) K3 untuk seluruh organ tubuh sesuai standar SNI, ANSI, dan EN.",
   "applicationCategory": "BusinessApplication",
   "operatingSystem": "All",

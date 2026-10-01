@@ -18,7 +18,7 @@ echo $shared_head;
   "itemListElement": [
     { "@type": "ListItem", "position": 1, "name": "Beranda", "item": "https://wahanatotalita.com/" },
     { "@type": "ListItem", "position": 2, "name": "Tools K3", "item": "https://wahanatotalita.com/tools/" },
-    { "@type": "ListItem", "position": 3, "name": "Social Generator", "item": "https://wahanatotalita.com/tools/social-generator.php" }
+    { "@type": "ListItem", "position": 3, "name": "Social Generator", "item": "https://wahanatotalita.com/tools/social-generator/" }
   ]
 }
 </script>
@@ -27,7 +27,7 @@ echo $shared_head;
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "Generator Poster & Banner K3 Online",
-  "url": "https://wahanatotalita.com/tools/social-generator.php",
+  "url": "https://wahanatotalita.com/tools/social-generator/",
   "description": "Aplikasi desain banner dan poster keselamatan kerja K3 online dengan tema Bulan K3 Nasional dan slogan budaya keselamatan kerja.",
   "applicationCategory": "DesignApplication",
   "operatingSystem": "All",
