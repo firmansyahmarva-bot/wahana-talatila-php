@@ -1,0 +1,420 @@
+<?php
+/**
+ * includes/riksa-uji-data.php
+ * Master dataset and helper functions for Jasa Riksa Uji (Pemeriksaan & Pengujian K3 Kemnaker).
+ * Statutory safety inspection for industrial machinery & installations under Kemnaker RI.
+ */
+
+function get_all_riksa_uji_items(array $filter = []): array {
+    static $items = null;
+    if ($items === null) {
+        $items = [
+            'forklift' => [
+                'slug'           => 'forklift',
+                'judul'          => 'Jasa Riksa Uji Forklift Kemnaker RI (Diesel, Elektrik & Reach Truck)',
+                'kategori'       => 'pesawat-angkat-angkut',
+                'kategori_label' => 'Pesawat Angkat & Angkut',
+                'dasar_hukum'    => 'Permenaker No. 8 Tahun 2020 tentang K3 Pesawat Angkat dan Pesawat Angkut',
+                'tagline'        => 'Uji kelayakan resmi unit forklift, reach truck, & stacker untuk penerbitan Suket / Pengesahan Pemakaian Kemnaker RI.',
+                'meta_title'     => 'Jasa Riksa Uji Forklift Kemnaker Resmi: Biaya, Prosedur & Suket',
+                'meta_desc'      => 'Jasa riksa uji forklift resmi Kemnaker RI (Permenaker 8/2020). Pengujian visual, NDT, & uji beban 110%-125%. Dapatkan Surat Keterangan (Suket) pemakaian resmi.',
+                'keywords'       => ['jasa riksa uji forklift', 'suket kemnaker forklift', 'biaya riksa uji forklift', 'uji kelayakan forklift kemnaker', 'uji beban forklift pabrik'],
+                'masa_berlaku'   => '1 (satu) tahun sekali untuk pemeriksaan berkala',
+                'lingkup_alat'   => 'Forklift Diesel (Counterbalance 2.5T - 10T+), Forklift Elektrik/Battery, Reach Truck, Stacker, Telehandler.',
+                'tahapan_uji'    => [
+                    'Pemeriksaan Dokumen & Sertifikat Mesin (Nameplate, buku riksa uji lama, manual book pabrikan)',
+                    'Pemeriksaan Visual Konstruksi (Mast upright, garpu/fork, chain, overhead guard, chassis, carriage)',
+                    'Pengujian NDT (Non-Destructive Testing) Garpu & Pengelasan Kritis (Magnetic Particle / Penetrant Test pada tumit garpu)',
+                    'Uji Fungsi & Safety Device (Rem dinamis & parkir, klakson, lampu rotary, backup alarm, sensor seatbelt, hydraulic interlock)',
+                    'Uji Beban Statis & Dinamis (Pengujian bertahap 25%, 50%, 100%, hingga 110%-125% Safe Working Load / SWL)',
+                    'Penerbitan Laporan Hasil Uji (LHU) PJK3 & Pengajuan Suket Resmi ke Pengawas Disnaker / Kemnaker RI'
+                ],
+                'dokumen_syarat' => [
+                    'Fotokopi Surat Izin Operator (SIO) / Lisensi K3 Operator Forklift yang masih aktif',
+                    'Gambar konstruksi alat & kapasitas angkat (Load Chart pabrikan)',
+                    'Buku akte pengesahan / Suket riksa uji periode sebelumnya (untuk uji berkala)',
+                    'Surat permohonan riksa uji resmi dari manajemen perusahaan'
+                ],
+                'regional_insight' => 'Permintaan riksa uji forklift sangat tinggi pada kawasan industri pergudangan & logistik Jabodetabek, pabrik manufaktur Karawang-Cilegon, hingga fasilitas workshop pertambangan di Balikpapan (Kalimantan Timur) dan smelter Morowali di mana unit forklift beroperasi intensif dalam kondisi debu dan beban ekstrem.',
+                'pelatihan_terkait' => [
+                    'slug' => 'pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri',
+                    'name' => 'Pelatihan Operator Forklift Kelas II Sertifikasi Kemnaker RI'
+                ],
+                'faqs'           => [
+                    [
+                        'q' => 'Berapa lama masa berlaku Surat Keterangan (Suket) K3 Forklift?',
+                        'a' => 'Berdasarkan Permenaker No. 8 Tahun 2020 Pasal 176, pemeriksaan dan pengujian berkala untuk pesawat angkat dan angkut seperti forklift wajib dilakukan minimal 1 (satu) tahun sekali. Sedangkan uji pertama dilakukan sebelum alat pertama kali dioperasikan.'
+                    ],
+                    [
+                        'q' => 'Apa sanksi jika pabrik mengoperasikan forklift tanpa Suket Kemnaker?',
+                        'a' => 'Berdasarkan UU No. 1 Tahun 1970 Pasal 15, perusahaan dapat dikenakan sanksi pidana kurungan atau denda. Selain itu, jika terjadi kecelakaan kerja fatal (forklift terguling / menabrak), klaim asuransi BPJS Ketenagakerjaan dapat tertahan dan perusahaan dapat dituntut secara hukum pidana kelalaian (KUHP Pasal 359).'
+                    ],
+                    [
+                        'q' => 'Berapa persen beban yang digunakan saat load test forklift?',
+                        'a' => 'Pengujian beban dinamis dilakukan dengan beban kerja aman (100% SWL) untuk menguji kestabilan lifting, tilting, dan pengereman. Untuk uji statis, beban uji dinaikkan hingga 110% hingga 125% dari kapasitas nominal sesuai standar pabrikan dan ketentuan pengawas ketenagakerjaan spesialis K3.'
+                    ]
+                ]
+            ],
+
+            'crane' => [
+                'slug'           => 'crane',
+                'judul'          => 'Jasa Riksa Uji Crane Kemnaker RI (Overhead, Mobile, Tower & Crawler Crane)',
+                'kategori'       => 'pesawat-angkat-angkut',
+                'kategori_label' => 'Pesawat Angkat & Angkut',
+                'dasar_hukum'    => 'Permenaker No. 8 Tahun 2020 tentang K3 Pesawat Angkat dan Pesawat Angkut',
+                'tagline'        => 'Pemeriksaan teknis, pengujian NDT hook & struktur boom, serta uji beban SWL resmi untuk seluruh jenis alat angkat berat.',
+                'meta_title'     => 'Jasa Riksa Uji Crane Resmi Kemnaker: Mobile, Overhead & Tower Crane',
+                'meta_desc'      => 'Jasa riksa uji crane berlisensi Kemnaker RI. Uji NDT wire rope, hook, defleksi girder & uji beban 110%-125%. Terbit Suket Layak Operasi PJK3 resmi.',
+                'keywords'       => ['jasa riksa uji crane', 'riksa uji overhead crane', 'inspeksi mobile crane kemnaker', 'suket crane kemnaker', 'uji beban tower crane proyek'],
+                'masa_berlaku'   => '1 (satu) tahun sekali untuk pemeriksaan berkala',
+                'lingkup_alat'   => 'Overhead Traveling Crane (Pabrik/Workshop), Mobile Crane / Rough Terrain, Tower Crane (Proyek Konstruksi), Crawler Crane, Gantry Crane, Jib Crane.',
+                'tahapan_uji'    => [
+                    'Verifikasi Spesifikasi Teknis (Load moment indicator / LMI, outrigger, counterweight, wire rope diameter)',
+                    'Inspeksi Visual Struktur Girder & Boom (Pengecekan keretakan las, korosi, kelurusan struktur girder, pin koneksi)',
+                    'Pengujian NDT Hook & Komponen Kritis (Magnetic Particle Inspection pada hook lifting, pin shackle, dan drum penggulung)',
+                    'Uji Safety Device & Interlock (Over-hoist limit switch, anti two-blocking, anemometer kecepatan angin, load cell indicator)',
+                    'Uji Defleksi Girder & Uji Beban (Uji angkat beban statis 125% SWL & beban dinamis 110% SWL mengikuti pergerakan luffing, slewing, dan traveling)',
+                    'Penyusunan BAP Pengujian & Koordinasi Terbit Suket Pengesahan Pemakaian Dinas Ketenagakerjaan'
+                ],
+                'dokumen_syarat' => [
+                    'Sertifikat pabrik pembuat (Mill Certificate wire rope & hook)',
+                    'Load Chart resmi yang terpasang di kabin operator',
+                    'SIO Operator Crane Kemnaker Kelas 1, 2, atau 3 yang berlaku',
+                    'Buku riksa uji dan Suket tahun sebelumnya'
+                ],
+                'regional_insight' => 'Di Kalimantan Timur (IKN Sepaku & Balikpapan) dan tambang batubara Tabalong/Kutai, mobile crane dan crawler crane berkapasitas 50-250 ton diuji ketat untuk erection struktur baja dan perakitan alat berat pit. Sementara di Cilegon & Surabaya, overhead crane pabrik baja menjalani uji defleksi girder tahunan tanpa mengganggu kontinuitas shift manufaktur.',
+                'pelatihan_terkait' => [
+                    'slug' => 'pelatihan-dan-sertifikasi-operator-angkat-angkut-overhead-crane-kelas-iii',
+                    'name' => 'Pelatihan Operator Overhead Crane Kelas III Kemnaker RI'
+                ],
+                'faqs'           => [
+                    [
+                        'q' => 'Apakah uji beban (load test) crane dapat menggunakan beban yang ada di proyek/workshop?',
+                        'a' => 'Bisa, asalkan beban uji (test weight) telah ditimbang dengan jembatan timbang terkalibrasi resmi atau menggunakan water bag khusus uji beban crane yang dilengkapi load cell digital terkalibrasi KAN.'
+                    ],
+                    [
+                        'q' => 'Bagaimana jika wire rope atau hook crane mengalami keausan melebihi batas toleransi?',
+                        'a' => 'Jika keausan hook melebihi 10% dimensi awal atau wire rope memiliki kawat putus melebihi batas ISO 4309, PJK3 akan menerbitkan Surat Rekomendasi Perbaikan. Unit wajib diganti komponen barunya sebelum Suket Kelayakan Operasi dapat disetujui pengawas Kemnaker.'
+                    ]
+                ]
+            ],
+
+            'boiler' => [
+                'slug'           => 'boiler',
+                'judul'          => 'Jasa Riksa Uji Boiler & Ketel Uap Kemnaker (PKS Sawit, Tekstil & Pembangkit)',
+                'kategori'       => 'pesawat-uap-bejana-tekan',
+                'kategori_label' => 'Pesawat Uap & Bejana Tekan',
+                'dasar_hukum'    => 'Undang-Undang Uap Tahun 1930 & Permenaker No. 1 Tahun 1982 tentang Bejana Tekan',
+                'tagline'        => 'Uji hidrostatik (hydrotest), NDT ketebalan dinding pipa, & sertifikasi katup pengaman (safety valve) bertekanan tinggi.',
+                'meta_title'     => 'Jasa Riksa Uji Boiler & Ketel Uap Kemnaker: Hydrotest & Suket Resmi',
+                'meta_desc'      => 'Jasa riksa uji boiler resmi Kemnaker RI untuk PKS sawit, pabrik tekstil, & pembangkit. Hydrotest, kalibrasi safety valve, & buku izin uap Kemnaker.',
+                'keywords'       => ['jasa riksa uji boiler', 'uji hydrotest boiler kemnaker', 'suket ketel uap kemnaker', 'riksa uji boiler pks sawit', 'uji safety valve boiler'],
+                'masa_berlaku'   => '2 (dua) tahun sekali untuk ketel uap darat (pemeriksaan berkala)',
+                'lingkup_alat'   => 'Water Tube Boiler (PKS Sawit & PLTU), Fire Tube Boiler (Tekstil, Makanan, Laundry), Combi Boiler, Waste Heat Recovery Boiler.',
+                'tahapan_uji'    => [
+                    'Pemeriksaan Visual Bagian Luar & Dalam (Drum uap, pipa lorong api, header, burner, refractory brick, insulasi termal)',
+                    'Ultrasonic Thickness (UT) Gauging (Pengukuran sisa ketebalan pelat drum dan pipa uap untuk menghitung laju korosi)',
+                    'Uji Tidak Merusak / NDT Welds (Penetrant / Magnetic test pada sambungan las nozel uap dan sambungan shell)',
+                    'Uji Tekan Hidrostatik (Hydrostatic Test) dengan tekanan 1.5 kali tekanan kerja maksimum (MAWP)',
+                    'Penyetelan & Sertifikasi Safety Valve (Pop test katup pengaman agar membuang tekanan secara akurat saat overpressure)',
+                    'Uji Operasi / Steam Test (Pengujian alat kontrol level air otomatis, pressure switch, dan burner cutoff)'
+                ],
+                'dokumen_syarat' => [
+                    'Akte Izin Uap (Buku Izin Boiler lama dari Disnaker / Kemnaker)',
+                    'Gambar konstruksi detail & kalkulasi kekuatan pipa/drum',
+                    'Sertifikat bahan / Mill Certificate & catatan perbaikan pipa (re-tubing)',
+                    'Lisensi K3 Operator Boiler Kelas 1 atau Kelas 2'
+                ],
+                'regional_insight' => 'Di wilayah perkebunan kelapa sawit Riau (Pekanbaru, Dumai, Pelalawan) serta Kalimantan Barat dan Tengah, ribuan unit boiler kapasitas 20-45 ton/jam berbahan bakar fiber dan cangkang sawit beroperasi nonstop 24 jam. Riksa uji hydrotest berkala adalah syarat mutlak pencegahan ledakan fatal ketel uap dan audit sertifikasi RSPO/ISPO.',
+                'pelatihan_terkait' => [
+                    'slug' => 'operator-boiler-kelas-2',
+                    'name' => 'Pelatihan & Sertifikasi Operator Boiler Kelas 2'
+                ],
+                'faqs'           => [
+                    [
+                        'q' => 'Berapa tekanan air yang dipakai pada hydrotest boiler?',
+                        'a' => 'Sesuai UU Uap 1930 dan standar ASME Boiler and Pressure Vessel Code, tekanan uji hydrotest adalah 1.5 kali tekanan kerja izin (design pressure / MAWP) dan ditahan minimal 15–30 menit untuk memantau ada tidaknya penurunan jarum pressure gauge atau rembesan las.'
+                    ],
+                    [
+                        'q' => 'Apakah pemeriksaan bagian dalam (internal inspection) boiler wajib mematikan mesin?',
+                        'a' => 'Wajib. Boiler harus dalam kondisi shutdown (cool-down), pipa air dikeringkan, dan manhole dibuka agar Tenaga Ahli K3 Spesialis Uap dapat masuk memeriksa kondisi kerak air (scaling), piting korosi, dan ketebalan pelat drum secara langsung.'
+                    ]
+                ]
+            ],
+
+            'penyalur-petir' => [
+                'slug'           => 'penyalur-petir',
+                'judul'          => 'Jasa Riksa Uji Instalasi Penyalur Petir Kemnaker (Grounding & Proteksi Gedung)',
+                'kategori'       => 'instalasi-listrik-petir',
+                'kategori_label' => 'Instalasi Listrik & Penyalur Petir',
+                'dasar_hukum'    => 'Permenaker No. 31 Tahun 2015 tentang Perubahan atas Permenaker No. 02/MEN/1989 tentang Instalasi Penyalur Petir',
+                'tagline'        => 'Pengukuran nilai tahanan pembumian (grounding resistance < 5 Ohm), radius proteksi, & penerbitan Suket Pengesahan Disnaker.',
+                'meta_title'     => 'Jasa Riksa Uji Penyalur Petir Kemnaker: Uji Grounding & Suket Resmi',
+                'meta_desc'      => 'Jasa riksa uji instalasi penangkal petir berlisensi Kemnaker RI (Permenaker 31/2015). Uji resistansi grounding (< 5 Ohm) & terbit Suket resmi pabrik.',
+                'keywords'       => ['jasa riksa uji petir', 'uji grounding penangkal petir', 'suket penangkal petir kemnaker', 'uji resistansi pembumian pabrik', 'biaya riksa uji petir gedung'],
+                'masa_berlaku'   => '2 (dua) tahun sekali untuk pemeriksaan berkala',
+                'lingkup_alat'   => 'Instalasi Penyalur Petir Konvensional (Franklin / Sangkar Faraday), Sistem Elektrostatis / Early Streamer Emission (ESE), Grounding Tower Telekomunikasi & Tangki BBM.',
+                'tahapan_uji'    => [
+                    'Pemeriksaan Visual Air Terminal (Kondisi ujung splitzer, korosi, kekencangan klem dudukan, sambungan bimetal)',
+                    'Pengecekan Hantaran Penurunan / Down Conductor (Kabel tembaga BC/NYA, jalur tray kabel, pipa pelindung mekanis setinggi 2 meter)',
+                    'Pemeriksaan Bak Kontrol & Test Joint (Kebersihan terminal pemutus uji dari lumpur, air, dan oksidasi karat)',
+                    'Pengukuran Resistansi Pembumian (Grounding Test) menggunakan Earth Tester terkalibrasi resmi (standar nilai maksimal < 5 Ohm)',
+                    'Kalkulasi Sudut & Radius Proteksi (Evaluasi luas cakupan gedung terhadap sambaran petir berdasarkan SNI 03-7015-2004)',
+                    'Pembuatan Gambar Instalasi Single Line Diagram & Pengajuan Pengesahan Pemakaian ke Dinas Ketenagakerjaan'
+                ],
+                'dokumen_syarat' => [
+                    'Gambar denah layout gedung & titik instalasi penangkal petir',
+                    'Spesifikasi teknis air terminal (head petir) & kedalaman elektroda tanah',
+                    'Suket pengesahan instalasi petir periode sebelumnya',
+                    'Legalitas izin operasional perusahaan pemohon'
+                ],
+                'regional_insight' => 'Indonesia memiliki tingkat hari guruh (isokeraunic level) tertinggi di dunia, khususnya di pesisir Sumatera (Riau, Medan), Kalimantan, dan Jawa Barat (Bogor/Karawang). Di tangki timbun minyak Balikpapan dan pabrik petrokimia Cilegon, sambaran petir langsung berisiko memicu ledakan dahsyat jika nilai grounding melebihi 5 Ohm.',
+                'pelatihan_terkait' => [
+                    'slug' => 'pelatihan-teknisi-k3-listrik-sertifikasi-bnsp',
+                    'name' => 'Pelatihan Teknisi K3 Listrik Sertifikasi BNSP'
+                ],
+                'faqs'           => [
+                    [
+                        'q' => 'Berapa batas maksimal nilai tahanan pembumian (grounding) yang diizinkan Kemnaker?',
+                        'a' => 'Berdasarkan Permenaker No. 31 Tahun 2015 dan standar PUIL, nilai tahanan sebaran pembumian instalasi penyalur petir tidak boleh melebihi 5 Ohm. Untuk area berisiko tinggi seperti kilang minyak dan tangki bahan bakar cair, sangat disarankan mencapai nilai di bawah 1–2 Ohm.'
+                    ],
+                    [
+                        'q' => 'Apa yang dilakukan jika saat diukur grounding penangkal petir menunjukkan angka di atas 5 Ohm?',
+                        'a' => 'Tim teknis Wahana Totalita akan memberikan rekomendasi teknis perbaikan, seperti penambahan rod elektroda pembumian paralel, pendalaman elektroda tanah, atau aplikasi bentonite / grounding compound penurun resistansi tanah sebelum pengujian ulang.'
+                    ]
+                ]
+            ],
+
+            'bejana-tekan-tangki-timbun' => [
+                'slug'           => 'bejana-tekan-tangki-timbun',
+                'judul'          => 'Jasa Riksa Uji Bejana Tekan & Tangki Timbun Kemnaker (Tangki Kompresor, BBM & Gas)',
+                'kategori'       => 'pesawat-uap-bejana-tekan',
+                'kategori_label' => 'Pesawat Uap & Bejana Tekan',
+                'dasar_hukum'    => 'Permenaker No. 37 Tahun 2016 tentang K3 Bejana Tekanan dan Tangki Timbun',
+                'tagline'        => 'Uji ketebalan ultrasonik (UT), uji tekan hidrolik, & sertifikasi tangki timbun solar/CPO serta bejana kompresor pabrik.',
+                'meta_title'     => 'Jasa Riksa Uji Bejana Tekan & Tangki Timbun Kemnaker: UT & Suket Resmi',
+                'meta_desc'      => 'Jasa riksa uji bejana tekan & tangki timbun resmi Kemnaker RI (Permenaker 37/2016). Uji UT gauging, hydrotest, & safety relief valve terbit Suket.',
+                'keywords'       => ['riksa uji bejana tekan', 'uji tangki timbun bbm kemnaker', 'suket tangki kompresor', 'uji ketebalan plat tangki cpo', 'pemeriksaan air receiver tank'],
+                'masa_berlaku'   => '2 (dua) tahun sekali untuk bejana tekan; 5 (lima) tahun sekali untuk tangki timbun',
+                'lingkup_alat'   => 'Air Receiver Tank (Kompresor Angin), Tangki Timbun BBM / Solar / Bensin, Storage Tank CPO, Tangki Kimia Asam/Basa, Tangki LPG/LNG, Bejana Reaktor Pabrik.',
+                'tahapan_uji'    => [
+                    'Pemeriksaan Visual Eksternal & Internal (Deformasi cembung/denting, korosi pitting, pondasi tangki, baut angkur)',
+                    'Ultrasonic Thickness (UT) Gauging Multi-Titik (Pengukuran ketebalan pelat dinding shell, bottom plate, dan roof plate)',
+                    'Pengujian Tidak Merusak / NDT Sambungan Las (Vacuum box test pada las pelat dasar tangki & Dye Penetrant Test pada nozel)',
+                    'Pemeriksaan Safety Accessories (Pressure gauge kalibrasi, safety relief valve / PRV, breather valve, grounding tangki timbun)',
+                    'Uji Tekan Pneumatik / Hidrostatik (Untuk bejana tekan dengan tekanan uji 1.3 - 1.5 kali tekanan kerja izin)',
+                    'Penyusunan Perhitungan Remaining Life Assessment (RLA) & Laporan Teknis Pengajuan Suket Dinas Tenaga Kerja'
+                ],
+                'dokumen_syarat' => [
+                    'Gambar rancang bangun konstruksi (As-built Drawing) & tabel kapasitas kalibrasi tangki',
+                    'Spesifikasi material pelat (Mill Certificate)',
+                    'Suket riksa uji periode terdahulu dari Disnaker',
+                    'SOP pengoperasian dan sertifikat kalibrasi instrumen'
+                ],
+                'regional_insight' => 'Di sentra perkebunan sawit Riau (Dumai, Rokan Hilir) dan industri kelapa sawit Kalimantan, tangki timbun CPO vertikal berkapasitas 2.000 hingga 5.000 ton wajib menjalani uji ketebalan pelat shell dan vacuum box test dasar tangki secara berkala guna mencegah keruntuhan struktur yang berakibat tumpahan fatal.',
+                'pelatihan_terkait' => [
+                    'slug' => 'pelatihan-teknisi-ruang-terbatas-sertifikasi-bnsp',
+                    'name' => 'Pelatihan Teknisi Ruang Terbatas (Confined Space) Masuk Tangki'
+                ],
+                'faqs'           => [
+                    [
+                        'q' => 'Apakah tangki angin kompresor kecil di bengkel/pabrik wajib memiliki Suket Kemnaker?',
+                        'a' => 'Ya. Menurut Permenaker No. 37 Tahun 2016, bejana tekanan yang memiliki volume di atas batas ambang atau tekanan kerja di atas 1 kg/cm² wajib memiliki Pengesahan Pemakaian dari Disnaker/Kemnaker RI karena berpotensi meledak layaknya bom jika sambungan las aus atau safety valve macet.'
+                    ],
+                    [
+                        'q' => 'Berapa tahun masa berlaku riksa uji untuk tangki timbun BBM pabrik?',
+                        'a' => 'Pemeriksaan berkala untuk tangki timbun dilakukan selambat-lambatnya 5 (lima) tahun sekali. Namun pemeriksaan visual dan pengecekan grounding serta katup pernafasan dianjurkan dilakukan evaluasi tahunan.'
+                    ]
+                ]
+            ],
+
+            'instalasi-listrik-daya' => [
+                'slug'           => 'instalasi-listrik-daya',
+                'judul'          => 'Jasa Riksa Uji Instalasi Listrik & Termografi Panel Kemnaker (Thermovision)',
+                'kategori'       => 'instalasi-listrik-petir',
+                'kategori_label' => 'Instalasi Listrik & Penyalur Petir',
+                'dasar_hukum'    => 'Permenaker No. 12 Tahun 2015 tentang Keselamatan dan Kesehatan Kerja Listrik di Tempat Kerja',
+                'tagline'        => 'Audit kelistrikan pabrik, thermography infrared panel distribusi (MCC/LVMDP), pengujian tahanan isolasi & pembumian.',
+                'meta_title'     => 'Jasa Riksa Uji Instalasi Listrik Pabrik & Thermovision Kemnaker',
+                'meta_desc'      => 'Jasa riksa uji instalasi listrik resmi Kemnaker RI (Permenaker 12/2015). Thermography kamera infrared panel LVMDP, uji isolasi kabel, terbit Suket sah.',
+                'keywords'       => ['riksa uji instalasi listrik', 'uji termografi panel listrik', 'audit kelistrikan pabrik kemnaker', 'suket instalasi listrik pabrik', 'inspeksi panel lvmdp'],
+                'masa_berlaku'   => '1 (satu) tahun sekali untuk pemeriksaan berkala',
+                'lingkup_alat'   => 'Panel Distribusi Utama (LVMDP/MCC), Transformator Daya (Trafo), Generator Listrik, Kabel Feeder Utama, Sistem Pembumian Listrik Pabrik.',
+                'tahapan_uji'    => [
+                    'Pemeriksaan Visual Sistem Pengawatan & Komponen (Kesesuaian kapasitas circuit breaker, penataan kabel, pemisahan fasa)',
+                    'Uji Termografi Inframerah / Thermovision Test (Pendeteksian titik panas / hotspot abnormal pada koneksi busbar dan breaker saat berbeban penuh)',
+                    'Pengujian Tahanan Isolasi (Insulation Resistance / Megger Test) pada kabel tenaga dan winding motor induksi',
+                    'Pengukuran Tahanan Pembumian Sistem Kelistrikan (Grounding sistem netral trafo dan body casing peralatan)',
+                    'Pengujian Fungsi Pengaman Proteksi (Uji trip ELCB / GFCI, overload thermal relay, serta interlock sistem ATS/AMF)',
+                    'Penyusunan Single Line Diagram Aktual & Laporan Rekomendasi Teknis untuk Penerbitan Suket Kemnaker'
+                ],
+                'dokumen_syarat' => [
+                    'Gambar Single Line Diagram (SLD) instalasi listrik yang disahkan',
+                    'Daftar rincian beban daya dan kapasitas terpasang (kVA)',
+                    'Lisensi K3 Teknisi Listrik atau Ahli K3 Listrik penanggung jawab pabrik',
+                    'Suket pemeriksaan listrik periode terdahulu'
+                ],
+                'regional_insight' => 'Lebih dari 65% kebakaran pabrik di kawasan manufaktur Karawang, Cikarang, dan Surabaya dipicu oleh korsleting listrik akibat sambungan busbar longgar yang memicu hotspot tanpa disadari. Thermovision inspection mendeteksi kenaikan suhu micro-derajat sebelum kabel meleleh atau terbakar.',
+                'pelatihan_terkait' => [
+                    'slug' => 'pelatihan-ahli-k3-listrik-sertifikasi-bnsp',
+                    'name' => 'Pelatihan Ahli K3 Listrik Sertifikasi Kemnaker / BNSP'
+                ],
+                'faqs'           => [
+                    [
+                        'q' => 'Apakah uji thermovision panel listrik mengharuskan pabrik mematikan operasional listrik?',
+                        'a' => 'Tidak sama sekali. Pengujian thermovision justru WAJIB dilakukan saat instalasi listrik beroperasi pada beban puncak (peak load minimal 40%–80%) agar kamera inframerah dapat menangkap anomali temperatur akibat hambatan sambungan yang longgar.'
+                    ],
+                    [
+                        'q' => 'Mengapa pemeriksaan instalasi listrik harus diulang setiap 1 tahun?',
+                        'a' => 'Getaran mesin pabrik, fluktuasi panas-dingin, dan penambahan beban kabel baru secara terus menerus dapat mengendurkan baut busbar dan mempercepat degradasi isolasi kabel, sehingga audit berkala tahunan diwajibkan demi mencegah risiko busur api (arc flash).'
+                    ]
+                ]
+            ],
+
+            'instalasi-proteksi-kebakaran' => [
+                'slug'           => 'instalasi-proteksi-kebakaran',
+                'judul'          => 'Jasa Riksa Uji Instalasi Proteksi Kebakaran (Hydrant, Sprinkler & Alarm Gedung)',
+                'kategori'       => 'proteksi-kebakaran',
+                'kategori_label' => 'Instalasi Proteksi Kebakaran',
+                'dasar_hukum'    => 'Permenaker No. 04/MEN/1980 (APAR) & Permenaker No. 02/MEN/1983 (Instalasi Alarm Kebakaran Otomatik)',
+                'tagline'        => 'Uji performa pompa hydrant (jockey, electric, diesel pump), uji pancaran pilar hydrant, sprinkler, & sistem deteksi alarm kebakaran.',
+                'meta_title'     => 'Jasa Riksa Uji Hydrant & Alarm Kebakaran Kemnaker: Flow Test & Suket',
+                'meta_desc'      => 'Jasa riksa uji instalasi proteksi kebakaran resmi Kemnaker RI. Uji debit pompa hydrant, sprinkler, detector alarm, & APAR gedung pabrik.',
+                'keywords'       => ['riksa uji hydrant gedung', 'uji pompa pemadam kebakaran pabrik', 'suket instalasi pemadam kemnaker', 'inspeksi sprinkler kebakaran', 'uji sistem fire alarm'],
+                'masa_berlaku'   => '1 (satu) tahun sekali untuk pemeriksaan berkala',
+                'lingkup_alat'   => 'Pompa Pemadam (Jockey Pump, Electric Main Pump, Diesel Standby Pump), Jaringan Pipa & Pilar Hydrant, Sistem Sprinkler Otomatis, Smoke/Heat Detector & Fire Alarm Control Panel (FACP).',
+                'tahapan_uji'    => [
+                    'Pemeriksaan Kapasitas Tandon Air Pemadam (Reservoir / Ground Water Tank volume minimum 45 menit operasi pemadaman penuh)',
+                    'Uji Kinerja Pompa Pemadam (Pressure flow test, uji start-stop otomatis pressure switch jockey pump dan electric pump)',
+                    'Uji Pancaran & Tekanan Nozel Hydrant (Pengukuran tekanan statis dan dinamis pada pilar hydrant terjauh minimal 4.5 bar)',
+                    'Uji Sensitivitas Detektor Asap & Panas (Uji semprot aerosol asap pada smoke detector dan respons panel utama FACP)',
+                    'Uji Flow Switch Sprinkler & Alarm Gong Mekanis (Pemeriksaan respons katup alarm saat glass bulb sprinkler pecah)',
+                    'Inspeksi Fisik APAR (Pemeriksaan segel pin, selang, nozzle, dan manometer tekanan gas pendorong N2)'
+                ],
+                'dokumen_syarat' => [
+                    'Gambar denah instalasi hydrant, sprinkler, dan titik penempatan APAR',
+                    'Spesifikasi kurva kinerja pompa pemadam kebakaran (Pump Performance Curve)',
+                    'Buku akte pengesahan instalasi proteksi kebakaran terdahulu',
+                    'Surat penunjukan tim peran kebakaran internal perusahaan'
+                ],
+                'regional_insight' => 'Di gedung perkantoran bertingkat tinggi Jakarta serta fasilitas manufaktur kimia Cilegon dan pergudangan logistik Cikarang, audit sistem proteksi kebakaran terintegrasi menjadi prasyarat mutlak verifikasi asuransi kebakaran korporasi (All Risks Insurance) dan audit CSMS BUMN.',
+                'pelatihan_terkait' => [
+                    'slug' => 'pelatihan-damkar-paralel-kelas-dcba-sertifikasi-kemnaker-ri',
+                    'name' => 'Pelatihan Petugas Penanggulangan Kebakaran Kelas D–A Kemnaker'
+                ],
+                'faqs'           => [
+                    [
+                        'q' => 'Berapa tekanan minimal air yang harus keluar pada pilar hydrant teratas/terjauh?',
+                        'a' => 'Berdasarkan standar Permenaker dan SNI 03-1745-2000, tekanan sisa (residual pressure) pada nozel hydrant terjauh saat beroperasi minimum adalah 4.5 kg/cm² (4.5 bar) dengan debit aliran memadai guna menjangkau titik api.'
+                    ],
+                    [
+                        'q' => 'Apakah diesel pump pemadam kebakaran wajib diuji saat sumber listrik PLN menyala?',
+                        'a' => 'Ya. Uji simulasi kegagalan listrik (power outage) dilakukan dengan memutus aliran ke electric pump, untuk memastikan diesel engine pump dapat menyala otomatis dalam hitungan detik saat tekanan pipa hydrant mengalami penurunan drastis.'
+                    ]
+                ]
+            ],
+
+            'genset' => [
+                'slug'           => 'genset',
+                'judul'          => 'Jasa Riksa Uji Genset Diesel & Pesawat Tenaga Produksi Kemnaker',
+                'kategori'       => 'pesawat-tenaga-produksi',
+                'kategori_label' => 'Pesawat Tenaga & Produksi',
+                'dasar_hukum'    => 'Permenaker No. 38 Tahun 2016 tentang K3 Pesawat Tenaga dan Produksi',
+                'tagline'        => 'Uji beban genset (load bank / real load), getaran mekanis, tingkat kebisingan ruang genset, & pengesahan pemakaian mesin.',
+                'meta_title'     => 'Jasa Riksa Uji Genset Diesel Kemnaker: Load Test & Suket Resmi',
+                'meta_desc'      => 'Jasa riksa uji genset diesel industri resmi Kemnaker RI (Permenaker 38/2016). Uji beban load bank, safety cutoff, emisi & terbit Suket pemakaian.',
+                'keywords'       => ['jasa riksa uji genset', 'uji beban genset diesel', 'suket genset kemnaker', 'riksa uji pesawat tenaga produksi', 'inspeksi genset industri pabrik'],
+                'masa_berlaku'   => '1 (satu) tahun sekali untuk pemeriksaan berkala',
+                'lingkup_alat'   => 'Diesel Generator Set (Genset 50 kVA hingga 2.500 kVA+), Gas Engine Generator, Mesin Penggerak Utama Diesel, Turbin Uap Pembangkit Mandiri.',
+                'tahapan_uji'    => [
+                    'Inspeksi Visual Mesin & Ruang Genset (Pondasi isolasi getaran, kebocoran oli/solar, peredam suara soundproofing)',
+                    'Pemeriksaan Sistem Proteksi Mekanis (Pelindung kipas radiator / rotating guard, cover coupling poros generator)',
+                    'Pengujian Safety Device Mesin (Sensor overspeed cutoff, low oil pressure switch, high water coolant temperature trip)',
+                    'Pengujian Beban Generator (Load Bank Test atau Real Plant Load bertahap 25%, 50%, 75%, dan 100% kapasitas rated)',
+                    'Pengukuran Tingkat Kebisingan & Getaran (Sound Level Meter dan Vibration Meter pada titik dudukan mesin)',
+                    'Pemeriksaan Pembumian Frame & Netral Generator (< 5 Ohm) serta Pengajuan Berita Acara ke Pengawas Kemnaker'
+                ],
+                'dokumen_syarat' => [
+                    'Nameplate mesin diesel dan alternator generator yang jelas terbaca',
+                    'Gambar denah tata letak ruang genset dan jalur pembuangan gas cerobong',
+                    'Buku akte pengesahan riksa uji tahun sebelumnya (untuk uji berkala)',
+                    'Lisensi K3 Teknisi / Operator Motor Diesel Kemnaker yang bertugas'
+                ],
+                'regional_insight' => 'Di site tambang batubara Kalimantan Timur (Samarinda, Sangatta) dan smelter nikel Morowali/Weda Bay yang beroperasi isolated (off-grid), puluhan genset berdaya megawatt beroperasi paralel tiada henti. Pengujian proteksi genset dan getaran mencegah downtime produksi fatal dan bahaya kebakaran tangki harian bahan bakar.',
+                'pelatihan_terkait' => [
+                    'slug' => 'operator-motor-diesel-genset',
+                    'name' => 'Pelatihan & Sertifikasi Operator Motor Diesel (Genset) Kemnaker'
+                ],
+                'faqs'           => [
+                    [
+                        'q' => 'Kapan genset pabrik wajib memiliki Suket Pengesahan Pemakaian dari Kemnaker?',
+                        'a' => 'Berdasarkan Permenaker No. 38 Tahun 2016 Pasal 5, setiap penggerak mula (mesin diesel) dengan daya 100 tenaga kuda (HP) atau sekitar 75 kW / 90 kVA ke atas wajib memiliki Pengesahan Pemakaian resmi dari Dinas Tenaga Kerja setempat.'
+                    ],
+                    [
+                        'q' => 'Apakah uji beban genset wajib menggunakan alat load bank eksternal?',
+                        'a' => 'Tidak wajib jika beban pabrik (real plant load) dapat difungsikan bertahap mendekati kapasitas operasional. Namun, untuk rumah sakit, data center, atau gedung yang sensitif terhadap pemadaman listrik, penggunaan unit load bank eksternal sangat direkomendasikan guna menghindari fluktuasi daya beban riil.'
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    if (empty($filter)) {
+        return $items;
+    }
+
+    $filtered = [];
+    foreach ($items as $key => $item) {
+        if (!empty($filter['kategori']) && $item['kategori'] !== $filter['kategori']) {
+            continue;
+        }
+        if (!empty($filter['q'])) {
+            $q = mb_strtolower($filter['q']);
+            $searchString = mb_strtolower($item['judul'] . ' ' . $item['tagline'] . ' ' . $item['lingkup_alat'] . ' ' . implode(' ', $item['keywords']));
+            if (!str_contains($searchString, $q)) {
+                continue;
+            }
+        }
+        $filtered[$key] = $item;
+    }
+
+    return $filtered;
+}
+
+function get_riksa_uji_item(string $slug): ?array {
+    $items = get_all_riksa_uji_items();
+    return $items[$slug] ?? null;
+}
+
+function get_riksa_uji_categories(): array {
+    return [
+        'pesawat-angkat-angkut'   => 'Pesawat Angkat & Angkut',
+        'pesawat-uap-bejana-tekan' => 'Pesawat Uap & Bejana Tekan',
+        'instalasi-listrik-petir'  => 'Instalasi Listrik & Penyalur Petir',
+        'proteksi-kebakaran'       => 'Proteksi Kebakaran',
+        'pesawat-tenaga-produksi'  => 'Pesawat Tenaga & Produksi'
+    ];
+}
+
+function get_related_riksa_uji(string $currentSlug, string $kategori, int $limit = 3): array {
+    $items = get_all_riksa_uji_items();
+    $related = [];
+
+    // Prioritize same category
+    foreach ($items as $slug => $item) {
+        if ($slug === $currentSlug) continue;
+        if ($item['kategori'] === $kategori) {
+            $related[$slug] = $item;
+            if (count($related) >= $limit) return $related;
+        }
+    }
+
+    // Fill remaining with other categories
+    foreach ($items as $slug => $item) {
+        if ($slug === $currentSlug || isset($related[$slug])) continue;
+        $related[$slug] = $item;
+        if (count($related) >= $limit) break;
+    }
+
+    return $related;
+}

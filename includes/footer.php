@@ -115,6 +115,7 @@
       <ul>
         <li><a href="/jadwal/">Jadwal Pelatihan <?= date('Y') ?></a></li>
         <li><a href="/jadwal/kalender/">Kalender Pelatihan</a></li>
+        <li><a href="/riksa-uji/"><strong>Jasa Riksa Uji K3 (Alat &amp; Instalasi)</strong></a></li>
         <li><a href="/perpanjangan-skp/">Perpanjangan SKP Ahli K3</a></li>
         <li><a href="/layanan-pemerintah/">Pengadaan LPSE &amp; B2G</a></li>
         <li><a href="/in-house-training/">In-House Training Perusahaan</a></li>

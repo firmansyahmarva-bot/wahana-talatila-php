@@ -42,7 +42,7 @@ if ($type === '') {
     $now = date('c');
     echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
     echo '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
-    foreach (['core','pelatihan','artikel','kota','kota-pelatihan','platform','jadwal','glosarium','regulasi','skkni'] as $child) {
+    foreach (['core','pelatihan','artikel','kota','kota-pelatihan','platform','jadwal','glosarium','regulasi','skkni','riksa-uji'] as $child) {
         $childUrl = $child === 'jadwal'
             ? $base . '/sitemap-jadwal.xml'
             : $base . '/sitemap-' . $child . '.xml';
@@ -461,6 +461,24 @@ case 'skkni':
     foreach ($skkniData as $item) {
         $lm = date('Y-m-d');
         echo sm_url($base . '/skkni/' . htmlspecialchars($item['slug']) . '/', $lm, '0.7');
+    }
+
+    echo '</urlset>' . "\n";
+    break;
+
+// ─── RIKSA-UJI: statutory safety inspection hub + equipment service pages ───
+case 'riksa-uji':
+    echo sm_header();
+
+    // Hub index
+    echo sm_url($base . '/riksa-uji/', date('Y-m-d'), '0.9');
+
+    // Individual equipment inspection pages
+    require_once __DIR__ . '/includes/riksa-uji-data.php';
+    $riksaData = get_all_riksa_uji_items();
+    foreach ($riksaData as $item) {
+        $lm = date('Y-m-d');
+        echo sm_url($base . '/riksa-uji/' . htmlspecialchars($item['slug']) . '/', $lm, '0.8');
     }
 
     echo '</urlset>' . "\n";
