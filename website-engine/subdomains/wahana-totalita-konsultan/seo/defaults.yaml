@@ -1,7 +1,0 @@
-title_template: {page_title} | {brand}
-default_description: Placeholder description for Wahana Totalita Konsultan.
-schema_type_map:
-  page: WebPage
-  faq: FAQPage
-  product: Product
-brand: Wahana Totalita Konsultan

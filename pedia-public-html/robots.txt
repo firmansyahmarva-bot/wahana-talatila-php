@@ -1,6 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /submissions/
-Disallow: /terima-kasih/
-
-Sitemap: https://pedia.wahanatotalita.com/sitemap.xml
