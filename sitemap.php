@@ -42,7 +42,7 @@ if ($type === '') {
     $now = date('c');
     echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
     echo '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
-    foreach (['core','pelatihan','artikel','kota','kota-pelatihan','platform','jadwal','glosarium','regulasi','skkni','riksa-uji'] as $child) {
+    foreach (['core','pelatihan','artikel','kota','kota-pelatihan','platform','jadwal','glosarium','regulasi','skkni','riksa-uji','perpanjangan-skp'] as $child) {
         $childUrl = $child === 'jadwal'
             ? $base . '/sitemap-jadwal.xml'
             : $base . '/sitemap-' . $child . '.xml';
@@ -479,6 +479,24 @@ case 'riksa-uji':
     foreach ($riksaData as $item) {
         $lm = date('Y-m-d');
         echo sm_url($base . '/riksa-uji/' . htmlspecialchars($item['slug']) . '/', $lm, '0.8');
+    }
+
+    echo '</urlset>' . "\n";
+    break;
+
+// ─── PERPANJANGAN-SKP: renewal hub + individual license renewal pages ────────
+case 'perpanjangan-skp':
+    echo sm_header();
+
+    // Hub index
+    echo sm_url($base . '/perpanjangan-skp/', date('Y-m-d'), '0.9');
+
+    // Individual renewal pages
+    require_once __DIR__ . '/includes/perpanjangan-skp-data.php';
+    $skpData = get_all_perpanjangan_skp_items();
+    foreach ($skpData as $item) {
+        $lm = date('Y-m-d');
+        echo sm_url($base . '/perpanjangan-skp/' . htmlspecialchars($item['slug']) . '/', $lm, '0.8');
     }
 
     echo '</urlset>' . "\n";

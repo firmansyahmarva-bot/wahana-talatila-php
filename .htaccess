@@ -255,8 +255,13 @@ RewriteRule ^klien/?$ klien.php [QSA,L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^sertifikasi-bnsp/?$ sertifikasi-bnsp.php [QSA,L]
 
+# ─── Perpanjangan SKP & Lisensi K3 Hub & Service Pages ────────
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^perpanjangan-skp/?$ perpanjangan-skp.php [QSA,L]
+RewriteRule ^perpanjangan-skp/?$ perpanjangan-skp/index.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^perpanjangan-skp/([a-z0-9\-]+)/?$ perpanjangan-skp/detail.php?slug=$1 [QSA,L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^kebijakan-privasi/?$ kebijakan-privasi.php [QSA,L]
@@ -537,6 +542,7 @@ RewriteRule ^sitemap-glosarium\.xml$ sitemap.php?type=glosarium [L]
 RewriteRule ^sitemap-regulasi\.xml$  sitemap.php?type=regulasi [L]
 RewriteRule ^sitemap-skkni\.xml$     sitemap.php?type=skkni [L]
 RewriteRule ^sitemap-riksa-uji\.xml$ sitemap.php?type=riksa-uji [L]
+RewriteRule ^sitemap-perpanjangan-skp\.xml$ sitemap.php?type=perpanjangan-skp [L]
 RewriteRule ^sitemap-kota-pelatihan\.xml$ sitemap.php?type=kota-pelatihan [L]
 
 # ─── Security Headers ────────────────────────────────────────
