@@ -18,7 +18,7 @@ $is_panduan_active = str_starts_with($_nav_path, '/artikel');
     </a>
 
     <!-- Single Unified Responsive Search Form (Desktop in actions bar, Mobile in top bar) -->
-    <form action="/pelatihan/" method="get" class="nav-search" role="search">
+    <form action="/pelatihan/" method="get" class="nav-search" id="nav-search-form" role="search">
       <span class="nav-search-icon" aria-hidden="true">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       </span>
@@ -27,6 +27,7 @@ $is_panduan_active = str_starts_with($_nav_path, '/artikel');
         <span class="nav-search-btn-label">Cari</span>
         <svg class="nav-search-btn-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       </button>
+      <div class="nav-search-dropdown" id="nav-search-dropdown" style="display:none;" role="listbox" aria-label="Saran pencarian"></div>
     </form>
 
     <ul class="nav-links" id="nav-links">

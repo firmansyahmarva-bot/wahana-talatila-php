@@ -388,7 +388,7 @@ if (is_file($_core_css_file)) {
   <div class="filter-bar" style="width:100%;max-width:780px;">
     <div class="catalog-search-wrap">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input type="text" id="catalog-search" placeholder="Cari nama program pelatihan..." value="<?= e($_GET['q'] ?? '') ?>" oninput="filterCatalog()">
+      <input type="search" id="catalog-search" placeholder="Cari nama program pelatihan..." value="<?= e($_GET['q'] ?? '') ?>" oninput="filterCatalog()" onsearch="filterCatalog()">
     </div>
     <div class="filter-group">
       <button class="filter-mode active" data-mode="all" onclick="setModeFilter(this)">Semua</button>
@@ -574,6 +574,7 @@ function filterCatalog() {
       var matchesMode = mode === 'all' || cardMode.indexOf(mode) !== -1;
       var show = matchesText && matchesMode;
       card.setAttribute('data-hidden', show ? 'false' : 'true');
+      card.style.display = show ? '' : 'none';
       if (show) { sectionHasVisible = true; anyVisible = true; }
     });
     section.style.display = sectionHasVisible ? '' : 'none';
@@ -582,9 +583,16 @@ function filterCatalog() {
   document.getElementById('catalog-empty').style.display = anyVisible ? 'none' : 'block';
 }
 
-// Auto filter on load if query parameter exists
+// Auto filter and auto-scroll on load if query parameter exists
 if ((document.getElementById('catalog-search').value || '').trim() !== '') {
   filterCatalog();
+  var filterBar = document.querySelector('.pcat-filter-row');
+  if (filterBar) {
+    setTimeout(function () {
+      var top = filterBar.getBoundingClientRect().top + window.scrollY - 70;
+      window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+    }, 150);
+  }
 }
 </script>
 <script src="/assets/js/main.js" defer></script>

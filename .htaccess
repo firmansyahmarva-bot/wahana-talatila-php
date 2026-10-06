@@ -130,6 +130,73 @@ RewriteRule ^zh/k3-pertambangan/?$ zh-mining.php [QSA,L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^zh/checklist/?$ zh-checklist.php [QSA,L]
 
+# ─── ENGLISH COMPLIANCE HUB (22 Routes) ───
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^en/?$ en/index.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^en/indonesia-occupational-safety-law/?$ en/indonesia-occupational-safety-law.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^en/p2k3-safety-committee-requirements/?$ en/p2k3-safety-committee-requirements.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^en/workplace-accident-reporting-procedure/?$ en/workplace-accident-reporting-procedure.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^en/smk3-certification-guide/?$ en/smk3-certification-guide.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^en/smk3-vs-iso-45001/?$ en/smk3-vs-iso-45001.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^en/csms-contractor-safety-management-system/?$ en/csms-contractor-safety-management-system.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^en/safety-officer-ak3-umum-requirements/?$ en/safety-officer-ak3-umum-requirements.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^en/chemical-safety-officer-requirements/?$ en/chemical-safety-officer-requirements.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^en/electrical-safety-expert-requirements/?$ en/electrical-safety-expert-requirements.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^en/industrial-hygiene-officer-guide/?$ en/industrial-hygiene-officer-guide.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^en/heavy-equipment-operator-license-sio/?$ en/heavy-equipment-operator-license-sio.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^en/statutory-equipment-inspection-sia/?$ en/statutory-equipment-inspection-sia.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^en/boiler-pressure-vessel-certification/?$ en/boiler-pressure-vessel-certification.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^en/certified-welder-regulations-indonesia/?$ en/certified-welder-regulations-indonesia.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^en/working-at-height-regulations/?$ en/working-at-height-regulations.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^en/confined-space-safety-standards/?$ en/confined-space-safety-standards.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^en/workplace-fire-safety-classification/?$ en/workplace-fire-safety-classification.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^en/mining-safety-regulations-smkp/?$ en/mining-safety-regulations-smkp.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^en/oil-gas-safety-migas-requirements/?$ en/oil-gas-safety-migas-requirements.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^en/construction-safety-system-smkk/?$ en/construction-safety-system-smkk.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^en/factory-setup-safety-checklist/?$ en/factory-setup-safety-checklist.php [QSA,L]
+
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^k3-migas/?$ k3-migas.php [QSA,L]

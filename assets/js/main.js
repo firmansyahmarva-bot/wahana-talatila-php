@@ -74,6 +74,7 @@ function applyFilter() {
       || mode === 'both';
     const show = catMatch && modeMatch;
     card.dataset.hidden = show ? 'false' : 'true';
+    card.style.display = show ? '' : 'none';
     if (show) visible++;
   });
   const empty = document.getElementById('filter-empty');
@@ -108,6 +109,135 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     }
   });
 });
+
+// ─── Navbar Live Search Suggestions ─────────────────────────
+(function () {
+  var form = document.getElementById('nav-search-form') || document.querySelector('.nav-search');
+  if (!form) return;
+  var input = form.querySelector('.nav-search-input');
+  var dropdown = document.getElementById('nav-search-dropdown');
+  if (!input || !dropdown) return;
+
+  var debounceTimer = null;
+  var searchCache = {};
+  var activeIndex = -1;
+  var currentResults = [];
+
+  function closeDropdown() {
+    dropdown.style.display = 'none';
+    dropdown.innerHTML = '';
+    activeIndex = -1;
+    currentResults = [];
+  }
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/[&<>"']/g, function (m) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
+    });
+  }
+
+  function renderResults(results) {
+    currentResults = results;
+    activeIndex = -1;
+    if (!results || results.length === 0) {
+      dropdown.innerHTML = '<div class="nav-search-empty">Tidak ada program yang cocok</div>';
+      dropdown.style.display = 'flex';
+      return;
+    }
+
+    var html = '';
+    results.forEach(function (item, idx) {
+      var badge = item.cert ? '<span class="nav-search-item-badge">' + escapeHtml(item.cert) + '</span>' : '';
+      html += '<a href="' + escapeHtml(item.url) + '" class="nav-search-item" data-idx="' + idx + '" role="option">' +
+                '<span class="nav-search-item-title">' + escapeHtml(item.name) + '</span>' +
+                badge +
+              '</a>';
+    });
+    dropdown.innerHTML = html;
+    dropdown.style.display = 'flex';
+  }
+
+  function fetchSuggestions(query) {
+    var q = query.trim();
+    if (q.length < 2) {
+      closeDropdown();
+      return;
+    }
+    if (searchCache[q]) {
+      renderResults(searchCache[q]);
+      return;
+    }
+    fetch('/api/search-suggest.php?q=' + encodeURIComponent(q))
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        if (input.value.trim() !== q) return;
+        var items = (data && data.success && Array.isArray(data.results)) ? data.results : [];
+        searchCache[q] = items;
+        renderResults(items);
+      })
+      .catch(function () {
+        closeDropdown();
+      });
+  }
+
+  input.addEventListener('input', function () {
+    clearTimeout(debounceTimer);
+    var val = this.value;
+    if (val.trim().length < 2) {
+      closeDropdown();
+      return;
+    }
+    debounceTimer = setTimeout(function () {
+      fetchSuggestions(val);
+    }, 220);
+  });
+
+  input.addEventListener('keydown', function (e) {
+    if (dropdown.style.display === 'none' || currentResults.length === 0) return;
+    var items = dropdown.querySelectorAll('.nav-search-item');
+    if (!items.length) return;
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      activeIndex = (activeIndex + 1) % items.length;
+      updateActiveItem(items);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      activeIndex = (activeIndex - 1 + items.length) % items.length;
+      updateActiveItem(items);
+    } else if (e.key === 'Enter') {
+      if (activeIndex >= 0 && items[activeIndex]) {
+        e.preventDefault();
+        items[activeIndex].click();
+      }
+    } else if (e.key === 'Escape') {
+      closeDropdown();
+    }
+  });
+
+  function updateActiveItem(items) {
+    items.forEach(function (el, i) {
+      el.classList.toggle('active', i === activeIndex);
+    });
+    if (activeIndex >= 0 && items[activeIndex]) {
+      items[activeIndex].scrollIntoView({ block: 'nearest' });
+    }
+  }
+
+  document.addEventListener('click', function (e) {
+    if (!form.contains(e.target)) {
+      closeDropdown();
+    }
+  });
+
+  input.addEventListener('focus', function () {
+    var val = this.value.trim();
+    if (val.length >= 2) {
+      fetchSuggestions(val);
+    }
+  });
+})();
 
 // ─── Catalog keyword search ──────────────────────────────────
 (function () {

@@ -301,6 +301,79 @@ h1, h2, h3, h4,
 .nav-search-btn-label { display: none; }
 .nav-search-btn-icon { display: flex; align-items: center; justify-content: center; }
 
+/* Nav Search Suggestions Dropdown */
+.nav-search-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 320px;
+  max-width: 92vw;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 14px 34px -6px rgba(15, 23, 42, 0.16), 0 4px 12px -2px rgba(15, 23, 42, 0.06);
+  padding: 6px;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-height: 380px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.nav-search-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--ink, #0f172a);
+  font-size: 13px;
+  line-height: 1.35;
+  transition: background 0.15s ease, color 0.15s ease;
+  cursor: pointer;
+}
+.nav-search-item:hover,
+.nav-search-item.active {
+  background: var(--brand-light, #f1f5f9);
+  color: var(--brand, #0A4A2E);
+}
+.nav-search-item-title {
+  font-weight: 600;
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+}
+.nav-search-item-badge {
+  font-size: 11px;
+  font-weight: 700;
+  color: #64748b;
+  background: #f1f5f9;
+  padding: 2px 7px;
+  border-radius: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.nav-search-item:hover .nav-search-item-badge,
+.nav-search-item.active .nav-search-item-badge {
+  background: #e2e8f0;
+  color: var(--brand, #0A4A2E);
+}
+.nav-search-empty {
+  padding: 12px 14px;
+  font-size: 13px;
+  color: #64748b;
+  text-align: center;
+}
+.training-card[data-hidden="true"] {
+  display: none !important;
+}
+
 .nav-actions { order: 4; display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
 .nav-hamburger {
   order: 5; display: none; flex-direction: column; gap: 5px;
@@ -500,6 +573,12 @@ h1, h2, h3, h4,
   .nav-search-btn:hover { background: var(--brand-dark) !important; }
   .nav-search-btn-label { display: inline !important; color: #fff !important; }
   .nav-search-btn-icon { display: none !important; }
+  .nav-search-dropdown {
+    left: 0 !important; right: 0 !important; width: 100% !important;
+    max-width: 100% !important; top: calc(100% + 8px) !important;
+    border-radius: 10px !important; max-height: min(340px, calc(100vh - 120px)) !important;
+  }
+  .nav-search-item { padding: 11px 12px !important; }
   .nav-actions { display: none !important; }
   .nav-hamburger { order: 3 !important; display: flex !important; }
   .nav-hamburger span { background: var(--ink) !important; }
