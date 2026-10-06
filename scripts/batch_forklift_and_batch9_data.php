@@ -23,7 +23,7 @@ return [
         'meta_title'    => 'K3 Operator Forklift Kelas 2: Aturan SIO Kemnaker & Kapasitas Beban',
         'meta_desc'     => 'Ketahui aturan operator forklift kelas 2 (beban s/d 15 ton) sesuai Permenaker 8/2020. Lisensi K3 resmi Kemnaker RI berlaku 5 tahun. Cek materi & syarat sertifikasi!',
         'wa_text'       => 'Halo Wahana Totalita, saya ingin informasi pendaftaran Pelatihan & Lisensi K3 Operator Forklift Kelas 2 Kemnaker RI (Public / In-House)',
-        'description'   => "Pelatihan K3 Operator Forklift Kelas 2 Sertifikasi Kemnaker RI adalah program pembinaan keselamatan kerja dan sertifikasi lisensi resmi bagi operator pesawat angkut material handling, mengacu pada Peraturan Menteri Ketenagakerjaan No. 8 Tahun 2020 tentang Keselamatan dan Kesehatan Kerja Pesawat Angkat dan Pesawat Angkut.\n\nSesuai regulasi nasional, operator forklift dikelompokkan menjadi 2 kelas berdasarkan kapasitas daya angkut beban. Forklift Kelas 2 berwenang mengoperasikan unit forklift dengan kapasitas beban maksimal hingga 15 ton (<= 15 ton). Pelatihan ini membekali operator dengan pemahaman segitiga stabilitas (stability triangle), kalkulasi load center, prosedur inspeksi harian sebelum operasi (P2H), teknik manuver aman di lorong sempit (aisle), dan mitigasi risiko unit terbalik (tip-over). Lulusan memperoleh Surat Izin Operasi (SIO) / Lisensi K3 dan Buku Kerja resmi dari Kemnaker RI yang berlaku selama 5 tahun.",
+        'description'   => "Pelatihan K3 Operator Forklift Kelas 2 Sertifikasi Kemnaker RI adalah program pembinaan keselamatan kerja dan sertifikasi lisensi resmi bagi operator pesawat angkut material handling, mengacu pada Peraturan Menteri Ketenagakerjaan No. 8 Tahun 2020 tentang Keselamatan dan Kesehatan Kerja Pesawat Angkat dan Pesawat Angkut.\n\nSesuai regulasi nasional, operator forklift dikelompokkan menjadi 2 kelas berdasarkan kapasitas daya angkut beban. Forklift Kelas 2 berwenang mengoperasikan unit forklift dengan kapasitas beban maksimal hingga 15 ton (<= 15 ton). Pelatihan ini membekali operator dengan pemahaman segitiga stabilitas (stability triangle), kalkulasi load center, prosedur inspeksi harian sebelum operasi (P2H), teknik manuver aman di lorong sempit (aisle), dan mitigasi risiko unit terbalik (tip-over). Lulusan memperoleh Surat Izin Operasi (SIO) / Lisensi K3 dan Buku Kerja resmi dari Kemnaker RI yang berlaku selama 5 tahun.\n\nWahana Totalita menyelenggarakan pelatihan forklift Surabaya, pelatihan forklift Semarang, Yogyakarta, dan in-house training perusahaan di seluruh Indonesia.",
         'curriculum'    => [
             'Kebijakan K3 Nasional dan Dasar Hukum K3 Pesawat Angkat & Angkut: Permenaker No. 8 Tahun 2020',
             'Pengetahuan Dasar dan Klasifikasi Pesawat Angkut Material: Forklift Counterbalance, Reach Truck, dan Side Loader',
@@ -125,7 +125,10 @@ return [
   <li>Praktik langsung menggunakan unit forklift dan jalur lintas beban aktual yang digunakan oleh karyawan sehari-hari.</li>
   <li>Jadwal fleksibel tanpa mengganggu ritme shift kerja operasional pergudangan.</li>
   <li>Audit keselamatan jalur forklift (zebra cross, cermin cembung, jalur pejalan kaki, dan pencahayaan lorong) bersama instruktur spesialis Kemnaker RI.</li>
-</ul>',
+</ul>
+
+<h2>Jangkauan Wilayah Pelatihan Forklift (Surabaya, Semarang & Seluruh Indonesia)</h2>
+<p>Selain kelas tatap muka reguler di Training Center kami, Wahana Totalita Konsultan secara rutin menyelenggarakan program <strong>pelatihan forklift Surabaya</strong> untuk melayani kawasan industri Rungkut (SIER), Gresik, Sidoarjo, dan logistik pelabuhan Tanjung Perak. Kami juga membuka jadwal berkala <strong>pelatihan forklift Semarang</strong> bagi korporasi dan pergudangan di kawasan industri Wijayakusuma, Candi, Terboyo, hingga Kawasan Industri Kendal (KIK) Jawa Tengah. Tersedia format kelas publik maupun in-house training yang dapat disesuaikan dengan jadwal shift operasional perusahaan Anda.</p>',
     ],
 
     // ════════════════════════════════════════════════════════════════════════

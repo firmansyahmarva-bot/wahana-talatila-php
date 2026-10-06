@@ -372,6 +372,12 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^artikel/([a-z0-9\-]+)/?$ artikel-detail.php?slug=$1 [QSA,L]
 
+# ─── 301 Redirect: Consolidate legacy Forklift city permutations & aliases to canonical course ───
+RewriteRule ^pelatihan/(operator-forklift|sio-forklift)(-kelas-[0-9a-z]+)?(-[a-z0-9\-]+)?(\.html)?/?$ /pelatihan/pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri/ [R=301,L]
+
+# ─── 301 Redirect: Consolidate legacy Ahli K3 Umum city permutations & old online slug to canonical course ───
+RewriteRule ^pelatihan/(ahli-k3-umum(-[a-z0-9\-]+)?|pelatihan-ahli-k3-umum-sertifikasi-bnsp-online)(\.html)?/?$ /pelatihan/ak3-bnsp/ [R=301,L]
+
 # ─── Serve static pelatihan HTML at clean URL (FIX 2026-06-20) ──────────
 # If /pelatihan/{slug}/ has a matching .html file → serve it directly.
 # FIXED: was %1 (a RewriteCond backref that does not exist here, so the
