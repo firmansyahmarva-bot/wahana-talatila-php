@@ -42,7 +42,7 @@ if ($type === '') {
     $now = date('c');
     echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
     echo '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
-    foreach (['core','pelatihan','artikel','kota','kota-pelatihan','platform','jadwal','glosarium','regulasi','skkni','riksa-uji','perpanjangan-skp'] as $child) {
+    foreach (['core','pelatihan','artikel','kota','kota-pelatihan','platform','jadwal','glosarium','regulasi','skkni','riksa-uji','perpanjangan-skp','purnabakti'] as $child) {
         $childUrl = $child === 'jadwal'
             ? $base . '/sitemap-jadwal.xml'
             : $base . '/sitemap-' . $child . '.xml';
@@ -497,6 +497,24 @@ case 'perpanjangan-skp':
     foreach ($skpData as $item) {
         $lm = date('Y-m-d');
         echo sm_url($base . '/perpanjangan-skp/' . htmlspecialchars($item['slug']) . '/', $lm, '0.8');
+    }
+
+    echo '</urlset>' . "\n";
+    break;
+
+// ─── PURNABAKTI: retirement preparation hub + individual service/syllabus pages ───
+case 'purnabakti':
+    echo sm_header();
+
+    // Hub index
+    echo sm_url($base . '/purnabakti/', date('Y-m-d'), '0.9');
+
+    // Individual purnabakti program pages
+    require_once __DIR__ . '/includes/purnabakti-data.php';
+    $purnaData = get_all_purnabakti_items();
+    foreach ($purnaData as $item) {
+        $lm = date('Y-m-d');
+        echo sm_url($base . '/purnabakti/' . htmlspecialchars($item['slug']) . '/', $lm, '0.8');
     }
 
     echo '</urlset>' . "\n";

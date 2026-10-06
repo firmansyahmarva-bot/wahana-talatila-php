@@ -117,6 +117,7 @@
         <li><a href="/jadwal/kalender/">Kalender Pelatihan</a></li>
         <li><a href="/riksa-uji/"><strong>Jasa Riksa Uji K3 (Alat &amp; Instalasi)</strong></a></li>
         <li><a href="/perpanjangan-skp/"><strong>Perpanjangan SKP &amp; Lisensi K3</strong></a></li>
+        <li><a href="/purnabakti/"><strong>Pelatihan Purnabakti (Masa Persiapan Pensiun)</strong></a></li>
         <li><a href="/layanan-pemerintah/">Pengadaan LPSE &amp; B2G</a></li>
         <li><a href="/in-house-training/">In-House Training Perusahaan</a></li>
         <li><a href="/instruktur/">Tim Instruktur &amp; Tenaga Ahli</a></li>

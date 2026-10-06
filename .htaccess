@@ -263,6 +263,14 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^perpanjangan-skp/([a-z0-9\-]+)/?$ perpanjangan-skp/detail.php?slug=$1 [QSA,L]
 
+# ─── Pelatihan Masa Persiapan Pensiun (Purnabakti / MPP) Hub ───
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^purnabakti/?$ purnabakti/index.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^purnabakti/([a-z0-9\-]+)/?$ purnabakti/detail.php?slug=$1 [QSA,L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^kebijakan-privasi/?$ kebijakan-privasi.php [QSA,L]
 
@@ -543,6 +551,7 @@ RewriteRule ^sitemap-regulasi\.xml$  sitemap.php?type=regulasi [L]
 RewriteRule ^sitemap-skkni\.xml$     sitemap.php?type=skkni [L]
 RewriteRule ^sitemap-riksa-uji\.xml$ sitemap.php?type=riksa-uji [L]
 RewriteRule ^sitemap-perpanjangan-skp\.xml$ sitemap.php?type=perpanjangan-skp [L]
+RewriteRule ^sitemap-purnabakti\.xml$ sitemap.php?type=purnabakti [L]
 RewriteRule ^sitemap-kota-pelatihan\.xml$ sitemap.php?type=kota-pelatihan [L]
 
 # ─── Security Headers ────────────────────────────────────────
