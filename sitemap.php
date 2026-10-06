@@ -128,7 +128,6 @@ case 'core':
         'selam'                          => '0.8',
         'outbound'                       => '0.8',
         'wisata-karyawan'                => '0.8',
-        'event-organizer'                => '0.8',
         'k3-rumah-sakit'                 => '0.8',
         'pelatihan-manajemen-sdm'        => '0.8',
         'pelatihan-satpam'               => '0.8',

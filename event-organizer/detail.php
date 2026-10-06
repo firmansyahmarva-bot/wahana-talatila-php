@@ -93,7 +93,12 @@ $schema_graph = [
 <meta property="og:title" content="<?= htmlspecialchars($meta_title) ?>">
 <meta property="og:description" content="<?= htmlspecialchars($meta_desc) ?>">
 <meta property="og:url" content="<?= htmlspecialchars($canonical) ?>">
-<meta property="og:image" content="<?= SITE_URL ?>/assets/img/inaproc-tender-winner.png">
+<meta property="og:image" content="<?= SITE_URL ?>/assets/img/og-cover.jpg">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="<?= htmlspecialchars($meta_title) ?>">
+<meta name="twitter:description" content="<?= htmlspecialchars($meta_desc) ?>">
+<meta name="twitter:image" content="<?= SITE_URL ?>/assets/img/og-cover.jpg">
 
 <script type="application/ld+json">
 <?= json_encode(['@context' => 'https://schema.org', '@graph' => $schema_graph], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) ?>
@@ -293,6 +298,7 @@ if (is_file($_core_css_file)) {
   height: fit-content;
   white-space: nowrap;
 }
+.eo-rundown-content h3,
 .eo-rundown-content h4 {
   margin: 0;
   font-size: 15px;
@@ -458,6 +464,7 @@ if (is_file($_core_css_file)) {
   transform: translateY(-3px);
   border-color: #93c5fd;
 }
+.eo-related-card h3,
 .eo-related-card h4 {
   font-size: 16px;
   font-weight: 800;
@@ -465,10 +472,12 @@ if (is_file($_core_css_file)) {
   color: #0f172a;
   line-height: 1.35;
 }
+.eo-related-card h3 a,
 .eo-related-card h4 a {
   color: inherit;
   text-decoration: none;
 }
+.eo-related-card h3 a:hover,
 .eo-related-card h4 a:hover {
   color: #2563eb;
 }
@@ -578,7 +587,7 @@ if (is_file($_core_css_file)) {
           <?php foreach ($item['spesifikasi_teknis'] as $spec): ?>
           <tr>
             <td><strong><?= htmlspecialchars($spec['item']) ?></strong></td>
-            <td><?= htmlspecialchars($spec['detail']) ?></td>
+            <td><?= htmlspecialchars($spec['spek'] ?? $spec['detail'] ?? '') ?></td>
           </tr>
           <?php endforeach; ?>
         </tbody>
@@ -594,7 +603,7 @@ if (is_file($_core_css_file)) {
         <div class="eo-rundown-item">
           <div class="eo-time-badge"><?= htmlspecialchars($rundown['fase']) ?></div>
           <div class="eo-rundown-content">
-            <h4><?= htmlspecialchars($rundown['agenda']) ?></h4>
+            <h3><?= htmlspecialchars($rundown['agenda']) ?></h3>
           </div>
         </div>
         <?php endforeach; ?>
@@ -668,7 +677,7 @@ if (is_file($_core_css_file)) {
       <div class="eo-rundown-box" style="background: transparent; padding: 0; border: none;">
         <?php foreach ($item['faqs'] as $faq): ?>
         <div style="background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 18px 20px; margin-bottom: 14px;">
-          <h4 style="margin: 0 0 8px; font-size: 15.5px; color: #0f172a;"><?= htmlspecialchars($faq['q']) ?></h4>
+          <h3 style="margin: 0 0 8px; font-size: 15.5px; color: #0f172a;"><?= htmlspecialchars($faq['q']) ?></h3>
           <p style="margin: 0; font-size: 14px; color: #475569; line-height: 1.6;"><?= htmlspecialchars($faq['a']) ?></p>
         </div>
         <?php endforeach; ?>
@@ -682,11 +691,11 @@ if (is_file($_core_css_file)) {
           <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: #2563eb; display: block; margin-bottom: 6px;">
             <?= htmlspecialchars($rel['kategori_label']) ?>
           </span>
-          <h4>
+          <h3>
             <a href="/event-organizer/<?= htmlspecialchars($rel['slug']) ?>/">
               <?= htmlspecialchars($rel['judul']) ?>
             </a>
-          </h4>
+          </h3>
           <p><?= htmlspecialchars(mb_substr($rel['tagline'], 0, 95)) ?>...</p>
           <a href="/event-organizer/<?= htmlspecialchars($rel['slug']) ?>/" class="link">
             Lihat Proposal &amp; Spesifikasi →

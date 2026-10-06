@@ -126,7 +126,12 @@ $schema_graph = [
 <meta property="og:title" content="<?= htmlspecialchars($page_title) ?>">
 <meta property="og:description" content="<?= htmlspecialchars($meta_desc) ?>">
 <meta property="og:url" content="<?= htmlspecialchars($canonical) ?>">
-<meta property="og:image" content="<?= SITE_URL ?>/assets/img/inaproc-tender-winner.png">
+<meta property="og:image" content="<?= SITE_URL ?>/assets/img/og-cover.jpg">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="<?= htmlspecialchars($page_title) ?>">
+<meta name="twitter:description" content="<?= htmlspecialchars($meta_desc) ?>">
+<meta name="twitter:image" content="<?= SITE_URL ?>/assets/img/og-cover.jpg">
 
 <script type="application/ld+json">
 <?= json_encode(['@context' => 'https://schema.org', '@graph' => $schema_graph], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) ?>
@@ -461,18 +466,21 @@ if (is_file($_core_css_file)) {
   padding: 3px 8px;
   border-radius: 4px;
 }
-.eo-card h2 {
+.eo-card h2,
+.eo-card h3 {
   font-size: 19px;
   font-weight: 800;
   line-height: 1.35;
   margin: 0 0 10px;
   color: #0f172a;
 }
-.eo-card h2 a {
+.eo-card h2 a,
+.eo-card h3 a {
   color: inherit;
   text-decoration: none;
 }
-.eo-card h2 a:hover {
+.eo-card h2 a:hover,
+.eo-card h3 a:hover {
   color: #2563eb;
 }
 .eo-card p.tagline {
@@ -1043,11 +1051,11 @@ if (is_file($_core_css_file)) {
           </span>
         </div>
 
-        <h2>
+        <h3>
           <a href="/event-organizer/<?= htmlspecialchars($item['slug']) ?>/">
             <?= htmlspecialchars($item['judul']) ?>
           </a>
-        </h2>
+        </h3>
 
         <p class="tagline">
           <?= htmlspecialchars($item['tagline']) ?>
