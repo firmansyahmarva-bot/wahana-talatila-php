@@ -439,50 +439,56 @@ html, body {
 .pd-seal-wrap { display: none; }
 
 /* ─── BODY (paper background) ──────────────────────────────────── */
-.pd-body { background: var(--pd-paper); padding: var(--pd-space-7) 0 var(--pd-space-6); }
+.pd-body { background: var(--pd-paper); padding: var(--pd-space-5) 0 var(--pd-space-6); }
 
 /* Main + sticky sidebar layout */
 .pd-layout {
   display: grid;
   grid-template-columns: 1fr var(--pd-sidebar-w);
   grid-template-areas: "main sidebar";
-  column-gap: var(--pd-space-7);
+  column-gap: var(--pd-space-5);
   align-items: start;
 }
 .pd-main { grid-area: main; min-width: 0; }
 .pd-sidebar { grid-area: sidebar; min-width: 0; }
 
-.pd-section { max-width: 68ch; }
-.pd-section + .pd-section { margin-top: var(--pd-space-7); }
+.pd-section { max-width: 100%; }
+.pd-section + .pd-section { margin-top: var(--pd-space-5); }
 .pd-section-eyebrow {
   font-family: var(--pd-font-mono); font-size: 11.5px; letter-spacing: .09em; text-transform: uppercase;
   color: var(--pd-safety-green); font-weight: 500; margin: 0 0 var(--pd-space-2);
 }
 .pd-section h2 {
-  font-family: var(--pd-font-display); font-weight: 800; font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+  font-family: var(--pd-font-display); font-weight: 800; font-size: clamp(1.3rem, 2.4vw, 1.75rem);
   text-transform: uppercase; letter-spacing: -.005em;
-  color: var(--pd-ink); margin: 0 0 var(--pd-space-4);
+  color: var(--pd-ink); margin: 0 0 var(--pd-space-3);
 }
 .pd-desc {
-  font-family: var(--pd-font-body); font-size: 16.5px; line-height: 1.75;
+  font-family: var(--pd-font-body); font-size: 16px; line-height: 1.7;
   color: var(--pd-steel);
 }
 
 /* Long-form rich content, from admin `long_content` field */
-.pd-rich { font-family: var(--pd-font-body); font-size: 16.5px; line-height: 1.8; color: var(--pd-steel); }
+.pd-rich { font-family: var(--pd-font-body); font-size: 16px; line-height: 1.75; color: var(--pd-steel); }
 .pd-rich h2 {
-  font-family: var(--pd-font-display); font-weight: 800; font-size: 1.5rem; text-transform: uppercase;
-  color: var(--pd-ink); margin: 2.2rem 0 .8rem; padding-bottom: .6rem;
+  font-family: var(--pd-font-display); font-weight: 800; font-size: 1.4rem; text-transform: uppercase;
+  color: var(--pd-ink); margin: 1.5rem 0 .7rem; padding-bottom: .5rem;
   border-bottom: 2px solid var(--pd-amber);
+}
+.pd-rich > h2:first-child,
+.pd-rich > :first-child h2 {
+  margin-top: 0;
 }
 .pd-rich h3 {
   font-family: var(--pd-font-body); font-weight: 700; font-size: 1rem; text-transform: uppercase; letter-spacing: .02em;
-  color: var(--pd-ink); margin: 1.6rem 0 .6rem;
+  color: var(--pd-ink); margin: 1.3rem 0 .5rem;
 }
-.pd-rich p { margin: 0 0 1.15rem; }
-.pd-rich ul, .pd-rich ol { margin: 0 0 1.15rem; padding-left: 1.4rem; }
-.pd-rich li { margin-bottom: .45rem; }
+.pd-rich p { margin: 0 0 1rem; }
+.pd-rich ul, .pd-rich ol { margin: 0 0 1rem; padding-left: 1.3rem; }
+.pd-rich li { margin-bottom: .35rem; }
 .pd-rich strong { font-weight: 700; color: var(--pd-ink); }
+.pd-rich table { width: 100%; max-width: 100%; border-collapse: collapse; margin: 1rem 0; }
+.pd-rich img { max-width: 100%; height: auto; }
 
 /* Curriculum — genuinely sequential list, numbering is earned here */
 .pd-curriculum { display: flex; flex-direction: column; gap: 0; border-top: 1px solid var(--pd-hairline-soft); }
