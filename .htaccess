@@ -174,8 +174,13 @@ RewriteRule ^outbound/?$ outbound.php [QSA,L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^wisata-karyawan/?$ wisata-karyawan.php [QSA,L]
 
+# ─── Event Organizer BUMN, Pemerintah & HSE Hub ───
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^event-organizer/?$ event-organizer.php [QSA,L]
+RewriteRule ^event-organizer/?$ event-organizer/index.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^event-organizer/([a-z0-9\-]+)/?$ event-organizer/detail.php?slug=$1 [QSA,L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^k3-rumah-sakit/?$ k3-rumah-sakit.php [QSA,L]
@@ -552,6 +557,7 @@ RewriteRule ^sitemap-skkni\.xml$     sitemap.php?type=skkni [L]
 RewriteRule ^sitemap-riksa-uji\.xml$ sitemap.php?type=riksa-uji [L]
 RewriteRule ^sitemap-perpanjangan-skp\.xml$ sitemap.php?type=perpanjangan-skp [L]
 RewriteRule ^sitemap-purnabakti\.xml$ sitemap.php?type=purnabakti [L]
+RewriteRule ^sitemap-event\.xml$      sitemap.php?type=event [L]
 RewriteRule ^sitemap-kota-pelatihan\.xml$ sitemap.php?type=kota-pelatihan [L]
 
 # ─── Security Headers ────────────────────────────────────────

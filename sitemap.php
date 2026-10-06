@@ -42,7 +42,7 @@ if ($type === '') {
     $now = date('c');
     echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
     echo '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
-    foreach (['core','pelatihan','artikel','kota','kota-pelatihan','platform','jadwal','glosarium','regulasi','skkni','riksa-uji','perpanjangan-skp','purnabakti'] as $child) {
+    foreach (['core','pelatihan','artikel','kota','kota-pelatihan','platform','jadwal','glosarium','regulasi','skkni','riksa-uji','perpanjangan-skp','purnabakti','event'] as $child) {
         $childUrl = $child === 'jadwal'
             ? $base . '/sitemap-jadwal.xml'
             : $base . '/sitemap-' . $child . '.xml';
@@ -515,6 +515,24 @@ case 'purnabakti':
     foreach ($purnaData as $item) {
         $lm = date('Y-m-d');
         echo sm_url($base . '/purnabakti/' . htmlspecialchars($item['slug']) . '/', $lm, '0.8');
+    }
+
+    echo '</urlset>' . "\n";
+    break;
+
+// ─── EVENT ORGANIZER: B2B/B2G MICE & HSE Statutory Event Hub + 24 program pages ───
+case 'event':
+    echo sm_header();
+
+    // Hub index
+    echo sm_url($base . '/event-organizer/', date('Y-m-d'), '0.9');
+
+    // 24 Individual event programs
+    require_once __DIR__ . '/includes/event-data.php';
+    $eventData = get_all_event_items();
+    foreach ($eventData as $item) {
+        $lm = date('Y-m-d');
+        echo sm_url($base . '/event-organizer/' . htmlspecialchars($item['slug']) . '/', $lm, '0.8');
     }
 
     echo '</urlset>' . "\n";
