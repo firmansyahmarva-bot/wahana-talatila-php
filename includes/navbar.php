@@ -181,7 +181,7 @@ $is_panduan_active = str_starts_with($_nav_path, '/artikel');
         </div>
       </li>
 
-      <li><a href="/perusahaan">Perusahaan</a></li>
+      <li><a href="/pelatihan/ak3-bnsp/">AK3 BNSP</a></li>
       <li><a href="/artikel/">Artikel</a></li>
       <li><a href="/perusahaan#kontak">Kontak</a></li>
     </ul>
