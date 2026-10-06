@@ -4,6 +4,38 @@
    Strong contrast, beautiful typography, memorable cards
    ============================================================ */
 
+/* ── Root Viewport Overflow Protection & Word Wrapping ───── */
+html, body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+@media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+}
+
+.ak-content,
+.ak-article-body,
+.article-body,
+.prose,
+.ak-article-header h1,
+.ak-top-hook-title,
+.ak-top-hook-desc,
+.ak-lead-title,
+.ak-lead-desc,
+.ak-lead-mid-title,
+.ak-lead-mid-desc,
+.ak-bc-title,
+.ak-bc-desc,
+.ak-card-title,
+.ak-rt-card-title,
+.st-article {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
 /* ── Reading Progress Bar ─────────────────────────────────── */
 .ak-progress-bar {
   position: fixed; top: 0; left: 0; z-index: 9999;
@@ -497,19 +529,42 @@
   border-radius: 0 12px 12px 0; font-style: italic; color: #374151;
   font-size: 1.05em;
 }
-.prose table {
+.prose table,
+.comparison-table,
+.article-body table {
   width: 100%; border-collapse: collapse;
   margin: 1.5rem 0; font-size: .9rem;
   border-radius: 10px; overflow: hidden;
   box-shadow: 0 2px 16px rgba(0,0,0,.06);
+  max-width: 100%;
 }
-.prose th {
+.prose th,
+.comparison-table th,
+.article-body th {
   background: var(--green,#0A4A2E); color: #fff;
   padding: 12px 16px; text-align: left; font-weight: 700;
 }
-.prose td { padding: 10px 16px; border-bottom: 1px solid #f3f4f6; color: #1f2937; }
+.prose td,
+.comparison-table td,
+.article-body td { padding: 10px 16px; border-bottom: 1px solid #f3f4f6; color: #1f2937; }
 .prose tr:hover td { background: var(--green-light,#E8F4EE); }
-.prose img { max-width: 100%; border-radius: 12px; margin: 1.75rem 0; box-shadow: 0 4px 20px rgba(0,0,0,.1); }
+.prose img { max-width: 100%; height: auto; border-radius: 12px; margin: 1.75rem 0; box-shadow: 0 4px 20px rgba(0,0,0,.1); }
+.prose pre { max-width: 100%; overflow-x: auto; white-space: pre-wrap; word-break: break-all; margin: 1.5rem 0; padding: 1rem; border-radius: 10px; background: #0f172a; color: #e2e8f0; }
+.prose iframe, .prose video, .prose embed { max-width: 100%; }
+
+@media(max-width: 768px) {
+  .prose table,
+  .comparison-table,
+  .article-body table {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    box-sizing: border-box;
+    margin: 1.25rem 0;
+  }
+}
 
 /* ── Mid-Article CTA ─────────────────────────────────────── */
 .ak-inline-cta {
@@ -1243,33 +1298,69 @@
   flex-shrink: 0;
 }
 
+/* ── Mobile Bottom Navigation Base (Shared fallback for all article templates) ── */
+.mobile-bottom-nav {
+  display: none; position: fixed; bottom: 0; left: 0; right: 0;
+  z-index: 998; background: rgba(255,255,255,.98);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid #e2e8f0; height: 60px;
+  padding-bottom: env(safe-area-inset-bottom, 0);
+  box-shadow: 0 -4px 20px rgba(0,0,0,.06);
+}
+.mbn-item {
+  position: relative;
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 3px;
+  font-size: 11px; font-weight: 600; color: #64748b;
+  text-decoration: none; transition: color 0.15s ease;
+}
+.mbn-item svg { flex-shrink: 0; transition: transform 0.15s ease, stroke 0.15s ease; stroke: #64748b; }
+.mbn-item:hover { color: var(--brand, #103A5C); }
+.mbn-item.active { color: var(--brand, #103A5C) !important; font-weight: 700; }
+.mbn-item.active svg { stroke: var(--brand, #103A5C) !important; transform: translateY(-1px); }
+.mbn-item.active::before {
+  content: ''; position: absolute; top: 0; left: 25%; right: 25%; height: 3px;
+  background: var(--accent, #F06A25); border-radius: 0 0 3px 3px;
+}
+
 /* ── Sticky Mobile Lead Hunter Bar ─────────────────────────── */
 .ak-mobile-sticky-bar {
   display: none;
 }
 
 @media(max-width: 768px) {
-  /* Prevent content from being hidden behind sticky bar */
-  body.artikel-single-page {
-    padding-bottom: 74px;
+  /* Prevent article content from being hidden behind stacked sticky bar and bottom nav */
+  body.artikel-single-page,
+  body.st-article-body,
+  body:has(.mobile-bottom-nav),
+  body:has(.ak-mobile-sticky-bar) {
+    padding-bottom: calc(128px + env(safe-area-inset-bottom, 0px)) !important;
   }
+
+  /* Always show canonical mobile bottom navigation at the very bottom */
+  .mobile-bottom-nav {
+    display: flex !important;
+    z-index: 998 !important;
+  }
+
+  /* Position sticky lead hunter bar neatly ABOVE the mobile bottom navigation */
   .ak-mobile-sticky-bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
     position: fixed;
-    bottom: 0;
+    bottom: calc(60px + env(safe-area-inset-bottom, 0px));
     left: 0;
     right: 0;
-    z-index: 9998;
-    background: rgba(255, 255, 255, 0.96);
+    z-index: 997;
+    background: rgba(255, 255, 255, 0.98);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border-top: 1px solid rgba(16, 58, 92, 0.12);
-    box-shadow: 0 -4px 22px rgba(0, 0, 0, 0.10);
-    padding: 10px 16px;
-    padding-bottom: max(10px, env(safe-area-inset-bottom));
+    box-shadow: 0 -4px 18px rgba(0, 0, 0, 0.08);
+    padding: 8px 16px;
+    box-sizing: border-box;
   }
   .ak-msb-info {
     flex: 1;
@@ -1298,10 +1389,16 @@
     text-overflow: ellipsis;
   }
   .ak-msb-btn {
-    padding: 10px 18px;
-    font-size: 13.5px;
+    padding: 8px 16px;
+    font-size: 13px;
     border-radius: 10px;
     flex-shrink: 0;
+  }
+
+  /* Hide redundant circular floating WhatsApp bubble on article pages to prevent button stacking */
+  body.artikel-single-page .wa-float,
+  body:has(.ak-mobile-sticky-bar) .wa-float {
+    display: none !important;
   }
 
   /* Responsive tweaks for mobile article reading */
@@ -1348,6 +1445,31 @@
   }
   .ak-bottom-corporate .ak-btn-wa-rich {
     width: 100%;
+  }
+}
+
+@media(max-width: 480px) {
+  /* Prevent horizontal stretch from rigid nowrap on small screens */
+  .ak-btn-wa-rich,
+  .ak-btn-wa-hero,
+  .ak-btn-wa-compact {
+    white-space: normal !important;
+    text-align: center;
+    max-width: 100%;
+    padding: 10px 14px;
+    font-size: 13px;
+    line-height: 1.35;
+  }
+  .ak-top-hook-content,
+  .ak-bc-content {
+    min-width: 0 !important;
+  }
+  .ak-msb-text {
+    font-size: 11.5px;
+  }
+  .ak-msb-btn {
+    padding: 7px 12px;
+    font-size: 12px;
   }
 }
 

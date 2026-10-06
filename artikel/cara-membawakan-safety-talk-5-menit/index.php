@@ -12,6 +12,7 @@ ob_start();
 require __DIR__ . '/../../includes/head.php';
 $shared_head = ob_get_clean();
 $shared_head = preg_replace('~<title>.*?</title>~s', '<title>' . e($page_title) . '</title>', $shared_head, 1);
+$shared_head = preg_replace('~<body([^>]*)>~i', '<body class="artikel-single-page"$1>', $shared_head, 1);
 echo $shared_head;
 ?>
 <link rel="canonical" href="https://wahanatotalita.com/artikel/cara-membawakan-safety-talk-5-menit/">
