@@ -1,0 +1,6 @@
+# Block ALL PHP execution inside uploads directory
+<FilesMatch "\.php$">
+    Require all denied
+</FilesMatch>
+Options -Indexes -ExecCGI
+AddHandler cgi-script .php .pl .py .sh
