@@ -1,5 +1,5 @@
-[
-    {
+{
+    "biaya-pelatihan-ahli-k3-umum-kemnaker-2026": {
         "title": "Biaya Pelatihan Ahli K3 Umum Kemnaker RI 2026: Rincian Lengkap & Fasilitas",
         "slug": "biaya-pelatihan-ahli-k3-umum-kemnaker-2026",
         "category": "K3",
@@ -23,7 +23,7 @@
             }
         ]
     },
-    {
+    "syarat-ahli-k3-umum-kemnaker-non-teknik": {
         "title": "Syarat Mengikuti Pembinaan Ahli K3 Umum Kemnaker RI: Apakah D3\/S1 Non-Teknik Bisa?",
         "slug": "syarat-ahli-k3-umum-kemnaker-non-teknik",
         "category": "K3",
@@ -47,7 +47,7 @@
             }
         ]
     },
-    {
+    "masa-berlaku-sertifikat-ahli-k3-umum-perpanjangan-skp": {
         "title": "Berapa Lama Masa Berlaku Sertifikat Ahli K3 Umum & Prosedur Perpanjangan SKP",
         "slug": "masa-berlaku-sertifikat-ahli-k3-umum-perpanjangan-skp",
         "category": "K3",
@@ -71,7 +71,7 @@
             }
         ]
     },
-    {
+    "perbedaan-ahli-k3-umum-vs-ahli-k3-spesialis": {
         "title": "Perbedaan Ahli K3 Umum vs Ahli K3 Spesialis: Mana yang Harus Diambil Dulu?",
         "slug": "perbedaan-ahli-k3-umum-vs-ahli-k3-spesialis",
         "category": "K3",
@@ -95,7 +95,7 @@
             }
         ]
     },
-    {
+    "syarat-biaya-ahli-muda-k3-konstruksi-tender-lpse": {
         "title": "Syarat & Biaya Sertifikasi Ahli Muda K3 Konstruksi Kemnaker untuk Tender LPSE",
         "slug": "syarat-biaya-ahli-muda-k3-konstruksi-tender-lpse",
         "category": "K3",
@@ -119,7 +119,7 @@
             }
         ]
     },
-    {
+    "cara-mendapatkan-sio-lisensi-k3-operator-forklift-kemnaker": {
         "title": "Cara Mendapatkan SIO & Lisensi K3 Operator Forklift Resmi Kemnaker RI",
         "slug": "cara-mendapatkan-sio-lisensi-k3-operator-forklift-kemnaker",
         "category": "K3",
@@ -139,7 +139,7 @@
             }
         ]
     },
-    {
+    "standar-k3-scaffolding-kualifikasi-teknisi-inspeksi-perancah": {
         "title": "Standar K3 Scaffolding: Kualifikasi Teknisi & Checklist Inspeksi Perancah Proyek",
         "slug": "standar-k3-scaffolding-kualifikasi-teknisi-inspeksi-perancah",
         "category": "K3",
@@ -159,7 +159,7 @@
             }
         ]
     },
-    {
+    "panduan-sertifikasi-ahli-k3-listrik-teknisi-k3-listrik-kemnaker": {
         "title": "Panduan Sertifikasi Ahli K3 Listrik & Teknisi K3 Listrik Sesuai Permenaker 12\/2015",
         "slug": "panduan-sertifikasi-ahli-k3-listrik-teknisi-k3-listrik-kemnaker",
         "category": "K3",
@@ -179,7 +179,7 @@
             }
         ]
     },
-    {
+    "kewajiban-sertifikasi-teknisi-confined-space-ruang-terbatas": {
         "title": "Kewajiban Sertifikasi Teknisi Confined Space (Ruang Terbatas) & Standar Gas Testing",
         "slug": "kewajiban-sertifikasi-teknisi-confined-space-ruang-terbatas",
         "category": "K3",
@@ -199,7 +199,7 @@
             }
         ]
     },
-    {
+    "panduan-sertifikasi-tkbt-ii-tkpk-kemnaker-pekerja-ketinggian": {
         "title": "Panduan Sertifikasi TKBT II & TKPK Kemnaker RI untuk Pekerja di Ketinggian",
         "slug": "panduan-sertifikasi-tkbt-ii-tkpk-kemnaker-pekerja-ketinggian",
         "category": "K3",
@@ -219,7 +219,7 @@
             }
         ]
     },
-    {
+    "pelatihan-damkar-kelas-d-c-b-a-kemnaker-kualifikasi": {
         "title": "Pelatihan Damkar Kelas D, C, B, A Kemnaker RI: Kualifikasi & Struktur Tim Darurat",
         "slug": "pelatihan-damkar-kelas-d-c-b-a-kemnaker-kualifikasi",
         "category": "K3",
@@ -239,7 +239,7 @@
             }
         ]
     },
-    {
+    "sertifikasi-pplb3-bnsp-syarat-uji-kompetensi-limbah-b3": {
         "title": "Sertifikasi PPLB3 BNSP: Syarat, Skema Uji Kompetensi, & Tugas Pengawas Limbah B3",
         "slug": "sertifikasi-pplb3-bnsp-syarat-uji-kompetensi-limbah-b3",
         "category": "Lingkungan",
@@ -259,7 +259,7 @@
             }
         ]
     },
-    {
+    "kewajiban-sertifikasi-pppa-pppu-bnsp-industri-pabrik": {
         "title": "Kewajiban Sertifikasi PPPA & PPPU BNSP untuk Industri Manufaktur & Pabrik",
         "slug": "kewajiban-sertifikasi-pppa-pppu-bnsp-industri-pabrik",
         "category": "Lingkungan",
@@ -279,7 +279,7 @@
             }
         ]
     },
-    {
+    "cara-menjadi-lead-auditor-iso-45001-syarat-peluang-karir": {
         "title": "Cara Menjadi Lead Auditor ISO 45001:2018: Syarat, Silabus, & Peluang Karir HSE",
         "slug": "cara-menjadi-lead-auditor-iso-45001-syarat-peluang-karir",
         "category": "System Management",
@@ -299,7 +299,7 @@
             }
         ]
     },
-    {
+    "panduan-csms-kontraktor-lolos-prakualifikasi-tender": {
         "title": "Panduan CSMS (Contractor Safety Management System) untuk Lolos Pra-Kualifikasi Tender",
         "slug": "panduan-csms-kontraktor-lolos-prakualifikasi-tender",
         "category": "K3",
@@ -319,7 +319,7 @@
             }
         ]
     },
-    {
+    "tugas-tanggung-jawab-ahli-k3-umum-perusahaan-permenaker-2-1992": {
         "title": "Tugas & Tanggung Jawab Ahli K3 Umum di Perusahaan Sesuai Permenaker No. 2\/1992",
         "slug": "tugas-tanggung-jawab-ahli-k3-umum-perusahaan-permenaker-2-1992",
         "category": "K3",
@@ -339,7 +339,7 @@
             }
         ]
     },
-    {
+    "perbedaan-pop-pom-pou-pertambangan-bnsp-jenjang-karir": {
         "title": "Perbedaan POP, POM, dan POU Pertambangan BNSP: Jenjang Karir Pengawas Tambang",
         "slug": "perbedaan-pop-pom-pou-pertambangan-bnsp-jenjang-karir",
         "category": "Mining",
@@ -359,7 +359,7 @@
             }
         ]
     },
-    {
+    "standar-k3-rumah-sakit-permenkes-66-2016-sertifikasi-petugas-k3rs": {
         "title": "Standar K3 Rumah Sakit Sesuai Permenkes 66\/2016 & Sertifikasi Petugas K3RS BNSP",
         "slug": "standar-k3-rumah-sakit-permenkes-66-2016-sertifikasi-petugas-k3rs",
         "category": "K3",
@@ -379,7 +379,7 @@
             }
         ]
     },
-    {
+    "panduan-sertifikasi-juru-las-welder-kelas-1-2-3-kemnaker": {
         "title": "Panduan Sertifikasi Juru Las (Welder) Kelas 1, 2, 3 Kemnaker RI & Uji Cacat Las",
         "slug": "panduan-sertifikasi-juru-las-welder-kelas-1-2-3-kemnaker",
         "category": "K3",
@@ -399,7 +399,7 @@
             }
         ]
     },
-    {
+    "metode-investigasi-kecelakaan-kerja-root-cause-analysis-scat": {
         "title": "Metode Investigasi Kecelakaan Kerja: Root Cause Analysis & SCAT Method di Tempat Kerja",
         "slug": "metode-investigasi-kecelakaan-kerja-root-cause-analysis-scat",
         "category": "K3",
@@ -419,4 +419,4 @@
             }
         ]
     }
-]
+}
