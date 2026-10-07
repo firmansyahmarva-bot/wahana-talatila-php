@@ -1,0 +1,1 @@
+.hg>*{min-width:0}.hero h1,.hero .lead{overflow-wrap:anywhere}.hero img{max-width:100%;min-width:0}@media(max-width:760px){.hg{grid-template-columns:minmax(0,1fr)!important}.hero h1{font-size:clamp(2rem,11vw,3.25rem)}}
