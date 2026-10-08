@@ -76,7 +76,7 @@ export default async function CatchAllPage({
           dangerouslySetInnerHTML={{ __html: s }}
         />
       ))}
-      <div dangerouslySetInnerHTML={{ __html: data.body_html }} />
+      <main id="konten-utama" dangerouslySetInnerHTML={{ __html: data.body_html }} />
     </>
   );
 }

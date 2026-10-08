@@ -226,14 +226,11 @@ export default function Footer() {
               <strong style={{ color: '#fff' }}>Luar Jawa:</strong>{' '}
               <Link href="/pelatihan-k3-balikpapan/">Balikpapan</Link> ·{' '}
               <Link href="/pelatihan-k3-samarinda/">Samarinda</Link> ·{' '}
-              <Link href="/pelatihan-k3-banjarmasin/">Banjarmasin</Link> ·{' '}
-              <Link href="/pelatihan-k3-pontianak/">Pontianak</Link> ·{' '}
               <Link href="/pelatihan-k3-medan/">Medan</Link> ·{' '}
               <Link href="/pelatihan-k3-palembang/">Palembang</Link> ·{' '}
               <Link href="/pelatihan-k3-pekanbaru/">Pekanbaru</Link> ·{' '}
               <Link href="/pelatihan-k3-batam/">Batam</Link> ·{' '}
               <Link href="/pelatihan-k3-makassar/">Makassar</Link> ·{' '}
-              <Link href="/pelatihan-k3-manado/">Manado</Link> ·{' '}
               <Link href="/pelatihan-k3-denpasar/">Bali</Link>
             </li>
             <li style={{ marginTop: '8px' }}>
