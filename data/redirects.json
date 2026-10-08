@@ -301,5 +301,6 @@
   "/news/dasar-hukum-keselamatan-dan-kesehatan-kerja.html": "/artikel/dasar-hukum-keselamatan-dan-kesehatan-kerja/",
   "/news/pentingnya-k3-di-tempat-kerja.html": "/artikel/pentingnya-k3-di-tempat-kerja/",
   "/pelatihan/sio-forklift": "/pelatihan/pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri/",
-  "/pelatihan/sio-forklift/": "/pelatihan/pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri/"
+  "/pelatihan/sio-forklift/": "/pelatihan/pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri/",
+  "/k3/*": "/k3/"
 }
