@@ -1,1 +1,78 @@
-/* Wahana Totalita site.css fallback */
+/* ============================================================
+   Wahana Totalita — site.css
+   Modern Next.js Layout Fixes & Content Visibility
+   ============================================================ */
+
+/* 1. Ensure all animated cards and sections are immediately visible */
+[data-reveal],
+.fade-in {
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+}
+
+/* 2. Hero Section: prevent fixed navbar from overlapping title */
+.hero26 {
+  padding-top: var(--nav-h, 68px) !important;
+}
+
+.hero26-inner {
+  padding-top: 32px !important;
+  padding-bottom: 48px !important;
+}
+
+/* 3. Transparent Navbar on Dark Hero at Top of Page */
+@media (min-width: 901px) {
+  .navbar:not(.scrolled):not(.on-light-hero) {
+    background: transparent !important;
+    box-shadow: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  }
+  .navbar:not(.scrolled):not(.on-light-hero) .nav-links a {
+    color: rgba(255, 255, 255, 0.92) !important;
+  }
+  .navbar:not(.scrolled):not(.on-light-hero) .nav-logo-text strong {
+    background: linear-gradient(135deg, #fff 40%, rgba(255, 255, 255, 0.75)) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+  }
+}
+
+/* 4. White Navbar on Scroll */
+.navbar.scrolled {
+  background: rgba(255, 255, 255, 0.98) !important;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08) !important;
+  border-bottom: 1px solid #e8e8e8 !important;
+}
+
+/* 5. Mobile Navbar (always solid white for readability) */
+@media (max-width: 900px) {
+  .navbar {
+    background: #fff !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08) !important;
+    border-bottom: 1px solid #e8e8e8 !important;
+  }
+}
+
+/* 6. Training Card Grid styling fallbacks */
+.training-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  width: 100%;
+}
+
+.jadwal-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+  width: 100%;
+}

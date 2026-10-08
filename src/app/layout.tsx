@@ -44,6 +44,7 @@ export default function RootLayout({
         <link rel="stylesheet" href="/assets/css/tokens.css" />
         <link rel="stylesheet" href="/assets/css/core.min.css" />
         <link rel="stylesheet" href="/assets/css/components.min.css" />
+        <link rel="stylesheet" href="/assets/css/site.css" />
       </head>
       <body style={{ margin: 0, padding: 0 }}>
         <ScrollProgress />

@@ -6,6 +6,8 @@ export interface TrainingCardProps {
   href: string;
   imageSrc: string;
   imageAlt: string;
+  category?: string;
+  catBadge?: string;
   mode?: string;
   certification?: string;
   features?: string[];
@@ -20,6 +22,7 @@ export default function TrainingCard({
   href,
   imageSrc,
   imageAlt,
+  catBadge,
   mode = 'Online',
   certification = 'Sertifikasi BNSP',
   features = [],
@@ -40,7 +43,7 @@ export default function TrainingCard({
       data-reveal-delay="1"
       style={{ '--accent': accentColor } as React.CSSProperties}
     >
-      <Link href={href} className="training-card-thumb" tabIndex={-1} aria-hidden="true">
+      <Link href={href} className="training-card-img-wrap" tabIndex={-1} aria-hidden="true">
         <img
           src={imageSrc}
           alt={imageAlt}
@@ -49,6 +52,7 @@ export default function TrainingCard({
           width={400}
           height={250}
         />
+        {catBadge && <span className="training-card-cat-badge">{catBadge}</span>}
       </Link>
       <div className="training-card-body">
         <div className="training-card-meta">
@@ -80,7 +84,7 @@ export default function TrainingCard({
             className="btn-wa-card"
             aria-label={`Daftar ${title} via WhatsApp`}
           >
-            Daftar
+            Daftar Sekarang
           </a>
         </div>
       </div>
