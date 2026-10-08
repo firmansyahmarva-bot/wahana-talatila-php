@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && node -e \"const fs=require('fs'); if(fs.existsSync('public/_redirects')) fs.copyFileSync('public/_redirects','out/_redirects');\"",
-    "start": "next start"
+    "start": "next start",
+    "serve": "node server.js",
+    "audit": "node scripts/final-audit.mjs"
   },
   "dependencies": {
     "next": "16.4.0",

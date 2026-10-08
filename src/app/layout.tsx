@@ -1,17 +1,29 @@
-import React from "react";
-import type { Metadata, Viewport } from "next";
+import React from 'react';
+import type { Metadata, Viewport } from 'next';
+import Navbar from '@/components/layout/Navbar';
+import Footer from '@/components/layout/Footer';
+import PhotoStrip from '@/components/layout/PhotoStrip';
+import MobileBottomNav from '@/components/layout/MobileBottomNav';
+import WhatsAppFloat from '@/components/layout/WhatsAppFloat';
+import ScrollProgress from '@/components/layout/ScrollProgress';
+import SkipLink from '@/components/layout/SkipLink';
+import ContentInteractions from '@/components/common/ContentInteractions';
 
 export const viewport: Viewport = {
-  width: "device-width",
+  width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://wahanatotalita.com"),
+  metadataBase: new URL('https://wahanatotalita.com'),
   robots: {
     index: true,
     follow: true,
+  },
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
   },
 };
 
@@ -21,39 +33,28 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="id" suppressHydrationWarning>
+    <html lang="id">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              // Global interaction handler for hamburger, dropdowns, and FAQ accordions
-              document.addEventListener('click', function(e) {
-                // FAQ item toggle
-                var faqBtn = e.target.closest('.faq-question');
-                if (faqBtn) {
-                  var item = faqBtn.closest('.faq-item');
-                  if (item) item.classList.toggle('open');
-                }
-
-                // Mobile hamburger toggle
-                var hamburger = e.target.closest('#nav-hamburger, .nav-hamburger');
-                if (hamburger) {
-                  var links = document.getElementById('nav-links') || document.querySelector('.nav-links');
-                  if (links) {
-                    var isOpen = links.classList.contains('open');
-                    links.classList.toggle('open', !isOpen);
-                    hamburger.setAttribute('aria-expanded', !isOpen);
-                  }
-                }
-              });
-            `,
-          }}
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;600;700;800&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&display=swap"
         />
+        <link rel="stylesheet" href="/assets/css/tokens.css" />
+        <link rel="stylesheet" href="/assets/css/core.min.css" />
+        <link rel="stylesheet" href="/assets/css/components.min.css" />
       </head>
-      <body suppressHydrationWarning style={{ margin: 0, padding: 0 }}>
+      <body style={{ margin: 0, padding: 0 }}>
+        <ScrollProgress />
+        <SkipLink />
+        <Navbar />
         {children}
+        <PhotoStrip />
+        <Footer />
+        <MobileBottomNav />
+        <WhatsAppFloat />
+        <ContentInteractions />
       </body>
     </html>
   );

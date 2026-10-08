@@ -1,15 +1,20 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import fs from 'fs';
-import path from 'path';
-
-function getHomePageData() {
-  const filePath = path.join(process.cwd(), 'data', 'pages', 'index.json');
-  return JSON.parse(fs.readFileSync(filePath, 'utf8'));
-}
+import { getPageDetail } from '@/lib/pages';
+import Hero from '@/components/home/Hero';
+import StatsBar from '@/components/home/StatsBar';
+import ScheduleStrip from '@/components/home/ScheduleStrip';
+import ServicesSection from '@/components/home/ServicesSection';
+import CatalogSection from '@/components/home/CatalogSection';
+import AboutSection from '@/components/home/AboutSection';
+import HowItWorks from '@/components/home/HowItWorks';
+import FaqSection from '@/components/home/FaqSection';
+import SocialProof from '@/components/home/SocialProof';
 
 export async function generateMetadata(): Promise<Metadata> {
-  const data = getHomePageData();
+  const data = getPageDetail('index');
+  if (!data) return {};
+
   return {
     title: data.title,
     description: data.description,
@@ -26,26 +31,29 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function HomePage() {
-  const data = getHomePageData();
+  const data = getPageDetail('index');
+
   return (
     <>
-      {data.css_links?.map((href: string, idx: number) => (
-        <link key={idx} rel="stylesheet" href={href} />
-      ))}
-      {data.inline_styles?.map((css: string, idx: number) => (
-        <style key={idx} dangerouslySetInnerHTML={{ __html: css }} />
-      ))}
-      {data.schemas?.map((s: string, idx: number) => (
+      <link rel="stylesheet" href="/assets/css/page/home.min.css" />
+      {data?.schemas?.map((s: string, idx: number) => (
         <script
           key={idx}
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: s }}
         />
       ))}
-      <div
-        dangerouslySetInnerHTML={{ __html: data.body_html }}
-        suppressHydrationWarning
-      />
+      <main id="konten-utama">
+        <Hero />
+        <StatsBar />
+        <ScheduleStrip />
+        <ServicesSection />
+        <CatalogSection />
+        <AboutSection />
+        <HowItWorks />
+        <FaqSection />
+        <SocialProof />
+      </main>
     </>
   );
 }

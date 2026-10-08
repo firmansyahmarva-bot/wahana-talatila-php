@@ -1,23 +1,10 @@
-import React from "react";
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import fs from "fs";
-import path from "path";
+import React from 'react';
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import { getAllPageSlugs, getPageMeta, getPageDetail } from '@/lib/pages';
 
 export async function generateStaticParams() {
-  const indexPath = path.join(process.cwd(), "data", "pages_index.json");
-  const index = JSON.parse(fs.readFileSync(indexPath, "utf8"));
-  const params: { slug: string[] }[] = [];
-
-  for (const p of Object.keys(index)) {
-    if (!p) continue; // home page is handled by src/app/page.tsx
-    const segments = p.split("/").filter(Boolean);
-    if (segments.length > 0) {
-      params.push({ slug: segments });
-    }
-  }
-
-  return params;
+  return getAllPageSlugs();
 }
 
 export async function generateMetadata({
@@ -26,10 +13,8 @@ export async function generateMetadata({
   params: Promise<{ slug: string[] }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const pagePath = slug.join("/");
-  const indexPath = path.join(process.cwd(), "data", "pages_index.json");
-  const index = JSON.parse(fs.readFileSync(indexPath, "utf8"));
-  const meta = index[pagePath];
+  const pagePath = slug.join('/');
+  const meta = getPageMeta(pagePath);
 
   if (!meta) {
     return {};
@@ -45,7 +30,7 @@ export async function generateMetadata({
       title: meta.title,
       description: meta.description,
       url: meta.canonical || `https://wahanatotalita.com/${pagePath}/`,
-      type: "article",
+      type: 'article',
     },
   };
 }
@@ -56,27 +41,31 @@ export default async function CatchAllPage({
   params: Promise<{ slug: string[] }>;
 }) {
   const { slug } = await params;
-  const pagePath = slug.join("/");
-  const indexPath = path.join(process.cwd(), "data", "pages_index.json");
-  const index = JSON.parse(fs.readFileSync(indexPath, "utf8"));
-  const item = index[pagePath];
+  const pagePath = slug.join('/');
+  const meta = getPageMeta(pagePath);
 
-  if (!item) {
+  if (!meta) {
     notFound();
   }
 
-  const detailPath = path.join(process.cwd(), "data", "pages", `${item.id}.json`);
-  if (!fs.existsSync(detailPath)) {
+  const data = getPageDetail(meta.id);
+  if (!data) {
     notFound();
   }
-
-  const data = JSON.parse(fs.readFileSync(detailPath, "utf8"));
 
   return (
     <>
-      {data.css_links?.map((href: string, idx: number) => (
-        <link key={idx} rel="stylesheet" href={href} />
-      ))}
+      {data.css_links?.map((href: string, idx: number) => {
+        if (
+          href.includes('tokens.css') ||
+          href.includes('core.min.css') ||
+          href.includes('components.min.css') ||
+          href.includes('fonts.googleapis.com')
+        ) {
+          return null;
+        }
+        return <link key={idx} rel="stylesheet" href={href} />;
+      })}
       {data.inline_styles?.map((css: string, idx: number) => (
         <style key={idx} dangerouslySetInnerHTML={{ __html: css }} />
       ))}
@@ -87,10 +76,7 @@ export default async function CatchAllPage({
           dangerouslySetInnerHTML={{ __html: s }}
         />
       ))}
-      <div
-        dangerouslySetInnerHTML={{ __html: data.body_html }}
-        suppressHydrationWarning
-      />
+      <div dangerouslySetInnerHTML={{ __html: data.body_html }} />
     </>
   );
 }
