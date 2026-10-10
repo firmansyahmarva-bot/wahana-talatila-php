@@ -42,10 +42,6 @@ export default function RootLayout({
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
         />
-        <link rel="stylesheet" href="/assets/css/tokens.css" />
-        <link rel="stylesheet" href="/assets/css/core.min.css" />
-        <link rel="stylesheet" href="/assets/css/components.min.css" />
-        <link rel="stylesheet" href="/assets/css/site.css" />
       </head>
       <body style={{ margin: 0, padding: 0 }}>
         <ScrollProgress />

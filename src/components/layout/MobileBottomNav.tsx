@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { Home, Calendar, BookOpen, FileText } from 'lucide-react';
 
 export default function MobileBottomNav() {
   const pathname = usePathname();
@@ -13,71 +14,47 @@ export default function MobileBottomNav() {
   const isArtikel = pathname.startsWith('/artikel');
 
   return (
-    <nav className="mobile-bottom-nav" aria-label="Mobile navigation">
-      <Link href="/" className={`mbn-item ${isHome ? 'active' : ''}`}>
-        <svg
-          width="22"
-          height="22"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-          <polyline points="9 22 9 12 15 12 15 22" />
-        </svg>
+    <nav
+      className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200/90 shadow-lg px-2 py-1.5 flex items-center justify-around"
+      aria-label="Navigasi Bawah Mobile"
+    >
+      <Link
+        href="/"
+        className={`flex flex-col items-center gap-1 py-1 px-3 rounded-xl text-[10px] font-bold transition-colors ${
+          isHome ? 'text-[#103A5C]' : 'text-slate-500 hover:text-slate-800'
+        }`}
+      >
+        <Home className={`w-5 h-5 ${isHome ? 'text-[#103A5C]' : 'text-slate-400'}`} />
         <span>Beranda</span>
       </Link>
-      <Link href="/jadwal/" className={`mbn-item ${isJadwal ? 'active' : ''}`}>
-        <svg
-          width="22"
-          height="22"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
-          <line x1="16" x2="16" y1="2" y2="6" />
-          <line x1="8" x2="8" y1="2" y2="6" />
-          <line x1="3" x2="21" y1="10" y2="10" />
-        </svg>
+
+      <Link
+        href="/jadwal/"
+        className={`flex flex-col items-center gap-1 py-1 px-3 rounded-xl text-[10px] font-bold transition-colors ${
+          isJadwal ? 'text-[#103A5C]' : 'text-slate-500 hover:text-slate-800'
+        }`}
+      >
+        <Calendar className={`w-5 h-5 ${isJadwal ? 'text-[#103A5C]' : 'text-slate-400'}`} />
         <span>Jadwal</span>
       </Link>
-      <Link href="/pelatihan/" className={`mbn-item ${isPelatihan ? 'active' : ''}`}>
-        <svg
-          width="22"
-          height="22"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-        </svg>
+
+      <Link
+        href="/pelatihan/"
+        className={`flex flex-col items-center gap-1 py-1 px-3 rounded-xl text-[10px] font-bold transition-colors ${
+          isPelatihan ? 'text-[#103A5C]' : 'text-slate-500 hover:text-slate-800'
+        }`}
+      >
+        <BookOpen className={`w-5 h-5 ${isPelatihan ? 'text-[#103A5C]' : 'text-slate-400'}`} />
         <span>Pelatihan</span>
       </Link>
-      <Link href="/artikel/" className={`mbn-item ${isArtikel ? 'active' : ''}`}>
-        <svg
-          width="22"
-          height="22"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z" />
-          <path d="M6 6h10" />
-          <path d="M6 10h10" />
-        </svg>
+
+      <Link
+        href="/artikel/"
+        className={`flex flex-col items-center gap-1 py-1 px-3 rounded-xl text-[10px] font-bold transition-colors ${
+          isArtikel ? 'text-[#103A5C]' : 'text-slate-500 hover:text-slate-800'
+        }`}
+      >
+        <FileText className={`w-5 h-5 ${isArtikel ? 'text-[#103A5C]' : 'text-slate-400'}`} />
         <span>Panduan</span>
       </Link>
     </nav>

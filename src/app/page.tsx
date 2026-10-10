@@ -35,7 +35,6 @@ export default function HomePage() {
 
   return (
     <>
-      <link rel="stylesheet" href="/assets/css/page/home.min.css" />
       {data?.schemas?.map((s: string, idx: number) => (
         <script
           key={idx}
