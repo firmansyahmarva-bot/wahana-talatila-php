@@ -39,8 +39,9 @@ for (const file of files) {
     issues.httpLinks.push({ file, path: data.path, matches: httpMatches.slice(0, 2) });
   }
 
-  // 3. H1 headings check
-  const h1Matches = html.match(/<h1[^>]*>[\s\S]*?<\/h1>/gi);
+  // 3. H1 headings check (ignoring script tags)
+  const domHtml = html.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+  const h1Matches = domHtml.match(/<h1[^>]*>[\s\S]*?<\/h1>/gi);
   if (!h1Matches || h1Matches.length === 0) {
     // Check if it's the home page (handled by React)
     if (data.id !== 'index') {
