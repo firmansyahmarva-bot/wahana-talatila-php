@@ -6852,13 +6852,6 @@
     "canonical": "https://smk3.wahanatotalita.com/",
     "type": "website"
   },
-  "tools": {
-    "id": "4a931512ce65bdc9ca6808adf92d8783",
-    "title": "Kumpulan Tools K3 Online 2026: Kalkulator, Generator & Regulasi K3",
-    "description": "Pusat tools dan kalkulator K3 online terlengkap 2026: Safety Talk, Kalkulator Statistik K3 (FR/SR), JSA Builder, Matriks Risiko 5x5, Kebisingan, Regulasi K3, dan IBPR gratis.",
-    "canonical": "https://wahanatotalita.com/tools/",
-    "type": "website"
-  },
   "tools/ai-analyzer": {
     "id": "53e4e26d1acde75640c57074e0c97e48",
     "title": "AI K3 Document Analyzer 2026: Cek Kepatuhan SMK3 & Gap Analysis",
