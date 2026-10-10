@@ -3,6 +3,170 @@
    Modern Next.js Layout Fixes & Content Visibility
    ============================================================ */
 
+/* Global Modern App Font Overrides */
+html, body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  color: #0F172A !important;
+  letter-spacing: -0.011em;
+}
+
+h1, h2, h3, h4, h5, h6,
+.nav-logo-text strong,
+.hero-title,
+.hero26-title,
+.section-title,
+.page-hero h1,
+.pcat-hero h1,
+.pcat-title,
+.sp-card-name {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  letter-spacing: -0.025em !important;
+}
+
+/* Unified Colored Subpage Header (Modern App Banner) */
+.page-hero,
+.pcat-hero,
+.ak-hero,
+.hub-hero {
+  background: radial-gradient(120% 120% at 50% 0%, #16486E 0%, #103A5C 60%, #0B2C46 100%) !important;
+  color: #FFFFFF !important;
+  position: relative;
+  overflow: hidden;
+  padding: calc(var(--nav-h, 68px) + 36px) 0 44px !important;
+}
+
+.page-hero::before,
+.pcat-hero::before,
+.ak-hero::before,
+.hub-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.page-hero h1,
+.pcat-hero h1,
+.pcat-title,
+.ak-hero h1,
+.hub-hero h1 {
+  color: #FFFFFF !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.ak-hero h1 em,
+.hub-hero h1 span {
+  font-style: normal;
+  color: #FF8A3D !important;
+}
+
+.page-hero p,
+.pcat-hero p,
+.pcat-desc,
+.ak-hero p,
+.hub-hero p {
+  color: #CBD5E1 !important;
+}
+
+.pcat-eyebrow {
+  display: inline-block;
+  background: rgba(240, 106, 37, 0.2);
+  color: #FF8A3D !important;
+  border: 1px solid rgba(240, 106, 37, 0.4);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  margin-bottom: 12px;
+}
+
+.pcat-badge {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #FFFFFF !important;
+  backdrop-filter: blur(8px);
+}
+
+/* Modern App Header Glassmorphism & Elevation */
+.navbar {
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+}
+
+.navbar.scrolled {
+  background: rgba(255, 255, 255, 0.94) !important;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8) !important;
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.08) !important;
+}
+
+/* App-like Mega Dropdown Menus */
+.nav-dropdown-menu {
+  border-radius: 16px !important;
+  box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.18), 0 0 0 1px rgba(15, 23, 42, 0.06) !important;
+  border: none !important;
+  padding: 18px !important;
+  backdrop-filter: blur(20px) !important;
+  background: rgba(255, 255, 255, 0.98) !important;
+}
+
+.nav-dropdown-item {
+  border-radius: 10px !important;
+  padding: 10px 12px !important;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.nav-dropdown-item:hover {
+  background: #F1F5F9 !important;
+  transform: translateX(3px);
+}
+
+.nav-dropdown-item strong {
+  font-weight: 700 !important;
+  color: #0F172A !important;
+}
+
+.nav-dropdown-item:hover strong {
+  color: var(--brand) !important;
+}
+
+.btn-wa-nav {
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%) !important;
+  font-weight: 700 !important;
+  padding: 8px 18px !important;
+  border-radius: 9999px !important;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35) !important;
+  transition: all 0.2s ease !important;
+}
+
+.btn-wa-nav:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45) !important;
+}
+
+/* WhatsApp Conversion Dock Animations */
+@keyframes waFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.wa-option-btn:hover {
+  background: #F1F5F9 !important;
+  border-color: #CBD5E1 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+}
+
 /* 1. Ensure all animated cards and sections are immediately visible */
 [data-reveal],
 .fade-in {
@@ -76,3 +240,186 @@
   gap: 20px;
   width: 100%;
 }
+
+/* ============================================================
+   7. KOTA & DIREKTORI PAGES OVERHAUL (Modern App Feel)
+   ============================================================ */
+
+/* Signature Dark App Hero for City Pages */
+.hero:has(.hero-eyebrow),
+section.hero:not(.hero26) {
+  background: radial-gradient(120% 120% at 50% 0%, #16486E 0%, #103A5C 60%, #0B2C46 100%) !important;
+  color: #FFFFFF !important;
+  border-bottom: none !important;
+  position: relative !important;
+  overflow: hidden !important;
+  padding: calc(var(--nav-h, 68px) + 36px) 0 52px !important;
+}
+
+.hero:has(.hero-eyebrow)::before,
+section.hero:not(.hero26)::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.hero:has(.hero-eyebrow) h1,
+section.hero:not(.hero26) h1 {
+  color: #FFFFFF !important;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.025em !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.hero:has(.hero-eyebrow) h1 em,
+section.hero:not(.hero26) h1 em {
+  color: #FF8A3D !important;
+  font-style: normal !important;
+}
+
+.hero:has(.hero-eyebrow) p,
+section.hero:not(.hero26) p {
+  color: #CBD5E1 !important;
+}
+
+.hero-eyebrow {
+  background: rgba(240, 106, 37, 0.2) !important;
+  border: 1px solid rgba(240, 106, 37, 0.4) !important;
+  color: #FF8A3D !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.03em !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.hero-badges span {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #FFFFFF !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+.btn-sec {
+  color: #FFFFFF !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  backdrop-filter: blur(8px);
+}
+
+.btn-sec:hover {
+  background: rgba(255, 255, 255, 0.16) !important;
+  border-color: #FFFFFF !important;
+  color: #FFFFFF !important;
+}
+
+/* Modern App Cards on City Pages */
+.prog-card {
+  border-radius: 16px !important;
+  border: 1px solid #E2E8F0 !important;
+  background: #FFFFFF !important;
+  box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.06) !important;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.prog-card:hover {
+  border-color: #CBD5E1 !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 0 12px 28px -4px rgba(15, 23, 42, 0.12) !important;
+}
+
+.prog-icon {
+  background: #F1F5F9 !important;
+  border-radius: 12px !important;
+}
+
+.prog-body h3 {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-weight: 700 !important;
+  color: #0F172A !important;
+}
+
+.prog-actions .daftar {
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%) !important;
+  border-radius: 8px !important;
+  font-weight: 700 !important;
+  box-shadow: 0 2px 8px rgba(37, 211, 102, 0.25) !important;
+}
+
+.prog-actions .detail {
+  color: #103A5C !important;
+  font-weight: 600 !important;
+}
+
+/* Lead Calculator Refined App Design */
+.lead-calculator {
+  border-radius: 20px !important;
+  border: 1px solid #E2E8F0 !important;
+  box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.08) !important;
+  background: #FFFFFF !important;
+}
+
+.lead-calculator h3 {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  color: #0F172A !important;
+  font-weight: 800 !important;
+}
+
+.calc-field select {
+  border: 1.5px solid #CBD5E1 !important;
+  border-radius: 10px !important;
+  font-weight: 500 !important;
+  background-color: #F8FAFC !important;
+  transition: border-color 0.2s ease;
+}
+
+.calc-field select:focus {
+  border-color: #103A5C !important;
+  background-color: #FFFFFF !important;
+}
+
+.calc-btn {
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35) !important;
+}
+
+/* Fix Mobile Bottom Overlap: Hide old duplicate sticky bar from kota pages so it never clashes with MobileBottomNav */
+.sticky-mobile-bar {
+  display: none !important;
+}
+
+/* Corporate & CTA Banners */
+.corporate-box,
+.cta-box {
+  background: radial-gradient(120% 120% at 50% 0%, #16486E 0%, #103A5C 60%, #0B2C46 100%) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 16px 36px -6px rgba(11, 44, 70, 0.3) !important;
+}
+
+.corporate-box h3,
+.cta-box h2 {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-weight: 800 !important;
+  color: #FFFFFF !important;
+}
+
+.compliance-table th {
+  background: #103A5C !important;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-weight: 700 !important;
+}
+
+.comparison-table th.col-wt {
+  background: #103A5C !important;
+}
+
+.section h2 {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  color: #0F172A !important;
+  font-weight: 800 !important;
+}
+

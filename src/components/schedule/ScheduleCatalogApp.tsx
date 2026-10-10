@@ -2,7 +2,9 @@
 
 import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
+import { Calendar, Search, X, MessageCircle, Building2, CheckCircle2 } from 'lucide-react';
 import { ScheduleBatch } from '@/data/schedules';
+import PageHeader from '@/components/layout/PageHeader';
 
 interface ScheduleCatalogAppProps {
   batches: ScheduleBatch[];
@@ -48,50 +50,29 @@ export default function ScheduleCatalogApp({ batches }: ScheduleCatalogAppProps)
   }, [batches, activeTab, searchQuery]);
 
   return (
-    <main id="konten-utama" className="schedule-page">
+    <main id="konten-utama" className="min-h-screen bg-slate-50">
       {/* ══════════════════════════════════════════════════════════
-           HERO SECTION
+           UNIFIED APP PAGE HEADER
            ══════════════════════════════════════════════════════════ */}
-      <section className="page-hero">
-        <div className="container">
-          <h1>📅 Jadwal Pelatihan K3 &amp; Sertifikasi 2026</h1>
-          <p>
-            Jadwal terbaru program pelatihan dan sertifikasi KEMNAKER RI, BNSP, dan KLHK tahun 2026. Diperbarui otomatis saat batch tersedia.
-          </p>
-          <div className="hero-btns">
-            <a
-              href="https://wa.me/6287759151278?text=Halo%20Wahana%20Totalita%2C%20saya%20ingin%20cek%20jadwal%20pelatihan%20bulan%20ini"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary"
-            >
-              💬 Daftar via WhatsApp
-            </a>
-            <a href="#jadwal" className="btn-dark">
-              Lihat Jadwal &darr;
-            </a>
-          </div>
-        </div>
-      </section>
+      <PageHeader
+        eyebrow="Agenda & Kalender Pembinaan 2026"
+        title="Jadwal Pelatihan K3"
+        highlightTitle="& Sertifikasi 2026"
+        description="Jadwal lengkap batch pembinaan dan sertifikasi KEMNAKER RI, BNSP, dan KLHK tahun 2026. Diperbarui setiap bulan dengan kuota transparan."
+        badges={[
+          'Update Batch Tiap Bulan',
+          'Sertifikasi Kemnaker & BNSP',
+          'Tersedia Kelas Online & Tatap Muka',
+          'Layanan In-House Corporate',
+        ]}
+        breadcrumbs={[
+          { name: 'Beranda', href: '/' },
+          { name: 'Jadwal Pelatihan' },
+        ]}
+      />
 
       {/* ══════════════════════════════════════════════════════════
-           NOTICE BAR
-           ══════════════════════════════════════════════════════════ */}
-      <div className="notice-bar">
-        <div className="container">
-          ℹ️ Jadwal dapat berubah sewaktu-waktu. Konfirmasi via WhatsApp:{' '}
-          <a
-            href="https://wa.me/6287759151278?text=Halo%20Wahana%20Totalita%2C%20saya%20ingin%20cek%20jadwal%20pelatihan%20bulan%20ini"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            0877-5915-1278
-          </a>
-        </div>
-      </div>
-
-      {/* ══════════════════════════════════════════════════════════
-           SCHEDULE SECTION & TABLE
+           SCHEDULE CONTROLS & TABLE
            ══════════════════════════════════════════════════════════ */}
       <section className="schedule-section" id="jadwal">
         <div className="container">

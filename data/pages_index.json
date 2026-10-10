@@ -7719,5 +7719,12 @@
     "description": "Kelola K3 perusahaan Anda dengan Workplace Dashboard. Tracking sertifikat, K3 Score karyawan, laporan HSE real-time.",
     "canonical": "https://wahanatotalita.com/workplace/",
     "type": "website"
+  },
+  "in-house": {
+    "id": "a5b3b5e50d8b724d89f9867c14b6537f",
+    "title": "In-House Training K3 Perusahaan: Layanan Sertifikasi On-Site Seluruh Indonesia | Wahana Totalita",
+    "description": "Layanan In-House Training K3 dan sertifikasi resmi Kemnaker RI & BNSP langsung di fasilitas/site perusahaan Anda. Hemat biaya hingga 40%, instruktur praktisi senior, proposal dalam 24 jam.",
+    "canonical": "https://wahanatotalita.com/in-house-training/",
+    "type": "website"
   }
 }

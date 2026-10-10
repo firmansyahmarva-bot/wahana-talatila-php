@@ -2,8 +2,10 @@
 
 import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
+import { Search, X, CheckCircle, ArrowRight } from 'lucide-react';
 import { TrainingProgram } from '@/data/trainings';
 import TrainingCard from '@/components/cards/TrainingCard';
+import PageHeader from '@/components/layout/PageHeader';
 
 interface TrainingCatalogAppProps {
   trainings: TrainingProgram[];
@@ -75,72 +77,72 @@ export default function TrainingCatalogApp({ trainings }: TrainingCatalogAppProp
   }, [filteredTrainings, visibleCount]);
 
   return (
-    <main id="konten-utama" className="pcat-page">
+    <main id="konten-utama" className="min-h-screen bg-slate-50">
       {/* ══════════════════════════════════════════════════════════
-           HERO & SEARCH SECTION
+           UNIFIED APP PAGE HEADER
            ══════════════════════════════════════════════════════════ */}
-      <section className="pcat-hero">
-        <div className="container">
-          <div className="pcat-hero-inner">
-            <span className="pcat-eyebrow">Direktori Resmi Pelatihan &amp; Sertifikasi K3</span>
-            <h1 className="pcat-title">Katalog Pelatihan K3 &amp; Sertifikasi Resmi</h1>
-            <p className="pcat-desc">
-              Pilihan program sertifikasi KEMNAKER RI &amp; BNSP terlengkap di Indonesia. Tersedia kelas online interaktif, tatap muka di 20 kota, dan in-house training perusahaan.
-            </p>
-
-            <div className="pcat-badges">
-              <span className="pcat-badge">✔ Kemnaker RI &amp; BNSP</span>
-              <span className="pcat-badge">✔ Online &amp; Offline</span>
-              <span className="pcat-badge">✔ In-house Perusahaan</span>
-              <span className="pcat-badge">✔ Seluruh Indonesia</span>
-            </div>
-
-            {/* Elevated Interactive Search */}
-            <div className="pcat-search-box">
-              <span className="pcat-search-icon" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <circle cx="11" cy="11" r="8" />
-                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                </svg>
-              </span>
-              <input
-                type="search"
-                className="pcat-search-input"
-                placeholder="Cari program: Ahli K3 Umum, Forklift, POP, Damkar, Auditor..."
-                aria-label="Cari pelatihan K3"
-                value={searchQuery}
-                onChange={(e) => {
-                  setSearchQuery(e.target.value);
-                  setVisibleCount(24);
-                }}
-              />
-              {searchQuery && (
-                <button
-                  type="button"
-                  className="pcat-search-clear"
-                  onClick={() => setSearchQuery('')}
-                  aria-label="Hapus pencarian"
-                >
-                  ✕
-                </button>
-              )}
-            </div>
+      <PageHeader
+        eyebrow="Direktori Resmi Pelatihan & Sertifikasi K3"
+        title="Katalog Pelatihan K3"
+        highlightTitle="& Sertifikasi Resmi"
+        description="Pilihan program sertifikasi KEMNAKER RI & BNSP terlengkap di Indonesia. Tersedia kelas online interaktif, tatap muka di 20 kota, dan in-house training perusahaan."
+        badges={[
+          'Kemnaker RI & BNSP',
+          'Online & Tatap Muka 20 Kota',
+          'In-House Training B2B',
+          'Instruktur Bersertifikasi Resmi',
+        ]}
+        breadcrumbs={[
+          { name: 'Beranda', href: '/' },
+          { name: 'Katalog Pelatihan' },
+        ]}
+      >
+        {/* Interactive App Search Bar */}
+        <div className="mt-4 max-w-2xl relative">
+          <div className="relative flex items-center">
+            <Search className="w-5 h-5 text-slate-400 absolute left-4 pointer-events-none" />
+            <input
+              type="search"
+              className="w-full pl-12 pr-12 py-3.5 rounded-2xl bg-white/95 text-slate-900 placeholder:text-slate-400 text-sm font-medium border border-white/20 shadow-xl focus:outline-none focus:ring-2 focus:ring-[#FF8A3D] focus:bg-white transition-all"
+              placeholder="Cari program: Ahli K3 Umum, Forklift, POP, Damkar, Auditor..."
+              aria-label="Cari pelatihan K3"
+              value={searchQuery}
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+                setVisibleCount(24);
+              }}
+            />
+            {searchQuery && (
+              <button
+                type="button"
+                onClick={() => setSearchQuery('')}
+                className="absolute right-4 p-1 text-slate-400 hover:text-slate-600 transition-colors"
+                aria-label="Hapus pencarian"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            )}
           </div>
         </div>
-      </section>
+      </PageHeader>
 
       {/* ══════════════════════════════════════════════════════════
            CATALOG SECTION & FILTER TABS
            ══════════════════════════════════════════════════════════ */}
-      <section className="pcat-catalog-section" id="katalog">
-        <div className="container">
-          <div className="pcat-catalog-header">
-            <div className="pcat-cat-tabs" role="tablist" aria-label="Kategori Pelatihan">
+      <section className="py-12 bg-slate-50 border-b border-slate-200/80" id="katalog">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Filter Pills & Counter Header */}
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8">
+            <div className="flex flex-wrap gap-2" role="tablist" aria-label="Kategori Pelatihan">
               {CATEGORIES.map((cat) => (
                 <button
                   key={cat.id}
                   type="button"
-                  className={`pcat-cat-btn ${activeCategory === cat.id ? 'active' : ''}`}
+                  className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${
+                    activeCategory === cat.id
+                      ? 'bg-[#103A5C] text-white shadow-md shadow-[#103A5C]/20'
+                      : 'bg-white text-slate-600 hover:text-slate-900 border border-slate-200 hover:border-slate-300'
+                  }`}
                   onClick={() => {
                     setActiveCategory(cat.id);
                     setVisibleCount(24);
@@ -150,30 +152,33 @@ export default function TrainingCatalogApp({ trainings }: TrainingCatalogAppProp
                 </button>
               ))}
             </div>
-            <div className="pcat-results-counter">
-              Menampilkan <strong>{filteredTrainings.length}</strong> program
+
+            <div className="text-xs sm:text-sm text-slate-500 font-medium shrink-0">
+              Menampilkan <strong className="text-slate-900">{filteredTrainings.length}</strong> program pelatihan
             </div>
           </div>
 
-          {/* Training Cards Grid */}
-          <div className="training-grid" id="trainingGrid">
-            {displayedTrainings.length === 0 ? (
-              <div className="pcat-empty">
-                <h3>Program Tidak Ditemukan</h3>
-                <p>Tidak ada program pelatihan yang cocok dengan kata kunci &ldquo;{searchQuery}&rdquo;.</p>
-                <button
-                  type="button"
-                  className="btn-primary"
-                  onClick={() => {
-                    setSearchQuery('');
-                    setActiveCategory('all');
-                  }}
-                >
-                  Reset Pencarian
-                </button>
-              </div>
-            ) : (
-              displayedTrainings.map((prog) => (
+          {/* Modern Responsive Card Grid */}
+          {displayedTrainings.length === 0 ? (
+            <div className="text-center py-16 bg-white rounded-2xl border border-slate-200 p-8 max-w-lg mx-auto">
+              <h3 className="font-display font-bold text-lg text-slate-900 mb-2">Program Tidak Ditemukan</h3>
+              <p className="text-sm text-slate-500 mb-6">
+                Tidak ada program pelatihan yang cocok dengan kata kunci &ldquo;{searchQuery}&rdquo;.
+              </p>
+              <button
+                type="button"
+                className="px-5 py-2.5 rounded-xl font-bold text-xs bg-[#103A5C] text-white hover:bg-[#0B2C46] transition-colors cursor-pointer"
+                onClick={() => {
+                  setSearchQuery('');
+                  setActiveCategory('all');
+                }}
+              >
+                Reset Filter Pencarian
+              </button>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {displayedTrainings.map((prog) => (
                 <TrainingCard
                   key={prog.slug}
                   title={prog.title}
@@ -186,16 +191,16 @@ export default function TrainingCatalogApp({ trainings }: TrainingCatalogAppProp
                   accentColor={prog.accent}
                   features={prog.features}
                 />
-              ))
-            )}
-          </div>
+              ))}
+            </div>
+          )}
 
           {/* Load More Button */}
           {visibleCount < filteredTrainings.length && (
-            <div className="pcat-load-more">
+            <div className="text-center mt-12">
               <button
                 type="button"
-                className="btn-outline"
+                className="px-8 py-3.5 rounded-xl text-sm font-bold bg-white text-[#103A5C] border border-slate-200 hover:border-[#103A5C] shadow-sm hover:shadow transition-all cursor-pointer"
                 onClick={() => setVisibleCount((prev) => prev + 24)}
               >
                 Muat Lebih Banyak Program (+24) &darr;
