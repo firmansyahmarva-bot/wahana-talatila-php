@@ -152,43 +152,97 @@ main:not(.home-main) {
 }
 
 /* ══════════════════════════════════════════════════════════
-   PROTECT NAVBAR & FOOTER FROM LEGACY STYLES
+   GLOBAL CONTENT STYLING
    ══════════════════════════════════════════════════════════ */
 
-footer,
-footer div,
-footer p,
-footer span {
-  color: #cbd5e1;
+#konten-utama {
+  color: #334155;
+  font-family: var(--font-sans);
 }
 
-footer a {
-  color: #cbd5e1 !important;
+/* Scoped typography for legacy article and page text */
+.legacy-prose {
+  color: #334155;
+  line-height: 1.75;
+}
+
+.legacy-prose h1, .legacy-prose h2, .legacy-prose h3 {
+  color: #103A5C;
+  font-family: var(--font-display);
+  font-weight: 700;
+  margin-top: 1.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.legacy-prose p {
+  margin-bottom: 1.25rem;
+  font-size: 1.05rem;
+}
+
+.legacy-prose ul, .legacy-prose ol {
+  margin-bottom: 1.25rem;
+  padding-left: 1.5rem;
+}
+
+.legacy-prose li {
+  margin-bottom: 0.5rem;
+}
+
+.legacy-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  border: 1px solid #e2e8f0;
+}
+
+.legacy-prose th {
+  background-color: #103A5C;
+  color: #ffffff;
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+.legacy-prose td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.legacy-prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+  margin: 1.5rem 0;
+  border: 1px solid #e2e8f0;
+}
+
+.legacy-prose a {
+  color: #103A5C;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.legacy-prose a:hover {
+  color: #F06A25;
+}
+
+.legacy-prose .btn-wa, .legacy-prose .btn-wa-card, .legacy-prose .btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #25D366;
+  color: #ffffff !important;
   text-decoration: none;
+  font-weight: 700;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.75rem;
+  margin: 0.5rem 0;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25);
+  transition: all 0.2s ease;
 }
 
-footer a:hover {
-  color: #ffffff !important;
+.legacy-prose .btn-wa:hover, .legacy-prose .btn-primary:hover {
+  background-color: #20ba5a;
+  transform: translateY(-2px);
 }
 
-footer .text-white,
-footer h3,
-footer h4 {
-  color: #ffffff !important;
-}
-
-footer a.text-\[\#FF8A3D\],
-footer span.text-\[\#FF8A3D\],
-footer svg.text-\[\#FF8A3D\] {
-  color: #FF8A3D !important;
-}
-
-footer a.bg-\[\#25D366\],
-footer .bg-\[\#25D366\] {
-  background-color: #25D366 !important;
-  color: #ffffff !important;
-}
-
-header form input[type="search"] {
-  box-sizing: border-box;
-}

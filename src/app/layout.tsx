@@ -2,7 +2,6 @@ import React from 'react';
 import type { Metadata, Viewport } from 'next';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
-import PhotoStrip from '@/components/layout/PhotoStrip';
 import MobileBottomNav from '@/components/layout/MobileBottomNav';
 import WhatsAppFloat from '@/components/layout/WhatsAppFloat';
 import ScrollProgress from '@/components/layout/ScrollProgress';

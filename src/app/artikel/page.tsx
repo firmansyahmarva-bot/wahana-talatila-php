@@ -57,7 +57,6 @@ const SCHEMAS = [
 export default function ArtikelPage() {
   return (
     <>
-      <link rel="stylesheet" href="/assets/css/artikel.css" />
       {SCHEMAS.map((schema, index) => (
         <script
           key={index}
