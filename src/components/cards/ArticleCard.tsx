@@ -10,7 +10,9 @@ export interface ArticleCardProps {
   categoryColor?: string;
   excerpt?: string;
   date?: string;
+  readingTime?: string;
   featured?: boolean;
+  headingLevel?: 'h2' | 'h3';
 }
 
 export default function ArticleCard({
@@ -22,8 +24,12 @@ export default function ArticleCard({
   categoryColor = '#C6621C',
   excerpt,
   date,
+  readingTime,
   featured = false,
+  headingLevel = 'h2',
 }: ArticleCardProps) {
+  const HeadingTag = headingLevel;
+
   return (
     <article className={`ak-card ${featured ? 'ak-card-featured' : ''}`}>
       <Link href={href} className="ak-card-img-wrap">
@@ -42,11 +48,20 @@ export default function ArticleCard({
         )}
       </Link>
       <div className="ak-card-body">
-        {date && <span className="ak-card-date">{date}</span>}
-        <h3 className="ak-card-title">
+        {(date || readingTime) && (
+          <div className="ak-card-meta">
+            {date && <time>{date}</time>}
+            {date && readingTime && <span>•</span>}
+            {readingTime && <span>{readingTime}</span>}
+          </div>
+        )}
+        <HeadingTag className="ak-card-title">
           <Link href={href}>{title}</Link>
-        </h3>
-        {excerpt && <p className="ak-card-excerpt">{excerpt}</p>}
+        </HeadingTag>
+        {excerpt && <p className="ak-card-desc">{excerpt}</p>}
+        <Link href={href} className="ak-read-more">
+          Baca selengkapnya <span>&rarr;</span>
+        </Link>
       </div>
     </article>
   );

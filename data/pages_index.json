@@ -6,13 +6,6 @@
     "canonical": "https://wahanatotalita.com/",
     "type": "website"
   },
-  "artikel": {
-    "id": "8979aaee439f3e99f77b0b9351539b30",
-    "title": "Artikel & Panduan K3 | Wahana Totalita Konsultan",
-    "description": "Artikel, panduan, dan tips seputar K3, sertifikasi BNSP, lingkungan kerja, dan keselamatan industri dari Wahana Totalita Konsultan.",
-    "canonical": "https://wahanatotalita.com/artikel/",
-    "type": "website"
-  },
   "akomodasi": {
     "id": "bb492e4d7e880758812fdaa6a65af175",
     "title": "Jasa Akomodasi & Hotel Arrangement Instansi Pemerintah Yogyakarta — Wahana Totalita",
@@ -1705,13 +1698,6 @@
     "title": "Wahana Totalita Konsultan — Pelatihan K3 & Sertifikasi BNSP Yogyakarta",
     "description": "Wahana Totalita Konsultan didukung oleh instruktur K3 nasional dari Pusdiklat Migas Cepu, akademisi, dan praktisi industri berpengalaman lebih dari 15 tahun.",
     "canonical": "https://wahanatotalita.com/instruktur/",
-    "type": "website"
-  },
-  "jadwal": {
-    "id": "3161d6d9be3cabfaf4bf206ab2149bd7",
-    "title": "Jadwal Pelatihan K3 & Sertifikasi 2026 – Wahana Totalita Konsultan",
-    "description": "Jadwal lengkap pelatihan K3 dan sertifikasi KEMNAKER RI, BNSP, KLHK tahun 2026. Pilih program, tanggal, dan kota sesuai kebutuhan Anda. Diperbarui setiap bulan.",
-    "canonical": "https://wahanatotalita.com/jadwal/",
     "type": "website"
   },
   "jadwal/112": {
