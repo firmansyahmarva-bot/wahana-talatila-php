@@ -62,10 +62,99 @@ main:not(.home-main) {
 }
 
 /* ══════════════════════════════════════════════════════════
-   STRICT OVERRIDES: PROTECT NAVBAR & FOOTER FROM LEGACY STYLES
+   GLOBAL TYPOGRAPHY STYLING FOR DYNAMIC SLUG PAGES
    ══════════════════════════════════════════════════════════ */
 
-/* Force Footer contrast & prevent legacy dark blue text leaks */
+#konten-utama {
+  color: #334155;
+  font-family: var(--font-sans);
+}
+
+#konten-utama h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.875rem, 4vw, 2.5rem);
+  font-weight: 800;
+  color: #103A5C;
+  line-height: 1.2;
+  margin-bottom: 1.25rem;
+}
+
+#konten-utama h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800;
+  color: #103A5C;
+  line-height: 1.3;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+#konten-utama h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.125rem, 2vw, 1.35rem);
+  font-weight: 700;
+  color: #0F172A;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+#konten-utama p {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  color: #334155;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+#konten-utama ul, #konten-utama ol {
+  margin-bottom: 1.25rem;
+  padding-left: 1.25rem;
+}
+
+#konten-utama li {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: #334155;
+  line-height: 1.6;
+  margin-bottom: 0.35rem;
+}
+
+#konten-utama table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+}
+
+#konten-utama th {
+  background-color: #103A5C;
+  color: #ffffff;
+  padding: 0.875rem 1rem;
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-align: left;
+}
+
+#konten-utama td {
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid #e2e8f0;
+  color: #334155;
+  font-size: 0.875rem;
+}
+
+#konten-utama tr:nth-child(even) td {
+  background-color: #f8fafc;
+}
+
+/* ══════════════════════════════════════════════════════════
+   PROTECT NAVBAR & FOOTER FROM LEGACY STYLES
+   ══════════════════════════════════════════════════════════ */
+
 footer,
 footer div,
 footer p,
@@ -100,7 +189,6 @@ footer .bg-\[\#25D366\] {
   color: #ffffff !important;
 }
 
-/* Force Navbar styling protection against legacy CSS overrides */
 header form input[type="search"] {
   box-sizing: border-box;
 }

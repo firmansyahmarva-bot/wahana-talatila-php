@@ -37,11 +37,21 @@ export async function generateMetadata({
 
 function cleanBodyHtml(html: string): string {
   if (!html) return '';
-  // Strip any old header, navbar, or footer DOM nodes embedded inside body content
+  // Strip old header, navbar, or footer DOM nodes embedded inside body content
   return html
     .replace(/<header[\s\S]*?<\/header>/gi, '')
     .replace(/<nav[\s\S]*?<\/nav>/gi, '')
     .replace(/<footer[\s\S]*?<\/footer>/gi, '');
+}
+
+function sanitizePageCss(css: string): string {
+  if (!css) return '';
+  // Strip global body, footer, navbar overrides to prevent header/footer corruption
+  return css
+    .replace(/body\s*\{[^}]*\}/gi, '')
+    .replace(/footer[\s\S]*?\{[^}]*\}/gi, '')
+    .replace(/\.navbar[\s\S]*?\{[^}]*\}/gi, '')
+    .replace(/a\s*\{[^}]*color\s*:[^;}]*!important[^}]*\}/gi, '');
 }
 
 export default async function CatchAllPage({
@@ -66,6 +76,11 @@ export default async function CatchAllPage({
 
   return (
     <>
+      {data.inline_styles?.map((css: string, idx: number) => {
+        const safeCss = sanitizePageCss(css);
+        if (!safeCss.trim()) return null;
+        return <style key={idx} dangerouslySetInnerHTML={{ __html: safeCss }} />;
+      })}
       {data.schemas?.map((s: string, idx: number) => (
         <script
           key={idx}
@@ -73,7 +88,7 @@ export default async function CatchAllPage({
           dangerouslySetInnerHTML={{ __html: s }}
         />
       ))}
-      <main id="konten-utama" className="py-12 bg-white" dangerouslySetInnerHTML={{ __html: sanitizedBody }} />
+      <main id="konten-utama" className="py-10 bg-white" dangerouslySetInnerHTML={{ __html: sanitizedBody }} />
     </>
   );
 }
