@@ -35,6 +35,15 @@ export async function generateMetadata({
   };
 }
 
+function cleanBodyHtml(html: string): string {
+  if (!html) return '';
+  // Strip any legacy header, navbar, or footer DOM nodes embedded inside old HTML bodies
+  return html
+    .replace(/<header[\s\S]*?<\/header>/gi, '')
+    .replace(/<nav[\s\S]*?<\/nav>/gi, '')
+    .replace(/<footer[\s\S]*?<\/footer>/gi, '');
+}
+
 export default async function CatchAllPage({
   params,
 }: {
@@ -52,6 +61,8 @@ export default async function CatchAllPage({
   if (!data) {
     notFound();
   }
+
+  const sanitizedBody = cleanBodyHtml(data.body_html);
 
   return (
     <>
@@ -79,7 +90,7 @@ export default async function CatchAllPage({
           dangerouslySetInnerHTML={{ __html: s }}
         />
       ))}
-      <main id="konten-utama" dangerouslySetInnerHTML={{ __html: data.body_html }} />
+      <main id="konten-utama" dangerouslySetInnerHTML={{ __html: sanitizedBody }} />
     </>
   );
 }
