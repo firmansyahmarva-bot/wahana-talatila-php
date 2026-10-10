@@ -37,7 +37,7 @@ export async function generateMetadata({
 
 function cleanBodyHtml(html: string): string {
   if (!html) return '';
-  // Strip any legacy header, navbar, or footer DOM nodes embedded inside old HTML bodies
+  // Strip any old header, navbar, or footer DOM nodes embedded inside body content
   return html
     .replace(/<header[\s\S]*?<\/header>/gi, '')
     .replace(/<nav[\s\S]*?<\/nav>/gi, '')
@@ -66,23 +66,6 @@ export default async function CatchAllPage({
 
   return (
     <>
-      {data.css_links?.map((href: string, idx: number) => {
-        if (
-          href.includes('tokens.css') ||
-          href.includes('core.min.css') ||
-          href.includes('components.min.css') ||
-          href.includes('fonts.googleapis.com')
-        ) {
-          return null;
-        }
-        return <link key={idx} rel="stylesheet" href={href} />;
-      })}
-      {data.inline_styles?.map((css: string, idx: number) => {
-        if (css.includes('footerPhotoScroll') || css.includes('.navbar{')) {
-          return null;
-        }
-        return <style key={idx} dangerouslySetInnerHTML={{ __html: css }} />;
-      })}
       {data.schemas?.map((s: string, idx: number) => (
         <script
           key={idx}
@@ -90,7 +73,7 @@ export default async function CatchAllPage({
           dangerouslySetInnerHTML={{ __html: s }}
         />
       ))}
-      <main id="konten-utama" dangerouslySetInnerHTML={{ __html: sanitizedBody }} />
+      <main id="konten-utama" className="py-12 bg-white" dangerouslySetInnerHTML={{ __html: sanitizedBody }} />
     </>
   );
 }
