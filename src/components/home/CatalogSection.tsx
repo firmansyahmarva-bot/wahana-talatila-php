@@ -3,6 +3,8 @@
 import React, { useState, useMemo } from 'react';
 import { Search, Filter, BookOpen } from 'lucide-react';
 import TrainingCard from '@/components/cards/TrainingCard';
+import SectionHeader from '@/components/ui/SectionHeader';
+import Button from '@/components/ui/Button';
 import catalogData from '../../../data/home_catalog.json';
 
 export default function CatalogSection() {
@@ -38,18 +40,12 @@ export default function CatalogSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#E8F0F7] text-[#103A5C] mb-3">
-            <BookOpen className="w-3.5 h-3.5" />
-            Katalog 40+ Program Resmi
-          </div>
-          <h2 className="font-display font-extrabold text-3xl sm:text-4xl text-slate-900 tracking-tight mb-4">
-            Program Pelatihan &amp; Sertifikasi K3
-          </h2>
-          <p className="text-base text-slate-600 leading-relaxed font-sans">
-            Lembaga pembinaan K3 berlisensi Kemnaker RI &amp; BNSP. Tersedia kelas online interaktif via Zoom, tatap muka di Yogyakarta &amp; 20 kota, serta in-house training perusahaan.
-          </p>
-        </div>
+        <SectionHeader
+          badgeText="Katalog 40+ Program Resmi"
+          title="Program Pelatihan & Sertifikasi K3"
+          subtitle="Lembaga pembinaan K3 berlisensi Kemnaker RI & BNSP. Tersedia kelas online interaktif via Zoom, tatap muka di Yogyakarta & 20 kota, serta in-house training perusahaan."
+          align="center"
+        />
 
         {/* Filter & Search Bar */}
         <div className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/90 shadow-sm mb-10">
@@ -82,18 +78,16 @@ export default function CatalogSection() {
                 { key: 'system-management', label: 'ISO / Sistem' },
                 { key: 'mining', label: 'Mining' },
               ].map((cat) => (
-                <button
+                <Button
                   key={cat.key}
                   type="button"
+                  size="sm"
+                  variant={selectedCat === cat.key ? 'primary' : 'ghost'}
                   onClick={() => setSelectedCat(cat.key)}
-                  className={`px-3.5 py-1.5 rounded-xl text-xs font-bold cursor-pointer transition-all ${
-                    selectedCat === cat.key
-                      ? 'bg-[#103A5C] text-white shadow-sm'
-                      : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
-                  }`}
+                  className={selectedCat !== cat.key ? 'bg-slate-100 hover:bg-slate-200' : ''}
                 >
                   {cat.label}
-                </button>
+                </Button>
               ))}
             </div>
 
@@ -107,18 +101,16 @@ export default function CatalogSection() {
                 { key: 'online', label: 'Online Zoom' },
                 { key: 'offline', label: 'Tatap Muka' },
               ].map((mode) => (
-                <button
+                <Button
                   key={mode.key}
                   type="button"
+                  size="sm"
+                  variant={selectedMode === mode.key ? 'accent' : 'ghost'}
                   onClick={() => setSelectedMode(mode.key)}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-bold cursor-pointer transition-all ${
-                    selectedMode === mode.key
-                      ? 'bg-[#F06A25] text-white shadow-sm'
-                      : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
-                  }`}
+                  className={selectedMode !== mode.key ? 'bg-slate-100 hover:bg-slate-200' : ''}
                 >
                   {mode.label}
-                </button>
+                </Button>
               ))}
             </div>
 
@@ -150,17 +142,19 @@ export default function CatalogSection() {
               <p className="text-sm font-bold text-slate-700">
                 Tidak ada program pelatihan yang sesuai dengan filter pencarian.
               </p>
-              <button
+              <Button
                 type="button"
+                size="sm"
+                variant="primary"
                 onClick={() => {
                   setSelectedCat('all');
                   setSelectedMode('all');
                   setSearchTerm('');
                 }}
-                className="mt-4 px-4 py-2 rounded-xl text-xs font-bold bg-[#103A5C] text-white"
+                className="mt-4"
               >
                 Reset Semua Filter
-              </button>
+              </Button>
             </div>
           )}
         </div>

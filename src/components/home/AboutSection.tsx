@@ -1,5 +1,8 @@
 import React from 'react';
-import { Award, ShieldCheck, CalendarCheck2, ArrowRight, MessageCircle } from 'lucide-react';
+import { Award, ShieldCheck, ArrowRight, MessageCircle } from 'lucide-react';
+import Button from '@/components/ui/Button';
+import Badge from '@/components/ui/Badge';
+import Card, { CardBody } from '@/components/ui/Card';
 
 export default function AboutSection() {
   return (
@@ -9,9 +12,10 @@ export default function AboutSection() {
           
           {/* Left Column: Text & Credibility */}
           <div className="lg:col-span-7">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#E8F0F7] text-[#103A5C] mb-3">
-              <ShieldCheck className="w-3.5 h-3.5" />
-              Tentang Wahana Totalita
+            <div className="mb-3">
+              <Badge variant="brand" size="md" icon={<ShieldCheck className="w-3.5 h-3.5" />}>
+                Tentang Wahana Totalita
+              </Badge>
             </div>
             
             <h2 className="font-display font-extrabold text-3xl sm:text-4xl text-slate-900 tracking-tight leading-tight mb-6">
@@ -28,53 +32,55 @@ export default function AboutSection() {
 
             {/* Credential Badges */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+              <Card hoverable={false} variant="flat" className="p-4 border-slate-200">
                 <div className="font-display font-extrabold text-lg text-[#103A5C]">
                   KEMNAKER RI
                 </div>
                 <div className="text-xs font-semibold text-slate-500 mt-1">
                   PJK3 Lisensi Resmi
                 </div>
-              </div>
+              </Card>
 
-              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+              <Card hoverable={false} variant="flat" className="p-4 border-slate-200">
                 <div className="font-display font-extrabold text-lg text-[#F06A25]">
                   BNSP RI
                 </div>
                 <div className="text-xs font-semibold text-slate-500 mt-1">
                   Sertifikasi Profesi
                 </div>
-              </div>
+              </Card>
 
-              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+              <Card hoverable={false} variant="flat" className="p-4 border-slate-200">
                 <div className="font-display font-extrabold text-lg text-[#103A5C]">
                   Sejak 2008
                 </div>
                 <div className="text-xs font-semibold text-slate-500 mt-1">
                   18+ Tahun Dedikasi
                 </div>
-              </div>
+              </Card>
             </div>
 
             {/* CTAs */}
             <div className="flex flex-wrap items-center gap-4">
-              <a
+              <Button
                 href="https://wa.me/6287759151278?text=Halo%2C%20saya%20ingin%20konsultasi%20pelatihan%20dengan%20Wahana%20Totalita"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-sm font-bold bg-[#103A5C] hover:bg-[#0B2C46] text-white shadow-sm hover:shadow transition-all"
+                isExternal
+                size="md"
+                variant="primary"
+                leftIcon={<MessageCircle className="w-4 h-4" />}
               >
-                <MessageCircle className="w-4 h-4" />
-                <span>Hubungi Konsultan Kami</span>
-              </a>
+                Hubungi Konsultan Kami
+              </Button>
 
-              <a
+              <Button
                 href="#produk"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-sm font-bold bg-slate-100 hover:bg-slate-200 text-slate-800 transition-colors"
+                size="md"
+                variant="ghost"
+                rightIcon={<ArrowRight className="w-4 h-4" />}
+                className="bg-slate-100 hover:bg-slate-200 text-slate-800"
               >
-                <span>Lihat Katalog Program</span>
-                <ArrowRight className="w-4 h-4" />
-              </a>
+                Lihat Katalog Program
+              </Button>
             </div>
           </div>
 
@@ -97,24 +103,26 @@ export default function AboutSection() {
                 </p>
                 <ul className="space-y-2.5 text-xs text-slate-200 mb-8">
                   <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                     <span>Instruktur bersertifikasi TOT &amp; praktisi senior</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                     <span>Jadwal &amp; silabus fleksibel sesuai shift kerja</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                     <span>Tersedia e-Faktur PPN resmi &amp; legalitas LPSE / PaDi UMKM</span>
                   </li>
                 </ul>
-                <a
+                <Button
                   href="/perusahaan/"
-                  className="block text-center py-3 px-4 rounded-xl text-xs font-extrabold bg-[#F06A25] hover:bg-[#d95614] text-white shadow-md transition-all"
+                  fullWidth
+                  variant="accent"
+                  size="md"
                 >
                   Pelajari Layanan B2B Korporasi &rarr;
-                </a>
+                </Button>
               </div>
             </div>
           </div>

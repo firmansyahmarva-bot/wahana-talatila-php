@@ -1,6 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
-import { MessageCircle, Calendar, ArrowRight, ShieldCheck, Users, Building, Award } from 'lucide-react';
+import { MessageCircle, Calendar, ArrowRight, ShieldCheck, Building, Award } from 'lucide-react';
+import Button from '@/components/ui/Button';
+import Badge from '@/components/ui/Badge';
 
 export default function Hero() {
   return (
@@ -23,9 +25,15 @@ export default function Hero() {
           {/* Left Column: Core Value Proposition & CTAs */}
           <div className="lg:col-span-7 flex flex-col items-start">
             {/* Trust Pill */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white/10 backdrop-blur-md border border-white/20 text-white mb-6 shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse" />
-              PJK3 Kemnaker RI · BNSP · Vendor Resmi LPSE
+            <div className="mb-6">
+              <Badge
+                variant="brand"
+                size="md"
+                className="bg-white/10 text-white border-white/20 backdrop-blur-md"
+                icon={<span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse mr-1" />}
+              >
+                PJK3 Kemnaker RI · BNSP · Vendor Resmi LPSE
+              </Badge>
             </div>
 
             {/* Main Headline */}
@@ -41,24 +49,27 @@ export default function Hero() {
 
             {/* Action Buttons */}
             <div className="flex flex-wrap items-center gap-4 w-full sm:w-auto mb-8">
-              <a
+              <Button
                 href="https://wa.me/6287759151278?text=Halo%20Wahana%20Totalita%2C%20saya%20ingin%20konsultasi%20program%20pelatihan%20K3"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-4 rounded-xl font-bold text-sm bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all cursor-pointer"
+                isExternal
+                size="lg"
+                variant="accent"
+                leftIcon={<MessageCircle className="w-5 h-5" />}
+                className="w-full sm:w-auto bg-gradient-to-r from-[#25D366] to-[#128C7E] border-none shadow-lg hover:shadow-xl"
               >
-                <MessageCircle className="w-5 h-5" />
-                <span>Konsultasi WhatsApp</span>
-              </a>
+                Konsultasi WhatsApp
+              </Button>
 
-              <Link
+              <Button
                 href="/jadwal/"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-bold text-sm bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md transition-all"
+                size="lg"
+                variant="secondary"
+                leftIcon={<Calendar className="w-4 h-4" />}
+                rightIcon={<ArrowRight className="w-4 h-4" />}
+                className="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white border-white/20 backdrop-blur-md"
               >
-                <Calendar className="w-4 h-4" />
-                <span>Lihat Jadwal 2026</span>
-                <ArrowRight className="w-4 h-4 ml-1" />
-              </Link>
+                Lihat Jadwal 2026
+              </Button>
             </div>
 
             {/* Quick Segment Selector */}
@@ -66,7 +77,7 @@ export default function Hero() {
               <span className="font-semibold text-white">Pilihan Peserta:</span>
               <a
                 href="/pelatihan/"
-                className="px-3 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/10 transition-colors"
+                className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/10 transition-colors"
               >
                 👤 Individu / Mandiri
               </a>
@@ -74,13 +85,13 @@ export default function Hero() {
                 href="https://wa.me/6287759151278?text=Halo%2C%20perusahaan%20kami%20ingin%20penawaran%20in-house%20training%20K3"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-3 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/10 transition-colors"
+                className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/10 transition-colors"
               >
                 🏢 Perusahaan (In-House)
               </a>
               <Link
                 href="/layanan-pemerintah/"
-                className="px-3 py-1 rounded-lg bg-[#FF8A3D]/20 hover:bg-[#FF8A3D]/30 text-[#FF8A3D] border border-[#FF8A3D]/30 transition-colors font-medium"
+                className="px-3 py-1.5 rounded-lg bg-[#FF8A3D]/20 hover:bg-[#FF8A3D]/30 text-[#FF8A3D] border border-[#FF8A3D]/30 transition-colors font-medium"
               >
                 🏛️ Pengadaan LPSE / B2G
               </Link>
@@ -94,9 +105,9 @@ export default function Hero() {
                 <span className="text-xs font-bold tracking-wider uppercase text-slate-300">
                   Track Record &amp; Kredibilitas
                 </span>
-                <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-[#10B981] text-white">
+                <Badge variant="success" size="sm" className="bg-[#10B981] text-white border-none">
                   Resmi Terverifikasi
-                </span>
+                </Badge>
               </div>
 
               {/* Big Stat */}

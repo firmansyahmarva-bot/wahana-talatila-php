@@ -2,9 +2,13 @@
 
 import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
-import { Calendar, Search, X, MessageCircle, Building2, CheckCircle2 } from 'lucide-react';
+import { Calendar, Search, X, MessageCircle, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { ScheduleBatch } from '@/data/schedules';
 import PageHeader from '@/components/layout/PageHeader';
+import Button from '@/components/ui/Button';
+import Badge from '@/components/ui/Badge';
+import Card, { CardBody } from '@/components/ui/Card';
+import SectionHeader from '@/components/ui/SectionHeader';
 
 interface ScheduleCatalogAppProps {
   batches: ScheduleBatch[];
@@ -74,28 +78,32 @@ export default function ScheduleCatalogApp({ batches }: ScheduleCatalogAppProps)
       {/* ══════════════════════════════════════════════════════════
            SCHEDULE CONTROLS & TABLE
            ══════════════════════════════════════════════════════════ */}
-      <section className="schedule-section" id="jadwal">
-        <div className="container">
+      <section className="py-12 bg-slate-50 border-b border-slate-200/80" id="jadwal">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
           {/* Controls: Tabs & Search Input */}
-          <div className="schedule-controls">
-            <div className="filter-tabs" role="tablist" aria-label="Filter Jadwal">
+          <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm mb-6 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
+            <div className="flex flex-wrap gap-2" role="tablist" aria-label="Filter Jadwal">
               {TABS.map((tab) => (
-                <button
+                <Button
                   key={tab.id}
                   type="button"
-                  className={`tab ${activeTab === tab.id ? 'active' : ''}`}
+                  size="sm"
+                  variant={activeTab === tab.id ? 'primary' : 'ghost'}
                   onClick={() => setActiveTab(tab.id)}
+                  className={activeTab !== tab.id ? 'bg-slate-100 hover:bg-slate-200 text-slate-700' : ''}
                 >
                   {tab.label}
-                </button>
+                </Button>
               ))}
             </div>
 
-            <div className="schedule-search-box">
+            <div className="relative max-w-sm w-full">
+              <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
               <input
                 type="search"
-                className="schedule-search-input"
-                placeholder="Cari jadwal program atau tanggal..."
+                className="w-full pl-10 pr-10 py-2 rounded-xl text-xs sm:text-sm bg-slate-50 border border-slate-200 focus:bg-white focus:ring-2 focus:ring-[#103A5C]/20 outline-none"
+                placeholder="Cari jadwal program..."
                 aria-label="Cari jadwal batch"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -103,91 +111,95 @@ export default function ScheduleCatalogApp({ batches }: ScheduleCatalogAppProps)
               {searchQuery && (
                 <button
                   type="button"
-                  className="schedule-search-clear"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 text-xs"
                   onClick={() => setSearchQuery('')}
-                  aria-label="Hapus filter pencarian"
                 >
-                  ✕
+                  <X className="w-4 h-4" />
                 </button>
               )}
             </div>
           </div>
 
-          <div className="schedule-results-count">
-            Menampilkan <strong>{filteredBatches.length}</strong> batch pelatihan tersedia
+          <div className="text-xs sm:text-sm text-slate-500 font-medium mb-6">
+            Menampilkan <strong className="text-slate-900">{filteredBatches.length}</strong> batch pelatihan tersedia
           </div>
 
-          {/* Schedule Table */}
-          <div className="schedule-table-wrap">
-            <table className="schedule-table" id="scheduleTable">
-              <thead>
-                <tr>
-                  <th style={{ width: '130px' }}>Tanggal</th>
-                  <th>Program Pelatihan</th>
-                  <th style={{ width: '180px' }}>Sertifikasi</th>
-                  <th style={{ width: '110px' }}>Kota / Mode</th>
-                  <th style={{ width: '120px' }}>Sisa Kursi</th>
-                  <th style={{ width: '100px' }}>Aksi</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredBatches.length === 0 ? (
+          {/* Schedule Table / Card View */}
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-xs sm:text-sm">
+                <thead className="bg-slate-50 text-slate-700 border-b border-slate-200 font-bold uppercase text-[11px] tracking-wider">
                   <tr>
-                    <td colSpan={6} style={{ textAlign: 'center', padding: '40px 20px', color: '#64748b' }}>
-                      <p style={{ fontWeight: 700, fontSize: '1rem', color: '#1e293b', marginBottom: '6px' }}>
-                        Tidak Ada Jadwal yang Cocok
-                      </p>
-                      <p style={{ fontSize: '0.9rem' }}>
-                        Coba kata kunci lain atau pilih tab &ldquo;Semua&rdquo; untuk melihat seluruh jadwal batch.
-                      </p>
-                    </td>
+                    <th className="py-3.5 px-4 sm:px-6 w-[140px]">Tanggal</th>
+                    <th className="py-3.5 px-4 sm:px-6">Program Pelatihan</th>
+                    <th className="py-3.5 px-4 sm:px-6 w-[180px]">Sertifikasi</th>
+                    <th className="py-3.5 px-4 sm:px-6 w-[140px]">Mode</th>
+                    <th className="py-3.5 px-4 sm:px-6 w-[120px]">Sisa Kuota</th>
+                    <th className="py-3.5 px-4 sm:px-6 w-[110px] text-right">Aksi</th>
                   </tr>
-                ) : (
-                  filteredBatches.map((b) => (
-                    <tr key={b.id || b.title}>
-                      <td data-label="Tanggal">
-                        <strong>{b.date}</strong>
-                      </td>
-                      <td data-label="Program">
-                        {b.batchHref ? (
-                          <Link href={b.batchHref} className="batch-link">
-                            {b.title}
-                          </Link>
-                        ) : (
-                          <strong className="batch-link">{b.title}</strong>
-                        )}
-                        <br />
-                        <Link href={b.programHref} style={{ fontSize: '12px', color: '#64748b' }}>
-                          Lihat silabus program &rarr;
-                        </Link>
-                      </td>
-                      <td data-label="Sertifikasi">
-                        <span className="badge badge-cert">{b.certification}</span>
-                      </td>
-                      <td data-label="Kota/Mode">
-                        <span className={`badge badge-${b.mode.toLowerCase().includes('online') ? 'online' : 'offline'}`}>
-                          {b.mode}
-                        </span>
-                      </td>
-                      <td data-label="Sisa Kursi">
-                        <span className="badge badge-ok">{b.seats}</span>
-                      </td>
-                      <td data-label="Daftar">
-                        <a
-                          href={b.waLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="btn-daftar"
-                          aria-label={`Daftar ${b.title}`}
-                        >
-                          Daftar
-                        </a>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  {filteredBatches.length === 0 ? (
+                    <tr>
+                      <td colSpan={6} className="text-center py-12 px-4 text-slate-500">
+                        <p className="font-bold text-slate-800 text-base mb-1">
+                          Tidak Ada Jadwal yang Cocok
+                        </p>
+                        <p className="text-xs">
+                          Coba kata kunci lain atau pilih tab &ldquo;Semua&rdquo; untuk melihat seluruh jadwal batch.
+                        </p>
                       </td>
                     </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
+                  ) : (
+                    filteredBatches.map((b) => (
+                      <tr key={b.id || b.title} className="hover:bg-slate-50/80 transition-colors">
+                        <td className="py-4 px-4 sm:px-6 font-bold text-[#103A5C]">
+                          {b.date}
+                        </td>
+                        <td className="py-4 px-4 sm:px-6">
+                          <Link href={b.batchHref || b.programHref} className="font-bold text-slate-900 hover:text-[#103A5C] transition-colors block leading-snug">
+                            {b.title}
+                          </Link>
+                          <Link href={b.programHref} className="text-[11px] text-slate-500 hover:text-[#103A5C] font-medium inline-flex items-center gap-1 mt-1">
+                            Lihat silabus program &rarr;
+                          </Link>
+                        </td>
+                        <td className="py-4 px-4 sm:px-6">
+                          <Badge variant="brand" size="sm">
+                            {b.certification}
+                          </Badge>
+                        </td>
+                        <td className="py-4 px-4 sm:px-6">
+                          <Badge
+                            variant={b.mode.toLowerCase().includes('online') ? 'success' : 'accent'}
+                            size="sm"
+                          >
+                            {b.mode}
+                          </Badge>
+                        </td>
+                        <td className="py-4 px-4 sm:px-6">
+                          <Badge variant="neutral" size="sm">
+                            {b.seats}
+                          </Badge>
+                        </td>
+                        <td className="py-4 px-4 sm:px-6 text-right">
+                          <Button
+                            href={b.waLink}
+                            isExternal
+                            variant="accent"
+                            size="sm"
+                            leftIcon={<MessageCircle className="w-3.5 h-3.5" />}
+                            className="bg-[#25D366] hover:bg-[#20ba5a] text-white"
+                          >
+                            Daftar
+                          </Button>
+                        </td>
+                      </tr>
+                    ))
+                  )}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </section>
@@ -195,64 +207,30 @@ export default function ScheduleCatalogApp({ batches }: ScheduleCatalogAppProps)
       {/* ══════════════════════════════════════════════════════════
            HOW TO REGISTER (6 STEPS)
            ══════════════════════════════════════════════════════════ */}
-      <section className="steps-section" style={{ background: '#f8fafc', padding: '60px 0' }}>
-        <div className="container">
-          <div className="section-header text-center" style={{ marginBottom: '40px' }}>
-            <span className="section-eyebrow">Panduan Registrasi</span>
-            <h2 className="section-title">📝 Cara Mendaftar Pelatihan</h2>
-            <p className="section-desc">Proses pendaftaran cepat, transparan, dan terverifikasi secara resmi.</p>
-          </div>
+      <section className="py-16 bg-white border-b border-slate-200/80">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeader
+            badgeText="Panduan Registrasi"
+            title="Cara Mendaftar Pelatihan"
+            subtitle="Proses pendaftaran cepat, transparan, dan terverifikasi secara resmi."
+            align="center"
+          />
 
-          <div
-            className="steps-grid"
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-              gap: '24px',
-            }}
-          >
-            <div className="step-card" style={{ background: '#fff', padding: '24px', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
-              <div style={{ fontSize: '1.75rem', marginBottom: '8px' }}>1️⃣</div>
-              <h4 style={{ margin: '0 0 8px', fontSize: '1.05rem', color: '#103A5C' }}>Pilih Jadwal &amp; Program</h4>
-              <p style={{ margin: 0, fontSize: '0.9rem', color: '#64748b' }}>
-                Pilih program sertifikasi dan tanggal batch yang sesuai dengan jadwal Anda pada tabel di atas.
-              </p>
-            </div>
-            <div className="step-card" style={{ background: '#fff', padding: '24px', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
-              <div style={{ fontSize: '1.75rem', marginBottom: '8px' }}>2️⃣</div>
-              <h4 style={{ margin: '0 0 8px', fontSize: '1.05rem', color: '#103A5C' }}>Klik Daftar / WhatsApp</h4>
-              <p style={{ margin: 0, fontSize: '0.9rem', color: '#64748b' }}>
-                Klik tombol Daftar untuk langsung terhubung dengan tim representatif kami dengan format pesan otomatis.
-              </p>
-            </div>
-            <div className="step-card" style={{ background: '#fff', padding: '24px', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
-              <div style={{ fontSize: '1.75rem', marginBottom: '8px' }}>3️⃣</div>
-              <h4 style={{ margin: '0 0 8px', fontSize: '1.05rem', color: '#103A5C' }}>Konfirmasi Data Peserta</h4>
-              <p style={{ margin: 0, fontSize: '0.9rem', color: '#64748b' }}>
-                Kirim dokumen persyaratan (KTP, pas foto latar merah, dan salinan ijazah terakhir) untuk verifikasi lisensi.
-              </p>
-            </div>
-            <div className="step-card" style={{ background: '#fff', padding: '24px', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
-              <div style={{ fontSize: '1.75rem', marginBottom: '8px' }}>4️⃣</div>
-              <h4 style={{ margin: '0 0 8px', fontSize: '1.05rem', color: '#103A5C' }}>Pembayaran</h4>
-              <p style={{ margin: 0, fontSize: '0.9rem', color: '#64748b' }}>
-                Lakukan pembayaran melalui rekening resmi perusahaan PT Wahana Totalita Konsultan dengan invoice legal.
-              </p>
-            </div>
-            <div className="step-card" style={{ background: '#fff', padding: '24px', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
-              <div style={{ fontSize: '1.75rem', marginBottom: '8px' }}>5️⃣</div>
-              <h4 style={{ margin: '0 0 8px', fontSize: '1.05rem', color: '#103A5C' }}>Ikuti Pelatihan</h4>
-              <p style={{ margin: 0, fontSize: '0.9rem', color: '#64748b' }}>
-                Akses link kelas Zoom interaktif atau hadir di fasilitas training center kami sesuai tanggal batch.
-              </p>
-            </div>
-            <div className="step-card" style={{ background: '#fff', padding: '24px', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
-              <div style={{ fontSize: '1.75rem', marginBottom: '8px' }}>6️⃣</div>
-              <h4 style={{ margin: '0 0 8px', fontSize: '1.05rem', color: '#103A5C' }}>Terima Sertifikat</h4>
-              <p style={{ margin: 0, fontSize: '0.9rem', color: '#64748b' }}>
-                Sertifikat kelulusan resmi Kemnaker RI / BNSP diterbitkan dan dikirimkan ke alamat peserta/kantor.
-              </p>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { num: '1️⃣', title: 'Pilih Jadwal & Program', desc: 'Pilih program sertifikasi dan tanggal batch yang sesuai dengan kebutuhan kualifikasi Anda.' },
+              { num: '2️⃣', title: 'Klik Daftar / WhatsApp', desc: 'Klik tombol Daftar untuk langsung terhubung dengan tim representatif kami dengan format pesan otomatis.' },
+              { num: '3️⃣', title: 'Konfirmasi Data Peserta', desc: 'Kirim dokumen persyaratan (KTP, pas foto, dan salinan ijazah terakhir) untuk verifikasi lisensi.' },
+              { num: '4️⃣', title: 'Pembayaran Legal', desc: 'Lakukan pembayaran melalui rekening resmi PT Wahana Totalita Konsultan dengan invoice legal.' },
+              { num: '5️⃣', title: 'Ikuti Pembinaan', desc: 'Akses link kelas Zoom interaktif atau hadir di fasilitas training center kami sesuai tanggal batch.' },
+              { num: '6️⃣', title: 'Terima Sertifikat Resmi', desc: 'Sertifikat kelulusan resmi Kemnaker RI / BNSP diterbitkan dan dikirimkan ke alamat Anda.' },
+            ].map((step, i) => (
+              <Card key={i} hoverable className="p-6 bg-slate-50 border-slate-200">
+                <div className="text-2xl mb-3">{step.num}</div>
+                <h3 className="font-display font-bold text-base text-[#103A5C] mb-2">{step.title}</h3>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-sans">{step.desc}</p>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
@@ -260,23 +238,24 @@ export default function ScheduleCatalogApp({ batches }: ScheduleCatalogAppProps)
       {/* ══════════════════════════════════════════════════════════
            CTA WHATSAPP SECTION
            ══════════════════════════════════════════════════════════ */}
-      <section className="schedule-cta" style={{ background: '#103A5C', color: '#fff', padding: '60px 0', textAlign: 'center' }}>
-        <div className="container">
-          <h2 style={{ fontSize: '1.85rem', marginBottom: '14px', color: '#fff' }}>
+      <section className="py-16 bg-[#103A5C] text-white text-center">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="font-display font-extrabold text-2xl sm:text-3xl leading-tight mb-4">
             Butuh Jadwal Khusus atau In-House Training Perusahaan?
           </h2>
-          <p style={{ maxWidth: '640px', margin: '0 auto 28px', color: '#cbd5e1', fontSize: '1rem', lineHeight: 1.6 }}>
+          <p className="text-slate-200 text-sm sm:text-base leading-relaxed mb-8 font-sans">
             Kami dapat menyesuaikan tanggal, materi, dan lokasi pelatihan sesuai kebutuhan operasional perusahaan Anda di seluruh wilayah Indonesia.
           </p>
-          <a
+          <Button
             href="https://wa.me/6287759151278?text=Halo%20Wahana%20Totalita%2C%20kami%20ingin%20jadwal%20khusus%20in-house%20training%20K3"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-primary"
-            style={{ padding: '14px 32px', fontSize: '1.05rem' }}
+            isExternal
+            size="lg"
+            variant="accent"
+            leftIcon={<MessageCircle className="w-5 h-5" />}
+            className="bg-[#25D366] hover:bg-[#20ba5a] text-white"
           >
-            💬 Hubungi Konsultan Pelatihan Kami &rarr;
-          </a>
+            Hubungi Konsultan Pelatihan Kami
+          </Button>
         </div>
       </section>
     </main>

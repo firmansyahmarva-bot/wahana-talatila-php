@@ -1,7 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ChevronDown, HelpCircle, MessageCircle } from 'lucide-react';
+import { ChevronDown, MessageCircle } from 'lucide-react';
+import SectionHeader from '@/components/ui/SectionHeader';
+import Button from '@/components/ui/Button';
+import Card, { CardBody } from '@/components/ui/Card';
 
 interface FaqItem {
   q: string;
@@ -47,28 +50,19 @@ export default function FaqSection() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#E8F0F7] text-[#103A5C] mb-3">
-            <HelpCircle className="w-3.5 h-3.5" />
-            Tanya Jawab Seputar Sertifikasi
-          </div>
-          <h2 id="faq-heading" className="font-display font-extrabold text-3xl sm:text-4xl text-slate-900 tracking-tight mb-4">
-            Pertanyaan Yang Sering Diajukan
-          </h2>
-          <p className="text-base text-slate-600 leading-relaxed font-sans">
-            Informasi lengkap mengenai jadwal, legalitas, prosedur sertifikasi, dan in-house training perusahaan.
-          </p>
-        </div>
+        <SectionHeader
+          badgeText="Tanya Jawab Seputar Sertifikasi"
+          title="Pertanyaan Yang Sering Diajukan"
+          subtitle="Informasi lengkap mengenai jadwal, legalitas, prosedur sertifikasi, dan in-house training perusahaan."
+          align="center"
+        />
 
         {/* Accordion List */}
         <div className="space-y-3.5">
           {faqs.map((item, idx) => {
             const isOpen = openIndex === idx;
             return (
-              <div
-                key={idx}
-                className="rounded-2xl bg-white border border-slate-200 shadow-sm overflow-hidden transition-colors"
-              >
+              <Card key={idx} hoverable={false} className="bg-white border-slate-200">
                 <button
                   type="button"
                   onClick={() => toggleFaq(idx)}
@@ -88,31 +82,34 @@ export default function FaqSection() {
                     {item.a}
                   </div>
                 )}
-              </div>
+              </Card>
             );
           })}
         </div>
 
         {/* WhatsApp Help Banner below FAQ */}
-        <div className="mt-10 p-6 rounded-2xl bg-white border border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left shadow-sm">
-          <div>
-            <h4 className="font-display font-bold text-base text-slate-900">
-              Masih punya pertanyaan seputar syarat atau biaya?
-            </h4>
-            <p className="text-xs sm:text-sm text-slate-500 mt-1">
-              Konsultan K3 kami online setiap hari kerja untuk membantu Anda.
-            </p>
+        <Card hoverable={false} className="mt-10 p-6 bg-white border-slate-200 shadow-sm">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+            <div>
+              <h3 className="font-display font-bold text-base text-slate-900">
+                Masih punya pertanyaan seputar syarat atau biaya?
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-500 mt-1">
+                Konsultan K3 kami online setiap hari kerja untuk membantu Anda.
+              </p>
+            </div>
+            <Button
+              href="https://wa.me/6287759151278?text=Halo%20Wahana%20Totalita%2C%20saya%20ingin%20bertanya%20tentang%20program%20pelatihan"
+              isExternal
+              variant="accent"
+              size="sm"
+              leftIcon={<MessageCircle className="w-4 h-4" />}
+              className="bg-[#25D366] hover:bg-[#20ba5a] text-white shrink-0"
+            >
+              Tanya via WhatsApp
+            </Button>
           </div>
-          <a
-            href="https://wa.me/6287759151278?text=Halo%20Wahana%20Totalita%2C%20saya%20ingin%20bertanya%20tentang%20program%20pelatihan"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-[#25D366] hover:bg-[#20ba5a] text-white shadow-sm shrink-0 transition-all"
-          >
-            <MessageCircle className="w-4 h-4" />
-            Tanya via WhatsApp
-          </a>
-        </div>
+        </Card>
 
       </div>
     </section>

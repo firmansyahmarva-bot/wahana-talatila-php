@@ -1,6 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
 import { ShieldCheck, Trees, Settings, Pickaxe, ArrowRight } from 'lucide-react';
+import SectionHeader from '@/components/ui/SectionHeader';
+import Card, { CardBody, CardFooter } from '@/components/ui/Card';
+import Badge from '@/components/ui/Badge';
 
 interface ServiceItem {
   href: string;
@@ -52,58 +55,53 @@ export default function ServicesSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#E8F0F7] text-[#103A5C] mb-3">
-            Direktori 4 Bidang Utama
-          </div>
-          <h2 className="font-display font-extrabold text-3xl sm:text-4xl text-slate-900 tracking-tight mb-4">
-            Bidang Pelatihan &amp; Sertifikasi Resmi
-          </h2>
-          <p className="text-base text-slate-600 leading-relaxed font-sans">
-            Solusi peningkatan kompetensi SDM dan pemenuhan regulasi wajib KEMNAKER RI serta standar profesi BNSP di seluruh sektor industri.
-          </p>
-        </div>
+        <SectionHeader
+          badgeText="Direktori 4 Bidang Utama"
+          title="Bidang Pelatihan & Sertifikasi Resmi"
+          subtitle="Solusi peningkatan kompetensi SDM dan pemenuhan regulasi wajib KEMNAKER RI serta standar profesi BNSP di seluruh sektor industri."
+          align="center"
+        />
 
         {/* 4 Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((item, idx) => {
             const Icon = item.icon;
             return (
-              <Link
-                key={idx}
-                href={item.href}
-                className="group relative flex flex-col justify-between p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-[#103A5C] hover:bg-white hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300"
-              >
-                <div>
-                  {/* Top Badge & Icon */}
-                  <div className="flex items-center justify-between mb-5">
-                    <div className="p-3.5 rounded-xl bg-white border border-slate-200 group-hover:bg-[#103A5C] group-hover:border-[#103A5C] text-[#103A5C] group-hover:text-white shadow-sm transition-colors">
-                      <Icon className="w-6 h-6" />
+              <Link key={idx} href={item.href} className="group block h-full">
+                <Card hoverable className="h-full flex flex-col bg-slate-50 border-slate-200 hover:border-[#103A5C] hover:bg-white">
+                  <CardBody className="p-6 flex flex-col justify-between">
+                    <div>
+                      {/* Top Badge & Icon */}
+                      <div className="flex items-center justify-between mb-5">
+                        <div className="p-3.5 rounded-xl bg-white border border-slate-200 group-hover:bg-[#103A5C] group-hover:border-[#103A5C] text-[#103A5C] group-hover:text-white shadow-sm transition-colors">
+                          <Icon className="w-6 h-6" />
+                        </div>
+                        <Badge variant="brand" size="sm" className="group-hover:bg-[#F06A25] group-hover:text-white border-transparent">
+                          {item.tag}
+                        </Badge>
+                      </div>
+
+                      {/* Title & Count */}
+                      <h3 className="font-display font-bold text-lg text-slate-900 group-hover:text-[#103A5C] transition-colors mb-2 leading-snug">
+                        {item.title}
+                      </h3>
+                      <div className="text-xs font-bold text-[#F06A25] mb-3">
+                        {item.count}
+                      </div>
+
+                      {/* Description */}
+                      <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-sans mb-6">
+                        {item.desc}
+                      </p>
                     </div>
-                    <span className="text-[11px] font-bold px-2.5 py-1 rounded-md bg-[#E8F0F7] text-[#103A5C] group-hover:bg-[#F06A25] group-hover:text-white transition-colors">
-                      {item.tag}
-                    </span>
-                  </div>
+                  </CardBody>
 
-                  {/* Title & Count */}
-                  <h3 className="font-display font-bold text-lg text-slate-900 group-hover:text-[#103A5C] transition-colors mb-2 leading-snug">
-                    {item.title}
-                  </h3>
-                  <div className="text-xs font-bold text-[#F06A25] mb-3">
-                    {item.count}
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-sans mb-6">
-                    {item.desc}
-                  </p>
-                </div>
-
-                {/* Footer Link */}
-                <div className="pt-4 border-t border-slate-200/60 flex items-center justify-between text-xs font-bold text-[#103A5C] group-hover:text-[#F06A25] transition-colors mt-auto">
-                  <span>Lihat Seluruh Program</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </div>
+                  {/* Footer Link */}
+                  <CardFooter className="p-4 flex items-center justify-between text-xs font-bold text-[#103A5C] group-hover:text-[#F06A25] transition-colors mt-auto">
+                    <span>Lihat Seluruh Program</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </CardFooter>
+                </Card>
               </Link>
             );
           })}

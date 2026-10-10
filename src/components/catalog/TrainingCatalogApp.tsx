@@ -2,10 +2,14 @@
 
 import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
-import { Search, X, CheckCircle, ArrowRight } from 'lucide-react';
+import { Search, X, CheckCircle2, MessageCircle, ArrowRight } from 'lucide-react';
 import { TrainingProgram } from '@/data/trainings';
 import TrainingCard from '@/components/cards/TrainingCard';
 import PageHeader from '@/components/layout/PageHeader';
+import Button from '@/components/ui/Button';
+import Badge from '@/components/ui/Badge';
+import Card, { CardBody } from '@/components/ui/Card';
+import SectionHeader from '@/components/ui/SectionHeader';
 
 interface TrainingCatalogAppProps {
   trainings: TrainingProgram[];
@@ -135,21 +139,19 @@ export default function TrainingCatalogApp({ trainings }: TrainingCatalogAppProp
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8">
             <div className="flex flex-wrap gap-2" role="tablist" aria-label="Kategori Pelatihan">
               {CATEGORIES.map((cat) => (
-                <button
+                <Button
                   key={cat.id}
                   type="button"
-                  className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${
-                    activeCategory === cat.id
-                      ? 'bg-[#103A5C] text-white shadow-md shadow-[#103A5C]/20'
-                      : 'bg-white text-slate-600 hover:text-slate-900 border border-slate-200 hover:border-slate-300'
-                  }`}
+                  size="sm"
+                  variant={activeCategory === cat.id ? 'primary' : 'ghost'}
                   onClick={() => {
                     setActiveCategory(cat.id);
                     setVisibleCount(24);
                   }}
+                  className={activeCategory !== cat.id ? 'bg-white border border-slate-200 text-slate-600 hover:text-slate-900' : ''}
                 >
                   {cat.label}
-                </button>
+                </Button>
               ))}
             </div>
 
@@ -160,22 +162,23 @@ export default function TrainingCatalogApp({ trainings }: TrainingCatalogAppProp
 
           {/* Modern Responsive Card Grid */}
           {displayedTrainings.length === 0 ? (
-            <div className="text-center py-16 bg-white rounded-2xl border border-slate-200 p-8 max-w-lg mx-auto">
+            <Card hoverable={false} className="text-center py-16 bg-white border border-slate-200 p-8 max-w-lg mx-auto">
               <h3 className="font-display font-bold text-lg text-slate-900 mb-2">Program Tidak Ditemukan</h3>
               <p className="text-sm text-slate-500 mb-6">
                 Tidak ada program pelatihan yang cocok dengan kata kunci &ldquo;{searchQuery}&rdquo;.
               </p>
-              <button
+              <Button
                 type="button"
-                className="px-5 py-2.5 rounded-xl font-bold text-xs bg-[#103A5C] text-white hover:bg-[#0B2C46] transition-colors cursor-pointer"
+                variant="primary"
+                size="sm"
                 onClick={() => {
                   setSearchQuery('');
                   setActiveCategory('all');
                 }}
               >
                 Reset Filter Pencarian
-              </button>
-            </div>
+              </Button>
+            </Card>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {displayedTrainings.map((prog) => (
@@ -198,13 +201,14 @@ export default function TrainingCatalogApp({ trainings }: TrainingCatalogAppProp
           {/* Load More Button */}
           {visibleCount < filteredTrainings.length && (
             <div className="text-center mt-12">
-              <button
+              <Button
                 type="button"
-                className="px-8 py-3.5 rounded-xl text-sm font-bold bg-white text-[#103A5C] border border-slate-200 hover:border-[#103A5C] shadow-sm hover:shadow transition-all cursor-pointer"
+                variant="secondary"
+                size="md"
                 onClick={() => setVisibleCount((prev) => prev + 24)}
               >
                 Muat Lebih Banyak Program (+24) &darr;
-              </button>
+              </Button>
             </div>
           )}
         </div>
@@ -213,97 +217,69 @@ export default function TrainingCatalogApp({ trainings }: TrainingCatalogAppProp
       {/* ══════════════════════════════════════════════════════════
            COMPARISON: KEMNAKER VS BNSP
            ══════════════════════════════════════════════════════════ */}
-      <section className="pcat-compare-section">
-        <div className="container">
-          <div className="section-header text-center">
-            <span className="section-eyebrow">Panduan Sertifikasi</span>
-            <h2 className="section-title">Memilih Antara Kemnaker RI dan BNSP</h2>
-            <p className="section-desc">
-              Pahami perbedaan mendasar antara lisensi kewenangan Kemnaker RI dan pengakuan kompetensi kerja BNSP untuk kebutuhan karier maupun perusahaan Anda.
-            </p>
-          </div>
+      <section className="py-16 bg-white border-b border-slate-200/80">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeader
+            badgeText="Panduan Sertifikasi"
+            title="Memilih Antara Kemnaker RI dan BNSP"
+            subtitle="Pahami perbedaan mendasar antara lisensi kewenangan Kemnaker RI dan pengakuan kompetensi kerja BNSP untuk kebutuhan karier maupun perusahaan Anda."
+            align="center"
+          />
 
-          <div className="pcat-compare-grid">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Kemnaker Card */}
-            <div className="pcat-compare-card pcat-compare-kemnaker" data-reveal="up" data-reveal-delay="1">
-              <span className="pcat-comp-tag tag-kemnaker">Kewajiban Regulasi &amp; Lisensi Legal</span>
-              <h3>Sertifikasi Kemnaker RI</h3>
-              <p>
+            <Card hoverable={false} className="p-6 md:p-8 bg-slate-50 border-slate-200">
+              <Badge variant="brand" size="sm" className="mb-4">
+                Kewajiban Regulasi &amp; Lisensi Legal
+              </Badge>
+              <h3 className="font-display font-extrabold text-2xl text-[#103A5C] mb-3">
+                Sertifikasi Kemnaker RI
+              </h3>
+              <p className="text-sm text-slate-600 leading-relaxed mb-6 font-sans">
                 Diterbitkan langsung melalui Kementerian Ketenagakerjaan RI, menghasilkan Surat Keputusan Penunjukan (SKP) dan Lisensi K3 (SIO/Buku Kerja).
               </p>
-              <ul className="pcat-comp-points">
-                <li>
-                  <span className="icon">✅</span>
+              <ul className="space-y-3 text-xs sm:text-sm text-slate-700 font-sans">
+                <li className="flex items-start gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" />
                   <span><strong>Wajib Regulasi:</strong> Payung hukum UU No. 1/1970 untuk pemenuhan syarat audit Pengawas Ketenagakerjaan.</span>
                 </li>
-                <li>
-                  <span className="icon">✅</span>
+                <li className="flex items-start gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" />
                   <span><strong>Output Lisensi:</strong> Mendapatkan SKP dan Kartu Kewenangan Ahli/Operator resmi pemerintah.</span>
                 </li>
-                <li>
-                  <span className="icon">✅</span>
-                  <span><strong>Contoh Skema:</strong> Ahli K3 Umum Kemnaker, Operator Forklift (Kelas 1 &amp; 2), Damkar (Kelas D/C/B/A), Operator Boiler &amp; Crane.</span>
+                <li className="flex items-start gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" />
+                  <span><strong>Contoh Skema:</strong> Ahli K3 Umum Kemnaker, Operator Forklift, Damkar, Operator Boiler &amp; Crane.</span>
                 </li>
               </ul>
-            </div>
+            </Card>
 
             {/* BNSP Card */}
-            <div className="pcat-compare-card pcat-compare-bnsp" data-reveal="up" data-reveal-delay="2">
-              <span className="pcat-comp-tag tag-bnsp">Standar Kompetensi Kerja (SKKNI)</span>
-              <h3>Sertifikasi BNSP (Badan Nasional Sertifikasi Profesi)</h3>
-              <p>
+            <Card hoverable={false} className="p-6 md:p-8 bg-slate-50 border-slate-200">
+              <Badge variant="accent" size="sm" className="mb-4">
+                Standar Kompetensi Kerja (SKKNI)
+              </Badge>
+              <h3 className="font-display font-extrabold text-2xl text-[#C2410C] mb-3">
+                Sertifikasi BNSP (Garuda Emas)
+              </h3>
+              <p className="text-sm text-slate-600 leading-relaxed mb-6 font-sans">
                 Diterbitkan melalui Lembaga Sertifikasi Profesi (LSP) berlisensi BNSP mengacu pada standar unit kompetensi SKKNI nasional.
               </p>
-              <ul className="pcat-comp-points">
-                <li>
-                  <span className="icon">✅</span>
+              <ul className="space-y-3 text-xs sm:text-sm text-slate-700 font-sans">
+                <li className="flex items-start gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" />
                   <span><strong>Pengakuan Kompetensi:</strong> Berlogo Garuda Emas, mengukur keterampilan terstandar industri nasional.</span>
                 </li>
-                <li>
-                  <span className="icon">✅</span>
+                <li className="flex items-start gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" />
                   <span><strong>Syarat Tender &amp; Proyek:</strong> Kerap menjadi syarat teknis dalam dokumen lelang BUMN, kontraktor EPC, dan migas.</span>
                 </li>
-                <li>
-                  <span className="icon">✅</span>
-                  <span><strong>Contoh Skema:</strong> Pengawas K3 Migas, POP/POM Pertambangan, Penanggung Jawab Air Limbah (POPAL), Auditor SMK3 &amp; ISO.</span>
+                <li className="flex items-start gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" />
+                  <span><strong>Contoh Skema:</strong> Pengawas K3 Migas, POP/POM Pertambangan, Penanggung Jawab Air Limbah (POPAL), Auditor ISO.</span>
                 </li>
               </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════════════════
-           4 STEPS REGISTRATION
-           ══════════════════════════════════════════════════════════ */}
-      <section className="pcat-steps-section">
-        <div className="container">
-          <div className="section-header text-center">
-            <span className="section-eyebrow">Alur Pendaftaran</span>
-            <h2 className="section-title">4 Langkah Mudah Mengikuti Pelatihan</h2>
-          </div>
-
-          <div className="pcat-steps-grid">
-            <div className="pcat-step-card" data-reveal="up" data-reveal-delay="1">
-              <div className="pcat-step-num">1</div>
-              <h4>Pilih Program &amp; Jadwal</h4>
-              <p>Pilih program sertifikasi yang sesuai dengan kebutuhan kualifikasi atau proyek perusahaan Anda.</p>
-            </div>
-            <div className="pcat-step-card" data-reveal="up" data-reveal-delay="2">
-              <div className="pcat-step-num">2</div>
-              <h4>Registrasi Dokumen</h4>
-              <p>Kirim kelengkapan berkas (KTP, Ijazah, CV, Surat Tugas) via WhatsApp atau email representatif kami.</p>
-            </div>
-            <div className="pcat-step-card" data-reveal="up" data-reveal-delay="3">
-              <div className="pcat-step-num">3</div>
-              <h4>Pembinaan &amp; Praktik</h4>
-              <p>Ikuti sesi pembinaan interaktif via Zoom atau tatap muka di training center bersama instruktur senior.</p>
-            </div>
-            <div className="pcat-step-card" data-reveal="up" data-reveal-delay="4">
-              <div className="pcat-step-num">4</div>
-              <h4>Asesmen &amp; Sertifikat</h4>
-              <p>Ujian evaluasi kelulusan &amp; penerbitan sertifikat resmi Kemnaker RI / BNSP berlisensi nasional.</p>
-            </div>
+            </Card>
           </div>
         </div>
       </section>
@@ -311,27 +287,37 @@ export default function TrainingCatalogApp({ trainings }: TrainingCatalogAppProp
       {/* ══════════════════════════════════════════════════════════
            CORPORATE IN-HOUSE CTA BANNER
            ══════════════════════════════════════════════════════════ */}
-      <section className="pcat-cta-section">
-        <div className="container">
-          <div className="pcat-cta-inner">
-            <span className="pcat-cta-badge">In-House Training Korporasi</span>
-            <h2>Konsultasi Kebutuhan Pelatihan K3 Perusahaan Anda</h2>
-            <p>
-              Kami melayani pelatihan rombongan in-house training di lokasi pabrik, proyek konstruksi, atau kantor perusahaan Anda di seluruh wilayah Indonesia dengan silabus yang disesuaikan.
-            </p>
-            <div className="pcat-cta-actions">
-              <a
-                href="https://wa.me/6287759151278?text=Halo%20Wahana%20Totalita%2C%20kami%20ingin%20mengajukan%20penawaran%20In-House%20Training%20K3%20untuk%20perusahaan"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary"
-              >
-                💬 Minta Proposal Penawaran WhatsApp &rarr;
-              </a>
-              <Link href="/jadwal/" className="btn-outline-light">
-                Lihat Jadwal Terdekat &rarr;
-              </Link>
-            </div>
+      <section className="py-16 bg-[#103A5C] text-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <Badge variant="accent" size="md" className="mb-4">
+            In-House Training Korporasi
+          </Badge>
+          <h2 className="font-display font-extrabold text-3xl sm:text-4xl leading-tight mb-4">
+            Konsultasi Kebutuhan Pelatihan K3 Perusahaan Anda
+          </h2>
+          <p className="text-slate-200 text-base leading-relaxed mb-8 max-w-2xl mx-auto font-sans">
+            Kami melayani pelatihan rombongan in-house training di lokasi pabrik, proyek konstruksi, atau kantor perusahaan Anda di seluruh wilayah Indonesia dengan silabus yang disesuaikan.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <Button
+              href="https://wa.me/6287759151278?text=Halo%20Wahana%20Totalita%2C%20kami%20ingin%20mengajukan%20penawaran%20In-House%20Training%20K3%20untuk%20perusahaan"
+              isExternal
+              size="lg"
+              variant="accent"
+              leftIcon={<MessageCircle className="w-5 h-5" />}
+              className="bg-[#25D366] hover:bg-[#20ba5a] text-white"
+            >
+              Minta Proposal Penawaran WhatsApp
+            </Button>
+            <Button
+              href="/jadwal/"
+              size="lg"
+              variant="secondary"
+              rightIcon={<ArrowRight className="w-4 h-4" />}
+              className="bg-white/10 hover:bg-white/20 text-white border-white/20"
+            >
+              Lihat Jadwal Terdekat
+            </Button>
           </div>
         </div>
       </section>
