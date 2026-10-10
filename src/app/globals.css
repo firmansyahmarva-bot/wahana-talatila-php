@@ -56,7 +56,51 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-/* Offset page content for the fixed navbar (except homepage which has its own top padding) */
+/* Offset page content for fixed navbar */
 main:not(.home-main) {
   padding-top: var(--nav-h);
+}
+
+/* ══════════════════════════════════════════════════════════
+   STRICT OVERRIDES: PROTECT NAVBAR & FOOTER FROM LEGACY STYLES
+   ══════════════════════════════════════════════════════════ */
+
+/* Force Footer contrast & prevent legacy dark blue text leaks */
+footer,
+footer div,
+footer p,
+footer span {
+  color: #cbd5e1;
+}
+
+footer a {
+  color: #cbd5e1 !important;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: #ffffff !important;
+}
+
+footer .text-white,
+footer h3,
+footer h4 {
+  color: #ffffff !important;
+}
+
+footer a.text-\[\#FF8A3D\],
+footer span.text-\[\#FF8A3D\],
+footer svg.text-\[\#FF8A3D\] {
+  color: #FF8A3D !important;
+}
+
+footer a.bg-\[\#25D366\],
+footer .bg-\[\#25D366\] {
+  background-color: #25D366 !important;
+  color: #ffffff !important;
+}
+
+/* Force Navbar styling protection against legacy CSS overrides */
+header form input[type="search"] {
+  box-sizing: border-box;
 }

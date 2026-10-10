@@ -98,25 +98,25 @@ export default function Navbar() {
           <form
             action="/pelatihan/"
             method="get"
-            className="hidden md:flex items-center relative flex-1 max-w-xs"
+            className="hidden md:flex items-center relative max-w-[180px] lg:max-w-[220px] w-full shrink-0"
             role="search"
             onSubmit={(e) => {
               if (!searchQuery.trim()) e.preventDefault();
             }}
           >
             <Search
-              className={`absolute left-3 w-4 h-4 pointer-events-none ${
+              className={`absolute left-3 w-4 h-4 pointer-events-none z-10 ${
                 isScrolled ? 'text-slate-400' : 'text-slate-300'
               }`}
             />
             <input
               type="search"
               name="q"
-              placeholder="Cari program pelatihan..."
+              placeholder="Cari pelatihan..."
               aria-label="Cari pelatihan"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className={`w-full pl-9 pr-4 py-2 rounded-full text-xs font-medium focus:outline-none transition-all ${
+              className={`w-full pl-9 pr-3 py-1.5 rounded-full text-xs font-medium focus:outline-none transition-all ${
                 isScrolled
                   ? 'bg-slate-100 text-slate-900 placeholder-slate-400 focus:bg-white focus:ring-2 focus:ring-[#103A5C]/20 border border-slate-200'
                   : 'bg-white/10 text-white placeholder-slate-300 focus:bg-white/20 focus:ring-2 focus:ring-white/30 border border-white/20'
@@ -125,7 +125,7 @@ export default function Navbar() {
           </form>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
+          <nav className="hidden lg:flex items-center gap-1 xl:gap-2 shrink-0">
             <Link
               href="/pelatihan/"
               className={`px-3 py-2 rounded-lg text-xs font-bold transition-colors ${
