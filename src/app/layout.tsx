@@ -48,7 +48,6 @@ export default function RootLayout({
         <SkipLink />
         <Navbar />
         {children}
-        <PhotoStrip />
         <Footer />
         <MobileBottomNav />
         <WhatsAppFloat />

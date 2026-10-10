@@ -42,7 +42,7 @@ export default function HomePage() {
           dangerouslySetInnerHTML={{ __html: s }}
         />
       ))}
-      <main id="konten-utama">
+      <main id="konten-utama" className="home-main">
         <Hero />
         <StatsBar />
         <ScheduleStrip />

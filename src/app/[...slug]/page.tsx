@@ -66,9 +66,12 @@ export default async function CatchAllPage({
         }
         return <link key={idx} rel="stylesheet" href={href} />;
       })}
-      {data.inline_styles?.map((css: string, idx: number) => (
-        <style key={idx} dangerouslySetInnerHTML={{ __html: css }} />
-      ))}
+      {data.inline_styles?.map((css: string, idx: number) => {
+        if (css.includes('footerPhotoScroll') || css.includes('.navbar{')) {
+          return null;
+        }
+        return <style key={idx} dangerouslySetInnerHTML={{ __html: css }} />;
+      })}
       {data.schemas?.map((s: string, idx: number) => (
         <script
           key={idx}
