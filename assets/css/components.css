@@ -145,6 +145,8 @@
 
 /* ─── SERVICES SECTION ──────────────────────────────────────── */
 .section-services { padding: 80px 0; }
+.section-alt,
+.section--alt { background-color: var(--surface-alt); }
 .services-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -152,21 +154,24 @@
 }
 .service-card {
   display: flex; flex-direction: column;
-  padding: 28px; border-radius: var(--radius);
-  border: 1.5px solid var(--border);
+  padding: 28px; border-radius: var(--radius-md);
+  border: 1px solid var(--border-card);
   background: #fff;
   position: relative; overflow: hidden;
   cursor: pointer;
-  transition: border-color .2s, box-shadow .2s, transform .2s;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--dur-hover) var(--ease-standard),
+              transform var(--dur-hover) var(--ease-standard);
 }
 .service-card::before {
   content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
   background: var(--accent, var(--green));
 }
-.service-card:hover {
-  border-color: var(--accent, var(--green));
-  box-shadow: var(--shadow-md);
-  transform: translateY(-3px);
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .service-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: var(--lift-sm);
+  }
 }
 .service-card-icon { font-size: 32px; margin-bottom: 14px; }
 .service-card-title { font-size: 17px; font-weight: 700; color: var(--green); margin-bottom: 8px; }
@@ -212,13 +217,19 @@
   gap: 20px;
 }
 .training-card {
-  background: #fff; border-radius: var(--radius); overflow: hidden;
-  border: 1.5px solid var(--border);
-  transition: box-shadow var(--dur-base) var(--ease-standard),
-              transform var(--dur-base) var(--ease-standard);
+  background: #fff; border-radius: var(--radius-md); overflow: hidden;
+  border: 1px solid var(--border-card);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--dur-hover) var(--ease-standard),
+              transform var(--dur-hover) var(--ease-standard);
   display: flex; flex-direction: column;
 }
-.training-card:hover { box-shadow: var(--shadow-md); transform: var(--lift-md); }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .training-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: var(--lift-sm);
+  }
+}
 .training-card[data-hidden="true"] { display: none; }
 .training-card-img-wrap {
   display: block; position: relative; overflow: hidden;

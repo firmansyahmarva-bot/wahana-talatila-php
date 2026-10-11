@@ -109,7 +109,7 @@ if (is_file($_core_css_file)) {
   'publisher'   => ['@id' => SITE_URL . '/#organization'],
   'potentialAction' => [
     '@type'       => 'SearchAction',
-    'target'      => ['@type' => 'EntryPoint', 'urlTemplate' => SITE_URL . '/?s={search_term_string}'],
+    'target'      => ['@type' => 'EntryPoint', 'urlTemplate' => 'https://wahanatotalita.com/pelatihan/?q={search_term_string}'],
     'query-input' => 'required name=search_term_string',
   ],
 ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?></script>

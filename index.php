@@ -4,14 +4,45 @@ require_once __DIR__ . '/config.php';
 $s          = get_all_settings();
 $categories = get_categories();
 $all_trainings = get_trainings();
+$total_programs = count($all_trainings);
+$total_programs_display = $total_programs > 0 ? $total_programs : 146;
 $wa_number  = $s['wa_number'] ?? '6287759151278';
 
 $by_cat     = [];
 $cat_counts = [];
-$trainings  = [];
+$mining_heavy_count = 0;
+
+// Separate priority programs (Ahli K3 Umum, Forklift, Damkar, P3K) to appear at the top
+$priority_trainings = [];
+$other_trainings    = [];
+
 foreach ($all_trainings as $t) {
-    $cs = $t['cat_slug'] ?? 'other';
+    $cs   = $t['cat_slug'] ?? 'other';
+    $name = $t['name'] ?? '';
+
     $by_cat[$cs][] = $t;
+
+    // Cut heavy-equipment mining cards (bulldozer, grader, water truck, compactor) to at most 1
+    if (preg_match('/bulldozer|grader|water\s*truck|compactor/i', $name)) {
+        if ($mining_heavy_count >= 1) {
+            continue;
+        }
+        $mining_heavy_count++;
+    }
+
+    $is_priority = (bool)preg_match('/ahli\s*k3\s*umum|forklift|damkar|kebakaran|p3k|first\s*aid/i', $name);
+    if ($is_priority) {
+        $priority_trainings[] = $t;
+    } else {
+        $other_trainings[] = $t;
+    }
+}
+
+// Combine priority programs first, followed by others, keeping up to 5 per category for balanced representation
+$ordered_all = array_merge($priority_trainings, $other_trainings);
+$trainings   = [];
+foreach ($ordered_all as $t) {
+    $cs = $t['cat_slug'] ?? 'other';
     $cat_counts[$cs] = ($cat_counts[$cs] ?? 0) + 1;
     if ($cat_counts[$cs] <= 5) {
         $trainings[] = $t;
@@ -68,7 +99,7 @@ $page_css = ['home'];
   <div class="container stats-inner">
     <div class="stat-item"><span class="stat-number" data-count="120000" data-suffix="+">120.000+</span><span class="stat-label">Peserta Bersertifikasi</span></div>
     <div class="stat-divider"></div>
-    <div class="stat-item"><span class="stat-number" data-count="125" data-suffix="+">125+</span><span class="stat-label"><?= e($s['stat_1_label']??'Program Pelatihan') ?></span></div>
+    <div class="stat-item"><span class="stat-number" data-count="<?= (int)$total_programs_display ?>" data-suffix="+"><?= (int)$total_programs_display ?>+</span><span class="stat-label"><?= e($s['stat_1_label']??'Program Pelatihan') ?></span></div>
     <div class="stat-divider"></div>
     <div class="stat-item"><span class="stat-number"><?= e($s['stat_2_number']??'BNSP') ?></span><span class="stat-label"><?= e($s['stat_2_label']??'Sertifikasi Resmi') ?></span></div>
     <div class="stat-divider"></div>
@@ -145,6 +176,87 @@ $page_css = ['home'];
   <a href="<?= wa_url('Halo, saya ingin info diskon grup pelatihan') ?>" class="mobile-promo-btn" target="_blank" rel="noopener">Info →</a>
 </div>
 
+<!-- ═════════ BLOCK 1: PELATIHAN K3 PALING DICARI ═════════ -->
+<section class="section-services section-alt" id="pelatihan-k3-populer" aria-labelledby="pk3-heading">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-eyebrow">Program Unggulan</p>
+      <h2 class="section-title" id="pk3-heading">Pelatihan K3 Paling Dicari</h2>
+      <p class="section-subtitle">Pilih pelatihan K3 resmi Kemnaker RI dan sertifikasi BNSP yang paling banyak dicari perusahaan dan profesional HSE. Tersedia kelas online via Zoom dan tatap muka di Yogyakarta.</p>
+    </div>
+    <div class="services-grid">
+
+      <a href="/ahli-k3-umum/" class="service-card" style="--accent: #C6621C">
+        <div class="service-card-icon">🦺</div>
+        <h3 class="service-card-title">Pelatihan Ahli K3 Umum Kemnaker RI</h3>
+        <p class="service-card-desc">Program utama untuk calon Ahli K3 Umum. Tersedia kelas online, cek batch terbaru di jadwal.</p>
+        <span class="service-card-count">Sertifikasi Kemnaker RI</span>
+        <span class="service-card-arrow">→</span>
+      </a>
+
+      <a href="/pelatihan/ak3-bnsp/" class="service-card" style="--accent: #C6621C">
+        <div class="service-card-icon">🏅</div>
+        <h3 class="service-card-title">Pelatihan Ahli K3 Umum BNSP</h3>
+        <p class="service-card-desc">Jalur sertifikasi kompetensi BNSP untuk profesi Ahli K3.</p>
+        <span class="service-card-count">Sertifikasi BNSP</span>
+        <span class="service-card-arrow">→</span>
+      </a>
+
+      <a href="/pelatihan/pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri/" class="service-card" style="--accent: #C6621C">
+        <div class="service-card-icon">🚜</div>
+        <h3 class="service-card-title">Pelatihan Operator Forklift Kelas II</h3>
+        <p class="service-card-desc">Pelatihan dan sertifikasi operator forklift Kelas II dari Kemnaker RI.</p>
+        <span class="service-card-count">Sertifikasi Kemnaker RI</span>
+        <span class="service-card-arrow">→</span>
+      </a>
+
+      <a href="/pelatihan/pelatihan-damkar-paralel-kelas-dcba-sertifikasi-kemnaker-ri/" class="service-card" style="--accent: #C6621C">
+        <div class="service-card-icon">🔥</div>
+        <h3 class="service-card-title">Pelatihan Damkar Kelas D, C, B, A</h3>
+        <p class="service-card-desc">Pelatihan petugas penanggulangan kebakaran di tempat kerja, jenjang Kelas D sampai A.</p>
+        <span class="service-card-count">Sertifikasi Kemnaker RI</span>
+        <span class="service-card-arrow">→</span>
+      </a>
+
+      <a href="/pelatihan/pelatihan-petugas-p3k-first-aid-online/" class="service-card" style="--accent: #C6621C">
+        <div class="service-card-icon">⛑️</div>
+        <h3 class="service-card-title">Pelatihan Petugas P3K / First Aid</h3>
+        <p class="service-card-desc">Pelatihan petugas pertolongan pertama di tempat kerja, tersedia kelas online.</p>
+        <span class="service-card-count">Kelas Online</span>
+        <span class="service-card-arrow">→</span>
+      </a>
+
+      <a href="/pelatihan/pelatihan-internal-auditor-iso-45001-online/" class="service-card" style="--accent: #2D7DD2">
+        <div class="service-card-icon">📋</div>
+        <h3 class="service-card-title">Pelatihan Internal Auditor ISO 45001</h3>
+        <p class="service-card-desc">Audit internal sistem manajemen K3 (ISO 45001:2018), 2 hari secara online.</p>
+        <span class="service-card-count">Sertifikat Kompetensi</span>
+        <span class="service-card-arrow">→</span>
+      </a>
+
+      <a href="/perpanjangan-skp/" class="service-card" style="--accent: #C6621C">
+        <div class="service-card-icon">🔄</div>
+        <h3 class="service-card-title">Perpanjangan SKP &amp; Lisensi K3</h3>
+        <p class="service-card-desc">Layanan perpanjangan SKP dan lisensi K3 untuk Ahli K3 dan petugas bersertifikat.</p>
+        <span class="service-card-count">Layanan Perpanjangan</span>
+        <span class="service-card-arrow">→</span>
+      </a>
+
+      <a href="/jadwal/" class="service-card" style="--accent: #C6621C">
+        <div class="service-card-icon">📅</div>
+        <h3 class="service-card-title">Jadwal Pelatihan K3 2026</h3>
+        <p class="service-card-desc">Lihat batch terdekat semua program, online maupun tatap muka, lengkap dengan sisa kursi.</p>
+        <span class="service-card-count">Daftar via WhatsApp</span>
+        <span class="service-card-arrow">→</span>
+      </a>
+
+    </div>
+    <div style="text-align:center;margin-top:28px;">
+      <a href="/pelatihan/" class="btn-outline">Lihat Semua Program Pelatihan →</a>
+    </div>
+  </div>
+</section>
+
 <!-- LAYANAN -->
 <section class="section-services" id="layanan">
   <div class="container">
@@ -208,7 +320,17 @@ $page_css = ['home'];
       <article class="training-card" <?php if ($t_idx <= 4): ?>data-reveal="up" data-reveal-delay="<?= $t_idx ?>"<?php endif; ?> data-cat="<?= e($t['cat_slug']) ?>" data-mode="<?= e($t['mode']) ?>" style="--accent: <?= e($t['accent_color']??'#0A4A2E') ?>">
         <a href="/pelatihan/<?= e($t['slug']) ?>/" class="training-card-img-wrap">
           <img src="<?= training_img_url($t['image_path'], $t['cat_slug'] ?? '', $t['slug'] ?? '') ?>"
-               alt="<?php $cat_ctx=['k3'=>'keselamatan dan kesehatan kerja industri','lingkungan'=>'pengelolaan lingkungan hidup','system-management'=>'sistem manajemen QHSE','mining'=>'pertambangan dan operasional tambang']; $pfx = (stripos($t['name'], 'pelatihan') === false ? 'Pelatihan ' : ''); echo e($pfx . $t['name'] . ' Sertifikasi ' . $t['certification'] . ' — ' . ($cat_ctx[$t['cat_slug']] ?? 'Pelatihan K3 Resmi')); ?>"
+               alt="<?php 
+                 $cat_ctx = [
+                   'k3'                => 'keselamatan dan kesehatan kerja industri',
+                   'lingkungan'        => 'pengelolaan lingkungan hidup',
+                   'system-management' => 'sistem manajemen QHSE',
+                   'mining'            => 'pertambangan dan operasional tambang'
+                 ];
+                 $pfx = (stripos($t['name'], 'pelatihan') === false ? 'Pelatihan ' : '');
+                 $cert_str = (!empty($t['certification']) && stripos($t['name'], $t['certification']) === false && stripos($t['name'], 'sertifikasi') === false) ? ' Sertifikasi ' . $t['certification'] : '';
+                 echo e($pfx . $t['name'] . $cert_str . ' — ' . ($cat_ctx[$t['cat_slug'] ?? ''] ?? 'Pelatihan K3 Resmi'));
+               ?>"
                loading="lazy" decoding="async" width="400" height="250">
           <span class="training-card-cat-badge"><?= $t['cat_icon'] ?> <?= e($t['cat_name']) ?></span>
         </a>
@@ -237,7 +359,7 @@ $page_css = ['home'];
     </div>
     <div class="catalog-cta-wrap" style="text-align:center;margin:40px 0 20px;">
       <a href="/pelatihan/" class="btn-primary" style="display:inline-flex;align-items:center;gap:10px;padding:15px 32px;font-size:1.05rem;font-weight:700;border-radius:12px;text-decoration:none;box-shadow:0 6px 20px rgba(10,74,46,0.22);transition:all .2s ease;">
-        <span>Lihat Semua 140+ Program di Katalog Lengkap</span>
+        <span>Lihat Semua <?= (int)$total_programs_display ?>+ Program di Katalog Lengkap</span>
         <span aria-hidden="true" style="font-size:1.2rem;">&rarr;</span>
       </a>
       <p style="color:#64748b;font-size:0.875rem;margin-top:12px;">Cari silabus lengkap, jadwal terdekat, dan sertifikasi Kemnaker RI &amp; BNSP</p>
@@ -278,6 +400,169 @@ $page_css = ['home'];
   </div>
 </section>
 
+<!-- ═════════ BLOCK 2: PELATIHAN K3 PER BIDANG INDUSTRI ═════════ -->
+<section class="section-services" id="pelatihan-k3-bidang" aria-labelledby="pk3b-heading">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-eyebrow">Sesuai Sektor Anda</p>
+      <h2 class="section-title" id="pk3b-heading">Pelatihan K3 Berdasarkan Bidang Industri</h2>
+      <p class="section-subtitle">Setiap sektor punya risiko dan regulasi berbeda. Temukan pelatihan K3 yang sesuai dengan bidang kerja Anda.</p>
+    </div>
+    <div class="services-grid">
+
+      <a href="/k3-konstruksi/" class="service-card" style="--accent: #C6621C">
+        <div class="service-card-icon">🏗️</div>
+        <h3 class="service-card-title">Pelatihan K3 Konstruksi</h3>
+        <p class="service-card-desc">Gedung, sipil &amp; infrastruktur.</p>
+        <span class="service-card-count">Lihat program</span>
+        <span class="service-card-arrow">→</span>
+      </a>
+
+      <a href="/k3-migas/" class="service-card" style="--accent: #C6621C">
+        <div class="service-card-icon">🛢️</div>
+        <h3 class="service-card-title">Pelatihan K3 Minyak &amp; Gas</h3>
+        <p class="service-card-desc">Hulu-hilir &amp; petrokimia.</p>
+        <span class="service-card-count">Lihat program</span>
+        <span class="service-card-arrow">→</span>
+      </a>
+
+      <a href="/k3-listrik/" class="service-card" style="--accent: #C6621C">
+        <div class="service-card-icon">⚡</div>
+        <h3 class="service-card-title">Pelatihan K3 Listrik &amp; Energi</h3>
+        <p class="service-card-desc">Pembangkit &amp; instalasi listrik.</p>
+        <span class="service-card-count">Lihat program</span>
+        <span class="service-card-arrow">→</span>
+      </a>
+
+      <a href="/k3-kimia/" class="service-card" style="--accent: #C6621C">
+        <div class="service-card-icon">🧪</div>
+        <h3 class="service-card-title">Pelatihan K3 Kimia &amp; B3</h3>
+        <p class="service-card-desc">Hazardous material &amp; laboratorium.</p>
+        <span class="service-card-count">Lihat program</span>
+        <span class="service-card-arrow">→</span>
+      </a>
+
+      <a href="/k3-ketinggian/" class="service-card" style="--accent: #C6621C">
+        <div class="service-card-icon">🧗</div>
+        <h3 class="service-card-title">Pelatihan Bekerja di Ketinggian</h3>
+        <p class="service-card-desc">TKBT, TKPK &amp; scaffolding.</p>
+        <span class="service-card-count">Lihat program</span>
+        <span class="service-card-arrow">→</span>
+      </a>
+
+      <a href="/k3-pertambangan/" class="service-card" style="--accent: #8B5A2B">
+        <div class="service-card-icon">⛏️</div>
+        <h3 class="service-card-title">Pelatihan K3 Pertambangan</h3>
+        <p class="service-card-desc">POP, POM, POU &amp; minerba.</p>
+        <span class="service-card-count">Lihat program</span>
+        <span class="service-card-arrow">→</span>
+      </a>
+
+      <a href="/k3-lingkungan/" class="service-card" style="--accent: #0A4A2E">
+        <div class="service-card-icon">🌿</div>
+        <h3 class="service-card-title">Pelatihan K3 Lingkungan &amp; AMDAL</h3>
+        <p class="service-card-desc">POPAL, PLB3 &amp; pengelolaan limbah.</p>
+        <span class="service-card-count">Lihat program</span>
+        <span class="service-card-arrow">→</span>
+      </a>
+
+      <a href="/k3-rumah-sakit/" class="service-card" style="--accent: #C6621C">
+        <div class="service-card-icon">🏥</div>
+        <h3 class="service-card-title">Pelatihan K3 Rumah Sakit &amp; Faskes</h3>
+        <p class="service-card-desc">Akreditasi &amp; biosafety.</p>
+        <span class="service-card-count">Lihat program</span>
+        <span class="service-card-arrow">→</span>
+      </a>
+
+    </div>
+    <div style="text-align:center;margin-top:28px;">
+      <a href="/keselamatan-kerja/" class="btn-outline">Lihat Semua 23 Bidang K3 →</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═════════ BLOCK 3: PELATIHAN K3 PER KOTA ═════════ -->
+<section class="section-services section-alt" id="pelatihan-k3-kota" aria-labelledby="pk3k-heading">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-eyebrow">Wilayah Layanan</p>
+      <h2 class="section-title" id="pk3k-heading">Pelatihan K3 di Kota Anda</h2>
+      <p class="section-subtitle">Public training tatap muka di Yogyakarta, in-house training perusahaan di berbagai kota di Indonesia, dan kelas online untuk peserta dari mana saja.</p>
+    </div>
+    <div class="services-grid">
+
+      <a href="/pelatihan-k3-yogyakarta/" class="service-card" style="--accent: #C6621C">
+        <div class="service-card-icon">🏢</div>
+        <h3 class="service-card-title">Pelatihan K3 Yogyakarta</h3>
+        <p class="service-card-desc">Training center dan kelas tatap muka.</p>
+        <span class="service-card-count">Public training</span>
+        <span class="service-card-arrow">→</span>
+      </a>
+
+      <a href="/pelatihan-k3-jakarta/" class="service-card" style="--accent: #C6621C">
+        <div class="service-card-icon">🌆</div>
+        <h3 class="service-card-title">Pelatihan K3 Jakarta</h3>
+        <p class="service-card-desc">Konstruksi, migas &amp; korporasi.</p>
+        <span class="service-card-count">In-house &amp; online</span>
+        <span class="service-card-arrow">→</span>
+      </a>
+
+      <a href="/pelatihan-k3-surabaya/" class="service-card" style="--accent: #C6621C">
+        <div class="service-card-icon">🚢</div>
+        <h3 class="service-card-title">Pelatihan K3 Surabaya</h3>
+        <p class="service-card-desc">Maritim, manufaktur &amp; crane.</p>
+        <span class="service-card-count">In-house &amp; online</span>
+        <span class="service-card-arrow">→</span>
+      </a>
+
+      <a href="/pelatihan-k3-bandung/" class="service-card" style="--accent: #C6621C">
+        <div class="service-card-icon">🏭</div>
+        <h3 class="service-card-title">Pelatihan K3 Bandung</h3>
+        <p class="service-card-desc">Tekstil, farmasi &amp; industri.</p>
+        <span class="service-card-count">In-house &amp; online</span>
+        <span class="service-card-arrow">→</span>
+      </a>
+
+      <a href="/pelatihan-k3-semarang/" class="service-card" style="--accent: #C6621C">
+        <div class="service-card-icon">🏗️</div>
+        <h3 class="service-card-title">Pelatihan K3 Semarang</h3>
+        <p class="service-card-desc">Kawasan Kendal &amp; pelabuhan.</p>
+        <span class="service-card-count">In-house &amp; online</span>
+        <span class="service-card-arrow">→</span>
+      </a>
+
+      <a href="/pelatihan-k3-cilegon/" class="service-card" style="--accent: #C6621C">
+        <div class="service-card-icon">⚙️</div>
+        <h3 class="service-card-title">Pelatihan K3 Cilegon</h3>
+        <p class="service-card-desc">Baja, petrokimia &amp; pelabuhan.</p>
+        <span class="service-card-count">In-house &amp; online</span>
+        <span class="service-card-arrow">→</span>
+      </a>
+
+      <a href="/pelatihan-k3-balikpapan/" class="service-card" style="--accent: #C6621C">
+        <div class="service-card-icon">🛢️</div>
+        <h3 class="service-card-title">Pelatihan K3 Balikpapan</h3>
+        <p class="service-card-desc">Migas, logistik &amp; tambang.</p>
+        <span class="service-card-count">In-house &amp; online</span>
+        <span class="service-card-arrow">→</span>
+      </a>
+
+      <a href="/pelatihan-k3-medan/" class="service-card" style="--accent: #C6621C">
+        <div class="service-card-icon">🌴</div>
+        <h3 class="service-card-title">Pelatihan K3 Medan</h3>
+        <p class="service-card-desc">Perkebunan sawit &amp; pabrik.</p>
+        <span class="service-card-count">In-house &amp; online</span>
+        <span class="service-card-arrow">→</span>
+      </a>
+
+    </div>
+    <div style="text-align:center;margin-top:28px;">
+      <a href="/kota/" class="btn-outline">Lihat Semua 20 Kota Layanan →</a>
+    </div>
+  </div>
+</section>
+
 <!-- HOW IT WORKS -->
 <section class="section-how fade-in">
   <div class="container">
@@ -291,7 +576,7 @@ $page_css = ['home'];
         <span class="how-step-num">Langkah 01</span>
         <div class="how-step-icon">📋</div>
         <h3>Pilih Program</h3>
-        <p>Browse katalog 40+ program pelatihan K3, Lingkungan, Mining, dan ISO. Filter sesuai kategori dan mode pelatihan.</p>
+        <p>Browse katalog <?= (int)$total_programs_display ?>+ program pelatihan K3, Lingkungan, Mining, dan ISO. Filter sesuai kategori dan mode pelatihan.</p>
       </div>
       <div class="how-step" data-reveal="up" data-reveal-delay="2">
         <span class="how-step-num">Langkah 02</span>
@@ -327,6 +612,10 @@ $faq_schema = [
     ['@type'=>'Question','name'=>'Apakah ada diskon untuk pendaftaran grup perusahaan?','acceptedAnswer'=>['@type'=>'Answer','text'=>'Ya, tersedia diskon khusus untuk pendaftaran grup minimal 5 peserta dari perusahaan yang sama. Hubungi kami via WhatsApp untuk mendapatkan penawaran harga korporasi dan paket in-house training.']],
     ['@type'=>'Question','name'=>'Apakah sertifikat berlaku di seluruh Indonesia?','acceptedAnswer'=>['@type'=>'Answer','text'=>'Ya. Sertifikat yang diterbitkan BNSP dan KEMNAKER RI berlaku secara nasional di seluruh wilayah Indonesia dan diakui oleh perusahaan-perusahaan di berbagai sektor industri.']],
     ['@type'=>'Question','name'=>'Apa perbedaan sertifikasi BNSP dan KEMNAKER RI?','acceptedAnswer'=>['@type'=>'Answer','text'=>'Sertifikasi KEMNAKER RI dikeluarkan langsung oleh Kementerian Ketenagakerjaan, umumnya untuk program K3 umum dan khusus yang diatur dalam UU K3. Sertifikasi BNSP (Badan Nasional Sertifikasi Profesi) mencakup lebih banyak bidang kompetensi kerja termasuk lingkungan, mining, dan ISO/QHSE.']],
+    ['@type'=>'Question','name'=>'Bagaimana cara mendaftar pelatihan di Wahana Totalita?','acceptedAnswer'=>['@type'=>'Answer','text'=>'Pendaftaran sangat mudah dilakukan secara online via WhatsApp ke nomor resmi kami. Tim admin kami akan mengirimkan formulir pendaftaran, detail jadwal batch terdekat, silabus materi, serta panduan administrasi dan pembayaran.']],
+    ['@type'=>'Question','name'=>'Apakah biaya pelatihan sudah termasuk ujian dan sertifikasi?','acceptedAnswer'=>['@type'=>'Answer','text'=>'Biaya bergantung pada program, jenis sertifikasi, dan mode kelas, mulai dari Rp 1.000.000 per orang. Untuk Ahli K3 Umum dan pendaftaran grup, hubungi kami via WhatsApp untuk penawaran terbaru.']],
+    ['@type'=>'Question','name'=>'Berapa lama masa berlaku sertifikat K3 dan bagaimana perpanjangannya?','acceptedAnswer'=>['@type'=>'Answer','text'=>'Masa berlaku sertifikat dan lisensi kompetensi K3 umumnya 3 tahun (beberapa lisensi operator hingga 5 tahun). Sebelum masa berlaku berakhir, Anda dapat memperpanjang SKP dan Lisensi Kewenangan K3 melalui layanan perpanjangan resmi di Wahana Totalita.']],
+    ['@type'=>'Question','name'=>'Apakah melayani in-house training untuk perusahaan di luar Yogyakarta?','acceptedAnswer'=>['@type'=>'Answer','text'=>'Ya, kami melayani in-house training langsung di lokasi perusahaan Anda di seluruh wilayah Indonesia (Sumatera, Jawa, Kalimantan, Sulawesi, hingga Papua) dengan jadwal fleksibel yang disesuaikan dengan kebutuhan operasional perusahaan.']],
   ],
 ];
 ?>
@@ -361,7 +650,7 @@ $faq_schema = [
     <p class="section-subtitle">Bergabung bersama alumni dari berbagai industri di seluruh Indonesia</p>
     <div class="sp-stats" aria-label="Statistik peserta">
       <div class="sp-stat"><span class="sp-stat-num">120.000+</span><span class="sp-stat-desc">Total Peserta Bersertifikasi</span></div>
-      <div class="sp-stat"><span class="sp-stat-num">125+</span><span class="sp-stat-desc">Program Pelatihan Tersedia</span></div>
+      <div class="sp-stat"><span class="sp-stat-num"><?= (int)$total_programs_display ?>+</span><span class="sp-stat-desc">Program Pelatihan Tersedia</span></div>
       <div class="sp-stat"><span class="sp-stat-num">Sejak 2008</span><span class="sp-stat-desc">Berpengalaman</span></div>
     </div>
     <div class="sp-testimonials">

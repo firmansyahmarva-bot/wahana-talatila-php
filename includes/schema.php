@@ -30,7 +30,7 @@ function build_schema_graph(): string {
         ],
         'contactPoint' => [
             '@type'             => 'ContactPoint',
-            'telephone'         => $s['site_phone'] ?? '+62-877-5915-1278',
+            'telephone'         => '+62-877-5915-1278',
             'contactType'       => 'customer service',
             'availableLanguage' => ['Indonesian', 'English', 'Chinese'],
         ],
@@ -93,9 +93,9 @@ function build_schema_graph(): string {
         'name'        => $s['site_name'] ?? 'Wahana Totalita Konsultan',
         'url'         => SITE_URL,
         'description' => 'Penyedia jasa pelatihan sertifikasi K3, Lingkungan, Mining, dan ISO terakreditasi KEMNAKER RI (No. Kep. 312/BINWASPNAK-PNK3/V/2020) dan BNSP.',
-        'priceRange'  => 'Rp3.000.000 – Rp8.750.000',
+        'priceRange'  => 'Rp1.000.000 – Rp24.000.000',
         'image'       => SITE_URL . ($s['og_image'] ?? '/assets/img/og-cover.jpg'),
-        'telephone'   => $s['site_phone'] ?? '+62-877-5915-1278',
+        'telephone'   => '+62-877-5915-1278',
         'email'       => $s['site_email'] ?? 'info@wahanatotalita.com',
         'hasMap'      => 'https://maps.google.com/?q=-7.7956,110.3695',
         'address'     => [

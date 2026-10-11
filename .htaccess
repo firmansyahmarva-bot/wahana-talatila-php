@@ -685,11 +685,8 @@ RewriteRule ^sitemap-kota-pelatihan\.xml$ sitemap.php?type=kota-pelatihan [L]
 </IfModule>
 RewriteEngine On
 
-# /k3            -> k3.php  (the one indexed hub)
-RewriteRule ^k3/?$ k3.php [L,QSA]
-
-# /k3/{slug}     -> k3.php?slug={slug}  (served on demand, noindex)
-RewriteRule ^k3/([A-Za-z0-9\-]+)/?$ k3.php?slug=$1 [L,QSA]
+# ─── 301 Redirect: /k3 and /k3/{slug} to /pelatihan/k3/ ─────────────
+RewriteRule ^k3(/.*)?$ /pelatihan/k3/ [R=301,L]
 
 
 # ─── Block PHP execution in uploads ──────────────────────────
