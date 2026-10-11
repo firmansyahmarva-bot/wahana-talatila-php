@@ -1,0 +1,14 @@
+{
+  "name": "Newsletter",
+  "description": "Two-section update layout with a small category label, intro paragraph, and a divider between sections. Best for training schedule updates, multi-item announcements, periodic company news.",
+  "fields": [
+    { "key": "eyebrow", "label": "Category label", "type": "text", "required": false, "default": "Info Terbaru", "max_length": 40 },
+    { "key": "intro_text", "label": "Intro paragraph", "type": "textarea", "required": true },
+    { "key": "section1_title", "label": "Section 1 title", "type": "text", "required": true, "max_length": 100 },
+    { "key": "section1_body", "label": "Section 1 content", "type": "textarea", "required": true },
+    { "key": "section2_title", "label": "Section 2 title", "type": "text", "required": true, "max_length": 100 },
+    { "key": "section2_body", "label": "Section 2 content", "type": "textarea", "required": true },
+    { "key": "cta_text", "label": "Button text", "type": "text", "required": false, "default": "Kunjungi Website" },
+    { "key": "cta_url", "label": "Button link", "type": "url", "required": false, "default": "https://wahanatotalita.com" }
+  ]
+}

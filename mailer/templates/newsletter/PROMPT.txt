@@ -1,0 +1,114 @@
+WAHANA MAILER — TEMPLATE SPEC (system contract — identical in every template folder)
+======================================================================================
+This folder is a self-contained email template for the PT Wahana Totalita Konsultan
+standalone mailer. An AI generating a NEW template should read this whole file, then
+follow the "THIS TEMPLATE" section at the bottom for the specific variant to build.
+
+REQUIRED / OPTIONAL FILES
+--------------------------
+- template.html  REQUIRED. The exact HTML that gets emailed. Must be fully
+  self-contained: every visual style is an inline style="" attribute. No external
+  stylesheet <link>, no @import, no Google Fonts, no JavaScript, no <iframe>, no <form>.
+- config.json    REQUIRED. Declares the template's name, description, and editable
+  fields. The admin UI reads this file directly to build the compose form — never
+  hardcode fields anywhere in PHP.
+- style.css      OPTIONAL. Used ONLY for convenience if someone opens template.html
+  directly in a plain browser tab. Never sent in the actual email and never relied on
+  for correctness — template.html must look right with style.css completely absent.
+- preview.png (or .webp/.jpg)  OPTIONAL thumbnail shown in the template picker.
+- PROMPT.txt     this file.
+
+Dropping a new folder with template.html + config.json under /templates/ is enough —
+the system auto-detects it. No PHP code changes are ever required to add a template.
+
+TOKEN SYSTEM
+------------
+Tokens are written as {{key}} inside template.html. Two kinds:
+1. Fields you declare in config.json's "fields" array — filled in once per campaign
+   by the admin when composing.
+2. System tokens — always available, filled in automatically PER RECIPIENT. Do not
+   redeclare these in config.json:
+     {{contact_name}}     recipient's name (falls back to "Bapak/Ibu")
+     {{unsubscribe_url}}  this recipient's one-click unsubscribe link
+     {{site_url}}         https://wahanatotalita.com
+     {{site_logo_url}}    absolute URL to the company logo
+     {{current_year}}     four-digit year, for the footer copyright line
+
+Every token is HTML-escaped automatically, except fields of type "textarea", which
+allow a small safe subset of tags: <p> <br> <strong> <b> <em> <i> <ul> <ol> <li> <a>.
+Give every optional field (especially cta_text / cta_url) a sensible "default" value
+in config.json so nothing renders broken or blank if the admin leaves it empty. There
+is NO conditional logic in the renderer — it is pure token substitution — so any field
+that would leave a visibly empty block if blank should be marked "required": true
+rather than "optional", or left out of the layout entirely.
+
+config.json field shape:
+  { "key": "cta_url", "label": "Button link", "type": "url", "required": false,
+    "default": "https://wahanatotalita.com" }
+  type is one of: "text", "textarea", "url". Add "max_length" to cap a text field.
+
+HTML EMAIL RULES (must render correctly in Gmail, Outlook desktop + web, Yahoo, Apple Mail)
+---------------------------------------------------------------------------------------------
+- Structure with nested <table role="presentation"> only — no <div> layout, no
+  flexbox, no CSS grid. Outlook desktop renders with Word's engine and ignores those.
+- Max content width 600px, centered, white (#ffffff) content card. A light neutral
+  canvas color behind the card is fine (e.g. #f4f6f5).
+- Every style lives inline on the element via style="...". A <head><style> block may
+  ONLY contain @media queries for small-screen collapsing and the standard Outlook
+  <!--[if mso]> conditional comments — never put base styling only there, because many
+  clients strip <head><style> entirely.
+- Fonts: web-safe stack only — 'Segoe UI', Arial, Helvetica, sans-serif. Never link to
+  Google Fonts or any external font — those requests are blocked or slow in most
+  email clients and would break the "fast loading" requirement.
+- Buttons: use the bulletproof-button pattern — a real <a> styled as a button, PLUS an
+  MSO/VML <!--[if mso]> conditional fallback so it renders as a solid button in
+  Outlook desktop too. Never a plain <button> element, never an image-as-button.
+- Images: absolute HTTPS URLs only. Always set explicit width/height attributes and a
+  meaningful alt attribute. Never put essential text inside an image and never use a
+  background-image for layout — the email must be fully readable with images blocked,
+  since many clients block images by default for first-time senders.
+- Dark mode: include <meta name="color-scheme" content="light dark"> and
+  <meta name="supported-color-schemes" content="light dark"> in <head>. Set bgcolor=""
+  attributes (not just CSS) on outer tables — Outlook honors the attribute over CSS.
+  Keep an explicit white card with dark text rather than attempting true color
+  inversion, which is unreliable across clients.
+- No JavaScript, no forms, no auto-playing or animated anything.
+- Tone: restrained and corporate. Generous padding and whitespace, a small color
+  palette, at most one CTA button. This must read like a bank/enterprise notification
+  — never like a marketing blast.
+
+BRAND
+-----
+- Primary: #0A4A2E (deep green) — headings, the CTA button fill.
+- Accent: #C6621C (orange) — used sparingly only (a thin rule, a small label);
+  never as a large block or the CTA color.
+- Body text: #1a1a1a on white. Secondary/meta text: #666 or #888.
+- Border/hairline color: #e2e5e3.
+- Logo: {{site_logo_url}}, always with explicit width/height and alt text.
+- Footer must include: company name (PT Wahana Totalita Konsultan), a link to
+  {{site_url}}, and a legible (not illegibly tiny/low-contrast) unsubscribe link at
+  {{unsubscribe_url}}.
+
+Follow this contract exactly and the template works with zero PHP changes.
+
+======================================================================================
+THIS TEMPLATE: Newsletter
+======================================================================================
+Purpose: periodic updates that naturally have more than one item — training schedule
+changes, multi-item company news, round-ups. The only template with more than one
+content block.
+
+Layout: same header/footer chrome as Corporate (logo + 3px green rule, gray footer
+band), plus a small pill-shaped "eyebrow" category label in the light-orange accent
+(#FEF3EC background, #C6621C text, uppercase, 11px) directly under the header. Below
+that: one intro paragraph, then two clearly separated sections — each a green (#0A4A2E)
+subheading followed by body copy — divided by a single hairline rule. One CTA button
+at the end, styled identically to Corporate's (solid deep green fill).
+
+Fields (see config.json): eyebrow (default "Info Terbaru"), intro_text, section1_title,
+section1_body, section2_title, section2_body — both sections are REQUIRED (not
+optional) specifically because the renderer has no conditional logic, so an empty
+section would otherwise leave a visible blank heading and a stray divider. If a real
+campaign only has one update, put a short "Jadwal berikutnya menyusul" style line in
+section 2 rather than leaving it blank. cta_text/cta_url default like the other
+templates.

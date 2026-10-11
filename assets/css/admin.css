@@ -1,0 +1,2 @@
+/* Shim: 8 admin Platform-K3 pages link this path; real stylesheet lives in /admin/assets/ */
+@import url('/admin/assets/admin.css');

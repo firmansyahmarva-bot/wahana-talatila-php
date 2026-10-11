@@ -1,0 +1,85 @@
+<?php
+/**
+ * curate-pelatihan.php  — ONE-SHOT curation of programmatic city pages
+ * ---------------------------------------------------------------------
+ * Problem: /pelatihan/ holds ~2,754 "{program}-{city}" doorway pages
+ *          (41 programs × 67 cities, ~82% identical text). Mass doorway
+ *          pages violate Google's spam policy and were the reason only
+ *          ~33 pages got indexed in 2 months.
+ *
+ * This script keeps ONLY the cities in $KEEP_CITIES and moves every other
+ * city page into /pelatihan/_removed_doorways/ (NOT deleted — reversible).
+ * Kept pages stay live (200) and will be picked up by sitemap.php.
+ *
+ * HOW TO RUN (pick one):
+ *   CLI : php /home/u566907099/public_html/cron/curate-pelatihan.php
+ *   Web : https://wahanatotalita.com/cron/curate-pelatihan.php?key=WT-curate-2026
+ *
+ * Edit $KEEP_CITIES to match the cities you actually serve, then run again
+ * (re-running is safe; it only moves files, never deletes).
+ */
+
+// ─── Safety guard ────────────────────────────────────────────────────────
+$RUN_KEY = 'WT-curate-2026';
+$isCli   = (php_sapi_name() === 'cli');
+if (!$isCli && (($_GET['key'] ?? '') !== $RUN_KEY)) {
+    http_response_code(403);
+    exit("Forbidden. Append ?key={$RUN_KEY} to run, or run from CLI.\n");
+}
+header('Content-Type: text/plain; charset=utf-8');
+
+// ─── EDIT ME: cities to KEEP (full slug exactly as in the file name) ──────
+// Default = home region (DIY/Jateng) + major metros + heavy-industry hubs.
+// Each kept city × ~41 programs. Fewer cities = safer. Add/remove freely.
+$KEEP_CITIES = [
+    // Home region / Central Java
+    'yogyakarta', 'sleman', 'bantul', 'semarang', 'solo',
+    // Major metros
+    'surabaya', 'bandung', 'bekasi',
+    // Heavy-industry / oil-gas / mining (high K3 demand)
+    'balikpapan', 'cilegon', 'batam',
+];
+
+// ─── Locate the pelatihan directory ──────────────────────────────────────
+$docroot = $_SERVER['DOCUMENT_ROOT'] ?? realpath(__DIR__ . '/..');
+$dir     = rtrim($docroot, '/') . '/pelatihan';
+if (!is_dir($dir)) { exit("ERROR: pelatihan dir not found at {$dir}\n"); }
+
+$removedDir = $dir . '/_removed_doorways';
+if (!is_dir($removedDir)) { mkdir($removedDir, 0755, true); }
+
+// ─── Classify & move ─────────────────────────────────────────────────────
+$files   = glob($dir . '/*.html');
+$kept    = 0;
+$moved   = 0;
+$keptCityCount = array_fill_keys($KEEP_CITIES, 0);
+
+foreach ($files as $file) {
+    $slug = basename($file, '.html');
+    if ($slug === '' || $slug === 'index') { continue; }
+
+    $keepThis = false;
+    foreach ($KEEP_CITIES as $city) {
+        if (str_ends_with($slug, '-' . $city)) { $keepThis = true; $keptCityCount[$city]++; break; }
+    }
+
+    if ($keepThis) {
+        $kept++;
+    } else {
+        rename($file, $removedDir . '/' . basename($file));
+        $moved++;
+    }
+}
+
+// ─── Report ──────────────────────────────────────────────────────────────
+echo "=== Pelatihan curation complete ===\n";
+echo "Kept (live)      : {$kept}\n";
+echo "Moved to _removed_doorways/ : {$moved}\n";
+echo "Kept per city:\n";
+foreach ($keptCityCount as $city => $n) {
+    echo sprintf("  %-14s %d\n", $city, $n);
+}
+echo "\nNext: ping sitemap.xml in Search Console. Removed pages now 404 and\n";
+echo "will drop out of the index. Kept pages are served (200) and listed in sitemap.xml.\n";
+echo "IMPORTANT: differentiate the kept pages' content (local regulation, venue,\n";
+echo "schedule, testimonials) — they are still ~82% similar across cities.\n";

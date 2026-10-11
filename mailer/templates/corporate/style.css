@@ -1,0 +1,12 @@
+/*
+  Preview-only stylesheet. NOT used when the campaign is actually sent —
+  template.html is fully self-contained with inline styles, as required for
+  Gmail/Outlook/Yahoo compatibility. This file only makes template.html look
+  reasonable if someone opens it directly in a plain browser tab outside the
+  admin's preview.php wrapper.
+*/
+body {
+  margin: 0;
+  background: #f4f6f5;
+  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+}
