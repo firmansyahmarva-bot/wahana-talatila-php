@@ -5,6 +5,7 @@ Desktop.ini
 .DS_Store
 __MACOSX/
 *.tmp
+test.tmp
 
 # Logs
 *.log
@@ -44,7 +45,21 @@ secrets.php
 config.local.php
 *.secret
 
+# Next.js projects (Separate apps - do not track in Hostinger PHP repo)
+nextjs-workspace/
+nextjs-clean/
+.next/
+out/
+node_modules/
 
+# Database dumps & SQL files (do not track in git)
+*.sql
+*.sql.gz
+scripts/*.sql
+
+# Temporary audit & scratch files
+tools/*-audit.csv
+tools/test-*.php
 
 # Python cache
 __pycache__/
