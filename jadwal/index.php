@@ -16,8 +16,8 @@ if ($mode)   $opts['mode']   = $mode;
 $batches    = get_public_schedules($opts);
 $totalCount = get_upcoming_schedule_count();
 
-$metaTitle = 'Jadwal Pelatihan K3 — Bersertifikat BNSP & Kemnaker RI | Wahana Totalita';
-$metaDesc  = 'Lihat jadwal pelatihan K3, safety, lingkungan & AMDAL. Sertifikasi BNSP resmi. Daftar online langsung dapat nomor peserta.';
+$metaTitle = 'Jadwal Pelatihan K3 2026: Resmi Kemnaker RI & BNSP';
+$metaDesc  = 'Jadwal resmi pelatihan K3, keselamatan kerja & sertifikasi Kemnaker RI dan BNSP 2026. Kelas online & tatap muka, daftar batch terdekat sekarang.';
 ?>
 <!DOCTYPE html>
 <html lang="id">

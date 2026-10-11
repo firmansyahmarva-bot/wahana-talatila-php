@@ -15,7 +15,7 @@ $total              = count_articles($cat, $search);
 $total_pages        = (int)ceil($total / $per);
 $article_categories = get_article_categories(); // renamed: was overwriting $categories, which footer.php also relies on
 
-$page_title = 'Artikel & Panduan K3 | ' . ($s['site_name'] ?? 'Wahana Totalita Konsultan');
+$page_title = 'Artikel & Panduan K3: Info Sertifikasi & Keselamatan Kerja';
 $meta_desc  = 'Artikel, panduan, dan tips seputar K3, sertifikasi BNSP, lingkungan kerja, dan keselamatan industri dari Wahana Totalita Konsultan.';
 
 // Canonical now reflects category/page state instead of always pointing at the bare listing

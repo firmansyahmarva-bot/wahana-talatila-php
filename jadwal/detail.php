@@ -23,9 +23,23 @@ $canonicalUrl = ($isEnded && !empty($batch['training_slug']))
 $s = get_all_settings();
 $sisa = $batch['max_participants'] - $batch['current_participants'];
 $isFull = $batch['status'] === 'full' || $sisa <= 0;
-$metaTitle = 'Daftar Pelatihan ' . $batch['training_name'] . ' — ' . format_date($batch['start_date']) . ' | Wahana Totalita';
-$metaDesc  = mb_substr(strip_tags($batch['training_desc'] ?? 'Daftar pelatihan K3 bersertifikasi BNSP Kemnaker RI. Jadwal ' . $batch['training_name']), 0, 160);
-$waRegister = wa_url("Halo, saya ingin mendaftar pelatihan:\n*{$batch['training_name']}*\nTanggal: ".format_date($batch['start_date'])."\nMode: ".strtoupper($batch['mode'] ?? 'offline')."\nURL batch: ".SITE_URL."/jadwal/{$id}/");
+$cleanProg = clean_program_name($batch['training_name'] ?? 'Pelatihan K3');
+$coreProg  = preg_replace('/^Pelatihan\s+/i', '', $cleanProg);
+$dateStr   = format_date($batch['start_date'], 'd M Y');
+
+$hasDate    = !empty($batch['start_date']) && $batch['start_date'] !== '0000-00-00' && $dateStr !== '—';
+$dateSuffix = $hasDate ? " ({$dateStr})" : "";
+
+$metaTitle = "Jadwal Pelatihan {$coreProg}{$dateSuffix}";
+if (mb_strlen($metaTitle) > 60) {
+    $metaTitle = "Jadwal {$coreProg}{$dateSuffix}";
+}
+
+$certTxt = !empty($batch['certification_body']) ? ' Sertifikasi ' . $batch['certification_body'] . '.' : '';
+$modeTxt = strtoupper($batch['mode'] ?? 'offline');
+$metaDesc = "Jadwal resmi Pelatihan {$coreProg} tanggal {$dateStr} ({$modeTxt}).{$certTxt} Kurikulum resmi, rincian biaya, dan registrasi batch terdekat.";
+
+$waRegister = wa_url("Halo, saya ingin mendaftar jadwal pelatihan:\n*Pelatihan {$coreProg}*\nTanggal: {$dateStr}\nMode: {$modeTxt}\nURL batch: ".SITE_URL."/jadwal/{$id}/");
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -36,6 +50,13 @@ $waRegister = wa_url("Halo, saya ingin mendaftar pelatihan:\n*{$batch['training_
 <meta name="description" content="<?= e($metaDesc) ?>">
 <meta name="robots" content="<?= $robots ?>">
 <link rel="canonical" href="<?= e($canonicalUrl) ?>">
+<meta property="og:type" content="website">
+<meta property="og:title" content="<?= e($metaTitle) ?>">
+<meta property="og:description" content="<?= e($metaDesc) ?>">
+<meta property="og:url" content="<?= e($canonicalUrl) ?>">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="<?= e($metaTitle) ?>">
+<meta name="twitter:description" content="<?= e($metaDesc) ?>">
 <style><?php
 $_core_css_file = __DIR__ . '/../assets/css/core.min.css';
 if (is_file($_core_css_file)) {
@@ -49,7 +70,7 @@ if (is_file($_core_css_file)) {
 <noscript><link rel="stylesheet" href="<?= asset_v('/assets/css/components.min.css') ?>"></noscript>
 <?= theme_css_vars($s) ?>
 <?php if (!$isEnded): ?><script type="application/ld+json"><?= json_encode([
-  '@context'=>'https://schema.org','@type'=>'Event','name'=>$batch['training_name'],
+  '@context'=>'https://schema.org','@type'=>'Event','name'=>'Jadwal Pelatihan '.$coreProg.' ('.$dateStr.')',
   'startDate'=>$batch['start_date'],'endDate'=>$batch['end_date'] ?: $batch['start_date'],
   'eventAttendanceMode'=>$batch['mode']==='online'?'https://schema.org/OnlineEventAttendanceMode':'https://schema.org/OfflineEventAttendanceMode',
   'eventStatus'=>'https://schema.org/EventScheduled','url'=>SITE_URL.'/jadwal/'.$id.'/',
@@ -95,7 +116,7 @@ if (is_file($_core_css_file)) {
       <a href="/jadwal/" style="color:inherit">Jadwal</a> › <?= e($batch['training_name']) ?>
     </div>
     <div style="margin-bottom:12px"><span class="badge-mode"><?= strtoupper($batch['mode'] ?? 'OFFLINE') ?></span></div>
-    <h1><?= e($batch['training_name']) ?></h1>
+    <h1>Jadwal Pelatihan <?= e($coreProg) ?></h1>
     <?php if ($batch['certification_body']): ?>
     <div style="font-size:.9rem;opacity:.8;margin-bottom:8px">🎓 Sertifikasi: <?= e($batch['certification_body']) ?></div>
     <?php endif; ?>

@@ -343,8 +343,13 @@ function training_img_url(?string $path, string $cat_slug = '', string $seed = '
     return $fallbacks[$cat_slug] ?? 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&q=75&auto=format&fit=crop';
 }
 function page_title(string $title = ''): string {
-    $site = get_setting('site_name', 'Wahana Totalita Konsultan');
-    return $title ? e($title) . ' | ' . e($site) : e($site . ' — ' . get_setting('site_tagline', 'Pelatihan K3 & Sertifikasi BNSP'));
+    global $page_title, $meta_title;
+    $t = $title !== '' ? $title : ($page_title ?? ($meta_title ?? ''));
+    if ($t) {
+        $clean = preg_replace('/\s*[-|–—]\s*Wahana Totalita.*$/iu', '', trim($t));
+        return e(trim($clean, " -|–—"));
+    }
+    return 'Pelatihan K3 Resmi Kemnaker & BNSP | Wahana Totalita';
 }
 
 // ─── Admin Auth ───────────────────────────────────────────────────────────
@@ -454,37 +459,28 @@ function clean_cert(string $raw_cert): string {
 
 function build_training_title(array $training): string {
     if (!empty($training['meta_title'])) {
-        return $training['meta_title'];
+        $clean = preg_replace('/\s*[-|–—]\s*Wahana Totalita.*$/iu', '', trim($training['meta_title']));
+        return trim($clean, " -|–—");
     }
     $rawName = $training['short_name'] ?? $training['name'] ?? '';
     $cleanName = clean_program_name($rawName);
     $cert = clean_cert($training['certification'] ?? 'BNSP');
-    $brand = 'Wahana Totalita';
 
     $hasCert = (stripos($cleanName, $cert) !== false) || 
                (stripos($cleanName, 'BNSP') !== false && $cert === 'BNSP') || 
                (stripos($cleanName, 'Kemnaker') !== false && stripos($cert, 'Kemnaker') !== false);
 
-    // Option 1: CleanName + Cert + Brand
-    $t1 = $hasCert ? "{$cleanName} | {$brand}" : "{$cleanName} {$cert} | {$brand}";
-    if (mb_strlen($t1) <= 65) return $t1;
+    $title = $hasCert ? $cleanName : "{$cleanName} Sertifikasi {$cert}";
+    if (mb_strlen($title) <= 60) return $title;
 
-    // Option 2: Strip parenthetical description (e.g. "Pelatihan PPPA (Pengendalian Pencemaran Air)" -> "Pelatihan PPPA")
+    // Strip parenthetical description (e.g. "Pelatihan PPPA (Pengendalian Pencemaran Air)" -> "Pelatihan PPPA")
     if (preg_match('/^(.*?)\s*\([^)]+\)$/', $cleanName, $m)) {
         $short = $m[1];
-        $t2 = $hasCert ? "{$short} | {$brand}" : "{$short} {$cert} | {$brand}";
-        if (mb_strlen($t2) <= 65) return $t2;
+        $t2 = $hasCert ? $short : "{$short} Sertifikasi {$cert}";
+        if (mb_strlen($t2) <= 60) return $t2;
     }
 
-    // Option 3: CleanName without cert
-    $t3 = "{$cleanName} | {$brand}";
-    if (mb_strlen($t3) <= 65) return $t3;
-
-    // Option 4: Word-boundary truncation strictly ≤65 chars
-    $maxLen = 65 - mb_strlen(" | {$brand}");
-    $sub = mb_substr($cleanName, 0, $maxLen);
-    $sub = preg_replace('/\s+[\S\-]*$/', '', $sub);
-    return "{$sub} | {$brand}";
+    return mb_substr($title, 0, 58);
 }
 
 function build_training_meta_desc(array $training): string {

@@ -55,13 +55,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && verify_csrf()) {
 }
 
 $s = get_all_settings();
+$cleanProg = clean_program_name($batch['training_name'] ?? 'Pelatihan K3');
+$coreProg  = preg_replace('/^Pelatihan\s+/i', '', $cleanProg);
 ?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Daftar Pelatihan <?= e($batch['training_name']) ?> | Wahana Totalita</title>
+<title>Pendaftaran Pelatihan <?= e($coreProg) ?></title>
 <meta name="robots" content="noindex, follow">
 <style><?php
 $_core_css_file = __DIR__ . '/../assets/css/core.min.css';

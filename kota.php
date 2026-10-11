@@ -628,7 +628,7 @@ if ($curIdx !== false) {
 }
 
 // Meta Title and Description (Preserved from $c['title'] with commercial price/schedule intent)
-$metaTitle = $c['title'];
+$metaTitle = trim(preg_replace('/\s*[-|–—]\s*Wahana Totalita.*$/iu', '', $c['title']), " -|–—");
 $metaDesc  = $c['desc'];
 if (mb_strlen($metaDesc) < 140) {
     $metaDesc .= " Dapatkan rincian biaya pelatihan K3 {$c['name']} & jadwal {$year} online/tatap muka.";

@@ -19,9 +19,9 @@ if (!isset($hub_data)) {
 $s = get_all_settings();
 $wa_number = $s['wa_number'] ?? '6287759151278';
 
-$hub_slug   = $hub_data['slug'] ?? '';
-$page_title = $hub_data['meta_title'] ?? ($hub_data['title'] . ' — Wahana Totalita');
-$meta_desc  = $hub_data['meta_desc'] ?? ($hub_data['title'] . '. Pelatihan resmi sertifikasi Kemnaker RI & BNSP. Jadwal terdekat dan biaya.');
+$rawHubTitle = $hub_data['meta_title'] ?? $hub_data['title'];
+$page_title  = trim(preg_replace('/\s*[-|–—]\s*Wahana Totalita.*$/iu', '', $rawHubTitle), " -|–—");
+$meta_desc   = $hub_data['meta_desc'] ?? ($hub_data['title'] . '. Pelatihan resmi sertifikasi Kemnaker RI & BNSP. Jadwal terdekat dan biaya.');
 $canonical  = SITE_URL . '/' . trim($hub_slug, '/') . '/';
 
 // Pre-fill WhatsApp message

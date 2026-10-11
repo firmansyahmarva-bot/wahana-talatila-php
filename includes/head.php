@@ -22,8 +22,9 @@
 $_head_uri   = strtok($_SERVER['REQUEST_URI'] ?? '/', '?');
 $_is_home    = ($_head_uri === '/' || $_head_uri === '');
 $_home_title = 'Pelatihan K3 Resmi Kemnaker & BNSP | Wahana Konsultan K3';
+$_active_title = $_is_home ? $_home_title : page_title($page_title ?? ($meta_title ?? ''));
 ?>
-<title><?= $_is_home ? e($_home_title) : page_title() ?></title>
+<title><?= e($_active_title) ?></title>
 <meta name="description" content="<?= e($meta_desc) ?>">
 <?php $canonical = 'https://wahanatotalita.com' . strtok($_SERVER['REQUEST_URI'], '?'); ?>
 <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
@@ -35,13 +36,13 @@ $_home_title = 'Pelatihan K3 Resmi Kemnaker & BNSP | Wahana Konsultan K3';
 
 <!-- Open Graph -->
 <meta property="og:type"        content="website">
-<meta property="og:site_name"   content="<?= e($s['site_name'] ?? '') ?>">
-<meta property="og:title"       content="<?= $_is_home ? e($_home_title) : e(($s['site_name'] ?? '') . ' | Pelatihan K3 & Sertifikasi BNSP') ?>">
+<meta property="og:site_name"   content="<?= e($s['site_name'] ?? 'Wahana Totalita') ?>">
+<meta property="og:title"       content="<?= e($_active_title) ?>">
 <meta property="og:description" content="<?= e($meta_desc) ?>">
 <meta property="og:url"         content="<?= htmlspecialchars($canonical) ?>">
 <meta property="og:image"       content="<?= SITE_URL . e($s['og_image'] ?? '/assets/img/og-cover.jpg') ?>">
 <meta name="twitter:card"       content="summary_large_image">
-<meta name="twitter:title"      content="<?= $_is_home ? e($_home_title) : e($s['site_name'] ?? '') ?>">
+<meta name="twitter:title"      content="<?= e($_active_title) ?>">
 <meta name="theme-color"        content="<?= e(is_valid_hex($s['theme_color_primary'] ?? '') ? $s['theme_color_primary'] : '#103A5C') ?>">
 
 <?php if (!empty($s['google_verify'])): ?>

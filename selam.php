@@ -67,26 +67,13 @@ $schema = [
   ],
 ];
 ?>
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><?php echo htmlspecialchars($meta_title); ?></title>
-  <meta name="description" content="<?php echo htmlspecialchars($meta_desc); ?>">
-  <link rel="canonical" href="<?php echo $canonical; ?>">
-  <meta property="og:title"       content="<?php echo htmlspecialchars($meta_title); ?>">
-  <meta property="og:description" content="<?php echo htmlspecialchars($meta_desc); ?>">
-  <meta property="og:url"         content="<?php echo $canonical; ?>">
-  <meta property="og:type"        content="website">
-  <meta property="og:locale"      content="id_ID">
-  <!-- GTM -->
-  <?php foreach ($schema as $schemaItem): ?>
+<?php
+$page_title = $meta_title;
+require __DIR__ . '/includes/head.php';
+?>
+<?php foreach ($schema as $schemaItem): ?>
   <script type="application/ld+json"><?php echo json_encode($schemaItem, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT); ?></script>
   <?php endforeach; ?>
-  <?php include 'includes/head.php'; ?>
-</head>
-<body>
 
 <?php include __DIR__ . '/includes/navbar.php'; ?>
 
