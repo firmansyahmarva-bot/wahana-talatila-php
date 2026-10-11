@@ -1104,63 +1104,145 @@ if (is_file($_core_css_file)) {
 
 <?php require __DIR__ . '/includes/navbar.php'; ?>
 
-<section class="hero">
-  <div class="container">
-    <?php
-    $breadcrumb_trail = [
-      ['label' => 'Beranda', 'url' => '/'],
-      ['label' => 'Kota Pelatihan', 'url' => '/kota/'],
-      ['label' => 'K3 ' . $c['name'], 'url' => null],
-    ];
-    include __DIR__ . '/includes/breadcrumb.php';
-    ?>
+<section class="hero hero26">
+  <div class="hero26-bg" aria-hidden="true"></div>
+  <div class="hero26-glow hero26-glow-a" aria-hidden="true"></div>
+  <div class="hero26-glow hero26-glow-b" aria-hidden="true"></div>
 
-    <?php if ($slug === 'surabaya'): ?>
-    <div class="sibling-alert">
-      💡 <strong>Program Khusus Wilayah Surabaya:</strong> Tersedia juga kelas spesialisasi <a href="/pelatihan/tkbt-ii-surabaya/">Tenaga Kerja Bangunan Tinggi (TKBT II Surabaya)</a> dengan jadwal rutin dan sertifikasi resmi Kemnaker RI.
-    </div>
-    <?php elseif ($slug === 'yogyakarta'): ?>
-    <div class="sibling-alert">
-      💡 <strong>Pusat Training Center Resmi:</strong> Yogyakarta merupakan basis training center Wahana Totalita. Cek langsung <a href="/jadwal/">Jadwal Pelatihan Tatap Muka &amp; Online Terdekat</a> untuk pendaftaran kelas reguler.
-    </div>
-    <?php endif; ?>
+  <div class="container hero26-inner">
+    <div class="hero26-content">
+      <div class="hero26-breadcrumbs">
+        <?php
+        $breadcrumb_trail = [
+          ['label' => 'Beranda', 'url' => '/'],
+          ['label' => 'Kota Pelatihan', 'url' => '/kota/'],
+          ['label' => 'K3 ' . $c['name'], 'url' => null],
+        ];
+        include __DIR__ . '/includes/breadcrumb.php';
+        ?>
+      </div>
 
-    <div class="hero-inner">
-      <div>
-        <div class="hero-eyebrow">📍 <?=htmlspecialchars($c['name'])?>, <?=htmlspecialchars($c['province'])?> · Pendaftaran Batch <?=htmlspecialchars($current_month)?> <?=htmlspecialchars($year)?> Dibuka</div>
-        <h1>Pelatihan &amp; Sertifikasi <em>K3 <?=htmlspecialchars($c['name'])?></em> <?=htmlspecialchars($year)?> Resmi Kemnaker RI &amp; BNSP</h1>
-        <p>Lembaga pembinaan K3 resmi terdekat bagi tenaga kerja dan perusahaan di wilayah <?=htmlspecialchars($c['name'])?> serta provinsi <?=htmlspecialchars($c['province'])?>. Melayani sertifikasi Ahli K3 Umum, K3 Konstruksi, K3 Listrik, K3 Migas, dan Operator berlisensi nasional.</p>
-        <div class="hero-btns">
-          <a href="<?=$wa?>" target="_blank" rel="noopener" class="btn-wa">💬 Cek Biaya &amp; Daftar via WhatsApp</a>
-          <a href="#biaya-jadwal" class="btn-sec">Lihat Biaya &amp; Jadwal ↓</a>
-        </div>
-        <div class="hero-badges">
-          <span>✅ Sertifikat KEMNAKER RI</span>
-          <span>✅ Sertifikasi BNSP Resmi</span>
-          <span>✅ In-House Training Korporasi</span>
+      <?php if ($slug === 'surabaya'): ?>
+      <div class="sibling-alert-dark">
+        💡 <strong>Program Spesialisasi Surabaya:</strong> Tersedia juga kelas <a href="/pelatihan/tkbt-ii-surabaya/">Tenaga Kerja Bangunan Tinggi (TKBT II Surabaya)</a> dengan jadwal rutin dan sertifikasi resmi Kemnaker RI.
+      </div>
+      <?php elseif ($slug === 'yogyakarta'): ?>
+      <div class="sibling-alert-dark">
+        💡 <strong>Training Center Resmi:</strong> Yogyakarta merupakan basis training center Wahana Totalita. Cek langsung <a href="/jadwal/">Jadwal Pelatihan Tatap Muka &amp; Online Terdekat</a> untuk registrasi kelas reguler.
+      </div>
+      <?php endif; ?>
+
+      <p class="hero26-eyebrow">
+        <span class="hero26-dot"></span>
+        📍 <?=htmlspecialchars($c['name'])?>, <?=htmlspecialchars($c['province'])?> · Pendaftaran Batch <?=htmlspecialchars($current_month)?> <?=htmlspecialchars($year)?> Dibuka
+      </p>
+
+      <h1 class="hero26-title">
+        Pelatihan K3 <?=htmlspecialchars($c['name'])?> <?=htmlspecialchars($year)?><br>
+        <em>Sertifikasi Resmi Kemnaker RI &amp; BNSP</em>
+      </h1>
+
+      <p class="hero26-sub">
+        Pusat pembinaan &amp; sertifikasi K3 resmi di wilayah <?=htmlspecialchars($c['name'])?> dan provinsi <?=htmlspecialchars($c['province'])?>. Melayani sertifikasi Ahli K3 Umum (AK3U), Operator Forklift, K3 Listrik, K3 Konstruksi, POP Pertambangan, Auditor SMK3 PP 50/2012, hingga In-House Training pabrik &amp; proyek.
+      </p>
+
+      <div class="hero26-actions">
+        <a href="<?=$wa?>" target="_blank" rel="noopener" class="btn26 btn26-primary">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
+          Konsultasi &amp; Daftar via WhatsApp
+        </a>
+        <a href="#biaya-jadwal" class="btn26 btn26-ghost">Cek Biaya &amp; Jadwal <?=htmlspecialchars($year)?> ↓</a>
+      </div>
+
+      <div class="hero26-paths">
+        <span class="hero26-paths-label">Kategori Pendaftaran di <?=htmlspecialchars($c['name'])?>:</span>
+        <div class="hero26-chips">
+          <a href="#program" class="chip26">Perorangan / Mandiri</a>
+          <a href="https://wa.me/<?=$wa_number?>?text=<?=rawurlencode("Halo Wahana Totalita, kami dari perusahaan di {$c['name']} ingin penawaran In-House Training K3")?>" class="chip26" target="_blank" rel="noopener">In-House Perusahaan</a>
+          <a href="/layanan-pemerintah" class="chip26 chip26-gov">Vendor LPSE / Dinas →</a>
         </div>
       </div>
-      <div class="hero-img-wrap">
-        <img src="<?=htmlspecialchars($c['img'])?>" alt="Pelatihan K3 &amp; Pembinaan Ahli K3 Umum di <?=htmlspecialchars($c['name'])?> — Sertifikasi Kemnaker RI Wahana Totalita" width="380" height="285" loading="eager" fetchpriority="high">
-        <div class="hero-img-caption">Dokumentasi Pelatihan &amp; Sertifikasi K3 Wahana Totalita</div>
-      </div>
     </div>
+
+    <aside class="hero26-card" aria-label="Statistik Layanan K3 <?=htmlspecialchars($c['name'])?>">
+      <p class="hero26-card-title">Pelatihan K3 <?=htmlspecialchars($c['name'])?></p>
+      <div class="hero26-stat">
+        <span class="hero26-stat-num">120.000<span class="plus">+</span></span>
+        <span class="hero26-stat-label">Peserta &amp; Alumni Tersertifikasi</span>
+      </div>
+      <div class="hero26-stat-row">
+        <div class="hero26-stat-sm"><span class="num">125+</span><span class="lbl">Program K3 &amp; ISO</span></div>
+        <div class="hero26-stat-sm"><span class="num">100%</span><span class="lbl">Garansi Lulus Ujian</span></div>
+      </div>
+      <div class="hero26-card-badges">
+        <span>KEMNAKER RI</span><span>BNSP</span><span>LPSE</span><span>PADI UMKM</span>
+      </div>
+    </aside>
   </div>
 </section>
 
+<!-- Official SVG Trust Bar -->
 <div class="trust-bar">
-  <div class="container inner">
-    <span class="trust-item">KEMNAKER RI</span><span class="trust-sep">·</span>
-    <span class="trust-item">BNSP</span><span class="trust-sep">·</span>
-    <span class="trust-item">KLHK</span><span class="trust-sep">·</span>
-    <span class="trust-item">Standar CSMS &amp; Tender BUMN</span>
+  <div class="container trust-bar-inner">
+    <span class="trust-bar-label">Terakreditasi &amp; Diakui</span>
+    <div class="trust-logo">
+      <div class="trust-logo-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M3 10h18M5 10v11M9 10v11M15 10v11M19 10v11M12 2L2 7h20L12 2z"/></svg>
+      </div>
+      <div><span class="trust-logo-name">KEMNAKER RI</span><span class="trust-logo-sub">Kementerian Ketenagakerjaan</span></div>
+    </div>
+    <div class="trust-logo">
+      <div class="trust-logo-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><path d="M9 14l2 2 4-4"/></svg>
+      </div>
+      <div><span class="trust-logo-name">BNSP</span><span class="trust-logo-sub">Badan Nasional Sertifikasi</span></div>
+    </div>
+    <div class="trust-logo">
+      <div class="trust-logo-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18h20v-2a8 8 0 0 0-16 0v2z"/><path d="M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5"/><path d="M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1"/></svg>
+      </div>
+      <div><span class="trust-logo-name">ESDM</span><span class="trust-logo-sub">Kementerian ESDM</span></div>
+    </div>
+    <div class="trust-logo">
+      <div class="trust-logo-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+      </div>
+      <div><span class="trust-logo-name">KLHK</span><span class="trust-logo-sub">Kementerian Lingkungan Hidup</span></div>
+    </div>
+    <div class="trust-logo">
+      <div class="trust-logo-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+      </div>
+      <div><span class="trust-logo-name">ISO 9001</span><span class="trust-logo-sub">Sistem Manajemen Mutu</span></div>
+    </div>
   </div>
 </div>
 
 <section class="section" id="biaya-jadwal">
   <div class="container">
-    <h2>Biaya dan Harga Pelatihan K3 di <?=htmlspecialchars($c['name'])?> &amp; <?=htmlspecialchars($c['province'])?></h2>
-    <p class="lead">Pilihan program sertifikasi KEMNAKER RI &amp; BNSP resmi dengan biaya transparan, silabus berstandar nasional, dan jadwal rutin setiap bulan di <?=htmlspecialchars($c['name'])?>.</p>
+
+    <!-- Keyword Cluster Quick Intent Navigation -->
+    <div class="kw-pill-nav">
+      <div class="kw-pill-header">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <span>Pencarian Program Populer di <?=htmlspecialchars($c['name'])?>:</span>
+      </div>
+      <div class="kw-pill-list">
+        <a href="#tabel-biaya" class="kw-pill">🎯 Ahli K3 Umum (AK3U)</a>
+        <a href="#tabel-biaya" class="kw-pill">🚜 Operator Forklift Kemnaker</a>
+        <a href="#tabel-biaya" class="kw-pill">⚡ Ahli K3 Listrik &amp; Teknisi</a>
+        <a href="#tabel-biaya" class="kw-pill">🏗️ K3 Konstruksi Bangunan</a>
+        <a href="#tabel-biaya" class="kw-pill">🔥 Petugas Pemadam Kebakaran</a>
+        <a href="#tabel-biaya" class="kw-pill">🩹 Petugas P3K di Tempat Kerja</a>
+        <a href="#tabel-biaya" class="kw-pill">⛏️ POP / POM Pertambangan</a>
+        <a href="#tabel-biaya" class="kw-pill">📋 Auditor SMK3 PP 50/2012</a>
+        <a href="#tabel-biaya" class="kw-pill">🧪 K3 Kimia &amp; B3 Industri</a>
+        <a href="#corporate" class="kw-pill">🏢 In-House Training Perusahaan</a>
+      </div>
+    </div>
+
+    <h2>Biaya dan Jadwal Pelatihan K3 di <?=htmlspecialchars($c['name'])?> &amp; <?=htmlspecialchars($c['province'])?> <?=htmlspecialchars($year)?></h2>
+    <p class="lead">Pilihan program sertifikasi KEMNAKER RI &amp; BNSP resmi dengan rincian biaya transparan, kelas Online Zoom interaktif, tatap muka, dan In-House Training pabrik/kantor di <?=htmlspecialchars($c['name'])?>.</p>
 
     <!-- Lead Hunter Quick Quote Calculator Widget -->
     <div class="lead-calculator">
@@ -1195,9 +1277,9 @@ if (is_file($_core_css_file)) {
         <h3>💻 Pelatihan K3 Online (Webinar Zoom)</h3>
         <p>Solusi hemat biaya dan waktu bagi peserta di <?=htmlspecialchars($c['name'])?> dan <?=htmlspecialchars($c['province'])?>. Belajar interaktif langsung bersama trainer praktisi dari mana saja.</p>
         <ul>
-          <li>✅ Jadwal rutin mingguan &amp; bulanan</li>
+          <li>✅ Jadwal rutin mingguan &amp; bulanan tahun <?=htmlspecialchars($year)?></li>
           <li>✅ Modul digital, e-book regulasi, &amp; rekaman materi</li>
-          <li>✅ Ujian online resmi berlisensi Kemnaker/BNSP</li>
+          <li>✅ Ujian online resmi berlisensi Kemnaker RI / BNSP</li>
         </ul>
         <a href="https://wa.me/<?=$wa_number?>?text=<?=rawurlencode("Halo Wahana Totalita, saya ingin daftar Pelatihan K3 Online untuk wilayah {$c['name']}")?>" target="_blank" rel="noopener" style="font-weight:700;font-size:13.5px;color:#063b22">Tanya Kelas Online →</a>
       </div>
@@ -1206,11 +1288,48 @@ if (is_file($_core_css_file)) {
         <p>Praktek langsung dan simulasi studi kasus di fasilitas training center kami atau langsung di lokasi pabrik/kantor perusahaan Anda di <?=htmlspecialchars($c['name'])?>.</p>
         <ul>
           <li>✅ Praktik alat angkut, listrik, &amp; simulasi tanggap darurat</li>
-          <li>✅ Penyesuaian materi dengan bahaya lokal <?=htmlspecialchars($c['name'])?></li>
+          <li>✅ Penyesuaian materi dengan bahaya operasional di <?=htmlspecialchars($c['name'])?></li>
           <li>✅ Faktur Pajak &amp; invoice resmi korporasi</li>
         </ul>
         <a href="https://wa.me/<?=$wa_number?>?text=<?=rawurlencode("Halo Wahana Totalita, saya ingin info Pelatihan K3 Tatap Muka / In-House di {$c['name']}")?>" target="_blank" rel="noopener" style="font-weight:700;font-size:13.5px;color:#063b22">Tanya Kelas Tatap Muka →</a>
       </div>
+    </div>
+
+    <!-- Transparent Pricing & Schedule Matrix Table -->
+    <div class="price-schedule-wrap" id="tabel-biaya">
+      <table class="price-table">
+        <thead>
+          <tr>
+            <th>Program Pelatihan &amp; Sertifikasi <?=htmlspecialchars($c['name'])?></th>
+            <th>Badan Sertifikasi</th>
+            <th>Metode Belajar</th>
+            <th>Durasi</th>
+            <th>Jadwal Batch</th>
+            <th>Rincian Biaya</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach($programs as $p): 
+            $cert_badge = ($p[2] === 'BNSP') ? 'badge-cert-bnsp' : 'badge-cert-kemnaker';
+          ?>
+          <tr>
+            <td>
+              <span class="price-prog-title"><?=$p[1]?></span>
+              <span class="price-prog-sub">Wilayah <?=htmlspecialchars($c['name'])?> &amp; sekitarnya</span>
+            </td>
+            <td><span class="<?=$cert_badge?>"><?=$p[2]?></span></td>
+            <td><span class="badge-mode">Online &amp; Tatap Muka</span></td>
+            <td><strong><?=$p[3]?></strong></td>
+            <td><span style="color:#0f5132;font-weight:700">Batch <?=htmlspecialchars($current_month)?> <?=htmlspecialchars($year)?></span></td>
+            <td>
+              <a href="https://wa.me/<?=$wa_number?>?text=<?=rawurlencode("Halo Wahana Totalita, saya ingin informasi biaya resmi dan jadwal batch terdekat untuk {$p[1]} di {$c['name']}")?>" target="_blank" rel="noopener" class="price-cta-btn">
+                <span>💬 Cek Biaya</span>
+              </a>
+            </td>
+          </tr>
+          <?php endforeach; ?>
+        </tbody>
+      </table>
     </div>
 
     <div class="programs-grid" id="program">
@@ -1310,7 +1429,7 @@ if (is_file($_core_css_file)) {
     </div>
 
     <!-- Corporate In-House Training B2B Feature Box -->
-    <div class="corporate-box">
+    <div class="corporate-box" id="corporate">
       <h3>🏢 Solusi In-House Training &amp; Sertifikasi Perusahaan di <?=htmlspecialchars($c['name'])?></h3>
       <p>Wahana Totalita menyediakan program pembinaan dan sertifikasi in-house yang disesuaikan secara khusus dengan proses bisnis, potensi bahaya (HIRA/IBPR), serta kebijakan operasional perusahaan Anda di <?=htmlspecialchars($c['name'])?>.</p>
       <div class="corporate-features">
