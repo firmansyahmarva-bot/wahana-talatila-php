@@ -880,7 +880,7 @@ require __DIR__ . '/includes/head.php';
           <p>Pemenuhan regulasi keselamatan kerja gedung perkantoran, fasyankes, dan balai diklat dinas.</p>
           <ul class="gov-cat-links">
             <li class="gov-cat-link-item">
-              <a href="/pelatihan/ahli-k3-umum-sertifikasi-kemnaker-ri">
+              <a href="/pelatihan/ahli-k3-umum-sertifikasi-kemnaker-ri/">
                 <span>Pelatihan Ahli K3 Umum Kemnaker RI</span>
                 <span class="gov-cat-link-arrow">&rarr;</span>
               </a>
@@ -918,7 +918,7 @@ require __DIR__ . '/includes/head.php';
           <p>Sertifikasi operator alat berat dan pengawas keselamatan proyek fisik dinas PU, perhubungan, &amp; pergudangan.</p>
           <ul class="gov-cat-links">
             <li class="gov-cat-link-item">
-              <a href="/pelatihan/pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri">
+              <a href="/pelatihan/pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri/">
                 <span>K3 Operator Forklift (Kelas 1 &amp; 2)</span>
                 <span class="gov-cat-link-arrow">&rarr;</span>
               </a>

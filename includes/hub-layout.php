@@ -22,6 +22,7 @@ $wa_number = $s['wa_number'] ?? '6287759151278';
 $rawHubTitle = $hub_data['meta_title'] ?? $hub_data['title'];
 $page_title  = trim(preg_replace('/\s*[-|–—]\s*Wahana Totalita.*$/iu', '', $rawHubTitle), " -|–—");
 $meta_desc   = $hub_data['meta_desc'] ?? ($hub_data['title'] . '. Pelatihan resmi sertifikasi Kemnaker RI & BNSP. Jadwal terdekat dan biaya.');
+$hub_slug    = $hub_data['slug'] ?? basename($_SERVER['SCRIPT_FILENAME'] ?? '', '.php');
 $canonical  = SITE_URL . '/' . trim($hub_slug, '/') . '/';
 
 // Pre-fill WhatsApp message
