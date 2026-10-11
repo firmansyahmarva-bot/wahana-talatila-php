@@ -176,7 +176,7 @@ require __DIR__ . '/includes/head.php';
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;">
       <?php
       $docs = [
-        ['📄','Surat Penawaran Harga','Resmi bermaterai dari PT Kreasi Ultimate Berjaya, mencantumkan rincian per kamar/malam dan per paket.'],
+        ['📄','Surat Penawaran Harga','Resmi bermaterai dari <a href="https://pelatihan-k3.co.id" target="_blank" rel="noopener">PT Kreasi Ultimate Berjaya</a>, mencantumkan rincian per kamar/malam dan per paket.'],
         ['📊','RAB Rinci','Rincian anggaran per komponen: tarif kamar, pajak hotel, meeting room, dan layanan tambahan.'],
         ['🧾','Faktur Pajak','Faktur pajak (PPN) diterbitkan untuk nilai ≥ Rp 1 juta. NPWP aktif dan PKP.'],
         ['📋','Berita Acara (BAST)','Berita Acara Serah Terima layanan — ditandatangani oleh penerima layanan dari instansi.'],

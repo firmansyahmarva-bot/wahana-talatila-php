@@ -284,7 +284,7 @@ require __DIR__ . '/includes/head.php';
         <tbody>
           <?php
           $proc = [
-            ['Surat Penawaran Harga','Surat penawaran resmi dengan kop PT Kreasi Ultimate Berjaya, ditandatangani dan bermaterai'],
+            ['Surat Penawaran Harga','Surat penawaran resmi dengan kop <a href="https://pelatihan-k3.co.id" target="_blank" rel="noopener">PT Kreasi Ultimate Berjaya</a>, ditandatangani dan bermaterai'],
             ['RAB (Rencana Anggaran Biaya)','Rincian biaya transparan: honorarium trainer, modul, sertifikat, konsumsi, dan lain-lain'],
             ['Dokumen Legalitas','NIB (OSS), NPWP, Akta Pendirian, SK Kemenkumham, SIUP — tersedia lengkap dan terkini'],
             ['NPWP & Faktur Pajak','Faktur pajak resmi untuk kebutuhan pembukuan dan pelaporan pajak instansi'],

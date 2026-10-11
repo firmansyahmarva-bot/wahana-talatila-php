@@ -1221,7 +1221,7 @@ require __DIR__ . '/includes/head.php';
           </a>
         </div>
         <p class="gov-final-note">
-          Hotline Pengadaan: <a href="tel:+<?= e($wa_number) ?>" style="color:#ffffff; font-weight:700; text-decoration:underline;"><?= e($phone_disp) ?></a> &nbsp;&middot;&nbsp; Layanan Resmi PT Kreasi Ultimate Berjaya
+          Hotline Pengadaan: <a href="tel:+<?= e($wa_number) ?>" style="color:#ffffff; font-weight:700; text-decoration:underline;"><?= e($phone_disp) ?></a> &nbsp;&middot;&nbsp; Layanan Resmi <a href="https://pelatihan-k3.co.id" target="_blank" rel="noopener" style="color:#ffffff; font-weight:700; text-decoration:underline;">PT Kreasi Ultimate Berjaya</a>
         </p>
       </div>
     </div>

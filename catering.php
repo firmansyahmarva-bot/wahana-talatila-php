@@ -166,7 +166,7 @@ require __DIR__ . '/includes/head.php';
         <tbody>
           <?php
           $docs = [
-            ['Surat Penawaran','Resmi, bermaterai, kop PT Kreasi Ultimate Berjaya'],
+            ['Surat Penawaran','Resmi, bermaterai, kop <a href="https://pelatihan-k3.co.id" target="_blank" rel="noopener">PT Kreasi Ultimate Berjaya</a>'],
             ['RAB Rinci','Per item menu dengan harga satuan — mudah diverifikasi PPK'],
             ['NPWP & Faktur Pajak','Faktur pajak diterbitkan untuk pembelian ≥ Rp 1 juta'],
             ['Kuitansi Resmi','Bukti pembayaran resmi bermaterai'],

@@ -253,7 +253,7 @@ require __DIR__ . '/includes/head.php';
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;">
       <?php
       $docs = [
-        ['📄','Surat Penawaran Harga','Resmi bermaterai dari PT Kreasi Ultimate Berjaya, rinci per program dan per peserta.'],
+        ['📄','Surat Penawaran Harga','Resmi bermaterai dari <a href="https://pelatihan-k3.co.id" target="_blank" rel="noopener">PT Kreasi Ultimate Berjaya</a>, rinci per program dan per peserta.'],
         ['📊','RAB Pelatihan','Rincian per komponen: instruktur, modul, konsumsi, sertifikat, dan fasilitas.'],
         ['🧾','Faktur Pajak (PPN)','Faktur pajak resmi untuk pengeluaran yang memerlukan pajak pertambahan nilai.'],
         ['📋','BAST Pelatihan','Berita Acara Serah Terima: ditandatangani perwakilan instansi sebagai bukti pelaksanaan.'],
