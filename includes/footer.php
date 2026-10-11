@@ -92,24 +92,41 @@
       </div>
     </div>
 
-    <!-- Col 2: Program Sertifikasi Populer -->
+    <!-- Col 2: Program K3 Kemnaker RI -->
     <div class="footer-nav">
-      <h4>Program Populer</h4>
+      <h4>Pelatihan Kemnaker RI</h4>
       <ul>
         <li><a href="/ahli-k3-umum/"><strong>Ahli K3 Umum (AK3U)</strong></a></li>
-        <li><a href="/pelatihan/k3/">Pelatihan K3 Lengkap</a></li>
-        <li><a href="/pelatihan/pelatihan-ahli-k3-umum-fresh-graduate-kemnaker-online/">Ahli K3 Umum Kemnaker</a></li>
-        <li><a href="/pelatihan/ak3-bnsp/">Ahli K3 BNSP</a></li>
+        <li><a href="/pelatihan/pelatihan-ahli-k3-umum-fresh-graduate-kemnaker-online/">Ahli K3 Umum Fresh Grad</a></li>
         <li><a href="/pelatihan/pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri/">Operator Forklift Kelas II</a></li>
-        <li><a href="/pelatihan/pelatihan-damkar-paralel-kelas-dcba-sertifikasi-kemnaker-ri/">Damkar Kelas D–A</a></li>
+        <li><a href="/pelatihan/pelatihan-damkar-paralel-kelas-dcba-sertifikasi-kemnaker-ri/">Damkar Kelas D, C, B, A</a></li>
         <li><a href="/pelatihan/pelatihan-petugas-p3k-first-aid-online/">Petugas P3K / First Aid</a></li>
-        <li><a href="/pelatihan/pelatihan-internal-auditor-iso-45001-online/">Internal Auditor ISO 45001</a></li>
-        <li><a href="/keselamatan-kerja/">Direktori 23 Bidang K3</a></li>
-        <li><a href="/pelatihan/">Katalog Semua Program</a></li>
+        <li><a href="/pelatihan/pelatihan-auditor-smk3-kemnaker-ri-online/">Auditor SMK3 PP 50/2012</a></li>
+        <li><a href="/pelatihan/pelatihan-k3-listrik-teknisi-kemnaker-ri/">Teknisi &amp; Ahli K3 Listrik</a></li>
+        <li><a href="/pelatihan/pelatihan-k3-bekerja-di-ketinggian-tkbt-tkpk-kemnaker/">Bekerja di Ketinggian (TKBT)</a></li>
+        <li><a href="/pelatihan/pelatihan-k3-ruang-terbatas-confined-space-kemnaker/">K3 Ruang Terbatas (Confined Space)</a></li>
+        <li><a href="/pelatihan/pelatihan-k3-pesawat-uap-bejana-tekan-kemnaker/">Operator Boiler &amp; Bejana Tekan</a></li>
       </ul>
     </div>
 
-    <!-- Col 3: Layanan & Fitur Platform -->
+    <!-- Col 3: Program BNSP & Sektor Industri -->
+    <div class="footer-nav">
+      <h4>Sertifikasi BNSP &amp; ISO</h4>
+      <ul>
+        <li><a href="/pelatihan/ak3-bnsp/"><strong>Ahli K3 Umum BNSP</strong></a></li>
+        <li><a href="/pelatihan/pelatihan-pengawas-operasional-pertama-pop-minerba-bnsp/">POP Pertambangan Minerba</a></li>
+        <li><a href="/pelatihan/pelatihan-pengawas-operasional-madya-pom-minerba-bnsp/">POM Pertambangan Minerba</a></li>
+        <li><a href="/pelatihan/pelatihan-penanggung-jawab-operasional-pengolahan-air-limbah-popal-bnsp/">POPAL Pengolahan Air Limbah</a></li>
+        <li><a href="/pelatihan/pelatihan-pengelolaan-limbah-b3-plb3-bnsp/">Pengelolaan Limbah B3 (PLB3)</a></li>
+        <li><a href="/pelatihan/pelatihan-penanggung-jawab-pengendalian-pencemaran-udara-poppua-bnsp/">Pengendalian Udara (POPPU)</a></li>
+        <li><a href="/pelatihan/pelatihan-internal-auditor-iso-45001-online/">Internal Auditor ISO 45001</a></li>
+        <li><a href="/pelatihan/pelatihan-internal-auditor-iso-9001-14001-45001-qhse-online/">Lead Auditor Integrated QHSE</a></li>
+        <li><a href="/pelatihan/pelatihan-higiene-industri-muda-himu-bnsp/">Higiene Industri Muda (HIMU)</a></li>
+        <li><a href="/pelatihan/">Katalog Semua 140+ Program &rarr;</a></li>
+      </ul>
+    </div>
+
+    <!-- Col 4: Layanan Korporasi & Fitur -->
     <div class="footer-nav">
       <h4>Layanan &amp; Fitur</h4>
       <ul>
@@ -117,24 +134,20 @@
         <li><a href="/jadwal/kalender/">Kalender Pelatihan</a></li>
         <li><a href="/riksa-uji/"><strong>Jasa Riksa Uji K3 (Alat &amp; Instalasi)</strong></a></li>
         <li><a href="/perpanjangan-skp/"><strong>Perpanjangan SKP &amp; Lisensi K3</strong></a></li>
-        <li><a href="/purnabakti/"><strong>Pelatihan Purnabakti (Masa Persiapan Pensiun)</strong></a></li>
-        <li><a href="/event-organizer/"><strong>Event Organizer BUMN &amp; HSE K3</strong></a></li>
+        <li><a href="/purnabakti/"><strong>Pelatihan Purnabakti (MPP)</strong></a></li>
+        <li><a href="/event-organizer/"><strong>Event Organizer BUMN &amp; HSE</strong></a></li>
         <li><a href="/layanan-pemerintah/">Pengadaan LPSE &amp; B2G</a></li>
         <li><a href="/in-house-training/">In-House Training Perusahaan</a></li>
         <li><a href="/instruktur/">Tim Instruktur &amp; Tenaga Ahli</a></li>
         <li><a href="/klien/">Portofolio &amp; Klien Kami</a></li>
-        <li><a href="/regulasi/">Pusat Regulasi K3 RI</a></li>
-        <li><a href="/skkni/">Standar Profesi SKKNI</a></li>
-        <li><a href="/tools/safety-talk">Safety Talk Generator</a></li>
         <li><a href="/verifikasi/">Verifikasi Keaslian Sertifikat</a></li>
-        <li><a href="/artikel/">Artikel &amp; Panduan K3</a></li>
-        <li><a href="/perusahaan">Tentang Wahana Totalita</a></li>
+        <li><a href="/keselamatan-kerja/">Direktori 23 Bidang K3 &rarr;</a></li>
       </ul>
     </div>
 
-    <!-- Col 4: Wilayah Layanan & Kontak -->
+    <!-- Col 5: Wilayah Layanan & Kontak -->
     <div class="footer-contact">
-      <h4>Wilayah Layanan &amp; Kontak</h4>
+      <h4>Wilayah &amp; Kontak</h4>
       <ul>
         <li><a href="/in-house-training/balikpapan-ikn/">In-House Balikpapan &amp; IKN</a></li>
         <li><a href="/in-house-training/cilegon-karawang/">In-House Cilegon &amp; Karawang</a></li>
@@ -177,11 +190,13 @@
   <div class="footer-bottom">
     <div class="container">
       <p>© <?= date('Y') ?> <?= e($s['site_name'] ?? 'Wahana Totalita Konsultan') ?>. All rights reserved.
-        · <a href="/sitemap.xml" style="opacity:.6;text-decoration:none">Sitemap</a>
-        · <a href="/sitemap-jadwal.xml" style="opacity:.6;text-decoration:none">Sitemap Jadwal</a>
-        · <a href="/verifikasi/" style="opacity:.6;text-decoration:none">Verifikasi Sertifikat</a>
-        · <a href="/kebijakan-privasi" style="opacity:.6;text-decoration:none">Privasi</a>
-        · <a href="/zh/" style="opacity:.6;text-decoration:none">中文 (ZH)</a>
+        · <a href="/perusahaan" style="opacity:.7;text-decoration:none">Tentang Kami</a>
+        · <a href="/regulasi/" style="opacity:.7;text-decoration:none">Regulasi K3</a>
+        · <a href="/skkni/" style="opacity:.7;text-decoration:none">Standar SKKNI</a>
+        · <a href="/artikel/" style="opacity:.7;text-decoration:none">Artikel</a>
+        · <a href="/sitemap.xml" style="opacity:.7;text-decoration:none">Sitemap</a>
+        · <a href="/kebijakan-privasi" style="opacity:.7;text-decoration:none">Privasi</a>
+        · <a href="/zh/" style="opacity:.7;text-decoration:none">中文 (ZH)</a>
       </p>
     </div>
   </div>

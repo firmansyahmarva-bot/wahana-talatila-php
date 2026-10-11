@@ -141,14 +141,101 @@ if (is_file($_core_css_file)) {
 <style>
 .breadcrumb-list { list-style: none; padding-left: 0; }
 
-/* Compact catalog hero — intentionally NOT .hero (that class is the
-   homepage's 100vh slideshow hero elsewhere on this site); this is its
-   own small banner so it can't inherit that min-height. */
-.pcat-hero { background: var(--green-light, #E8F4EE); padding: 44px 0 40px; text-align: center; }
-.pcat-hero h1 { font-size: clamp(1.7rem, 4vw, 2.4rem); font-weight: 800; color: var(--green, #0A4A2E); margin-bottom: 10px; }
-.pcat-hero p { font-size: 15px; color: var(--text-muted, #555); max-width: 640px; margin: 0 auto 20px; line-height: 1.7; }
-.pcat-badges { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
-.pcat-badge { display: inline-flex; align-items: center; gap: 6px; background: #fff; border: 1.5px solid #d0e8d8; color: var(--green, #0A4A2E); font-size: 12.5px; font-weight: 700; padding: 7px 15px; border-radius: 20px; }
+/* ─── Premium Executive Catalog Hero (matches pd-hero aesthetic) ─── */
+.pcat-hero {
+  position: relative;
+  background: radial-gradient(1000px circle at 80% 15%, rgba(10, 74, 46, 0.45) 0%, rgba(16, 58, 92, 0.35) 45%, #0B1523 90%), #070e17;
+  padding: clamp(52px, 6vw, 84px) 0 clamp(44px, 5vw, 68px);
+  text-align: center;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.pcat-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+}
+.pcat-hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0; height: 60px;
+  background: linear-gradient(to top, rgba(7, 14, 23, 0.6), transparent);
+  pointer-events: none;
+}
+.pcat-hero .container { position: relative; z-index: 1; }
+.pcat-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: ui-monospace, monospace;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #34d399;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(52, 211, 153, 0.28);
+  padding: 4px 14px;
+  border-radius: 999px;
+  margin-bottom: 18px;
+}
+.pcat-hero h1 {
+  font-family: 'Lexend', system-ui, sans-serif;
+  font-size: clamp(2rem, 4.2vw, 2.9rem);
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 auto 14px;
+  letter-spacing: -0.02em;
+  max-width: 860px;
+  line-height: 1.25;
+}
+.pcat-hero p {
+  font-size: 16px;
+  color: #94a3b8;
+  max-width: 680px;
+  margin: 0 auto 26px;
+  line-height: 1.7;
+}
+.pcat-badges { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.pcat-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  color: #e2e8f0;
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+}
+.pcat-badge-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: #34d399;
+}
+
+/* Floating Glass Stats Bar on Catalog Page */
+.catalog-page .stats-bar {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+  padding: 24px 0;
+}
+.catalog-page .stat-number {
+  color: #ffffff;
+  font-family: 'Lexend', sans-serif;
+}
+.catalog-page .stat-label {
+  color: #94a3b8;
+}
+.catalog-page .stat-divider {
+  background: rgba(255, 255, 255, 0.12);
+}
 
 /* Category directory intro line inside the services section */
 .pcat-dir-intro { text-align: center; max-width: 760px; margin: 0 auto 8px; color: var(--text-muted, #555); font-size: 14.5px; line-height: 1.7; }
@@ -207,21 +294,35 @@ if (is_file($_core_css_file)) {
 .pcat-trust-item h4 { font-size: 14.5px; font-weight: 700; color: #0f172a; margin: 0 0 4px; }
 .pcat-trust-item p { font-size: 12.5px; color: #64748b; line-height: 1.5; margin: 0; }
 
-/* Navbar visibility fix: this page's hero is light (pcat-hero), not the
-   dark hero the shared navbar assumes by default (transparent bg +
-   white text, meant to sit on a dark background). Without this, the
-   navbar is invisible until the user scrolls. Mirrors the site's own
-   .navbar.on-light-hero rules, scoped here so it doesn't require
-   editing the shared includes/navbar.php used on every other page. */
-#navbar:not(.scrolled) { background: rgba(255,255,255,.97) !important; border-bottom-color: #e8e8e8 !important; }
-#navbar:not(.scrolled) .nav-logo { color: var(--green) !important; }
-#navbar:not(.scrolled) .nav-links a { color: var(--text) !important; }
-#navbar:not(.scrolled) .nav-logo-text strong {
-  background: linear-gradient(135deg, var(--green) 30%, var(--orange));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+.breadcrumb-bar {
+  margin-top: var(--nav-h, 72px);
+  background: rgba(11, 21, 35, 0.95);
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
-#navbar:not(.scrolled) .nav-hamburger span { background: var(--text) !important; }
-#navbar:not(.scrolled) .nav-socials a { color: var(--text-muted) !important; }
+.breadcrumb-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  font-size: 13px;
+  color: #94a3b8;
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+.breadcrumb-list a {
+  color: #cbd5e1;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+.breadcrumb-list a:hover {
+  color: #34d399;
+}
+.breadcrumb-list li[aria-current="page"] {
+  color: #34d399;
+  font-weight: 600;
+}
 </style>
 </head>
 <body class="catalog-page">
@@ -249,14 +350,15 @@ if (is_file($_core_css_file)) {
 <!-- HERO -->
 <section class="pcat-hero">
   <div class="container">
+    <div class="pcat-eyebrow">PJK3 RESMI KEMNAKER RI &amp; BNSP</div>
     <h1>Katalog Pelatihan K3 &amp; Sertifikasi Resmi</h1>
-    <p>Semua program sertifikasi K3 resmi Kemnaker RI &amp; BNSP — tersedia kelas online, tatap muka di Yogyakarta, maupun in-house training perusahaan di seluruh Indonesia.</p>
+    <p>Pilih dan temukan program sertifikasi kompetensi K3 resmi Kemnaker RI dan BNSP — tersedia kelas online interaktif via Zoom, tatap muka di Yogyakarta, dan in-house training perusahaan di seluruh Indonesia.</p>
 
     <div class="pcat-badges">
-      <span class="pcat-badge">✔ Kemnaker RI &amp; BNSP</span>
-      <span class="pcat-badge">✔ Online &amp; Offline</span>
-      <span class="pcat-badge">✔ In-house Perusahaan</span>
-      <span class="pcat-badge">✔ Seluruh Indonesia</span>
+      <span class="pcat-badge"><span class="pcat-badge-dot"></span> Kemnaker RI &amp; BNSP</span>
+      <span class="pcat-badge"><span class="pcat-badge-dot"></span> Online &amp; Tatap Muka</span>
+      <span class="pcat-badge"><span class="pcat-badge-dot"></span> In-House Training Korporasi</span>
+      <span class="pcat-badge"><span class="pcat-badge-dot"></span> Terakreditasi Nasional</span>
     </div>
   </div>
 </section>
