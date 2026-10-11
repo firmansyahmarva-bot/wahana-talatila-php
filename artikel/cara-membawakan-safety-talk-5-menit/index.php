@@ -42,7 +42,7 @@ echo $shared_head;
 
 <h2 id="checklist">Checklist sebelum menutup briefing</h2><ul class="check"><li>Topik berhubungan langsung dengan pekerjaan hari itu.</li><li>Tim menyebutkan bahaya dan kontrol dengan kata-kata sendiri.</li><li>Perubahan kondisi dan prosedur berhenti kerja dibahas.</li><li>Ada tindakan, penanggung jawab, dan waktu pemeriksaan.</li><li>Topik, pemimpin, dan peserta dicatat.</li></ul>
 <p>Baca juga <a href="/artikel/perbedaan-safety-talk-toolbox-meeting-tbm-safety-briefing/">perbedaan Safety Talk, Toolbox Meeting, TBM, dan Safety Briefing</a>.</p>
-<div class="cta"><h2>Siapkan materi briefing berikutnya</h2><p>Pilih dari 100 topik berdasarkan risiko pekerjaan, buka poin diskusi, lalu cetak bersama daftar hadir.</p><a href="/tools/safety-talk">Buka 100 Materi Safety Talk →</a></div>
+<div class="cta"><h2>Siapkan materi briefing berikutnya</h2><p>Pilih dari 100 topik berdasarkan risiko pekerjaan, buka poin diskusi, lalu cetak bersama daftar hadir.</p><a href="/tools/safety-talk/">Buka 100 Materi Safety Talk →</a></div>
 </article><aside class="aside">
 
 <?= artikel_sidebar_lead_card($article, $s) ?>

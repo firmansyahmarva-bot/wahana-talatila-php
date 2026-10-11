@@ -92,7 +92,7 @@ if (empty($ak3u_batches)) {
             'venue'      => 'Virtual Assessment via Zoom LSP K3',
             'mode'       => 'online',
             'price'      => '4500000',
-            'course_slug'=> 'pelatihan-ahli-k3-umum-sertifikasi-bnsp-online',
+            'course_slug'=> 'ak3-bnsp',
         ],
     ];
 }
@@ -890,7 +890,7 @@ body {
           <li><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Durasi Singkat (3–4 Hari Efektif)</li>
           <li><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Diakui Standar Kerja Regional ASEAN</li>
         </ul>
-        <a href="/pelatihan/pelatihan-ahli-k3-umum-sertifikasi-bnsp-online/" class="ak-track-btn">
+        <a href="/pelatihan/ak3-bnsp/" class="ak-track-btn">
           <span>Lihat Jalur BNSP &rarr;</span>
         </a>
       </article>

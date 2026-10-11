@@ -1153,12 +1153,12 @@ require __DIR__ . '/includes/head.php';
       <h2 id="csms-resources-title">Perkuat dokumen dan kompetensi perusahaan</h2>
       <p>Gunakan panduan, alat bantu, jadwal pelatihan, dan program kompetensi yang relevan untuk menindaklanjuti hasil evaluasi CSMS.</p>
       <div class="csms-resource-grid">
-        <a class="csms-resource-card" href="/tools/safety-talk"><small>Toolbox</small><b>Materi Safety Talk</b><span>Siapkan pengarahan →</span></a>
+        <a class="csms-resource-card" href="/tools/safety-talk/"><small>Toolbox</small><b>Materi Safety Talk</b><span>Siapkan pengarahan →</span></a>
         <a class="csms-resource-card" href="/jadwal/"><small>Kompetensi</small><b>Jadwal Pelatihan K3</b><span>Lihat batch aktif →</span></a>
-        <a class="csms-resource-card" href="/pelatihan/ahli-k3-umum-sertifikasi-kemnaker-ri"><small>Kemnaker RI</small><b>Ahli K3 Umum</b><span>Lihat program →</span></a>
-        <a class="csms-resource-card" href="/k3"><small>Panduan</small><b>Pusat Informasi K3</b><span>Pelajari dasar K3 →</span></a>
-        <a class="csms-resource-card" href="/layanan-pemerintah"><small>B2G &amp; Vendor</small><b>Vendor Pelatihan K3</b><span>Lihat pengadaan →</span></a>
-        <a class="csms-resource-card" href="/perusahaan"><small>In-House</small><b>Layanan Korporasi</b><span>Solusi training →</span></a>
+        <a class="csms-resource-card" href="/pelatihan/pelatihan-ahli-k3-umum-sertifikasi-kemnaker-ri/"><small>Kemnaker RI</small><b>Ahli K3 Umum</b><span>Lihat program →</span></a>
+        <a class="csms-resource-card" href="/pelatihan/k3/"><small>Panduan</small><b>Pusat Informasi K3</b><span>Pelajari dasar K3 →</span></a>
+        <a class="csms-resource-card" href="/layanan-pemerintah/"><small>B2G &amp; Vendor</small><b>Vendor Pelatihan K3</b><span>Lihat pengadaan →</span></a>
+        <a class="csms-resource-card" href="/perusahaan/"><small>In-House</small><b>Layanan Korporasi</b><span>Solusi training →</span></a>
         <a class="csms-resource-card" href="/artikel/"><small>Referensi</small><b>Artikel dan Regulasi</b><span>Baca artikel →</span></a>
         <a class="csms-resource-card" href="<?= e($wa_consult) ?>"><small>Konsultasi</small><b>Pendampingan CSMS</b><span>Hubungi konsultan →</span></a>
       </div>

@@ -154,7 +154,7 @@ $is_panduan_active = str_starts_with($_nav_path, '/artikel');
                 <span class="nav-di-icon">🧮</span>
                 <span><strong>Tools K3 Online</strong><br><small>Kalkulator, JSA, Risk Matrix</small></span>
               </a>
-              <a href="/tools/ai-analyzer" class="nav-dropdown-item">
+              <a href="/tools/ai-analyzer/" class="nav-dropdown-item">
                 <span class="nav-di-icon">🤖</span>
                 <span><strong>AI Analyzer Dokumen</strong><br><small>Analisis dokumen K3 gratis</small></span>
               </a>
