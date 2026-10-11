@@ -15,7 +15,59 @@ require_once __DIR__ . '/config.php';
 // add it as its own exact-match rule or a new keyword rule below.
 
 $__requestUri = $_SERVER['REQUEST_URI'] ?? '/';
-$__path       = strtolower((string) parse_url($__requestUri, PHP_URL_PATH));
+$__pathRaw    = (string) parse_url($__requestUri, PHP_URL_PATH);
+$__path       = strtolower($__pathRaw);
+
+// ─── 0. Normalize quote-wrapped or double-encoded paths (%22, ", //) ──────
+// Often external aggregators or broken scrapers request /"/pelatihan/..."/
+if (strpos($__path, '%22') !== false || strpos($__path, '"') !== false || strpos($__path, '//') !== false) {
+    $__cleanPath = str_replace(['%22', '"'], '', $__path);
+    $__cleanPath = preg_replace('#/+#', '/', $__cleanPath);
+    if ($__cleanPath !== $__path && strlen($__cleanPath) > 1) {
+        header('Location: ' . $__cleanPath, true, 301);
+        exit;
+    }
+}
+
+// ─── 1. SILENT JUNK BLOCKER (Zero Logging, No Crawl Budget Waste) ─────────
+// Stop bot probes, hardware scanner noise, and attack attempts immediately
+$__silentJunkPatterns = [
+    // Generic attack & scanner probes
+    '/.env', '/wp-admin', '/wp-login', '/wp-content', '/wp-includes',
+    '/wp-json', '/wp-sitemap', '/phpmyadmin', '/cgi-bin', '/.git',
+    '/xmlrpc.php', '/.aws', '/vendor/', '/.ssh', '/.htpasswd',
+    '/.htaccess', '/config.php', '/.well-known', '/actuator', '/telescope',
+    '/database/sync_run', '/admin]', '/login', '/crossdomain.xml',
+    '/404error_test', '/security.txt', '/cgi-sys', '/cdn-cgi',
+    'apple-touch-icon', 'favicon',
+
+    // Specific hardware/supplier scraper bot targeting unrelated keywords
+    '/siemens', '/simatic', '/sinamics', '/sirius', '/sitop', '/et200', '/et-200',
+    '/plc', '/hmi', '/drives', '/automation', '/manufacturer', '/brands', '/brand',
+    '/products', '/product', '/shop', '/catalog', '/stock', '/surplus', '/obsolete',
+    '/industrial-automation', '/factory-automation',
+
+    // Non-existent generic corporate page scans
+    '/leadership', '/team', '/staff', '/about', '/people', '/contact', '/inquiry',
+    '/feed/', '/feed', '/ads.txt', '/store-google-analytics-client-id',
+
+    // Malformed external hostnames injected into path
+    '/recruitment.btn.co.id', '/www.holcim.co.id', '/ib.bri.co.id',
+    'https://wahanatotalita.com',
+
+    // Old dynamic uploads & expired schedule IDs
+    '/assets/uploads/', '/jadwal/daftar/',
+
+    // Old discarded sitemaps
+    '/sitemap-wahana', '/sitemap_index.xml'
+];
+
+foreach ($__silentJunkPatterns as $__junk) {
+    if (strpos($__path, $__junk) !== false) {
+        http_response_code(410); // 410 Gone tells search engines never to request this again
+        goto __render_404;
+    }
+}
 
 // Sanitize referrer/user-agent before logging: strip line breaks so a forged
 // header can't inject fake extra log lines.
@@ -34,7 +86,81 @@ $__logHit = function (string $outcome) use ($__requestUri, $__clean) {
 };
 
 // ---------------------------------------------------------------------------
-// 1. Hardcoded legacy URL redirects — confirmed real, permanent (301)
+// 2. High-Intent Direct Redirects (Captured from real 404 log review)
+// ---------------------------------------------------------------------------
+if ($__path === '/kontak' || $__path === '/kontak/') {
+    header('Location: /perusahaan/', true, 301);
+    exit;
+}
+
+if ($__path === '/pelatihan-ahli-k3-umum' || $__path === '/pelatihan-ahli-k3-umum/') {
+    header('Location: /ahli-k3-umum/', true, 301);
+    exit;
+}
+
+if ($__path === '/pelatihan-k3' || $__path === '/pelatihan-k3/') {
+    header('Location: /pelatihan/', true, 301);
+    exit;
+}
+
+if ($__path === '/refreshing-k3' || $__path === '/refreshing-k3/') {
+    header('Location: /perpanjangan-skp/', true, 301);
+    exit;
+}
+
+if ($__path === '/artikel/investigasi-kecelakaan-kerja-metode-langkah' || $__path === '/artikel/investigasi-kecelakaan-kerja-metode-langkah/') {
+    header('Location: /artikel/metode-investigasi-kecelakaan-kerja-root-cause-analysis-scat/', true, 301);
+    exit;
+}
+
+if ($__path === '/pelatihan/operator-rigger' || $__path === '/pelatihan/operator-rigger/') {
+    header('Location: /pelatihan/k3-pesawat-angkat-angkut/', true, 301);
+    exit;
+}
+
+if ($__path === '/pelatihan/operator-alat-berat' || $__path === '/pelatihan/operator-alat-berat/') {
+    header('Location: /operator-alat-berat/', true, 301);
+    exit;
+}
+
+if ($__path === '/pelatihan/supervisor-k3-konstruksi' || $__path === '/pelatihan/supervisor-k3-konstruksi/') {
+    header('Location: /k3-konstruksi/', true, 301);
+    exit;
+}
+
+if ($__path === '/pelatihan/operator-motor-diesel-genset' || $__path === '/pelatihan/operator-motor-diesel-genset/') {
+    header('Location: /pelatihan/pelatihan-k3-operator-motor-diesel-genset-sertifikasi-kemnaker-ri/', true, 301);
+    exit;
+}
+
+if ($__path === '/pelatihan/petugas-pemadam-kebakaran-kelas-d' || $__path === '/pelatihan/petugas-pemadam-kebakaran-kelas-d/') {
+    header('Location: /pelatihan/pelatihan-petugas-peran-kebakaran-kelas-d-kemnaker-ri/', true, 301);
+    exit;
+}
+
+if ($__path === '/pelatihan/operator-boiler-kelas-2' || $__path === '/pelatihan/operator-boiler-kelas-2/') {
+    header('Location: /pelatihan/pelatihan-k3-operator-pesawat-uap-boiler-kelas-2-kemnaker-ri/', true, 301);
+    exit;
+}
+
+if ($__path === '/pelatihan/pelatihan-tkbt-tingkat-2-kemnaker-ri' || $__path === '/pelatihan/pelatihan-tkbt-tingkat-2-kemnaker-ri/') {
+    header('Location: /pelatihan/pelatihan-tkbt-ii-sertifikasi-kemnaker-ri/', true, 301);
+    exit;
+}
+
+if ($__path === '/pelatihan/pelatihan-tkpk-tingkat-1-kemnaker-ri' || $__path === '/pelatihan/pelatihan-tkpk-tingkat-1-kemnaker-ri/') {
+    header('Location: /k3-ketinggian/', true, 301);
+    exit;
+}
+
+// Redirect city pages not in current 20-city matrix to master /kota/ directory
+if (preg_match('#^/pelatihan-k3-([a-z0-9\-]+)/?$#', $__path, $__cm)) {
+    header('Location: /kota/', true, 301);
+    exit;
+}
+
+// ---------------------------------------------------------------------------
+// 3. Hardcoded legacy URL redirects — confirmed real, permanent (301)
 // ---------------------------------------------------------------------------
 if ($__path === '/event-orgniser') {
     header('Location: /event-organizer/', true, 301);
@@ -182,12 +308,12 @@ if ($__path === '/pelnanggulangan-kebakaran') {
 // ---------------------------------------------------------------------------
 
 if ($__path === '/resources/template-hiradc-ibpr/') {
-    header('Location: /k3/', true, 301);
+    header('Location: /pelatihan/k3/', true, 301);
     exit;
 }
 
 if ($__path === '/resources/materi-safety-talk-toolbox-meeting/') {
-    header('Location: /k3/', true, 301);
+    header('Location: /pelatihan/k3/', true, 301);
     exit;
 }
 
@@ -399,66 +525,19 @@ foreach ($__citySpecificRedirects as $__slug => $__target) {
 
 
 // ---------------------------------------------------------------------------
-// 9. Confirmed junk / scanner / bot-probe patterns — real 404, still logged
-// ---------------------------------------------------------------------------
-
-// Benign Chrome prefetch-proxy probe — extremely high frequency, zero signal.
-// 404 silently, no log entry, so it doesn't drown out real 404s worth reviewing.
-if ($__path === '/.well-known/traffic-advice') {
-    http_response_code(404);
-    goto __render_404;
-}
-
-$__junkPatterns = [
-    // generic attack/scanner probes
-    '/.env', '/wp-admin', '/wp-login', '/wp-content', '/wp-includes',
-    '/wp-json', '/wp-sitemap', '/phpmyadmin', '/cgi-bin', '/.git',
-    '/xmlrpc.php', '/.aws', '/vendor/', '/.ssh', '/.htpasswd',
-    '/.htaccess', '/config.php.bak', '/.well-known/security',
-    '/actuator', '/telescope', '/database/sync_run.php', '/admin]',
-    '/login', '/crossdomain.xml', '/404error_test.html',
-
-    // stale/legacy CMS paths with no modern equivalent
-    '/images/stories/', '/apple-touch-icon-precomposed.png',
-
-    // old dynamic upload filenames — no stable target to redirect to
-    '/assets/uploads/',
-
-    // malformed / injected external-looking paths
-    '/recruitment.btn.co.id', '/www.holcim.co.id', '/ib.bri.co.id',
-
-    // typo/scanner noise (not a real user typo worth mapping)
-    '/gallry', '/gallary', '/artickel',
-
-    // sitemap files that don't exist under these names
-    '/sitemap-wahana-city-pages.xml', '/sitemap-wahana-index.xml',
-    '/sitemap_index.xml',
-
-    // expired/deleted training-schedule IDs — no live schedule to point to
-    '/jadwal/daftar/',
-];
-
-foreach ($__junkPatterns as $__pat) {
-    if (strpos($__path, $__pat) !== false) {
-        $__logHit('404 (confirmed junk/scanner pattern: ' . $__pat . ')');
-        http_response_code(404);
-        goto __render_404;
-    }
-}
-
-// ---------------------------------------------------------------------------
 // 10. Keyword-matched slugs — 301 permanent redirect, logged
+// Uses word boundaries / segment checks to avoid misdirecting courses like supervisor into iso
 // ---------------------------------------------------------------------------
-$__redirectRules = [
-    'smk3' => '/smk3/',
-    'bnsp' => '/sertifikasi-bnsp/',
-    'iso'  => '/pelatihan-iso/',
-    'k3'   => '/k3/', // keep last: broadest match, catches anything with "k3" in it
+$__keywordRedirects = [
+    '#(^|[-_/])smk3([-_/]|$)#' => '/smk3/',
+    '#(^|[-_/])bnsp([-_/]|$)#' => '/sertifikasi-bnsp/',
+    '#(^|[-_/])iso([-_/]|$)#'  => '/pelatihan-iso/',
+    '#(^|[-_/])k3([-_/]|$)#'   => '/pelatihan/k3/',
 ];
 
-foreach ($__redirectRules as $__keyword => $__target) {
-    if (strpos($__path, $__keyword) !== false) {
-        $__logHit($__target . ' (keyword match: "' . $__keyword . '") [301 permanent]');
+foreach ($__keywordRedirects as $__pattern => $__target) {
+    if (preg_match($__pattern, $__path)) {
+        $__logHit($__target . ' (keyword match pattern: ' . $__pattern . ') [301 permanent]');
         header('Location: ' . $__target, true, 301);
         exit;
     }

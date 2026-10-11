@@ -771,6 +771,8 @@ body {
 }
 </style>
 
+<?php require __DIR__ . '/includes/navbar.php'; ?>
+
 <!-- ═══════════════ HERO SECTION ═══════════════ -->
 <section class="ak-hero">
   <div class="container ak-hero-inner">
@@ -1273,3 +1275,6 @@ body {
 </section>
 
 <?php require __DIR__ . '/includes/footer.php'; ?>
+<?php require __DIR__ . '/includes/scripts.php'; ?>
+</body>
+</html>
