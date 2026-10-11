@@ -16,6 +16,7 @@ $hub_data = array (
   array (
     0 => 'Sistem Manajemen Keselamatan dan Kesehatan Kerja (SMK3) diatur dalam Peraturan Pemerintah No. 50 Tahun 2012 dan merupakan kewajiban hukum mutlak bagi setiap perusahaan yang mempekerjakan 100 orang pekerja atau lebih, atau memiliki potensi bahaya tinggi.',
     1 => 'Penerapan SMK3 yang terstruktur dibuktikan melalui audit eksternal oleh Lembaga Audit SMK3 resmi yang ditunjuk Kemnaker RI. Meraih penghargaan Sertifikat dan Bendera Emas/Perak SMK3 tidak hanya membuktikan kepatuhan regulasi nasional, tetapi juga menjadi syarat mutlak kualifikasi prakualifikasi CSMS dan tender BUMN/pemerintah.',
+    2 => 'Pelaksanaan evaluasi menyeluruh terhadap 166 kriteria audit sistem manajemen membutuhkan kompetensi teruji dari seorang <a href="https://www.ak3u.my.id/auditor-smk3/" target="_blank" rel="noopener">auditor smk3 kemnaker</a> bersertifikat untuk memastikan pemenuhan regulasi ketenagakerjaan, mitigasi risiko fatalitas, serta kesiapan dokumen sebelum penilaian resmi berlangsung.',
   ),
   'regulasi' => 
   array (
