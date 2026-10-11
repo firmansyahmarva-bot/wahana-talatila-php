@@ -581,18 +581,9 @@ RewriteRule ^lowongan/?$ lowongan/index.php [QSA,L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^lowongan/([a-z0-9\-]+)/?$ lowongan/detail.php?slug=$1 [QSA,L]
 
-# ─── Workplace Dashboard ──────────────────────────────
+# ─── Workplace K3 & Dashboard Perusahaan ───────────────
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^workplace/?$ workplace/index.php [QSA,L]
-
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^workplace/login/?$ workplace/login.php [QSA,L]
-
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^workplace/daftar/?$ workplace/daftar.php [QSA,L]
-
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^workplace/([a-z0-9\-]+)/?$ workplace/$1.php [QSA,L]
+RewriteRule ^workplace(/.*)?$ workplace/index.php [QSA,L]
 
 # ─── Newsletter ───────────────────────────────────────
 RewriteCond %{REQUEST_FILENAME} !-f

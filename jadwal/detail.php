@@ -15,7 +15,10 @@ if ($daysEnded > 90) {
     header('Location: '.$target, true, 301); exit;
 }
 $isEnded = $endDate < $today;
-$robots = $isEnded ? 'noindex,follow' : 'index,follow';
+$robots = 'index,follow';
+$canonicalUrl = ($isEnded && !empty($batch['training_slug']))
+    ? SITE_URL . '/pelatihan/' . $batch['training_slug'] . '/'
+    : SITE_URL . '/jadwal/' . $id . '/';
 
 $s = get_all_settings();
 $sisa = $batch['max_participants'] - $batch['current_participants'];
@@ -32,7 +35,7 @@ $waRegister = wa_url("Halo, saya ingin mendaftar pelatihan:\n*{$batch['training_
 <title><?= e($metaTitle) ?></title>
 <meta name="description" content="<?= e($metaDesc) ?>">
 <meta name="robots" content="<?= $robots ?>">
-<link rel="canonical" href="<?= SITE_URL ?>/jadwal/<?= $id ?>/">
+<link rel="canonical" href="<?= e($canonicalUrl) ?>">
 <style><?php
 $_core_css_file = __DIR__ . '/../assets/css/core.min.css';
 if (is_file($_core_css_file)) {
