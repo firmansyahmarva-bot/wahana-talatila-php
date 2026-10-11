@@ -101,11 +101,11 @@
         <li><a href="/pelatihan/pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri/">Operator Forklift Kelas II</a></li>
         <li><a href="/pelatihan/pelatihan-damkar-paralel-kelas-dcba-sertifikasi-kemnaker-ri/">Damkar Kelas D, C, B, A</a></li>
         <li><a href="/pelatihan/pelatihan-petugas-p3k-first-aid-online/">Petugas P3K / First Aid</a></li>
-        <li><a href="/pelatihan/pelatihan-auditor-smk3-kemnaker-ri-online/">Auditor SMK3 PP 50/2012</a></li>
-        <li><a href="/pelatihan/pelatihan-k3-listrik-teknisi-kemnaker-ri/">Teknisi &amp; Ahli K3 Listrik</a></li>
-        <li><a href="/pelatihan/pelatihan-k3-bekerja-di-ketinggian-tkbt-tkpk-kemnaker/">Bekerja di Ketinggian (TKBT)</a></li>
-        <li><a href="/pelatihan/pelatihan-k3-ruang-terbatas-confined-space-kemnaker/">K3 Ruang Terbatas (Confined Space)</a></li>
-        <li><a href="/pelatihan/pelatihan-k3-pesawat-uap-bejana-tekan-kemnaker/">Operator Boiler &amp; Bejana Tekan</a></li>
+        <li><a href="/pelatihan/pelatihan-auditor-sistem-manajemen-k3-sertifikasi-kemnaker-ri/">Auditor SMK3 PP 50/2012</a></li>
+        <li><a href="/pelatihan/pelatihan-k3-teknisi-listrik-sertifikasi-kemnaker-ri/">Teknisi &amp; Ahli K3 Listrik</a></li>
+        <li><a href="/pelatihan/pelatihan-tkbt-ii-sertifikasi-kemnaker-ri/">Bekerja di Ketinggian (TKBT)</a></li>
+        <li><a href="/pelatihan/pelatihan-teknisi-ruang-terbatas-sertifikasi-bnsp/">K3 Ruang Terbatas (Confined Space)</a></li>
+        <li><a href="/pelatihan/pelatihan-k3-operator-boiler-kelas-2-sertifikasi-kemnaker-ri/">Operator Boiler &amp; Bejana Tekan</a></li>
       </ul>
     </div>
 
@@ -114,14 +114,14 @@
       <h4>Sertifikasi BNSP &amp; ISO</h4>
       <ul>
         <li><a href="/pelatihan/ak3-bnsp/"><strong>Ahli K3 Umum BNSP</strong></a></li>
-        <li><a href="/pelatihan/pelatihan-pengawas-operasional-pertama-pop-minerba-bnsp/">POP Pertambangan Minerba</a></li>
-        <li><a href="/pelatihan/pelatihan-pengawas-operasional-madya-pom-minerba-bnsp/">POM Pertambangan Minerba</a></li>
-        <li><a href="/pelatihan/pelatihan-penanggung-jawab-operasional-pengolahan-air-limbah-popal-bnsp/">POPAL Pengolahan Air Limbah</a></li>
-        <li><a href="/pelatihan/pelatihan-pengelolaan-limbah-b3-plb3-bnsp/">Pengelolaan Limbah B3 (PLB3)</a></li>
-        <li><a href="/pelatihan/pelatihan-penanggung-jawab-pengendalian-pencemaran-udara-poppua-bnsp/">Pengendalian Udara (POPPU)</a></li>
+        <li><a href="/pelatihan/pelatihan-pop-pertambangan-sertifikasi-bnsp-online/">POP Pertambangan Minerba</a></li>
+        <li><a href="/pelatihan/pelatihan-pom-pertambangan-sertifikasi-bnsp-online/">POM Pertambangan Minerba</a></li>
+        <li><a href="/pelatihan/pelatihan-penanggung-jawab-operasional-pengolahan-air-limbah-popal-sertifikasi-bnsp/">POPAL Pengolahan Air Limbah</a></li>
+        <li><a href="/pelatihan/pelatihan-pemantauan-pengelolaan-limbah-bahan-berbahaya-dan-beracun-level-pengawas-pplb3-sertifikasi-bnsp/">Pengelolaan Limbah B3 (PLB3)</a></li>
+        <li><a href="/pelatihan/pelatihan-penanggung-jawab-pengendalian-pencemaran-udara-pppu-sertifikasi-bnsp/">Pengendalian Udara (POPPU)</a></li>
         <li><a href="/pelatihan/pelatihan-internal-auditor-iso-45001-online/">Internal Auditor ISO 45001</a></li>
-        <li><a href="/pelatihan/pelatihan-internal-auditor-iso-9001-14001-45001-qhse-online/">Lead Auditor Integrated QHSE</a></li>
-        <li><a href="/pelatihan/pelatihan-higiene-industri-muda-himu-bnsp/">Higiene Industri Muda (HIMU)</a></li>
+        <li><a href="/pelatihan/pelatihan-qhse-awareness-terintegrasi-iso-online/">Lead Auditor Integrated QHSE</a></li>
+        <li><a href="/pelatihan/pelatihan-ahli-higiene-industri-muda-sertifikasi-bnsp/">Higiene Industri Muda (HIMU)</a></li>
         <li><a href="/pelatihan/">Katalog Semua 140+ Program &rarr;</a></li>
       </ul>
     </div>
@@ -162,20 +162,20 @@
           <a href="/pelatihan-k3-solo/">Solo</a> · 
           <a href="/pelatihan-k3-cilegon/">Cilegon</a> · 
           <a href="/pelatihan-k3-bekasi/">Bekasi</a> · 
+          <a href="/pelatihan-k3-karawang/">Karawang</a> · 
+          <a href="/pelatihan-k3-tangerang/">Tangerang</a> · 
+          <a href="/pelatihan-k3-bogor/">Bogor</a> · 
           <a href="/pelatihan-k3-malang/">Malang</a>
         </li>
         <li style="margin-top:4px;font-size:12px;color:#9DB8CE;line-height:1.6;">
           <strong style="color:#fff;">Luar Jawa:</strong> 
           <a href="/pelatihan-k3-balikpapan/">Balikpapan</a> · 
           <a href="/pelatihan-k3-samarinda/">Samarinda</a> · 
-          <a href="/pelatihan-k3-banjarmasin/">Banjarmasin</a> · 
-          <a href="/pelatihan-k3-pontianak/">Pontianak</a> · 
           <a href="/pelatihan-k3-medan/">Medan</a> · 
           <a href="/pelatihan-k3-palembang/">Palembang</a> · 
           <a href="/pelatihan-k3-pekanbaru/">Pekanbaru</a> · 
           <a href="/pelatihan-k3-batam/">Batam</a> · 
           <a href="/pelatihan-k3-makassar/">Makassar</a> · 
-          <a href="/pelatihan-k3-manado/">Manado</a> · 
           <a href="/pelatihan-k3-denpasar/">Bali</a>
         </li>
         <li style="margin-top:8px;"><a href="/kota/" style="color:#FFB74D;font-weight:700;">📍 Direktori 20 Kota Layanan &rarr;</a></li>

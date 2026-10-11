@@ -32,8 +32,8 @@ $phone_disp = trim(chunk_split($phone_disp, 4, '-'), '-');
 $year       = date('Y');
 
 $canonical  = SITE_URL . '/ahli-k3-umum/';
-$page_title = 'Pelatihan & Sertifikasi Ahli K3 Umum (AK3U) Kemnaker RI & BNSP ' . $year . ' | Biaya, Syarat, & Jadwal';
-$meta_desc  = 'Pusat pendaftaran Pelatihan Ahli K3 Umum (AK3U) resmi Kemnaker RI & BNSP. Informasi lengkap rincian biaya pelatihan, syarat pendaftaran, jadwal ' . $year . ', jalur fresh graduate & in-house.';
+$page_title = 'Pelatihan Ahli K3 Umum (AK3U) Kemnaker RI & BNSP ' . $year;
+$meta_desc  = 'Pendaftaran Pelatihan Ahli K3 Umum (AK3U) resmi Kemnaker RI & BNSP ' . $year . '. Biaya terjangkau, syarat lengkap, jadwal terdekat, kelas fresh graduate & corporate.';
 
 // WhatsApp Pre-filled Links
 $wa_hero_msg     = "Halo Wahana Totalita, saya ingin informasi lengkap biaya, syarat, dan jadwal pelatihan Ahli K3 Umum {$year}. Mohon dibantu.";

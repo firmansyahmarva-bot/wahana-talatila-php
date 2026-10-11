@@ -347,7 +347,7 @@ function page_title(string $title = ''): string {
     $t = $title !== '' ? $title : ($page_title ?? ($meta_title ?? ''));
     if ($t) {
         $clean = preg_replace('/\s*[-|–—]\s*Wahana Totalita.*$/iu', '', trim($t));
-        return e(trim($clean, " -|–—"));
+        return trim($clean, " -|–—");
     }
     return 'Pelatihan K3 Resmi Kemnaker & BNSP | Wahana Totalita';
 }

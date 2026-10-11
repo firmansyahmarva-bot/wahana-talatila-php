@@ -153,6 +153,27 @@ if ($__path === '/pelatihan/pelatihan-tkpk-tingkat-1-kemnaker-ri' || $__path ===
     exit;
 }
 
+// ─── Legacy Course Redirects (Direct Course-to-Course 301) ───────────
+$__legacyCourseMap = [
+    '/pelatihan/pelatihan-auditor-smk3-kemnaker-ri-online' => '/pelatihan/pelatihan-auditor-sistem-manajemen-k3-sertifikasi-kemnaker-ri/',
+    '/pelatihan/pelatihan-k3-listrik-teknisi-kemnaker-ri' => '/pelatihan/pelatihan-k3-teknisi-listrik-sertifikasi-kemnaker-ri/',
+    '/pelatihan/pelatihan-k3-bekerja-di-ketinggian-tkbt-tkpk-kemnaker' => '/pelatihan/pelatihan-tkbt-ii-sertifikasi-kemnaker-ri/',
+    '/pelatihan/pelatihan-k3-ruang-terbatas-confined-space-kemnaker' => '/pelatihan/pelatihan-teknisi-ruang-terbatas-sertifikasi-bnsp/',
+    '/pelatihan/pelatihan-k3-pesawat-uap-bejana-tekan-kemnaker' => '/pelatihan/pelatihan-k3-operator-boiler-kelas-2-sertifikasi-kemnaker-ri/',
+    '/pelatihan/pelatihan-pengawas-operasional-pertama-pop-minerba-bnsp' => '/pelatihan/pelatihan-pop-pertambangan-sertifikasi-bnsp-online/',
+    '/pelatihan/pelatihan-pengawas-operasional-madya-pom-minerba-bnsp' => '/pelatihan/pelatihan-pom-pertambangan-sertifikasi-bnsp-online/',
+    '/pelatihan/pelatihan-penanggung-jawab-operasional-pengolahan-air-limbah-popal-bnsp' => '/pelatihan/pelatihan-penanggung-jawab-operasional-pengolahan-air-limbah-popal-sertifikasi-bnsp/',
+    '/pelatihan/pelatihan-pengelolaan-limbah-b3-plb3-bnsp' => '/pelatihan/pelatihan-pemantauan-pengelolaan-limbah-bahan-berbahaya-dan-beracun-level-pengawas-pplb3-sertifikasi-bnsp/',
+    '/pelatihan/pelatihan-penanggung-jawab-pengendalian-pencemaran-udara-poppua-bnsp' => '/pelatihan/pelatihan-penanggung-jawab-pengendalian-pencemaran-udara-pppu-sertifikasi-bnsp/',
+    '/pelatihan/pelatihan-internal-auditor-iso-9001-14001-45001-qhse-online' => '/pelatihan/pelatihan-qhse-awareness-terintegrasi-iso-online/',
+    '/pelatihan/pelatihan-higiene-industri-muda-himu-bnsp' => '/pelatihan/pelatihan-ahli-higiene-industri-muda-sertifikasi-bnsp/',
+];
+$__trimmedPath = rtrim($__path, '/');
+if (isset($__legacyCourseMap[$__trimmedPath])) {
+    header('Location: ' . $__legacyCourseMap[$__trimmedPath], true, 301);
+    exit;
+}
+
 // Redirect city pages not in current 20-city matrix to master /kota/ directory
 if (preg_match('#^/pelatihan-k3-([a-z0-9\-]+)/?$#', $__path, $__cm)) {
     header('Location: /kota/', true, 301);
