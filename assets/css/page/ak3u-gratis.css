@@ -1,0 +1,48 @@
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',system-ui,sans-serif;color:var(--slate-900);line-height:1.7;-webkit-font-smoothing:antialiased}
+.container{max-width:900px;margin:0 auto;padding:0 20px}
+.container-sm{max-width:680px;margin:0 auto;padding:0 20px}
+.hero{background:linear-gradient(160deg,var(--brand) 0%,var(--brand-mid) 100%);color:var(--surface);padding:64px 0 56px;position:relative;overflow:hidden;text-align:center}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 15% 60%,color-mix(in srgb, var(--accent) 25%, transparent),transparent 55%),radial-gradient(circle at 85% 20%,color-mix(in srgb, var(--surface) 7%, transparent),transparent 40%)}
+.hero::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:48px;background:linear-gradient(to bottom right,transparent 49%,var(--slate-100) 50%)}
+.hero .inner{position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:color-mix(in srgb, var(--surface) 15%, transparent);border:1px solid color-mix(in srgb, var(--surface) 25%, transparent);color:var(--surface);font-size:11px;font-weight:800;padding:6px 16px;border-radius:20px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:20px}
+.hero h1{font-size:clamp(1.6rem,4.5vw,2.5rem);font-weight:800;line-height:1.2;margin-bottom:14px;letter-spacing:-.02em}
+.hero-sub{font-size:1rem;color:color-mix(in srgb, var(--surface) 85%, transparent);max-width:600px;margin:0 auto}
+.btn-wa{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--whatsapp);color:var(--surface);padding:16px 32px;border-radius:14px;font-size:16px;font-weight:800;text-decoration:none;box-shadow:0 6px 24px color-mix(in srgb, var(--whatsapp) 40%, transparent);margin-top:24px}
+section{padding:48px 0;background:var(--slate-100)}
+section.white{background:var(--surface)}
+h2.section-title{font-size:1.5rem;font-weight:800;color:var(--slate-900);margin-bottom:20px;letter-spacing:-.02em}
+.intro-text{font-size:15.5px;color:var(--slate-700);line-height:1.85;max-width:720px;margin:0 auto 8px}
+.law-list{display:flex;flex-direction:column;gap:10px}
+.law-item{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:14px 18px}
+.law-item strong{display:block;font-size:14.5px;color:var(--brand);margin-bottom:3px}
+.law-item span{font-size:13.5px;color:var(--slate-600)}
+.quiz-list{display:flex;flex-direction:column;gap:14px}
+.quiz-item{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:18px 20px}
+.quiz-item .q-num{font-weight:800;color:var(--brand);font-size:14px;margin-bottom:6px}
+.quiz-item .q-text{font-size:14.5px;font-weight:600;color:var(--slate-900);margin-bottom:10px}
+.quiz-item .q-opts{list-style:none;font-size:13.5px;color:var(--slate-600);line-height:1.9;margin-bottom:8px}
+.quiz-item .q-ans{font-size:13px;font-weight:700;color:var(--brand);background:var(--success-bg);display:inline-block;padding:4px 12px;border-radius:20px}
+.term-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(max-width:640px){.term-grid{grid-template-columns:1fr}}
+.term-card{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:14px 16px}
+.term-card strong{display:block;font-size:14px;color:var(--brand);margin-bottom:3px}
+.term-card span{font-size:13px;color:var(--slate-600)}
+.faq-list{max-width:740px;margin:0 auto}
+.faq-item{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;margin-bottom:.75rem;overflow:hidden}
+.faq-q{width:100%;background:none;border:none;text-align:left;padding:16px 20px;font-family:inherit;font-size:15px;font-weight:700;color:var(--slate-900);cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.faq-q:hover{background:var(--slate-50)}
+.faq-q[aria-expanded="true"]{background:var(--brand);color:var(--surface)}
+.faq-arrow{transition:transform .3s}
+.faq-q[aria-expanded="true"] .faq-arrow{transform:rotate(180deg)}
+.faq-a{padding:0 20px;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s;font-size:14.5px;color:var(--slate-700);line-height:1.75}
+.faq-a.open{max-height:300px;padding:14px 20px 18px}
+.final-cta{background:linear-gradient(135deg,var(--brand),var(--brand-mid));color:var(--surface);padding:56px 0;text-align:center}
+.final-cta h2{font-size:1.8rem;font-weight:800;margin-bottom:10px}
+.final-cta p{font-size:15px;color:color-mix(in srgb, var(--surface) 85%, transparent)}
+
+/* wt-hero-height-fix-2026-07: this page's own .hero is a small custom hero, not the
+   homepage full-screen slideshow hero — cancel the global 100vh /
+   flex-centering from style.css so it doesn't leak in here. */
+.hero{min-height:auto!important;display:block!important}

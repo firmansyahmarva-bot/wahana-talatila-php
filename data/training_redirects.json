@@ -1,0 +1,298 @@
+[
+    {
+        "id": 1,
+        "old_slug": "pelatihan-teknis-pertek-limbah-b3-dan-emisi-udara-sertifikasi-bnsp-1",
+        "target_slug": "pelatihan-teknis-pertek-limbah-b3-dan-emisi-udara-sertifikasi-bnsp",
+        "target_category_slug": null,
+        "reason": "slug_changed",
+        "created_at": "2026-07-31 08:16:15"
+    },
+    {
+        "id": 2,
+        "old_slug": "pelatihan-penanggung-jawab-operasional-pengolahan-air-limbah-popal-sertifikasi-bnsp-1",
+        "target_slug": "pelatihan-penanggung-jawab-operasional-pengolahan-air-limbah-popal-sertifikasi-bnsp",
+        "target_category_slug": null,
+        "reason": "slug_changed",
+        "created_at": "2026-07-31 08:16:15"
+    },
+    {
+        "id": 3,
+        "old_slug": "pelatihan-pengambilan-contoh-uji-air-pcua-sertifikasi-bnsp-1",
+        "target_slug": "pelatihan-pengambilan-contoh-uji-air-pcua-sertifikasi-bnsp",
+        "target_category_slug": null,
+        "reason": "slug_changed",
+        "created_at": "2026-07-31 08:16:15"
+    },
+    {
+        "id": 4,
+        "old_slug": "pelatihan-operator-pengumpulan-limbah-b3-jenjang-kualifikasi-3-level-pelaksana-oplb3-sertifikasi-bnsp-1",
+        "target_slug": "pelatihan-operator-pengumpulan-limbah-b3-jenjang-kualifikasi-3-level-pelaksana-oplb3-sertifikasi-bnsp",
+        "target_category_slug": null,
+        "reason": "slug_changed",
+        "created_at": "2026-07-31 08:16:15"
+    },
+    {
+        "id": 5,
+        "old_slug": "pelatihan-penanggung-jawab-operasional-instalasi-pengendalian-pencemaran-udara-poippu-sertifikasi-bnsp-1",
+        "target_slug": "pelatihan-penanggung-jawab-operasional-instalasi-pengendalian-pencemaran-udara-poippu-sertifikasi-bnsp",
+        "target_category_slug": null,
+        "reason": "slug_changed",
+        "created_at": "2026-07-31 08:16:15"
+    },
+    {
+        "id": 6,
+        "old_slug": "pelatihan-pemantauan-pengelolaan-limbah-bahan-berbahaya-dan-beracun-level-pengawas-pplb3-sertifikasi-bnsp-1",
+        "target_slug": "pelatihan-pemantauan-pengelolaan-limbah-bahan-berbahaya-dan-beracun-level-pengawas-pplb3-sertifikasi-bnsp",
+        "target_category_slug": null,
+        "reason": "slug_changed",
+        "created_at": "2026-07-31 08:16:15"
+    },
+    {
+        "id": 7,
+        "old_slug": "pelatihan-penanggung-jawab-pengendalian-pencemaran-air-pppa-sertifikasi-bnsp-1",
+        "target_slug": "pelatihan-penanggung-jawab-pengendalian-pencemaran-air-pppa-sertifikasi-bnsp",
+        "target_category_slug": null,
+        "reason": "slug_changed",
+        "created_at": "2026-07-31 08:16:15"
+    },
+    {
+        "id": 8,
+        "old_slug": "pelatihan-penanggung-jawab-pengendalian-pencemaran-udara-pppu-sertifikasi-bnsp-1",
+        "target_slug": "pelatihan-penanggung-jawab-pengendalian-pencemaran-udara-pppu-sertifikasi-bnsp",
+        "target_category_slug": null,
+        "reason": "slug_changed",
+        "created_at": "2026-07-31 08:16:15"
+    },
+    {
+        "id": 9,
+        "old_slug": "pelatihan-manajer-pengolahan-limbah-b3-jenjang-kualifikasi-6-level-pengawas-mplb3-sertifikasi-bnsp-1",
+        "target_slug": "pelatihan-manajer-pengolahan-limbah-b3-jenjang-kualifikasi-6-level-pengawas-mplb3-sertifikasi-bnsp",
+        "target_category_slug": null,
+        "reason": "slug_changed",
+        "created_at": "2026-07-31 08:16:15"
+    },
+    {
+        "id": 10,
+        "old_slug": "pelatihan-pengumpulan-limbah-b3-jenjang-kualifikasi-6-level-pengawas-mplb3-sertifikasi-bnsp-1",
+        "target_slug": "pelatihan-pengumpulan-limbah-b3-jenjang-kualifikasi-6-level-pengawas-mplb3-sertifikasi-bnsp",
+        "target_category_slug": null,
+        "reason": "slug_changed",
+        "created_at": "2026-07-31 08:16:15"
+    },
+    {
+        "id": 11,
+        "old_slug": "pelatihan-ahli-k3-umum-sertifikasi-bnsp",
+        "target_slug": "pelatihan-ahli-k3-umum-sertifikasi-bnsp-online",
+        "target_category_slug": null,
+        "reason": "",
+        "created_at": "2026-08-08 18:00:22"
+    },
+    {
+        "id": 14,
+        "old_slug": "pelatihan-ahli-k3-umum-kemnaker-offline",
+        "target_slug": "pelatihan-ahli-k3-umum-sertifikasi-kemnaker-ri",
+        "target_category_slug": null,
+        "reason": "",
+        "created_at": "2026-08-01 18:23:36"
+    },
+    {
+        "id": 15,
+        "old_slug": "pelatihan-unit-p-keb-kelas-c-sertifikasi-kemnaker-ri",
+        "target_slug": "pelatihan-koordinator-unit-p-keb-kelas-b-sertifikasi-kemnaker-ri",
+        "target_category_slug": null,
+        "reason": "",
+        "created_at": "2026-08-05 01:32:55"
+    },
+    {
+        "id": 56,
+        "old_slug": "pelatihan-pppa-online",
+        "target_slug": "pelatihan-penanggung-jawab-pengendalian-pencemaran-air-pppa-sertifikasi-bnsp",
+        "target_category_slug": "lingkungan",
+        "reason": "deleted",
+        "created_at": "2026-08-10 07:52:34"
+    },
+    {
+        "id": 57,
+        "old_slug": "pelatihan-oplb3-online",
+        "target_slug": "pelatihan-pengambilan-contoh-uji-air-pcua-sertifikasi-bnsp",
+        "target_category_slug": "lingkungan",
+        "reason": "deleted",
+        "created_at": "2026-08-10 08:01:31"
+    },
+    {
+        "id": 58,
+        "old_slug": "pelatihan-hazops-online",
+        "target_slug": "pelatihan-hazard-dan-operability-studies-hazops-sertifikasi-bnsp",
+        "target_category_slug": "k3",
+        "reason": "deleted",
+        "created_at": "2026-08-11 07:21:08"
+    },
+    {
+        "id": 59,
+        "old_slug": "pelatihan-higiene-industri-madya-hima-online",
+        "target_slug": "pelatihan-ahli-higiene-industri-madya-sertifikasi-bnsp",
+        "target_category_slug": "k3",
+        "reason": "deleted",
+        "created_at": "2026-08-11 07:23:05"
+    },
+    {
+        "id": 60,
+        "old_slug": "pelatihan-ahli-k3-listrik-online",
+        "target_slug": "pelatihan-ahli-k3-listrik-sertifikasi-bnsp",
+        "target_category_slug": "k3",
+        "reason": "deleted",
+        "created_at": "2026-08-11 07:23:55"
+    },
+    {
+        "id": 61,
+        "old_slug": "pelatihan-pengawas-k3-migas-online",
+        "target_slug": "pelatihan-pengawas-k3-fasyankes-sertifikasi-bnsp/",
+        "target_category_slug": "k3",
+        "reason": "deleted",
+        "created_at": "2026-08-11 07:24:16"
+    },
+    {
+        "id": 64,
+        "old_slug": "pelatihan-popal-penanggung-jawab-pengendalian-pencemaran-air-limbah",
+        "target_slug": "pelatihan-penanggung-jawab-operasional-pengolahan-air-limbah-popal-sertifikasi-bnsp/",
+        "target_category_slug": "lingkungan",
+        "reason": "deleted",
+        "created_at": "2026-08-11 07:24:51"
+    },
+    {
+        "id": 65,
+        "old_slug": "pelatihan-pppu-online",
+        "target_slug": "pelatihan-penanggung-jawab-pengendalian-pencemaran-udara-pppu-sertifikasi-bnsp",
+        "target_category_slug": "lingkungan",
+        "reason": "deleted",
+        "created_at": "2026-08-11 07:25:05"
+    },
+    {
+        "id": 66,
+        "old_slug": "pelatihan-poippu-online",
+        "target_slug": "pelatihan-penanggung-jawab-operasional-instalasi-pengendalian-pencemaran-udara-poippu-sertifikasi-bnsp",
+        "target_category_slug": "lingkungan",
+        "reason": "deleted",
+        "created_at": "2026-08-11 07:25:22"
+    },
+    {
+        "id": 67,
+        "old_slug": "pelatihan-pcua-online",
+        "target_slug": "pelatihan-pengambilan-contoh-uji-air-pcua-sertifikasi-bnsp/",
+        "target_category_slug": "lingkungan",
+        "reason": "deleted",
+        "created_at": "2026-08-11 07:25:41"
+    },
+    {
+        "id": 68,
+        "old_slug": "pelatihan-pertek-limbah-b3-online",
+        "target_slug": "pelatihan-teknis-pertek-limbah-b3-dan-emisi-udara-sertifikasi-bnsp",
+        "target_category_slug": "lingkungan",
+        "reason": "deleted",
+        "created_at": "2026-08-11 07:26:09"
+    },
+    {
+        "id": 69,
+        "old_slug": "pelatihan-auditor-smk3-online",
+        "target_slug": null,
+        "target_category_slug": "k3",
+        "reason": "deleted",
+        "created_at": "2026-08-12 02:44:26"
+    },
+    {
+        "id": 70,
+        "old_slug": "pelatihan-higiene-industri-muda-himu-online",
+        "target_slug": null,
+        "target_category_slug": "k3",
+        "reason": "deleted",
+        "created_at": "2026-08-12 03:33:42"
+    },
+    {
+        "id": 71,
+        "old_slug": "pelatihan-authorized-gas-tester-agt-online",
+        "target_slug": null,
+        "target_category_slug": "k3",
+        "reason": "deleted",
+        "created_at": "2026-08-12 04:10:10"
+    },
+    {
+        "id": 72,
+        "old_slug": "pelatihan-pengawas-k3-laboratorium-online",
+        "target_slug": null,
+        "target_category_slug": "k3",
+        "reason": "deleted",
+        "created_at": "2026-08-12 04:35:05"
+    },
+    {
+        "id": 73,
+        "old_slug": "pelatihan-petugas-k3-laboratorium-online",
+        "target_slug": null,
+        "target_category_slug": "k3",
+        "reason": "deleted",
+        "created_at": "2026-08-12 04:35:54"
+    },
+    {
+        "id": 74,
+        "old_slug": "pelatihan-penanganan-bahaya-gas-h2s-online",
+        "target_slug": null,
+        "target_category_slug": "k3",
+        "reason": "deleted",
+        "created_at": "2026-08-12 06:23:40"
+    },
+    {
+        "id": 75,
+        "old_slug": "pelatihan-pengumpulan-limbah-b3-jenjang-kualifikasi-6-level-pengawas-mplb3-sertifikasi-bnsp",
+        "target_slug": null,
+        "target_category_slug": "lingkungan",
+        "reason": "deleted",
+        "created_at": "2026-08-12 06:29:32"
+    },
+    {
+        "id": 76,
+        "old_slug": "pelatihan-mplb3-online",
+        "target_slug": null,
+        "target_category_slug": "lingkungan",
+        "reason": "deleted",
+        "created_at": "2026-08-12 06:29:53"
+    },
+    {
+        "id": 77,
+        "old_slug": "pelatihan-petugas-p3k-first-aid-online",
+        "target_slug": null,
+        "target_category_slug": "k3",
+        "reason": "deleted",
+        "created_at": "2026-08-14 03:46:06"
+    },
+    {
+        "id": 78,
+        "old_slug": "pelatihan-authorized-gas-tester-sertifikasi-bnsp",
+        "target_slug": "pelatihanpelatihan-authorized-gas-tester-agt-online",
+        "target_category_slug": null,
+        "reason": "slug_changed",
+        "created_at": "2026-08-16 12:37:51"
+    },
+    {
+        "id": 79,
+        "old_slug": "pelatihanpelatihan-authorized-gas-tester-agt-online",
+        "target_slug": "pelatihan-authorized-gas-tester-agt-online",
+        "target_category_slug": null,
+        "reason": "slug_changed",
+        "created_at": "2026-08-16 12:38:43"
+    },
+    {
+        "id": 80,
+        "old_slug": "pelatihan-operator-k3-sertifikasi-bnsp",
+        "target_slug": null,
+        "target_category_slug": "k3",
+        "reason": "deleted",
+        "created_at": "2026-08-17 04:22:26"
+    },
+    {
+        "id": 81,
+        "old_slug": "pelatihan-ahli-k3-umum-sertifikasi-bnsp-online",
+        "target_slug": null,
+        "target_category_slug": "k3",
+        "reason": "deactivated",
+        "created_at": "2026-10-06 18:18:37"
+    }
+]

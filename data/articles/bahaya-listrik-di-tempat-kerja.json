@@ -1,0 +1,18 @@
+{
+    "id": 195,
+    "title": "5 Bahaya Listrik di Tempat Kerja dan Cara Mengendalikannya",
+    "slug": "bahaya-listrik-di-tempat-kerja",
+    "meta_title": "5 Bahaya Listrik di Tempat Kerja dan Cara Mengendalikannya",
+    "meta_desc": "Kenali 5 bahaya listrik di tempat kerja — sengatan, arc flash, kebakaran, ledakan area berbahaya, listrik statis — dan cara mengendalikannya.",
+    "keywords": null,
+    "category": "K3",
+    "thumbnail": null,
+    "content": "<h2>1. Sengatan Listrik (Electric Shock)</h2>\n<p>Kontak langsung dengan bagian bertegangan dapat menyebabkan sengatan listrik, mulai dari kejutan ringan hingga henti jantung dan kematian. Pengendalian: pastikan grounding/pembumian instalasi berfungsi baik, gunakan RCD/ELCB untuk memutus arus saat terjadi kebocoran, dan terapkan prosedur Lockout/Tagout (LOTO) sebelum bekerja pada instalasi.</p>\n<h2>2. Arc Flash (Ledakan Busur Listrik)</h2>\n<p>Arc flash adalah ledakan energi listrik yang terjadi saat arus mengalir melalui udara antara dua konduktor, dengan suhu yang dapat mencapai sekitar 20.000°C — lebih panas dari permukaan matahari. Pengendalian: gunakan APD tahan arc flash (arc-rated clothing), jaga jarak aman kerja (working distance), dan lakukan arc flash hazard analysis pada panel bertegangan tinggi.</p>\n<h2>3. Kebakaran Akibat Korsleting</h2>\n<p>Kabel yang terkelupas, sambungan longgar, atau beban berlebih (overload) dapat memicu percikan api dan kebakaran. Pengendalian: lakukan inspeksi kabel dan sambungan secara berkala, gunakan pengaman arus lebih (circuit breaker/fuse) sesuai kapasitas, dan hindari penggunaan stop kontak melebihi kapasitas yang dianjurkan.</p>\n<h2>4. Ledakan pada Area Berbahaya (Hazardous Area)</h2>\n<p>Di area dengan gas atau uap mudah terbakar — seperti kilang minyak dan pabrik kimia — percikan listrik dapat memicu ledakan besar. Pengendalian: gunakan peralatan listrik dengan sertifikasi explosion-proof sesuai klasifikasi area berbahaya, dan pastikan sistem ventilasi memadai.</p>\n<h2>5. Kejutan Listrik Statis</h2>\n<p>Listrik statis yang terakumulasi pada peralatan atau bahan tertentu dapat memicu percikan yang berbahaya, terutama di area dengan bahan mudah terbakar. Pengendalian: pasang grounding pada peralatan dan tangki penyimpanan bahan mudah terbakar, serta gunakan alas kaki dan pakaian anti-statis di area berisiko.</p>\n<p>Ingin tim Anda memahami dan mengendalikan seluruh bahaya listrik di tempat kerja secara sistematis? <a href=\"/k3-listrik/\">kunjungi halaman program K3 Listrik kami</a>.</p>",
+    "faq_data": null,
+    "author": "Wahana Totalita Konsultan",
+    "status": "published",
+    "published_at": "2026-07-12 08:19:36",
+    "view_count": 109,
+    "created_at": "2026-07-12 08:19:36",
+    "updated_at": "2026-10-13 08:01:24"
+}

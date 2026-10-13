@@ -1,0 +1,28 @@
+{
+    "id": 193,
+    "title": "Contoh Job Safety Analysis (JSA) untuk Pekerjaan pada Ketinggian",
+    "slug": "jsa-pekerjaan-ketinggian-contoh",
+    "meta_title": "Contoh JSA Pekerjaan Ketinggian: Studi Kasus Scaffolding",
+    "meta_desc": "Contoh JSA pekerjaan di ketinggian untuk pemasangan scaffolding, dipecah per tahapan bahaya dan pengendaliannya.",
+    "keywords": "contoh JSA ketinggian, job safety analysis scaffolding, JSA pekerjaan ketinggian, analisis keselamatan kerja",
+    "category": "K3",
+    "thumbnail": null,
+    "content": "<p>Contoh paling jelas untuk memahami JSA (Job Safety Analysis) bukan penjelasan teori, tapi melihat langsung bagaimana satu pekerjaan dipecah jadi tahapan kecil, lalu tiap tahapan dinilai bahayanya sendiri-sendiri. Berikut contoh JSA untuk pekerjaan pemasangan scaffolding di ketinggian sedang, salah satu pekerjaan yang paling sering membutuhkan analisis tertulis sebelum dimulai.</p>\r\n\r\n<table>\r\n<thead><tr><th>Tahapan Pekerjaan</th><th>Potensi Bahaya</th><th>Pengendalian</th></tr></thead>\r\n<tbody>\r\n<tr><td>Persiapan dan pengangkutan material scaffolding ke lokasi</td><td>Tertimpa komponen scaffolding saat pengangkutan manual, terjepit saat menurunkan dari kendaraan</td><td>Gunakan alat bantu angkut, minimal dua orang untuk komponen berat, area drop zone dipagari</td></tr>\r\n<tr><td>Pemasangan base plate dan standard awal</td><td>Struktur ambruk jika base plate tidak rata atau tanah tidak stabil</td><td>Periksa kestabilan permukaan tanah, gunakan sole board pada permukaan lunak</td></tr>\r\n<tr><td>Naik ke level berikutnya untuk memasang ledger dan transom</td><td>Jatuh dari ketinggian saat struktur belum sepenuhnya lengkap</td><td>Gunakan sistem proteksi jatuh sementara sampai platform berikutnya terpasang penuh</td></tr>\r\n<tr><td>Pemasangan platform kerja dan guardrail</td><td>Terjatuh melalui celah platform yang belum lengkap</td><td>Pasang platform dari sisi yang sudah terlindungi guardrail, jangan berdiri di platform yang belum diikat penuh</td></tr>\r\n<tr><td>Inspeksi akhir sebelum digunakan tim lain</td><td>Cacat struktural tidak terdeteksi karena inspeksi terburu-buru</td><td>Inspeksi dilakukan personel kompeten terpisah dari tim pemasang, gunakan sistem tagging</td></tr>\r\n</tbody>\r\n</table>\r\n\r\n<p>Pola yang sering kami lihat pada JSA yang kurang efektif: tahapan pekerjaan ditulis terlalu umum, misalnya cuma \"pasang scaffolding\" sebagai satu baris, tanpa memecah proses jadi tahapan yang benar-benar berurutan seperti contoh di atas. Semakin general tahapannya ditulis, semakin sulit menemukan bahaya spesifik yang sebenarnya muncul di titik tertentu dalam proses tersebut.</p>\r\n\r\n<h2>Siapa yang Seharusnya Menyusun JSA</h2>\r\n<p>JSA idealnya disusun bersama antara pengawas yang memahami regulasi dan pekerja yang benar-benar akan melakukan pekerjaan tersebut, bukan disusun sepihak oleh tim K3 dari balik meja. Pekerja lapangan sering tahu detail praktis yang tidak terpikirkan pengawas — misalnya kondisi permukaan tanah spesifik di lokasi hari itu, atau kebiasaan tertentu dalam mengangkut material yang ternyata berisiko tapi sudah dianggap \"biasa\" oleh tim.</p>\r\n\r\n<h2>Kapan JSA Perlu Ditinjau Ulang</h2>\r\n<p>JSA bukan dokumen sekali jadi untuk seluruh durasi proyek. Setiap perubahan kondisi — cuaca, jenis material, tim yang bertugas, atau tahap pekerjaan yang berbeda — idealnya memicu peninjauan ulang, bukan mengandalkan JSA yang sama untuk semua kondisi karena dianggap \"sudah pernah dibuat sebelumnya.\"</p>\r\n\r\n<p>JSA yang baik selalu jadi bagian dari <a href=\"https://wahanatotalita.com/artikel/rk3k-rencana-k3-kontrak-panduan/\">RK3K</a> proyek konstruksi, khususnya untuk pekerjaan berisiko tinggi seperti kerja di ketinggian.</p>\r\n",
+    "faq_data": "[{\"question\":\"Siapa yang seharusnya menyusun JSA?\",\"answer\":\"Disusun bersama antara pengawas yang memahami regulasi dan pekerja yang benar-benar akan melakukan pekerjaan, bukan sepihak oleh tim K3 dari balik meja.\"},{\"question\":\"Kapan JSA perlu ditinjau ulang?\",\"answer\":\"Setiap perubahan kondisi seperti cuaca, jenis material, tim yang bertugas, atau tahap pekerjaan berbeda, bukan mengandalkan JSA yang sama untuk semua kondisi.\"}]",
+    "author": "Wahana Totalita Konsultan",
+    "status": "published",
+    "published_at": "2026-07-12 08:03:12",
+    "view_count": 148,
+    "created_at": "2026-07-12 08:03:12",
+    "updated_at": "2026-10-13 07:23:08",
+    "faq_list": [
+        {
+            "question": "Siapa yang seharusnya menyusun JSA?",
+            "answer": "Disusun bersama antara pengawas yang memahami regulasi dan pekerja yang benar-benar akan melakukan pekerjaan, bukan sepihak oleh tim K3 dari balik meja."
+        },
+        {
+            "question": "Kapan JSA perlu ditinjau ulang?",
+            "answer": "Setiap perubahan kondisi seperti cuaca, jenis material, tim yang bertugas, atau tahap pekerjaan berbeda, bukan mengandalkan JSA yang sama untuk semua kondisi."
+        }
+    ]
+}

@@ -1,0 +1,252 @@
+[
+    {
+        "id": 1,
+        "name": "Yogyakarta",
+        "slug": "yogyakarta",
+        "province": "DI Yogyakarta",
+        "province_slug": "di-yogyakarta",
+        "population": 422732,
+        "industry_type": "Pendidikan, Pariwisata, UMKM",
+        "price_modifier": 1
+    },
+    {
+        "id": 2,
+        "name": "Jakarta Selatan",
+        "slug": "jakarta-selatan",
+        "province": "DKI Jakarta",
+        "province_slug": "dki-jakarta",
+        "population": 2226000,
+        "industry_type": "Keuangan, Teknologi, Jasa",
+        "price_modifier": 1.3
+    },
+    {
+        "id": 3,
+        "name": "Jakarta Pusat",
+        "slug": "jakarta-pusat",
+        "province": "DKI Jakarta",
+        "province_slug": "dki-jakarta",
+        "population": 914000,
+        "industry_type": "Pemerintahan, Keuangan",
+        "price_modifier": 1.3
+    },
+    {
+        "id": 4,
+        "name": "Surabaya",
+        "slug": "surabaya",
+        "province": "Jawa Timur",
+        "province_slug": "jawa-timur",
+        "population": 2874699,
+        "industry_type": "Manufaktur, Pelabuhan, Perdagangan",
+        "price_modifier": 1.15
+    },
+    {
+        "id": 5,
+        "name": "Bandung",
+        "slug": "bandung",
+        "province": "Jawa Barat",
+        "province_slug": "jawa-barat",
+        "population": 2575478,
+        "industry_type": "Manufaktur, Tekstil, Teknologi",
+        "price_modifier": 1.1
+    },
+    {
+        "id": 6,
+        "name": "Semarang",
+        "slug": "semarang",
+        "province": "Jawa Tengah",
+        "province_slug": "jawa-tengah",
+        "population": 1814110,
+        "industry_type": "Industri, Pelabuhan, Perdagangan",
+        "price_modifier": 1.05
+    },
+    {
+        "id": 7,
+        "name": "Medan",
+        "slug": "medan",
+        "province": "Sumatera Utara",
+        "province_slug": "sumatera-utara",
+        "population": 2435252,
+        "industry_type": "Perkebunan, Industri, Perdagangan",
+        "price_modifier": 1.05
+    },
+    {
+        "id": 8,
+        "name": "Makassar",
+        "slug": "makassar",
+        "province": "Sulawesi Selatan",
+        "province_slug": "sulawesi-selatan",
+        "population": 1508154,
+        "industry_type": "Pelabuhan, Perdagangan, Konstruksi",
+        "price_modifier": 1
+    },
+    {
+        "id": 9,
+        "name": "Palembang",
+        "slug": "palembang",
+        "province": "Sumatera Selatan",
+        "province_slug": "sumatera-selatan",
+        "population": 1672641,
+        "industry_type": "Migas, Pertambangan, Industri",
+        "price_modifier": 1.05
+    },
+    {
+        "id": 10,
+        "name": "Balikpapan",
+        "slug": "balikpapan",
+        "province": "Kalimantan Timur",
+        "province_slug": "kalimantan-timur",
+        "population": 794298,
+        "industry_type": "Migas, Pertambangan, Konstruksi",
+        "price_modifier": 1.2
+    },
+    {
+        "id": 11,
+        "name": "Samarinda",
+        "slug": "samarinda",
+        "province": "Kalimantan Timur",
+        "province_slug": "kalimantan-timur",
+        "population": 812597,
+        "industry_type": "Pertambangan, Migas, Kehutanan",
+        "price_modifier": 1.15
+    },
+    {
+        "id": 12,
+        "name": "Batam",
+        "slug": "batam",
+        "province": "Kepulauan Riau",
+        "province_slug": "kepulauan-riau",
+        "population": 1196396,
+        "industry_type": "Industri, Galangan Kapal, Elektronik",
+        "price_modifier": 1.2
+    },
+    {
+        "id": 13,
+        "name": "Pekanbaru",
+        "slug": "pekanbaru",
+        "province": "Riau",
+        "province_slug": "riau",
+        "population": 1093416,
+        "industry_type": "Migas, Kelapa Sawit, Perdagangan",
+        "price_modifier": 1.1
+    },
+    {
+        "id": 14,
+        "name": "Manado",
+        "slug": "manado",
+        "province": "Sulawesi Utara",
+        "province_slug": "sulawesi-utara",
+        "population": 451916,
+        "industry_type": "Pariwisata, Perikanan, Perdagangan",
+        "price_modifier": 0.95
+    },
+    {
+        "id": 15,
+        "name": "Denpasar",
+        "slug": "denpasar",
+        "province": "Bali",
+        "province_slug": "bali",
+        "population": 925000,
+        "industry_type": "Pariwisata, Perhotelan, MICE",
+        "price_modifier": 1.1
+    },
+    {
+        "id": 16,
+        "name": "Bekasi",
+        "slug": "bekasi",
+        "province": "Jawa Barat",
+        "province_slug": "jawa-barat",
+        "population": 2543676,
+        "industry_type": "Manufaktur, Otomotif, Elektronik",
+        "price_modifier": 1.15
+    },
+    {
+        "id": 17,
+        "name": "Tangerang",
+        "slug": "tangerang",
+        "province": "Banten",
+        "province_slug": "banten",
+        "population": 2139891,
+        "industry_type": "Manufaktur, Tekstil, Elektronik",
+        "price_modifier": 1.15
+    },
+    {
+        "id": 18,
+        "name": "Bogor",
+        "slug": "bogor",
+        "province": "Jawa Barat",
+        "province_slug": "jawa-barat",
+        "population": 1081009,
+        "industry_type": "Industri, Pertanian, Perdagangan",
+        "price_modifier": 1.05
+    },
+    {
+        "id": 19,
+        "name": "Depok",
+        "slug": "depok",
+        "province": "Jawa Barat",
+        "province_slug": "jawa-barat",
+        "population": 2484000,
+        "industry_type": "Perdagangan, Jasa, Pendidikan",
+        "price_modifier": 1.1
+    },
+    {
+        "id": 20,
+        "name": "Malang",
+        "slug": "malang",
+        "province": "Jawa Timur",
+        "province_slug": "jawa-timur",
+        "population": 895387,
+        "industry_type": "Industri, Pendidikan, Perdagangan",
+        "price_modifier": 1
+    },
+    {
+        "id": 21,
+        "name": "Solo",
+        "slug": "solo",
+        "province": "Jawa Tengah",
+        "province_slug": "jawa-tengah",
+        "population": 516102,
+        "industry_type": "Batik, Industri, Perdagangan",
+        "price_modifier": 0.95
+    },
+    {
+        "id": 22,
+        "name": "Jayapura",
+        "slug": "jayapura",
+        "province": "Papua",
+        "province_slug": "papua",
+        "population": 315872,
+        "industry_type": "Konstruksi, Pertambangan, Pemerintahan",
+        "price_modifier": 1.1
+    },
+    {
+        "id": 23,
+        "name": "Pontianak",
+        "slug": "pontianak",
+        "province": "Kalimantan Barat",
+        "province_slug": "kalimantan-barat",
+        "population": 607618,
+        "industry_type": "Pertambangan, Kehutanan, Perdagangan",
+        "price_modifier": 1
+    },
+    {
+        "id": 24,
+        "name": "Banjarmasin",
+        "slug": "banjarmasin",
+        "province": "Kalimantan Selatan",
+        "province_slug": "kalimantan-selatan",
+        "population": 700869,
+        "industry_type": "Pertambangan Batubara, Industri",
+        "price_modifier": 1.05
+    },
+    {
+        "id": 25,
+        "name": "Mataram",
+        "slug": "mataram",
+        "province": "Nusa Tenggara Barat",
+        "province_slug": "nusa-tenggara-barat",
+        "population": 481000,
+        "industry_type": "Pariwisata, Pertambangan",
+        "price_modifier": 0.95
+    }
+]

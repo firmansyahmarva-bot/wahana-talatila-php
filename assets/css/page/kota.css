@@ -1,0 +1,176 @@
+.dir-hero {
+    background: linear-gradient(135deg, var(--brand) 0%, var(--brand) 60%, var(--brand-mid) 100%);
+    color: var(--surface);
+    padding: 56px 0 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .dir-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 20% 30%, color-mix(in srgb, var(--accent) 15%, transparent), transparent 45%);
+    pointer-events: none;
+  }
+  .dir-eyebrow {
+    display: inline-block;
+    background: color-mix(in srgb, var(--surface) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--surface) 25%, transparent);
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--warning-border);
+    margin-bottom: 16px;
+  }
+  .dir-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 900;
+    line-height: 1.22;
+    margin-bottom: 14px;
+    color: var(--surface);
+  }
+  .dir-title em { font-style: normal; color: var(--warning); }
+  .dir-sub {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--slate-200);
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .dir-section {
+    padding: 56px 0;
+    background: var(--slate-50);
+  }
+  .dir-region-group {
+    margin-bottom: 48px;
+  }
+  .dir-region-heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--brand);
+    margin-bottom: 22px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--slate-200);
+  }
+  .dir-region-heading span {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--slate-500);
+    background: var(--slate-200);
+    padding: 3px 10px;
+    border-radius: 999px;
+  }
+  .dir-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .dir-card {
+    background: var(--surface);
+    border: 1.5px solid var(--slate-200);
+    border-radius: 12px;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 8px color-mix(in srgb, var(--black) 3%, transparent);
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .dir-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--brand);
+    box-shadow: 0 10px 24px color-mix(in srgb, var(--brand-mid) 12%, transparent);
+  }
+  .dir-card-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .dir-card-name {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--brand);
+    margin: 0;
+  }
+  .dir-card-prov {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--slate-600);
+    background: var(--slate-100);
+    padding: 3px 8px;
+    border-radius: 6px;
+  }
+  .dir-card-tag {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 10px;
+    display: block;
+  }
+  .dir-card-desc {
+    font-size: 13.5px;
+    color: var(--slate-500);
+    line-height: 1.6;
+    margin-bottom: 18px;
+    flex-grow: 1;
+  }
+  .dir-card-link {
+    font-size: 13.5px;
+    font-weight: 800;
+    color: var(--brand);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 12px;
+    border-top: 1px solid var(--slate-100);
+  }
+  .dir-card:hover .dir-card-link {
+    color: var(--accent);
+  }
+  .dir-inhouse-box {
+    background: linear-gradient(135deg, var(--brand) 0%, var(--brand) 100%);
+    color: var(--surface);
+    border-radius: 14px;
+    padding: 36px 32px;
+    margin-top: 48px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .dir-inhouse-box h3 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    color: var(--surface);
+  }
+  .dir-inhouse-box p {
+    font-size: 14.5px;
+    color: var(--slate-300);
+    margin: 0;
+    max-width: 600px;
+    line-height: 1.6;
+  }
+  .dir-btn-inhouse {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--whatsapp);
+    color: var(--surface) !important;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 800;
+    font-size: 15px;
+    text-decoration: none;
+    box-shadow: 0 4px 14px color-mix(in srgb, var(--whatsapp) 35%, transparent);
+  }

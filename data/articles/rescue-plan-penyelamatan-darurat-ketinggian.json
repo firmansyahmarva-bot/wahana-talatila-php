@@ -1,0 +1,32 @@
+{
+    "id": 192,
+    "title": "Rescue Plan: Prosedur Penyelamatan Darurat Pekerja di Ketinggian",
+    "slug": "rescue-plan-penyelamatan-darurat-ketinggian",
+    "meta_title": "Rescue Plan: Penyelamatan Darurat Pekerja di Ketinggian",
+    "meta_desc": "Mengapa rescue plan menentukan hidup-mati saat pekerja jatuh, elemen wajibnya, dan penanganan suspension trauma setelah diturunkan.",
+    "keywords": "rescue plan ketinggian, suspension trauma, penyelamatan darurat ketinggian, evakuasi pekerja jatuh",
+    "category": "K3",
+    "thumbnail": null,
+    "content": "<p>Ada satu fakta yang sering tidak dijelaskan dengan cukup tegas dalam pelatihan ketinggian: pekerja yang tergantung tak sadar di harness setelah jatuh punya waktu terbatas sebelum suspension trauma menjadi fatal, bahkan jika harness-nya sendiri sudah berhasil mencegah dia jatuh ke tanah. Harness yang menahan tubuh dalam posisi tegak dalam waktu lama justru bisa memicu penumpukan darah di kaki, menurunkan aliran darah ke jantung dan otak. Inilah alasan rescue plan bukan pelengkap dokumen — ini yang menentukan apakah pekerja yang jatuh benar-benar selamat atau tidak.</p>\r\n\r\n<h2>Kenapa Menunggu Ambulans Saja Tidak Cukup</h2>\r\n<p>Waktu tempuh ambulans ke lokasi proyek, ditambah waktu mereka menaiki struktur untuk mencapai pekerja yang tergantung, sering kali sudah melewati jendela waktu kritis suspension trauma. Rescue plan yang efektif mengasumsikan tim internal harus mampu melakukan evakuasi awal sendiri dalam hitungan menit, bukan menunggu bantuan eksternal tiba sebagai langkah pertama.</p>\r\n\r\n<h2>Elemen yang Wajib Ada dalam Rescue Plan</h2>\r\n<p>Rencana yang hanya berisi nomor telepon darurat bukan rescue plan yang memadai. Yang dibutuhkan: identifikasi siapa di tim yang terlatih melakukan rescue teknis, peralatan rescue khusus yang tersedia dan siap pakai di lokasi (bukan disimpan jauh di gudang pusat), rute evakuasi tercepat dari titik kerja ke area aman, dan prosedur pertolongan pertama spesifik untuk suspension trauma setelah pekerja berhasil diturunkan.</p>\r\n\r\n<h2>Simulasi, Bukan Sekadar Dokumen</h2>\r\n<p>Rescue plan yang tidak pernah disimulasikan hampir pasti akan gagal saat benar-benar dibutuhkan. Tim yang tahu prosedur di atas kertas tapi belum pernah mempraktikkannya cenderung kehilangan waktu berharga saat kejadian sesungguhnya terjadi — mencari peralatan yang ternyata tidak ada di tempat yang seharusnya, atau ragu siapa yang bertanggung jawab mengambil keputusan cepat.</p>\r\n\r\n<h2>Posisi Tubuh Setelah Diturunkan</h2>\r\n<p>Satu detail yang sering terlewat: pekerja yang baru diturunkan dari posisi tergantung tidak boleh langsung dibaringkan datar. Posisi ini justru bisa memperparah efek suspension trauma karena darah yang terkumpul di kaki mengalir mendadak ke jantung. Posisi setengah duduk dengan kaki tertekuk selama beberapa menit pertama umumnya lebih aman sebelum penanganan medis lanjutan tiba.</p>\r\n\r\n<p>Rescue plan yang baik selalu terintegrasi dengan sertifikasi kompetensi personel yang benar-benar memahami risiko ini secara teknis, seperti yang kami ajarkan dalam <a href=\"https://wahanatotalita.com/pelatihan/pelatihan-tkbt-ii-sertifikasi-kemnaker-ri/\">Pelatihan TKBT 2</a>.</p>\r\n",
+    "faq_data": "[{\"question\":\"Apa itu suspension trauma?\",\"answer\":\"Kondisi berbahaya saat pekerja tergantung tak bergerak di harness dalam waktu lama, menyebabkan penumpukan darah di kaki dan menurunkan aliran darah ke jantung dan otak.\"},{\"question\":\"Kenapa tidak cukup hanya mengandalkan ambulans untuk rescue ketinggian?\",\"answer\":\"Waktu tempuh dan akses ambulans ke lokasi sering melewati jendela waktu kritis suspension trauma, sehingga tim internal harus mampu melakukan evakuasi awal sendiri.\"},{\"question\":\"Bagaimana posisi tubuh yang aman setelah pekerja diturunkan dari harness?\",\"answer\":\"Posisi setengah duduk dengan kaki tertekuk, bukan langsung dibaringkan datar, karena posisi datar bisa memperparah efek suspension trauma.\"}]",
+    "author": "Wahana Totalita Konsultan",
+    "status": "published",
+    "published_at": "2026-07-12 08:03:12",
+    "view_count": 109,
+    "created_at": "2026-07-12 08:03:12",
+    "updated_at": "2026-10-12 13:55:47",
+    "faq_list": [
+        {
+            "question": "Apa itu suspension trauma?",
+            "answer": "Kondisi berbahaya saat pekerja tergantung tak bergerak di harness dalam waktu lama, menyebabkan penumpukan darah di kaki dan menurunkan aliran darah ke jantung dan otak."
+        },
+        {
+            "question": "Kenapa tidak cukup hanya mengandalkan ambulans untuk rescue ketinggian?",
+            "answer": "Waktu tempuh dan akses ambulans ke lokasi sering melewati jendela waktu kritis suspension trauma, sehingga tim internal harus mampu melakukan evakuasi awal sendiri."
+        },
+        {
+            "question": "Bagaimana posisi tubuh yang aman setelah pekerja diturunkan dari harness?",
+            "answer": "Posisi setengah duduk dengan kaki tertekuk, bukan langsung dibaringkan datar, karena posisi datar bisa memperparah efek suspension trauma."
+        }
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "id": 197,
+    "title": "Arc Flash: Pengertian, Bahaya, dan Cara Pencegahannya di Industri",
+    "slug": "arc-flash-bahaya-dan-pencegahan",
+    "meta_title": "Arc Flash: Pengertian, Bahaya, dan Cara Pencegahan di Industri",
+    "meta_desc": "Pelajari apa itu arc flash, mengapa berbahaya (suhu hingga 20.000°C), faktor risiko, dan cara pencegahannya di tempat kerja.",
+    "keywords": null,
+    "category": "K3",
+    "thumbnail": null,
+    "content": "<h2>Apa itu Arc Flash?</h2>\n<p>Arc flash adalah ledakan energi listrik yang terjadi ketika arus mengalir melalui udara antara dua konduktor bertegangan, atau antara konduktor bertegangan dengan tanah/bagian yang di-grounding. Peristiwa ini dapat dipicu oleh berbagai faktor, termasuk kegagalan isolasi, debu konduktif, kelembapan, atau kesalahan kerja saat menangani panel bertegangan.</p>\n<h2>Mengapa Arc Flash Sangat Berbahaya</h2>\n<p>Suhu arc flash dapat mencapai sekitar 20.000°C — lebih panas dari permukaan matahari — dalam hitungan milidetik. Panas ekstrem ini mampu menguapkan logam seperti tembaga dan aluminium secara eksplosif, menghasilkan gelombang tekanan yang dapat membuat panel pecah, puing beterbangan, serta radiasi cahaya dan panas yang menyebabkan luka bakar serius pada pekerja di sekitarnya — bahkan tanpa kontak langsung dengan sumber listrik.</p>\n<h2>Faktor Risiko yang Meningkatkan Bahaya Arc Flash</h2>\n<ul>\n<li>Bekerja pada panel bertegangan tanpa melakukan LOTO terlebih dahulu</li>\n<li>Peralatan listrik yang sudah tua atau kurang terawat</li>\n<li>Kelembapan atau debu konduktif di dalam panel listrik</li>\n<li>Kesalahan prosedur kerja, seperti menggunakan alat yang tidak sesuai standar saat bekerja pada panel bertegangan</li>\n</ul>\n<h2>Cara Pencegahan Arc Flash</h2>\n<ol>\n<li>Lakukan arc flash hazard analysis untuk mengidentifikasi tingkat risiko setiap panel/instalasi</li>\n<li>Terapkan LOTO sebelum melakukan pekerjaan pada instalasi listrik yang berpotensi arc flash</li>\n<li>Gunakan APD tahan arc flash (arc-rated face shield, sarung tangan, dan pakaian) sesuai kategori risiko</li>\n<li>Pasang label peringatan arc flash pada panel yang teridentifikasi berisiko tinggi</li>\n<li>Jaga jarak kerja aman (working distance/arc flash boundary) sesuai hasil analisis risiko</li>\n</ol>\n<h2>Kompetensi Analisis Arc Flash dalam Pelatihan Ahli K3 Listrik</h2>\n<p>Kemampuan melakukan arc flash hazard analysis dan risk assessment adalah salah satu kompetensi lanjutan yang diajarkan khusus dalam pelatihan Ahli K3 Listrik, membedakannya dari jenjang Teknisi K3 Listrik yang berfokus pada pelaksanaan teknis harian.</p>\n<p>Ingin tim Anda memahami cara mencegah dan menganalisis risiko arc flash? <a href=\"/k3-listrik/\">kunjungi halaman program K3 Listrik kami</a>.</p>",
+    "faq_data": null,
+    "author": "Wahana Totalita Konsultan",
+    "status": "published",
+    "published_at": "2026-07-12 08:19:36",
+    "view_count": 99,
+    "created_at": "2026-07-12 08:19:36",
+    "updated_at": "2026-10-12 13:56:23"
+}

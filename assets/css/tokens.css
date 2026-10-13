@@ -1,0 +1,120 @@
+/* ============================================================
+   Wahana Totalita — tokens.css
+   Semantic Design Tokens (Stripe Tech Standard: Ink #0A2540 + Indigo #635BFF)
+   ============================================================ */
+:root {
+  /* Semantic Brand Tokens */
+  --brand:          #0A2540;
+  --brand-dark:     #071B30;
+  --brand-mid:      #1E3A5F;
+  --brand-light:    #F4F3FF;
+  --accent:         #635BFF;
+  --accent-dark:    #4E44E6;
+  --accent-light:   #F4F3FF;
+  --surface:        #FFFFFF;
+  --surface-subtle: #F6F9FC;
+  --surface-alt:    #F6F9FC;
+  --ink:            #0A2540;
+  --mut:            #425466;
+  --border:         #E3E8EE;
+  --border-card:    rgba(227, 232, 238, 0.9);
+
+  /* Legacy Name Aliases (kept for 100% backward compatibility) */
+  --green:          #0A2540;
+  --green-dark:     #071B30;
+  --green-mid:      #1E3A5F;
+  --green-light:    #F6F9FC;
+  --orange:         #635BFF;
+  --orange-dark:    #4E44E6;
+  --orange-light:   #F4F3FF;
+  --text:           #0A2540;
+  --text-muted:     #425466;
+  --text-light:     #8898AA;
+
+  /* Redesign 2026 Palette Aliases */
+  --n900:           #071B30;
+  --n800:           #0A2540;
+  --n700:           #1E3A5F;
+  --n100:           #F6F9FC;
+  --o500:           #635BFF;
+  --o400:           #7C75FF;
+  --o100:           #F4F3FF;
+
+  /* Extended palette: the ONLY place raw colors are allowed. Everything else uses var(--token). */
+  --accent-soft:    #7C75FF;
+  --black:          #000000;
+  --slate-50:       #F8FAFC;
+  --slate-100:      #F1F5F9;
+  --slate-200:      #E2E8F0;
+  --slate-300:      #CBD5E1;
+  --slate-400:      #94A3B8;
+  --slate-500:      #64748B;
+  --slate-600:      #475569;
+  --slate-700:      #334155;
+  --slate-800:      #1E293B;
+  --slate-900:      #0F172A;
+  --success:        #16A34A;
+  --success-dark:   #166534;
+  --success-bg:     #F0FDF4;
+  --success-soft:   #DCFCE7;
+  --success-border: #BBF7D0;
+  --danger:         #DC2626;
+  --danger-dark:    #991B1B;
+  --danger-bg:      #FEE2E2;
+  --danger-border:  #FECACA;
+  --warning:        #F59E0B;
+  --warning-dark:   #B45309;
+  --warning-text:   #92400E;
+  --warning-bg:     #FEF3C7;
+  --warning-border: #FDE68A;
+  --info:           #2563EB;
+  --info-dark:      #1E40AF;
+  --info-bg:        #EFF6FF;
+  --info-border:    #BFDBFE;
+  --whatsapp:       #25D366;
+  --whatsapp-dark:  #20BA5A;
+
+  /* Layout & Elevations (Stripe Multi-Layer Soft Shadows) */
+  --container:      1200px;
+  --nav-h:          68px;
+  --radius-sm:      8px;
+  --radius:         16px;
+  --radius-md:      16px;
+  --radius-lg:      20px;
+  --radius-full:    9999px;
+  --shadow-sm:      0 1px 3px rgba(50, 50, 93, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+  --shadow-md:      0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -2px rgba(0, 0, 0, 0.04), 0 10px 20px -3px rgba(50, 50, 93, 0.06);
+  --shadow-lg:      0 18px 32px -8px rgba(50, 50, 93, 0.12), 0 8px 16px -4px rgba(0, 0, 0, 0.06);
+
+  /* Motion Tokens */
+  --ease-standard:  cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-menu:      cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-enter:     cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-exit:      cubic-bezier(0.4, 0, 1, 1);
+  --ease-bounce:    cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out-quart: cubic-bezier(.77, 0, .175, 1);
+  --ease-out-back:  cubic-bezier(.34, 1.3, .64, 1);
+  --dur-fast:       150ms;
+  --dur-hover:      180ms;
+  --dur-base:       250ms;
+  --dur-menu:       280ms;
+  --dur-slow:       400ms;
+  --dur-enter:      560ms;
+  --lift-sm:        translateY(-2px);
+  --lift-md:        translateY(-4px);
+  --lift-lg:        translateY(-6px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 0ms !important;
+    --dur-hover: 0ms !important;
+    --dur-base: 0ms !important;
+    --dur-menu: 0ms !important;
+    --dur-slow: 0ms !important;
+    --dur-enter: 0ms !important;
+    --lift-sm: none !important;
+    --lift-md: none !important;
+    --lift-lg: none !important;
+  }
+}
