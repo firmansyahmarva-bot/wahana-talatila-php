@@ -16,17 +16,17 @@ if (APP_DEBUG) {
     error_reporting(0);
 }
 
-// ─── Database Credentials  ← CHANGE THESE BEFORE UPLOADING ──────────────
-define('DB_HOST',    'localhost');
-define('DB_NAME',    'u566907099_wahana_db');
-define('DB_USER',    'u566907099_billalpenacons');
-define('DB_PASS',    'Hati@4413');
-define('DB_CHARSET', 'utf8mb4');
-
 // ─── Untracked Local/Server Secrets (Ignored by Git) ───────────────────────
 if (file_exists(__DIR__ . '/secrets.php')) {
     require_once __DIR__ . '/secrets.php';
 }
+
+// ─── Fallback Database Credentials (Overridden by secrets.php) ────────────
+defined('DB_HOST')    || define('DB_HOST',    'localhost');
+defined('DB_NAME')    || define('DB_NAME',    'u566907099_wahana_db');
+defined('DB_USER')    || define('DB_USER',    'u566907099_billalpenacons');
+defined('DB_PASS')    || define('DB_PASS',    '');
+defined('DB_CHARSET') || define('DB_CHARSET', 'utf8mb4');
 
 // ─── Site Constants ───────────────────────────────────────────────────────
 define('SITE_URL',         'https://wahanatotalita.com');  // no trailing slash
@@ -613,41 +613,10 @@ function course_schema(array $t): string {
     return json_encode($schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
 }
 
-// ─── Theme Helpers ───────────────────────────────────────────────────────────
-function _hex_clamp(int $v): int { return max(0, min(255, $v)); }
-
-function hex_darken(string $hex, int $amt): string {
-    $hex = ltrim($hex,'#');
-    return sprintf('#%02x%02x%02x',
-        _hex_clamp(hexdec(substr($hex,0,2)) - $amt),
-        _hex_clamp(hexdec(substr($hex,2,2)) - $amt),
-        _hex_clamp(hexdec(substr($hex,4,2)) - $amt)
-    );
-}
-function hex_lighten(string $hex, int $amt): string {
-    $hex = ltrim($hex,'#');
-    return sprintf('#%02x%02x%02x',
-        _hex_clamp(hexdec(substr($hex,0,2)) + $amt),
-        _hex_clamp(hexdec(substr($hex,2,2)) + $amt),
-        _hex_clamp(hexdec(substr($hex,4,2)) + $amt)
-    );
-}
-function hex_to_rgb(string $hex): array {
-    $hex = ltrim($hex,'#');
-    return [hexdec(substr($hex,0,2)), hexdec(substr($hex,2,2)), hexdec(substr($hex,4,2))];
-}
+// ─── Theme & Asset Helpers ──────────────────────────────────────────────────
 function is_valid_hex(string $v): bool {
     return (bool) preg_match('/^#[0-9A-Fa-f]{6}$/', $v);
 }
-
-const THEME_FONTS = [
-    'Plus Jakarta Sans' => 'Plus+Jakarta+Sans:wght@400;500;600;700;800',
-    'Poppins'           => 'Poppins:wght@400;500;600;700;800',
-    'Nunito Sans'       => 'Nunito+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800',
-    'DM Sans'           => 'DM+Sans:wght@400;500;600;700;800',
-    'Outfit'            => 'Outfit:wght@400;500;600;700;800',
-    'Inter'             => 'Inter:wght@400;500;600;700;800',
-];
 
 function asset_v(string $path): string {
     $doc_root = !empty($_SERVER['DOCUMENT_ROOT']) ? $_SERVER['DOCUMENT_ROOT'] : __DIR__;
@@ -660,28 +629,6 @@ function asset_v(string $path): string {
 
 function theme_font_url(array $s = []): string {
     return 'https://fonts.googleapis.com/css2?family=Lexend:wght@500;600;700;800&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&display=swap';
-}
-
-function theme_css_vars(array $s): string {
-    $prim   = is_valid_hex($s['theme_color_primary'] ?? '') ? $s['theme_color_primary'] : 'var(--brand)';
-    $accent = is_valid_hex($s['theme_color_accent']  ?? '') ? $s['theme_color_accent']  : 'var(--accent)';
-
-    $prim_dark  = hex_darken($prim,  15);
-    $prim_mid   = hex_lighten($prim, 18);
-    $prim_light = 'var(--surface-subtle)';
-    $acc_dark   = hex_darken($accent, 20);
-    $acc_light  = 'var(--accent-light)';
-
-    return "<style>
-:root{
-  --brand:{$prim};--brand-dark:{$prim_dark};--brand-mid:{$prim_mid};
-  --accent:{$accent};--accent-dark:{$acc_dark};--accent-light:{$acc_light};
-  --green:{$prim};--green-dark:{$prim_dark};--green-mid:{$prim_mid};
-  --green-light:{$prim_light};
-  --orange:{$accent};--orange-dark:{$acc_dark};--orange-light:{$acc_light};
-  --ink:{$prim};
-}
-</style>";
 }
 
 function theme_logo_html(array $s, string $cls = 'nav-logo-icon'): string {
