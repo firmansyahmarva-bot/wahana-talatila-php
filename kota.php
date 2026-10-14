@@ -786,7 +786,7 @@ if ($city_type === 'energy_mining') {
 <meta name="twitter:title"      content="<?=htmlspecialchars($metaTitle)?>">
 <meta name="twitter:description" content="<?=htmlspecialchars($metaDesc)?>">
 <meta name="robots"             content="index,follow">
-<meta name="theme-color"        content="var(--brand)">
+<meta name="theme-color"        content="#1b4332">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png">
 
 <!-- JSON-LD: LocalBusiness & EducationalOrganization Schema -->

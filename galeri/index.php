@@ -146,7 +146,7 @@ $canon_url  = SITE_URL . '/galeri/';
 <meta property="og:url"         content="<?= e($canon_url) ?>">
 <meta property="og:image"       content="<?= SITE_URL . e($s['og_image'] ?? '/assets/img/og-cover.jpg') ?>">
 <meta name="twitter:card"       content="summary_large_image">
-<meta name="theme-color"        content="<?= e(is_valid_hex($s['theme_color_primary'] ?? '') ? $s['theme_color_primary'] : ($s['brand_color'] ?? 'var(--brand)')) ?>">
+<meta name="theme-color"        content="<?= e(is_valid_hex($s['theme_color_primary'] ?? '') ? $s['theme_color_primary'] : ($s['brand_color'] ?? '#1b4332')) ?>">
 <?php if (!empty($s['gtm_id'])): ?>
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','<?= e($s['gtm_id']) ?>');</script>
 <?php endif; ?>
