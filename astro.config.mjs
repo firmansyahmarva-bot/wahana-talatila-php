@@ -7,5 +7,8 @@ export default defineConfig({
   trailingSlash: 'always',
   build: {
     format: 'directory'
+  },
+  redirects: {
+    '/pelatihan/ahli-k3-umum-surabaya/': '/pelatihan-k3-surabaya/'
   }
 });
