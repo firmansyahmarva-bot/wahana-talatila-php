@@ -1,0 +1,118 @@
+---
+interface Props {
+  currentPath?: string;
+  isHome?: boolean;
+}
+
+const { currentPath = '/', isHome = false } = Astro.props;
+---
+
+<nav class={`navbar ${isHome ? '' : 'on-light-hero'}`} id="navbar">
+  <div class="container nav-inner">
+    <a href="/" class="nav-logo" aria-label="Wahana Totalita Konsultan — Pelatihan K3 & Sertifikasi Resmi">
+      <img src="/assets/img/logo-wt.png" alt="Wahana Totalita" class="nav-logo-img" width="160" height="40" />
+      <span class="nav-logo-text">
+        <strong>Wahana Totalita</strong>
+      </span>
+    </a>
+
+    <!-- Single Unified Responsive Search Form -->
+    <form action="/pelatihan/" method="get" class="nav-search" id="nav-search-form" role="search">
+      <span class="nav-search-icon" aria-hidden="true">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </span>
+      <input type="search" name="q" class="nav-search-input" placeholder="Cari pelatihan..." aria-label="Cari pelatihan" autocomplete="off" />
+      <button type="submit" class="nav-search-btn" aria-label="Cari">
+        <span class="nav-search-btn-label">Cari</span>
+        <svg class="nav-search-btn-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+      <div class="nav-search-dropdown" id="nav-search-dropdown" style="display:none;" role="listbox" aria-label="Saran pencarian"></div>
+    </form>
+
+    <ul class="nav-links" id="nav-links">
+      <li><a href="/pelatihan/" class={currentPath.startsWith('/pelatihan') ? 'active' : ''}>Pelatihan</a></li>
+      <li><a href="/ahli-k3-umum/" class={currentPath === '/ahli-k3-umum/' ? 'active' : ''}>Ahli K3 Umum</a></li>
+      <li><a href="/jadwal/" class={currentPath.startsWith('/jadwal') ? 'active' : ''}>Jadwal</a></li>
+      <li class="nav-dropdown">
+        <a href="/keselamatan-kerja/" class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+          Bidang &amp; Kota
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="vertical-align:middle;margin-left:3px">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </a>
+        <div class="nav-dropdown-menu" role="menu" style="min-width:540px;">
+          <div class="nav-dropdown-grid" style="grid-template-columns: repeat(2, 1fr);">
+            <div class="nav-dropdown-col">
+              <div class="nav-dropdown-heading">🏭 Sektor Keahlian K3</div>
+              <a href="/k3-konstruksi/" class="nav-dropdown-item">
+                <span class="nav-di-icon">🏗️</span>
+                <span><strong>K3 Konstruksi</strong><br><small>Gedung, sipil &amp; infrastruktur</small></span>
+              </a>
+              <a href="/k3-migas/" class="nav-dropdown-item">
+                <span class="nav-di-icon">🛢️</span>
+                <span><strong>K3 Minyak &amp; Gas</strong><br><small>Hulu-hilir &amp; petrokimia</small></span>
+              </a>
+              <a href="/k3-listrik/" class="nav-dropdown-item">
+                <span class="nav-di-icon">⚡</span>
+                <span><strong>K3 Listrik &amp; Energi</strong><br><small>Pembangkit &amp; instalasi</small></span>
+              </a>
+              <a href="/k3-kimia/" class="nav-dropdown-item">
+                <span class="nav-di-icon">🧪</span>
+                <span><strong>K3 Kimia &amp; Toksikologi</strong><br><small>B3 &amp; pengendalian bahaya</small></span>
+              </a>
+              <a href="/k3-ketinggian/" class="nav-dropdown-item">
+                <span class="nav-di-icon">🧗</span>
+                <span><strong>K3 Ketinggian (TKBT/TKPK)</strong><br><small>Rope access &amp; tower</small></span>
+              </a>
+              <a href="/k3-kebakaran/" class="nav-dropdown-item">
+                <span class="nav-di-icon">🔥</span>
+                <span><strong>K3 Kebakaran</strong><br><small>Regu Damkar &amp; Ahli K3</small></span>
+              </a>
+            </div>
+            <div class="nav-dropdown-col">
+              <div class="nav-dropdown-heading">🏙️ Kota Pelatihan Prioritas</div>
+              <a href="/pelatihan-k3-yogyakarta/" class="nav-dropdown-item">
+                <span class="nav-di-icon">🏛️</span>
+                <span><strong>Yogyakarta (Pusat)</strong><br><small>Public training reguler tiap bulan</small></span>
+              </a>
+              <a href="/pelatihan-k3-jakarta/" class="nav-dropdown-item">
+                <span class="nav-di-icon">🏢</span>
+                <span><strong>Jakarta &amp; Jabodetabek</strong><br><small>Corporate &amp; in-house training</small></span>
+              </a>
+              <a href="/pelatihan-k3-surabaya/" class="nav-dropdown-item">
+                <span class="nav-di-icon">⚓</span>
+                <span><strong>Surabaya &amp; Jatim</strong><br><small>Industri maritim &amp; manufaktur</small></span>
+              </a>
+              <a href="/pelatihan-k3-balikpapan/" class="nav-dropdown-item">
+                <span class="nav-di-icon">🏗️</span>
+                <span><strong>Balikpapan &amp; IKN</strong><br><small>Mining, migas &amp; konstruksi IKN</small></span>
+              </a>
+              <div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);">
+                <a href="/kota/" style="color:var(--brand);font-size:12px;font-weight:700;display:block;text-align:right;">Lihat 20 Kota Layanan &rarr;</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li><a href="/artikel/" class={currentPath.startsWith('/artikel') ? 'active' : ''}>Artikel</a></li>
+      <li><a href="/perusahaan/" class={currentPath.startsWith('/perusahaan') ? 'active' : ''}>Tentang Kami</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <a href="https://wa.me/6287759151278?text=Halo%20Wahana%20Totalita,%20saya%20ingin%20konsultasi%20pelatihan%20K3" class="btn btn-primary nav-cta" target="_blank" rel="noopener">
+        <span>Konsultasi WA</span>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu navigasi" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+</nav>

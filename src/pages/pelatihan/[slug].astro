@@ -1,0 +1,135 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const programmatic = await getCollection('programmaticTrainings');
+  const trainings = await getCollection('trainings');
+
+  const paths: any[] = [];
+
+  // 1. Programmatic 352 courses
+  for (const item of programmatic) {
+    paths.push({
+      params: { slug: item.data.slug },
+      props: {
+        type: 'programmatic',
+        data: item.data,
+      },
+    });
+  }
+
+  // 2. Standard 148 trainings
+  for (const item of trainings) {
+    paths.push({
+      params: { slug: item.data.slug },
+      props: {
+        type: 'training',
+        data: item.data,
+      },
+    });
+  }
+
+  return paths;
+}
+
+interface Props {
+  type: 'programmatic' | 'training';
+  data: any;
+}
+
+const { type, data } = Astro.props;
+
+let pageTitle = '';
+let pageDesc = '';
+let canonicalUrl = '';
+let schemas: any[] = [];
+let htmlContent = '';
+
+if (type === 'programmatic') {
+  pageTitle = data.title;
+  pageDesc = data.description || data.title;
+  canonicalUrl = data.canonical || `https://wahanatotalita.com/pelatihan/${data.slug}/`;
+  schemas = Array.isArray(data.schemas) ? data.schemas : [];
+  
+  // Clean outer main tag if present
+  let raw = data.content || '';
+  raw = raw.replace(/^<main\s*[^>]*>/i, '').replace(/<\/main>\s*$/i, '');
+  htmlContent = raw;
+} else {
+  pageTitle = data.meta_title || `${data.name} — Wahana Totalita`;
+  pageDesc = data.meta_desc || data.description || data.name;
+  canonicalUrl = `https://wahanatotalita.com/pelatihan/${data.slug}/`;
+  htmlContent = data.long_content || data.description || '';
+
+  schemas = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Course',
+      name: data.name,
+      description: pageDesc,
+      provider: {
+        '@type': 'Organization',
+        name: 'PT Wahana Totalita Konsultan',
+        url: 'https://wahanatotalita.com',
+      },
+      offers: {
+        '@type': 'Offer',
+        price: data.price || '0',
+        priceCurrency: 'IDR',
+        category: data.certification || 'Sertifikasi K3',
+      },
+    },
+  ];
+}
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDesc}
+  canonical={canonicalUrl}
+  schemas={schemas}
+>
+  {type === 'programmatic' ? (
+    <div class="programmatic-course-page" set:html={htmlContent} />
+  ) : (
+    <div class="training-detail-page">
+      <div style="background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand) 100%); color: var(--surface); padding: 50px 0;">
+        <div class="container" style="max-width: 1000px; margin: 0 auto; padding: 0 20px;">
+          <div style="font-size: 13px; color: var(--slate-300); margin-bottom: 15px;">
+            <a href="/" style="color: var(--slate-300); text-decoration: none;">Beranda</a> &rsaquo;
+            <a href="/pelatihan/" style="color: var(--slate-300); text-decoration: none;">Pelatihan</a> &rsaquo;
+            <span style="color: #fff; font-weight: 600;">{data.category_name || 'K3'}</span>
+          </div>
+          <span style="display: inline-block; background: rgba(99, 91, 255, 0.2); color: #7C75FF; padding: 4px 10px; border-radius: 4px; font-weight: 700; font-size: 12px; margin-bottom: 12px; border: 1px solid rgba(99,91,255,0.4);">
+            {data.certification || 'Sertifikasi Resmi'}
+          </span>
+          <h1 style="font-size: clamp(26px, 4vw, 40px); font-weight: 800; line-height: 1.25; margin-bottom: 15px; color: #FFFFFF;">
+            {data.name}
+          </h1>
+          <p style="font-size: 16px; color: var(--slate-200); line-height: 1.6; max-width: 800px; margin-bottom: 25px;">
+            {data.description}
+          </p>
+          <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
+            <a
+              href={`https://wa.me/6287759151278?text=${encodeURIComponent('Halo Wahana Totalita, saya ingin daftar/tanya pelatihan: ' + data.name)}`}
+              class="btn btn-primary"
+              target="_blank"
+              rel="noopener"
+              style="background: var(--accent); color: #fff; padding: 12px 24px; border-radius: 6px; font-weight: 700; text-decoration: none;"
+            >
+              Daftar / Tanya Biaya
+            </a>
+            <span style="font-size: 15px; font-weight: 800; color: #fff;">
+              {data.price_label || 'Hubungi Kami'}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="container" style="max-width: 1000px; margin: 40px auto 60px; padding: 0 20px;">
+        <div style="font-size: 16px; line-height: 1.8; color: var(--text);" set:html={htmlContent} />
+      </div>
+    </div>
+  )}
+</Layout>

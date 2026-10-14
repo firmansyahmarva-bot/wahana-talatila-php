@@ -1,0 +1,71 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const trainings = await getCollection('trainings');
+const categories = await getCollection('categories');
+
+// Filter active trainings and sort
+const activeTrainings = trainings.filter((t) => t.data.is_active !== 0);
+
+const title = 'Katalog Pelatihan K3, Lingkungan & Sertifikasi BNSP | Wahana Totalita';
+const description = 'Daftar lengkap program pembinaan Ahli K3 Umum, Sertifikasi BNSP, K3 Konstruksi, Lingkungan Hidup, Pemadam Kebakaran, dan Operator Alat Berat.';
+const canonical = 'https://wahanatotalita.com/pelatihan/';
+---
+
+<Layout title={title} description={description} canonical={canonical}>
+  <div style="background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand) 100%); color: var(--surface); padding: 50px 0;">
+    <div class="container" style="max-width: 1100px; margin: 0 auto; padding: 0 20px; text-align: center;">
+      <h1 style="font-size: clamp(26px, 4vw, 40px); font-weight: 800; margin-bottom: 12px; color: #FFFFFF;">
+        Katalog Pelatihan &amp; Sertifikasi K3
+      </h1>
+      <p style="font-size: 16px; color: var(--slate-300); max-width: 650px; margin: 0 auto;">
+        Temukan program pelatihan dan sertifikasi kompetensi resmi Kemnaker RI, BNSP, dan Kementerian ESDM sesuai kebutuhan profesi dan industri Anda.
+      </p>
+    </div>
+  </div>
+
+  <div style="max-width: 1100px; margin: 40px auto 60px; padding: 0 20px;">
+    <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 25px;">
+      {categories.map((c) => (
+        <span style="background: var(--surface-subtle); border: 1px solid var(--border); padding: 6px 12px; border-radius: 16px; font-size: 12px; font-weight: 600; color: var(--mut);">
+          {c.data.name}
+        </span>
+      ))}
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 15px;">
+      <p style="font-size: 14px; color: var(--mut); margin: 0;">
+        Menampilkan <strong>{activeTrainings.length}</strong> program pelatihan resmi.
+      </p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px;">
+      {activeTrainings.map((t) => (
+        <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s;">
+          <div style="padding: 22px; flex: 1; display: flex; flex-direction: column;">
+            <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--accent); margin-bottom: 8px;">
+              {t.data.category_name || 'Pelatihan K3'}
+            </span>
+            <h2 style="font-size: 16px; font-weight: 700; margin-bottom: 10px; line-height: 1.35;">
+              <a href={`/pelatihan/${t.data.slug}/`} style="color: var(--brand); text-decoration: none;">
+                {t.data.name}
+              </a>
+            </h2>
+            <p style="font-size: 13px; color: var(--mut); line-height: 1.5; margin-bottom: 16px; flex: 1;">
+              {t.data.meta_desc ? `${t.data.meta_desc.slice(0, 100)}...` : ''}
+            </p>
+            <div style="border-top: 1px solid var(--border); padding-top: 12px; display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 13px; font-weight: 800; color: var(--brand);">
+                {t.data.price_label || 'Hubungi Kami'}
+              </span>
+              <a href={`/pelatihan/${t.data.slug}/`} style="font-size: 12px; font-weight: 700; color: var(--accent); text-decoration: none;">
+                Detail Program &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</Layout>

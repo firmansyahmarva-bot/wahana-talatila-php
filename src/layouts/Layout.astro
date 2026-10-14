@@ -1,0 +1,90 @@
+---
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+  ogType?: string;
+  hreflangs?: Array<{ lang: string; href: string }>;
+  schemas?: any[];
+  isHome?: boolean;
+}
+
+const {
+  title,
+  description = 'Wahana Totalita Konsultan menyediakan pelatihan K3, Lingkungan, Mining & ISO terakreditasi resmi KEMNAKER RI dan BNSP.',
+  canonical = Astro.url.href,
+  ogImage = 'https://wahanatotalita.com/assets/img/og-cover.jpg',
+  ogType = 'website',
+  hreflangs = [],
+  schemas = [],
+  isHome = false,
+} = Astro.props;
+
+// Default site hreflang reciprocal set if on homepage
+const defaultHreflangs = isHome
+  ? [
+      { lang: 'id', href: 'https://wahanatotalita.com/' },
+      { lang: 'en', href: 'https://wahanatotalita.com/en/' },
+      { lang: 'zh-Hans', href: 'https://wahanatotalita.com/zh/' },
+      { lang: 'x-default', href: 'https://wahanatotalita.com/' },
+    ]
+  : hreflangs;
+---
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+
+  <!-- Reciprocal Hreflang Tags -->
+  {defaultHreflangs.map((item) => (
+    <link rel="alternate" hreflang={item.lang} href={item.href} />
+  ))}
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicon-180.png" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content={ogType} />
+  <meta property="og:site_name" content="PT Wahana Totalita Konsultan" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={ogImage} />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+  <meta name="theme-color" content="#1b4332" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/assets/css/tokens.css" />
+  <link rel="stylesheet" href="/assets/css/core.css" />
+  <link rel="stylesheet" href="/assets/css/components.css" />
+
+  <!-- Structured Data JSON-LD Schemas -->
+  {schemas.map((schema) => (
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  ))}
+</head>
+<body>
+  <Navbar currentPath={Astro.url.pathname} isHome={isHome} />
+  <main id="konten-utama">
+    <slot />
+  </main>
+  <Footer />
+</body>
+</html>

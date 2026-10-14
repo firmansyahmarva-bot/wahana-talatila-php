@@ -1,0 +1,131 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles');
+  return articles.map((article) => ({
+    params: { slug: article.data.slug },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props;
+const {
+  title,
+  meta_title,
+  meta_desc,
+  category,
+  author,
+  published_at,
+  content,
+  faq_list,
+  slug,
+  thumbnail,
+} = article.data;
+
+const pageTitle = meta_title || `${title} — Wahana Totalita`;
+const pageDesc = meta_desc || title;
+const canonicalUrl = `https://wahanatotalita.com/artikel/${slug}/`;
+const imageUrl = thumbnail || 'https://wahanatotalita.com/assets/img/og-cover.jpg';
+
+// JSON-LD Article Schema
+const schemas: Record<string, any>[] = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': canonicalUrl,
+    },
+    headline: title,
+    description: pageDesc,
+    image: imageUrl,
+    author: {
+      '@type': 'Person',
+      name: author || 'PT Wahana Totalita Konsultan',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'PT Wahana Totalita Konsultan',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://wahanatotalita.com/assets/img/logo-wt.png',
+      },
+    },
+    datePublished: published_at || '2026-01-01',
+    dateModified: article.data.updated_at || published_at || '2026-01-01',
+  },
+];
+
+// Add FAQ schema if present
+if (Array.isArray(faq_list) && faq_list.length > 0) {
+  schemas.push({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq_list.map((item: any) => ({
+      '@type': 'Question',
+      name: item.q || item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.a || item.answer,
+      },
+    })),
+  });
+}
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDesc}
+  canonical={canonicalUrl}
+  ogImage={imageUrl}
+  ogType="article"
+  schemas={schemas}
+>
+  <div style="background: var(--surface-subtle); border-bottom: 1px solid var(--border); padding: 15px 0;">
+    <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 20px; font-size: 13px; color: var(--mut);">
+      <a href="/" style="color: var(--mut); text-decoration: none;">Beranda</a> &rsaquo;
+      <a href="/artikel/" style="color: var(--mut); text-decoration: none;">Artikel</a> &rsaquo;
+      <span style="color: var(--brand); font-weight: 600;">{category || 'K3'}</span>
+    </div>
+  </div>
+
+  <article style="max-width: 900px; margin: 40px auto 60px; padding: 0 20px;">
+    <header style="margin-bottom: 30px;">
+      <span style="display: inline-block; background: var(--accent-light); color: var(--accent); font-weight: 700; font-size: 12px; padding: 4px 10px; border-radius: 4px; text-transform: uppercase; margin-bottom: 12px;">
+        {category || 'K3 & Regulasi'}
+      </span>
+      <h1 style="font-size: clamp(24px, 4vw, 36px); font-weight: 800; color: var(--brand); line-height: 1.3; margin-bottom: 15px;">
+        {title}
+      </h1>
+      <div style="display: flex; gap: 15px; font-size: 13px; color: var(--mut); border-bottom: 1px solid var(--border); padding-bottom: 15px;">
+        <span>Penulis: <strong>{author || 'Tim Ahli K3'}</strong></span>
+        <span>&bull;</span>
+        <span>{published_at ? new Date(published_at).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' }) : ''}</span>
+      </div>
+    </header>
+
+    <div class="article-body" style="font-size: 16px; line-height: 1.8; color: var(--text);" set:html={content} />
+
+    {Array.isArray(faq_list) && faq_list.length > 0 && (
+      <section style="margin-top: 50px; border-top: 2px solid var(--border); padding-top: 30px;">
+        <h2 style="font-size: 22px; font-weight: 800; color: var(--brand); margin-bottom: 20px;">
+          Pertanyaan Umum (FAQ)
+        </h2>
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          {faq_list.map((faq: any) => (
+            <div style="background: var(--surface-subtle); border: 1px solid var(--border); border-radius: 8px; padding: 18px;">
+              <h3 style="font-size: 16px; font-weight: 700; color: var(--brand); margin-bottom: 8px;">
+                {faq.q || faq.question}
+              </h3>
+              <p style="font-size: 14px; line-height: 1.6; color: var(--mut); margin: 0;">
+                {faq.a || faq.answer}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+  </article>
+</Layout>

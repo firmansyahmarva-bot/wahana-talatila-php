@@ -1,0 +1,60 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const articles = await getCollection('articles');
+
+// Sort by published_at desc
+articles.sort((a, b) => {
+  const dateA = new Date(a.data.published_at || 0).getTime();
+  const dateB = new Date(b.data.published_at || 0).getTime();
+  return dateB - dateA;
+});
+
+const title = 'Pusat Artikel & Regulasi K3 Indonesia — Wahana Totalita';
+const description = 'Kumpulan panduan komprehensif, standar K3 Kemnaker, sertifikasi BNSP, SMK3, dan keselamatan kerja industri terpercaya di Indonesia.';
+const canonical = 'https://wahanatotalita.com/artikel/';
+---
+
+<Layout title={title} description={description} canonical={canonical}>
+  <div style="background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand) 100%); color: var(--surface); padding: 50px 0;">
+    <div class="container" style="max-width: 1100px; margin: 0 auto; padding: 0 20px; text-align: center;">
+      <h1 style="font-size: clamp(26px, 4vw, 40px); font-weight: 800; margin-bottom: 12px; color: #FFFFFF;">
+        Pusat Panduan &amp; Edukasi K3
+      </h1>
+      <p style="font-size: 16px; color: var(--slate-300); max-width: 650px; margin: 0 auto;">
+        Artikel resmi, bedah undang-undang ketenagakerjaan, modul teknis sertifikasi, dan tips keselamatan industri.
+      </p>
+    </div>
+  </div>
+
+  <div style="max-width: 1100px; margin: 40px auto 60px; padding: 0 20px;">
+    <p style="font-size: 14px; color: var(--mut); margin-bottom: 24px;">
+      Menampilkan <strong>{articles.length}</strong> artikel dan panduan resmi.
+    </p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px;">
+      {articles.map((a) => (
+        <article style="background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s;">
+          <span style="font-size: 11px; font-weight: 700; color: var(--accent); text-transform: uppercase; margin-bottom: 8px;">
+            {a.data.category || 'K3 & Regulasi'}
+          </span>
+          <h2 style="font-size: 17px; font-weight: 700; line-height: 1.4; margin-bottom: 12px;">
+            <a href={`/artikel/${a.data.slug}/`} style="color: var(--brand); text-decoration: none;">
+              {a.data.title}
+            </a>
+          </h2>
+          <p style="font-size: 13px; color: var(--mut); line-height: 1.5; margin-bottom: 16px; flex: 1;">
+            {a.data.meta_desc ? `${a.data.meta_desc.slice(0, 120)}...` : ''}
+          </p>
+          <div style="display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--text-light); border-top: 1px solid var(--border); padding-top: 12px;">
+            <span>{a.data.author || 'Tim Ahli K3'}</span>
+            <a href={`/artikel/${a.data.slug}/`} style="color: var(--accent); font-weight: 700; text-decoration: none;">
+              Baca Selengkapnya &rarr;
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</Layout>

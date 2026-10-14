@@ -1,0 +1,131 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allTrainings = await getCollection('trainings');
+const allCategories = await getCollection('categories');
+const allArticles = await getCollection('articles');
+
+// Featured trainings
+const featuredTrainings = allTrainings
+  .filter((t) => t.data.is_active !== 0)
+  .slice(0, 8);
+
+// Latest articles
+const latestArticles = allArticles
+  .filter((a) => a.data.status === 'published' || !a.data.status)
+  .slice(0, 6);
+
+const title = 'Pelatihan K3 Resmi Kemnaker & BNSP | Wahana Konsultan K3';
+const description = 'Wahana Totalita Konsultan menyediakan pelatihan K3, Lingkungan, Mining & ISO terakreditasi resmi KEMNAKER RI dan BNSP. Online & offline. Berbasis di Yogyakarta.';
+---
+
+<Layout title={title} description={description} isHome={true}>
+  <!-- Hero Section -->
+  <section class="hero-section" style="background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand) 100%); color: var(--surface); padding: 70px 0 60px;">
+    <div class="container hero-inner" style="max-width: 1100px; margin: 0 auto; padding: 0 20px; text-align: center;">
+      <span class="hero-badge" style="display: inline-block; background: rgba(99, 91, 255, 0.2); color: #7C75FF; padding: 6px 14px; border-radius: 20px; font-weight: 700; font-size: 13px; margin-bottom: 20px; border: 1px solid rgba(99,91,255,0.4);">
+        🛡️ PJK3 RESMI KEMNAKER RI & LSP BNSP
+      </span>
+      <h1 style="font-size: clamp(28px, 5vw, 48px); font-weight: 800; line-height: 1.2; margin-bottom: 20px; color: #FFFFFF;">
+        Pusat Pelatihan K3 &amp; Sertifikasi BNSP Terakreditasi Nasional
+      </h1>
+      <p style="font-size: 17px; line-height: 1.6; max-width: 760px; margin: 0 auto 30px; color: var(--slate-300);">
+        Tingkatkan kompetensi kerja dan pemenuhan regulasi keselamatan industri bersama Wahana Totalita. Tersedia kelas Online, Tatap Muka di Yogyakarta, dan In-House Training di seluruh Indonesia.
+      </p>
+      <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+        <a href="/pelatihan/" class="btn btn-primary" style="background: var(--accent); color: #fff; padding: 14px 28px; border-radius: 8px; font-weight: 700; text-decoration: none;">
+          Lihat Katalog Program
+        </a>
+        <a href="https://wa.me/6287759151278?text=Halo%20Wahana%20Totalita,%20saya%20ingin%20konsultasi%20pelatihan%20K3" class="btn btn-outline" target="_blank" rel="noopener" style="background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.3); padding: 14px 28px; border-radius: 8px; font-weight: 700; text-decoration: none;">
+          Konsultasi WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Category Pills -->
+  <section style="padding: 30px 0 10px; max-width: 1100px; margin: 0 auto; padding-left: 20px; padding-right: 20px;">
+    <div style="display: flex; gap: 10px; overflow-x: auto; padding-bottom: 10px;">
+      {allCategories.map((cat) => (
+        <a href={`/pelatihan/${cat.data.slug}/`} style="display: inline-flex; align-items: center; gap: 6px; background: var(--surface); border: 1px solid var(--border); padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 700; color: var(--brand); text-decoration: none; white-space: nowrap;">
+          <span>{cat.data.icon || '📁'}</span>
+          <span>{cat.data.name}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Featured Programs -->
+  <section style="padding: 60px 0; max-width: 1100px; margin: 0 auto; padding-left: 20px; padding-right: 20px;">
+    <div style="text-align: center; margin-bottom: 40px;">
+      <h2 style="font-size: 28px; font-weight: 800; color: var(--brand); margin-bottom: 10px;">Program Pelatihan Unggulan</h2>
+      <p style="color: var(--mut); font-size: 15px;">Sertifikasi resmi yang paling banyak diikuti profesional dan instansi di Indonesia</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 24px;">
+      {featuredTrainings.map((t) => (
+        <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s;">
+          <div style="padding: 20px; flex: 1; display: flex; flex-direction: column;">
+            <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--accent); margin-bottom: 6px;">
+              {t.data.category_name || 'Pelatihan K3'}
+            </span>
+            <h3 style="font-size: 17px; font-weight: 700; margin-bottom: 10px; line-height: 1.3;">
+              <a href={`/pelatihan/${t.data.slug}/`} style="color: var(--brand); text-decoration: none;">
+                {t.data.name}
+              </a>
+            </h3>
+            <p style="font-size: 13px; color: var(--mut); line-height: 1.5; margin-bottom: 15px; flex: 1;">
+              {t.data.meta_desc?.slice(0, 95)}...
+            </p>
+            <div style="border-top: 1px solid var(--border); padding-top: 12px; display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 13px; font-weight: 800; color: var(--brand);">
+                {t.data.price_label || 'Hubungi Kami'}
+              </span>
+              <a href={`/pelatihan/${t.data.slug}/`} style="font-size: 12px; font-weight: 700; color: var(--accent); text-decoration: none;">
+                Detail &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Latest Articles Section -->
+  <section style="background: var(--surface-subtle); padding: 60px 0; border-top: 1px solid var(--border);">
+    <div style="max-width: 1100px; margin: 0 auto; padding: 0 20px;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px; flex-wrap: wrap; gap: 10px;">
+        <div>
+          <h2 style="font-size: 26px; font-weight: 800; color: var(--brand); margin-bottom: 6px;">Wawasan &amp; Regulasi K3 Terkini</h2>
+          <p style="color: var(--mut); font-size: 14px;">Panduan kepatuhan, undang-undang ketenagakerjaan, dan standar keselamatan industri</p>
+        </div>
+        <a href="/artikel/" style="color: var(--accent); font-weight: 700; text-decoration: none; font-size: 14px;">
+          Lihat Semua Artikel &rarr;
+        </a>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px;">
+        {latestArticles.map((a) => (
+          <article style="background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; display: flex; flex-direction: column;">
+            <span style="font-size: 11px; font-weight: 700; color: var(--accent); text-transform: uppercase; margin-bottom: 8px;">
+              {a.data.category || 'Regulasi & K3'}
+            </span>
+            <h3 style="font-size: 16px; font-weight: 700; line-height: 1.4; margin-bottom: 10px;">
+              <a href={`/artikel/${a.data.slug}/`} style="color: var(--brand); text-decoration: none;">
+                {a.data.title}
+              </a>
+            </h3>
+            <p style="font-size: 13px; color: var(--mut); line-height: 1.5; margin-bottom: 15px; flex: 1;">
+              {a.data.meta_desc ? `${a.data.meta_desc.slice(0, 110)}...` : ''}
+            </p>
+            <div style="display: flex; justify-content: space-between; font-size: 12px; color: var(--text-light); border-top: 1px solid var(--border); padding-top: 10px;">
+              <span>{a.data.author || 'Tim Ahli K3'}</span>
+              <span>{a.data.published_at ? new Date(a.data.published_at).toLocaleDateString('id-ID', { year: 'numeric', month: 'short', day: 'numeric' }) : ''}</span>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

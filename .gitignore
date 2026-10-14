@@ -48,7 +48,10 @@ config.local.php
 # Next.js projects (Separate apps - do not track in Hostinger PHP repo)
 nextjs-workspace/
 nextjs-clean/
-.next/
+# Astro build output
+.astro/
+dist/
+public/assets
 out/
 node_modules/
 
