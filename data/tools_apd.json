@@ -1,0 +1,72 @@
+[
+    {
+        "id": "kepala",
+        "kategori": "Pelindung Kepala (Head Protection)",
+        "nama": "Safety Helmet (Helm Keselamatan)",
+        "standar": "SNI ISO 3873:2012 / ANSI Z89.1 (Tipe I & II, Kelas E, G, C)",
+        "bahaya": "Tertimpa benda jatuh, benturan struktur rendah, kontak listrik tegangan tinggi.",
+        "spesifikasi": "Cangkang HDPE / ABS tahan benturan, suspensi 4 atau 6 titik, chin strap elastis, tahan voltase listrik hingga 20.000V (Kelas E).",
+        "masa_pakai": "Umur pakai maksimal 3 - 5 tahun dari tanggal pembuatan, atau langsung diganti jika pernah terkena benturan keras.",
+        "inspeksi": "Periksa retakan mikro pada cangkang, kelenturan suspensi harness, dan elastisitas tali dagu."
+    },
+    {
+        "id": "mata",
+        "kategori": "Pelindung Mata & Wajah (Eye & Face Protection)",
+        "nama": "Safety Goggles & Face Shield",
+        "standar": "SNI 16-0158-1987 / ANSI Z87.1+ / EN 166",
+        "bahaya": "Percikan bahan kimia asam/basa, partikel gerinda kecepatan tinggi, radiasi sinar UV/las.",
+        "spesifikasi": "Lensa polikarbonat anti-fog & anti-scratch dengan proteksi samping (side shield), pelindung wajah transparan asetat untuk cairan kimia.",
+        "masa_pakai": "Ganti saat lensa tergores buram atau pita karet pengikat mengendur.",
+        "inspeksi": "Pastikan kejernihan pandangan bebas distorsi dan segel bantalan silikon menempel rapat pada lekuk wajah."
+    },
+    {
+        "id": "pernapasan",
+        "kategori": "Pelindung Pernapasan (Respiratory Protection)",
+        "nama": "Respirator Partikulat & Gas (Half/Full Face)",
+        "standar": "SNI 19-3998-1995 / NIOSH 42 CFR 84 (N95, P100) / EN 14387",
+        "bahaya": "Inhalasi debu silika, uap pelarut organik (VOC), gas beracun (H2S, CO, NH3), asap logam (fume).",
+        "spesifikasi": "Bodi silikon food-grade hypoallergenic, katup ekshalasi ganda, cartridge kombinasi filter partikulat + adsorben karbon aktif.",
+        "masa_pakai": "Cartridge gas wajib diganti saat tercium bau kimia atau sesuai batas jam jenuh (breakthrough time).",
+        "inspeksi": "Uji segel tekanan positif (hembus napas) dan tekanan negatif (tarik napas) sebelum memasuki area kerja terkontaminasi."
+    },
+    {
+        "id": "telinga",
+        "kategori": "Pelindung Pendengaran (Hearing Protection)",
+        "nama": "Earplug & Earmuff (Sumbat & Tutup Telinga)",
+        "standar": "ANSI S3.19 / EN 352-1 (Earmuff) & EN 352-2 (Earplug)",
+        "bahaya": "Kebisingan mesin di atas NAB 85 dBA, suara letupan mendadak impulsif.",
+        "spesifikasi": "Earplug busa poliuretan expand perlahan (NRR 28-33 dB), earmuff berkantong busa kedap dengan headband pegas baja (NRR 22-30 dB).",
+        "masa_pakai": "Earplug sekali pakai dibuang setelah 1 shift; Earmuff diganti bantalan busanya setiap 6 bulan.",
+        "inspeksi": "Pastikan bantalan earmuff tidak pecah/kaku dan busa earplug kembali ke bentuk semula saat diremas."
+    },
+    {
+        "id": "tangan",
+        "kategori": "Pelindung Tangan (Hand Protection)",
+        "nama": "Sarung Tangan K3 (Safety Gloves)",
+        "standar": "SNI 06-0652-2005 / EN 388 (Mekanik) / EN 374 (Kimia) / EN 407 (Panas)",
+        "bahaya": "Tergores plat besi tajam, tersiram asam pekat, panas lelehan logam, sengatan arus listrik.",
+        "spesifikasi": "Sarung tangan anti-potong serat Kevlar/HPPE (Cut Level 5), sarung tangan nitril tebal tahan kimia, sarung tangan kulit las, sarung tangan isolasi listrik berlabel kelas tegangan.",
+        "masa_pakai": "Ganti saat lapisan nitril melar/tembus kimia atau serat kain berlubang pada ujung jari.",
+        "inspeksi": "Uji tiup udara untuk mendeteksi kebocoran jarum mikro pada sarung tangan kimia dan isolasi listrik."
+    },
+    {
+        "id": "kaki",
+        "kategori": "Pelindung Kaki (Foot Protection)",
+        "nama": "Safety Shoes / Safety Boots",
+        "standar": "SNI 7079:2009 / SNI 0111:2009 / ASTM F2413 / EN ISO 20345 (S1P, S3)",
+        "bahaya": "Tertimpa benda berat hingga 200 Joule, tertusuk paku lantai, tergelincir oli, sengatan listrik tanah.",
+        "spesifikasi": "Pelindung jari baja/komposit (Steel/Composite Toe Cap), pelat sol baja anti-tusuk (Steel Midsole), sol poliuretan tahan minyak dan licin (Anti-slip / Oil Resistant).",
+        "masa_pakai": "Maksimal 1 - 2 tahun tergantung keausan kembangan sol tapak luar.",
+        "inspeksi": "Periksa keausan sol bawah, pastikan tutup baja tidak menonjol menembus kulit sepatu."
+    },
+    {
+        "id": "ketinggian",
+        "kategori": "Perlindungan Jatuh (Fall Protection)",
+        "nama": "Full Body Harness & Lanyard Shock Absorber",
+        "standar": "SNI 0420:2018 / ANSI Z359.11 / EN 361 & EN 355",
+        "bahaya": "Terjatuh dari ketinggian > 1.8 meter, benturan fatal ke tanah atau struktur bawah.",
+        "spesifikasi": "Anyaman serat poliester kekuatan tarik minimal 22 kN, D-ring punggung (dorsal) baja tempa, double lanyard dengan energy absorber peredam kejut benturan.",
+        "masa_pakai": "Maksimal 5 tahun dari tanggal perakitan pabrik, atau langsung dimusnahkan jika pernah menahan beban orang jatuh.",
+        "inspeksi": "Periksa jahitan webbing dari benang putus, karat pada D-ring, dan pastikan sobekan indikator jatuh (fall indicator) masih utuh."
+    }
+]

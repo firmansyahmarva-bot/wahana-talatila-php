@@ -1,0 +1,176 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import apdList from '../../../data/tools_apd.json';
+
+const pageTitle = "Panduan Pemilihan APD K3 2026: Standar Permenaker 08/2010, SNI & ANSI";
+const metaDesc = "Panduan lengkap pemilihan Alat Pelindung Diri (APD) K3 sesuai Permenaker No. 08/2010, standar SNI, ANSI, & EN. Evaluasi spesifikasi teknis 7 organ tubuh dan checklist inspeksi.";
+const canonical = "https://wahanatotalita.com/tools/apd-selector/";
+
+const schemas = [
+    {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Beranda", "item": "https://wahanatotalita.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Tools K3", "item": "https://wahanatotalita.com/tools/" },
+    { "@type": "ListItem", "position": 3, "name": "Panduan APD", "item": "https://wahanatotalita.com/tools/apd-selector/" }
+  ]
+},
+    {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Panduan Pemilihan APD K3 Standar SNI & Permenaker 08/2010",
+  "url": "https://wahanatotalita.com/tools/apd-selector/",
+  "description": "Pedoman teknis pemilihan dan inspeksi kelayakan Alat Pelindung Diri (APD) K3 untuk seluruh organ tubuh sesuai standar SNI, ANSI, dan EN.",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "All",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "IDR" }
+},
+    {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Bolehkah perusahaan memotong gaji pekerja untuk pembelian APD?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "TIDAK BOLEH. Pasal 2 Permenaker No. 08/MEN/VII/2010 secara tegas mewajibkan pengusaha untuk menyediakan Alat Pelindung Diri (APD) bagi pekerja/buruh di tempat kerja secara CUMA-CUMA (gratis). Pemotongan gaji untuk pembelian APD wajib merupakan pelanggaran hukum ketenagakerjaan."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kapan helm safety (safety helmet) harus diganti meskipun tidak terlihat retak?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Safety helmet memiliki masa pakai pabrikan rata-rata 3 hingga 5 tahun karena paparan radiasi sinar UV matahari dan perubahan suhu lingkungan dapat menyebabkan degradasi polimer plastik menjadi getas. Selain itu, jika helm pernah terbentur keras oleh benda jatuh, helm wajib segera dimusnahkan dan diganti baru seketika."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Mengapa sabuk pengaman pinggang (safety belt) dilarang untuk pekerjaan ketinggian?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sabuk pengaman pinggang (waist belt) dilarang digunakan sebagai penahan jatuh (fall arrest) berdasarkan Permenaker 09/2016 dan standar internasional karena saat pekerja terjatuh bebas, gaya sentakan mendadak akan terpusat di pinggang dan tulang belakang, yang dapat menyebabkan patah tulang punggung atau kerusakan organ dalam fatal. Pekerjaan ketinggian wajib menggunakan Full Body Harness."
+      }
+    }
+  ]
+},
+  ];
+---
+
+<Layout
+  title={pageTitle}
+  description={metaDesc}
+  canonical={canonical}
+  schemas={schemas}
+  pageCss={['/assets/css/page/tools-apd-selector.css']}
+>
+<main class="apd-page" id="konten-utama">
+
+<!-- HERO -->
+<section class="apd-hero">
+  <div class="container">
+    <div class="hero-badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Permenaker No. 08/MEN/VII/2010 &amp; SNI
+    </div>
+    <h1>Panduan Pemilihan APD K3 <span>Lengkap 2026</span></h1>
+    <p>Pedoman standar spesifikasi teknis Alat Pelindung Diri (APD) untuk seluruh organ tubuh manusia. Memenuhi standar SNI, ANSI, dan EN Eropa lengkap dengan panduan inspeksi kelayakan pra-pakai.</p>
+    <div class="hero-tags">
+      <span class="hero-tag">7 Kategori Perlindungan Organ Tubuh</span>
+      <span class="hero-tag">Standar SNI &amp; ANSI / EN Terverifikasi</span>
+      <span class="hero-tag">Checklist Pra-Pakai &amp; Masa Kadaluarsa</span>
+      <span class="hero-tag">Kewajiban Pengusaha Menyediakan Cuma-Cuma</span>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN WORKSPACE -->
+<section class="apd-wrapper">
+  <div class="container">
+    
+    <!-- FILTER BAR -->
+    <div class="filter-bar">
+      <button class="filter-btn active" type="button" onclick="filterApd('all', this)">Semua APD (7 Organ Tubuh)</button>
+      <button class="filter-btn" type="button" onclick="filterApd('kepala', this)">Kepala (Helmet)</button>
+      <button class="filter-btn" type="button" onclick="filterApd('mata', this)">Mata &amp; Wajah</button>
+      <button class="filter-btn" type="button" onclick="filterApd('pernapasan', this)">Pernapasan (Respirator)</button>
+      <button class="filter-btn" type="button" onclick="filterApd('telinga', this)">Pendengaran (Earplug)</button>
+      <button class="filter-btn" type="button" onclick="filterApd('tangan', this)">Tangan (Gloves)</button>
+      <button class="filter-btn" type="button" onclick="filterApd('kaki', this)">Kaki (Safety Shoes)</button>
+      <button class="filter-btn" type="button" onclick="filterApd('ketinggian', this)">Ketinggian (Harness)</button>
+    </div>
+
+    <!-- SERVER-RENDERED APD SPECIFICATION CARDS -->
+    <div class="apd-cards-grid" id="apdCards">
+      {apdList.map((a) => (
+        <div class="apd-card" data-cat={a.id}>
+          <div class="apd-badge">{a.kategori}</div>
+          <h3 class="apd-title">{a.nama}</h3>
+          <div class="apd-standard">Standar: {a.standar}</div>
+          
+          <div class="apd-spec-list">
+            <div><strong>Potensi Bahaya:</strong> {a.bahaya}</div>
+            <div><strong>Spesifikasi Wajib:</strong> {a.spesifikasi}</div>
+            <div><strong>Masa Pakai / Kadaluarsa:</strong> {a.masa_pakai}</div>
+          </div>
+
+          <div class="apd-inspect-box">
+            <strong>Poin Kritis Inspeksi Pra-Pakai:</strong><br />
+            {a.inspeksi}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- IN-DEPTH EDITORIAL ARTICLE (SEO DEPTH) -->
+    <div class="editorial-box">
+      <h2 class="editorial-title">Kewajiban Hukum Penyediaan Alat Pelindung Diri di Tempat Kerja</h2>
+      <p class="editorial-p">
+        Berdasarkan <strong>Peraturan Menteri Tenaga Kerja dan Transmigrasi RI No. PER.08/MEN/VII/2010 tentang Alat Pelindung Diri</strong>, pengusaha diwajibkan menyediakan APD bagi pekerja/buruh di tempat kerja secara CUMA-CUMA, wajib mencantumkan Standar Nasional Indonesia (SNI) atau standar internasional yang setara, serta wajib mengumumkan instruksi tertulis dan memasang rambu-rambu APD di lokasi kerja.
+      </p>
+
+      <h3 style="color:var(--navy);font-family:'Lexend',sans-serif;font-size:1.15rem;margin:22px 0 10px">Prinsip Hirarki Pengendalian Bahaya: Mengapa APD Adalah Garis Terakhir?</h3>
+      <p class="editorial-p">
+        Dalam ilmu Keselamatan Kerja modern, pemakaian APD menempati peringkat terbawah (garis pertahanan terakhir / <em>last line of defense</em>). Alasan utama mengapa APD berada di tingkat terbawah adalah:
+      </p>
+      <ul style="padding-left:22px;color:var(--slate-700);line-height:1.75;margin-bottom:20px">
+        <li><strong>Bahaya Tetap Ada:</strong> APD tidak menghilangkan atau mengurangi sumber bahaya itu sendiri, melainkan hanya membangun perisai sementara pada tubuh pekerja.</li>
+        <li><strong>Faktor Kesalahan Manusia (Human Factor):</strong> Jika APD dipakai dengan ukuran longgar, terpasang miring, atau dilepas sesaat karena gerah, pekerja seketika kehilangan seluruh perlindungan dan rentan terkena bahaya fatal.</li>
+        <li><strong>Menimbulkan Ketidaknyamanan Fisik:</strong> Penggunaan APD yang lama dapat meningkatkan beban panas tubuh (heat stress), membatasi bidang pandang mata, atau mengurangi kelincahan pergerakan jari tangan.</li>
+      </ul>
+
+      <!-- FAQ ACCORDION -->
+      <h3 style="color:var(--navy);font-family:'Lexend',sans-serif;font-size:1.25rem;margin:28px 0 16px">Tanya Jawab Seputar Pemilihan APD K3 (FAQ)</h3>
+      <div class="faq-box">
+        
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>Bagaimana jika pekerja menolak menggunakan APD yang sudah disediakan?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-a">
+            Pasal 12 huruf b UU No. 1 Tahun 1970 menyatakan bahwa tenaga kerja WAJIB memakai alat-alat perlindungan diri yang diwajibkan. Jika pekerja menolak memakai APD setelah diberikan pembinaan, manajemen berhak memberikan sanksi indisipliner (Surat Peringatan / SP) hingga menonaktifkan pekerja dari area bahaya demi keselamatan bersama.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>Apakah APD bekas pekerja lama boleh dihibahkan ke pekerja baru?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-a">
+            Untuk APD yang bersentuhan langsung dengan kulit dan bersifat higienis (seperti earplug, sepatu safety, sarung tangan kain, dan masker respirator), APD TIDAK BOLEH dipindahtangankan karena risiko penularan infeksi dermatologis dan saluran napas. Namun untuk APD struktural (seperti safety helmet atau full body harness), pemindahtanganan diperbolehkan asalkan telah melalui proses dekontaminasi dan inspeksi kelayakan fisik oleh Petugas K3.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+</main>
+</Layout>

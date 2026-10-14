@@ -1,0 +1,281 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allSkkni = await getCollection('skkni');
+
+// Sort alphabetically by judul
+allSkkni.sort((a, b) => a.data.judul.localeCompare(b.data.judul));
+
+const totalCount = allSkkni.length;
+const sectors = Array.from(new Set(allSkkni.map(s => s.data.sektor).filter(Boolean))).sort();
+
+const metaTitle = 'Direktori Standar Kompetensi Kerja Nasional Indonesia (SKKNI) & Skema Sertifikasi BNSP';
+const metaDesc = 'Koleksi lengkap skema sertifikasi profesi berbasis SKKNI resmi BNSP: K3, Migas, Lingkungan Hidup, Kelistrikan, dan Konstruksi dengan daftar unit kompetensi & standar uji asesmen.';
+const canonical = 'https://wahanatotalita.com/skkni/';
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    '@id': `${canonical}#breadcrumb`,
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Beranda', item: 'https://wahanatotalita.com/' },
+      { '@type': 'ListItem', position: 2, name: 'SKKNI & Profesi', item: canonical },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: metaTitle,
+    description: metaDesc,
+    url: canonical,
+    publisher: {
+      '@type': 'Organization',
+      name: 'Wahana Totalita Konsultan',
+      url: 'https://wahanatotalita.com',
+    },
+  },
+];
+---
+
+<Layout
+  title={metaTitle}
+  description={metaDesc}
+  canonical={canonical}
+  schemas={schemas}
+  pageCss={['/assets/css/page/skkni.css']}
+>
+  <!-- Hero Section -->
+  <header class="skkni-hero">
+    <div class="container">
+      <div class="skkni-badge-top">STANDAR KOMPETENSI RESMI BNSP & KEMNAKER RI</div>
+      <h1>Direktori Standar Kompetensi Profesi (SKKNI)</h1>
+      <p>
+        Panduan komprehensif skema sertifikasi profesi nasional, unit kompetensi LSP, kurikulum asesmen, serta prospek karir dan standar remunerasi industri di Indonesia.
+      </p>
+
+      <div class="skkni-search-box">
+        <input type="text" id="skkniSearchInput" placeholder="Cari skema sertifikasi, profesi, atau sektor (contoh: POP, K3 Migas, IPAL, Scaffolding)..." autocomplete="off" />
+        <button type="button" id="skkniSearchBtn">Cari Skema</button>
+      </div>
+
+      <div class="skkni-stats">
+        <div class="skkni-stat-item">
+          <strong>{totalCount}</strong>
+          <span>Skema Profesi BNSP</span>
+        </div>
+        <div class="skkni-stat-item">
+          <strong>{sectors.length}</strong>
+          <span>Klaster Sektor Industri</span>
+        </div>
+        <div class="skkni-stat-item">
+          <strong>100%</strong>
+          <span>Standar Uji Terverifikasi</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Filter Bar -->
+  <nav class="skkni-filter-bar" aria-label="Filter Sektor SKKNI">
+    <div class="container">
+      <div class="skkni-filter-label">Filter Berdasarkan Sektor Industri:</div>
+      <div class="skkni-chips" id="sectorFilter">
+        <button class="skkni-chip active" data-sector="all">Semua Sektor ({totalCount})</button>
+        {sectors.map((sec) => (
+          <button class="skkni-chip" data-sector={sec}>
+            {sec} ({allSkkni.filter(s => s.data.sektor === sec).length})
+          </button>
+        ))}
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Cards Grid -->
+  <main class="skkni-main">
+    <div class="container">
+      <div class="skkni-grid" id="skkniGrid">
+        {allSkkni.map((item) => (
+          <article class="skkni-card" data-sector={item.data.sektor || ''} data-title={(item.data.judul + ' ' + (item.data.skkni_nomor || '')).toLowerCase()}>
+            <div class="skkni-card-top">
+              <span class="skkni-sector-pill">{item.data.sektor || 'Umum'}</span>
+              <span class="skkni-level-pill">{item.data.jenjang_kkni || 'Sertifikasi BNSP'}</span>
+            </div>
+
+            <h2 class="skkni-card-title">
+              <a href={`/skkni/${item.data.slug}/`}>{item.data.judul}</a>
+            </h2>
+
+            <div class="skkni-card-nomor">
+              📜 {item.data.skkni_nomor || 'Standar Kompetensi BNSP'}
+            </div>
+
+            <p class="skkni-card-desc">
+              {item.data.ringkasan ? (item.data.ringkasan.length > 140 ? item.data.ringkasan.substring(0, 140) + '...' : item.data.ringkasan) : ''}
+            </p>
+
+            <div class="skkni-card-meta">
+              <span>📋 {item.data.unit_kompetensi ? item.data.unit_kompetensi.length : 0} Unit Kompetensi</span>
+              <span>💵 {item.data.rentang_gaji ? item.data.rentang_gaji.split('(')[0].trim() : 'Gaji Standar Industri'}</span>
+            </div>
+
+            <a href={`/skkni/${item.data.slug}/`} class="skkni-card-btn">
+              Lihat Unit SKKNI & Silabus Uji &rarr;
+            </a>
+          </article>
+        ))}
+      </div>
+
+      <div id="noResults" style="display:none; text-align:center; padding:48px 0; color:#64748b;">
+        <p style="font-size:1.1rem; font-weight:600;">Tidak ditemukan skema profesi yang sesuai pencarian Anda.</p>
+        <button id="resetSearch" style="background:#1e40af; color:#fff; border:none; padding:10px 20px; border-radius:8px; cursor:pointer; font-weight:600; margin-top:12px;">Reset Pencarian</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Educational Guide to SKKNI & BNSP Section -->
+  <section style="background:#ffffff; padding:64px 0; border-top:1px solid #e2e8f0;">
+    <div class="container" style="max-width:960px;">
+      <h2 style="font-size:1.8rem; font-weight:800; color:#0f172a; margin-bottom:16px; text-align:center;">
+        📘 Panduan Standar Kompetensi SKKNI & Jalur Sertifikasi Profesi
+      </h2>
+      <p style="font-size:1rem; color:#475569; line-height:1.7; text-align:center; margin-bottom:40px;">
+        Memahami bagaimana Standar Kompetensi Kerja Nasional Indonesia (SKKNI) diterapkan sebagai tolok ukur pengakuan keahlian personil, akreditasi LSP, dan kualifikasi rekrutmen industri modern.
+      </p>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:24px; margin-bottom:44px;">
+        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:24px;">
+          <div style="font-size:1.8rem; margin-bottom:10px;">📋</div>
+          <h3 style="font-size:1.15rem; font-weight:700; color:#1e3a8a; margin:0 0 10px;">1. Pengertian SKKNI</h3>
+          <p style="font-size:0.92rem; color:#475569; line-height:1.6; margin:0;">
+            SKKNI adalah rumusan kemampuan kerja yang mencakup aspek pengetahuan (knowledge), keterampilan (skill), serta sikap kerja (attitude) yang relevan dengan pelaksanaan tugas dan syarat jabatan yang ditetapkan secara tripartit oleh pemerintah, asosiasi profesi, dan pakar industri.
+          </p>
+        </div>
+
+        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:24px;">
+          <div style="font-size:1.8rem; margin-bottom:10px;">🏛️</div>
+          <h3 style="font-size:1.15rem; font-weight:700; color:#0284c7; margin:0 0 10px;">2. Peran BNSP & LSP</h3>
+          <p style="font-size:0.92rem; color:#475569; line-height:1.6; margin:0;">
+            Badan Nasional Sertifikasi Profesi (BNSP) adalah lembaga independen pemerintah yang memberikan lisensi kepada Lembaga Sertifikasi Profesi (LSP). Asesor bersertifikat menguji kandidat melalui metode verifikasi portofolio kerja, tes tulis, wawancara, dan simulasi unjuk kerja.
+          </p>
+        </div>
+
+        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:24px;">
+          <div style="font-size:1.8rem; margin-bottom:10px;">🌍</div>
+          <h3 style="font-size:1.15rem; font-weight:700; color:#16a34a; margin:0 0 10px;">3. Pengakuan Regional & Global</h3>
+          <p style="font-size:0.92rem; color:#475569; line-height:1.6; margin:0;">
+            Sertifikat kompetensi yang berlogo Garuda Emas BNSP diakui secara nasional di seluruh wilayah Indonesia serta memiliki kesetaraan kualifikasi regional di kawasan ASEAN melalui kerangka kerja ASEAN Guiding Principles for Quality Assurance and Recognition of Competency.
+          </p>
+        </div>
+      </div>
+
+      <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:14px; padding:28px; margin-bottom:44px;">
+        <h3 style="font-size:1.25rem; font-weight:700; color:#1e40af; margin:0 0 14px;">
+          🚀 4 Langkah Mengikuti Asesmen Uji Kompetensi BNSP
+        </h3>
+        <ol style="color:#1e3a8a; font-size:0.95rem; line-height:1.75; margin:0; padding-left:22px;">
+          <li><strong>Memilih Skema Sertifikasi:</strong> Pilih skema profesi yang sesuai dengan latar belakang pendidikan dan pengalaman kerja Anda di lapangan.</li>
+          <li><strong>Mengikuti Pelatihan Pembekalan (Pre-Assessment):</strong> Ikuti workshop pembekalan materi SKKNI bersama instruktur master trainer Wahana Totalita untuk merapikan portofolio bukti kerja (Formulir APL-01 & APL-02).</li>
+          <li><strong>Pelaksanaan Uji Kompetensi:</strong> Menjalani asesmen tatap muka atau daring di hadapan Asesor Kompetensi berlisensi BNSP melalui tes wawancara, ujian tertulis, dan demonstrasi studi kasus.</li>
+          <li><strong>Penerbitan Sertifikat Resmi BNSP:</strong> Peserta yang dinyatakan <em>Kompeten (K)</em> akan diterbitkan Sertifikat Kompetensi Kerja berlogo Garuda Republik Indonesia yang berlaku selama 3 hingga 5 tahun.</li>
+        </ol>
+      </div>
+
+      <!-- FAQ Section -->
+      <h3 style="font-size:1.45rem; font-weight:700; color:#0f172a; margin-bottom:20px; text-align:center;">
+        ❓ Pertanyaan Umum Seputar SKKNI & Sertifikasi Profesi
+      </h3>
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:20px;">
+          <h4 style="margin:0 0 8px; font-size:1rem; color:#0f172a;">Apa perbedaan sertifikat pelatihan dan sertifikat kompetensi BNSP?</h4>
+          <p style="margin:0; font-size:0.92rem; color:#475569; line-height:1.6;">
+            Sertifikat pelatihan (Certificate of Attendance/Completion) hanya membuktikan bahwa seseorang telah selesai mendengarkan materi kursus. Sedangkan Sertifikat Kompetensi BNSP adalah pengakuan negara resmi yang menyatakan bahwa orang tersebut telah diuji dan terbukti memiliki kemampuan kerja nyata sesuai standar SKKNI.
+          </p>
+        </div>
+
+        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:20px;">
+          <h4 style="margin:0 0 8px; font-size:1rem; color:#0f172a;">Apakah sertifikasi BNSP bisa kadaluarsa?</h4>
+          <p style="margin:0; font-size:0.92rem; color:#475569; line-height:1.6;">
+            Ya, sertifikat kompetensi BNSP memiliki masa berlaku umumnya 3 (tiga) tahun atau 5 (lima) tahun tergantung skema profesi, dan dapat diperpanjang melalui proses re-sertifikasi portofolio kegiatan kerja aktif.
+          </p>
+        </div>
+
+        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:20px;">
+          <h4 style="margin:0 0 8px; font-size:1rem; color:#0f172a;">Bagaimana cara mendaftar sertifikasi profesi di Wahana Totalita?</h4>
+          <p style="margin:0; font-size:0.92rem; color:#475569; line-height:1.6;">
+            Anda dapat menghubungi konsultan training Wahana Totalita melalui tombol WhatsApp atau memilih program pelatihan yang Anda minati di katalog program kami untuk mendapatkan jadwal public training maupun penawaran in-house training perusahaan.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filter & Search Script -->
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      const searchInput = document.getElementById('skkniSearchInput');
+      const searchBtn = document.getElementById('skkniSearchBtn');
+      const filterChips = document.querySelectorAll('#sectorFilter .skkni-chip');
+      const cards = document.querySelectorAll('#skkniGrid .skkni-card');
+      const noResults = document.getElementById('noResults');
+      const resetBtn = document.getElementById('resetSearch');
+
+      let currentSector = 'all';
+      let currentQuery = '';
+
+      function filterCards() {
+        let visibleCount = 0;
+        cards.forEach((card) => {
+          const cardSector = card.getAttribute('data-sector') || '';
+          const cardTitle = card.getAttribute('data-title') || '';
+          const matchSector = currentSector === 'all' || cardSector === currentSector;
+          const matchQuery = !currentQuery || cardTitle.includes(currentQuery);
+
+          if (matchSector && matchQuery) {
+            card.style.display = '';
+            visibleCount++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        if (noResults) {
+          noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+      }
+
+      filterChips.forEach((chip) => {
+        chip.addEventListener('click', () => {
+          filterChips.forEach((c) => c.classList.remove('active'));
+          chip.classList.add('active');
+          currentSector = chip.getAttribute('data-sector') || 'all';
+          filterCards();
+        });
+      });
+
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          currentQuery = e.target.value.toLowerCase().trim();
+          filterCards();
+        });
+      }
+
+      if (searchBtn) {
+        searchBtn.addEventListener('click', filterCards);
+      }
+
+      if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+          if (searchInput) searchInput.value = '';
+          currentQuery = '';
+          currentSector = 'all';
+          filterChips.forEach((c) => c.classList.remove('active'));
+          const allChip = document.querySelector('#sectorFilter .skkni-chip[data-sector="all"]');
+          if (allChip) allChip.classList.add('active');
+          filterCards();
+        });
+      }
+    });
+  </script>
+</Layout>

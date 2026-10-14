@@ -389,6 +389,59 @@ const riksaUji = defineCollection({
   }),
 });
 
+/**
+ * 14. Regulasi K3 Collection (32 Statutory Health & Safety Regulations)
+ */
+const regulasi = defineCollection({
+  loader: file('./data/regulasi.json'),
+  schema: z.object({
+    id: z.string(),
+    slug: z.string(),
+    nomor: z.string(),
+    jenis: z.string().optional().nullable(),
+    tahun: z.union([z.number(), z.string()]).optional().nullable(),
+    tentang: z.string().optional().nullable(),
+    kategori: z.string().optional().nullable(),
+    status: z.string().optional().nullable(),
+    mencabut: z.string().optional().nullable(),
+    ringkasan: z.string().optional().nullable(),
+    pasal_penting: z.array(z.string()).optional().nullable(),
+    kewajiban_perusahaan: z.string().optional().nullable(),
+    sanksi: z.string().optional().nullable(),
+    content_html: z.string().optional().nullable(),
+    faqs: z.array(z.object({
+      q: z.string(),
+      a: z.string(),
+    })).optional().nullable(),
+  }),
+});
+
+/**
+ * 15. SKKNI Collection (35 Certified Profession Frameworks)
+ */
+const skkni = defineCollection({
+  loader: file('./data/skkni.json'),
+  schema: z.object({
+    id: z.string(),
+    slug: z.string(),
+    judul: z.string(),
+    skkni_nomor: z.string().optional().nullable(),
+    sektor: z.string().optional().nullable(),
+    jenjang_kkni: z.string().optional().nullable(),
+    ringkasan: z.string().optional().nullable(),
+    content_html: z.string().optional().nullable(),
+    unit_kompetensi: z.array(z.any()).optional().nullable(),
+    persyaratan_asesmen: z.string().optional().nullable(),
+    deskripsi_tugas: z.string().optional().nullable(),
+    rentang_gaji: z.string().optional().nullable(),
+    prospek_karir: z.string().optional().nullable(),
+    faqs: z.array(z.object({
+      q: z.string(),
+      a: z.string(),
+    })).optional().nullable(),
+  }),
+});
+
 export const collections = {
   articles,
   trainings,
@@ -403,6 +456,9 @@ export const collections = {
   eventOrganizer,
   purnabakti,
   riksaUji,
+  regulasi,
+  skkni,
 };
+
 
 

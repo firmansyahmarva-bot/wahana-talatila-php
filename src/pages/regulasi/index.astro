@@ -1,0 +1,338 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allRegulasi = await getCollection('regulasi');
+
+// Sort by year desc
+allRegulasi.sort((a, b) => {
+  const yearA = Number(a.data.tahun) || 0;
+  const yearB = Number(b.data.tahun) || 0;
+  return yearB - yearA;
+});
+
+const totalCount = allRegulasi.length;
+const categories = Array.from(new Set(allRegulasi.map(r => r.data.kategori).filter(Boolean))).sort();
+
+const metaTitle = 'Database Regulasi K3 Indonesia: UU, PP, Permenaker & Kepmenaker Terlengkap';
+const metaDesc = 'Pusat database perundang-undangan Keselamatan dan Kesehatan Kerja (K3), Lingkungan Hidup, dan Ketenagakerjaan Indonesia. Temukan UU 1/1970, PP 50/2012, Permenaker, dan standar SNI terkini.';
+const canonical = 'https://wahanatotalita.com/regulasi/';
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    '@id': `${canonical}#breadcrumb`,
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Beranda', item: 'https://wahanatotalita.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Regulasi K3', item: canonical },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: metaTitle,
+    description: metaDesc,
+    url: canonical,
+    publisher: {
+      '@type': 'Organization',
+      name: 'Wahana Totalita Konsultan',
+      url: 'https://wahanatotalita.com',
+    },
+  },
+];
+---
+
+<Layout
+  title={metaTitle}
+  description={metaDesc}
+  canonical={canonical}
+  schemas={schemas}
+  pageCss={['/assets/css/page/regulasi.css']}
+>
+  <!-- Hero Section -->
+  <header class="reg-hero">
+    <div class="container">
+      <h1>Pusat Regulasi & Peraturan K3 Indonesia</h1>
+      <p>
+        Kumpulan undang-undang, peraturan pemerintah, peraturan menteri tenaga kerja, dan standar operasional keselamatan kerja resmi terlengkap untuk kepatuhan hukum industri.
+      </p>
+
+      <div class="reg-search-form">
+        <input type="text" id="regSearchInput" placeholder="Cari nomor SK, pasal, atau kata kunci (contoh: PP 50/2012, kebakaran, kimia)..." autocomplete="off" />
+        <button type="button" id="regSearchBtn">Cari Dokumen</button>
+      </div>
+
+      <div class="reg-stats-row">
+        <div class="reg-stat-box">
+          <strong>{totalCount}</strong>
+          <span>Regulasi Pokok K3</span>
+        </div>
+        <div class="reg-stat-box">
+          <strong>{categories.length}</strong>
+          <span>Sektor Spesialisasi</span>
+        </div>
+        <div class="reg-stat-box">
+          <strong>100%</strong>
+          <span>Status Berlaku Valid</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Filter Bar -->
+  <nav class="reg-filter-bar" aria-label="Filter Regulasi">
+    <div class="container">
+      <div class="reg-filter-group">
+        <div class="reg-filter-label">Kategori / Sektor Industri:</div>
+        <div class="reg-chip-row" id="kategoriFilter">
+          <button class="reg-chip active" data-kategori="all">Semua Sektor ({totalCount})</button>
+          {categories.map((cat) => (
+            <button class="reg-chip" data-kategori={cat}>
+              {cat} ({allRegulasi.filter(r => r.data.kategori === cat).length})
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content Grid -->
+  <main class="reg-main-content">
+    <div class="container">
+      <div class="reg-grid" id="regGrid">
+        {allRegulasi.map((r) => (
+          <article class="reg-card" data-kategori={r.data.kategori || ''} data-title={(r.data.nomor + ' ' + (r.data.tentang || '')).toLowerCase()}>
+            <div class="reg-card-header">
+              <span class="reg-badge-jenis">{r.data.jenis || 'Regulasi'}</span>
+              <span class="reg-badge-tahun">Tahun {r.data.tahun}</span>
+            </div>
+
+            <h2 class="reg-card-title">
+              <a href={`/regulasi/${r.data.slug}/`}>{r.data.nomor}</a>
+            </h2>
+
+            <div class="reg-card-tentang">
+              {r.data.tentang}
+            </div>
+
+            <p class="reg-card-desc">
+              {r.data.ringkasan ? (r.data.ringkasan.length > 140 ? r.data.ringkasan.substring(0, 140) + '...' : r.data.ringkasan) : ''}
+            </p>
+
+            <div class="reg-card-meta">
+              <span class="reg-meta-kategori">🏢 {r.data.kategori || 'Umum'}</span>
+              <span class="reg-status-pill">{r.data.status || 'Berlaku Penuh'}</span>
+            </div>
+
+            <a href={`/regulasi/${r.data.slug}/`} class="reg-card-btn">
+              Analisis Lengkap & Sanksi Hukum &rarr;
+            </a>
+          </article>
+        ))}
+      </div>
+
+      <div id="noResults" style="display:none; text-align:center; padding:48px 0; color:#64748b;">
+        <p style="font-size:1.1rem; font-weight:600;">Tidak ditemukan regulasi yang sesuai pencarian Anda.</p>
+        <button id="resetSearch" style="background:#0f5132; color:#fff; border:none; padding:10px 20px; border-radius:8px; cursor:pointer; font-weight:600; margin-top:12px;">Reset Pencarian</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Related Featured Programs -->
+  <section class="reg-featured-trainings">
+    <div class="container">
+      <div class="ft-header">
+        <h2>Program Sertifikasi Terkait Regulasi Wajib</h2>
+        <p>Tingkatkan kepatuhan hukum perusahaan dengan mengikutsertakan personil dalam pelatihan lisensi resmi Kemnaker RI dan BNSP.</p>
+      </div>
+
+      <div class="ft-grid">
+        <div class="ft-card">
+          <span class="ft-badge">Sertifikasi Kemnaker RI</span>
+          <h3 class="ft-title">Ahli K3 Umum (AK3U)</h3>
+          <p class="ft-desc">Mandat wajib UU No. 1 Tahun 1970 dan Permenaker No. 02/1992 untuk seluruh perusahaan dengan minimal 100 tenaga kerja.</p>
+          <a href="/pelatihan/ahli-k3-umum-sertifikasi-kemnaker-ri/" class="ft-btn">Lihat Silabus Program &rarr;</a>
+        </div>
+
+        <div class="ft-card">
+          <span class="ft-badge">Sertifikasi Kemnaker RI</span>
+          <h3 class="ft-title">Auditor SMK3 PP 50/2012</h3>
+          <p class="ft-desc">Kualifikasi auditor internal pemenuhan 166 kriteria audit SMK3 resmi berdasarkan Peraturan Pemerintah No. 50 Tahun 2012.</p>
+          <a href="/pelatihan/pelatihan-auditor-smk3-sertifikasi-kemnaker-ri/" class="ft-btn">Lihat Silabus Program &rarr;</a>
+        </div>
+
+        <div class="ft-card">
+          <span class="ft-badge">Sertifikasi BNSP</span>
+          <h3 class="ft-title">POPAL (Operasional Air Limbah)</h3>
+          <p class="ft-desc">Mandat pemenuhan PP No. 22 Tahun 2021 dan Permen LH No. 5 Tahun 2014 untuk operasional IPAL industri bebas sanksi pencemaran.</p>
+          <a href="/pelatihan/pelatihan-penanggung-jawab-operasional-pengolahan-air-limbah-popal-sertifikasi-bnsp/" class="ft-btn">Lihat Silabus Program &rarr;</a>
+        </div>
+
+        <div class="ft-card">
+          <span class="ft-badge">Sertifikasi BNSP / ESDM</span>
+          <h3 class="ft-title">POP Pertambangan Minerba</h3>
+          <p class="ft-desc">Sertifikasi frontliner pengawas tambang wajib Kepmen ESDM No. 1827/2018 dan Kepdirjen Minerba No. 185/2019.</p>
+          <a href="/pelatihan/pelatihan-pengawas-operasional-pertama-pop-pertambangan-sertifikasi-bnsp/" class="ft-btn">Lihat Silabus Program &rarr;</a>
+        </div>
+
+        <div class="ft-card">
+          <span class="ft-badge">Sertifikasi BNSP</span>
+          <h3 class="ft-title">Pengawas K3 Migas</h3>
+          <p class="ft-desc">Kepatuhan standar PTK 005 SKK Migas dan CSMS untuk pengawasan operasi rig onshore maupun offshore.</p>
+          <a href="/pelatihan/pelatihan-pengawas-k3-migas-sertifikasi-bnsp/" class="ft-btn">Lihat Silabus Program &rarr;</a>
+        </div>
+
+        <div class="ft-card">
+          <span class="ft-badge">Sertifikasi Kemnaker RI</span>
+          <h3 class="ft-title">Petugas P3K di Tempat Kerja</h3>
+          <p class="ft-desc">Mandat wajib Permenaker No. 15 Tahun 2008 untuk penyediaan personil pertolongan pertama berlisensi di setiap unit kerja.</p>
+          <a href="/pelatihan/pelatihan-petugas-p3k-sertifikasi-kemnaker-ri/" class="ft-btn">Lihat Silabus Program &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Educational Regulatory Guide & Legal Hierarchy Section -->
+  <section style="background:#ffffff; padding:60px 0; border-top:1px solid #e2e8f0;">
+    <div class="container" style="max-width:960px;">
+      <h2 style="font-size:1.8rem; font-weight:800; color:#0f172a; margin-bottom:16px; text-align:center;">
+        📚 Panduan Hierarki Hukum & Kepatuhan K3 di Indonesia
+      </h2>
+      <p style="font-size:1rem; color:#475569; line-height:1.7; text-align:center; margin-bottom:36px;">
+        Sistem perundang-undangan Keselamatan dan Kesehatan Kerja (K3) di Indonesia disusun secara berjenjang untuk memastikan perlindungan menyeluruh bagi setiap tenaga kerja di seluruh sektor industri.
+      </p>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:24px; margin-bottom:40px;">
+        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:20px;">
+          <h3 style="font-size:1.1rem; font-weight:700; color:#0f5132; margin:0 0 8px;">1. Tingkat Undang-Undang (UU)</h3>
+          <p style="font-size:0.9rem; color:#475569; line-height:1.6; margin:0;">
+            Landasan payung hukum tertinggi, seperti <strong>UU No. 1 Tahun 1970</strong> (Keselamatan Kerja), <strong>UU No. 13 Tahun 2003</strong> (Ketenagakerjaan), dan <strong>UU No. 32 Tahun 2009</strong> (PPLH) yang memuat hak konstitusional dan tanggung jawab pidana pengurus.
+          </p>
+        </div>
+
+        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:20px;">
+          <h3 style="font-size:1.1rem; font-weight:700; color:#1e40af; margin:0 0 8px;">2. Peraturan Pemerintah (PP)</h3>
+          <p style="font-size:0.9rem; color:#475569; line-height:1.6; margin:0;">
+            Aturan pelaksanaan operasional lintas kementerian, seperti <strong>PP No. 50 Tahun 2012</strong> tentang SMK3 dan <strong>PP No. 22 Tahun 2021</strong> tentang Persetujuan Lingkungan dan Limbah B3.
+          </p>
+        </div>
+
+        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:20px;">
+          <h3 style="font-size:1.1rem; font-weight:700; color:#c2410c; margin:0 0 8px;">3. Peraturan Menteri (Permen)</h3>
+          <p style="font-size:0.9rem; color:#475569; line-height:1.6; margin:0;">
+            Standar teknis spesifik yang diterbitkan oleh Kementerian Ketenagakerjaan (Permenaker), Kementerian ESDM, dan Kementerian LHK mengenai kualifikasi operator, izin alat (SILO), dan ambang batas lingkungan.
+          </p>
+        </div>
+      </div>
+
+      <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:12px; padding:28px; margin-bottom:44px;">
+        <h3 style="font-size:1.25rem; font-weight:700; color:#166534; margin:0 0 12px;">
+          🏢 5 Kewajiban Pokok K3 bagi Setiap Manajemen Perusahaan
+        </h3>
+        <ul style="color:#166534; font-size:0.95rem; line-height:1.75; margin:0; padding-left:20px;">
+          <li><strong>Membentuk Panitia Pembina K3 (P2K3)</strong> dan menunjuk personil Ahli K3 Umum ber-SKP aktif sebagai sekretaris (Permenaker 04/1987).</li>
+          <li><strong>Menerapkan Sistem Manajemen K3 (SMK3)</strong> bagi tempat kerja dengan minimal 100 buruh atau berpotensi bahaya tinggi (PP 50/2012).</li>
+          <li><strong>Menyediakan Surat Izin Layak Operasi (SILO)</strong> dan Lisensi K3 (SIO) untuk seluruh operator forklift, boiler, genset, dan bejana tekan.</li>
+          <li><strong>Menempatkan Petugas P3K Berlisensi</strong> dan menyediakan kotak P3K sesuai rasio jumlah tenaga kerja (Permenaker 15/2008).</li>
+          <li><strong>Melakukan Pemeriksaan & Pengujian (Riksa Uji)</strong> berkala terhadap seluruh instalasi listrik, penyalur petir, dan lingkungan kerja minimal 1 tahun sekali.</li>
+        </ul>
+      </div>
+
+      <!-- FAQ Hub Section -->
+      <h3 style="font-size:1.4rem; font-weight:700; color:#0f172a; margin-bottom:20px; text-align:center;">
+        ❓ Tanya Jawab Seputar Regulasi K3 di Indonesia
+      </h3>
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:18px 20px;">
+          <h4 style="margin:0 0 8px; font-size:1rem; color:#0f172a;">Apa akibat hukum jika perusahaan tidak menerapkan K3?</h4>
+          <p style="margin:0; font-size:0.9rem; color:#475569; line-height:1.6;">
+            Perusahaan berisiko dikenakan sanksi pidana kurungan, denda, penghentian sementara kegiatan operasional oleh Pengawas Ketenagakerjaan, hingga penutupan tempat kerja serta tanggung jawab perdata penuh bila terjadi kecelakaan fatal.
+          </p>
+        </div>
+
+        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:18px 20px;">
+          <h4 style="margin:0 0 8px; font-size:1rem; color:#0f172a;">Apakah sertifikat kompetensi K3 wajib diperpanjang secara berkala?</h4>
+          <p style="margin:0; font-size:0.9rem; color:#475569; line-height:1.6;">
+            Ya. Surat Keputusan Penunjukan (SKP) Ahli K3 dan Lisensi K3 Kemnaker umumnya memiliki masa berlaku 3 hingga 5 tahun dan wajib diperpanjang dengan menyertakan bukti laporan kegiatan kerja K3 periodik.
+          </p>
+        </div>
+
+        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:18px 20px;">
+          <h4 style="margin:0 0 8px; font-size:1rem; color:#0f172a;">Bagaimana cara memastikan seluruh regulasi K3 terpenuhi di perusahaan?</h4>
+          <p style="margin:0; font-size:0.9rem; color:#475569; line-height:1.6;">
+            Perusahaan dapat melakukan gap analysis kepatuhan hukum melalui audit internal SMK3, menyusun register regulasi K3 yang terus diperbarui, dan bermitra dengan konsultan terpercaya seperti Wahana Totalita untuk in-house training dan sertifikasi resmi.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Client-side Filter Script -->
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      const searchInput = document.getElementById('regSearchInput');
+      const searchBtn = document.getElementById('regSearchBtn');
+      const filterChips = document.querySelectorAll('#kategoriFilter .reg-chip');
+      const cards = document.querySelectorAll('#regGrid .reg-card');
+      const noResults = document.getElementById('noResults');
+      const resetBtn = document.getElementById('resetSearch');
+
+      let currentKategori = 'all';
+      let currentQuery = '';
+
+      function filterCards() {
+        let visibleCount = 0;
+        cards.forEach((card) => {
+          const cardCat = card.getAttribute('data-kategori') || '';
+          const cardTitle = card.getAttribute('data-title') || '';
+          const matchCat = currentKategori === 'all' || cardCat === currentKategori;
+          const matchQuery = !currentQuery || cardTitle.includes(currentQuery);
+
+          if (matchCat && matchQuery) {
+            card.style.display = '';
+            visibleCount++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        if (noResults) {
+          noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+      }
+
+      filterChips.forEach((chip) => {
+        chip.addEventListener('click', () => {
+          filterChips.forEach((c) => c.classList.remove('active'));
+          chip.classList.add('active');
+          currentKategori = chip.getAttribute('data-kategori') || 'all';
+          filterCards();
+        });
+      });
+
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          currentQuery = e.target.value.toLowerCase().trim();
+          filterCards();
+        });
+      }
+
+      if (searchBtn) {
+        searchBtn.addEventListener('click', filterCards);
+      }
+
+      if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+          if (searchInput) searchInput.value = '';
+          currentQuery = '';
+          currentKategori = 'all';
+          filterChips.forEach((c) => c.classList.remove('active'));
+          const allChip = document.querySelector('#kategoriFilter .reg-chip[data-kategori="all"]');
+          if (allChip) allChip.classList.add('active');
+          filterCards();
+        });
+      }
+    });
+  </script>
+</Layout>

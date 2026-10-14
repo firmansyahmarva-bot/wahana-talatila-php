@@ -1,0 +1,267 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const pageTitle = "JSA Builder Online 2026: Generator Job Safety Analysis & JHA Indonesia";
+const metaDesc = "Buat dokumen Job Safety Analysis (JSA / JHA) K3 standar industri secara instan online. Dilengkapi 6 template pekerjaan risiko tinggi, hirarki pengendalian, dan cetak form resmi.";
+const canonical = "https://wahanatotalita.com/tools/jsa-builder/";
+
+const schemas = [
+    {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Beranda", "item": "https://wahanatotalita.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Tools K3", "item": "https://wahanatotalita.com/tools/" },
+    { "@type": "ListItem", "position": 3, "name": "JSA Builder", "item": "https://wahanatotalita.com/tools/jsa-builder/" }
+  ]
+},
+    {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "JSA & JHA Builder Online K3 Indonesia",
+  "url": "https://wahanatotalita.com/tools/jsa-builder/",
+  "description": "Generator dokumen Job Safety Analysis (JSA) dan Job Hazard Analysis (JHA) standar SMK3 PP 50/2012 dan ISO 45001 dengan fitur cetak formulir resmi.",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "All",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "IDR" }
+},
+    {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Apa perbedaan antara JSA (Job Safety Analysis) dan HIRADC / IBPR?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "HIRADC / IBPR adalah identifikasi bahaya dan penilaian risiko makro yang mencakup seluruh aktivitas, fasilitas, dan proses operasional perusahaan secara menyeluruh. Sedangkan JSA (Job Safety Analysis) bersifat mikro dan taktis, berfokus menganalisis langkah demi langkah dari satu pekerjaan spesifik, terutama pekerjaan berisiko tinggi atau non-rutin sebelum izin kerja (PTW) diterbitkan."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Siapa yang wajib menyusun dan menyetujui dokumen JSA di lapangan?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "JSA idealnya disusun oleh pengawas langsung atau supervisor pekerjaan bersama tim pekerja pelaksana yang memahami teknis lapangan, lalu ditinjau dan divalidasi oleh Petugas / Ahli K3 Umum (HSE Officer), serta disahkan oleh Pimpinan Proyek atau Site Manager sebelum pekerjaan dimulai."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kapan suatu pekerjaan wajib dilengkapi dokumen JSA?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Dokumen JSA wajib dibuat untuk pekerjaan yang memiliki potensi risiko tinggi (seperti bekerja di ketinggian, ruang terbatas, pekerjaan panas, pengangkatan crane, penggalian dalam), pekerjaan non-rutin yang belum memiliki SOP baku, atau pekerjaan baru dengan perubahan metode/alat kerja."
+      }
+    }
+  ]
+},
+  ];
+---
+
+<Layout
+  title={pageTitle}
+  description={metaDesc}
+  canonical={canonical}
+  schemas={schemas}
+  pageCss={['/assets/css/page/tools-jsa-builder.css']}
+>
+<main class="jsa-page" id="konten-utama">
+
+<!-- HERO -->
+<section class="jsa-hero">
+  <div class="container">
+    <div class="hero-badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      Sesuai SMK3 PP 50/2012 &amp; ISO 45001
+    </div>
+    <h1>JSA Builder <span>Online 2026</span></h1>
+    <p>Susun formulir Job Safety Analysis (JSA) &amp; Job Hazard Analysis (JHA) profesional langkah demi langkah. Pilih template risiko tinggi, sesuaikan hierarki kontrol, dan cetak form resmi untuk Izin Kerja (PTW).</p>
+    <div class="hero-tags">
+      <span class="hero-tag">6 Template Industri Siap Pakai</span>
+      <span class="hero-tag">Hirarki Kontrol 5 Tingkat</span>
+      <span class="hero-tag">Matriks Tingkat Risiko L/M/H</span>
+      <span class="hero-tag">Format Cetak Tanda Tangan Lapangan</span>
+    </div>
+  </div>
+</section>
+
+<!-- BUILDER WORKSPACE -->
+<section class="jsa-wrapper">
+  <div class="container">
+    
+    <div class="card-box">
+      
+      <!-- TEMPLATE SELECTOR -->
+      <div class="card-header-line">
+        <h2 class="card-title">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Pilih Template Pekerjaan Berisiko Tinggi
+        </h2>
+        <span style="font-size:0.8rem;color:var(--slate-600)">Klik untuk memuat langkah kerja standar:</span>
+      </div>
+
+      <div class="preset-bar">
+        <button class="preset-btn active" type="button" onclick="loadTemplate('ketinggian')">
+          🪜 Bekerja di Ketinggian / Scaffolding
+        </button>
+        <button class="preset-btn" type="button" onclick="loadTemplate('hotwork')">
+          🔥 Pekerjaan Panas (Welding &amp; Cutting)
+        </button>
+        <button class="preset-btn" type="button" onclick="loadTemplate('confined')">
+          🕳️ Ruang Terbatas (Confined Space)
+        </button>
+        <button class="preset-btn" type="button" onclick="loadTemplate('lifting')">
+          🏗️ Pengangkatan Beban Berat (Crane Lifting)
+        </button>
+        <button class="preset-btn" type="button" onclick="loadTemplate('galian')">
+          ⛏️ Pekerjaan Penggalian Tanah Dalam
+        </button>
+        <button class="preset-btn" type="button" onclick="loadTemplate('listrik')">
+          ⚡ Perbaikan Panel &amp; Trafo Listrik
+        </button>
+      </div>
+
+      <!-- METADATA FORM -->
+      <div class="meta-grid">
+        <div class="form-field">
+          <label class="form-label" for="inpJudulKerja">Nama Pekerjaan (Job Title)</label>
+          <input type="text" id="inpJudulKerja" class="form-input" value="Pemasangan &amp; Inspeksi Perancah Scaffolding">
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="inpLokasi">Lokasi / Area Proyek</label>
+          <input type="text" id="inpLokasi" class="form-input" value="Area Workshop Gedung B">
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="inpSupervisor">Pengawas Lapangan (Supervisor)</label>
+          <input type="text" id="inpSupervisor" class="form-input" value="Ahmad Farhan">
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="inpHse">Ahli K3 / HSE Officer</label>
+          <input type="text" id="inpHse" class="form-input" value="Rian Pratama, S.T.">
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="inpPtw">No. Izin Kerja (PTW)</label>
+          <input type="text" id="inpPtw" class="form-input" value="PTW-WAHANA-2026-042">
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="inpTanggal">Tanggal Pelaksanaan</label>
+          <input type="date" id="inpTanggal" class="form-input">
+        </div>
+      </div>
+
+      <!-- JSA STEPS TABLE -->
+      <div class="jsa-table-container">
+        <table class="jsa-table" id="jsaTable">
+          <thead>
+            <tr>
+              <th style="width:45px;text-align:center">No</th>
+              <th style="width:24%">Urutan Langkah Kerja</th>
+              <th style="width:24%">Potensi Bahaya &amp; Dampak</th>
+              <th style="width:130px;text-align:center">Tingkat Risiko</th>
+              <th>Tindakan Pengendalian (Hirarki K3)</th>
+              <th style="width:14%">Penanggung Jawab (PIC)</th>
+              <th style="width:40px;text-align:center">Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="jsaBody">
+            <!-- Dynamically populated -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ACTION BUTTONS -->
+      <div class="action-bar">
+        <button class="btn-add-step" type="button" onclick="addJsaStep()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Tambah Baris Langkah Kerja
+        </button>
+
+        <div class="export-group">
+          <button class="btn-export btn-csv" type="button" onclick="exportCsv()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Export CSV
+          </button>
+          <button class="btn-export btn-print" type="button" onclick="printOfficialJsa()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            Cetak Formulir JSA Resmi
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- IN-DEPTH EDUCATIONAL GUIDE (SEO DEPTH) -->
+    <div class="editorial-box">
+      <h2 class="editorial-title">Panduan Lengkap Penyusunan Job Safety Analysis (JSA) Sesuai Standar K3</h2>
+      <p class="editorial-p">
+        <strong>Job Safety Analysis (JSA)</strong>, yang juga dikenal sebagai <em>Job Hazard Analysis (JHA)</em>, adalah teknik manajemen keselamatan kerja sistematis untuk mengidentifikasi bahaya fisik, kimia, biologis, ergonomi, dan mekanis pada setiap urutan tahapan kerja, guna menetapkan langkah pencegahan sebelum kecelakaan terjadi.
+      </p>
+
+      <h3 style="color:var(--navy);font-family:'Lexend',sans-serif;font-size:1.15rem;margin:22px 0 10px">4 Tahap Utama Pembuatan JSA yang Efektif</h3>
+      <ol style="padding-left:22px;color:var(--slate-700);line-height:1.75;margin-bottom:18px">
+        <li><strong>Memilih Pekerjaan yang Dianalisis:</strong> Prioritaskan pekerjaan dengan tingkat frekuensi atau keparahan insiden tinggi, pekerjaan baru tanpa instruksi kerja baku, atau pekerjaan berisiko kritis (misal: hot work, confined space, ketinggian).</li>
+        <li><strong>Memecah Pekerjaan Menjadi Urutan Langkah:</strong> Uraikan tugas dari awal persiapan hingga penyelesaian. Hindari membuat urutan terlalu detail (lebih dari 15 langkah) atau terlalu umum (kurang dari 3 langkah).</li>
+        <li><strong>Mengidentifikasi Potensi Bahaya pada Tiap Langkah:</strong> Teliti potensi terjatuh, tertimpa, tersengat listrik, terpapar zat kimia, titik jepit (pinch point), atau postur janggal.</li>
+        <li><strong>Menetapkan Tindakan Pengendalian Bahaya:</strong> Gunakan hierarki kontrol (eliminasi hingga APD) untuk merancang perlindungan yang reliabel.</li>
+      </ol>
+
+      <h3 style="color:var(--navy);font-family:'Lexend',sans-serif;font-size:1.15rem;margin:22px 0 10px">Penerapan Hirarki Pengendalian Bahaya (Hierarchy of Controls)</h3>
+      <p class="editorial-p">
+        Saat mengisi kolom tindakan pengendalian pada JSA, Ahli K3 dan Supervisor dilarang langsung meloncat ke pemakaian APD. Wajib memprioritaskan kontrol dari tingkat teratas:
+      </p>
+      <ul style="padding-left:22px;color:var(--slate-700);line-height:1.75;margin-bottom:24px">
+        <li><strong>1. Eliminasi:</strong> Menghilangkan sumber bahaya secara fisik (misal: memindahkan panel listrik bertegangan sebelum dikerjakan).</li>
+        <li><strong>2. Substitusi:</strong> Mengganti bahan atau alat beracun/berbahaya dengan yang lebih aman (misal: mengganti solvent berbasis benzena dengan pembersih berbasis air).</li>
+        <li><strong>3. Rekayasa Teknik (Engineering Controls):</strong> Memasang pelindung mesin, exhaust ventilation, scaffolding berpagar ganda.</li>
+        <li><strong>4. Pengendalian Administratif:</strong> Pemberlakuan Izin Kerja (PTW), rotasi shift kerja, safety briefing / TBM sebelum kerja.</li>
+        <li><strong>5. Alat Pelindung Diri (APD):</strong> Garis pertahanan terakhir (harness, kacamata goggle, respirator N95, sepatu safety).</li>
+      </ul>
+
+      <!-- FAQ ACCORDION -->
+      <h3 style="color:var(--navy);font-family:'Lexend',sans-serif;font-size:1.25rem;margin:28px 0 16px">Tanya Jawab Seputar JSA / JHA (FAQ)</h3>
+      <div class="faq-box">
+        
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>Apa perbedaan mendasar antara JSA dan IBPR / HIRADC?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-a">
+            HIRADC (Hazard Identification, Risk Assessment and Determining Control) atau IBPR bersifat makro di tingkat fasilitas dan mencakup seluruh siklus operasional bisnis perusahaan secara periodik (tahunan). Sedangkan JSA bersifat mikro, operasional, dan dibuat spesifik untuk satu jenis pekerjaan tertentu sebelum pekerjaan fisik dilakukan di lapangan, biasanya menjadi lampiran wajib dokumen Surat Izin Kerja Aman (SIKA / PTW).
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>Siapa yang wajib menandatangani formulir JSA sebelum pekerjaan dimulai?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-a">
+            Formulir JSA resmi wajib ditandatangani oleh:
+            <ol style="padding-left:20px;margin-top:6px">
+              <li><strong>Pelaksana / Mandor:</strong> Memahami langkah dan berkomitmen menerapkan kontrol.</li>
+              <li><strong>Pengawas Pekerjaan / Supervisor:</strong> Memverifikasi kesiapan alat dan keselamatan lapangan.</li>
+              <li><strong>Petugas HSE / Ahli K3 Umum:</strong> Mereview kepatuhan regulasi dan standar K3 perusahaan.</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>Berapa lama masa berlaku suatu dokumen JSA?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-a">
+            Dokumen JSA berlaku selama durasi pekerjaan tersebut berlangsung (sesuai masa aktif PTW, umumnya 1 shift kerja atau maksimal 1 minggu untuk pekerjaan proyek berkelanjutan). Jika terdapat perubahan kondisi lapangan, cuaca ekstrem, pergantian mesin/metode, atau terjadi insiden, JSA wajib ditinjau ulang (review) dan direvisi seketika.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+</main>
+</Layout>
