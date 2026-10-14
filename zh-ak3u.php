@@ -7,6 +7,9 @@
 <title>印尼注册安全官 (Ahli K3 Umum) 法定配置与 P2K3 委员会设立指引 — Wahana Totalita</title>
 <meta name="description" content="深度解析印尼企业安全生产委员会(P2K3)法定设立流程、注册安全工程师(AK3U)配置门槛与季报报送要求。帮助在印尼中资企业厘清用工合规与劳动监察风险。">
 <link rel="canonical" href="https://wahanatotalita.com/zh/ahli-k3-umum/">
+<link rel="alternate" hreflang="zh-Hans" href="https://wahanatotalita.com/zh/ahli-k3-umum/" />
+<link rel="alternate" hreflang="en" href="https://wahanatotalita.com/en/safety-officer-ak3-umum-requirements/" />
+<link rel="alternate" hreflang="id" href="https://wahanatotalita.com/ahli-k3-umum.php" />
 <meta name="robots" content="index, follow">
 <meta name="keywords" content="印尼Ahli K3 Umum,印尼注册安全官,印尼P2K3安全委员会,1970年第1号安全法,印尼劳工部任职令SKP,法定安全生产季度报告">
 <meta name="author" content="PT Wahana Totalita Konsultan">

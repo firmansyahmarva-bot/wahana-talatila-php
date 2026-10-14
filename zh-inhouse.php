@@ -7,6 +7,9 @@
 <title>在印尼中资工业园驻厂培训与中印双语实操考证解决方案 — Wahana Totalita</title>
 <meta name="description" content="专门针对苏拉威西青山(IMIP)、德龙(VDNI)、纬达贝(IWIP)及加里曼丹等偏远工业园的驻厂定制考证方案。官方考官进厂考核，节省差旅停工成本，支持中印双语技术交底。">
 <link rel="canonical" href="https://wahanatotalita.com/zh/in-house-training/">
+<link rel="alternate" hreflang="zh-Hans" href="https://wahanatotalita.com/zh/in-house-training/" />
+<link rel="alternate" hreflang="en" href="https://wahanatotalita.com/en/" />
+<link rel="alternate" hreflang="id" href="https://wahanatotalita.com/in-house-training/" />
 <meta name="robots" content="index, follow">
 <meta name="keywords" content="印尼驻厂双语内训,青山莫罗瓦利IMIP,德龙VDNI,纬达贝IWIP,偏远工区现场考证,免停工驻厂培训,中资企业印尼现地考证">
 <meta name="author" content="PT Wahana Totalita Konsultan">

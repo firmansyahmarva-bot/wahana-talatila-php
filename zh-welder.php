@@ -7,6 +7,9 @@
 <title>印尼承压管道与结构特种焊工 (Juru Las) 等级规范与实操考核指南 — Wahana Totalita</title>
 <meta name="description" content="深度解析印尼1982年第2号劳工部令对特种焊工等级(Kelas 1/2/3)的法定划分、X射线无损探伤(NDT/X-Ray)考核要求及压力容器管道作业持证规范。">
 <link rel="canonical" href="https://wahanatotalita.com/zh/juru-las/">
+<link rel="alternate" hreflang="zh-Hans" href="https://wahanatotalita.com/zh/juru-las/" />
+<link rel="alternate" hreflang="en" href="https://wahanatotalita.com/en/certified-welder-regulations-indonesia/" />
+<link rel="alternate" hreflang="id" href="https://wahanatotalita.com/juru-las.php" />
 <meta name="robots" content="index, follow">
 <meta name="keywords" content="印尼特种焊工证,Juru Las Kemnaker,Kelas 1 2 3焊工,高压管道焊接,X射线探伤抽检,印尼劳工部焊工等级规范">
 <meta name="author" content="PT Wahana Totalita Konsultan">

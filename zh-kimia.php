@@ -17,6 +17,9 @@ $wa_url = 'https://wa.me/6287759151278?text=' . rawurlencode('您好，我们是
 <title><?= htmlspecialchars($page_title, ENT_QUOTES, 'UTF-8') ?></title>
 <meta name="description" content="<?= htmlspecialchars($meta_desc, ENT_QUOTES, 'UTF-8') ?>">
 <link rel="canonical" href="<?= htmlspecialchars($canonical, ENT_QUOTES, 'UTF-8') ?>">
+<link rel="alternate" hreflang="zh-Hans" href="https://wahanatotalita.com/zh/k3-kimia/" />
+<link rel="alternate" hreflang="en" href="https://wahanatotalita.com/en/chemical-safety-officer-requirements/" />
+<link rel="alternate" hreflang="id" href="https://wahanatotalita.com/k3-kimia.php" />
 <meta name="robots" content="index, follow">
 <meta name="keywords" content="印尼危化品合规,印尼湿法冶炼安全,HPAL高压酸浸,RKEF镍冶炼,Petugas K3 Kimia,Ahli K3 Kimia,Kepmenaker 187/1999,印尼语LDK说明书">
 <meta name="author" content="PT Wahana Totalita Konsultan">

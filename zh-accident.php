@@ -17,6 +17,9 @@ $wa_url = 'https://wa.me/6287759151278?text=' . rawurlencode('您好，我们是
 <title><?= htmlspecialchars($page_title, ENT_QUOTES, 'UTF-8') ?></title>
 <meta name="description" content="<?= htmlspecialchars($meta_desc, ENT_QUOTES, 'UTF-8') ?>">
 <link rel="canonical" href="<?= htmlspecialchars($canonical, ENT_QUOTES, 'UTF-8') ?>">
+<link rel="alternate" hreflang="zh-Hans" href="https://wahanatotalita.com/zh/kecelakaan-kerja/" />
+<link rel="alternate" hreflang="en" href="https://wahanatotalita.com/en/workplace-accident-reporting-procedure/" />
+<link rel="alternate" hreflang="id" href="https://wahanatotalita.com/insiden/" />
 <meta name="robots" content="index, follow">
 <meta name="keywords" content="印尼工伤事故处置,印尼劳工部Formulir 3-3A,印尼BPJS工伤社保理赔,印尼警方现场封锁,工伤2x24小时报案,印尼劳动监察调查">
 <meta name="author" content="PT Wahana Totalita Konsultan">

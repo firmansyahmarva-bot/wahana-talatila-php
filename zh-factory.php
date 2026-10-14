@@ -18,6 +18,9 @@ $wa_url = 'https://wa.me/6287759151278?text=' . rawurlencode('您好，我们是
 <title><?= htmlspecialchars($page_title, ENT_QUOTES, 'UTF-8') ?></title>
 <meta name="description" content="<?= htmlspecialchars($meta_desc, ENT_QUOTES, 'UTF-8') ?>">
 <link rel="canonical" href="<?= htmlspecialchars($canonical, ENT_QUOTES, 'UTF-8') ?>">
+<link rel="alternate" hreflang="zh-Hans" href="https://wahanatotalita.com/zh/factory-roadmap/" />
+<link rel="alternate" hreflang="en" href="https://wahanatotalita.com/en/factory-setup-safety-checklist/" />
+<link rel="alternate" hreflang="id" href="https://wahanatotalita.com/" />
 <meta name="robots" content="index, follow">
 <meta name="keywords" content="印尼办厂流程,印尼建厂安全合规,印尼工厂投产手续,印尼特种设备检验SIA,印尼劳工部开工许可,印尼P2K3设立,印尼SMK3认证">
 <meta name="author" content="PT Wahana Totalita Konsultan">

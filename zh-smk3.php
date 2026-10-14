@@ -7,6 +7,9 @@
 <title>印尼国家职业安全健康体系 (SMK3) 审核与金牌认证 (Bendera Emas) 指南 — Wahana Totalita</title>
 <meta name="description" content="系统解读印尼2012年第50号政府条例(PP 50/2012)强制性SMK3审核标准、64/122/166项准则划分、金牌认证门槛及大型央企矿业招投标前置资质。">
 <link rel="canonical" href="https://wahanatotalita.com/zh/smk3/">
+<link rel="alternate" hreflang="zh-Hans" href="https://wahanatotalita.com/zh/smk3/" />
+<link rel="alternate" hreflang="en" href="https://wahanatotalita.com/en/smk3-certification-guide/" />
+<link rel="alternate" hreflang="id" href="https://wahanatotalita.com/smk3.php" />
 <meta name="robots" content="index, follow">
 <meta name="keywords" content="印尼SMK3认证,PP 50/2012,印尼金牌认证Bendera Emas,SMK3 166项准则,PLN招标门槛,Pertamina供应商准入,CSMS合规">
 <meta name="author" content="PT Wahana Totalita Konsultan">

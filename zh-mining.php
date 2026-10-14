@@ -17,6 +17,9 @@ $wa_url = 'https://wa.me/6287759151278?text=' . rawurlencode('您好，我们是
 <title><?= htmlspecialchars($page_title, ENT_QUOTES, 'UTF-8') ?></title>
 <meta name="description" content="<?= htmlspecialchars($meta_desc, ENT_QUOTES, 'UTF-8') ?>">
 <link rel="canonical" href="<?= htmlspecialchars($canonical, ENT_QUOTES, 'UTF-8') ?>">
+<link rel="alternate" hreflang="zh-Hans" href="https://wahanatotalita.com/zh/k3-pertambangan/" />
+<link rel="alternate" hreflang="en" href="https://wahanatotalita.com/en/mining-safety-regulations-smkp/" />
+<link rel="alternate" hreflang="id" href="https://wahanatotalita.com/k3-pertambangan.php" />
 <meta name="robots" content="index, follow">
 <meta name="keywords" content="印尼矿山安全监管,印尼能矿部ESDM,矿长KTT任命,POP初级安全主管,POM中级安全主管,POU高级安全主管,SMKP Minerba,红土镍矿合规">
 <meta name="author" content="PT Wahana Totalita Konsultan">

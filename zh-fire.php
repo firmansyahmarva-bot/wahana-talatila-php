@@ -17,6 +17,9 @@ $wa_url = 'https://wa.me/6287759151278?text=' . rawurlencode('您好，我们是
 <title><?= htmlspecialchars($page_title, ENT_QUOTES, 'UTF-8') ?></title>
 <meta name="description" content="<?= htmlspecialchars($meta_desc, ENT_QUOTES, 'UTF-8') ?>">
 <link rel="canonical" href="<?= htmlspecialchars($canonical, ENT_QUOTES, 'UTF-8') ?>">
+<link rel="alternate" hreflang="zh-Hans" href="https://wahanatotalita.com/zh/k3-kebakaran/" />
+<link rel="alternate" hreflang="en" href="https://wahanatotalita.com/en/workplace-fire-safety-classification/" />
+<link rel="alternate" hreflang="id" href="https://wahanatotalita.com/penanggulangan-kebakaran.php" />
 <meta name="robots" content="index, follow">
 <meta name="keywords" content="印尼工厂消防合规,印尼消防员考证Kelas D C B A,Kepmenaker 186/1999,消防栓管网水压试验,灭火器APAR年检,印尼财产保险理赔合规">
 <meta name="author" content="PT Wahana Totalita Konsultan">

@@ -7,6 +7,9 @@
 <title>印尼特种设备操作员执照 (SIO) 与机械安全年检 (SIA) 合规全解 — Wahana Totalita</title>
 <meta name="description" content="详尽梳理印尼叉车、吊车、挖掘机、锅炉与压力容器的特种人员持证 (SIO) 与机械准用检验 (SIA / Riksa Uji) 流程，助中资企业化解无证作业停机与安全罚款风险。">
 <link rel="canonical" href="https://wahanatotalita.com/zh/sio-alat-berat/">
+<link rel="alternate" hreflang="zh-Hans" href="https://wahanatotalita.com/zh/sio-alat-berat/" />
+<link rel="alternate" hreflang="en" href="https://wahanatotalita.com/en/heavy-equipment-operator-license-sio/" />
+<link rel="alternate" hreflang="id" href="https://wahanatotalita.com/pelatihan/" />
 <meta name="robots" content="index, follow">
 <meta name="keywords" content="印尼特种设备操作证SIO,印尼机械准用证SIA,叉车证SIO,天车证Crane,锅炉年检,储气罐压力容器检验,Riksa Uji Kemnaker">
 <meta name="author" content="PT Wahana Totalita Konsultan">
