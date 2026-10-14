@@ -124,13 +124,30 @@ let catName = 'K3';
 let hubLink = '/keselamatan-kerja/';
 let displayPillars: typeof PILLAR_PROGRAMS = [];
 
+const KNOWN_CITIES = [
+  'balikpapan', 'bandung', 'bantul', 'batam', 'bekasi', 'cilegon',
+  'jakarta', 'makassar', 'malang', 'medan', 'pekanbaru', 'semarang',
+  'sleman', 'solo', 'surabaya', 'yogyakarta'
+];
+
+let cityName = '';
+let trainingSlug = data.slug;
+
 if (type === 'programmatic') {
   pageTitle = data.title;
   pageDesc = data.description || data.title;
   canonicalUrl = data.canonical || `https://wahanatotalita.com/pelatihan/${data.slug}/`;
   schemas = Array.isArray(data.schemas) ? data.schemas : [];
-  
-  let raw = data.content || '';
+
+  for (const c of KNOWN_CITIES) {
+    if (data.slug.endsWith('-' + c)) {
+      cityName = c.charAt(0).toUpperCase() + c.slice(1);
+      trainingSlug = data.slug.slice(0, -c.length - 1);
+      break;
+    }
+  }
+
+  let raw = (data.content || '').trim();
   raw = raw.replace(/^<main\s*[^>]*>/i, '').replace(/<\/main>\s*$/i, '');
   htmlContent = raw;
 } else {
@@ -223,6 +240,17 @@ const priceFormatted = formatPrice(data.price);
 const modeText = modeLabel(data.mode);
 const defaultWaMsg = data.wa_text || `Halo Wahana Totalita, saya ingin konsultasi pendaftaran program: ${data.name}`;
 const inhouseWaMsg = `Halo Wahana Totalita, kami dari perusahaan ingin meminta penawaran in-house training resmi untuk topik: ${data.name}`;
+const cityPageCss = [
+  '/assets/css/page/training-city-remake.css',
+  '/assets/css/page/training-content.css',
+  '/assets/css/page/training-schedule-feed.css',
+  '/assets/css/page/training-fixes.css',
+];
+
+const cityScripts = [
+  '/assets/js/training-schedule-feed.js',
+  '/assets/js/training-schedule-fallback.js',
+];
 ---
 
 <Layout
@@ -230,11 +258,13 @@ const inhouseWaMsg = `Halo Wahana Totalita, kami dari perusahaan ingin meminta p
   description={pageDesc}
   canonical={canonicalUrl}
   bodyClass={type === 'training' ? 'detail-page pd-page' : ''}
-  pageCss={type === 'training' ? ['/assets/css/pelatihan-detail.css'] : []}
+  bodyAttrs={type === 'programmatic' ? { 'data-training-slug': trainingSlug, 'data-city': cityName } : {}}
+  pageCss={type === 'training' ? ['/assets/css/pelatihan-detail.css'] : cityPageCss}
+  scripts={type === 'programmatic' ? cityScripts : []}
   schemas={schemas}
 >
   {type === 'programmatic' ? (
-    <div class="programmatic-course-page" set:html={htmlContent} />
+    <Fragment set:html={htmlContent} />
   ) : (
     <div class="training-detail-page">
       <!-- BREADCRUMB -->
