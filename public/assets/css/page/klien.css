@@ -1,0 +1,265 @@
+/* ─── KLIEN PAGE DESIGN TOKENS & EXECUTIVE HERO ──────────────── */
+.kl-hero {
+  position: relative;
+  background: radial-gradient(1000px circle at 80% 15%, color-mix(in srgb, var(--brand) 45%, transparent) 0%, color-mix(in srgb, var(--brand-mid) 40%, transparent) 45%, var(--slate-900) 90%), var(--slate-900);
+  padding: clamp(56px, 7vw, 88px) 0 clamp(44px, 5vw, 68px);
+  text-align: center;
+  overflow: hidden;
+  border-bottom: 1px solid color-mix(in srgb, var(--surface) 8%, transparent);
+}
+.kl-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(color-mix(in srgb, var(--surface) 7%, transparent) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+}
+.kl-hero .container { position: relative; z-index: 1; }
+.kl-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: ui-monospace, monospace;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--whatsapp);
+  background: color-mix(in srgb, var(--whatsapp-dark) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--whatsapp) 28%, transparent);
+  padding: 4px 14px;
+  border-radius: 999px;
+  margin-bottom: 18px;
+}
+.kl-hero h1 {
+  font-family: 'Lexend', system-ui, sans-serif;
+  font-size: clamp(2rem, 4.4vw, 3rem);
+  font-weight: 800;
+  color: var(--surface);
+  margin: 0 auto 16px;
+  letter-spacing: -0.02em;
+  max-width: 860px;
+  line-height: 1.25;
+}
+.kl-hero p {
+  font-size: 16px;
+  color: var(--slate-400);
+  max-width: 720px;
+  margin: 0 auto 30px;
+  line-height: 1.7;
+}
+.kl-stats-strip {
+  display: flex;
+  justify-content: center;
+  gap: 36px;
+  flex-wrap: wrap;
+  margin-top: 36px;
+  padding-top: 28px;
+  border-top: 1px solid color-mix(in srgb, var(--surface) 10%, transparent);
+}
+.kl-stat-item { text-align: center; }
+.kl-stat-num {
+  font-family: 'Lexend', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--surface);
+  line-height: 1.1;
+}
+.kl-stat-num span { color: var(--accent); }
+.kl-stat-lbl {
+  font-size: 12.5px;
+  color: var(--slate-400);
+  margin-top: 4px;
+}
+
+/* ─── KLIEN SHOWCASE SECTION ────────────────────────────────── */
+.kl-section {
+  padding: 72px 0;
+  background: var(--slate-50);
+}
+.kl-group-wrap {
+  margin-bottom: 48px;
+}
+.kl-group-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--slate-200);
+}
+.kl-group-head h2 {
+  font-family: 'Lexend', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--slate-900);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.kl-group-head p {
+  font-size: 13.5px;
+  color: var(--slate-500);
+  margin: 0;
+}
+.kl-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+}
+.kl-card {
+  background: var(--surface);
+  border: 1px solid color-mix(in srgb, var(--brand-mid) 8%, transparent);
+  border-radius: 14px;
+  padding: 20px 22px;
+  box-shadow: 0 4px 16px -6px color-mix(in srgb, var(--brand) 6%, transparent);
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.kl-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px -10px color-mix(in srgb, var(--brand) 16%, transparent);
+  border-color: color-mix(in srgb, var(--brand-mid) 20%, transparent);
+}
+.kl-card-name {
+  font-family: 'Lexend', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--slate-900);
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+.kl-card-scope {
+  font-size: 12.5px;
+  color: var(--info);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.kl-card-scope::before {
+  content: "•";
+  color: var(--whatsapp);
+  font-size: 1.2rem;
+}
+
+/* ─── TESTIMONIALS SECTION ─────────────────────────────────── */
+.kl-testi-section {
+  padding: 72px 0;
+  background: var(--surface);
+  border-top: 1px solid var(--slate-200);
+}
+.kl-sec-title {
+  text-align: center;
+  font-family: 'Lexend', sans-serif;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 800;
+  color: var(--slate-900);
+  margin: 0 0 12px;
+}
+.kl-sec-sub {
+  text-align: center;
+  font-size: 15px;
+  color: var(--slate-500);
+  max-width: 600px;
+  margin: 0 auto 48px;
+}
+.kl-testi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+.kl-testi-card {
+  background: var(--slate-50);
+  border: 1px solid var(--slate-200);
+  border-radius: 16px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+.kl-testi-tag {
+  align-self: flex-start;
+  background: var(--info-bg);
+  color: var(--info-dark);
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+}
+.kl-testi-quote {
+  font-size: 14.5px;
+  color: var(--slate-700);
+  line-height: 1.7;
+  margin-bottom: 24px;
+  font-style: italic;
+}
+.kl-testi-author {
+  border-top: 1px solid var(--slate-200);
+  padding-top: 16px;
+}
+.kl-testi-role {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--slate-900);
+}
+.kl-testi-comp {
+  font-size: 12.5px;
+  color: var(--slate-500);
+  margin-top: 2px;
+}
+
+/* ─── CORPORATE IN-HOUSE CTA BANNER ────────────────────────── */
+.kl-cta-box {
+  background: linear-gradient(135deg, var(--brand) 0%, var(--brand) 100%);
+  color: var(--surface);
+  border-radius: 20px;
+  padding: 48px 40px;
+  margin: 64px auto 0;
+  box-shadow: 0 20px 40px -15px color-mix(in srgb, var(--brand) 40%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.kl-cta-copy h2 {
+  font-family: 'Lexend', sans-serif;
+  font-size: clamp(1.4rem, 2.6vw, 2rem);
+  font-weight: 800;
+  color: var(--surface);
+  margin: 0 0 10px;
+}
+.kl-cta-copy p {
+  font-size: 14.5px;
+  color: var(--success-border);
+  margin: 0;
+  max-width: 620px;
+  line-height: 1.6;
+}
+.btn-kl-wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--whatsapp);
+  color: var(--surface) !important;
+  padding: 15px 30px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--whatsapp) 40%, transparent);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.btn-kl-wa:hover {
+  background: var(--success);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px color-mix(in srgb, var(--whatsapp) 50%, transparent);
+}

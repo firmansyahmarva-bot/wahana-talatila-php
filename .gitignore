@@ -51,8 +51,6 @@ nextjs-clean/
 # Astro build output
 .astro/
 dist/
-public/assets
-public/galeri
 out/
 node_modules/
 

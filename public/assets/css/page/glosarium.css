@@ -1,0 +1,19 @@
+.glos-hero{margin-top:var(--nav-h,72px);background:linear-gradient(135deg,var(--brand-dark,#081c15),var(--brand,#1b4332));padding:56px 0;color:var(--surface);text-align:center}
+.glos-hero h1{font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:800;margin:0 0 12px}
+.search-box{background:var(--surface);border-radius:12px;padding:6px;display:flex;gap:8px;max-width:500px;margin:20px auto 0;box-shadow:0 4px 20px color-mix(in srgb, var(--black) 20%, transparent)}
+.search-box input{flex:1;border:none;outline:none;padding:10px 16px;font-size:1rem;background:transparent;color:var(--slate-900)}
+.search-box button{background:var(--orange);color:var(--surface);border:none;padding:10px 20px;border-radius:8px;cursor:pointer;font-weight:600}
+.alpha-nav{display:flex;gap:4px;flex-wrap:wrap;justify-content:center;padding:20px 0;background:var(--surface-subtle);border-bottom:1px solid var(--border)}
+.alpha-btn{display:inline-block;width:36px;height:36px;line-height:36px;text-align:center;border-radius:8px;text-decoration:none;font-weight:700;font-size:.9rem;color:var(--slate-600);transition:.2s}
+.alpha-btn:hover,.alpha-btn.active{background:var(--green);color:var(--surface)}
+.alpha-btn.has-terms{color:var(--green)}
+.glos-content{padding:40px 0;max-width:800px;margin:0 auto;padding-left:20px;padding-right:20px}
+.term-card{background:var(--surface);border-radius:8px;border:1px solid var(--border);padding:20px 24px;margin-bottom:12px;transition:.2s}
+.term-card:hover{border-color:var(--green);box-shadow:0 4px 12px color-mix(in srgb, var(--brand) 8%, transparent)}
+.term-card h2{margin:0 0 8px;font-size:1.05rem}
+.term-card h2 a{text-decoration:none;color:var(--green)}
+.term-card h2 a:hover{text-decoration:underline}
+.term-abbr{font-size:.8rem;color:var(--orange);font-weight:600;font-family:monospace;margin-bottom:4px}
+.term-def{font-size:.9rem;color:var(--slate-600);line-height:1.6;margin:0}
+.term-cat{display:inline-block;background:var(--success-bg);color:var(--green);padding:2px 8px;border-radius:100px;font-size:.72rem;font-weight:600;margin-top:8px}
+.letter-heading{font-size:2rem;font-weight:800;color:var(--green);margin:32px 0 16px;border-bottom:3px solid var(--green);padding-bottom:8px;display:inline-block}

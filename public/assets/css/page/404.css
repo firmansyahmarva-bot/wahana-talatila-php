@@ -1,0 +1,29 @@
+.e404-hero{background:var(--brand,var(--brand));color:var(--surface);padding:80px 0 60px;text-align:center}
+.e404-code{font-size:clamp(6rem,20vw,10rem);font-weight:800;line-height:1;margin:0;
+  background:linear-gradient(135deg,var(--accent,var(--accent)),var(--accent));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.e404-hero h1{font-size:clamp(1.5rem,4vw,2.2rem);font-weight:800;margin:.5rem 0 1rem}
+.e404-hero p{font-size:1rem;opacity:.8;max-width:440px;margin:0 auto 2rem;line-height:1.6}
+.e404-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.e404-btn-prim{background:var(--accent,var(--accent));color:var(--surface);padding:13px 28px;border-radius:8px;
+  text-decoration:none;font-weight:700;font-size:15px;transition:background .2s}
+.e404-btn-prim:hover{background:var(--accent-dark)}
+.e404-btn-sec{background:color-mix(in srgb, var(--surface) 12%, transparent);color:var(--surface);border:1.5px solid color-mix(in srgb, var(--surface) 30%, transparent);
+  padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:700;font-size:15px;
+  transition:background .2s}
+.e404-btn-sec:hover{background:color-mix(in srgb, var(--surface) 20%, transparent)}
+.e404-suggest{padding:4rem 0 5rem;background:var(--slate-50)}
+.e404-suggest-title{text-align:center;font-size:1.4rem;font-weight:800;color:var(--slate-900);margin:0 0 2rem}
+.e404-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem}
+.e404-card{background:var(--surface);border-radius:10px;overflow:hidden;box-shadow:0 2px 10px color-mix(in srgb, var(--black) 6%, transparent);
+  text-decoration:none;color:inherit;transition:transform .2s,box-shadow .2s;display:flex;flex-direction:column}
+.e404-card:hover{transform:translateY(-3px);box-shadow:0 6px 20px color-mix(in srgb, var(--black) 10%, transparent)}
+.e404-card img{width:100%;aspect-ratio:16/9;object-fit:cover}
+.e404-card-body{padding:1rem}
+.e404-card-name{font-size:14px;font-weight:700;color:var(--slate-900);line-height:1.4;margin:0 0 .4rem}
+.e404-card-price{font-size:13px;color:var(--accent,var(--accent));font-weight:600}
+.e404-search{max-width:480px;margin:0 auto 3rem;display:flex;background:var(--surface);
+  border-radius:50px;box-shadow:0 2px 16px color-mix(in srgb, var(--black) 10%, transparent);overflow:hidden}
+.e404-search input{flex:1;border:none;outline:none;padding:13px 20px;font-size:14px}
+.e404-search button{background:var(--brand,var(--brand));border:none;padding:13px 22px;
+  color:var(--surface);cursor:pointer;font-size:14px;font-weight:700}

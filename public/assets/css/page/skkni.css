@@ -1,0 +1,325 @@
+/* SKKNI Hub Styling */
+.skkni-hero {
+    background: linear-gradient(135deg, var(--info-dark) 0%, var(--info-dark) 60%, var(--info-dark) 100%);
+    color: var(--surface);
+    padding: 60px 0 50px;
+    text-align: center;
+}
+.skkni-hero h1 {
+    font-size: clamp(1.8rem, 3.5vw, 2.7rem);
+    font-weight: 800;
+    margin: 0 0 14px;
+    line-height: 1.25;
+}
+.skkni-hero p {
+    font-size: 1.05rem;
+    opacity: 0.92;
+    max-width: 740px;
+    margin: 0 auto 28px;
+    line-height: 1.6;
+}
+.skkni-stats-row {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    margin-top: 28px;
+}
+.skkni-stat-box {
+    background: color-mix(in srgb, var(--surface) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--surface) 22%, transparent);
+    border-radius: 12px;
+    padding: 12px 24px;
+    min-width: 140px;
+    backdrop-filter: blur(4px);
+}
+.skkni-stat-box strong {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--accent-soft);
+}
+.skkni-stat-box span {
+    font-size: 0.85rem;
+    opacity: 0.95;
+}
+
+/* Search bar */
+.skkni-search-form {
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 6px;
+    display: flex;
+    gap: 8px;
+    max-width: 660px;
+    margin: 0 auto;
+    box-shadow: 0 10px 25px color-mix(in srgb, var(--black) 20%, transparent);
+}
+.skkni-search-form input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 12px 18px;
+    font-size: 1rem;
+    color: var(--slate-800);
+    background: transparent;
+}
+.skkni-search-form button {
+    background: var(--orange, var(--accent));
+    color: var(--surface);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.skkni-search-form button:hover {
+    background: var(--accent);
+}
+
+/* Filter Section */
+.skkni-filter-bar {
+    background: var(--slate-50);
+    border-bottom: 1px solid var(--slate-200);
+    padding: 18px 0;
+}
+.skkni-filter-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--slate-500);
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
+}
+.skkni-chip-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.skkni-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: var(--surface);
+    border: 1px solid var(--slate-300);
+    color: var(--slate-700);
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+.skkni-chip:hover {
+    border-color: var(--info-dark);
+    color: var(--info-dark);
+}
+.skkni-chip.active {
+    background: var(--info-dark);
+    color: var(--surface);
+    border-color: var(--info-dark);
+    font-weight: 600;
+}
+
+/* Card Grid */
+.skkni-main-content {
+    padding: 48px 0 64px;
+}
+.skkni-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+}
+.skkni-card {
+    background: var(--surface);
+    border-radius: 14px;
+    border: 1px solid var(--slate-200);
+    box-shadow: 0 2px 8px color-mix(in srgb, var(--black) 4%, transparent);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.skkni-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px color-mix(in srgb, var(--black) 9%, transparent);
+    border-color: var(--slate-300);
+}
+.skkni-card-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--slate-100);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--slate-50);
+}
+.skkni-badge-sector {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 6px;
+    letter-spacing: 0.04em;
+    background: var(--info-bg);
+    color: var(--info-dark);
+}
+.skkni-badge-kkni {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--slate-500);
+    background: var(--slate-100);
+    padding: 3px 8px;
+    border-radius: 4px;
+}
+.skkni-card-body {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.skkni-card-ref {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--info);
+    margin-bottom: 6px;
+}
+.skkni-card-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--slate-900);
+    line-height: 1.35;
+    margin: 0 0 10px;
+}
+.skkni-card-title a {
+    color: inherit;
+    text-decoration: none;
+}
+.skkni-card-title a:hover {
+    color: var(--info-dark);
+}
+.skkni-card-desc {
+    font-size: 0.88rem;
+    color: var(--slate-600);
+    line-height: 1.55;
+    margin: 0 0 18px;
+    flex: 1;
+}
+.skkni-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.8rem;
+    color: var(--slate-500);
+    border-top: 1px solid var(--slate-100);
+    padding-top: 14px;
+    margin-top: auto;
+}
+.skkni-card-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+.skkni-card-footer {
+    padding: 14px 20px;
+    background: var(--slate-50);
+    border-top: 1px solid var(--slate-100);
+}
+.skkni-btn-detail {
+    display: block;
+    text-align: center;
+    background: var(--info-dark);
+    color: var(--surface);
+    padding: 9px 16px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+.skkni-btn-detail:hover {
+    background: var(--info);
+}
+
+/* Featured Training Showcase */
+.skkni-showcase {
+    background: var(--success-bg);
+    border-top: 1px solid var(--success-border);
+    border-bottom: 1px solid var(--success-border);
+    padding: 60px 0;
+}
+.skkni-showcase-title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 800;
+    color: var(--brand);
+    text-align: center;
+    margin: 0 0 12px;
+}
+.skkni-showcase-sub {
+    font-size: 1rem;
+    color: var(--success-dark);
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 36px;
+    line-height: 1.6;
+}
+.ft-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+}
+.ft-card {
+    background: var(--surface);
+    border-radius: 12px;
+    border: 1px solid var(--success-soft);
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--success-dark) 6%, transparent);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s;
+}
+.ft-card:hover {
+    transform: translateY(-3px);
+}
+.ft-badge {
+    align-self: flex-start;
+    background: var(--success-soft);
+    color: var(--success-dark);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+}
+.ft-title {
+    font-size: 1.12rem;
+    font-weight: 700;
+    color: var(--slate-900);
+    margin: 0 0 8px;
+    line-height: 1.35;
+}
+.ft-desc {
+    font-size: 0.88rem;
+    color: var(--slate-600);
+    line-height: 1.5;
+    margin: 0 0 16px;
+    flex: 1;
+}
+.ft-btn {
+    display: inline-block;
+    background: var(--success);
+    color: var(--surface);
+    text-align: center;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+.ft-btn:hover {
+    background: var(--success-dark);
+}

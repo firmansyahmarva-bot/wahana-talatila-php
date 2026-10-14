@@ -1,0 +1,40 @@
+.jadwal-hero{background:linear-gradient(135deg,var(--green),var(--brand-mid));padding:60px 0;color:var(--surface);text-align:center}
+.jadwal-hero h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;margin:0 0 12px}
+.jadwal-hero p{opacity:.85;max-width:600px;margin:0 auto 24px}
+.stat-pills{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.stat-pill{background:color-mix(in srgb, var(--surface) 15%, transparent);padding:10px 20px;border-radius:100px;font-weight:600}
+.jadwal-filters{background:var(--surface-subtle);border-bottom:1px solid var(--border);padding:20px 0}
+.filter-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.filter-row input{flex:1;min-width:200px;padding:10px 16px;border:1px solid var(--slate-300);border-radius:8px;font-size:.95rem}
+.filter-row select{padding:10px 16px;border:1px solid var(--slate-300);border-radius:8px;background:var(--surface);font-size:.95rem;min-width:140px}
+.filter-row button{background:var(--orange);color:var(--surface);border:none;padding:10px 20px;border-radius:8px;font-weight:600;cursor:pointer}
+.jadwal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px;padding:40px 0}
+.jadwal-card{background:var(--surface);border-radius:12px;border:1px solid var(--border);overflow:hidden;box-shadow:0 2px 8px color-mix(in srgb, var(--black) 6%, transparent);transition:.2s}
+.jadwal-card:hover{box-shadow:0 8px 24px color-mix(in srgb, var(--black) 12%, transparent);transform:translateY(-2px)}
+.jadwal-card-header{background:linear-gradient(135deg,var(--green),var(--brand-mid));padding:20px;color:var(--surface)}
+.jadwal-card-header .batch-code{font-size:.8rem;opacity:.7;margin-bottom:6px;font-family:monospace}
+.jadwal-card-header h3{font-size:1.05rem;font-weight:700;margin:0;line-height:1.4}
+.jadwal-card-body{padding:20px}
+.jadwal-meta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.jadwal-meta-item{display:flex;align-items:flex-start;gap:8px;font-size:.875rem;color:var(--slate-600)}
+.jadwal-meta-item .label{font-size:.75rem;color:var(--text-light);display:block}
+.badge-mode{display:inline-block;padding:3px 10px;border-radius:100px;font-size:.75rem;font-weight:700}
+.badge-online{background:var(--slate-200);color:var(--info)}
+.badge-offline{background:var(--success-soft);color:var(--brand-mid)}
+.badge-hybrid{background:var(--warning-bg);color:var(--warning-text)}
+.slots-bar{height:8px;background:var(--border);border-radius:100px;overflow:hidden;margin-bottom:8px}
+.slots-fill{height:100%;background:var(--orange);border-radius:100px;transition:.3s}
+.slots-fill.full{background:var(--danger)}
+.slots-fill.low{background:var(--warning)}
+.btn-daftar{display:block;text-align:center;background:var(--orange);color:var(--surface);padding:12px;border-radius:8px;font-weight:700;text-decoration:none;margin-top:12px}
+.btn-daftar:hover{background:var(--orange-dark)}
+.btn-daftar.full{background:var(--text-light);cursor:not-allowed}
+.price-tag{font-size:1.2rem;font-weight:800;color:var(--green)}
+.price-tag.free{color:var(--success)}
+.nav-tabs{display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:32px;padding-top:24px}
+.nav-tab{padding:12px 24px;font-weight:600;color:var(--text-light);text-decoration:none;border-bottom:2px solid transparent;margin-bottom:-2px}
+.nav-tab.active{color:var(--green);border-bottom-color:var(--green)}
+.empty-state{text-align:center;padding:80px 20px;color:var(--text-light)}
+.pagination{display:flex;gap:8px;justify-content:center;padding:40px 0}
+.page-btn{display:inline-block;padding:8px 16px;border-radius:8px;border:1px solid var(--slate-300);text-decoration:none;color:var(--slate-800);font-weight:600}
+.page-btn.active{background:var(--green);color:var(--surface);border-color:var(--green)}
