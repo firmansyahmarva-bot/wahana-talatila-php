@@ -306,7 +306,7 @@ if ($slug === 'all' || $slug === '' || $slug === 'index') {
   $meta_desc  = 'Daftar lengkap 20 kota pusat pelatihan dan sertifikasi K3 resmi Kemnaker RI & BNSP di Indonesia. Layanan public training & in-house corporate di seluruh Nusantara.';
   $canonical  = SITE_URL . '/kota/';
 
-$page_css = array_merge($page_css ?? [], ['kota-inline']);
+$page_css = array_merge($page_css ?? [], ['kota']);
   require __DIR__ . '/includes/head.php';
   ?>
   <script type="application/ld+json">

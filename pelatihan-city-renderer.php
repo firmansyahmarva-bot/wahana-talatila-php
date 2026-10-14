@@ -74,12 +74,10 @@ foreach ($known_cities as $c) {
 <?php foreach ($schemas as $schema): ?>
 <script type="application/ld+json"><?= $schema ?></script>
 <?php endforeach; ?>
-<link rel="stylesheet" href="/assets/css/core.css">
-<link rel="stylesheet" href="/assets/css/components.css">
-<link rel="stylesheet" href="/assets/css/page/training-city-remake.css">
-<link rel="stylesheet" href="/assets/css/page/training-content.css">
-<link rel="stylesheet" href="/assets/css/page/training-schedule-feed.css">
-<link rel="stylesheet" href="/assets/css/page/training-fixes.css">
+<?php 
+$page_css = ['training-city-remake', 'training-content', 'training-schedule-feed', 'training-fixes'];
+require_once __DIR__ . '/includes/css.php'; 
+?>
 </head>
 <body data-training-slug="<?= htmlspecialchars($training_slug, ENT_QUOTES, 'UTF-8') ?>" data-city="<?= htmlspecialchars($city_name, ENT_QUOTES, 'UTF-8') ?>">
 

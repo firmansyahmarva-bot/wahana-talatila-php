@@ -214,11 +214,10 @@ $related_trainings = [
           Kamus &amp; Database Safety Talk K3 2026
         </div>
         <h1>
-          <span>100 Materi Safety Talk Harian</span>
-          Toolbox Meeting Singkat &amp; Jelas
+          100 Materi Safety Talk Harian &amp; <span>Toolbox Meeting (TBM)</span>
         </h1>
         <p class="st-lead">
-          Topik K3 harian terlengkap — fakta statistik, poin diskusi, teknologi K3 &amp; AI, serta lembar daftar hadir siap cetak.
+          Database materi briefing K3 singkat dan jelas (5–10 menit): fakta statistik, poin diskusi interaktif, serta lembar absensi siap cetak.
         </p>
 
         <!-- Elevated Search Bar -->

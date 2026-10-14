@@ -60,7 +60,7 @@ a { color: inherit; text-decoration: none; }
 }
 .st-hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.75fr);
+  grid-template-columns: minmax(0, 1.45fr) minmax(290px, 0.8fr);
   gap: 48px;
   align-items: center;
   position: relative;
@@ -74,7 +74,7 @@ a { color: inherit; text-decoration: none; }
   background: color-mix(in srgb, var(--success-border) 12%, transparent);
   border: 1px solid color-mix(in srgb, var(--success-border) 35%, transparent);
   border-radius: 999px;
-  color: var(--st-lime);
+  color: var(--accent-soft);
   font-family: 'Lexend', sans-serif;
   font-size: 0.78rem;
   font-weight: 700;
@@ -97,15 +97,15 @@ a { color: inherit; text-decoration: none; }
 }
 .st-hero h1 {
   font-family: 'Lexend', sans-serif;
-  font-size: clamp(2rem, 4.2vw, 3.4rem);
+  font-size: clamp(1.85rem, 3.2vw, 2.75rem);
   font-weight: 800;
-  line-height: 1.12;
-  letter-spacing: -0.03em;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
   color: var(--surface);
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 .st-hero h1 span {
-  color: var(--st-lime);
+  color: var(--accent-soft);
   display: block;
 }
 .st-hero p.st-lead {
@@ -151,7 +151,7 @@ a { color: inherit; text-decoration: none; }
 }
 .st-search-input::placeholder { color: var(--st-slate-600); }
 .st-search-btn {
-  background: var(--st-forest);
+  background: var(--accent);
   color: var(--surface);
   border: none;
   border-radius: 12px;
@@ -166,7 +166,7 @@ a { color: inherit; text-decoration: none; }
   transition: background 0.18s, transform 0.18s;
   flex-shrink: 0;
 }
-.st-search-btn:hover { background: var(--st-forest-light); transform: scale(1.02); }
+.st-search-btn:hover { background: var(--accent-dark); transform: scale(1.02); }
 
 /* Quick Action Chips (High CTR Boost) */
 .st-quick-chips {
@@ -198,7 +198,7 @@ a { color: inherit; text-decoration: none; }
 .st-chip:hover {
   background: var(--st-lime);
   color: var(--st-forest-dark);
-  border-color: var(--st-lime);
+  border-color: var(--accent-soft);
   transform: translateY(-1px);
 }
 
@@ -217,13 +217,13 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
   gap: 7px;
 }
-.st-trust-item svg { color: var(--st-lime); }
+.st-trust-item svg { color: var(--accent-soft); }
 
 /* Hero Stat Panel Card */
 .st-hero-panel {
   background: color-mix(in srgb, var(--surface) 8%, transparent);
   border: 1px solid color-mix(in srgb, var(--surface) 16%, transparent);
-  border-radius: var(--st-radius-xl);
+  border-radius: var(--st-radius-lg); border-color: color-mix(in srgb, var(--surface) 20%, transparent);
   padding: 28px 24px;
   backdrop-filter: blur(16px);
   box-shadow: 0 24px 50px color-mix(in srgb, var(--black) 22%, transparent);
@@ -234,7 +234,7 @@ a { color: inherit; text-decoration: none; }
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--st-lime);
+  color: var(--accent-soft);
   margin-bottom: 8px;
 }
 .st-hero-panel h2 {
@@ -262,7 +262,7 @@ a { color: inherit; text-decoration: none; }
   font-family: 'Lexend', sans-serif;
   font-size: 1.45rem;
   font-weight: 800;
-  color: var(--st-lime);
+  color: var(--accent-soft);
   line-height: 1.1;
 }
 .st-stat-cell span {
@@ -330,7 +330,7 @@ a { color: inherit; text-decoration: none; }
   color: var(--st-forest);
 }
 .st-cat-btn.active {
-  background: var(--st-forest);
+  background: var(--accent);
   border-color: var(--st-forest);
   color: var(--surface);
   box-shadow: 0 4px 12px color-mix(in srgb, var(--brand) 25%, transparent);
@@ -506,7 +506,7 @@ a { color: inherit; text-decoration: none; }
 }
 .st-btn-detail {
   flex: 1;
-  background: var(--st-forest);
+  background: var(--accent);
   color: var(--surface);
   border: none;
   border-radius: 10px;
@@ -522,7 +522,7 @@ a { color: inherit; text-decoration: none; }
   transition: background 0.18s, transform 0.15s;
 }
 .st-btn-detail:hover {
-  background: var(--st-forest-light);
+  background: var(--accent-dark);
   transform: translateY(-1px);
 }
 .st-btn-print {
@@ -570,7 +570,7 @@ a { color: inherit; text-decoration: none; }
   transition: all 0.2s;
 }
 .st-load-more-btn:hover {
-  background: var(--st-forest);
+  background: var(--accent);
   color: var(--surface);
   box-shadow: 0 8px 24px color-mix(in srgb, var(--brand) 20%, transparent);
   transform: translateY(-2px);
@@ -582,7 +582,7 @@ a { color: inherit; text-decoration: none; }
   background: radial-gradient(circle at 90% 20%, color-mix(in srgb, var(--success-border) 15%, transparent), transparent 40%),
               linear-gradient(135deg, var(--brand) 0%, var(--brand) 100%);
   color: var(--surface);
-  border-radius: var(--st-radius-xl);
+  border-radius: var(--st-radius-lg); border-color: color-mix(in srgb, var(--surface) 20%, transparent);
   padding: 40px 36px;
   margin-top: 48px;
   display: flex;
@@ -784,7 +784,7 @@ a { color: inherit; text-decoration: none; }
 
 .st-modal-dialog {
   background: var(--surface);
-  border-radius: var(--st-radius-xl);
+  border-radius: var(--st-radius-lg); border-color: color-mix(in srgb, var(--surface) 20%, transparent);
   max-width: 720px;
   width: 100%;
   max-height: 88vh;
