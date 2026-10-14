@@ -148,8 +148,40 @@ if (type === 'programmatic') {
   }
 
   let raw = (data.content || '').trim();
-  raw = raw.replace(/^<main\s*[^>]*>/i, '').replace(/<\/main>\s*$/i, '');
+  raw = raw.replace(/<main\b[^>]*>/gi, '').replace(/<\/main>/gi, '');
   htmlContent = raw;
+
+  const cleanTitle = (data.title || '').split('—')[0].split('|')[0].trim();
+  const breadcrumbElements: any[] = [
+    { '@type': 'ListItem', position: 1, name: 'Beranda', item: 'https://wahanatotalita.com/' },
+    { '@type': 'ListItem', position: 2, name: 'Pelatihan', item: 'https://wahanatotalita.com/pelatihan/' },
+  ];
+  if (cityName) {
+    breadcrumbElements.push({
+      '@type': 'ListItem',
+      position: 3,
+      name: `Pelatihan K3 ${cityName}`,
+      item: `https://wahanatotalita.com/pelatihan-k3-${cityName.toLowerCase()}/`,
+    });
+    breadcrumbElements.push({
+      '@type': 'ListItem',
+      position: 4,
+      name: cleanTitle,
+      item: canonicalUrl,
+    });
+  } else {
+    breadcrumbElements.push({
+      '@type': 'ListItem',
+      position: 3,
+      name: cleanTitle,
+      item: canonicalUrl,
+    });
+  }
+  schemas.push({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbElements,
+  });
 } else {
   pageTitle = data.meta_title || `${data.name} — Wahana Totalita`;
   pageDesc = data.meta_desc || data.description || data.name;
@@ -240,6 +272,7 @@ const priceFormatted = formatPrice(data.price);
 const modeText = modeLabel(data.mode);
 const defaultWaMsg = data.wa_text || `Halo Wahana Totalita, saya ingin konsultasi pendaftaran program: ${data.name}`;
 const inhouseWaMsg = `Halo Wahana Totalita, kami dari perusahaan ingin meminta penawaran in-house training resmi untuk topik: ${data.name}`;
+const programmaticTitle = (pageTitle || '').split('—')[0].split('|')[0].trim();
 const cityPageCss = [
   '/assets/css/page/training-city-remake.css',
   '/assets/css/page/training-content.css',
@@ -257,14 +290,35 @@ const cityScripts = [
   title={pageTitle}
   description={pageDesc}
   canonical={canonicalUrl}
-  bodyClass={type === 'training' ? 'detail-page pd-page' : ''}
+  bodyClass={type === 'training' ? 'detail-page pd-page' : 'city-program-body'}
   bodyAttrs={type === 'programmatic' ? { 'data-training-slug': trainingSlug, 'data-city': cityName } : {}}
   pageCss={type === 'training' ? ['/assets/css/pelatihan-detail.css'] : cityPageCss}
   scripts={type === 'programmatic' ? cityScripts : []}
   schemas={schemas}
 >
   {type === 'programmatic' ? (
-    <Fragment set:html={htmlContent} />
+    <div class="city-program-page">
+      <div class="breadcrumb-bar">
+        <div class="container">
+          <nav aria-label="Breadcrumb">
+            <ol class="breadcrumb-list">
+              <li><a href="/">Beranda</a></li>
+              <li aria-hidden="true">›</li>
+              <li><a href="/pelatihan/">Pelatihan</a></li>
+              {cityName && (
+                <>
+                  <li aria-hidden="true">›</li>
+                  <li><a href={`/pelatihan-k3-${cityName.toLowerCase()}/`}>Pelatihan K3 {cityName}</a></li>
+                </>
+              )}
+              <li aria-hidden="true">›</li>
+              <li aria-current="page">{programmaticTitle}</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+      <Fragment set:html={htmlContent} />
+    </div>
   ) : (
     <div class="training-detail-page">
       <!-- BREADCRUMB -->
