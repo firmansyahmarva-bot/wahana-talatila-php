@@ -3,45 +3,45 @@
    Semantic Design Tokens (Stripe Tech Standard: Ink #0A2540 + Indigo #635BFF)
    ============================================================ */
 :root {
-  /* Semantic Brand Tokens */
-  --brand:          #0A2540;
-  --brand-dark:     #071B30;
-  --brand-mid:      #1E3A5F;
-  --brand-light:    #F4F3FF;
-  --accent:         #635BFF;
-  --accent-dark:    #4E44E6;
-  --accent-light:   #F4F3FF;
+  /* Semantic Brand Tokens (Wahana Totalita Official: Deep Forest Green #1b4332 + Safety Emerald #2d6a4f) */
+  --brand:          #1b4332;
+  --brand-dark:     #081c15;
+  --brand-mid:      #2d6a4f;
+  --brand-light:    #f0fdf4;
+  --accent:         #2d6a4f;
+  --accent-dark:    #1b4332;
+  --accent-light:   #f0fdf4;
   --surface:        #FFFFFF;
-  --surface-subtle: #F6F9FC;
-  --surface-alt:    #F6F9FC;
-  --ink:            #0A2540;
-  --mut:            #425466;
-  --border:         #E3E8EE;
-  --border-card:    rgba(227, 232, 238, 0.9);
+  --surface-subtle: #F8FAFC;
+  --surface-alt:    #F1F5F9;
+  --ink:            #0F172A;
+  --mut:            #475569;
+  --border:         #E2E8F0;
+  --border-card:    rgba(226, 232, 240, 0.9);
 
   /* Legacy Name Aliases (kept for 100% backward compatibility) */
-  --green:          #0A2540;
-  --green-dark:     #071B30;
-  --green-mid:      #1E3A5F;
-  --green-light:    #F6F9FC;
-  --orange:         #635BFF;
-  --orange-dark:    #4E44E6;
-  --orange-light:   #F4F3FF;
-  --text:           #0A2540;
-  --text-muted:     #425466;
-  --text-light:     #8898AA;
+  --green:          #1b4332;
+  --green-dark:     #081c15;
+  --green-mid:      #2d6a4f;
+  --green-light:    #f0fdf4;
+  --orange:         #d97706;
+  --orange-dark:    #b45309;
+  --orange-light:   #fef3c7;
+  --text:           #0F172A;
+  --text-muted:     #475569;
+  --text-light:     #64748B;
 
   /* Redesign 2026 Palette Aliases */
-  --n900:           #071B30;
-  --n800:           #0A2540;
-  --n700:           #1E3A5F;
-  --n100:           #F6F9FC;
-  --o500:           #635BFF;
-  --o400:           #7C75FF;
-  --o100:           #F4F3FF;
+  --n900:           #081c15;
+  --n800:           #1b4332;
+  --n700:           #2d6a4f;
+  --n100:           #f0fdf4;
+  --o500:           #d97706;
+  --o400:           #f59e0b;
+  --o100:           #fef3c7;
 
   /* Extended palette: the ONLY place raw colors are allowed. Everything else uses var(--token). */
-  --accent-soft:    #7C75FF;
+  --accent-soft:    #52b788;
   --black:          #000000;
   --slate-50:       #F8FAFC;
   --slate-100:      #F1F5F9;

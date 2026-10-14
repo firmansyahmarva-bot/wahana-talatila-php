@@ -282,7 +282,7 @@ const hubAccent: Record<string, string> = {
 
                   return (
                     <article
-                      class="training-card fade-in"
+                      class="training-card"
                       data-cat={t.data.category_slug || group.cat.slug}
                       data-mode={(t.data.mode || 'offline').toLowerCase()}
                       style={`--accent: ${t.data.accent_color || hubAccent[group.cat.slug] || 'var(--accent)'};`}
