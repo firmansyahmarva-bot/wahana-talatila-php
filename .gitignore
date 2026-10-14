@@ -52,6 +52,7 @@ nextjs-clean/
 .astro/
 dist/
 public/assets
+public/galeri
 out/
 node_modules/
 

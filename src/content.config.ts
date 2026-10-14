@@ -166,6 +166,50 @@ const trainingBatches = defineCollection({
   }),
 });
 
+/**
+ * 8. Sector Hubs Collection (24 Industrial Hubs)
+ */
+const hubs = defineCollection({
+  loader: file('./data/hubs.json'),
+  schema: z.object({
+    id: z.string(),
+    slug: z.string(),
+    badge: z.string().optional().nullable(),
+    title: z.string(),
+    meta_title: z.string().optional().nullable(),
+    meta_desc: z.string().optional().nullable(),
+    intro_lead: z.string().optional().nullable(),
+    intro: z.union([z.array(z.string()), z.string()]).optional().nullable(),
+    regulasi: z.array(z.object({
+      nomor: z.string(),
+      desc: z.string(),
+    })).optional().nullable(),
+    comparison: z.any().optional().nullable(),
+    programs: z.array(z.object({
+      slug: z.string(),
+      name: z.string(),
+      cert: z.string().optional().nullable(),
+      mode: z.string().optional().nullable(),
+      duration: z.string().optional().nullable(),
+      desc: z.string().optional().nullable(),
+      target_peserta: z.string().optional().nullable(),
+      wa_text: z.string().optional().nullable(),
+    })).optional().nullable(),
+    syarat: z.array(z.string()).optional().nullable(),
+    materi: z.array(z.string()).optional().nullable(),
+    faqs: z.array(z.object({
+      q: z.string(),
+      a: z.string(),
+    })).optional().nullable(),
+    related_hubs: z.array(z.object({
+      slug: z.string(),
+      name: z.string(),
+      badge: z.string().optional().nullable(),
+      desc: z.string().optional().nullable(),
+    })).optional().nullable(),
+  }),
+});
+
 export const collections = {
   articles,
   trainings,
@@ -174,4 +218,6 @@ export const collections = {
   cities,
   glossary,
   trainingBatches,
+  hubs,
 };
+

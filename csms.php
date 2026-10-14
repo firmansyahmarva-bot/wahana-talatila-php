@@ -237,23 +237,23 @@ require __DIR__ . '/includes/head.php';
           <nav class="toc-box" aria-label="Daftar Isi">
             <div class="toc-title">📖 Daftar Isi Panduan</div>
             <ul class="toc-list">
-              <li><a href="var(--slate-400)-1">1. Pengertian &amp; Peran Strategis CSMS</a></li>
-              <li><a href="var(--slate-400)-2">2. Landasan Hukum &amp; Regulasi CSMS</a></li>
-              <li><a href="var(--slate-400)-3">3. CSMS vs SMK3 PP 50 vs ISO 45001</a></li>
-              <li><a href="var(--slate-400)-4">4. Siklus K3LL Pertamina (6 Tahapan)</a></li>
-              <li><a href="var(--slate-400)-5">5. 7 Elemen Utama Penilaian CSMS</a></li>
-              <li><a href="var(--slate-400)-6">6. Kategorisasi Risiko Pekerjaan</a></li>
-              <li><a href="var(--slate-400)-7">7. Berkas Prakualifikasi CSMS Wajib</a></li>
+              <li><a href="#bab-1">1. Pengertian &amp; Peran Strategis CSMS</a></li>
+              <li><a href="#bab-2">2. Landasan Hukum &amp; Regulasi CSMS</a></li>
+              <li><a href="#bab-3">3. CSMS vs SMK3 PP 50 vs ISO 45001</a></li>
+              <li><a href="#bab-4">4. Siklus K3LL Pertamina (6 Tahapan)</a></li>
+              <li><a href="#bab-5">5. 7 Elemen Utama Penilaian CSMS</a></li>
+              <li><a href="#bab-6">6. Kategorisasi Risiko Pekerjaan</a></li>
+              <li><a href="#bab-7">7. Berkas Prakualifikasi CSMS Wajib</a></li>
               <li><a href="#download-dokumen-csms">📥 Download Contoh Dokumen CSMS</a></li>
               <li><a href="#prosedur-daftar-csms">7.1 Cara Daftar &amp; Masa Berlaku CSMS</a></li>
-              <li><a href="var(--slate-400)-8">8. Menyusun HSE Plan Tender Unggul</a></li>
-              <li><a href="var(--slate-400)-9">9. Pelaksanaan &amp; Pengawasan Lapangan</a></li>
-              <li><a href="var(--slate-400)-10">10. Evaluasi Akhir &amp; Rating Kontraktor</a></li>
+              <li><a href="#bab-8">8. Menyusun HSE Plan Tender Unggul</a></li>
+              <li><a href="#bab-9">9. Pelaksanaan &amp; Pengawasan Lapangan</a></li>
+              <li><a href="#bab-10">10. Evaluasi Akhir &amp; Rating Kontraktor</a></li>
               <li><a href="#laporan-kinerja-manajemen-puncak">10.1 Laporan Kinerja CHSEMS Manajemen Puncak</a></li>
-              <li><a href="var(--slate-400)-11">11. 10 Kesalahan Fatal Penyebab Gagal</a></li>
-              <li><a href="var(--slate-400)-12">12. Roadmap 30 Hari Persiapan CSMS</a></li>
-              <li><a href="var(--slate-400)-13">13. Tanya Jawab Terlengkap (FAQ)</a></li>
-              <li><a href="var(--slate-400)-14">14. Pendampingan CSMS Wahana Totalita</a></li>
+              <li><a href="#bab-11">11. 10 Kesalahan Fatal Penyebab Gagal</a></li>
+              <li><a href="#bab-12">12. Roadmap 30 Hari Persiapan CSMS</a></li>
+              <li><a href="#bab-13">13. Tanya Jawab Terlengkap (FAQ)</a></li>
+              <li><a href="#bab-14">14. Pendampingan CSMS Wahana Totalita</a></li>
             </ul>
           </nav>
 
@@ -1002,3 +1002,4 @@ require __DIR__ . '/includes/head.php';
 
 </body>
 </html>
+
