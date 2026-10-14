@@ -1,4 +1,4 @@
-.glos-hero{background:linear-gradient(135deg,var(--green),var(--brand-mid));padding:56px 0;color:var(--surface);text-align:center}
+.glos-hero{margin-top:var(--nav-h,72px);background:linear-gradient(135deg,var(--brand-dark,#081c15),var(--brand,#1b4332));padding:56px 0;color:var(--surface);text-align:center}
 .glos-hero h1{font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:800;margin:0 0 12px}
 .search-box{background:var(--surface);border-radius:12px;padding:6px;display:flex;gap:8px;max-width:500px;margin:20px auto 0;box-shadow:0 4px 20px color-mix(in srgb, var(--black) 20%, transparent)}
 .search-box input{flex:1;border:none;outline:none;padding:10px 16px;font-size:1rem;background:transparent;color:var(--slate-900)}

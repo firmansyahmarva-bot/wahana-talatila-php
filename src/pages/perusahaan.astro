@@ -276,9 +276,21 @@ const schemas = [
   schemas={schemas}
   pageCss={['/assets/css/perusahaan.css']}
 >
-  <main id="konten-utama">
-    <!-- ═══ 1 · HERO ═══ -->
-    <section class="pr-hero">
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb-bar" style="margin-top:var(--nav-h,72px);background:var(--surface);padding:12px 0;border-bottom:1px solid var(--border);">
+    <div class="container" style="max-width:1160px;margin:0 auto;padding:0 20px;">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb-list" style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:13px;color:var(--slate-500);list-style:none;padding:0;margin:0;">
+          <li><a href="/" style="color:var(--slate-600);text-decoration:none;">Beranda</a></li>
+          <li aria-hidden="true">›</li>
+          <li aria-current="page" style="color:var(--brand);font-weight:600;">Training K3 Perusahaan</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <!-- ═══ 1 · HERO ═══ -->
+  <section class="pr-hero">
       <div class="container pr-hero-inner">
         <div class="pr-hero-copy">
           <span class="pr-eyebrow">Training K3 Perusahaan · In House &amp; Public</span>
@@ -582,5 +594,4 @@ const schemas = [
         </div>
       </div>
     </section>
-  </main>
 </Layout>

@@ -45,9 +45,10 @@
 
 /* ─── HERO & LEAD HOOK (Clean Light Stripe Style) ─── */
 .hub-hero {
+  margin-top: var(--nav-h, 72px);
   background: var(--surface);
   color: var(--hub-dark);
-  padding: 56px 0 44px;
+  padding: 40px 0 44px;
   position: relative;
   overflow: hidden;
   border-bottom: 1px solid var(--hub-border);
