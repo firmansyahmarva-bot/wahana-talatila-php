@@ -85,7 +85,7 @@ if (!empty($article['thumbnail'])) $article_schema['image'] = artikel_thumb($art
 <meta name="twitter:card"        content="summary_large_image">
 <meta name="twitter:title"       content="<?= e($article['title']) ?>">
 <meta name="twitter:description" content="<?= e($meta_desc) ?>">
-<meta name="theme-color"         content="<?= e(is_valid_hex($s['theme_color_primary'] ?? '') ? $s['theme_color_primary'] : 'var(--brand)') ?>">
+<meta name="theme-color"         content="<?= e(is_valid_hex($s['theme_color_primary'] ?? '') ? $s['theme_color_primary'] : '#1b4332') ?>">
 <script type="application/ld+json"><?= json_encode($article_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?></script>
 <?php if ($faq_schema): ?>
 <script type="application/ld+json"><?= json_encode($faq_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?></script>

@@ -25,6 +25,7 @@ $canonical = SITE_URL . '/zh/';
 <link rel="canonical" href="<?= htmlspecialchars($canonical, ENT_QUOTES, 'UTF-8') ?>">
 <link rel="alternate" hreflang="zh-Hans" href="https://wahanatotalita.com/zh/" />
 <link rel="alternate" hreflang="id" href="https://wahanatotalita.com/" />
+<link rel="alternate" hreflang="en" href="https://wahanatotalita.com/en/" />
 <link rel="alternate" hreflang="x-default" href="https://wahanatotalita.com/" />
 <meta name="robots" content="index, follow">
 <meta name="keywords" content="印尼安全生产法规,印尼K3合规,印尼安全官AK3U,印尼特种设备年检SIA,印尼特种作业操作证SIO,印尼SMK3金牌认证,P2K3委员会设立,中资企业印尼办厂">

@@ -82,7 +82,7 @@ $catalogFaqs = [
 <meta property="og:url"         content="<?= e($page_url) ?>">
 <meta property="og:site_name"   content="<?= e($s['site_name'] ?? 'Wahana Totalita Konsultan') ?>">
 <meta property="og:locale"      content="id_ID">
-<meta name="theme-color"        content="<?= e(is_valid_hex($s['theme_color_primary'] ?? '') ? $s['theme_color_primary'] : 'var(--brand)') ?>">
+<meta name="theme-color"        content="<?= e(is_valid_hex($s['theme_color_primary'] ?? '') ? $s['theme_color_primary'] : '#1b4332') ?>">
 <meta name="robots"             content="index,follow">
 <link rel="manifest" href="/manifest.json">
 

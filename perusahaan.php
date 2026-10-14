@@ -138,7 +138,7 @@ $faqs = [
 <meta name="twitter:title"       content="<?= e($page_title) ?>">
 <meta name="twitter:description" content="<?= e($meta_desc) ?>">
 <meta name="twitter:image"       content="<?= SITE_URL . e($s['og_image'] ?? '/assets/img/og-cover.svg') ?>">
-<meta name="theme-color"        content="<?= e(is_valid_hex($s['theme_color_primary'] ?? '') ? $s['theme_color_primary'] : 'var(--brand)') ?>">
+<meta name="theme-color"        content="<?= e(is_valid_hex($s['theme_color_primary'] ?? '') ? $s['theme_color_primary'] : '#1b4332') ?>">
 <script type="application/ld+json"><?= json_encode([
   '@context' => 'https://schema.org',
   '@type'    => 'Organization',

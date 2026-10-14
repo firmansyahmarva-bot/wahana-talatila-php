@@ -194,7 +194,7 @@ if (isset($HUB_CATEGORY_MAP[$training['cat_slug'] ?? ''])) {
 <meta name="twitter:title"         content="<?= e($meta_title) ?>">
 <meta name="twitter:description"   content="<?= e($meta_desc) ?>">
 <meta name="twitter:image"         content="<?= training_img_url($training['image_path'], $training['cat_slug'] ?? '') ?>">
-<meta name="theme-color"           content="<?= e(is_valid_hex($s['theme_color_primary'] ?? '') ? $s['theme_color_primary'] : 'var(--brand)') ?>">
+<meta name="theme-color"           content="<?= e(is_valid_hex($s['theme_color_primary'] ?? '') ? $s['theme_color_primary'] : '#1b4332') ?>">
 <meta name="robots"                content="index,follow">
 <!-- PWA -->
 <link rel="manifest" href="/manifest.json">

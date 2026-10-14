@@ -44,7 +44,7 @@ if ($cat) {
 <meta property="og:url"         content="<?= e($canon_url) ?>">
 <meta property="og:image"       content="<?= SITE_URL . e($s['og_image'] ?? '/assets/img/og-cover.jpg') ?>">
 <meta name="twitter:card"       content="summary_large_image">
-<meta name="theme-color"        content="<?= e(is_valid_hex($s['theme_color_primary'] ?? '') ? $s['theme_color_primary'] : ($s['brand_color'] ?? 'var(--brand)')) ?>">
+<meta name="theme-color"        content="<?= e(is_valid_hex($s['theme_color_primary'] ?? '') ? $s['theme_color_primary'] : ($s['brand_color'] ?? '#1b4332')) ?>">
 <script type="application/ld+json"><?= json_encode([
   '@context'      => 'https://schema.org',
   '@type'         => 'Blog',

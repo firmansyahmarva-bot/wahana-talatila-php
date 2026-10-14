@@ -196,6 +196,7 @@
         · <a href="/artikel/" style="opacity:.7;text-decoration:none">Artikel</a>
         · <a href="/sitemap.xml" style="opacity:.7;text-decoration:none">Sitemap</a>
         · <a href="/kebijakan-privasi" style="opacity:.7;text-decoration:none">Privasi</a>
+        · <a href="/en/" style="opacity:.7;text-decoration:none">English (EN)</a>
         · <a href="/zh/" style="opacity:.7;text-decoration:none">中文 (ZH)</a>
       </p>
     </div>

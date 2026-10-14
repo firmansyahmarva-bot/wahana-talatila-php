@@ -30,6 +30,7 @@ $_active_title = $_is_home ? $_home_title : page_title($page_title ?? ($meta_tit
 <link rel="canonical" href="<?= htmlspecialchars($canonical) ?>">
 <link rel="alternate" hreflang="id" href="<?= htmlspecialchars($canonical) ?>" />
 <?php if ($_is_home): ?>
+<link rel="alternate" hreflang="en" href="https://wahanatotalita.com/en/" />
 <link rel="alternate" hreflang="zh-Hans" href="https://wahanatotalita.com/zh/" />
 <?php endif; ?>
 <link rel="alternate" hreflang="x-default" href="<?= htmlspecialchars($canonical) ?>" />
@@ -43,7 +44,7 @@ $_active_title = $_is_home ? $_home_title : page_title($page_title ?? ($meta_tit
 <meta property="og:image"       content="<?= SITE_URL . e($s['og_image'] ?? '/assets/img/og-cover.jpg') ?>">
 <meta name="twitter:card"       content="summary_large_image">
 <meta name="twitter:title"      content="<?= e($_active_title) ?>">
-<meta name="theme-color"        content="<?= e(is_valid_hex($s['theme_color_primary'] ?? '') ? $s['theme_color_primary'] : 'var(--brand)') ?>">
+<meta name="theme-color"        content="<?= e(is_valid_hex($s['theme_color_primary'] ?? '') ? $s['theme_color_primary'] : '#1b4332') ?>">
 
 <?php if (!empty($s['google_verify'])): ?>
 <meta name="google-site-verification" content="<?= e($s['google_verify']) ?>">
