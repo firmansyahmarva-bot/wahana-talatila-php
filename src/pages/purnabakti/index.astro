@@ -1,0 +1,505 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const canonical = 'https://wahanatotalita.com/purnabakti/';
+const pageTitle = 'Pelatihan Masa Persiapan Pensiun (MPP) Yogyakarta — BUMN, ASN & Korporasi | Wahana Totalita';
+const metaDesc = 'Program pelatihan purnabakti & persiapan pensiun eksekutif di Yogyakarta. Kurikulum 4 pilar (mental, finansial, kesehatan, wirausaha), hotel *4, plus pasangan & kunjungan usaha.';
+
+const rawItems = await getCollection('purnabakti');
+const items = rawItems.map(i => i.data);
+
+const categories = [
+  { key: 'paket-utama', label: 'Program Unggulan' },
+  { key: 'pilar-psikologi', label: 'Pilar Psikologis' },
+  { key: 'pilar-finansial', label: 'Pilar Finansial' },
+  { key: 'pilar-kesehatan', label: 'Pilar Kesehatan' },
+  { key: 'pilar-wirausaha', label: 'Pilar Kewirausahaan' },
+  { key: 'b2b-corporate', label: 'Korporasi BUMN' },
+  { key: 'b2g-government', label: 'Pemerintah (ASN/PNS)' },
+];
+
+const waNumber = '6287759151278';
+const defaultWaText = 'Halo Wahana Totalita, saya dari bagian HR / Manajemen Perusahaan. Kami ingin konsultasi dan meminta proposal resmi Pelatihan Masa Persiapan Pensiun (MPP) di Yogyakarta. Mohon infonya.';
+const defaultWaUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(defaultWaText)}`;
+
+const faqs = [
+  {
+    q: 'Mengapa Daerah Istimewa Yogyakarta menjadi destinasi utama pelatihan purnabakti korporasi?',
+    a: 'Yogyakarta memiliki ekosistem retirement ideal: suasana budaya yang tenang dan ramah, biaya hidup terjangkau, serta living laboratory kewirausahaan pensiun yang sangat kaya mulai dari greenhouse melon hidroponik di Sleman, peternakan terpadu kambing etawa di lereng Merapi, sentra perikanan bioflok di Bantul, hingga bisnis homestay dan kuliner heritage yang dipimpin langsung oleh mantan purnawirawan BUMN.'
+  },
+  {
+    q: 'Apa saja 4 pilar utama kurikulum pelatihan masa persiapan pensiun Wahana Totalita?',
+    a: 'Kurikulum kami mengintegrasikan: (1) Pilar Psikologis & Spiritualitas untuk mengatasi Post-Power Syndrome dan menata hubungan bersama pasangan, (2) Pilar Finansial & Investasi Aman untuk mengelola uang pesangon/DPLK bebas investasi bodong, (3) Pilar Kesehatan & Wellness Usia Emas untuk pencegahan penyakit degeneratif, dan (4) Pilar Kewirausahaan & Studi Lapangan ke unit usaha nyata.'
+  },
+  {
+    q: 'Mengapa program purnabakti sangat direkomendasikan mengikutsertakan suami/istri (pasangan)?',
+    a: 'Pensiun adalah transformasi kehidupan keluarga. Pasangan adalah mitra hidup harian yang terdampak langsung oleh perubahan jadwal, pengelolaan kas rumah tangga, dan pemilihan aktivitas pensiun. Menghadirkan pasangan memastikan tidak ada friksi harapan dan menyelaraskan komitmen bersama dalam menjalani babak hidup baru.'
+  },
+  {
+    q: 'Apakah Wahana Totalita melayani pengadaan B2B BUMN dan LPSE instansi pemerintah dengan kelengkapan SPK dan faktur pajak?',
+    a: 'Ya, Wahana Totalita adalah badan hukum PT resmi dengan NPWP, status PKP, terdaftar di LPSE dan PADI UMKM BUMN. Kami menyediakan dokumen pengadaan lengkap: Kerangka Acuan Kerja (KAK/TOR), Surat Perjanjian Kerja (SPK), Berita Acara Serah Terima (BAST), kuitansi bermeterai, serta Faktur Pajak PPh 23 dan PPN.'
+  },
+  {
+    q: 'Berapa durasi ideal dan estimasi biaya per peserta untuk pelatihan MPP?',
+    a: 'Durasi paling direkomendasikan adalah 4 Hari 3 Malam di Yogyakarta dengan hotel bintang 4. Biaya reguler public training mulai dari Rp 7.500.000 / orang, sedangkan paket eksekutif all-in bersama pasangan berkisar antara Rp 14.500.000 hingga Rp 17.500.000 per pasang, sudah mencakup hotel, konsumsi penuh, transportasi wisata, praktisi narasumber, tiket masuk usaha, dan gala dinner.'
+  }
+];
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': 'https://wahanatotalita.com/#organization',
+    name: 'PT Wahana Totalita Konsultan',
+    url: 'https://wahanatotalita.com/',
+    description: 'Lembaga Konsultan Pengembangan SDM, Pelatihan Masa Persiapan Pensiun (MPP) & Sertifikasi Kompetensi Terakreditasi.',
+    contactPoint: [
+      {
+        '@type': 'ContactPoint',
+        telephone: '+62-877-5915-1278',
+        contactType: 'Corporate Human Capital & Procurement Service',
+        availableLanguage: ['Indonesian', 'English']
+      }
+    ]
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    '@id': `${canonical}#breadcrumb`,
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Beranda', item: 'https://wahanatotalita.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Pelatihan Purnabakti (MPP)', item: canonical }
+    ]
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': `${canonical}#service`,
+    name: 'Pelatihan Masa Persiapan Pensiun (MPP) & Wisata Wirausaha Yogyakarta',
+    provider: { '@id': 'https://wahanatotalita.com/#organization' },
+    serviceType: 'Executive Retirement Transition Training & Corporate Living Laboratory',
+    description: metaDesc,
+    areaServed: [
+      { '@type': 'Country', name: 'Indonesia' }
+    ]
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    '@id': `${canonical}#faq`,
+    mainEntity: faqs.map(f => ({
+      '@type': 'Question',
+      name: f.q,
+      answerCount: 1,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: f.a
+      }
+    }))
+  }
+];
+---
+
+<Layout
+  title={pageTitle}
+  description={metaDesc}
+  canonical={canonical}
+  schemas={schemas}
+  pageCss={['/assets/css/page/purnabakti.css']}
+>
+  <!-- HERO -->
+  <section class="mpp-hero">
+    <div class="container">
+      <div class="mpp-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        Executive Retirement Transition &amp; Corporate Living Lab
+      </div>
+      <h1>Pelatihan Masa Persiapan Pensiun <em>(MPP)</em> di Yogyakarta</h1>
+      <p class="lead">
+        Bekali insan terbaik korporasi Anda menyongsong masa purnabakti yang bermakna, sejahtera finansial, dan sehat lahir batin. Program komprehensif 4 hari 3 malam di Yogyakarta: <strong>Kesiapan Mental, Proteksi Uang Pesangon Bebas Penipuan, Wellness Usia Emas, &amp; Kunjungan Usaha Nyata Bersama Pasangan.</strong>
+      </p>
+
+      <div class="mpp-hero-actions">
+        <a href={defaultWaUrl} class="mpp-btn-wa" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+          Minta Proposal &amp; Silabus Resmi (B2B HR)
+        </a>
+        <a href="#katalog" class="mpp-btn-outline">Pilihan Program &amp; Silabus ({items.length})</a>
+      </div>
+
+      <div class="mpp-trust-bar">
+        <span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Rekanan Resmi LPSE &amp; BUMN PADI UMKM</span>
+        <span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Hotel Bintang 4 &amp; Fasilitas VIP Pasangan</span>
+        <span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Narasumber Certified (CFP, Psikolog &amp; Dokter)</span>
+        <span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Kunjungan Usaha Riil di Sleman &amp; Bantul</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 PILLARS EXPLANATION -->
+  <section style="padding: 56px 0 40px; background: var(--surface);">
+    <div class="container">
+      <div style="text-align:center; max-width:760px; margin:0 auto 32px;">
+        <span style="color:var(--warning-dark); font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.08em;">Kurikulum Holistik Teruji</span>
+        <h2 style="font-size:clamp(22px, 3.2vw, 34px); color:var(--slate-900); font-weight:800; margin:6px 0 12px;">
+          Empat Pilar Kesiapan Purna Tugas Bahagia &amp; Berdaya
+        </h2>
+        <p style="color:var(--slate-500); font-size:15px; margin:0;">
+          Program kami dirancang tidak hanya untuk mengisi waktu luang, tetapi memberikan transformasi menyeluruh bagi purnawirawan korporasi dan pasangannya:
+        </p>
+      </div>
+
+      <div class="mpp-pillars-grid">
+        <div class="mpp-pillar-item">
+          <h4>1. Pilar Psikologis &amp; Spiritual</h4>
+          <p>
+            Mengatasi Post-Power Syndrome, restrukturisasi identitas diri lepas dari atribut jabatan kantor, dialog keterbukaan bersama pasangan, dan menemukan Ikigai (makna hidup baru).
+          </p>
+        </div>
+
+        <div class="mpp-pillar-item">
+          <h4>2. Pilar Finansial &amp; Proteksi Aset</h4>
+          <p>
+            Pengelolaan uang pesangon BUMN &amp; DPLK dengan Strategi 3 Keranjang (Likuiditas, Pendapatan Tetap, Pertumbuhan). Mitigasi 5 ciri investasi bodong dan perencanaan waris keluarga.
+          </p>
+        </div>
+
+        <div class="mpp-pillar-item">
+          <h4>3. Pilar Kesehatan &amp; Wellness</h4>
+          <p>
+            Skrining kebugaran (Mini MCU), nutrisi ramah gula/garam usia 50+, senam vitalitas lansia low-impact, manajemen tidur tanpa obat kimia, dan ergonomi rumah aman jatuh.
+          </p>
+        </div>
+
+        <div class="mpp-pillar-item">
+          <h4>4. Pilar Wirausaha &amp; Living Lab</h4>
+          <p>
+            Studi lapangan langsung ke unit usaha nyata di Yogyakarta: Agribisnis greenhouse hidroponik Sleman, peternakan terpadu kambing etawa Kaliurang, kuliner, dan boutique homestay.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE B2B RETIREMENT BUDGET CALCULATOR -->
+  <section style="padding: 20px 0; background: var(--surface);">
+    <div class="container">
+      <div class="mpp-calc-box">
+        <div class="mpp-calc-grid">
+          <div class="mpp-calc-form">
+            <span style="color:var(--warning-border); font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:.08em;">B2B Corporate Cost Estimator</span>
+            <h3 style="color:var(--surface); font-size:24px; font-weight:800; margin:6px 0 16px;">Simulasi Estimasi Anggaran MPP Instansi</h3>
+            
+            <label for="calc-peserta">Jumlah Karyawan Peserta Purna Tugas:</label>
+            <input type="number" id="calc-peserta" min="5" max="200" value="10" />
+
+            <label for="calc-tipe">Format Pendampingan:</label>
+            <select id="calc-tipe">
+              <option value="pasangan">Plus Pasangan (Suami/Istri Ikut Serta - Rekomendasi)</option>
+              <option value="individu">Hanya Karyawan (Tanpa Pasangan)</option>
+            </select>
+
+            <label for="calc-durasi">Durasi &amp; Paket Pelaksanaan di Yogyakarta:</label>
+            <select id="calc-durasi">
+              <option value="4h3m">4 Hari 3 Malam (Executive Hotel *4 All-In + 3 Kunjungan Usaha)</option>
+              <option value="3h2m">3 Hari 2 Malam (Intensive Hotel *4 All-In + 2 Kunjungan Usaha)</option>
+            </select>
+          </div>
+
+          <div class="mpp-calc-result">
+            <h4>Perkiraan Alokasi Anggaran Investasi:</h4>
+            <div class="val" id="calc-total">Rp 155.000.000</div>
+            <p id="calc-detail">Estimasi untuk 10 pasang (20 orang), 4H3M Hotel *4 Yogyakarta, Fullboard, Transport &amp; Kunjungan Usaha.</p>
+            <a href={defaultWaUrl} id="calc-wa-btn" class="mpp-btn-wa" target="_blank" rel="noopener" style="justify-content:center;">
+              Kirim Rincian Ini ke WhatsApp HR
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FILTER SECTION -->
+  <section class="mpp-filter-section" id="katalog">
+    <div class="container">
+      <div class="mpp-filter-bar">
+        <button type="button" class="mpp-filter-chip active" data-filter="all">Semua Program ({items.length})</button>
+        {categories.map(cat => (
+          <button type="button" class="mpp-filter-chip" data-filter={cat.key}>
+            {cat.label}
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES GRID -->
+  <section style="padding: 48px 0 60px; background: var(--surface);">
+    <div class="container">
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px;">
+        <div>
+          <span style="color:var(--warning-dark); font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.08em;">Katalog Program Masa Persiapan Pensiun</span>
+          <h2 style="font-size:clamp(22px, 3vw, 32px); color:var(--slate-900); font-weight:800; margin:6px 0 0;">
+            Pilih Silabus &amp; Program yang Sesuai Kebutuhan Karyawan
+          </h2>
+        </div>
+        <p style="color:var(--slate-500); font-size:14px; margin:0;" id="mpp-count-display">
+          Menampilkan <strong id="mpp-item-count">{items.length}</strong> modul spesialisasi purnabakti
+        </p>
+      </div>
+
+      <div class="mpp-grid" id="mpp-items-grid">
+        {items.map(item => {
+          const itemWaText = `Halo Wahana Totalita, saya ingin meminta proposal resmi untuk program: ${item.judul}. Mohon info jadwal dan penawaran biayanya.`;
+          const itemWaUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(itemWaText)}`;
+          return (
+            <article class="mpp-card" data-category={item.kategori}>
+              <span class="mpp-card-tag">{item.kategori_label}</span>
+              <h3><a href={`/purnabakti/${item.slug}/`}>{item.judul}</a></h3>
+              <p class="desc">{item.tagline}</p>
+
+              <div class="mpp-card-price-box">
+                <div>
+                  <span style="display:block; font-size:11.5px; color:var(--slate-500); text-transform:uppercase;">Investasi Mulai:</span>
+                  <strong>{item.biaya_standar}</strong>
+                </div>
+                <div style="text-align:right;">
+                  <span style="display:block; font-size:11.5px; color:var(--slate-500);">Durasi Pelatihan:</span>
+                  <span style="font-weight:700; color:var(--slate-900);">{item.durasi_program}</span>
+                </div>
+              </div>
+
+              <div class="mpp-card-actions">
+                <a href={`/purnabakti/${item.slug}/`} class="mpp-card-btn mpp-card-btn-primary">
+                  Lihat Silabus &amp; Jadwal &rarr;
+                </a>
+                <a href={itemWaUrl} class="mpp-card-btn mpp-card-btn-wa" target="_blank" rel="noopener" title="Konsultasi WhatsApp">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+                </a>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- JOGJA LIVING LAB SHOWCASE -->
+  <section style="padding: 50px 0; background: var(--slate-50); border-top: 1px solid var(--slate-200); border-bottom: 1px solid var(--slate-200);">
+    <div class="container">
+      <div style="text-align:center; max-width:760px; margin:0 auto 28px;">
+        <span style="color:var(--warning-dark); font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.08em;">The Living Laboratory Advantage</span>
+        <h2 style="font-size:clamp(22px, 3vw, 32px); color:var(--slate-900); font-weight:800; margin:6px 0 12px;">
+          Destinasi Kunjungan Usaha Nyata di Yogyakarta
+        </h2>
+        <p style="color:var(--slate-500); font-size:15px; margin:0;">
+          Bukan sekadar wisata biasa, peserta diajak membedah langsung neraca operasional, modal awal, dan kiat sukses para pemilik bisnis purnawirawan di Yogyakarta:
+        </p>
+      </div>
+
+      <div class="mpp-lab-grid">
+        <div class="mpp-lab-card">
+          <h4>Greenhouse Melon Hidroponik Presisi</h4>
+          <p>
+            Budidaya melon premium varietas Jepang dengan fertigasi otomatis di lahan terbatas. Panen per 75 hari dengan serapan pasar supermarket Jakarta &amp; Surabaya yang pasti.
+          </p>
+          <span class="mpp-lab-loc">&bull; Lokasi: Sleman, D.I. Yogyakarta</span>
+        </div>
+
+        <div class="mpp-lab-card">
+          <h4>Peternakan Terintegrasi Kambing Etawa</h4>
+          <p>
+            Pengolahan susu kambing organik pasteurisasi, pakan silase hemat tenaga, dan pemanfaatan kotoran menjadi pupuk padat/cair bernilai ekonomis tinggi.
+          </p>
+          <span class="mpp-lab-loc">&bull; Lokasi: Lereng Merapi, Kaliurang</span>
+        </div>
+
+        <div class="mpp-lab-card">
+          <h4>Budidaya Ikan Nila Bioflok Modern</h4>
+          <p>
+            Teknologi kolam bulat terpal hemat air dan hemat pakan di pekarangan rumah. Menghasilkan panen ikan segar higienis untuk rantai pasok restoran kuliner.
+          </p>
+          <span class="mpp-lab-loc">&bull; Lokasi: Bantul, D.I. Yogyakarta</span>
+        </div>
+
+        <div class="mpp-lab-card">
+          <h4>Boutique Homestay &amp; Wisata Kuliner</h4>
+          <p>
+            Manajemen perhotelan mikro dan kafe bernuansa heritage asri. Kolaborasi dengan Online Travel Agent (OTA) untuk mendulang passive income tanpa stres operasional.
+          </p>
+          <span class="mpp-lab-loc">&bull; Lokasi: Kota Jogja &amp; Kulon Progo</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRANSPARENT B2B PRICING TABLE -->
+  <section style="padding: 50px 0; background: var(--surface);">
+    <div class="container">
+      <div style="text-align:center; max-width:760px; margin:0 auto 28px;">
+        <span style="color:var(--warning-dark); font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.08em;">Transparansi Biaya &amp; Paket Korporasi</span>
+        <h2 style="font-size:clamp(22px, 3vw, 32px); color:var(--slate-900); font-weight:800; margin:6px 0 12px;">
+          Tabel Paket Investasi Pelatihan Purnabakti Yogyakarta
+        </h2>
+        <p style="color:var(--slate-500); font-size:15px; margin:0;">
+          Pilihan skema fleksibel untuk anggaran perusahaan swasta, standar BUMN, maupun Standar Biaya Masukan (SBM) APBN/APBD:
+        </p>
+      </div>
+
+      <div class="mpp-table-box">
+        <table class="mpp-table">
+          <thead>
+            <tr>
+              <th>Paket Pelatihan</th>
+              <th>Durasi &amp; Fasilitas</th>
+              <th>Tarif Perorangan</th>
+              <th>Tarif Plus Pasangan</th>
+              <th>Keterangan Tambahan</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Paket Public Training Reguler</strong><br /><small>Jadwal Bulanan di Hotel Bintang 4 Jogja</small></td>
+              <td>3 Hari 2 Malam<br />Workshop di Kelas + 1 Kunjungan Usaha</td>
+              <td><strong>Rp 7.500.000</strong></td>
+              <td><strong>Rp 12.500.000</strong></td>
+              <td>Tanpa kamar menginap (Non-Residential)</td>
+            </tr>
+            <tr>
+              <td><strong>Paket Executive All-In (+ Pasangan)</strong><br /><small>Program Favorit BUMN &amp; Korporasi</small></td>
+              <td>4 Hari 3 Malam<br />Hotel *4, 3 Kunjungan Usaha, Gala Dinner</td>
+              <td><strong>Rp 11.500.000</strong></td>
+              <td><strong>Rp 16.500.000</strong></td>
+              <td>All-In Kamar Twin/Double, Konsumsi &amp; Transportasi</td>
+            </tr>
+            <tr>
+              <td><strong>Paket In-House BUMN / Pemda Cohort</strong><br /><small>Khusus Rombongan 15–30 Pasang</small></td>
+              <td>4 Hari 3 Malam<br />Customized Syllabus, Bus Eksklusif, VIP YIA</td>
+              <td><strong>Rp 10.000.000</strong></td>
+              <td><strong>Rp 14.500.000</strong></td>
+              <td>Termasuk Pembuatan Video Dokumenter Kenangan HC</td>
+            </tr>
+            <tr>
+              <td><strong>Paket Bimtek ASN / PNS (B2G LPSE)</strong><br /><small>Standar SBM Kemenkeu &amp; KAK Pemda</small></td>
+              <td>3 Hari 2 Malam<br />Modul Taspen, BKN, SPJ &amp; Faktur Pajak Sah</td>
+              <td><strong>Rp 6.500.000</strong></td>
+              <td><strong>Rp 13.500.000</strong></td>
+              <td>Didukung Kuitansi Riil, SPK, BAST &amp; Bukti PPh 23/PPN</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section style="padding: 50px 0; background: var(--slate-50); border-top: 1px solid var(--slate-200);">
+    <div class="container">
+      <div style="text-align:center; max-width:700px; margin:0 auto 36px;">
+        <span style="color:var(--warning-dark); font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.08em;">Informasi Pengadaan &amp; Tanya Jawab</span>
+        <h2 style="font-size:clamp(22px, 3vw, 30px); color:var(--slate-900); font-weight:800; margin:6px 0 0;">
+          FAQ Pelatihan Masa Persiapan Pensiun
+        </h2>
+      </div>
+
+      <div style="max-width:840px; margin:0 auto; display:flex; flex-direction:column; gap:14px;">
+        {faqs.map(f => (
+          <details style="background:var(--surface); border:1px solid var(--slate-200); border-radius:10px; padding:16px 20px;">
+            <summary style="font-weight:700; color:var(--slate-900); cursor:pointer; font-size:15.5px;">{f.q}</summary>
+            <p style="margin:12px 0 0; color:var(--slate-600); font-size:14px; line-height:1.6;">
+              {f.a}
+            </p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTTOM CTA -->
+  <section style="background:var(--brand-dark); color:var(--surface); padding:54px 0; text-align:center; border-top:1px solid var(--slate-800);">
+    <div class="container">
+      <h2 style="color:var(--surface); font-size:clamp(22px, 3.5vw, 32px); margin:0 0 14px; font-weight:800;">Wujudkan Masa Pensiun Karyawan yang Bahagia, Sehat &amp; Mandiri</h2>
+      <p style="color:var(--slate-300); font-size:16px; max-width:680px; margin:0 auto 26px; line-height:1.6;">
+        Konsultasikan jadwal pelaksanaan in-house korporasi Anda, permintaan silabus kustom, dan penawaran biaya resmi bersama tim konsultan Wahana Totalita.
+      </p>
+      <a href={defaultWaUrl} class="mpp-btn-wa" target="_blank" rel="noopener" style="font-size:16px; padding:15px 34px;">
+        Hubungi Konsultan MPP via WhatsApp (0877-5915-1278)
+      </a>
+    </div>
+  </section>
+
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Filter chips
+      const chips = document.querySelectorAll('.mpp-filter-chip');
+      const cards = document.querySelectorAll('.mpp-card');
+      const countEl = document.getElementById('mpp-item-count');
+
+      chips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          chips.forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+
+          const filter = chip.getAttribute('data-filter');
+          let visibleCount = 0;
+
+          cards.forEach(card => {
+            const cat = card.getAttribute('data-category');
+            if (filter === 'all' || cat === filter) {
+              card.style.display = '';
+              visibleCount++;
+            } else {
+              card.style.display = 'none';
+            }
+          });
+
+          if (countEl) countEl.textContent = visibleCount;
+        });
+      });
+
+      // Budget Calculator
+      const inputPeserta = document.getElementById('calc-peserta');
+      const selectTipe   = document.getElementById('calc-tipe');
+      const selectDurasi = document.getElementById('calc-durasi');
+      const elTotal      = document.getElementById('calc-total');
+      const elDetail     = document.getElementById('calc-detail');
+      const btnWa        = document.getElementById('calc-wa-btn');
+
+      function calculate() {
+        if (!inputPeserta || !selectTipe || !selectDurasi || !elTotal || !elDetail || !btnWa) return;
+        let n = parseInt(inputPeserta.value) || 10;
+        if (n < 1) n = 1;
+        const tipe = selectTipe.value;
+        const durasi = selectDurasi.value;
+
+        let ratePerUnit = 0;
+        if (tipe === 'pasangan') {
+          ratePerUnit = (durasi === '4h3m') ? 15500000 : 13500000;
+        } else {
+          ratePerUnit = (durasi === '4h3m') ? 10500000 : 8500000;
+        }
+
+        if (n >= 20) ratePerUnit *= 0.92;
+        else if (n >= 15) ratePerUnit *= 0.95;
+
+        const total = Math.round(n * ratePerUnit);
+        const formatted = 'Rp ' + total.toLocaleString('id-ID');
+
+        elTotal.textContent = formatted;
+        
+        const labelTipe = (tipe === 'pasangan') ? `${n} Pasang Karyawan & Pasangan` : `${n} Karyawan (Individu)`;
+        const labelDurasi = (durasi === '4h3m') ? '4 Hari 3 Malam' : '3 Hari 2 Malam';
+        elDetail.textContent = `Estimasi alokasi untuk ${labelTipe}, paket ${labelDurasi} Hotel Bintang 4 Yogyakarta (Fullboard, Field Trip, Narasumber).`;
+
+        const waMsg = `Halo Wahana Totalita, saya telah menghitung simulasi anggaran Pelatihan MPP di Yogyakarta: ${labelTipe}, Durasi ${labelDurasi}, Estimasi: ${formatted}. Mohon kirimkan proposal resmi dan detail silabusnya ke perusahaan kami.`;
+        btnWa.href = `https://wa.me/6287759151278?text=` + encodeURIComponent(waMsg);
+      }
+
+      if (inputPeserta) inputPeserta.addEventListener('input', calculate);
+      if (selectTipe) selectTipe.addEventListener('change', calculate);
+      if (selectDurasi) selectDurasi.addEventListener('change', calculate);
+      calculate();
+    });
+  </script>
+</Layout>

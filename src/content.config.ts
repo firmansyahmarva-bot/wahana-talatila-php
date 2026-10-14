@@ -210,6 +210,185 @@ const hubs = defineCollection({
   }),
 });
 
+/**
+ * 9. Incidents Collection (Database Kecelakaan Kerja Indonesia)
+ */
+const incidents = defineCollection({
+  loader: file('./data/incidents.json'),
+  schema: z.object({
+    id: z.number(),
+    title: z.string(),
+    slug: z.string(),
+    company: z.string().optional().nullable(),
+    province: z.string().optional().nullable(),
+    city: z.string().optional().nullable(),
+    industry: z.string().optional().nullable(),
+    incident_type: z.string().optional().nullable(),
+    incident_date: z.string().optional().nullable(),
+    deaths: z.number().optional().nullable(),
+    injured: z.number().optional().nullable(),
+    description: z.string().optional().nullable(),
+    root_cause: z.string().optional().nullable(),
+    regulation_violated: z.string().optional().nullable(),
+    prevention: z.string().optional().nullable(),
+    source_url: z.string().optional().nullable(),
+    source_name: z.string().optional().nullable(),
+    is_verified: z.union([z.number(), z.boolean()]).optional().nullable(),
+    is_active: z.union([z.number(), z.boolean()]).optional().nullable(),
+    view_count: z.number().optional().nullable(),
+    meta_title: z.string().optional().nullable(),
+    meta_desc: z.string().optional().nullable(),
+    created_at: z.string().optional().nullable(),
+    updated_at: z.string().optional().nullable(),
+  }),
+});
+
+/**
+ * 10. Perpanjangan SKP & Lisensi Collection (17 Renewal Services)
+ */
+const perpanjanganSkp = defineCollection({
+  loader: file('./data/perpanjangan_skp.json'),
+  schema: z.object({
+    id: z.string(),
+    slug: z.string(),
+    judul: z.string(),
+    kategori: z.string().optional().nullable(),
+    kategori_label: z.string().optional().nullable(),
+    dasar_hukum: z.string().optional().nullable(),
+    tagline: z.string().optional().nullable(),
+    meta_title: z.string().optional().nullable(),
+    meta_desc: z.string().optional().nullable(),
+    keywords: z.array(z.string()).optional().nullable(),
+    masa_berlaku: z.string().optional().nullable(),
+    biaya_standar: z.string().optional().nullable(),
+    biaya_batch: z.string().optional().nullable(),
+    durasi_proses: z.string().optional().nullable(),
+    city_keyword: z.string().optional().nullable(),
+    deskripsi_lengkap: z.string().optional().nullable(),
+    syarat_dokumen: z.array(z.string()).optional().nullable(),
+    alur_proses: z.array(z.string()).optional().nullable(),
+    faqs: z.array(z.object({
+      q: z.string(),
+      a: z.string(),
+    })).optional().nullable(),
+  }),
+});
+
+/**
+ * 11. Event Organizer Collection (24 Corporate, Government MICE & HSE Events)
+ */
+const eventOrganizer = defineCollection({
+  loader: file('./data/event_organizer.json'),
+  schema: z.object({
+    id: z.string(),
+    slug: z.string(),
+    judul: z.string(),
+    kategori: z.string().optional().nullable(),
+    kategori_label: z.string().optional().nullable(),
+    tagline: z.string().optional().nullable(),
+    meta_title: z.string().optional().nullable(),
+    meta_desc: z.string().optional().nullable(),
+    keywords: z.array(z.string()).optional().nullable(),
+    target_klien: z.string().optional().nullable(),
+    durasi_event: z.string().optional().nullable(),
+    lokasi_layanan: z.string().optional().nullable(),
+    biaya_standar: z.string().optional().nullable(),
+    biaya_batch: z.string().optional().nullable(),
+    b2b_min_peserta: z.string().optional().nullable(),
+    inaproc_relevance: z.string().optional().nullable(),
+    city_mentions: z.array(z.string()).optional().nullable(),
+    companies_mentions: z.array(z.string()).optional().nullable(),
+    highlight_pillars: z.array(z.string()).optional().nullable(),
+    deskripsi_lengkap: z.string().optional().nullable(),
+    spesifikasi_teknis: z.array(z.object({
+      item: z.string(),
+      spek: z.string(),
+    })).optional().nullable(),
+    susunan_acara: z.array(z.object({
+      fase: z.string(),
+      agenda: z.string(),
+    })).optional().nullable(),
+    deliverables_output: z.array(z.string()).optional().nullable(),
+    faqs: z.array(z.object({
+      q: z.string(),
+      a: z.string(),
+    })).optional().nullable(),
+  }),
+});
+
+/**
+ * 12. Purnabakti / MPP Collection (7 Preparation for Retirement Programs)
+ */
+const purnabakti = defineCollection({
+  loader: file('./data/purnabakti.json'),
+  schema: z.object({
+    id: z.string(),
+    slug: z.string(),
+    judul: z.string(),
+    kategori: z.string().optional().nullable(),
+    kategori_label: z.string().optional().nullable(),
+    tagline: z.string().optional().nullable(),
+    meta_title: z.string().optional().nullable(),
+    meta_desc: z.string().optional().nullable(),
+    keywords: z.array(z.string()).optional().nullable(),
+    target_peserta: z.string().optional().nullable(),
+    durasi_program: z.string().optional().nullable(),
+    lokasi_utama: z.string().optional().nullable(),
+    biaya_standar: z.string().optional().nullable(),
+    biaya_batch: z.string().optional().nullable(),
+    b2b_min_batch: z.string().optional().nullable(),
+    city_mentions: z.array(z.string()).optional().nullable(),
+    companies_mentions: z.array(z.string()).optional().nullable(),
+    highlight_pillars: z.array(z.string()).optional().nullable(),
+    deskripsi_lengkap: z.string().optional().nullable(),
+    silabus_modul: z.array(z.object({
+      modul: z.string(),
+      durasi: z.string().optional().nullable(),
+      fokus: z.string().optional().nullable(),
+      output: z.string().optional().nullable(),
+    })).optional().nullable(),
+    jadwal_rundown: z.record(z.string()).optional().nullable(),
+    kunjungan_lapangan: z.array(z.string()).optional().nullable(),
+    fasilitas_include: z.array(z.string()).optional().nullable(),
+    faqs: z.array(z.object({
+      q: z.string(),
+      a: z.string(),
+    })).optional().nullable(),
+  }),
+});
+
+/**
+ * 13. Riksa Uji K3 Collection (8 Statutory Inspection Services)
+ */
+const riksaUji = defineCollection({
+  loader: file('./data/riksa_uji.json'),
+  schema: z.object({
+    id: z.string(),
+    slug: z.string(),
+    judul: z.string(),
+    kategori: z.string().optional().nullable(),
+    kategori_label: z.string().optional().nullable(),
+    dasar_hukum: z.string().optional().nullable(),
+    tagline: z.string().optional().nullable(),
+    meta_title: z.string().optional().nullable(),
+    meta_desc: z.string().optional().nullable(),
+    keywords: z.array(z.string()).optional().nullable(),
+    masa_berlaku: z.string().optional().nullable(),
+    lingkup_alat: z.string().optional().nullable(),
+    tahapan_uji: z.array(z.string()).optional().nullable(),
+    dokumen_syarat: z.array(z.string()).optional().nullable(),
+    regional_insight: z.string().optional().nullable(),
+    pelatihan_terkait: z.object({
+      slug: z.string(),
+      name: z.string(),
+    }).optional().nullable(),
+    faqs: z.array(z.object({
+      q: z.string(),
+      a: z.string(),
+    })).optional().nullable(),
+  }),
+});
+
 export const collections = {
   articles,
   trainings,
@@ -219,5 +398,11 @@ export const collections = {
   glossary,
   trainingBatches,
   hubs,
+  incidents,
+  perpanjanganSkp,
+  eventOrganizer,
+  purnabakti,
+  riksaUji,
 };
+
 

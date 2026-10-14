@@ -1,0 +1,317 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allIncidents = await getCollection('incidents');
+
+// Sort by date desc (or id desc if null date)
+allIncidents.sort((a, b) => {
+  const dateA = a.data.incident_date || a.data.created_at || '';
+  const dateB = b.data.incident_date || b.data.created_at || '';
+  if (dateA && dateB && dateA !== dateB) {
+    return dateB.localeCompare(dateA);
+  }
+  return b.data.id - a.data.id;
+});
+
+const total = allIncidents.length;
+const fatalCount = allIncidents.filter((i) => (i.data.deaths ?? 0) > 0).length;
+const injuredCount = allIncidents.filter((i) => (i.data.injured ?? 0) > 0).length;
+
+const sectors = Array.from(
+  new Set(
+    allIncidents
+      .map((i) => i.data.industry?.trim())
+      .filter((v): v is string => Boolean(v && v.length > 0))
+  )
+).sort((a, b) => a.localeCompare(b));
+
+const provinces = Array.from(
+  new Set(
+    allIncidents
+      .map((i) => i.data.province?.trim())
+      .filter((v): v is string => Boolean(v && v.length > 0))
+  )
+).sort((a, b) => a.localeCompare(b));
+
+const metaTitle = 'Database Kecelakaan Kerja K3 Indonesia — Insiden Terkini | Wahana Totalita';
+const metaDesc = 'Database investigasi kecelakaan kerja dan insiden K3 Indonesia. Data referensi sektor konstruksi, pertambangan, oil & gas, manufaktur, dan perkebunan untuk profesional HSE.';
+const canonical = 'https://wahanatotalita.com/insiden/';
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Dataset',
+    name: 'Database Kecelakaan Kerja K3 Indonesia',
+    description: metaDesc,
+    url: canonical,
+    creator: {
+      '@type': 'Organization',
+      name: 'Wahana Totalita Konsultan',
+      url: 'https://wahanatotalita.com',
+    },
+    keywords: ['K3', 'kecelakaan kerja', 'HSE', 'occupational safety', 'investigasi insiden', 'Indonesia'],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Beranda',
+        item: 'https://wahanatotalita.com/',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Database Insiden K3',
+        item: canonical,
+      },
+    ],
+  },
+];
+---
+
+<Layout
+  title={metaTitle}
+  description={metaDesc}
+  canonical={canonical}
+  schemas={schemas}
+  pageCss={['/assets/css/page/insiden.css']}
+>
+  <section class="insiden-hero">
+    <div class="container">
+      <div style="margin-bottom:12px">
+        <span class="live-badge"><span class="live-dot"></span> Pembaruan Berkala Analisis Kasus K3</span>
+      </div>
+      <h1>🚨 Database Kecelakaan Kerja Indonesia</h1>
+      <p style="opacity:.9;max-width:620px;margin:0 auto;line-height:1.6">
+        Pusat data referensi dan studi kasus kecelakaan kerja serta kepatuhan K3 di Indonesia. Dirancang bagi praktisi HSE, pengawas operasional, dan manajemen untuk pembelajaran preventif.
+      </p>
+
+      <div class="stat-row">
+        <div class="stat">
+          <strong>{total}</strong>
+          <span>Total Studi Kasus</span>
+        </div>
+        <div class="stat">
+          <strong style="color: #fca5a5;">{fatalCount}</strong>
+          <span>Insiden Fatal</span>
+        </div>
+        <div class="stat">
+          <strong style="color: #fde68a;">{injuredCount}</strong>
+          <span>Luka &amp; Cedera</span>
+        </div>
+        <div class="stat">
+          <strong>{sectors.length}</strong>
+          <span>Sektor Industri</span>
+        </div>
+      </div>
+
+      <div class="search-box">
+        <input
+          type="search"
+          id="incidentSearchInput"
+          placeholder="Cari insiden (konstruksi, tambang, jatuh, Morowali, kebakaran...)"
+          aria-label="Cari kecelakaan kerja"
+        />
+        <button type="button" id="incidentSearchBtn">🔍 Cari</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="filter-bar">
+    <div class="container" style="display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between;">
+      <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center;">
+        <label for="sectorFilter" style="font-size:0.85rem; font-weight:600; color:var(--slate-700);">Sektor:</label>
+        <select id="sectorFilter">
+          <option value="">Semua Sektor ({sectors.length})</option>
+          {sectors.map((sec) => (
+            <option value={sec.toLowerCase()}>{sec}</option>
+          ))}
+        </select>
+
+        <label for="provinceFilter" style="font-size:0.85rem; font-weight:600; color:var(--slate-700);">Provinsi:</label>
+        <select id="provinceFilter">
+          <option value="">Semua Wilayah ({provinces.length})</option>
+          {provinces.map((prov) => (
+            <option value={prov.toLowerCase()}>{prov}</option>
+          ))}
+        </select>
+
+        <label for="severityFilter" style="font-size:0.85rem; font-weight:600; color:var(--slate-700);">Dampak:</label>
+        <select id="severityFilter">
+          <option value="">Semua Dampak</option>
+          <option value="fatal">Fatal (Korban Jiwa)</option>
+          <option value="major">Mayor / Luka-luka</option>
+          <option value="minor">Pelanggaran / Nyaris Celaka</option>
+        </select>
+
+        <button type="button" id="resetFilterBtn" style="background:var(--slate-200);color:var(--slate-800);border:none;padding:8px 14px;border-radius:8px;font-size:0.85rem;cursor:pointer;font-weight:600;">
+          ↺ Reset
+        </button>
+      </div>
+
+      <div id="resultsCount" style="font-size:0.875rem; font-weight:600; color:var(--slate-600);">
+        Menampilkan {total} kasus insiden
+      </div>
+    </div>
+  </div>
+
+  <div class="container" style="min-height: 400px; padding: 32px 20px;">
+    <div class="insiden-grid" id="incidentsGrid">
+      {allIncidents.map((entry) => {
+        const ins = entry.data;
+        const deaths = ins.deaths ?? 0;
+        const injured = ins.injured ?? 0;
+        const severity = deaths > 0 ? 'fatal' : injured > 0 ? 'major' : 'minor';
+        const severityLabel = deaths > 0 ? `Fatal (${deaths} Meninggal)` : injured > 0 ? `Mayor (${injured} Luka)` : 'Insiden / Pelanggaran';
+
+        const searchableText = `${ins.title} ${ins.company || ''} ${ins.city || ''} ${ins.province || ''} ${ins.industry || ''} ${ins.incident_type || ''} ${ins.description || ''}`.toLowerCase();
+
+        return (
+          <article
+            class="insiden-card"
+            data-search={searchableText}
+            data-sector={(ins.industry || '').toLowerCase()}
+            data-province={(ins.province || '').toLowerCase()}
+            data-severity={severity}
+          >
+            <div class="insiden-card-top" style={deaths > 0 ? 'border-left-color: var(--danger-dark);' : injured > 0 ? 'border-left-color: var(--warning);' : 'border-left-color: var(--slate-400);'}>
+              <span class={`severity-badge sev-${severity}`}>
+                {severityLabel}
+              </span>
+              <h3>
+                <a href={`/insiden/${ins.slug}/`}>
+                  {ins.title}
+                </a>
+              </h3>
+              <div class="insiden-meta">
+                {ins.industry && <span>🏭 {ins.industry}</span>}
+                {(ins.city || ins.province) && (
+                  <span>📍 {[ins.city, ins.province].filter(Boolean).join(', ')}</span>
+                )}
+                {ins.incident_date ? (
+                  <span>📅 {ins.incident_date}</span>
+                ) : ins.created_at ? (
+                  <span>📅 {ins.created_at.slice(0, 10)}</span>
+                ) : null}
+              </div>
+            </div>
+            {ins.description && (
+              <p>
+                {ins.description.length > 130 ? ins.description.slice(0, 130) + '...' : ins.description}
+              </p>
+            )}
+          </article>
+        );
+      })}
+    </div>
+
+    <div id="noResults" style="display:none; text-align:center; padding:60px 20px; color:var(--text-light)">
+      <div style="font-size:3rem; margin-bottom:16px">🔍</div>
+      <h3 style="color:var(--slate-800); font-size:1.25rem; font-weight:700; margin-bottom:8px">Tidak ada kasus insiden yang sesuai kriteria</h3>
+      <p style="margin-bottom:16px">Coba gunakan kata kunci lain atau bersihkan opsi filter Anda.</p>
+      <button type="button" id="clearSearchBtn" style="background:var(--brand); color:#fff; border:none; padding:10px 20px; border-radius:8px; font-weight:600; cursor:pointer;">
+        Tampilkan Semua Insiden
+      </button>
+    </div>
+  </div>
+
+  <section style="background:var(--surface-subtle);border-top:1px solid var(--border);padding:56px 0;text-align:center">
+    <div class="container" style="max-width:800px;">
+      <span style="display:inline-block;background:var(--success-bg);color:var(--brand);font-weight:700;font-size:0.8rem;padding:4px 12px;border-radius:100px;margin-bottom:12px;border:1px solid var(--success-border)">
+        ZERO ACCIDENT COMMITMENT
+      </span>
+      <h2 style="font-size: clamp(1.4rem, 2.5vw, 1.85rem); font-weight: 800; color: var(--brand); margin: 0 0 12px;">
+        Cegah Insiden Serupa di Lingkungan Kerja Anda
+      </h2>
+      <p style="color:var(--slate-600);font-size:1rem;line-height:1.6;margin:0 auto 28px;">
+        Investasi terbaik dalam K3 adalah kompetensi dan kepatuhan sistemik. Wahana Totalita Konsultan menyediakan pembinaan sertifikasi Kemnaker RI, BNSP, dan audit SMK3 PP 50/2012 untuk mewujudkan tempat kerja bebas kecelakaan.
+      </p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a href="/jadwal/" style="display:inline-block;background:var(--brand);color:#fff;padding:14px 28px;border-radius:10px;font-weight:700;text-decoration:none;box-shadow:var(--shadow-sm);transition:transform .2s">
+          📅 Jadwal Pelatihan K3 2026
+        </a>
+        <a href="/pelatihan/" style="display:inline-block;background:var(--surface);color:var(--brand);border:1px solid var(--border);padding:14px 28px;border-radius:10px;font-weight:700;text-decoration:none">
+          📋 Katalog 140+ Program Sertifikasi
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline>
+    (function() {
+      const searchInput = document.getElementById('incidentSearchInput');
+      const searchBtn = document.getElementById('incidentSearchBtn');
+      const sectorFilter = document.getElementById('sectorFilter');
+      const provinceFilter = document.getElementById('provinceFilter');
+      const severityFilter = document.getElementById('severityFilter');
+      const resetBtn = document.getElementById('resetFilterBtn');
+      const clearBtn = document.getElementById('clearSearchBtn');
+      const grid = document.getElementById('incidentsGrid');
+      const noResults = document.getElementById('noResults');
+      const resultsCount = document.getElementById('resultsCount');
+
+      if (!grid) return;
+      const cards = Array.from(grid.querySelectorAll('.insiden-card'));
+
+      function filterIncidents() {
+        const query = (searchInput?.value || '').trim().toLowerCase();
+        const sector = (sectorFilter?.value || '').toLowerCase();
+        const province = (provinceFilter?.value || '').toLowerCase();
+        const severity = (severityFilter?.value || '').toLowerCase();
+
+        let visibleCount = 0;
+
+        cards.forEach(card => {
+          const text = card.getAttribute('data-search') || '';
+          const cardSector = card.getAttribute('data-sector') || '';
+          const cardProvince = card.getAttribute('data-province') || '';
+          const cardSeverity = card.getAttribute('data-severity') || '';
+
+          const matchesQuery = !query || text.includes(query);
+          const matchesSector = !sector || cardSector.includes(sector);
+          const matchesProvince = !province || cardProvince.includes(province);
+          const matchesSeverity = !severity || cardSeverity === severity;
+
+          if (matchesQuery && matchesSector && matchesProvince && matchesSeverity) {
+            card.style.display = '';
+            visibleCount++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        if (resultsCount) {
+          resultsCount.textContent = `Menampilkan ${visibleCount} dari ${cards.length} kasus insiden`;
+        }
+
+        if (visibleCount === 0) {
+          if (noResults) noResults.style.display = 'block';
+          grid.style.display = 'none';
+        } else {
+          if (noResults) noResults.style.display = 'none';
+          grid.style.display = 'grid';
+        }
+      }
+
+      function resetAll() {
+        if (searchInput) searchInput.value = '';
+        if (sectorFilter) sectorFilter.value = '';
+        if (provinceFilter) provinceFilter.value = '';
+        if (severityFilter) severityFilter.value = '';
+        filterIncidents();
+      }
+
+      searchInput?.addEventListener('input', filterIncidents);
+      searchBtn?.addEventListener('click', filterIncidents);
+      sectorFilter?.addEventListener('change', filterIncidents);
+      provinceFilter?.addEventListener('change', filterIncidents);
+      severityFilter?.addEventListener('change', filterIncidents);
+      resetBtn?.addEventListener('click', resetAll);
+      clearBtn?.addEventListener('click', resetAll);
+    })();
+  </script>
+</Layout>

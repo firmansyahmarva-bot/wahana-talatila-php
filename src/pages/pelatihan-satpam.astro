@@ -1,0 +1,194 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const canonical = 'https://wahanatotalita.com/pelatihan-satpam/';
+const metaTitle = 'Pelatihan K3 & Keamanan untuk Satuan Pengamanan (Satpam) — Wahana Totalita Yogyakarta';
+const metaDesc = 'Pelatihan K3 untuk petugas satuan pengamanan: bahaya kerja satpam, P3K, pemadam kebakaran, evakuasi darurat, dan keselamatan petugas keamanan. Bersertifikat Kemnaker RI, Yogyakarta.';
+
+const hazards = [
+  { icon: '🌙', title: 'Bahaya Shift Malam', desc: 'Gangguan ritme sirkadian (circadian disruption), kurang tidur kronis, penurunan kewaspadaan menjelang dini hari, dan peningkatan risiko kecelakaan saat shift 00.00–04.00. Risiko jangka panjang: gangguan metabolik dan kardiovaskular.', color: 'var(--brand-dark)' },
+  { icon: '🚶', title: 'Bahaya Ergonomi Patroli', desc: 'Berdiri statis berjam-jam di pos jaga menyebabkan varises dan nyeri punggung bawah. Patroli jarak jauh tanpa perencanaan ergonomis menambah risiko cedera muskuloskeletal. Alas kaki yang tidak tepat memperburuk masalah sendi.', color: 'var(--brand)' },
+  { icon: '⚡', title: 'Bahaya Lone Worker', desc: 'Petugas yang berjaga sendirian menghadapi risiko tanpa ada yang segera membantu jika terjadi kecelakaan, pingsan, atau serangan. Sistem check-in berkala dan SOP lone worker adalah kontrol K3 wajib.', color: 'var(--brand-dark)' },
+  { icon: '😤', title: 'Bahaya Psikososial', desc: 'Konflik dengan pengunjung/masyarakat, ancaman verbal, potensi kekerasan fisik, dan tekanan dari situasi darurat yang tidak terlatih adalah sumber stres psikologis berat yang sering berujung burnout.', color: 'var(--brand-dark)' },
+  { icon: '🔥', title: 'Bahaya Responden Darurat', desc: 'Satpam sering menjadi responden pertama saat kebakaran atau insiden keamanan — tanpa pelatihan memadai, mereka menjadi korban kedua. Kompetensi pemadam kebakaran dan P3K adalah kewajiban mutlak.', color: 'var(--danger-dark)' },
+  { icon: '☀️', title: 'Bahaya Lingkungan Fisik', desc: 'Paparan panas/hujan saat patroli outdoor, kebisingan di area parkir atau loading dock, pencahayaan buruk saat malam, dan paparan bahan kimia atau asap di area industri.', color: 'var(--brand-mid)' },
+];
+
+const programs = [
+  { title: 'P3K untuk Petugas Keamanan', href: '/pelatihan/pelatihan-petugas-p3k-sertifikasi-kemnaker-ri/', desc: 'Pertolongan pertama untuk satpam: penanganan trauma, luka tusuk/sayat, patah tulang, serangan jantung, tersedak. Sertifikat Kemnaker RI. Satpam sering menjadi petugas P3K pertama di fasilitas.', cta: 'Lihat Program P3K' },
+  { title: 'Penanggulangan Kebakaran', href: '/penanggulangan-kebakaran/', desc: 'Teori dan praktik APAR, prosedur evakuasi, koordinasi dengan damkar, pemadaman awal kebakaran kecil. Wajib untuk satpam gedung bertingkat, mall, dan fasilitas industri.', cta: 'Lihat Program Damkar' },
+  { title: 'Evakuasi Darurat & Emergency Response', href: null, desc: 'Prosedur evakuasi massal, titik kumpul, komunikasi darurat, bantuan evakuasi orang berkebutuhan khusus, koordinasi dengan tim darurat. Praktik langsung di fasilitas Anda.', cta: 'Tanya via WhatsApp' },
+  { title: 'K3 Satpam — Program Komprehensif', href: null, desc: 'Program 2 hari khusus satpam: identifikasi bahaya di tempat kerja, APD untuk satpam, pengelolaan stres shift malam, lone worker safety, pertolongan pertama, dan pemadam kebakaran dasar.', cta: 'Tanya via WhatsApp' },
+  { title: 'Manajemen Keselamatan Fasilitas', href: null, desc: 'Untuk Kepala Satpam dan Security Manager: risk assessment fasilitas, penyusunan prosedur keamanan (SOP), sistem pelaporan insiden, koordinasi K3 antara tim keamanan dan manajemen perusahaan.', cta: 'Tanya via WhatsApp' },
+  { title: 'Kesehatan Mental & Stres Kerja Satpam', href: null, desc: 'Pengelolaan stres dari shift malam dan konflik, teknik relaksasi, tanda-tanda burnout, dan dukungan psikologis sederhana untuk satpam. In-house, 4 jam (half-day).', cta: 'Tanya via WhatsApp' },
+];
+
+const kewajiban = [
+  { rule: 'UU 1/1970 Pasal 9', desc: 'Pengusaha wajib menjelaskan bahaya dan cara pencegahannya kepada semua pekerja di fasilitasnya, termasuk pekerja outsourcing/keamanan.' },
+  { rule: 'Permenaker 15/2008', desc: 'Wajib tersedia petugas P3K di setiap tempat kerja. Satpam sering menjadi personil P3K yang ditunjuk — dan harus bersertifikat resmi.' },
+  { rule: 'Permenaker 4/1980', desc: 'Wajib tersedia APAR dan petugas yang terlatih menggunakannya. Satpam sebagai responden pertama harus kompeten mengoperasikan APAR.' },
+  { rule: 'PP 50/2012', desc: 'Perusahaan ≥100 karyawan wajib SMK3 — program K3 harus mencakup semua pekerja termasuk satpam, cleaning service, dan vendor outsourcing.' },
+];
+
+const faqs = [
+  { q: 'Apa saja bahaya K3 yang dihadapi petugas satpam setiap hari?', a: 'Satpam menghadapi bahaya ergonomi (berdiri/patroli lama), bahaya shift malam (gangguan ritme sirkadian, kelelahan kronis), stres psikososial dari konflik pengunjung, bahaya lone worker saat patroli sendirian, dan risiko saat merespons kebakaran atau insiden darurat.' },
+  { q: 'Apakah satpam wajib mendapat pelatihan K3?', a: 'Ya. UU 1/1970 berlaku untuk semua pekerja. Satpam juga merupakan lini terdepan evakuasi darurat, kebakaran, dan pertolongan pertama, sehingga pelatihan K3 adalah kewajiban hukum pengusaha.' },
+  { q: 'Apa perbedaan pelatihan K3 satpam dengan pelatihan Gada Pratama?', a: 'Gada Pratama (Polri) adalah pembinaan profesi dan legalitas sekuriti. Pelatihan K3 Satpam fokus pada perlindungan fisik, kesehatan shift malam, P3K darurat, dan pemadaman kebakaran APAR.' },
+  { q: 'Apa saja sertifikasi K3 yang relevan untuk satpam?', a: 'Sertifikat Petugas P3K Kemnaker RI (Permenaker 15/2008), Sertifikat Petugas Peran Kebakaran Kelas D (Kepmenaker 186/1999), dan Sertifikat Pelatihan Tanggap Darurat Evakuasi.' },
+  { q: 'Berapa peserta minimum untuk pelatihan in-house satpam?', a: 'Minimum 10 peserta. Sesi dapat dipecah menjadi 2 shift agar pos jaga fasilitas tetap aman selama pelatihan berlangsung.' },
+  { q: 'Apakah instansi pemerintah bisa menganggarkan pelatihan K3 satpam?', a: 'Bisa, melalui pos pengembangan kompetensi ASN/Non-ASN atau belanja operasional K3. Wahana Totalita terdaftar LPSE/PADI untuk pengadaan langsung di bawah Rp 200 juta.' },
+];
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Beranda', item: 'https://wahanatotalita.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Pelatihan', item: 'https://wahanatotalita.com/pelatihan/' },
+      { '@type': 'ListItem', position: 3, name: 'Pelatihan K3 Satpam', item: canonical },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+];
+---
+
+<Layout
+  title={metaTitle}
+  description={metaDesc}
+  canonical={canonical}
+  schemas={schemas}
+>
+  <section style="background:linear-gradient(135deg,var(--slate-900) 0%,var(--brand) 100%);color:var(--surface);padding:60px 20px 50px;">
+    <div class="container" style="max-width:960px;">
+      <nav aria-label="breadcrumb" style="font-size:0.85rem;opacity:0.8;margin-bottom:16px;">
+        <a href="/" style="color:#fff;text-decoration:none;">Beranda</a> › 
+        <a href="/pelatihan/" style="color:#fff;text-decoration:none;">Pelatihan</a> › 
+        <span>K3 Satuan Pengamanan</span>
+      </nav>
+      <h1 style="font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;margin:0 0 16px;color:#fff;">
+        Pelatihan K3 &amp; Keselamatan untuk Satuan Pengamanan (Satpam)
+      </h1>
+      <p style="font-size:1.1rem;opacity:0.92;max-width:760px;margin:0 0 14px;line-height:1.7;">
+        Satpam adalah garda terdepan keamanan fasilitas — tapi siapa yang menjaga keselamatan satpam itu sendiri? Shift malam, patroli sendirian, potensi konflik fisik, dan respons darurat adalah risiko nyata yang membutuhkan kompetensi K3 khusus. Program ini membekali satpam dengan kemampuan P3K, pemadaman kebakaran, evakuasi darurat, dan manajemen keselamatan diri.
+      </p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 28px;">
+        <span style="background:rgba(255,255,255,0.18);padding:6px 14px;border-radius:20px;font-size:0.85rem;">✓ Sertifikat Kemnaker RI</span>
+        <span style="background:rgba(255,255,255,0.18);padding:6px 14px;border-radius:20px;font-size:0.85rem;">✓ Praktik Lapangan APAR</span>
+        <span style="background:rgba(255,255,255,0.18);padding:6px 14px;border-radius:20px;font-size:0.85rem;">✓ In-House di Fasilitas Anda</span>
+        <span style="background:rgba(255,255,255,0.18);padding:6px 14px;border-radius:20px;font-size:0.85rem;">✓ Fleksibel Sesuai Jadwal Shift</span>
+      </div>
+      <a href="https://wa.me/6287759151278?text=Halo%20Wahana%20Totalita,%20saya%20ingin%20info%20pelatihan%20K3%20untuk%20satuan%20pengamanan%20(satpam)%20kami"
+         target="_blank" rel="noopener"
+         style="display:inline-block;background:#25d366;color:#fff;padding:14px 32px;border-radius:8px;font-weight:700;text-decoration:none;font-size:1rem;box-shadow:var(--shadow-sm);">
+        Konsultasi Program via WhatsApp
+      </a>
+    </div>
+  </section>
+
+  <main class="container" style="max-width:960px;padding:48px 20px 64px;">
+    <!-- BAHAYA K3 SATPAM -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:20px;font-weight:800;">
+        Bahaya K3 yang Spesifik untuk Petugas Keamanan
+      </h2>
+      <p style="line-height:1.8;color:var(--slate-800);margin-bottom:20px;">
+        Profesi satpam memiliki profil risiko K3 yang unik — berbeda dari pekerja kantor maupun pekerja industri. Kombinasi shift malam, lone working, interaksi dengan publik yang tidak terduga, dan respons terhadap kedaruratan menciptakan paparan risiko yang harus dikelola secara profesional.
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;">
+        {hazards.map((h) => (
+          <div style={`background:${h.color};color:#fff;border-radius:10px;padding:20px;box-shadow:var(--shadow-sm);`}>
+            <div style="font-size:1.8rem;margin-bottom:8px;">{h.icon}</div>
+            <div style="font-weight:700;margin-bottom:8px;font-size:1rem;">{h.title}</div>
+            <p style="font-size:0.86rem;line-height:1.6;opacity:0.92;margin:0;">{h.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- PROGRAM -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:24px;font-weight:800;">
+        Program Pelatihan K3 untuk Satuan Pengamanan
+      </h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:20px;">
+        {programs.map((p) => (
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow-sm);">
+            <div style="background:var(--slate-900);color:var(--surface);padding:14px 18px;">
+              <div style="font-weight:700;font-size:0.95rem;color:#fff;">{p.title}</div>
+            </div>
+            <div style="padding:16px 18px;flex:1;">
+              <p style="color:var(--slate-600);font-size:0.88rem;line-height:1.6;margin:0;">{p.desc}</p>
+            </div>
+            <div style="padding:0 18px 18px;">
+              <a href={p.href || `https://wa.me/6287759151278?text=${encodeURIComponent(`Halo Wahana Totalita, saya ingin info program ${p.title} untuk satuan pengamanan kami.`)}`}
+                 target={p.href ? undefined : '_blank'}
+                 rel={p.href ? undefined : 'noopener'}
+                 style={`display:block;text-align:center;background:${p.href ? 'var(--brand)' : '#25d366'};color:#fff;padding:10px;border-radius:6px;text-decoration:none;font-weight:700;font-size:0.88rem;`}>
+                {p.cta}
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- KEWAJIBAN HUKUM -->
+    <section style="margin-bottom:48px;background:var(--surface-subtle);border-radius:12px;padding:28px;border:1px solid var(--border);">
+      <h2 style="color:var(--brand);font-size:1.45rem;margin:0 0 14px;font-weight:800;">
+        Kewajiban Hukum Pengusaha terhadap K3 Satpam
+      </h2>
+      <p style="line-height:1.8;color:var(--slate-800);margin-bottom:20px;">
+        UU No. 1/1970 mewajibkan setiap pengusaha melindungi <em>semua</em> pekerja — termasuk satpam outsourcing yang bekerja di fasilitas mereka. Pemberi kerja tidak bisa melepas tanggung jawab K3 hanya karena satpam berstatus vendor keamanan.
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;">
+        {kewajiban.map((k) => (
+          <div style="background:var(--surface);border-radius:8px;padding:16px;border:1px solid var(--border);">
+            <div style="font-weight:700;color:var(--brand);margin-bottom:6px;font-size:0.92rem;">{k.rule}</div>
+            <p style="color:var(--slate-600);font-size:0.85rem;line-height:1.6;margin:0;">{k.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:24px;font-weight:800;">
+        Pertanyaan yang Sering Diajukan
+      </h2>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        {faqs.map((faq) => (
+          <details style="border:1px solid var(--border);border-radius:8px;padding:14px 18px;background:var(--surface);">
+            <summary style="font-weight:700;color:var(--brand);cursor:pointer;font-size:0.95rem;">
+              {faq.q}
+            </summary>
+            <p style="margin-top:12px;color:var(--slate-700);line-height:1.75;font-size:0.9rem;">
+              {faq.a}
+            </p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section style="background:linear-gradient(135deg,var(--slate-900),var(--brand-dark));color:var(--surface);border-radius:12px;padding:44px 24px;text-align:center;">
+      <h2 style="margin:0 0 12px;font-size:1.75rem;color:#fff;font-weight:800;">Lindungi Petugas Keamanan Anda</h2>
+      <p style="opacity:0.9;margin:0 auto 28px;line-height:1.7;max-width:620px;">
+        Satpam yang terlatih K3 adalah aset — bukan beban. Hubungi kami untuk konsultasi program pelatihan K3 yang sesuai profil risiko fasilitas dan jumlah satpam Anda.
+      </p>
+      <a href="https://wa.me/6287759151278?text=Halo%20Wahana%20Totalita,%20saya%20ingin%20info%20pelatihan%20K3%20untuk%20satuan%20pengamanan%20(satpam)%20kami"
+         target="_blank" rel="noopener"
+         style="display:inline-block;background:#25d366;color:#fff;padding:14px 36px;border-radius:8px;font-weight:700;text-decoration:none;font-size:1.05rem;">
+        💬 Hubungi Kami via WhatsApp: 0877-5915-1278
+      </a>
+    </section>
+  </main>
+</Layout>

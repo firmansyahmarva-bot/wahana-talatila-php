@@ -1,0 +1,382 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const canonical = 'https://wahanatotalita.com/selam/';
+const metaTitle = 'Pelatihan Selam & Scuba Diving — CMAS, NAUI & Commercial Diving | Wahana Totalita';
+const metaDesc = 'Pelatihan selam profesional dan rekreasional: CMAS, NAUI, Scientific Diving, Commercial Diving. Untuk oil & gas, penyelamatan, riset bawah laut. Yogyakarta. Hubungi: 0877-5915-1278.';
+
+const levels = [
+  { level: 'Pemula', cmas: 'CMAS 1 Bintang (*)', naui: 'NAUI Scuba Diver', depth: '20 meter', dur: '4–7 hari' },
+  { level: 'Menengah', cmas: 'CMAS 2 Bintang (**)', naui: 'NAUI Advanced Scuba Diver', depth: '40 meter', dur: '3–5 hari (setelah level 1)' },
+  { level: 'Mahir', cmas: 'CMAS 3 Bintang (***)', naui: 'NAUI Divemaster', depth: '40 meter + supervisi', dur: '5–7 hari (setelah level 2)' },
+  { level: 'Instruktur', cmas: 'CMAS Instruktur', naui: 'NAUI Instructor', depth: 'Tidak terbatas', dur: 'Program khusus + ujian' },
+];
+
+const commercial = [
+  { title: 'Inshore/Nearshore Diver', desc: 'Penyelaman di perairan dangkal (<30m): pelabuhan, dermaga, sungai, danau. Inspeksi lambung kapal, pembersihan propeler, perbaikan konstruksi bawah air.' },
+  { title: 'Offshore Diver', desc: 'Penyelaman di laut lepas termasuk platform minyak & gas. Sertifikasi IMCA atau ADCI menjadi standar minimum untuk kontraktor internasional.' },
+  { title: 'Saturation Diver', desc: 'Penyelaman sangat dalam (100m+) menggunakan teknik saturasi — tinggal di dalam sistem ruang bertekanan selama beberapa hari. Spesialisasi tertinggi dan terbayar terbaik dalam dunia selam komersial.' },
+  { title: 'Dive Supervisor', desc: 'Mengawasi operasi penyelaman dari permukaan, memastikan prosedur keselamatan, mengelola tim penyelam dan peralatan. Tidak harus menyelam aktif.' },
+];
+
+const scientificBullets = [
+  'Protokol keselamatan scientific diving (standar lebih ketat dari rekreasional)',
+  'Teknik pengambilan sampel dan dokumentasi bawah air',
+  'Penggunaan peralatan riset bawah laut: kamera, video, transek, kuadrat',
+  'Pencatatan data di bawah air (slate, underwater writing tools)',
+  'Foto dan video bawah air untuk dokumentasi ilmiah',
+  'Protokol transek terumbu karang (Reef Check, Manta Tow)',
+  'Manajemen dekompresi dan batas paparan penyelaman berulang',
+];
+
+const safety = [
+  { icon: '🩺', title: 'Medical Fitness Check', desc: 'Pemeriksaan medis selam wajib sebelum pelatihan. Paru-paru, jantung, telinga, sinus, dan kondisi umum harus dinyatakan layak selam oleh dokter berwenang. Beberapa kondisi kontraindikasi absolut: epilepsi, pneumotoraks spontan, asma parah tidak terkontrol.' },
+  { icon: '📋', title: 'Dive Planning & Dive Tables', desc: 'Setiap penyelaman harus direncanakan — kedalaman maksimal, waktu bawah (bottom time), interval permukaan, dan batas nitrogen. Penggunaan dive computer atau tabel dekompresi (NOAA, US Navy) wajib untuk mencegah DCS.' },
+  { icon: '🤝', title: 'Buddy System', desc: 'Selam tidak pernah dilakukan sendirian. Sistem buddy (pasangan selam) adalah protokol keselamatan dasar — setiap penyelam bertanggung jawab memantau pasangannya dan siap memberikan pertolongan pertama bawah air.' },
+  { icon: '🔧', title: 'Pre-Dive Equipment Check', desc: 'BWRAF atau "Begin With Review And Friend" — prosedur pengecekan peralatan sebelum masuk air: Buoyancy (BCD), Weights (pemberat), Releases (rilis), Air (pasokan udara), Final (pemeriksaan akhir bersama buddy).' },
+  { icon: '🆘', title: 'Emergency Procedures', desc: 'Setiap penyelam harus hafal: prosedur naik darurat (emergency ascent), penanganan kehabisan udara, tindakan pertama DCS (oksigen 100% dan evakuasi ke ruang hiperbarik), serta lokasi ruang hiperbarik terdekat.' },
+  { icon: '⏱️', title: 'Surface Interval & Repetitive Dives', desc: 'Penyelaman berulang dalam satu hari membutuhkan interval permukaan yang cukup untuk melepas nitrogen dari jaringan tubuh. Mengabaikan interval permukaan adalah penyebab utama DCS pada penyelam rekreasional.' },
+];
+
+const reqs = [
+  { title: 'Usia Minimum', desc: '17 tahun untuk program penuh (CMAS 1*/NAUI). Peserta 12–16 tahun dapat mengikuti program junior dengan pendampingan orang tua/wali.' },
+  { title: 'Kemampuan Berenang', desc: 'Mampu berenang minimal 200 meter tanpa alat bantu dan bertahan di air selama 10 menit. Bukan berarti harus perenang mahir — cukup nyaman di air.' },
+  { title: 'Kondisi Kesehatan', desc: 'Surat keterangan layak selam dari dokter. Tidak memiliki kondisi kontraindikasi: epilepsi, penyakit jantung tidak terkontrol, pneumotoraks spontan, asma parah.' },
+  { title: 'Dokumen', desc: 'KTP/paspor, pas foto 3×4 (4 lembar), surat keterangan dokter, dan formulir pendaftaran yang diisi lengkap.' },
+];
+
+const programs = [
+  { title: 'CMAS 1 Bintang (Open Water)', desc: 'Selam rekreasional level dasar. Sertifikat diakui internasional. Termasuk 4 open water dives.', dur: '4–7 hari' },
+  { title: 'CMAS 2 Bintang (Advanced)', desc: 'Level menengah — kedalaman hingga 40m, navigasi bawah air, penyelaman malam. Prasyarat: CMAS 1*.', dur: '3–5 hari' },
+  { title: 'CMAS 3 Bintang (Divemaster)', desc: 'Level mahir — manajemen kelompok selam, rescue, pengawasan penyelaman. Prasyarat: CMAS 2**.', dur: '5–7 hari' },
+  { title: 'Scientific Diving', desc: 'Pelatihan selam untuk keperluan riset dan survei lingkungan. Termasuk teknik pengambilan data bawah air.', dur: 'Kustom' },
+  { title: 'Commercial Diving Awareness', desc: 'Pengenalan selam komersial — prosedur, peralatan, regulasi K3 industri. Untuk oil & gas, maritim.', dur: '3 hari' },
+  { title: 'Rescue Diver', desc: 'Teknik penyelamatan penyelam dalam kesulitan, penanganan darurat bawah air, prosedur evakuasi.', dur: '3–5 hari' },
+];
+
+const users = [
+  { icon: '🛢️', title: 'Oil & Gas', desc: 'Inspektor pipa, welder bawah air, operator ROV, platform maintenance' },
+  { icon: '⚓', title: 'Maritim & Pelabuhan', desc: 'Inspeksi lambung kapal, konstruksi dermaga, pengerukan, salvage' },
+  { icon: '🔬', title: 'Riset & AMDAL', desc: 'BRIN/LIPI, konsultan lingkungan, monitoring ekosistem perairan' },
+  { icon: '🪖', title: 'TNI AL & Basarnas', desc: 'Penyelam tempur, tim SAR, penyelamatan underwater' },
+  { icon: '🐠', title: 'Pariwisata Bahari', desc: 'Dive guide, dive instructor, resort diving operations' },
+  { icon: '🎓', title: 'Mahasiswa Kelautan', desc: 'Program studi kelautan, biologi laut, teknik perkapalan' },
+];
+
+const related = [
+  { href: '/k3-migas/', title: 'K3 Minyak & Gas', desc: 'Sertifikasi K3 untuk industri migas termasuk offshore' },
+  { href: '/k3-ketinggian/', title: 'K3 Ketinggian', desc: 'Bekerja di ketinggian — regulasi dan sertifikasi' },
+  { href: '/p3k/', title: 'Pelatihan P3K', desc: 'Pertolongan pertama termasuk untuk keadaan darurat diving' },
+  { href: '/keselamatan-kerja/', title: 'K3 Umum', desc: 'Sertifikasi Ahli K3 Umum Kemnaker RI' },
+];
+
+const faqs = [
+  {
+    q: 'Apa perbedaan selam rekreasional dan selam komersial (commercial diving)?',
+    a: 'Selam rekreasional dilakukan untuk hobi atau olahraga, dengan kedalaman umumnya tidak melebihi 40 meter dan menggunakan sirkuit terbuka (open circuit). Sertifikasinya melalui POSSI/CMAS, NAUI, atau PADI. Selam komersial adalah kegiatan penyelaman dalam rangka pekerjaan — inspeksi pipa bawah laut, perawatan offshore platform, konstruksi pelabuhan, atau SAR. Selam komersial memiliki regulasi K3 tersendiri, peralatan khusus, dan sertifikasi yang berbeda dari selam rekreasional.'
+  },
+  {
+    q: 'Apakah ada persyaratan kesehatan untuk mengikuti pelatihan selam?',
+    a: 'Ya. Sebelum mengikuti pelatihan selam, peserta wajib melakukan medical check-up selam yang mencakup: pemeriksaan paru-paru (tidak ada riwayat pneumotoraks spontan), jantung (EKG normal), telinga dan sinus (tidak ada gangguan yang menghalangi ekualisasi), dan tidak memiliki kondisi yang dikontraindikasikan untuk menyelam seperti epilepsi, diabetes tidak terkontrol, atau asma parah. Sertifikat layak selam dari dokter berwenang diperlukan sebelum pelatihan dimulai.'
+  },
+  {
+    q: 'Berapa kedalaman maksimal untuk penyelam bersertifikat CMAS atau NAUI?',
+    a: 'Batasan kedalaman bergantung pada level sertifikasi: CMAS/NAUI Open Water (level 1) — maksimal 20 meter; CMAS/NAUI Advanced (level 2) — maksimal 40 meter; CMAS/NAUI Divemaster (level 3) — hingga 40 meter dengan pengawasan; instruktur dan penyelam teknis dapat melebihi 40 meter dengan sertifikasi khusus dan gas campuran (trimix). Untuk penyelam komersial, kedalaman diatur oleh regulasi tersendiri dan membutuhkan sertifikasi commercial diver.'
+  },
+  {
+    q: 'Apakah pelatihan selam Wahana Totalita diakui untuk keperluan industri oil & gas?',
+    a: 'Wahana Totalita menyediakan pelatihan selam yang mencakup aspek K3 untuk keperluan industri termasuk oil & gas. Untuk penyelam komersial yang bekerja di platform lepas pantai, sertifikasi IMCA (International Marine Contractors Association) atau ADCI (Association of Diving Contractors International) biasanya menjadi standar yang diminta kontraktor internasional. Hubungi kami untuk konsultasi program yang sesuai dengan kebutuhan industri Anda.'
+  },
+  {
+    q: 'Apa itu Scientific Diving dan siapa yang membutuhkannya?',
+    a: 'Scientific Diving adalah penyelaman yang dilakukan dalam rangka riset atau survei ilmiah — penelitian terumbu karang, biota laut, arkeologi bawah air, survei lingkungan perairan, atau pemantauan pipa bawah laut. Dibutuhkan oleh: peneliti LIPI/BRIN, mahasiswa kelautan dan biologi laut, tim AMDAL untuk proyek pesisir, dan konsultan lingkungan perairan. Sertifikasi scientific diving memiliki persyaratan protokol keselamatan yang lebih ketat dari selam rekreasional.'
+  },
+  {
+    q: 'Berapa lama waktu yang dibutuhkan untuk mendapatkan sertifikat selam dasar?',
+    a: 'Program Open Water Diver (level 1/CMAS* atau NAUI Scuba Diver) membutuhkan waktu: 2–3 hari teori dan latihan kolam renang, ditambah 4 penyelaman terbuka (open water dives) di laut atau danau. Total waktu efektif sekitar 4–7 hari tergantung kondisi cuaca dan ketersediaan lokasi penyelaman. Setelah lulus, peserta menerima kartu selam (C-card) yang diakui secara internasional.'
+  },
+];
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Beranda', item: 'https://wahanatotalita.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Pelatihan', item: 'https://wahanatotalita.com/pelatihan/' },
+      { '@type': 'ListItem', position: 3, name: 'Pelatihan Selam', item: canonical },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Wahana Totalita Konsultan',
+    url: 'https://wahanatotalita.com',
+    telephone: '+6287759151278',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Yogyakarta',
+      addressRegion: 'DI Yogyakarta',
+      addressCountry: 'ID',
+    },
+  },
+];
+---
+
+<Layout
+  title={metaTitle}
+  description={metaDesc}
+  canonical={canonical}
+  schemas={schemas}
+>
+  <!-- HERO -->
+  <section style="background:linear-gradient(135deg,var(--brand) 0%,var(--brand-mid) 100%);color:var(--surface);padding:60px 20px 50px;">
+    <div style="max-width:900px;margin:0 auto;">
+      <nav aria-label="breadcrumb" style="font-size:0.85rem;opacity:0.8;margin-bottom:16px;">
+        <a href="/" style="color:var(--warning-border);text-decoration:none;">Beranda</a> &rsaquo;
+        <a href="/pelatihan/" style="color:var(--warning-border);text-decoration:none;">Pelatihan</a> &rsaquo;
+        <span>Pelatihan Selam</span>
+      </nav>
+      <h1 style="font-size:clamp(1.6rem,4vw,2.4rem);font-weight:700;margin:0 0 16px;">
+        Pelatihan Selam &amp; Scuba Diving — CMAS, NAUI &amp; Commercial Diving
+      </h1>
+      <p style="font-size:1.1rem;opacity:0.92;max-width:720px;margin:0 0 28px;line-height:1.7;">
+        Dari selam rekreasional hingga commercial diving untuk industri oil &amp; gas, maritim, dan riset kelautan. Wahana Totalita menyediakan pelatihan selam bersertifikat internasional dengan instruktur berpengalaman dan standar keselamatan tertinggi.
+      </p>
+      <a href="https://wa.me/6287759151278?text=Halo%2C+saya+ingin+info+program+pelatihan+selam+(CMAS%2FNAUI%2FCommercial+Diving).+Mohon+info+jadwal+dan+biaya."
+         target="_blank" rel="noopener"
+         style="display:inline-block;background:var(--accent);color:var(--surface);padding:14px 32px;border-radius:6px;font-weight:700;text-decoration:none;font-size:1rem;">
+        Tanya Info Pelatihan Selam
+      </a>
+    </div>
+  </section>
+
+  <main style="max-width:960px;margin:0 auto;padding:40px 20px 60px;">
+
+    <!-- MENGAPA SELAM PENTING -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:20px;">
+        Mengapa Pelatihan Selam Bersertifikat Penting?
+      </h2>
+      <p style="line-height:1.8;color:var(--slate-800);margin-bottom:16px;">
+        Menyelam tanpa sertifikasi yang valid bukan hanya berbahaya — di banyak konteks profesional dan industri, ini juga ilegal. Di Indonesia, penyelam yang bekerja di lingkungan industri (offshore platform, konstruksi pelabuhan, inspeksi pipa, SAR) wajib memiliki sertifikasi yang diakui. Bahkan untuk selam rekreasional, sertifikasi adalah syarat mutlak untuk menyewa peralatan dan mengikuti penyelaman di hampir seluruh resort dan dive center di dunia.
+      </p>
+      <p style="line-height:1.8;color:var(--slate-800);">
+        Indonesia adalah negara kepulauan dengan garis pantai terpanjang kedua di dunia — kebutuhan tenaga selam terlatih sangat tinggi, mulai dari industri kelautan, pertambangan lepas pantai, riset lingkungan, hingga pariwisata bahari. Sertifikasi selam yang tepat membuka peluang karir dan operasional yang tidak bisa diakses tanpanya.
+      </p>
+    </section>
+
+    <!-- JALUR SERTIFIKASI -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:24px;">
+        Jalur Sertifikasi Selam — Dari Pemula hingga Profesional
+      </h2>
+
+      <!-- Selam Rekreasional -->
+      <div style="margin-bottom:32px;">
+        <h3 style="color:var(--brand);font-size:1.2rem;background:var(--accent-light);padding:12px 16px;border-radius:6px;margin:0 0 16px;">
+          🤿 Selam Rekreasional — CMAS &amp; NAUI
+        </h3>
+        <p style="line-height:1.8;color:var(--slate-800);margin-bottom:16px;">
+          CMAS (Confédération Mondiale des Activités Subaquatiques) adalah badan selam internasional tertua yang memiliki hubungan resmi dengan UNESCO. POSSI (Persatuan Olahraga Selam Seluruh Indonesia) adalah anggota CMAS di Indonesia. NAUI (National Association of Underwater Instructors) adalah badan sertifikasi selam internasional terkemuka dengan standar pengajaran tinggi.
+        </p>
+        <div style="overflow-x:auto;">
+          <table style="width:100%;border-collapse:collapse;font-size:0.92rem;">
+            <thead>
+              <tr style="background:var(--brand);color:var(--surface);">
+                <th style="padding:10px 14px;text-align:left;">Level</th>
+                <th style="padding:10px 14px;text-align:left;">CMAS</th>
+                <th style="padding:10px 14px;text-align:left;">NAUI Setara</th>
+                <th style="padding:10px 14px;text-align:left;">Kedalaman Maks</th>
+                <th style="padding:10px 14px;text-align:left;">Durasi Pelatihan</th>
+              </tr>
+            </thead>
+            <tbody>
+              {levels.map((lv, i) => (
+                <tr style={`background:${i % 2 === 0 ? 'var(--surface)' : 'var(--surface-subtle)'};`}>
+                  <td style="padding:9px 14px;border-bottom:1px solid var(--border);font-weight:600;color:var(--brand);">{lv.level}</td>
+                  <td style="padding:9px 14px;border-bottom:1px solid var(--border);">{lv.cmas}</td>
+                  <td style="padding:9px 14px;border-bottom:1px solid var(--border);">{lv.naui}</td>
+                  <td style="padding:9px 14px;border-bottom:1px solid var(--border);">{lv.depth}</td>
+                  <td style="padding:9px 14px;border-bottom:1px solid var(--border);">{lv.dur}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Selam Profesional -->
+      <div style="margin-bottom:32px;">
+        <h3 style="color:var(--brand);font-size:1.2rem;background:var(--accent-light);padding:12px 16px;border-radius:6px;margin:0 0 16px;">
+          🏗️ Commercial Diving — Selam Profesional Industri
+        </h3>
+        <p style="line-height:1.8;color:var(--slate-800);margin-bottom:16px;">
+          Commercial diving (selam komersial) berbeda fundamental dari selam rekreasional. Penyelam komersial bekerja di lingkungan berisiko tinggi — platform minyak lepas pantai, konstruksi dermaga, inspeksi dan pemeliharaan infrastruktur bawah air — dengan durasi kerja, kedalaman, dan tekanan yang melampaui standar rekreasional.
+        </p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;">
+          {commercial.map((c) => (
+            <div style="background:var(--surface);border:1px solid var(--slate-300);border-radius:8px;padding:16px;border-left:4px solid var(--accent);">
+              <div style="font-weight:600;color:var(--brand);margin-bottom:8px;font-size:0.95rem;">{c.title}</div>
+              <p style="color:var(--slate-600);font-size:0.88rem;line-height:1.6;margin:0;">{c.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Scientific Diving -->
+      <div>
+        <h3 style="color:var(--brand);font-size:1.2rem;background:var(--accent-light);padding:12px 16px;border-radius:6px;margin:0 0 16px;">
+          🔬 Scientific Diving — Selam untuk Riset &amp; Lingkungan
+        </h3>
+        <p style="line-height:1.8;color:var(--slate-800);margin-bottom:16px;">
+          Scientific diving adalah penyelaman yang dilakukan dalam rangka penelitian atau survei ilmiah. Digunakan oleh: peneliti BRIN/LIPI untuk studi ekosistem terumbu karang dan biota laut, tim AMDAL untuk proyek pesisir dan lepas pantai yang memerlukan data bawah laut, konsultan lingkungan yang melakukan pemantauan kualitas perairan, serta arkeolog bawah air.
+        </p>
+        <div style="background:var(--accent-light);border-radius:8px;padding:20px;">
+          <div style="font-weight:600;color:var(--brand);margin-bottom:12px;">Cakupan program Scientific Diving:</div>
+          <ul style="margin:0;padding-left:20px;color:var(--slate-700);line-height:2;">
+            {scientificBullets.map((b) => (
+              <li>{b}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- KESELAMATAN SELAM -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:20px;">
+        K3 dalam Kegiatan Selam — Protokol Keselamatan Wajib
+      </h2>
+      <p style="line-height:1.8;color:var(--slate-800);margin-bottom:20px;">
+        Selam adalah kegiatan berisiko tinggi yang membutuhkan disiplin protokol keselamatan yang ketat. Kecelakaan selam — dari barotrauma hingga decompression sickness (DCS) — hampir selalu dapat dicegah dengan penerapan prosedur yang benar.
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px;">
+        {safety.map((s) => (
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:18px;">
+            <div style="font-size:1.8rem;margin-bottom:8px;">{s.icon}</div>
+            <div style="font-weight:600;color:var(--brand);margin-bottom:8px;">{s.title}</div>
+            <p style="color:var(--slate-600);font-size:0.88rem;line-height:1.6;margin:0;">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- PERSYARATAN -->
+    <section style="margin-bottom:48px;background:var(--accent-light);border-radius:10px;padding:30px;">
+      <h2 style="color:var(--brand);font-size:1.4rem;margin:0 0 20px;">
+        Persyaratan Peserta Pelatihan Selam
+      </h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;">
+        {reqs.map((r) => (
+          <div style="background:var(--surface);border-radius:6px;padding:16px;">
+            <div style="font-weight:600;color:var(--brand);margin-bottom:8px;">{r.title}</div>
+            <p style="color:var(--slate-600);font-size:0.9rem;line-height:1.6;margin:0;">{r.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- PROGRAM CARDS -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:24px;">
+        Program Pelatihan Selam Wahana Totalita
+      </h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;">
+        {programs.map((p) => {
+          const waUrl = `https://wa.me/6287759151278?text=${encodeURIComponent(`Halo, saya ingin info program pelatihan ${p.title}. Mohon info jadwal dan biaya.`)}`;
+          return (
+            <div style="background:var(--surface);border:1px solid var(--slate-300);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;">
+              <div style="background:linear-gradient(135deg,var(--brand-mid),var(--brand));color:var(--surface);padding:14px 16px;">
+                <div style="font-weight:600;font-size:0.95rem;">{p.title}</div>
+              </div>
+              <div style="padding:14px 16px;flex:1;">
+                <p style="color:var(--slate-600);font-size:0.88rem;line-height:1.6;margin:0 0 10px;">{p.desc}</p>
+                <div style="font-size:0.85rem;color:var(--slate-600);">⏱️ Durasi: <strong>{p.dur}</strong></div>
+              </div>
+              <div style="padding:0 16px 16px;">
+                <a href={waUrl}
+                   target="_blank" rel="noopener"
+                   style="display:block;text-align:center;background:var(--accent);color:var(--surface);padding:10px;border-radius:5px;text-decoration:none;font-weight:600;font-size:0.9rem;">
+                  Tanya Jadwal &amp; Harga
+                </a>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+
+    <!-- SIAPA YANG MEMBUTUHKAN -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:20px;">
+        Siapa yang Membutuhkan Pelatihan Selam Profesional?
+      </h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
+        {users.map((u) => (
+          <div style="background:var(--surface);border:1px solid var(--slate-300);border-radius:8px;padding:16px;text-align:center;">
+            <div style="font-size:2rem;margin-bottom:8px;">{u.icon}</div>
+            <div style="font-weight:600;color:var(--brand);margin-bottom:6px;font-size:0.9rem;">{u.title}</div>
+            <div style="color:var(--slate-600);font-size:0.82rem;line-height:1.5;">{u.desc}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- RELATED -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.4rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:20px;">
+        Program Terkait
+      </h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;">
+        {related.map((r) => (
+          <a href={r.href} style="display:block;background:var(--surface);border:1px solid var(--slate-300);border-radius:8px;padding:16px;text-decoration:none;">
+            <div style="font-weight:600;color:var(--brand);margin-bottom:6px;font-size:0.95rem;">{r.title}</div>
+            <div style="color:var(--slate-600);font-size:0.85rem;line-height:1.5;">{r.desc}</div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:24px;">
+        Pertanyaan yang Sering Diajukan
+      </h2>
+      {faqs.map((faq) => (
+        <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:12px;overflow:hidden;background:var(--surface);">
+          <summary style="padding:16px 20px;background:var(--slate-50);cursor:pointer;font-weight:600;color:var(--brand);font-size:0.95rem;display:flex;justify-content:space-between;align-items:center;list-style:none;">
+            <span>{faq.q}</span>
+            <span style="font-size:1.2rem;font-weight:700;color:var(--accent);min-width:20px;text-align:center;">+</span>
+          </summary>
+          <div style="padding:16px 20px;color:var(--slate-700);line-height:1.8;background:var(--surface);border-top:1px solid var(--border);font-size:0.92rem;">
+            {faq.a}
+          </div>
+        </details>
+      ))}
+    </section>
+
+    <!-- CTA -->
+    <section style="background:linear-gradient(135deg,var(--brand-mid),var(--brand));color:var(--surface);border-radius:12px;padding:40px;text-align:center;">
+      <h2 style="margin:0 0 12px;font-size:1.6rem;color:var(--surface);">Siap Memulai Perjalanan Selam Anda?</h2>
+      <p style="opacity:0.9;margin:0 0 28px;line-height:1.7;max-width:600px;margin-left:auto;margin-right:auto;">
+        Dari CMAS Open Water hingga Commercial Diving — Wahana Totalita siap mendampingi dengan instruktur berpengalaman, standar keselamatan internasional, dan sertifikat yang diakui secara global.
+      </p>
+      <a href="https://wa.me/6287759151278?text=Halo%2C+saya+ingin+info+program+pelatihan+selam+di+Wahana+Totalita.+Mohon+info+jadwal+dan+biaya."
+         target="_blank" rel="noopener"
+         style="display:inline-block;background:var(--accent);color:var(--surface);padding:14px 36px;border-radius:6px;font-weight:700;text-decoration:none;font-size:1.05rem;">
+        WhatsApp: 0877-5915-1278
+      </a>
+    </section>
+
+  </main>
+</Layout>

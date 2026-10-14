@@ -1,0 +1,412 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const canonical = 'https://wahanatotalita.com/outbound/';
+const metaTitle = 'Outbound Training & Team Building Yogyakarta — untuk Instansi & BUMN | Wahana Totalita';
+const metaDesc = 'Outbound training dan team building profesional di Yogyakarta untuk instansi pemerintah, BUMN, dan korporasi. Program kepemimpinan, team cohesion, dan pengembangan SDM. Hubungi: 0877-5915-1278.';
+
+const benefits = [
+  { icon: '🧠', title: '70% lebih diingat', desc: 'Pembelajaran experiential tersimpan lebih lama dibanding metode klasikal' },
+  { icon: '🤝', title: 'Tim lebih kohesif', desc: 'Aktivitas bersama membangun kepercayaan yang sulit diciptakan di dalam kantor' },
+  { icon: '🎯', title: 'Tujuan terukur', desc: 'Setiap aktivitas dikaitkan dengan kompetensi spesifik yang ingin dikembangkan' },
+  { icon: '⚡', title: 'Energi organisasi naik', desc: 'Peserta kembali ke kantor dengan semangat dan perspektif baru' },
+];
+
+const goals = [
+  {
+    icon: '👑',
+    title: 'Kepemimpinan (Leadership)',
+    color: 'var(--surface-subtle)',
+    items: ['Pengambilan keputusan di bawah tekanan', 'Delegasi dan kepercayaan kepada tim', 'Komunikasi visi dan arah kepada bawahan', 'Manajemen konflik dan negosiasi'],
+  },
+  {
+    icon: '🤝',
+    title: 'Kerja Sama Tim (Team Cohesion)',
+    color: 'var(--info-bg)',
+    items: ['Membangun kepercayaan antar anggota tim', 'Peran dan tanggung jawab dalam tim', 'Komunikasi efektif saat tekanan tinggi', 'Mengatasi perbedaan gaya kerja'],
+  },
+  {
+    icon: '💡',
+    title: 'Kreativitas & Problem Solving',
+    color: 'var(--warning-bg)',
+    items: ['Berpikir out-of-the-box dalam situasi terbatas', 'Pendekatan sistematis terhadap masalah kompleks', 'Inovasi dan adaptasi perubahan', 'Design thinking sederhana'],
+  },
+  {
+    icon: '📣',
+    title: 'Komunikasi & Kolaborasi',
+    color: 'var(--accent-light)',
+    items: ['Komunikasi lintas departemen', 'Active listening dan empati', 'Presentasi dan penyampaian ide', 'Feedback yang konstruktif'],
+  },
+  {
+    icon: '🏆',
+    title: 'Motivasi & Engagement',
+    color: 'var(--danger-bg)',
+    items: ['Membangun motivasi internal tim', 'Menyelaraskan nilai pribadi dengan nilai organisasi', 'Merayakan pencapaian bersama', 'Re-energize tim pasca tekanan proyek besar'],
+  },
+  {
+    icon: '🔄',
+    title: 'Change Management',
+    color: 'var(--surface-subtle)',
+    items: ['Memperkenalkan perubahan organisasi', 'Mengelola resistensi perubahan', 'Membangun growth mindset', 'Adaptasi dengan teknologi dan proses baru'],
+  },
+];
+
+const formats = [
+  {
+    title: '⏱️ Half Day (4 Jam)',
+    sub: 'Ideal untuk energizer',
+    bg: 'var(--brand)',
+    items: ['Pembukaan & ice breaking', '2–3 aktivitas terfokus', 'Sesi debriefing singkat', 'Penutup & foto bersama'],
+    best_for: 'Annual gathering, setelah rapat besar, departemen baru',
+  },
+  {
+    title: '☀️ Full Day (8 Jam)',
+    sub: 'Program paling populer',
+    bg: 'var(--brand-mid)',
+    items: ['Pembukaan & forming tim', '4–6 aktivitas bertema', 'Sesi makan siang bersama', 'Debriefing mendalam', 'Games penutup & penghargaan'],
+    best_for: 'HUT instansi, program tahunan SDM, pembinaan pegawai',
+  },
+  {
+    title: '🌙 2D1N',
+    sub: 'Pengembangan intensif',
+    bg: 'var(--brand-mid)',
+    items: ['Program hari 1 lengkap', 'Sesi refleksi malam hari', 'Games trust building malam', 'Program hari 2 + closing ceremony', 'Sertifikat peserta'],
+    best_for: 'Leadership development, penerimaan pegawai baru, tim manajemen',
+  },
+  {
+    title: '🏕️ 3D2N',
+    sub: 'Transformasi SDM mendalam',
+    bg: 'var(--brand-dark)',
+    items: ['Leadership camp penuh', 'Simulasi situasi nyata', 'Presentasi action plan', 'Komitmen perubahan', 'Sertifikat & laporan evaluasi'],
+    best_for: 'Diklat kepemimpinan, talent program, calon pemimpin unit',
+  },
+];
+
+const activities = [
+  { icon: '🪵', title: 'Flying Fox & High Ropes', desc: 'Membangun keberanian, kepercayaan diri, dan kepercayaan kepada tim pemandu — metafora nyata tentang mengambil risiko terkalkulasi.' },
+  { icon: '🔍', title: 'Amazing Race / Treasure Hunt', desc: 'Kompetisi navigasi berbasis tim yang menguji komunikasi, strategi, dan adaptasi rencana saat kondisi berubah.' },
+  { icon: '🥁', title: 'Drum Circle', desc: 'Aktivitas kolaboratif berbasis ritme — seluruh peserta bermain perkusi bersama, menghasilkan harmoni dari keberagaman individu.' },
+  { icon: '🚣', title: 'Arung Jeram (Rafting)', desc: 'Kerja sama tim dalam kondisi penuh adrenalin. Tersedia di Sungai Progo dan Elo, Magelang (dekat Yogyakarta).' },
+  { icon: '🧩', title: 'Problem Solving Games', desc: 'Tantangan fisik dan mental yang hanya bisa diselesaikan dengan koordinasi tim — melatih kepemimpinan situasional dan komunikasi efektif.' },
+  { icon: '🔥', title: 'Malam Refleksi & Api Unggun', desc: 'Sesi emosional yang membangun ikatan tim di luar rutinitas kerja — sharing, apresiasi, dan komitmen bersama.' },
+  { icon: '🎭', title: 'Simulasi Kepemimpinan', desc: 'Role play skenario manajemen nyata: krisis proyek, konflik tim, negosiasi stakeholder — lalu dianalisis bersama fasilitator.' },
+  { icon: '🌱', title: 'Corporate Farming', desc: 'Bercocok tanam bersama — metafora tentang investasi jangka panjang, sabar menunggu hasil, dan merawat dengan konsisten.' },
+];
+
+const gov = [
+  { icon: '📋', title: 'Dokumen Lengkap', desc: 'SPK, BA pelaksanaan, kuitansi, faktur pajak, laporan kegiatan, dan foto dokumentasi — semua siap kami sediakan.' },
+  { icon: '🏛️', title: 'LPSE & PADI Terdaftar', desc: 'Terdaftar sebagai vendor resmi pengadaan langsung. Dapat melalui mekanisme penunjukan langsung di bawah Rp 200 juta.' },
+  { icon: '💼', title: 'Paket All-in-One', desc: 'Venue, konsumsi, fasilitator, peralatan, akomodasi, dan transportasi dapat dikemas dalam satu paket harga untuk kemudahan penganggaran.' },
+  { icon: '📊', title: 'Laporan Evaluasi', desc: 'Laporan kegiatan lengkap termasuk foto, daftar hadir, evaluasi peserta, dan rekomendasi tindak lanjut — sesuai kebutuhan pelaporan instansi.' },
+];
+
+const locations = [
+  { icon: '🌋', title: 'Lereng Merapi — Kaliurang', desc: 'Suasana sejuk, aktivitas alam terbuka, view Gunung Merapi. Cocok untuk program alam dan kepemimpinan.' },
+  { icon: '🌊', title: 'Pantai Selatan — Parangtritis, Baron, Kukup', desc: 'Aktivitas pantai, outbound pasir, refleksi sore di tepi laut. Kesan mendalam untuk tim.' },
+  { icon: '🌾', title: 'Pedesaan Sleman & Bantul', desc: 'Persawahan, perkebunan, suasana pedesaan — cocok untuk corporate farming dan program kebersamaan.' },
+  { icon: '⛰️', title: 'Kulon Progo — Bukit Menoreh', desc: 'Trekking, flying fox, dan aktivitas alam bertema petualangan dengan panorama perbukitan.' },
+  { icon: '🏨', title: 'Hotel & Resort Yogyakarta', desc: 'Indoor dan outdoor terintegrasi. Tersedia di hotel bintang 3–5 kota Yogyakarta untuk program kombinasi.' },
+  { icon: '🚀', title: 'Di Luar Yogyakarta', desc: 'Program tersedia di Bali, Lombok, Bromo, Labuan Bajo, atau destinasi lain sesuai permintaan klien.' },
+];
+
+const steps = [
+  { num: '1', title: 'Konsultasi Kebutuhan', desc: 'Diskusi tujuan, jumlah peserta, anggaran, dan waktu pelaksanaan. Gratis, tidak mengikat.' },
+  { num: '2', title: 'Proposal & Penawaran', desc: 'Kami kirimkan proposal program lengkap dan penawaran harga dalam 1×24 jam kerja.' },
+  { num: '3', title: 'Finalisasi Desain Program', desc: 'Setelah sepakat, kami rancang rundown detail, aktivitas, dan briefing fasilitator.' },
+  { num: '4', title: 'Pelaksanaan', desc: 'Hari-H: tim fasilitator kami hadir, semua logistik sudah disiapkan. Klien tinggal hadir.' },
+  { num: '5', title: 'Laporan Kegiatan', desc: 'Dalam 3 hari kerja pasca kegiatan: laporan lengkap, foto, daftar hadir, dan evaluasi peserta.' },
+];
+
+const related = [
+  { href: '/keselamatan-kerja/', title: 'Pelatihan K3 Umum', desc: 'Sertifikasi K3 dan pengembangan kompetensi keselamatan kerja' },
+  { href: '/pelatihan-iso/', title: 'Pelatihan ISO', desc: 'Sistem manajemen mutu, lingkungan, dan K3 internasional' },
+  { href: '/smk3/', title: 'SMK3 & Audit', desc: 'Sistem Manajemen K3 nasional — PP 50/2012' },
+  { href: '/pelatihan/', title: 'Semua Program', desc: 'Lihat katalog lengkap pelatihan Wahana Totalita' },
+];
+
+const faqs = [
+  {
+    q: 'Apa perbedaan outbound training dan team building biasa?',
+    a: 'Outbound training menggabungkan aktivitas fisik outdoor dengan sesi pembelajaran terstruktur — setiap aktivitas dirancang untuk tujuan pengembangan spesifik. Fasilitator terlatih memimpin debriefing yang menghubungkan pengalaman lapangan dengan konteks kerja nyata. Team building biasa umumnya hanya aktivitas rekreasi tanpa tujuan pembelajaran yang terstruktur.'
+  },
+  {
+    q: 'Berapa peserta minimum dan maksimum untuk program outbound?',
+    a: 'Program kami dapat mengakomodasi 20 hingga 500+ peserta. Untuk kelompok besar, dibagi menjadi sub-kelompok 8–12 orang per tim dengan fasilitator masing-masing. Hubungi kami untuk proposal sesuai jumlah peserta Anda.'
+  },
+  {
+    q: 'Apakah program outbound bisa dilaksanakan di dalam kantor (indoor)?',
+    a: 'Ya. Kami menyediakan program indoor team building untuk gedung kantor, aula, atau ballroom hotel. Aktivitas indoor mencakup problem-solving games, simulasi leadership, creative workshop, dan games kolaboratif yang tidak membutuhkan ruang luas.'
+  },
+  {
+    q: 'Berapa lama waktu ideal untuk program outbound training?',
+    a: 'Setengah hari (4 jam) untuk energizer ringan; satu hari penuh (8 jam) untuk program komprehensif; 2D1N untuk pengembangan intensif; 3D2N untuk leadership development mendalam. Kami akan merekomendasikan durasi yang tepat berdasarkan tujuan dan anggaran Anda.'
+  },
+  {
+    q: 'Apakah outbound training bisa dimasukkan ke dalam anggaran instansi pemerintah?',
+    a: 'Ya. Program dapat masuk di mata anggaran pengembangan SDM atau pembinaan kepegawaian. Wahana Totalita terdaftar di LPSE dan PADI UMKM — dapat menjadi vendor untuk pengadaan langsung di bawah Rp 200 juta. Dokumen administrasi lengkap tersedia.'
+  },
+  {
+    q: 'Lokasi mana yang tersedia untuk outbound training di Yogyakarta?',
+    a: 'Lereng Merapi (Kaliurang), Pantai Selatan (Parangtritis, Baron, Kukup), pedesaan Sleman & Bantul, Bukit Menoreh Kulon Progo, hotel & resort kota Yogyakarta, dan destinasi luar kota atas permintaan.'
+  },
+];
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Beranda', item: 'https://wahanatotalita.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Pelatihan', item: 'https://wahanatotalita.com/pelatihan/' },
+      { '@type': 'ListItem', position: 3, name: 'Outbound Training', item: canonical },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Wahana Totalita Konsultan',
+    url: 'https://wahanatotalita.com',
+    telephone: '+6287759151278',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Yogyakarta',
+      addressRegion: 'DI Yogyakarta',
+      addressCountry: 'ID',
+    },
+  },
+];
+---
+
+<Layout
+  title={metaTitle}
+  description={metaDesc}
+  canonical={canonical}
+  schemas={schemas}
+>
+  <!-- HERO -->
+  <section style="background:linear-gradient(135deg,var(--brand) 0%,var(--brand-mid) 60%,var(--brand-dark) 100%);color:var(--surface);padding:60px 20px 50px;">
+    <div style="max-width:900px;margin:0 auto;">
+      <nav aria-label="breadcrumb" style="font-size:0.85rem;opacity:0.8;margin-bottom:16px;">
+        <a href="/" style="color:var(--warning-border);text-decoration:none;">Beranda</a> &rsaquo;
+        <a href="/pelatihan/" style="color:var(--warning-border);text-decoration:none;">Pelatihan</a> &rsaquo;
+        <span>Outbound Training</span>
+      </nav>
+      <h1 style="font-size:clamp(1.6rem,4vw,2.4rem);font-weight:700;margin:0 0 16px;">
+        Outbound Training &amp; Team Building Yogyakarta
+      </h1>
+      <p style="font-size:1.1rem;opacity:0.92;max-width:720px;margin:0 0 10px;line-height:1.7;">
+        Program pengembangan SDM berbasis experiential learning untuk instansi pemerintah, BUMN, dan korporasi. Dipercaya oleh 70+ instansi sejak 2012 — dari Dinas, BUMN, hingga perusahaan swasta nasional di wilayah Yogyakarta dan sekitarnya.
+      </p>
+      <p style="font-size:0.92rem;opacity:0.8;margin:0 0 28px;">
+        ✅ Terdaftar LPSE &amp; PADI UMKM &nbsp;|&nbsp; ✅ Pengadaan langsung &lt; Rp 200 juta &nbsp;|&nbsp; ✅ Dokumen administrasi lengkap
+      </p>
+      <a href="https://wa.me/6287759151278?text=Halo%2C+saya+ingin+konsultasi+program+outbound+training%2Fteam+building+untuk+instansi+kami.+Mohon+info+jadwal+dan+penawaran."
+         target="_blank" rel="noopener"
+         style="display:inline-block;background:var(--accent);color:var(--surface);padding:14px 32px;border-radius:6px;font-weight:700;text-decoration:none;font-size:1rem;">
+        Minta Proposal &amp; Penawaran Harga
+      </a>
+    </div>
+  </section>
+
+  <main style="max-width:960px;margin:0 auto;padding:40px 20px 60px;">
+
+    <!-- MENGAPA OUTBOUND -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:20px;">
+        Mengapa Outbound Training Efektif untuk Pengembangan SDM?
+      </h2>
+      <p style="line-height:1.8;color:var(--slate-800);margin-bottom:16px;">
+        Penelitian dalam bidang experiential learning menunjukkan bahwa manusia menyerap dan mempertahankan informasi jauh lebih baik ketika mereka <em>mengalami</em> sesuatu secara langsung dibandingkan hanya mendengarkan atau membaca. Outbound training menggunakan prinsip ini — setiap aktivitas dirancang untuk menciptakan pengalaman yang terasa nyata, diikuti dengan sesi debriefing yang menghubungkan pengalaman tersebut dengan tantangan kerja sehari-hari.
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:20px;">
+        {benefits.map((b) => (
+          <div style="background:var(--accent-light);border-radius:8px;padding:18px;text-align:center;">
+            <div style="font-size:2rem;margin-bottom:8px;">{b.icon}</div>
+            <div style="font-weight:600;color:var(--brand);margin-bottom:6px;font-size:0.95rem;">{b.title}</div>
+            <div style="color:var(--slate-600);font-size:0.85rem;line-height:1.5;">{b.desc}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- TUJUAN PENGEMBANGAN -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:24px;">
+        Tujuan Pengembangan yang Dapat Dicapai
+      </h2>
+      <p style="color:var(--slate-600);margin-bottom:20px;line-height:1.7;">
+        Setiap program dirancang sesuai kebutuhan spesifik klien. Berikut tema dan kompetensi yang paling sering diminta instansi dan korporasi:
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:20px;">
+        {goals.map((g) => (
+          <div style={`background:${g.color};border-radius:8px;padding:20px;`}>
+            <div style="font-size:1.8rem;margin-bottom:8px;">{g.icon}</div>
+            <div style="font-weight:600;color:var(--brand);margin-bottom:12px;font-size:1rem;">{g.title}</div>
+            <ul style="margin:0;padding-left:18px;color:var(--slate-700);font-size:0.88rem;line-height:1.8;">
+              {g.items.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- FORMAT PROGRAM -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:24px;">
+        Format Program — Pilih Sesuai Kebutuhan
+      </h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;">
+        {formats.map((f) => (
+          <div style="border-radius:8px;overflow:hidden;display:flex;flex-direction:column;border:1px solid var(--slate-300);">
+            <div style={`background:${f.bg};color:var(--surface);padding:16px;`}>
+              <div style="font-weight:700;font-size:1rem;">{f.title}</div>
+              <div style="font-size:0.82rem;opacity:0.85;margin-top:4px;">{f.sub}</div>
+            </div>
+            <div style="padding:14px 16px;flex:1;background:var(--surface);">
+              <ul style="margin:0 0 12px;padding-left:18px;color:var(--slate-700);font-size:0.88rem;line-height:1.8;">
+                {f.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+              <div style="font-size:0.82rem;color:var(--brand);font-weight:600;">🎯 {f.best_for}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- AKTIVITAS UNGGULAN -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:20px;">
+        Aktivitas Unggulan
+      </h2>
+      <p style="color:var(--slate-600);margin-bottom:20px;line-height:1.7;">
+        Setiap aktivitas dirancang oleh fasilitator berpengalaman dengan mempertimbangkan tujuan pembelajaran, kondisi fisik peserta, dan ketersediaan venue. Berikut aktivitas yang paling sering diminta:
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;">
+        {activities.map((a) => (
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;">
+            <div style="font-size:1.8rem;margin-bottom:8px;">{a.icon}</div>
+            <div style="font-weight:600;color:var(--brand);margin-bottom:6px;font-size:0.9rem;">{a.title}</div>
+            <p style="color:var(--slate-600);font-size:0.85rem;line-height:1.5;margin:0;">{a.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- UNTUK INSTANSI PEMERINTAH -->
+    <section style="margin-bottom:48px;background:var(--accent-light);border-radius:10px;padding:30px;">
+      <h2 style="color:var(--brand);font-size:1.4rem;margin:0 0 16px;">
+        Khusus untuk Instansi Pemerintah &amp; BUMN
+      </h2>
+      <p style="line-height:1.8;color:var(--slate-800);margin-bottom:20px;">
+        Wahana Totalita memiliki pengalaman panjang melayani instansi pemerintah dan BUMN di wilayah DIY dan sekitarnya. Kami memahami kebutuhan spesifik pengadaan pemerintah — mulai dari mekanisme LPSE, penganggaran di mata anggaran yang tepat, hingga kelengkapan dokumen administrasi.
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;">
+        {gov.map((g) => (
+          <div style="background:var(--surface);border-radius:6px;padding:16px;">
+            <div style="font-size:1.6rem;margin-bottom:8px;">{g.icon}</div>
+            <div style="font-weight:600;color:var(--brand);margin-bottom:6px;font-size:0.9rem;">{g.title}</div>
+            <p style="color:var(--slate-600);font-size:0.85rem;line-height:1.6;margin:0;">{g.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- LOKASI -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:20px;">
+        Pilihan Lokasi di Yogyakarta &amp; Sekitarnya
+      </h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;">
+        {locations.map((l) => (
+          <div style="background:var(--surface);border:1px solid var(--slate-300);border-radius:8px;padding:16px;border-top:3px solid var(--brand);">
+            <div style="font-size:1.8rem;margin-bottom:8px;">{l.icon}</div>
+            <div style="font-weight:600;color:var(--brand);margin-bottom:6px;font-size:0.9rem;">{l.title}</div>
+            <p style="color:var(--slate-600);font-size:0.85rem;line-height:1.5;margin:0;">{l.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- PROSES -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:24px;">
+        Alur Kerja — Dari Konsultasi hingga Laporan
+      </h2>
+      <div>
+        {steps.map((step) => (
+          <div style="display:flex;gap:20px;margin-bottom:20px;align-items:flex-start;">
+            <div style="background:var(--brand);color:var(--surface);width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1rem;flex-shrink:0;">{step.num}</div>
+            <div style="background:var(--slate-50);border:1px solid var(--border);border-radius:8px;padding:14px 18px;flex:1;">
+              <div style="font-weight:600;color:var(--brand);margin-bottom:4px;">{step.title}</div>
+              <div style="color:var(--slate-600);font-size:0.9rem;line-height:1.6;">{step.desc}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- RELATED -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.4rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:20px;">
+        Program Pengembangan SDM Terkait
+      </h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;">
+        {related.map((r) => (
+          <a href={r.href} style="display:block;background:var(--surface);border:1px solid var(--slate-300);border-radius:8px;padding:16px;text-decoration:none;">
+            <div style="font-weight:600;color:var(--brand);margin-bottom:6px;font-size:0.95rem;">{r.title}</div>
+            <div style="color:var(--slate-600);font-size:0.85rem;line-height:1.5;">{r.desc}</div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:24px;">
+        Pertanyaan yang Sering Diajukan
+      </h2>
+      {faqs.map((faq) => (
+        <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:12px;overflow:hidden;background:var(--surface);">
+          <summary style="padding:16px 20px;background:var(--slate-50);cursor:pointer;font-weight:600;color:var(--brand);font-size:0.95rem;display:flex;justify-content:space-between;align-items:center;list-style:none;">
+            <span>{faq.q}</span>
+            <span style="font-size:1.2rem;font-weight:700;color:var(--accent);min-width:20px;text-align:center;">+</span>
+          </summary>
+          <div style="padding:16px 20px;color:var(--slate-700);line-height:1.8;background:var(--surface);border-top:1px solid var(--border);font-size:0.92rem;">
+            {faq.a}
+          </div>
+        </details>
+      ))}
+    </section>
+
+    <!-- CTA -->
+    <section style="background:linear-gradient(135deg,var(--brand),var(--brand-mid));color:var(--surface);border-radius:12px;padding:40px;text-align:center;">
+      <h2 style="margin:0 0 12px;font-size:1.6rem;color:var(--surface);">Siap Membangun Tim yang Lebih Kuat?</h2>
+      <p style="opacity:0.9;margin:0 0 28px;line-height:1.7;max-width:600px;margin-left:auto;margin-right:auto;">
+        Ceritakan kebutuhan Anda — jumlah peserta, tujuan, dan anggaran. Kami kirimkan proposal dan penawaran harga dalam 1×24 jam kerja.
+      </p>
+      <a href="https://wa.me/6287759151278?text=Halo%2C+saya+ingin+konsultasi+program+outbound+training%2Fteam+building+untuk+instansi%2Fperusahaan+kami.+Mohon+info+program+dan+penawaran+harga."
+         target="_blank" rel="noopener"
+         style="display:inline-block;background:var(--accent);color:var(--surface);padding:14px 36px;border-radius:6px;font-weight:700;text-decoration:none;font-size:1.05rem;margin-right:12px;">
+        WhatsApp: 0877-5915-1278
+      </a>
+      <a href="/pelatihan/"
+         style="display:inline-block;background:transparent;color:var(--surface);padding:14px 28px;border-radius:6px;font-weight:600;text-decoration:none;font-size:1rem;border:2px solid color-mix(in srgb, var(--surface) 60%, transparent);margin-top:10px;">
+        Lihat Semua Program
+      </a>
+    </section>
+
+  </main>
+</Layout>

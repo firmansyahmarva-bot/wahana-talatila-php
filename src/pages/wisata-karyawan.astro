@@ -1,0 +1,391 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const canonical = 'https://wahanatotalita.com/wisata-karyawan/';
+const metaTitle = 'Paket Wisata Karyawan & Instansi Yogyakarta — BUMN, Dinas & Korporasi | Wahana Totalita';
+const metaDesc = 'Paket wisata tahunan karyawan untuk instansi pemerintah, BUMN, dan korporasi. Yogyakarta & destinasi seluruh Indonesia. Terdaftar LPSE & PADI UMKM. Hubungi: 0877-5915-1278.';
+
+const benefits = [
+  { icon: '😊', title: 'Kepuasan Karyawan', desc: 'Wisata bersama meningkatkan employee satisfaction dan mengurangi burnout pasca kerja keras setahun' },
+  { icon: '🤝', title: 'Keakraban Tim', desc: 'Momen informal di luar kantor mempererat hubungan antar karyawan lintas divisi' },
+  { icon: '🔋', title: 'Energi Baru', desc: 'Karyawan kembali dengan semangat dan perspektif segar untuk menghadapi tantangan berikutnya' },
+  { icon: '🏆', title: 'Retensi SDM', desc: 'Fasilitas wisata tahunan menjadi salah satu faktor karyawan memilih bertahan di organisasi' },
+];
+
+const packages = [
+  {
+    title: '🏙️ Wisata Lokal Yogyakarta',
+    dur: 'Setengah hari – 1 hari',
+    bg: 'var(--brand)',
+    items: ['Prambanan, Borobudur, Keraton', 'Kaliurang & Lereng Merapi', 'Pantai Selatan (Parangtritis, Baron)', 'Cave Tubing Goa Pindul', 'Tebing Breksi & Kalibiru'],
+    note: 'Tanpa biaya akomodasi & transportasi udara — paling ekonomis',
+  },
+  {
+    title: '🌋 Bromo & Ijen — Jawa Timur',
+    dur: '2 hari 1 malam / 3 hari 2 malam',
+    bg: 'var(--brand-dark)',
+    items: ['Sunrise Gunung Bromo', 'Kawah Ijen (blue fire)', 'Savana Teletubbies', 'Pantai Balekambang / Sendang Biru', 'Pemandangan khas Jawa Timur'],
+    note: 'Populer untuk instansi yang menginginkan pengalaman alam dramatis',
+  },
+  {
+    title: '🌴 Bali — Destinasi Favorit',
+    dur: '3 hari 2 malam / 4 hari 3 malam',
+    bg: 'var(--brand-mid)',
+    items: ['Tanah Lot & Uluwatu', 'Ubud & sawah Tegalalang', 'Kuta, Seminyak, Nusa Dua', 'Water sport Tanjung Benoa', 'Pura Besakih & budaya Bali'],
+    note: 'Destinasi paling diminati — pilihan hotel dan aktivitas sangat lengkap',
+  },
+  {
+    title: '🏝️ Lombok & Gili',
+    dur: '3 hari 2 malam / 4 hari 3 malam',
+    bg: 'var(--brand-mid)',
+    items: ['Gili Trawangan, Air, Meno', 'Snorkeling & diving', 'Pantai Pink & Tangsi', 'Sasak Village & budaya lokal', 'Gunung Rinjani (opsional)'],
+    note: 'Alternatif Bali yang lebih tenang — pantai lebih bersih, lebih eksklusif',
+  },
+  {
+    title: '🐉 Labuan Bajo & Komodo',
+    dur: '3 hari 2 malam / 4 hari 3 malam',
+    bg: 'var(--brand-dark)',
+    items: ['Taman Nasional Komodo', 'Pulau Padar & Pink Beach', 'Snorkeling Kanawa Island', 'Sunset Gili Laba', 'Kota Labuan Bajo'],
+    note: 'Paket premium — untuk instansi yang ingin pengalaman tak terlupakan',
+  },
+  {
+    title: '✈️ Destinasi Lainnya',
+    dur: 'Kustom sesuai permintaan',
+    bg: 'var(--brand-dark)',
+    items: ['Raja Ampat, Papua', 'Wakatobi, Sulawesi', 'Belitung', 'Singapura & Malaysia', 'Destinasi dalam/luar negeri lainnya'],
+    note: 'Kami merancang itinerary untuk destinasi manapun sesuai anggaran',
+  },
+];
+
+const inclusions = [
+  { icon: '🚌', title: 'Transportasi', desc: 'Bus pariwisata AC (dari Yogyakarta) + angkutan lokal di destinasi. Tiket pesawat PP jika destinasi luar Jawa.' },
+  { icon: '🏨', title: 'Akomodasi', desc: 'Hotel sesuai kategori yang disepakati — mulai dari bintang 2 (ekonomis) hingga bintang 4 (premium). 1 atau 2 kamar per unit.' },
+  { icon: '🍽️', title: 'Konsumsi', desc: 'Makan 3× sehari sesuai menu yang disepakati. Snack di perjalanan dan air mineral sepanjang kegiatan.' },
+  { icon: '🎫', title: 'Tiket Wisata', desc: 'Semua tiket masuk objek wisata yang tercantum dalam itinerary, termasuk tiket kapal/speedboat jika diperlukan.' },
+  { icon: '🧑‍💼', title: 'Tour Leader & Pemandu', desc: 'Tour leader dari Wahana Totalita mendampingi seluruh perjalanan. Pemandu lokal tersedia di destinasi.' },
+  { icon: '📸', title: 'Dokumentasi', desc: 'Fotografer/videografer (opsional, atas permintaan). Minimal foto dokumentasi oleh tour leader.' },
+  { icon: '🎁', title: 'Souvenir', desc: 'Souvenir/kenang-kenangan khas destinasi untuk seluruh peserta (opsional, bisa disesuaikan anggaran).' },
+  { icon: '📄', title: 'Laporan Kegiatan', desc: 'Laporan lengkap pasca kegiatan: daftar hadir, foto, dan narasi kegiatan — untuk kebutuhan pelaporan instansi.' },
+];
+
+const combos = [
+  { title: 'Format 2D1N', desc: 'Hari 1: Outbound training penuh (8 jam aktivitas + debriefing). Hari 2: Wisata objek unggulan destinasi.' },
+  { title: 'Format 3D2N', desc: 'Hari 1: Tiba + wisata ringan. Hari 2: Outbound training + gala dinner. Hari 3: Wisata utama + kembali.' },
+  { title: 'Format 4D3N', desc: 'Hari 1–2: Outbound + team building intensif. Hari 3–4: Wisata bebas + belanja souvenir.' },
+  { title: 'Full Custom', desc: 'Proporsi outbound vs wisata bisa diatur sesuai prioritas — dari 80% outbound hingga 80% wisata.' },
+];
+
+const procure = [
+  { req: 'Vendor terdaftar sistem pengadaan', sol: 'Terdaftar LPSE (eProcurement pemerintah) dan PADI UMKM' },
+  { req: 'Mekanisme pengadaan langsung', sol: 'Dapat melalui penunjukan langsung untuk nilai di bawah Rp 200 juta' },
+  { req: 'Dokumen administrasi lengkap', sol: 'Proposal + RAB, SPK, kuitansi, faktur pajak, BAST, laporan kegiatan' },
+  { req: 'NPWP & PKP aktif', sol: 'Faktur pajak resmi untuk kebutuhan SPJ keuangan instansi' },
+  { req: 'Legalitas vendor jelas', sol: 'NIB aktif, akta perusahaan, TDP, dan izin usaha perjalanan wisata' },
+  { req: 'Laporan pasca kegiatan', sol: 'Laporan tertulis + foto + daftar hadir untuk kebutuhan audit internal' },
+];
+
+const steps = [
+  { num: '1', title: 'Konsultasi Awal (Gratis)', desc: 'Hubungi kami via WhatsApp atau telepon. Ceritakan jumlah peserta, destinasi yang diminati, anggaran, dan tanggal yang diinginkan.' },
+  { num: '2', title: 'Proposal & Itinerary', desc: 'Dalam 1×24 jam kami kirimkan proposal lengkap: itinerary hari per hari, daftar hotel, RAB, dan rincian harga paket.' },
+  { num: '3', title: 'Revisi & Finalisasi', desc: 'Kami revisi proposal sesuai masukan Anda hingga semua sesuai kebutuhan dan anggaran yang tersedia.' },
+  { num: '4', title: 'Penandatanganan SPK', desc: 'Setelah harga dan program sepakat, SPK ditandatangani dan DP (biasanya 30–50%) dibayarkan untuk konfirmasi booking.' },
+  { num: '5', title: 'Pelaksanaan Perjalanan', desc: 'Hari-H: seluruh logistik sudah disiapkan. Tour leader kami mendampingi dari keberangkatan hingga kembali ke Yogyakarta.' },
+  { num: '6', title: 'Laporan Kegiatan', desc: 'Dalam 3–5 hari kerja pasca perjalanan, laporan lengkap beserta foto dan daftar hadir kami kirimkan untuk kebutuhan SPJ.' },
+];
+
+const related = [
+  { href: '/outbound/', title: 'Outbound Training', desc: 'Team building dan pengembangan kepemimpinan di alam terbuka' },
+  { href: '/keselamatan-kerja/', title: 'Pelatihan K3', desc: 'Sertifikasi K3 wajib untuk karyawan dan perusahaan' },
+  { href: '/pelatihan-iso/', title: 'Pelatihan ISO', desc: 'Sistem manajemen mutu dan K3 berstandar internasional' },
+  { href: '/pelatihan/', title: 'Semua Program', desc: 'Katalog lengkap pelatihan dan jasa Wahana Totalita' },
+];
+
+const faqs = [
+  {
+    q: 'Apakah paket wisata karyawan bisa dimasukkan ke dalam anggaran instansi pemerintah?',
+    a: 'Ya. Kegiatan wisata karyawan instansi pemerintah umumnya masuk dalam mata anggaran kegiatan pembinaan kepegawaian, peningkatan kesejahteraan pegawai, atau kegiatan motivasi dan penguatan tim. Wahana Totalita terdaftar di LPSE dan PADI UMKM sehingga dapat menjadi vendor resmi pengadaan langsung di bawah Rp 200 juta. Kami menyediakan dokumen administrasi lengkap: proposal, SPK, kuitansi, faktur pajak, dan laporan kegiatan.'
+  },
+  {
+    q: 'Berapa peserta minimum untuk paket wisata karyawan instansi?',
+    a: 'Paket wisata karyawan Wahana Totalita tersedia mulai dari 20 peserta. Untuk rombongan besar (100–500 orang), kami menyediakan armada bus, koordinator lapangan per kelompok, dan sistem check-in yang terorganisir. Tidak ada batas maksimum peserta — kami pernah mengelola perjalanan instansi hingga 500+ peserta dalam satu rangkaian kegiatan.'
+  },
+  {
+    q: 'Destinasi mana yang paling populer untuk wisata karyawan dari Yogyakarta?',
+    a: 'Dari Yogyakarta, destinasi paling populer untuk wisata karyawan: (1) Bali — destinasi favorit untuk perjalanan 3–5 hari dengan kombinasi budaya dan pantai; (2) Bromo & Ijen — untuk instansi yang menginginkan pengalaman alam pegunungan; (3) Lombok & Gili — pantai dan snorkeling, alternatif Bali yang lebih tenang; (4) Labuan Bajo & Komodo — untuk perjalanan premium; (5) Domestik Yogyakarta — untuk kegiatan setengah atau satu hari tanpa perjalanan jauh.'
+  },
+  {
+    q: 'Apakah wisata karyawan bisa dikombinasikan dengan outbound atau pelatihan?',
+    a: 'Ya, dan ini justru paling direkomendasikan. Program kombinasi wisata + outbound sangat populer di kalangan instansi — peserta mendapatkan pengalaman rekreasi sekaligus pengembangan kompetensi. Formatnya fleksibel: hari pertama outbound/team building, hari berikutnya wisata; atau sebaliknya. Wahana Totalita mengelola keduanya secara terintegrasi sehingga klien hanya perlu berurusan dengan satu vendor.'
+  },
+  {
+    q: 'Apa saja yang termasuk dalam paket wisata karyawan Wahana Totalita?',
+    a: 'Komponen paket dapat disesuaikan, namun umumnya mencakup: transportasi (bus pariwisata AC, tiket pesawat jika diperlukan), akomodasi (hotel sesuai budget — bintang 2 hingga 4), konsumsi (makan 3× sehari + snack), tiket masuk objek wisata, pemandu wisata, dokumentasi foto/video, souvenir, dan laporan kegiatan. Kami juga dapat menambahkan outbound facilitator, MC, atau hiburan malam sesuai permintaan.'
+  },
+  {
+    q: 'Berapa jauh hari sebelumnya harus memesan paket wisata karyawan?',
+    a: 'Untuk memastikan ketersediaan hotel, bus, dan tiket pesawat terbaik, idealnya pesan 1–3 bulan sebelum keberangkatan — terutama untuk musim ramai (Juni–Juli dan Desember). Namun kami juga dapat mengakomodasi pemesanan mendadak 2–3 minggu sebelumnya untuk destinasi lokal atau rombongan di bawah 50 orang. Hubungi kami segera untuk mengecek ketersediaan.'
+  },
+];
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Beranda', item: 'https://wahanatotalita.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Program', item: 'https://wahanatotalita.com/pelatihan/' },
+      { '@type': 'ListItem', position: 3, name: 'Wisata Karyawan', item: canonical },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Wahana Totalita Konsultan',
+    url: 'https://wahanatotalita.com',
+    telephone: '+6287759151278',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Yogyakarta',
+      addressRegion: 'DI Yogyakarta',
+      addressCountry: 'ID',
+    },
+  },
+];
+---
+
+<Layout
+  title={metaTitle}
+  description={metaDesc}
+  canonical={canonical}
+  schemas={schemas}
+>
+  <!-- HERO -->
+  <section style="background:linear-gradient(135deg,var(--brand) 0%,var(--brand-mid) 50%,var(--brand-dark) 100%);color:var(--surface);padding:60px 20px 50px;">
+    <div style="max-width:900px;margin:0 auto;">
+      <nav aria-label="breadcrumb" style="font-size:0.85rem;opacity:0.8;margin-bottom:16px;">
+        <a href="/" style="color:var(--warning-border);text-decoration:none;">Beranda</a> &rsaquo;
+        <a href="/pelatihan/" style="color:var(--warning-border);text-decoration:none;">Program</a> &rsaquo;
+        <span>Wisata Karyawan</span>
+      </nav>
+      <h1 style="font-size:clamp(1.6rem,4vw,2.4rem);font-weight:700;margin:0 0 16px;">
+        Paket Wisata Karyawan &amp; Instansi Pemerintah
+      </h1>
+      <p style="font-size:1.1rem;opacity:0.92;max-width:720px;margin:0 0 10px;line-height:1.7;">
+        Perjalanan wisata tahunan yang terorganisir untuk instansi pemerintah, BUMN, dan korporasi. Dari Yogyakarta ke Bali, Bromo, Lombok, Labuan Bajo, dan destinasi lainnya — satu vendor, satu SPK, tanpa repot koordinasi.
+      </p>
+      <p style="font-size:0.92rem;opacity:0.8;margin:0 0 28px;">
+        ✅ Terdaftar LPSE &amp; PADI UMKM &nbsp;|&nbsp; ✅ Pengadaan langsung &lt; Rp 200 juta &nbsp;|&nbsp; ✅ Dipercaya 70+ instansi sejak 2012
+      </p>
+      <a href="https://wa.me/6287759151278?text=Halo%2C+saya+ingin+info+paket+wisata+karyawan+untuk+instansi%2Fperusahaan+kami.+Mohon+kirimkan+proposal+dan+penawaran+harga."
+         target="_blank" rel="noopener"
+         style="display:inline-block;background:var(--accent);color:var(--surface);padding:14px 32px;border-radius:6px;font-weight:700;text-decoration:none;font-size:1rem;">
+        Minta Proposal Wisata Karyawan
+      </a>
+    </div>
+  </section>
+
+  <main style="max-width:960px;margin:0 auto;padding:40px 20px 60px;">
+
+    <!-- MENGAPA WISATA KARYAWAN -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:20px;">
+        Mengapa Wisata Tahunan Karyawan Penting?
+      </h2>
+      <p style="line-height:1.8;color:var(--slate-800);margin-bottom:16px;">
+        Wisata tahunan karyawan bukan sekadar kegiatan rekreasi — ini adalah investasi dalam kesehatan mental tim, kohesivitas antar departemen, dan retensi SDM berkualitas. Karyawan yang merasa dihargai melalui kegiatan seperti ini cenderung memiliki loyalitas lebih tinggi dan produktivitas yang lebih baik setelah kembali dari perjalanan.
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:20px;">
+        {benefits.map((b) => (
+          <div style="background:var(--accent-light);border-radius:8px;padding:18px;text-align:center;">
+            <div style="font-size:2rem;margin-bottom:8px;">{b.icon}</div>
+            <div style="font-weight:600;color:var(--brand);margin-bottom:6px;font-size:0.95rem;">{b.title}</div>
+            <div style="color:var(--slate-600);font-size:0.85rem;line-height:1.5;">{b.desc}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- FORMAT PAKET -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:24px;">
+        Format Paket Wisata Karyawan
+      </h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;">
+        {packages.map((p) => (
+          <div style="border-radius:8px;overflow:hidden;display:flex;flex-direction:column;border:1px solid var(--slate-300);">
+            <div style={`background:${p.bg};color:var(--surface);padding:16px;`}>
+              <div style="font-weight:700;font-size:0.95rem;">{p.title}</div>
+              <div style="font-size:0.8rem;opacity:0.85;margin-top:4px;">⏱️ {p.dur}</div>
+            </div>
+            <div style="padding:14px 16px;flex:1;background:var(--surface);">
+              <ul style="margin:0 0 12px;padding-left:18px;color:var(--slate-700);font-size:0.88rem;line-height:1.8;">
+                {p.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+              <div style="font-size:0.82rem;color:var(--brand);font-style:italic;border-top:1px solid var(--border);padding-top:8px;">{p.note}</div>
+            </div>
+            <div style="padding:0 16px 14px;background:var(--surface);">
+              <a href={`https://wa.me/6287759151278?text=${encodeURIComponent(`Halo, saya ingin info paket wisata ${p.title} untuk karyawan kami.`)}`}
+                 target="_blank" rel="noopener"
+                 style="display:block;text-align:center;background:var(--accent);color:var(--surface);padding:9px;border-radius:5px;text-decoration:none;font-weight:600;font-size:0.88rem;">
+                Tanya Harga Paket Ini
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- YANG TERMASUK DALAM PAKET -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:20px;">
+        Yang Termasuk dalam Paket
+      </h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;">
+        {inclusions.map((inc) => (
+          <div style="background:var(--slate-50);border:1px solid var(--border);border-radius:8px;padding:16px;display:flex;gap:14px;align-items:flex-start;">
+            <div style="font-size:1.8rem;flex-shrink:0;">{inc.icon}</div>
+            <div>
+              <div style="font-weight:600;color:var(--brand);margin-bottom:4px;font-size:0.9rem;">{inc.title}</div>
+              <div style="color:var(--slate-600);font-size:0.85rem;line-height:1.5;">{inc.desc}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- WISATA + OUTBOUND COMBO -->
+    <section style="margin-bottom:48px;background:var(--accent-light);border-radius:10px;padding:30px;">
+      <h2 style="color:var(--brand);font-size:1.4rem;margin:0 0 16px;">
+        Program Kombinasi Wisata + Outbound Training
+      </h2>
+      <p style="line-height:1.8;color:var(--slate-800);margin-bottom:20px;">
+        Program kombinasi wisata dan outbound training adalah pilihan paling populer di kalangan instansi pemerintah dan BUMN. Peserta mendapatkan dua manfaat sekaligus: pengembangan kompetensi tim melalui outbound, dan rekreasi menyenangkan melalui wisata. Satu anggaran, dua tujuan.
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
+        {combos.map((c) => (
+          <div style="background:var(--surface);border-radius:8px;padding:16px;border-left:4px solid var(--accent);">
+            <div style="font-weight:600;color:var(--brand);margin-bottom:8px;font-size:0.9rem;">{c.title}</div>
+            <p style="color:var(--slate-600);font-size:0.85rem;line-height:1.6;margin:0;">{c.desc}</p>
+          </div>
+        ))}
+      </div>
+      <div style="margin-top:20px;">
+        <a href="/outbound/"
+           style="display:inline-block;background:var(--brand);color:var(--surface);padding:11px 24px;border-radius:6px;font-weight:600;text-decoration:none;font-size:0.9rem;margin-right:12px;">
+          Lihat Program Outbound Training
+        </a>
+        <a href="https://wa.me/6287759151278?text=Halo%2C+saya+ingin+konsultasi+paket+kombinasi+wisata+dan+outbound+training+untuk+karyawan+kami."
+           target="_blank" rel="noopener"
+           style="display:inline-block;background:var(--accent);color:var(--surface);padding:11px 24px;border-radius:6px;font-weight:600;text-decoration:none;font-size:0.9rem;">
+          Konsultasi Paket Combo
+        </a>
+      </div>
+    </section>
+
+    <!-- PENGADAAN PEMERINTAH -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:20px;">
+        Kemudahan Pengadaan untuk Instansi Pemerintah
+      </h2>
+      <p style="line-height:1.8;color:var(--slate-800);margin-bottom:20px;">
+        Wahana Totalita memahami kompleksitas pengadaan pemerintah dan telah membangun sistem yang memudahkan proses dari perencanaan hingga pelaporan. Kami bukan sekadar travel agent — kami adalah mitra pengadaan yang memahami aturan main APBN/APBD.
+      </p>
+      <div style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;font-size:0.92rem;">
+          <thead>
+            <tr style="background:var(--brand);color:var(--surface);">
+              <th style="padding:12px 16px;text-align:left;">Kebutuhan Instansi</th>
+              <th style="padding:12px 16px;text-align:left;">Solusi Wahana Totalita</th>
+            </tr>
+          </thead>
+          <tbody>
+            {procure.map((row, i) => (
+              <tr style={`background:${i % 2 === 0 ? 'var(--surface)' : 'var(--surface-subtle)'};`}>
+                <td style="padding:10px 16px;border-bottom:1px solid var(--border);color:var(--slate-800);">{row.req}</td>
+                <td style="padding:10px 16px;border-bottom:1px solid var(--border);color:var(--brand);font-weight:500;">{row.sol}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ALUR PEMESANAN -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:24px;">
+        Alur Pemesanan Paket Wisata Karyawan
+      </h2>
+      {steps.map((step) => (
+        <div style="display:flex;gap:20px;margin-bottom:18px;align-items:flex-start;">
+          <div style="background:var(--brand);color:var(--surface);width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1rem;flex-shrink:0;">{step.num}</div>
+          <div style="background:var(--slate-50);border:1px solid var(--border);border-radius:8px;padding:14px 18px;flex:1;">
+            <div style="font-weight:600;color:var(--brand);margin-bottom:4px;">{step.title}</div>
+            <div style="color:var(--slate-600);font-size:0.9rem;line-height:1.6;">{step.desc}</div>
+          </div>
+        </div>
+      ))}
+    </section>
+
+    <!-- RELATED -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.4rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:20px;">
+        Program Lain untuk Instansi &amp; Korporasi
+      </h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;">
+        {related.map((r) => (
+          <a href={r.href} style="display:block;background:var(--surface);border:1px solid var(--slate-300);border-radius:8px;padding:16px;text-decoration:none;">
+            <div style="font-weight:600;color:var(--brand);margin-bottom:6px;font-size:0.95rem;">{r.title}</div>
+            <div style="color:var(--slate-600);font-size:0.85rem;line-height:1.5;">{r.desc}</div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:24px;">
+        Pertanyaan yang Sering Diajukan
+      </h2>
+      {faqs.map((faq) => (
+        <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:12px;overflow:hidden;background:var(--surface);">
+          <summary style="padding:16px 20px;background:var(--slate-50);cursor:pointer;font-weight:600;color:var(--brand);font-size:0.95rem;display:flex;justify-content:space-between;align-items:center;list-style:none;">
+            <span>{faq.q}</span>
+            <span style="font-size:1.2rem;font-weight:700;color:var(--accent);min-width:20px;text-align:center;">+</span>
+          </summary>
+          <div style="padding:16px 20px;color:var(--slate-700);line-height:1.8;background:var(--surface);border-top:1px solid var(--border);font-size:0.92rem;">
+            {faq.a}
+          </div>
+        </details>
+      ))}
+    </section>
+
+    <!-- CTA -->
+    <section style="background:linear-gradient(135deg,var(--brand),var(--brand-mid));color:var(--surface);border-radius:12px;padding:40px;text-align:center;">
+      <h2 style="margin:0 0 12px;font-size:1.6rem;color:var(--surface);">Rencanakan Wisata Karyawan Tahun Ini</h2>
+      <p style="opacity:0.9;margin:0 0 28px;line-height:1.7;max-width:600px;margin-left:auto;margin-right:auto;">
+        Ceritakan jumlah peserta, destinasi, dan anggaran Anda — kami kirimkan proposal dan itinerary lengkap dalam 1×24 jam kerja.
+      </p>
+      <a href="https://wa.me/6287759151278?text=Halo%2C+saya+ingin+konsultasi+paket+wisata+karyawan+untuk+instansi%2Fperusahaan+kami.+Mohon+kirimkan+proposal."
+         target="_blank" rel="noopener"
+         style="display:inline-block;background:var(--accent);color:var(--surface);padding:14px 36px;border-radius:6px;font-weight:700;text-decoration:none;font-size:1.05rem;margin-right:12px;">
+        WhatsApp: 0877-5915-1278
+      </a>
+      <a href="/outbound/"
+         style="display:inline-block;background:transparent;color:var(--surface);padding:14px 28px;border-radius:6px;font-weight:600;text-decoration:none;font-size:1rem;border:2px solid color-mix(in srgb, var(--surface) 60%, transparent);margin-top:10px;">
+        Lihat Program Outbound
+      </a>
+    </section>
+
+  </main>
+</Layout>

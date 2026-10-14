@@ -1,0 +1,176 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const canonical = 'https://wahanatotalita.com/ak3u-fresh-graduate/';
+const metaTitle = 'Cara Menjadi Ahli K3 Umum untuk Fresh Graduate — Wahana Totalita';
+const metaDesc = 'Fresh graduate bisa langsung ambil sertifikasi Ahli K3 Umum (AK3U) tanpa pengalaman kerja. Panduan lengkap syarat, proses, dan biaya pelatihan AK3U di Yogyakarta.';
+
+const waUrl = 'https://wa.me/6287759151278?text=Halo%2C%20saya%20fresh%20graduate%20dan%20ingin%20tanya%20tentang%20pelatihan%20Ahli%20K3%20Umum';
+
+const syarat = [
+  'Fotokopi ijazah terakhir (minimal SMA/sederajat)',
+  'Pas foto berwarna 3×4 (4 lembar)',
+  'Fotokopi KTP yang masih berlaku',
+  'Surat keterangan sehat dari dokter',
+  'Tidak wajib memiliki pengalaman kerja — sesuai ketentuan Kemnaker RI dan PP No. 50 Tahun 2012',
+];
+
+const steps = [
+  { title: 'Pendaftaran', desc: 'Daftar dan lengkapi dokumen persyaratan melalui tim Wahana Totalita.' },
+  { title: 'Pelatihan 12 Hari', desc: 'Mengikuti pelatihan Ahli K3 Umum selama 12 hari kerja, mencakup teori dan praktik.' },
+  { title: 'Ujian Tertulis', desc: 'Ujian tertulis untuk menilai pemahaman regulasi dan konsep dasar K3.' },
+  { title: 'Ujian Praktik / Wawancara', desc: 'Wawancara dan penilaian praktik oleh pengawas dari Disnakertrans.' },
+  { title: 'Penerbitan SK Kemnaker RI', desc: 'Peserta yang dinyatakan lulus menerima Surat Keputusan Penunjukan sebagai Ahli K3 Umum dari Kemnaker RI.' },
+];
+
+const modul = [
+  'Dasar-Dasar Keselamatan dan Kesehatan Kerja (K3)',
+  'Teknik Inspeksi K3 di Tempat Kerja',
+  'Investigasi dan Pelaporan Kecelakaan Kerja',
+  'HIRARC — Identifikasi Bahaya, Penilaian, dan Pengendalian Risiko',
+  'Sistem Izin Kerja (Permit to Work)',
+  'Sistem Manajemen K3 (SMK3) sesuai PP No. 50 Tahun 2012',
+  'Pertolongan Pertama pada Kecelakaan (P3K)',
+  'Dokumentasi dan Pelaporan K3',
+];
+
+const faqs = [
+  { q: 'Apakah fresh graduate bisa ikut AK3U?', a: 'Ya. Kemnaker RI tidak mensyaratkan pengalaman kerja untuk mengikuti pelatihan dan ujian Ahli K3 Umum — fresh graduate dengan ijazah minimal SMA/sederajat dapat langsung mendaftar.' },
+  { q: 'Berapa lama pelatihan AK3U?', a: 'Pelatihan Ahli K3 Umum berlangsung selama 12 hari kerja, termasuk sesi teori, praktik, dan ujian.' },
+  { q: 'Sertifikat AK3U berlaku berapa tahun?', a: 'Sertifikat dan SK Ahli K3 Umum berlaku selama 3 tahun sejak diterbitkan, dan dapat diperpanjang melalui program Refreshing K3.' },
+  { q: 'Apakah ada ujian setelah pelatihan?', a: 'Ya. Peserta mengikuti ujian tertulis serta wawancara/penilaian praktik yang dilakukan oleh pengawas dari Disnakertrans setempat.' },
+  { q: 'Apa perbedaan AK3U Kemnaker dan BNSP?', a: 'AK3U Kemnaker RI menghasilkan Surat Keputusan resmi dari pemerintah, sedangkan sertifikasi BNSP mengacu pada skema kompetensi profesi. Keduanya diakui dan dihargai di dunia industri.' },
+];
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ProfessionalService',
+    name: 'Wahana Totalita Konsultan',
+    telephone: '+6287759151278',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Jl. Wonosari KM 8.5',
+      addressLocality: 'Sleman',
+      addressRegion: 'DIY',
+      addressCountry: 'ID',
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+];
+---
+
+<Layout
+  title={metaTitle}
+  description={metaDesc}
+  canonical={canonical}
+  schemas={schemas}
+  pageCss={['/assets/css/page/ak3u-fresh-graduate.css']}
+>
+  <section class="hero">
+    <div class="container inner">
+      <div class="hero-badge">🎓 Panduan Fresh Graduate</div>
+      <h1>Ahli K3 Umum untuk Fresh Graduate: Bisa Langsung Ikut?</h1>
+      <p class="hero-sub">Banyak fresh graduate bertanya apakah mereka bisa mengambil sertifikasi AK3U tanpa pengalaman kerja. Jawabannya: bisa.</p>
+      <div><a href={waUrl} class="btn-wa" target="_blank" rel="noopener">💬 Tanya Jadwal Pelatihan</a></div>
+    </div>
+  </section>
+
+  <section class="white">
+    <div class="container">
+      <p class="intro-text">Banyak fresh graduate bertanya apakah mereka bisa mengambil sertifikasi Ahli K3 Umum (AK3U) tanpa pengalaman kerja. Jawabannya: bisa. Kemnaker RI tidak mensyaratkan pengalaman kerja untuk mengikuti pelatihan dan ujian Ahli K3 Umum. Yang diperlukan adalah ijazah minimal SMA/D3/S1 dan komitmen untuk belajar selama 12 hari pelatihan penuh.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">Syarat Mengikuti Pelatihan AK3U</h2>
+      <ul class="check-list">
+        {syarat.map((s) => (
+          <li>{s}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="white">
+    <div class="container">
+      <h2 class="section-title">Proses Sertifikasi AK3U Langkah demi Langkah</h2>
+      <div class="steps">
+        {steps.map((s, i) => (
+          <div class="step-card">
+            <div class="step-num">{i + 1}</div>
+            <div class="step-body"><h3>{s.title}</h3><p>{s.desc}</p></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">Apa yang Dipelajari dalam Pelatihan AK3U?</h2>
+      <div class="modul-grid">
+        {modul.map((m, i) => (
+          <div class="modul-item"><span>{i + 1}.</span> {m}</div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="white">
+    <div class="container">
+      <h2 class="section-title">Prospek Karir Setelah AK3U</h2>
+      <p class="intro-text">Lulusan Ahli K3 Umum banyak diserap oleh industri migas, konstruksi, manufaktur, dan pertambangan — termasuk perusahaan BUMN dan multinasional yang menjadi klien pelatihan kami. Kisaran gaji HSE Officer/Ahli K3 Umum pemula umumnya berada di rentang Rp 5-15 juta per bulan, tergantung sektor dan lokasi penempatan.</p>
+      <div class="karir-grid" style="margin-top:20px">
+        <div class="karir-card"><strong>Rp 5-15 Juta</strong><span>Kisaran gaji per bulan</span></div>
+        <div class="karir-card"><strong>4 Sektor</strong><span>Migas, konstruksi, manufaktur, tambang</span></div>
+        <div class="karir-card"><strong>BUMN &amp; Multinasional</strong><span>Termasuk klien pelatihan kami</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="link-card">
+        <h3>📘 Lihat Program Pelatihan Ahli K3 Umum</h3>
+        <a href="/pelatihan/pelatihan-ahli-k3-umum-fresh-graduate-kemnaker-online/" class="btn-link">Lihat Program &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="white">
+    <div class="container-sm">
+      <h2 class="section-title" style="text-align:center">Pertanyaan yang Sering Ditanyakan</h2>
+      <div class="faq-list" style="margin-top:20px">
+        {faqs.map((f) => (
+          <details class="faq-item" style="border:1px solid var(--border);border-radius:8px;margin-bottom:12px;background:var(--surface);overflow:hidden;">
+            <summary style="padding:16px 20px;background:var(--slate-50);cursor:pointer;font-weight:600;color:var(--brand);font-size:0.95rem;display:flex;justify-content:space-between;align-items:center;list-style:none;">
+              <span>{f.q}</span>
+              <span class="faq-arrow" style="font-size:1.2rem;font-weight:700;color:var(--accent);">+</span>
+            </summary>
+            <div class="faq-a" style="padding:16px 20px;color:var(--slate-700);line-height:1.8;background:var(--surface);border-top:1px solid var(--border);font-size:0.92rem;">
+              <p style="margin:0;">{f.a}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="final-cta">
+    <div class="container-sm">
+      <h2>Siap Memulai Karier K3 Anda?</h2>
+      <p>Konsultasikan jadwal dan biaya pelatihan Ahli K3 Umum bersama tim kami.</p>
+      <a href={waUrl} class="btn-wa" target="_blank" rel="noopener">💬 Tanya Pelatihan AK3U</a>
+    </div>
+  </section>
+</Layout>
