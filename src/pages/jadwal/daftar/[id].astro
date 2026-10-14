@@ -1,0 +1,124 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import batchesRaw from '../../../../data/training_batches.json';
+import trainingsRaw from '../../../../data/trainings.json';
+import { formatPrice, waUrl } from '../../../lib/images';
+
+export async function getStaticPaths() {
+  const trainingMap = new Map();
+  for (const t of (trainingsRaw as any[])) {
+    trainingMap.set(t.id, t);
+  }
+
+  return (batchesRaw as any[]).map((b) => {
+    const training = trainingMap.get(b.course_id);
+    return {
+      params: { id: String(b.id) },
+      props: {
+        batch: b,
+        training: training || null,
+      },
+    };
+  });
+}
+
+const { batch, training } = Astro.props;
+
+const trainingName = training?.name || batch.batch_name || 'Pelatihan K3';
+const trainingSlug = training?.slug || '';
+const certification = training?.certification || 'Kemnaker RI / BNSP';
+const price = batch.price || training?.price || 0;
+const mode = batch.mode || 'offline';
+const venue = batch.venue || (mode === 'online' ? 'Online via Zoom Interaktif' : 'Training Center Wahana Totalita Yogyakarta');
+
+function formatDateIndo(dateStr: string): string {
+  if (!dateStr || dateStr === '0000-00-00') return '';
+  const d = new Date(dateStr);
+  if (isNaN(d.getTime())) return dateStr;
+  const months = [
+    'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+    'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+  ];
+  return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+}
+
+const dateStr = formatDateIndo(batch.start_date);
+const pageTitle = `Pendaftaran ${trainingName} (Batch ${dateStr}) — Wahana Totalita`;
+const canonical = `https://wahanatotalita.com/jadwal/daftar/${batch.id}/`;
+
+const waMsg = `Halo Wahana Totalita, saya ingin mendaftar pelatihan:\n*${trainingName}*\nBatch: ${dateStr}\nMode: ${mode.toUpperCase()}\nMohon informasi format pendaftaran dan invoice pendaftaran. Terima kasih.`;
+---
+
+<Layout
+  title={pageTitle}
+  description={`Formulir pendaftaran resmi pelatihan ${trainingName} batch ${dateStr}. Sertifikasi ${certification}.`}
+  canonical={canonical}
+>
+  <div class="breadcrumb-bar" style="margin-top:var(--nav-h,72px);background:var(--surface);padding:12px 0;border-bottom:1px solid var(--border);">
+    <div class="container" style="max-width:800px;margin:0 auto;padding:0 20px;">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb-list" style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:13px;color:var(--slate-500);list-style:none;padding:0;margin:0;">
+          <li><a href="/" style="color:var(--slate-600);text-decoration:none;">Beranda</a></li>
+          <li aria-hidden="true">›</li>
+          <li><a href="/jadwal/" style="color:var(--slate-600);text-decoration:none;">Jadwal</a></li>
+          <li aria-hidden="true">›</li>
+          <li><a href={`/jadwal/${batch.id}/`} style="color:var(--slate-600);text-decoration:none;">Batch #{batch.id}</a></li>
+          <li aria-hidden="true">›</li>
+          <li aria-current="page" style="color:var(--brand);font-weight:600;">Pendaftaran</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <div style="max-width:800px;margin:40px auto 80px;padding:0 20px;">
+    <div style="background:var(--surface);border-radius:20px;border:1px solid var(--border);padding:36px;box-shadow:0 12px 36px -10px color-mix(in srgb,var(--brand) 10%,transparent);">
+      <span style="display:inline-block;padding:4px 12px;border-radius:999px;background:var(--accent-light);color:var(--accent);font-size:12px;font-weight:800;text-transform:uppercase;margin-bottom:12px;">
+        FORMULIR PENDAFTARAN RESMI
+      </span>
+      <h1 style="font-family:'Lexend',sans-serif;font-size:clamp(1.6rem,2.8vw,2.2rem);font-weight:800;color:var(--brand);margin:0 0 10px;line-height:1.25;">
+        {trainingName}
+      </h1>
+      <p style="color:var(--slate-600);font-size:15px;margin:0 0 24px;">
+        Batch: <strong>{dateStr}</strong> &bull; Metode: <strong>{mode.toUpperCase()}</strong> &bull; Lokasi: <strong>{venue}</strong>
+      </p>
+
+      <div style="background:var(--slate-50);border-radius:12px;border:1px solid var(--border);padding:20px;margin-bottom:28px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+          <div>
+            <span style="font-size:12px;color:var(--slate-500);display:block;">Biaya Investasi</span>
+            <strong style="font-size:22px;color:var(--brand);font-weight:800;">
+              {price > 0 ? formatPrice(price) : 'Hubungi Admin'}
+            </strong>
+          </div>
+          <span style="font-size:12px;padding:4px 10px;border-radius:6px;background:color-mix(in srgb,var(--brand) 10%,transparent);color:var(--brand);font-weight:700;">
+            Sertifikasi {certification}
+          </span>
+        </div>
+      </div>
+
+      <!-- Instant WhatsApp Registration (Recommended) -->
+      <div style="text-align:center;background:linear-gradient(135deg,var(--brand-dark,#081c15) 0%,var(--brand,#1b4332) 100%);padding:28px;border-radius:14px;color:var(--surface);margin-bottom:30px;">
+        <h2 style="font-family:'Lexend',sans-serif;font-size:1.15rem;margin:0 0 8px;color:#ffffff;">
+          Daftar Cepat via WhatsApp
+        </h2>
+        <p style="color:rgba(255,255,255,0.85);font-size:13.5px;max-width:500px;margin:0 auto 18px;">
+          Tim registrasi kami akan langsung mengirimkan form konfirmasi data peserta, rincian rekening resmi, dan surat konfirmasi pendaftaran.
+        </p>
+        <a
+          href={waUrl(waMsg)}
+          target="_blank"
+          rel="noopener"
+          style="display:inline-flex;align-items:center;gap:8px;background:var(--whatsapp,#25D366);color:#052e16;padding:14px 32px;border-radius:999px;font-weight:800;font-size:15px;text-decoration:none;box-shadow:0 4px 14px color-mix(in srgb,var(--whatsapp) 40%,transparent);"
+        >
+          <span>Daftar via WhatsApp Sekarang</span>
+        </a>
+      </div>
+
+      <div style="text-align:center;">
+        <a href={`/jadwal/${batch.id}/`} style="font-size:13px;color:var(--slate-500);text-decoration:none;">
+          ← Kembali ke Informasi Detail Jadwal
+        </a>
+      </div>
+    </div>
+  </div>
+</Layout>

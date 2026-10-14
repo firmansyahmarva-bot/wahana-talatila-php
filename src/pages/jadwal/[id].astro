@@ -1,0 +1,266 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import batchesRaw from '../../../data/training_batches.json';
+import trainingsRaw from '../../../data/trainings.json';
+import { formatPrice, waUrl } from '../../lib/images';
+
+export async function getStaticPaths() {
+  const trainingMap = new Map();
+  for (const t of (trainingsRaw as any[])) {
+    trainingMap.set(t.id, t);
+  }
+
+  return (batchesRaw as any[]).map((b) => {
+    const training = trainingMap.get(b.course_id);
+    return {
+      params: { id: String(b.id) },
+      props: {
+        batch: b,
+        training: training || null,
+      },
+    };
+  });
+}
+
+const { batch, training } = Astro.props;
+
+const trainingName = training?.name || batch.batch_name || 'Pelatihan K3';
+const trainingSlug = training?.slug || '';
+const certification = training?.certification || 'Kemnaker RI / BNSP';
+const durationDays = training?.duration_days || 3;
+const price = batch.price || training?.price || 0;
+const mode = batch.mode || 'offline';
+const venue = batch.venue || (mode === 'online' ? 'Online via Zoom Interaktif' : 'Training Center Wahana Totalita Yogyakarta');
+
+function formatDateIndo(dateStr: string): string {
+  if (!dateStr || dateStr === '0000-00-00') return '';
+  const d = new Date(dateStr);
+  if (isNaN(d.getTime())) return dateStr;
+  const months = [
+    'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+    'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+  ];
+  return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+}
+
+const dateStr = formatDateIndo(batch.start_date);
+const endDateStr = batch.end_date && batch.end_date !== batch.start_date ? formatDateIndo(batch.end_date) : '';
+
+let curriculumList: string[] = [];
+if (Array.isArray(training?.curriculum_data) && training.curriculum_data.length > 0) {
+  curriculumList = training.curriculum_data;
+} else if (training?.curriculum) {
+  try {
+    const parsed = typeof training.curriculum === 'string' ? JSON.parse(training.curriculum) : training.curriculum;
+    if (Array.isArray(parsed)) curriculumList = parsed;
+  } catch (e) {
+    curriculumList = [];
+  }
+}
+
+const pageTitle = `Jadwal ${trainingName} (${dateStr}) — Wahana Totalita`;
+const pageDesc = `Jadwal resmi pelatihan ${trainingName} tanggal ${dateStr} (${mode.toUpperCase()}). Sertifikasi ${certification}. Kurikulum resmi, rincian biaya, dan registrasi batch terdekat.`;
+const canonical = `https://wahanatotalita.com/jadwal/${batch.id}/`;
+
+const waMsg = `Halo Wahana Totalita, saya ingin mendaftar jadwal pelatihan:\n*${trainingName}*\nTanggal: ${dateStr}\nMode: ${mode.toUpperCase()}\nURL batch: ${canonical}`;
+
+const eventSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'EducationalEvent',
+  name: `Jadwal Pelatihan ${trainingName} (${dateStr})`,
+  description: pageDesc,
+  startDate: batch.start_date,
+  endDate: batch.end_date && batch.end_date !== '0000-00-00' ? batch.end_date : batch.start_date,
+  eventAttendanceMode: mode === 'online'
+    ? 'https://schema.org/OnlineEventAttendanceMode'
+    : 'https://schema.org/OfflineEventAttendanceMode',
+  eventStatus: 'https://schema.org/EventScheduled',
+  url: canonical,
+  organizer: {
+    '@type': 'Organization',
+    name: 'PT Wahana Totalita Konsultan',
+    url: 'https://wahanatotalita.com',
+  },
+  location: mode === 'online'
+    ? { '@type': 'VirtualLocation', url: canonical }
+    : {
+        '@type': 'Place',
+        name: venue,
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Yogyakarta',
+          addressRegion: 'DI Yogyakarta',
+          addressCountry: 'ID',
+        },
+      },
+  offers: {
+    '@type': 'Offer',
+    price: String(price),
+    priceCurrency: 'IDR',
+    availability: 'https://schema.org/InStock',
+    url: canonical,
+  },
+};
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDesc}
+  canonical={canonical}
+  schemas={[eventSchema]}
+  pageCss={['/assets/css/page/jadwal-detail.css']}
+>
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb-bar" style="margin-top:var(--nav-h,72px);background:var(--surface);padding:12px 0;border-bottom:1px solid var(--border);">
+    <div class="container" style="max-width:1160px;margin:0 auto;padding:0 20px;">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb-list" style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:13px;color:var(--slate-500);list-style:none;padding:0;margin:0;">
+          <li><a href="/" style="color:var(--slate-600);text-decoration:none;">Beranda</a></li>
+          <li aria-hidden="true">›</li>
+          <li><a href="/jadwal/" style="color:var(--slate-600);text-decoration:none;">Jadwal Pelatihan</a></li>
+          <li aria-hidden="true">›</li>
+          <li aria-current="page" style="color:var(--brand);font-weight:600;">{trainingName}</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="detail-hero" style="background:linear-gradient(135deg,var(--brand-dark,#081c15) 0%,var(--brand,#1b4332) 100%);padding:48px 0;color:var(--surface);">
+    <div class="container" style="max-width:1160px;margin:0 auto;padding:0 20px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+        <span class="badge-mode" style="background:color-mix(in srgb,var(--surface) 15%,transparent);color:#a7f3d0;padding:4px 12px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.05em;border:1px solid color-mix(in srgb,var(--surface) 20%,transparent);">
+          {mode.toUpperCase()}
+        </span>
+        <span style="font-size:13px;color:rgba(255,255,255,0.8);">
+          🎓 Sertifikasi: <strong>{certification}</strong>
+        </span>
+      </div>
+      <h1 style="font-family:'Lexend',sans-serif;font-size:clamp(1.8rem,3.2vw,2.5rem);font-weight:800;margin:0 0 16px;color:#ffffff;line-height:1.25;">
+        Jadwal Pelatihan {trainingName}
+      </h1>
+      <div class="meta-grid" style="display:flex;gap:20px;flex-wrap:wrap;font-size:14px;color:rgba(255,255,255,0.9);">
+        <span>📅 <strong>{dateStr} {endDateStr ? `— ${endDateStr}` : ''}</strong></span>
+        <span>📍 {venue}</span>
+        <span>⏱ {durationDays} Hari Pelatihan</span>
+        <span>🏛️ Sertifikasi Resmi {certification}</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTENT & REGISTRATION CARD GRID -->
+  <div class="container" style="max-width:1160px;margin:40px auto 70px;padding:0 20px;">
+    <div class="content-grid" style="display:grid;grid-template-columns:1fr 360px;gap:36px;align-items:start;">
+      <!-- MAIN BODY -->
+      <div>
+        {training?.description && (
+          <div class="content-card" style="background:var(--surface);border-radius:14px;border:1px solid var(--border);padding:28px;margin-bottom:24px;box-shadow:0 2px 8px color-mix(in srgb,var(--brand) 3%,transparent);">
+            <h2 style="font-family:'Lexend',sans-serif;font-size:1.25rem;font-weight:700;color:var(--brand);margin:0 0 14px;">
+              📋 Tentang Pelatihan
+            </h2>
+            <p style="color:var(--slate-700);line-height:1.75;font-size:15px;margin:0;">
+              {training.description}
+            </p>
+          </div>
+        )}
+
+        {curriculumList.length > 0 && (
+          <div class="content-card" style="background:var(--surface);border-radius:14px;border:1px solid var(--border);padding:28px;margin-bottom:24px;box-shadow:0 2px 8px color-mix(in srgb,var(--brand) 3%,transparent);">
+            <h2 style="font-family:'Lexend',sans-serif;font-size:1.25rem;font-weight:700;color:var(--brand);margin:0 0 16px;">
+              📚 Materi &amp; Silabus Pelatihan
+            </h2>
+            <ul class="module-list" style="list-style:none;padding:0;margin:0;display:grid;gap:10px;">
+              {curriculumList.map((m: any, idx: number) => (
+                <li style="padding:10px 14px;background:var(--slate-50);border-radius:8px;border:1px solid var(--border);display:flex;gap:12px;align-items:flex-start;font-size:14px;color:var(--slate-800);">
+                  <strong style="color:var(--accent);min-width:24px;">{idx + 1}.</strong>
+                  <span>{typeof m === 'string' ? m : (m.title || m.name || JSON.stringify(m))}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <div class="content-card" style="background:var(--surface);border-radius:14px;border:1px solid var(--border);padding:28px;margin-bottom:24px;box-shadow:0 2px 8px color-mix(in srgb,var(--brand) 3%,transparent);">
+          <h2 style="font-family:'Lexend',sans-serif;font-size:1.25rem;font-weight:700;color:var(--brand);margin:0 0 14px;">
+            ℹ️ Persyaratan Peserta
+          </h2>
+          <ul style="margin:0;padding-left:20px;line-height:2;color:var(--slate-700);font-size:14.5px;">
+            <li>Pendidikan minimal sesuai kualifikasi program ({certification})</li>
+            <li>Scan identitas diri (KTP / SIM / Paspor yang masih berlaku)</li>
+            <li>Pas foto formal dengan latar belakang merah / biru</li>
+            <li>Surat rekomendasi / penunjukan dari perusahaan (bila diutus perusahaan)</li>
+            <li>Mengikuti seluruh sesi teori, simulasi praktik, dan evaluasi kelulusan</li>
+          </ul>
+        </div>
+
+        <div class="content-card" style="background:var(--surface);border-radius:14px;border:1px solid var(--border);padding:28px;box-shadow:0 2px 8px color-mix(in srgb,var(--brand) 3%,transparent);">
+          <h2 style="font-family:'Lexend',sans-serif;font-size:1.25rem;font-weight:700;color:var(--brand);margin:0 0 14px;">
+            📜 Fasilitas &amp; Sertifikasi Resmi
+          </h2>
+          <p style="color:var(--slate-700);line-height:1.7;font-size:14.5px;margin:0 0 12px;">
+            Setelah menyelesaikan rangkaian pembinaan dan dinyatakan kompeten, peserta akan memperoleh:
+          </p>
+          <ul style="margin:0;padding-left:20px;line-height:2;color:var(--slate-700);font-size:14.5px;">
+            <li><strong>Sertifikat resmi berlisensi {certification}</strong> diakui secara nasional</li>
+            <li>Lisensi Kewenangan / SKP (Surat Keputusan Penunjukan) resmi</li>
+            <li>Modul pelatihan, hardcopy/softcopy materi, dan training kit</li>
+            <li>Surat Keterangan Lulus (SKL) sementara saat sertifikat dalam proses penerbitan</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- SIDEBAR REGISTRATION TICKET -->
+      <aside>
+        <div class="reg-card" style="background:var(--surface);border-radius:16px;border:2px solid var(--brand);padding:28px;position:sticky;top:100px;box-shadow:0 12px 30px -8px color-mix(in srgb,var(--brand) 15%,transparent);">
+          <span style="font-size:11px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;">TIKET PENDAFTARAN</span>
+          <h3 style="font-family:'Lexend',sans-serif;color:var(--brand);margin:6px 0 14px;font-size:1.25rem;">
+            Investasi Pelatihan
+          </h3>
+          <div class="price-big" style="font-size:2rem;font-weight:800;color:var(--brand);margin-bottom:18px;">
+            {price > 0 ? formatPrice(price) : 'Hubungi Admin'}
+          </div>
+
+          <div class="info-rows" style="border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:14px 0;margin-bottom:20px;">
+            <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:13.5px;">
+              <span style="color:var(--slate-500);">📅 Tanggal</span>
+              <strong style="color:var(--brand);">{dateStr}</strong>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:13.5px;">
+              <span style="color:var(--slate-500);">🖥 Metode</span>
+              <strong style="color:var(--brand);text-transform:uppercase;">{mode}</strong>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:13.5px;">
+              <span style="color:var(--slate-500);">⏱ Durasi</span>
+              <strong style="color:var(--brand);">{durationDays} Hari</strong>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:13.5px;">
+              <span style="color:var(--slate-500);">📍 Lokasi</span>
+              <strong style="color:var(--brand);text-align:right;max-width:180px;">{venue}</strong>
+            </div>
+          </div>
+
+          <a
+            href={waUrl(waMsg)}
+            target="_blank"
+            rel="noopener"
+            class="btn-reg"
+            style="display:flex;align-items:center;justify-content:center;gap:8px;background:var(--whatsapp,#25D366);color:#052e16;padding:14px;border-radius:12px;font-weight:800;font-size:15px;text-align:center;text-decoration:none;box-shadow:0 4px 14px color-mix(in srgb,var(--whatsapp) 35%,transparent);transition:transform .2s;"
+          >
+            <span>Daftar via WhatsApp</span>
+          </a>
+
+          {trainingSlug && (
+            <div style="margin-top:16px;text-align:center;">
+              <a
+                href={`/pelatihan/${trainingSlug}/`}
+                style="font-size:13px;color:var(--accent);font-weight:700;text-decoration:none;"
+              >
+                Lihat Halaman Lengkap Program →
+              </a>
+            </div>
+          )}
+        </div>
+      </aside>
+    </div>
+  </div>
+</Layout>
