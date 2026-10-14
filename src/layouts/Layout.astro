@@ -12,6 +12,7 @@ interface Props {
   schemas?: any[];
   isHome?: boolean;
   pageCss?: string[];
+  bodyClass?: string;
 }
 
 const {
@@ -24,6 +25,7 @@ const {
   schemas = [],
   isHome = false,
   pageCss = [],
+  bodyClass = '',
 } = Astro.props;
 
 // Default site hreflang reciprocal set if on homepage
@@ -86,7 +88,7 @@ const defaultHreflangs = isHome
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
   ))}
 </head>
-<body>
+<body class={bodyClass || undefined}>
   <Navbar currentPath={Astro.url.pathname} isHome={isHome} />
   <main id="konten-utama">
     <slot />
