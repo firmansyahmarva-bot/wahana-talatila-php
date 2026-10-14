@@ -184,14 +184,14 @@ $canonical = SITE_URL . '/regulasi/';
                 <span class="ft-badge">Sertifikasi BNSP / ESDM</span>
                 <h3 class="ft-title">POP Pertambangan Minerba</h3>
                 <p class="ft-desc">Sertifikasi frontliner pengawas tambang wajib Kepmen ESDM No. 1827/2018 dan Kepdirjen Minerba No. 185/2019.</p>
-                <a href="/pelatihan/pelatihan-pengawas-operasional-pertama-pop-pertambangan-sertifikasi-bnsp/" class="ft-btn">Lihat Silabus Program &rarr;</a>
+                <a href="/pelatihan/pelatihan-pop-pertambangan-sertifikasi-bnsp-online/" class="ft-btn">Lihat Silabus Program &rarr;</a>
             </div>
 
             <div class="ft-card">
                 <span class="ft-badge">Sertifikasi BNSP</span>
                 <h3 class="ft-title">Pengawas K3 Migas</h3>
                 <p class="ft-desc">Kepatuhan standar PTK 005 SKK Migas dan CSMS untuk pengawasan operasi rig onshore maupun offshore.</p>
-                <a href="/pelatihan/pelatihan-pengawas-k3-migas-sertifikasi-bnsp/" class="ft-btn">Lihat Silabus Program &rarr;</a>
+                <a href="/pelatihan/pelatihan-pengawas-k3-industri-migas-sertifikasi-bnsp/" class="ft-btn">Lihat Silabus Program &rarr;</a>
             </div>
 
             <div class="ft-card">

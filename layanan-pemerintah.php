@@ -259,7 +259,7 @@ require __DIR__ . '/includes/head.php';
           <p>Pemenuhan regulasi keselamatan kerja gedung perkantoran, fasyankes, dan balai diklat dinas.</p>
           <ul class="gov-cat-links">
             <li class="gov-cat-link-item">
-              <a href="/pelatihan/ahli-k3-umum-sertifikasi-kemnaker-ri/">
+              <a href="/pelatihan/pelatihan-ahli-k3-umum-sertifikasi-kemnaker-ri/">
                 <span>Pelatihan Ahli K3 Umum Kemnaker RI</span>
                 <span class="gov-cat-link-arrow">&rarr;</span>
               </a>

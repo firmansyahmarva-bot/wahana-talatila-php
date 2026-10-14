@@ -11,6 +11,7 @@ interface Props {
   hreflangs?: Array<{ lang: string; href: string }>;
   schemas?: any[];
   isHome?: boolean;
+  pageCss?: string[];
 }
 
 const {
@@ -22,6 +23,7 @@ const {
   hreflangs = [],
   schemas = [],
   isHome = false,
+  pageCss = [],
 } = Astro.props;
 
 // Default site hreflang reciprocal set if on homepage
@@ -74,6 +76,9 @@ const defaultHreflangs = isHome
   <link rel="stylesheet" href="/assets/css/tokens.css" />
   <link rel="stylesheet" href="/assets/css/core.css" />
   <link rel="stylesheet" href="/assets/css/components.css" />
+  {pageCss.map((cssHref) => (
+    <link rel="stylesheet" href={cssHref} />
+  ))}
 
   <!-- Structured Data JSON-LD Schemas -->
   {schemas.map((schema) => (

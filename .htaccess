@@ -440,6 +440,7 @@ RewriteRule ^artikel/([a-z0-9\-]+)/?$ artikel-detail.php?slug=$1 [QSA,L]
 RewriteRule ^pelatihan/(operator-forklift|sio-forklift)(-kelas-[0-9a-z]+)?(-[a-z0-9\-]+)?(\.html)?/?$ /pelatihan/pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri/ [R=301,L]
 
 # ─── 301 Redirect: Consolidate legacy Ahli K3 Umum city permutations & old online slug to canonical course ───
+RewriteRule ^pelatihan/ahli-k3-umum-sertifikasi-kemnaker-ri(\.html)?/?$ /pelatihan/pelatihan-ahli-k3-umum-sertifikasi-kemnaker-ri/ [R=301,L]
 RewriteRule ^pelatihan/(ahli-k3-umum(-[a-z0-9\-]+)?|pelatihan-ahli-k3-umum-sertifikasi-bnsp-online)(\.html)?/?$ /pelatihan/ak3-bnsp/ [R=301,L]
 
 # ─── Enforce Trailing Slash on /pelatihan and /pelatihan/{slug} ──────────────

@@ -79,7 +79,7 @@ if (empty($ak3u_batches)) {
             'venue'      => 'Training Center Wahana Totalita, Yogyakarta',
             'mode'       => 'onsite',
             'price'      => '8500000',
-            'course_slug'=> 'pelatihan-ahli-k3-umum-kemnaker-offline',
+            'course_slug'=> 'pelatihan-ahli-k3-umum-sertifikasi-kemnaker-ri',
         ],
         [
             'id' => 103,
@@ -297,7 +297,7 @@ require __DIR__ . '/includes/head.php';
           <li><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Lunch, Coffee Break &amp; Akomodasi</li>
           <li><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Bimbingan Tatap Muka Instruktur Senior</li>
         </ul>
-        <a href="/pelatihan/pelatihan-ahli-k3-umum-kemnaker-offline/" class="ak-track-btn">
+        <a href="/pelatihan/pelatihan-ahli-k3-umum-sertifikasi-kemnaker-ri/" class="ak-track-btn">
           <span>Lihat Detail Offline &rarr;</span>
         </a>
       </article>

@@ -200,7 +200,7 @@ $jsonLd = [
                 <span class="ft-badge">Sertifikasi BNSP</span>
                 <h3 class="ft-title">Pengawas K3 Migas</h3>
                 <p class="ft-desc">Kualifikasi perwira keselamatan fasilitas hulu dan hilir migas berstandar PTK 005 SKK Migas dan CSMS.</p>
-                <a href="/pelatihan/pelatihan-pengawas-k3-migas-sertifikasi-bnsp/" class="ft-btn">Lihat Silabus & Jadwal &rarr;</a>
+                <a href="/pelatihan/pelatihan-pengawas-k3-industri-migas-sertifikasi-bnsp/" class="ft-btn">Lihat Silabus & Jadwal &rarr;</a>
             </div>
 
             <div class="ft-card">

@@ -77,7 +77,6 @@ case 'core':
         'perpanjangan-skp'  => '0.8',
         'csms'              => '0.7',
         'kebijakan-privasi' => '0.4',
-        'k3'                => '0.8',
     ];
     foreach ($no_slash as $slug => $pri) {
         $file = __DIR__ . '/' . $slug . '.php';
@@ -87,6 +86,7 @@ case 'core':
 
     // Pages with trailing-slash canonical
     $with_slash = [
+        'pelatihan/k3'                   => '0.85',
         'zh'                             => '0.85',
         'zh/factory-roadmap'             => '0.85',
         'zh/ahli-k3-umum'                => '0.8',
