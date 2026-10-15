@@ -1,1 +1,117 @@
 /* shared.css — rules used by 3+ pages (auto-deduplicated from per-page CSS). Add new reusable rules here or in components.css. */
+
+/* ── CONTAINER UTILITIES ───────────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
+}
+
+.container-narrow {
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+@media (max-width: 768px) {
+  .container-narrow {
+    padding: 0 16px;
+  }
+}
+
+/* ── BREADCRUMB BAR ────────────────────────────────────────── */
+.breadcrumb-bar {
+  background: var(--surface-subtle);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 0;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.breadcrumb-bar a {
+  color: var(--brand);
+  text-decoration: none;
+  font-weight: 500;
+}
+.breadcrumb-bar a:hover {
+  text-decoration: underline;
+}
+.breadcrumb-separator {
+  margin: 0 8px;
+  color: var(--text-subtle);
+}
+
+/* ── SECTION TITLE UNDERLINED ──────────────────────────────── */
+.section-title-underlined {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 10px;
+  margin-bottom: 24px;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  color: var(--text);
+}
+.section-title-underlined::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: var(--cta);
+  border-radius: 2px;
+}
+
+/* ── SHARED FAQ ACCORDION ──────────────────────────────────── */
+.faq-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  transition: border-color var(--dur-fast) var(--ease-standard);
+}
+.faq-question,
+.faq-q {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px;
+  background: none;
+  border: none;
+  text-align: left;
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  cursor: pointer;
+}
+.faq-question:hover,
+.faq-q:hover {
+  background: var(--surface-subtle);
+}
+.faq-answer,
+.faq-a {
+  padding: 0 20px 20px;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* ── SPACING & DISPLAY UTILITIES ────────────────────────────── */
+.section-py { padding-top: 56px; padding-bottom: 56px; }
+.section-py-lg { padding-top: 80px; padding-bottom: 80px; }
+.text-center { text-align: center; }
+.text-brand { color: var(--brand); }
+.text-cta { color: var(--cta); }
+.text-muted { color: var(--text-muted); }
+.text-subtle { color: var(--text-subtle); }
+.bg-surface { background-color: var(--surface); }
+.bg-subtle { background-color: var(--surface-subtle); }
+.border-subtle { border-color: var(--border); }
