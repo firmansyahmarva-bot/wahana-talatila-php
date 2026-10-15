@@ -6,20 +6,23 @@
   margin-bottom: 48px;
 }
 
-.sp-breadcrumb-wrap {
+.sp-breadcrumb-wrap,
+.breadcrumb-bar.sp-breadcrumb-wrap {
   margin-top: var(--nav-h, 72px);
   background: var(--surface);
   padding: 12px 0;
   border-bottom: 1px solid var(--border);
 }
 
-.sp-breadcrumb-inner {
+.sp-breadcrumb-inner,
+.container.sp-breadcrumb-inner {
   max-width: 1160px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
-.sp-breadcrumb-list {
+.sp-breadcrumb-list,
+.breadcrumb-list.sp-breadcrumb-list {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
@@ -81,7 +84,8 @@
 }
 
 /* ── FAQ INLINE CLUSTERS ───────────────────────────────────── */
-.sp-faq-card {
+.sp-faq-card,
+.faq-item.sp-faq-card {
   border: 1px solid var(--border);
   border-radius: 8px;
   margin-bottom: 12px;
@@ -89,7 +93,10 @@
   overflow: hidden;
 }
 
-.sp-faq-summary {
+.sp-faq-summary,
+.faq-question.sp-faq-summary,
+.faq-q.sp-faq-summary,
+summary.sp-faq-summary {
   padding: 16px 20px;
   background: var(--slate-50);
   cursor: pointer;
@@ -102,7 +109,10 @@
   list-style: none;
 }
 
-.sp-faq-content {
+.sp-faq-content,
+.faq-answer.sp-faq-content,
+.faq-a.sp-faq-content,
+div.sp-faq-content {
   padding: 16px 20px;
   color: var(--slate-700);
   line-height: 1.8;
