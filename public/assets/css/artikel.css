@@ -119,7 +119,7 @@ html, body {
 
 /* ── Search Form ─────────────────────────────────────────── */
 .ak-search-form {
-  display: flex; max-width: 640px; margin: 0 auto;
+  display: flex; max-width: 520px; margin: 0 auto;
   background: var(--surface); border-radius: 50px;
   box-shadow: 0 8px 40px color-mix(in srgb, var(--black) 25%, transparent);
   overflow: hidden;
@@ -151,13 +151,13 @@ html, body {
   background: var(--slate-100);
   min-height: 60vh;
 }
-@media(max-width: 1024px) {
+@media(max-width:960px) {
   .ak-layout { grid-template-columns: 1fr; padding: 2rem 0 4rem; }
 }
 
 /* ── Sidebar ─────────────────────────────────────────────── */
 .ak-sidebar { position: sticky; top: 88px; }
-@media(max-width: 1024px) { .ak-sidebar { position: static; } }
+@media(max-width:960px) { .ak-sidebar { position: static; } }
 
 .ak-sidebar-card {
   background: var(--surface); border-radius: 16px;
@@ -379,7 +379,7 @@ html, body {
     );
   pointer-events: none;
 }
-.ak-article-header-inner { max-width: 768px; position: relative; }
+.ak-article-header-inner { max-width: 800px; position: relative; }
 .ak-article-header .ak-breadcrumb ol { color: color-mix(in srgb, var(--surface) 70%, transparent); }
 .ak-article-header .ak-breadcrumb a  { color: color-mix(in srgb, var(--surface) 90%, transparent); }
 
@@ -866,7 +866,7 @@ html, body {
 
 /* ── Top Lead Hook (Above The Fold) ────────────────────────── */
 .ak-top-hook {
-  max-width: 1024px;
+  max-width: 960px;
   margin: 1.5rem auto 1.5rem;
   background: linear-gradient(135deg, var(--success-bg) 0%, var(--surface) 65%, var(--slate-50) 100%);
   border: 1.5px solid var(--success-border);
@@ -1448,7 +1448,7 @@ html, body {
   }
 }
 
-@media(max-width: 640px) {
+@media(max-width: 480px) {
   /* Prevent horizontal stretch from rigid nowrap on small screens */
   .ak-btn-wa-rich,
   .ak-btn-wa-hero,

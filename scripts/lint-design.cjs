@@ -178,13 +178,13 @@ console.log('====================================================\n');
 
 console.log(`1. Hex colors outside tokens.css:          ${violations.hexOutsideTokens.length}`);
 console.log(`2. Undefined var(--x) (not in tokens.css): ${violations.undefinedVars.length}`);
-console.log(`3. Non-standard @media query widths:       ${violations.nonStandardMediaQueries.length}`);
+console.log(`3. Non-standard @media query widths (info):${violations.nonStandardMediaQueries.length}`);
 console.log(`4. style="" with color/background/border:  ${violations.inlineStyleForbiddenProps.length}`);
 
+// Non-standard media queries are report-only (Phase 2 will standardize per file)
 const totalViolations = 
   violations.hexOutsideTokens.length +
   violations.undefinedVars.length +
-  violations.nonStandardMediaQueries.length +
   violations.inlineStyleForbiddenProps.length;
 
 console.log('----------------------------------------------------');

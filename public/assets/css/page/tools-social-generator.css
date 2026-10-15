@@ -70,7 +70,7 @@ body {
 .gen-hero p {
   color: var(--slate-300);
   font-size: 1.05rem;
-  max-width: 768px;
+  max-width: 760px;
   margin-bottom: 20px;
 }
 .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -91,7 +91,7 @@ body {
   gap: 32px;
   align-items: start;
 }
-@media (max-width: 1024px) {
+@media (max-width: 900px) {
   .gen-grid { grid-template-columns: 1fr; }
 }
 

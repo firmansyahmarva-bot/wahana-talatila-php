@@ -47,7 +47,7 @@
   color: var(--surface);
   margin: 0 auto 14px;
   letter-spacing: -0.02em;
-  max-width: 768px;
+  max-width: 860px;
   line-height: 1.25;
 }
 .pcat-hero p {
@@ -97,12 +97,12 @@
 }
 
 /* Category directory intro line inside the services section */
-.pcat-dir-intro { text-align: center; max-width: 768px; margin: 0 auto 8px; color: var(--text-muted, var(--slate-600)); font-size: 14.5px; line-height: 1.7; }
+.pcat-dir-intro { text-align: center; max-width: 760px; margin: 0 auto 8px; color: var(--text-muted, var(--slate-600)); font-size: 14.5px; line-height: 1.7; }
 
 .pcat-filter-row { display: flex; flex-direction: column; align-items: center; padding: 24px 0 8px; }
 
 /* Quick Category Filter Pills */
-.pcat-cat-pills-wrap { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; width: 100%; max-width: 768px; }
+.pcat-cat-pills-wrap { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; width: 100%; max-width: 820px; }
 .pcat-cat-pill { padding: 8px 18px; border-radius: 999px; border: 1.5px solid var(--slate-300); background: var(--surface); color: var(--slate-700); font-size: 13px; font-weight: 600; cursor: pointer; transition: all .2s; }
 .pcat-cat-pill:hover { border-color: var(--brand, var(--brand)); color: var(--brand, var(--brand)); }
 .pcat-cat-pill.active { background: var(--brand, var(--brand)); color: var(--surface); border-color: var(--brand, var(--brand)); box-shadow: 0 2px 8px color-mix(in srgb, var(--brand) 25%, transparent); }
@@ -134,14 +134,14 @@
 /* In-House B2B Banner */
 .pcat-b2b-box { background: linear-gradient(135deg, var(--brand) 0%, var(--brand) 100%); color: var(--surface); border-radius: 16px; padding: 36px 40px; margin: 48px auto; max-width: 1060px; box-shadow: 0 16px 36px color-mix(in srgb, var(--brand) 15%, transparent); border: 1px solid color-mix(in srgb, var(--surface) 10%, transparent); }
 .pcat-b2b-inner { display: grid; grid-template-columns: 1.4fr 1fr; gap: 36px; align-items: center; }
-@media (max-width: 768px) { .pcat-b2b-inner { grid-template-columns: 1fr; gap: 24px; } .pcat-b2b-box { padding: 28px 20px; } }
+@media (max-width: 800px) { .pcat-b2b-inner { grid-template-columns: 1fr; gap: 24px; } .pcat-b2b-box { padding: 28px 20px; } }
 .pcat-b2b-box h2 { font-size: clamp(1.4rem, 2.5vw, 1.85rem); font-weight: 800; margin: 0 0 10px; color: var(--surface); }
 .pcat-b2b-box p { font-size: 14px; line-height: 1.65; color: var(--success-border); margin-bottom: 18px; }
 .pcat-b2b-features { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; font-size: 13.5px; }
 .pcat-b2b-features li { display: flex; align-items: center; gap: 10px; color: var(--success-bg); }
 .pcat-b2b-features li span { color: var(--whatsapp); font-weight: 700; }
 .pcat-b2b-actions { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
-@media (max-width: 768px) { .pcat-b2b-actions { align-items: stretch; } }
+@media (max-width: 800px) { .pcat-b2b-actions { align-items: stretch; } }
 .btn-b2b-wa { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--whatsapp); color: var(--surface) !important; padding: 13px 24px; border-radius: 10px; font-weight: 700; font-size: 14px; text-decoration: none; box-shadow: 0 4px 16px color-mix(in srgb, var(--whatsapp) 30%, transparent); transition: all .2s; }
 .btn-b2b-wa:hover { background: var(--whatsapp-dark); transform: translateY(-2px); }
 
@@ -193,7 +193,7 @@
   gap: 36px;
   align-items: start;
 }
-@media (max-width: 1024px) {
+@media (max-width: 1040px) {
   .pcat-catalog-layout {
     grid-template-columns: 1fr;
     gap: 32px;
@@ -211,7 +211,7 @@
   top: calc(var(--nav-h, 72px) + 24px);
   z-index: 20;
 }
-@media (max-width: 1024px) {
+@media (max-width: 1040px) {
   .pcat-sidebar-col {
     position: static;
   }

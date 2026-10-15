@@ -70,7 +70,7 @@ body {
 .apd-hero p {
   color: var(--slate-300);
   font-size: 1.05rem;
-  max-width: 768px;
+  max-width: 760px;
   margin-bottom: 20px;
 }
 .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -117,7 +117,7 @@ body {
   gap: 24px;
   margin-bottom: 40px;
 }
-@media (max-width: 640px) {
+@media (max-width: 600px) {
   .apd-cards-grid { grid-template-columns: 1fr; }
 }
 

@@ -70,7 +70,7 @@ body {
 .rm-hero p {
   color: var(--slate-300);
   font-size: 1.05rem;
-  max-width: 768px;
+  max-width: 760px;
   margin-bottom: 20px;
 }
 .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -91,7 +91,7 @@ body {
   gap: 32px;
   align-items: start;
 }
-@media (max-width: 1024px) {
+@media (max-width: 992px) {
   .rm-grid { grid-template-columns: 1fr; }
 }
 
@@ -327,7 +327,7 @@ body {
 .faq-item.active .faq-icon { transform: rotate(180deg); }
 .faq-icon { transition: transform 0.2s; }
 
-body{font-family:'Segoe UI',Arial,sans-serif;padding:32px;max-width: 768px;margin:0 auto;color:var(--slate-900);line-height:1.5}
+body{font-family:'Segoe UI',Arial,sans-serif;padding:32px;max-width:860px;margin:0 auto;color:var(--slate-900);line-height:1.5}
     h1{font-size:16pt;margin:0;color:var(--brand);border-bottom:2px solid var(--brand);padding-bottom:8px}
     .sub{font-size:8.5pt;color:var(--slate-500);margin:6px 0 16px}
     table{width:100%;border-collapse:collapse;margin-top:12px;font-size:9pt}

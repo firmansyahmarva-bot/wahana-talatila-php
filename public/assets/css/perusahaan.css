@@ -16,7 +16,7 @@
 }
 .pr-section { padding: 80px 0; }
 .pr-section-alt { background: var(--brand-light); }
-.pr-head { max-width: 768px; margin: 0 auto 48px; text-align: center; }
+.pr-head { max-width: 760px; margin: 0 auto 48px; text-align: center; }
 .pr-head h2 {
   font-size: clamp(26px, 3.4vw, 38px);
   line-height: 1.2;
@@ -111,7 +111,7 @@
   box-shadow: var(--shadow-lg);
   display: block;
 }
-@media (max-width: 1024px) {
+@media (max-width: 900px) {
   .pr-hero-inner { grid-template-columns: 1fr; gap: 36px; }
   .pr-hero { padding: 44px 0 40px; }
 }
@@ -142,7 +142,7 @@
   color: var(--text-muted);
   background: var(--brand-light);
 }
-@media (max-width: 1024px) { .pr-trustnum { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 900px) { .pr-trustnum { grid-template-columns: repeat(2, 1fr); } }
 
 /* ── CTA strips ─────────────────────────────────────────────── */
 .pr-ctastrip { background: var(--brand-dark); padding: 34px 0; }
@@ -166,7 +166,7 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 16px;
-  max-width: 1024px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 .pr-industry {
@@ -182,9 +182,9 @@
 .pr-industry:hover { background: color-mix(in srgb, var(--surface) 12%, transparent); border-color: var(--cta); }
 .pr-ind-ic { display: flex; color: var(--cta); }
 .pr-ind-ic svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-@media (max-width: 1024px) { .pr-industries { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 1000px) { .pr-industries { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 640px) { .pr-industries { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 640px) { .pr-industries { grid-template-columns: 1fr; } }
+@media (max-width: 400px) { .pr-industries { grid-template-columns: 1fr; } }
 
 /* ── 8 · Timeline (8 steps: 4×2 desktop, vertical mobile) ───── */
 .pr-timeline {
@@ -217,7 +217,7 @@
 }
 .pr-timeline h3 { font-size: 16px; color: var(--brand-dark); margin: 0 0 6px; }
 .pr-timeline p { font-size: 13.5px; color: var(--text-muted); line-height: 1.55; margin: 0; }
-@media (max-width: 1024px) {
+@media (max-width: 900px) {
   .pr-timeline { grid-template-columns: 1fr; gap: 0; }
   .pr-timeline li::before { top: 0; bottom: -28px; left: 23px; width: 2px; height: auto; display: block !important; }
   .pr-timeline li:first-child::before { display: none !important; }
@@ -314,7 +314,7 @@
 .pr-testi figcaption small { font-size: 13px; color: var(--text-muted); }
 
 /* ── 11 · FAQ ───────────────────────────────────────────────── */
-.pr-faq { max-width: 768px; margin: 0 auto; display: grid; gap: 12px; }
+.pr-faq { max-width: 760px; margin: 0 auto; display: grid; gap: 12px; }
 .pr-faq details {
   background: var(--surface);
   border: 1px solid var(--border);
