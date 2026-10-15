@@ -1,0 +1,117 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+interface Props {
+  data: any;
+}
+
+const { data } = Astro.props;
+
+const KNOWN_CITIES = [
+  'balikpapan', 'bandung', 'bantul', 'batam', 'bekasi', 'cilegon',
+  'jakarta', 'makassar', 'malang', 'medan', 'pekanbaru', 'semarang',
+  'sleman', 'solo', 'surabaya', 'yogyakarta'
+];
+
+let cityName = '';
+let trainingSlug = data.slug;
+
+for (const c of KNOWN_CITIES) {
+  if (data.slug.endsWith('-' + c)) {
+    cityName = c.charAt(0).toUpperCase() + c.slice(1);
+    trainingSlug = data.slug.slice(0, -c.length - 1);
+    break;
+  }
+}
+
+const pageTitle = data.title;
+const pageDesc = data.description || data.title;
+const canonicalUrl = data.canonical || `https://wahanatotalita.com/pelatihan/${data.slug}/`;
+const schemas = Array.isArray(data.schemas) ? [...data.schemas] : [];
+
+let raw = (data.content || '').trim();
+raw = raw.replace(/<main\b[^>]*>/gi, '').replace(/<\/main>/gi, '');
+const htmlContent = raw;
+
+const cleanTitle = (data.title || '').split('—')[0].split('|')[0].trim();
+const breadcrumbElements: any[] = [
+  { '@type': 'ListItem', position: 1, name: 'Beranda', item: 'https://wahanatotalita.com/' },
+  { '@type': 'ListItem', position: 2, name: 'Pelatihan', item: 'https://wahanatotalita.com/pelatihan/' },
+];
+
+if (cityName) {
+  breadcrumbElements.push({
+    '@type': 'ListItem',
+    position: 3,
+    name: `Pelatihan K3 ${cityName}`,
+    item: `https://wahanatotalita.com/pelatihan-k3-${cityName.toLowerCase()}/`,
+  });
+  breadcrumbElements.push({
+    '@type': 'ListItem',
+    position: 4,
+    name: cleanTitle,
+    item: canonicalUrl,
+  });
+} else {
+  breadcrumbElements.push({
+    '@type': 'ListItem',
+    position: 3,
+    name: cleanTitle,
+    item: canonicalUrl,
+  });
+}
+
+schemas.push({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumbElements,
+});
+
+const programmaticTitle = (pageTitle || '').split('—')[0].split('|')[0].trim();
+
+const cityPageCss = [
+  '/assets/css/page/training-city-remake.css',
+  '/assets/css/page/training-content.css',
+  '/assets/css/page/training-schedule-feed.css',
+  '/assets/css/page/training-fixes.css',
+];
+
+const cityScripts = [
+  '/assets/js/training-schedule-feed.js',
+  '/assets/js/training-schedule-fallback.js',
+];
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDesc}
+  canonical={canonicalUrl}
+  bodyClass="city-program-body"
+  bodyAttrs={{ 'data-training-slug': trainingSlug, 'data-city': cityName }}
+  pageCss={cityPageCss}
+  scripts={cityScripts}
+  schemas={schemas}
+>
+  <div class="city-program-page">
+    <div class="breadcrumb-bar">
+      <div class="container">
+        <nav aria-label="Breadcrumb">
+          <ol class="breadcrumb-list">
+            <li><a href="/">Beranda</a></li>
+            <li aria-hidden="true">›</li>
+            <li><a href="/pelatihan/">Pelatihan</a></li>
+            {cityName && (
+              <>
+                <li aria-hidden="true">›</li>
+                <li><a href={`/pelatihan-k3-${cityName.toLowerCase()}/`}>Pelatihan K3 {cityName}</a></li>
+              </>
+            )}
+            <li aria-hidden="true">›</li>
+            <li aria-current="page">{programmaticTitle}</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+    <Fragment set:html={htmlContent} />
+  </div>
+</Layout>

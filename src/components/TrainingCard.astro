@@ -1,0 +1,244 @@
+---
+import { getTrainingImageUrl, formatPrice, modeLabel } from '../lib/images';
+import WaButton from './WaButton.astro';
+
+interface Props {
+  training: any;
+  showWa?: boolean;
+  headingLevel?: 'h2' | 'h3' | 'h4';
+  categoryIcon?: string;
+  categoryName?: string;
+}
+
+const {
+  training,
+  showWa = true,
+  headingLevel = 'h3',
+  categoryIcon = '',
+  categoryName = '',
+} = Astro.props;
+
+const item = training && training.data ? training.data : training;
+const Heading = headingLevel;
+
+const imageSrc = getTrainingImageUrl(item.image_path, item.category_slug, item.slug);
+const priceStr = formatPrice(item.price);
+const modeText = modeLabel(item.mode);
+const certText = item.certification || 'Kemnaker / BNSP';
+const catDisplayName = categoryName || item.category_name || '';
+const iconDisplay = categoryIcon || '';
+const waMessage = item.wa_text || `Halo Wahana Totalita, saya tertarik mendaftar program ${item.name}. Mohon informasi jadwal batch terdekat dan investasinya.`;
+const trainingUrl = `/pelatihan/${item.slug}/`;
+---
+
+<article
+  class="training-card tc-card"
+  data-cat={item.category_slug || ''}
+  data-mode={(item.mode || 'offline').toLowerCase()}
+  data-slug={item.slug}
+>
+  <a href={trainingUrl} class="tc-card-img-wrap">
+    <img
+      src={imageSrc}
+      alt={`Pelatihan ${item.name} ${certText}`}
+      loading="lazy"
+      width="400"
+      height="250"
+      decoding="async"
+      class="tc-card-img"
+    />
+    {(catDisplayName || iconDisplay) && (
+      <span class="tc-card-cat-badge">
+        {iconDisplay && <span>{iconDisplay}</span>}
+        {catDisplayName && <span>{catDisplayName}</span>}
+      </span>
+    )}
+  </a>
+
+  <div class="tc-card-body">
+    <div class="tc-card-badges">
+      <span class="badge-mode tc-card-badge-mode">{modeText}</span>
+      <span class="badge-cert tc-card-badge-cert">{certText}</span>
+    </div>
+
+    <Heading class="training-card-title tc-card-title">
+      <a href={trainingUrl} class="tc-card-title-link">{item.name}</a>
+    </Heading>
+
+    <div class="tc-card-footer">
+      <div class="tc-card-price-box">
+        <span class="tc-card-price-label">Investasi</span>
+        <span class="tc-card-price-val">{priceStr} <span class="tc-card-price-sub">/orang</span></span>
+      </div>
+
+      <div class="tc-card-actions">
+        <a href={trainingUrl} class="tc-card-syllabus-link">Lihat Silabus</a>
+        {showWa && (
+          <WaButton
+            message={waMessage}
+            label="Daftar"
+            variant="primary"
+            size="sm"
+            class="tc-card-wa-btn"
+          />
+        )}
+      </div>
+    </div>
+  </div>
+</article>
+
+<style>
+  .tc-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 8px color-mix(in srgb, var(--brand) 4%, transparent);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .tc-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px -4px color-mix(in srgb, var(--brand) 12%, transparent);
+    border-color: var(--brand);
+  }
+  .tc-card-img-wrap {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    aspect-ratio: 16 / 10;
+    background: var(--surface-alt);
+  }
+  .tc-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+  .tc-card:hover .tc-card-img {
+    transform: scale(1.03);
+  }
+  .tc-card-cat-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: color-mix(in srgb, var(--brand) 85%, transparent);
+    color: var(--on-brand);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    backdrop-filter: blur(4px);
+    z-index: 1;
+  }
+  .tc-card-body {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  .tc-card-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+  .tc-card-badge-mode {
+    font-size: 11px;
+    font-weight: 600;
+    background: var(--surface-alt);
+    color: var(--slate-700);
+    padding: 3px 8px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+  .tc-card-badge-cert {
+    font-size: 11px;
+    font-weight: 700;
+    background: color-mix(in srgb, var(--brand) 10%, transparent);
+    color: var(--brand);
+    padding: 3px 8px;
+    border-radius: 4px;
+    border: 1px solid color-mix(in srgb, var(--brand) 20%, transparent);
+  }
+  .tc-card-title {
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.4;
+    margin: 0 0 14px 0;
+    flex: 1;
+  }
+  .tc-card-title-link {
+    color: var(--brand);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  .tc-card-title-link:hover {
+    color: var(--cta);
+  }
+  .tc-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+    margin-top: auto;
+  }
+  .tc-card-price-box {
+    display: flex;
+    flex-direction: column;
+  }
+  .tc-card-price-label {
+    font-size: 11px;
+    color: var(--text-subtle);
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .tc-card-price-val {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--brand);
+  }
+  .tc-card-price-sub {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-subtle);
+  }
+  .tc-card-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tc-card-syllabus-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 8px 12px;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--brand);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-decoration: none;
+    box-sizing: border-box;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  }
+  .tc-card-syllabus-link:hover {
+    background: var(--surface-alt);
+    border-color: var(--brand);
+  }
+  .tc-card-syllabus-link:focus-visible {
+    outline: 2px solid var(--cta);
+    outline-offset: 2px;
+  }
+</style>
