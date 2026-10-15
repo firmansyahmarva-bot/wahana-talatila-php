@@ -1,0 +1,529 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const year = new Date().getFullYear();
+const canonical = 'https://wahanatotalita.com/ahli-k3-umum/';
+const title = `Pelatihan Ahli K3 Umum (AK3U) Kemnaker RI & BNSP ${year}`;
+const description = `Pendaftaran Pelatihan Ahli K3 Umum (AK3U) resmi Kemnaker RI & BNSP ${year}. Biaya terjangkau, syarat lengkap, jadwal terdekat, kelas fresh graduate & corporate.`;
+
+const hreflangs = [
+  { lang: 'id', href: 'https://wahanatotalita.com/ahli-k3-umum/' },
+  { lang: 'en', href: 'https://wahanatotalita.com/en/safety-officer-ak3-umum-requirements/' },
+  { lang: 'zh-Hans', href: 'https://wahanatotalita.com/zh/ahli-k3-umum/' },
+  { lang: 'x-default', href: 'https://wahanatotalita.com/ahli-k3-umum/' },
+];
+
+const faqs = [
+  {
+    q: 'Berapa biaya pelatihan Ahli K3 Umum Kemnaker RI dan BNSP?',
+    a: 'Biaya pelatihan Ahli K3 Umum bersertifikasi Kemnaker RI jalur Online/Blended berkisar antara Rp 6.500.000 hingga Rp 7.500.000, sedangkan jalur Tatap Muka (Offline) di Yogyakarta berkisar antara Rp 8.000.000 hingga Rp 8.500.000 (sudah termasuk akomodasi/fasilitas kelas). Untuk jalur Sertifikasi Profesi BNSP berkisar antara Rp 4.000.000 hingga Rp 5.000.000. Biaya sudah termasuk pembinaan resmi, modul, ujian, SKP/Lisensi Kemnaker atau Sertifikat BNSP Garuda Emas.',
+  },
+  {
+    q: 'Apa saja syarat pendidikan untuk mengikuti pelatihan Ahli K3 Umum?',
+    a: 'Sesuai Permenaker No. Per.02/MEN/1992, syarat pendidikan minimal untuk memperoleh penunjukan Ahli K3 Umum Kemnaker RI adalah Diploma 3 (D3) atau Sarjana (S1) dari SEMUA JURUSAN (baik teknik maupun non-teknik seperti hukum, ekonomi, komunikasi, dsb). Fresh graduate yang belum bekerja tetap dapat mendaftar dan mengikuti pembinaan hingga lulus ujian.',
+  },
+  {
+    q: 'Apa perbedaan Ahli K3 Umum sertifikasi Kemnaker RI vs BNSP?',
+    a: 'Sertifikasi Kemnaker RI berorientasi pada kepatuhan hukum regulasi nasional dan penunjukan operasional personel di tempat kerja (menghasilkan SKP & Lisensi K3 untuk pembentukan P2K3 dan audit SMK3). Sedangkan sertifikasi BNSP berorientasi pada pengakuan kompetensi profesi kerja berbasis standar SKKNI nasional berlogo Garuda Emas, sangat diminati untuk tender BUMN, KKKS Migas, dan standar kualifikasi kompetensi profesi.',
+  },
+  {
+    q: 'Berapa lama masa berlaku sertifikat & lisensi Ahli K3 Umum?',
+    a: 'Sertifikat Pembinaan Ahli K3 Umum dari Kemnaker RI berlaku seumur hidup. Namun, Lisensi Kewenangan & Surat Keputusan Penunjukan (SKP) berlaku selama 3 (tiga) tahun dan wajib diperpanjang melalui PJK3 resmi sebelum masa berlakunya habis. Sertifikat kompetensi BNSP juga memiliki masa berlaku selama 3 tahun.',
+  },
+  {
+    q: 'Apakah fresh graduate bisa langsung mengikuti pelatihan AK3U?',
+    a: 'Bisa. Fresh graduate lulusan D3 atau S1 dapat langsung mengambil sertifikasi Ahli K3 Umum. Sertifikat ini menjadi nilai tambah terbesar (competitive edge) saat melamar kerja posisi HSE Officer, Safety Supervisor, atau Management Trainee di sektor migas, tambang, manufaktur, dan konstruksi.',
+  },
+  {
+    q: 'Berapa lama durasi pelatihan Ahli K3 Umum?',
+    a: 'Durasi pembinaan Ahli K3 Umum sertifikasi Kemnaker RI adalah 12 hari kerja efektif (sekitar 120 jam pelajaran), mencakup penyampaian materi regulasi & teknis, praktik kerja lapangan (PKL), pembuatan laporan PKL, seminar presentasi, dan evaluasi ujian negara Kemnaker RI. Untuk jalur BNSP berlangsung selama 3–4 hari efektif.',
+  },
+  {
+    q: 'Apakah Wahana Totalita menyediakan program In-House Training untuk perusahaan?',
+    a: 'Ya. Kami menyelenggarakan In-House Training Ahli K3 Umum khusus bagi korporasi atau instansi dengan jadwal fleksibel, materi yang disesuaikan dengan hazard industri perusahaan, serta efisiensi anggaran investasi pelatihan untuk rombongan karyawan.',
+  },
+];
+
+// Batches from collection or fallbacks
+const allBatches = await getCollection('trainingBatches');
+let ak3uBatches = allBatches
+  .filter((b) => (b.data.batch_name || '').toLowerCase().includes('ahli k3 umum') || (b.data.batch_name || '').toLowerCase().includes('ak3u'))
+  .slice(0, 4)
+  .map((b) => b.data);
+
+if (ak3uBatches.length === 0) {
+  ak3uBatches = [
+    {
+      id: 1,
+      batch_name: `Batch Reguler Online Blended ${year}`,
+      start_date: new Date(Date.now() + 7 * 86400000).toISOString().split('T')[0],
+      end_date: new Date(Date.now() + 19 * 86400000).toISOString().split('T')[0],
+      venue: 'Online via Zoom Interaktif & Praktik Mandiri',
+    },
+    {
+      id: 2,
+      batch_name: `Batch Intensif Tatap Muka Yogyakarta`,
+      start_date: new Date(Date.now() + 21 * 86400000).toISOString().split('T')[0],
+      end_date: new Date(Date.now() + 33 * 86400000).toISOString().split('T')[0],
+      venue: 'Training Center Wahana Totalita, Yogyakarta',
+    },
+    {
+      id: 3,
+      batch_name: `Batch Uji Kompetensi BNSP Online`,
+      start_date: new Date(Date.now() + 14 * 86400000).toISOString().split('T')[0],
+      end_date: new Date(Date.now() + 17 * 86400000).toISOString().split('T')[0],
+      venue: 'Virtual Assessment via Zoom LSP K3',
+    },
+  ];
+}
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'EducationalOrganization',
+    '@id': 'https://wahanatotalita.com/#organization',
+    name: 'Wahana Totalita Konsultan',
+    url: 'https://wahanatotalita.com',
+    logo: 'https://wahanatotalita.com/assets/img/og-cover.jpg',
+    telephone: '+6287759151278',
+    description: 'PJK3 Resmi Berlisensi Kementerian Ketenagakerjaan RI dan LSP Terakreditasi BNSP.',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    '@id': `${canonical}#breadcrumb`,
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Beranda', item: 'https://wahanatotalita.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Pelatihan K3', item: 'https://wahanatotalita.com/pelatihan/' },
+      { '@type': 'ListItem', position: 3, name: 'Ahli K3 Umum (AK3U)', item: canonical },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Course',
+    '@id': `${canonical}#course`,
+    name: 'Pelatihan & Sertifikasi Ahli K3 Umum (AK3U) Kemnaker RI & BNSP',
+    description: 'Pembinaan dan sertifikasi resmi Ahli K3 Umum Kemnaker RI dan uji kompetensi BNSP.',
+    url: canonical,
+    provider: { '@id': 'https://wahanatotalita.com/#organization' },
+    offers: {
+      '@type': 'AggregateOffer',
+      priceCurrency: 'IDR',
+      lowPrice: '4500000',
+      highPrice: '8500000',
+      offerCount: '6',
+      availability: 'https://schema.org/InStock',
+      url: canonical,
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    '@id': `${canonical}#faq`,
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: f.a,
+      },
+    })),
+  },
+];
+---
+
+<Layout
+  title={title}
+  description={description}
+  canonical={canonical}
+  hreflangs={hreflangs}
+  schemas={schemas}
+  pageCss={['/assets/css/page/ahli-k3-umum.css']}
+>
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb-bar" style="margin-top:var(--nav-h,72px);background:var(--surface);padding:12px 0;border-bottom:1px solid var(--border);">
+    <div class="container" style="max-width:1160px;margin:0 auto;padding:0 20px;">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb-list" style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:13px;color:var(--slate-500);list-style:none;padding:0;margin:0;">
+          <li><a href="/" style="color:var(--slate-600);text-decoration:none;">Beranda</a></li>
+          <li aria-hidden="true">›</li>
+          <li><a href="/pelatihan/" style="color:var(--slate-600);text-decoration:none;">Pelatihan</a></li>
+          <li aria-hidden="true">›</li>
+          <li aria-current="page" style="color:var(--brand);font-weight:600;">Ahli K3 Umum (AK3U)</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <!-- HERO SECTION -->
+  <section class="ak-hero">
+    <div class="container ak-hero-inner">
+      <div class="ak-eyebrow">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"></path>
+        </svg>
+        PJK3 Resmi Kemnaker RI · BNSP · Vendor LPSE
+      </div>
+      <h1 class="ak-hero-title">
+        Pelatihan &amp; Sertifikasi <em>Ahli K3 Umum (AK3U)</em><br />
+        Kemnaker RI &amp; BNSP {year}
+      </h1>
+      <p class="ak-hero-sub">
+        Pusat resmi pembinaan calon Ahli K3 Umum berlisensi Kementerian Ketenagakerjaan RI dan uji kompetensi profesi BNSP. 
+        Tersedia kelas <strong>Online Blended via Zoom</strong>, <strong>Tatap Muka Yogyakarta</strong>, <strong>Jalur Khusus Fresh Graduate</strong>, 
+        hingga <strong>In-House Training Perusahaan</strong> dengan garansi kelulusan dan pendampingan pasca-pelatihan.
+      </p>
+
+      <div class="ak-hero-actions">
+        <a href="https://wa.me/6287759151278?text=Halo%20Wahana%20Totalita,%20saya%20ingin%20informasi%20lengkap%20biaya,%20syarat,%20dan%20jadwal%20pelatihan%20Ahli%20K3%20Umum" class="ak-btn-primary" target="_blank" rel="noopener">
+          <span>Konsultasi Pendaftaran WhatsApp</span>
+        </a>
+        <a href="#jadwal" class="ak-btn-secondary">
+          <span>Lihat Jadwal &amp; Biaya {year} &darr;</span>
+        </a>
+      </div>
+
+      <div class="ak-trust-badges">
+        <div class="ak-badge-item">
+          <span class="ak-badge-icon">📜</span>
+          <div class="ak-badge-text">
+            <strong>SK Kemnaker RI</strong>
+            <span>No. Kep. 312/BINWASPNAK-PNK3/V/2020</span>
+          </div>
+        </div>
+        <div class="ak-badge-item">
+          <span class="ak-badge-icon">🦅</span>
+          <div class="ak-badge-text">
+            <strong>Sertifikasi BNSP</strong>
+            <span>Garuda Emas Standar SKKNI</span>
+          </div>
+        </div>
+        <div class="ak-badge-item">
+          <span class="ak-badge-icon">👥</span>
+          <div class="ak-badge-text">
+            <strong>12.000+ Alumni K3</strong>
+            <span>Tersebar di BUMN &amp; Multinasional</span>
+          </div>
+        </div>
+        <div class="ak-badge-item">
+          <span class="ak-badge-icon">🏛️</span>
+          <div class="ak-badge-text">
+            <strong>Penyedia Resmi LPSE</strong>
+            <span>Siap SPK &amp; Pengadaan B2G</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6-TRACK PROGRAM SELECTOR -->
+  <section class="ak-section" id="jalur">
+    <div class="container">
+      <div class="ak-header-box">
+        <span class="ak-kicker">Pilihan Jalur Sertifikasi</span>
+        <h2 class="ak-title">Pilih Jalur Ahli K3 Umum yang Tepat untuk Kebutuhan Anda</h2>
+        <p class="ak-desc">
+          Setiap peserta memiliki target karir dan kebutuhan industri yang berbeda. 
+          Wahana Totalita menyediakan 6 pilihan jalur komprehensif dengan legalitas resmi pemerintah.
+        </p>
+      </div>
+
+      <div class="ak-track-grid">
+        <!-- Track 1: Kemnaker Blended -->
+        <article class="ak-track-card">
+          <span class="ak-track-pill ak-pill-popular">Paling Diminati</span>
+          <h3 class="ak-track-title">AK3U Kemnaker RI (Online Blended)</h3>
+          <p class="ak-track-body">
+            Pembinaan 12 hari melalui Zoom interaktif dengan pengawas Kemnaker RI. Efisien tanpa meninggalkan domisili, dengan ujian negara dan PKL online.
+          </p>
+          <ul class="ak-track-features">
+            <li>✔ SKP &amp; Lisensi K3 Kemnaker RI</li>
+            <li>✔ Durasi 12 Hari Kerja via Zoom</li>
+            <li>✔ Termasuk Seminar Kit &amp; Modul Kirim Fisik</li>
+          </ul>
+          <a href="/pelatihan/pelatihan-ahli-k3-umum-sertifikasi-kemnaker-ri/" class="ak-track-btn">
+            <span>Lihat Detail Program &rarr;</span>
+          </a>
+        </article>
+
+        <!-- Track 2: Kemnaker Offline -->
+        <article class="ak-track-card">
+          <span class="ak-track-pill ak-pill-offline">Tatap Muka Intensif</span>
+          <h3 class="ak-track-title">AK3U Kemnaker RI (Offline Yogyakarta)</h3>
+          <p class="ak-track-body">
+            Pelaksanaan tatap muka di Yogyakarta dengan kunjungan praktik kerja lapangan (PKL) langsung ke pabrik/industri mitra untuk pengalaman audit nyata.
+          </p>
+          <ul class="ak-track-features">
+            <li>✔ PKL Nyata di Pabrik Manufaktur</li>
+            <li>✔ Lunch, Coffee Break &amp; Akomodasi</li>
+            <li>✔ Bimbingan Tatap Muka Instruktur Senior</li>
+          </ul>
+          <a href="/pelatihan/pelatihan-ahli-k3-umum-sertifikasi-kemnaker-ri/" class="ak-track-btn">
+            <span>Lihat Detail Offline &rarr;</span>
+          </a>
+        </article>
+
+        <!-- Track 3: BNSP Online -->
+        <article class="ak-track-card">
+          <span class="ak-track-pill ak-pill-bnsp">Sertifikasi Profesi</span>
+          <h3 class="ak-track-title">Ahli K3 Umum Sertifikasi BNSP</h3>
+          <p class="ak-track-body">
+            Uji kompetensi berbasis SKKNI nasional berlogo Garuda Emas. Fokus pada pembuktian portofolio keahlian kerja bagi praktisi HSE dan syarat tender BUMN/Migas.
+          </p>
+          <ul class="ak-track-features">
+            <li>✔ Sertifikat Kompetensi Garuda BNSP</li>
+            <li>✔ Durasi Singkat (3–4 Hari Efektif)</li>
+            <li>✔ Diakui Standar Kerja Regional ASEAN</li>
+          </ul>
+          <a href="/pelatihan/ak3-bnsp/" class="ak-track-btn">
+            <span>Lihat Jalur BNSP &rarr;</span>
+          </a>
+        </article>
+
+        <!-- Track 4: Fresh Graduate -->
+        <article class="ak-track-card">
+          <span class="ak-track-pill ak-pill-fresh">Karir Akselerasi</span>
+          <h3 class="ak-track-title">Khusus Fresh Graduate D3/S1</h3>
+          <p class="ak-track-body">
+            Program akselerasi karir bagi lulusan baru D3/S1 tanpa syarat pengalaman kerja. Dilengkapi pembekalan CV review, teknik wawancara HSE, dan simulasi JSA.
+          </p>
+          <ul class="ak-track-features">
+            <li>✔ Tanpa Syarat Pengalaman Kerja</li>
+            <li>✔ Biaya Bersahabat dengan Opsi Cicilan</li>
+            <li>✔ Akses Jaringan Alumni &amp; Lowongan HSE</li>
+          </ul>
+          <a href="/ak3u-fresh-graduate/" class="ak-track-btn">
+            <span>Pelajari Jalur Fresh Grad &rarr;</span>
+          </a>
+        </article>
+
+        <!-- Track 5: Corporate In-House -->
+        <article class="ak-track-card">
+          <span class="ak-track-pill ak-pill-corp">Perusahaan / B2B</span>
+          <h3 class="ak-track-title">In-House Training Perusahaan</h3>
+          <p class="ak-track-body">
+            Pelatihan massal staf/manajemen K3 di lokasi perusahaan Anda di seluruh Indonesia. Jadwal fleksibel, kurikulum disesuaikan potensi bahaya spesifik pabrik.
+          </p>
+          <ul class="ak-track-features">
+            <li>✔ Efisiensi Biaya per Peserta (Grup 10+)</li>
+            <li>✔ Studi Kasus &amp; Audit Hazard Internal</li>
+            <li>✔ Fasilitasi Pembentukan Komite P2K3</li>
+          </ul>
+          <a href="/in-house-training/" class="ak-track-btn">
+            <span>Minta Proposal In-House &rarr;</span>
+          </a>
+        </article>
+
+        <!-- Track 6: Perpanjangan SKP -->
+        <article class="ak-track-card">
+          <span class="ak-track-pill ak-pill-renew">Reaktivasi Lisensi</span>
+          <h3 class="ak-track-title">Perpanjangan SKP &amp; Lisensi K3</h3>
+          <p class="ak-track-body">
+            Lisensi atau SKP Ahli K3 Umum Anda sudah lewat dari masa 3 tahun? Kami memproses perpanjangan resmi Kemnaker RI secara cepat, aman, dan tanpa tes ulang.
+          </p>
+          <ul class="ak-track-features">
+            <li>✔ Proses Resmi PJK3 Kemnaker RI</li>
+            <li>✔ Tanpa Mengulang Pelatihan 12 Hari</li>
+            <li>✔ Pengurusan Berkas Pindah Perusahaan</li>
+          </ul>
+          <a href="/perpanjangan-skp/" class="ak-track-btn">
+            <span>Perpanjang SKP Sekarang &rarr;</span>
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING & TRANSPARENCY MATRIX -->
+  <section class="ak-section ak-section-alt" id="biaya">
+    <div class="container">
+      <div class="ak-header-box">
+        <span class="ak-kicker">Transparansi Investasi Pelatihan</span>
+        <h2 class="ak-title">Berapa Biaya Pelatihan Ahli K3 Umum {year}?</h2>
+        <p class="ak-desc">
+          Wahana Totalita menerapkan kebijakan harga all-in transparan tanpa pungutan liar tersembunyi. 
+          Seluruh sertifikat, lisensi, lencana, modul, dan administrasi Kemnaker RI sudah termasuk dalam paket.
+        </p>
+      </div>
+
+      <div class="ak-price-grid">
+        <div class="ak-price-card featured">
+          <span class="ak-ribbon">Rekomendasi</span>
+          <h3>Kemnaker RI Blended Online</h3>
+          <div class="ak-price-num">Rp 6.950.000 <small>/peserta</small></div>
+          <p class="ak-price-desc">
+            Format paling fleksibel. Belajar via Zoom 12 hari, PKL online, ujian resmi, gratis ongkir pengiriman berkas &amp; seminar kit ke rumah.
+          </p>
+          <a href="https://wa.me/6287759151278?text=Halo%20Wahana%20Totalita,%20mohon%20kirimkan%20rincian%20biaya%20dan%20fasilitas%20resmi%20pelatihan%20Ahli%20K3%20Umum" class="ak-track-btn" target="_blank" rel="noopener">Minta Rincian Biaya WA</a>
+        </div>
+
+        <div class="ak-price-card">
+          <h3>Kemnaker RI Tatap Muka (Jogja)</h3>
+          <div class="ak-price-num">Rp 8.500.000 <small>/peserta</small></div>
+          <p class="ak-price-desc">
+            Kelas tatap muka eksklusif di Yogyakarta. Termasuk lunch, 2x coffee break, kunjungan pabrik industri nyata, dan modul cetak hardcopy.
+          </p>
+          <a href="https://wa.me/6287759151278?text=Halo%20Wahana%20Totalita,%20saya%20ingin%20cek%20kuota%20kelas%20offline%20Jogja" class="ak-track-btn" target="_blank" rel="noopener">Cek Kuota Offline</a>
+        </div>
+
+        <div class="ak-price-card">
+          <h3>Sertifikasi BNSP Online</h3>
+          <div class="ak-price-num">Rp 4.750.000 <small>/peserta</small></div>
+          <p class="ak-price-desc">
+            Uji portofolio kompetensi 3–4 hari untuk praktisi K3 berpengalaman. Sertifikat resmi BNSP berlogo Garuda Emas diakui nasional &amp; ASEAN.
+          </p>
+          <a href="https://wa.me/6287759151278?text=Halo%20Wahana%20Totalita,%20saya%20ingin%20daftar%20jalur%20BNSP" class="ak-track-btn" target="_blank" rel="noopener">Daftar Jalur BNSP</a>
+        </div>
+
+        <div class="ak-price-card">
+          <h3>In-House Perusahaan (B2B)</h3>
+          <div class="ak-price-num">Custom RAB <small>/rombongan</small></div>
+          <p class="ak-price-desc">
+            Investasi lebih hemat untuk perusahaan (minimal 10–20 staf). Instruktur kami hadir langsung di lokasi site/kantor Anda di seluruh Indonesia.
+          </p>
+          <a href="https://wa.me/6287759151278?text=Halo%20Wahana%20Totalita,%20kami%20ingin%20penawaran%20In-House%20Training%20Ahli%20K3%20Umum" class="ak-track-btn" target="_blank" rel="noopener">Minta Penawaran RAB</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARISON TABLE: KEMNAKER VS BNSP -->
+  <section class="ak-section" id="perbedaan">
+    <div class="container">
+      <div class="ak-header-box">
+        <span class="ak-kicker">Panduan Pengambilan Keputusan</span>
+        <h2 class="ak-title">Perbedaan Sertifikasi Ahli K3 Umum: Kemnaker RI vs BNSP</h2>
+        <p class="ak-desc">
+          Bingung memilih antara sertifikasi Kemnaker RI atau BNSP? Simak tabel perbandingan objektif berikut untuk menentukan sertifikat mana yang wajib Anda miliki.
+        </p>
+      </div>
+
+      <div class="ak-table-wrap">
+        <table class="ak-comp-table">
+          <thead>
+            <tr>
+              <th style="width:25%">Parameter Evaluasi</th>
+              <th style="width:38%">Sertifikasi Kemnaker RI (Pemerintah)</th>
+              <th style="width:37%">Sertifikasi Profesi BNSP</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="dimmed">Dasar Hukum Utama</td>
+              <td>UU No. 1 Tahun 1970 &amp; Permenaker No. 02/MEN/1992</td>
+              <td>UU No. 13 Tahun 2003 &amp; PP No. 10 Tahun 2018</td>
+            </tr>
+            <tr>
+              <td class="dimmed">Lembaga Penerbit</td>
+              <td>Direktorat Bina Wasnak &amp; Pengujian K3, Kemnaker RI</td>
+              <td>Badan Nasional Sertifikasi Profesi (BNSP) melalui LSP Terlisensi</td>
+            </tr>
+            <tr>
+              <td class="dimmed">Output Dokumen</td>
+              <td>
+                • Sertifikat Pembinaan Calon Ahli K3 Umum<br />
+                • <strong>Surat Keputusan Penunjukan (SKP)</strong><br />
+                • <strong>Kartu Lisensi Kewenangan K3</strong>
+              </td>
+              <td>
+                • <strong>Sertifikat Kompetensi Kerja</strong> berlogo Garuda Emas
+              </td>
+            </tr>
+            <tr>
+              <td class="dimmed">Kewajiban Perusahaan</td>
+              <td><strong>Wajib hukum</strong> bagi pembentukan P2K3 dan audit SMK3 PP 50/2012</td>
+              <td>Syarat mutlak tender BUMN, KKKS Migas &amp; kualifikasi kompetensi profesi</td>
+            </tr>
+            <tr>
+              <td class="dimmed">Metode Pembinaan</td>
+              <td>12 hari materi intensif + PKL industri + Ujian Pengawas Kemnaker</td>
+              <td>3–4 hari uji asesmen portofolio kerja oleh Asesor BNSP</td>
+            </tr>
+            <tr>
+              <td class="dimmed">Masa Berlaku</td>
+              <td>Sertifikat seumur hidup; Lisensi &amp; SKP berlaku 3 tahun</td>
+              <td>Sertifikat berlaku 3 tahun (perpanjangan via asesmen ulang)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- UPCOMING BATCHES -->
+  <section class="ak-section ak-section-alt" id="jadwal">
+    <div class="container">
+      <div class="ak-header-box">
+        <span class="ak-kicker">Konfirmasi Jadwal Terdekat</span>
+        <h2 class="ak-title">Jadwal Pelatihan Ahli K3 Umum Terbaru {year}</h2>
+        <p class="ak-desc">
+          Pendaftaran dibuka untuk gelombang batch terdekat. Kuota dibatasi maksimal 30 peserta per kelas demi menjamin efektivitas interaksi pembinaan.
+        </p>
+      </div>
+
+      <div class="ak-batch-grid">
+        {ak3uBatches.map((b) => (
+          <div class="ak-batch-card">
+            <span class="ak-track-pill ak-pill-popular" style="margin-bottom:8px">Pendaftaran Dibuka</span>
+            <div class="ak-batch-date">
+              {b.start_date ? new Date(b.start_date).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) : ''} – {b.end_date ? new Date(b.end_date).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) : 'Selesai'}
+            </div>
+            <div class="ak-batch-name">{b.batch_name || 'Batch Pelatihan Ahli K3 Umum'}</div>
+            <div class="ak-batch-venue">
+              <strong>Lokasi / Mode:</strong><br />
+              {b.venue || 'Online Zoom Interaktif'}
+            </div>
+            <a
+              href={`https://wa.me/6287759151278?text=${encodeURIComponent('Halo Wahana Totalita, saya ingin daftar batch: ' + (b.batch_name || 'AK3U'))}`}
+              class="ak-track-btn"
+              target="_blank"
+              rel="noopener"
+            >
+              <span>Daftar Batch Ini &rarr;</span>
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQS -->
+  <section class="ak-section" id="faq">
+    <div class="container">
+      <div class="ak-header-box">
+        <span class="ak-kicker">Tanya Jawab Populer</span>
+        <h2 class="ak-title">Pertanyaan Umum Seputar Pelatihan Ahli K3 Umum</h2>
+        <p class="ak-desc">
+          Jawaban lengkap atas pertanyaan yang paling sering diajukan calon peserta mengenai sertifikasi, legalitas, dan ujian Ahli K3 Umum.
+        </p>
+      </div>
+
+      <div class="ak-faq-list">
+        {faqs.map((f, idx) => (
+          <div class="ak-faq-item">
+            <details open={idx === 0}>
+              <summary>{f.q}</summary>
+              <div class="ak-faq-content">
+                <p>{f.a}</p>
+              </div>
+            </details>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTTOM CTA -->
+  <section class="ak-cta-strip">
+    <div class="container">
+      <h2>Amankan Kursi Pelatihan Ahli K3 Umum Anda Hari Ini</h2>
+      <p>
+        Dapatkan sertifikat resmi Kemnaker RI / BNSP untuk meningkatkan kepatuhan K3 perusahaan dan melesatkan karir profesional Anda. Konsultasikan jadwal dan penawaran khusus via WhatsApp.
+      </p>
+      <a href="https://wa.me/6287759151278?text=Halo%20Wahana%20Totalita,%20saya%20ingin%20konsultasi%20pelatihan%20Ahli%20K3%20Umum" class="ak-btn-primary" target="_blank" rel="noopener">
+        <span>Hubungi Konsultan Kami Sekarang</span>
+      </a>
+    </div>
+  </section>
+</Layout>

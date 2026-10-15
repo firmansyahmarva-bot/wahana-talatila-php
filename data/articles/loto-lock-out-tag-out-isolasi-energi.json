@@ -1,0 +1,40 @@
+{
+    "id": 96,
+    "title": "LOTO (Lock Out Tag Out): Prosedur Isolasi Energi yang Aman",
+    "slug": "loto-lock-out-tag-out-isolasi-energi",
+    "meta_title": "LOTO (Lock Out Tag Out): Prosedur Isolasi Energi | Wahana Totalita",
+    "meta_desc": "Memahami LOTO: konsep isolasi energi berbahaya, jenis energi, langkah penerapan, peran kunci & label, dan manfaat mencegah kecelakaan saat pemeliharaan.",
+    "keywords": "loto, lock out tag out, isolasi energi, prosedur loto, k3 mesin, energy isolation",
+    "category": "K3",
+    "thumbnail": null,
+    "content": "<p>Banyak kecelakaan serius terjadi saat mesin tiba-tiba menyala ketika sedang diperbaiki atau dibersihkan. Untuk mencegahnya, diterapkan prosedur LOTO (Lock Out Tag Out) yang memastikan energi berbahaya benar-benar terisolasi selama pekerjaan berlangsung.</p><h2>Apa Itu LOTO?</h2><p>LOTO (Lock Out Tag Out) adalah prosedur keselamatan untuk memastikan mesin atau peralatan dimatikan dan tidak dapat dihidupkan kembali secara tidak sengaja selama perbaikan atau pemeliharaan. Lock out berarti mengunci sumber energi, sedangkan tag out berarti memberi label peringatan.</p><h2>Mengapa LOTO Penting?</h2><p>Energi tersimpan pada mesin — listrik, mekanik, hidrolik, pneumatik — dapat melukai pekerja secara fatal jika terlepas tiba-tiba. LOTO melindungi teknisi pemeliharaan dari bahaya start-up tak terduga, gerakan mesin, atau pelepasan energi tersimpan.</p><h2>Jenis Energi yang Diisolasi</h2><ul><li>Energi listrik</li><li>Energi mekanik dan gerakan</li><li>Energi hidrolik dan pneumatik (tekanan)</li><li>Energi termal (panas)</li><li>Energi tersimpan seperti pegas dan gravitasi</li></ul><h2>Langkah-Langkah Penerapan LOTO</h2><ol><li>Persiapan dan pemberitahuan kepada pihak terkait</li><li>Matikan peralatan sesuai prosedur</li><li>Isolasi seluruh sumber energi</li><li>Pasang gembok (lock) dan label (tag)</li><li>Lepaskan/redam energi tersimpan</li><li>Verifikasi kondisi nol energi sebelum bekerja</li></ol><h2>Peran Gembok dan Label</h2><p>Gembok (lock) secara fisik mencegah peralatan dinyalakan, sedangkan label (tag) memberi informasi siapa yang mengunci, kapan, dan alasannya. Setiap pekerja yang terlibat sebaiknya memasang gembok pribadinya (group lockout) untuk perlindungan menyeluruh.</p><h2>Aturan Pelepasan LOTO</h2><p>Hanya orang yang memasang gembok yang boleh melepasnya, untuk memastikan tidak ada pekerja yang masih berada dalam bahaya. Pelepasan oleh orang lain hanya boleh dilakukan melalui prosedur khusus yang ketat dan terverifikasi.</p><h2>Manfaat Penerapan LOTO</h2><p>LOTO secara signifikan menurunkan kecelakaan fatal saat pemeliharaan, melindungi teknisi, memenuhi kepatuhan K3, dan menumbuhkan budaya kerja aman terhadap energi berbahaya. Penerapan yang konsisten adalah kunci efektivitasnya.</p><h2>Kesimpulan</h2><p>LOTO adalah prosedur sederhana namun menyelamatkan nyawa. Dengan mengisolasi energi berbahaya secara benar sebelum pekerjaan pemeliharaan, perusahaan mencegah kecelakaan fatal akibat mesin yang menyala tiba-tiba. Pelatihan LOTO membekali pekerja menerapkan prosedur ini dengan disiplin.</p><h2>Tingkatkan Kompetensi K3 Bersama Wahana Totalita</h2><p>Wahana Totalita Konsultan menyediakan pelatihan dan sertifikasi K3 dengan instruktur berpengalaman, kelas online via Zoom maupun tatap muka di Yogyakarta, pelatihan in-house, dan jadwal rutin setiap bulan. Konsultasi gratis via <a href=\"https://wa.me/6281235036420\">WhatsApp 0812-3503-6420</a> atau kunjungi <a href=\"/\">wahanatotalita.com</a> untuk info program dan biaya.</p>",
+    "faq_data": "[{\"q\":\"Apa fungsi gembok dan label pada LOTO?\",\"a\":\"Gembok mencegah peralatan dinyalakan, sedangkan label memberi tahu siapa yang mengunci dan alasannya.\"},{\"q\":\"Siapa yang boleh melepas LOTO?\",\"a\":\"Hanya orang yang memasangnya, untuk memastikan keselamatan; pelepasan oleh orang lain harus mengikuti prosedur khusus.\"},{\"q\":\"Energi apa saja yang diisolasi?\",\"a\":\"Listrik, mekanik, hidrolik, pneumatik, termal, dan energi tersimpan lain seperti pegas dan gravitasi.\"},{\"q\":\"Kapan LOTO diterapkan?\",\"a\":\"Saat pemeliharaan, perbaikan, atau pembersihan mesin yang berpotensi menyala atau melepaskan energi berbahaya.\"},{\"q\":\"Apa itu group lockout?\",\"a\":\"Praktik di mana setiap pekerja yang terlibat memasang gembok pribadinya agar semua terlindungi sampai pekerjaannya selesai.\"}]",
+    "author": "Wahana Totalita Konsultan",
+    "status": "published",
+    "published_at": "2026-06-25 13:50:17",
+    "view_count": 79,
+    "created_at": "2026-06-25 13:50:17",
+    "updated_at": "2026-10-12 14:18:46",
+    "faq_list": [
+        {
+            "q": "Apa fungsi gembok dan label pada LOTO?",
+            "a": "Gembok mencegah peralatan dinyalakan, sedangkan label memberi tahu siapa yang mengunci dan alasannya."
+        },
+        {
+            "q": "Siapa yang boleh melepas LOTO?",
+            "a": "Hanya orang yang memasangnya, untuk memastikan keselamatan; pelepasan oleh orang lain harus mengikuti prosedur khusus."
+        },
+        {
+            "q": "Energi apa saja yang diisolasi?",
+            "a": "Listrik, mekanik, hidrolik, pneumatik, termal, dan energi tersimpan lain seperti pegas dan gravitasi."
+        },
+        {
+            "q": "Kapan LOTO diterapkan?",
+            "a": "Saat pemeliharaan, perbaikan, atau pembersihan mesin yang berpotensi menyala atau melepaskan energi berbahaya."
+        },
+        {
+            "q": "Apa itu group lockout?",
+            "a": "Praktik di mana setiap pekerja yang terlibat memasang gembok pribadinya agar semua terlindungi sampai pekerjaannya selesai."
+        }
+    ]
+}

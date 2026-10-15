@@ -1,0 +1,18 @@
+{
+    "id": 196,
+    "title": "Prosedur Lockout/Tagout (LOTO): Panduan Lengkap untuk Keselamatan Listrik",
+    "slug": "prosedur-lockout-tagout-loto-k3",
+    "meta_title": "Prosedur LOTO (Lockout/Tagout): Panduan Lengkap K3 Listrik",
+    "meta_desc": "Panduan lengkap 6 langkah prosedur Lockout/Tagout (LOTO) untuk keselamatan listrik: notify, identify, isolate, lock, tag, verify.",
+    "keywords": null,
+    "category": "K3",
+    "thumbnail": null,
+    "content": "<h2>Apa itu Lockout/Tagout (LOTO)?</h2>\n<p>Lockout/Tagout (LOTO) adalah prosedur keselamatan untuk memastikan mesin atau instalasi listrik berbahaya dimatikan dan tidak dapat dinyalakan kembali secara tidak sengaja selama pekerjaan pemeliharaan atau perbaikan berlangsung. LOTO menjadi salah satu materi wajib dalam pelatihan K3 Listrik karena mencegah kecelakaan akibat energi listrik yang tidak terduga menyala kembali saat pekerja masih berada dalam zona bahaya.</p>\n<h2>6 Langkah Prosedur LOTO</h2>\n<ol>\n<li><strong>Notify (Pemberitahuan)</strong> — beritahu seluruh pekerja terdampak bahwa akan dilakukan LOTO pada suatu instalasi/mesin.</li>\n<li><strong>Identify (Identifikasi)</strong> — kenali semua sumber energi yang perlu diisolasi, termasuk energi tersimpan (kapasitor, pegas, tekanan).</li>\n<li><strong>Isolate (Isolasi)</strong> — matikan seluruh sumber energi menggunakan saklar, circuit breaker, atau katup yang sesuai.</li>\n<li><strong>Lock (Penguncian)</strong> — pasang gembok LOTO milik masing-masing pekerja pada titik isolasi, memastikan hanya pekerja tersebut yang dapat membukanya.</li>\n<li><strong>Tag (Penandaan)</strong> — pasang tag identitas pada gembok, mencantumkan nama pekerja, tanggal, dan alasan LOTO.</li>\n<li><strong>Verify (Verifikasi)</strong> — uji dengan alat ukur atau coba starter untuk memastikan energi benar-benar telah terisolasi sebelum memulai pekerjaan.</li>\n</ol>\n<h2>Prinsip Satu Pekerja, Satu Gembok</h2>\n<p>Setiap pekerja yang terlibat dalam pekerjaan pemeliharaan wajib memasang gembok pribadinya sendiri (personal lock) — bukan menggunakan gembok bersama. Prinsip ini memastikan mesin/instalasi hanya dapat dinyalakan kembali setelah seluruh pekerja yang memasang gembok telah selesai bekerja dan melepas guemboknya masing-masing.</p>\n<h2>Kesalahan Umum dalam Penerapan LOTO</h2>\n<p>Kesalahan yang sering ditemukan meliputi: menggunakan gembok bersama untuk banyak pekerja, melewatkan langkah verifikasi (langsung bekerja setelah isolasi tanpa mengecek ulang), tidak mengidentifikasi seluruh sumber energi (termasuk energi tersimpan), dan tergesa-gesa melepas LOTO sebelum benar-benar yakin area kerja sudah aman.</p>\n<h2>Pelatihan LOTO sebagai Bagian dari K3 Listrik</h2>\n<p>Prosedur LOTO menjadi materi inti dalam pelatihan Teknisi maupun Ahli K3 Listrik, dengan sesi praktik langsung menggunakan gembok, tag, dan alat ukur agar peserta benar-benar mahir menerapkannya di lapangan, bukan hanya memahami teorinya.</p>\n<p>Ingin tim Anda terlatih menerapkan prosedur LOTO dengan benar? <a href=\"/k3-listrik/\">kunjungi halaman program K3 Listrik kami</a>.</p>",
+    "faq_data": null,
+    "author": "Wahana Totalita Konsultan",
+    "status": "published",
+    "published_at": "2026-07-12 08:19:36",
+    "view_count": 169,
+    "created_at": "2026-07-12 08:19:36",
+    "updated_at": "2026-10-13 08:46:38"
+}

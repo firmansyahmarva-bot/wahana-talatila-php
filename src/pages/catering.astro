@@ -1,0 +1,266 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const canonical = 'https://wahanatotalita.com/catering/';
+const metaTitle = 'Jasa Catering Instansi Pemerintah & BUMN Yogyakarta — Wahana Totalita';
+const metaDesc = 'Jasa catering, snack box, dan konsumsi rapat untuk instansi pemerintah dan BUMN di Yogyakarta. Halal, lengkap dokumen SPJ, LPSE & PADI terdaftar. Pengadaan langsung < Rp 200 juta.';
+
+const pakets = [
+  { icon: '☕', title: 'Snack Box & Minuman', desc: 'Rapat, FGD, sosialisasi. Kombinasi kue basah + kue kering + minuman (air mineral, teh, kopi). Kemasan rapi, label instansi tersedia. Min. 20 box.', price: 'Rp 15.000 – 35.000/box', bg: 'var(--surface-subtle)' },
+  { icon: '🍱', title: 'Nasi Box / Lunch Box', desc: 'Seminar, workshop, pelatihan. Nasi + lauk 2–3 item + sayur + kerupuk + buah + air mineral. Kemasan food-grade steril. Min. 20 box.', price: 'Rp 35.000 – 75.000/box', bg: 'var(--warning-bg)' },
+  { icon: '🍽️', title: 'Prasmanan / Buffet', desc: 'Gathering, halal bihalal, rapat besar (≥50 orang). Menu lengkap: nasi, 3–4 lauk, sayur, buah, dessert, minuman. Termasuk peralatan makan dan petugas serving.', price: 'Mulai Rp 55.000/pax', bg: 'var(--info-bg)' },
+  { icon: '🥂', title: 'Gala Dinner Kedinasan', desc: 'Acara seremonial formal, kunjungan tamu VVIP, malam penghargaan. Menu 4-5 course, dekorasi meja, MC makan malam, dan layanan premium.', price: 'Mulai Rp 125.000/pax', bg: 'var(--warning-bg)' },
+  { icon: '🏕️', title: 'Konsumsi Outbound', desc: 'Paket konsumsi untuk kegiatan outbound dan team building: bekal lapangan, makan siang di lokasi, snack sore, dan makan malam api unggun.', price: 'Paket disesuaikan', bg: 'var(--surface-subtle)' },
+  { icon: '🎪', title: 'Konsumsi Seminar/Expo', desc: 'Coffee break pagi + siang, makan siang prasmanan, snack sore. Untuk acara 1–3 hari. Dapat dikombinasikan dengan layanan EO Wahana.', price: 'Paket disesuaikan', bg: 'var(--warning-bg)' },
+];
+
+const menus = [
+  { icon: '🍛', title: 'Menu Nusantara', desc: 'Nasi putih/kuning/uduk + ayam goreng/bakar/opor + rendang/semur daging + tumis sayur + lalapan + sambal + kerupuk. Menu paling populer untuk kegiatan dinas.' },
+  { icon: '🥗', title: 'Menu Sehat & Vegetarian', desc: 'Nasi merah/putih + tempe/tahu olahan + tumis sayuran beragam + soup + buah segar. Cocok untuk instansi yang memperhatikan gizi pegawai.' },
+  { icon: '🍜', title: 'Menu Kontemporer', desc: 'Pilihan lebih modern: nasi dengan lauk fusion, pasta, salad, dan minuman sehat. Untuk gathering dan event yang ingin kesan berbeda.' },
+  { icon: '🎂', title: 'Snack Premium', desc: 'Kue tradisional Yogyakarta (klepon, lemper, onde-onde, tart) + kue modern (finger food, pastry) + minuman premium (es cincau, wedang uwuh, jus segar).' },
+];
+
+const docs = [
+  { title: 'Surat Penawaran', desc: 'Resmi, bermaterai, kop PT Kreasi Ultimate Berjaya' },
+  { title: 'RAB Rinci', desc: 'Per item menu dengan harga satuan — mudah diverifikasi PPK' },
+  { title: 'NPWP & Faktur Pajak', desc: 'Faktur pajak diterbitkan untuk pembelian ≥ Rp 1 juta' },
+  { title: 'Kuitansi Resmi', desc: 'Bukti pembayaran resmi bermaterai' },
+  { title: 'Berita Acara (BAST)', desc: 'Serah terima konsumsi — ditandatangani penerima' },
+  { title: 'Foto Dokumentasi', desc: 'Foto persiapan dan penyajian konsumsi' },
+  { title: 'Daftar Menu Tersaji', desc: 'Rincian menu yang dihidangkan sesuai SPK' },
+];
+
+const keunggulan = [
+  { icon: '🏛️', title: 'Paham Protokol Kedinasan', desc: 'Berpengalaman menangani konsumsi untuk kegiatan formal instansi pemerintah — memahami tata kelola, protokol, dan standar administrasi yang diperlukan.' },
+  { icon: '📋', title: 'Satu Vendor, Banyak Layanan', desc: 'Konsumsi + EO + outbound + wisata dalam satu vendor — sederhanakan proses pengadaan dan koordinasi kegiatan instansi Anda.' },
+  { icon: '⏱️', title: 'Tepat Waktu Dijamin', desc: 'Konsumsi yang terlambat mengganggu jalannya acara dinas. Kami memiliki sistem jadwal ketat dengan buffer waktu untuk memastikan pengiriman tepat waktu.' },
+  { icon: '📄', title: 'Administrasi Beres', desc: 'Seluruh dokumen yang dibutuhkan untuk SPJ sudah disiapkan sejak awal — tidak perlu bolak-balik minta kelengkapan administrasi.' },
+  { icon: '✅', title: 'Halal & Higienis', desc: 'Seluruh menu halal, disiapkan di dapur higienis, dikemas dalam kemasan food-grade yang aman dan rapi untuk kegiatan formal.' },
+  { icon: '🎯', title: 'Fleksibel & Dapat Dikustom', desc: 'Menu, kemasan, label, dan jadwal dapat disesuaikan dengan kebutuhan spesifik acara — termasuk menu untuk tamu VVIP atau kebutuhan diet khusus.' },
+];
+
+const cross = [
+  { href: '/event-organizer/', title: 'Event Organizer Kedinasan', desc: 'Seminar, rakor, upacara — EO + konsumsi dalam satu paket.' },
+  { href: '/outbound/', title: 'Outbound & Team Building', desc: 'Konsumsi makan siang lapangan + snack untuk outbound.' },
+  { href: '/wisata-karyawan/', title: 'Wisata Karyawan', desc: 'Paket all-in wisata + konsumsi selama perjalanan dinas.' },
+];
+
+const faqs = [
+  {
+    q: 'Apakah catering dari Wahana Totalita tersertifikasi halal?',
+    a: 'Ya. Seluruh menu halal dan disiapkan oleh mitra dapur yang memperhatikan standar kehalalan. Untuk kegiatan instansi pemerintah, ini adalah standar wajib yang selalu kami penuhi.'
+  },
+  {
+    q: 'Apa saja dokumen administrasi yang tersedia untuk keperluan SPJ?',
+    a: 'Kami siapkan: Surat Penawaran Harga, RAB rinci, Faktur Pajak, kuitansi resmi, BAST, foto dokumentasi, dan daftar menu tersaji. Semua dokumen diterbitkan oleh PT Kreasi Ultimate Berjaya.'
+  },
+  {
+    q: 'Berapa minimum order dan jangkauan area layanan?',
+    a: 'Minimum 20 box untuk snack/nasi box, 50 pax untuk prasmanan. Jangkauan: seluruh Yogyakarta. Pengiriman gratis radius 15 km dari pusat kota.'
+  },
+  {
+    q: 'Bagaimana mekanisme pengadaan melalui LPSE?',
+    a: 'Wahana terdaftar LPSE dan PADI UMKM kategori Catering & Snack. Nilai di bawah Rp 200 juta dapat diproses melalui pengadaan langsung — PPK hubungi kami, kami siapkan seluruh dokumen.'
+  },
+  {
+    q: 'Apakah bisa memesan paket lengkap termasuk peralatan makan?',
+    a: 'Ya. Paket prasmanan dan gala dinner sudah termasuk peralatan makan, meja display, dan petugas serving. Dekorasi meja sederhana juga tersedia untuk acara formal.'
+  },
+  {
+    q: 'Berapa harga snack box dan nasi box untuk rapat dinas?',
+    a: 'Snack box Rp 15.000–35.000/box, nasi box Rp 35.000–75.000/box. Untuk penawaran resmi dengan RAB yang bisa digunakan pengajuan anggaran, hubungi kami via WhatsApp.'
+  },
+];
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Beranda', item: 'https://wahanatotalita.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Layanan', item: 'https://wahanatotalita.com/layanan/' },
+      { '@type': 'ListItem', position: 3, name: 'Catering Instansi', item: canonical },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Wahana Totalita Konsultan',
+    url: 'https://wahanatotalita.com',
+    telephone: '+6287759151278',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Yogyakarta',
+      addressRegion: 'DI Yogyakarta',
+      addressCountry: 'ID',
+    },
+  },
+];
+---
+
+<Layout
+  title={metaTitle}
+  description={metaDesc}
+  canonical={canonical}
+  schemas={schemas}
+>
+  <!-- HERO -->
+  <section style="background:linear-gradient(135deg,var(--brand) 0%,var(--accent) 100%);color:var(--surface);padding:60px 20px 50px;">
+    <div style="max-width:900px;margin:0 auto;">
+      <nav aria-label="breadcrumb" style="font-size:0.85rem;opacity:0.8;margin-bottom:16px;">
+        <a href="/" style="color:var(--warning-border);text-decoration:none;">Beranda</a> &rsaquo;
+        <span>Catering Instansi</span>
+      </nav>
+      <h1 style="font-size:clamp(1.6rem,4vw,2.4rem);font-weight:700;margin:0 0 16px;">
+        Jasa Catering &amp; Konsumsi untuk Instansi Pemerintah dan BUMN
+      </h1>
+      <p style="font-size:1.1rem;opacity:0.92;max-width:720px;margin:0 0 10px;line-height:1.7;">
+        Konsumsi rapat, snack box seminar, prasmanan gathering, hingga gala dinner kedinasan — Wahana Totalita menyediakan layanan catering lengkap untuk semua jenis kegiatan instansi pemerintah dan BUMN di Yogyakarta. Halal, tepat waktu, dan dokumen SPJ beres.
+      </p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 28px;">
+        <span style="background:color-mix(in srgb, var(--surface) 18%, transparent);padding:6px 14px;border-radius:20px;font-size:0.85rem;">✓ LPSE &amp; PADI Terdaftar</span>
+        <span style="background:color-mix(in srgb, var(--surface) 18%, transparent);padding:6px 14px;border-radius:20px;font-size:0.85rem;">✓ Halal</span>
+        <span style="background:color-mix(in srgb, var(--surface) 18%, transparent);padding:6px 14px;border-radius:20px;font-size:0.85rem;">✓ Faktur Pajak &amp; SPJ Lengkap</span>
+        <span style="background:color-mix(in srgb, var(--surface) 18%, transparent);padding:6px 14px;border-radius:20px;font-size:0.85rem;">✓ Pengadaan Langsung &lt; Rp 200 juta</span>
+        <span style="background:color-mix(in srgb, var(--surface) 18%, transparent);padding:6px 14px;border-radius:20px;font-size:0.85rem;">✓ Min. 20 box</span>
+      </div>
+      <a href="https://wa.me/6287759151278?text=Halo%2C+saya+ingin+info+jasa+catering+untuk+kegiatan+instansi+kami+di+Yogyakarta.+Mohon+kirim+harga+dan+menu."
+         target="_blank" rel="noopener"
+         style="display:inline-block;background:var(--surface);color:var(--brand);padding:14px 32px;border-radius:6px;font-weight:700;text-decoration:none;font-size:1rem;">
+        Minta Penawaran Harga
+      </a>
+    </div>
+  </section>
+
+  <main style="max-width:960px;margin:0 auto;padding:40px 20px 60px;">
+
+    <!-- PAKET LAYANAN -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:24px;">
+        Paket Layanan Catering
+      </h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;">
+        {pakets.map((p) => (
+          <div style={`background:${p.bg};border-radius:10px;padding:20px;border-top:4px solid var(--brand);`}>
+            <div style="font-size:1.8rem;margin-bottom:10px;">{p.icon}</div>
+            <div style="font-weight:700;color:var(--brand);margin-bottom:6px;font-size:0.95rem;">{p.title}</div>
+            <p style="color:var(--slate-600);font-size:0.86rem;line-height:1.6;margin:0 0 10px;">{p.desc}</p>
+            <div style="background:var(--brand);color:var(--surface);padding:6px 12px;border-radius:4px;font-size:0.85rem;font-weight:600;display:inline-block;">{p.price}</div>
+          </div>
+        ))}
+      </div>
+      <p style="color:var(--slate-600);font-size:0.85rem;margin-top:16px;font-style:italic;">* Harga dapat berubah sesuai menu dan volume. Hubungi kami untuk penawaran resmi dan RAB yang dapat digunakan untuk pengajuan anggaran.</p>
+    </section>
+
+    <!-- MENU UNGGULAN -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:20px;">
+        Pilihan Menu
+      </h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
+        {menus.map((m) => (
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:18px;">
+            <div style="font-size:1.8rem;margin-bottom:10px;">{m.icon}</div>
+            <div style="font-weight:600;color:var(--brand);margin-bottom:8px;">{m.title}</div>
+            <p style="color:var(--slate-600);font-size:0.86rem;line-height:1.6;margin:0;">{m.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- PROCUREMENT -->
+    <section style="margin-bottom:48px;background:var(--accent-light);border-radius:10px;padding:28px;">
+      <h2 style="color:var(--brand);font-size:1.4rem;margin:0 0 6px;">Pengadaan Catering untuk Instansi Pemerintah</h2>
+      <p style="color:var(--slate-600);font-size:0.9rem;margin:0 0 20px;line-height:1.7;">Wahana Totalita terdaftar di LPSE dan PADI UMKM sebagai vendor <strong>Catering &amp; Snack</strong>. Pengadaan di bawah Rp 200 juta melalui mekanisme pengadaan langsung — tidak perlu tender.</p>
+      <div style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;font-size:0.88rem;background:var(--surface);border-radius:8px;overflow:hidden;">
+          <thead>
+            <tr style="background:var(--brand);color:var(--surface);">
+              <th style="padding:10px 14px;text-align:left;">Kebutuhan SPJ</th>
+              <th style="padding:10px 14px;text-align:left;">Yang Kami Siapkan</th>
+            </tr>
+          </thead>
+          <tbody>
+            {docs.map((d, i) => (
+              <tr style={`background:${i % 2 === 0 ? 'var(--surface)' : 'var(--surface-subtle)'};`}>
+                <td style="padding:9px 14px;border-bottom:1px solid var(--border);font-weight:600;color:var(--brand);">{d.title}</td>
+                <td style="padding:9px 14px;border-bottom:1px solid var(--border);color:var(--slate-700);">{d.desc}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- KEUNGGULAN -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:20px;">
+        Keunggulan Wahana Totalita untuk Catering Instansi
+      </h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;">
+        {keunggulan.map((k) => (
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;">
+            <div style="font-size:1.4rem;margin-bottom:8px;">{k.icon}</div>
+            <div style="font-weight:600;color:var(--brand);margin-bottom:6px;font-size:0.9rem;">{k.title}</div>
+            <p style="color:var(--slate-600);font-size:0.85rem;line-height:1.6;margin:0;">{k.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- CROSS LINKS -->
+    <section style="margin-bottom:48px;background:var(--slate-50);border-radius:10px;padding:24px;">
+      <h2 style="color:var(--brand);font-size:1.3rem;margin:0 0 16px;">Paket Lengkap Kegiatan Instansi</h2>
+      <p style="color:var(--slate-600);line-height:1.8;margin:0 0 18px;font-size:0.9rem;">Gabungkan layanan catering dengan layanan lain Wahana Totalita untuk kegiatan yang lebih efisien dan terkoordinasi.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;">
+        {cross.map((c) => (
+          <a href={c.href} style="display:block;background:var(--surface);border:1px solid var(--warning-border);border-radius:8px;padding:14px;text-decoration:none;">
+            <div style="font-weight:600;color:var(--brand);margin-bottom:4px;font-size:0.9rem;">{c.title}</div>
+            <div style="color:var(--slate-600);font-size:0.83rem;">{c.desc}</div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:24px;">Pertanyaan yang Sering Diajukan</h2>
+      {faqs.map((faq) => (
+        <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:12px;overflow:hidden;background:var(--surface);">
+          <summary style="padding:16px 20px;background:var(--slate-50);cursor:pointer;font-weight:600;color:var(--brand);font-size:0.95rem;display:flex;justify-content:space-between;align-items:center;list-style:none;">
+            <span>{faq.q}</span>
+            <span style="font-size:1.2rem;font-weight:700;color:var(--accent);min-width:20px;text-align:center;">+</span>
+          </summary>
+          <div style="padding:16px 20px;color:var(--slate-700);line-height:1.8;background:var(--surface);border-top:1px solid var(--border);font-size:0.92rem;">
+            {faq.a}
+          </div>
+        </details>
+      ))}
+    </section>
+
+    <!-- CTA -->
+    <section style="background:linear-gradient(135deg,var(--brand),var(--accent));color:var(--surface);border-radius:12px;padding:40px;text-align:center;">
+      <h2 style="margin:0 0 12px;font-size:1.6rem;color:var(--surface);">Butuh Konsumsi untuk Kegiatan Instansi Anda?</h2>
+      <p style="opacity:0.9;margin:0 0 10px;line-height:1.7;max-width:580px;margin-left:auto;margin-right:auto;">
+        Hubungi kami sekarang untuk penawaran harga dan RAB resmi yang dapat langsung digunakan untuk pengajuan anggaran.
+      </p>
+      <p style="opacity:0.75;font-size:0.9rem;margin:0 0 24px;">Respon penawaran dalam 2 jam kerja · Dokumen SPJ lengkap</p>
+      <a href="https://wa.me/6287759151278?text=Halo%2C+saya+ingin+pesan+catering+untuk+kegiatan+instansi+kami.+Mohon+kirim+menu+dan+harga+beserta+info+pengadaan+LPSE."
+         target="_blank" rel="noopener"
+         style="display:inline-block;background:var(--surface);color:var(--brand);padding:14px 36px;border-radius:6px;font-weight:700;text-decoration:none;font-size:1.05rem;">
+        WhatsApp: 0877-5915-1278
+      </a>
+    </section>
+
+  </main>
+</Layout>

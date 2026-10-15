@@ -1,0 +1,145 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import jobs from '../../data/jobs.json';
+
+const title = 'Lowongan Kerja K3 & HSE Indonesia — Job Board Safety | Wahana Totalita';
+const description = 'Temukan lowongan kerja K3, HSE Officer, Safety Manager, QHSE Engineer di seluruh Indonesia. Update info karir keselamatan kerja terpercaya.';
+const canonical = 'https://wahanatotalita.com/lowongan/';
+
+function formatPrice(amount: number) {
+  return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(amount);
+}
+---
+
+<Layout
+  title={title}
+  description={description}
+  canonical={canonical}
+  pageCss={['/assets/css/page/lowongan.css']}
+>
+  <section class="job-hero">
+    <div class="container">
+      <h1>💼 Lowongan Kerja K3 &amp; HSE</h1>
+      <p style="opacity:.9;max-width:580px;margin:0 auto 20px;">Temukan peluang karir profesional di bidang Keselamatan, Kesehatan Kerja &amp; Lingkungan Hidup di Indonesia</p>
+      
+      <div class="search-box">
+        <input type="search" id="jobSearch" placeholder="Cari posisi (misal: HSE Officer, Safety Manager, Balikpapan)..." autocomplete="off" />
+        <button type="button" id="jobSearchBtn">🔍 Cari</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="filter-bar">
+    <div class="container" style="display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap;">
+      <div style="display: flex; gap: 8px; align-items: center;">
+        <span style="font-size: .9rem; font-weight: 600; color: #475569;">Tipe Pekerjaan:</span>
+        <button type="button" class="filter-pill active" data-type="all">Semua Tipe</button>
+        <button type="button" class="filter-pill" data-type="fulltime">Full-time</button>
+        <button type="button" class="filter-pill" data-type="contract">Kontrak</button>
+      </div>
+
+      <a href="https://wa.me/6281226834789?text=Halo%20Admin%20Wahana%20Totalita,%20perusahaan%20kami%20ingin%20memasang%20info%20lowongan%20kerja%20K3." target="_blank" rel="noopener" style="font-size: .875rem; font-weight: 600; color: #16a34a; text-decoration: none;">
+        + Pasang Lowongan K3 (Gratis)
+      </a>
+    </div>
+  </div>
+
+  <div class="container" style="padding-top: 24px; padding-bottom: 60px;">
+    <div class="jobs-list" id="jobsList">
+      {jobs.length === 0 ? (
+        <div class="empty-state">
+          <div style="font-size:3rem;margin-bottom:16px">📭</div>
+          <h3>Belum ada lowongan tersedia</h3>
+          <p>Lowongan K3 akan segera tersedia. Hubungi kami untuk posting lowongan.</p>
+          <a href="https://wa.me/6281226834789?text=Halo,%20saya%20ingin%20posting%20lowongan%20kerja%20K3" style="display:inline-block;margin-top:16px;background:#25d366;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600">💬 Post Lowongan (Gratis)</a>
+        </div>
+      ) : (
+        jobs.map((j) => (
+          <div class="job-card" data-title={j.title.toLowerCase()} data-loc={j.location.toLowerCase()} data-type={j.job_type}>
+            <div class="job-logo">🏢</div>
+            <div class="job-info">
+              <h2>
+                <a href={`/lowongan/${j.slug}/`}>{j.title}</a>
+                <span class="new-badge">BARU</span>
+              </h2>
+              <div class="company">{j.company}</div>
+              <div class="tags">
+                <span class="tag">📍 {j.location}</span>
+                <span class="tag">📋 {j.job_type.toUpperCase()}</span>
+                {j.salary_min && (
+                  <span class="tag">💰 {formatPrice(j.salary_min)} - {formatPrice(j.salary_max)}</span>
+                )}
+              </div>
+              <p style="font-size: .95rem; color: #64748b; margin-top: 10px; line-height: 1.5;">{j.description}</p>
+            </div>
+            <div class="job-action">
+              <a href={`/lowongan/${j.slug}/`} class="btn-apply">Lihat Detail →</a>
+            </div>
+          </div>
+        ))
+      )}
+    </div>
+
+    <div class="post-cta-box" style="margin-top: 48px; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; padding: 28px; text-align: center;">
+      <h3 style="color: #166534; font-size: 1.25rem; font-weight: 700; margin-bottom: 8px;">Perusahaan Anda Sedang Membutuhkan Tenaga Profesional K3 / HSE?</h3>
+      <p style="color: #15803d; max-width: 600px; margin: 0 auto 16px; font-size: .95rem;">
+        Publikasikan lowongan kerja K3 perusahaan Anda ke ribuan alumni pelatihan dan praktisi K3 bersertifikat Wahana Totalita di seluruh Indonesia.
+      </p>
+      <a href="https://wa.me/6281226834789?text=Halo%20Wahana%20Totalita,%20saya%20ingin%20memasang%20info%20lowongan%20kerja%20K3%20perusahaan%20kami." target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 24px; background: #16a34a; color: #fff; border-radius: 8px; text-decoration: none; font-weight: 700;">
+        💬 Hubungi Tim Kami untuk Publikasi Lowongan
+      </a>
+    </div>
+  </div>
+
+  <style>
+    .filter-pill {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: .85rem;
+      cursor: pointer;
+      color: #334155;
+      font-weight: 500;
+    }
+    .filter-pill.active {
+      background: #16a34a;
+      border-color: #16a34a;
+      color: #fff;
+    }
+  </style>
+
+  <script>
+    const searchInput = document.getElementById('jobSearch') as HTMLInputElement;
+    const cards = document.querySelectorAll('.job-card') as NodeListOf<HTMLElement>;
+    const pills = document.querySelectorAll('.filter-pill') as NodeListOf<HTMLButtonElement>;
+
+    let currentType = 'all';
+
+    function filterJobs() {
+      const q = (searchInput?.value || '').toLowerCase().trim();
+      cards.forEach((card) => {
+        const title = card.getAttribute('data-title') || '';
+        const loc = card.getAttribute('data-loc') || '';
+        const type = card.getAttribute('data-type') || '';
+        const matchesQuery = !q || title.includes(q) || loc.includes(q);
+        const matchesType = currentType === 'all' || type === currentType;
+
+        card.style.display = (matchesQuery && matchesType) ? '' : 'none';
+      });
+    }
+
+    if (searchInput) {
+      searchInput.addEventListener('input', filterJobs);
+    }
+
+    pills.forEach((pill) => {
+      pill.addEventListener('click', () => {
+        pills.forEach((p) => p.classList.remove('active'));
+        pill.classList.add('active');
+        currentType = pill.getAttribute('data-type') || 'all';
+        filterJobs();
+      });
+    });
+  </script>
+</Layout>

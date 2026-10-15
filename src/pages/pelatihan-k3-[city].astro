@@ -1,0 +1,354 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const citiesMap: Record<string, any> = {
+    jakarta: {
+      name: 'Jakarta',
+      province: 'DKI Jakarta',
+      title: 'Pelatihan K3 Jakarta – Sertifikasi KEMNAKER RI & BNSP | Wahana Totalita',
+      desc: 'Sertifikasi Ahli K3 Umum (AK3U) BNSP & Kemnaker RI di Jakarta, plus K3 Konstruksi, K3 Listrik, dan K3 Migas.',
+      industries: 'konstruksi gedung bertingkat, industri manufaktur, minyak dan gas, logistik dan pergudangan',
+      demand: 'Jakarta sebagai ibu kota memiliki kepadatan industri tertinggi di Indonesia dengan kebutuhan sertifikasi K3 yang masif.',
+      companies: 'Pertamina, PLN, Wijaya Karya, Adhi Karya, Waskita Karya',
+    },
+    surabaya: {
+      name: 'Surabaya',
+      province: 'Jawa Timur',
+      title: 'Pelatihan K3 Surabaya – Sertifikasi KEMNAKER RI & BNSP | Wahana Totalita',
+      desc: 'Sertifikasi Ahli K3 Umum (AK3U) BNSP & Kemnaker RI di Surabaya untuk industri perkapalan, petrokimia, dan manufaktur berat.',
+      industries: 'industri perkapalan, petrokimia Gresik, manufaktur berat, logistik pelabuhan Tanjung Perak',
+      demand: 'Surabaya adalah pusat industri terbesar kedua Indonesia dengan kawasan industri SIER, PIER, dan kompleks petrokimia.',
+      companies: 'PT Petrokimia Gresik, PAL Indonesia, Pelindo, Semen Indonesia',
+    },
+    yogyakarta: {
+      name: 'Yogyakarta',
+      province: 'D.I. Yogyakarta',
+      title: 'Pelatihan K3 Yogyakarta – Pusat Diklat Tatap Muka Resmi | Wahana Totalita',
+      desc: 'Pelatihan K3 tatap muka & online di Yogyakarta. Pusat pembinaan Ahli K3 Umum, BNSP, dan sertifikasi Kemnaker RI terpercaya.',
+      industries: 'pendidikan tinggi, pariwisata dan perhotelan, UMKM manufaktur, rumah sakit dan fasyankes',
+      demand: 'Yogyakarta merupakan training center utama Wahana Totalita yang melayani ribuan peserta dari seluruh penjuru Indonesia setiap tahunnya.',
+      companies: 'Hotel Bintang 4-5, RSUP Dr. Sardjito, Bandara YIA, Berbagai Perguruan Tinggi',
+    },
+    bandung: {
+      name: 'Bandung',
+      province: 'Jawa Barat',
+      title: 'Pelatihan K3 Bandung – Sertifikasi KEMNAKER RI & BNSP | Wahana Totalita',
+      desc: 'Sertifikasi Ahli K3 Umum, K3 Listrik, dan K3 Kimia di Bandung untuk industri tekstil, farmasi, dan manufaktur presisi.',
+      industries: 'tekstil dan garmen, farmasi dan kimia, teknologi informasi, pariwisata',
+      demand: 'Bandung dan sekitarnya (Cimahi, Padalarang) memiliki ratusan pabrik tekstil dan farmasi yang wajib audit SMK3 PP 50/2012.',
+      companies: 'Bio Farma, PT Dirgantara Indonesia, Pindad, Kimia Farma',
+    },
+    semarang: {
+      name: 'Semarang',
+      province: 'Jawa Tengah',
+      title: 'Pelatihan K3 Semarang – Sertifikasi KEMNAKER RI & BNSP | Wahana Totalita',
+      desc: 'Pelatihan K3 Semarang: Ahli K3 Umum Kemnaker RI, BNSP, Operator Forklift & Boiler kawasan industri Wijayakusuma dan Kendal.',
+      industries: 'manufaktur ekspor, industri makanan minuman, logistik Pelabuhan Tanjung Emas, tekstil Kendal',
+      demand: 'Kawasan Industri Kendal (KIK) dan Wijayakusuma mengalami ekspansi pesat yang membutuhkan personel K3 berlisensi resmi.',
+      companies: 'Kawasan Industri Kendal (KIK), PT Sido Muncul, PT Phapros, Pelindo',
+    },
+    cilegon: {
+      name: 'Cilegon',
+      province: 'Banten',
+      title: 'Pelatihan K3 Cilegon – Ahli K3 Kimia, Industri Baja & Petrokimia | Wahana Totalita',
+      desc: 'Pusat pelatihan K3 Cilegon: Ahli K3 Kimia, AK3U Kemnaker, dan K3 Ruang Terbatas untuk industri baja Krakatau dan petrokimia.',
+      industries: 'industri baja dan logam berat, petrokimia Cilegon-Anyer, pembangkitan listrik PLTU Suralaya',
+      demand: 'Cilegon adalah sentra industri kimia dan baja terberat di Pulau Jawa dengan hazard tingkat tinggi yang mewajibkan sertifikasi resmi.',
+      companies: 'Krakatau Steel, Chandra Asri Petrochemical, Lotte Chemical, PLTU Suralaya',
+    },
+    karawang: {
+      name: 'Karawang',
+      province: 'Jawa Barat',
+      title: 'Pelatihan K3 Karawang – Sentra Manufaktur Otomotif & Elektronik | Wahana Totalita',
+      desc: 'Pelatihan K3 Karawang: KIIC, Suryacipta, KIM. Pembinaan Ahli K3 Umum, Operator Crane/Forklift & Teknisi Listrik Kemnaker RI.',
+      industries: 'manufaktur otomotif, perakitan elektronik, komponen presisi, logistik industri',
+      demand: 'Karawang memiliki kawasan industri terluas di Asia Tenggara dengan ribuan pabrik otomotif dan elektronik internasional.',
+      companies: 'Toyota Motor Manufacturing, Astra Honda Motor, Daihatsu, Yamaha',
+    },
+    balikpapan: {
+      name: 'Balikpapan',
+      province: 'Kalimantan Timur',
+      title: 'Pelatihan K3 Balikpapan & IKN – Sertifikasi Migas, Tambang & Konstruksi | Wahana Totalita',
+      desc: 'Pelatihan K3 Balikpapan: Ahli K3 Migas, POP Pertambangan BNSP, K3 Konstruksi IKN Nusantara. PJK3 Resmi Kemnaker RI.',
+      industries: 'minyak dan gas bumi, penunjang pertambangan batubara, mega proyek konstruksi IKN Nusantara',
+      demand: 'Balikpapan adalah gerbang utama IKN Nusantara dan hub migas Kalimantan yang membutuhkan kualifikasi HSE berstandar tinggi.',
+      companies: 'Pertamina RU V Balikpapan, TotalEnergies, Petrosea, Thiess, Hexindo',
+    },
+    samarinda: {
+      name: 'Samarinda',
+      province: 'Kalimantan Timur',
+      title: 'Pelatihan K3 Samarinda – Sertifikasi Tambang Batubara & Lingkungan | Wahana Totalita',
+      desc: 'Sertifikasi K3 Samarinda: POP/POM Pertambangan Minerba BNSP, Pengelolaan Limbah B3, dan Ahli K3 Umum Kemnaker RI.',
+      industries: 'pertambangan batubara, kehutanan dan perkayuan, logistik tongkang Sungai Mahakam',
+      demand: 'Industri batubara dan energi di Samarinda mewajibkan setiap penanggung jawab teknis memiliki sertifikat kompetensi POP/POM ESDM.',
+      companies: 'PT Kaltim Prima Coal, Bayan Resources, BUMA, Kideco Jaya Agung',
+    },
+    medan: {
+      name: 'Medan',
+      province: 'Sumatera Utara',
+      title: 'Pelatihan K3 Medan – Sertifikasi Perkebunan Sawit & Manufaktur | Wahana Totalita',
+      desc: 'Pelatihan K3 Medan & Sumut: Ahli K3 Umum Kemnaker RI, K3 Pabrik Kelapa Sawit (PKS), Operator Boiler & Bejana Tekan.',
+      industries: 'perkebunan dan industri kelapa sawit (PKS), pengolahan karet, logistik Pelabuhan Belawan',
+      demand: 'Sumatera Utara merupakan sentra agroindustri sawit terbesar dengan ratusan PKS yang wajib menempatkan Ahli K3 Umum dan operator berlisensi.',
+      companies: 'PTPN Group, Musim Mas, Wilmar International, Socfin Indonesia',
+    },
+    makassar: {
+      name: 'Makassar',
+      province: 'Sulawesi Selatan',
+      title: 'Pelatihan K3 Makassar – Hub Industri & Smelter Indonesia Timur | Wahana Totalita',
+      desc: 'Pelatihan K3 Makassar: Ahli K3 Umum, K3 Konstruksi & Smelter Nikel. Hub pelatihan resmi Kemnaker RI untuk kawasan Indonesia Timur.',
+      industries: 'pusat logistik maritim Kawasan Timur Indonesia, industri semen, penunjang smelter nikel Morowali/Pomalaa',
+      demand: 'Makassar berperan sebagai hub utama logistik dan tenaga kerja teknis bagi kawasan hilirisasi tambang nikel di Sulawesi.',
+      companies: 'PT Semen Tonasa, Bosowa Semen, Pelindo IV, KIMA',
+    },
+    batam: {
+      name: 'Batam',
+      province: 'Kepulauan Riau',
+      title: 'Pelatihan K3 Batam – Galangan Kapal, Elektronik & Fabrikasi Offshore | Wahana Totalita',
+      desc: 'Pelatihan K3 Batam: Ahli K3 Konstruksi, Juru Las (Welder), Operator Crane, dan CSMS Migas untuk kawasan industri galangan kapal.',
+      industries: 'shipyard dan galangan kapal, fabrikasi migas offshore, industri manufaktur semikonduktor',
+      demand: 'Batam memiliki regulasi keselamatan maritim dan offshore yang ketat sesuai standar keselamatan internasional.',
+      companies: 'McDermott Indonesia, Batamindo, ASL Shipyard, Citra Tubindo',
+    },
+    solo: {
+      name: 'Solo',
+      province: 'Jawa Tengah',
+      title: 'Pelatihan K3 Solo – Sertifikasi Manufaktur & Tekstil Surakarta | Wahana Totalita',
+      desc: 'Sertifikasi K3 Solo (Surakarta): Ahli K3 Umum Kemnaker RI, Petugas P3K, dan Damkar untuk industri tekstil dan manufaktur Soloraya.',
+      industries: 'tekstil dan garmen Sukoharjo-Karanganyar, pariwisata dan kuliner, manufaktur furnitur',
+      demand: 'Klaster industri di Soloraya terus meningkatkan standar keselamatan kerja guna memenuhi kriteria audit buyers ekspor.',
+      companies: 'Sritex Group, Danliris, Konimex, Indo Acidatama',
+    },
+    malang: {
+      name: 'Malang',
+      province: 'Jawa Timur',
+      title: 'Pelatihan K3 Malang – Sertifikasi Industri Manufaktur & Fasyankes | Wahana Totalita',
+      desc: 'Pelatihan K3 Malang: Ahli K3 Umum Kemnaker RI, K3 Rumah Sakit & Fasyankes, ISO 45001. Kelas online & in-house corporate.',
+      industries: 'industri rokok dan tembakau, manufaktur olahan makanan, pariwisata, fasilitas kesehatan',
+      demand: 'Malang Raya memiliki puluhan fasilitas kesehatan besar dan industri manufaktur yang membutuhkan sertifikasi kepatuhan K3.',
+      companies: 'PT Bentoel Group, Greenfields Indonesia, Rumah Sakit Besar Malang Raya',
+    },
+    denpasar: {
+      name: 'Denpasar',
+      province: 'Bali',
+      title: 'Pelatihan K3 Bali (Denpasar) – Standar K3 Pariwisata, Hotel & Konstruksi | Wahana Totalita',
+      desc: 'Pelatihan K3 di Bali: Ahli K3 Umum Kemnaker RI, K3 Perhotelan, Penanggulangan Kebakaran & Petugas P3K. Sertifikat resmi nasional.',
+      industries: 'perhotelan dan pariwisata internasional, konstruksi resort dan villa, bandara dan logistik',
+      demand: 'Sektor pariwisata Bali mewajibkan standar safety tinggi guna menjamin keselamatan wisatawan domestik dan mancanegara.',
+      companies: 'Resort & Hotel Bintang 5 Internasional, Angkasa Pura I Bandara Ngurah Rai',
+    },
+    palembang: {
+      name: 'Palembang',
+      province: 'Sumatera Selatan',
+      title: 'Pelatihan K3 Palembang – Sertifikasi Pupuk, Batubara & Petrokimia | Wahana Totalita',
+      desc: 'Pelatihan K3 Palembang: Ahli K3 Kimia, POP Tambang BNSP, dan AK3U Kemnaker RI untuk sentra industri pupuk dan energi Sumsel.',
+      industries: 'pupuk dan petrokimia, pertambangan batubara dan gas bumi, perkebunan kelapa sawit dan karet',
+      demand: 'Palembang memiliki kompleks petrokimia Pusri dan jalur logistik energi batubara yang mewajibkan pengawasan K3 ketat.',
+      companies: 'PT Pupuk Sriwidjaja (Pusri), PT Bukit Asam (PTBA), Pertamina Plaju',
+    },
+    bekasi: {
+      name: 'Bekasi',
+      province: 'Jawa Barat',
+      title: 'Pelatihan K3 Bekasi – Sentra Industri Manufaktur Cikarang & MM2100 | Wahana Totalita',
+      desc: 'Pelatihan K3 Bekasi & Cikarang: MM2100, Jababeka, EJIP. Ahli K3 Umum, Operator Forklift, Teknisi Listrik & Auditor SMK3.',
+      industries: 'manufaktur berat dan elektronik, perakitan otomotif, kawasan industri Cikarang',
+      demand: 'Bekasi dan Cikarang menampung konsentrasi pabrik multinasional terbesar yang menuntut kepatuhan zero accident.',
+      companies: 'Kawasan Industri Jababeka, MM2100, EJIP, GIIC Cikarang',
+    },
+    tangerang: {
+      name: 'Tangerang',
+      province: 'Banten',
+      title: 'Pelatihan K3 Tangerang – Kawasan Industri Balaraja & Bandara Soetta | Wahana Totalita',
+      desc: 'Sertifikasi K3 Tangerang: Ahli K3 Umum Kemnaker RI, Petugas Damkar, K3 Kimia untuk industri manufaktur dan pergudangan logistik.',
+      industries: 'manufaktur kimia dan plastik, logistik Bandara Soekarno-Hatta, pergudangan modern',
+      demand: 'Tangerang merupakan pintu gerbang kargo udara nasional dengan ribuan gudang dan pabrik manufaktur.',
+      companies: 'Kawasan Industri Jatake, Manis, Balaraja, Pergudangan Bandara Mas',
+    },
+    bogor: {
+      name: 'Bogor',
+      province: 'Jawa Barat',
+      title: 'Pelatihan K3 Bogor – Kawasan Industri Sentul & Manufaktur Semen | Wahana Totalita',
+      desc: 'Pelatihan K3 Bogor: Ahli K3 Umum Kemnaker RI, K3 Konstruksi, Pengendalian Lingkungan BNSP kawasan Sentul dan Gunung Putri.',
+      industries: 'industri semen dan bahan bangunan, manufaktur makanan minuman Sentul, riset pertanian dan hayati',
+      demand: 'Kawasan industri Gunung Putri dan Sentul memiliki pabrik-pabrik berskala besar dengan regulasi SMK3 terintegrasi.',
+      companies: 'Indocement Tunggal Prakarsa, Kawasan Industri Sentul, PT Tirta Investama',
+    },
+    pekanbaru: {
+      name: 'Pekanbaru',
+      province: 'Riau',
+      title: 'Pelatihan K3 Pekanbaru – Sentra Industri Migas Blok Rokan & Pulp Paper | Wahana Totalita',
+      desc: 'Pelatihan K3 Pekanbaru & Riau: Ahli K3 Migas, POP Pertambangan, K3 Pabrik Sawit dan K3 Bejana Tekan Kemnaker RI.',
+      industries: 'eksplorasi minyak bumi Blok Rokan, industri pulp and paper, perkebunan kelapa sawit terbesar nasional',
+      demand: 'Riau adalah produsen sawit dan minyak bumi utama di Indonesia yang mewajibkan sertifikasi keselamatan kerja standar CSMS.',
+      companies: 'Pertamina Hulu Rokan (PHR), RAPP (April Group), Indah Kiat Pulp & Paper',
+    },
+  };
+
+  // Supplement remaining cities from cities.json
+  const citiesJson = await getCollection('cities');
+  for (const c of citiesJson) {
+    if (!citiesMap[c.data.slug]) {
+      citiesMap[c.data.slug] = {
+        name: c.data.name,
+        province: c.data.province || 'Indonesia',
+        title: `Pelatihan K3 ${c.data.name} – Sertifikasi KEMNAKER RI & BNSP | Wahana Totalita`,
+        desc: `Sertifikasi Ahli K3 Umum (AK3U) Kemnaker RI & BNSP di ${c.data.name}. Tersedia kelas online, in-house perusahaan, dan sertifikasi resmi nasional.`,
+        industries: c.data.industry_type || 'manufaktur, industri jasa, logistik, dan konstruksi',
+        demand: `Pertumbuhan industri di ${c.data.name} mendorong tingginya kebutuhan tenaga kerja bersertifikat K3 resmi.`,
+        companies: 'Perusahaan BUMN, Swasta Nasional, dan Kontraktor Daerah',
+      };
+    }
+  }
+
+  return Object.entries(citiesMap).map(([citySlug, cityData]) => ({
+    params: { city: citySlug },
+    props: { citySlug, cityData },
+  }));
+}
+
+const { citySlug, cityData } = Astro.props;
+const canonicalUrl = `https://wahanatotalita.com/pelatihan-k3-${citySlug}/`;
+
+const programs = [
+  { name: 'Ahli K3 Umum (AK3U) Kemnaker RI', tag1: 'Kemnaker RI', tag2: 'Online / Jogja', slug: 'pelatihan-ahli-k3-umum-sertifikasi-kemnaker-ri' },
+  { name: 'Ahli K3 Umum Sertifikasi BNSP', tag1: 'BNSP Garuda', tag2: 'Online Asesmen', slug: 'ak3-bnsp' },
+  { name: 'POP Pertambangan Minerba BNSP', tag1: 'ESDM / BNSP', tag2: 'Online / Offline', slug: 'pelatihan-pop-pertambangan-sertifikasi-bnsp-online' },
+  { name: 'K3 Operator Forklift Kelas II', tag1: 'Kemnaker RI', tag2: 'Lisensi SIO', slug: 'pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri' },
+  { name: 'K3 Penanggulangan Kebakaran (Damkar)', tag1: 'Kemnaker RI', tag2: 'Kelas D/C/B/A', slug: 'pelatihan-damkar-paralel-kelas-dcba-sertifikasi-kemnaker-ri' },
+  { name: 'Petugas P3K di Tempat Kerja', tag1: 'Kemnaker RI', tag2: 'First Aid Pro', slug: 'pelatihan-petugas-p3k-first-aid-online' },
+  { name: 'Auditor SMK3 PP No. 50/2012', tag1: 'Kemnaker RI', tag2: 'Audit Emas', slug: 'pelatihan-auditor-sistem-manajemen-k3-sertifikasi-kemnaker-ri' },
+  { name: 'K3 Bekerja di Ketinggian (TKBT)', tag1: 'Kemnaker RI', tag2: 'Rope Access', slug: 'pelatihan-tkbt-ii-sertifikasi-kemnaker-ri' },
+];
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: cityData.title,
+    description: cityData.desc,
+    provider: {
+      '@type': 'Organization',
+      name: 'PT Wahana Totalita Konsultan',
+      url: 'https://wahanatotalita.com',
+    },
+    areaServed: {
+      '@type': 'City',
+      name: cityData.name,
+    },
+  },
+];
+---
+
+<Layout
+  title={cityData.title}
+  description={cityData.desc}
+  canonical={canonicalUrl}
+  schemas={schemas}
+  pageCss={['/assets/css/page/kota.css']}
+>
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb-bar" style="margin-top:var(--nav-h,72px);background:var(--surface);padding:12px 0;border-bottom:1px solid var(--border);">
+    <div class="container" style="max-width:1160px;margin:0 auto;padding:0 20px;">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb-list" style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:13px;color:var(--slate-500);list-style:none;padding:0;margin:0;">
+          <li><a href="/" style="color:var(--slate-600);text-decoration:none;">Beranda</a></li>
+          <li aria-hidden="true">›</li>
+          <li><a href="/pelatihan/" style="color:var(--slate-600);text-decoration:none;">Pelatihan</a></li>
+          <li aria-hidden="true">›</li>
+          <li aria-current="page" style="color:var(--brand);font-weight:600;">Pelatihan K3 {cityData.name}</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <!-- City Hero -->
+  <section class="hero-section" style="background: linear-gradient(135deg, var(--brand-dark, #081c15) 0%, var(--brand, #1b4332) 100%); color: var(--surface); padding: 56px 0 50px;">
+    <div class="container" style="max-width: 1000px; margin: 0 auto; padding: 0 20px; text-align: center;">
+      <span style="display: inline-block; background: color-mix(in srgb, var(--surface) 12%, transparent); color: #a7f3d0; padding: 4px 14px; border-radius: 999px; font-weight: 700; font-size: 12.5px; margin-bottom: 16px; border: 1px solid color-mix(in srgb, var(--surface) 18%, transparent); text-transform: uppercase; letter-spacing: 0.05em;">
+        📍 Layanan Resmi K3 Wilayah {cityData.name} &amp; {cityData.province}
+      </span>
+      <h1 style="font-family: 'Lexend', sans-serif; font-size: clamp(26px, 4vw, 42px); font-weight: 800; line-height: 1.25; margin-bottom: 18px; color: #FFFFFF; letter-spacing: -0.02em;">
+        Pelatihan K3 &amp; Sertifikasi BNSP di {cityData.name}
+      </h1>
+      <p style="font-size: 16.5px; line-height: 1.65; max-width: 760px; margin: 0 auto 25px; color: rgba(255, 255, 255, 0.88);">
+        Penyedia resmi sertifikasi Ahli K3 Umum, BNSP, K3 Konstruksi, Migas, dan Operator Alat Berat untuk tenaga kerja dan perusahaan di {cityData.name}.
+      </p>
+      <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+        <a href={`https://wa.me/6287759151278?text=${encodeURIComponent('Halo Wahana Totalita, saya ingin informasi pelatihan K3 wilayah ' + cityData.name)}`} class="btn btn-primary" target="_blank" rel="noopener" style="background: var(--whatsapp, #25D366); color: #052e16; padding: 12px 24px; border-radius: 10px; font-weight: 800; text-decoration: none; box-shadow: 0 4px 14px color-mix(in srgb, var(--whatsapp) 30%, transparent); display: inline-flex; align-items: center; gap: 6px;">
+          <span>Konsultasi Jadwal {cityData.name}</span>
+        </a>
+        <a href="#program" style="background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.3); padding: 12px 24px; border-radius: 10px; font-weight: 700; text-decoration: none;">
+          Pilih Program Pelatihan &darr;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Programs Grid -->
+  <section id="program" style="padding: 60px 0; max-width: 1050px; margin: 0 auto; padding-left: 20px; padding-right: 20px;">
+    <div style="text-align: center; margin-bottom: 35px;">
+      <h2 style="font-size: 26px; font-weight: 800; color: var(--brand); margin-bottom: 8px;">
+        Program Pembinaan K3 Terfavorit di {cityData.name}
+      </h2>
+      <p style="color: var(--mut); font-size: 14px;">
+        Tersedia jalur Online Interaktif via Zoom, Tatap Muka di Training Center, dan In-House Training di pabrik/kantor Anda.
+      </p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px;">
+      {programs.map((p) => (
+        <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; display: flex; flex-direction: column;">
+          <div style="display: flex; gap: 6px; margin-bottom: 10px;">
+            <span style="font-size: 10px; font-weight: 700; background: var(--accent-light); color: var(--accent); padding: 3px 8px; border-radius: 4px;">{p.tag1}</span>
+            <span style="font-size: 10px; font-weight: 700; background: var(--surface-subtle); color: var(--mut); padding: 3px 8px; border-radius: 4px;">{p.tag2}</span>
+          </div>
+          <h3 style="font-size: 16px; font-weight: 700; line-height: 1.35; margin-bottom: 15px; flex: 1;">
+            <a href={`/pelatihan/${p.slug}/`} style="color: var(--brand); text-decoration: none;">
+              {p.name}
+            </a>
+          </h3>
+          <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 12px; font-size: 12px;">
+            <a href={`/pelatihan/${p.slug}/`} style="color: var(--accent); font-weight: 700; text-decoration: none;">
+              Detail Program &rarr;
+            </a>
+            <a href={`https://wa.me/6287759151278?text=${encodeURIComponent('Halo Wahana Totalita, saya ingin daftar ' + p.name + ' di ' + cityData.name)}`} target="_blank" rel="noopener" style="background: var(--brand); color: #fff; padding: 4px 10px; border-radius: 4px; font-weight: 700; text-decoration: none;">
+              Daftar
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Industry Context & Demand -->
+  <section style="background: var(--surface-subtle); padding: 50px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div style="max-width: 1000px; margin: 0 auto; padding: 0 20px;">
+      <h2 style="font-size: 22px; font-weight: 800; color: var(--brand); margin-bottom: 15px;">
+        Kebutuhan Kepatuhan K3 &amp; Sektor Industri di {cityData.name}
+      </h2>
+      <p style="font-size: 15px; line-height: 1.7; color: var(--text); margin-bottom: 15px;">
+        {cityData.demand}
+      </p>
+      <p style="font-size: 14px; line-height: 1.6; color: var(--mut);">
+        <strong>Klaster &amp; Sektor Unggulan:</strong> {cityData.industries}. Keberadaan korporasi seperti {cityData.companies} mewajibkan pemenuhan standar kepatuhan K3 tingkat tinggi serta ketersediaan personel bersertifikat resmi.
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA Box -->
+  <section style="padding: 60px 0 80px; max-width: 960px; margin: 0 auto; padding-left: 20px; padding-right: 20px;">
+    <div style="background: linear-gradient(135deg, var(--brand-dark, #081c15) 0%, var(--brand, #1b4332) 100%); padding: 48px 32px; border-radius: 20px; text-align: center; color: var(--surface); box-shadow: 0 20px 40px -12px color-mix(in srgb, var(--brand) 35%, transparent);">
+      <h2 style="font-family: 'Lexend', sans-serif; font-size: clamp(22px, 3vw, 30px); font-weight: 800; margin-bottom: 12px; color: #FFFFFF;">
+        Siap Mengikuti Pelatihan K3 di {cityData.name}?
+      </h2>
+      <p style="font-size: 16px; color: rgba(255,255,255,0.85); margin-bottom: 25px; line-height: 1.6; max-width: 620px; margin-left: auto; margin-right: auto;">
+        Dapatkan jadwal batch terdekat, rincian biaya penawaran resmi, silabus pelatihan, dan konsultasi pendaftaran gratis via WhatsApp.
+      </p>
+      <a href={`https://wa.me/6287759151278?text=${encodeURIComponent('Halo Wahana Totalita, saya ingin konsultasi pelatihan K3 wilayah ' + cityData.name)}`} target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; background: var(--whatsapp, #25D366); color: #052e16; padding: 14px 32px; border-radius: 999px; font-weight: 800; text-decoration: none; font-size: 15px; box-shadow: 0 4px 16px color-mix(in srgb, var(--whatsapp) 40%, transparent);">
+        <span>Hubungi Konsultan via WhatsApp</span>
+      </a>
+    </div>
+  </section>
+</Layout>

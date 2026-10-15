@@ -1,0 +1,95 @@
+---
+import EnLayout from '../../layouts/EnLayout.astro';
+import EnSidebar from '../../components/EnSidebar.astro';
+
+const title = "Electrical Safety Regulations Indonesia (K3 Listrik): Expert Mandates — Wahana Totalita";
+const description = "<?= htmlspecialchars($meta_desc, ENT_QUOTES,";
+const canonical = "https://wahanatotalita.com/en/electrical-safety-expert-requirements/";
+const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","@id":"https://wahanatotalita.com/en/electrical-safety-expert-requirements/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://wahanatotalita.com/"},{"@type":"ListItem","position":2,"name":"English OHS Hub","item":"https://wahanatotalita.com/en/"},{"@type":"ListItem","position":3,"name":"Electrical Safety (K3 Listrik)","item":"https://wahanatotalita.com/en/electrical-safety-expert-requirements/"}]},{"@type":"Article","@id":"https://wahanatotalita.com/en/electrical-safety-expert-requirements/#article","headline":"Electrical Safety Regulations in Indonesia: Permenaker No. 12/2015 Guide","description":"<?= htmlspecialchars($meta_desc, ENT_QUOTES,","inLanguage":"en-US","mainEntityOfPage":"https://wahanatotalita.com/en/electrical-safety-expert-requirements/","datePublished":"2026-09-01T08:00:00+07:00","dateModified":"2026-10-01T12:00:00+07:00","publisher":{"@type":"Organization","name":"PT Wahana Totalita Konsultan","url":"https://wahanatotalita.com","logo":{"@type":"ImageObject","url":"https://wahanatotalita.com/assets/img/logo-wt.png"}}}]}];
+---
+
+<EnLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  schemas={schemas}
+>
+<section class="en-hero">
+  <div class="en-container">
+    <div class="en-breadcrumb">
+      <a href="/">Home</a> &rsaquo; <a href="/en/">English OHS Hub</a> &rsaquo; <span>Electrical Safety (K3 Listrik)</span>
+    </div>
+    <div class="en-hero-pill">
+      <span>Power Systems · Permenaker No. 12/2015</span>
+    </div>
+    <h1>Electrical Safety (K3 Listrik) in Indonesia: Statutory Staffing &amp; Installation Testing</h1>
+    <p class="en-hero-lead">
+      Statutory requirements for high-voltage power installations, substations, and industrial manufacturing plants: mandatory ratios for Teknisi K3 Listrik and Ahli K3 Listrik, PUIL standards, and annual grounding verification.
+    </p>
+
+    <div class="en-trust-bar">
+      <div class="en-trust-item">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        <div>
+          <strong>Permenaker 12/2015</strong>
+          <span>Statutory electrical safety decree</span>
+        </div>
+      </div>
+      <div class="en-trust-item">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        <div>
+          <strong>>200 kVA Capacity</strong>
+          <span>Threshold requiring certified experts</span>
+        </div>
+      </div>
+      <div class="en-trust-item">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        <div>
+          <strong>Annual Inspection (SIA)</strong>
+          <span>Mandatory lightning &amp; transformer testing</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="en-container">
+  <div class="en-body-grid">
+    <main>
+      <section class="en-card">
+        <span class="en-sec-badge">Statutory Personnel Quotas</span>
+        <h2 class="en-sec-title">When is an Electrical Safety Expert Legally Mandatory?</h2>
+        <p class="en-text">
+          Under <strong>Minister of Manpower Regulation No. 12 of 2015</strong>, companies generating, transmitting, or consuming electrical power are legally subject to strict certified personnel thresholds:
+        </p>
+
+        <div class="en-law-grid">
+          <div class="en-law-card">
+            <strong>Power Capacity >200 kVA</strong>
+            <p>Every industrial facility operating electrical generation or consumption capacity exceeding <strong>200 kVA</strong> must employ at least <strong>one certified Ahli K3 Listrik (Electrical OHS Expert)</strong> possessing an official Kemnaker appointment decree (SKP).</p>
+          </div>
+          <div class="en-law-card">
+            <strong>Maintenance &amp; High-Voltage Work</strong>
+            <p>Technicians involved in electrical maintenance, distribution panels, and switchgear operation must hold a <strong>Teknisi K3 Listrik license</strong> issued by Kemnaker or BNSP.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="en-card">
+        <span class="en-sec-badge">Inspection Mandates</span>
+        <h2 class="en-sec-title">Annual Statutory Testing of Electrical Installations</h2>
+        <p class="en-text">
+          In addition to certified staff, all electrical installations must undergo periodic statutory testing (<em>Riksa Uji</em>) by a licensed PJK3 inspection body:
+        </p>
+        <ul style="padding-left: 20px; line-height: 1.8; color: var(--slate-700);">
+          <li><strong>Lightning Protection Systems (Penangkal Petir):</strong> Earth resistance testing (must not exceed 5 Ohms under Permenaker 02/1989), inspected every 2 years.</li>
+          <li><strong>Power Generators &amp; Transformers:</strong> Insulation resistance, dielectric oil analysis, and protective relay trip testing.</li>
+          <li><strong>Thermographic Infrared Audits:</strong> Hotspot detection across main distribution boards (MDB) to prevent catastrophic factory fires.</li>
+        </ul>
+      </section>
+    </main>
+
+    <EnSidebar currentSlug="electrical-safety-expert-requirements" />
+  </div>
+</div>
+</EnLayout>

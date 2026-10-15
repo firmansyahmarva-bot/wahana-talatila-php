@@ -1,0 +1,18 @@
+{
+    "id": 186,
+    "title": "Cara Melakukan Penilaian Risiko Kimia dengan Metode HIRARC",
+    "slug": "penilaian-risiko-kimia-hirarc",
+    "meta_title": "Cara Melakukan Penilaian Risiko Kimia dengan Metode HIRARC",
+    "meta_desc": "Cara melakukan penilaian risiko bahan kimia berbahaya menggunakan metode HIRARC: identifikasi bahaya, penilaian risiko, dan hierarki pengendalian.",
+    "keywords": null,
+    "category": "K3",
+    "thumbnail": null,
+    "content": "<h2>Mengapa HIRARC untuk Risiko Kimia?</h2>\r\n<p>HIRARC (Hazard Identification, Risk Assessment and Risk Control) adalah metode sistematis untuk mengidentifikasi bahaya, menilai risiko, dan menentukan pengendalian yang tepat — yang dapat diterapkan secara spesifik untuk risiko bahan kimia berbahaya (BKB) di tempat kerja. Bahaya kimia memiliki karakteristik unik dibanding bahaya fisik biasa: efeknya bisa akut (langsung) maupun kronis (jangka panjang), sehingga penilaian risikonya perlu mempertimbangkan kedua dimensi tersebut.</p>\r\n<h2>Langkah 1: Identifikasi Bahaya Kimia</h2>\r\n<p>Kumpulkan Lembar Data Keselamatan (SDS) setiap bahan kimia yang digunakan, lalu identifikasi jenis bahaya (toksik, korosif, mudah terbakar, reaktif) berdasarkan klasifikasi GHS pada Bagian 2 SDS. Petakan seluruh titik kontak pekerja dengan bahan kimia tersebut — mulai dari penyimpanan, pencampuran, hingga pembuangan limbah.</p>\r\n<h2>Langkah 2: Penilaian Risiko (Likelihood x Severity)</h2>\r\n<p>Nilai kemungkinan (likelihood) paparan terjadi berdasarkan frekuensi penggunaan, volume bahan, dan kondisi pengendalian yang sudah ada, lalu nilai tingkat keparahan (severity) dampaknya — mulai dari iritasi ringan hingga kerusakan organ permanen atau kematian untuk bahan sangat toksik. Skor risiko dihitung dengan mengalikan likelihood dan severity, menghasilkan tingkat risiko: rendah, sedang, tinggi, atau ekstrem.</p>\r\n<h2>Langkah 3: Pengendalian Risiko (Hierarki Kontrol)</h2>\r\n<p>Setelah risiko dinilai, terapkan pengendalian sesuai hierarki: eliminasi (hilangkan bahan kimia berbahaya jika memungkinkan), substitusi (ganti dengan bahan yang lebih aman), rekayasa teknik (ventilasi, sistem tertutup), pengendalian administratif (SOP, rotasi kerja, pembatasan waktu paparan), dan alat pelindung diri (APD) sebagai lapisan terakhir. Untuk risiko kimia dengan tingkat ekstrem, kombinasi beberapa lapisan pengendalian sekaligus biasanya diperlukan.</p>\r\n<h2>Dokumentasi dan Peninjauan Berkala</h2>\r\n<p>Hasil HIRARC kimia harus didokumentasikan dalam register risiko kimia perusahaan, ditinjau ulang secara berkala (minimal setahun sekali atau saat ada perubahan proses/bahan kimia baru), dan menjadi dasar penyusunan program pengendalian BKB yang disusun oleh Ahli K3 Kimia sesuai Kepmenaker 187/1999.</p>\r\n<p>Ingin tim K3 perusahaan Anda terampil melakukan HIRARC risiko kimia? <a href=\"/k3-kimia/\">kunjungi halaman program K3 Kimia kami</a>.</p>",
+    "faq_data": null,
+    "author": "Wahana Totalita Konsultan",
+    "status": "published",
+    "published_at": "2026-07-12 08:03:11",
+    "view_count": 71,
+    "created_at": "2026-07-12 08:03:11",
+    "updated_at": "2026-10-12 13:55:43"
+}

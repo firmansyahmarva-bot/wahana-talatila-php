@@ -1,0 +1,237 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const canonical = 'https://wahanatotalita.com/pelatihan-kelautan/';
+const metaTitle = 'Pelatihan K3 & Keselamatan Maritim — Marine Safety Training | Wahana Totalita';
+const metaDesc = 'Pelatihan K3 dan keselamatan maritim: sea survival, marine firefighting, man overboard, keselamatan pelabuhan, dan K3 di lingkungan laut. Untuk pelaut, port worker, dan industri maritim Indonesia.';
+
+const regs = [
+  { no: 'UU No. 17/2008', desc: 'Pelayaran — mengatur keselamatan berlayar, pencegahan pencemaran laut, dan keselamatan jiwa di atas kapal. Kementerian Perhubungan (Ditjen Hubla) adalah regulator.', bg: 'var(--surface-subtle)' },
+  { no: 'Konvensi SOLAS', desc: 'Safety of Life at Sea — standar keselamatan kapal internasional: alat keselamatan, pemadam kebakaran, prosedur darurat, radio komunikasi, stabilitas kapal.', bg: 'var(--info-bg)' },
+  { no: 'Konvensi STCW', desc: 'Standards of Training, Certification and Watchkeeping — kompetensi wajib awak kapal, termasuk Basic Safety Training (BST) yang wajib dimiliki semua ABK.', bg: 'var(--warning-bg)' },
+  { no: 'IMDG Code', desc: 'International Maritime Dangerous Goods Code — regulasi pengangkutan kargo berbahaya di laut: pengemasan, pelabelan, penanganan darurat.', bg: 'var(--danger-bg)' },
+  { no: 'MLC 2006', desc: 'Maritime Labour Convention — perlindungan tenaga kerja maritim: jam kerja, keselamatan, kesehatan, dan kondisi kerja di atas kapal.', bg: 'var(--surface-subtle)' },
+  { no: 'UU 1/1970', desc: 'Keselamatan Kerja — tetap berlaku untuk semua pekerja di kapal dan pelabuhan sebagai regulasi K3 dasar Indonesia.', bg: 'var(--info-bg)' },
+];
+
+const hazards = [
+  { icon: '🌊', title: 'Man Overboard (MOB)', desc: 'Jatuh ke laut adalah bahaya paling fatal di lingkungan maritim. Survival time di air tropis 4–6 jam; di air dingin hanya menit. Prosedur MOB yang benar (melempar lifebuoy, memutar kapal, pencarian) harus dilatih hingga menjadi refleks otomatis.', color: 'var(--brand)' },
+  { icon: '🔥', title: 'Kebakaran Kapal', desc: 'Kebakaran di kapal jauh lebih kompleks dari di darat: sumber air terbatas (sea water), ruang tertutup dengan asap tebal, dan tidak ada damkar yang bisa dipanggil. Semua ABK harus kompeten memadamkan api dan mengevakuasi secara mandiri.', color: 'var(--danger-dark)' },
+  { icon: '☠️', title: 'Kargo Berbahaya (Dangerous Goods)', desc: 'Kapal kargo mengangkut ribuan jenis zat berbahaya: LPG, bahan kimia, BBM, radioaktif. Kegagalan handling atau insiden bocor/tumpah di tengah laut memerlukan respons yang terlatih khusus.', color: 'var(--brand-dark)' },
+  { icon: '⛽', title: 'Confined Space di Kapal', desc: 'Tangki bahan bakar, ruang kargo, bilge, dan duct keel adalah confined space di kapal dengan risiko kekurangan oksigen dan gas beracun. Lebih berbahaya dari confined space di darat karena akses evakuasi lebih sulit.', color: 'var(--brand-dark)' },
+  { icon: '🏗️', title: 'K3 Bongkar Muat Pelabuhan', desc: 'Operasi bongkar muat menggunakan crane pelabuhan, forklift, dan reach stacker dengan beban ratusan ton. Risiko: barang jatuh, kapal bergoyang, dan jalur transportasi pelabuhan yang padat.', color: 'var(--brand-dark)' },
+  { icon: '🌀', title: 'Cuaca Ekstrem & Stabilitas', desc: 'Badai, angin kencang, dan ombak tinggi mengancam stabilitas kapal. Pekerja di dek terbuka menghadapi risiko tersapu ombak. Overloading dan muatan tidak seimbang dapat menyebabkan kapal miring berbahaya.', color: 'var(--brand-mid)' },
+];
+
+const bst = [
+  { mod: 'Modul 1', title: 'Personal Survival Techniques', desc: 'Bertahan hidup di laut: menggunakan life jacket, naik ke life raft, sinyal distress, teknik survival di air.' },
+  { mod: 'Modul 2', title: 'Fire Prevention & Fire Fighting', desc: 'Pencegahan kebakaran di kapal, klasifikasi api, teknik pemadaman, menggunakan APAR dan breathing apparatus di kapal.' },
+  { mod: 'Modul 3', title: 'Elementary First Aid', desc: 'Pertolongan pertama darurat di laut: RJP/BLS, penanganan trauma, penggunaan AED, dan merawat korban hingga bantuan tiba.' },
+  { mod: 'Modul 4', title: 'Personal Safety & Social Responsibilities', desc: 'Prosedur darurat kapal, komunikasi bahaya, keselamatan diri di lingkungan kapal, dan tanggung jawab sosial ABK.' },
+];
+
+const targets = [
+  { icon: '⚓', title: 'Awak Kapal & ABK', desc: 'Kewajiban STCW — semua awak kapal yang berlayar secara internasional wajib memiliki sertifikat BST.' },
+  { icon: '🏭', title: 'Petugas Pelabuhan', desc: 'TKBM, operator crane, stevedore, dan staf terminal wajib memiliki kompetensi K3 di lingkungan pelabuhan.' },
+  { icon: '🛢️', title: 'Pekerja Offshore', desc: 'Personel di platform minyak dan gas lepas pantai — merupakan kelompok dengan risiko keselamatan maritim tertinggi.' },
+  { icon: '🐟', title: 'Industri Perikanan', desc: 'Nelayan komersial dan pekerja budidaya laut yang beroperasi di lepas pantai memerlukan pelatihan sea survival.' },
+  { icon: '🚢', title: 'HSE Perusahaan Pelayaran', desc: 'Tim HSE, safety officer, dan manajer K3 perusahaan pelayaran, BUMN maritim, dan shipping company.' },
+  { icon: '🔬', title: 'Riset & Eksplorasi Laut', desc: 'Tim survei dan riset kelautan, arkeologi bawah air, dan eksplorasi sumber daya laut.' },
+];
+
+const programs = [
+  { name: 'Marine Safety Awareness', desc: 'Orientasi keselamatan maritim 1 hari untuk personel yang mulai bekerja di lingkungan kapal atau pelabuhan. Bahaya maritim, APD laut, prosedur darurat dasar, dan penggunaan life jacket.' },
+  { name: 'Sea Survival & Man Overboard', desc: 'Teknik bertahan hidup di laut, prosedur MOB, penggunaan life raft dan survival equipment. Praktik di kolam renang (simulasi kondisi di air).' },
+  { name: 'Marine Firefighting', desc: 'Pemadam kebakaran khusus lingkungan kapal: klasifikasi kebakaran kapal, sistem pemadam fix (CO2, FM200), SCBA di kapal, dan koordinasi pemadaman di ruang tertutup.' },
+  { name: 'K3 Pelabuhan & Bongkar Muat', desc: 'K3 untuk TKBM dan operator alat bongkar muat: keselamatan crane pelabuhan, forklift terminal, konveyor, dan prosedur safety di area dermaga.' },
+  { name: 'Dangerous Goods & IMDG', desc: 'Penanganan kargo berbahaya sesuai IMDG Code: klasifikasi DG, pengemasan dan pelabelan, stowage plan, prosedur darurat tumpahan, dan dokumen manifes kargo berbahaya.' },
+  { name: 'Offshore Safety Induction', desc: 'Orientasi keselamatan untuk personel yang pertama kali bekerja di platform offshore: TEMPSC (lifeboat), helideck safety, PTW offshore, dan helicopter egress.' },
+];
+
+const faqs = [
+  { q: 'Apa regulasi keselamatan maritim yang berlaku di Indonesia?', a: 'Regulasi keselamatan maritim di Indonesia: (1) UU No. 17/2008 tentang Pelayaran; (2) Konvensi SOLAS (Safety of Life at Sea); (3) Konvensi STCW (Standards of Training, Certification and Watchkeeping); (4) PP No. 51/2002 tentang Perkapalan; (5) Peraturan Menhub PM 70/2013 tentang Pendidikan dan Pelatihan Kepelautan. UU 1/1970 tetap berlaku untuk pekerja di atas kapal dan pelabuhan.' },
+  { q: 'Apa saja bahaya K3 yang unik di lingkungan maritim?', a: 'Bahaya K3 spesifik maritim mencakup: bahaya tenggelam (man overboard), kebakaran kapal di laut lepas, bahaya ergonomi dek bergerak, bahaya kargo kimia/LPG berbahaya (Dangerous Goods), isolasi medis dari daratan, dan cuaca ekstrem laut.' },
+  { q: 'Apa yang dimaksud dengan Basic Safety Training (BST)?', a: 'BST adalah pelatihan keselamatan dasar wajib bagi awak kapal sesuai Konvensi STCW 1978. Terdiri dari Personal Survival Techniques, Fire Prevention & Fire Fighting, Elementary First Aid, serta Personal Safety & Social Responsibilities.' },
+  { q: 'Apakah pelatihan keselamatan maritim hanya untuk pelaut?', a: 'Tidak. Pelatihan ini relevan untuk pekerja pelabuhan (TKBM, crane operator), kru kapal kerja/tender, personel platform offshore, tim SAR laut, dan pekerja industri perikanan lepas pantai.' },
+  { q: 'Apa perbedaan keselamatan maritim dengan pelatihan selam (diving)?', a: 'Keselamatan maritim berfokus pada keselamatan di atas kapal dan permukaan air (prosedur darurat, pemadaman, kargo). Pelatihan selam (CMAS/NAUI) berfokus pada kegiatan penyelaman di bawah air (scuba, diving physiology).' },
+  { q: 'Apakah relevan untuk perusahaan pertambangan dan energi laut?', a: 'Sangat relevan. Perusahaan yang mengoperasikan terminal laut, kapal tongkang, atau platform offshore wajib memberikan orientasi keselamatan maritim dan penanganan darurat bagi krunya.' },
+];
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Beranda', item: 'https://wahanatotalita.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Pelatihan', item: 'https://wahanatotalita.com/pelatihan/' },
+      { '@type': 'ListItem', position: 3, name: 'Pelatihan Keselamatan Maritim', item: canonical },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+];
+---
+
+<Layout
+  title={metaTitle}
+  description={metaDesc}
+  canonical={canonical}
+  schemas={schemas}
+>
+  <section style="background:linear-gradient(135deg,var(--brand) 0%,var(--brand-dark) 100%);color:var(--surface);padding:60px 20px 50px;">
+    <div class="container" style="max-width:960px;">
+      <nav aria-label="breadcrumb" style="font-size:0.85rem;opacity:0.8;margin-bottom:16px;">
+        <a href="/" style="color:var(--surface);text-decoration:none;">Beranda</a> › 
+        <a href="/pelatihan/" style="color:var(--surface);text-decoration:none;">Pelatihan</a> › 
+        <span>Keselamatan Maritim</span>
+      </nav>
+      <h1 style="font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;margin:0 0 16px;color:#fff;">
+        Pelatihan K3 &amp; Keselamatan Maritim
+      </h1>
+      <p style="font-size:1.05rem;opacity:0.92;max-width:760px;margin:0 0 12px;line-height:1.7;">
+        Lingkungan laut dan maritim menghadirkan bahaya yang tidak ada di tempat kerja darat: man overboard, kebakaran kapal di tengah laut, kargo berbahaya, cuaca ekstrem, dan isolasi dari fasilitas medis. Program keselamatan maritim Wahana Totalita membekali pelaut, port worker, dan personel industri laut dengan kompetensi keselamatan yang menyelamatkan nyawa.
+      </p>
+      <p style="font-size:0.88rem;opacity:0.75;margin:0 0 24px;">
+        Regulasi: UU 17/2008 Pelayaran | SOLAS | STCW | UU 1/1970
+      </p>
+      <a href="https://wa.me/6287759151278?text=Halo%20Wahana%20Totalita,%20saya%20ingin%20info%20program%20pelatihan%20keselamatan%20maritim"
+         target="_blank" rel="noopener"
+         style="display:inline-block;background:#25d366;color:#fff;padding:14px 32px;border-radius:8px;font-weight:700;text-decoration:none;font-size:1rem;box-shadow:var(--shadow-sm);">
+        Konsultasi Program via WhatsApp
+      </a>
+    </div>
+  </section>
+
+  <main class="container" style="max-width:960px;padding:48px 20px 64px;">
+    <!-- REGULASI -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:20px;font-weight:800;">
+        Kerangka Regulasi Keselamatan Maritim
+      </h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;">
+        {regs.map((r) => (
+          <div style={`background:${r.bg};border-radius:8px;padding:18px;border-left:4px solid var(--brand);`}>
+            <div style="font-weight:700;color:var(--brand);margin-bottom:6px;font-size:0.95rem;">{r.no}</div>
+            <div style="color:var(--slate-700);font-size:0.88rem;line-height:1.6;">{r.desc}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- BAHAYA MARITIM -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:20px;font-weight:800;">
+        6 Bahaya Utama K3 di Lingkungan Maritim
+      </h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px;">
+        {hazards.map((h) => (
+          <div style={`background:${h.color};color:#fff;border-radius:10px;padding:20px;box-shadow:var(--shadow-sm);`}>
+            <div style="font-size:1.8rem;margin-bottom:8px;">{h.icon}</div>
+            <div style="font-weight:700;margin-bottom:8px;font-size:1rem;">{h.title}</div>
+            <p style="font-size:0.86rem;line-height:1.6;opacity:0.92;margin:0;">{h.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- BST SECTION -->
+    <section style="margin-bottom:48px;background:var(--surface-subtle);border-radius:12px;border:1px solid var(--border);padding:28px;">
+      <h2 style="color:var(--brand);font-size:1.45rem;margin:0 0 12px;font-weight:800;">
+        Basic Safety Training (BST) — 4 Modul Wajib STCW
+      </h2>
+      <p style="color:var(--slate-700);line-height:1.8;margin:0 0 20px;">
+        BST adalah pelatihan keselamatan dasar yang <strong>wajib dimiliki semua awak kapal</strong> sesuai Konvensi STCW. Terdiri dari 4 modul yang saling melengkapi:
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;">
+        {bst.map((b) => (
+          <div style="background:var(--surface);border-radius:8px;padding:18px;border:1px solid var(--border);border-top:3px solid var(--brand);">
+            <div style="font-size:0.75rem;font-weight:700;color:var(--accent);text-transform:uppercase;margin-bottom:4px;">{b.mod}</div>
+            <div style="font-weight:700;color:var(--brand);margin-bottom:8px;font-size:0.92rem;">{b.title}</div>
+            <p style="color:var(--slate-600);font-size:0.84rem;line-height:1.5;margin:0;">{b.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- TARGET PESERTA -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:20px;font-weight:800;">
+        Siapa yang Membutuhkan Pelatihan Keselamatan Maritim?
+      </h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;">
+        {targets.map((t) => (
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:18px;border-top:3px solid var(--brand);">
+            <div style="font-size:1.6rem;margin-bottom:8px;">{t.icon}</div>
+            <div style="font-weight:700;color:var(--brand);margin-bottom:6px;font-size:0.92rem;">{t.title}</div>
+            <p style="color:var(--slate-600);font-size:0.84rem;line-height:1.55;margin:0;">{t.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- PROGRAM -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:24px;font-weight:800;">
+        Program Pelatihan Keselamatan Maritim
+      </h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:20px;">
+        {programs.map((p) => (
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow-sm);">
+            <div style="background:var(--brand);color:var(--surface);padding:14px 18px;">
+              <div style="font-weight:700;font-size:0.95rem;color:#fff;">{p.name}</div>
+            </div>
+            <div style="padding:16px 18px;flex:1;">
+              <p style="color:var(--slate-600);font-size:0.88rem;line-height:1.6;margin:0;">{p.desc}</p>
+            </div>
+            <div style="padding:0 18px 18px;">
+              <a href={`https://wa.me/6287759151278?text=${encodeURIComponent(`Halo Wahana Totalita, saya ingin informasi silabus dan jadwal pelatihan ${p.name}`)}`}
+                 target="_blank" rel="noopener"
+                 style="display:block;text-align:center;background:var(--brand);color:#fff;padding:10px;border-radius:6px;text-decoration:none;font-weight:700;font-size:0.88rem;">
+                Tanya via WhatsApp
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:24px;font-weight:800;">
+        Pertanyaan yang Sering Diajukan
+      </h2>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        {faqs.map((faq) => (
+          <details style="border:1px solid var(--border);border-radius:8px;padding:14px 18px;background:var(--surface);">
+            <summary style="font-weight:700;color:var(--brand);cursor:pointer;font-size:0.95rem;">
+              {faq.q}
+            </summary>
+            <p style="margin-top:12px;color:var(--slate-700);line-height:1.75;font-size:0.9rem;">
+              {faq.a}
+            </p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section style="background:linear-gradient(135deg,var(--brand),var(--brand-dark));color:var(--surface);border-radius:12px;padding:44px 24px;text-align:center;">
+      <h2 style="margin:0 0 12px;font-size:1.75rem;color:#fff;font-weight:800;">Siapkan Tim Anda untuk Keselamatan di Laut</h2>
+      <p style="opacity:0.9;margin:0 auto 28px;line-height:1.7;max-width:620px;">
+        Konsultasikan program keselamatan maritim yang sesuai dengan jenis operasi laut dan profil risiko tim Anda.
+      </p>
+      <a href="https://wa.me/6287759151278?text=Halo%20Wahana%20Totalita,%20saya%20ingin%20info%20program%20pelatihan%20keselamatan%20maritim"
+         target="_blank" rel="noopener"
+         style="display:inline-block;background:#25d366;color:#fff;padding:14px 36px;border-radius:8px;font-weight:700;text-decoration:none;font-size:1.05rem;">
+        💬 Hubungi Kami via WhatsApp: 0877-5915-1278
+      </a>
+    </section>
+  </main>
+</Layout>

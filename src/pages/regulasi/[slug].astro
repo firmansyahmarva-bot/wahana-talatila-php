@@ -1,0 +1,264 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const allRegulasi = await getCollection('regulasi');
+  return allRegulasi.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: {
+      r: entry.data,
+      allRegulasi: allRegulasi.map((i) => i.data),
+    },
+  }));
+}
+
+const { r, allRegulasi } = Astro.props;
+
+const canonical = `https://wahanatotalita.com/regulasi/${r.slug}/`;
+const metaTitle = `${r.nomor} — Analisis Kepatuhan & Sanksi Hukum K3 | Wahana Totalita`;
+const metaDesc = (r.ringkasan || '').length > 155
+  ? (r.ringkasan || '').substring(0, 155) + '...'
+  : (r.ringkasan || '');
+
+const waNumber = '6287759151278';
+const waMsg = `Halo Wahana Totalita, saya ingin konsultasi pemenuhan regulasi ${r.nomor} (${r.tentang}) untuk perusahaan kami.`;
+const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(waMsg)}`;
+
+// Related regulations in same category
+const related = allRegulasi
+  .filter((item) => item.slug !== r.slug && item.kategori === r.kategori)
+  .slice(0, 4);
+
+// If not enough related in same category, fill with others
+if (related.length < 4) {
+  const others = allRegulasi
+    .filter((item) => item.slug !== r.slug && !related.some((rel) => rel.slug === item.slug))
+    .slice(0, 4 - related.length);
+  related.push(...others);
+}
+
+const schemaFaqs = (r.faqs || []).map((faq) => ({
+  '@type': 'Question',
+  name: faq.q,
+  acceptedAnswer: {
+    '@type': 'Answer',
+    text: faq.a,
+  },
+}));
+
+const schemas: any[] = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    '@id': `${canonical}#breadcrumb`,
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Beranda', item: 'https://wahanatotalita.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Regulasi K3', item: 'https://wahanatotalita.com/regulasi/' },
+      { '@type': 'ListItem', position: 3, name: r.nomor, item: canonical },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Legislation',
+    '@id': `${canonical}#legislation`,
+    name: r.nomor,
+    alternateName: r.tentang,
+    legislationType: r.jenis,
+    legislationDate: `${r.tahun}-01-01`,
+    description: r.ringkasan,
+    url: canonical,
+    inLanguage: 'id',
+    publisher: {
+      '@type': 'Organization',
+      name: 'Wahana Totalita Konsultan',
+      url: 'https://wahanatotalita.com',
+    },
+  },
+];
+
+if (schemaFaqs.length > 0) {
+  schemas.push({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    '@id': `${canonical}#faq`,
+    mainEntity: schemaFaqs,
+  });
+}
+---
+
+<Layout
+  title={metaTitle}
+  description={metaDesc}
+  canonical={canonical}
+  schemas={schemas}
+  pageCss={['/assets/css/page/regulasi-detail.css']}
+>
+  <!-- Detail Hero -->
+  <header class="reg-detail-hero">
+    <div class="container">
+      <nav class="reg-breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Beranda</a>
+        <span>›</span>
+        <a href="/regulasi/">Regulasi K3</a>
+        <span>›</span>
+        <span>{r.nomor}</span>
+      </nav>
+
+      <div class="reg-hero-meta">
+        <span class="reg-hero-badge">{r.jenis || 'Regulasi'}</span>
+        <span class="reg-hero-badge badge-status">{r.status || 'Berlaku Penuh'}</span>
+        <span class="reg-hero-badge">Tahun {r.tahun}</span>
+        <span class="reg-hero-badge">{r.kategori}</span>
+      </div>
+
+      <h1>{r.nomor}</h1>
+      <div class="hero-sub">Tentang: {r.tentang}</div>
+    </div>
+  </header>
+
+  <!-- Main Layout -->
+  <main class="reg-content-wrap">
+    <div class="container">
+      <div class="reg-layout-grid">
+        <!-- Left Column: Legal Analysis -->
+        <article class="reg-main-article">
+          <!-- Ringkasan Resmi -->
+          <section class="reg-card-block">
+            <h2>📋 Ringkasan & Ruang Lingkup Hukum</h2>
+            <p>{r.ringkasan}</p>
+            {r.mencabut && r.mencabut !== '-' && (
+              <p style="font-size:0.9rem; color:#64748b; margin-top:12px; font-style:italic;">
+                * Status Historis: Mencabut atau merevisi ketentuan pada {r.mencabut}.
+              </p>
+            )}
+          </section>
+
+          <!-- Analisis Kontekstual & In-Content Anchor Links -->
+          {r.content_html && (
+            <section class="reg-card-block">
+              <h2>🔍 Analisis Kepatuhan & Implementasi Lapangan</h2>
+              <div set:html={r.content_html} />
+            </section>
+          )}
+
+          <!-- Pasal-Pasal Penting -->
+          {r.pasal_penting && r.pasal_penting.length > 0 && (
+            <section class="reg-card-block">
+              <h2>⚖️ Ketentuan & Pasal-Pasal Kunci</h2>
+              <ul class="pasal-list">
+                {r.pasal_penting.map((pasal) => (
+                  <li class="pasal-item">{pasal}</li>
+                ))}
+              </ul>
+            </section>
+          )}
+
+          <!-- Kewajiban Perusahaan -->
+          {r.kewajiban_perusahaan && (
+            <section class="reg-card-block">
+              <h2>🏢 Kewajiban Bagi Perusahaan & Pengurus</h2>
+              <div class="compliance-box">
+                <strong>Checklist Kepatuhan:</strong>
+                <p style="white-space:pre-line; margin-top:8px;">{r.kewajiban_perusahaan}</p>
+              </div>
+            </section>
+          )}
+
+          <!-- Sanksi Pelanggaran -->
+          {r.sanksi && (
+            <section class="reg-card-block">
+              <h2>⚠️ Sanksi Hukum atas Pelanggaran</h2>
+              <div class="penalty-box">
+                <strong>Konsekuensi Hukum:</strong>
+                <p style="margin-top:8px;">{r.sanksi}</p>
+              </div>
+            </section>
+          )}
+
+          <!-- FAQs Accordion -->
+          {r.faqs && r.faqs.length > 0 && (
+            <section class="reg-card-block">
+              <h2>❓ Pertanyaan Umum Seputar Regulasi Ini</h2>
+              <div class="faq-accordion">
+                {r.faqs.map((faq) => (
+                  <details class="faq-box" style="margin-bottom:12px; border:1px solid #e2e8f0; border-radius:8px; padding:14px 18px;">
+                    <summary style="font-weight:700; cursor:pointer; color:#0f172a; list-style:none; display:flex; justify-content:space-between; align-items:center;">
+                      <span>{faq.q}</span>
+                      <span style="font-size:1.2rem; color:#0f5132;">+</span>
+                    </summary>
+                    <p style="margin:12px 0 0; color:#475569; line-height:1.6; font-size:0.95rem;">{faq.a}</p>
+                  </details>
+                ))}
+              </div>
+            </section>
+          )}
+        </article>
+
+        <!-- Right Column: Sticky Sidebar -->
+        <aside class="reg-sidebar">
+          <!-- Legal Metadata Box -->
+          <div class="side-card">
+            <h3 class="side-title">Informasi Regulasi</h3>
+            <div class="side-meta-item">
+              <strong>Nomor Aturan</strong>
+              <span>{r.nomor}</span>
+            </div>
+            <div class="side-meta-item">
+              <strong>Jenis Dokumen</strong>
+              <span>{r.jenis || 'Regulasi'}</span>
+            </div>
+            <div class="side-meta-item">
+              <strong>Tahun Pengesahan</strong>
+              <span>{r.tahun}</span>
+            </div>
+            <div class="side-meta-item">
+              <strong>Sektor / Kategori</strong>
+              <span>{r.kategori}</span>
+            </div>
+            <div class="side-meta-item">
+              <strong>Status Keberlakuan</strong>
+              <span style="color:#166534; font-weight:700;">✓ {r.status || 'Berlaku'}</span>
+            </div>
+            {r.mencabut && r.mencabut !== '-' && (
+              <div class="side-meta-item">
+                <strong>Menggantikan</strong>
+                <span>{r.mencabut}</span>
+              </div>
+            )}
+          </div>
+
+          <!-- B2B In-House Consultation CTA -->
+          <div class="side-cta-card">
+            <h3>Butuh Kepatuhan Regulasi?</h3>
+            <p>
+              Wahana Totalita membantu audit internal, penyiapan personil bersertifikat, dan training in-house pemenuhan {r.nomor} di perusahaan Anda.
+            </p>
+            <a href={waUrl} target="_blank" rel="noopener noreferrer" class="btn-side-wa">
+              💬 Konsultasi via WhatsApp
+            </a>
+          </div>
+
+          <!-- Related Regulations -->
+          {related.length > 0 && (
+            <div class="side-card">
+              <h3 class="side-title">Regulasi Terkait</h3>
+              {related.map((rel) => (
+                <a href={`/regulasi/${rel.slug}/`} class="related-link">
+                  <strong>{rel.nomor}</strong>
+                  <span>{rel.tentang}</span>
+                </a>
+              ))}
+            </div>
+          )}
+
+          <div style="text-align:center; padding:12px;">
+            <a href="/regulasi/" style="color:#0f5132; font-size:0.9rem; font-weight:600; text-decoration:none;">
+              &larr; Kembali ke Pusat Regulasi
+            </a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+</Layout>

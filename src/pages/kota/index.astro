@@ -1,0 +1,140 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allCities = await getCollection('cities');
+
+// Fallback / enhanced list of primary training hubs
+const primaryCities = [
+  { slug: 'jakarta', name: 'Jakarta', province: 'DKI Jakarta', tag: 'Pusat Bisnis & Konstruksi' },
+  { slug: 'surabaya', name: 'Surabaya', province: 'Jawa Timur', tag: 'Pusat Industri & Maritim' },
+  { slug: 'yogyakarta', name: 'Yogyakarta', province: 'D.I. Yogyakarta', tag: 'Headquarters & Training Center' },
+  { slug: 'bandung', name: 'Bandung', province: 'Jawa Barat', tag: 'Tekstil & Manufaktur' },
+  { slug: 'semarang', name: 'Semarang', province: 'Jawa Tengah', tag: 'Logistik & Pabrik' },
+  { slug: 'cilegon', name: 'Cilegon', province: 'Banten', tag: 'Petrokimia & Baja' },
+  { slug: 'karawang', name: 'Karawang', province: 'Jawa Barat', tag: 'Otomotif & Manufaktur' },
+  { slug: 'balikpapan', name: 'Balikpapan', province: 'Kalimantan Timur', tag: 'Migas & IKN Nusantara' },
+  { slug: 'samarinda', name: 'Samarinda', province: 'Kalimantan Timur', tag: 'Pertambangan Batubara' },
+  { slug: 'medan', name: 'Medan', province: 'Sumatera Utara', tag: 'Perkebunan Sawit & Pelabuhan' },
+  { slug: 'makassar', name: 'Makassar', province: 'Sulawesi Selatan', tag: 'Gateway Industri Timur & Nikel' },
+  { slug: 'batam', name: 'Batam', province: 'Kepulauan Riau', tag: 'Galangan Kapal & Elektronik' },
+  { slug: 'solo', name: 'Solo (Surakarta)', province: 'Jawa Tengah', tag: 'Tekstil & Faskes' },
+  { slug: 'malang', name: 'Malang', province: 'Jawa Timur', tag: 'Pariwisata & Agroindustri' },
+  { slug: 'denpasar', name: 'Denpasar', province: 'Bali', tag: 'Hospitality & K3 Pariwisata' },
+  { slug: 'palembang', name: 'Palembang', province: 'Sumatera Selatan', tag: 'Migas & Pupuk' },
+  { slug: 'bekasi', name: 'Bekasi', province: 'Jawa Barat', tag: 'Kawasan Industri MM2100 & GIIC' },
+  { slug: 'tangerang', name: 'Tangerang', province: 'Banten', tag: 'Bandara & Industri Pergudangan' },
+  { slug: 'bogor', name: 'Bogor', province: 'Jawa Barat', tag: 'Riset, Pangan & Kimia' },
+  { slug: 'pekanbaru', name: 'Pekanbaru', province: 'Riau', tag: 'Jantung Migas & Sawit Riau' },
+  { slug: 'manado', name: 'Manado', province: 'Sulawesi Utara', tag: 'Maritim & Energi Panas Bumi' },
+  { slug: 'depok', name: 'Depok', province: 'Jawa Barat', tag: 'Faskes & IT' },
+  { slug: 'jayapura', name: 'Jayapura', province: 'Papua', tag: 'Konstruksi & Pertambangan' },
+  { slug: 'pontianak', name: 'Pontianak', province: 'Kalimantan Barat', tag: 'Perkebunan & Bauksit' },
+  { slug: 'banjarmasin', name: 'Banjarmasin', province: 'Kalimantan Selatan', tag: 'Batubara & Pelayaran Sungai' },
+  { slug: 'mataram', name: 'Mataram', province: 'Nusa Tenggara Barat', tag: 'Tambang Emas & Pariwisata' },
+];
+
+const canonical = 'https://wahanatotalita.com/kota/';
+const metaTitle = 'Direktori Lokasi Pelatihan K3 Seluruh Indonesia | Wahana Totalita';
+const metaDesc = 'Pusat pelatihan dan sertifikasi K3 resmi Kemnaker RI dan BNSP di 20+ kota industri Indonesia: Jakarta, Surabaya, Balikpapan, Cilegon, Medan, Makassar, dan lainnya.';
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Lokasi Pelatihan K3 Indonesia',
+    description: metaDesc,
+    url: canonical,
+    itemListElement: primaryCities.map((c, idx) => ({
+      '@type': 'ListItem',
+      position: idx + 1,
+      name: `Pelatihan K3 ${c.name}`,
+      url: `https://wahanatotalita.com/pelatihan-k3-${c.slug}/`,
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Beranda', item: 'https://wahanatotalita.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Lokasi Pelatihan K3', item: canonical },
+    ],
+  },
+];
+---
+
+<Layout
+  title={metaTitle}
+  description={metaDesc}
+  canonical={canonical}
+  schemas={schemas}
+  pageCss={['/assets/css/page/kota.css']}
+>
+  <section style="background: linear-gradient(135deg, var(--brand), var(--brand-dark)); color: #fff; padding: 64px 20px 54px; text-align: center;">
+    <div class="container" style="max-width: 800px;">
+      <span style="display: inline-block; background: rgba(255,255,255,0.15); padding: 4px 14px; border-radius: 100px; font-size: 0.85rem; font-weight: 700; margin-bottom: 16px;">
+        📍 Jangkauan Nasional
+      </span>
+      <h1 style="font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 800; margin-bottom: 14px; color: #fff;">
+        Direktori Pelatihan K3 Kota-Kota Industri Indonesia
+      </h1>
+      <p style="font-size: 1.05rem; opacity: 0.9; line-height: 1.6; margin: 0 auto 28px;">
+        Wahana Totalita menyelenggarakan Public Training tatap muka &amp; online blended learning serta In-House Training bersertifikasi Kemnaker RI dan BNSP di berbagai pusat pertumbuhan ekonomi nasional.
+      </p>
+      <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
+        <a href="/jadwal/" style="background: #fff; color: var(--brand); padding: 12px 24px; border-radius: 8px; font-weight: 700; text-decoration: none;">
+          📅 Lihat Jadwal Terdekat
+        </a>
+        <a href="https://wa.me/6287759151278?text=Halo%20Wahana%20Totalita,%20saya%20ingin%20tanya%20jadwal%20pelatihan%20K3%20di%20kota%20saya" target="_blank" rel="noopener" style="background: #25d366; color: #fff; padding: 12px 24px; border-radius: 8px; font-weight: 700; text-decoration: none;">
+          💬 Konsultasi Jadwal Kota via WA
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="container" style="padding: 48px 20px 64px;">
+    <div style="margin-bottom: 32px; text-align: center;">
+      <h2 style="font-size: 1.6rem; font-weight: 800; color: var(--brand); margin-bottom: 8px;">
+        Pilih Kota Pelatihan K3 Anda
+      </h2>
+      <p style="color: var(--slate-600); font-size: 0.95rem;">
+        Klik kota di bawah untuk melihat rincian silabus, sertifikasi wajib di kawasan tersebut, dan jadwal pelaksanaan terdekat:
+      </p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
+      {primaryCities.map((city) => (
+        <a
+          href={`/pelatihan-k3-${city.slug}/`}
+          style="display: block; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; box-shadow: var(--shadow-sm);"
+          class="city-link-card"
+        >
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+            <span style="font-size: 1.4rem;">📍</span>
+            <span style="background: var(--surface-subtle); color: var(--brand); font-size: 0.72rem; font-weight: 700; padding: 3px 8px; border-radius: 6px; border: 1px solid var(--border);">
+              {city.province}
+            </span>
+          </div>
+          <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--slate-900); margin: 0 0 6px;">
+            Pelatihan K3 {city.name}
+          </h3>
+          <p style="font-size: 0.85rem; color: var(--slate-600); margin: 0 0 14px; line-height: 1.4;">
+            {city.tag}
+          </p>
+          <div style="font-size: 0.82rem; font-weight: 700; color: var(--brand); display: flex; align-items: center; gap: 4px;">
+            <span>Lihat Program &amp; Jadwal</span>
+            <span>&rarr;</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <style>
+    .city-link-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md) !important;
+      border-color: var(--brand-mid) !important;
+    }
+  </style>
+</Layout>

@@ -1,0 +1,597 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const pageTitle = 'Training K3 Perusahaan — In House Training & Sertifikasi';
+const metaDesc = 'Training K3 perusahaan & In House Training K3 resmi KEMNAKER RI dan BNSP. Corporate HSE training, konsultasi ISO, sertifikasi K3 untuk industri seluruh Indonesia. Proposal dalam 24 jam.';
+const canonical = 'https://wahanatotalita.com/perusahaan/';
+
+const waNumber = '6287759151278';
+const phoneDisp = '0877-5915-1278';
+const waDiskusi = `https://wa.me/${waNumber}?text=${encodeURIComponent('Halo, saya dari perusahaan dan ingin konsultasi kebutuhan training K3 untuk tim kami. Mohon dibantu.')}`;
+const waProposal = `https://wa.me/${waNumber}?text=${encodeURIComponent('Halo, kami ingin minta proposal training K3 / in house training untuk perusahaan kami. Mohon dikirimkan penawarannya.')}`;
+const getWaService = (svc: string) => `https://wa.me/${waNumber}?text=${encodeURIComponent(`Halo, kami tertarik dengan ${svc} untuk perusahaan kami. Mohon info silabus & penawarannya.`)}`;
+
+const pains = [
+  {
+    title: 'Audit SMK3 Sudah di Depan Mata',
+    desc: 'Auditor datang beberapa bulan lagi, tapi dokumen belum rapi dan personel belum kompeten. Satu temuan mayor bisa menggagalkan sertifikasi yang sudah dinanti direksi.',
+  },
+  {
+    title: 'Sertifikat Personel Hampir Kedaluwarsa',
+    desc: 'Lisensi Ahli K3, operator, dan petugas Anda punya masa berlaku. Telat perpanjang = personel tidak sah bekerja, dan operasional bisa terhenti mendadak.',
+  },
+  {
+    title: 'Kalah Tender karena Persyaratan K3',
+    desc: 'Klien & CSMS mensyaratkan personel bersertifikat KEMNAKER/BNSP. Tanpa itu, penawaran terbaik pun gugur di tahap pra-kualifikasi — sebelum harga dibuka.',
+  },
+  {
+    title: 'Target Zero Accident Terancam',
+    desc: 'Satu kecelakaan kerja berarti investigasi, kompensasi, reputasi rusak, dan KPI HSE merah. Pencegahan lewat pelatihan selalu jauh lebih murah daripada satu insiden.',
+  },
+  {
+    title: 'Temuan Compliance KEMNAKER',
+    desc: 'Inspeksi pengawas ketenagakerjaan menemukan kewajiban training Kemnaker yang belum dipenuhi? Sanksi administratif dan proyek tertunda adalah risikonya.',
+  },
+  {
+    title: 'Karyawan Baru & Gap Kompetensi HSE',
+    desc: 'Rekrutmen berjalan cepat, tapi onboarding K3 tertinggal. Karyawan baru yang belum terlatih adalah risiko berjalan di lantai produksi Anda setiap hari.',
+  },
+];
+
+const services = [
+  {
+    title: 'In House Training K3',
+    desc: 'Corporate safety training di lokasi perusahaan Anda — materi disesuaikan proses & risiko industri, hemat biaya untuk grup besar.',
+  },
+  {
+    title: 'Public Training',
+    desc: 'Kirim 1–5 karyawan mengikuti jadwal reguler kami — training Kemnaker & BNSP setiap bulan, online maupun tatap muka.',
+  },
+  {
+    title: 'Konsultasi Sistem Manajemen',
+    desc: 'Pendampingan SMK3 PP 50/2012, ISO 45001, ISO 14001, ISO 9001 — dari gap analysis hingga sistem berjalan.',
+  },
+  {
+    title: 'Pendampingan Sertifikasi K3',
+    desc: 'Kami dampingi personel & perusahaan hingga lulus sertifikasi K3 KEMNAKER RI maupun BNSP — termasuk administrasinya.',
+  },
+  {
+    title: 'Audit Internal',
+    desc: 'Pelaksanaan & pelatihan auditor internal SMK3/ISO agar perusahaan selalu siap menghadapi audit eksternal.',
+  },
+  {
+    title: 'Penyusunan Dokumen',
+    desc: 'Manual, prosedur, IBPR/HIRADC, JSA, dan dokumen CSMS — disusun sesuai standar klien & regulator.',
+  },
+  {
+    title: 'Safety Campaign',
+    desc: 'Program budaya K3: safety talk, bulan K3 nasional, kampanye visual, hingga observasi perilaku (BBS).',
+  },
+  {
+    title: 'Emergency Response',
+    desc: 'Pelatihan & simulasi tanggap darurat: kebakaran, P3K, evakuasi, hingga penyusunan ERP perusahaan.',
+  },
+];
+
+const programs = [
+  { title: 'Mandatory Training KEMNAKER', desc: 'Ahli K3 Umum, K3 Listrik, Operator Forklift, TKBT/TKPK, Petugas P3K, Damkar', query: 'Training Kemnaker wajib' },
+  { title: 'Sertifikasi BNSP', desc: 'Sertifikasi K3 berbasis kompetensi: Auditor SMK3, Petugas K3, dan skema BNSP lainnya', query: 'Sertifikasi BNSP' },
+  { title: 'Custom In House Training', desc: 'Materi dirancang khusus sesuai risiko site, temuan audit, dan SOP perusahaan Anda', query: 'Custom In House Training' },
+  { title: 'Soft Skills & Pelatihan Karyawan', desc: 'Komunikasi K3, 5S/5R, safety leadership dasar, dan pengembangan SDM operasional', query: 'Soft Skills Training' },
+  { title: 'ISO & Sistem Manajemen', desc: 'ISO 45001, ISO 14001, ISO 9001, SMK3 PP 50/2012 — awareness hingga auditor internal', query: 'Training ISO' },
+  { title: 'Environmental / Lingkungan', desc: 'Pengelolaan limbah B3, pengendalian pencemaran, kepatuhan lingkungan industri', query: 'Training Lingkungan' },
+  { title: 'Mining Safety', desc: 'POP, POM, POU — pengawas operasional pertambangan sesuai regulasi ESDM', query: 'Training Mining Safety' },
+  { title: 'HSE Leadership', desc: 'Safety leadership untuk supervisor, superintendent, dan manager lini produksi', query: 'Training HSE Leadership' },
+];
+
+const reasons = [
+  { title: 'Proposal dalam 24 Jam', desc: 'Diskusi hari ini, proposal + quotation resmi masuk email Anda besok. Tanpa menunggu berminggu-minggu.' },
+  { title: 'Jadwal Fleksibel', desc: 'Weekday, weekend, atau menyesuaikan shift produksi — training mengikuti operasional Anda, bukan sebaliknya.' },
+  { title: 'Bisa In House di Site Anda', desc: 'Instruktur datang ke lokasi perusahaan di mana pun di Indonesia — hemat akomodasi, produksi tetap jalan.' },
+  { title: 'Instruktur Praktisi Industri', desc: 'Pengajar adalah praktisi aktif di konstruksi, tambang, dan manufaktur — studi kasus nyata, bukan sekadar teori.' },
+  { title: 'Sertifikat Resmi & Diakui', desc: 'Sertifikat KEMNAKER RI & BNSP yang sah untuk audit SMK3, CSMS, dan persyaratan tender.' },
+  { title: 'Administrasi Dibantu Penuh', desc: 'Vendor registration, invoice, faktur pajak, hingga penerbitan sertifikat — semua kami urus sampai selesai.' },
+  { title: 'Training Seluruh Indonesia', desc: 'Jaringan instruktur training safety Indonesia dari Sumatera hingga Papua — respons cepat, biaya efisien.' },
+  { title: 'Support Setelah Training', desc: 'Konsultasi implementasi pasca-pelatihan tanpa biaya tambahan — kami pastikan ilmunya diterapkan.' },
+];
+
+const industries = [
+  'Manufacturing', 'Mining', 'Construction', 'Oil & Gas', 'Power Plant',
+  'Palm Oil', 'Chemical', 'Logistics', 'Hospital', 'Government'
+];
+
+const process = [
+  { title: 'Konsultasi', desc: 'Ceritakan tantangan K3 perusahaan Anda via WhatsApp — gratis.' },
+  { title: 'Analisis Kebutuhan', desc: 'Kami petakan gap kompetensi & kewajiban regulasi tim Anda.' },
+  { title: 'Proposal', desc: 'Silabus, jadwal, instruktur, dan investasi — dalam 24 jam.' },
+  { title: 'Penjadwalan', desc: 'Tanggal dikunci menyesuaikan operasional & shift produksi.' },
+  { title: 'Pelaksanaan', desc: 'Training berjalan di site Anda atau kelas kami.' },
+  { title: 'Sertifikasi', desc: 'Sertifikat resmi KEMNAKER/BNSP diproses & diterbitkan.' },
+  { title: 'Reporting', desc: 'Laporan hasil & rekomendasi tindak lanjut untuk manajemen.' },
+  { title: 'After Sales Support', desc: 'Konsultasi implementasi berlanjut setelah training selesai.' },
+];
+
+const packages = [
+  {
+    name: 'IN-HOUSE TRAINING',
+    badge: 'Paling Populer',
+    isFeatured: true,
+    forWhom: 'Ideal untuk 10–100 peserta',
+    desc: 'Perusahaan dengan banyak personel yang butuh pelatihan serentak di lokasi sendiri.',
+    bullets: [
+      'Materi custom sesuai risiko industri Anda',
+      'Hemat biaya per peserta hingga 40%',
+      'Tanpa biaya perjalanan peserta',
+      'Jadwal menyesuaikan operasional',
+      'Sertifikat resmi seluruh peserta',
+    ],
+    waTarget: 'In House Training K3',
+  },
+  {
+    name: 'PUBLIC TRAINING',
+    isFeatured: false,
+    forWhom: 'Karyawan mengikuti jadwal kami',
+    desc: 'Kebutuhan 1–5 peserta per program tanpa menunggu kuota internal terpenuhi.',
+    bullets: [
+      'Jadwal reguler setiap bulan',
+      'Networking antar praktisi K3',
+      'Online (Zoom) atau tatap muka',
+      'Biaya per peserta transparan',
+      'Sertifikat resmi KEMNAKER/BNSP',
+    ],
+    waTarget: 'Public Training K3',
+  },
+  {
+    name: 'CONSULTING & CERTIFICATION',
+    isFeatured: false,
+    forWhom: 'Pendampingan hingga lulus audit',
+    desc: 'Perusahaan yang mengejar sertifikasi SMK3, ISO 45001/14001/9001, atau kualifikasi CSMS.',
+    bullets: [
+      'Gap analysis & roadmap kepatuhan',
+      'Penyusunan dokumen lengkap',
+      'Pelatihan auditor internal',
+      'Pendampingan saat audit eksternal',
+      'Garansi pendampingan sampai lulus',
+    ],
+    waTarget: 'Konsultasi & Sertifikasi',
+  },
+];
+
+const testimonials = [
+  {
+    initials: 'AH',
+    quote: '"Kami berhasil menutup seluruh temuan audit klien dalam satu semester. Tim Wahana responsif dan benar-benar memahami kebutuhan kontraktor."',
+    name: 'Andi H.',
+    role: 'HSE Manager',
+    company: 'Konstruksi Nasional',
+    outcome: 'Lulus audit CSMS klien — nihil temuan mayor',
+  },
+  {
+    initials: 'SR',
+    quote: '"Training K3 perusahaan yang mereka rancang langsung menjawab temuan audit SMK3 kami. Instrukturnya praktisi, contoh kasusnya nyata dan langsung diterapkan di lini produksi."',
+    name: 'Sari R.',
+    role: 'HRD Manager',
+    company: 'Manufaktur Otomotif',
+    outcome: 'Sertifikasi SMK3 tercapai di audit pertama',
+  },
+  {
+    initials: 'BP',
+    quote: '"Administrasi sangat cepat — quotation sehari jadi, sertifikat tidak pakai lama. Untuk kebutuhan tender migas, kecepatan seperti ini sangat berharga."',
+    name: 'Bambang P.',
+    role: 'Training Coordinator',
+    company: 'Kontraktor Migas',
+    outcome: 'Lolos pra-kualifikasi tender tepat waktu',
+  },
+];
+
+const faqs = [
+  {
+    q: 'Apakah training bisa dilaksanakan di lokasi perusahaan kami?',
+    a: 'Bisa. In house training K3 adalah layanan utama kami — instruktur datang ke site Anda di mana pun di Indonesia, lengkap dengan modul, alat peraga, dan administrasi sertifikasi.',
+  },
+  {
+    q: 'Berapa jumlah minimum peserta?',
+    a: 'Untuk in house training, umumnya mulai 10 peserta agar biaya per orang efisien. Di bawah itu, karyawan Anda dapat bergabung di jadwal public training kami yang berjalan setiap bulan.',
+  },
+  {
+    q: 'Apakah materi training bisa disesuaikan dengan perusahaan kami?',
+    a: 'Bisa. Kurikulum kami sesuaikan dengan proses kerja, risiko spesifik site, temuan audit, dan SOP perusahaan Anda — bukan materi generik.',
+  },
+  {
+    q: 'Berapa lama durasi training?',
+    a: 'Bervariasi per program: 1–3 hari untuk sebagian besar pelatihan karyawan dan sertifikasi BNSP, hingga 12 hari untuk pembinaan Ahli K3 Umum KEMNAKER.',
+  },
+  {
+    q: 'Apakah sertifikatnya resmi?',
+    a: 'Ya. Sertifikat diterbitkan resmi oleh KEMNAKER RI atau BNSP, berlaku nasional, dan sah digunakan untuk audit SMK3, CSMS, dan persyaratan tender.',
+  },
+  {
+    q: 'Apakah melayani seluruh Indonesia?',
+    a: 'Ya. Jaringan instruktur kami tersebar di berbagai kota — kami rutin melaksanakan corporate HSE training dari Sumatera hingga Papua, plus opsi online via Zoom.',
+  },
+  {
+    q: 'Bagaimana proses pengajuan proposal?',
+    a: 'Sederhana: hubungi kami via WhatsApp, ceritakan kebutuhan Anda, dan proposal lengkap (silabus, jadwal, investasi) kami kirim maksimal 1×24 jam kerja.',
+  },
+  {
+    q: 'Bagaimana termin pembayarannya?',
+    a: 'Kami terbiasa dengan proses procurement perusahaan: vendor registration, PO, invoice, dan faktur pajak. Termin pembayaran fleksibel sesuai kesepakatan.',
+  },
+];
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'EducationalOrganization',
+    '@id': 'https://wahanatotalita.com/#organization',
+    name: 'Wahana Totalita Konsultan',
+    alternateName: 'PT Wahana Totalita Konsultan',
+    url: 'https://wahanatotalita.com',
+    logo: 'https://wahanatotalita.com/assets/img/og-cover.jpg',
+    telephone: '+62-877-5915-1278',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Training K3 Perusahaan & In House Training K3',
+    serviceType: 'Corporate HSE Training, In House Training K3, Sertifikasi K3 KEMNAKER & BNSP, Konsultasi ISO',
+    provider: {
+      '@type': 'EducationalOrganization',
+      name: 'Wahana Totalita Konsultan',
+      url: 'https://wahanatotalita.com',
+      telephone: '+62-877-5915-1278',
+    },
+    areaServed: { '@type': 'Country', name: 'Indonesia' },
+    audience: {
+      '@type': 'BusinessAudience',
+      name: 'HSE Manager, HSE Officer, HR Manager, GA Manager, Training Coordinator, Factory Manager',
+    },
+    description: metaDesc,
+    url: canonical,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Beranda', item: 'https://wahanatotalita.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Training K3 Perusahaan', item: canonical },
+    ],
+  },
+];
+---
+
+<Layout
+  title={pageTitle}
+  description={metaDesc}
+  canonical={canonical}
+  schemas={schemas}
+  pageCss={['/assets/css/perusahaan.css']}
+>
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb-bar" style="margin-top:var(--nav-h,72px);background:var(--surface);padding:12px 0;border-bottom:1px solid var(--border);">
+    <div class="container" style="max-width:1160px;margin:0 auto;padding:0 20px;">
+      <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb-list" style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:13px;color:var(--slate-500);list-style:none;padding:0;margin:0;">
+          <li><a href="/" style="color:var(--slate-600);text-decoration:none;">Beranda</a></li>
+          <li aria-hidden="true">›</li>
+          <li aria-current="page" style="color:var(--brand);font-weight:600;">Training K3 Perusahaan</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <!-- ═══ 1 · HERO ═══ -->
+  <section class="pr-hero">
+      <div class="container pr-hero-inner">
+        <div class="pr-hero-copy">
+          <span class="pr-eyebrow">Training K3 Perusahaan · In House &amp; Public</span>
+          <h1>Training K3 &amp; Sertifikasi Resmi untuk <em>Perusahaan Anda</em> — di Seluruh Indonesia</h1>
+          <p class="pr-lead">In house training K3, corporate HSE training, sertifikasi KEMNAKER RI &amp; BNSP, dan konsultasi ISO. Dipercaya 200+ perusahaan manufaktur, tambang, konstruksi, dan migas untuk memenuhi regulasi dan mencapai zero accident.</p>
+          <div class="pr-hero-cta">
+            <a class="btn-primary pr-btn-lg" href={waProposal} target="_blank" rel="noopener">Minta Proposal</a>
+            <a class="btn-outline pr-btn-lg" href={waDiskusi} target="_blank" rel="noopener">Konsultasi Gratis</a>
+          </div>
+          <p class="pr-reassure">&#10003; Proposal dalam 24 jam &nbsp;·&nbsp; &#10003; Resmi KEMNAKER RI &amp; BNSP &nbsp;·&nbsp; &#10003; Tanpa komitmen</p>
+        </div>
+        <div class="pr-hero-media">
+          <img
+            src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=760&q=70"
+            alt="Konsultan K3 dan Tim HSE Mengikuti Pelatihan K3 Perusahaan & Sertifikasi Kemnaker RI"
+            width="760"
+            height="507"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 2 · TRUST ═══ -->
+    <section class="pr-trustband" aria-label="Kredibilitas Wahana Totalita">
+      <div class="container">
+        <div class="pr-trustnum">
+          <div class="pr-tn"><b>200+</b><span>Perusahaan Dilayani</span></div>
+          <div class="pr-tn"><b>5000+</b><span>Peserta Dilatih</span></div>
+          <div class="pr-tn"><b>15+</b><span>Tahun Pengalaman</span></div>
+          <div class="pr-tn"><b>30+</b><span>Provinsi Terjangkau</span></div>
+        </div>
+        <div class="pr-clients">
+          <p>Dipercaya tim HSE &amp; HRD dari:</p>
+          <div class="pr-client-chips">
+            <span>PT Badak NGL</span><span>Pupuk Kujang</span><span>Indonesia Power</span><span>Pertamina</span><span>PT Itokoh Ceperindo</span><span>+ ratusan perusahaan lainnya</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 2.5 · FOUNDING STORY ═══ -->
+    <section class="pr-section">
+      <div class="container">
+        <div class="pr-head">
+          <span class="pr-eyebrow">Perjalanan Kami</span>
+          <h2>Berdiri sejak 2001, Wahana Totalita resmi berbadan hukum pada 2006</h2>
+          <p>Berawal sebagai praktik pelatihan Keselamatan dan Kesehatan Kerja di Yogyakarta pada 2001, kami resmi berbadan hukum pada 2006 melalui Akte Notaris No. 01 tanggal 3 Agustus 2006 (Notaris H. Hamdani, SH), dengan Tanda Daftar Perusahaan (TDP) 120237001899 dan SIUP 503/0347/Mkr/XI/2011. Sejak saat itu, kami terus melayani perusahaan di seluruh Indonesia dengan pelatihan dan sertifikasi K3 yang resmi dan diakui.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 3 · PAIN POINTS ═══ -->
+    <section class="pr-section">
+      <div class="container">
+        <div class="pr-head">
+          <span class="pr-eyebrow">Masalah yang Kami Selesaikan</span>
+          <h2>Tantangan Ini Sedang Dihadapi Perusahaan Anda?</h2>
+          <p>Setiap minggu kami menerima pertanyaan yang sama dari HSE Manager dan HRD di seluruh Indonesia. Mungkin salah satunya sedang ada di meja Anda:</p>
+        </div>
+        <div class="pr-grid pr-grid-3">
+          {pains.map((p, i) => (
+            <div class="pr-card pr-problem" data-reveal="up" data-reveal-delay={(i % 4) + 1}>
+              <div class="pr-ic pr-ic-warn">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+              </div>
+              <h3>{p.title}</h3>
+              <p>{p.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA strip -->
+    <section class="pr-ctastrip" aria-label="Ajakan konsultasi">
+      <div class="container pr-ctastrip-inner">
+        <p><b>Sedang menghadapi salah satu masalah di atas?</b> Ceritakan situasinya — kami balas dengan solusi &amp; proposal dalam 24 jam.</p>
+        <a class="btn-primary" href={waDiskusi} target="_blank" rel="noopener">Konsultasi Gratis via WhatsApp</a>
+      </div>
+    </section>
+
+    <!-- ═══ 4 · LAYANAN ═══ -->
+    <section class="pr-section pr-section-alt" id="layanan">
+      <div class="container">
+        <div class="pr-head">
+          <span class="pr-eyebrow">Solusi Wahana Totalita</span>
+          <h2>Satu Partner untuk Seluruh Kebutuhan Corporate Safety Training</h2>
+          <p>Dari pelatihan karyawan hingga lulus audit — satu vendor, satu standar layanan, satu penanggung jawab.</p>
+        </div>
+        <div class="pr-grid pr-grid-4">
+          {services.map((sv, i) => (
+            <div class="pr-card pr-service" data-reveal="up" data-reveal-delay={(i % 4) + 1}>
+              <div class="pr-ic">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+              </div>
+              <h3>{sv.title}</h3>
+              <p>{sv.desc}</p>
+              <a class="pr-link" href={getWaService(sv.title)} target="_blank" rel="noopener">Pelajari Layanan
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 4.5 · TRUST: KLIEN & INSTRUKTUR ═══ -->
+    <section class="pr-section">
+      <div class="container" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;">
+        <div class="pr-card">
+          <h2 style="font-size:1.35rem;margin-top:0;">Dipercaya oleh 70+ Perusahaan Besar</h2>
+          <p>Sejak 2001, kami telah melayani lebih dari 70 perusahaan BUMN dan multinasional — dari sektor migas, pertambangan, perbankan, hingga manufaktur.</p>
+          <a class="pr-link" href="/klien/">Lihat daftar klien kami &rarr;</a>
+        </div>
+        <div class="pr-card">
+          <h2 style="font-size:1.35rem;margin-top:0;">Instruktur Berpengalaman</h2>
+          <p>Program pelatihan kami didukung oleh jaringan instruktur K3 bersertifikat nasional, termasuk praktisi dari Pusdiklat Migas Cepu, akademisi bidang K3, dan pengawas ketenagakerjaan.</p>
+          <a class="pr-link" href="/instruktur/">Kenali instruktur kami &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 5 · PROGRAM ═══ -->
+    <section class="pr-section" id="program">
+      <div class="container">
+        <div class="pr-head">
+          <span class="pr-eyebrow">Kategori Program</span>
+          <h2>100+ Program Training Kemnaker, BNSP, ISO &amp; Soft Skills</h2>
+          <p>Semua program tersedia sebagai public training maupun in house training di lokasi perusahaan Anda. Lihat juga <a href="/jadwal/">jadwal pelatihan terdekat</a>.</p>
+        </div>
+        <div class="pr-grid pr-grid-4">
+          {programs.map((pg, i) => (
+            <div class="pr-card pr-program" data-reveal="up" data-reveal-delay={(i % 4) + 1}>
+              <h3>{pg.title}</h3>
+              <p>{pg.desc}</p>
+              <a class="pr-link" href={getWaService(pg.query)} target="_blank" rel="noopener">Minta Silabus &amp; Harga
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 6 · KENAPA DIPILIH ═══ -->
+    <section class="pr-section pr-section-alt">
+      <div class="container">
+        <div class="pr-head">
+          <span class="pr-eyebrow">Kenapa Dipilih Perusahaan</span>
+          <h2>Standar Layanan yang Dirancang untuk Kebutuhan Korporasi</h2>
+        </div>
+        <div class="pr-grid pr-grid-4">
+          {reasons.map((r, i) => (
+            <div class="pr-card pr-reason" data-reveal="up" data-reveal-delay={(i % 4) + 1}>
+              <div class="pr-ic">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <h3>{r.title}</h3>
+              <p>{r.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 7 · INDUSTRI ═══ -->
+    <section class="pr-section pr-section-dark">
+      <div class="container">
+        <div class="pr-head">
+          <span class="pr-eyebrow">Bidang Industri</span>
+          <h2>Berpengalaman Melayani Berbagai Sektor Industri</h2>
+        </div>
+        <div class="pr-industries">
+          {industries.map((ind) => (
+            <div class="pr-industry">
+              <span class="pr-ind-ic">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </span>
+              <span>{ind}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 8 · PROSES ═══ -->
+    <section class="pr-section">
+      <div class="container">
+        <div class="pr-head">
+          <span class="pr-eyebrow">Corporate Training Process</span>
+          <h2>Dari Konsultasi hingga After Sales — Proses yang Jelas</h2>
+        </div>
+        <ol class="pr-timeline pr-timeline-8">
+          {process.map((st, i) => (
+            <li>
+              <span class="pr-step-num">{i + 1}</span>
+              <h3>{st.title}</h3>
+              <p>{st.desc}</p>
+            </li>
+          ))}
+        </ol>
+        <div class="pr-center">
+          <a class="btn-primary pr-btn-lg" href={waDiskusi} target="_blank" rel="noopener">Mulai dari Langkah 1 — Konsultasi Gratis</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 9 · PAKET ═══ -->
+    <section class="pr-section pr-section-alt" id="paket">
+      <div class="container">
+        <div class="pr-head">
+          <span class="pr-eyebrow">Corporate Packages</span>
+          <h2>Pilih Skema yang Sesuai Kebutuhan Perusahaan</h2>
+        </div>
+        <div class="pr-grid pr-grid-3 pr-packages">
+          {packages.map((pk, i) => (
+            <div class={`pr-package${pk.isFeatured ? ' pr-package-featured' : ''}`} data-reveal="up" data-reveal-delay={(i % 4) + 1}>
+              {pk.badge && <span class="pr-badge">{pk.badge}</span>}
+              <h3>{pk.name}</h3>
+              <p class="pr-pkg-for"><strong>Best for:</strong> {pk.forWhom}</p>
+              <p class="pr-pkg-desc">{pk.desc}</p>
+              <ul>
+                {pk.bullets.map((b) => (
+                  <li>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
+                    {b}
+                  </li>
+                ))}
+              </ul>
+              <a class={pk.isFeatured ? 'btn-primary pr-btn-block' : 'btn-outline pr-btn-block'} href={getWaService(pk.waTarget)} target="_blank" rel="noopener">Diskusikan Paket Ini</a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 10 · TESTIMONIALS ═══ -->
+    <section class="pr-section">
+      <div class="container">
+        <div class="pr-head">
+          <span class="pr-eyebrow">Success Stories</span>
+          <h2>Dampak Nyata bagi Bisnis Klien Kami</h2>
+        </div>
+        <div class="pr-grid pr-grid-3">
+          {testimonials.map((t, i) => (
+            <figure class="pr-testi" data-reveal="up" data-reveal-delay={(i % 4) + 1}>
+              <div class="pr-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              <blockquote>{t.quote}</blockquote>
+              <p class="pr-outcome">
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
+                {t.outcome}
+              </p>
+              <figcaption>
+                <span class="pr-av">{t.initials}</span>
+                <span><b>{t.name}</b><small>{t.role} · {t.company}</small></span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 11 · FAQ ═══ -->
+    <section class="pr-section pr-section-alt" id="faq">
+      <div class="container">
+        <div class="pr-head">
+          <span class="pr-eyebrow">Pertanyaan Umum</span>
+          <h2>Yang Sering Ditanyakan HRD &amp; Tim HSE</h2>
+        </div>
+        <div class="pr-faq">
+          {faqs.map((f, k) => (
+            <details open={k === 0} data-reveal="up" data-reveal-delay={(k % 4) + 1}>
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 12 · FINAL CTA ═══ -->
+    <section class="pr-final">
+      <div class="container pr-final-inner">
+        <h2>Siap Meningkatkan Kompetensi Tim HSE Perusahaan Anda?</h2>
+        <p>Diskusikan kebutuhan training K3 perusahaan, sertifikasi, dan kepatuhan Anda — gratis, tanpa komitmen, proposal dalam 24 jam.</p>
+        <div class="pr-final-cta">
+          <a class="pr-btn-white" href={waDiskusi} target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2z"/></svg>
+            Chat WhatsApp Sekarang
+          </a>
+          <a class="pr-btn-ghost" href={waProposal} target="_blank" rel="noopener">Minta Proposal</a>
+        </div>
+        <p class="pr-final-phone">Atau hubungi kami: <a href={`tel:+${waNumber}`}>{phoneDisp}</a></p>
+        <div class="pr-badges">
+          <span>&#10003; Resmi KEMNAKER RI</span>
+          <span>&#10003; Sertifikasi BNSP</span>
+          <span>&#10003; 15+ Tahun Pengalaman</span>
+          <span>&#10003; Melayani Seluruh Indonesia</span>
+        </div>
+      </div>
+    </section>
+</Layout>

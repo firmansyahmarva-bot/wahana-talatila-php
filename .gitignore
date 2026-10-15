@@ -1,0 +1,69 @@
+# OS Files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+__MACOSX/
+*.tmp
+test.tmp
+
+# Logs
+*.log
+404-log.txt
+error_log
+
+# Temp & backup files
+*.bak
+*.swp
+*.swo
+
+# Staging archives
+staging-app/Archief.zip
+staging-app/__MACOSX/
+staging-app/dist/__MACOSX/
+
+# Subdomains & Landing Pages (Hostinger public_html decoupling)
+k3umum-publichtml/
+smk3/
+lp/
+pedia-public-html/
+staging-app/
+website-engine/
+iso/
+hse/
+k3umum/
+pedia/
+
+# IDE / Editor
+.vscode/
+.idea/
+
+# Environment & Server Secrets (Never commit secrets to git)
+.env
+.env.*
+secrets.php
+config.local.php
+*.secret
+
+# Next.js projects (Separate apps - do not track in Hostinger PHP repo)
+nextjs-workspace/
+nextjs-clean/
+# Astro build output
+.astro/
+dist/
+out/
+node_modules/
+
+# Database dumps & SQL files (do not track in git)
+*.sql
+*.sql.gz
+scripts/*.sql
+
+# Temporary audit & scratch files
+tools/*-audit.csv
+tools/test-*.php
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.class

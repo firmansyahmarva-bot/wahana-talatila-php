@@ -1,0 +1,85 @@
+---
+import EnLayout from '../../layouts/EnLayout.astro';
+import EnSidebar from '../../components/EnSidebar.astro';
+
+const title = "Confined Space Safety Indonesia: Permenaker 11/2023 Statutory Guide — Wahana Totalita";
+const description = "<?= htmlspecialchars($meta_desc, ENT_QUOTES,";
+const canonical = "https://wahanatotalita.com/en/confined-space-safety-standards/";
+const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","@id":"https://wahanatotalita.com/en/confined-space-safety-standards/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://wahanatotalita.com/"},{"@type":"ListItem","position":2,"name":"English OHS Hub","item":"https://wahanatotalita.com/en/"},{"@type":"ListItem","position":3,"name":"Confined Space Safety Standards","item":"https://wahanatotalita.com/en/confined-space-safety-standards/"}]},{"@type":"Article","@id":"https://wahanatotalita.com/en/confined-space-safety-standards/#article","headline":"Confined Space Safety in Indonesia: Permenaker No. 11/2023 Guide","description":"<?= htmlspecialchars($meta_desc, ENT_QUOTES,","inLanguage":"en-US","mainEntityOfPage":"https://wahanatotalita.com/en/confined-space-safety-standards/","datePublished":"2026-09-01T08:00:00+07:00","dateModified":"2026-10-01T12:00:00+07:00","publisher":{"@type":"Organization","name":"PT Wahana Totalita Konsultan","url":"https://wahanatotalita.com","logo":{"@type":"ImageObject","url":"https://wahanatotalita.com/assets/img/logo-wt.png"}}}]}];
+---
+
+<EnLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  schemas={schemas}
+>
+<section class="en-hero">
+  <div class="en-container">
+    <div class="en-breadcrumb">
+      <a href="/">Home</a> &rsaquo; <a href="/en/">English OHS Hub</a> &rsaquo; <span>Confined Space Standards</span>
+    </div>
+    <div class="en-hero-pill">
+      <span>High-Risk Safety · Permenaker No. 11/2023</span>
+    </div>
+    <h1>Confined Space Safety (K3 Ruang Terbatas) in Indonesia: The Permenaker 11/2023 Mandate</h1>
+    <p class="en-hero-lead">
+      Statutory requirements for entering storage tanks, underground vessels, culverts, silos, and ship holds: atmospheric gas testing, entry permit systems, and certified entrant/rescuer ratios.
+    </p>
+
+    <div class="en-trust-bar">
+      <div class="en-trust-item">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        <div>
+          <strong>Permenaker 11/2023</strong>
+          <span>Updated statutory confined space law</span>
+        </div>
+      </div>
+      <div class="en-trust-item">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        <div>
+          <strong>Entry Permit System</strong>
+          <span>Mandatory written Izin Masuk</span>
+        </div>
+      </div>
+      <div class="en-trust-item">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        <div>
+          <strong>Madya &amp; Utama Ratios</strong>
+          <span>Certified entrant &amp; supervisor quotas</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="en-container">
+  <div class="en-body-grid">
+    <main>
+      <section class="en-card">
+        <span class="en-sec-badge">Statutory Overview</span>
+        <h2 class="en-sec-title">The Modernized Permenaker 11/2023 Framework</h2>
+        <p class="en-text">
+          Replacing older regulatory circulars, <strong>Minister of Manpower Regulation No. 11 of 2023</strong> establishes strict statutory protocols for entering, cleaning, inspecting, or welding inside any <strong>Ruang Terbatas (Confined Space)</strong> in Indonesia.
+        </p>
+        <p class="en-text">
+          A confined space is defined as an area with restricted entry/exit, not intended for continuous human occupancy, and prone to atmospheric oxygen deficiency (<19.5%), oxygen enrichment (>23.5%), toxic gas build-up, or engulfment hazards.
+        </p>
+
+        <div class="en-law-grid">
+          <div class="en-law-card">
+            <strong>Petugas K3 Ruang Terbatas (Madya)</strong>
+            <p>Certified Authorized Entrants and Standby Persons. Legally qualified to enter the space, operate continuous 4-gas atmospheric monitors, and maintain communication with the outside standby watch.</p>
+          </div>
+          <div class="en-law-card">
+            <strong>Teknisi K3 Ruang Terbatas (Utama)</strong>
+            <p>Confined Space Supervisors and Entry Permit Issuers. Legally authorized to perform pre-entry gas clearance tests, authorize the written Entry Permit, and oversee isolation (LOTO).</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <EnSidebar currentSlug="confined-space-safety-standards" />
+  </div>
+</div>
+</EnLayout>

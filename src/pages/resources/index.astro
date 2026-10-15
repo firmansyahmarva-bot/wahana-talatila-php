@@ -1,0 +1,110 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import data from '../../data/resources.json';
+
+const { categories, resources } = data;
+
+const title = 'Download Dokumen K3 Gratis — Template JSA, Checklist, SOP | Wahana Totalita';
+const description = 'Kumpulan template dokumen K3 gratis: JSA, HIRADC, checklist inspeksi, SOP K3, poster, safety talk. Download langsung untuk kebutuhan HSE perusahaan Anda.';
+const canonical = 'https://wahanatotalita.com/resources/';
+
+const totalDocs = resources.length;
+const totalDownloads = resources.reduce((acc, r) => acc + (r.download_count || 0), 1800);
+---
+
+<Layout
+  title={title}
+  description={description}
+  canonical={canonical}
+  pageCss={['/assets/css/page/resources.css']}
+>
+  <section class="resource-hero">
+    <div class="container">
+      <h1>📄 Resource Library K3</h1>
+      <p>Download template dokumen K3 gratis — JSA, HIRADC, Checklist, SOP, Poster, Safety Talk &amp; panduan teknis HSE</p>
+      
+      <div class="resource-stats">
+        <div class="stat"><strong>{totalDocs}+</strong><span>Dokumen</span></div>
+        <div class="stat"><strong>{totalDownloads}+</strong><span>Download</span></div>
+        <div class="stat"><strong>1,200+</strong><span>Pengguna HSE</span></div>
+      </div>
+
+      <div class="search-bar">
+        <input type="search" id="resourceSearch" placeholder="Cari template dokumen K3 (misal: JSA, HIRADC, SOP)..." autocomplete="off" />
+        <button type="button" id="resourceSearchBtn">🔍 Cari</button>
+      </div>
+    </div>
+  </section>
+
+  <nav class="filter-bar">
+    <div class="filter-bar-inner">
+      <a href="/resources/" class="filter-chip active">📁 Semua ({resources.length})</a>
+      {categories.map((c) => (
+        <a href={`/resources/kategori/${c.slug}/`} class="filter-chip">
+          {c.icon} {c.name}
+          {c.count > 0 && <span style="font-size:.75rem;opacity:.7">({c.count})</span>}
+        </a>
+      ))}
+    </div>
+  </nav>
+
+  <div class="container" style="padding-bottom: 60px;">
+    <div class="resource-grid" id="resourceGrid">
+      {resources.map((r) => {
+        const icon = r.file_type === 'pdf' ? '📕' : (['xlsx', 'xls'].includes(r.file_type) ? '📊' : (['docx', 'doc'].includes(r.file_type) ? '📝' : '📄'));
+        return (
+          <div class="resource-card" data-title={r.title.toLowerCase()} data-tags={r.tags.toLowerCase()} data-cat={r.cat_slug}>
+            <div class="resource-card-top">
+              <span class="icon">{icon}</span>
+              <span class="file-type">{r.file_type.toUpperCase()}</span>
+            </div>
+            <div class="resource-card-body">
+              <h3><a href={`/resources/${r.slug}/`} style="color: inherit; text-decoration: none;">{r.title}</a></h3>
+              <p>{r.description}</p>
+              <div class="meta">
+                <span>⬇ {r.download_count} download</span>
+                <span>📦 {r.file_size_kb} KB</span>
+                <span class="badge-free">GRATIS</span>
+              </div>
+            </div>
+            <div class="resource-card-footer">
+              <a href={`/resources/${r.slug}/`} class="btn-download">Detail &amp; Download ⬇</a>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+
+    <div id="noResults" style="display: none; text-align: center; padding: 60px 20px;">
+      <span style="font-size: 3rem;">📭</span>
+      <h3 style="margin-top: 12px; font-size: 1.25rem;">Tidak ada dokumen yang cocok</h3>
+      <p style="color: #64748b;">Coba gunakan kata kunci pencarian yang berbeda.</p>
+    </div>
+  </div>
+
+  <script>
+    const searchInput = document.getElementById('resourceSearch') as HTMLInputElement;
+    const cards = document.querySelectorAll('.resource-card') as NodeListOf<HTMLElement>;
+    const noResults = document.getElementById('noResults');
+
+    if (searchInput) {
+      searchInput.addEventListener('input', () => {
+        const q = searchInput.value.toLowerCase().trim();
+        let visibleCount = 0;
+        cards.forEach((card) => {
+          const title = card.getAttribute('data-title') || '';
+          const tags = card.getAttribute('data-tags') || '';
+          if (!q || title.includes(q) || tags.includes(q)) {
+            card.style.display = '';
+            visibleCount++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+        if (noResults) {
+          noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+      });
+    }
+  </script>
+</Layout>

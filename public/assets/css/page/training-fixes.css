@@ -1,0 +1,151 @@
+/* Responsive Grid Fixes */
+.hg > * { min-width: 0; }
+.hero h1, .hero .lead { overflow-wrap: anywhere; }
+.hero img { max-width: 100%; min-width: 0; }
+@media (max-width: 760px) {
+  .hg { grid-template-columns: minmax(0, 1fr) !important; }
+  .hero h1 { font-size: clamp(2rem, 11vw, 3.25rem); }
+}
+
+/* ─── Breadcrumb Bar for City Program Pages ─── */
+.city-program-page .breadcrumb-bar {
+  margin-top: var(--nav-h, 72px);
+  background: var(--surface);
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+.city-program-page .breadcrumb-bar .container {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.city-program-page .breadcrumb-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  font-size: 13px;
+  color: var(--slate-500);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.city-program-page .breadcrumb-list a {
+  color: var(--slate-600);
+  text-decoration: none;
+  transition: color .2s;
+}
+.city-program-page .breadcrumb-list a:hover {
+  color: var(--brand);
+}
+.city-program-page .breadcrumb-list li[aria-current="page"] {
+  color: var(--brand);
+  font-weight: 600;
+}
+
+/* ─── Hero Styling Enhancements ─── */
+.city-program-page .hero {
+  padding: 56px 0;
+  background: linear-gradient(135deg, var(--brand-dark, #081c15) 0%, var(--brand, #1b4332) 100%);
+  color: var(--surface);
+}
+.city-program-page .hero .tag {
+  background: color-mix(in srgb, var(--surface) 12%, transparent);
+  color: #a7f3d0;
+  border: 1px solid color-mix(in srgb, var(--surface) 20%, transparent);
+  backdrop-filter: blur(8px);
+}
+.city-program-page .hero h1 {
+  font-family: 'Lexend', sans-serif;
+  letter-spacing: -0.025em;
+  color: #ffffff;
+}
+.city-program-page .hero h1 span {
+  color: var(--accent-soft, #52b788);
+}
+.city-program-page .hero .lead {
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+/* ─── High-Converting WhatsApp Button Styling ─── */
+.city-program-page a.btn[href*="wa.me"],
+.city-program-page a[href*="wa.me"].ghost {
+  background: var(--whatsapp, #25D366) !important;
+  color: #052e16 !important;
+  font-weight: 700;
+  border: none !important;
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--whatsapp) 30%, transparent) !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.city-program-page a.btn[href*="wa.me"]:hover,
+.city-program-page a[href*="wa.me"].ghost:hover {
+  background: #20bd5a !important;
+  color: #021f0d !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px color-mix(in srgb, var(--whatsapp) 40%, transparent) !important;
+}
+.city-program-page a.btn[href*="wa.me"]::before {
+  content: '';
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23052e16'%3E%3Cpath d='M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+/* ─── Stats Ribbon Polish ─── */
+.city-program-page .stats {
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 20px color-mix(in srgb, var(--brand) 6%, transparent);
+  margin-top: -24px;
+  position: relative;
+  z-index: 10;
+  overflow: hidden;
+}
+
+/* ─── FAQ Accordion Polish ─── */
+.city-program-page .faq details {
+  transition: border-color .2s ease, box-shadow .2s ease;
+  border: 1px solid var(--border);
+}
+.city-program-page .faq details[open] {
+  border-color: var(--accent);
+  box-shadow: 0 4px 16px color-mix(in srgb, var(--accent) 10%, transparent);
+}
+.city-program-page .faq summary {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+  font-weight: 700;
+  color: var(--brand);
+}
+.city-program-page .faq summary::-webkit-details-marker {
+  display: none;
+}
+.city-program-page .faq summary::after {
+  content: '+';
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent);
+  transition: transform .2s ease;
+}
+.city-program-page .faq details[open] summary::after {
+  content: '−';
+}
+
+/* ─── CTA Banner Polish ─── */
+.city-program-page .cta {
+  background: linear-gradient(135deg, var(--brand-dark, #081c15) 0%, var(--brand, #1b4332) 100%);
+  border: 1px solid color-mix(in srgb, var(--surface) 10%, transparent);
+  box-shadow: 0 20px 40px -12px color-mix(in srgb, var(--brand) 40%, transparent);
+}

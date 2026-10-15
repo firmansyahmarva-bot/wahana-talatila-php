@@ -1,0 +1,277 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const items = await getCollection('riksaUji');
+  return items.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: {
+      item: entry.data,
+      allItems: items.map(i => i.data),
+    },
+  }));
+}
+
+const { item, allItems } = Astro.props;
+
+const canonical = `https://wahanatotalita.com/riksa-uji/${item.slug}/`;
+const metaTitle = `${item.meta_title} | Wahana Totalita`;
+const metaDesc = item.meta_desc || '';
+
+const waNumber = '6287759151278';
+const waLeadMsg = `Halo Wahana Totalita, kami ingin konsultasi dan meminta penawaran resmi Jasa Riksa Uji Kemnaker untuk objek: ${item.judul} di perusahaan kami.`;
+const waLeadUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(waLeadMsg)}`;
+
+// Filter related items (same category first, limit 3)
+const relatedItems = allItems
+  .filter(i => i.slug !== item.slug)
+  .sort((a, b) => {
+    if (a.kategori === item.kategori && b.kategori !== item.kategori) return -1;
+    if (a.kategori !== item.kategori && b.kategori === item.kategori) return 1;
+    return 0;
+  })
+  .slice(0, 3);
+
+const schemaFaqs = (item.faqs || []).map(faq => ({
+  '@type': 'Question',
+  name: faq.q,
+  acceptedAnswer: {
+    '@type': 'Answer',
+    text: faq.a,
+  },
+}));
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    '@id': `${canonical}#breadcrumb`,
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Beranda', item: 'https://wahanatotalita.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Jasa Riksa Uji K3', item: 'https://wahanatotalita.com/riksa-uji/' },
+      { '@type': 'ListItem', position: 3, name: item.judul, item: canonical },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': `${canonical}#service`,
+    name: item.judul,
+    provider: {
+      '@type': 'Organization',
+      name: 'PT Wahana Totalita Konsultan',
+      url: 'https://wahanatotalita.com/',
+    },
+    serviceType: 'Statutory Technical Safety Inspection & Testing',
+    description: metaDesc,
+    areaServed: [
+      { '@type': 'Country', name: 'Indonesia' },
+    ],
+  },
+  ...(schemaFaqs.length > 0 ? [{
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    '@id': `${canonical}#faq`,
+    mainEntity: schemaFaqs,
+  }] : []),
+];
+---
+
+<Layout
+  title={metaTitle}
+  description={metaDesc}
+  canonical={canonical}
+  schemas={schemas}
+  pageCss={['/assets/css/page/riksa-uji-detail.css']}
+>
+  <!-- HERO -->
+  <section class="rud-hero">
+    <div class="container">
+      <div class="rud-breadcrumbs">
+        <a href="/">Beranda</a> &rsaquo;
+        <a href="/riksa-uji/">Jasa Riksa Uji K3</a> &rsaquo;
+        <a href={`/riksa-uji/?kategori=${item.kategori}`}>{item.kategori_label}</a> &rsaquo;
+        <span style="color:var(--surface);">{item.judul}</span>
+      </div>
+
+      <h1>{item.judul}</h1>
+      <p class="lead">{item.tagline}</p>
+
+      <div class="rud-quick-specs">
+        {item.dasar_hukum && (
+          <div class="rud-spec-item">
+            <strong>Dasar Hukum:</strong> {item.dasar_hukum}
+          </div>
+        )}
+        {item.masa_berlaku && (
+          <div class="rud-spec-item">
+            <strong>Masa Berlaku Uji:</strong> {item.masa_berlaku}
+          </div>
+        )}
+        <div class="rud-spec-item">
+          <strong>Legalitas Hasil:</strong> Suket Resmi Kemnaker / Disnaker RI
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT & SIDEBAR -->
+  <main class="container">
+    <div class="rud-body-grid">
+      <!-- LEFT: IN-DEPTH TECHNICAL CONTENT -->
+      <article class="rud-content">
+        <h2>Pentingnya Riksa Uji Teknis Berdasarkan Regulasi Kemnaker</h2>
+        <p>
+          Setiap peralatan dan instalasi industri wajib melalui tahapan pemeriksaan dan pengujian (Riksa Uji) K3 sebelum pertama kali dioperasikan (uji pertama), secara berkala sesuai siklus waktu peraturan menteri (uji berkala), maupun setelah mengalami modifikasi atau perbaikan besar (uji khusus).
+        </p>
+        <p>
+          Pengujian ini berlandaskan langsung pada <strong>{item.dasar_hukum}</strong>. Melalui pemeriksaan menyeluruh, potensi bahaya mekanis, kegagalan material, dan malfungsi perangkat pengaman dapat dicegah sedini mungkin sebelum menyebabkan kerugian aset fatal atau korban jiwa tenaga kerja.
+        </p>
+
+        <div class="rud-callout-warning">
+          <strong>Peringatan Hukum &amp; Asuransi:</strong>
+          Pengoperasian peralatan tanpa Surat Keterangan (Suket) Kelayakan Operasi yang masih berlaku merupakan pelanggaran terhadap UU No. 1 Tahun 1970 Pasal 15 dengan ancaman sanksi pidana. Selain itu, polis asuransi aset industri dan jaminan BPJS Ketenagakerjaan berhak menolak klaim kerugian jika insiden melibatkan mesin yang tidak memiliki legalitas riksa uji sah.
+        </div>
+
+        {item.lingkup_alat && (
+          <>
+            <h2>Cakupan &amp; Objek Peralatan yang Diuji</h2>
+            <p>
+              Layanan inspeksi teknis kami mencakup berbagai varian dan kapasitas peralatan, antara lain:
+            </p>
+            <p style="background:var(--slate-50); border:1px solid var(--slate-200); border-radius:8px; padding:14px 18px; font-weight:600; color:var(--slate-900);">
+              {item.lingkup_alat}
+            </p>
+          </>
+        )}
+
+        {item.tahapan_uji && item.tahapan_uji.length > 0 && (
+          <>
+            <h2>6 Tahapan Pemeriksaan &amp; Pengujian di Lapangan</h2>
+            <p>
+              Pemeriksaan dilakukan langsung oleh Tim Tenaga Ahli K3 Spesialis Wahana Totalita Konsultan yang telah mengantongi SKP resmi dari Kementerian Ketenagakerjaan Republik Indonesia:
+            </p>
+            <ol class="rud-step-list">
+              {item.tahapan_uji.map(step => (
+                <li>{step}</li>
+              ))}
+            </ol>
+          </>
+        )}
+
+        {item.dokumen_syarat && item.dokumen_syarat.length > 0 && (
+          <>
+            <h2>Persyaratan Dokumen Pengajuan Suket Resmi</h2>
+            <p>
+              Untuk mempercepat proses administrasi penerbitan Surat Keterangan (Suket) dan pengesahan pemakaian di Dinas Tenaga Kerja setempat, perusahaan pemohon disarankan menyiapkan berkas pendukung berikut:
+            </p>
+            <ul style="padding-left:20px; margin-bottom:24px;">
+              {item.dokumen_syarat.map(doc => (
+                <li style="margin-bottom:8px;">{doc}</li>
+              ))}
+            </ul>
+          </>
+        )}
+
+        {item.regional_insight && (
+          <>
+            <h2>Aplikasi Industri &amp; Pengalaman Lapangan</h2>
+            <p>{item.regional_insight}</p>
+            <p>
+              Dengan jaringan Tenaga Ahli K3 Spesialis di berbagai wilayah, Wahana Totalita siap memobilisasi peralatan uji standar internasional ke lokasi pabrik, site pertambangan, maupun pelabuhan logistik perusahaan Anda dengan jadwal fleksibel yang tidak mengganggu target shift operasional.
+            </p>
+          </>
+        )}
+
+        {item.faqs && item.faqs.length > 0 && (
+          <>
+            <h2>Pertanyaan Kerap Diajukan (FAQ)</h2>
+            <div style="display:flex; flex-direction:column; gap:12px; margin-top:16px;">
+              {item.faqs.map(faq => (
+                <details style="background:var(--slate-50); border:1px solid var(--slate-200); border-radius:8px; padding:14px 18px;">
+                  <summary style="font-weight:700; color:var(--slate-900); cursor:pointer; font-size:14.5px;">{faq.q}</summary>
+                  <p style="margin:10px 0 0; color:var(--slate-600); font-size:13.5px; line-height:1.6;">{faq.a}</p>
+                </details>
+              ))}
+            </div>
+          </>
+        )}
+      </article>
+
+      <!-- RIGHT: RFQ SIDEBAR -->
+      <aside>
+        <div class="rud-sidebar-card">
+          <h3>Minta Penawaran Resmi</h3>
+          <p style="color:var(--slate-500); font-size:13px; line-height:1.5; margin:0 0 14px;">
+            Dapatkan estimasi biaya, timeline penerbitan Suket, dan jadwal ketersediaan Tenaga Ahli K3 Spesialis kami:
+          </p>
+
+          <ul class="rud-sidebar-list">
+            <li>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              PJK3 Berpenunjukan Resmi Kemnaker
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              Laporan Hasil Uji (LHU) Akurat &amp; Cepat
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              Harga Paket Batch Multi-Unit Hemat
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              Didampingi Hingga Suket Terbit
+            </li>
+          </ul>
+
+          <a href={waLeadUrl} class="rud-btn-wa-full" target="_blank" rel="noopener">
+            Konsultasi via WhatsApp
+          </a>
+
+          {item.pelatihan_terkait && (
+            <div class="rud-cross-promo">
+              <h4>Operator Anda Belum Berlisensi?</h4>
+              <p>
+                Selain kelayakan unit mesin, Kemnaker mewajibkan operator mengantongi Surat Izin Operator (SIO).
+              </p>
+              <a href={`/pelatihan/${item.pelatihan_terkait.slug}/`}>
+                Lihat {item.pelatihan_terkait.name} &rarr;
+              </a>
+            </div>
+          )}
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- RELATED INSPECTION SERVICES -->
+  {relatedItems.length > 0 && (
+    <section style="background:var(--slate-50); padding:48px 0; border-top:1px solid var(--slate-200);">
+      <div class="container">
+        <h3 style="font-size:20px; font-weight:800; color:var(--slate-900); margin:0 0 20px;">Layanan Riksa Uji Terkait Lainnya</h3>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:20px;">
+          {relatedItems.map(rel => (
+            <div style="background:var(--surface); border:1px solid var(--slate-200); border-radius:10px; padding:20px;">
+              <span style="font-size:11.5px; font-weight:700; color:var(--accent-dark); background:var(--accent-light); padding:2px 8px; border-radius:4px;">
+                {rel.kategori_label}
+              </span>
+              <h4 style="font-size:16px; margin:10px 0 6px; font-weight:700;">
+                <a href={`/riksa-uji/${rel.slug}/`} style="color:var(--slate-900); text-decoration:none;">
+                  {rel.judul}
+                </a>
+              </h4>
+              <p style="font-size:13px; color:var(--slate-500); line-height:1.5; margin:0 0 12px;">
+                {rel.tagline}
+              </p>
+              <a href={`/riksa-uji/${rel.slug}/`} style="font-size:13px; font-weight:700; color:var(--brand-dark); text-decoration:none;">
+                Detail Layanan &rarr;
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+</Layout>

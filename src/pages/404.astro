@@ -1,0 +1,53 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allTrainings = await getCollection('trainings');
+const featured = allTrainings
+  .filter((t) => t.data.is_featured)
+  .slice(0, 6);
+
+const pageTitle = 'Halaman Tidak Ditemukan (404) | Wahana Totalita';
+const metaDesc = 'Halaman yang Anda cari tidak ada atau sudah dipindahkan. Temukan program pelatihan K3, Lingkungan, dan Sertifikasi BNSP resmi.';
+---
+
+<Layout
+  title={pageTitle}
+  description={metaDesc}
+  pageCss={['/assets/css/page/404.css']}
+>
+  <section class="e404-hero">
+    <div class="container">
+      <p class="e404-code">404</p>
+      <h1>Halaman Tidak Ditemukan</h1>
+      <p>Halaman yang Anda cari tidak ada atau sudah dipindahkan. Coba cari program pelatihan yang Anda butuhkan di bawah ini.</p>
+      <div class="e404-actions">
+        <a href="/" class="e404-btn-prim">← Kembali ke Beranda</a>
+        <a href="https://wa.me/6287759151278?text=Halo%20Wahana%20Totalita%2C%20saya%20mencari%20informasi%20layanan%20K3" class="e404-btn-sec" target="_blank" rel="noopener noreferrer">💬 Hubungi Kami</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="e404-suggest">
+    <div class="container">
+      <p class="e404-suggest-title">Program Pelatihan Populer</p>
+      <div class="e404-grid">
+        {featured.map((t) => (
+          <a href={`/pelatihan/${t.data.slug}/`} class="e404-card">
+            <img
+              src={t.data.image_path || '/assets/img/default-training.jpg'}
+              alt={t.data.name}
+              loading="lazy"
+              width="400"
+              height="225"
+            />
+            <div class="e404-card-body">
+              <div class="e404-card-name">{t.data.name}</div>
+              <div class="e404-card-price">{t.data.price_label || 'Hubungi Kami'}</div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

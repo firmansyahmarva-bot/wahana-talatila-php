@@ -1,0 +1,113 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import photos from '../../data/galeri.json';
+
+const title = 'Galeri Kegiatan | Wahana Totalita Konsultan';
+const description = 'Dokumentasi pelaksanaan pelatihan dan sertifikasi K3 resmi Kemnaker RI dan BNSP di berbagai kota di Indonesia.';
+const canonical = 'https://wahanatotalita.com/galeri/';
+---
+
+<Layout
+  title={title}
+  description={description}
+  canonical={canonical}
+  pageCss={['/assets/css/page/galeri.css']}
+>
+  <section class="gal-hero container">
+    <h1>Galeri Kegiatan</h1>
+    <p>Dokumentasi pelaksanaan pelatihan dan sertifikasi K3 di berbagai kota di Indonesia.</p>
+  </section>
+
+  <div class="container">
+    {photos.length === 0 ? (
+      <div class="gal-empty">
+        Belum ada foto kegiatan.
+      </div>
+    ) : (
+      <div class="gal-grid" id="galGrid">
+        {photos.map((p, i) => (
+          <div class="gal-item" data-index={i}>
+            <img
+              src={p.thumbUrl}
+              alt={p.caption}
+              width="640"
+              height="480"
+              loading={i < 8 ? 'eager' : 'lazy'}
+              decoding="async"
+            />
+            <span class="gal-cap">{p.caption}</span>
+          </div>
+        ))}
+      </div>
+    )}
+
+    <div class="gal-cta-wrap" style="margin: 48px 0; text-align: center; background: #f8fafc; padding: 36px 24px; border-radius: 16px; border: 1px solid #e2e8f0;">
+      <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 12px; color: #0f172a;">Ingin Selenggarakan Pelatihan K3 Serupa di Perusahaan Anda?</h2>
+      <p style="color: #475569; max-width: 600px; margin: 0 auto 24px; line-height: 1.6;">Kami siap menyelenggarakan In-House Training sertifikasi resmi Kemnaker RI &amp; BNSP di seluruh wilayah Indonesia.</p>
+      <a href="https://wa.me/6281226834789?text=Halo%20Wahana%20Totalita,%20saya%20tertarik%20dengan%20pelatihan%20K3%20setelah%20melihat%20galeri%20kegiatan." target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; background: #25d366; color: #fff; font-weight: 700; border-radius: 999px; text-decoration: none;">
+        💬 Konsultasi Jadwal &amp; Biaya via WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <div class="gal-lightbox" id="galLightbox">
+    <div class="gal-lb-close" id="galClose">&times;</div>
+    <div class="gal-lb-prev" id="galPrev">&#8249;</div>
+    <img src="" alt="Dokumentasi Pelatihan K3 &amp; Sertifikasi Kemnaker RI Wahana Totalita" id="galLbImg" />
+    <div class="gal-lb-cap" id="galLbCap"></div>
+    <div class="gal-lb-next" id="galNext">&#8250;</div>
+  </div>
+
+  <script define:vars={{ photos }}>
+    (function(){
+      if (!photos || !photos.length) return;
+
+      var grid   = document.getElementById('galGrid');
+      var lb     = document.getElementById('galLightbox');
+      var lbImg  = document.getElementById('galLbImg');
+      var lbCap  = document.getElementById('galLbCap');
+      var current = 0;
+
+      function open(i){
+        current = i;
+        lbImg.src = photos[i].url;
+        lbImg.alt = photos[i].caption;
+        lbCap.textContent = photos[i].caption;
+        lb.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+      function close(){
+        lb.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+      function next(){ open((current + 1) % photos.length); }
+      function prev(){ open((current - 1 + photos.length) % photos.length); }
+
+      if (grid) {
+        grid.addEventListener('click', function(e){
+          var item = e.target.closest('.gal-item');
+          if (!item) return;
+          open(parseInt(item.dataset.index, 10));
+        });
+      }
+
+      var closeBtn = document.getElementById('galClose');
+      var nextBtn  = document.getElementById('galNext');
+      var prevBtn  = document.getElementById('galPrev');
+
+      if (closeBtn) closeBtn.addEventListener('click', close);
+      if (nextBtn) nextBtn.addEventListener('click', next);
+      if (prevBtn) prevBtn.addEventListener('click', prev);
+      if (lb) {
+        lb.addEventListener('click', function(e){ if (e.target === lb) close(); });
+      }
+
+      document.addEventListener('keydown', function(e){
+        if (!lb || !lb.classList.contains('active')) return;
+        if (e.key === 'Escape') close();
+        if (e.key === 'ArrowRight') next();
+        if (e.key === 'ArrowLeft') prev();
+      });
+    })();
+  </script>
+</Layout>

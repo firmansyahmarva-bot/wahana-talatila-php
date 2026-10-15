@@ -1,0 +1,46 @@
+{
+    "umum": {
+        "url": "/pelatihan/pelatihan-ahli-k3-umum-sertifikasi-kemnaker-ri/",
+        "label": "Program Ahli K3 Umum Kemnaker RI"
+    },
+    "ketinggian": {
+        "url": "/pelatihan/pelatihan-tkbt-ii-sertifikasi-kemnaker-ri/",
+        "label": "Program TKBT II Kemnaker RI"
+    },
+    "kebakaran": {
+        "url": "/pelatihan/pelatihan-regu-penanggulangan-kebakaran-kelas-c-sertifikasi-kemnaker-ri/",
+        "label": "Program Regu Kebakaran Kelas C"
+    },
+    "listrik": {
+        "url": "/pelatihan/pelatihan-ahli-k3-listrik-sertifikasi-kemnaker-ri/",
+        "label": "Program Ahli K3 Listrik Kemnaker RI"
+    },
+    "kimia": {
+        "url": "/pelatihan/pelatihan-petugas-k3-kimia-sertifikasi-kemnaker-ri/",
+        "label": "Program Petugas K3 Kimia Kemnaker RI"
+    },
+    "alatberat": {
+        "url": "/pelatihan/pelatihan-k3-operator-alat-berat-sertifikasi-kemnaker-ri/",
+        "label": "Program Operator Alat Berat Kemnaker RI"
+    },
+    "kesehatan": {
+        "url": "/pelatihan/pelatihan-petugas-p3k-sertifikasi-kemnaker-ri/",
+        "label": "Program Petugas P3K Kemnaker RI"
+    },
+    "konstruksi": {
+        "url": "/pelatihan/pelatihan-ahli-muda-k3-konstruksi-sertifikasi-kemnaker-ri/",
+        "label": "Program Ahli Muda K3 Konstruksi"
+    },
+    "tambang": {
+        "url": "/pelatihan/pelatihan-pop-pertambangan-sertifikasi-bnsp-online/",
+        "label": "Program POP Pertambangan BNSP"
+    },
+    "lingkungan": {
+        "url": "/pelatihan/pelatihan-ahli-muda-lingkungan-kerja-sertifikasi-kemnaker-ri/",
+        "label": "Program Ahli Muda Lingkungan Kerja"
+    },
+    "teknologi": {
+        "url": "/pelatihan/pelatihan-ahli-k3-umum-sertifikasi-bnsp-online/",
+        "label": "Program Ahli K3 Umum BNSP Online"
+    }
+}

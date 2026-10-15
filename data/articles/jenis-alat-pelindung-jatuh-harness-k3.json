@@ -1,0 +1,36 @@
+{
+    "id": 189,
+    "title": "Jenis-Jenis Alat Pelindung Jatuh: Harness, Lanyard, dan Anchor Point",
+    "slug": "jenis-alat-pelindung-jatuh-harness-k3",
+    "meta_title": "Jenis Alat Pelindung Jatuh: Harness, Lanyard, dan Anchor Point",
+    "meta_desc": "Komponen sistem proteksi jatuh — harness, lanyard, self-retracting lifeline, dan anchor point — serta risiko kombinasi yang salah.",
+    "keywords": "alat pelindung jatuh, jenis harness k3, lanyard, self retracting lifeline, anchor point",
+    "category": "K3",
+    "thumbnail": null,
+    "content": "<p>Harness bukan satu-satunya alat pelindung jatuh, meski sering dianggap begitu. Sistem proteksi jatuh yang lengkap terdiri dari beberapa komponen yang bekerja bersama — harness sebagai titik kontak ke tubuh pekerja, lanyard atau lifeline sebagai penghubung, dan anchor point sebagai titik tumpu — dan kelemahan di salah satu komponen membuat komponen lain jadi tidak berarti, sekuat apa pun masing-masing terlihat sendiri-sendiri.</p>\r\n\r\n<h2>Full Body Harness</h2>\r\n<p>Ini yang paling umum dikenali — tali anyaman yang membungkus tubuh, dirancang mendistribusikan gaya benturan saat jatuh ke seluruh tubuh, bukan terkonsentrasi di satu titik seperti sabuk pinggang lama yang sudah tidak lagi direkomendasikan untuk pekerjaan ketinggian modern. Ada beberapa variasi tergantung kebutuhan — model dengan D-ring tambahan di pinggang untuk positioning kerja, atau model dengan bantalan ekstra untuk pekerjaan durasi panjang yang membutuhkan kenyamanan lebih.</p>\r\n\r\n<h2>Lanyard</h2>\r\n<p>Penghubung antara harness dan anchor point, tersedia dalam beberapa jenis — lanyard statis untuk pekerjaan restraint (mencegah pekerja mencapai zona jatuh sama sekali), dan lanyard dengan shock absorber untuk pekerjaan yang memang memiliki risiko jatuh, dirancang meredam gaya benturan saat jatuh terjadi agar tidak sepenuhnya diteruskan ke tubuh pekerja.</p>\r\n\r\n<h2>Self-Retracting Lifeline (SRL)</h2>\r\n<p>Alat ini bekerja mirip sabuk pengaman mobil — memanjang bebas mengikuti gerakan pekerja, tapi mengunci otomatis saat mendeteksi gerakan jatuh mendadak. Cocok untuk pekerjaan yang membutuhkan mobilitas lebih di area kerja luas, meski butuh perawatan dan inspeksi mekanisme penguncian yang lebih teliti dibanding lanyard statis biasa.</p>\r\n\r\n<h2>Anchor Point</h2>\r\n<p>Sering dianggap remeh padahal ini titik yang paling menentukan seluruh sistem berfungsi atau tidak. Anchor point harus mampu menahan beban minimal yang ditentukan standar, dan yang sering jadi masalah di lapangan bukan soal ketiadaan anchor point, tapi soal pekerja mengaitkan lanyard ke struktur yang terlihat kokoh tapi sebenarnya tidak pernah diuji beban — pipa scaffolding, railing sementara, atau bahkan pegangan tangga darurat.</p>\r\n\r\n<h2>Kenapa Kombinasi yang Salah Bisa Berbahaya</h2>\r\n<p>Satu hal yang jarang dijelaskan dengan baik: memasangkan komponen dari sistem yang berbeda tanpa memastikan kompatibilitasnya bisa menciptakan risiko baru yang tidak terlihat. Lanyard dengan shock absorber yang dipasang terlalu tinggi ke anchor point, misalnya, bisa membuat jarak jatuh total melebihi ruang bebas yang tersedia di bawahnya — pekerja tetap terhubung ke sistem proteksi, tapi tetap membentur permukaan di bawah sebelum sistem sempat meredam benturan sepenuhnya.</p>\r\n\r\n<p>Detail mengenai bagaimana cara memeriksa kelayakan harness sebelum dipakai kami bahas di <a href=\"https://wahanatotalita.com/artikel/cara-inspeksi-harness-sebelum-digunakan/\">artikel terpisah</a>.</p>\r\n",
+    "faq_data": "[{\"question\":\"Apa saja komponen utama sistem proteksi jatuh?\",\"answer\":\"Full body harness, lanyard atau self-retracting lifeline, dan anchor point — ketiganya bekerja bersama, dan kelemahan di satu komponen membuat komponen lain tidak berarti.\"},{\"question\":\"Apa beda lanyard statis dan lanyard dengan shock absorber?\",\"answer\":\"Lanyard statis untuk pekerjaan restraint yang mencegah pekerja mencapai zona jatuh, sedangkan lanyard dengan shock absorber dirancang meredam gaya benturan saat jatuh benar-benar terjadi.\"},{\"question\":\"Mengapa anchor point sering jadi sumber masalah meski terlihat sepele?\",\"answer\":\"Karena pekerja sering mengaitkan lanyard ke struktur yang terlihat kokoh tapi belum pernah diuji beban, seperti pipa scaffolding atau railing sementara.\"},{\"question\":\"Apa risiko memasang komponen dari sistem berbeda tanpa memastikan kompatibilitas?\",\"answer\":\"Bisa menciptakan jarak jatuh total yang melebihi ruang bebas yang tersedia, sehingga pekerja tetap membentur permukaan di bawah sebelum sistem sempat meredam benturan sepenuhnya.\"}]",
+    "author": "Wahana Totalita Konsultan",
+    "status": "published",
+    "published_at": "2026-07-12 08:03:11",
+    "view_count": 74,
+    "created_at": "2026-07-12 08:03:11",
+    "updated_at": "2026-10-13 01:13:12",
+    "faq_list": [
+        {
+            "question": "Apa saja komponen utama sistem proteksi jatuh?",
+            "answer": "Full body harness, lanyard atau self-retracting lifeline, dan anchor point — ketiganya bekerja bersama, dan kelemahan di satu komponen membuat komponen lain tidak berarti."
+        },
+        {
+            "question": "Apa beda lanyard statis dan lanyard dengan shock absorber?",
+            "answer": "Lanyard statis untuk pekerjaan restraint yang mencegah pekerja mencapai zona jatuh, sedangkan lanyard dengan shock absorber dirancang meredam gaya benturan saat jatuh benar-benar terjadi."
+        },
+        {
+            "question": "Mengapa anchor point sering jadi sumber masalah meski terlihat sepele?",
+            "answer": "Karena pekerja sering mengaitkan lanyard ke struktur yang terlihat kokoh tapi belum pernah diuji beban, seperti pipa scaffolding atau railing sementara."
+        },
+        {
+            "question": "Apa risiko memasang komponen dari sistem berbeda tanpa memastikan kompatibilitas?",
+            "answer": "Bisa menciptakan jarak jatuh total yang melebihi ruang bebas yang tersedia, sehingga pekerja tetap membentur permukaan di bawah sebelum sistem sempat meredam benturan sepenuhnya."
+        }
+    ]
+}

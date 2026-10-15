@@ -1,0 +1,171 @@
+/* Light navbar fix */
+#navbar:not(.scrolled) { background: color-mix(in srgb, var(--surface) 97%, transparent) !important; border-bottom-color: var(--border) !important; }
+#navbar:not(.scrolled) .nav-logo { color: var(--green) !important; }
+#navbar:not(.scrolled) .nav-links a { color: var(--text) !important; }
+#navbar:not(.scrolled) .nav-logo-text strong {
+  background: linear-gradient(135deg, var(--green) 30%, var(--orange));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+#navbar:not(.scrolled) .nav-hamburger span { background: var(--text) !important; }
+#navbar:not(.scrolled) .nav-socials a { color: var(--text-muted) !important; }
+
+/* Category Hero Banner */
+.cat-hero-banner {
+  background: linear-gradient(135deg, var(--cat-accent, var(--accent)) 0%, var(--brand) 100%);
+  color: var(--surface);
+  padding: 48px 0 44px;
+  position: relative;
+  overflow: hidden;
+}
+.cat-hero-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 1px 1px, color-mix(in srgb, var(--surface) 7%, transparent) 1px, transparent 0);
+  background-size: 28px 28px;
+  pointer-events: none;
+}
+.cat-hero-inner {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto;
+}
+.cat-hero-icon {
+  font-size: 2.8rem;
+  margin-bottom: 12px;
+  display: inline-block;
+  line-height: 1;
+}
+.cat-hero-title {
+  font-family: 'Lexend', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 800;
+  color: var(--surface);
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+.cat-hero-sub {
+  font-size: 15.5px;
+  color: var(--slate-200);
+  line-height: 1.65;
+  margin-bottom: 22px;
+}
+.cat-hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+.cat-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: color-mix(in srgb, var(--surface) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--surface) 24%, transparent);
+  color: var(--surface);
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 999px;
+  backdrop-filter: blur(4px);
+}
+
+/* Catalog Main Section */
+.cat-section {
+  padding: 50px 0 70px;
+  background: var(--surface-subtle);
+}
+.cat-top-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+.cat-count-pill {
+  font-size: 14px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+.cat-count-pill strong {
+  color: var(--text);
+}
+
+/* Pagination */
+.cat-pagination-wrap {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 48px;
+}
+.cat-pg-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 42px;
+  height: 42px;
+  padding: 0 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  background: var(--surface);
+  color: var(--text);
+  border: 1.5px solid var(--border);
+  text-decoration: none;
+  transition: all .2s;
+}
+.cat-pg-btn:hover {
+  border-color: var(--green);
+  color: var(--green);
+}
+.cat-pg-btn.active {
+  background: var(--green);
+  color: var(--surface);
+  border-color: var(--green);
+}
+
+/* Sub-hubs & Articles */
+.cat-extra-sec {
+  background: var(--surface);
+  padding: 50px 0;
+  border-top: 1px solid var(--border);
+}
+.cat-extra-head {
+  text-align: center;
+  margin-bottom: 32px;
+}
+.cat-extra-head h2 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--green);
+  margin-bottom: 6px;
+}
+.cat-extra-head p {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+.cat-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+.cat-hub-card {
+  display: block;
+  background: var(--slate-50);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 20px;
+  color: var(--green);
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  transition: all .2s;
+}
+.cat-hub-card:hover {
+  background: var(--green-light);
+  border-color: var(--green);
+  transform: translateY(-2px);
+}

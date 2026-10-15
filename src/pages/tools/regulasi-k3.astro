@@ -1,0 +1,173 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import regulasiList from '../../../data/tools_regulasi.json';
+
+const pageTitle = "Database Regulasi K3 Indonesia Terlengkap 2026: UU, PP, Permenaker & Sanksi Hukum";
+const metaDesc = "Kumpulan peraturan perundang-undangan K3 terlengkap di Indonesia: UU No 1/1970, PP 50/2012, Permenaker, Kepmenaker. Dilengkapi ringkasan pasal krusial dan sanksi hukum.";
+const canonical = "https://wahanatotalita.com/tools/regulasi-k3/";
+
+const schemas = [
+    {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Beranda", "item": "https://wahanatotalita.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Tools K3", "item": "https://wahanatotalita.com/tools/" },
+    { "@type": "ListItem", "position": 3, "name": "Database Regulasi K3", "item": "https://wahanatotalita.com/tools/regulasi-k3/" }
+  ]
+},
+    {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Database Regulasi K3 Indonesia Terlengkap",
+  "url": "https://wahanatotalita.com/tools/regulasi-k3/",
+  "description": "Kompilasi peraturan keselamatan dan kesehatan kerja (UU No 1/1970, PP 50/2012, Permenaker, Kepmenaker) beserta ringkasan pasal krusial dan sanksi pidana.",
+  "inLanguage": "id-ID"
+},
+    {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Apa dasar hukum tertinggi K3 di Indonesia?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Dasar hukum tertinggi dan payung hukum utama keselamatan kerja di Indonesia adalah Undang-Undang No. 1 Tahun 1970 tentang Keselamatan Kerja, yang kemudian diatur pelaksanaannya melalui Peraturan Pemerintah No. 50 Tahun 2012 tentang Penerapan SMK3 serta berbagai Peraturan Menteri Ketenagakerjaan (Permenaker)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Perusahaan seperti apa yang wajib menerapkan SMK3 PP 50/2012?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Berdasarkan Pasal 5 PP 50 Tahun 2012, perusahaan yang wajib menerapkan Sistem Manajemen K3 (SMK3) adalah: (1) Perusahaan yang mempekerjakan pekerja/buruh paling sedikit 100 (seratus) orang; ATAU (2) Perusahaan yang mempunyai tingkat potensi bahaya tinggi (seperti sektor pertambangan, minyak dan gas, kimia, konstruksi, manufaktur berisiko tinggi) meskipun pekerjanya kurang dari 100 orang."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Apa syarat legalitas pembentukan P2K3 di perusahaan?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sesuai Permenaker No. 04/MEN/1987, susunan organisasi Panitia Pembina Keselamatan dan Kesehatan Kerja (P2K3) harus terdiri dari unsur pengusaha dan pekerja, di mana Ketua P2K3 dijabat oleh Pimpinan Perusahaan dan Sekretaris P2K3 wajib dijabat oleh Ahli K3 Umum yang memiliki SKP resmi aktif dari Kementerian Ketenagakerjaan RI, lalu disahkan oleh Dinas Tenaga Kerja setempat."
+      }
+    }
+  ]
+},
+  ];
+---
+
+<Layout
+  title={pageTitle}
+  description={metaDesc}
+  canonical={canonical}
+  schemas={schemas}
+  pageCss={['/assets/css/page/tools-regulasi-k3.css']}
+>
+<main class="reg-page" id="konten-utama">
+
+<!-- HERO -->
+<section class="reg-hero">
+  <div class="container">
+    <div class="hero-badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      Kumpulan Regulasi K3 Resmi Kemnaker RI
+    </div>
+    <h1>Database Regulasi K3 <span>Indonesia 2026</span></h1>
+    <p>Database hukum keselamatan dan kesehatan kerja terlengkap di Indonesia. Akses undang-undang, peraturan pemerintah, dan permenaker resmi disertai ringkasan pasal krusial, syarat pemenuhan kepatuhan, serta sanksi pidana.</p>
+    <div class="hero-tags">
+      <span class="hero-tag">UU No. 1 Tahun 1970</span>
+      <span class="hero-tag">PP No. 50 Tahun 2012 (SMK3)</span>
+      <span class="hero-tag">Permenaker Faktor Lingkungan Kerja</span>
+      <span class="hero-tag">Sanksi Hukum &amp; Pidana Ketenagakerjaan</span>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN REGULATION REPOSITORY -->
+<section class="reg-wrapper">
+  <div class="container">
+    
+    <!-- SEARCH & FILTER -->
+    <div class="filter-card">
+      <div class="search-input-box">
+        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="regSearch" class="reg-search-input" placeholder="Cari regulasi berdasarkan kata kunci (contoh: genset, scaffolding, apar, kebisingan, p2k3, listrik)..." oninput="filterRegulations()">
+      </div>
+
+      <div class="category-pills">
+        <button class="cat-btn active" type="button" onclick="setCategory('all', this)">Semua Regulasi ({regulasiList.length})</button>
+        <button class="cat-btn" type="button" onclick="setCategory('uu', this)">Undang-Undang &amp; PP</button>
+        <button class="cat-btn" type="button" onclick="setCategory('mekanik', this)">Mekanik &amp; Ketinggian</button>
+        <button class="cat-btn" type="button" onclick="setCategory('lingkungan', this)">Lingkungan, APD &amp; P3K</button>
+        <button class="cat-btn" type="button" onclick="setCategory('listrik', this)">Listrik &amp; Kebakaran</button>
+        <button class="cat-btn" type="button" onclick="setCategory('kimia', this)">Kimia &amp; Ruang Terbatas</button>
+      </div>
+    </div>
+
+    <!-- SERVER-RENDERED REGULATION CARDS (INDEXABLE BY GOOGLE) -->
+    <div class="reg-grid" id="regCardGrid">
+      {regulasiList.map((r) => (
+        <div class="reg-card" data-cat={r.cat} data-text={(r.nomor + ' ' + r.judul + ' ' + r.ringkasan + ' ' + r.pasal).toLowerCase()}>
+          <div class="reg-badge-row">
+            <span style="font-size:0.75rem;font-weight:700;color:var(--slate-600);text-transform:uppercase">{r.cat.toUpperCase()}</span>
+            <span class="badge-status">{r.status}</span>
+          </div>
+          <h3 class="reg-num">{r.nomor}</h3>
+          <div class="reg-sub">{r.judul}</div>
+          <p class="reg-desc">{r.ringkasan}</p>
+          <div class="reg-meta-box">
+            <div style="margin-bottom:6px"><strong>Pasal Krusial:</strong> {r.pasal}</div>
+            <div><strong>Sanksi Pelanggaran:</strong> <span style="color:var(--danger-dark)">{r.sanksi}</span></div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- IN-DEPTH EDITORIAL ARTICLE (SEO DEPTH) -->
+    <div class="editorial-box">
+      <h2 class="editorial-title">Hierarki Peraturan Perundang-undangan K3 di Indonesia</h2>
+      <p class="editorial-p">
+        Sistem hukum Keselamatan dan Kesehatan Kerja (K3) di Indonesia berakar pada konstitusi Pasal 27 ayat (2) UUD 1945 yang menjamin setiap warga negara berhak atas pekerjaan dan penghidupan yang layak bagi kemanusiaan. Penjaminan keselamatan raga dan jiwa pekerja diatur secara hierarkis melalui:
+      </p>
+
+      <ol style="padding-left:22px;color:var(--slate-700);line-height:1.75;margin-bottom:20px">
+        <li><strong>Undang-Undang (Lex Generalis &amp; Lex Specialis):</strong> UU No. 1 Tahun 1970 tentang Keselamatan Kerja menjadi undang-undang pokok keselamatan, yang diperkuat oleh UU No. 13 Tahun 2003 tentang Ketenagakerjaan dan UU Cipta Kerja.</li>
+        <li><strong>Peraturan Pemerintah (PP):</strong> Memberikan panduan operasional teknis berskala nasional, seperti PP No. 50 Tahun 2012 yang mewajibkan seluruh industri menerapkan 5 prinsip SMK3.</li>
+        <li><strong>Peraturan Menteri Ketenagakerjaan (Permenaker):</strong> Standar teknis yang sangat spesifik mengatur batas ambang lingkungan kerja, kualifikasi operator alat berat, bejana tekan, instalasi listrik, pencegahan kebakaran, hingga kriteria APD.</li>
+        <li><strong>Surat Keputusan Direktur Jenderal (Kepdirjen Binwasnaker):</strong> Petunjuk teknis operasional bagi pengawas ketenagakerjaan dan ahli K3 di lapangan (contoh: lisensi ruang terbatas, scaffolding, dan juru las).</li>
+      </ol>
+
+      <!-- FAQ ACCORDION -->
+      <h3 style="color:var(--navy);font-family:'Lexend',sans-serif;font-size:1.25rem;margin:28px 0 16px">Pertanyaan Sering Diajukan Terkait Regulasi K3 (FAQ)</h3>
+      <div class="faq-box">
+        
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>Apakah perusahaan subkontraktor wajib memiliki Ahli K3 Umum?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-a">
+            Ya. Berdasarkan UU 1/1970 dan Permenaker No. 02/MEN/1992 juncto Permenaker No. 04/MEN/1987, setiap badan usaha (baik kontraktor utama maupun subkontraktor) yang mempekerjakan lebih dari 100 tenaga kerja atau memiliki risiko bahaya tinggi (seperti pekerjaan konstruksi, fabrikasi, kelistrikan) wajib memiliki sekurang-kurangnya satu orang Ahli K3 Umum bersertifikasi Kemnaker RI sebagai sekretaris P2K3.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            <span>Apa konsekuensi hukum jika perusahaan mengabaikan audit SMK3 PP 50/2012?</span>
+            <span class="faq-icon">▼</span>
+          </button>
+          <div class="faq-a">
+            Perusahaan yang masuk dalam kriteria wajib (pekerja ≥ 100 orang atau berisiko tinggi) namun tidak menerapkan dan mengaudit SMK3 dapat dikenakan sanksi administratif bertahap dari Pengawas Ketenagakerjaan berupa: nota pemeriksaan, peringatan tertulis, pembekuan izin operasi sementara, diskualifikasi dari tender proyek pemerintah dan BUMN, hingga sanksi pidana jika terjadi kecelakaan kerja fatal akibat ketiadaan sistem K3.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+</main>
+</Layout>

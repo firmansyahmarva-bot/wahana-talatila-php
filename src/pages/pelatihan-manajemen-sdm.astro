@@ -1,0 +1,218 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const canonical = 'https://wahanatotalita.com/pelatihan-manajemen-sdm/';
+const metaTitle = 'Pelatihan Manajemen & Pengembangan SDM Instansi Pemerintah — Wahana Totalita Yogyakarta';
+const metaDesc = 'Pelatihan manajemen, kepemimpinan, soft skills, dan pengembangan SDM untuk ASN, BUMN, dan swasta di Yogyakarta. Sesuai PermenpanRB 13/2022 dan UU ASN. Bersertifikat, in-house & publik.';
+
+const regs = [
+  { no: 'UU No. 5/2014', desc: 'ASN — Pasal 70: setiap PNS berhak dan wajib mengikuti pengembangan kompetensi minimal 20 JP per tahun. Instansi wajib menyusun rencana pengembangan kompetensi dalam RKA.', bg: 'var(--surface-subtle)' },
+  { no: 'PP No. 17/2020', desc: 'Manajemen PNS — mengatur jenis pengembangan kompetensi: pendidikan, pelatihan klasikal, non-klasikal (e-learning, coaching, mentoring, magang), dan pertukaran PNS-Swasta.', bg: 'var(--info-bg)' },
+  { no: 'PermenpanRB No. 13/2022', desc: 'Pengembangan kompetensi mencakup 3 jenis: (1) Kompetensi Teknis, (2) Kompetensi Manajerial (kepemimpinan, perencanaan, pengorganisasian), (3) Kompetensi Sosio-kultural (komunikasi, pelayanan publik, kolaborasi).', bg: 'var(--warning-bg)' },
+  { no: 'Perpres No. 81/2010', desc: 'Grand Design Reformasi Birokrasi 2010–2025 — pengembangan SDM aparatur sebagai pilar utama reformasi birokrasi Indonesia. Pelatihan kepemimpinan dan manajemen perubahan termasuk prioritas nasional.', bg: 'var(--danger-bg)' },
+];
+
+const clusters = [
+  {
+    no: '1',
+    icon: '🎯',
+    title: 'Kepemimpinan & Manajerial',
+    topics: ['Kepemimpinan Transformasional', 'Manajemen Perubahan (Change Management)', 'Pengambilan Keputusan Strategis', 'Manajemen Konflik dan Negosiasi', 'Coaching & Mentoring untuk Manajer', 'Perencanaan dan Evaluasi Kinerja (SKP/LAKIP)'],
+    target: 'Pejabat eselon II–IV, kepala unit, supervisor, calon pemimpin.',
+  },
+  {
+    no: '2',
+    icon: '💬',
+    title: 'Komunikasi & Interpersonal',
+    topics: ['Public Speaking & Presentasi Efektif', 'Komunikasi Asertif di Tempat Kerja', 'Penulisan Dinas dan Surat Resmi', 'Fasilitasi Rapat yang Produktif', 'Komunikasi Lintas Generasi (Gen Z di ASN)', 'Media Relations untuk Humas Instansi'],
+    target: 'Semua level pegawai, staf humas, sekretaris, bendahara, arsiparis.',
+  },
+  {
+    no: '3',
+    icon: '🤝',
+    title: 'Pelayanan Publik & Customer Service',
+    topics: ['Pelayanan Prima (Service Excellence) ASN', 'Penanganan Komplain Masyarakat', 'Etika Pegawai dan Kode Etik ASN', 'Standard Operating Procedure Pelayanan', 'Membangun Budaya Inovatif di Instansi', 'Zona Integritas dan WBK/WBBM'],
+    target: 'Staf front-office, petugas loket, customer service, pegawai pelayanan publik.',
+  },
+  {
+    no: '4',
+    icon: '📊',
+    title: 'Manajemen Keuangan & Administrasi',
+    topics: ['Manajemen Keuangan Dasar untuk Non-Keuangan', 'Perencanaan Anggaran dan DIPA', 'Pengadaan Barang/Jasa Pemerintah (dasar)', 'Tata Kelola Arsip dan Dokumen', 'Laporan Keuangan Instansi (SAKIP/LAKIP)', 'Manajemen Risiko Organisasi Publik'],
+    target: 'Staf administrasi, bendahara, pejabat pengadaan, pengelola BMN.',
+  },
+  {
+    no: '5',
+    icon: '👥',
+    title: 'Manajemen SDM & Pengembangan Organisasi',
+    topics: ['Manajemen Talenta (Talent Management)', 'Analisis Jabatan dan Evaluasi Jabatan', 'Penilaian Kinerja Pegawai (SKP Baru PP 30/2019)', 'Perencanaan Kebutuhan Pegawai (ABK)', 'Budaya Organisasi dan Employee Engagement', 'Manajemen Pengetahuan (Knowledge Management)'],
+    target: 'Biro SDM, Bagian Kepegawaian, HR BUMN, analis jabatan.',
+  },
+];
+
+const formats = [
+  { icon: '🏢', title: 'In-House Training', desc: 'Diselenggarakan di kantor atau aula instansi Anda. Materi disesuaikan dengan kebutuhan dan konteks organisasi. Minimum 15 peserta. Paling efisien secara anggaran untuk kelompok besar.' },
+  { icon: '🏛️', title: 'Public Training', desc: 'Jadwal terbuka — peserta dari berbagai instansi bergabung. Cocok untuk 1–5 orang dari satu instansi. Kesempatan networking lintas instansi. Diselenggarakan di Yogyakarta.' },
+  { icon: '💻', title: 'Blended Learning', desc: 'Kombinasi sesi tatap muka dan modul e-learning. Materi pre-training dikirim H-7. Sesi tatap muka fokus pada praktik dan diskusi kasus. Cocok untuk peserta dengan jadwal padat.' },
+  { icon: '🏕️', title: 'Residential Training', desc: 'Format 2–3 hari dengan penginapan — maksimalkan fokus dan team building. Wahana menyediakan paket all-in termasuk akomodasi, konsumsi, dan aktivitas.' },
+];
+
+const faqs = [
+  { q: 'Apakah pelatihan manajemen dan soft skills wajib untuk ASN?', a: 'Ya. UU No. 5 Tahun 2014 tentang ASN mewajibkan pengembangan kompetensi bagi setiap PNS minimal 20 jam pelajaran per tahun. PermenpanRB No. 13 Tahun 2022 memperinci bahwa pengembangan kompetensi mencakup kompetensi teknis, manajerial, dan sosio-kultural.' },
+  { q: 'Berapa jam pelajaran yang diakui dari pelatihan manajemen untuk ASN?', a: 'Setiap program pelatihan memiliki bobot jam pelajaran (JP) yang berbeda tergantung kurikulum. Pelatihan 1 hari setara dengan 8-10 JP, pelatihan 2 hari 16-20 JP. Sertifikat kami mencantumkan jumlah JP resmi.' },
+  { q: 'Apakah bisa diselenggarakan secara in-house di kantor instansi kami?', a: 'Ya, ini format yang paling banyak dipilih. Seluruh peserta dari instansi Anda, materi disesuaikan dengan konteks organisasi, dan diselenggarakan di lokasi pilihan Anda.' },
+  { q: 'Apakah pelatihan ini bisa masuk mekanisme pengadaan langsung LPSE?', a: 'Ya. Wahana Totalita terdaftar di LPSE dan PADI UMKM untuk kategori Pendidikan dan Pelatihan. Paket bernilai di bawah Rp 200 juta dapat diproses via pengadaan langsung (PL) dengan dokumen SPJ lengkap.' },
+  { q: 'Apa saja topik yang paling banyak diminta instansi pemerintah?', a: 'Kepemimpinan Transformasional, Service Excellence front-office, Manajemen Konflik, Public Speaking, Change Management, dan Penilaian Kinerja SKP.' },
+  { q: 'Apakah sertifikat pelatihan manajemen dari Wahana Totalita diakui?', a: 'Sertifikat diterbitkan oleh badan usaha berlegalitas resmi lengkap (NIB, NPWP, Akta Notaris) dan diakui sebagai bukti pemenuhan 20 JP pengembangan kompetensi tahunan ASN ke Biro SDM/BKPSDM.' },
+];
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Beranda', item: 'https://wahanatotalita.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Pelatihan', item: 'https://wahanatotalita.com/pelatihan/' },
+      { '@type': 'ListItem', position: 3, name: 'Pelatihan Manajemen & SDM', item: canonical },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+];
+---
+
+<Layout
+  title={metaTitle}
+  description={metaDesc}
+  canonical={canonical}
+  schemas={schemas}
+>
+  <section style="background:linear-gradient(135deg,var(--brand) 0%,var(--brand-mid) 60%,var(--slate-800) 100%);color:var(--surface);padding:60px 20px 50px;">
+    <div class="container" style="max-width:960px;">
+      <nav aria-label="breadcrumb" style="font-size:0.85rem;opacity:0.8;margin-bottom:16px;">
+        <a href="/" style="color:#fff;text-decoration:none;">Beranda</a> › 
+        <a href="/pelatihan/" style="color:#fff;text-decoration:none;">Pelatihan</a> › 
+        <span>Manajemen &amp; Pengembangan SDM</span>
+      </nav>
+      <h1 style="font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;margin:0 0 16px;color:#fff;">
+        Pelatihan Manajemen &amp; Pengembangan SDM
+      </h1>
+      <p style="font-size:1.1rem;opacity:0.92;max-width:760px;margin:0 0 14px;line-height:1.7;">
+        Program pengembangan kompetensi manajerial dan sosio-kultural untuk ASN, BUMN, dan swasta — mulai kepemimpinan, komunikasi, pelayanan publik, hingga manajemen keuangan dan SDM. Sesuai kewajiban 20 JP per tahun per UU ASN No. 5/2014.
+      </p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin:20px 0 28px;">
+        <span style="background:rgba(255,255,255,0.18);padding:6px 14px;border-radius:20px;font-size:0.85rem;">✓ LPSE &amp; PADI Terdaftar</span>
+        <span style="background:rgba(255,255,255,0.18);padding:6px 14px;border-radius:20px;font-size:0.85rem;">✓ In-house &amp; Public Training</span>
+        <span style="background:rgba(255,255,255,0.18);padding:6px 14px;border-radius:20px;font-size:0.85rem;">✓ Sertifikat Resmi + Laporan</span>
+        <span style="background:rgba(255,255,255,0.18);padding:6px 14px;border-radius:20px;font-size:0.85rem;">✓ Pengadaan Langsung &lt; Rp 200 juta</span>
+      </div>
+      <a href="https://wa.me/6287759151278?text=Halo%20Wahana%20Totalita,%20saya%20ingin%20konsultasi%20program%20pelatihan%20manajemen%20dan%20pengembangan%20SDM"
+         target="_blank" rel="noopener"
+         style="display:inline-block;background:#25d366;color:#fff;padding:14px 32px;border-radius:8px;font-weight:700;text-decoration:none;font-size:1rem;box-shadow:var(--shadow-sm);">
+        Konsultasi Program Gratis via WA
+      </a>
+    </div>
+  </section>
+
+  <main class="container" style="max-width:960px;padding:48px 20px 64px;">
+    <!-- REGULASI -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:20px;font-weight:800;">
+        Dasar Hukum Pengembangan Kompetensi ASN
+      </h2>
+      <p style="line-height:1.8;color:var(--slate-800);margin-bottom:20px;">
+        Pengembangan kompetensi bukan sekadar program pilihan — ini <strong>kewajiban hukum</strong> bagi setiap instansi pemerintah. Anggaran diklat yang tidak terserap adalah anggaran yang terbuang, dan kompetensi pegawai yang stagnan adalah risiko birokrasi nyata.
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;">
+        {regs.map((r) => (
+          <div style={`background:${r.bg};border-radius:8px;padding:18px;border-left:4px solid var(--brand);`}>
+            <div style="font-weight:700;color:var(--brand);margin-bottom:8px;font-size:0.95rem;">{r.no}</div>
+            <div style="color:var(--slate-700);font-size:0.87rem;line-height:1.65;" set:html={r.desc} />
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- 5 KLASTER PROGRAM -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:24px;font-weight:800;">
+        5 Klaster Program Pengembangan Kompetensi
+      </h2>
+      <div style="display:flex;flex-direction:column;gap:20px;">
+        {clusters.map((c) => (
+          <div style="background:var(--surface);border-radius:10px;padding:22px;border:1px solid var(--border);border-left:5px solid var(--brand);box-shadow:var(--shadow-sm);">
+            <h3 style="color:var(--brand);margin:0 0 14px;font-size:1.1rem;display:flex;align-items:center;gap:10px;font-weight:800;">
+              <span style="font-size:1.4rem;">{c.icon}</span>
+              Klaster {c.no}: {c.title}
+            </h3>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-bottom:14px;">
+              {c.topics.map((t) => (
+                <div style="background:var(--surface-subtle);border-radius:6px;padding:10px 12px;font-size:0.88rem;color:var(--slate-800);border:1px solid var(--border);">
+                  ✓ {t}
+                </div>
+              ))}
+            </div>
+            <div style="font-size:0.85rem;color:var(--slate-600);">
+              <strong style="color:var(--brand);">Target peserta:</strong> {c.target}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- FORMAT PELATIHAN -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:24px;font-weight:800;">
+        Format Penyelenggaraan
+      </h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;">
+        {formats.map((f) => (
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:20px;border-top:3px solid var(--brand);box-shadow:var(--shadow-sm);">
+            <div style="font-size:1.8rem;margin-bottom:8px;">{f.icon}</div>
+            <div style="font-weight:700;color:var(--brand);margin-bottom:8px;font-size:1rem;">{f.title}</div>
+            <p style="color:var(--slate-600);font-size:0.86rem;line-height:1.6;margin:0;">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:24px;font-weight:800;">
+        Pertanyaan yang Sering Diajukan
+      </h2>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        {faqs.map((faq) => (
+          <details style="border:1px solid var(--border);border-radius:8px;padding:14px 18px;background:var(--surface);">
+            <summary style="font-weight:700;color:var(--brand);cursor:pointer;font-size:0.95rem;">
+              {faq.q}
+            </summary>
+            <p style="margin-top:12px;color:var(--slate-700);line-height:1.75;font-size:0.9rem;">
+              {faq.a}
+            </p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section style="background:linear-gradient(135deg,var(--brand),var(--brand-dark));color:var(--surface);border-radius:12px;padding:44px 24px;text-align:center;">
+      <h2 style="margin:0 0 12px;font-size:1.75rem;color:#fff;font-weight:800;">Konsultasikan Program SDM Instansi Anda</h2>
+      <p style="opacity:0.9;margin:0 auto 24px;line-height:1.7;max-width:620px;">
+        Dapatkan silabus kustom, proposal teknis, dan rancangan anggaran biaya (RAB) resmi untuk pelatihan SDM di instansi Anda.
+      </p>
+      <a href="https://wa.me/6287759151278?text=Halo%20Wahana%20Totalita,%20saya%20ingin%20konsultasi%20program%20pelatihan%20manajemen%20dan%20pengembangan%20SDM"
+         target="_blank" rel="noopener"
+         style="display:inline-block;background:#25d366;color:#fff;padding:14px 36px;border-radius:8px;font-weight:700;text-decoration:none;font-size:1.05rem;">
+        💬 Hubungi Kami via WhatsApp: 0877-5915-1278
+      </a>
+    </section>
+  </main>
+</Layout>

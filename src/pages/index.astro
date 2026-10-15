@@ -1,0 +1,824 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { getTrainingImageUrl, formatPrice, modeLabel, waUrl } from '../lib/images';
+
+const allTrainings = await getCollection('trainings');
+const allCategories = await getCollection('categories');
+const allBatches = await getCollection('trainingBatches');
+
+// Sort and order trainings matching the original algorithm:
+// Priority courses first (AK3U, Forklift, Damkar, P3K), max 5 per category for initial display
+const priorityTrainings: any[] = [];
+const otherTrainings: any[] = [];
+let miningHeavyCount = 0;
+
+for (const t of allTrainings) {
+  if (t.data.is_active === 0) continue;
+  const name = t.data.name || '';
+  if (/bulldozer|grader|water\s*truck|compactor/i.test(name)) {
+    if (miningHeavyCount >= 1) continue;
+    miningHeavyCount++;
+  }
+  const isPriority = /ahli\s*k3\s*umum|forklift|damkar|kebakaran|p3k|first\s*aid/i.test(name);
+  if (isPriority) {
+    priorityTrainings.push(t);
+  } else {
+    otherTrainings.push(t);
+  }
+}
+
+const orderedAll = [...priorityTrainings, ...otherTrainings];
+const catCounts: Record<string, number> = {};
+const displayTrainings: any[] = [];
+for (const t of orderedAll) {
+  const cs = t.data.category_slug || 'k3';
+  catCounts[cs] = (catCounts[cs] || 0) + 1;
+  if (catCounts[cs] <= 5) {
+    displayTrainings.push(t);
+  }
+}
+
+// 4 Nearest public batches
+const upcomingBatches = allBatches
+  .filter((b) => b.data.is_public !== 0)
+  .sort((a, b) => (a.data.start_date || '').localeCompare(b.data.start_date || ''))
+  .slice(0, 4);
+
+const totalPrograms = allTrainings.length > 0 ? allTrainings.length : 146;
+
+const title = 'Pelatihan K3 Resmi Kemnaker & BNSP | Wahana Konsultan K3';
+const description = 'Wahana Totalita Konsultan menyediakan pelatihan K3, Lingkungan, Mining & ISO terakreditasi resmi KEMNAKER RI dan BNSP. Online & offline. Berbasis di Yogyakarta.';
+
+const hbMonths = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Ags', 'Sep', 'Okt', 'Nov', 'Des'];
+
+function formatBatchDate(start?: string | null, end?: string | null) {
+  if (!start) return 'Jadwal Fleksibel 2026';
+  const partsS = start.split('-');
+  const yS = parseInt(partsS[0], 10);
+  const mS = parseInt(partsS[1], 10);
+  const dayS = parseInt(partsS[2], 10);
+
+  if (!end || end === start) {
+    return `${dayS} ${hbMonths[mS]} ${yS}`;
+  }
+  const partsE = end.split('-');
+  const yE = parseInt(partsE[0], 10);
+  const mE = parseInt(partsE[1], 10);
+  const dayE = parseInt(partsE[2], 10);
+
+  if (mS === mE && yS === yE) {
+    return `${dayS}-${dayE} ${hbMonths[mS]} ${yS}`;
+  }
+  return `${dayS} ${hbMonths[mS]} - ${dayE} ${hbMonths[mE]} ${yE}`;
+}
+
+const faqs = [
+  {
+    q: 'Apa itu sertifikasi K3 KEMNAKER RI?',
+    a: 'Sertifikasi K3 KEMNAKER RI adalah pengakuan resmi dari Kementerian Ketenagakerjaan Republik Indonesia bahwa seseorang telah memenuhi kompetensi di bidang Keselamatan dan Kesehatan Kerja. Sertifikat ini wajib dimiliki untuk posisi Ahli K3 Umum di perusahaan yang memiliki risiko kerja tinggi.',
+  },
+  {
+    q: 'Apakah pelatihan bisa dilakukan secara online?',
+    a: 'Ya. Wahana Totalita Konsultan menyediakan pelatihan online via Zoom untuk hampir semua program. Peserta dari seluruh Indonesia dapat mengikuti pelatihan tanpa harus datang ke Yogyakarta. Materi, modul, dan ujian dilakukan secara daring dengan kualitas yang sama.',
+  },
+  {
+    q: 'Berapa lama proses penerbitan sertifikat setelah ujian?',
+    a: 'Sertifikat BNSP umumnya terbit dalam 14-30 hari kerja setelah peserta dinyatakan lulus ujian kompetensi. Sertifikat KEMNAKER RI memiliki proses lebih panjang sesuai regulasi, biasanya 30-60 hari kerja.',
+  },
+  {
+    q: 'Apakah ada diskon untuk pendaftaran grup perusahaan?',
+    a: 'Ya, tersedia diskon khusus untuk pendaftaran grup minimal 5 peserta dari perusahaan yang sama. Hubungi kami via WhatsApp untuk mendapatkan penawaran harga korporasi dan paket in-house training.',
+  },
+  {
+    q: 'Apakah sertifikat berlaku di seluruh Indonesia?',
+    a: 'Ya. Sertifikat yang diterbitkan BNSP dan KEMNAKER RI berlaku secara nasional di seluruh wilayah Indonesia dan diakui oleh perusahaan-perusahaan di berbagai sektor industri.',
+  },
+  {
+    q: 'Apa perbedaan sertifikasi BNSP dan KEMNAKER RI?',
+    a: 'Sertifikasi KEMNAKER RI dikeluarkan langsung oleh Kementerian Ketenagakerjaan, umumnya untuk program K3 umum dan khusus yang diatur dalam UU K3. Sertifikasi BNSP (Badan Nasional Sertifikasi Profesi) mencakup lebih banyak bidang kompetensi kerja termasuk lingkungan, mining, dan ISO/QHSE.',
+  },
+  {
+    q: 'Bagaimana cara mendaftar pelatihan di Wahana Totalita?',
+    a: 'Pendaftaran sangat mudah dilakukan secara online via WhatsApp ke nomor resmi kami. Tim admin kami akan mengirimkan formulir pendaftaran, detail jadwal batch terdekat, silabus materi, serta panduan administrasi dan pembayaran.',
+  },
+  {
+    q: 'Apakah biaya pelatihan sudah termasuk ujian dan sertifikasi?',
+    a: 'Biaya bergantung pada program, jenis sertifikasi, dan mode kelas, mulai dari Rp 1.000.000 per orang. Untuk Ahli K3 Umum dan pendaftaran grup, hubungi kami via WhatsApp untuk penawaran terbaru.',
+  },
+  {
+    q: 'Berapa lama masa berlaku sertifikat K3 dan bagaimana perpanjangannya?',
+    a: 'Masa berlaku sertifikat dan lisensi kompetensi K3 umumnya 3 tahun (beberapa lisensi operator hingga 5 tahun). Sebelum masa berlaku berakhir, Anda dapat memperpanjang SKP dan Lisensi Kewenangan K3 melalui layanan perpanjangan resmi di Wahana Totalita.',
+  },
+  {
+    q: 'Apakah melayani in-house training untuk perusahaan di luar Yogyakarta?',
+    a: 'Ya, kami melayani in-house training langsung di lokasi perusahaan Anda di seluruh wilayah Indonesia (Sumatera, Jawa, Kalimantan, Sulawesi, hingga Papua) dengan jadwal fleksibel yang disesuaikan dengan kebutuhan operasional perusahaan.',
+  },
+];
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: f.a,
+      },
+    })),
+  },
+];
+---
+
+<Layout
+  title={title}
+  description={description}
+  isHome={true}
+  canonical="https://wahanatotalita.com/"
+  pageCss={['/assets/css/page/home.css']}
+  schemas={schemas}
+>
+  <!-- HERO SECTION (HERO 2026) -->
+  <section class="hero hero26">
+    <div class="hero26-bg" aria-hidden="true"></div>
+    <div class="hero26-glow hero26-glow-a" aria-hidden="true"></div>
+    <div class="hero26-glow hero26-glow-b" aria-hidden="true"></div>
+
+    <div class="container hero26-inner">
+      <div class="hero26-content">
+        <p class="hero26-eyebrow">
+          <span class="hero26-dot"></span>
+          PJK3 · KEMNAKER RI · BNSP · Vendor LPSE
+        </p>
+        <h1 class="hero26-title">
+          Pelatihan K3 &amp; Sertifikasi Kemnaker RI – BNSP<br />
+          <em>Wahana Totalita Konsultan K3</em>
+        </h1>
+        <p class="hero26-sub">
+          Lembaga Pelatihan &amp; Konsultan K3 Resmi — {totalPrograms}+ program K3, Lingkungan, ISO, dan Mining bersertifikasi BNSP &amp; KEMNAKER RI. Kelas online interaktif via Zoom dan tatap muka, melayani pelatihan perusahaan, instansi, dan perorangan di seluruh Indonesia.
+        </p>
+
+        <div class="hero26-actions">
+          <a href={waUrl('Halo Wahana Totalita, saya ingin konsultasi program pelatihan K3')} class="btn26 btn26-primary" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
+            Konsultasi via WhatsApp
+          </a>
+          <a href="/jadwal/" class="btn26 btn26-ghost">Lihat Jadwal 2026 &rarr;</a>
+        </div>
+
+        <div class="hero26-paths">
+          <span class="hero26-paths-label">Saya mendaftar sebagai:</span>
+          <div class="hero26-chips">
+            <a href="#produk" class="chip26">Individu</a>
+            <a href={waUrl('Halo Wahana Totalita, kami dari perusahaan ingin info pelatihan K3 untuk karyawan (in-house / grup)')} class="chip26" target="_blank" rel="noopener">Perusahaan</a>
+            <a href="/layanan-pemerintah" class="chip26 chip26-gov">Instansi Pemerintah &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <aside class="hero26-card" aria-label="Statistik Wahana Totalita">
+        <p class="hero26-card-title">Kenapa Wahana Totalita?</p>
+        <div class="hero26-stat">
+          <span class="hero26-stat-num">120.000<span class="plus">+</span></span>
+          <span class="hero26-stat-label">Peserta Bersertifikasi</span>
+        </div>
+        <div class="hero26-stat-row">
+          <div class="hero26-stat-sm"><span class="num">{totalPrograms}+</span><span class="lbl">Program Aktif</span></div>
+          <div class="hero26-stat-sm"><span class="num">2008</span><span class="lbl">Berdiri Sejak</span></div>
+        </div>
+        <div class="hero26-card-badges">
+          <span>PJK3</span><span>LPSE</span><span>PADI UMKM</span>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <div class="trust-bar">
+    <div class="container trust-bar-inner">
+      <span class="trust-bar-label">Terakreditasi &amp; Diakui</span>
+      <div class="trust-logo">
+        <div class="trust-logo-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 10h18M5 10v11M9 10v11M15 10v11M19 10v11M12 2L2 7h20L12 2z"/></svg>
+        </div>
+        <div><span class="trust-logo-name">KEMNAKER RI</span><span class="trust-logo-sub">Kementerian Ketenagakerjaan</span></div>
+      </div>
+      <div class="trust-logo">
+        <div class="trust-logo-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><path d="M9 14l2 2 4-4"/></svg>
+        </div>
+        <div><span class="trust-logo-name">BNSP</span><span class="trust-logo-sub">Badan Nasional Sertifikasi Profesi</span></div>
+      </div>
+      <div class="trust-logo">
+        <div class="trust-logo-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 18h20v-2a8 8 0 0 0-16 0v2z"/><path d="M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5"/><path d="M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1"/></svg>
+        </div>
+        <div><span class="trust-logo-name">ESDM</span><span class="trust-logo-sub">Kementerian ESDM</span></div>
+      </div>
+      <div class="trust-logo">
+        <div class="trust-logo-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+        </div>
+        <div><span class="trust-logo-name">KLHK</span><span class="trust-logo-sub">Kementerian Lingkungan Hidup</span></div>
+      </div>
+      <div class="trust-logo">
+        <div class="trust-logo-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        </div>
+        <div><span class="trust-logo-name">ISO 9001</span><span class="trust-logo-sub">Sistem Manajemen Mutu</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS BAR -->
+  <section class="stats-bar">
+    <div class="container stats-inner">
+      <div class="stat-item"><span class="stat-number">120.000+</span><span class="stat-label">Peserta Bersertifikasi</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat-item"><span class="stat-number">{totalPrograms}+</span><span class="stat-label">Program Pelatihan</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat-item"><span class="stat-number">BNSP</span><span class="stat-label">Sertifikasi Resmi</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat-item"><span class="stat-number">4</span><span class="stat-label">Bidang Keahlian</span></div>
+    </div>
+  </section>
+
+  <!-- JADWAL TERDEKAT -->
+  <section class="jadwal-strip" aria-labelledby="jt-heading">
+    <div class="container">
+      <div class="jadwal-strip-head">
+        <div>
+          <p class="section-eyebrow">Batch Berikutnya</p>
+          <h2 class="section-title" id="jt-heading" style="margin:0">Jadwal Terdekat</h2>
+        </div>
+        <a href="/jadwal/" class="all">Lihat semua jadwal &rarr;</a>
+      </div>
+      <div class="jadwal-cards">
+        {upcomingBatches.map((hb, idx) => {
+          const hbDate = formatBatchDate(hb.data.start_date, hb.data.end_date);
+          const hbOnline = hb.data.mode === 'online';
+          const hbCity = hbOnline ? 'Online' : (hb.data.venue || 'Yogyakarta');
+          const hbSeats = hb.data.max_participants ? parseInt(String(hb.data.max_participants), 10) : 15;
+          const hbName = hb.data.batch_name || 'Batch Reguler Pelatihan K3';
+          return (
+            <div class="jcard">
+              <span class="jcard-date">{hbDate}</span>
+              <a class="jcard-title" href={`/jadwal/${hb.data.id}/`}>{hbName}</a>
+              <span class="jcard-meta">{hbCity} · {hbOnline ? 'Online' : 'Tatap Muka'} · ✅ {hbSeats} kursi</span>
+              <a class="jcard-cta" href={waUrl(`Halo Wahana Totalita, saya ingin daftar ${hbName} tanggal ${hbDate}`)} target="_blank" rel="noopener">Daftar Sekarang</a>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOCK 1: PROGRAM UNGGULAN -->
+  <section class="section-services section-alt" id="pelatihan-k3-populer" aria-labelledby="pk3-heading">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Program Unggulan</p>
+        <h2 class="section-title" id="pk3-heading">Pelatihan K3 Paling Dicari</h2>
+        <p class="section-subtitle">Pilih pelatihan K3 resmi Kemnaker RI dan sertifikasi BNSP yang paling banyak dicari perusahaan dan profesional HSE. Tersedia kelas online via Zoom dan tatap muka di Yogyakarta.</p>
+      </div>
+      <div class="services-grid">
+        <a href="/ahli-k3-umum/" class="service-card" style="--accent: #C6621C">
+          <div class="service-card-icon">🦺</div>
+          <h3 class="service-card-title">Pelatihan Ahli K3 Umum Kemnaker RI</h3>
+          <p class="service-card-desc">Program utama untuk calon Ahli K3 Umum. Tersedia kelas online, cek batch terbaru di jadwal.</p>
+          <span class="service-card-count">Sertifikasi Kemnaker RI</span>
+          <span class="service-card-arrow">&rarr;</span>
+        </a>
+
+        <a href="/pelatihan/ak3-bnsp/" class="service-card" style="--accent: #C6621C">
+          <div class="service-card-icon">🏅</div>
+          <h3 class="service-card-title">Pelatihan Ahli K3 Umum BNSP</h3>
+          <p class="service-card-desc">Jalur sertifikasi kompetensi BNSP untuk profesi Ahli K3.</p>
+          <span class="service-card-count">Sertifikasi BNSP</span>
+          <span class="service-card-arrow">&rarr;</span>
+        </a>
+
+        <a href="/pelatihan/pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri/" class="service-card" style="--accent: #C6621C">
+          <div class="service-card-icon">🚜</div>
+          <h3 class="service-card-title">Pelatihan Operator Forklift Kelas II</h3>
+          <p class="service-card-desc">Pelatihan dan sertifikasi operator forklift Kelas II dari Kemnaker RI.</p>
+          <span class="service-card-count">Sertifikasi Kemnaker RI</span>
+          <span class="service-card-arrow">&rarr;</span>
+        </a>
+
+        <a href="/pelatihan/pelatihan-damkar-paralel-kelas-dcba-sertifikasi-kemnaker-ri/" class="service-card" style="--accent: #C6621C">
+          <div class="service-card-icon">🔥</div>
+          <h3 class="service-card-title">Pelatihan Damkar Kelas D, C, B, A</h3>
+          <p class="service-card-desc">Pelatihan petugas penanggulangan kebakaran di tempat kerja, jenjang Kelas D sampai A.</p>
+          <span class="service-card-count">Sertifikasi Kemnaker RI</span>
+          <span class="service-card-arrow">&rarr;</span>
+        </a>
+
+        <a href="/p3k/" class="service-card" style="--accent: #C6621C">
+          <div class="service-card-icon">⛑️</div>
+          <h3 class="service-card-title">Pelatihan Petugas P3K / First Aid</h3>
+          <p class="service-card-desc">Pelatihan petugas pertolongan pertama di tempat kerja, tersedia kelas online.</p>
+          <span class="service-card-count">Kelas Online &amp; Offline</span>
+          <span class="service-card-arrow">&rarr;</span>
+        </a>
+
+        <a href="/pelatihan-iso/" class="service-card" style="--accent: #2D7DD2">
+          <div class="service-card-icon">📋</div>
+          <h3 class="service-card-title">Pelatihan Internal Auditor ISO 45001</h3>
+          <p class="service-card-desc">Audit internal sistem manajemen K3 (ISO 45001:2018), 2 hari secara online.</p>
+          <span class="service-card-count">Sertifikat Kompetensi</span>
+          <span class="service-card-arrow">&rarr;</span>
+        </a>
+
+        <a href="/perpanjangan-skp/" class="service-card" style="--accent: #C6621C">
+          <div class="service-card-icon">🔄</div>
+          <h3 class="service-card-title">Perpanjangan SKP &amp; Lisensi K3</h3>
+          <p class="service-card-desc">Layanan perpanjangan SKP dan lisensi K3 untuk Ahli K3 dan petugas bersertifikat.</p>
+          <span class="service-card-count">Layanan Perpanjangan</span>
+          <span class="service-card-arrow">&rarr;</span>
+        </a>
+
+        <a href="/jadwal/" class="service-card" style="--accent: #C6621C">
+          <div class="service-card-icon">📅</div>
+          <h3 class="service-card-title">Jadwal Pelatihan K3 2026</h3>
+          <p class="service-card-desc">Lihat batch terdekat semua program, online maupun tatap muka, lengkap dengan sisa kursi.</p>
+          <span class="service-card-count">Daftar via WhatsApp</span>
+          <span class="service-card-arrow">&rarr;</span>
+        </a>
+      </div>
+      <div style="text-align:center;margin-top:28px;">
+        <a href="/pelatihan/" class="btn-outline">Lihat Semua Program Pelatihan &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- LAYANAN KAMI (4 MAIN CATEGORIES) -->
+  <section class="section-services" id="layanan">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Layanan Kami</p>
+        <h2 class="section-title">Bidang Pelatihan &amp; Sertifikasi</h2>
+        <p class="section-subtitle">Empat bidang utama pelatihan bersertifikasi resmi KEMNAKER RI, BNSP, dan kompetensi.</p>
+      </div>
+      <div class="services-grid">
+        {allCategories.map((cat) => {
+          const hubUrls: Record<string, string> = {
+            k3: '/keselamatan-kerja/',
+            lingkungan: '/k3-lingkungan/',
+            'system-management': '/pelatihan-iso/',
+            mining: '/k3-pertambangan/',
+          };
+          const hubTarget = hubUrls[cat.data.slug] || `/pelatihan/${cat.data.slug}/`;
+          const programCount = allTrainings.filter((t) => t.data.category_slug === cat.data.slug || t.data.category_id === cat.data.id).length;
+          return (
+            <a href={hubTarget} class="service-card" style={`--accent: ${cat.data.accent_color || '#0A4A2E'}`}>
+              <div class="service-card-icon">{cat.data.icon || '🦺'}</div>
+              <h3 class="service-card-title">{cat.data.name}</h3>
+              <p class="service-card-desc">{cat.data.description || 'Program sertifikasi kompetensi terakreditasi resmi.'}</p>
+              <span class="service-card-count">{programCount} Program</span>
+              <span class="service-card-arrow">&rarr;</span>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- CATALOG GRID -->
+  <section class="section-catalog" id="produk">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Katalog Program</p>
+        <h2 class="section-title">Program Pelatihan &amp; Sertifikasi K3</h2>
+        <p class="section-subtitle">Lembaga pelatihan K3 resmi dan sertifikasi profesi Kemnaker RI &amp; BNSP. Tersedia kelas online interaktif via Zoom, kelas tatap muka di Yogyakarta, dan in-house training perusahaan di seluruh Indonesia.</p>
+      </div>
+
+      <div class="filter-bar">
+        <div class="catalog-search-wrap">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="search" id="catalog-search" placeholder="Cari program pelatihan..." autocomplete="off" aria-label="Cari program pelatihan" />
+        </div>
+        <div class="filter-group" id="filter-cat">
+          <button class="filter-btn active" data-filter="all">Semua</button>
+          {allCategories.map((cat) => (
+            <button class="filter-btn" data-filter={cat.data.slug}>{cat.data.name}</button>
+          ))}
+        </div>
+        <div class="filter-group" id="filter-mode">
+          <button class="filter-mode active" data-mode="all">Semua</button>
+          <button class="filter-mode" data-mode="online">Online</button>
+          <button class="filter-mode" data-mode="offline">Tatap Muka</button>
+        </div>
+      </div>
+
+      <div class="training-grid" id="training-grid">
+        {displayTrainings.map((t) => {
+          const rImg = getTrainingImageUrl(t.data.image_path, t.data.category_slug, t.data.slug);
+          const rPrice = formatPrice(t.data.price);
+          const rMode = modeLabel(t.data.mode);
+          const rCert = t.data.certification || 'Sertifikasi Resmi';
+          return (
+            <article class="training-card" data-cat={t.data.category_slug} data-mode={t.data.mode} style={`--accent: ${t.data.accent_color || '#0A4A2E'}`}>
+              <a href={`/pelatihan/${t.data.slug}/`} class="training-card-img-wrap">
+                <img src={rImg} alt={t.data.name} loading="lazy" decoding="async" width="400" height="250" />
+                <span class="training-card-cat-badge">{t.data.category_name || 'Pelatihan K3'}</span>
+              </a>
+              <div class="training-card-body">
+                <div class="training-card-meta">
+                  <span class="badge-mode">{rMode}</span>
+                  <span class="badge-cert">{rCert}</span>
+                </div>
+                <h3 class="training-card-title"><a href={`/pelatihan/${t.data.slug}/`}>{t.data.name}</a></h3>
+                <ul class="training-card-features">
+                  {t.data.duration_days && (
+                    <li><span class="tcf-ico">⏱</span> {t.data.duration_days} hari pelatihan</li>
+                  )}
+                  <li><span class="tcf-ico">✓</span> Sertifikat + modul + e-certificate</li>
+                </ul>
+                <div class="training-card-footer">
+                  <span class="training-price">{rPrice} <small>/orang</small></span>
+                  <a href={waUrl(`Halo Wahana Totalita, saya ingin daftar ${t.data.name}`)} class="btn-wa-card" target="_blank" rel="noopener">Daftar Sekarang</a>
+                </div>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+
+      <div class="catalog-cta-wrap" style="text-align:center;margin:40px 0 20px;">
+        <a href="/pelatihan/" class="btn-primary" style="display:inline-flex;align-items:center;gap:10px;padding:15px 32px;font-size:1.05rem;font-weight:700;border-radius:12px;text-decoration:none;box-shadow:0 6px 20px rgba(10,74,46,0.22);transition:all .2s ease;">
+          <span>Lihat Semua {totalPrograms}+ Program di Katalog Lengkap</span>
+          <span aria-hidden="true" style="font-size:1.2rem;">&rarr;</span>
+        </a>
+        <p style="color:#64748b;font-size:0.875rem;margin-top:12px;">Cari silabus lengkap, jadwal terdekat, dan sertifikasi Kemnaker RI &amp; BNSP</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- B2G BAND -->
+  <div class="container" style="margin: 40px auto;">
+    <div class="b2g-band">
+      <div>
+        <h2>🏛️ Vendor Resmi Pengadaan Pemerintah</h2>
+        <p>Terdaftar di LPSE dan PADI UMKM — siap melayani pengadaan langsung maupun tender pelatihan K3 untuk Dinas, OPD, dan BUMN.</p>
+        <div class="b2g-badges"><span>LPSE ✓</span><span>PADI UMKM ✓</span><span>PJK3 ✓</span><span>Sejak 2008</span></div>
+      </div>
+      <a href="/layanan-pemerintah" class="btn26 btn26-primary">Lihat Layanan Pemerintah &rarr;</a>
+    </div>
+  </div>
+
+  <!-- ABOUT SECTION -->
+  <section class="section-about" id="perusahaan">
+    <div class="container about-inner">
+      <div class="about-text fade-in">
+        <p class="section-eyebrow">Tentang Kami</p>
+        <h2 class="section-title">Mitra Sertifikasi &amp; Konsultasi K3</h2>
+        <p>Wahana Totalita Konsultan adalah lembaga pelatihan K3 resmi dan konsultan Keselamatan &amp; Kesehatan Kerja berlisensi PJK3 Kementerian Ketenagakerjaan RI (No. Kep. 312/BINWASPNAK-PNK3/V/2020) serta terakreditasi BNSP. Sejak 2008, kami telah meluluskan lebih dari 120.000 alumni dan bermitra dengan ratusan BUMN serta swasta dalam sertifikasi Ahli K3 Umum, SMK3 PP 50/2012, CSMS, K3 Konstruksi, Listrik, dan Migas.</p>
+        <div class="about-badges">
+          <div class="about-badge"><strong>KEMNAKER RI</strong><span>Sertifikasi Resmi</span></div>
+          <div class="about-badge"><strong>BNSP</strong><span>Sertifikasi Profesi</span></div>
+          <div class="about-badge"><strong>Sejak 2008</strong><span>Berpengalaman</span></div>
+        </div>
+      </div>
+      <div class="about-actions fade-in">
+        <a href={waUrl('Halo Wahana Totalita, saya ingin konsultasi dengan tim konsultan K3')} class="btn-primary" target="_blank" rel="noopener">Hubungi Konsultan</a>
+        <a href="/pelatihan/" class="btn-outline">Lihat Program</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOCK 2: SEKTOR INDUSTRI -->
+  <section class="section-services" id="pelatihan-k3-bidang" aria-labelledby="pk3b-heading">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Sesuai Sektor Anda</p>
+        <h2 class="section-title" id="pk3b-heading">Pelatihan K3 Berdasarkan Bidang Industri</h2>
+        <p class="section-subtitle">Setiap sektor punya risiko dan regulasi berbeda. Temukan pelatihan K3 yang sesuai dengan bidang kerja Anda.</p>
+      </div>
+      <div class="services-grid">
+        <a href="/k3-konstruksi/" class="service-card" style="--accent: #C6621C">
+          <div class="service-card-icon">🏗️</div>
+          <h3 class="service-card-title">Pelatihan K3 Konstruksi</h3>
+          <p class="service-card-desc">Gedung, sipil &amp; infrastruktur.</p>
+          <span class="service-card-count">Lihat program</span>
+          <span class="service-card-arrow">&rarr;</span>
+        </a>
+
+        <a href="/k3-migas/" class="service-card" style="--accent: #C6621C">
+          <div class="service-card-icon">🛢️</div>
+          <h3 class="service-card-title">Pelatihan K3 Minyak &amp; Gas</h3>
+          <p class="service-card-desc">Hulu-hilir &amp; petrokimia.</p>
+          <span class="service-card-count">Lihat program</span>
+          <span class="service-card-arrow">&rarr;</span>
+        </a>
+
+        <a href="/k3-listrik/" class="service-card" style="--accent: #C6621C">
+          <div class="service-card-icon">⚡</div>
+          <h3 class="service-card-title">Pelatihan K3 Listrik &amp; Energi</h3>
+          <p class="service-card-desc">Pembangkit &amp; instalasi listrik.</p>
+          <span class="service-card-count">Lihat program</span>
+          <span class="service-card-arrow">&rarr;</span>
+        </a>
+
+        <a href="/k3-kimia/" class="service-card" style="--accent: #C6621C">
+          <div class="service-card-icon">🧪</div>
+          <h3 class="service-card-title">Pelatihan K3 Kimia &amp; B3</h3>
+          <p class="service-card-desc">Hazardous material &amp; laboratorium.</p>
+          <span class="service-card-count">Lihat program</span>
+          <span class="service-card-arrow">&rarr;</span>
+        </a>
+
+        <a href="/k3-ketinggian/" class="service-card" style="--accent: #C6621C">
+          <div class="service-card-icon">🧗</div>
+          <h3 class="service-card-title">Pelatihan Bekerja di Ketinggian</h3>
+          <p class="service-card-desc">TKBT, TKPK &amp; scaffolding.</p>
+          <span class="service-card-count">Lihat program</span>
+          <span class="service-card-arrow">&rarr;</span>
+        </a>
+
+        <a href="/k3-pertambangan/" class="service-card" style="--accent: #8B5A2B">
+          <div class="service-card-icon">⛏️</div>
+          <h3 class="service-card-title">Pelatihan K3 Pertambangan</h3>
+          <p class="service-card-desc">POP, POM, POU &amp; minerba.</p>
+          <span class="service-card-count">Lihat program</span>
+          <span class="service-card-arrow">&rarr;</span>
+        </a>
+
+        <a href="/k3-lingkungan/" class="service-card" style="--accent: #0A4A2E">
+          <div class="service-card-icon">🌿</div>
+          <h3 class="service-card-title">Pelatihan K3 Lingkungan &amp; AMDAL</h3>
+          <p class="service-card-desc">POPAL, PLB3 &amp; pengelolaan limbah.</p>
+          <span class="service-card-count">Lihat program</span>
+          <span class="service-card-arrow">&rarr;</span>
+        </a>
+
+        <a href="/k3-rumah-sakit/" class="service-card" style="--accent: #C6621C">
+          <div class="service-card-icon">🏥</div>
+          <h3 class="service-card-title">Pelatihan K3 Rumah Sakit &amp; Faskes</h3>
+          <p class="service-card-desc">Akreditasi &amp; biosafety.</p>
+          <span class="service-card-count">Lihat program</span>
+          <span class="service-card-arrow">&rarr;</span>
+        </a>
+      </div>
+      <div style="text-align:center;margin-top:28px;">
+        <a href="/keselamatan-kerja/" class="btn-outline">Lihat Semua 23 Bidang K3 &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOCK 3: KOTA-KOTA INDUSTRI -->
+  <section class="section-services section-alt" id="pelatihan-k3-kota" aria-labelledby="pk3k-heading">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Wilayah Layanan</p>
+        <h2 class="section-title" id="pk3k-heading">Pelatihan K3 di Kota Anda</h2>
+        <p class="section-subtitle">Public training tatap muka di Yogyakarta, in-house training perusahaan di berbagai kota di Indonesia, dan kelas online untuk peserta dari mana saja.</p>
+      </div>
+      <div class="services-grid">
+        <a href="/pelatihan-k3-yogyakarta/" class="service-card" style="--accent: #C6621C">
+          <div class="service-card-icon">🏢</div>
+          <h3 class="service-card-title">Pelatihan K3 Yogyakarta</h3>
+          <p class="service-card-desc">Training center dan kelas tatap muka.</p>
+          <span class="service-card-count">Public training</span>
+          <span class="service-card-arrow">&rarr;</span>
+        </a>
+
+        <a href="/pelatihan-k3-jakarta/" class="service-card" style="--accent: #C6621C">
+          <div class="service-card-icon">🌆</div>
+          <h3 class="service-card-title">Pelatihan K3 Jakarta</h3>
+          <p class="service-card-desc">Konstruksi, migas &amp; korporasi.</p>
+          <span class="service-card-count">In-house &amp; online</span>
+          <span class="service-card-arrow">&rarr;</span>
+        </a>
+
+        <a href="/pelatihan-k3-surabaya/" class="service-card" style="--accent: #C6621C">
+          <div class="service-card-icon">🚢</div>
+          <h3 class="service-card-title">Pelatihan K3 Surabaya</h3>
+          <p class="service-card-desc">Maritim, manufaktur &amp; crane.</p>
+          <span class="service-card-count">In-house &amp; online</span>
+          <span class="service-card-arrow">&rarr;</span>
+        </a>
+
+        <a href="/pelatihan-k3-bandung/" class="service-card" style="--accent: #C6621C">
+          <div class="service-card-icon">🏭</div>
+          <h3 class="service-card-title">Pelatihan K3 Bandung</h3>
+          <p class="service-card-desc">Tekstil, farmasi &amp; industri.</p>
+          <span class="service-card-count">In-house &amp; online</span>
+          <span class="service-card-arrow">&rarr;</span>
+        </a>
+
+        <a href="/pelatihan-k3-semarang/" class="service-card" style="--accent: #C6621C">
+          <div class="service-card-icon">🏗️</div>
+          <h3 class="service-card-title">Pelatihan K3 Semarang</h3>
+          <p class="service-card-desc">Kawasan Kendal &amp; pelabuhan.</p>
+          <span class="service-card-count">In-house &amp; online</span>
+          <span class="service-card-arrow">&rarr;</span>
+        </a>
+
+        <a href="/pelatihan-k3-cilegon/" class="service-card" style="--accent: #C6621C">
+          <div class="service-card-icon">⚙️</div>
+          <h3 class="service-card-title">Pelatihan K3 Cilegon</h3>
+          <p class="service-card-desc">Baja, petrokimia &amp; pelabuhan.</p>
+          <span class="service-card-count">In-house &amp; online</span>
+          <span class="service-card-arrow">&rarr;</span>
+        </a>
+
+        <a href="/pelatihan-k3-balikpapan/" class="service-card" style="--accent: #C6621C">
+          <div class="service-card-icon">🛢️</div>
+          <h3 class="service-card-title">Pelatihan K3 Balikpapan</h3>
+          <p class="service-card-desc">Migas, logistik &amp; tambang.</p>
+          <span class="service-card-count">In-house &amp; online</span>
+          <span class="service-card-arrow">&rarr;</span>
+        </a>
+
+        <a href="/pelatihan-k3-medan/" class="service-card" style="--accent: #C6621C">
+          <div class="service-card-icon">🌴</div>
+          <h3 class="service-card-title">Pelatihan K3 Medan</h3>
+          <p class="service-card-desc">Perkebunan sawit &amp; pabrik.</p>
+          <span class="service-card-count">In-house &amp; online</span>
+          <span class="service-card-arrow">&rarr;</span>
+        </a>
+      </div>
+      <div style="text-align:center;margin-top:28px;">
+        <a href="/kota/" class="btn-outline">Lihat Semua 20 Kota Layanan &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section-how fade-in">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Mudah &amp; Cepat</p>
+        <h2 class="section-title">Cara Daftar Pelatihan</h2>
+        <p class="section-subtitle">Proses pendaftaran sederhana, tanpa birokrasi rumit. Sertifikat terbit tepat waktu.</p>
+      </div>
+      <div class="how-steps">
+        <div class="how-step">
+          <span class="how-step-num">Langkah 01</span>
+          <div class="how-step-icon">📋</div>
+          <h3>Pilih Program</h3>
+          <p>Browse katalog {totalPrograms}+ program pelatihan K3, Lingkungan, Mining, dan ISO. Filter sesuai kategori dan mode pelatihan.</p>
+        </div>
+        <div class="how-step">
+          <span class="how-step-num">Langkah 02</span>
+          <div class="how-step-icon">💬</div>
+          <h3>Hubungi via WhatsApp</h3>
+          <p>Klik tombol Daftar Sekarang. Tim kami merespons dalam 1×24 jam untuk konfirmasi jadwal dan biaya.</p>
+        </div>
+        <div class="how-step">
+          <span class="how-step-num">Langkah 03</span>
+          <div class="how-step-icon">📚</div>
+          <h3>Ikuti Pelatihan</h3>
+          <p>Pelatihan online via Zoom atau tatap muka di Yogyakarta. Materi terstruktur, instruktur praktisi berpengalaman.</p>
+        </div>
+        <div class="how-step">
+          <span class="how-step-num">Langkah 04</span>
+          <div class="how-step-icon">🏆</div>
+          <h3>Terima Sertifikat</h3>
+          <p>Lulus ujian kompetensi, sertifikat resmi KEMNAKER RI / BNSP diterbitkan dan dikirimkan ke alamat Anda.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section class="section-faq fade-in" aria-labelledby="faq-heading">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Pertanyaan Umum</p>
+        <h2 class="section-title" id="faq-heading">Yang Sering Ditanyakan</h2>
+        <p class="section-subtitle">Jawaban atas pertanyaan paling umum seputar pelatihan dan sertifikasi kami.</p>
+      </div>
+      <div class="faq-grid">
+        {faqs.map((faq) => (
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false" type="button">
+              {faq.q}
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">{faq.a}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF & TESTIMONIALS -->
+  <section class="section-social-proof" aria-labelledby="sp-heading">
+    <div class="container">
+      <p class="section-eyebrow">Dipercaya Profesional Indonesia</p>
+      <h2 class="section-title" id="sp-heading">Ribuan Peserta Telah Bersertifikasi</h2>
+      <p class="section-subtitle">Bergabung bersama alumni dari berbagai industri di seluruh Indonesia</p>
+      <div class="sp-stats" aria-label="Statistik peserta">
+        <div class="sp-stat"><span class="sp-stat-num">120.000+</span><span class="sp-stat-desc">Total Peserta Bersertifikasi</span></div>
+        <div class="sp-stat"><span class="sp-stat-num">{totalPrograms}+</span><span class="sp-stat-desc">Program Pelatihan Tersedia</span></div>
+        <div class="sp-stat"><span class="sp-stat-num">Sejak 2008</span><span class="sp-stat-desc">Berpengalaman</span></div>
+      </div>
+      <div class="sp-testimonials">
+        <article class="sp-card">
+          <span class="sp-card-program">Ahli K3 Umum</span>
+          <blockquote class="sp-card-quote">Materi sangat relevan dan instruktur berpengalaman di lapangan. Sertifikasi BNSP yang saya dapat langsung diakui perusahaan dan mempercepat karier saya di bidang HSE.</blockquote>
+          <div class="sp-card-footer">
+            <div class="sp-card-avatar" aria-hidden="true">BS</div>
+            <div>
+              <div class="sp-card-name">Budi S.</div>
+              <div class="sp-card-meta">HSE Manager &middot; Industri Manufaktur, Jawa Tengah</div>
+            </div>
+          </div>
+        </article>
+        <article class="sp-card">
+          <span class="sp-card-program">POPAL</span>
+          <blockquote class="sp-card-quote">Pelatihan online sangat fleksibel dan tidak mengganggu jadwal kerja. Modul lengkap dan tim Wahana Totalita sangat responsif merespon pertanyaan peserta.</blockquote>
+          <div class="sp-card-footer">
+            <div class="sp-card-avatar" aria-hidden="true">SR</div>
+            <div>
+              <div class="sp-card-name">Sari R.</div>
+              <div class="sp-card-meta">Environmental Coordinator &middot; Sektor Energi</div>
+            </div>
+          </div>
+        </article>
+        <article class="sp-card">
+          <span class="sp-card-program">POP Mining</span>
+          <blockquote class="sp-card-quote">Daftar mudah lewat WhatsApp, sertifikat BNSP terbit tepat waktu. Pelatihan POP ini benar-benar mendukung persiapan saya naik jabatan pengawas lapangan.</blockquote>
+          <div class="sp-card-footer">
+            <div class="sp-card-avatar" aria-hidden="true">AF</div>
+            <div>
+              <div class="sp-card-name">Ahmad F.</div>
+              <div class="sp-card-meta">Mining Supervisor &middot; Tambang Batubara, Kalimantan</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script is:inline>
+  // FAQ accordion interaction
+  document.querySelectorAll('.faq-question').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', !expanded);
+      var answer = this.nextElementSibling;
+      if (answer) {
+        answer.classList.toggle('open', !expanded);
+      }
+      var icon = this.querySelector('.faq-icon');
+      if (icon) {
+        icon.textContent = expanded ? '+' : '−';
+      }
+    });
+  });
+
+  // Client-side catalog filtering
+  var currentCat = 'all';
+  var currentMode = 'all';
+  var searchInput = document.getElementById('catalog-search');
+
+  function updateFilter() {
+    var query = (searchInput ? searchInput.value : '').toLowerCase().trim();
+    var cards = document.querySelectorAll('#training-grid .training-card');
+    cards.forEach(function(card) {
+      var cardCat = card.getAttribute('data-cat') || '';
+      var cardMode = card.getAttribute('data-mode') || '';
+      var cardText = card.textContent.toLowerCase();
+
+      var matchCat = currentCat === 'all' || cardCat === currentCat;
+      var matchMode = currentMode === 'all' || cardMode.includes(currentMode);
+      var matchQuery = !query || cardText.includes(query);
+
+      if (matchCat && matchMode && matchQuery) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  document.querySelectorAll('#filter-cat .filter-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('#filter-cat .filter-btn').forEach(function(b) { b.classList.remove('active'); });
+      this.classList.add('active');
+      currentCat = this.getAttribute('data-filter') || 'all';
+      updateFilter();
+    });
+  });
+
+  document.querySelectorAll('#filter-mode .filter-mode').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('#filter-mode .filter-mode').forEach(function(b) { b.classList.remove('active'); });
+      this.classList.add('active');
+      currentMode = this.getAttribute('data-mode') || 'all';
+      updateFilter();
+    });
+  });
+
+  if (searchInput) {
+    searchInput.addEventListener('input', updateFilter);
+  }
+</script>

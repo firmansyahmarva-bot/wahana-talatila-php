@@ -1,0 +1,28 @@
+{
+    "id": 190,
+    "title": "Cara Inspeksi Harness dan Lanyard Sebelum Bekerja di Ketinggian",
+    "slug": "cara-inspeksi-harness-sebelum-digunakan",
+    "meta_title": "Cara Inspeksi Harness Sebelum Digunakan di Ketinggian",
+    "meta_desc": "Urutan pemeriksaan harness sebelum dipakai: webbing, jahitan, D-ring, buckle, hingga tanggal produksi yang sering terlewat.",
+    "keywords": "inspeksi harness, cara memeriksa harness, kelayakan harness, webbing harness rusak, D-ring harness",
+    "category": "K3",
+    "thumbnail": null,
+    "content": "<p>Seorang pekerja pernah bercerita ke tim kami: dia sudah memakai harness selama bertahun-tahun, tapi baru menyadari webbing di bagian dorsal D-ring miliknya mulai retak halus setelah hampir jatuh saat lanyard-nya justru menahan beban dengan baik — bukan karena harness-nya, tapi karena kebetulan titik yang rusak bukan titik yang menahan beban saat itu. Ceritanya jadi pengingat sederhana: harness yang terlihat baik-baik saja dari luar bisa saja sudah tidak layak pakai.</p>\r\n\r\n<p>Inspeksi harness sebelum digunakan bukan formalitas lima detik melihat sekilas. Ada urutan yang perlu diperiksa satu per satu, dan kebanyakan kegagalan yang kami temukan saat audit justru ada di bagian yang jarang diperhatikan pekerja karena tidak terlihat mencolok.</p>\r\n\r\n<h2>Webbing (Tali Anyaman)</h2>\r\n<p>Periksa sepanjang webbing dari ujung ke ujung, bukan hanya bagian yang mudah dilihat. Cari serat yang putus, sobekan kecil, bekas gesekan berlebih, atau perubahan warna yang menandakan degradasi akibat paparan bahan kimia atau sinar UV. Webbing yang terasa kaku atau getas saat ditekuk, meski terlihat utuh, sudah cukup jadi alasan untuk tidak dipakai.</p>\r\n\r\n<h2>Jahitan (Stitching)</h2>\r\n<p>Titik jahitan di sekitar D-ring dan buckle adalah bagian yang menanggung beban paling besar saat terjadi jatuh. Benang yang putus, longgar, atau menunjukkan pola aus di sekitar area ini sering jadi tanda paling awal kegagalan struktural, jauh sebelum kerusakan terlihat di bagian webbing itu sendiri.</p>\r\n\r\n<h2>D-Ring dan Hardware Logam</h2>\r\n<p>Cek karat, deformasi bentuk, atau retak halus pada D-ring, buckle, dan hardware logam lainnya. D-ring yang sudah berubah bentuk sedikit saja — bahkan yang terlihat sepele — bisa berarti komponen tersebut pernah menahan beban jatuh sebelumnya dan seharusnya sudah ditarik dari peredaran, bukan terus dipakai karena \"masih bisa dipasang.\"</p>\r\n\r\n<h2>Buckle dan Mekanisme Pengunci</h2>\r\n<p>Pastikan buckle berfungsi mengunci dengan sempurna, tidak longgar, dan tidak ada komponen yang aus sehingga mekanisme pengunci tidak lagi rapat. Buckle yang sedikit susah dikunci mungkin terlihat seperti masalah kecil, tapi ini bisa berarti harness tidak akan menahan posisi dengan benar saat benar-benar dibutuhkan.</p>\r\n\r\n<h2>Label dan Tanggal Produksi</h2>\r\n<p>Setiap harness punya masa pakai yang direkomendasikan pabrikan, biasanya tercantum di label yang sering justru paling jarang diperiksa. Harness yang sudah melewati masa pakai rekomendasi tetap berisiko digunakan meski secara visual tidak menunjukkan kerusakan, karena degradasi material bisa terjadi secara internal tanpa tanda kasat mata.</p>\r\n\r\n<p>Kalau ada satu hal yang paling ingin kami tekankan dari pengalaman menangani banyak kasus lapangan, itu adalah: jangan biarkan inspeksi ini jadi kebiasaan yang dilakukan tanpa benar-benar melihat. Rutinitas yang dilakukan setiap hari cenderung berubah jadi gerakan otomatis tanpa perhatian — dan justru di titik itulah kerusakan kecil paling sering terlewat.</p>\r\n\r\n<p>Cakupan lengkap jenis alat pelindung jatuh dan kriteria kelayakannya kami bahas di <a href=\"https://wahanatotalita.com/artikel/jenis-alat-pelindung-jatuh-harness-k3/\">artikel terpisah</a>. Praktik inspeksi ini menjadi bagian dari materi <a href=\"https://wahanatotalita.com/pelatihan/pelatihan-tkbt-1-bangunan-tinggi-online/\">Pelatihan TKBT 1</a> yang kami selenggarakan.</p>\r\n",
+    "faq_data": "[{\"question\":\"Bagian mana dari harness yang paling sering luput dari inspeksi?\",\"answer\":\"Titik jahitan di sekitar D-ring dan buckle, serta label tanggal produksi, karena keduanya sering tidak terlihat mencolok dibanding kerusakan pada webbing.\"},{\"question\":\"Apakah harness yang terlihat baik secara visual pasti aman dipakai?\",\"answer\":\"Tidak selalu. Degradasi material bisa terjadi secara internal tanpa tanda kasat mata, terutama jika harness sudah melewati masa pakai yang direkomendasikan pabrikan.\"}]",
+    "author": "Wahana Totalita Konsultan",
+    "status": "published",
+    "published_at": "2026-07-12 08:03:11",
+    "view_count": 88,
+    "created_at": "2026-07-12 08:03:11",
+    "updated_at": "2026-10-12 20:34:15",
+    "faq_list": [
+        {
+            "question": "Bagian mana dari harness yang paling sering luput dari inspeksi?",
+            "answer": "Titik jahitan di sekitar D-ring dan buckle, serta label tanggal produksi, karena keduanya sering tidak terlihat mencolok dibanding kerusakan pada webbing."
+        },
+        {
+            "question": "Apakah harness yang terlihat baik secara visual pasti aman dipakai?",
+            "answer": "Tidak selalu. Degradasi material bisa terjadi secara internal tanpa tanda kasat mata, terutama jika harness sudah melewati masa pakai yang direkomendasikan pabrikan."
+        }
+    ]
+}

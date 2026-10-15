@@ -1,0 +1,293 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const allSkkni = await getCollection('skkni');
+  return allSkkni.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: {
+      item: entry.data,
+      allSkkni: allSkkni.map((i) => i.data),
+    },
+  }));
+}
+
+const { item, allSkkni } = Astro.props;
+
+const canonical = `https://wahanatotalita.com/skkni/${item.slug}/`;
+const metaTitle = `SKKNI ${item.judul} — Standar Unit Kompetensi & Sertifikasi BNSP | Wahana Totalita`;
+const metaDesc = (item.ringkasan || '').length > 155
+  ? (item.ringkasan || '').substring(0, 155) + '...'
+  : (item.ringkasan || '');
+
+const waNumber = '6287759151278';
+const waMsg = `Halo Wahana Totalita, saya ingin informasi pendaftaran sertifikasi BNSP untuk skema ${item.judul}. Mohon info jadwal dan persyaratannya.`;
+const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(waMsg)}`;
+
+// Related professions in same sector
+const related = allSkkni
+  .filter((i) => i.slug !== item.slug && i.sektor === item.sektor)
+  .slice(0, 4);
+
+if (related.length < 4) {
+  const others = allSkkni
+    .filter((i) => i.slug !== item.slug && !related.some((rel) => rel.slug === i.slug))
+    .slice(0, 4 - related.length);
+  related.push(...others);
+}
+
+const schemaFaqs = (item.faqs || []).map((faq) => ({
+  '@type': 'Question',
+  name: faq.q,
+  acceptedAnswer: {
+    '@type': 'Answer',
+    text: faq.a,
+  },
+}));
+
+const schemas: any[] = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    '@id': `${canonical}#breadcrumb`,
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Beranda', item: 'https://wahanatotalita.com/' },
+      { '@type': 'ListItem', position: 2, name: 'SKKNI & Profesi', item: 'https://wahanatotalita.com/skkni/' },
+      { '@type': 'ListItem', position: 3, name: item.judul, item: canonical },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Occupation',
+    '@id': `${canonical}#occupation`,
+    name: item.judul,
+    description: item.ringkasan,
+    occupationalCategory: item.sektor,
+    estimatedSalary: {
+      '@type': 'MonetaryAmountDistribution',
+      name: 'Rentang Gaji Industri',
+      currency: 'IDR',
+      description: item.rentang_gaji,
+    },
+    responsibilities: item.deskripsi_tugas,
+    qualifications: item.persyaratan_asesmen,
+    url: canonical,
+  },
+];
+
+if (schemaFaqs.length > 0) {
+  schemas.push({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    '@id': `${canonical}#faq`,
+    mainEntity: schemaFaqs,
+  });
+}
+---
+
+<Layout
+  title={metaTitle}
+  description={metaDesc}
+  canonical={canonical}
+  schemas={schemas}
+  pageCss={['/assets/css/page/skkni-detail.css']}
+>
+  <!-- Detail Hero -->
+  <header class="skkni-detail-hero">
+    <div class="container">
+      <nav class="skkni-breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Beranda</a>
+        <span>›</span>
+        <a href="/skkni/">SKKNI & Profesi</a>
+        <span>›</span>
+        <span>{item.judul}</span>
+      </nav>
+
+      <div class="skkni-hero-badges">
+        <span class="skkni-badge-hero">{item.sektor}</span>
+        <span class="skkni-badge-hero badge-level">{item.jenjang_kkni || 'Sertifikasi BNSP'}</span>
+        <span class="skkni-badge-hero">{item.unit_kompetensi ? item.unit_kompetensi.length : 0} Unit Kompetensi</span>
+      </div>
+
+      <h1>{item.judul}</h1>
+      <div class="skkni-hero-subtitle">
+        Dasar SKKNI: <strong>{item.skkni_nomor}</strong>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <main class="skkni-detail-wrap">
+    <div class="container">
+      <div class="skkni-detail-grid">
+        <!-- Left Main Content Column -->
+        <article class="skkni-main-content">
+          <!-- Section 1: Overview -->
+          <section class="skkni-section-card">
+            <h2 class="skkni-section-title">📖 Ringkasan & Ruang Lingkup Profesi</h2>
+            <p style="font-size:1.02rem; line-height:1.75; color:#334155; margin-bottom:20px;">
+              {item.ringkasan}
+            </p>
+            {item.content_html && (
+              <div class="skkni-html-body" set:html={item.content_html} />
+            )}
+          </section>
+
+          <!-- Section 2: Units of Competence -->
+          {item.unit_kompetensi && item.unit_kompetensi.length > 0 && (
+            <section class="skkni-section-card">
+              <h2 class="skkni-section-title">📋 Daftar Unit Kompetensi SKKNI (BNSP)</h2>
+              <p style="font-size:0.92rem; color:#64748b; margin:0 0 16px;">
+                Kandidat wajib dinyatakan <em>Kompeten (K)</em> pada seluruh unit kompetensi berikut dalam uji asesmen LSP terlisensi BNSP:
+              </p>
+              <div class="units-table-wrapper">
+                <table class="units-table">
+                  <thead>
+                    <tr>
+                      <th style="width:40px;">No</th>
+                      <th style="width:180px;">Kode Unit</th>
+                      <th>Judul Unit Kompetensi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {item.unit_kompetensi.map((unit: any, idx: number) => (
+                      <tr>
+                        <td style="color:#94a3b8; font-weight:600;">{idx + 1}</td>
+                        <td><span class="unit-code">{unit.kode || '-'}</span></td>
+                        <td><strong>{unit.judul || unit}</strong></td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          )}
+
+          <!-- Section 3: Assessment Prerequisites -->
+          {item.persyaratan_asesmen && (
+            <section class="skkni-section-card">
+              <h2 class="skkni-section-title">🎓 Persyaratan Peserta & Uji Asesmen</h2>
+              <div class="info-block">
+                <p style="white-space:pre-line; margin:0;">{item.persyaratan_asesmen}</p>
+              </div>
+              <p style="font-size:0.88rem; color:#64748b; margin-top:12px;">
+                * Portofolio kerja dan bukti berkas pendukung wajib diverifikasi oleh Asesor Kompetensi sebelum pelaksanaan uji lisan/praktik.
+              </p>
+            </section>
+          )}
+
+          <!-- Section 4: Operational Duties -->
+          {item.deskripsi_tugas && (
+            <section class="skkni-section-card">
+              <h2 class="skkni-section-title">🛠️ Uraian Tugas & Tanggung Jawab Operasional</h2>
+              <div class="info-block" style="border-left-color:#0284c7;">
+                <p style="white-space:pre-line; margin:0;">{item.deskripsi_tugas}</p>
+              </div>
+            </section>
+          )}
+
+          <!-- Section 5: Salary Benchmark & Career Path -->
+          {(item.rentang_gaji || item.prospek_karir) && (
+            <section class="skkni-section-card">
+              <h2 class="skkni-section-title">💼 Benchmarking Gaji & Jenjang Karir</h2>
+              <div class="career-grid">
+                {item.rentang_gaji && (
+                  <div class="career-box">
+                    <div class="career-box-title">💵 Rentang Gaji Industri</div>
+                    <div class="career-box-val">{item.rentang_gaji}</div>
+                  </div>
+                )}
+                {item.prospek_karir && (
+                  <div class="career-box" style="background:#eff6ff; border-color:#bfdbfe;">
+                    <div class="career-box-title" style="color:#1e40af;">📈 Prospek Jalur Karir</div>
+                    <div class="career-box-val" style="color:#1e3a8a; font-size:0.95rem; font-weight:600;">
+                      {item.prospek_karir}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </section>
+          )}
+
+          <!-- Section 6: FAQ -->
+          {item.faqs && item.faqs.length > 0 && (
+            <section class="skkni-section-card">
+              <h2 class="skkni-section-title">❓ Tanya Jawab Seputar {item.judul}</h2>
+              <div>
+                {item.faqs.map((faq) => (
+                  <div class="faq-item">
+                    <h3 class="faq-q">{faq.q}</h3>
+                    <p class="faq-a">{faq.a}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+        </article>
+
+        <!-- Right Sidebar Column -->
+        <aside class="skkni-sidebar">
+          <!-- Quick Facts Card -->
+          <div class="skkni-sidebar-card">
+            <h3 class="skkni-sidebar-title">📌 Informasi Kunci Profesi</h3>
+            <div class="fact-row">
+              <span class="fact-label">Dasar SKKNI</span>
+              <span class="fact-val">{item.skkni_nomor}</span>
+            </div>
+            <div class="fact-row">
+              <span class="fact-label">Klaster Sektor</span>
+              <span class="fact-val">{item.sektor}</span>
+            </div>
+            <div class="fact-row">
+              <span class="fact-label">Jenjang KKNI</span>
+              <span class="fact-val">{item.jenjang_kkni}</span>
+            </div>
+            <div class="fact-row">
+              <span class="fact-label">Total Unit</span>
+              <span class="fact-val">{item.unit_kompetensi ? item.unit_kompetensi.length : 0} Unit</span>
+            </div>
+            <div class="fact-row">
+              <span class="fact-label">Lembaga Uji</span>
+              <span class="fact-val">LSP Terlisensi BNSP</span>
+            </div>
+          </div>
+
+          <!-- WhatsApp Consultation Card -->
+          <div class="skkni-sidebar-card" style="background:linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-color:#bbf7d0;">
+            <div style="font-size:1.8rem; margin-bottom:8px;">💬</div>
+            <h3 style="font-size:1.15rem; font-weight:700; color:#14532d; margin:0 0 8px;">Konsultasi Sertifikasi</h3>
+            <p style="font-size:0.88rem; color:#166534; line-height:1.55; margin:0 0 16px;">
+              Ingin mengikuti uji kompetensi atau mendaftarkan pelatihan in-house perusahaan untuk skema <strong>{item.judul}</strong>? Tim konsultan kami siap membantu jadwal & penawaran resmi.
+            </p>
+            <a href={waUrl} target="_blank" rel="noopener noreferrer" class="wa-btn-card">
+              Hubungi via WhatsApp &rarr;
+            </a>
+          </div>
+
+          <!-- Related Professions in Same Sector -->
+          {related.length > 0 && (
+            <div class="skkni-sidebar-card">
+              <h3 class="skkni-sidebar-title">🔗 Skema Terkait di Sektor Ini</h3>
+              <div>
+                {related.map((rel) => (
+                  <a href={`/skkni/${rel.slug}/`} class="related-item">
+                    <div class="related-item-title">{rel.judul}</div>
+                    <div class="related-item-sub">📜 {rel.skkni_nomor}</div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <!-- Hub Link -->
+          <div style="text-align:center; padding:12px;">
+            <a href="/skkni/" style="color:#1e40af; font-size:0.9rem; font-weight:600; text-decoration:none;">
+              &larr; Kembali ke Direktori SKKNI
+            </a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+</Layout>

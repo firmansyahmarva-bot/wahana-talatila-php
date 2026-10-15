@@ -1,0 +1,96 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const pageTitle = 'Instruktur K3 Berpengalaman Yogyakarta';
+const metaDesc = 'Wahana Totalita Konsultan didukung oleh instruktur K3 nasional dari Pusdiklat Migas Cepu, akademisi, dan praktisi industri berpengalaman lebih dari 15 tahun.';
+const canonical = 'https://wahanatotalita.com/instruktur/';
+
+const waNumber = '6287759151278';
+const waJoinUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent('Halo, saya ingin bergabung sebagai instruktur K3 di Wahana Totalita')}`;
+
+const instruktur = [
+  { name: 'Baldric Siregar', cred: 'Dr., MBA., Ak.', spec: 'Manajemen & Audit K3' },
+  { name: 'Hari Purnomo', cred: 'Dr. Ir., MT', spec: 'Teknik Industri & Ergonomi' },
+  { name: 'Viktor Malau', cred: 'Dr. Ir., DEA', spec: 'K3 Industri & Lingkungan' },
+  { name: 'M. Kusumawan Herliansyah', cred: 'Dr., ST., MT.', spec: 'Teknik Mesin & Keselamatan' },
+  { name: 'Arman Hakim Nasution', cred: 'Ir., M.Eng', spec: 'Manajemen Risiko Industri' },
+  { name: 'Rini Dharmastiti', cred: 'Ir., MSc, PhD', spec: 'Ergonomi & Keselamatan Kerja' },
+  { name: 'R.I. Triyanto', cred: 'Capt., M.Mar', spec: 'Keselamatan Maritim & IATA' },
+  { name: 'H. Zaenal M. Sofro', cred: 'M.D., AIFM', spec: 'Kesehatan Kerja & Kedokteran Olahraga' },
+  { name: 'Marlin Maryudi', cred: 'Praktisi K3 Bersertifikat', spec: 'Pusdiklat Migas Cepu' },
+  { name: 'Putut Prasetyo', cred: 'Praktisi K3 Bersertifikat', spec: 'Pusdiklat Migas Cepu' },
+  { name: 'Suwoyo', cred: 'ST', spec: 'Pusdiklat Migas Cepu' },
+  { name: 'Slamet Riyadi', cred: 'ST., MEng', spec: 'Pusdiklat Migas Cepu' },
+  { name: 'Sutrisno', cred: 'Praktisi K3 Bersertifikat', spec: 'Pusdiklat Migas Cepu' },
+  { name: 'Bambang Setyo', cred: 'Praktisi K3 Bersertifikat', spec: 'Pusdiklat Migas Cepu' },
+  { name: 'Instruktur K3 Nasional', cred: 'Tersertifikasi Kemnaker RI / BNSP', spec: 'Ahli K3 Umum & SMK3' },
+  { name: 'Instruktur K3 Nasional', cred: 'Tersertifikasi Kemnaker RI / BNSP', spec: 'K3 Konstruksi & Bekerja di Ketinggian' },
+  { name: 'Instruktur K3 Nasional', cred: 'Tersertifikasi Kemnaker RI / BNSP', spec: 'Auditor Sistem Manajemen K3' },
+  { name: 'Instruktur K3 Nasional', cred: 'Tersertifikasi Kemnaker RI / BNSP', spec: 'ISO 45001 / 14001 / 9001' },
+  { name: 'Instruktur K3 Nasional', cred: 'Tersertifikasi Kemnaker RI / BNSP', spec: 'K3 Kimia & Bahan Berbahaya' },
+  { name: 'Instruktur K3 Nasional', cred: 'Tersertifikasi Kemnaker RI / BNSP', spec: 'Investigasi Kecelakaan Kerja' },
+];
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Daftar Instruktur dan Tenaga Ahli K3 Wahana Totalita',
+    itemListElement: instruktur.map((ins, i) => ({
+      '@type': 'Person',
+      name: ins.name,
+      jobTitle: 'Instruktur ' + ins.spec,
+      worksFor: {
+        '@type': 'EducationalOrganization',
+        name: 'Wahana Totalita Konsultan',
+      },
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Beranda', item: 'https://wahanatotalita.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Instruktur K3', item: canonical },
+    ],
+  },
+];
+---
+
+<Layout
+  title={pageTitle}
+  description={metaDesc}
+  canonical={canonical}
+  schemas={schemas}
+  pageCss={['/assets/css/page/instruktur.css']}
+>
+  <main id="konten-utama">
+    <div class="instruktur-hero">
+      <div class="container">
+        <h1>Instruktur &amp; Tenaga Ahli K3</h1>
+        <p class="lead">
+          Wahana Totalita didukung oleh jaringan instruktur berpengalaman: praktisi dari Pusdiklat Migas Cepu,
+          akademisi S2/S3 bidang K3 dan teknik, serta pengawas ketenagakerjaan berlisensi nasional.
+        </p>
+      </div>
+    </div>
+
+    <div class="container instruktur-content">
+      <div class="instruktur-grid">
+        {instruktur.map((ins) => (
+          <div class="instruktur-card">
+            <h3>{ins.name}</h3>
+            <span class="instruktur-cred">{ins.cred}</span>
+            <p>{ins.spec}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="instruktur-cta">
+        <h2>Ingin Bergabung Sebagai Instruktur?</h2>
+        <p>Kami selalu membuka peluang kerja sama bagi praktisi K3 bersertifikasi dan akademisi yang berkomitmen memajukan keselamatan kerja di Indonesia.</p>
+        <a class="btn-primary" href={waJoinUrl} target="_blank" rel="noopener">Hubungi Tim Akademik via WhatsApp</a>
+      </div>
+    </div>
+  </main>
+</Layout>

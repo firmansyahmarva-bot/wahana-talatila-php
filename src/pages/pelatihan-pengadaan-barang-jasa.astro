@@ -1,0 +1,285 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const canonical = 'https://wahanatotalita.com/pelatihan-pengadaan-barang-jasa/';
+const metaTitle = 'Pelatihan Pengadaan Barang Jasa Pemerintah (PBJP) Yogyakarta — Wahana Totalita';
+const metaDesc = 'Pelatihan pengadaan barang dan jasa pemerintah (PBJP) untuk PPK, PPTK, panitia pengadaan, dan ASN di Yogyakarta. Perpres 16/2018, Perlem LKPP, e-Purchasing, SiRUP, LPSE.';
+
+const regs = [
+  { no: 'Perpres 16/2018', title: 'Pengadaan Barang/Jasa Pemerintah', desc: 'Regulasi induk pengadaan pemerintah yang berlaku. Menetapkan prinsip, metode, pelaku, dan tata cara pengadaan. Diubah sebagian oleh Perpres 12/2021 untuk memperkuat UMKM dan produk dalam negeri.', bg: 'var(--surface-subtle)' },
+  { no: 'Perpres 12/2021', title: 'Perubahan Perpres 16/2018', desc: 'Memperkuat keberpihakan pada produk dalam negeri (PDN) dan UMKM: ambang pengadaan langsung naik, kewajiban e-Purchasing diperluas, dan pengaturan P3DN dipertegas.', bg: 'var(--info-bg)' },
+  { no: 'Perlem LKPP 12/2021', title: 'Pedoman Pengadaan Barang/Jasa Pemerintah', desc: 'Petunjuk teknis pelaksanaan Perpres 16/2018 — mengatur detail prosedur, dokumen, dan standar untuk setiap metode pengadaan.', bg: 'var(--surface-subtle)' },
+  { no: 'Perlem LKPP 11/2021', title: 'E-Katalog dan E-Purchasing', desc: 'Mengatur penggunaan katalog elektronik nasional, sektoral, dan lokal. E-Purchasing wajib didahulukan jika barang/jasa tersedia di katalog LKPP.', bg: 'var(--warning-bg)' },
+  { no: 'Perlem LKPP 9/2018', title: 'Jabatan Fungsional PPBJ', desc: 'Mengatur Jabatan Fungsional Pengelola Pengadaan Barang/Jasa (PPBJ) — kompetensi, jenjang, angka kredit, dan kewenangan PPBJ dalam proses pengadaan.', bg: 'var(--warning-bg)' },
+  { no: 'UU 2/2017 & PP 22/2020', title: 'Jasa Konstruksi', desc: 'Regulasi khusus untuk pengadaan pekerjaan konstruksi: persyaratan SBUJK, SBU subkontraktor, dan K3 konstruksi yang wajib dipenuhi penyedia jasa konstruksi.', bg: 'var(--accent-light)' },
+];
+
+const methods = [
+  { method: 'E-Purchasing', value: 'Wajib jika ada di e-Catalog', executor: 'PPK / Pejabat Pengadaan', notes: 'Didahulukan! Jika barang/jasa ada di katalog LKPP, e-purchasing WAJIB dilakukan terlebih dahulu.' },
+  { method: 'Pengadaan Langsung', value: '≤ Rp 200 jt (B/PK/JL) atau ≤ Rp 100 jt (JK)', executor: 'Pejabat Pengadaan (1 orang)', notes: 'Tidak perlu tender — cukup 1 penawaran dan negosiasi. Wahana Totalita masuk kategori ini.' },
+  { method: 'Penunjukan Langsung', value: 'Kondisi tertentu (darurat, satu penyedia)', executor: 'PPK + Pokja', notes: 'Harus ada justifikasi tertulis yang kuat. Sering jadi temuan BPK jika alasannya lemah.' },
+  { method: 'Tender Cepat', value: 'Spesifikasi & harga sudah jelas di SIKAP', executor: 'Pokja Pemilihan', notes: 'Proses lebih cepat dari tender biasa — cocok untuk barang standar.' },
+  { method: 'Tender / Seleksi', value: '> Rp 200 jt (B/PK/JL) atau > Rp 100 jt (JK)', executor: 'Pokja Pemilihan (min. 3 orang)', notes: 'Proses pengumuman, dokumen, evaluasi, sanggah, penetapan pemenang.' },
+  { method: 'Swakelola', value: 'Nilai bervariasi, tipe I–IV', executor: 'PPK + Tim Pelaksana Swakelola', notes: 'Bukan berarti bebas administrasi — tetap perlu perencanaan dan SPJ yang ketat.' },
+];
+
+const roles = [
+  { name: 'PA / KPA', title: 'Pengguna Anggaran / Kuasa Pengguna Anggaran', desc: 'Menetapkan PPK, Pokja, dan Pejabat Pengadaan. Bertanggung jawab atas pengelolaan anggaran kegiatan secara keseluruhan. Menandatangani kontrak bernilai besar.' },
+  { name: 'PPK', title: 'Pejabat Pembuat Komitmen', desc: 'Menetapkan HPS dan spesifikasi teknis, menandatangani kontrak, mengendalikan pelaksanaan kontrak, menerima hasil pekerjaan, dan mengajukan pembayaran. Risiko hukum tertinggi.' },
+  { name: 'Pokja Pemilihan', title: 'Kelompok Kerja Pemilihan (min. 3 org)', desc: 'Membuat dokumen pemilihan, melaksanakan proses tender/seleksi, mengevaluasi penawaran, menetapkan pemenang, dan membuat laporan pemilihan.' },
+  { name: 'Pejabat Pengadaan', title: '1 orang untuk pengadaan langsung', desc: 'Khusus untuk pengadaan langsung dan penunjukan langsung di bawah ambang batas. Menetapkan penyedia, mengklarifikasi spesifikasi, dan mendokumentasikan proses.' },
+  { name: 'PPTK', title: 'Pejabat Pelaksana Teknis Kegiatan', desc: 'Membantu PPK dalam administrasi kegiatan di SKPD: koordinasi teknis, verifikasi progres, penyiapan dokumen tagihan, dan monitoring pelaksanaan di lapangan.' },
+  { name: 'Pengelola Keuangan', title: 'Bendahara + Staf Keuangan', desc: 'Verifikasi kelengkapan dokumen pembayaran, penerbitan SPP dan SPM, koordinasi dengan BPPKAD/KPPN, dan penyusunan laporan keuangan kegiatan.' },
+];
+
+const findings = [
+  { icon: '🔪', title: 'Pemecahan Paket', desc: 'Memecah satu paket besar menjadi beberapa paket kecil untuk menghindari tender (Pasal 22 Perpres 16/2018). Risiko: tuntutan pidana korupsi.' },
+  { icon: '📋', title: 'HPS Tidak Wajar', desc: 'HPS jauh di atas atau di bawah harga pasar tanpa justifikasi yang memadai. Pembuatan HPS wajib berdasarkan survei harga yang terdokumentasi.' },
+  { icon: '🔖', title: 'Spek Mengarah ke Merek', desc: 'Spesifikasi teknis yang hanya bisa dipenuhi satu merek/penyedia tanpa justifikasi. Melanggar prinsip persaingan sehat.' },
+  { icon: '⏰', title: 'Denda Tidak Dipungut', desc: 'Tidak mengenakan denda 1/1000 per hari kepada penyedia yang terlambat. BPK menghitung ini sebagai kerugian negara.' },
+  { icon: '📦', title: 'Volume Tidak Sesuai', desc: 'Pembayaran tidak sesuai volume/progres pekerjaan yang sebenarnya diselesaikan. Temuan paling sering di pekerjaan konstruksi dan barang.' },
+  { icon: '💻', title: 'Tidak Pakai E-Catalog', desc: 'Membeli barang melalui pengadaan langsung/tender padahal barang tersedia di katalog elektronik LKPP — melanggar kewajiban e-purchasing.' },
+];
+
+const programs = [
+  { name: 'Pengadaan Barang/Jasa Dasar (PPK & Pejabat Pengadaan)', dur: '2 hari / 14 JP', aud: 'PPK baru, PPTK, Pejabat Pengadaan, dan staf yang baru menangani pengadaan. Fokus: alur, metode, dokumen, dan HPS.' },
+  { name: 'Pengelolaan Kontrak Pemerintah', dur: '1 hari / 8 JP', aud: 'PPK, PPTK, dan pengawas lapangan yang mengelola kontrak aktif. Fokus: jenis kontrak, addendum, denda, BAST, dan pembayaran.' },
+  { name: 'E-Purchasing & Katalog Elektronik LKPP', dur: 'Half-day / 4 JP', aud: 'Seluruh staf pengadaan yang perlu update cara belanja di e-Catalog LKPP — prosedur, verifikasi produk, dan pembayaran.' },
+  { name: 'SiRUP & Perencanaan Pengadaan', dur: 'Half-day / 4 JP', aud: 'Perencana anggaran, PPK, dan staf keuangan. Praktik mengisi SiRUP, membuat RUP SKPD, dan integrasi dengan RKA-SKPD.' },
+  { name: 'Pokja Pemilihan — Tender & Seleksi', dur: '2 hari / 14 JP', aud: 'Anggota Pokja Pemilihan, LPSE admin, dan PPK yang ingin memahami proses tender dari sisi panitia. Termasuk evaluasi dan sanggah.' },
+  { name: 'Pencegahan Korupsi dalam Pengadaan', dur: '1 hari / 8 JP', aud: 'Semua pelaku pengadaan. Kolaborasi dengan KPK/Inspektorat: titik rawan korupsi, gratifikasi, dan cara pencegahannya.' },
+  { name: 'Update Regulasi Pengadaan Terbaru', dur: 'Half-day / 4 JP', aud: 'Refresher tahunan untuk semua staf pengadaan: update Perpres, Perlem LKPP, dan SE LKPP terbaru.' },
+  { name: 'Pengadaan Pekerjaan Konstruksi (PPK & Pokja)', dur: '2 hari / 14 JP', aud: 'PPK dan Pokja yang menangani tender konstruksi. Fokus: spesifikasi teknis, HPS konstruksi, sub-kontraktor, dan SMKK K3.' },
+];
+
+const steps = [
+  { no: '1', title: 'Persiapan', desc: 'PPK menetapkan spesifikasi teknis, HPS (berdasarkan survei harga), dan rancangan kontrak/SPK.' },
+  { no: '2', title: 'Pemilihan Penyedia', desc: 'Pejabat Pengadaan mengundang 1 (satu) penyedia yang memenuhi kualifikasi, meminta penawaran harga.' },
+  { no: '3', title: 'Klarifikasi & Negosiasi', desc: 'Pejabat Pengadaan melakukan klarifikasi teknis dan negosiasi harga agar sesuai atau di bawah HPS.' },
+  { no: '4', title: 'Penetapan Penyedia', desc: 'PPK menerbitkan Surat Penunjukan Penyedia Barang/Jasa (SPPBJ) kepada penyedia yang ditetapkan.' },
+  { no: '5', title: 'Penandatanganan SPK/Kontrak', desc: 'PPK menandatangani Surat Perintah Kerja (SPK) atau kontrak — memuat ruang lingkup, harga, dan waktu.' },
+  { no: '6', title: 'Pelaksanaan & Pembayaran', desc: 'Penyedia melaksanakan pekerjaan. Setelah selesai dan BAST ditandatangani, PPK mengajukan pembayaran.' },
+];
+
+const faqs = [
+  { q: 'Apa perbedaan PPK, PPTK, dan Pokja Pemilihan?', a: 'PPK bertanggung jawab penuh atas pelaksanaan kontrak dan pembayaran. PPTK membantu PPK secara teknis di SKPD. Pokja Pemilihan melaksanakan proses tender/seleksi pemilihan penyedia.' },
+  { q: 'Apa saja metode pengadaan berdasarkan Perpres 16/2018?', a: 'E-Purchasing (wajib jika ada di e-catalog), Pengadaan Langsung (≤ Rp 200 jt), Penunjukan Langsung, Tender Cepat, Tender, dan Seleksi.' },
+  { q: 'Apa temuan BPK yang paling sering terjadi dalam pengadaan?', a: 'Pemecahan paket pengadaan, HPS tidak wajar tanpa survei pasar, spesifikasi mengarah ke merek, denda keterlambatan tidak dipungut, dan tidak memanfaatkan e-katalog.' },
+  { q: 'Apakah Wahana Totalita terdaftar di PADI dan LPSE?', a: 'Ya. PT Kreasi Ultimate Berjaya (Wahana Totalita) terdaftar di PADI UMKM dan LPSE untuk kategori Pendidikan dan Pelatihan. Pengadaan langsung dapat diproses tanpa tender untuk paket di bawah Rp 200 juta.' },
+  { q: 'Apa itu SiRUP dan mengapa wajib diisi sebelum pengadaan?', a: 'SiRUP adalah Sistem Informasi Rencana Umum Pengadaan LKPP tempat instansi wajib mengumumkan rencana pengadaan sebelum proses dimulai.' },
+  { q: 'Berapa denda keterlambatan penyedia dan bagaimana menghitungnya?', a: 'Denda adalah 1/1000 dari nilai kontrak per hari kalender keterlambatan sesuai Perlem LKPP 12/2021. Denda ini wajib dipungut agar tidak menjadi temuan kerugian negara oleh BPK.' },
+];
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Beranda', item: 'https://wahanatotalita.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Pelatihan', item: 'https://wahanatotalita.com/pelatihan/' },
+      { '@type': 'ListItem', position: 3, name: 'Pelatihan PBJP', item: canonical },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+];
+---
+
+<Layout
+  title={metaTitle}
+  description={metaDesc}
+  canonical={canonical}
+  schemas={schemas}
+>
+  <section style="background:linear-gradient(135deg,var(--brand) 0%,var(--brand-dark) 100%);color:var(--surface);padding:60px 20px 50px;">
+    <div class="container" style="max-width:960px;">
+      <nav aria-label="breadcrumb" style="font-size:0.85rem;opacity:0.8;margin-bottom:16px;">
+        <a href="/" style="color:#fff;text-decoration:none;">Beranda</a> › 
+        <a href="/pelatihan/" style="color:#fff;text-decoration:none;">Pelatihan</a> › 
+        <span>Pengadaan Barang/Jasa</span>
+      </nav>
+      <h1 style="font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;margin:0 0 16px;color:#fff;">
+        Pelatihan Pengadaan Barang/Jasa Pemerintah (PBJP) Yogyakarta
+      </h1>
+      <p style="font-size:1.05rem;opacity:0.92;max-width:760px;margin:0 0 14px;line-height:1.7;">
+        Pelatihan komprehensif pengadaan barang dan jasa pemerintah untuk PPK, PPTK, Pokja Pemilihan, dan staf keuangan instansi — mencakup Perpres 16/2018 jo Perpres 12/2021, e-Purchasing, SiRUP, LPSE, kontrak pemerintah, dan pencegahan temuan BPK. In-house di instansi Anda, dokumen SPJ lengkap.
+      </p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 28px;">
+        <span style="background:rgba(255,255,255,0.18);padding:6px 14px;border-radius:20px;font-size:0.85rem;">✓ Perpres 16/2018 &amp; 12/2021</span>
+        <span style="background:rgba(255,255,255,0.18);padding:6px 14px;border-radius:20px;font-size:0.85rem;">✓ Perlem LKPP Terbaru</span>
+        <span style="background:rgba(255,255,255,0.18);padding:6px 14px;border-radius:20px;font-size:0.85rem;">✓ Poin JP ASN</span>
+        <span style="background:rgba(255,255,255,0.18);padding:6px 14px;border-radius:20px;font-size:0.85rem;">✓ Studi Kasus Temuan BPK</span>
+        <span style="background:rgba(255,255,255,0.18);padding:6px 14px;border-radius:20px;font-size:0.85rem;">✓ Pengadaan Langsung Tersedia</span>
+      </div>
+      <a href="https://wa.me/6287759151278?text=Halo%20Wahana%20Totalita,%20saya%20ingin%20info%20pelatihan%20pengadaan%20barang%20jasa%20pemerintah%20(PBJP)%20untuk%20instansi%20kami"
+         target="_blank" rel="noopener"
+         style="display:inline-block;background:#25d366;color:#fff;padding:14px 32px;border-radius:8px;font-weight:700;text-decoration:none;font-size:1rem;box-shadow:var(--shadow-sm);">
+        Konsultasi Program Pelatihan via WA
+      </a>
+    </div>
+  </section>
+
+  <main class="container" style="max-width:960px;padding:48px 20px 64px;">
+    <!-- REGULASI -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:24px;font-weight:800;">
+        Regulasi Utama Pengadaan Barang/Jasa Pemerintah
+      </h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;">
+        {regs.map((r) => (
+          <div style={`background:${r.bg};border-radius:10px;padding:20px;border-left:5px solid var(--brand);`}>
+            <div style="font-weight:800;color:var(--brand);font-size:0.9rem;margin-bottom:4px;">{r.no}</div>
+            <div style="font-weight:700;color:var(--slate-900);margin-bottom:8px;font-size:0.95rem;">{r.title}</div>
+            <p style="color:var(--slate-600);font-size:0.86rem;line-height:1.6;margin:0;">{r.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- METODE PENGADAAN -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:20px;font-weight:800;">
+        Metode Pengadaan (Perpres 16/2018 jo 12/2021)
+      </h2>
+      <div style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;font-size:0.88rem;border:1px solid var(--border);">
+          <thead>
+            <tr style="background:var(--brand);color:var(--surface);">
+              <th style="padding:12px 14px;text-align:left;color:#fff;">Metode</th>
+              <th style="padding:12px 14px;text-align:left;color:#fff;">Nilai / Kondisi</th>
+              <th style="padding:12px 14px;text-align:left;color:#fff;">Pelaksana</th>
+              <th style="padding:12px 14px;text-align:left;color:#fff;">Catatan Penting</th>
+            </tr>
+          </thead>
+          <tbody>
+            {methods.map((m, i) => (
+              <tr style={i % 2 === 0 ? 'background:var(--surface);' : 'background:var(--surface-subtle);'}>
+                <td style="padding:10px 14px;border-bottom:1px solid var(--border);font-weight:700;color:var(--brand);">{m.method}</td>
+                <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:var(--slate-700);">{m.value}</td>
+                <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:var(--slate-600);">{m.executor}</td>
+                <td style="padding:10px 14px;border-bottom:1px solid var(--border);color:var(--slate-600);">{m.notes}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- PERAN DALAM PENGADAAN -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:20px;font-weight:800;">
+        Peran &amp; Tanggung Jawab dalam Pengadaan
+      </h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;">
+        {roles.map((r) => (
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;border-top:4px solid var(--brand);box-shadow:var(--shadow-sm);">
+            <div style="font-size:1.2rem;font-weight:800;color:var(--brand);margin-bottom:4px;">{r.name}</div>
+            <div style="font-weight:700;font-size:0.88rem;color:var(--slate-800);margin-bottom:8px;">{r.title}</div>
+            <p style="font-size:0.85rem;line-height:1.6;color:var(--slate-600);margin:0;">{r.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- TEMUAN BPK -->
+    <section style="margin-bottom:48px;background:var(--surface-subtle);border-radius:12px;padding:28px;border:1px solid var(--border);border-left:6px solid var(--warning);">
+      <h2 style="color:var(--brand);font-size:1.45rem;margin:0 0 14px;font-weight:800;">
+        ⚠️ Temuan BPK Paling Sering — Pahami Sebelum Terlambat
+      </h2>
+      <p style="color:var(--slate-800);line-height:1.7;margin:0 0 16px;font-size:0.92rem;">
+        Berdasarkan laporan IHPS BPK, ini adalah temuan paling berulang dalam pengadaan pemerintah yang wajib diketahui setiap PPK dan Pokja:
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;">
+        {findings.map((f) => (
+          <div style="background:var(--surface);border-radius:8px;padding:16px;border:1px solid var(--border);">
+            <div style="font-size:1.5rem;margin-bottom:6px;">{f.icon}</div>
+            <div style="font-weight:700;color:var(--brand);margin-bottom:4px;font-size:0.9rem;">{f.title}</div>
+            <p style="color:var(--slate-600);font-size:0.84rem;line-height:1.5;margin:0;">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- PROGRAM PELATIHAN -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:20px;font-weight:800;">
+        Program Pelatihan PBJP yang Tersedia
+      </h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;">
+        {programs.map((p) => (
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;">
+            <div style="font-weight:700;color:var(--brand);margin-bottom:6px;font-size:0.95rem;">{p.name}</div>
+            <div style="font-size:0.82rem;color:var(--orange);font-weight:700;margin-bottom:8px;">⏱️ {p.dur}</div>
+            <div style="font-size:0.84rem;color:var(--slate-600);margin-bottom:16px;line-height:1.5;flex:1;">Sasaran: {p.aud}</div>
+            <a href={`https://wa.me/6287759151278?text=${encodeURIComponent(`Halo Wahana Totalita, saya tertarik pelatihan ${p.name} untuk instansi kami. Mohon info jadwal dan harga.`)}`}
+               target="_blank" rel="noopener"
+               style="display:inline-block;background:var(--brand);color:#fff;padding:8px 16px;border-radius:6px;text-decoration:none;font-size:0.85rem;font-weight:700;text-align:center;">
+              Tanya via WhatsApp →
+            </a>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- ALUR PENGADAAN LANGSUNG -->
+    <section style="margin-bottom:48px;background:var(--surface-subtle);border-radius:12px;padding:28px;border:1px solid var(--border);">
+      <h2 style="color:var(--brand);font-size:1.45rem;margin:0 0 14px;font-weight:800;">
+        Alur Pengadaan Langsung (Nilai ≤ Rp 200 Juta)
+      </h2>
+      <p style="color:var(--slate-600);font-size:0.9rem;margin:0 0 20px;line-height:1.7;">
+        Wahana Totalita termasuk dalam kategori ini. Berikut alur standar yang wajib dipahami PPK dan Pejabat Pengadaan:
+      </p>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        {steps.map((s) => (
+          <div style="display:flex;align-items:flex-start;gap:14px;background:var(--surface);border-radius:8px;padding:16px 18px;border:1px solid var(--border);">
+            <div style="background:var(--brand);color:var(--surface);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;flex-shrink:0;">{s.no}</div>
+            <div>
+              <div style="font-weight:700;color:var(--brand);margin-bottom:4px;font-size:0.95rem;">{s.title}</div>
+              <p style="color:var(--slate-600);font-size:0.86rem;line-height:1.6;margin:0;">{s.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section style="margin-bottom:48px;">
+      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:24px;font-weight:800;">
+        Pertanyaan yang Sering Diajukan
+      </h2>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        {faqs.map((faq) => (
+          <details style="border:1px solid var(--border);border-radius:8px;padding:14px 18px;background:var(--surface);">
+            <summary style="font-weight:700;color:var(--brand);cursor:pointer;font-size:0.95rem;">
+              {faq.q}
+            </summary>
+            <p style="margin-top:12px;color:var(--slate-700);line-height:1.75;font-size:0.9rem;">
+              {faq.a}
+            </p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section style="background:linear-gradient(135deg,var(--brand),var(--brand-dark));color:var(--surface);border-radius:12px;padding:44px 24px;text-align:center;">
+      <h2 style="margin:0 0 12px;font-size:1.75rem;color:#fff;font-weight:800;">Siap Meningkatkan Kompetensi Pengadaan Tim Anda?</h2>
+      <p style="opacity:0.9;margin:0 auto 12px;line-height:1.7;max-width:620px;">
+        Hubungi kami untuk mendapatkan proposal pelatihan PBJP yang disesuaikan — in-house di instansi Anda, jadwal fleksibel, instruktur berpengalaman, dan dokumen SPJ lengkap siap pakai.
+      </p>
+      <p style="opacity:0.8;font-size:0.9rem;margin:0 0 24px;">Pengadaan langsung tanpa tender · LPSE &amp; PADI terdaftar · Nilai di bawah Rp 200 juta</p>
+      <a href="https://wa.me/6287759151278?text=Halo%20Wahana%20Totalita,%20saya%20ingin%20proposal%20pelatihan%20pengadaan%20barang%20jasa%20pemerintah%20(PBJP)%20untuk%20instansi%20kami"
+         target="_blank" rel="noopener"
+         style="display:inline-block;background:#25d366;color:#fff;padding:14px 36px;border-radius:8px;font-weight:700;text-decoration:none;font-size:1.05rem;">
+        💬 Hubungi Kami via WhatsApp: 0877-5915-1278
+      </a>
+    </section>
+  </main>
+</Layout>

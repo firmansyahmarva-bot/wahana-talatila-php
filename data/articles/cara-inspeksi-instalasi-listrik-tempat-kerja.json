@@ -1,0 +1,18 @@
+{
+    "id": 198,
+    "title": "Cara Melakukan Inspeksi Instalasi Listrik di Tempat Kerja",
+    "slug": "cara-inspeksi-instalasi-listrik-tempat-kerja",
+    "meta_title": "Cara Inspeksi Instalasi Listrik di Tempat Kerja — Panduan K3",
+    "meta_desc": "Panduan langkah demi langkah inspeksi instalasi listrik di tempat kerja: jenis inspeksi, alat ukur yang digunakan, dan dokumentasi hasil.",
+    "keywords": null,
+    "category": "K3",
+    "thumbnail": null,
+    "content": "<h2>Mengapa Inspeksi Instalasi Listrik Wajib Dilakukan</h2>\n<p>Sesuai Permenaker No. 12 Tahun 2015, instalasi listrik wajib diperiksa dan diuji secara berkala oleh pemeriksa yang berkompeten untuk memastikan kondisinya tetap aman digunakan. Inspeksi yang konsisten mencegah kegagalan komponen yang dapat memicu sengatan listrik, arc flash, atau kebakaran akibat korsleting.</p>\n<h2>Jenis Inspeksi: Harian vs Berkala</h2>\n<p>Inspeksi harian (visual) dilakukan oleh operator atau teknisi sebelum menggunakan peralatan listrik — memeriksa kondisi kabel, steker, dan tanda-tanda kerusakan yang terlihat. Inspeksi berkala (lebih menyeluruh) dilakukan oleh Teknisi atau Ahli K3 Listrik pada interval tertentu (umumnya tahunan), mencakup pengujian dengan alat ukur khusus untuk menilai kondisi internal instalasi yang tidak terlihat secara visual.</p>\n<h2>Langkah Inspeksi Instalasi Listrik</h2>\n<ol>\n<li>Periksa kondisi fisik kabel, steker, dan sambungan — cari tanda kerupasan, terkelupas, atau perubahan warna akibat panas berlebih</li>\n<li>Periksa fungsi pengaman arus lebih (circuit breaker/fuse) — pastikan kapasitasnya sesuai beban</li>\n<li>Uji fungsi RCD/ELCB dengan tombol test untuk memastikan perangkat proteksi bekerja dengan baik</li>\n<li>Periksa sistem grounding/pembumian — ukur resistansi grounding menggunakan earth tester</li>\n<li>Periksa kondisi panel listrik — pastikan tidak ada tanda overheating, debu berlebih, atau kelembapan</li>\n<li>Dokumentasikan hasil inspeksi dan tindak lanjut perbaikan yang diperlukan</li>\n</ol>\n<h2>Peralatan yang Digunakan untuk Inspeksi</h2>\n<p>Inspeksi instalasi listrik yang menyeluruh memerlukan alat ukur seperti multimeter, earth tester (untuk mengukur resistansi grounding), insulation tester (untuk menguji ketahanan isolasi kabel), dan thermal imaging camera (untuk mendeteksi titik panas/hot spot pada panel yang mengindikasikan masalah sambungan).</p>\n<h2>Dokumentasi dan Tindak Lanjut</h2>\n<p>Setiap hasil inspeksi wajib didokumentasikan dalam laporan pemeriksaan berkala, mencakup temuan, rekomendasi perbaikan, dan batas waktu tindak lanjut. Dokumentasi ini menjadi bukti kepatuhan penting saat audit K3 maupun jika terjadi insiden yang memerlukan investigasi.</p>\n<p>Ingin tim Anda terampil melakukan inspeksi instalasi listrik sesuai standar? <a href=\"/k3-listrik/\">kunjungi halaman program K3 Listrik kami</a>.</p>",
+    "faq_data": null,
+    "author": "Wahana Totalita Konsultan",
+    "status": "published",
+    "published_at": "2026-07-12 08:19:36",
+    "view_count": 114,
+    "created_at": "2026-07-12 08:19:36",
+    "updated_at": "2026-10-12 13:56:15"
+}

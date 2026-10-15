@@ -1,0 +1,182 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const pageTitle = 'Klien & Portofolio Perusahaan — 70+ BUMN & Multinasional';
+const metaDesc = 'Daftar klien & rekam jejak Wahana Totalita Konsultan sejak 2008. Dipercaya lebih dari 70+ korporasi BUMN, Migas, Pertambangan, Perbankan, dan Manufaktur di seluruh Indonesia.';
+const canonical = 'https://wahanatotalita.com/klien/';
+
+const waNumber = '6287759151278';
+const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent('Halo Wahana Totalita, kami dari perusahaan ingin konsultasi program pelatihan K3 & proposal in-house training.')}`;
+
+const klienGroups: Record<string, { icon: string; desc: string; list: Array<{ name: string; scope: string }> }> = {
+  'Minyak, Gas & Energi': {
+    icon: '🛢️',
+    desc: 'Eksplorasi, kilang pengolahan, petrokimia, dan transmisi kelistrikan nasional',
+    list: [
+      { name: 'PT Pertamina (Persero)', scope: 'HSE Training & Sertifikasi' },
+      { name: 'Freeport Indonesia (PTFI)', scope: 'Pembinaan Kompetensi K3' },
+      { name: 'Chevron Pacific Indonesia', scope: 'In-House Training Contractor' },
+      { name: 'BP Indonesia', scope: 'Sertifikasi K3 & CSMS' },
+      { name: 'Total E&P Indonesie', scope: 'Safety Officer Program' },
+      { name: 'ConocoPhillips Indonesia', scope: 'Pelatihan Ahli K3' },
+      { name: 'Badak LNG', scope: 'Sertifikasi Ruang Terbatas & Gas' },
+      { name: 'Inpex Corporation', scope: 'HSE Compliance Training' },
+      { name: 'Star Energy Geothermal', scope: 'K3 Panas Bumi & Listrik' },
+      { name: 'MedcoEnergi', scope: 'Pelatihan Operator & Safety' },
+      { name: 'PT PLN (Persero)', scope: 'Sertifikasi K3 Listrik & Ketinggian' },
+      { name: 'PT PJB (Pembangkitan Jawa-Bali)', scope: 'Teknisi K3 Instalasi Pembangkit' },
+    ],
+  },
+  'Pertambangan, Metal & Smelter': {
+    icon: '⛏️',
+    desc: 'Pertambangan minerba terbuka, bawah tanah, smelter nikel & industri baja',
+    list: [
+      { name: 'PT Adaro Energy Indonesia', scope: 'POP & POM Pertambangan' },
+      { name: 'PT Inalum (Persero)', scope: 'K3 Peleburan Aluminium & Smelter' },
+      { name: 'PT Krakatau Steel (Persero)', scope: 'K3 Industri Baja & Crane' },
+      { name: 'PT Smelting Gresik', scope: 'K3 Kimia, Gas & B3' },
+      { name: 'PT Holcim Indonesia (Semen)', scope: 'Safety Awareness & Operator' },
+      { name: 'PT Vale Indonesia Tbk', scope: 'HSE Refreshment & Alat Berat' },
+      { name: 'PT Bukit Asam Tbk (PTBA)', scope: 'Pengawas Operasional Tambang' },
+    ],
+  },
+  'Industri Manufaktur, Kimia & Farmasi': {
+    icon: '🏭',
+    desc: 'Pabrik pupuk, bahan kimia industri, farmasi terkemuka, dan percetakan negara',
+    list: [
+      { name: 'PT Pupuk Kalimantan Timur', scope: 'Audit SMK3 & K3 Kimia' },
+      { name: 'PT Pupuk Kujang Cikampek', scope: 'Sertifikasi Operator Boiler' },
+      { name: 'PT Pupuk Sriwidjaja (Pusri)', scope: 'K3 Ruang Terbatas & Damkar' },
+      { name: 'PT Bio Farma (Persero)', scope: 'Biosafety & Higiene Industri' },
+      { name: 'Perum Peruri', scope: 'K3 Mesin Produksi & ISO 45001' },
+      { name: 'PT Kalbe Farma Tbk', scope: 'Internal Auditor QHSE' },
+    ],
+  },
+  'Perbankan, BUMN Fasilitas & Gedung': {
+    icon: '🏢',
+    desc: 'Pengelolaan gedung bertingkat, tanggap darurat faskes, dan compliance kantor pusat',
+    list: [
+      { name: 'PT Bank Mandiri (Persero) Tbk', scope: 'Damkar Gedung & Evakuasi' },
+      { name: 'PT Bank Rakyat Indonesia (BRI)', scope: 'K3 Perkantoran & First Aid' },
+      { name: 'PT Bank Tabungan Negara (BTN)', scope: 'Petugas P3K & Tanggap Darurat' },
+      { name: 'PT Telkom Indonesia Tbk', scope: 'K3 Bekerja di Ketinggian Tower' },
+      { name: 'PT Angkasa Pura Indonesia', scope: 'K3 Bandara & Ground Handling' },
+      { name: 'PT Kereta Api Indonesia (KAI)', scope: 'Operator Forklift & Bengkel Balai Yasa' },
+    ],
+  },
+  'Jasa Inspeksi, Konstruksi & Engineering': {
+    icon: '🛡️',
+    desc: 'Lembaga uji inspeksi teknik, EPC global, dan kontraktor migas internasional',
+    list: [
+      { name: 'PT Sucofindo (Persero)', scope: 'Sertifikasi Personel Inspeksi' },
+      { name: 'PT Surveyor Indonesia', scope: 'HSE Assessment & Auditor' },
+      { name: 'Halliburton Indonesia', scope: 'Oilfield Safety Compliance' },
+      { name: 'Schlumberger Indonesia', scope: 'Well Services Safety Standards' },
+      { name: 'PT Wijaya Karya (WIKA)', scope: 'Ahli K3 Konstruksi & Scaffolding' },
+      { name: 'PT PP (Persero) Tbk', scope: 'CSMS & SMK3 Proyek Sipil' },
+    ],
+  },
+};
+
+const testimonials = [
+  {
+    quote: 'Program In-House Training K3 yang diselenggarakan Wahana Totalita sangat aplikatif dan terstruktur. Instruktur tidak hanya mengajarkan teori regulasi, tetapi mengupas studi kasus nyata di offshore dan fasilitas pengolahan, sehingga tim kami langsung siap menghadapi audit CSMS.',
+    role: 'HSE Superintendent',
+    company: 'Perusahaan Kontraktor Kontrak Kerja Sama (KKKS) Migas',
+    tag: 'Sektor Minyak & Gas',
+  },
+  {
+    quote: 'Koordinasi sertifikasi petugas K3 gedung dan tim tanggap darurat kantor pusat kami berjalan sangat transparan dan tepat waktu. Seluruh berkas administrasi dan lisensi Kemnaker RI terbit sesuai estimasi yang dijanjikan.',
+    role: 'Facility & Building Manager',
+    company: 'BUMN Perbankan Nasional',
+    tag: 'Sektor Perbankan & Gedung',
+  },
+  {
+    quote: 'Pelatihan Pengawas Operasional Tambang (POP) untuk site kami di Kalimantan berjalan lancar. Materi sesuai dengan Kepmen ESDM 1827 dan instruktur sangat memahami dinamika operasional alat berat tambang batubara.',
+    role: 'HR & Training Supervisor',
+    company: 'Perusahaan Tambang Batubara Terbuka',
+    tag: 'Sektor Pertambangan',
+  },
+];
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Beranda', item: 'https://wahanatotalita.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Klien & Portofolio', item: canonical },
+    ],
+  },
+];
+---
+
+<Layout
+  title={pageTitle}
+  description={metaDesc}
+  canonical={canonical}
+  schemas={schemas}
+  pageCss={['/assets/css/page/klien.css']}
+>
+  <main id="konten-utama">
+    <header class="kl-hero">
+      <div class="container">
+        <span class="kl-eyebrow">REKAM JEJAK &amp; PORTOFOLIO KORPORASI</span>
+        <h1>Dipercaya 70+ Korporasi BUMN, Multinasional &amp; Instansi Nasional</h1>
+        <p class="kl-lead">
+          Sejak 2008, Wahana Totalita Konsultan menjadi mitra strategis kepatuhan keselamatan kerja (HSE)
+          dan peningkatan kompetensi SDM untuk industri migas, pertambangan, perbankan, manufaktur, dan konstruksi di seluruh Indonesia.
+        </p>
+        <div class="kl-stats-strip">
+          <div class="kl-stat-item"><b>70+</b><span>Perusahaan Ternama</span></div>
+          <div class="kl-stat-item"><b>15+</b><span>Tahun Dedikasi</span></div>
+          <div class="kl-stat-item"><b>5,000+</b><span>Alumni Tersertifikasi</span></div>
+          <div class="kl-stat-item"><b>100%</b><span>Lisensi Resmi Nasional</span></div>
+        </div>
+      </div>
+    </header>
+
+    <div class="container kl-main-content">
+      {Object.entries(klienGroups).map(([groupTitle, group]) => (
+        <section class="kl-group-sec">
+          <div class="kl-group-header">
+            <h2><span>{group.icon}</span> {groupTitle}</h2>
+            <p>{group.desc}</p>
+          </div>
+          <div class="kl-grid">
+            {group.list.map((c) => (
+              <div class="kl-card">
+                <div class="kl-card-name">{c.name}</div>
+                <div class="kl-card-scope">{c.scope}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+      ))}
+
+      <!-- CTA BANNER -->
+      <section class="kl-cta-banner">
+        <h2>Butuh Penawaran Corporate Training untuk Perusahaan Anda?</h2>
+        <p>Konsultasikan kebutuhan in-house training K3, gap analysis audit SMK3/CSMS, atau program peningkatan sertifikasi tim HSE perusahaan Anda.</p>
+        <a class="btn-primary" href={waUrl} target="_blank" rel="noopener">Minta Proposal &amp; Jadwal Khusus Perusahaan</a>
+      </section>
+
+      <!-- TESTIMONIALS -->
+      <section class="kl-testimonials">
+        <h2>Apa Kata Praktisi HSE &amp; Manajemen</h2>
+        <div class="kl-testi-grid">
+          {testimonials.map((t) => (
+            <div class="kl-testi-card">
+              <span class="kl-testi-tag">{t.tag}</span>
+              <p class="kl-testi-quote">“{t.quote}”</p>
+              <div class="kl-testi-author">
+                <div class="kl-testi-role">{t.role}</div>
+                <div class="kl-testi-comp">{t.company}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+  </main>
+</Layout>

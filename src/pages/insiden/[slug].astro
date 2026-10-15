@@ -1,0 +1,350 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const incidents = await getCollection('incidents');
+  return incidents.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { incident: entry.data },
+  }));
+}
+
+const { incident } = Astro.props;
+const allIncidents = await getCollection('incidents');
+
+// Get 4 related incidents from same sector or province
+const relatedIncidents = allIncidents
+  .filter(
+    (item) =>
+      item.data.id !== incident.id &&
+      ((incident.industry && item.data.industry === incident.industry) ||
+        (incident.province && item.data.province === incident.province))
+  )
+  .slice(0, 4)
+  .map((i) => i.data);
+
+// Fallback to latest incidents if not enough matched
+if (relatedIncidents.length < 4) {
+  const extra = allIncidents
+    .filter((item) => item.data.id !== incident.id && !relatedIncidents.some((r) => r.id === item.data.id))
+    .slice(0, 4 - relatedIncidents.length)
+    .map((i) => i.data);
+  relatedIncidents.push(...extra);
+}
+
+const deaths = incident.deaths ?? 0;
+const injured = incident.injured ?? 0;
+const severity = deaths > 0 ? 'fatal' : injured > 0 ? 'major' : 'minor';
+const severityBadge = deaths > 0 ? '⚠️ KECELAKAAN FATAL' : injured > 0 ? '⚠️ INSIDEN CEDERA BERAT' : 'ℹ️ TEMUAN K3 / NYARIS CELAKA';
+
+const canonical = `https://wahanatotalita.com/insiden/${incident.slug}/`;
+const metaTitle = incident.meta_title || `${incident.title} — Insiden K3 Indonesia | Wahana Totalita`;
+const metaDesc = incident.meta_desc || incident.description?.slice(0, 160) || incident.title;
+
+const publishedDate = incident.incident_date || incident.created_at || '2026-01-01';
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'NewsArticle',
+    headline: incident.title,
+    description: metaDesc,
+    url: canonical,
+    datePublished: publishedDate,
+    dateModified: incident.updated_at || publishedDate,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': canonical,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Wahana Totalita Konsultan',
+      url: 'https://wahanatotalita.com',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://wahanatotalita.com/assets/img/logo-wt.png',
+      },
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Beranda',
+        item: 'https://wahanatotalita.com/',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Database Insiden',
+        item: 'https://wahanatotalita.com/insiden/',
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: incident.title,
+        item: canonical,
+      },
+    ],
+  },
+];
+---
+
+<Layout
+  title={metaTitle}
+  description={metaDesc}
+  canonical={canonical}
+  schemas={schemas}
+  pageCss={['/assets/css/page/insiden-detail.css']}
+>
+  <div class="container insiden-detail">
+    <nav class="breadcrumb" aria-label="Breadcrumb" style="font-size:0.875rem; color:var(--text-light); margin-bottom:24px;">
+      <a href="/" style="color:var(--mut); text-decoration:none;">Beranda</a>
+      <span style="margin: 0 6px;">›</span>
+      <a href="/insiden/" style="color:var(--brand); text-decoration:none; font-weight:600;">Database Insiden</a>
+      {incident.industry && (
+        <>
+          <span style="margin: 0 6px;">›</span>
+          <span style="color:var(--slate-600);">{incident.industry}</span>
+        </>
+      )}
+      <span style="margin: 0 6px;">›</span>
+      <span style="color:var(--slate-800); font-weight:600;">
+        {incident.title.length > 45 ? incident.title.slice(0, 45) + '...' : incident.title}
+      </span>
+    </nav>
+
+    <div class="insiden-layout">
+      <!-- Main Content Area -->
+      <div>
+        <article class="article-card">
+          <header class="article-header" style={deaths > 0 ? 'background: linear-gradient(135deg, #7f1d1d, #991b1b);' : injured > 0 ? 'background: linear-gradient(135deg, #9a3412, #c2410c);' : 'background: linear-gradient(135deg, #1e293b, #334155);'}>
+            <span class="severity-badge" style="background: rgba(255,255,255,0.2); color: #fff;">
+              {severityBadge}
+            </span>
+            <h1 style="color: #fff; margin-top: 8px;">
+              {incident.title}
+            </h1>
+            <div class="article-meta-grid" style="color: rgba(255,255,255,0.9);">
+              {incident.incident_date ? (
+                <span>📅 Tanggal: {incident.incident_date}</span>
+              ) : incident.created_at ? (
+                <span>📅 Terdata: {incident.created_at.slice(0, 10)}</span>
+              ) : null}
+              {incident.industry && <span>🏭 Sektor: {incident.industry}</span>}
+              {(incident.city || incident.province) && (
+                <span>📍 Lokasi: {[incident.city, incident.province].filter(Boolean).join(', ')}</span>
+              )}
+              {incident.source_name && <span>📰 Sumber: {incident.source_name}</span>}
+            </div>
+          </header>
+
+          <div class="article-body">
+            <!-- Key Facts Data Box -->
+            <div class="key-facts" style="background: var(--surface-subtle); border-radius: 12px; border: 1px solid var(--border); padding: 20px; margin-bottom: 28px;">
+              <h3 style="margin-top: 0; margin-bottom: 14px; font-size: 1.05rem; font-weight: 700; color: var(--brand);">
+                📊 Ringkasan Fakta &amp; Dampak Insiden
+              </h3>
+              <div class="key-facts-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+                <div class="fact-item">
+                  <span class="fact-label">Korban Meninggal Dunia</span>
+                  <span class="fact-val" style={deaths > 0 ? 'color: var(--danger); font-size: 1.15rem;' : 'color: var(--slate-700);'}>
+                    {deaths > 0 ? `💀 ${deaths} Orang` : '0 (Nihil)'}
+                  </span>
+                </div>
+                <div class="fact-item">
+                  <span class="fact-label">Korban Luka / Cedera</span>
+                  <span class="fact-val" style={injured > 0 ? 'color: var(--warning-dark); font-size: 1.15rem;' : 'color: var(--slate-700);'}>
+                    {injured > 0 ? `🤕 ${injured} Orang` : '0 (Nihil)'}
+                  </span>
+                </div>
+                {incident.company && (
+                  <div class="fact-item">
+                    <span class="fact-label">Entitas / Perusahaan</span>
+                    <span class="fact-val">🏢 {incident.company}</span>
+                  </div>
+                )}
+                {incident.incident_type && (
+                  <div class="fact-item">
+                    <span class="fact-label">Klasifikasi Insiden</span>
+                    <span class="fact-val">⚠️ {incident.incident_type}</span>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <!-- Incident Narrative / Description -->
+            {incident.description && (
+              <div class="article-content" style="margin-bottom: 30px;">
+                <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--brand); margin-bottom: 12px; border-bottom: 2px solid var(--border); padding-bottom: 6px;">
+                  📋 Kronologi &amp; Uraian Kejadian
+                </h2>
+                <div style="font-size: 0.98rem; line-height: 1.85; color: var(--slate-800); white-space: pre-line;">
+                  {incident.description}
+                </div>
+              </div>
+            )}
+
+            <!-- Root Cause Analysis -->
+            {incident.root_cause && (
+              <div style="background: #fffbeb; border-left: 4px solid var(--warning); border-radius: 6px; padding: 20px; margin-bottom: 28px;">
+                <h2 style="font-size: 1.15rem; font-weight: 800; color: #92400e; margin: 0 0 10px; display: flex; align-items: center; gap: 8px;">
+                  <span>🔍</span> Analisis Akar Masalah (Root Cause)
+                </h2>
+                <div style="font-size: 0.95rem; line-height: 1.75; color: #78350f; white-space: pre-line;">
+                  {incident.root_cause}
+                </div>
+              </div>
+            )}
+
+            <!-- Regulation Violated -->
+            {incident.regulation_violated && (
+              <div style="background: #fef2f2; border-left: 4px solid var(--danger); border-radius: 6px; padding: 20px; margin-bottom: 28px;">
+                <h2 style="font-size: 1.15rem; font-weight: 800; color: #991b1b; margin: 0 0 10px; display: flex; align-items: center; gap: 8px;">
+                  <span>⚖️</span> Regulasi &amp; Dasar Hukum Terkait
+                </h2>
+                <div style="font-size: 0.95rem; line-height: 1.75; color: #7f1d1d; white-space: pre-line;">
+                  {incident.regulation_violated}
+                </div>
+              </div>
+            )}
+
+            <!-- Prevention & Recommendations -->
+            {incident.prevention && (
+              <div style="background: var(--success-bg); border-left: 4px solid var(--brand-mid); border-radius: 6px; padding: 20px; margin-bottom: 28px;">
+                <h2 style="font-size: 1.15rem; font-weight: 800; color: var(--brand); margin: 0 0 10px; display: flex; align-items: center; gap: 8px;">
+                  <span>🛡️</span> Tindakan Pencegahan &amp; Kontrol Mitigasi
+                </h2>
+                <div style="font-size: 0.95rem; line-height: 1.75; color: #14532d; white-space: pre-line;">
+                  {incident.prevention}
+                </div>
+              </div>
+            )}
+
+            <!-- Source Link -->
+            {incident.source_url && (
+              <div style="margin-top: 24px; padding: 14px 18px; background: var(--surface-subtle); border-radius: 8px; font-size: 0.875rem; border: 1px solid var(--border);">
+                📰 <strong>Referensi Sumber:</strong>{' '}
+                <a href={incident.source_url} target="_blank" rel="noopener nofollow" style="color: var(--brand); font-weight: 600; text-decoration: underline;">
+                  {incident.source_name || incident.source_url} ↗
+                </a>
+              </div>
+            )}
+
+            <!-- In-Page Action Callout -->
+            <div style="margin-top: 36px; padding: 24px; background: var(--surface-subtle); border-radius: 12px; border: 1px solid var(--border); text-align: center;">
+              <h3 style="margin: 0 0 8px; font-size: 1.15rem; color: var(--brand); font-weight: 800;">
+                Tingkatkan Kompetensi K3 Tim Anda untuk Mencegah Kejadian Serupa
+              </h3>
+              <p style="color: var(--slate-600); font-size: 0.92rem; margin: 0 0 18px; max-width: 580px; margin-left: auto; margin-right: auto;">
+                Sertifikasi personil K3 (Ahli K3 Umum, Pengawas K3, Petugas P3K, Damkar) merupakan pilar utama kepatuhan hukum dan proteksi aset ketenagakerjaan.
+              </p>
+              <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+                <a href="/jadwal/" style="display: inline-block; background: var(--brand); color: #fff; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.9rem;">
+                  📅 Cek Jadwal Pelatihan K3 Terdekat
+                </a>
+                <a href="https://wa.me/6287759151278?text=Halo%20Wahana%20Totalita,%20saya%20ingin%20konsultasi%20K3%20dan%20pencegahan%20kecelakaan%20kerja" target="_blank" rel="noopener" style="display: inline-block; background: #25d366; color: #fff; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.9rem;">
+                  💬 Konsultasi Ahli via WhatsApp
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Sidebar -->
+      <aside>
+        <!-- WhatsApp Assistance Card -->
+        <div class="sidebar-card" style="background: linear-gradient(135deg, var(--brand), var(--brand-dark)); color: #fff; border: none; box-shadow: var(--shadow-md);">
+          <h3 style="color: #fff; margin-top: 0; font-size: 1.1rem; font-weight: 800;">
+            🛡️ Pendampingan &amp; Audit K3
+          </h3>
+          <p style="font-size: 0.875rem; opacity: 0.9; margin: 0 0 18px; line-height: 1.5;">
+            Butuh audit SMK3 PP 50/2012, penyusunan HIRADC/IBPR, atau investigasi insiden di perusahaan Anda?
+          </p>
+          <a
+            href="https://wa.me/6287759151278?text=Halo%20Wahana%20Totalita,%20saya%20ingin%20konsultasi%20pendampingan%20audit%20K3%20dan%20inhouse%20training"
+            target="_blank"
+            rel="noopener"
+            style="display: block; background: #25d366; color: #fff; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: 700; text-align: center; font-size: 0.9rem; box-shadow: 0 4px 12px rgba(37,211,102,0.3);"
+          >
+            💬 Hubungi Konsultan K3
+          </a>
+        </div>
+
+        <!-- Related Incidents -->
+        {relatedIncidents.length > 0 && (
+          <div class="sidebar-card">
+            <h3 style="margin-top: 0; font-size: 1.05rem; font-weight: 800; color: var(--brand); border-bottom: 2px solid var(--border); padding-bottom: 8px;">
+              🔗 Kasus Insiden Terkait
+            </h3>
+            <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 14px;">
+              {relatedIncidents.map((r) => {
+                const rDeaths = r.deaths ?? 0;
+                return (
+                  <a href={`/insiden/${r.slug}/`} class="related-item" style="display: flex; gap: 10px; align-items: flex-start; text-decoration: none; padding-bottom: 12px; border-bottom: 1px solid var(--border);">
+                    <span style="font-size: 1.25rem; flex-shrink: 0; line-height: 1;">
+                      {rDeaths > 0 ? '🚨' : '⚠️'}
+                    </span>
+                    <div>
+                      <div class="related-title" style="color: var(--slate-900); font-size: 0.875rem; font-weight: 700; line-height: 1.4; margin-bottom: 4px;">
+                        {r.title}
+                      </div>
+                      <div class="related-meta" style="font-size: 0.75rem; color: var(--text-light);">
+                        {r.industry && <span>{r.industry} • </span>}
+                        <span>{r.incident_date || (r.created_at ? r.created_at.slice(0, 10) : '')}</span>
+                      </div>
+                    </div>
+                  </a>
+                );
+              })}
+            </div>
+            <div style="margin-top: 14px; text-align: center;">
+              <a href="/insiden/" style="color: var(--brand); font-size: 0.85rem; font-weight: 700; text-decoration: none;">
+                Lihat Semua 200+ Insiden →
+              </a>
+            </div>
+          </div>
+        )}
+
+        <!-- Quick Safety Programs Links -->
+        <div class="sidebar-card">
+          <h3 style="margin-top: 0; font-size: 1.05rem; font-weight: 800; color: var(--brand); border-bottom: 2px solid var(--border); padding-bottom: 8px;">
+            🎓 Sertifikasi Prioritas K3
+          </h3>
+          <ul style="list-style: none; padding: 0; margin: 12px 0 0; display: flex; flex-direction: column; gap: 10px; font-size: 0.875rem;">
+            <li>
+              <a href="/ahli-k3-umum/" style="color: var(--slate-800); text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 6px;">
+                <span>⭐</span> Pembinaan Ahli K3 Umum (AK3U)
+              </a>
+            </li>
+            <li>
+              <a href="/pelatihan/pelatihan-petugas-p3k-first-aid-online/" style="color: var(--slate-800); text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 6px;">
+                <span>🩹</span> Petugas P3K di Tempat Kerja
+              </a>
+            </li>
+            <li>
+              <a href="/pelatihan/pelatihan-damkar-paralel-kelas-dcba-sertifikasi-kemnaker-ri/" style="color: var(--slate-800); text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 6px;">
+                <span>🧯</span> Penanggulangan Kebakaran (Damkar)
+              </a>
+            </li>
+            <li>
+              <a href="/csms/" style="color: var(--slate-800); text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 6px;">
+                <span>📋</span> Contractor Safety Management (CSMS)
+              </a>
+            </li>
+            <li>
+              <a href="/pelatihan/" style="color: var(--brand); text-decoration: none; font-weight: 700; margin-top: 4px; display: inline-block;">
+                Jelajahi Semua Pelatihan →
+              </a>
+            </li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</Layout>

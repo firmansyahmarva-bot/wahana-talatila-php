@@ -1,0 +1,536 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const allHubs = await getCollection('hubs');
+  return allHubs.map((h) => ({
+    params: { hub: h.data.slug },
+    props: { hub: h.data },
+  }));
+}
+
+const { hub } = Astro.props;
+
+const rawHubTitle = hub.meta_title || hub.title;
+const pageTitle = rawHubTitle.replace(/\s*[-|–—]\s*Wahana Totalita.*$/iu, '').trim();
+const metaDesc = hub.meta_desc || `${hub.title}. Pelatihan resmi sertifikasi Kemnaker RI & BNSP. Jadwal terdekat dan biaya.`;
+const canonical = `https://wahanatotalita.com/${hub.slug}/`;
+
+const waNumber = '6287759151278';
+const heroWaMsg = `Halo Wahana Totalita, saya ingin informasi silabus dan jadwal terdekat pelatihan ${hub.title}`;
+const heroWaUrl = `https://api.whatsapp.com/send?phone=${waNumber}&text=${encodeURIComponent(heroWaMsg)}`;
+const b2bWaUrl = `https://api.whatsapp.com/send?phone=${waNumber}&text=${encodeURIComponent('Halo Wahana Totalita, saya ingin konsultasi penawaran In-House Training untuk perusahaan kami')}`;
+const syllabusWaUrl = `https://api.whatsapp.com/send?phone=${waNumber}&text=${encodeURIComponent(`Halo Wahana, mohon kirimkan PDF silabus dan kalender jadwal pelatihan ${hub.title}`)}`;
+
+// Master Structured Data Graph
+const schemas: any[] = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'EducationalOrganization',
+    '@id': 'https://wahanatotalita.com/#organization',
+    name: 'Wahana Totalita Konsultan',
+    url: 'https://wahanatotalita.com',
+    description: 'PJK3 Resmi Berlisensi Kementerian Ketenagakerjaan RI (No. Kep. 312/BINWASPNAK-PNK3/V/2020) & Lembaga Pelatihan Terakreditasi BNSP.',
+    logo: 'https://wahanatotalita.com/assets/img/og-cover.jpg',
+    telephone: '+62-877-5915-1278',
+    contactPoint: [
+      {
+        '@type': 'ContactPoint',
+        telephone: '+62-877-5915-1278',
+        contactType: 'customer service',
+        availableLanguage: ['Indonesian', 'English', 'Chinese'],
+      },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    '@id': `${canonical}#breadcrumb`,
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Beranda', item: 'https://wahanatotalita.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Keselamatan Kerja', item: 'https://wahanatotalita.com/keselamatan-kerja/' },
+      { '@type': 'ListItem', position: 3, name: hub.title, item: canonical },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${canonical}#webpage`,
+    url: canonical,
+    name: pageTitle,
+    description: metaDesc,
+    inLanguage: 'id-ID',
+    isPartOf: {
+      '@type': 'WebSite',
+      '@id': 'https://wahanatotalita.com/#website',
+      name: 'Wahana Totalita Konsultan',
+      url: 'https://wahanatotalita.com/',
+    },
+    publisher: { '@id': 'https://wahanatotalita.com/#organization' },
+  },
+];
+
+if (hub.faqs && hub.faqs.length > 0) {
+  schemas.push({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    '@id': `${canonical}#faq`,
+    mainEntity: hub.faqs.map((f: any) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: f.a,
+      },
+    })),
+  });
+}
+
+const HUB_DIRECTORY_MESH: Record<string, Array<{ url: string; name: string }>> = {
+  'Konstruksi & Kelistrikan': [
+    { url: '/k3-listrik/', name: 'K3 Listrik (Teknisi & Ahli)' },
+    { url: '/k3-konstruksi/', name: 'K3 Konstruksi' },
+    { url: '/k3-ketinggian/', name: 'K3 Ketinggian (TKBT/TKPK)' },
+    { url: '/k3-pesawat-angkat-angkut/', name: 'K3 Pesawat Angkat Angkut' },
+    { url: '/k3-pesawat-uap/', name: 'K3 Pesawat Uap & Bejana Tekan' },
+  ],
+  'Pabrik & Manufaktur': [
+    { url: '/k3-kimia/', name: 'K3 Kimia (Petugas & Ahli)' },
+    { url: '/higiene-industri/', name: 'Higiene Industri (HIMU/HIMA)' },
+    { url: '/penanggulangan-kebakaran/', name: 'Penanggulangan Kebakaran' },
+    { url: '/p3k/', name: 'P3K di Tempat Kerja' },
+    { url: '/k3-manufaktur/', name: 'K3 Manufaktur & Pabrik' },
+    { url: '/juru-las/', name: 'Juru Las (Welder Kemnaker/BNSP)' },
+  ],
+  'Migas, Tambang & Energi': [
+    { url: '/k3-migas/', name: 'K3 Migas & Energi' },
+    { url: '/k3-pertambangan/', name: 'K3 Pertambangan (POP/POM)' },
+    { url: '/operator-alat-berat/', name: 'Operator Alat Berat (Forklift/Loader)' },
+  ],
+  'Fasilitas & Sektor Spesifik': [
+    { url: '/k3-rumah-sakit/', name: 'K3 Rumah Sakit & Faskes' },
+    { url: '/k3-laboratorium/', name: 'K3 Laboratorium' },
+    { url: '/k3-perkantoran/', name: 'K3 Perkantoran & Gedung' },
+    { url: '/k3-transportasi/', name: 'K3 Transportasi & Logistik' },
+    { url: '/k3-pangan/', name: 'K3 Industri Pangan & HACCP' },
+    { url: '/k3-psikososial/', name: 'K3 Psikososial & Ergonomi' },
+    { url: '/pelatihan-iso/', name: 'Pelatihan ISO (45001/9001/14001)' },
+    { url: '/smk3/', name: 'Penerapan & Audit SMK3 PP 50' },
+  ],
+};
+
+const introParagraphs = Array.isArray(hub.intro) ? hub.intro : [hub.intro].filter(Boolean);
+---
+
+<Layout
+  title={pageTitle}
+  description={metaDesc}
+  canonical={canonical}
+  schemas={schemas}
+  pageCss={['/assets/css/page/hub-master.css']}
+>
+  <!-- ─── HERO ─── -->
+  <header class="hub-hero">
+    <div class="container">
+      <nav class="hub-breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Beranda</a>
+        <span aria-hidden="true">&rsaquo;</span>
+        <a href="/keselamatan-kerja/">Bidang K3</a>
+        <span aria-hidden="true">&rsaquo;</span>
+        <span aria-current="page">{hub.badge || 'Bidang Keahlian'}</span>
+      </nav>
+
+      <div class="hub-badge-wrap">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>{hub.badge || 'Sertifikasi Resmi'}</span>
+      </div>
+
+      <h1>{hub.title}</h1>
+      <p class="hub-hero-sub">{hub.intro_lead || hub.meta_desc}</p>
+
+      <!-- Quick Lead Hook Box -->
+      <div class="hub-hero-lead-box">
+        <div class="hub-lead-text">
+          <div class="hub-lead-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <div>
+            <strong>Dapatkan Silabus Resmi &amp; Jadwal Terdekat</strong>
+            <div style="font-size:12.5px;color:rgba(255,255,255,0.85);">Konsultasikan kebutuhan sertifikasi personil atau corporate training via WhatsApp</div>
+          </div>
+        </div>
+        <a href={heroWaUrl} class="hub-btn-lead-wa" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
+          <span>Minta Jadwal &amp; Silabus via WA</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ─── WRAPPER (2 COLUMNS) ─── -->
+  <div class="hub-wrapper">
+    <div class="container hub-grid-layout">
+      <!-- LEFT COLUMN: MAIN CONTENT -->
+      <main class="hub-main">
+        <!-- SECTION: PENGENALAN -->
+        {introParagraphs.length > 0 && (
+          <section class="hub-card-section">
+            <div class="hub-sec-header">
+              <span class="hub-sec-eyebrow">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                Ruang Lingkup
+              </span>
+              <h2 class="hub-sec-title">Apa itu {hub.title}?</h2>
+            </div>
+            <div class="hub-prose">
+              {introParagraphs.map((p: any) => (
+                <p>{p}</p>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <!-- SECTION: DASAR HUKUM -->
+        {hub.regulasi && hub.regulasi.length > 0 && (
+          <section class="hub-card-section">
+            <div class="hub-sec-header">
+              <span class="hub-sec-eyebrow">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                Kepatuhan Regulasi
+              </span>
+              <h2 class="hub-sec-title">Dasar Hukum &amp; Standar Regulasi</h2>
+            </div>
+            <div class="hub-regulasi-grid">
+              {hub.regulasi.map((reg: any, regIdx: number) => (
+                <div class="hub-regulasi-item" data-reveal="up" data-reveal-delay={(regIdx % 4) + 1}>
+                  <div class="hub-regulasi-title">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                    <span>{reg.nomor}</span>
+                  </div>
+                  <p class="hub-regulasi-desc">{reg.desc}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <!-- SECTION: PROGRAM PELATIHAN UTAMA -->
+        {hub.programs && hub.programs.length > 0 && (
+          <section class="hub-card-section" style="border-color:var(--success-border);background:var(--slate-50);">
+            <div class="hub-sec-header">
+              <span class="hub-sec-eyebrow">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                Program Sertifikasi Resmi
+              </span>
+              <h2 class="hub-sec-title">Program Pelatihan &amp; Sertifikasi {hub.badge || ''}</h2>
+              <p style="font-size:14px;color:var(--hub-muted);margin:6px 0 0;">Pilih skema sertifikasi yang sesuai dengan kualifikasi dan kewenangan kerja Anda.</p>
+            </div>
+
+            <div class="hub-program-cards">
+              {hub.programs.map((prog: any, pIdx: number) => {
+                const progUrl = `/pelatihan/${prog.slug.replace(/^\/+|\/+$/g, '')}/`;
+                const progWaMsg = prog.wa_text || `Halo Wahana Totalita, saya ingin informasi biaya dan jadwal terdekat pelatihan ${prog.name}`;
+                const progWaUrl = `https://api.whatsapp.com/send?phone=${waNumber}&text=${encodeURIComponent(progWaMsg)}`;
+                const progImg = '/assets/img/og-cover.jpg';
+                return (
+                  <article class="hub-prog-card" data-reveal="up" data-reveal-delay={(pIdx % 4) + 1}>
+                    <div class="hub-prog-card-media">
+                      <img src={progImg} alt={`Pelatihan ${prog.name} Sertifikasi ${prog.cert || ''}`} loading="lazy" width="400" height="180" />
+                      <div class="hub-prog-media-overlay">
+                        <span class="hub-prog-pill-cert">
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                          {prog.cert}
+                        </span>
+                        {prog.duration && (
+                          <span class="hub-prog-pill-dur">{prog.duration}</span>
+                        )}
+                      </div>
+                    </div>
+
+                    <div class="hub-prog-card-content">
+                      <div style="font-size:11px;font-weight:700;color:var(--hub-orange);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:6px;">
+                        {prog.mode || 'Sertifikasi Resmi Kemnaker RI'}
+                      </div>
+
+                      <h3 class="hub-prog-title">
+                        <a href={progUrl}>{prog.name}</a>
+                      </h3>
+
+                      <p class="hub-prog-desc">{prog.desc}</p>
+
+                      <ul class="hub-prog-checklist">
+                        <li>
+                          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                          <span>Lisensi &amp; SKP Resmi {prog.cert}</span>
+                        </li>
+                        {prog.target_peserta && (
+                          <li>
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="7" r="4"/><path d="M5.5 21a6.5 6.5 0 0 1 13 0"/></svg>
+                            <span>Sasaran: {prog.target_peserta}</span>
+                          </li>
+                        )}
+                        <li>
+                          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>
+                          <span>Fasilitas Modul, Ujian Kompetensi &amp; E-Certificate</span>
+                        </li>
+                      </ul>
+
+                      <div class="hub-prog-card-footer">
+                        <a href={progUrl} class="hub-btn-prog-primary">
+                          <span>Silabus &amp; Jadwal</span>
+                          <span aria-hidden="true">&rarr;</span>
+                        </a>
+                        <a href={progWaUrl} class="hub-btn-prog-wa-icon" target="_blank" rel="noopener" title="Konsultasi WhatsApp">
+                          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
+                          <span>Chat WA</span>
+                        </a>
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          </section>
+        )}
+
+        <!-- SECTION: PERBANDINGAN LEVEL -->
+        {hub.comparison && hub.comparison.headers && (
+          <section class="hub-card-section">
+            <div class="hub-sec-header">
+              <span class="hub-sec-eyebrow">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                Panduan Kualifikasi
+              </span>
+              <h2 class="hub-sec-title">Perbandingan Jenjang &amp; Kewenangan</h2>
+              <p style="font-size:14px;color:var(--hub-muted);margin:4px 0 0;">Pahami perbedaan peran, lingkup kerja, dan persyaratan pendidikan sebelum mendaftar.</p>
+            </div>
+
+            <div class="hub-compare-grid">
+              {/* Card 1 */}
+              <div class="hub-compare-card" data-reveal="up" data-reveal-delay="1">
+                <span class="hub-compare-badge">Pelaksana Lapangan</span>
+                <h3>{hub.comparison.headers[1] || 'Jenjang 1'}</h3>
+                {hub.comparison.rows && hub.comparison.rows.map((row: any) => (
+                  <div class="hub-compare-row">
+                    <span class="hub-compare-label">{row[0]}</span>
+                    <span class="hub-compare-val">{row[1]}</span>
+                  </div>
+                ))}
+                <div style="margin-top:20px;">
+                  <a href={heroWaUrl} class="hub-btn-prog-primary" style="width:100%;text-align:center;" target="_blank" rel="noopener">
+                    <span>Daftar {hub.comparison.headers[1] || 'Jenjang 1'} &rarr;</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Card 2 */}
+              <div class="hub-compare-card featured" data-reveal="up" data-reveal-delay="2">
+                <span class="hub-compare-badge" style="background:var(--warning-bg);color:var(--warning-text);">Penanggung Jawab / Ahli</span>
+                <h3>{hub.comparison.headers[2] || 'Jenjang 2'}</h3>
+                {hub.comparison.rows && hub.comparison.rows.map((row: any) => (
+                  <div class="hub-compare-row">
+                    <span class="hub-compare-label">{row[0]}</span>
+                    <span class="hub-compare-val">{row[2]}</span>
+                  </div>
+                ))}
+                <div style="margin-top:20px;">
+                  <a href={heroWaUrl} class="hub-btn-prog-primary" style="width:100%;text-align:center;background:var(--accent);" target="_blank" rel="noopener">
+                    <span>Daftar {hub.comparison.headers[2] || 'Jenjang 2'} &rarr;</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        <!-- SECTION: PERSYARATAN & KURIKULUM -->
+        {(hub.syarat || hub.materi) && (
+          <section class="hub-card-section">
+            {hub.syarat && hub.syarat.length > 0 && (
+              <>
+                <div class="hub-sec-header">
+                  <span class="hub-sec-eyebrow">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg>
+                    Kriteria
+                  </span>
+                  <h2 class="hub-sec-title">Persyaratan Peserta Pelatihan</h2>
+                </div>
+                <ul class="hub-check-list" style="margin-bottom:28px;">
+                  {hub.syarat.map((sItem: any) => (
+                    <li>
+                      <svg class="hub-check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                      <span>{sItem}</span>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+
+            {hub.materi && hub.materi.length > 0 && (
+              <>
+                <div class="hub-sec-header">
+                  <span class="hub-sec-eyebrow">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                    Kurikulum
+                  </span>
+                  <h2 class="hub-sec-title">Materi &amp; Silabus Pelatihan</h2>
+                </div>
+                <ol class="hub-num-list">
+                  {hub.materi.map((mItem: any) => (
+                    <li>
+                      <span class="hub-num-badge">✓</span>
+                      <span>{mItem}</span>
+                    </li>
+                  ))}
+                </ol>
+              </>
+            )}
+          </section>
+        )}
+
+        <!-- B2B / IN-HOUSE CORPORATE BANNER -->
+        <div class="hub-b2b-box">
+          <div class="hub-b2b-content">
+            <h3>Butuh In-House Training untuk Perusahaan?</h3>
+            <p>Wahana Totalita melayani pelatihan langsung di lokasi pabrik/site perusahaan Anda di seluruh Indonesia, serta pengadaan resmi instansi via LPSE dan PADI UMKM.</p>
+          </div>
+          <a href={b2bWaUrl} class="hub-btn-b2b" target="_blank" rel="noopener">
+            Minta Proposal Resmi &rarr;
+          </a>
+        </div>
+
+        <!-- FAQ ACCORDION -->
+        {hub.faqs && hub.faqs.length > 0 && (
+          <section class="hub-card-section">
+            <div class="hub-sec-header">
+              <span class="hub-sec-eyebrow">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                Tanya Jawab
+              </span>
+              <h2 class="hub-sec-title">Pertanyaan Umum (FAQ)</h2>
+            </div>
+            <div class="hub-faq-list">
+              {hub.faqs.map((faq: any, idx: number) => (
+                <div class="hub-faq-item" data-reveal="up" data-reveal-delay={(idx % 4) + 1}>
+                  <button class="hub-faq-question" type="button" aria-expanded="false" onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'); this.nextElementSibling.classList.toggle('open');">
+                    <span>{faq.q}</span>
+                    <svg class="hub-faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                  </button>
+                  <div class="hub-faq-answer">
+                    <p>{faq.a}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <!-- SIBLING HUBS (Cross-linking) -->
+        {hub.related_hubs && hub.related_hubs.length > 0 && (
+          <section class="hub-card-section">
+            <div class="hub-sec-header">
+              <span class="hub-sec-eyebrow">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                Interlink Terkait
+              </span>
+              <h2 class="hub-sec-title">Bidang Keahlian K3 Terkait Lainnya</h2>
+            </div>
+            <div class="hub-sibling-grid">
+              {hub.related_hubs.map((sh: any, shIdx: number) => (
+                <a href={`/${sh.slug.replace(/^\/+|\/+$/g, '')}/`} class="hub-sibling-card" data-reveal="up" data-reveal-delay={(shIdx % 4) + 1}>
+                  <span class="hub-sibling-badge">{sh.badge || 'Sertifikasi K3'}</span>
+                  <h3 class="hub-sibling-title">{sh.name}</h3>
+                  <p class="hub-sibling-desc">{sh.desc}</p>
+                  <span class="hub-sibling-link">
+                    <span>Lihat Program</span>
+                    <span aria-hidden="true">&rarr;</span>
+                  </span>
+                </a>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <!-- 23 HUB COMPLETE DIRECTORY MESH -->
+        <section class="hub-directory-mesh">
+          <div class="hub-sec-header" style="margin-bottom:12px;">
+            <span class="hub-sec-eyebrow">Direktori Lengkap</span>
+            <h3 style="font-size:1.15rem;font-weight:800;color:var(--hub-dark);margin:0;">
+              Jelajahi 23 Bidang Keahlian K3 &amp; Sertifikasi Indonesia
+            </h3>
+            <p style="font-size:13px;color:var(--hub-muted);margin:4px 0 0;">
+              Pusat pelatihan sertifikasi resmi KEMNAKER RI dan BNSP untuk seluruh sektor industri nasional.
+            </p>
+          </div>
+          <div class="hub-mesh-cols">
+            {Object.entries(HUB_DIRECTORY_MESH).map(([secTitle, hubsList]) => (
+              <div class="hub-mesh-group">
+                <h4>{secTitle}</h4>
+                <ul class="hub-mesh-links">
+                  {hubsList.map((hb) => (
+                    <li><a href={hb.url}>{hb.name}</a></li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+      </main>
+
+      <!-- RIGHT COLUMN: DESKTOP STICKY SIDEBAR -->
+      <aside class="hub-sticky-sidebar">
+        <div class="hub-sidebar-card">
+          <div class="hub-sb-status">
+            <span class="hub-sb-status-dot"></span>
+            <span>Konsultan Online &bull; Respon Cepat</span>
+          </div>
+
+          <h3 class="hub-sb-title">Konsultasi Pelatihan {hub.badge || 'K3'}</h3>
+          <p class="hub-sb-sub">Dapatkan informasi jadwal terdekat, rincian biaya, dan silabus lengkap langsung dari konsultan kami.</p>
+
+          <a href={heroWaUrl} class="hub-sb-btn-wa" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
+            <span>Chat WhatsApp Konsultan</span>
+          </a>
+
+          <a href={syllabusWaUrl} class="hub-sb-btn-secondary" target="_blank" rel="noopener">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span>Unduh Silabus via WA</span>
+          </a>
+
+          <ul class="hub-sb-trust-list">
+            <li class="hub-sb-trust-item">
+              <svg class="hub-sb-trust-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Sertifikasi Kemnaker RI / BNSP Resmi</span>
+            </li>
+            <li class="hub-sb-trust-item">
+              <svg class="hub-sb-trust-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>PJK3 Berlisensi &amp; Berpengalaman sejak 2008</span>
+            </li>
+            <li class="hub-sb-trust-item">
+              <svg class="hub-sb-trust-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Terdaftar di LPSE &amp; PADI UMKM</span>
+            </li>
+            <li class="hub-sb-trust-item">
+              <svg class="hub-sb-trust-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Kelas Public (Jogja) &amp; In-House Nasional</span>
+            </li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- ─── MOBILE STICKY FLOATING BOTTOM BAR ─── -->
+  <div class="hub-mobile-sticky-bar" id="hubMobileSticky">
+    <div class="hub-msb-info">
+      <p class="hub-msb-title">{hub.badge || 'Pelatihan K3'}</p>
+      <p class="hub-msb-sub">Konsultasi Jadwal &amp; Biaya (Respon Cepat)</p>
+    </div>
+    <a href={heroWaUrl} class="hub-msb-btn" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
+      <span>Chat WA</span>
+    </a>
+  </div>
+</Layout>

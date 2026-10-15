@@ -1,0 +1,78 @@
+---
+import EnLayout from '../../layouts/EnLayout.astro';
+import EnSidebar from '../../components/EnSidebar.astro';
+
+const title = "Construction Safety in Indonesia (SMKK PUPR): Permen 10/2021 Guide — Wahana Totalita";
+const description = "<?= htmlspecialchars($meta_desc, ENT_QUOTES,";
+const canonical = "https://wahanatotalita.com/en/construction-safety-system-smkk/";
+const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","@id":"https://wahanatotalita.com/en/construction-safety-system-smkk/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://wahanatotalita.com/"},{"@type":"ListItem","position":2,"name":"English OHS Hub","item":"https://wahanatotalita.com/en/"},{"@type":"ListItem","position":3,"name":"Construction Safety System (SMKK)","item":"https://wahanatotalita.com/en/construction-safety-system-smkk/"}]},{"@type":"Article","@id":"https://wahanatotalita.com/en/construction-safety-system-smkk/#article","headline":"Construction Safety System (SMKK PUPR) in Indonesia: Legal Guide","description":"<?= htmlspecialchars($meta_desc, ENT_QUOTES,","inLanguage":"en-US","mainEntityOfPage":"https://wahanatotalita.com/en/construction-safety-system-smkk/","datePublished":"2026-09-01T08:00:00+07:00","dateModified":"2026-10-01T12:00:00+07:00","publisher":{"@type":"Organization","name":"PT Wahana Totalita Konsultan","url":"https://wahanatotalita.com","logo":{"@type":"ImageObject","url":"https://wahanatotalita.com/assets/img/logo-wt.png"}}}]}];
+---
+
+<EnLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  schemas={schemas}
+>
+<section class="en-hero">
+  <div class="en-container">
+    <div class="en-breadcrumb">
+      <a href="/">Home</a> &rsaquo; <a href="/en/">English OHS Hub</a> &rsaquo; <span>Construction Safety (SMKK)</span>
+    </div>
+    <div class="en-hero-pill">
+      <span>Infrastructure &amp; Civil EPC · Permen PUPR No. 10/2021</span>
+    </div>
+    <h1>Construction Safety Management (SMKK) in Indonesia: Ministry of Public Works Guidelines</h1>
+    <p class="en-hero-lead">
+      Statutory requirements for international EPC consortia, civil infrastructure contractors, and high-rise builders under Ministry of Public Works (PUPR) regulations: RKK plans, safety budget allocations, and certified construction experts.
+    </p>
+
+    <div class="en-trust-bar">
+      <div class="en-trust-item">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        <div>
+          <strong>Permen PUPR 10/2021</strong>
+          <span>Statutory construction safety decree</span>
+        </div>
+      </div>
+      <div class="en-trust-item">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        <div>
+          <strong>Mandatory RKK Plan</strong>
+          <span>Construction Safety Plan documentation</span>
+        </div>
+      </div>
+      <div class="en-trust-item">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        <div>
+          <strong>Ahli K3 Konstruksi</strong>
+          <span>SKA / Kemnaker licensed engineers</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="en-container">
+  <div class="en-body-grid">
+    <main>
+      <section class="en-card">
+        <span class="en-sec-badge">PUPR Regulatory Architecture</span>
+        <h2 class="en-sec-title">What is SMKK and How Does it Govern Projects?</h2>
+        <p class="en-text">
+          In Indonesia, all civil engineering, infrastructure building, and construction services fall under the jurisdiction of the <strong>Ministry of Public Works and Public Housing (Kementerian PUPR)</strong> via <strong>Permen PUPR No. 10 of 2021</strong> on the Implementation of Construction Safety Management Systems (<em>Sistem Manajemen Keselamatan Konstruksi - SMKK</em>).
+        </p>
+        <p class="en-text">
+          Any foreign contractor participating in toll roads, bridges, power station construction, dams, or urban high-rise developments must fulfill two strict contractual prerequisites:
+        </p>
+        <ul style="padding-left: 20px; line-height: 1.8; color: var(--slate-700);">
+          <li><strong>Rencana Keselamatan Konstruksi (RKK):</strong> A comprehensive, legally binding project safety plan detailing engineering controls, hazard registers, traffic management, and emergency procedures submitted during tender bidding.</li>
+          <li><strong>Dedicated SMKK Budget Line:</strong> Indonesian law prohibits contractors from absorbing safety costs into general overhead; safety costs (PPE, training, medical, equipment inspections) must be explicitly listed as a standalone Bill of Quantities item.</li>
+        </ul>
+      </section>
+    </main>
+
+    <EnSidebar currentSlug="construction-safety-system-smkk" />
+  </div>
+</div>
+</EnLayout>

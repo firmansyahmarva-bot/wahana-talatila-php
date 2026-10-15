@@ -1,0 +1,92 @@
+---
+import EnLayout from '../../layouts/EnLayout.astro';
+import EnSidebar from '../../components/EnSidebar.astro';
+
+const title = "Chemical Safety in Indonesia (K3 Kimia): Officer & Expert Mandates — Wahana Totalita";
+const description = "<?= htmlspecialchars($meta_desc, ENT_QUOTES,";
+const canonical = "https://wahanatotalita.com/en/chemical-safety-officer-requirements/";
+const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","@id":"https://wahanatotalita.com/en/chemical-safety-officer-requirements/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://wahanatotalita.com/"},{"@type":"ListItem","position":2,"name":"English OHS Hub","item":"https://wahanatotalita.com/en/"},{"@type":"ListItem","position":3,"name":"Chemical Safety (K3 Kimia)","item":"https://wahanatotalita.com/en/chemical-safety-officer-requirements/"}]},{"@type":"Article","@id":"https://wahanatotalita.com/en/chemical-safety-officer-requirements/#article","headline":"Chemical Safety in Indonesia (K3 Kimia): Regulatory Overview","description":"<?= htmlspecialchars($meta_desc, ENT_QUOTES,","inLanguage":"en-US","mainEntityOfPage":"https://wahanatotalita.com/en/chemical-safety-officer-requirements/","datePublished":"2026-09-01T08:00:00+07:00","dateModified":"2026-10-01T12:00:00+07:00","publisher":{"@type":"Organization","name":"PT Wahana Totalita Konsultan","url":"https://wahanatotalita.com","logo":{"@type":"ImageObject","url":"https://wahanatotalita.com/assets/img/logo-wt.png"}}}]}];
+---
+
+<EnLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  schemas={schemas}
+>
+<section class="en-hero">
+  <div class="en-container">
+    <div class="en-breadcrumb">
+      <a href="/">Home</a> &rsaquo; <a href="/en/">English OHS Hub</a> &rsaquo; <span>Chemical Safety (K3 Kimia)</span>
+    </div>
+    <div class="en-hero-pill">
+      <span>Hazardous Substances · Kepmenaker No. 187/MEN/1999</span>
+    </div>
+    <h1>Chemical Safety (K3 Kimia) in Indonesia: Officer Ratios &amp; Hazard Potentials</h1>
+    <p class="en-hero-lead">
+      Statutory compliance for manufacturing plants, smelters, chemical storage terminals, and processing facilities: understanding Threshold Quantity (NKT) classifications and mandatory Kemnaker chemical officer staffing.
+    </p>
+
+    <div class="en-trust-bar">
+      <div class="en-trust-item">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        <div>
+          <strong>Kepmenaker 187/1999</strong>
+          <span>Statutory hazardous chemical law</span>
+        </div>
+      </div>
+      <div class="en-trust-item">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        <div>
+          <strong>Major vs Medium Hazard</strong>
+          <span>NKT Threshold Quantities</span>
+        </div>
+      </div>
+      <div class="en-trust-item">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        <div>
+          <strong>Petugas &amp; Ahli K3 Kimia</strong>
+          <span>Mandatory certified personnel quotas</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="en-container">
+  <div class="en-body-grid">
+    <main>
+      <section class="en-card">
+        <span class="en-sec-badge">Statutory Framework</span>
+        <h2 class="en-sec-title">Hazard Potential Categorization in Indonesia</h2>
+        <p class="en-text">
+          Under <strong>Minister of Manpower Decree No. Kep. 187/MEN/1999</strong>, all enterprises handling, manufacturing, storing, or transporting hazardous chemicals must submit a chemical inventory declaration to the local labor office (<em>Disnaker</em>). The facility is officially categorized based on <strong>Threshold Quantities (Nilai Ambang Kuantitas - NKT)</strong>:
+        </p>
+
+        <div class="en-law-grid">
+          <div class="en-law-card">
+            <strong>Major Hazard Potential (Potensi Bahaya Besar)</strong>
+            <p>Chemical storage volumes exceed statutory NKT levels (e.g., >10 tons of toxic gases, >50 tons of highly flammable liquids). Mandates at least <strong>1 certified Ahli K3 Kimia</strong> and <strong>2 certified Petugas K3 Kimia per shift</strong>.</p>
+          </div>
+          <div class="en-law-card">
+            <strong>Medium Hazard Potential (Potensi Bahaya Menengah)</strong>
+            <p>Chemical volumes below NKT levels but presenting workplace risks. Mandates at least <strong>1 certified Petugas K3 Kimia per non-shift operation</strong>.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="en-card">
+        <span class="en-sec-badge">Technical Mandates</span>
+        <h2 class="en-sec-title">Required Documentation for Disnaker Audits</h2>
+        <ul style="padding-left: 20px; line-height: 1.8; color: var(--slate-700);">
+          <li><strong>Indonesian Material Safety Data Sheets (LDKB / MSDS):</strong> Every chemical container must feature an MSDS translated into Bahasa Indonesia.</li>
+          <li><strong>Chemical Hazard Identification &amp; Risk Assessment (HIRADC / IBPR):</strong> Documented chemical exposure controls and toxic gas leak emergency procedures.</li>
+          <li><strong>Statutory Waste &amp; Storage Licensing:</strong> Storage bunding compliance, safety shower inspections, and specialized PPE.</li>
+        </ul>
+      </section>
+    </main>
+
+    <EnSidebar currentSlug="chemical-safety-officer-requirements" />
+  </div>
+</div>
+</EnLayout>
