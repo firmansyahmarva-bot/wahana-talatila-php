@@ -31,14 +31,34 @@ a { color: inherit; text-decoration: none; }
 :focus:not(:focus-visible) {
   outline: none;
 }
+:focus-visible,
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+.btn:focus-visible,
 .btn-primary:focus-visible,
 .btn-wa-card:focus-visible,
 .wa-btn--lg:focus-visible,
 .wa-btn--sm:focus-visible,
 .btn-wa-nav:focus-visible,
-.wa-float:focus-visible {
-  outline: 3px solid var(--brand-dark, var(--brand-dark));
+.wa-float:focus-visible,
+.nav-link:focus-visible,
+.filter-btn:focus-visible,
+.faq-question:focus-visible {
+  outline: 2px solid var(--cta);
   outline-offset: 2px;
+}
+
+/* Ensure mobile touch targets >= 44px */
+@media (pointer: coarse) {
+  a, button, input[type="button"], input[type="submit"], select {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
 }
 main { opacity: 1; transition: opacity var(--dur-slow) var(--ease-standard); }
 @starting-style { main { opacity: .6; } }
