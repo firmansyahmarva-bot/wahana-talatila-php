@@ -51,13 +51,26 @@ textarea:focus-visible,
   outline-offset: 2px;
 }
 
-/* Ensure mobile touch targets >= 44px */
+/* Ensure mobile touch targets >= 44px on interactive elements */
 @media (pointer: coarse) {
-  a, button, input[type="button"], input[type="submit"], select {
+  .btn,
+  .btn-primary,
+  .btn-wa-card,
+  .btn-wa-nav,
+  .wa-btn--lg,
+  .wa-btn--sm,
+  .nav-link,
+  .filter-btn,
+  .chip,
+  .form-input,
+  .form-select,
+  input[type="button"],
+  input[type="submit"],
+  input[type="text"],
+  input[type="tel"],
+  input[type="email"],
+  select {
     min-height: 44px;
-    min-width: 44px;
-    display: inline-flex;
-    align-items: center;
   }
 }
 main { opacity: 1; transition: opacity var(--dur-slow) var(--ease-standard); }
