@@ -8,12 +8,18 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "check": "astro check"
+    "check": "astro check",
+    "lint:design": "node scripts/lint-design.cjs",
+    "baseline:capture": "node scripts/capture-baseline.cjs",
+    "baseline:compare": "node scripts/compare-screenshots.cjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.10",
     "@astrojs/sitemap": "^3.7.4",
     "astro": "^7.3.8",
     "typescript": "^6.0.3"
+  },
+  "devDependencies": {
+    "playwright": "^1.64.1"
   }
 }

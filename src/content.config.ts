@@ -54,6 +54,7 @@ const trainings = defineCollection({
     image_path: z.string().optional().nullable(),
     meta_title: z.string().optional().nullable(),
     meta_desc: z.string().optional().nullable(),
+    accent_color: z.string().optional().nullable(),
     wa_text: z.string().optional().nullable(),
     is_featured: z.union([z.number(), z.boolean()]).optional().nullable(),
     is_active: z.union([z.number(), z.boolean()]).optional().nullable(),
@@ -347,7 +348,7 @@ const purnabakti = defineCollection({
       fokus: z.string().optional().nullable(),
       output: z.string().optional().nullable(),
     })).optional().nullable(),
-    jadwal_rundown: z.record(z.string()).optional().nullable(),
+    jadwal_rundown: z.record(z.string(), z.string()).optional().nullable(),
     kunjungan_lapangan: z.array(z.string()).optional().nullable(),
     fasilitas_include: z.array(z.string()).optional().nullable(),
     faqs: z.array(z.object({
