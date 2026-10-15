@@ -113,7 +113,7 @@ a { color: inherit; text-decoration: none; }
   line-height: 1.65;
   color: color-mix(in srgb, var(--surface) 85%, transparent);
   margin-bottom: 26px;
-  max-width: 650px;
+  max-width: 768px;
 }
 
 /* Hero Search Bar (Modern Elevated) */
@@ -890,7 +890,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ─── RESPONSIVE RULES ──────────────────────────────────── */
-@media (max-width: 992px) {
+@media (max-width: 1024px) {
   .st-hero-grid { grid-template-columns: 1fr; gap: 36px; }
   .st-hero-panel { display: none; }
   .st-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }

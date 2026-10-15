@@ -139,7 +139,7 @@ body {
   gap: 26px;
   margin-bottom: 48px;
 }
-@media (max-width: 600px) {
+@media (max-width: 640px) {
   .tools-grid { grid-template-columns: 1fr; }
 }
 

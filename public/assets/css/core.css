@@ -218,7 +218,7 @@ h1, h2, h3, h4,
   box-shadow: var(--shadow-sm);
   border-bottom-color: var(--border-card);
 }
-@media (min-width: 961px) {
+@media (min-width: 1024px) {
   @supports (backdrop-filter: blur(8px)) {
     .navbar.scrolled {
       background: color-mix(in srgb, var(--surface) 94%, transparent);
@@ -279,7 +279,7 @@ h1, h2, h3, h4,
 .navbar.on-light-hero:not(.scrolled) .nav-links a:hover {
   color: var(--brand) !important;
 }
-@media (min-width: 961px) {
+@media (min-width: 1024px) {
   .navbar:not(.scrolled):not(.on-light-hero) .nav-links a:hover {
     color: var(--surface) !important;
   }
@@ -425,7 +425,7 @@ h1, h2, h3, h4,
   box-shadow: var(--shadow-lg); border: 1px solid var(--border-card);
   min-width: 720px; padding: 20px;
 }
-@media (min-width: 961px) {
+@media (min-width: 1024px) {
   .nav-dropdown-menu {
     display: block;
     visibility: hidden;
@@ -588,7 +588,7 @@ h1, h2, h3, h4,
 .footer-bottom a { color: var(--text-subtle); text-decoration: none; transition: color 0.15s ease; }
 .footer-bottom a:hover { color: var(--surface); }
 
-@media (max-width: 1180px) and (min-width: 901px) {
+@media (max-width: 1024px) and (min-width: 1024px) {
   .nav-links a { padding: 6px 8px; font-size: 13px; }
   .nav-search-input { width: 140px; }
   .nav-search-input:focus { width: 180px; }
@@ -596,7 +596,7 @@ h1, h2, h3, h4,
 }
 
 /* ─── RESPONSIVE BREAKPOINTS ────────────────────────────────── */
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   :root { --nav-h: 56px; }
   .navbar {
     height: var(--nav-h) !important; background: var(--surface) !important;
@@ -677,7 +677,7 @@ h1, h2, h3, h4,
   .footer-photo-strip::before, .footer-photo-strip::after { width: 35px; }
 }
 
-@media (max-width: 540px) {
+@media (max-width: 640px) {
   .footer-inner { grid-template-columns: 1fr; gap: 24px; padding: 32px 16px 24px; }
 }
 

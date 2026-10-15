@@ -12,4 +12,4 @@
 .cal-event:hover{background:var(--cta)}
 .cal-event.online{background:var(--info)}
 .cal-event.hybrid{background:var(--warning-text)}
-@media(max-width:600px){.cal-day{min-height:60px;padding:4px}.cal-day-num{font-size:.75rem}.cal-event{display:none}.cal-event:first-of-type{display:block}}
+@media(max-width: 640px){.cal-day{min-height:60px;padding:4px}.cal-day-num{font-size:.75rem}.cal-event{display:none}.cal-event:first-of-type{display:block}}
