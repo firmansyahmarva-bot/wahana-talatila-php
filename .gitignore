@@ -67,3 +67,8 @@ tools/test-*.php
 __pycache__/
 *.py[cod]
 *.class
+
+# Screenshots & Visual Regression (keep scripts, ignore large images)
+baseline/
+screenshots-current/
+

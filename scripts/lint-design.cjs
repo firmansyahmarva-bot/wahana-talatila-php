@@ -32,11 +32,24 @@ if (fs.existsSync(tokensCssPath)) {
   }
 }
 
+// Gather all variables defined in other CSS files (scoped component variables)
+const cssFiles = getFiles(path.join(rootDir, 'public', 'assets', 'css'), ['.css']);
+let scopedCssVars = new Map(); // varName -> Set of files where defined
+cssFiles.forEach(file => {
+  const relPath = path.relative(rootDir, file);
+  const content = fs.readFileSync(file, 'utf8');
+  const tokenRegex = /(--[a-zA-Z0-9_-]+)\s*:/g;
+  let tm;
+  while ((tm = tokenRegex.exec(content)) !== null) {
+    if (!scopedCssVars.has(tm[1])) scopedCssVars.set(tm[1], new Set());
+    scopedCssVars.get(tm[1]).add(relPath);
+  }
+});
+
 // Standard media query widths allowed
 const allowedBreakpoints = new Set(['640px', '768px', '1024px', '1200px']);
 
 const srcFiles = getFiles(path.join(rootDir, 'src'), ['.astro', '.html', '.ts', '.js']);
-const cssFiles = getFiles(path.join(rootDir, 'public', 'assets', 'css'), ['.css']);
 
 let violations = {
   hexOutsideTokens: [],
@@ -64,14 +77,12 @@ cssFiles.forEach(file => {
     }
   }
 
-  // Rule 2: var(--x) not defined in tokens.css
+  // Rule 2: var(--x) not defined in tokens.css or in scoped CSS
   const varRegex = /var\(\s*(--[a-zA-Z0-9_-]+)/g;
   let vm;
   while ((vm = varRegex.exec(content)) !== null) {
     const varName = vm[1];
-    // Skip internal scoped vars starting with --pd- in pelatihan-detail if locally defined,
-    // or report if not in tokens.css
-    if (!definedTokens.has(varName)) {
+    if (!definedTokens.has(varName) && !scopedCssVars.has(varName)) {
       violations.undefinedVars.push({
         file: relPath,
         match: varName
@@ -121,7 +132,7 @@ srcFiles.forEach(file => {
   let vm;
   while ((vm = varRegex.exec(content)) !== null) {
     const varName = vm[1];
-    if (!definedTokens.has(varName)) {
+    if (!definedTokens.has(varName) && !scopedCssVars.has(varName)) {
       violations.undefinedVars.push({
         file: relPath,
         match: varName
@@ -151,11 +162,11 @@ srcFiles.forEach(file => {
 
 // Report results
 console.log('====================================================');
-console.log('           DESIGN LINTER BASELINE REPORT            ');
+console.log('           DESIGN LINTER REPORT                     ');
 console.log('====================================================\n');
 
 console.log(`1. Hex colors outside tokens.css:          ${violations.hexOutsideTokens.length}`);
-console.log(`2. Undefined var(--x) (not in tokens.css): ${violations.undefinedVars.length}`);
+console.log(`2. Undefined var(--x) (truly undefined):   ${violations.undefinedVars.length}`);
 console.log(`3. Non-standard @media query widths:       ${violations.nonStandardMediaQueries.length}`);
 console.log(`4. style="" with color/background/border:  ${violations.inlineStyleForbiddenProps.length}`);
 

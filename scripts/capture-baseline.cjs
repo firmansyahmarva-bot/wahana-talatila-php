@@ -11,7 +11,6 @@ if (!fs.existsSync(baselineDir)) {
   fs.mkdirSync(baselineDir, { recursive: true });
 }
 
-// 15 representative pages requested
 const pages = [
   { name: '01-home', url: '/' },
   { name: '02-pelatihan-list', url: '/pelatihan/' },
@@ -49,18 +48,15 @@ const mimeTypes = {
   '.woff2': 'font/woff2'
 };
 
-// Simple static server for dist
 function startServer(port = 4322) {
   return new Promise((resolve, reject) => {
     const server = http.createServer((req, res) => {
       let reqPath = decodeURI(req.url.split('?')[0]);
       if (reqPath.endsWith('/')) reqPath += 'index.html';
       let filePath = path.join(distDir, reqPath);
-
       if (!fs.existsSync(filePath) && fs.existsSync(filePath + '.html')) {
         filePath += '.html';
       }
-
       if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
         const ext = path.extname(filePath);
         res.writeHead(200, { 'Content-Type': mimeTypes[ext] || 'application/octet-stream' });
@@ -80,6 +76,34 @@ function startServer(port = 4322) {
     server.listen(port, () => resolve(server));
     server.on('error', reject);
   });
+}
+
+const freezeCss = `
+  *, *::before, *::after {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+    caret-color: transparent !important;
+  }
+`;
+
+async function stabilizePage(page) {
+  await page.addStyleTag({ content: freezeCss });
+  // Force all lazy images to eager and wait for images to load
+  await page.evaluate(async () => {
+    document.querySelectorAll('img').forEach(img => {
+      img.loading = 'eager';
+      img.decoding = 'sync';
+    });
+    // Scroll down and up to trigger viewport observers
+    window.scrollTo(0, document.body.scrollHeight / 2);
+    await new Promise(r => setTimeout(r, 100));
+    window.scrollTo(0, document.body.scrollHeight);
+    await new Promise(r => setTimeout(r, 100));
+    window.scrollTo(0, 0);
+  });
+  await page.waitForTimeout(400);
 }
 
 async function run() {
@@ -109,8 +133,7 @@ async function run() {
 
       try {
         await page.goto(targetUrl, { waitUntil: 'domcontentloaded', timeout: 15000 });
-        // small delay for web fonts and layout stability
-        await page.waitForTimeout(300);
+        await stabilizePage(page);
 
         const outPath = path.join(baselineDir, `${p.name}-${vp.name}.png`);
         await page.screenshot({ path: outPath, fullPage: true });

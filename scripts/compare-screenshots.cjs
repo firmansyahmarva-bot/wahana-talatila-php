@@ -78,6 +78,32 @@ function startServer(port = 4323) {
   });
 }
 
+const freezeCss = `
+  *, *::before, *::after {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+    caret-color: transparent !important;
+  }
+`;
+
+async function stabilizePage(page) {
+  await page.addStyleTag({ content: freezeCss });
+  await page.evaluate(async () => {
+    document.querySelectorAll('img').forEach(img => {
+      img.loading = 'eager';
+      img.decoding = 'sync';
+    });
+    window.scrollTo(0, document.body.scrollHeight / 2);
+    await new Promise(r => setTimeout(r, 100));
+    window.scrollTo(0, document.body.scrollHeight);
+    await new Promise(r => setTimeout(r, 100));
+    window.scrollTo(0, 0);
+  });
+  await page.waitForTimeout(400);
+}
+
 async function run() {
   const server = await startServer(4323);
   const browser = await chromium.launch({
@@ -86,6 +112,8 @@ async function run() {
   });
 
   let diffList = [];
+  const total = pages.length * viewports.length;
+  let count = 0;
 
   for (const vp of viewports) {
     const context = await browser.newContext({
@@ -95,29 +123,36 @@ async function run() {
     const page = await context.newPage();
 
     for (const p of pages) {
+      count++;
       const fileName = `${p.name}-${vp.name}.png`;
       const baselineFile = path.join(baselineDir, fileName);
       const currentFile = path.join(currentDir, fileName);
 
+      process.stdout.write(`[${count}/${total}] ${p.name} @ ${vp.width}px ... `);
+
       try {
         await page.goto(`http://localhost:4323${p.url}`, { waitUntil: 'domcontentloaded', timeout: 15000 });
-        await page.waitForTimeout(300);
+        await stabilizePage(page);
+
         await page.screenshot({ path: currentFile, fullPage: true });
 
         if (fs.existsSync(baselineFile)) {
           const bBuf = fs.readFileSync(baselineFile);
           const cBuf = fs.readFileSync(currentFile);
-          const sizeDiff = Math.abs(bBuf.length - cBuf.length);
-          // Flag if buffer differs significantly (>1% file size change)
-          const pct = ((sizeDiff / bBuf.length) * 100).toFixed(2);
           if (bBuf.compare(cBuf) !== 0) {
+            const sizeDiff = Math.abs(bBuf.length - cBuf.length);
+            const pct = ((sizeDiff / bBuf.length) * 100).toFixed(2);
             diffList.push({ name: fileName, sizeDiff, pct, baselineSize: bBuf.length, currentSize: cBuf.length });
+            console.log(`DIFF (${pct}%)`);
+          } else {
+            console.log('IDENTICAL');
           }
         } else {
           diffList.push({ name: fileName, status: 'NO_BASELINE' });
+          console.log('NO BASELINE');
         }
       } catch (e) {
-        console.error(`Error capturing ${fileName}:`, e.message);
+        console.log(`ERROR: ${e.message}`);
       }
     }
     await context.close();
@@ -126,14 +161,19 @@ async function run() {
   await browser.close();
   server.close();
 
-  console.log('\n=== SCREENSHOT REGRESSION CHECK ===');
+  console.log('\n====================================================');
+  console.log('       SCREENSHOT VISUAL REGRESSION REPORT          ');
+  console.log('====================================================\n');
+  console.log(`Total screenshots checked: ${count}`);
+
   if (diffList.length === 0) {
-    console.log('✅ 100% Identical: No visual differences detected against baseline.');
+    console.log('✅ 100% Identical: No visual differences detected against baseline.\n');
   } else {
     console.log(`⚠️  ${diffList.length} screenshots differ from baseline:`);
     diffList.forEach(d => {
       console.log(`  - ${d.name}: byte diff ${d.sizeDiff} bytes (${d.pct}%)`);
     });
+    console.log('');
   }
 }
 

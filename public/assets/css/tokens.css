@@ -1,78 +1,144 @@
 /* ============================================================
    Wahana Totalita — tokens.css
-   Semantic Design Tokens (Stripe Tech Standard: Ink #0A2540 + Indigo #635BFF)
+   TWO-LAYER DESIGN TOKEN SYSTEM
+   ------------------------------------------------------------
+   Layer 1: Palette Layer (Raw values).
+            The ONLY place raw hex/rgb values are declared.
+            Direct usage in components/pages is FORBIDDEN.
+   Layer 2: Semantic Layer (System tokens).
+            Every page, component, and utility MUST reference
+            these semantic tokens (e.g., var(--brand), var(--cta),
+            var(--text), var(--surface), var(--on-brand)).
+   Rule: Pages use semantic tokens only. Zero hardcoded colors.
    ============================================================ */
+
 :root {
-  /* Semantic Brand Tokens (Wahana Totalita Official: Deep Forest Green #1b4332 + Safety Emerald #2d6a4f) */
-  --brand:          #1b4332;
-  --brand-dark:     #081c15;
-  --brand-mid:      #2d6a4f;
-  --brand-light:    #f0fdf4;
-  --accent:         #2d6a4f;
-  --accent-dark:    #1b4332;
-  --accent-light:   #f0fdf4;
-  --surface:        #FFFFFF;
-  --surface-subtle: #F8FAFC;
-  --surface-alt:    #F1F5F9;
-  --ink:            #0F172A;
-  --mut:            #475569;
-  --border:         #E2E8F0;
+  /* ─── 1. PALETTE LAYER (Raw Values) ────────────────────────── */
+  --green-950:      #051c14;
+  --green-900:      #081c15;
+  --green-800:      #1b4332;
+  --green-700:      #2d6a4f;
+  --green-600:      #40916c;
+  --green-500:      #52b788;
+  --green-400:      #74c69d;
+  --green-200:      #b7e4c7;
+  --green-100:      #d8f3dc;
+  --green-50:       #f0fdf4;
+
+  --orange-900:     #7c2d12;
+  --orange-800:     #9a3412;
+  --orange-700:     #c2410c;
+  --orange-600:     #b45309;
+  --orange-500:     #d97706;
+  --orange-400:     #f59e0b;
+  --orange-300:     #fcd34d;
+  --orange-100:     #fef3c7;
+  --orange-50:      #fffbeb;
+
+  --slate-950:      #020617;
+  --slate-900:      #0F172A;
+  --slate-800:      #1E293B;
+  --slate-700:      #334155;
+  --slate-600:      #475569;
+  --slate-500:      #64748B;
+  --slate-400:      #94A3B8;
+  --slate-300:      #CBD5E1;
+  --slate-200:      #E2E8F0;
+  --slate-100:      #F1F5F9;
+  --slate-50:       #F8FAFC;
+
+  --pure-white:     #FFFFFF;
+  --pure-black:     #000000;
+
+  --emerald-600:    #16A34A;
+  --emerald-800:    #166534;
+  --emerald-50:     #F0FDF4;
+  --emerald-100:    #DCFCE7;
+  --emerald-200:    #BBF7D0;
+
+  --red-600:        #DC2626;
+  --red-800:        #991B1B;
+  --red-50:         #FEE2E2;
+  --red-200:        #FECACA;
+
+  --amber-500:      #F59E0B;
+  --amber-700:      #B45309;
+  --amber-900:      #92400E;
+  --amber-50:       #FEF3C7;
+  --amber-200:      #FDE68A;
+
+  --blue-600:       #2563EB;
+  --blue-800:       #1E40AF;
+  --blue-50:        #EFF6FF;
+  --blue-200:       #BFDBFE;
+
+  --wa-green:       #25D366;
+  --wa-dark:        #20BA5A;
+
+  /* ─── 2. SEMANTIC LAYER ────────────────────────────────────── */
+  /* Brand Identity (Deep Forest & Safety Emerald) */
+  --brand:          var(--green-800);
+  --brand-dark:     var(--green-900);
+  --brand-mid:      var(--green-700);
+  --brand-light:    var(--green-50);
+  --accent:         var(--green-700);
+  --accent-dark:    var(--green-800);
+  --accent-light:   var(--green-50);
+  --accent-soft:    var(--green-500);
+
+  /* Call-To-Action (High-Conversion Action Orange) */
+  --cta:            var(--orange-500);
+  --cta-hover:      var(--orange-600);
+  --cta-soft:       var(--orange-100);
+
+  /* Surfaces & Canvas */
+  --surface:        var(--pure-white);
+  --surface-subtle: var(--slate-50);
+  --surface-alt:    var(--slate-100);
+
+  /* Typography / Text Content */
+  --text:           var(--slate-900);
+  --text-muted:     var(--slate-600);
+  --text-subtle:    var(--slate-500);
+
+  /* Contrast Text On Dark / Colored Surfaces */
+  --on-brand:       var(--pure-white);
+  --on-cta:         var(--pure-white);
+
+  /* Borders & Dividers */
+  --border:         var(--slate-200);
   --border-card:    rgba(226, 232, 240, 0.9);
 
-  /* Legacy Name Aliases (kept for 100% backward compatibility) */
-  --green:          #1b4332;
-  --green-dark:     #081c15;
-  --green-mid:      #2d6a4f;
-  --green-light:    #f0fdf4;
-  --orange:         #d97706;
-  --orange-dark:    #b45309;
-  --orange-light:   #fef3c7;
-  --text:           #0F172A;
-  --text-muted:     #475569;
-  --text-light:     #64748B;
+  /* Communication Channels */
+  --whatsapp:       var(--wa-green);
+  --whatsapp-dark:  var(--wa-dark);
 
-  /* Redesign 2026 Palette Aliases */
-  --n900:           #081c15;
-  --n800:           #1b4332;
-  --n700:           #2d6a4f;
-  --n100:           #f0fdf4;
-  --o500:           #d97706;
-  --o400:           #f59e0b;
-  --o100:           #fef3c7;
+  /* Status Tokens */
+  --success:        var(--emerald-600);
+  --success-dark:   var(--emerald-800);
+  --success-bg:     var(--emerald-50);
+  --success-soft:   var(--emerald-100);
+  --success-border: var(--emerald-200);
 
-  /* Extended palette: the ONLY place raw colors are allowed. Everything else uses var(--token). */
-  --accent-soft:    #52b788;
-  --black:          #000000;
-  --slate-50:       #F8FAFC;
-  --slate-100:      #F1F5F9;
-  --slate-200:      #E2E8F0;
-  --slate-300:      #CBD5E1;
-  --slate-400:      #94A3B8;
-  --slate-500:      #64748B;
-  --slate-600:      #475569;
-  --slate-700:      #334155;
-  --slate-800:      #1E293B;
-  --slate-900:      #0F172A;
-  --success:        #16A34A;
-  --success-dark:   #166534;
-  --success-bg:     #F0FDF4;
-  --success-soft:   #DCFCE7;
-  --success-border: #BBF7D0;
-  --danger:         #DC2626;
-  --danger-dark:    #991B1B;
-  --danger-bg:      #FEE2E2;
-  --danger-border:  #FECACA;
-  --warning:        #F59E0B;
-  --warning-dark:   #B45309;
-  --warning-text:   #92400E;
-  --warning-bg:     #FEF3C7;
-  --warning-border: #FDE68A;
-  --info:           #2563EB;
-  --info-dark:      #1E40AF;
-  --info-bg:        #EFF6FF;
-  --info-border:    #BFDBFE;
-  --whatsapp:       #25D366;
-  --whatsapp-dark:  #20BA5A;
+  --danger:         var(--red-600);
+  --danger-dark:    var(--red-800);
+  --danger-bg:      var(--red-50);
+  --danger-border:  var(--red-200);
+
+  --warning:        var(--amber-500);
+  --warning-dark:   var(--amber-700);
+  --warning-text:   var(--amber-900);
+  --warning-bg:     var(--amber-50);
+  --warning-border: var(--amber-200);
+
+  --info:           var(--blue-600);
+  --info-dark:      var(--blue-800);
+  --info-bg:        var(--blue-50);
+  --info-border:    var(--blue-200);
+
+  /* Typography Stacks (Default ID) */
+  --font-body:      'Source Sans 3', system-ui, -apple-system, sans-serif;
+  --font-heading:   'Lexend', system-ui, -apple-system, sans-serif;
 
   /* Layout & Elevations (Stripe Multi-Layer Soft Shadows) */
   --container:      1200px;
@@ -103,6 +169,46 @@
   --lift-sm:        translateY(-2px);
   --lift-md:        translateY(-4px);
   --lift-lg:        translateY(-6px);
+
+  /* ─── 3. DEPRECATED LEGACY ALIASES (Backward Compatibility) ──── */
+  --green:          var(--brand);          /* deprecated: use var(--brand) */
+  --green-dark:     var(--brand-dark);     /* deprecated: use var(--brand-dark) */
+  --green-mid:      var(--brand-mid);      /* deprecated: use var(--brand-mid) */
+  --green-light:    var(--brand-light);    /* deprecated: use var(--brand-light) */
+  --orange:         var(--cta);            /* deprecated: use var(--cta) */
+  --orange-dark:    var(--cta-hover);      /* deprecated: use var(--cta-hover) */
+  --orange-light:   var(--cta-soft);       /* deprecated: use var(--cta-soft) */
+  --ink:            var(--text);           /* alias: backward compatible */
+  --mut:            var(--text-muted);      /* alias: backward compatible */
+  --text-light:     var(--text-subtle);    /* deprecated: use var(--text-subtle) */
+  --navy:           var(--text);           /* deprecated: use var(--text) */
+  --navy-light:     var(--slate-700);      /* deprecated: use var(--slate-700) */
+  --n900:           var(--brand-dark);     /* deprecated: use var(--brand-dark) */
+  --n800:           var(--brand);          /* deprecated: use var(--brand) */
+  --n700:           var(--brand-mid);      /* deprecated: use var(--brand-mid) */
+  --n100:           var(--brand-light);    /* deprecated: use var(--brand-light) */
+  --o500:           var(--cta);            /* deprecated: use var(--cta) */
+  --o400:           var(--warning);        /* deprecated: use var(--warning) */
+  --o100:           var(--cta-soft);       /* deprecated: use var(--cta-soft) */
+  --orange-hover:   var(--cta-hover);      /* deprecated: use var(--cta-hover) */
+  --black:          var(--pure-black);     /* alias */
+  --border-color:   var(--border);         /* deprecated: use var(--border) */
+  --bg-card:        var(--surface);        /* deprecated: use var(--surface) */
+  --bg-subtle:      var(--surface-alt);    /* deprecated: use var(--surface-alt) */
+  --text-heading:   var(--text);           /* deprecated: use var(--text) */
+  --warning-light:  var(--warning-bg);     /* deprecated: use var(--warning-bg) */
+}
+
+/* Language-specific typography stacks */
+html[lang="en"] {
+  --font-body:    'Inter', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
+html[lang="zh"],
+html[lang="zh-Hans"] {
+  --font-body:    'Source Sans 3', 'Noto Sans SC', system-ui, sans-serif;
+  --font-heading: 'Noto Sans SC', system-ui, sans-serif;
 }
 
 @media (prefers-reduced-motion: reduce) {
