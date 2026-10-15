@@ -1,0 +1,127 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import data from '../../data/resources.json';
+
+export async function getStaticPaths() {
+  const { resources, categories } = data;
+  return resources.map((r) => {
+    const related = resources.filter((item) => item.id !== r.id).slice(0, 4);
+    return {
+      params: { slug: r.slug },
+      props: { resource: r, related, categories },
+    };
+  });
+}
+
+const { resource, related } = Astro.props;
+
+const title = resource.meta_title || `Download ${resource.title} | Wahana Totalita`;
+const description = resource.meta_desc || resource.description;
+const canonical = `https://wahanatotalita.com/resources/${resource.slug}/`;
+
+const fileIcon = resource.file_type === 'pdf' ? '📕' : (['xlsx', 'xls'].includes(resource.file_type) ? '📊' : (['docx', 'doc'].includes(resource.file_type) ? '📝' : '📄'));
+
+const waDownloadUrl = `https://wa.me/6281226834789?text=${encodeURIComponent(`Halo Wahana Totalita, saya ingin mendownload dokumen template K3: "${resource.title}"`)}`;
+
+const tagsArray = resource.tags ? resource.tags.split(',').map((t: string) => t.trim()) : [];
+---
+
+<Layout
+  title={title}
+  description={description}
+  canonical={canonical}
+  pageCss={['/assets/css/page/resources-detail.css']}
+>
+  <section class="detail-hero">
+    <div class="container">
+      <div class="detail-hero-inner">
+        <div>
+          <span class="cat-tag">{resource.cat_icon} {resource.cat_name}</span>
+          <h1>{resource.title}</h1>
+          <div class="meta">
+            <span>⬇ {resource.download_count} download</span>
+            <span>👁 {resource.view_count} dilihat</span>
+            {resource.file_size_kb && (
+              <span>📦 {resource.file_size_kb > 1024 ? Math.round(resource.file_size_kb / 1024) + 'MB' : resource.file_size_kb + 'KB'}</span>
+            )}
+            <span style="background: rgba(255,255,255,0.2); padding: 2px 10px; border-radius: 100px;">✅ GRATIS</span>
+          </div>
+          {tagsArray.length > 0 && (
+            <div class="tag-list" style="margin-top: 16px;">
+              {tagsArray.map((tag: string) => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div class="download-box">
+          <span class="file-icon">{fileIcon}</span>
+          <div class="file-type-badge">{resource.file_type.toUpperCase()}</div>
+          <div style="font-size: 1.5rem; font-weight: 800; color: #16a34a; margin-bottom: 4px;">
+            GRATIS
+          </div>
+          <div style="font-size: .8rem; color: #64748b; margin-bottom: 20px;">Download langsung tanpa ribet</div>
+
+          {resource.file_path ? (
+            <a href={resource.file_path} download class="btn-download-big" style="margin-bottom: 8px;">
+              ⬇ Download File Sekarang
+            </a>
+          ) : (
+            <a href={waDownloadUrl} target="_blank" rel="noopener" class="btn-download-big" style="margin-bottom: 8px;">
+              💬 Minta Dokumen via WhatsApp
+            </a>
+          )}
+          <a href={waDownloadUrl} target="_blank" rel="noopener" style="font-size: .85rem; color: #0284c7; text-decoration: underline; display: block;">
+            Kirim ke WhatsApp Saya
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="detail-content" style="padding: 48px 0 80px;">
+    <div class="container">
+      <div class="detail-content-grid" style="display: grid; grid-template-columns: 2fr 1fr; gap: 36px;">
+        <div>
+          <div class="content-block" style="background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 28px; margin-bottom: 24px;">
+            <h2 style="font-size: 1.35rem; font-weight: 700; margin-bottom: 16px; color: #0f172a;">📋 Tentang Dokumen Ini</h2>
+            <p style="font-size: 1.05rem; line-height: 1.7; color: #334155;">{resource.description}</p>
+          </div>
+
+          <div class="content-block" style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 28px;">
+            <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 12px; color: #0f172a;">🛡️ Standar Kepatuhan K3 Terkait</h3>
+            <p style="color: #475569; line-height: 1.6; margin-bottom: 16px;">
+              Dokumen ini diselaraskan dengan pedoman penerapan Sistem Manajemen Keselamatan dan Kesehatan Kerja (SMK3 PP No. 50 Tahun 2012) serta standar teknis Kemnaker RI dan standar internasional ISO 45001:2018.
+            </p>
+            <a href="/pelatihan/" style="display: inline-flex; align-items: center; gap: 6px; color: #16a34a; font-weight: 600; text-decoration: none;">
+              Lihat Program Pelatihan &amp; Sertifikasi K3 Resmi →
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <div class="content-block" style="background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px;">
+            <h2 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 16px; color: #0f172a;">📁 Dokumen Terkait</h2>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              {related.map((r: any) => {
+                const relIcon = r.file_type === 'pdf' ? '📕' : (['xlsx', 'xls'].includes(r.file_type) ? '📊' : (['docx', 'doc'].includes(r.file_type) ? '📝' : '📄'));
+                return (
+                  <a href={`/resources/${r.slug}/`} style="display: flex; gap: 12px; align-items: center; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; text-decoration: none; color: inherit; transition: background .15s;">
+                    <span style="font-size: 1.5rem;">{relIcon}</span>
+                    <span style="font-size: .85rem; font-weight: 600; line-height: 1.3; color: #1e293b;">{r.title}</span>
+                  </a>
+                );
+              })}
+            </div>
+            <div style="margin-top: 20px; text-align: center;">
+              <a href="/resources/" style="font-size: .85rem; font-weight: 600; color: #0284c7; text-decoration: none;">
+                ← Lihat Semua Resource ({data.resources.length})
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,104 @@
+---
+import EnLayout from '../../layouts/EnLayout.astro';
+import EnSidebar from '../../components/EnSidebar.astro';
+
+const title = "Certified Welder Regulations Indonesia (Juru Las): Class 1, 2, 3 SIO — Wahana Totalita";
+const description = "<?= htmlspecialchars($meta_desc, ENT_QUOTES,";
+const canonical = "https://wahanatotalita.com/en/certified-welder-regulations-indonesia/";
+const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","@id":"https://wahanatotalita.com/en/certified-welder-regulations-indonesia/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://wahanatotalita.com/"},{"@type":"ListItem","position":2,"name":"English OHS Hub","item":"https://wahanatotalita.com/en/"},{"@type":"ListItem","position":3,"name":"Certified Welder Regulations (Juru Las)","item":"https://wahanatotalita.com/en/certified-welder-regulations-indonesia/"}]},{"@type":"Article","@id":"https://wahanatotalita.com/en/certified-welder-regulations-indonesia/#article","headline":"Certified Welder Regulations in Indonesia: Permenaker 02/1982 Guide","description":"<?= htmlspecialchars($meta_desc, ENT_QUOTES,","inLanguage":"en-US","mainEntityOfPage":"https://wahanatotalita.com/en/certified-welder-regulations-indonesia/","datePublished":"2026-09-01T08:00:00+07:00","dateModified":"2026-10-01T12:00:00+07:00","publisher":{"@type":"Organization","name":"PT Wahana Totalita Konsultan","url":"https://wahanatotalita.com","logo":{"@type":"ImageObject","url":"https://wahanatotalita.com/assets/img/logo-wt.png"}}}]}];
+---
+
+<EnLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  schemas={schemas}
+>
+<section class="en-hero">
+  <div class="en-container">
+    <div class="en-breadcrumb">
+      <a href="/">Home</a> &rsaquo; <a href="/en/">English OHS Hub</a> &rsaquo; <span>Certified Welder (Juru Las)</span>
+    </div>
+    <div class="en-hero-pill">
+      <span>Industrial Fabrication · Permenaker No. 02/MEN/1982</span>
+    </div>
+    <h1>Certified Welder (Juru Las) Regulations in Indonesia: Class 1, 2 &amp; 3 Certification</h1>
+    <p class="en-hero-lead">
+      Statutory qualification framework for structural steelwork, pressure vessel fabrication, and industrial piping under Indonesian law: welder classes, non-destructive testing (NDT), and WPS/PQR validation.
+    </p>
+
+    <div class="en-trust-bar">
+      <div class="en-trust-item">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        <div>
+          <strong>Permenaker 02/1982</strong>
+          <span>Statutory welding safety law</span>
+        </div>
+      </div>
+      <div class="en-trust-item">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        <div>
+          <strong>Class 1, 2, 3 Tiers</strong>
+          <span>High pressure to non-load structures</span>
+        </div>
+      </div>
+      <div class="en-trust-item">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        <div>
+          <strong>Kemnaker Welder License</strong>
+          <span>Statutory 3-year certification card</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="en-container">
+  <div class="en-body-grid">
+    <main>
+      <section class="en-card">
+        <span class="en-sec-badge">Statutory Qualification</span>
+        <h2 class="en-sec-title">The Three Statutory Welder Classes Explained</h2>
+        <p class="en-text">
+          Under <strong>Minister of Manpower Regulation No. 02/MEN/1982</strong>, any welding performed on pressure vessels, steam boilers, lifting equipment, or load-bearing steel structures must be executed exclusively by a certified <strong>Juru Las</strong> holding an active license issued by Kemnaker:
+        </p>
+
+        <div class="en-table-wrap">
+          <table class="en-table">
+            <thead>
+              <tr>
+                <th>Welder Class</th>
+                <th>Permitted Welding Scope</th>
+                <th>Testing Positions Qualified</th>
+                <th>Target Engineering Sector</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Kelas 1 (Class I)</strong></td>
+                <td>High-pressure vessels, steam boilers, high-pressure hydrocarbon piping, all critical joints</td>
+                <td>All positions: 1G, 2G, 3G, 4G, 5G, 6G / 6GR</td>
+                <td>Oil &amp; Gas, Power Plants, Petrochemical Refineries</td>
+              </tr>
+              <tr>
+                <td><strong>Kelas 2 (Class II)</strong></td>
+                <td>Medium pressure vessels, storage tanks, building structural steelwork</td>
+                <td>Plate &amp; pipe in flat, horizontal, and vertical: 1G, 2G, 3G</td>
+                <td>EPC Infrastructure, Smelter Steel Construction</td>
+              </tr>
+              <tr>
+                <td><strong>Kelas 3 (Class III)</strong></td>
+                <td>Non-critical structural joints, non-pressurized tanks, general steel framing</td>
+                <td>Flat and horizontal positions: 1G, 2G</td>
+                <td>General Manufacturing, Warehousing Fabrication</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <EnSidebar currentSlug="certified-welder-regulations-indonesia" />
+  </div>
+</div>
+</EnLayout>

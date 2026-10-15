@@ -1,0 +1,119 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import jobs from '../../data/jobs.json';
+
+export async function getStaticPaths() {
+  return jobs.map((job) => ({
+    params: { slug: job.slug },
+    props: { job },
+  }));
+}
+
+const { job } = Astro.props;
+
+const title = `${job.title} di ${job.company} | Lowongan K3 Wahana Totalita`;
+const description = `${job.description.slice(0, 155)}...`;
+const canonical = `https://wahanatotalita.com/lowongan/${job.slug}/`;
+
+function formatPrice(amount: number) {
+  return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(amount);
+}
+
+const applyWaUrl = `https://wa.me/6281226834789?text=${encodeURIComponent(`Halo Wahana Totalita, saya ingin melamar untuk posisi: "${job.title}" di ${job.company}. Mohon informasi proses pendaftarannya.`)}`;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "JobPosting",
+  "title": job.title,
+  "description": job.description,
+  "hiringOrganization": {
+    "@type": "Organization",
+    "name": job.company
+  },
+  "jobLocation": {
+    "@type": "Place",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": job.location,
+      "addressCountry": "ID"
+    }
+  },
+  "employmentType": job.job_type === 'fulltime' ? 'FULL_TIME' : 'CONTRACTOR',
+  "datePosted": job.created_at,
+  "url": canonical
+};
+---
+
+<Layout
+  title={title}
+  description={description}
+  canonical={canonical}
+  schemas={[schema]}
+  pageCss={['/assets/css/page/lowongan-detail.css']}
+>
+  <div class="container job-detail" style="padding: 32px 16px 80px;">
+    <div class="breadcrumb" style="font-size: .9rem; color: #64748b; margin-bottom: 24px;">
+      <a href="/lowongan/" style="color: inherit; text-decoration: underline;">Lowongan K3</a> › <span>{job.title}</span>
+    </div>
+
+    <div class="job-layout" style="display: grid; grid-template-columns: 2fr 1fr; gap: 32px;">
+      <div>
+        <div class="job-main" style="background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 32px;">
+          <div class="job-main-header" style="border-bottom: 1px solid #e2e8f0; padding-bottom: 24px; margin-bottom: 24px;">
+            <h1 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin-bottom: 8px;">{job.title}</h1>
+            <div class="company" style="font-size: 1.1rem; color: #16a34a; font-weight: 600; margin-bottom: 12px;">🏢 {job.company}</div>
+            
+            <div class="meta-row" style="display: flex; gap: 16px; flex-wrap: wrap; font-size: .9rem; color: #64748b;">
+              <span>📍 {job.location}</span>
+              <span>📋 {job.job_type.toUpperCase()}</span>
+              {job.salary_min && (
+                <span>💰 {formatPrice(job.salary_min)} - {formatPrice(job.salary_max)}</span>
+              )}
+              <span>📅 Diposting {job.created_at}</span>
+            </div>
+          </div>
+
+          <div class="job-body">
+            <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 12px; color: #0f172a;">Deskripsi Pekerjaan</h2>
+            <p style="line-height: 1.7; color: #334155; margin-bottom: 28px;">{job.description}</p>
+
+            <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 12px; color: #0f172a;">Kualifikasi &amp; Persyaratan</h2>
+            <div style="line-height: 1.8; color: #334155; white-space: pre-line; margin-bottom: 28px;">
+              {job.requirements}
+            </div>
+
+            {job.benefits && (
+              <>
+                <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 12px; color: #0f172a;">Benefit &amp; Fasilitas</h2>
+                <p style="line-height: 1.7; color: #334155; margin-bottom: 28px;">{job.benefits}</p>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="job-sidebar" style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; position: sticky; top: 24px;">
+          <h3 style="font-size: 1.15rem; font-weight: 700; color: #0f172a; margin-bottom: 16px;">Tertarik Melamar?</h3>
+          <p style="font-size: .9rem; color: #475569; line-height: 1.6; margin-bottom: 20px;">
+            Pastikan CV dan sertifikat kompetensi K3 Anda sudah siap. Ajukan lamaran atau konsultasi persyaratan langsung via WhatsApp.
+          </p>
+
+          <a href={applyWaUrl} target="_blank" rel="noopener" style="display: block; text-align: center; background: #25d366; color: #fff; padding: 14px 20px; border-radius: 8px; font-weight: 700; text-decoration: none; margin-bottom: 12px;">
+            💬 Lamar via WhatsApp
+          </a>
+
+          <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid #e2e8f0;">
+            <h4 style="font-size: .95rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;">Belum Memiliki Sertifikat K3?</h4>
+            <p style="font-size: .85rem; color: #64748b; line-height: 1.5; margin-bottom: 12px;">
+              Tingkatkan kualifikasi Anda dengan mengikuti pelatihan Ahli K3 Umum sertifikasi Kemnaker RI.
+            </p>
+            <a href="/pelatihan/ahli-k3-umum/" style="font-size: .85rem; font-weight: 600; color: #16a34a; text-decoration: underline;">
+              Lihat Pelatihan Ahli K3 Umum →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

@@ -1,0 +1,138 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  canonical: string;
+  schemas?: any[];
+  pageCss?: string[];
+}
+
+const {
+  title,
+  description,
+  canonical,
+  schemas = [],
+  pageCss = ['/assets/css/page/en.css'],
+} = Astro.props;
+
+const waUrl = "https://wa.me/6287759151278?text=" + encodeURIComponent("Hello Wahana Totalita, we are an international company operating in Indonesia and require HSE compliance and licensing support.");
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  <link rel="alternate" hreflang="en" href={canonical} />
+  <link rel="alternate" hreflang="id" href="https://wahanatotalita.com/" />
+  <link rel="alternate" hreflang="zh-Hans" href="https://wahanatotalita.com/zh/" />
+  <link rel="alternate" hreflang="x-default" href="https://wahanatotalita.com/en/" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="PT Wahana Totalita Konsultan" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16.png" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Wahana Totalita Konsultan" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content="https://wahanatotalita.com/assets/img/og-cover.jpg" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content="https://wahanatotalita.com/assets/img/og-cover.jpg" />
+
+  <!-- Fonts & Master Stylesheet -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="/assets/css/tokens.css" />
+  {pageCss.map((cssHref) => (
+    <link rel="stylesheet" href={cssHref} />
+  ))}
+
+  <!-- Schemas -->
+  {schemas.map((schema) => (
+    <script type="application/ld+json" set:html={typeof schema === 'string' ? schema : JSON.stringify(schema)} />
+  ))}
+</head>
+<body>
+  <!-- NAVIGATION -->
+  <header class="en-nav">
+    <div class="en-nav-inner">
+      <a href="/en/" class="en-logo">
+        <img src="/assets/img/logo-wt.webp" alt="Wahana Totalita Logo" width="160" height="38" onerror="this.onerror=null;this.src='/assets/img/logo-wt.png'" />
+        <span class="en-lang-badge">Indonesia HSE Portal</span>
+      </a>
+      <div class="en-nav-links">
+        <a href="/en/" class="en-nav-back">&larr; All English Guides</a>
+        <a href={waUrl} class="en-nav-contact" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
+          <span>Contact Legal HSE Team</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="konten-utama">
+    <slot />
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="en-footer">
+    <div class="en-footer-inner">
+      <div>
+        <h4>PT Wahana Totalita Konsultan — Statutory HSE &amp; Technical Inspection Body</h4>
+        <p>
+          Official PJK3 licensed by the Ministry of Manpower Republic of Indonesia (Kep. 312/BINWASPNAK-PNK3/V/2020). We provide complete statutory compliance consulting, equipment inspection (Riksa Uji / SIA), operator licensing (SIO), and certified safety management audits (SMK3) for foreign companies, mining operators, petrochemical plants, and infrastructure contractors nationwide.
+        </p>
+        <p>
+          <strong>Headquarters:</strong> Jl. Wonosari KM 8.5, Berbah, Sleman, D.I. Yogyakarta 55573, Indonesia<br />
+          <strong>Email:</strong> info@wahanatotalita.com &nbsp;|&nbsp; <strong>Direct Line:</strong> +62 877-5915-1278
+        </p>
+      </div>
+      <div>
+        <h4>Legal Disclaimer</h4>
+        <p style="font-size:12.5px;">
+          The regulatory overviews on this portal are based on Law No. 1/1970, Law No. 13/2003, Government Regulation PP 50/2012, and corresponding Ministerial Decrees issued by the Indonesian Ministry of Manpower (Kemnaker) and Ministry of Energy and Mineral Resources (ESDM). Official enforcement and statutory audits are subject to regional labor inspection offices (Disnaker).
+        </p>
+      </div>
+    </div>
+    <div class="en-footer-bottom">
+      &copy; 2008 - 2026 PT Wahana Totalita Konsultan. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- MOBILE STICKY CONTACT BAR -->
+  <div class="en-mobile-bar">
+    <div>
+      <div class="en-mb-text">Indonesia HSE &amp; Licensing Advisory</div>
+      <div class="en-mb-sub">Ministry of Manpower Licensed PJK3 Body</div>
+    </div>
+    <a href={waUrl} class="en-mb-btn" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
+      <span>Consult Now</span>
+    </a>
+  </div>
+
+  <script is:inline>
+    function toggleEnFaq(btn) {
+      var ans = btn.nextElementSibling;
+      var isOpen = ans.classList.contains('open');
+      document.querySelectorAll('.en-faq-a').forEach(function(el) { el.classList.remove('open'); });
+      if (!isOpen) { ans.classList.add('open'); }
+    }
+  </script>
+</body>
+</html>

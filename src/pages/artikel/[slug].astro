@@ -4,74 +4,167 @@ import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
   const articles = await getCollection('articles');
-  return articles.map((article) => ({
-    params: { slug: article.data.slug },
-    props: { article },
-  }));
+  const categories = await getCollection('categories');
+
+  const paths: any[] = [];
+
+  // 1. Individual Article Pages
+  for (const article of articles) {
+    paths.push({
+      params: { slug: article.data.slug },
+      props: { type: 'article', data: article.data },
+    });
+  }
+
+  // 2. Category Hub Pages (k3, lingkungan, mining, system-management)
+  for (const cat of categories) {
+    const catArticles = articles
+      .filter((a) => {
+        const c = a.data.category?.toLowerCase() || '';
+        if (cat.data.slug === 'k3') return c.includes('k3');
+        if (cat.data.slug === 'lingkungan') return c.includes('lingkungan');
+        if (cat.data.slug === 'system-management') return c.includes('iso') || c.includes('qhse');
+        if (cat.data.slug === 'mining') return c.includes('mining') || c.includes('tambang');
+        return false;
+      })
+      .map((a) => a.data);
+
+    paths.push({
+      params: { slug: cat.data.slug },
+      props: {
+        type: 'category',
+        data: {
+          category: cat.data,
+          articles: catArticles,
+        },
+      },
+    });
+  }
+
+  return paths;
 }
 
-const { article } = Astro.props;
-const {
-  title,
-  meta_title,
-  meta_desc,
-  category,
-  author,
-  published_at,
-  content,
-  faq_list,
-  slug,
-  thumbnail,
-} = article.data;
+interface Props {
+  type: 'article' | 'category';
+  data: any;
+}
 
-const pageTitle = meta_title || `${title} — Wahana Totalita`;
-const pageDesc = meta_desc || title;
-const canonicalUrl = `https://wahanatotalita.com/artikel/${slug}/`;
-const imageUrl = thumbnail || 'https://wahanatotalita.com/assets/img/og-cover.jpg';
+const { type, data } = Astro.props;
 
-// JSON-LD Article Schema
-const schemas: Record<string, any>[] = [
-  {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': canonicalUrl,
-    },
-    headline: title,
-    description: pageDesc,
-    image: imageUrl,
-    author: {
-      '@type': 'Person',
-      name: author || 'PT Wahana Totalita Konsultan',
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'PT Wahana Totalita Konsultan',
-      logo: {
-        '@type': 'ImageObject',
-        url: 'https://wahanatotalita.com/assets/img/logo-wt.png',
-      },
-    },
-    datePublished: published_at || '2026-01-01',
-    dateModified: article.data.updated_at || published_at || '2026-01-01',
+const CATEGORY_TITLES: Record<string, { title: string; h1: string; desc: string }> = {
+  k3: {
+    title: 'Artikel & Panduan K3 Keselamatan Kerja | Wahana Totalita',
+    h1: 'Artikel & Panduan K3',
+    desc: 'Kumpulan artikel edukasi keselamatan dan kesehatan kerja (K3), regulasi Kemnaker RI, panduan SMK3, dan tips keselamatan industri.',
   },
-];
+  lingkungan: {
+    title: 'Artikel K3 Lingkungan & Pengolahan Limbah | Wahana Totalita',
+    h1: 'Artikel K3 Lingkungan & Limbah',
+    desc: 'Panduan teknis pengelolaan limbah B3, pengendalian pencemaran air dan udara, serta sertifikasi kompetensi lingkungan BNSP.',
+  },
+  mining: {
+    title: 'Artikel & Regulasi K3 Pertambangan (Minerba) | Wahana Totalita',
+    h1: 'Artikel K3 Pertambangan (Minerba)',
+    desc: 'Panduan keselamatan operasional pertambangan, regulasi Kepmen ESDM, dan kompetensi pengawas operasional POP, POM, POU.',
+  },
+  'system-management': {
+    title: 'Panduan ISO & Sistem Manajemen SMK3 | Wahana Totalita',
+    h1: 'Panduan ISO & Sistem Manajemen',
+    desc: 'Panduan implementasi SMK3 PP 50/2012, audit SMK3 kriteria emas, ISO 45001, ISO 9001, dan integrasi sistem manajemen perusahaan.',
+  },
+};
 
-// Add FAQ schema if present
-if (Array.isArray(faq_list) && faq_list.length > 0) {
-  schemas.push({
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faq_list.map((item: any) => ({
-      '@type': 'Question',
-      name: item.q || item.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: item.a || item.answer,
+let pageTitle = '';
+let pageDesc = '';
+let canonicalUrl = '';
+let imageUrl = 'https://wahanatotalita.com/assets/img/og-cover.jpg';
+let schemas: Record<string, any>[] = [];
+
+if (type === 'category') {
+  const seo = CATEGORY_TITLES[data.category.slug] || {
+    title: `Artikel ${data.category.name} | Wahana Totalita`,
+    h1: `Artikel ${data.category.name}`,
+    desc: `Kumpulan artikel dan panduan ${data.category.name} dari Wahana Totalita Konsultan.`,
+  };
+  pageTitle = seo.title;
+  pageDesc = seo.desc;
+  canonicalUrl = `https://wahanatotalita.com/artikel/${data.category.slug}/`;
+  schemas = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: seo.h1,
+      description: seo.desc,
+      url: canonicalUrl,
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Beranda', item: 'https://wahanatotalita.com/' },
+        { '@type': 'ListItem', position: 2, name: 'Artikel', item: 'https://wahanatotalita.com/artikel/' },
+        { '@type': 'ListItem', position: 3, name: data.category.name, item: canonicalUrl },
+      ],
+    },
+  ];
+} else {
+  pageTitle = data.meta_title || `${data.title} — Wahana Totalita`;
+  pageDesc = data.meta_desc || data.title;
+  canonicalUrl = `https://wahanatotalita.com/artikel/${data.slug}/`;
+  imageUrl = data.thumbnail || 'https://wahanatotalita.com/assets/img/og-cover.jpg';
+
+  schemas = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      mainEntityOfPage: {
+        '@type': 'WebPage',
+        '@id': canonicalUrl,
       },
-    })),
-  });
+      headline: data.title,
+      description: pageDesc,
+      image: imageUrl,
+      author: {
+        '@type': 'Person',
+        name: data.author || 'PT Wahana Totalita Konsultan',
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'PT Wahana Totalita Konsultan',
+        logo: {
+          '@type': 'ImageObject',
+          url: 'https://wahanatotalita.com/assets/img/logo-wt.png',
+        },
+      },
+      datePublished: data.published_at || '2026-01-01',
+      dateModified: data.updated_at || data.published_at || '2026-01-01',
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Beranda', item: 'https://wahanatotalita.com/' },
+        { '@type': 'ListItem', position: 2, name: 'Artikel', item: 'https://wahanatotalita.com/artikel/' },
+        { '@type': 'ListItem', position: 3, name: data.category || 'K3', item: `https://wahanatotalita.com/artikel/` },
+        { '@type': 'ListItem', position: 4, name: data.title, item: canonicalUrl },
+      ],
+    },
+  ];
+
+  if (Array.isArray(data.faq_list) && data.faq_list.length > 0) {
+    schemas.push({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: data.faq_list.map((item: any) => ({
+        '@type': 'Question',
+        name: item.q || item.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.a || item.answer,
+        },
+      })),
+    });
+  }
 }
 ---
 
@@ -80,52 +173,104 @@ if (Array.isArray(faq_list) && faq_list.length > 0) {
   description={pageDesc}
   canonical={canonicalUrl}
   ogImage={imageUrl}
-  ogType="article"
+  ogType={type === 'article' ? 'article' : 'website'}
   schemas={schemas}
 >
-  <div class="breadcrumb-bar" style="margin-top: var(--nav-h, 72px); background: var(--surface-subtle); border-bottom: 1px solid var(--border); padding: 12px 0;">
-    <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 20px; font-size: 13px; color: var(--mut);">
-      <a href="/" style="color: var(--mut); text-decoration: none;">Beranda</a> &rsaquo;
-      <a href="/artikel/" style="color: var(--mut); text-decoration: none;">Artikel</a> &rsaquo;
-      <span style="color: var(--brand); font-weight: 600;">{category || 'K3'}</span>
-    </div>
-  </div>
-
-  <article style="max-width: 900px; margin: 40px auto 60px; padding: 0 20px;">
-    <header style="margin-bottom: 30px;">
-      <span style="display: inline-block; background: var(--accent-light); color: var(--accent); font-weight: 700; font-size: 12px; padding: 4px 10px; border-radius: 4px; text-transform: uppercase; margin-bottom: 12px;">
-        {category || 'K3 & Regulasi'}
-      </span>
-      <h1 style="font-size: clamp(24px, 4vw, 36px); font-weight: 800; color: var(--brand); line-height: 1.3; margin-bottom: 15px;">
-        {title}
-      </h1>
-      <div style="display: flex; gap: 15px; font-size: 13px; color: var(--mut); border-bottom: 1px solid var(--border); padding-bottom: 15px;">
-        <span>Penulis: <strong>{author || 'Tim Ahli K3'}</strong></span>
-        <span>&bull;</span>
-        <span>{published_at ? new Date(published_at).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' }) : ''}</span>
+  {type === 'category' ? (
+    <div class="category-articles-page">
+      <div class="breadcrumb-bar" style="margin-top: var(--nav-h, 72px); background: var(--surface-subtle); border-bottom: 1px solid var(--border); padding: 12px 0;">
+        <div class="container" style="max-width: 1100px; margin: 0 auto; padding: 0 20px; font-size: 13px; color: var(--mut);">
+          <a href="/" style="color: var(--mut); text-decoration: none;">Beranda</a> &rsaquo;
+          <a href="/artikel/" style="color: var(--mut); text-decoration: none;">Artikel</a> &rsaquo;
+          <span style="color: var(--brand); font-weight: 600;">{data.category.name}</span>
+        </div>
       </div>
-    </header>
 
-    <div class="article-body" style="font-size: 16px; line-height: 1.8; color: var(--text);" set:html={content} />
+      <header style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #fff; padding: 60px 20px 50px; text-align: center;">
+        <div class="container" style="max-width: 800px; margin: 0 auto;">
+          <span style="font-size: 2.5rem; display: block; margin-bottom: 12px;">{data.category.icon || '📚'}</span>
+          <h1 style="font-size: clamp(26px, 4vw, 38px); font-weight: 800; margin-bottom: 16px;">{CATEGORY_TITLES[data.category.slug]?.h1 || data.category.name}</h1>
+          <p style="font-size: 1.05rem; color: #94a3b8; line-height: 1.6; margin: 0 auto;">{CATEGORY_TITLES[data.category.slug]?.desc || pageDesc}</p>
+        </div>
+      </header>
 
-    {Array.isArray(faq_list) && faq_list.length > 0 && (
-      <section style="margin-top: 50px; border-top: 2px solid var(--border); padding-top: 30px;">
-        <h2 style="font-size: 22px; font-weight: 800; color: var(--brand); margin-bottom: 20px;">
-          Pertanyaan Umum (FAQ)
-        </h2>
-        <div style="display: flex; flex-direction: column; gap: 16px;">
-          {faq_list.map((faq: any) => (
-            <div style="background: var(--surface-subtle); border: 1px solid var(--border); border-radius: 8px; padding: 18px;">
-              <h3 style="font-size: 16px; font-weight: 700; color: var(--brand); margin-bottom: 8px;">
-                {faq.q || faq.question}
-              </h3>
-              <p style="font-size: 14px; line-height: 1.6; color: var(--mut); margin: 0;">
-                {faq.a || faq.answer}
-              </p>
-            </div>
+      <main class="container" style="max-width: 1100px; margin: 50px auto 80px; padding: 0 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 16px;">
+          <span style="font-size: 0.95rem; color: var(--mut);">Ditemukan <strong>{data.articles.length}</strong> artikel & panduan</span>
+          <a href={`/pelatihan/${data.category.slug}/`} style="font-size: 0.9rem; font-weight: 600; color: var(--accent); text-decoration: none;">Lihat Program Pelatihan {data.category.name} &rarr;</a>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px;">
+          {data.articles.map((art: any) => (
+            <article style="background: var(--bg-card, #fff); border: 1px solid var(--border-color, #e2e8f0); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column;">
+              {art.thumbnail && (
+                <a href={`/artikel/${art.slug}/`} style="display: block;">
+                  <img src={art.thumbnail} alt={art.title} loading="lazy" style="width: 100%; height: 180px; object-fit: cover;" />
+                </a>
+              )}
+              <div style="padding: 20px; flex: 1; display: flex; flex-direction: column;">
+                <span style="font-size: 0.75rem; font-weight: 700; color: var(--accent, #0ea5e9); text-transform: uppercase; margin-bottom: 8px;">{art.category || data.category.name}</span>
+                <h2 style="font-size: 1.15rem; font-weight: 700; line-height: 1.4; margin-bottom: 10px;">
+                  <a href={`/artikel/${art.slug}/`} style="color: inherit; text-decoration: none;">{art.title}</a>
+                </h2>
+                <p style="font-size: 0.875rem; color: var(--text-muted, #64748b); line-height: 1.5; margin-bottom: 16px; flex: 1; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">{art.meta_desc || art.title}</p>
+                <div style="border-top: 1px solid var(--border-color, #e2e8f0); padding-top: 12px; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: var(--text-muted, #94a3b8);">
+                  <span>{art.published_at ? new Date(art.published_at).toLocaleDateString('id-ID', { year: 'numeric', month: 'short', day: 'numeric' }) : ''}</span>
+                  <a href={`/artikel/${art.slug}/`} style="font-weight: 600; color: var(--accent, #0ea5e9); text-decoration: none;">Baca Selengkapnya &rarr;</a>
+                </div>
+              </div>
+            </article>
           ))}
         </div>
-      </section>
-    )}
-  </article>
+      </main>
+    </div>
+  ) : (
+    <div class="single-article-page">
+      <div class="breadcrumb-bar" style="margin-top: var(--nav-h, 72px); background: var(--surface-subtle); border-bottom: 1px solid var(--border); padding: 12px 0;">
+        <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 20px; font-size: 13px; color: var(--mut);">
+          <a href="/" style="color: var(--mut); text-decoration: none;">Beranda</a> &rsaquo;
+          <a href="/artikel/" style="color: var(--mut); text-decoration: none;">Artikel</a> &rsaquo;
+          <span style="color: var(--brand); font-weight: 600;">{data.category || 'K3'}</span>
+        </div>
+      </div>
+
+      <article style="max-width: 900px; margin: 40px auto 60px; padding: 0 20px;">
+        <header style="margin-bottom: 30px;">
+          <span style="display: inline-block; background: var(--accent-light); color: var(--accent); font-weight: 700; font-size: 12px; padding: 4px 10px; border-radius: 4px; text-transform: uppercase; margin-bottom: 12px;">
+            {data.category || 'K3 & Regulasi'}
+          </span>
+          <h1 style="font-size: clamp(24px, 4vw, 36px); font-weight: 800; color: var(--brand); line-height: 1.3; margin-bottom: 15px;">
+            {data.title}
+          </h1>
+          <div style="display: flex; gap: 15px; font-size: 13px; color: var(--mut); border-bottom: 1px solid var(--border); padding-bottom: 15px;">
+            <span>Penulis: <strong>{data.author || 'Tim Ahli K3'}</strong></span>
+            <span>&bull;</span>
+            <span>{data.published_at ? new Date(data.published_at).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' }) : ''}</span>
+          </div>
+        </header>
+
+        <div class="article-body" style="font-size: 16px; line-height: 1.8; color: var(--text);" set:html={data.content} />
+
+        {Array.isArray(data.faq_list) && data.faq_list.length > 0 && (
+          <section style="margin-top: 50px; border-top: 2px solid var(--border); padding-top: 30px;">
+            <h2 style="font-size: 22px; font-weight: 800; color: var(--brand); margin-bottom: 20px;">
+              Pertanyaan Umum (FAQ)
+            </h2>
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+              {data.faq_list.map((faq: any) => (
+                <div style="background: var(--surface-subtle); border: 1px solid var(--border); border-radius: 8px; padding: 18px;">
+                  <h3 style="font-size: 16px; font-weight: 700; color: var(--brand); margin-bottom: 8px;">
+                    {faq.q || faq.question}
+                  </h3>
+                  <p style="font-size: 14px; line-height: 1.6; color: var(--mut); margin: 0;">
+                    {faq.a || faq.answer}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+      </article>
+    </div>
+  )}
 </Layout>

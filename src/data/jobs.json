@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "title": "HSE Officer (K3 Tambang & Konstruksi)",
+    "slug": "hse-officer-tambang-konstruksi",
+    "company": "Mitra Industri EPC & Pertambangan",
+    "location": "Balikpapan & IKN, Kalimantan Timur",
+    "job_type": "fulltime",
+    "salary_min": 8500000,
+    "salary_max": 14000000,
+    "description": "Dibutuhkan HSE Officer berpengalaman untuk mengawasi operasional kepatuhan K3 di proyek infrastruktur dan pertambangan. Bertanggung jawab dalam penyusunan JSA, inspeksi harian, toolbox meeting, dan investigasi insiden.",
+    "requirements": "1. Pendidikan minimal D3/S1 semua jurusan (Teknik/K3 lebih disukai).\n2. Memiliki Sertifikasi Ahli K3 Umum Kemnaker RI yang masih berlaku.\n3. Pengalaman minimal 2 tahun di bidang HSE pertambangan atau konstruksi sipil.\n4. Memahami regulasi SMK3 PP 50/2012 dan standar keselamatan kerja pertambangan (Kepmen ESDM 1827 K/30/MEM/2018).\n5. Bersedia ditempatkan di site project dengan sistem kerja roster.",
+    "benefits": "Akomodasi site, tiket roster, BPJS Kesehatan & Ketenagakerjaan, tunjangan kesehatan.",
+    "created_at": "2026-10-10",
+    "is_active": true
+  },
+  {
+    "id": 2,
+    "title": "Koordinator K3 & Lingkungan (QHSE Specialist)",
+    "slug": "koordinator-k3-lingkungan-cilegon",
+    "company": "Perusahaan Manufaktur Kimia & Petrokimia",
+    "location": "Cilegon, Banten",
+    "job_type": "fulltime",
+    "salary_min": 10000000,
+    "salary_max": 18000000,
+    "description": "Bertanggung jawab atas implementasi Sistem Manajemen K3 (SMK3) dan ISO 14001 di fasilitas industri manufaktur kimia. Mengelola perizinan limbah B3, inspeksi sarana proteksi kebakaran, dan pembinaan keselamatan kerja berkala.",
+    "requirements": "1. S1 Teknik Lingkungan / Teknik Kimia / Kesehatan Masyarakat (K3).\n2. Memiliki sertifikat Ahli K3 Kimia atau Ahli K3 Umum Kemnaker RI.\n3. Sertifikasi Penanggung Jawab Pengendalian Pencemaran Air (PPPA) atau Udara (PPPU) merupakan nilai tambah.\n4. Pengalaman minimal 3 tahun di industri kimia atau petrokimia.\n5. Komunikatif dan memiliki jiwa kepemimpinan yang baik.",
+    "benefits": "Gaji kompetitif, tunjangan transportasi, asuransi swasta keluarga, bonus tahunan.",
+    "created_at": "2026-10-12",
+    "is_active": true
+  }
+]

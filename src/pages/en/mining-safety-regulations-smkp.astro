@@ -1,0 +1,93 @@
+---
+import EnLayout from '../../layouts/EnLayout.astro';
+import EnSidebar from '../../components/EnSidebar.astro';
+
+const title = "Mining Safety in Indonesia: SMKP Minerba & POP/POM Certification — Wahana Totalita";
+const description = "<?= htmlspecialchars($meta_desc, ENT_QUOTES,";
+const canonical = "https://wahanatotalita.com/en/mining-safety-regulations-smkp/";
+const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","@id":"https://wahanatotalita.com/en/mining-safety-regulations-smkp/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://wahanatotalita.com/"},{"@type":"ListItem","position":2,"name":"English OHS Hub","item":"https://wahanatotalita.com/en/"},{"@type":"ListItem","position":3,"name":"Mining Safety Regulations (SMKP)","item":"https://wahanatotalita.com/en/mining-safety-regulations-smkp/"}]},{"@type":"Article","@id":"https://wahanatotalita.com/en/mining-safety-regulations-smkp/#article","headline":"Mining Safety in Indonesia: SMKP Minerba & Operational Supervision Guide","description":"<?= htmlspecialchars($meta_desc, ENT_QUOTES,","inLanguage":"en-US","mainEntityOfPage":"https://wahanatotalita.com/en/mining-safety-regulations-smkp/","datePublished":"2026-09-01T08:00:00+07:00","dateModified":"2026-10-01T12:00:00+07:00","publisher":{"@type":"Organization","name":"PT Wahana Totalita Konsultan","url":"https://wahanatotalita.com","logo":{"@type":"ImageObject","url":"https://wahanatotalita.com/assets/img/logo-wt.png"}}}]}];
+---
+
+<EnLayout
+  title={title}
+  description={description}
+  canonical={canonical}
+  schemas={schemas}
+>
+<section class="en-hero">
+  <div class="en-container">
+    <div class="en-breadcrumb">
+      <a href="/">Home</a> &rsaquo; <a href="/en/">English OHS Hub</a> &rsaquo; <span>Mining Safety (SMKP)</span>
+    </div>
+    <div class="en-hero-pill">
+      <span>Mining Sector · Kepmen ESDM No. 1827 K/30/MEM/2018</span>
+    </div>
+    <h1>Mining Safety (SMKP) in Indonesia: Legal Framework &amp; Competency Standards</h1>
+    <p class="en-hero-lead">
+      Statutory compliance for foreign mining concession holders, nickel smelters, and mining service contractors (IUJP): understanding SMKP Minerba audits, KTT appointment, and POP/POM/POU certifications.
+    </p>
+
+    <div class="en-trust-bar">
+      <div class="en-trust-item">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        <div>
+          <strong>Kepmen 1827/2018</strong>
+          <span>ESDM mining safety guideline</span>
+        </div>
+      </div>
+      <div class="en-trust-item">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        <div>
+          <strong>SMKP Minerba</strong>
+          <span>Seven-element mining safety system</span>
+        </div>
+      </div>
+      <div class="en-trust-item">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        <div>
+          <strong>POP / POM / POU</strong>
+          <span>Statutory frontline mining supervisors</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="en-container">
+  <div class="en-body-grid">
+    <main>
+      <section class="en-card">
+        <span class="en-sec-badge">ESDM Regulatory Domain</span>
+        <h2 class="en-sec-title">Dual Jurisdiction: Kemnaker vs Ditjen Minerba</h2>
+        <p class="en-text">
+          Mining operations in Indonesia are unique: while general labor law is policed by the Ministry of Manpower (Kemnaker), mining technical safety is strictly regulated by the <strong>Ministry of Energy and Mineral Resources (Kementerian ESDM - Ditjen Minerba)</strong> under <strong>Decree No. 1827 K/30/MEM/2018</strong>.
+        </p>
+        <p class="en-text">
+          Every mining company (IUP holder) and mining contractor (IUJP holder) must establish a specialized safety management system known as <strong>SMKP Minerba (Sistem Manajemen Keselamatan Pertambangan)</strong>.
+        </p>
+
+        <div class="en-law-grid">
+          <div class="en-law-card">
+            <strong>Head of Mining Engineering (KTT)</strong>
+            <p>Every concession must appoint an approved <strong>Kepala Teknik Tambang (KTT)</strong> endorsed by the Chief Mine Inspector (KaIT) who holds supreme operational liability over the mine.</p>
+          </div>
+          <div class="en-law-card">
+            <strong>POP — Operational Supervisor</strong>
+            <p><strong>Pengawas Operasional Pertama (POP)</strong>: Frontline pit supervisors, pit foremen, and shift leaders must pass government competency assessment.</p>
+          </div>
+          <div class="en-law-card">
+            <strong>POM — Middle Supervisor</strong>
+            <p><strong>Pengawas Operasional Madya (POM)</strong>: Department superintendents and pit captains responsible for safety compliance across mining contractors.</p>
+          </div>
+          <div class="en-law-card">
+            <strong>POU — Senior Executive</strong>
+            <p><strong>Pengawas Operasional Utama (POU)</strong>: Mining General Managers and Operations Directors responsible for strategic safety governance.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <EnSidebar currentSlug="mining-safety-regulations-smkp" />
+  </div>
+</div>
+</EnLayout>
