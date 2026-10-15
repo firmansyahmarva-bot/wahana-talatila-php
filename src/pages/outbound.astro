@@ -220,8 +220,8 @@ const schemas = [
   <main style="max-width:960px;margin:0 auto;padding:40px 20px 60px;">
 
     <!-- MENGAPA OUTBOUND -->
-    <section style="margin-bottom:48px;">
-      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:20px;">
+    <section class="sp-mb-48">
+      <h2 class="sp-title-underlined-20">
         Mengapa Outbound Training Efektif untuk Pengembangan SDM?
       </h2>
       <p style="line-height:1.8;color:var(--slate-800);margin-bottom:16px;">
@@ -239,8 +239,8 @@ const schemas = [
     </section>
 
     <!-- TUJUAN PENGEMBANGAN -->
-    <section style="margin-bottom:48px;">
-      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:24px;">
+    <section class="sp-mb-48">
+      <h2 class="sp-title-underlined-24">
         Tujuan Pengembangan yang Dapat Dicapai
       </h2>
       <p style="color:var(--slate-600);margin-bottom:20px;line-height:1.7;">
@@ -262,8 +262,8 @@ const schemas = [
     </section>
 
     <!-- FORMAT PROGRAM -->
-    <section style="margin-bottom:48px;">
-      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:24px;">
+    <section class="sp-mb-48">
+      <h2 class="sp-title-underlined-24">
         Format Program — Pilih Sesuai Kebutuhan
       </h2>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;">
@@ -287,8 +287,8 @@ const schemas = [
     </section>
 
     <!-- AKTIVITAS UNGGULAN -->
-    <section style="margin-bottom:48px;">
-      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:20px;">
+    <section class="sp-mb-48">
+      <h2 class="sp-title-underlined-20">
         Aktivitas Unggulan
       </h2>
       <p style="color:var(--slate-600);margin-bottom:20px;line-height:1.7;">
@@ -325,8 +325,8 @@ const schemas = [
     </section>
 
     <!-- LOKASI -->
-    <section style="margin-bottom:48px;">
-      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:20px;">
+    <section class="sp-mb-48">
+      <h2 class="sp-title-underlined-20">
         Pilihan Lokasi di Yogyakarta &amp; Sekitarnya
       </h2>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;">
@@ -341,8 +341,8 @@ const schemas = [
     </section>
 
     <!-- PROSES -->
-    <section style="margin-bottom:48px;">
-      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:24px;">
+    <section class="sp-mb-48">
+      <h2 class="sp-title-underlined-24">
         Alur Kerja — Dari Konsultasi hingga Laporan
       </h2>
       <div>
@@ -359,7 +359,7 @@ const schemas = [
     </section>
 
     <!-- RELATED -->
-    <section style="margin-bottom:48px;">
+    <section class="sp-mb-48">
       <h2 style="color:var(--brand);font-size:1.4rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:20px;">
         Program Pengembangan SDM Terkait
       </h2>
@@ -374,17 +374,17 @@ const schemas = [
     </section>
 
     <!-- FAQ -->
-    <section style="margin-bottom:48px;">
-      <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:24px;">
+    <section class="sp-mb-48">
+      <h2 class="sp-title-underlined-24">
         Pertanyaan yang Sering Diajukan
       </h2>
       {faqs.map((faq) => (
-        <details style="border:1px solid var(--border);border-radius:8px;margin-bottom:12px;overflow:hidden;background:var(--surface);">
-          <summary style="padding:16px 20px;background:var(--slate-50);cursor:pointer;font-weight:600;color:var(--brand);font-size:0.95rem;display:flex;justify-content:space-between;align-items:center;list-style:none;">
+        <details class="sp-faq-card">
+          <summary class="sp-faq-summary">
             <span>{faq.q}</span>
             <span style="font-size:1.2rem;font-weight:700;color:var(--accent);min-width:20px;text-align:center;">+</span>
           </summary>
-          <div style="padding:16px 20px;color:var(--slate-700);line-height:1.8;background:var(--surface);border-top:1px solid var(--border);font-size:0.92rem;">
+          <div class="sp-faq-content">
             {faq.a}
           </div>
         </details>

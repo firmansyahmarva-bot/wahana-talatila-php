@@ -258,12 +258,12 @@ const schemas = [
         </div>
         <div class="faq-grid" style="max-width:860px;margin:0 auto;">
           {faqs.map((f) => (
-            <details class="faq-item" style="border:1px solid var(--border);border-radius:8px;margin-bottom:12px;background:var(--surface);overflow:hidden;">
-              <summary style="padding:16px 20px;background:var(--slate-50);cursor:pointer;font-weight:600;color:var(--brand);font-size:0.95rem;display:flex;justify-content:space-between;align-items:center;list-style:none;">
+            <details class="faq-item sp-faq-card">
+              <summary class="sp-faq-summary">
                 <span>{f.q}</span>
                 <span class="faq-icon" style="font-size:1.2rem;font-weight:700;color:var(--accent);min-width:20px;text-align:center;">+</span>
               </summary>
-              <div class="faq-answer" style="padding:16px 20px;color:var(--slate-700);line-height:1.8;background:var(--surface);border-top:1px solid var(--border);font-size:0.92rem;">
+              <div class="faq-answer sp-faq-content">
                 <p style="margin:0;">{f.a}</p>
               </div>
             </details>

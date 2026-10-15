@@ -111,10 +111,10 @@ const eventSchema = {
   pageCss={['/assets/css/page/jadwal-detail.css']}
 >
   <!-- BREADCRUMB -->
-  <div class="breadcrumb-bar" style="margin-top:var(--nav-h,72px);background:var(--surface);padding:12px 0;border-bottom:1px solid var(--border);">
-    <div class="container" style="max-width:1160px;margin:0 auto;padding:0 20px;">
+  <div class="breadcrumb-bar sp-breadcrumb-wrap">
+    <div class="container sp-breadcrumb-inner">
       <nav aria-label="Breadcrumb">
-        <ol class="breadcrumb-list" style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:13px;color:var(--slate-500);list-style:none;padding:0;margin:0;">
+        <ol class="breadcrumb-list sp-breadcrumb-list">
           <li><a href="/" style="color:var(--slate-600);text-decoration:none;">Beranda</a></li>
           <li aria-hidden="true">›</li>
           <li><a href="/jadwal/" style="color:var(--slate-600);text-decoration:none;">Jadwal Pelatihan</a></li>
@@ -127,7 +127,7 @@ const eventSchema = {
 
   <!-- HERO -->
   <section class="detail-hero" style="background:linear-gradient(135deg,var(--brand-dark,var(--brand-dark)) 0%,var(--brand,var(--brand)) 100%);padding:48px 0;color:var(--surface);">
-    <div class="container" style="max-width:1160px;margin:0 auto;padding:0 20px;">
+    <div class="container sp-breadcrumb-inner">
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
         <span class="badge-mode" style="background:color-mix(in srgb,var(--surface) 15%,transparent);color:var(--success-border);padding:4px 12px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.05em;border:1px solid color-mix(in srgb,var(--surface) 20%,transparent);">
           {mode.toUpperCase()}
