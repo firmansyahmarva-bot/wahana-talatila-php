@@ -126,7 +126,7 @@ if (schemaFaqs.length > 0) {
           <!-- Section 1: Overview -->
           <section class="skkni-section-card">
             <h2 class="skkni-section-title">📖 Ringkasan & Ruang Lingkup Profesi</h2>
-            <p style="font-size:1.02rem; line-height:1.75; color:#334155; margin-bottom:20px;">
+            <p style="font-size:1.02rem; line-height:1.75; color:var(--slate-700); margin-bottom:20px;">
               {item.ringkasan}
             </p>
             {item.content_html && (
@@ -138,7 +138,7 @@ if (schemaFaqs.length > 0) {
           {item.unit_kompetensi && item.unit_kompetensi.length > 0 && (
             <section class="skkni-section-card">
               <h2 class="skkni-section-title">📋 Daftar Unit Kompetensi SKKNI (BNSP)</h2>
-              <p style="font-size:0.92rem; color:#64748b; margin:0 0 16px;">
+              <p style="font-size:0.92rem; color:var(--text-subtle); margin:0 0 16px;">
                 Kandidat wajib dinyatakan <em>Kompeten (K)</em> pada seluruh unit kompetensi berikut dalam uji asesmen LSP terlisensi BNSP:
               </p>
               <div class="units-table-wrapper">
@@ -153,7 +153,7 @@ if (schemaFaqs.length > 0) {
                   <tbody>
                     {item.unit_kompetensi.map((unit: any, idx: number) => (
                       <tr>
-                        <td style="color:#94a3b8; font-weight:600;">{idx + 1}</td>
+                        <td style="color:var(--slate-400); font-weight:600;">{idx + 1}</td>
                         <td><span class="unit-code">{unit.kode || '-'}</span></td>
                         <td><strong>{unit.judul || unit}</strong></td>
                       </tr>
@@ -171,7 +171,7 @@ if (schemaFaqs.length > 0) {
               <div class="info-block">
                 <p style="white-space:pre-line; margin:0;">{item.persyaratan_asesmen}</p>
               </div>
-              <p style="font-size:0.88rem; color:#64748b; margin-top:12px;">
+              <p style="font-size:0.88rem; color:var(--text-subtle); margin-top:12px;">
                 * Portofolio kerja dan bukti berkas pendukung wajib diverifikasi oleh Asesor Kompetensi sebelum pelaksanaan uji lisan/praktik.
               </p>
             </section>
@@ -181,7 +181,7 @@ if (schemaFaqs.length > 0) {
           {item.deskripsi_tugas && (
             <section class="skkni-section-card">
               <h2 class="skkni-section-title">🛠️ Uraian Tugas & Tanggung Jawab Operasional</h2>
-              <div class="info-block" style="border-left-color:#0284c7;">
+              <div class="info-block" style="border-left-color:var(--info);">
                 <p style="white-space:pre-line; margin:0;">{item.deskripsi_tugas}</p>
               </div>
             </section>
@@ -199,9 +199,9 @@ if (schemaFaqs.length > 0) {
                   </div>
                 )}
                 {item.prospek_karir && (
-                  <div class="career-box" style="background:#eff6ff; border-color:#bfdbfe;">
-                    <div class="career-box-title" style="color:#1e40af;">📈 Prospek Jalur Karir</div>
-                    <div class="career-box-val" style="color:#1e3a8a; font-size:0.95rem; font-weight:600;">
+                  <div class="career-box" style="background:var(--info-bg); border-color:var(--info-border);">
+                    <div class="career-box-title" style="color:var(--info-dark);">📈 Prospek Jalur Karir</div>
+                    <div class="career-box-val" style="color:var(--info-dark); font-size:0.95rem; font-weight:600;">
                       {item.prospek_karir}
                     </div>
                   </div>
@@ -254,10 +254,10 @@ if (schemaFaqs.length > 0) {
           </div>
 
           <!-- WhatsApp Consultation Card -->
-          <div class="skkni-sidebar-card" style="background:linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-color:#bbf7d0;">
+          <div class="skkni-sidebar-card" style="background:linear-gradient(135deg, var(--brand-light) 0%, var(--success-soft) 100%); border-color:var(--success-border);">
             <div style="font-size:1.8rem; margin-bottom:8px;">💬</div>
-            <h3 style="font-size:1.15rem; font-weight:700; color:#14532d; margin:0 0 8px;">Konsultasi Sertifikasi</h3>
-            <p style="font-size:0.88rem; color:#166534; line-height:1.55; margin:0 0 16px;">
+            <h3 style="font-size:1.15rem; font-weight:700; color:var(--success-dark); margin:0 0 8px;">Konsultasi Sertifikasi</h3>
+            <p style="font-size:0.88rem; color:var(--success-dark); line-height:1.55; margin:0 0 16px;">
               Ingin mengikuti uji kompetensi atau mendaftarkan pelatihan in-house perusahaan untuk skema <strong>{item.judul}</strong>? Tim konsultan kami siap membantu jadwal & penawaran resmi.
             </p>
             <a href={waUrl} target="_blank" rel="noopener noreferrer" class="wa-btn-card">
@@ -282,7 +282,7 @@ if (schemaFaqs.length > 0) {
 
           <!-- Hub Link -->
           <div style="text-align:center; padding:12px;">
-            <a href="/skkni/" style="color:#1e40af; font-size:0.9rem; font-weight:600; text-decoration:none;">
+            <a href="/skkni/" style="color:var(--info-dark); font-size:0.9rem; font-weight:600; text-decoration:none;">
               &larr; Kembali ke Direktori SKKNI
             </a>
           </div>

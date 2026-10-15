@@ -46,22 +46,22 @@
 /* ─── Hero Styling Enhancements ─── */
 .city-program-page .hero {
   padding: 56px 0;
-  background: linear-gradient(135deg, var(--brand-dark, #081c15) 0%, var(--brand, #1b4332) 100%);
+  background: linear-gradient(135deg, var(--brand-dark, var(--brand-dark)) 0%, var(--brand, var(--brand)) 100%);
   color: var(--surface);
 }
 .city-program-page .hero .tag {
   background: color-mix(in srgb, var(--surface) 12%, transparent);
-  color: #a7f3d0;
+  color: var(--success-border);
   border: 1px solid color-mix(in srgb, var(--surface) 20%, transparent);
   backdrop-filter: blur(8px);
 }
 .city-program-page .hero h1 {
   font-family: 'Lexend', sans-serif;
   letter-spacing: -0.025em;
-  color: #ffffff;
+  color: var(--surface);
 }
 .city-program-page .hero h1 span {
-  color: var(--accent-soft, #52b788);
+  color: var(--accent-soft, var(--accent-soft));
 }
 .city-program-page .hero .lead {
   color: rgba(255, 255, 255, 0.88);
@@ -72,8 +72,8 @@
 /* ─── High-Converting WhatsApp Button Styling ─── */
 .city-program-page a.btn[href*="wa.me"],
 .city-program-page a[href*="wa.me"].ghost {
-  background: var(--whatsapp, #25D366) !important;
-  color: #052e16 !important;
+  background: var(--whatsapp, var(--whatsapp)) !important;
+  color: var(--brand-dark) !important;
   font-weight: 700;
   border: none !important;
   box-shadow: 0 4px 14px color-mix(in srgb, var(--whatsapp) 30%, transparent) !important;
@@ -85,8 +85,8 @@
 }
 .city-program-page a.btn[href*="wa.me"]:hover,
 .city-program-page a[href*="wa.me"].ghost:hover {
-  background: #20bd5a !important;
-  color: #021f0d !important;
+  background: var(--whatsapp) !important;
+  color: var(--brand-dark) !important;
   transform: translateY(-2px);
   box-shadow: 0 6px 20px color-mix(in srgb, var(--whatsapp) 40%, transparent) !important;
 }
@@ -145,7 +145,7 @@
 
 /* ─── CTA Banner Polish ─── */
 .city-program-page .cta {
-  background: linear-gradient(135deg, var(--brand-dark, #081c15) 0%, var(--brand, #1b4332) 100%);
+  background: linear-gradient(135deg, var(--brand-dark, var(--brand-dark)) 0%, var(--brand, var(--brand)) 100%);
   border: 1px solid color-mix(in srgb, var(--surface) 10%, transparent);
   box-shadow: 0 20px 40px -12px color-mix(in srgb, var(--brand) 40%, transparent);
 }

@@ -16,7 +16,7 @@
 .job-info h2 a{text-decoration:none;color:var(--slate-900)}
 .job-info h2 a:hover{color:var(--mut)}
 .job-company{font-size:.875rem;color:var(--mut);font-weight:600;margin-bottom:8px}
-.job-meta{display:flex;gap:14px;flex-wrap:wrap;font-size:.8rem;color:var(--text-light)}
+.job-meta{display:flex;gap:14px;flex-wrap:wrap;font-size:.8rem;color:var(--text-subtle)}
 .job-badge{display:inline-block;padding:3px 10px;border-radius:100px;font-size:.75rem;font-weight:700}
 .badge-fulltime{background:var(--slate-200);color:var(--info)}
 .badge-contract{background:var(--warning-bg);color:var(--warning-text)}
@@ -25,5 +25,5 @@
 .btn-apply:hover{background:var(--brand-mid)}
 .salary-tag{background:var(--success-bg);color:var(--success);padding:4px 10px;border-radius:100px;font-size:.78rem;font-weight:600}
 .new-badge{background:var(--danger-bg);color:var(--danger-dark);padding:2px 8px;border-radius:100px;font-size:.72rem;font-weight:700}
-.empty-state{text-align:center;padding:60px 20px;color:var(--text-light)}
+.empty-state{text-align:center;padding:60px 20px;color:var(--text-subtle)}
 @media(max-width:600px){.job-card{flex-direction:column}.btn-apply{width:100%;margin-top:12px}}

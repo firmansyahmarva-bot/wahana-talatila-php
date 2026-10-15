@@ -58,10 +58,10 @@ const tagsArray = resource.tags ? resource.tags.split(',').map((t: string) => t.
         <div class="download-box">
           <span class="file-icon">{fileIcon}</span>
           <div class="file-type-badge">{resource.file_type.toUpperCase()}</div>
-          <div style="font-size: 1.5rem; font-weight: 800; color: #16a34a; margin-bottom: 4px;">
+          <div style="font-size: 1.5rem; font-weight: 800; color: var(--success); margin-bottom: 4px;">
             GRATIS
           </div>
-          <div style="font-size: .8rem; color: #64748b; margin-bottom: 20px;">Download langsung tanpa ribet</div>
+          <div style="font-size: .8rem; color: var(--text-subtle); margin-bottom: 20px;">Download langsung tanpa ribet</div>
 
           {resource.file_path ? (
             <a href={resource.file_path} download class="btn-download-big" style="margin-bottom: 8px;">
@@ -72,7 +72,7 @@ const tagsArray = resource.tags ? resource.tags.split(',').map((t: string) => t.
               💬 Minta Dokumen via WhatsApp
             </a>
           )}
-          <a href={waDownloadUrl} target="_blank" rel="noopener" style="font-size: .85rem; color: #0284c7; text-decoration: underline; display: block;">
+          <a href={waDownloadUrl} target="_blank" rel="noopener" style="font-size: .85rem; color: var(--info); text-decoration: underline; display: block;">
             Kirim ke WhatsApp Saya
           </a>
         </div>
@@ -84,38 +84,38 @@ const tagsArray = resource.tags ? resource.tags.split(',').map((t: string) => t.
     <div class="container">
       <div class="detail-content-grid" style="display: grid; grid-template-columns: 2fr 1fr; gap: 36px;">
         <div>
-          <div class="content-block" style="background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 28px; margin-bottom: 24px;">
-            <h2 style="font-size: 1.35rem; font-weight: 700; margin-bottom: 16px; color: #0f172a;">📋 Tentang Dokumen Ini</h2>
-            <p style="font-size: 1.05rem; line-height: 1.7; color: #334155;">{resource.description}</p>
+          <div class="content-block" style="background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 28px; margin-bottom: 24px;">
+            <h2 style="font-size: 1.35rem; font-weight: 700; margin-bottom: 16px; color: var(--text);">📋 Tentang Dokumen Ini</h2>
+            <p style="font-size: 1.05rem; line-height: 1.7; color: var(--slate-700);">{resource.description}</p>
           </div>
 
-          <div class="content-block" style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 28px;">
-            <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 12px; color: #0f172a;">🛡️ Standar Kepatuhan K3 Terkait</h3>
-            <p style="color: #475569; line-height: 1.6; margin-bottom: 16px;">
+          <div class="content-block" style="background: var(--surface-subtle); border: 1px solid var(--border); border-radius: 12px; padding: 28px;">
+            <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 12px; color: var(--text);">🛡️ Standar Kepatuhan K3 Terkait</h3>
+            <p style="color: var(--text-muted); line-height: 1.6; margin-bottom: 16px;">
               Dokumen ini diselaraskan dengan pedoman penerapan Sistem Manajemen Keselamatan dan Kesehatan Kerja (SMK3 PP No. 50 Tahun 2012) serta standar teknis Kemnaker RI dan standar internasional ISO 45001:2018.
             </p>
-            <a href="/pelatihan/" style="display: inline-flex; align-items: center; gap: 6px; color: #16a34a; font-weight: 600; text-decoration: none;">
+            <a href="/pelatihan/" style="display: inline-flex; align-items: center; gap: 6px; color: var(--success); font-weight: 600; text-decoration: none;">
               Lihat Program Pelatihan &amp; Sertifikasi K3 Resmi →
             </a>
           </div>
         </div>
 
         <div>
-          <div class="content-block" style="background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px;">
-            <h2 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 16px; color: #0f172a;">📁 Dokumen Terkait</h2>
+          <div class="content-block" style="background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px;">
+            <h2 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 16px; color: var(--text);">📁 Dokumen Terkait</h2>
             <div style="display: flex; flex-direction: column; gap: 12px;">
               {related.map((r: any) => {
                 const relIcon = r.file_type === 'pdf' ? '📕' : (['xlsx', 'xls'].includes(r.file_type) ? '📊' : (['docx', 'doc'].includes(r.file_type) ? '📝' : '📄'));
                 return (
-                  <a href={`/resources/${r.slug}/`} style="display: flex; gap: 12px; align-items: center; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; text-decoration: none; color: inherit; transition: background .15s;">
+                  <a href={`/resources/${r.slug}/`} style="display: flex; gap: 12px; align-items: center; padding: 12px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: inherit; transition: background .15s;">
                     <span style="font-size: 1.5rem;">{relIcon}</span>
-                    <span style="font-size: .85rem; font-weight: 600; line-height: 1.3; color: #1e293b;">{r.title}</span>
+                    <span style="font-size: .85rem; font-weight: 600; line-height: 1.3; color: var(--slate-800);">{r.title}</span>
                   </a>
                 );
               })}
             </div>
             <div style="margin-top: 20px; text-align: center;">
-              <a href="/resources/" style="font-size: .85rem; font-weight: 600; color: #0284c7; text-decoration: none;">
+              <a href="/resources/" style="font-size: .85rem; font-weight: 600; color: var(--info); text-decoration: none;">
                 ← Lihat Semua Resource ({data.resources.length})
               </a>
             </div>

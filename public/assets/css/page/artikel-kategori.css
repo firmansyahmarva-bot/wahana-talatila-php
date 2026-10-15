@@ -1,9 +1,9 @@
 /* Light navbar fix */
 #navbar:not(.scrolled) { background: color-mix(in srgb, var(--surface) 97%, transparent) !important; border-bottom-color: var(--border) !important; }
-#navbar:not(.scrolled) .nav-logo { color: var(--green) !important; }
+#navbar:not(.scrolled) .nav-logo { color: var(--brand) !important; }
 #navbar:not(.scrolled) .nav-links a { color: var(--text) !important; }
 #navbar:not(.scrolled) .nav-logo-text strong {
-  background: linear-gradient(135deg, var(--green) 30%, var(--orange));
+  background: linear-gradient(135deg, var(--brand) 30%, var(--cta));
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
 #navbar:not(.scrolled) .nav-hamburger span { background: var(--text) !important; }
@@ -82,7 +82,7 @@
   position: relative;
   aspect-ratio: 16 / 10;
   overflow: hidden;
-  background: var(--green-light);
+  background: var(--brand-light);
 }
 .article-card-img-wrap img {
   width: 100%;
@@ -118,7 +118,7 @@
   text-decoration: none;
 }
 .article-card-title a:hover {
-  color: var(--green);
+  color: var(--brand);
 }
 .article-card-desc {
   font-size: 14px;
@@ -133,12 +133,12 @@
   gap: 6px;
   font-size: 13px;
   font-weight: 700;
-  color: var(--green);
+  color: var(--brand);
   text-decoration: none;
   margin-top: auto;
 }
 .article-card-more:hover {
-  color: var(--orange);
+  color: var(--cta);
 }
 
 /* Pagination */
@@ -165,13 +165,13 @@
   transition: all .2s;
 }
 .acat-pg-btn:hover {
-  border-color: var(--green);
-  color: var(--green);
+  border-color: var(--brand);
+  color: var(--brand);
 }
 .acat-pg-btn.active {
-  background: var(--green);
+  background: var(--brand);
   color: var(--surface);
-  border-color: var(--green);
+  border-color: var(--brand);
 }
 
 /* Related Trainings Box */
@@ -187,7 +187,7 @@
 .acat-trainings-head h2 {
   font-size: 1.5rem;
   font-weight: 800;
-  color: var(--green);
+  color: var(--brand);
   margin-bottom: 6px;
 }
 .acat-trainings-head p {

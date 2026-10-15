@@ -101,11 +101,11 @@ const schemas = [
   <section style="background:linear-gradient(135deg,var(--brand) 0%,var(--brand-dark) 100%);color:var(--surface);padding:60px 20px 50px;">
     <div class="container" style="max-width:960px;">
       <nav aria-label="breadcrumb" style="font-size:0.85rem;opacity:0.8;margin-bottom:16px;">
-        <a href="/" style="color:#fff;text-decoration:none;">Beranda</a> › 
-        <a href="/pelatihan/" style="color:#fff;text-decoration:none;">Pelatihan</a> › 
+        <a href="/" style="color: var(--surface);text-decoration:none;">Beranda</a> › 
+        <a href="/pelatihan/" style="color: var(--surface);text-decoration:none;">Pelatihan</a> › 
         <span>Pengadaan Barang/Jasa</span>
       </nav>
-      <h1 style="font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;margin:0 0 16px;color:#fff;">
+      <h1 style="font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;margin:0 0 16px;color: var(--surface);">
         Pelatihan Pengadaan Barang/Jasa Pemerintah (PBJP) Yogyakarta
       </h1>
       <p style="font-size:1.05rem;opacity:0.92;max-width:760px;margin:0 0 14px;line-height:1.7;">
@@ -120,7 +120,7 @@ const schemas = [
       </div>
       <a href="https://wa.me/6287759151278?text=Halo%20Wahana%20Totalita,%20saya%20ingin%20info%20pelatihan%20pengadaan%20barang%20jasa%20pemerintah%20(PBJP)%20untuk%20instansi%20kami"
          target="_blank" rel="noopener"
-         style="display:inline-block;background:#25d366;color:#fff;padding:14px 32px;border-radius:8px;font-weight:700;text-decoration:none;font-size:1rem;box-shadow:var(--shadow-sm);">
+         style="display:inline-block;background:var(--whatsapp);color: var(--on-brand);padding:14px 32px;border-radius:8px;font-weight:700;text-decoration:none;font-size:1rem;box-shadow:var(--shadow-sm);">
         Konsultasi Program Pelatihan via WA
       </a>
     </div>
@@ -152,10 +152,10 @@ const schemas = [
         <table style="width:100%;border-collapse:collapse;font-size:0.88rem;border:1px solid var(--border);">
           <thead>
             <tr style="background:var(--brand);color:var(--surface);">
-              <th style="padding:12px 14px;text-align:left;color:#fff;">Metode</th>
-              <th style="padding:12px 14px;text-align:left;color:#fff;">Nilai / Kondisi</th>
-              <th style="padding:12px 14px;text-align:left;color:#fff;">Pelaksana</th>
-              <th style="padding:12px 14px;text-align:left;color:#fff;">Catatan Penting</th>
+              <th style="padding:12px 14px;text-align:left;color: var(--on-brand);">Metode</th>
+              <th style="padding:12px 14px;text-align:left;color: var(--surface);">Nilai / Kondisi</th>
+              <th style="padding:12px 14px;text-align:left;color: var(--surface);">Pelaksana</th>
+              <th style="padding:12px 14px;text-align:left;color: var(--surface);">Catatan Penting</th>
             </tr>
           </thead>
           <tbody>
@@ -216,11 +216,11 @@ const schemas = [
         {programs.map((p) => (
           <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;">
             <div style="font-weight:700;color:var(--brand);margin-bottom:6px;font-size:0.95rem;">{p.name}</div>
-            <div style="font-size:0.82rem;color:var(--orange);font-weight:700;margin-bottom:8px;">⏱️ {p.dur}</div>
+            <div style="font-size:0.82rem;color:var(--cta);font-weight:700;margin-bottom:8px;">⏱️ {p.dur}</div>
             <div style="font-size:0.84rem;color:var(--slate-600);margin-bottom:16px;line-height:1.5;flex:1;">Sasaran: {p.aud}</div>
             <a href={`https://wa.me/6287759151278?text=${encodeURIComponent(`Halo Wahana Totalita, saya tertarik pelatihan ${p.name} untuk instansi kami. Mohon info jadwal dan harga.`)}`}
                target="_blank" rel="noopener"
-               style="display:inline-block;background:var(--brand);color:#fff;padding:8px 16px;border-radius:6px;text-decoration:none;font-size:0.85rem;font-weight:700;text-align:center;">
+               style="display:inline-block;background:var(--brand);color: var(--on-brand);padding:8px 16px;border-radius:6px;text-decoration:none;font-size:0.85rem;font-weight:700;text-align:center;">
               Tanya via WhatsApp →
             </a>
           </div>
@@ -270,14 +270,14 @@ const schemas = [
 
     <!-- CTA -->
     <section style="background:linear-gradient(135deg,var(--brand),var(--brand-dark));color:var(--surface);border-radius:12px;padding:44px 24px;text-align:center;">
-      <h2 style="margin:0 0 12px;font-size:1.75rem;color:#fff;font-weight:800;">Siap Meningkatkan Kompetensi Pengadaan Tim Anda?</h2>
+      <h2 style="margin:0 0 12px;font-size:1.75rem;color: var(--surface);font-weight:800;">Siap Meningkatkan Kompetensi Pengadaan Tim Anda?</h2>
       <p style="opacity:0.9;margin:0 auto 12px;line-height:1.7;max-width:620px;">
         Hubungi kami untuk mendapatkan proposal pelatihan PBJP yang disesuaikan — in-house di instansi Anda, jadwal fleksibel, instruktur berpengalaman, dan dokumen SPJ lengkap siap pakai.
       </p>
       <p style="opacity:0.8;font-size:0.9rem;margin:0 0 24px;">Pengadaan langsung tanpa tender · LPSE &amp; PADI terdaftar · Nilai di bawah Rp 200 juta</p>
       <a href="https://wa.me/6287759151278?text=Halo%20Wahana%20Totalita,%20saya%20ingin%20proposal%20pelatihan%20pengadaan%20barang%20jasa%20pemerintah%20(PBJP)%20untuk%20instansi%20kami"
          target="_blank" rel="noopener"
-         style="display:inline-block;background:#25d366;color:#fff;padding:14px 36px;border-radius:8px;font-weight:700;text-decoration:none;font-size:1.05rem;">
+         style="display:inline-block;background:var(--whatsapp);color: var(--on-brand);padding:14px 36px;border-radius:8px;font-weight:700;text-decoration:none;font-size:1.05rem;">
         💬 Hubungi Kami via WhatsApp: 0877-5915-1278
       </a>
     </section>

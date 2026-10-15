@@ -102,7 +102,7 @@ html, body {
   --pd-safety-green: var(--accent-dark);
   --pd-safety-green-soft: var(--accent-light);
   --pd-steel:        var(--mut);
-  --pd-steel-soft:   var(--text-light);
+  --pd-steel-soft:   var(--text-subtle);
   --pd-hairline:        color-mix(in srgb, var(--surface) 14%, transparent);
   --pd-hairline-soft:   color-mix(in srgb, var(--brand) 12%, transparent);
   --pd-shadow-soft:  var(--shadow-md);

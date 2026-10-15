@@ -70,11 +70,11 @@ const schemas = [
   <section style="background:linear-gradient(135deg,var(--slate-900) 0%,var(--brand) 100%);color:var(--surface);padding:60px 20px 50px;">
     <div class="container" style="max-width:960px;">
       <nav aria-label="breadcrumb" style="font-size:0.85rem;opacity:0.8;margin-bottom:16px;">
-        <a href="/" style="color:#fff;text-decoration:none;">Beranda</a> › 
-        <a href="/pelatihan/" style="color:#fff;text-decoration:none;">Pelatihan</a> › 
+        <a href="/" style="color: var(--surface);text-decoration:none;">Beranda</a> › 
+        <a href="/pelatihan/" style="color: var(--surface);text-decoration:none;">Pelatihan</a> › 
         <span>K3 Satuan Pengamanan</span>
       </nav>
-      <h1 style="font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;margin:0 0 16px;color:#fff;">
+      <h1 style="font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;margin:0 0 16px;color: var(--surface);">
         Pelatihan K3 &amp; Keselamatan untuk Satuan Pengamanan (Satpam)
       </h1>
       <p style="font-size:1.1rem;opacity:0.92;max-width:760px;margin:0 0 14px;line-height:1.7;">
@@ -88,7 +88,7 @@ const schemas = [
       </div>
       <a href="https://wa.me/6287759151278?text=Halo%20Wahana%20Totalita,%20saya%20ingin%20info%20pelatihan%20K3%20untuk%20satuan%20pengamanan%20(satpam)%20kami"
          target="_blank" rel="noopener"
-         style="display:inline-block;background:#25d366;color:#fff;padding:14px 32px;border-radius:8px;font-weight:700;text-decoration:none;font-size:1rem;box-shadow:var(--shadow-sm);">
+         style="display:inline-block;background:var(--whatsapp);color: var(--on-brand);padding:14px 32px;border-radius:8px;font-weight:700;text-decoration:none;font-size:1rem;box-shadow:var(--shadow-sm);">
         Konsultasi Program via WhatsApp
       </a>
     </div>
@@ -105,7 +105,7 @@ const schemas = [
       </p>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;">
         {hazards.map((h) => (
-          <div style={`background:${h.color};color:#fff;border-radius:10px;padding:20px;box-shadow:var(--shadow-sm);`}>
+          <div style={`background:${h.color};color: var(--surface);border-radius:10px;padding:20px;box-shadow:var(--shadow-sm);`}>
             <div style="font-size:1.8rem;margin-bottom:8px;">{h.icon}</div>
             <div style="font-weight:700;margin-bottom:8px;font-size:1rem;">{h.title}</div>
             <p style="font-size:0.86rem;line-height:1.6;opacity:0.92;margin:0;">{h.desc}</p>
@@ -123,7 +123,7 @@ const schemas = [
         {programs.map((p) => (
           <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow-sm);">
             <div style="background:var(--slate-900);color:var(--surface);padding:14px 18px;">
-              <div style="font-weight:700;font-size:0.95rem;color:#fff;">{p.title}</div>
+              <div style="font-weight:700;font-size:0.95rem;color: var(--surface);">{p.title}</div>
             </div>
             <div style="padding:16px 18px;flex:1;">
               <p style="color:var(--slate-600);font-size:0.88rem;line-height:1.6;margin:0;">{p.desc}</p>
@@ -132,7 +132,7 @@ const schemas = [
               <a href={p.href || `https://wa.me/6287759151278?text=${encodeURIComponent(`Halo Wahana Totalita, saya ingin info program ${p.title} untuk satuan pengamanan kami.`)}`}
                  target={p.href ? undefined : '_blank'}
                  rel={p.href ? undefined : 'noopener'}
-                 style={`display:block;text-align:center;background:${p.href ? 'var(--brand)' : '#25d366'};color:#fff;padding:10px;border-radius:6px;text-decoration:none;font-weight:700;font-size:0.88rem;`}>
+                 style={`display:block;text-align:center;background:${p.href ? 'var(--brand)' : 'var(--whatsapp)'};color: var(--surface);padding:10px;border-radius:6px;text-decoration:none;font-weight:700;font-size:0.88rem;`}>
                 {p.cta}
               </a>
             </div>
@@ -180,13 +180,13 @@ const schemas = [
 
     <!-- CTA -->
     <section style="background:linear-gradient(135deg,var(--slate-900),var(--brand-dark));color:var(--surface);border-radius:12px;padding:44px 24px;text-align:center;">
-      <h2 style="margin:0 0 12px;font-size:1.75rem;color:#fff;font-weight:800;">Lindungi Petugas Keamanan Anda</h2>
+      <h2 style="margin:0 0 12px;font-size:1.75rem;color: var(--surface);font-weight:800;">Lindungi Petugas Keamanan Anda</h2>
       <p style="opacity:0.9;margin:0 auto 28px;line-height:1.7;max-width:620px;">
         Satpam yang terlatih K3 adalah aset — bukan beban. Hubungi kami untuk konsultasi program pelatihan K3 yang sesuai profil risiko fasilitas dan jumlah satpam Anda.
       </p>
       <a href="https://wa.me/6287759151278?text=Halo%20Wahana%20Totalita,%20saya%20ingin%20info%20pelatihan%20K3%20untuk%20satuan%20pengamanan%20(satpam)%20kami"
          target="_blank" rel="noopener"
-         style="display:inline-block;background:#25d366;color:#fff;padding:14px 36px;border-radius:8px;font-weight:700;text-decoration:none;font-size:1.05rem;">
+         style="display:inline-block;background:var(--whatsapp);color: var(--on-brand);padding:14px 36px;border-radius:8px;font-weight:700;text-decoration:none;font-size:1.05rem;">
         💬 Hubungi Kami via WhatsApp: 0877-5915-1278
       </a>
     </section>

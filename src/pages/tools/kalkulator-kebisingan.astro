@@ -96,7 +96,7 @@ const schemas = [
         <div class="card-box">
           <div class="card-header-line">
             <h2 class="card-title">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--cta)" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
               Tabel Sumber &amp; Durasi Paparan
             </h2>
             <button class="btn-add-source" type="button" onclick="addNoiseRow()">
@@ -121,7 +121,7 @@ const schemas = [
 
           <!-- APD DERATING CALCULATOR -->
           <div class="apd-box">
-            <div style="font-weight:700;color:var(--navy);font-size:0.92rem;display:flex;align-items:center;gap:8px">
+            <div style="font-weight:700;color:var(--text);font-size:0.92rem;display:flex;align-items:center;gap:8px">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
               Kalkulator Efektivitas Alat Pelindung Diri (HPD NRR)
             </div>
@@ -150,10 +150,10 @@ const schemas = [
         <div class="card-box">
           <div class="card-header-line">
             <h2 class="card-title">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--cta)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
               Hasil Evaluasi Pajanan
             </h2>
-            <span style="font-size:0.78rem;font-weight:700;color:var(--orange);background:var(--orange-light);padding:4px 8px;border-radius:4px">
+            <span style="font-size:0.78rem;font-weight:700;color:var(--cta);background:var(--cta-soft);padding:4px 8px;border-radius:4px">
               Permenaker 5/2018
             </span>
           </div>
@@ -199,7 +199,7 @@ const schemas = [
             </ul>
           </div>
 
-          <button class="noise-input" type="button" onclick="printNoiseReport()" style="margin-top:18px;background:var(--orange);color:var(--surface);border:none;font-weight:700;padding:12px;cursor:pointer">
+          <button class="noise-input" type="button" onclick="printNoiseReport()" style="margin-top:18px;background:var(--cta);color:var(--surface);border:none;font-weight:700;padding:12px;cursor:pointer">
             Cetak Laporan Penilaian Kebisingan
           </button>
 
@@ -215,7 +215,7 @@ const schemas = [
         Pengendalian faktor fisik kebisingan diatur secara mengikat melalui <strong>Peraturan Menteri Ketenagakerjaan RI No. 5 Tahun 2018 tentang Keselamatan dan Kesehatan Kerja Lingkungan Kerja</strong>. Kebisingan diartikan sebagai semua suara yang tidak dikehendaki yang bersumber dari alat-alat proses produksi dan/atau alat-alat kerja yang pada tingkat tertentu dapat menimbulkan gangguan pendengaran.
       </p>
 
-      <h3 style="color:var(--navy);font-family:'Lexend',sans-serif;font-size:1.15rem;margin:22px 0 10px">Tabel Resmi Batas Waktu Pemaparan Kebisingan (Permenaker 5/2018)</h3>
+      <h3 style="color:var(--text);font-family:'Lexend',sans-serif;font-size:1.15rem;margin:22px 0 10px">Tabel Resmi Batas Waktu Pemaparan Kebisingan (Permenaker 5/2018)</h3>
       <table class="ref-table">
         <thead>
           <tr>
@@ -237,11 +237,11 @@ const schemas = [
         </tbody>
       </table>
 
-      <h3 style="color:var(--navy);font-family:'Lexend',sans-serif;font-size:1.15rem;margin:22px 0 10px">Rumus Perhitungan Dosis Kebisingan Kumulatif</h3>
+      <h3 style="color:var(--text);font-family:'Lexend',sans-serif;font-size:1.15rem;margin:22px 0 10px">Rumus Perhitungan Dosis Kebisingan Kumulatif</h3>
       <p class="editorial-p">
         Apabila seorang tenaga kerja bekerja di berbagai ruangan dengan intensitas bising yang bervariasi sepanjang giliran kerja (shift), maka dosis paparan kumulatif dihitung dengan rumus:
       </p>
-      <div style="background:var(--slate-100);padding:14px 18px;border-radius:8px;font-family:monospace;font-size:0.95rem;color:var(--navy);margin-bottom:16px">
+      <div style="background:var(--slate-100);padding:14px 18px;border-radius:8px;font-family:monospace;font-size:0.95rem;color:var(--text);margin-bottom:16px">
         Dosis (D) = [ (C1 / T1) + (C2 / T2) + ... + (Cn / Tn) ] × 100%
       </div>
       <p class="editorial-p">
@@ -249,7 +249,7 @@ const schemas = [
       </p>
 
       <!-- FAQ ACCORDION -->
-      <h3 style="color:var(--navy);font-family:'Lexend',sans-serif;font-size:1.25rem;margin:28px 0 16px">Tanya Jawab Seputar Kebisingan Tempat Kerja (FAQ)</h3>
+      <h3 style="color:var(--text);font-family:'Lexend',sans-serif;font-size:1.25rem;margin:28px 0 16px">Tanya Jawab Seputar Kebisingan Tempat Kerja (FAQ)</h3>
       <div class="faq-box">
         
         <div class="faq-item">

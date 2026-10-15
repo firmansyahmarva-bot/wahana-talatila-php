@@ -32,13 +32,13 @@ function formatPrice(amount: number) {
   <div class="filter-bar">
     <div class="container" style="display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap;">
       <div style="display: flex; gap: 8px; align-items: center;">
-        <span style="font-size: .9rem; font-weight: 600; color: #475569;">Tipe Pekerjaan:</span>
+        <span style="font-size: .9rem; font-weight: 600; color: var(--text-muted);">Tipe Pekerjaan:</span>
         <button type="button" class="filter-pill active" data-type="all">Semua Tipe</button>
         <button type="button" class="filter-pill" data-type="fulltime">Full-time</button>
         <button type="button" class="filter-pill" data-type="contract">Kontrak</button>
       </div>
 
-      <a href="https://wa.me/6281226834789?text=Halo%20Admin%20Wahana%20Totalita,%20perusahaan%20kami%20ingin%20memasang%20info%20lowongan%20kerja%20K3." target="_blank" rel="noopener" style="font-size: .875rem; font-weight: 600; color: #16a34a; text-decoration: none;">
+      <a href="https://wa.me/6281226834789?text=Halo%20Admin%20Wahana%20Totalita,%20perusahaan%20kami%20ingin%20memasang%20info%20lowongan%20kerja%20K3." target="_blank" rel="noopener" style="font-size: .875rem; font-weight: 600; color: var(--success); text-decoration: none;">
         + Pasang Lowongan K3 (Gratis)
       </a>
     </div>
@@ -51,7 +51,7 @@ function formatPrice(amount: number) {
           <div style="font-size:3rem;margin-bottom:16px">📭</div>
           <h3>Belum ada lowongan tersedia</h3>
           <p>Lowongan K3 akan segera tersedia. Hubungi kami untuk posting lowongan.</p>
-          <a href="https://wa.me/6281226834789?text=Halo,%20saya%20ingin%20posting%20lowongan%20kerja%20K3" style="display:inline-block;margin-top:16px;background:#25d366;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600">💬 Post Lowongan (Gratis)</a>
+          <a href="https://wa.me/6281226834789?text=Halo,%20saya%20ingin%20posting%20lowongan%20kerja%20K3" style="display:inline-block;margin-top:16px;background:var(--whatsapp);color: var(--on-brand);padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600">💬 Post Lowongan (Gratis)</a>
         </div>
       ) : (
         jobs.map((j) => (
@@ -70,7 +70,7 @@ function formatPrice(amount: number) {
                   <span class="tag">💰 {formatPrice(j.salary_min)} - {formatPrice(j.salary_max)}</span>
                 )}
               </div>
-              <p style="font-size: .95rem; color: #64748b; margin-top: 10px; line-height: 1.5;">{j.description}</p>
+              <p style="font-size: .95rem; color: var(--text-subtle); margin-top: 10px; line-height: 1.5;">{j.description}</p>
             </div>
             <div class="job-action">
               <a href={`/lowongan/${j.slug}/`} class="btn-apply">Lihat Detail →</a>
@@ -80,12 +80,12 @@ function formatPrice(amount: number) {
       )}
     </div>
 
-    <div class="post-cta-box" style="margin-top: 48px; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; padding: 28px; text-align: center;">
-      <h3 style="color: #166534; font-size: 1.25rem; font-weight: 700; margin-bottom: 8px;">Perusahaan Anda Sedang Membutuhkan Tenaga Profesional K3 / HSE?</h3>
-      <p style="color: #15803d; max-width: 600px; margin: 0 auto 16px; font-size: .95rem;">
+    <div class="post-cta-box" style="margin-top: 48px; background: var(--brand-light); border: 1px solid var(--success-border); border-radius: 12px; padding: 28px; text-align: center;">
+      <h3 style="color: var(--success-dark); font-size: 1.25rem; font-weight: 700; margin-bottom: 8px;">Perusahaan Anda Sedang Membutuhkan Tenaga Profesional K3 / HSE?</h3>
+      <p style="color: var(--success); max-width: 600px; margin: 0 auto 16px; font-size: .95rem;">
         Publikasikan lowongan kerja K3 perusahaan Anda ke ribuan alumni pelatihan dan praktisi K3 bersertifikat Wahana Totalita di seluruh Indonesia.
       </p>
-      <a href="https://wa.me/6281226834789?text=Halo%20Wahana%20Totalita,%20saya%20ingin%20memasang%20info%20lowongan%20kerja%20K3%20perusahaan%20kami." target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 24px; background: #16a34a; color: #fff; border-radius: 8px; text-decoration: none; font-weight: 700;">
+      <a href="https://wa.me/6281226834789?text=Halo%20Wahana%20Totalita,%20saya%20ingin%20memasang%20info%20lowongan%20kerja%20K3%20perusahaan%20kami." target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 24px; background: var(--success); color: var(--on-brand); border-radius: 8px; text-decoration: none; font-weight: 700;">
         💬 Hubungi Tim Kami untuk Publikasi Lowongan
       </a>
     </div>
@@ -93,19 +93,19 @@ function formatPrice(amount: number) {
 
   <style>
     .filter-pill {
-      background: #f1f5f9;
-      border: 1px solid #cbd5e1;
+      background: var(--surface-alt);
+      border: 1px solid var(--slate-300);
       padding: 6px 14px;
       border-radius: 999px;
       font-size: .85rem;
       cursor: pointer;
-      color: #334155;
+      color: var(--slate-700);
       font-weight: 500;
     }
     .filter-pill.active {
-      background: #16a34a;
-      border-color: #16a34a;
-      color: #fff;
+      background: var(--success);
+      border-color: var(--success);
+      color: var(--surface);
     }
   </style>
 

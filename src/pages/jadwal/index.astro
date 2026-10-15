@@ -106,12 +106,12 @@ const eventSchemas = batches.slice(0, 30).map((b) => {
   </div>
 
   <!-- HERO -->
-  <section class="jadwal-hero" style="background:linear-gradient(135deg,var(--brand-dark,#081c15) 0%,var(--brand,#1b4332) 100%);padding:56px 0;color:var(--surface);text-align:center;">
+  <section class="jadwal-hero" style="background:linear-gradient(135deg,var(--brand-dark,var(--brand-dark)) 0%,var(--brand,var(--brand)) 100%);padding:56px 0;color:var(--surface);text-align:center;">
     <div class="container" style="max-width:1160px;margin:0 auto;padding:0 20px;">
-      <span class="jadwal-eyebrow" style="display:inline-block;padding:4px 14px;border-radius:999px;background:color-mix(in srgb,var(--surface) 12%,transparent);color:#a7f3d0;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;border:1px solid color-mix(in srgb,var(--surface) 18%,transparent);">
+      <span class="jadwal-eyebrow" style="display:inline-block;padding:4px 14px;border-radius:999px;background:color-mix(in srgb,var(--surface) 12%,transparent);color:var(--success-border);font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;border:1px solid color-mix(in srgb,var(--surface) 18%,transparent);">
         JADWAL RESMI TAHUN 2026
       </span>
-      <h1 style="font-family:'Lexend',sans-serif;font-size:clamp(2rem,3.8vw,3rem);font-weight:800;margin:0 0 14px;letter-spacing:-.02em;color:#ffffff;">
+      <h1 style="font-family:'Lexend',sans-serif;font-size:clamp(2rem,3.8vw,3rem);font-weight:800;margin:0 0 14px;letter-spacing:-.02em;color: var(--surface);">
         Jadwal Pelatihan K3 &amp; Sertifikasi
       </h1>
       <p style="color:rgba(255,255,255,0.85);max-width:640px;margin:0 auto 24px;font-size:16.5px;line-height:1.65;">
@@ -174,16 +174,16 @@ const eventSchemas = batches.slice(0, 30).map((b) => {
             data-mode={(b.mode || 'offline').toLowerCase()}
             style="background:var(--surface);border-radius:16px;border:1px solid var(--border);overflow:hidden;box-shadow:0 4px 14px color-mix(in srgb,var(--brand) 4%,transparent);display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s;"
           >
-            <div class="jadwal-card-header" style="background:linear-gradient(135deg,var(--brand,#1b4332),var(--brand-mid,#2d6a4f));padding:22px;color:var(--surface);">
+            <div class="jadwal-card-header" style="background:linear-gradient(135deg,var(--brand,var(--brand)),var(--brand-mid,var(--brand-mid)));padding:22px;color:var(--surface);">
               <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px;">
-                <span style="font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#a7f3d0;">
+                <span style="font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--success-border);">
                   {b.certification}
                 </span>
-                <span style="font-size:11px;padding:3px 8px;border-radius:999px;background:color-mix(in srgb,var(--surface) 18%,transparent);color:#ffffff;font-weight:700;text-transform:uppercase;">
+                <span style="font-size:11px;padding:3px 8px;border-radius:999px;background:color-mix(in srgb,var(--surface) 18%,transparent);color: var(--surface);font-weight:700;text-transform:uppercase;">
                   {b.mode || 'OFFLINE'}
                 </span>
               </div>
-              <h3 style="font-family:'Lexend',sans-serif;font-size:1.15rem;font-weight:700;margin:0;line-height:1.35;color:#ffffff;">
+              <h3 style="font-family:'Lexend',sans-serif;font-size:1.15rem;font-weight:700;margin:0;line-height:1.35;color: var(--surface);">
                 {b.training_name}
               </h3>
             </div>
@@ -228,7 +228,7 @@ const eventSchemas = batches.slice(0, 30).map((b) => {
                 target="_blank"
                 rel="noopener"
                 class="btn-daftar"
-                style="display:flex;align-items:center;justify-content:center;gap:8px;background:var(--whatsapp,#25D366);color:#052e16;padding:12px;border-radius:10px;font-weight:800;font-size:13.5px;text-decoration:none;box-shadow:0 4px 12px color-mix(in srgb,var(--whatsapp) 30%,transparent);transition:transform .2s,background .2s;"
+                style="display:flex;align-items:center;justify-content:center;gap:8px;background:var(--whatsapp,var(--whatsapp));color:var(--brand-dark);padding:12px;border-radius:10px;font-weight:800;font-size:13.5px;text-decoration:none;box-shadow:0 4px 12px color-mix(in srgb,var(--whatsapp) 30%,transparent);transition:transform .2s,background .2s;"
               >
                 <span>Daftar via WhatsApp</span>
               </a>
@@ -249,7 +249,7 @@ const eventSchemas = batches.slice(0, 30).map((b) => {
         href={waUrl('Halo Wahana Totalita, saya ingin bertanya jadwal khusus pelatihan K3')}
         target="_blank"
         rel="noopener"
-        style="display:inline-flex;padding:12px 24px;border-radius:10px;background:var(--whatsapp,#25D366);color:#052e16;font-weight:700;text-decoration:none;"
+        style="display:inline-flex;padding:12px 24px;border-radius:10px;background:var(--whatsapp,var(--whatsapp));color:var(--brand-dark);font-weight:700;text-decoration:none;"
       >
         Tanya Jadwal via WhatsApp
       </a>
@@ -257,9 +257,9 @@ const eventSchemas = batches.slice(0, 30).map((b) => {
   </div>
 
   <!-- IN-HOUSE BANNER -->
-  <section style="background:linear-gradient(135deg,var(--brand-dark,#081c15) 0%,var(--brand,#1b4332) 100%);padding:56px 0;text-align:center;color:var(--surface);">
+  <section style="background:linear-gradient(135deg,var(--brand-dark,var(--brand-dark)) 0%,var(--brand,var(--brand)) 100%);padding:56px 0;text-align:center;color:var(--surface);">
     <div class="container" style="max-width:800px;margin:0 auto;padding:0 20px;">
-      <h2 style="font-family:'Lexend',sans-serif;font-size:clamp(1.6rem,2.8vw,2.2rem);font-weight:800;margin:0 0 12px;color:#ffffff;">
+      <h2 style="font-family:'Lexend',sans-serif;font-size:clamp(1.6rem,2.8vw,2.2rem);font-weight:800;margin:0 0 12px;color: var(--on-brand);">
         Butuh Jadwal Khusus untuk Perusahaan?
       </h2>
       <p style="color:rgba(255,255,255,0.85);margin-bottom:24px;font-size:16px;line-height:1.65;">
@@ -269,7 +269,7 @@ const eventSchemas = batches.slice(0, 30).map((b) => {
         href={waUrl('Halo Wahana Totalita, kami ingin mengajukan proposal In-House Training K3 untuk perusahaan kami')}
         target="_blank"
         rel="noopener"
-        style="display:inline-flex;align-items:center;gap:8px;background:var(--whatsapp,#25D366);color:#052e16;padding:14px 32px;border-radius:999px;font-weight:800;font-size:15px;text-decoration:none;box-shadow:0 6px 20px color-mix(in srgb,var(--whatsapp) 40%,transparent);"
+        style="display:inline-flex;align-items:center;gap:8px;background:var(--whatsapp,var(--whatsapp));color:var(--brand-dark);padding:14px 32px;border-radius:999px;font-weight:800;font-size:15px;text-decoration:none;box-shadow:0 6px 20px color-mix(in srgb,var(--whatsapp) 40%,transparent);"
       >
         <span>Minta Penawaran In-House</span>
       </a>

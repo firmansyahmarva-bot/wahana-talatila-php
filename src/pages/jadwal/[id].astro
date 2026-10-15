@@ -126,17 +126,17 @@ const eventSchema = {
   </div>
 
   <!-- HERO -->
-  <section class="detail-hero" style="background:linear-gradient(135deg,var(--brand-dark,#081c15) 0%,var(--brand,#1b4332) 100%);padding:48px 0;color:var(--surface);">
+  <section class="detail-hero" style="background:linear-gradient(135deg,var(--brand-dark,var(--brand-dark)) 0%,var(--brand,var(--brand)) 100%);padding:48px 0;color:var(--surface);">
     <div class="container" style="max-width:1160px;margin:0 auto;padding:0 20px;">
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-        <span class="badge-mode" style="background:color-mix(in srgb,var(--surface) 15%,transparent);color:#a7f3d0;padding:4px 12px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.05em;border:1px solid color-mix(in srgb,var(--surface) 20%,transparent);">
+        <span class="badge-mode" style="background:color-mix(in srgb,var(--surface) 15%,transparent);color:var(--success-border);padding:4px 12px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.05em;border:1px solid color-mix(in srgb,var(--surface) 20%,transparent);">
           {mode.toUpperCase()}
         </span>
         <span style="font-size:13px;color:rgba(255,255,255,0.8);">
           🎓 Sertifikasi: <strong>{certification}</strong>
         </span>
       </div>
-      <h1 style="font-family:'Lexend',sans-serif;font-size:clamp(1.8rem,3.2vw,2.5rem);font-weight:800;margin:0 0 16px;color:#ffffff;line-height:1.25;">
+      <h1 style="font-family:'Lexend',sans-serif;font-size:clamp(1.8rem,3.2vw,2.5rem);font-weight:800;margin:0 0 16px;color: var(--surface);line-height:1.25;">
         Jadwal Pelatihan {trainingName}
       </h1>
       <div class="meta-grid" style="display:flex;gap:20px;flex-wrap:wrap;font-size:14px;color:rgba(255,255,255,0.9);">
@@ -244,7 +244,7 @@ const eventSchema = {
             target="_blank"
             rel="noopener"
             class="btn-reg"
-            style="display:flex;align-items:center;justify-content:center;gap:8px;background:var(--whatsapp,#25D366);color:#052e16;padding:14px;border-radius:12px;font-weight:800;font-size:15px;text-align:center;text-decoration:none;box-shadow:0 4px 14px color-mix(in srgb,var(--whatsapp) 35%,transparent);transition:transform .2s;"
+            style="display:flex;align-items:center;justify-content:center;gap:8px;background:var(--whatsapp,var(--whatsapp));color:var(--brand-dark);padding:14px;border-radius:12px;font-weight:800;font-size:15px;text-align:center;text-decoration:none;box-shadow:0 4px 14px color-mix(in srgb,var(--whatsapp) 35%,transparent);transition:transform .2s;"
           >
             <span>Daftar via WhatsApp</span>
           </a>

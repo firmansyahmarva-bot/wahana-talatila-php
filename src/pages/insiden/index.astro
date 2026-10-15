@@ -96,11 +96,11 @@ const schemas = [
           <span>Total Studi Kasus</span>
         </div>
         <div class="stat">
-          <strong style="color: #fca5a5;">{fatalCount}</strong>
+          <strong style="color: var(--danger-border);">{fatalCount}</strong>
           <span>Insiden Fatal</span>
         </div>
         <div class="stat">
-          <strong style="color: #fde68a;">{injuredCount}</strong>
+          <strong style="color: var(--warning-border);">{injuredCount}</strong>
           <span>Luka &amp; Cedera</span>
         </div>
         <div class="stat">
@@ -209,11 +209,11 @@ const schemas = [
       })}
     </div>
 
-    <div id="noResults" style="display:none; text-align:center; padding:60px 20px; color:var(--text-light)">
+    <div id="noResults" style="display:none; text-align:center; padding:60px 20px; color:var(--text-subtle)">
       <div style="font-size:3rem; margin-bottom:16px">🔍</div>
       <h3 style="color:var(--slate-800); font-size:1.25rem; font-weight:700; margin-bottom:8px">Tidak ada kasus insiden yang sesuai kriteria</h3>
       <p style="margin-bottom:16px">Coba gunakan kata kunci lain atau bersihkan opsi filter Anda.</p>
-      <button type="button" id="clearSearchBtn" style="background:var(--brand); color:#fff; border:none; padding:10px 20px; border-radius:8px; font-weight:600; cursor:pointer;">
+      <button type="button" id="clearSearchBtn" style="background:var(--brand); color: var(--on-brand); border:none; padding:10px 20px; border-radius:8px; font-weight:600; cursor:pointer;">
         Tampilkan Semua Insiden
       </button>
     </div>
@@ -231,7 +231,7 @@ const schemas = [
         Investasi terbaik dalam K3 adalah kompetensi dan kepatuhan sistemik. Wahana Totalita Konsultan menyediakan pembinaan sertifikasi Kemnaker RI, BNSP, dan audit SMK3 PP 50/2012 untuk mewujudkan tempat kerja bebas kecelakaan.
       </p>
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-        <a href="/jadwal/" style="display:inline-block;background:var(--brand);color:#fff;padding:14px 28px;border-radius:10px;font-weight:700;text-decoration:none;box-shadow:var(--shadow-sm);transition:transform .2s">
+        <a href="/jadwal/" style="display:inline-block;background:var(--brand);color: var(--on-brand);padding:14px 28px;border-radius:10px;font-weight:700;text-decoration:none;box-shadow:var(--shadow-sm);transition:transform .2s">
           📅 Jadwal Pelatihan K3 2026
         </a>
         <a href="/pelatihan/" style="display:inline-block;background:var(--surface);color:var(--brand);border:1px solid var(--border);padding:14px 28px;border-radius:10px;font-weight:700;text-decoration:none">

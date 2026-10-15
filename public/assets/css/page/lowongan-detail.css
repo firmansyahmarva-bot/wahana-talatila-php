@@ -13,11 +13,11 @@
 .sidebar-card h3{font-size:1rem;font-weight:700;margin:0 0 14px;color:var(--mut)}
 .job-info-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--slate-100);font-size:.875rem}
 .job-info-row:last-child{border-bottom:none}
-.job-info-row .label{color:var(--text-light)}
+.job-info-row .label{color:var(--text-subtle)}
 .job-info-row .value{font-weight:600}
 .btn-apply-big{display:block;background:var(--mut);color:var(--surface);padding:14px;border-radius:12px;font-weight:700;font-size:1.1rem;text-align:center;text-decoration:none}
 .btn-apply-big:hover{background:var(--brand-mid)}
-.btn-wa{display:block;background:var(--orange);color:var(--surface);padding:12px;border-radius:8px;font-weight:700;text-align:center;text-decoration:none;margin-top:8px}
-.breadcrumb{font-size:.85rem;color:var(--text-light);margin-bottom:20px}
+.btn-wa{display:block;background:var(--cta);color:var(--surface);padding:12px;border-radius:8px;font-weight:700;text-align:center;text-decoration:none;margin-top:8px}
+.breadcrumb{font-size:.85rem;color:var(--text-subtle);margin-bottom:20px}
 .breadcrumb a{color:var(--mut);text-decoration:none}
 @media(max-width:768px){.job-layout{grid-template-columns:1fr}}

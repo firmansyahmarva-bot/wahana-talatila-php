@@ -33,7 +33,7 @@ body {
   padding: 58px 0 44px;
   position: relative;
   overflow: hidden;
-  border-bottom: 3px solid var(--orange);
+  border-bottom: 3px solid var(--cta);
 }
 .inc-hero::before {
   content: "";
@@ -66,7 +66,7 @@ body {
   line-height: 1.2;
   margin-bottom: 12px;
 }
-.inc-hero h1 span { color: var(--orange); }
+.inc-hero h1 span { color: var(--cta); }
 .inc-hero p {
   color: var(--slate-300);
   font-size: 1.05rem;
@@ -105,7 +105,7 @@ body {
   font-family: 'Lexend', sans-serif;
   font-size: 1.25rem;
   font-weight: 700;
-  color: var(--navy);
+  color: var(--text);
   display: flex;
   align-items: center;
   gap: 10px;
@@ -132,7 +132,7 @@ body {
   display: block;
   font-size: 0.84rem;
   font-weight: 700;
-  color: var(--navy);
+  color: var(--text);
   margin-bottom: 6px;
 }
 .form-input {
@@ -144,7 +144,7 @@ body {
   color: var(--slate-900);
   background: var(--surface);
 }
-.form-input:focus { outline: none; border-color: var(--orange); }
+.form-input:focus { outline: none; border-color: var(--cta); }
 textarea.form-input { min-height: 80px; resize: vertical; }
 
 /* 5-WHY CHAIN */
@@ -159,7 +159,7 @@ textarea.form-input { min-height: 80px; resize: vertical; }
 .why-label {
   font-size: 0.8rem;
   font-weight: 800;
-  color: var(--orange);
+  color: var(--cta);
   text-transform: uppercase;
   margin-bottom: 4px;
 }
@@ -172,7 +172,7 @@ textarea.form-input { min-height: 80px; resize: vertical; }
   margin: 16px 0;
 }
 .capa-table th {
-  background: var(--navy);
+  background: var(--text);
   color: var(--surface);
   padding: 10px 12px;
   text-align: left;
@@ -185,7 +185,7 @@ textarea.form-input { min-height: 80px; resize: vertical; }
 
 /* ACTIONS */
 .btn-submit-inc {
-  background: var(--orange);
+  background: var(--cta);
   color: var(--surface);
   border: none;
   padding: 12px 24px;
@@ -197,7 +197,7 @@ textarea.form-input { min-height: 80px; resize: vertical; }
   align-items: center;
   gap: 8px;
 }
-.btn-submit-inc:hover { background: var(--orange-hover); }
+.btn-submit-inc:hover { background: var(--cta-hover); }
 
 /* EDITORIAL ARTICLE */
 .editorial-box {
@@ -211,9 +211,9 @@ textarea.form-input { min-height: 80px; resize: vertical; }
   font-family: 'Lexend', sans-serif;
   font-size: 1.45rem;
   font-weight: 800;
-  color: var(--navy);
+  color: var(--text);
   margin-bottom: 16px;
-  border-left: 4px solid var(--orange);
+  border-left: 4px solid var(--cta);
   padding-left: 14px;
 }
 .editorial-p {
@@ -240,7 +240,7 @@ textarea.form-input { min-height: 80px; resize: vertical; }
   font-family: 'Lexend', sans-serif;
   font-size: 0.98rem;
   font-weight: 700;
-  color: var(--navy);
+  color: var(--text);
   cursor: pointer;
   display: flex;
   justify-content: space-between;

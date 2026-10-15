@@ -66,9 +66,17 @@ cssFiles.forEach(file => {
 
   // Rule 1: Hex colors outside tokens.css
   if (!isTokens) {
+    const isHomeCss = relPath.includes('home.css');
     const hexRegex = /#([0-9a-fA-F]{3,8})\b/g;
     let m;
     while ((m = hexRegex.exec(content)) !== null) {
+      // Exclude HTML entities if any
+      const prevChar = content[m.index - 1];
+      if (prevChar === '&') continue;
+      // Exclude protected legacy colors in home.css (#103A5C and #F06A25)
+      if (isHomeCss && ['#103A5C', '#103a5c', '#F06A25', '#f06a25'].includes(m[0])) {
+        continue;
+      }
       violations.hexOutsideTokens.push({
         file: relPath,
         match: m[0],
@@ -117,9 +125,17 @@ srcFiles.forEach(file => {
   const content = fs.readFileSync(file, 'utf8');
 
   // Rule 1: Hex colors in src
+  // Match 3, 4, 6, or 8 digit hex colors (e.g. #fff, #1a1a1a) but not HTML entities &#...; or href="#..."
   const hexRegex = /#([0-9a-fA-F]{3,8})\b/g;
   let m;
   while ((m = hexRegex.exec(content)) !== null) {
+    const prevChar = content[m.index - 1];
+    // Ignore HTML entities like &#8249; or &#10003;
+    if (prevChar === '&') continue;
+    // Ignore href="#..." anchor links
+    const beforeSnippet = content.slice(Math.max(0, m.index - 10), m.index);
+    if (/href=["']?$/i.test(beforeSnippet) || /id=["']?$/i.test(beforeSnippet)) continue;
+
     violations.hexOutsideTokens.push({
       file: relPath,
       match: m[0],

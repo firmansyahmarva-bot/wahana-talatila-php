@@ -435,25 +435,25 @@ const cityScripts = [
                 <article class="training-card fade-in" style={`--accent: ${t.accent_color || data.category.accent_color || 'var(--accent)'}`}>
                   <a href={`/pelatihan/${t.slug}/`} class="training-card-img-wrap" style="display: block; position: relative;">
                     <img src={rImg} alt={t.name} loading="lazy" decoding="async" width="400" height="250" style="width: 100%; height: 200px; object-fit: cover; border-radius: 12px 12px 0 0;" />
-                    <span class="training-card-cat-badge" style="position: absolute; top: 12px; left: 12px; background: rgba(0,0,0,0.65); color: #fff; padding: 4px 8px; border-radius: 6px; font-size: 0.75rem; backdrop-filter: blur(4px);">{data.category.icon || '🦺'} {data.category.name}</span>
+                    <span class="training-card-cat-badge" style="position: absolute; top: 12px; left: 12px; background: rgba(0,0,0,0.65); color: var(--surface); padding: 4px 8px; border-radius: 6px; font-size: 0.75rem; backdrop-filter: blur(4px);">{data.category.icon || '🦺'} {data.category.name}</span>
                   </a>
-                  <div class="training-card-body" style="padding: 16px; border: 1px solid var(--border-color, #e2e8f0); border-top: none; border-radius: 0 0 12px 12px;">
+                  <div class="training-card-body" style="padding: 16px; border: 1px solid var(--border); border-top: none; border-radius: 0 0 12px 12px;">
                     <div class="training-card-badges" style="display: flex; gap: 8px; margin-bottom: 8px;">
-                      <span class="training-badge badge-mode" style="font-size: 0.75rem; background: var(--bg-subtle, #f1f5f9); padding: 2px 8px; border-radius: 4px;">{rMode}</span>
-                      <span class="training-badge badge-cert" style="font-size: 0.75rem; background: #e0f2fe; color: #0284c7; padding: 2px 8px; border-radius: 4px;">{rCert}</span>
+                      <span class="training-badge badge-mode" style="font-size: 0.75rem; background: var(--surface-alt); padding: 2px 8px; border-radius: 4px;">{rMode}</span>
+                      <span class="training-badge badge-cert" style="font-size: 0.75rem; background: var(--info-bg); color: var(--info); padding: 2px 8px; border-radius: 4px;">{rCert}</span>
                     </div>
                     <h2 class="training-card-title" style="font-size: 1.1rem; line-height: 1.4; margin-bottom: 8px;">
                       <a href={`/pelatihan/${t.slug}/`} style="color: inherit; text-decoration: none;">{t.name}</a>
                     </h2>
-                    <p class="training-card-desc" style="font-size: 0.875rem; color: var(--text-muted, #64748b); line-height: 1.5; margin-bottom: 16px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">{t.description || t.meta_desc}</p>
-                    <div class="training-card-footer" style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-color, #e2e8f0); padding-top: 12px;">
+                    <p class="training-card-desc" style="font-size: 0.875rem; color: var(--text-muted, var(--text-subtle)); line-height: 1.5; margin-bottom: 16px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">{t.description || t.meta_desc}</p>
+                    <div class="training-card-footer" style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 12px;">
                       <div class="training-price-box">
-                        <span class="training-price-label" style="display: block; font-size: 0.75rem; color: var(--text-muted, #64748b);">Investasi</span>
-                        <span class="training-price-val" style="font-size: 1rem; font-weight: 700; color: var(--text-heading, #0f172a);">{rPrice}</span>
+                        <span class="training-price-label" style="display: block; font-size: 0.75rem; color: var(--text-muted, var(--text-subtle));">Investasi</span>
+                        <span class="training-price-val" style="font-size: 1rem; font-weight: 700; color: var(--text);">{rPrice}</span>
                       </div>
                       <div class="training-card-actions" style="display: flex; gap: 8px;">
-                        <a href={`/pelatihan/${t.slug}/`} class="btn btn-outline btn-sm" style="padding: 6px 12px; font-size: 0.85rem; border: 1px solid var(--border-color, #cbd5e1); border-radius: 6px; text-decoration: none; color: inherit;">Silabus</a>
-                        <a href={waUrl(`Halo Wahana Totalita, saya ingin konsultasi pendaftaran program: ${t.name}`)} target="_blank" rel="noopener" class="btn btn-primary btn-sm" style="padding: 6px 12px; font-size: 0.85rem; background: #25d366; color: #fff; border-radius: 6px; text-decoration: none; font-weight: 600;">Daftar</a>
+                        <a href={`/pelatihan/${t.slug}/`} class="btn btn-outline btn-sm" style="padding: 6px 12px; font-size: 0.85rem; border: 1px solid var(--border); border-radius: 6px; text-decoration: none; color: inherit;">Silabus</a>
+                        <a href={waUrl(`Halo Wahana Totalita, saya ingin konsultasi pendaftaran program: ${t.name}`)} target="_blank" rel="noopener" class="btn btn-primary btn-sm" style="padding: 6px 12px; font-size: 0.85rem; background: var(--whatsapp); color: var(--on-brand); border-radius: 6px; text-decoration: none; font-weight: 600;">Daftar</a>
                       </div>
                     </div>
                   </div>
@@ -467,12 +467,12 @@ const cityScripts = [
               <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 24px;">Panduan &amp; Artikel Terkait {data.category.name}</h2>
               <div class="article-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
                 {data.articles.map((art: any) => (
-                  <article class="article-card" style="background: var(--bg-card, #fff); border: 1px solid var(--border-color, #e2e8f0); border-radius: 12px; padding: 16px;">
+                  <article class="article-card" style="background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px;">
                     <h3 style="font-size: 1.05rem; font-weight: 600; line-height: 1.4; margin-bottom: 8px;">
                       <a href={`/artikel/${art.slug}/`} style="color: inherit; text-decoration: none;">{art.title}</a>
                     </h3>
-                    <p style="font-size: 0.875rem; color: var(--text-muted, #64748b); line-height: 1.5; margin-bottom: 12px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">{art.meta_desc || art.title}</p>
-                    <a href={`/artikel/${art.slug}/`} style="font-size: 0.875rem; font-weight: 600; color: var(--cat-accent, #0ea5e9); text-decoration: none;">Baca Panduan &rarr;</a>
+                    <p style="font-size: 0.875rem; color: var(--text-muted, var(--text-subtle)); line-height: 1.5; margin-bottom: 12px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">{art.meta_desc || art.title}</p>
+                    <a href={`/artikel/${art.slug}/`} style="font-size: 0.875rem; font-weight: 600; color: var(--accent); text-decoration: none;">Baca Panduan &rarr;</a>
                   </article>
                 ))}
               </div>

@@ -96,7 +96,7 @@ const schemas = [
         <div class="card-box">
           <div class="card-header-line">
             <h2 class="card-title">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--cta)" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
               Tabel Matriks Risiko 5x5
             </h2>
             <span style="font-size:0.8rem;color:var(--slate-600)">Klik salah satu sel untuk evaluasi instan:</span>
@@ -111,7 +111,7 @@ const schemas = [
           <div class="control-row">
             <div class="control-label">
               <span>Peluang Terjadi (Likelihood)</span>
-              <strong id="labelL" style="color:var(--orange)">Tingkat 3 - Mungkin Terjadi</strong>
+              <strong id="labelL" style="color:var(--cta)">Tingkat 3 - Mungkin Terjadi</strong>
             </div>
             <select id="selL" class="select-styled" onchange="onSelectChange()">
               <option value="1">1 - Sangat Jarang / Hampir Mustahil (Terjadi 1x > 5 tahun)</option>
@@ -125,7 +125,7 @@ const schemas = [
           <div class="control-row">
             <div class="control-label">
               <span>Keparahan Dampak (Consequence / Severity)</span>
-              <strong id="labelC" style="color:var(--orange)">Tingkat 3 - Cedera Sedang (LTI)</strong>
+              <strong id="labelC" style="color:var(--cta)">Tingkat 3 - Cedera Sedang (LTI)</strong>
             </div>
             <select id="selC" class="select-styled" onchange="onSelectChange()">
               <option value="1">1 - Tidak Signifikan (Tidak ada cedera, kerugian finansial nihil)</option>
@@ -144,10 +144,10 @@ const schemas = [
         <div class="card-box">
           <div class="card-header-line">
             <h2 class="card-title">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--cta)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
               Hasil Evaluasi Risiko
             </h2>
-            <span style="font-size:0.78rem;font-weight:700;color:var(--navy)">ISO 31000:2018</span>
+            <span style="font-size:0.78rem;font-weight:700;color:var(--text)">ISO 31000:2018</span>
           </div>
 
           <div class="risk-score-display" id="scoreBox">
@@ -157,21 +157,21 @@ const schemas = [
           </div>
 
           <div style="background:var(--slate-50);border:1px solid var(--slate-200);border-radius:var(--radius-md);padding:18px;margin-bottom:20px">
-            <h4 style="font-size:0.9rem;font-weight:700;color:var(--navy);margin-bottom:8px">Ketentuan Pengendalian Wajib:</h4>
+            <h4 style="font-size:0.9rem;font-weight:700;color:var(--text);margin-bottom:8px">Ketentuan Pengendalian Wajib:</h4>
             <p id="actionGuide" style="font-size:0.86rem;color:var(--slate-700);line-height:1.6">
               Pekerjaan dapat dijalankan dengan pengawasan supervisor dan penerapan Standard Operating Procedure (SOP) yang diperketat serta APD standar.
             </p>
           </div>
 
           <div style="border-top:1px dashed var(--slate-300);padding-top:18px">
-            <h4 style="font-size:0.9rem;font-weight:700;color:var(--navy);margin-bottom:12px">Tambahkan ke Risk Register:</h4>
+            <h4 style="font-size:0.9rem;font-weight:700;color:var(--text);margin-bottom:12px">Tambahkan ke Risk Register:</h4>
             <div style="margin-bottom:10px">
               <input type="text" id="regActivity" class="select-styled" placeholder="Aktivitas / Bahaya (cth: Pekerjaan Las di Ketinggian)">
             </div>
             <div style="margin-bottom:14px">
               <input type="text" id="regControl" class="select-styled" placeholder="Rencana Pengendalian (cth: Pasang fire blanket & full body harness)">
             </div>
-            <button class="select-styled" type="button" onclick="addToRiskRegister()" style="background:var(--orange);color:var(--surface);border:none;font-weight:700;cursor:pointer">
+            <button class="select-styled" type="button" onclick="addToRiskRegister()" style="background:var(--cta);color:var(--surface);border:none;font-weight:700;cursor:pointer">
               + Tambah ke Tabel Risk Register
             </button>
           </div>
@@ -185,11 +185,11 @@ const schemas = [
     <div class="card-box" id="regCard">
       <div class="card-header-line">
         <h2 class="card-title">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--cta)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
           Daftar Rekapitulasi Risiko (Risk Register)
         </h2>
         <div style="display:flex;gap:8px">
-          <button class="select-styled" type="button" onclick="printRiskRegister()" style="padding:6px 14px;font-size:0.82rem;font-weight:700;background:var(--navy);color:var(--surface);cursor:pointer">
+          <button class="select-styled" type="button" onclick="printRiskRegister()" style="padding:6px 14px;font-size:0.82rem;font-weight:700;background:var(--text);color:var(--surface);cursor:pointer">
             Cetak Risk Register
           </button>
         </div>
@@ -223,7 +223,7 @@ const schemas = [
         Penilaian risiko keselamatan kerja merupakan fondasi utama sistem manajemen K3 modern sesuai dengan <strong>SNI ISO 31000:2018 (Manajemen Risiko — Pedoman)</strong> dan Lampiran Peraturan Pemerintah No. 50 Tahun 2012 tentang Penerapan SMK3. Matriks 5x5 menggabungkan probabilitas kemunculan bahaya dengan tingkat keparahan konsekuensi yang ditimbulkan.
       </p>
 
-      <h3 style="color:var(--navy);font-family:'Lexend',sans-serif;font-size:1.15rem;margin:22px 0 10px">1. Klasifikasi 4 Tingkat Risiko (Risk Levels)</h3>
+      <h3 style="color:var(--text);font-family:'Lexend',sans-serif;font-size:1.15rem;margin:22px 0 10px">1. Klasifikasi 4 Tingkat Risiko (Risk Levels)</h3>
       <ul style="padding-left:22px;color:var(--slate-700);line-height:1.75;margin-bottom:18px">
         <li><strong>Ekstrem / Kritis (Skor 15 - 25):</strong> Risiko tidak dapat ditoleransi. Pekerjaan harus segera dihentikan seketika sampai tindakan rekayasa teknik dipasang. Wajib persetujuan Direktur Operasional.</li>
         <li><strong>Tinggi / High (Skor 10 - 14):</strong> Risiko signifikan yang memerlukan tindakan perbaikan mendesak dalam kurun waktu 24 jam. Wajib izin kerja khusus (PTW) dan pengawasan intensif HSE.</li>
@@ -231,13 +231,13 @@ const schemas = [
         <li><strong>Rendah / Low (Skor 1 - 4):</strong> Risiko dapat diterima (Broadly Acceptable). Tindakan pencegahan rutin dan pemantauan berkala saat inspeksi K3 triwulanan.</li>
       </ul>
 
-      <h3 style="color:var(--navy);font-family:'Lexend',sans-serif;font-size:1.15rem;margin:22px 0 10px">2. Konsep ALARP (As Low As Reasonably Practicable)</h3>
+      <h3 style="color:var(--text);font-family:'Lexend',sans-serif;font-size:1.15rem;margin:22px 0 10px">2. Konsep ALARP (As Low As Reasonably Practicable)</h3>
       <p class="editorial-p">
         Prinsip ALARP menetapkan bahwa tidak semua risiko di tempat kerja dapat diturunkan hingga nol mutlak (zero risk), namun setiap bahaya harus ditekan hingga ke titik di mana biaya tambahan untuk menurunkannya lagi akan sangat tidak proporsional dibanding penurunan risiko yang dicapai.
       </p>
 
       <!-- FAQ ACCORDION -->
-      <h3 style="color:var(--navy);font-family:'Lexend',sans-serif;font-size:1.25rem;margin:28px 0 16px">Pertanyaan Sering Diajukan Seputar Matriks Risiko K3 (FAQ)</h3>
+      <h3 style="color:var(--text);font-family:'Lexend',sans-serif;font-size:1.25rem;margin:28px 0 16px">Pertanyaan Sering Diajukan Seputar Matriks Risiko K3 (FAQ)</h3>
       <div class="faq-box">
         
         <div class="faq-item">

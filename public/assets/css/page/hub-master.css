@@ -17,7 +17,7 @@
   --hub-wa-hover: var(--whatsapp-dark);
   --hub-dark: var(--brand);
   --hub-slate: var(--mut);
-  --hub-muted: var(--text-light);
+  --hub-muted: var(--text-subtle);
   --hub-border: var(--border);
   --hub-bg: var(--slate-50);
   --hub-white: var(--surface);

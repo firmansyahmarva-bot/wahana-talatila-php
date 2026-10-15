@@ -264,22 +264,22 @@ const schemas = [
   </div>
 
   <!-- City Hero -->
-  <section class="hero-section" style="background: linear-gradient(135deg, var(--brand-dark, #081c15) 0%, var(--brand, #1b4332) 100%); color: var(--surface); padding: 56px 0 50px;">
+  <section class="hero-section" style="background: linear-gradient(135deg, var(--brand-dark, var(--brand-dark)) 0%, var(--brand, var(--brand)) 100%); color: var(--surface); padding: 56px 0 50px;">
     <div class="container" style="max-width: 1000px; margin: 0 auto; padding: 0 20px; text-align: center;">
-      <span style="display: inline-block; background: color-mix(in srgb, var(--surface) 12%, transparent); color: #a7f3d0; padding: 4px 14px; border-radius: 999px; font-weight: 700; font-size: 12.5px; margin-bottom: 16px; border: 1px solid color-mix(in srgb, var(--surface) 18%, transparent); text-transform: uppercase; letter-spacing: 0.05em;">
+      <span style="display: inline-block; background: color-mix(in srgb, var(--surface) 12%, transparent); color: var(--success-border); padding: 4px 14px; border-radius: 999px; font-weight: 700; font-size: 12.5px; margin-bottom: 16px; border: 1px solid color-mix(in srgb, var(--surface) 18%, transparent); text-transform: uppercase; letter-spacing: 0.05em;">
         📍 Layanan Resmi K3 Wilayah {cityData.name} &amp; {cityData.province}
       </span>
-      <h1 style="font-family: 'Lexend', sans-serif; font-size: clamp(26px, 4vw, 42px); font-weight: 800; line-height: 1.25; margin-bottom: 18px; color: #FFFFFF; letter-spacing: -0.02em;">
+      <h1 style="font-family: 'Lexend', sans-serif; font-size: clamp(26px, 4vw, 42px); font-weight: 800; line-height: 1.25; margin-bottom: 18px; color: var(--surface); letter-spacing: -0.02em;">
         Pelatihan K3 &amp; Sertifikasi BNSP di {cityData.name}
       </h1>
       <p style="font-size: 16.5px; line-height: 1.65; max-width: 760px; margin: 0 auto 25px; color: rgba(255, 255, 255, 0.88);">
         Penyedia resmi sertifikasi Ahli K3 Umum, BNSP, K3 Konstruksi, Migas, dan Operator Alat Berat untuk tenaga kerja dan perusahaan di {cityData.name}.
       </p>
       <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-        <a href={`https://wa.me/6287759151278?text=${encodeURIComponent('Halo Wahana Totalita, saya ingin informasi pelatihan K3 wilayah ' + cityData.name)}`} class="btn btn-primary" target="_blank" rel="noopener" style="background: var(--whatsapp, #25D366); color: #052e16; padding: 12px 24px; border-radius: 10px; font-weight: 800; text-decoration: none; box-shadow: 0 4px 14px color-mix(in srgb, var(--whatsapp) 30%, transparent); display: inline-flex; align-items: center; gap: 6px;">
+        <a href={`https://wa.me/6287759151278?text=${encodeURIComponent('Halo Wahana Totalita, saya ingin informasi pelatihan K3 wilayah ' + cityData.name)}`} class="btn btn-primary" target="_blank" rel="noopener" style="background: var(--whatsapp, var(--whatsapp)); color: var(--brand-dark); padding: 12px 24px; border-radius: 10px; font-weight: 800; text-decoration: none; box-shadow: 0 4px 14px color-mix(in srgb, var(--whatsapp) 30%, transparent); display: inline-flex; align-items: center; gap: 6px;">
           <span>Konsultasi Jadwal {cityData.name}</span>
         </a>
-        <a href="#program" style="background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.3); padding: 12px 24px; border-radius: 10px; font-weight: 700; text-decoration: none;">
+        <a href="#program" style="background: rgba(255,255,255,0.1); color: var(--surface); border: 1px solid rgba(255,255,255,0.3); padding: 12px 24px; border-radius: 10px; font-weight: 700; text-decoration: none;">
           Pilih Program Pelatihan &darr;
         </a>
       </div>
@@ -313,7 +313,7 @@ const schemas = [
             <a href={`/pelatihan/${p.slug}/`} style="color: var(--accent); font-weight: 700; text-decoration: none;">
               Detail Program &rarr;
             </a>
-            <a href={`https://wa.me/6287759151278?text=${encodeURIComponent('Halo Wahana Totalita, saya ingin daftar ' + p.name + ' di ' + cityData.name)}`} target="_blank" rel="noopener" style="background: var(--brand); color: #fff; padding: 4px 10px; border-radius: 4px; font-weight: 700; text-decoration: none;">
+            <a href={`https://wa.me/6287759151278?text=${encodeURIComponent('Halo Wahana Totalita, saya ingin daftar ' + p.name + ' di ' + cityData.name)}`} target="_blank" rel="noopener" style="background: var(--brand); color: var(--on-brand); padding: 4px 10px; border-radius: 4px; font-weight: 700; text-decoration: none;">
               Daftar
             </a>
           </div>
@@ -339,14 +339,14 @@ const schemas = [
 
   <!-- CTA Box -->
   <section style="padding: 60px 0 80px; max-width: 960px; margin: 0 auto; padding-left: 20px; padding-right: 20px;">
-    <div style="background: linear-gradient(135deg, var(--brand-dark, #081c15) 0%, var(--brand, #1b4332) 100%); padding: 48px 32px; border-radius: 20px; text-align: center; color: var(--surface); box-shadow: 0 20px 40px -12px color-mix(in srgb, var(--brand) 35%, transparent);">
-      <h2 style="font-family: 'Lexend', sans-serif; font-size: clamp(22px, 3vw, 30px); font-weight: 800; margin-bottom: 12px; color: #FFFFFF;">
+    <div style="background: linear-gradient(135deg, var(--brand-dark, var(--brand-dark)) 0%, var(--brand, var(--brand)) 100%); padding: 48px 32px; border-radius: 20px; text-align: center; color: var(--surface); box-shadow: 0 20px 40px -12px color-mix(in srgb, var(--brand) 35%, transparent);">
+      <h2 style="font-family: 'Lexend', sans-serif; font-size: clamp(22px, 3vw, 30px); font-weight: 800; margin-bottom: 12px; color: var(--surface);">
         Siap Mengikuti Pelatihan K3 di {cityData.name}?
       </h2>
       <p style="font-size: 16px; color: rgba(255,255,255,0.85); margin-bottom: 25px; line-height: 1.6; max-width: 620px; margin-left: auto; margin-right: auto;">
         Dapatkan jadwal batch terdekat, rincian biaya penawaran resmi, silabus pelatihan, dan konsultasi pendaftaran gratis via WhatsApp.
       </p>
-      <a href={`https://wa.me/6287759151278?text=${encodeURIComponent('Halo Wahana Totalita, saya ingin konsultasi pelatihan K3 wilayah ' + cityData.name)}`} target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; background: var(--whatsapp, #25D366); color: #052e16; padding: 14px 32px; border-radius: 999px; font-weight: 800; text-decoration: none; font-size: 15px; box-shadow: 0 4px 16px color-mix(in srgb, var(--whatsapp) 40%, transparent);">
+      <a href={`https://wa.me/6287759151278?text=${encodeURIComponent('Halo Wahana Totalita, saya ingin konsultasi pelatihan K3 wilayah ' + cityData.name)}`} target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; background: var(--whatsapp, var(--whatsapp)); color: var(--brand-dark); padding: 14px 32px; border-radius: 999px; font-weight: 800; text-decoration: none; font-size: 15px; box-shadow: 0 4px 16px color-mix(in srgb, var(--whatsapp) 40%, transparent);">
         <span>Hubungi Konsultan via WhatsApp</span>
       </a>
     </div>

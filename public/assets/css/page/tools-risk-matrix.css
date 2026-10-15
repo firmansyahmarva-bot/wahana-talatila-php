@@ -33,7 +33,7 @@ body {
   padding: 58px 0 44px;
   position: relative;
   overflow: hidden;
-  border-bottom: 3px solid var(--orange);
+  border-bottom: 3px solid var(--cta);
 }
 .rm-hero::before {
   content: "";
@@ -66,7 +66,7 @@ body {
   line-height: 1.2;
   margin-bottom: 12px;
 }
-.rm-hero h1 span { color: var(--orange); }
+.rm-hero h1 span { color: var(--cta); }
 .rm-hero p {
   color: var(--slate-300);
   font-size: 1.05rem;
@@ -115,7 +115,7 @@ body {
   font-family: 'Lexend', sans-serif;
   font-size: 1.25rem;
   font-weight: 700;
-  color: var(--navy);
+  color: var(--text);
   display: flex;
   align-items: center;
   gap: 10px;
@@ -177,7 +177,7 @@ body {
   text-align: center;
   font-size: 0.85rem;
   font-weight: 700;
-  color: var(--navy);
+  color: var(--text);
   padding: 6px;
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -190,7 +190,7 @@ body {
   justify-content: space-between;
   font-size: 0.88rem;
   font-weight: 700;
-  color: var(--navy);
+  color: var(--text);
   margin-bottom: 8px;
 }
 .select-styled {
@@ -204,7 +204,7 @@ body {
 }
 .select-styled:focus {
   outline: none;
-  border-color: var(--orange);
+  border-color: var(--cta);
 }
 
 /* RESULT DETAILS */
@@ -255,7 +255,7 @@ body {
   font-size: 0.86rem;
 }
 .reg-table th {
-  background: var(--navy);
+  background: var(--text);
   color: var(--surface);
   padding: 10px 12px;
   text-align: left;
@@ -280,9 +280,9 @@ body {
   font-family: 'Lexend', sans-serif;
   font-size: 1.45rem;
   font-weight: 800;
-  color: var(--navy);
+  color: var(--text);
   margin-bottom: 16px;
-  border-left: 4px solid var(--orange);
+  border-left: 4px solid var(--cta);
   padding-left: 14px;
 }
 .editorial-p {
@@ -309,7 +309,7 @@ body {
   font-family: 'Lexend', sans-serif;
   font-size: 0.98rem;
   font-weight: 700;
-  color: var(--navy);
+  color: var(--text);
   cursor: pointer;
   display: flex;
   justify-content: space-between;

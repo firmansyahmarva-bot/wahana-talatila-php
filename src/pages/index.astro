@@ -284,7 +284,7 @@ const schemas = [
         <p class="section-subtitle">Pilih pelatihan K3 resmi Kemnaker RI dan sertifikasi BNSP yang paling banyak dicari perusahaan dan profesional HSE. Tersedia kelas online via Zoom dan tatap muka di Yogyakarta.</p>
       </div>
       <div class="services-grid">
-        <a href="/ahli-k3-umum/" class="service-card" style="--accent: #C6621C">
+        <a href="/ahli-k3-umum/" class="service-card" style="--accent: var(--cta)">
           <div class="service-card-icon">🦺</div>
           <h3 class="service-card-title">Pelatihan Ahli K3 Umum Kemnaker RI</h3>
           <p class="service-card-desc">Program utama untuk calon Ahli K3 Umum. Tersedia kelas online, cek batch terbaru di jadwal.</p>
@@ -292,7 +292,7 @@ const schemas = [
           <span class="service-card-arrow">&rarr;</span>
         </a>
 
-        <a href="/pelatihan/ak3-bnsp/" class="service-card" style="--accent: #C6621C">
+        <a href="/pelatihan/ak3-bnsp/" class="service-card" style="--accent: var(--cta)">
           <div class="service-card-icon">🏅</div>
           <h3 class="service-card-title">Pelatihan Ahli K3 Umum BNSP</h3>
           <p class="service-card-desc">Jalur sertifikasi kompetensi BNSP untuk profesi Ahli K3.</p>
@@ -300,7 +300,7 @@ const schemas = [
           <span class="service-card-arrow">&rarr;</span>
         </a>
 
-        <a href="/pelatihan/pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri/" class="service-card" style="--accent: #C6621C">
+        <a href="/pelatihan/pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri/" class="service-card" style="--accent: var(--cta)">
           <div class="service-card-icon">🚜</div>
           <h3 class="service-card-title">Pelatihan Operator Forklift Kelas II</h3>
           <p class="service-card-desc">Pelatihan dan sertifikasi operator forklift Kelas II dari Kemnaker RI.</p>
@@ -308,7 +308,7 @@ const schemas = [
           <span class="service-card-arrow">&rarr;</span>
         </a>
 
-        <a href="/pelatihan/pelatihan-damkar-paralel-kelas-dcba-sertifikasi-kemnaker-ri/" class="service-card" style="--accent: #C6621C">
+        <a href="/pelatihan/pelatihan-damkar-paralel-kelas-dcba-sertifikasi-kemnaker-ri/" class="service-card" style="--accent: var(--cta)">
           <div class="service-card-icon">🔥</div>
           <h3 class="service-card-title">Pelatihan Damkar Kelas D, C, B, A</h3>
           <p class="service-card-desc">Pelatihan petugas penanggulangan kebakaran di tempat kerja, jenjang Kelas D sampai A.</p>
@@ -316,7 +316,7 @@ const schemas = [
           <span class="service-card-arrow">&rarr;</span>
         </a>
 
-        <a href="/p3k/" class="service-card" style="--accent: #C6621C">
+        <a href="/p3k/" class="service-card" style="--accent: var(--cta)">
           <div class="service-card-icon">⛑️</div>
           <h3 class="service-card-title">Pelatihan Petugas P3K / First Aid</h3>
           <p class="service-card-desc">Pelatihan petugas pertolongan pertama di tempat kerja, tersedia kelas online.</p>
@@ -324,7 +324,7 @@ const schemas = [
           <span class="service-card-arrow">&rarr;</span>
         </a>
 
-        <a href="/pelatihan-iso/" class="service-card" style="--accent: #2D7DD2">
+        <a href="/pelatihan-iso/" class="service-card" style="--accent: var(--info)">
           <div class="service-card-icon">📋</div>
           <h3 class="service-card-title">Pelatihan Internal Auditor ISO 45001</h3>
           <p class="service-card-desc">Audit internal sistem manajemen K3 (ISO 45001:2018), 2 hari secara online.</p>
@@ -332,7 +332,7 @@ const schemas = [
           <span class="service-card-arrow">&rarr;</span>
         </a>
 
-        <a href="/perpanjangan-skp/" class="service-card" style="--accent: #C6621C">
+        <a href="/perpanjangan-skp/" class="service-card" style="--accent: var(--cta)">
           <div class="service-card-icon">🔄</div>
           <h3 class="service-card-title">Perpanjangan SKP &amp; Lisensi K3</h3>
           <p class="service-card-desc">Layanan perpanjangan SKP dan lisensi K3 untuk Ahli K3 dan petugas bersertifikat.</p>
@@ -340,7 +340,7 @@ const schemas = [
           <span class="service-card-arrow">&rarr;</span>
         </a>
 
-        <a href="/jadwal/" class="service-card" style="--accent: #C6621C">
+        <a href="/jadwal/" class="service-card" style="--accent: var(--cta)">
           <div class="service-card-icon">📅</div>
           <h3 class="service-card-title">Jadwal Pelatihan K3 2026</h3>
           <p class="service-card-desc">Lihat batch terdekat semua program, online maupun tatap muka, lengkap dengan sisa kursi.</p>
@@ -373,7 +373,7 @@ const schemas = [
           const hubTarget = hubUrls[cat.data.slug] || `/pelatihan/${cat.data.slug}/`;
           const programCount = allTrainings.filter((t) => t.data.category_slug === cat.data.slug || t.data.category_id === cat.data.id).length;
           return (
-            <a href={hubTarget} class="service-card" style={`--accent: ${cat.data.accent_color || '#0A4A2E'}`}>
+            <a href={hubTarget} class="service-card" style={`--accent: ${cat.data.accent_color || 'var(--brand)'}`}>
               <div class="service-card-icon">{cat.data.icon || '🦺'}</div>
               <h3 class="service-card-title">{cat.data.name}</h3>
               <p class="service-card-desc">{cat.data.description || 'Program sertifikasi kompetensi terakreditasi resmi.'}</p>
@@ -420,7 +420,7 @@ const schemas = [
           const rMode = modeLabel(t.data.mode);
           const rCert = t.data.certification || 'Sertifikasi Resmi';
           return (
-            <article class="training-card" data-cat={t.data.category_slug} data-mode={t.data.mode} style={`--accent: ${t.data.accent_color || '#0A4A2E'}`}>
+            <article class="training-card" data-cat={t.data.category_slug} data-mode={t.data.mode} style={`--accent: ${t.data.accent_color || 'var(--brand)'}`}>
               <a href={`/pelatihan/${t.data.slug}/`} class="training-card-img-wrap">
                 <img src={rImg} alt={t.data.name} loading="lazy" decoding="async" width="400" height="250" />
                 <span class="training-card-cat-badge">{t.data.category_name || 'Pelatihan K3'}</span>
@@ -452,7 +452,7 @@ const schemas = [
           <span>Lihat Semua {totalPrograms}+ Program di Katalog Lengkap</span>
           <span aria-hidden="true" style="font-size:1.2rem;">&rarr;</span>
         </a>
-        <p style="color:#64748b;font-size:0.875rem;margin-top:12px;">Cari silabus lengkap, jadwal terdekat, dan sertifikasi Kemnaker RI &amp; BNSP</p>
+        <p style="color:var(--text-subtle);font-size:0.875rem;margin-top:12px;">Cari silabus lengkap, jadwal terdekat, dan sertifikasi Kemnaker RI &amp; BNSP</p>
       </div>
     </div>
   </section>
@@ -498,7 +498,7 @@ const schemas = [
         <p class="section-subtitle">Setiap sektor punya risiko dan regulasi berbeda. Temukan pelatihan K3 yang sesuai dengan bidang kerja Anda.</p>
       </div>
       <div class="services-grid">
-        <a href="/k3-konstruksi/" class="service-card" style="--accent: #C6621C">
+        <a href="/k3-konstruksi/" class="service-card" style="--accent: var(--cta)">
           <div class="service-card-icon">🏗️</div>
           <h3 class="service-card-title">Pelatihan K3 Konstruksi</h3>
           <p class="service-card-desc">Gedung, sipil &amp; infrastruktur.</p>
@@ -506,7 +506,7 @@ const schemas = [
           <span class="service-card-arrow">&rarr;</span>
         </a>
 
-        <a href="/k3-migas/" class="service-card" style="--accent: #C6621C">
+        <a href="/k3-migas/" class="service-card" style="--accent: var(--cta)">
           <div class="service-card-icon">🛢️</div>
           <h3 class="service-card-title">Pelatihan K3 Minyak &amp; Gas</h3>
           <p class="service-card-desc">Hulu-hilir &amp; petrokimia.</p>
@@ -514,7 +514,7 @@ const schemas = [
           <span class="service-card-arrow">&rarr;</span>
         </a>
 
-        <a href="/k3-listrik/" class="service-card" style="--accent: #C6621C">
+        <a href="/k3-listrik/" class="service-card" style="--accent: var(--cta)">
           <div class="service-card-icon">⚡</div>
           <h3 class="service-card-title">Pelatihan K3 Listrik &amp; Energi</h3>
           <p class="service-card-desc">Pembangkit &amp; instalasi listrik.</p>
@@ -522,7 +522,7 @@ const schemas = [
           <span class="service-card-arrow">&rarr;</span>
         </a>
 
-        <a href="/k3-kimia/" class="service-card" style="--accent: #C6621C">
+        <a href="/k3-kimia/" class="service-card" style="--accent: var(--cta)">
           <div class="service-card-icon">🧪</div>
           <h3 class="service-card-title">Pelatihan K3 Kimia &amp; B3</h3>
           <p class="service-card-desc">Hazardous material &amp; laboratorium.</p>
@@ -530,7 +530,7 @@ const schemas = [
           <span class="service-card-arrow">&rarr;</span>
         </a>
 
-        <a href="/k3-ketinggian/" class="service-card" style="--accent: #C6621C">
+        <a href="/k3-ketinggian/" class="service-card" style="--accent: var(--cta)">
           <div class="service-card-icon">🧗</div>
           <h3 class="service-card-title">Pelatihan Bekerja di Ketinggian</h3>
           <p class="service-card-desc">TKBT, TKPK &amp; scaffolding.</p>
@@ -538,7 +538,7 @@ const schemas = [
           <span class="service-card-arrow">&rarr;</span>
         </a>
 
-        <a href="/k3-pertambangan/" class="service-card" style="--accent: #8B5A2B">
+        <a href="/k3-pertambangan/" class="service-card" style="--accent: var(--cta-hover)">
           <div class="service-card-icon">⛏️</div>
           <h3 class="service-card-title">Pelatihan K3 Pertambangan</h3>
           <p class="service-card-desc">POP, POM, POU &amp; minerba.</p>
@@ -546,7 +546,7 @@ const schemas = [
           <span class="service-card-arrow">&rarr;</span>
         </a>
 
-        <a href="/k3-lingkungan/" class="service-card" style="--accent: #0A4A2E">
+        <a href="/k3-lingkungan/" class="service-card" style="--accent: var(--brand)">
           <div class="service-card-icon">🌿</div>
           <h3 class="service-card-title">Pelatihan K3 Lingkungan &amp; AMDAL</h3>
           <p class="service-card-desc">POPAL, PLB3 &amp; pengelolaan limbah.</p>
@@ -554,7 +554,7 @@ const schemas = [
           <span class="service-card-arrow">&rarr;</span>
         </a>
 
-        <a href="/k3-rumah-sakit/" class="service-card" style="--accent: #C6621C">
+        <a href="/k3-rumah-sakit/" class="service-card" style="--accent: var(--cta)">
           <div class="service-card-icon">🏥</div>
           <h3 class="service-card-title">Pelatihan K3 Rumah Sakit &amp; Faskes</h3>
           <p class="service-card-desc">Akreditasi &amp; biosafety.</p>
@@ -577,7 +577,7 @@ const schemas = [
         <p class="section-subtitle">Public training tatap muka di Yogyakarta, in-house training perusahaan di berbagai kota di Indonesia, dan kelas online untuk peserta dari mana saja.</p>
       </div>
       <div class="services-grid">
-        <a href="/pelatihan-k3-yogyakarta/" class="service-card" style="--accent: #C6621C">
+        <a href="/pelatihan-k3-yogyakarta/" class="service-card" style="--accent: var(--cta)">
           <div class="service-card-icon">🏢</div>
           <h3 class="service-card-title">Pelatihan K3 Yogyakarta</h3>
           <p class="service-card-desc">Training center dan kelas tatap muka.</p>
@@ -585,7 +585,7 @@ const schemas = [
           <span class="service-card-arrow">&rarr;</span>
         </a>
 
-        <a href="/pelatihan-k3-jakarta/" class="service-card" style="--accent: #C6621C">
+        <a href="/pelatihan-k3-jakarta/" class="service-card" style="--accent: var(--cta)">
           <div class="service-card-icon">🌆</div>
           <h3 class="service-card-title">Pelatihan K3 Jakarta</h3>
           <p class="service-card-desc">Konstruksi, migas &amp; korporasi.</p>
@@ -593,7 +593,7 @@ const schemas = [
           <span class="service-card-arrow">&rarr;</span>
         </a>
 
-        <a href="/pelatihan-k3-surabaya/" class="service-card" style="--accent: #C6621C">
+        <a href="/pelatihan-k3-surabaya/" class="service-card" style="--accent: var(--cta)">
           <div class="service-card-icon">🚢</div>
           <h3 class="service-card-title">Pelatihan K3 Surabaya</h3>
           <p class="service-card-desc">Maritim, manufaktur &amp; crane.</p>
@@ -601,7 +601,7 @@ const schemas = [
           <span class="service-card-arrow">&rarr;</span>
         </a>
 
-        <a href="/pelatihan-k3-bandung/" class="service-card" style="--accent: #C6621C">
+        <a href="/pelatihan-k3-bandung/" class="service-card" style="--accent: var(--cta)">
           <div class="service-card-icon">🏭</div>
           <h3 class="service-card-title">Pelatihan K3 Bandung</h3>
           <p class="service-card-desc">Tekstil, farmasi &amp; industri.</p>
@@ -609,7 +609,7 @@ const schemas = [
           <span class="service-card-arrow">&rarr;</span>
         </a>
 
-        <a href="/pelatihan-k3-semarang/" class="service-card" style="--accent: #C6621C">
+        <a href="/pelatihan-k3-semarang/" class="service-card" style="--accent: var(--cta)">
           <div class="service-card-icon">🏗️</div>
           <h3 class="service-card-title">Pelatihan K3 Semarang</h3>
           <p class="service-card-desc">Kawasan Kendal &amp; pelabuhan.</p>
@@ -617,7 +617,7 @@ const schemas = [
           <span class="service-card-arrow">&rarr;</span>
         </a>
 
-        <a href="/pelatihan-k3-cilegon/" class="service-card" style="--accent: #C6621C">
+        <a href="/pelatihan-k3-cilegon/" class="service-card" style="--accent: var(--cta)">
           <div class="service-card-icon">⚙️</div>
           <h3 class="service-card-title">Pelatihan K3 Cilegon</h3>
           <p class="service-card-desc">Baja, petrokimia &amp; pelabuhan.</p>
@@ -625,7 +625,7 @@ const schemas = [
           <span class="service-card-arrow">&rarr;</span>
         </a>
 
-        <a href="/pelatihan-k3-balikpapan/" class="service-card" style="--accent: #C6621C">
+        <a href="/pelatihan-k3-balikpapan/" class="service-card" style="--accent: var(--cta)">
           <div class="service-card-icon">🛢️</div>
           <h3 class="service-card-title">Pelatihan K3 Balikpapan</h3>
           <p class="service-card-desc">Migas, logistik &amp; tambang.</p>
@@ -633,7 +633,7 @@ const schemas = [
           <span class="service-card-arrow">&rarr;</span>
         </a>
 
-        <a href="/pelatihan-k3-medan/" class="service-card" style="--accent: #C6621C">
+        <a href="/pelatihan-k3-medan/" class="service-card" style="--accent: var(--cta)">
           <div class="service-card-icon">🌴</div>
           <h3 class="service-card-title">Pelatihan K3 Medan</h3>
           <p class="service-card-desc">Perkebunan sawit &amp; pabrik.</p>

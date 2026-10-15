@@ -54,16 +54,16 @@ const eventsJson = JSON.stringify(
     </div>
   </div>
 
-  <section class="cal-hero" style="background:linear-gradient(135deg,var(--brand-dark,#081c15) 0%,var(--brand,#1b4332) 100%);padding:48px 0;color:var(--surface);text-align:center;">
+  <section class="cal-hero" style="background:linear-gradient(135deg,var(--brand-dark,var(--brand-dark)) 0%,var(--brand,var(--brand)) 100%);padding:48px 0;color:var(--surface);text-align:center;">
     <div class="container" style="max-width:1160px;margin:0 auto;padding:0 20px;">
-      <h1 style="font-family:'Lexend',sans-serif;font-size:clamp(1.8rem,3.2vw,2.5rem);font-weight:800;margin:0 0 10px;color:#ffffff;">
+      <h1 style="font-family:'Lexend',sans-serif;font-size:clamp(1.8rem,3.2vw,2.5rem);font-weight:800;margin:0 0 10px;color: var(--surface);">
         📅 Kalender Pelatihan K3 2026
       </h1>
       <p style="color:rgba(255,255,255,0.85);max-width:580px;margin:0 auto 18px;font-size:15.5px;">
         Pilih bulan untuk melihat distribusi jadwal batch pelatihan secara visual.
       </p>
       <div style="display:flex;gap:12px;justify-content:center;">
-        <a href="/jadwal/" style="display:inline-flex;padding:8px 18px;border-radius:999px;background:color-mix(in srgb,var(--surface) 15%,transparent);color:#ffffff;font-size:13px;font-weight:700;text-decoration:none;border:1px solid color-mix(in srgb,var(--surface) 20%,transparent);">
+        <a href="/jadwal/" style="display:inline-flex;padding:8px 18px;border-radius:999px;background:color-mix(in srgb,var(--surface) 15%,transparent);color: var(--surface);font-size:13px;font-weight:700;text-decoration:none;border:1px solid color-mix(in srgb,var(--surface) 20%,transparent);">
           ← Kembali ke Daftar Jadwal
         </a>
       </div>
@@ -109,10 +109,10 @@ const eventsJson = JSON.stringify(
         <span style="width:12px;height:12px;border-radius:3px;background:var(--brand);"></span> Tatap Muka Offline
       </span>
       <span style="display:flex;align-items:center;gap:6px;">
-        <span style="width:12px;height:12px;border-radius:3px;background:var(--whatsapp,#25D366);"></span> Online Zoom
+        <span style="width:12px;height:12px;border-radius:3px;background:var(--whatsapp,var(--whatsapp));"></span> Online Zoom
       </span>
       <span style="display:flex;align-items:center;gap:6px;">
-        <span style="width:12px;height:12px;border-radius:3px;background:var(--orange,#d97706);"></span> Hybrid
+        <span style="width:12px;height:12px;border-radius:3px;background:var(--orange,var(--cta));"></span> Hybrid
       </span>
     </div>
   </div>
@@ -166,7 +166,7 @@ const eventsJson = JSON.stringify(
           const pill = document.createElement('a');
           const isOnline = ev.mode === 'online';
           pill.href = ev.slug ? `/pelatihan/${ev.slug}/` : '/jadwal/';
-          pill.style.cssText = `font-size:11px;font-weight:700;padding:3px 6px;border-radius:4px;text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:${isOnline ? '#e6f9ed' : '#edf3f0'};color:${isOnline ? '#0f5132' : '#1b4332'};border-left:2.5px solid ${isOnline ? '#25D366' : '#1b4332'};display:block;`;
+          pill.style.cssText = `font-size:11px;font-weight:700;padding:3px 6px;border-radius:4px;text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:${isOnline ? 'var(--brand-light)' : 'var(--brand-light)'};color:${isOnline ? 'var(--brand)' : 'var(--brand)'};border-left:2.5px solid ${isOnline ? 'var(--whatsapp)' : 'var(--brand)'};display:block;`;
           pill.textContent = ev.name;
           pill.title = ev.name;
           cell.appendChild(pill);

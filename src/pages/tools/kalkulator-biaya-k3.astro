@@ -97,7 +97,7 @@ const schemas = [
           
           <div class="card-header-line">
             <h2 class="card-title">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 6v2m0 8v2"/></svg>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--cta)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 6v2m0 8v2"/></svg>
               Input Biaya Langsung (Direct Costs)
             </h2>
             <button type="button" class="ratio-btn" onclick="resetCostForm()" style="padding:4px 10px;font-size:0.8rem">Reset</button>
@@ -154,10 +154,10 @@ const schemas = [
           
           <div class="card-header-line">
             <h2 class="card-title">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--cta)" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
               Visualisasi Teori Gunung Es K3
             </h2>
-            <span id="ratioLabel" style="font-size:0.78rem;font-weight:700;color:var(--orange);background:var(--orange-light);padding:4px 8px;border-radius:4px">
+            <span id="ratioLabel" style="font-size:0.78rem;font-weight:700;color:var(--cta);background:var(--cta-soft);padding:4px 8px;border-radius:4px">
               Rasio 1 : 4
             </span>
           </div>
@@ -171,7 +171,7 @@ const schemas = [
             
             <div class="ice-top">
               <div style="font-size:0.75rem;color:var(--slate-600);text-transform:uppercase">Biaya Langsung (Terlihat)</div>
-              <div style="font-size:1.3rem;font-weight:800;color:var(--navy)" id="iceDirectVal">Rp 50.000.000</div>
+              <div style="font-size:1.3rem;font-weight:800;color:var(--text)" id="iceDirectVal">Rp 50.000.000</div>
               <div style="font-size:0.78rem;color:var(--slate-600);margin-top:4px">Kompensasi, medis, perbaikan mesin langsung</div>
             </div>
 
@@ -200,7 +200,7 @@ const schemas = [
             <div class="stat-desc" id="outRoiDesc">Setiap Rp 1 investasi K3 menghemat Rp 6.67 potensi kerugian</div>
           </div>
 
-          <button type="button" class="form-input" onclick="printCostReport()" style="background:var(--orange);color:var(--surface);border:none;font-weight:700;padding:12px;cursor:pointer;margin-top:10px">
+          <button type="button" class="form-input" onclick="printCostReport()" style="background:var(--cta);color:var(--surface);border:none;font-weight:700;padding:12px;cursor:pointer;margin-top:10px">
             Cetak Executive Summary untuk Direksi
           </button>
 
@@ -216,7 +216,7 @@ const schemas = [
         Dalam manajemen keuangan dan K3, banyak pengusaha beranggapan bahwa kecelakaan kerja telah ditanggung sepenuhnya oleh asuransi (seperti BPJS Ketenagakerjaan). Pandangan keliru ini dibantah secara empiris oleh <strong>Herbert William Heinrich (1931)</strong> dan dilanjutkan oleh <strong>Frank E. Bird Jr. (1969)</strong> melalui model Teori Gunung Es (<em>The Iceberg Principle of Accident Costs</em>).
       </p>
 
-      <h3 style="color:var(--navy);font-family:'Lexend',sans-serif;font-size:1.15rem;margin:22px 0 10px">Rincian Komponen Biaya Tidak Langsung (Indirect Costs)</h3>
+      <h3 style="color:var(--text);font-family:'Lexend',sans-serif;font-size:1.15rem;margin:22px 0 10px">Rincian Komponen Biaya Tidak Langsung (Indirect Costs)</h3>
       <p class="editorial-p">
         Biaya tersembunyi yang ditanggung langsung oleh kas perusahaan (tanpa dapat diklaim asuransi) meliputi:
       </p>
@@ -229,7 +229,7 @@ const schemas = [
       </ul>
 
       <!-- FAQ ACCORDION -->
-      <h3 style="color:var(--navy);font-family:'Lexend',sans-serif;font-size:1.25rem;margin:28px 0 16px">Tanya Jawab Seputar Biaya Kecelakaan Kerja (FAQ)</h3>
+      <h3 style="color:var(--text);font-family:'Lexend',sans-serif;font-size:1.25rem;margin:28px 0 16px">Tanya Jawab Seputar Biaya Kecelakaan Kerja (FAQ)</h3>
       <div class="faq-box">
         
         <div class="faq-item">

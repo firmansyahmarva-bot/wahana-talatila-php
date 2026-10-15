@@ -127,54 +127,54 @@ const schemas = [
         ))}
       </div>
 
-      <div id="noResults" style="display:none; text-align:center; padding:48px 0; color:#64748b;">
+      <div id="noResults" style="display:none; text-align:center; padding:48px 0; color:var(--text-subtle);">
         <p style="font-size:1.1rem; font-weight:600;">Tidak ditemukan skema profesi yang sesuai pencarian Anda.</p>
-        <button id="resetSearch" style="background:#1e40af; color:#fff; border:none; padding:10px 20px; border-radius:8px; cursor:pointer; font-weight:600; margin-top:12px;">Reset Pencarian</button>
+        <button id="resetSearch" style="background:var(--info-dark); color: var(--surface); border:none; padding:10px 20px; border-radius:8px; cursor:pointer; font-weight:600; margin-top:12px;">Reset Pencarian</button>
       </div>
     </div>
   </main>
 
   <!-- Educational Guide to SKKNI & BNSP Section -->
-  <section style="background:#ffffff; padding:64px 0; border-top:1px solid #e2e8f0;">
+  <section style="background: var(--surface); padding:64px 0; border-top:1px solid var(--border);">
     <div class="container" style="max-width:960px;">
-      <h2 style="font-size:1.8rem; font-weight:800; color:#0f172a; margin-bottom:16px; text-align:center;">
+      <h2 style="font-size:1.8rem; font-weight:800; color:var(--text); margin-bottom:16px; text-align:center;">
         📘 Panduan Standar Kompetensi SKKNI & Jalur Sertifikasi Profesi
       </h2>
-      <p style="font-size:1rem; color:#475569; line-height:1.7; text-align:center; margin-bottom:40px;">
+      <p style="font-size:1rem; color:var(--text-muted); line-height:1.7; text-align:center; margin-bottom:40px;">
         Memahami bagaimana Standar Kompetensi Kerja Nasional Indonesia (SKKNI) diterapkan sebagai tolok ukur pengakuan keahlian personil, akreditasi LSP, dan kualifikasi rekrutmen industri modern.
       </p>
 
       <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:24px; margin-bottom:44px;">
-        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:24px;">
+        <div style="background:var(--surface-subtle); border:1px solid var(--border); border-radius:12px; padding:24px;">
           <div style="font-size:1.8rem; margin-bottom:10px;">📋</div>
-          <h3 style="font-size:1.15rem; font-weight:700; color:#1e3a8a; margin:0 0 10px;">1. Pengertian SKKNI</h3>
-          <p style="font-size:0.92rem; color:#475569; line-height:1.6; margin:0;">
+          <h3 style="font-size:1.15rem; font-weight:700; color:var(--info-dark); margin:0 0 10px;">1. Pengertian SKKNI</h3>
+          <p style="font-size:0.92rem; color:var(--text-muted); line-height:1.6; margin:0;">
             SKKNI adalah rumusan kemampuan kerja yang mencakup aspek pengetahuan (knowledge), keterampilan (skill), serta sikap kerja (attitude) yang relevan dengan pelaksanaan tugas dan syarat jabatan yang ditetapkan secara tripartit oleh pemerintah, asosiasi profesi, dan pakar industri.
           </p>
         </div>
 
-        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:24px;">
+        <div style="background:var(--surface-subtle); border:1px solid var(--border); border-radius:12px; padding:24px;">
           <div style="font-size:1.8rem; margin-bottom:10px;">🏛️</div>
-          <h3 style="font-size:1.15rem; font-weight:700; color:#0284c7; margin:0 0 10px;">2. Peran BNSP & LSP</h3>
-          <p style="font-size:0.92rem; color:#475569; line-height:1.6; margin:0;">
+          <h3 style="font-size:1.15rem; font-weight:700; color:var(--info); margin:0 0 10px;">2. Peran BNSP & LSP</h3>
+          <p style="font-size:0.92rem; color:var(--text-muted); line-height:1.6; margin:0;">
             Badan Nasional Sertifikasi Profesi (BNSP) adalah lembaga independen pemerintah yang memberikan lisensi kepada Lembaga Sertifikasi Profesi (LSP). Asesor bersertifikat menguji kandidat melalui metode verifikasi portofolio kerja, tes tulis, wawancara, dan simulasi unjuk kerja.
           </p>
         </div>
 
-        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:24px;">
+        <div style="background:var(--surface-subtle); border:1px solid var(--border); border-radius:12px; padding:24px;">
           <div style="font-size:1.8rem; margin-bottom:10px;">🌍</div>
-          <h3 style="font-size:1.15rem; font-weight:700; color:#16a34a; margin:0 0 10px;">3. Pengakuan Regional & Global</h3>
-          <p style="font-size:0.92rem; color:#475569; line-height:1.6; margin:0;">
+          <h3 style="font-size:1.15rem; font-weight:700; color:var(--success); margin:0 0 10px;">3. Pengakuan Regional & Global</h3>
+          <p style="font-size:0.92rem; color:var(--text-muted); line-height:1.6; margin:0;">
             Sertifikat kompetensi yang berlogo Garuda Emas BNSP diakui secara nasional di seluruh wilayah Indonesia serta memiliki kesetaraan kualifikasi regional di kawasan ASEAN melalui kerangka kerja ASEAN Guiding Principles for Quality Assurance and Recognition of Competency.
           </p>
         </div>
       </div>
 
-      <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:14px; padding:28px; margin-bottom:44px;">
-        <h3 style="font-size:1.25rem; font-weight:700; color:#1e40af; margin:0 0 14px;">
+      <div style="background:var(--info-bg); border:1px solid var(--info-border); border-radius:14px; padding:28px; margin-bottom:44px;">
+        <h3 style="font-size:1.25rem; font-weight:700; color:var(--info-dark); margin:0 0 14px;">
           🚀 4 Langkah Mengikuti Asesmen Uji Kompetensi BNSP
         </h3>
-        <ol style="color:#1e3a8a; font-size:0.95rem; line-height:1.75; margin:0; padding-left:22px;">
+        <ol style="color:var(--info-dark); font-size:0.95rem; line-height:1.75; margin:0; padding-left:22px;">
           <li><strong>Memilih Skema Sertifikasi:</strong> Pilih skema profesi yang sesuai dengan latar belakang pendidikan dan pengalaman kerja Anda di lapangan.</li>
           <li><strong>Mengikuti Pelatihan Pembekalan (Pre-Assessment):</strong> Ikuti workshop pembekalan materi SKKNI bersama instruktur master trainer Wahana Totalita untuk merapikan portofolio bukti kerja (Formulir APL-01 & APL-02).</li>
           <li><strong>Pelaksanaan Uji Kompetensi:</strong> Menjalani asesmen tatap muka atau daring di hadapan Asesor Kompetensi berlisensi BNSP melalui tes wawancara, ujian tertulis, dan demonstrasi studi kasus.</li>
@@ -183,27 +183,27 @@ const schemas = [
       </div>
 
       <!-- FAQ Section -->
-      <h3 style="font-size:1.45rem; font-weight:700; color:#0f172a; margin-bottom:20px; text-align:center;">
+      <h3 style="font-size:1.45rem; font-weight:700; color:var(--text); margin-bottom:20px; text-align:center;">
         ❓ Pertanyaan Umum Seputar SKKNI & Sertifikasi Profesi
       </h3>
       <div style="display:flex; flex-direction:column; gap:14px;">
-        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:20px;">
-          <h4 style="margin:0 0 8px; font-size:1rem; color:#0f172a;">Apa perbedaan sertifikat pelatihan dan sertifikat kompetensi BNSP?</h4>
-          <p style="margin:0; font-size:0.92rem; color:#475569; line-height:1.6;">
+        <div style="background:var(--surface-subtle); border:1px solid var(--border); border-radius:10px; padding:20px;">
+          <h4 style="margin:0 0 8px; font-size:1rem; color:var(--text);">Apa perbedaan sertifikat pelatihan dan sertifikat kompetensi BNSP?</h4>
+          <p style="margin:0; font-size:0.92rem; color:var(--text-muted); line-height:1.6;">
             Sertifikat pelatihan (Certificate of Attendance/Completion) hanya membuktikan bahwa seseorang telah selesai mendengarkan materi kursus. Sedangkan Sertifikat Kompetensi BNSP adalah pengakuan negara resmi yang menyatakan bahwa orang tersebut telah diuji dan terbukti memiliki kemampuan kerja nyata sesuai standar SKKNI.
           </p>
         </div>
 
-        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:20px;">
-          <h4 style="margin:0 0 8px; font-size:1rem; color:#0f172a;">Apakah sertifikasi BNSP bisa kadaluarsa?</h4>
-          <p style="margin:0; font-size:0.92rem; color:#475569; line-height:1.6;">
+        <div style="background:var(--surface-subtle); border:1px solid var(--border); border-radius:10px; padding:20px;">
+          <h4 style="margin:0 0 8px; font-size:1rem; color:var(--text);">Apakah sertifikasi BNSP bisa kadaluarsa?</h4>
+          <p style="margin:0; font-size:0.92rem; color:var(--text-muted); line-height:1.6;">
             Ya, sertifikat kompetensi BNSP memiliki masa berlaku umumnya 3 (tiga) tahun atau 5 (lima) tahun tergantung skema profesi, dan dapat diperpanjang melalui proses re-sertifikasi portofolio kegiatan kerja aktif.
           </p>
         </div>
 
-        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:20px;">
-          <h4 style="margin:0 0 8px; font-size:1rem; color:#0f172a;">Bagaimana cara mendaftar sertifikasi profesi di Wahana Totalita?</h4>
-          <p style="margin:0; font-size:0.92rem; color:#475569; line-height:1.6;">
+        <div style="background:var(--surface-subtle); border:1px solid var(--border); border-radius:10px; padding:20px;">
+          <h4 style="margin:0 0 8px; font-size:1rem; color:var(--text);">Bagaimana cara mendaftar sertifikasi profesi di Wahana Totalita?</h4>
+          <p style="margin:0; font-size:0.92rem; color:var(--text-muted); line-height:1.6;">
             Anda dapat menghubungi konsultan training Wahana Totalita melalui tombol WhatsApp atau memilih program pelatihan yang Anda minati di katalog program kami untuk mendapatkan jadwal public training maupun penawaran in-house training perusahaan.
           </p>
         </div>

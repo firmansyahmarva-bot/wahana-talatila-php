@@ -33,7 +33,7 @@ body {
   padding: 58px 0 44px;
   position: relative;
   overflow: hidden;
-  border-bottom: 3px solid var(--orange);
+  border-bottom: 3px solid var(--cta);
 }
 .noise-hero::before {
   content: "";
@@ -66,7 +66,7 @@ body {
   line-height: 1.2;
   margin-bottom: 12px;
 }
-.noise-hero h1 span { color: var(--orange); }
+.noise-hero h1 span { color: var(--cta); }
 .noise-hero p {
   color: var(--slate-300);
   font-size: 1.05rem;
@@ -115,7 +115,7 @@ body {
   font-family: 'Lexend', sans-serif;
   font-size: 1.25rem;
   font-weight: 700;
-  color: var(--navy);
+  color: var(--text);
   display: flex;
   align-items: center;
   gap: 10px;
@@ -129,7 +129,7 @@ body {
   font-size: 0.9rem;
 }
 .noise-table th {
-  background: var(--navy);
+  background: var(--text);
   color: var(--surface);
   padding: 10px 12px;
   text-align: left;
@@ -147,12 +147,12 @@ body {
   border-radius: 6px;
   font-size: 0.9rem;
 }
-.noise-input:focus { outline: none; border-color: var(--orange); }
+.noise-input:focus { outline: none; border-color: var(--cta); }
 
 .btn-add-source {
   background: var(--slate-100);
   border: 1.5px solid var(--slate-300);
-  color: var(--navy);
+  color: var(--text);
   padding: 8px 16px;
   border-radius: 8px;
   font-size: 0.84rem;
@@ -210,7 +210,7 @@ body {
   position: absolute;
   top: 0; left: 0;
   width: 4px; height: 100%;
-  background: var(--orange);
+  background: var(--cta);
 }
 .stat-meta {
   font-size: 0.76rem;
@@ -224,7 +224,7 @@ body {
   font-family: 'Lexend', sans-serif;
   font-size: 1.8rem;
   font-weight: 800;
-  color: var(--navy);
+  color: var(--text);
   line-height: 1.1;
   margin-bottom: 4px;
 }
@@ -256,9 +256,9 @@ body {
   font-family: 'Lexend', sans-serif;
   font-size: 1.45rem;
   font-weight: 800;
-  color: var(--navy);
+  color: var(--text);
   margin-bottom: 16px;
-  border-left: 4px solid var(--orange);
+  border-left: 4px solid var(--cta);
   padding-left: 14px;
 }
 .editorial-p {
@@ -274,7 +274,7 @@ body {
   margin: 20px 0;
 }
 .ref-table th {
-  background: var(--navy);
+  background: var(--text);
   color: var(--surface);
   padding: 10px 14px;
   text-align: left;
@@ -303,7 +303,7 @@ body {
   font-family: 'Lexend', sans-serif;
   font-size: 0.98rem;
   font-weight: 700;
-  color: var(--navy);
+  color: var(--text);
   cursor: pointer;
   display: flex;
   justify-content: space-between;

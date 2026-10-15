@@ -132,9 +132,9 @@ const schemas = [
         ))}
       </div>
 
-      <div id="noResults" style="display:none; text-align:center; padding:48px 0; color:#64748b;">
+      <div id="noResults" style="display:none; text-align:center; padding:48px 0; color:var(--text-subtle);">
         <p style="font-size:1.1rem; font-weight:600;">Tidak ditemukan regulasi yang sesuai pencarian Anda.</p>
-        <button id="resetSearch" style="background:#0f5132; color:#fff; border:none; padding:10px 20px; border-radius:8px; cursor:pointer; font-weight:600; margin-top:12px;">Reset Pencarian</button>
+        <button id="resetSearch" style="background:var(--brand); color: var(--surface); border:none; padding:10px 20px; border-radius:8px; cursor:pointer; font-weight:600; margin-top:12px;">Reset Pencarian</button>
       </div>
     </div>
   </main>
@@ -194,43 +194,43 @@ const schemas = [
   </section>
 
   <!-- Educational Regulatory Guide & Legal Hierarchy Section -->
-  <section style="background:#ffffff; padding:60px 0; border-top:1px solid #e2e8f0;">
+  <section style="background: var(--surface); padding:60px 0; border-top:1px solid var(--border);">
     <div class="container" style="max-width:960px;">
-      <h2 style="font-size:1.8rem; font-weight:800; color:#0f172a; margin-bottom:16px; text-align:center;">
+      <h2 style="font-size:1.8rem; font-weight:800; color:var(--text); margin-bottom:16px; text-align:center;">
         📚 Panduan Hierarki Hukum & Kepatuhan K3 di Indonesia
       </h2>
-      <p style="font-size:1rem; color:#475569; line-height:1.7; text-align:center; margin-bottom:36px;">
+      <p style="font-size:1rem; color:var(--text-muted); line-height:1.7; text-align:center; margin-bottom:36px;">
         Sistem perundang-undangan Keselamatan dan Kesehatan Kerja (K3) di Indonesia disusun secara berjenjang untuk memastikan perlindungan menyeluruh bagi setiap tenaga kerja di seluruh sektor industri.
       </p>
 
       <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:24px; margin-bottom:40px;">
-        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:20px;">
-          <h3 style="font-size:1.1rem; font-weight:700; color:#0f5132; margin:0 0 8px;">1. Tingkat Undang-Undang (UU)</h3>
-          <p style="font-size:0.9rem; color:#475569; line-height:1.6; margin:0;">
+        <div style="background:var(--surface-subtle); border:1px solid var(--border); border-radius:10px; padding:20px;">
+          <h3 style="font-size:1.1rem; font-weight:700; color:var(--brand); margin:0 0 8px;">1. Tingkat Undang-Undang (UU)</h3>
+          <p style="font-size:0.9rem; color:var(--text-muted); line-height:1.6; margin:0;">
             Landasan payung hukum tertinggi, seperti <strong>UU No. 1 Tahun 1970</strong> (Keselamatan Kerja), <strong>UU No. 13 Tahun 2003</strong> (Ketenagakerjaan), dan <strong>UU No. 32 Tahun 2009</strong> (PPLH) yang memuat hak konstitusional dan tanggung jawab pidana pengurus.
           </p>
         </div>
 
-        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:20px;">
-          <h3 style="font-size:1.1rem; font-weight:700; color:#1e40af; margin:0 0 8px;">2. Peraturan Pemerintah (PP)</h3>
-          <p style="font-size:0.9rem; color:#475569; line-height:1.6; margin:0;">
+        <div style="background:var(--surface-subtle); border:1px solid var(--border); border-radius:10px; padding:20px;">
+          <h3 style="font-size:1.1rem; font-weight:700; color:var(--info-dark); margin:0 0 8px;">2. Peraturan Pemerintah (PP)</h3>
+          <p style="font-size:0.9rem; color:var(--text-muted); line-height:1.6; margin:0;">
             Aturan pelaksanaan operasional lintas kementerian, seperti <strong>PP No. 50 Tahun 2012</strong> tentang SMK3 dan <strong>PP No. 22 Tahun 2021</strong> tentang Persetujuan Lingkungan dan Limbah B3.
           </p>
         </div>
 
-        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:20px;">
-          <h3 style="font-size:1.1rem; font-weight:700; color:#c2410c; margin:0 0 8px;">3. Peraturan Menteri (Permen)</h3>
-          <p style="font-size:0.9rem; color:#475569; line-height:1.6; margin:0;">
+        <div style="background:var(--surface-subtle); border:1px solid var(--border); border-radius:10px; padding:20px;">
+          <h3 style="font-size:1.1rem; font-weight:700; color:var(--cta-hover); margin:0 0 8px;">3. Peraturan Menteri (Permen)</h3>
+          <p style="font-size:0.9rem; color:var(--text-muted); line-height:1.6; margin:0;">
             Standar teknis spesifik yang diterbitkan oleh Kementerian Ketenagakerjaan (Permenaker), Kementerian ESDM, dan Kementerian LHK mengenai kualifikasi operator, izin alat (SILO), dan ambang batas lingkungan.
           </p>
         </div>
       </div>
 
-      <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:12px; padding:28px; margin-bottom:44px;">
-        <h3 style="font-size:1.25rem; font-weight:700; color:#166534; margin:0 0 12px;">
+      <div style="background:var(--brand-light); border:1px solid var(--success-border); border-radius:12px; padding:28px; margin-bottom:44px;">
+        <h3 style="font-size:1.25rem; font-weight:700; color:var(--success-dark); margin:0 0 12px;">
           🏢 5 Kewajiban Pokok K3 bagi Setiap Manajemen Perusahaan
         </h3>
-        <ul style="color:#166534; font-size:0.95rem; line-height:1.75; margin:0; padding-left:20px;">
+        <ul style="color:var(--success-dark); font-size:0.95rem; line-height:1.75; margin:0; padding-left:20px;">
           <li><strong>Membentuk Panitia Pembina K3 (P2K3)</strong> dan menunjuk personil Ahli K3 Umum ber-SKP aktif sebagai sekretaris (Permenaker 04/1987).</li>
           <li><strong>Menerapkan Sistem Manajemen K3 (SMK3)</strong> bagi tempat kerja dengan minimal 100 buruh atau berpotensi bahaya tinggi (PP 50/2012).</li>
           <li><strong>Menyediakan Surat Izin Layak Operasi (SILO)</strong> dan Lisensi K3 (SIO) untuk seluruh operator forklift, boiler, genset, dan bejana tekan.</li>
@@ -240,27 +240,27 @@ const schemas = [
       </div>
 
       <!-- FAQ Hub Section -->
-      <h3 style="font-size:1.4rem; font-weight:700; color:#0f172a; margin-bottom:20px; text-align:center;">
+      <h3 style="font-size:1.4rem; font-weight:700; color:var(--text); margin-bottom:20px; text-align:center;">
         ❓ Tanya Jawab Seputar Regulasi K3 di Indonesia
       </h3>
       <div style="display:flex; flex-direction:column; gap:12px;">
-        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:18px 20px;">
-          <h4 style="margin:0 0 8px; font-size:1rem; color:#0f172a;">Apa akibat hukum jika perusahaan tidak menerapkan K3?</h4>
-          <p style="margin:0; font-size:0.9rem; color:#475569; line-height:1.6;">
+        <div style="background:var(--surface-subtle); border:1px solid var(--border); border-radius:8px; padding:18px 20px;">
+          <h4 style="margin:0 0 8px; font-size:1rem; color:var(--text);">Apa akibat hukum jika perusahaan tidak menerapkan K3?</h4>
+          <p style="margin:0; font-size:0.9rem; color:var(--text-muted); line-height:1.6;">
             Perusahaan berisiko dikenakan sanksi pidana kurungan, denda, penghentian sementara kegiatan operasional oleh Pengawas Ketenagakerjaan, hingga penutupan tempat kerja serta tanggung jawab perdata penuh bila terjadi kecelakaan fatal.
           </p>
         </div>
 
-        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:18px 20px;">
-          <h4 style="margin:0 0 8px; font-size:1rem; color:#0f172a;">Apakah sertifikat kompetensi K3 wajib diperpanjang secara berkala?</h4>
-          <p style="margin:0; font-size:0.9rem; color:#475569; line-height:1.6;">
+        <div style="background:var(--surface-subtle); border:1px solid var(--border); border-radius:8px; padding:18px 20px;">
+          <h4 style="margin:0 0 8px; font-size:1rem; color:var(--text);">Apakah sertifikat kompetensi K3 wajib diperpanjang secara berkala?</h4>
+          <p style="margin:0; font-size:0.9rem; color:var(--text-muted); line-height:1.6;">
             Ya. Surat Keputusan Penunjukan (SKP) Ahli K3 dan Lisensi K3 Kemnaker umumnya memiliki masa berlaku 3 hingga 5 tahun dan wajib diperpanjang dengan menyertakan bukti laporan kegiatan kerja K3 periodik.
           </p>
         </div>
 
-        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:18px 20px;">
-          <h4 style="margin:0 0 8px; font-size:1rem; color:#0f172a;">Bagaimana cara memastikan seluruh regulasi K3 terpenuhi di perusahaan?</h4>
-          <p style="margin:0; font-size:0.9rem; color:#475569; line-height:1.6;">
+        <div style="background:var(--surface-subtle); border:1px solid var(--border); border-radius:8px; padding:18px 20px;">
+          <h4 style="margin:0 0 8px; font-size:1rem; color:var(--text);">Bagaimana cara memastikan seluruh regulasi K3 terpenuhi di perusahaan?</h4>
+          <p style="margin:0; font-size:0.9rem; color:var(--text-muted); line-height:1.6;">
             Perusahaan dapat melakukan gap analysis kepatuhan hukum melalui audit internal SMK3, menyusun register regulasi K3 yang terus diperbarui, dan bermitra dengan konsultan terpercaya seperti Wahana Totalita untuk in-house training dan sertifikasi resmi.
           </p>
         </div>

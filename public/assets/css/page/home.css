@@ -39,13 +39,13 @@
   transition: all .15s;
 }
 .mobile-chip.active,
-.mobile-chip:active { background: var(--brand, #103A5C); color: #fff; }
+.mobile-chip:active { background: var(--brand, #103A5C); color: var(--on-brand); }
 
 /* ── MOBILE PROMO BANNER ───────────────────────────────────── */
 .mobile-promo {
   display: none;
   margin: 10px 12px 4px;
-  background: linear-gradient(135deg, var(--accent, #F06A25) 0%, #f59e0b 100%);
+  background: linear-gradient(135deg, var(--accent, #F06A25) 0%, var(--warning) 100%);
   border-radius: 14px;
   padding: 13px 14px;
   align-items: center;
