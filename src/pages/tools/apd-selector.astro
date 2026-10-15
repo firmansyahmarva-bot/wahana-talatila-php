@@ -173,4 +173,24 @@ const schemas = [
 </section>
 
 </main>
+
+<script is:inline>
+  function filterApd(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+    const cards = document.querySelectorAll('.apd-card');
+    cards.forEach(card => {
+      if (cat === 'all' || card.getAttribute('data-cat') === cat) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    if (item) item.classList.toggle('active');
+  }
+</script>
 </Layout>

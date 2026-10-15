@@ -32,24 +32,11 @@ if (fs.existsSync(tokensCssPath)) {
   }
 }
 
-// Gather all variables defined in other CSS files (scoped component variables)
-const cssFiles = getFiles(path.join(rootDir, 'public', 'assets', 'css'), ['.css']);
-let scopedCssVars = new Map(); // varName -> Set of files where defined
-cssFiles.forEach(file => {
-  const relPath = path.relative(rootDir, file);
-  const content = fs.readFileSync(file, 'utf8');
-  const tokenRegex = /(--[a-zA-Z0-9_-]+)\s*:/g;
-  let tm;
-  while ((tm = tokenRegex.exec(content)) !== null) {
-    if (!scopedCssVars.has(tm[1])) scopedCssVars.set(tm[1], new Set());
-    scopedCssVars.get(tm[1]).add(relPath);
-  }
-});
-
 // Standard media query widths allowed
 const allowedBreakpoints = new Set(['640px', '768px', '1024px', '1200px']);
 
 const srcFiles = getFiles(path.join(rootDir, 'src'), ['.astro', '.html', '.ts', '.js']);
+const cssFiles = getFiles(path.join(rootDir, 'public', 'assets', 'css'), ['.css']);
 
 let violations = {
   hexOutsideTokens: [],
@@ -66,17 +53,9 @@ cssFiles.forEach(file => {
 
   // Rule 1: Hex colors outside tokens.css
   if (!isTokens) {
-    const isHomeCss = relPath.includes('home.css');
     const hexRegex = /#([0-9a-fA-F]{3,8})\b/g;
     let m;
     while ((m = hexRegex.exec(content)) !== null) {
-      // Exclude HTML entities if any
-      const prevChar = content[m.index - 1];
-      if (prevChar === '&') continue;
-      // Exclude protected legacy colors in home.css (#103A5C and #F06A25)
-      if (isHomeCss && ['#103A5C', '#103a5c', '#F06A25', '#f06a25'].includes(m[0])) {
-        continue;
-      }
       violations.hexOutsideTokens.push({
         file: relPath,
         match: m[0],
@@ -85,12 +64,14 @@ cssFiles.forEach(file => {
     }
   }
 
-  // Rule 2: var(--x) not defined in tokens.css or in scoped CSS
+  // Rule 2: var(--x) not defined in tokens.css
   const varRegex = /var\(\s*(--[a-zA-Z0-9_-]+)/g;
   let vm;
   while ((vm = varRegex.exec(content)) !== null) {
     const varName = vm[1];
-    if (!definedTokens.has(varName) && !scopedCssVars.has(varName)) {
+    // Skip internal scoped vars starting with --pd- in pelatihan-detail if locally defined,
+    // or report if not in tokens.css
+    if (!definedTokens.has(varName)) {
       violations.undefinedVars.push({
         file: relPath,
         match: varName
@@ -125,17 +106,9 @@ srcFiles.forEach(file => {
   const content = fs.readFileSync(file, 'utf8');
 
   // Rule 1: Hex colors in src
-  // Match 3, 4, 6, or 8 digit hex colors (e.g. #fff, #1a1a1a) but not HTML entities &#...; or href="#..."
   const hexRegex = /#([0-9a-fA-F]{3,8})\b/g;
   let m;
   while ((m = hexRegex.exec(content)) !== null) {
-    const prevChar = content[m.index - 1];
-    // Ignore HTML entities like &#8249; or &#10003;
-    if (prevChar === '&') continue;
-    // Ignore href="#..." anchor links
-    const beforeSnippet = content.slice(Math.max(0, m.index - 10), m.index);
-    if (/href=["']?$/i.test(beforeSnippet) || /id=["']?$/i.test(beforeSnippet)) continue;
-
     violations.hexOutsideTokens.push({
       file: relPath,
       match: m[0],
@@ -148,7 +121,7 @@ srcFiles.forEach(file => {
   let vm;
   while ((vm = varRegex.exec(content)) !== null) {
     const varName = vm[1];
-    if (!definedTokens.has(varName) && !scopedCssVars.has(varName)) {
+    if (!definedTokens.has(varName)) {
       violations.undefinedVars.push({
         file: relPath,
         match: varName
@@ -176,13 +149,35 @@ srcFiles.forEach(file => {
   }
 });
 
+// Check JSON data files (src/data, data, pelatihan-data)
+const jsonDirs = ['src/data', 'data', 'pelatihan-data'];
+let jsonFiles = [];
+jsonDirs.forEach(d => {
+  const fullDir = path.join(rootDir, d);
+  jsonFiles = jsonFiles.concat(getFiles(fullDir, ['.json']));
+});
+
+jsonFiles.forEach(file => {
+  const relPath = path.relative(rootDir, file);
+  const content = fs.readFileSync(file, 'utf8');
+  const hexRegex = /#([0-9a-fA-F]{3,8})\b/g;
+  let m;
+  while ((m = hexRegex.exec(content)) !== null) {
+    violations.hexOutsideTokens.push({
+      file: relPath,
+      match: m[0],
+      index: m.index
+    });
+  }
+});
+
 // Report results
 console.log('====================================================');
-console.log('           DESIGN LINTER REPORT                     ');
+console.log('           DESIGN LINTER BASELINE REPORT            ');
 console.log('====================================================\n');
 
 console.log(`1. Hex colors outside tokens.css:          ${violations.hexOutsideTokens.length}`);
-console.log(`2. Undefined var(--x) (truly undefined):   ${violations.undefinedVars.length}`);
+console.log(`2. Undefined var(--x) (not in tokens.css): ${violations.undefinedVars.length}`);
 console.log(`3. Non-standard @media query widths:       ${violations.nonStandardMediaQueries.length}`);
 console.log(`4. style="" with color/background/border:  ${violations.inlineStyleForbiddenProps.length}`);
 
