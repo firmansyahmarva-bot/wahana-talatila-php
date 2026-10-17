@@ -56,6 +56,19 @@ for (const pageKey of Object.keys(before)) {
         if (prop === 'boxShadow' && bVal && aVal && bVal.replace(/\s+/g, '') === aVal.replace(/\s+/g, '')) {
           continue;
         }
+
+        // Special case: In commit ca82039, 9 tool pages lacked a toggleFaq() function definition,
+        // causing Playwright's click on the summary to error in before-true.json and remain closed (display: none, transform: none).
+        // In the migrated component, native <details> opens cleanly (display: block, transform: matrix(-1, 0, 0, -1, 0, 0)).
+        if (pageKey.includes('@open') && pageKey.startsWith('/tools/')) {
+          if (elKey === 'faqAnswer' && prop === 'display' && bVal === 'none' && aVal === 'block') {
+            continue;
+          }
+          if (elKey === 'faqIcon' && prop === 'transform' && bVal === 'none' && aVal === 'matrix(-1, 0, 0, -1, 0, 0)') {
+            continue;
+          }
+        }
+
         diffReport.push(`[${pageKey}] ${elKey}.${prop}: before="${bVal}" vs after="${aVal}"`);
         totalDifferences++;
       }

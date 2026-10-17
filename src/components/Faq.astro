@@ -14,10 +14,10 @@ interface Props {
 
 const { items = [], title = '', variant = '', class: className = '', icon: customIcon } = Astro.props;
 
-// Determine icon character: tool uses ▼, empty for skkni/safety-talk/simple, default +
+// Determine icon character: tool uses ▼, empty for skkni/safety-talk/simple/tools-index, default +
 const iconChar = customIcon !== undefined
   ? customIcon
-  : (variant === 'tool' ? '▼' : (variant === 'none' || variant === 'skkni' || variant === 'safety-talk' || variant === 'simple' ? '' : '+'));
+  : (variant === 'tool' ? '▼' : (variant === 'none' || variant === 'skkni' || variant === 'safety-talk' || variant === 'simple' || variant === 'tools-index' ? '' : '+'));
 ---
 
 <div class={`fqc-wrap ${variant ? 'fqc-var-' + variant : ''} ${className}`.trim()}>
@@ -152,6 +152,10 @@ const iconChar = customIcon !== undefined
     background: rgba(0, 0, 0, 0);
     margin: 1px 0 0;
     transform: none;
+  }
+  .fqc-kalkulator-k3 .fqc-icon {
+    font-size: 0.8rem;
+    line-height: 0.8rem;
   }
   .fqc-var-tool .fqc-item[open] > .fqc-summary > .fqc-icon {
     transform: matrix(-1, 0, 0, -1, 0, 0);
