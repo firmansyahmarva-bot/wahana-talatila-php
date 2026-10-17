@@ -5,6 +5,7 @@ import { formatPrice, modeLabel, waUrl } from '../../lib/images';
 import { getTrainingFaqs } from '../../lib/trainingFaqs';
 import WaButton from '../WaButton.astro';
 import TrainingCard from '../TrainingCard.astro';
+import Breadcrumb from '../Breadcrumb.astro';
 import allBatches from '../../../data/training_batches.json';
 
 interface Props {
@@ -120,10 +121,18 @@ if (relatedArticles.length < 2) {
   relatedArticles = allArticles.slice(0, 3);
 }
 
-// Batches for this course
-const courseBatches = allBatches.filter(
-  (b: any) => (b.course_id === data.id || (b.course_id && String(b.course_id) === String(data.id))) && b.is_public !== 0
-);
+// Batches for this course: start_date >= today, sorted ascending, max 3
+const today = new Date().toISOString().slice(0, 10);
+const courseBatches = (allBatches as any[])
+  .filter(
+    (b: any) =>
+      (b.course_id === data.id || (b.course_id && String(b.course_id) === String(data.id))) &&
+      b.is_public !== 0 &&
+      b.start_date &&
+      b.start_date >= today
+  )
+  .sort((a: any, b: any) => (a.start_date || '').localeCompare(b.start_date || ''))
+  .slice(0, 3);
 
 function formatDateIndo(dateStr?: string | null): string {
   if (!dateStr || dateStr === '0000-00-00') return '';
@@ -135,6 +144,7 @@ function formatDateIndo(dateStr?: string | null): string {
   ];
   return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
 }
+
 
 const schemas = [
   {
@@ -198,21 +208,16 @@ const inhouseWaMsg = `Halo Wahana Totalita, kami dari perusahaan ingin meminta p
 >
   <div class="training-detail-page">
     <!-- BREADCRUMB -->
-    <div class="breadcrumb-bar">
-      <div class="container">
-        <nav aria-label="Breadcrumb">
-          <ol class="breadcrumb-list">
-            <li><a href="/">Beranda</a></li>
-            <li aria-hidden="true">›</li>
-            <li><a href="/pelatihan/">Pelatihan</a></li>
-            <li aria-hidden="true">›</li>
-            <li><a href={hubLink}>{catName}</a></li>
-            <li aria-hidden="true">›</li>
-            <li aria-current="page">{data.name}</li>
-          </ol>
-        </nav>
-      </div>
-    </div>
+    <Breadcrumb
+      variant="course"
+      items={[
+        { name: 'Beranda', href: '/' },
+        { name: 'Pelatihan', href: '/pelatihan/' },
+        { name: catName, href: hubLink },
+        { name: data.name },
+      ]}
+    />
+
 
     <!-- DETAIL HERO -->
     <section class="pd-hero">
@@ -318,13 +323,13 @@ const inhouseWaMsg = `Halo Wahana Totalita, kami dari perusahaan ingin meminta p
         </div>
 
         <div class="tc-live-scroll" id="live-schedule-grid">
-          {courseBatches.length > 0 ? (
+          {courseBatches.length > 0 &&
             courseBatches.map((b: any, idx: number) => {
               const startDateStr = formatDateIndo(b.start_date);
               const place = b.mode === 'online' ? 'Online via Zoom' : (b.venue || 'Yogyakarta / Tatap Muka');
               const batchPrice = b.price > 0 ? formatPrice(b.price) : priceFormatted;
               return (
-                <a class="tc-schedule-card" href="/jadwal/">
+                <a class="tc-schedule-card" href="/jadwal/" data-start={b.start_date}>
                   <span>{idx === 0 ? 'Batch terdekat' : 'Pendaftaran dibuka'}</span>
                   <b>{startDateStr || b.batch_name}</b>
                   <small>{place} · {String(b.mode || 'offline').toUpperCase()}</small>
@@ -333,18 +338,38 @@ const inhouseWaMsg = `Halo Wahana Totalita, kami dari perusahaan ingin meminta p
                 </a>
               );
             })
-          ) : (
-            <div class="pd-schedule-fallback">
-              <p class="pd-schedule-fallback-text">Jadwal batch reguler berikutnya sedang disiapkan atau disesuaikan dengan permintaan in-house perusahaan.</p>
-              <WaButton
-                message={`Halo Wahana Totalita, saya ingin tanya jadwal batch terdekat untuk program: ${data.name}`}
-                label="Tanya jadwal via WhatsApp"
-                variant="secondary"
-                size="md"
-              />
-            </div>
-          )}
+          }
+          <div class={`pd-schedule-fallback ${courseBatches.length > 0 ? 'is-hidden' : ''}`}>
+            <p class="pd-schedule-fallback-text">Jadwal batch reguler berikutnya sedang disiapkan atau disesuaikan dengan permintaan in-house perusahaan.</p>
+            <WaButton
+              message={`Halo Wahana Totalita, saya ingin tanya jadwal batch terdekat untuk program: ${data.name}`}
+              label="Tanya jadwal via WhatsApp"
+              variant="secondary"
+              size="md"
+            />
+          </div>
         </div>
+        <script is:inline>
+          (function() {
+            var today = new Date().toISOString().slice(0, 10);
+            var grid = document.getElementById('live-schedule-grid');
+            if (!grid) return;
+            var cards = grid.querySelectorAll('.tc-schedule-card[data-start]');
+            var visible = 0;
+            cards.forEach(function(c) {
+              var s = c.getAttribute('data-start');
+              if (s && s < today) {
+                c.remove();
+              } else {
+                visible++;
+              }
+            });
+            var fb = grid.querySelector('.pd-schedule-fallback');
+            if (visible === 0 && fb) {
+              fb.classList.remove('is-hidden');
+            }
+          })();
+        </script>
       </div>
     </section>
 
@@ -681,6 +706,9 @@ const inhouseWaMsg = `Halo Wahana Totalita, kami dari perusahaan ingin meminta p
     border-radius: 12px;
     width: 100%;
     gap: 14px;
+  }
+  .pd-schedule-fallback.is-hidden {
+    display: none;
   }
   .pd-schedule-fallback-text {
     margin: 0;

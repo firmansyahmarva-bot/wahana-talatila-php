@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import Section from '../components/Section.astro';
 
 const canonical = 'https://wahanatotalita.com/pelatihan-kelautan/';
 const metaTitle = 'Pelatihan K3 & Keselamatan Maritim — Marine Safety Training | Wahana Totalita';
@@ -111,10 +113,10 @@ const schemas = [
 
   <main class="container" style="max-width:960px;padding:48px 20px 64px;">
     <!-- REGULASI -->
-    <section class="sp-mb-48">
-      <h2 class="sp-title-underlined-20-bold">
+    <Section spacing="md">
+      <SectionTitle level={2} underline bold size="20">
         Kerangka Regulasi Keselamatan Maritim
-      </h2>
+      </SectionTitle>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;">
         {regs.map((r) => (
           <div style={`background:${r.bg};border-radius:8px;padding:18px;border-left:4px solid var(--brand);`}>
@@ -123,13 +125,13 @@ const schemas = [
           </div>
         ))}
       </div>
-    </section>
+    </Section>
 
     <!-- BAHAYA MARITIM -->
-    <section class="sp-mb-48">
-      <h2 class="sp-title-underlined-20-bold">
+    <Section spacing="md">
+      <SectionTitle level={2} underline bold size="20">
         6 Bahaya Utama K3 di Lingkungan Maritim
-      </h2>
+      </SectionTitle>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px;">
         {hazards.map((h) => (
           <div style={`background:${h.color};color: var(--surface);border-radius:10px;padding:20px;box-shadow:var(--shadow-sm);`}>
@@ -139,7 +141,7 @@ const schemas = [
           </div>
         ))}
       </div>
-    </section>
+    </Section>
 
     <!-- BST SECTION -->
     <section style="margin-bottom:48px;background:var(--surface-subtle);border-radius:12px;border:1px solid var(--border);padding:28px;">
@@ -161,10 +163,10 @@ const schemas = [
     </section>
 
     <!-- TARGET PESERTA -->
-    <section class="sp-mb-48">
-      <h2 class="sp-title-underlined-20-bold">
+    <Section spacing="md">
+      <SectionTitle level={2} underline bold size="20">
         Siapa yang Membutuhkan Pelatihan Keselamatan Maritim?
-      </h2>
+      </SectionTitle>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;">
         {targets.map((t) => (
           <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:18px;border-top:3px solid var(--brand);">
@@ -174,13 +176,13 @@ const schemas = [
           </div>
         ))}
       </div>
-    </section>
+    </Section>
 
     <!-- PROGRAM -->
-    <section class="sp-mb-48">
-      <h2 class="sp-title-underlined-24-bold">
+    <Section spacing="md">
+      <SectionTitle level={2} underline bold size="24">
         Program Pelatihan Keselamatan Maritim
-      </h2>
+      </SectionTitle>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:20px;">
         {programs.map((p) => (
           <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow-sm);">
@@ -200,13 +202,13 @@ const schemas = [
           </div>
         ))}
       </div>
-    </section>
+    </Section>
 
     <!-- FAQ -->
-    <section class="sp-mb-48">
-      <h2 class="sp-title-underlined-24-bold">
+    <Section spacing="md">
+      <SectionTitle level={2} underline bold size="24">
         Pertanyaan yang Sering Diajukan
-      </h2>
+      </SectionTitle>
       <div style="display:flex;flex-direction:column;gap:12px;">
         {faqs.map((faq) => (
           <details style="border:1px solid var(--border);border-radius:8px;padding:14px 18px;background:var(--surface);">
@@ -219,7 +221,7 @@ const schemas = [
           </details>
         ))}
       </div>
-    </section>
+    </Section>
 
     <!-- CTA -->
     <section style="background:linear-gradient(135deg,var(--brand),var(--brand-dark));color:var(--surface);border-radius:12px;padding:44px 24px;text-align:center;">

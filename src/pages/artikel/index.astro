@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 import { getCollection } from 'astro:content';
 
 const articles = await getCollection('articles');
@@ -18,17 +19,13 @@ const canonical = 'https://wahanatotalita.com/artikel/';
 
 <Layout title={title} description={description} canonical={canonical}>
   <!-- BREADCRUMB -->
-  <div class="breadcrumb-bar sp-breadcrumb-wrap">
-    <div class="container sp-breadcrumb-inner">
-      <nav aria-label="Breadcrumb">
-        <ol class="breadcrumb-list sp-breadcrumb-list">
-          <li><a href="/" style="color:var(--slate-600);text-decoration:none;">Beranda</a></li>
-          <li aria-hidden="true">›</li>
-          <li aria-current="page" style="color:var(--brand);font-weight:600;">Artikel &amp; Edukasi K3</li>
-        </ol>
-      </nav>
-    </div>
-  </div>
+  <Breadcrumb
+    variant="city"
+    items={[
+      { name: 'Beranda', href: '/' },
+      { name: 'Artikel & Edukasi K3' },
+    ]}
+  />
 
   <div style="background: linear-gradient(135deg, var(--brand-dark, var(--brand-dark)) 0%, var(--brand, var(--brand)) 100%); color: var(--surface); padding: 50px 0;">
     <div class="container" style="max-width: 1100px; margin: 0 auto; padding: 0 20px; text-align: center;">

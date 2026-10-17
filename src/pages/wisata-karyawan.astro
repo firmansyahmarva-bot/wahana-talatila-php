@@ -1,5 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import Section from '../components/Section.astro';
+import Faq from '../components/Faq.astro';
 
 const canonical = 'https://wahanatotalita.com/wisata-karyawan/';
 const metaTitle = 'Paket Wisata Karyawan & Instansi Yogyakarta — BUMN, Dinas & Korporasi | Wahana Totalita';
@@ -196,10 +199,10 @@ const schemas = [
   <main style="max-width:960px;margin:0 auto;padding:40px 20px 60px;">
 
     <!-- MENGAPA WISATA KARYAWAN -->
-    <section class="sp-mb-48">
-      <h2 class="sp-title-underlined-20">
+    <Section spacing="md">
+      <SectionTitle level={2} underline size="20">
         Mengapa Wisata Tahunan Karyawan Penting?
-      </h2>
+      </SectionTitle>
       <p style="line-height:1.8;color:var(--slate-800);margin-bottom:16px;">
         Wisata tahunan karyawan bukan sekadar kegiatan rekreasi — ini adalah investasi dalam kesehatan mental tim, kohesivitas antar departemen, dan retensi SDM berkualitas. Karyawan yang merasa dihargai melalui kegiatan seperti ini cenderung memiliki loyalitas lebih tinggi dan produktivitas yang lebih baik setelah kembali dari perjalanan.
       </p>
@@ -212,13 +215,13 @@ const schemas = [
           </div>
         ))}
       </div>
-    </section>
+    </Section>
 
     <!-- FORMAT PAKET -->
-    <section class="sp-mb-48">
-      <h2 class="sp-title-underlined-24">
+    <Section spacing="md">
+      <SectionTitle level={2} underline size="24">
         Format Paket Wisata Karyawan
-      </h2>
+      </SectionTitle>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;">
         {packages.map((p) => (
           <div style="border-radius:8px;overflow:hidden;display:flex;flex-direction:column;border:1px solid var(--slate-300);">
@@ -244,13 +247,13 @@ const schemas = [
           </div>
         ))}
       </div>
-    </section>
+    </Section>
 
     <!-- YANG TERMASUK DALAM PAKET -->
-    <section class="sp-mb-48">
-      <h2 class="sp-title-underlined-20">
+    <Section spacing="md">
+      <SectionTitle level={2} underline size="20">
         Yang Termasuk dalam Paket
-      </h2>
+      </SectionTitle>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;">
         {inclusions.map((inc) => (
           <div style="background:var(--slate-50);border:1px solid var(--border);border-radius:8px;padding:16px;display:flex;gap:14px;align-items:flex-start;">
@@ -262,7 +265,7 @@ const schemas = [
           </div>
         ))}
       </div>
-    </section>
+    </Section>
 
     <!-- WISATA + OUTBOUND COMBO -->
     <section style="margin-bottom:48px;background:var(--accent-light);border-radius:10px;padding:30px;">
@@ -294,10 +297,10 @@ const schemas = [
     </section>
 
     <!-- PENGADAAN PEMERINTAH -->
-    <section class="sp-mb-48">
-      <h2 class="sp-title-underlined-20">
+    <Section spacing="md">
+      <SectionTitle level={2} underline size="20">
         Kemudahan Pengadaan untuk Instansi Pemerintah
-      </h2>
+      </SectionTitle>
       <p style="line-height:1.8;color:var(--slate-800);margin-bottom:20px;">
         Wahana Totalita memahami kompleksitas pengadaan pemerintah dan telah membangun sistem yang memudahkan proses dari perencanaan hingga pelaporan. Kami bukan sekadar travel agent — kami adalah mitra pengadaan yang memahami aturan main APBN/APBD.
       </p>
@@ -319,13 +322,13 @@ const schemas = [
           </tbody>
         </table>
       </div>
-    </section>
+    </Section>
 
     <!-- ALUR PEMESANAN -->
-    <section class="sp-mb-48">
-      <h2 class="sp-title-underlined-24">
+    <Section spacing="md">
+      <SectionTitle level={2} underline size="24">
         Alur Pemesanan Paket Wisata Karyawan
-      </h2>
+      </SectionTitle>
       {steps.map((step) => (
         <div style="display:flex;gap:20px;margin-bottom:18px;align-items:flex-start;">
           <div style="background:var(--brand);color:var(--surface);width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1rem;flex-shrink:0;">{step.num}</div>
@@ -335,10 +338,10 @@ const schemas = [
           </div>
         </div>
       ))}
-    </section>
+    </Section>
 
     <!-- RELATED -->
-    <section class="sp-mb-48">
+    <Section spacing="md">
       <h2 style="color:var(--brand);font-size:1.4rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:20px;">
         Program Lain untuk Instansi &amp; Korporasi
       </h2>
@@ -350,25 +353,15 @@ const schemas = [
           </a>
         ))}
       </div>
-    </section>
+    </Section>
 
     <!-- FAQ -->
-    <section class="sp-mb-48">
-      <h2 class="sp-title-underlined-24">
+    <Section spacing="md">
+      <SectionTitle level={2} underline size="24">
         Pertanyaan yang Sering Diajukan
-      </h2>
-      {faqs.map((faq) => (
-        <details class="sp-faq-card">
-          <summary class="sp-faq-summary">
-            <span>{faq.q}</span>
-            <span style="font-size:1.2rem;font-weight:700;color:var(--accent);min-width:20px;text-align:center;">+</span>
-          </summary>
-          <div class="sp-faq-content">
-            {faq.a}
-          </div>
-        </details>
-      ))}
-    </section>
+      </SectionTitle>
+      <Faq items={faqs} />
+    </Section>
 
     <!-- CTA -->
     <section style="background:linear-gradient(135deg,var(--brand),var(--brand-mid));color:var(--surface);border-radius:12px;padding:40px;text-align:center;">

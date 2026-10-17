@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
 
 const pageTitle = "Kalkulator Biaya Kecelakaan Kerja 2026: Teori Gunung Es Heinrich & Bird";
 const metaDesc = "Hitung total kerugian finansial akibat kecelakaan kerja berdasarkan Teori Gunung Es K3 (Heinrich 1:4 & Bird 1:10). Analisis biaya langsung, biaya tak langsung, dan ROI program K3.";
@@ -216,7 +217,7 @@ const schemas = [
         Dalam manajemen keuangan dan K3, banyak pengusaha beranggapan bahwa kecelakaan kerja telah ditanggung sepenuhnya oleh asuransi (seperti BPJS Ketenagakerjaan). Pandangan keliru ini dibantah secara empiris oleh <strong>Herbert William Heinrich (1931)</strong> dan dilanjutkan oleh <strong>Frank E. Bird Jr. (1969)</strong> melalui model Teori Gunung Es (<em>The Iceberg Principle of Accident Costs</em>).
       </p>
 
-      <h3 class="sp-heading-lexend-md">Rincian Komponen Biaya Tidak Langsung (Indirect Costs)</h3>
+      <SectionTitle level={3} size="md">Rincian Komponen Biaya Tidak Langsung (Indirect Costs)</SectionTitle>
       <p class="editorial-p">
         Biaya tersembunyi yang ditanggung langsung oleh kas perusahaan (tanpa dapat diklaim asuransi) meliputi:
       </p>
@@ -229,7 +230,7 @@ const schemas = [
       </ul>
 
       <!-- FAQ ACCORDION -->
-      <h3 class="sp-heading-lexend-lg">Tanya Jawab Seputar Biaya Kecelakaan Kerja (FAQ)</h3>
+      <SectionTitle level={3} size="lg">Tanya Jawab Seputar Biaya Kecelakaan Kerja (FAQ)</SectionTitle>
       <div class="faq-box">
         
         <div class="faq-item">

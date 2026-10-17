@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Section from '../components/Section.astro';
 
 const canonical = 'https://wahanatotalita.com/pelatihan-manajemen-sdm/';
 const metaTitle = 'Pelatihan Manajemen & Pengembangan SDM Instansi Pemerintah — Wahana Totalita Yogyakarta';
@@ -123,7 +124,7 @@ const schemas = [
 
   <main class="container" style="max-width:960px;padding:48px 20px 64px;">
     <!-- REGULASI -->
-    <section class="sp-mb-48">
+    <Section spacing="md">
       <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:20px;font-weight:800;">
         Dasar Hukum Pengembangan Kompetensi ASN
       </h2>
@@ -138,10 +139,10 @@ const schemas = [
           </div>
         ))}
       </div>
-    </section>
+    </Section>
 
     <!-- 5 KLASTER PROGRAM -->
-    <section class="sp-mb-48">
+    <Section spacing="md">
       <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:24px;font-weight:800;">
         5 Klaster Program Pengembangan Kompetensi
       </h2>
@@ -165,10 +166,10 @@ const schemas = [
           </div>
         ))}
       </div>
-    </section>
+    </Section>
 
     <!-- FORMAT PELATIHAN -->
-    <section class="sp-mb-48">
+    <Section spacing="md">
       <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:24px;font-weight:800;">
         Format Penyelenggaraan
       </h2>
@@ -181,10 +182,10 @@ const schemas = [
           </div>
         ))}
       </div>
-    </section>
+    </Section>
 
     <!-- FAQ -->
-    <section class="sp-mb-48">
+    <Section spacing="md">
       <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:24px;font-weight:800;">
         Pertanyaan yang Sering Diajukan
       </h2>
@@ -200,7 +201,7 @@ const schemas = [
           </details>
         ))}
       </div>
-    </section>
+    </Section>
 
     <!-- CTA -->
     <section style="background:linear-gradient(135deg,var(--brand),var(--brand-dark));color:var(--surface);border-radius:12px;padding:44px 24px;text-align:center;">

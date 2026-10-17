@@ -1,0 +1,74 @@
+const fs = require('fs');
+const path = require('path');
+
+const beforeFile = process.argv[2] || path.join(__dirname, 'out', 'before-styles.json');
+const afterFile = process.argv[3] || path.join(__dirname, 'out', 'after-styles.json');
+
+if (!fs.existsSync(beforeFile) || !fs.existsSync(afterFile)) {
+  console.error(`Missing style files: ${beforeFile} or ${afterFile}`);
+  process.exit(1);
+}
+
+const before = JSON.parse(fs.readFileSync(beforeFile, 'utf8'));
+const after = JSON.parse(fs.readFileSync(afterFile, 'utf8'));
+
+const cssProps = [
+  'display', 'padding', 'margin', 'fontSize', 'fontWeight',
+  'lineHeight', 'color', 'backgroundColor', 'border', 'borderRadius', 'maxWidth'
+];
+
+let totalDifferences = 0;
+const diffReport = [];
+
+for (const pageKey of Object.keys(before)) {
+  const bPage = before[pageKey];
+  const aPage = after[pageKey];
+
+  if (!aPage) {
+    diffReport.push(`Missing pageKey in after: ${pageKey}`);
+    totalDifferences++;
+    continue;
+  }
+
+  for (const elKey of Object.keys(bPage)) {
+    const bEl = bPage[elKey];
+    const aEl = aPage[elKey];
+
+    if (!bEl && !aEl) continue;
+    if (!bEl && aEl) {
+      diffReport.push(`[${pageKey}] ${elKey}: was null, now present`);
+      totalDifferences++;
+      continue;
+    }
+    if (bEl && !aEl) {
+      diffReport.push(`[${pageKey}] ${elKey}: was present, now null`);
+      totalDifferences++;
+      continue;
+    }
+
+    for (const prop of cssProps) {
+      const bVal = bEl[prop];
+      const aVal = aEl[prop];
+
+      if (bVal !== aVal) {
+        diffReport.push(`[${pageKey}] ${elKey}.${prop}: before="${bVal}" vs after="${aVal}"`);
+        totalDifferences++;
+      }
+    }
+  }
+}
+
+console.log('\n=== COMPUTED STYLE COMPARISON SUMMARY ===');
+if (totalDifferences === 0) {
+  console.log('Zero style regressions detected across all 11 sample templates at 375px and 1280px!');
+  console.log('RESULT: PASS');
+  process.exit(0);
+} else {
+  console.error(`Found ${totalDifferences} style differences:`);
+  diffReport.slice(0, 30).forEach(d => console.error('  - ' + d));
+  if (diffReport.length > 30) {
+    console.error(`  ... and ${diffReport.length - 30} more.`);
+  }
+  console.log('RESULT: FAIL');
+  process.exit(1);
+}

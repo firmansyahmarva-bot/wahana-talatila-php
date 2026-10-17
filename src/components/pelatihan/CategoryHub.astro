@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import TrainingCard from '../TrainingCard.astro';
+import Breadcrumb from '../Breadcrumb.astro';
 
 interface Props {
   data: {
@@ -89,19 +90,14 @@ const schemas = [
   schemas={schemas}
 >
   <div class="category-page-wrapper">
-    <div class="breadcrumb-bar">
-      <div class="container">
-        <nav aria-label="Breadcrumb">
-          <ol class="breadcrumb-list">
-            <li><a href="/">Beranda</a></li>
-            <li aria-hidden="true">›</li>
-            <li><a href="/pelatihan/">Pelatihan</a></li>
-            <li aria-hidden="true">›</li>
-            <li aria-current="page">{data.category.name}</li>
-          </ol>
-        </nav>
-      </div>
-    </div>
+    <Breadcrumb
+      variant="category"
+      items={[
+        { name: 'Beranda', href: '/' },
+        { name: 'Pelatihan', href: '/pelatihan/' },
+        { name: data.category.name },
+      ]}
+    />
 
     <section class="cat-hero-banner" style={`--cat-accent: ${data.category.accent_color || 'var(--accent)'}`}>
       <div class="container cat-hero-inner">

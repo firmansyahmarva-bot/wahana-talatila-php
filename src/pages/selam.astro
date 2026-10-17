@@ -1,5 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import Section from '../components/Section.astro';
+import Faq from '../components/Faq.astro';
 
 const canonical = 'https://wahanatotalita.com/selam/';
 const metaTitle = 'Pelatihan Selam & Scuba Diving — CMAS, NAUI & Commercial Diving | Wahana Totalita';
@@ -163,23 +166,23 @@ const schemas = [
   <main style="max-width:960px;margin:0 auto;padding:40px 20px 60px;">
 
     <!-- MENGAPA SELAM PENTING -->
-    <section class="sp-mb-48">
-      <h2 class="sp-title-underlined-20">
+    <Section spacing="md">
+      <SectionTitle level={2} underline size="20">
         Mengapa Pelatihan Selam Bersertifikat Penting?
-      </h2>
+      </SectionTitle>
       <p style="line-height:1.8;color:var(--slate-800);margin-bottom:16px;">
         Menyelam tanpa sertifikasi yang valid bukan hanya berbahaya — di banyak konteks profesional dan industri, ini juga ilegal. Di Indonesia, penyelam yang bekerja di lingkungan industri (offshore platform, konstruksi pelabuhan, inspeksi pipa, SAR) wajib memiliki sertifikasi yang diakui. Bahkan untuk selam rekreasional, sertifikasi adalah syarat mutlak untuk menyewa peralatan dan mengikuti penyelaman di hampir seluruh resort dan dive center di dunia.
       </p>
       <p style="line-height:1.8;color:var(--slate-800);">
         Indonesia adalah negara kepulauan dengan garis pantai terpanjang kedua di dunia — kebutuhan tenaga selam terlatih sangat tinggi, mulai dari industri kelautan, pertambangan lepas pantai, riset lingkungan, hingga pariwisata bahari. Sertifikasi selam yang tepat membuka peluang karir dan operasional yang tidak bisa diakses tanpanya.
       </p>
-    </section>
+    </Section>
 
     <!-- JALUR SERTIFIKASI -->
-    <section class="sp-mb-48">
-      <h2 class="sp-title-underlined-24">
+    <Section spacing="md">
+      <SectionTitle level={2} underline size="24">
         Jalur Sertifikasi Selam — Dari Pemula hingga Profesional
-      </h2>
+      </SectionTitle>
 
       <!-- Selam Rekreasional -->
       <div style="margin-bottom:32px;">
@@ -250,13 +253,13 @@ const schemas = [
           </ul>
         </div>
       </div>
-    </section>
+    </Section>
 
     <!-- KESELAMATAN SELAM -->
-    <section class="sp-mb-48">
-      <h2 class="sp-title-underlined-20">
+    <Section spacing="md">
+      <SectionTitle level={2} underline size="20">
         K3 dalam Kegiatan Selam — Protokol Keselamatan Wajib
-      </h2>
+      </SectionTitle>
       <p style="line-height:1.8;color:var(--slate-800);margin-bottom:20px;">
         Selam adalah kegiatan berisiko tinggi yang membutuhkan disiplin protokol keselamatan yang ketat. Kecelakaan selam — dari barotrauma hingga decompression sickness (DCS) — hampir selalu dapat dicegah dengan penerapan prosedur yang benar.
       </p>
@@ -269,7 +272,7 @@ const schemas = [
           </div>
         ))}
       </div>
-    </section>
+    </Section>
 
     <!-- PERSYARATAN -->
     <section style="margin-bottom:48px;background:var(--accent-light);border-radius:10px;padding:30px;">
@@ -287,10 +290,10 @@ const schemas = [
     </section>
 
     <!-- PROGRAM CARDS -->
-    <section class="sp-mb-48">
-      <h2 class="sp-title-underlined-24">
+    <Section spacing="md">
+      <SectionTitle level={2} underline size="24">
         Program Pelatihan Selam Wahana Totalita
-      </h2>
+      </SectionTitle>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;">
         {programs.map((p) => {
           const waUrl = `https://wa.me/6287759151278?text=${encodeURIComponent(`Halo, saya ingin info program pelatihan ${p.title}. Mohon info jadwal dan biaya.`)}`;
@@ -314,13 +317,13 @@ const schemas = [
           );
         })}
       </div>
-    </section>
+    </Section>
 
     <!-- SIAPA YANG MEMBUTUHKAN -->
-    <section class="sp-mb-48">
-      <h2 class="sp-title-underlined-20">
+    <Section spacing="md">
+      <SectionTitle level={2} underline size="20">
         Siapa yang Membutuhkan Pelatihan Selam Profesional?
-      </h2>
+      </SectionTitle>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
         {users.map((u) => (
           <div style="background:var(--surface);border:1px solid var(--slate-300);border-radius:8px;padding:16px;text-align:center;">
@@ -330,10 +333,10 @@ const schemas = [
           </div>
         ))}
       </div>
-    </section>
+    </Section>
 
     <!-- RELATED -->
-    <section class="sp-mb-48">
+    <Section spacing="md">
       <h2 style="color:var(--brand);font-size:1.4rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:20px;">
         Program Terkait
       </h2>
@@ -345,25 +348,15 @@ const schemas = [
           </a>
         ))}
       </div>
-    </section>
+    </Section>
 
     <!-- FAQ -->
-    <section class="sp-mb-48">
-      <h2 class="sp-title-underlined-24">
+    <Section spacing="md">
+      <SectionTitle level={2} underline size="24">
         Pertanyaan yang Sering Diajukan
-      </h2>
-      {faqs.map((faq) => (
-        <details class="sp-faq-card">
-          <summary class="sp-faq-summary">
-            <span>{faq.q}</span>
-            <span style="font-size:1.2rem;font-weight:700;color:var(--accent);min-width:20px;text-align:center;">+</span>
-          </summary>
-          <div class="sp-faq-content">
-            {faq.a}
-          </div>
-        </details>
-      ))}
-    </section>
+      </SectionTitle>
+      <Faq items={faqs} />
+    </Section>
 
     <!-- CTA -->
     <section style="background:linear-gradient(135deg,var(--brand-mid),var(--brand));color:var(--surface);border-radius:12px;padding:40px;text-align:center;">

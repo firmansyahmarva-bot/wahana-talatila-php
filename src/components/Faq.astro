@@ -1,0 +1,88 @@
+---
+export interface FaqItem {
+  q: string;
+  a: string;
+}
+
+interface Props {
+  items: FaqItem[];
+  title?: string;
+  variant?: string;
+  class?: string;
+}
+
+const { items = [], title = '', variant = '', class: className = '' } = Astro.props;
+---
+
+<div class={`faq-wrapper fqc-wrap ${variant ? 'fqc-var-' + variant : ''} ${className}`.trim()}>
+  {title && <h2 class="faq-section-title fqc-title">{title}</h2>}
+  <div class="faq-list fqc-list">
+    {items.map((item) => (
+      <details class="faq-item fqc-card">
+        <summary class="faq-question faq-q fqc-summary">
+          <span class="fqc-q-text">{item.q}</span>
+          <span class="faq-icon fqc-icon" aria-hidden="true">+</span>
+        </summary>
+        <div class="faq-a fqc-content">
+          <p class="fqc-a-text">{item.a}</p>
+        </div>
+      </details>
+    ))}
+  </div>
+</div>
+
+<style>
+  .fqc-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 12px;
+    background: var(--surface);
+    overflow: hidden;
+  }
+  .fqc-summary {
+    padding: 16px 20px;
+    background: var(--slate-50);
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--brand);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    min-height: 44px;
+    box-sizing: border-box;
+    user-select: none;
+  }
+  .fqc-summary::-webkit-details-marker {
+    display: none;
+  }
+  .fqc-summary:focus-visible {
+    outline: 2px solid var(--cta);
+    outline-offset: -2px;
+  }
+  .fqc-card[open] .fqc-icon {
+    transform: rotate(45deg);
+  }
+  .fqc-icon {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1;
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+    margin-left: 12px;
+  }
+  .fqc-content {
+    display: block;
+    padding: 16px 20px;
+    color: var(--slate-700);
+    line-height: 1.8;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    font-size: 0.92rem;
+  }
+  .fqc-a-text {
+    margin: 0;
+  }
+</style>

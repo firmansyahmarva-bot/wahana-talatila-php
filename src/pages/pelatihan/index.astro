@@ -4,6 +4,7 @@ import { getCollection } from 'astro:content';
 import { waUrl } from '../../lib/images';
 import TrainingCard from '../../components/TrainingCard.astro';
 import WaButton from '../../components/WaButton.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 
 // Fetch all trainings and categories
 const allTrainings = await getCollection('trainings');
@@ -90,17 +91,13 @@ const hubAccent: Record<string, string> = {
   pageCss={['/assets/css/page/pelatihan-catalog.css']}
   schemas={schemas}
 >
-  <div class="breadcrumb-bar">
-    <div class="container">
-      <nav aria-label="Breadcrumb">
-        <ol class="breadcrumb-list">
-          <li><a href="/">Beranda</a></li>
-          <li aria-hidden="true">›</li>
-          <li aria-current="page">Pelatihan</li>
-        </ol>
-      </nav>
-    </div>
-  </div>
+  <Breadcrumb
+    variant="course"
+    items={[
+      { name: 'Beranda', href: '/' },
+      { name: 'Pelatihan' },
+    ]}
+  />
 
   <!-- HERO (SHORT HERO + SEARCH BOX + MODE FILTER RIGHT UNDER IT) -->
   <section class="pcat-hero">

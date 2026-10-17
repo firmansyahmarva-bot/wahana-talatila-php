@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
 
 const pageTitle = 'Training K3 Perusahaan — In House Training & Sertifikasi';
 const metaDesc = 'Training K3 perusahaan & In House Training K3 resmi KEMNAKER RI dan BNSP. Corporate HSE training, konsultasi ISO, sertifikasi K3 untuk industri seluruh Indonesia. Proposal dalam 24 jam.';
@@ -277,17 +278,13 @@ const schemas = [
   pageCss={['/assets/css/perusahaan.css']}
 >
   <!-- BREADCRUMB -->
-  <div class="breadcrumb-bar sp-breadcrumb-wrap">
-    <div class="container sp-breadcrumb-inner">
-      <nav aria-label="Breadcrumb">
-        <ol class="breadcrumb-list sp-breadcrumb-list">
-          <li><a href="/" style="color:var(--slate-600);text-decoration:none;">Beranda</a></li>
-          <li aria-hidden="true">›</li>
-          <li aria-current="page" style="color:var(--brand);font-weight:600;">Training K3 Perusahaan</li>
-        </ol>
-      </nav>
-    </div>
-  </div>
+  <Breadcrumb
+    variant="city"
+    items={[
+      { name: 'Beranda', href: '/' },
+      { name: 'Training K3 Perusahaan' },
+    ]}
+  />
 
   <!-- ═══ 1 · HERO ═══ -->
   <section class="pr-hero">

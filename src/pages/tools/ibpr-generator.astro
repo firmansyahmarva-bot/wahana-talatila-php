@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
 
 const pageTitle = "Generator IBPR & HIRADC K3 2026: Identifikasi Bahaya & Penilaian Risiko";
 const metaDesc = "Buat tabel dokumen IBPR (Identifikasi Bahaya dan Penilaian Risiko) & HIRADC lengkap standar SMK3 PP 50/2012 dan ISO 45001:2018. Tersedia template manufaktur, konstruksi, dan tambang.";
@@ -180,7 +181,7 @@ const schemas = [
         Identifikasi Bahaya, Penilaian Risiko, dan Pengendalian Risiko (IBPR) merupakan pilar utama penerapan <strong>Sistem Manajemen K3 (SMK3) berdasarkan Peraturan Pemerintah No. 50 Tahun 2012</strong> Elemen 2 tentang Perencanaan K3, serta Klausul 6.1.2 <strong>ISO 45001:2018</strong>. Dokumen ini menjadi rujukan legal apakah suatu tempat kerja telah melakukan mitigasi proaktif sebelum terjadi kecelakaan.
       </p>
 
-      <h3 class="sp-heading-lexend-md">Klasifikasi Kondisi Operasional (Rutin, Non-Rutin, Emergency)</h3>
+      <SectionTitle level={3} size="md">Klasifikasi Kondisi Operasional (Rutin, Non-Rutin, Emergency)</SectionTitle>
       <p class="editorial-p">
         Saat melakukan asesmen bahaya, tim K3 dilarang hanya melihat proses normal. Wajib mengklasifikasikan ke dalam 3 kondisi:
       </p>
@@ -191,7 +192,7 @@ const schemas = [
       </ul>
 
       <!-- FAQ ACCORDION -->
-      <h3 class="sp-heading-lexend-lg">Tanya Jawab Seputar IBPR / HIRADC (FAQ)</h3>
+      <SectionTitle level={3} size="lg">Tanya Jawab Seputar IBPR / HIRADC (FAQ)</SectionTitle>
       <div class="faq-box">
         
         <div class="faq-item">

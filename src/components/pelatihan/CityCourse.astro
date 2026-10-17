@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Breadcrumb from '../Breadcrumb.astro';
 
 interface Props {
   data: any;
@@ -93,25 +94,15 @@ const cityScripts = [
   schemas={schemas}
 >
   <div class="city-program-page">
-    <div class="breadcrumb-bar">
-      <div class="container">
-        <nav aria-label="Breadcrumb">
-          <ol class="breadcrumb-list">
-            <li><a href="/">Beranda</a></li>
-            <li aria-hidden="true">›</li>
-            <li><a href="/pelatihan/">Pelatihan</a></li>
-            {cityName && (
-              <>
-                <li aria-hidden="true">›</li>
-                <li><a href={`/pelatihan-k3-${cityName.toLowerCase()}/`}>Pelatihan K3 {cityName}</a></li>
-              </>
-            )}
-            <li aria-hidden="true">›</li>
-            <li aria-current="page">{programmaticTitle}</li>
-          </ol>
-        </nav>
-      </div>
-    </div>
+    <Breadcrumb
+      variant="course"
+      items={[
+        { name: 'Beranda', href: '/' },
+        { name: 'Pelatihan', href: '/pelatihan/' },
+        ...(cityName ? [{ name: `Pelatihan K3 ${cityName}`, href: `/pelatihan-k3-${cityName.toLowerCase()}/` }] : []),
+        { name: programmaticTitle },
+      ]}
+    />
     <Fragment set:html={htmlContent} />
   </div>
 </Layout>

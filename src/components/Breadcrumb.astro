@@ -1,0 +1,136 @@
+---
+export interface BreadcrumbItem {
+  name: string;
+  href?: string;
+}
+
+interface Props {
+  items: BreadcrumbItem[];
+  variant?: 'default' | 'course' | 'category' | 'city' | 'article' | string;
+  class?: string;
+}
+
+const { items = [], variant = 'default', class: className = '' } = Astro.props;
+---
+
+<div class={`breadcrumb-bar bcr-bar bcr-bar-${variant} ${className}`.trim()}>
+  <div class={`container bcr-inner bcr-inner-${variant}`.trim()}>
+    <nav aria-label="Breadcrumb">
+      <ol class={`breadcrumb-list bcr-list bcr-list-${variant}`.trim()}>
+        {items.map((item, idx) => {
+          const isLast = idx === items.length - 1;
+          return (
+            <>
+              <li class="bcr-item" aria-current={isLast ? 'page' : undefined}>
+                {!isLast && item.href ? (
+                  <a href={item.href} class={`bcr-link bcr-link-${variant}`}>{item.name}</a>
+                ) : (
+                  <span class={`bcr-current bcr-current-${variant}`}>{item.name}</span>
+                )}
+              </li>
+              {!isLast && <li class="bcr-sep" aria-hidden="true"><Fragment set:html={variant && variant.startsWith('article') ? '&rsaquo;' : '›'} /></li>}
+            </>
+          );
+        })}
+      </ol>
+    </nav>
+  </div>
+</div>
+
+<style>
+  .bcr-bar {
+    margin-top: var(--nav-h, 72px);
+    background: var(--surface);
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .bcr-bar-course,
+  .bcr-bar-article,
+  .bcr-bar-article-cat {
+    background: var(--slate-50);
+  }
+  .bcr-bar-category {
+    background: var(--brand-light);
+  }
+
+  .bcr-inner {
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  .bcr-inner-default,
+  .bcr-inner-city {
+    max-width: 1160px;
+    padding: 0 20px;
+  }
+  .bcr-inner-course,
+  .bcr-inner-category {
+    max-width: 1200px;
+    padding: 0 24px;
+  }
+  @media (max-width: 768px) {
+    .bcr-inner-course,
+    .bcr-inner-category {
+      padding: 0 16px;
+    }
+  }
+  .bcr-inner-article {
+    max-width: 900px;
+    padding: 0 20px;
+  }
+  .bcr-inner-article-cat {
+    max-width: 1100px;
+    padding: 0 20px;
+  }
+  .bcr-inner-800 {
+    max-width: 800px;
+    padding: 0 20px;
+  }
+
+  .bcr-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-items: center;
+    font-size: 13px;
+    color: var(--slate-500);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .bcr-list-category {
+    color: var(--slate-600);
+  }
+  .bcr-item {
+    display: inline;
+  }
+  .bcr-link {
+    color: var(--slate-600);
+    text-decoration: none;
+    font-weight: 400;
+  }
+  .bcr-link:hover {
+    text-decoration: underline;
+  }
+  .bcr-link-course {
+    font-weight: 500;
+  }
+  .bcr-link-category {
+    color: var(--brand);
+  }
+  .bcr-sep {
+    color: var(--slate-400);
+    user-select: none;
+  }
+  .bcr-current {
+    color: var(--slate-600);
+  }
+  .bcr-current-category,
+  .bcr-current-city,
+  .bcr-current-article,
+  .bcr-current-article-cat,
+  .bcr-current-800 {
+    color: var(--brand);
+    font-weight: 600;
+  }
+</style>

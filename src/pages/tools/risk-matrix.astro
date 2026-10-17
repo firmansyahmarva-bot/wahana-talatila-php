@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
 
 const pageTitle = "Matriks Risiko 5x5 K3 Online 2026: Kalkulator ISO 31000 & HIRARC";
 const metaDesc = "Kalkulator Matriks Risiko 5x5 interaktif standar ISO 31000:2018 dan HIRARC K3. Evaluasi skor keparahan, peluang, level risiko Low-Extreme, serta buat Risk Register online.";
@@ -223,7 +224,7 @@ const schemas = [
         Penilaian risiko keselamatan kerja merupakan fondasi utama sistem manajemen K3 modern sesuai dengan <strong>SNI ISO 31000:2018 (Manajemen Risiko — Pedoman)</strong> dan Lampiran Peraturan Pemerintah No. 50 Tahun 2012 tentang Penerapan SMK3. Matriks 5x5 menggabungkan probabilitas kemunculan bahaya dengan tingkat keparahan konsekuensi yang ditimbulkan.
       </p>
 
-      <h3 class="sp-heading-lexend-md">1. Klasifikasi 4 Tingkat Risiko (Risk Levels)</h3>
+      <SectionTitle level={3} size="md">1. Klasifikasi 4 Tingkat Risiko (Risk Levels)</SectionTitle>
       <ul style="padding-left:22px;color:var(--slate-700);line-height:1.75;margin-bottom:18px">
         <li><strong>Ekstrem / Kritis (Skor 15 - 25):</strong> Risiko tidak dapat ditoleransi. Pekerjaan harus segera dihentikan seketika sampai tindakan rekayasa teknik dipasang. Wajib persetujuan Direktur Operasional.</li>
         <li><strong>Tinggi / High (Skor 10 - 14):</strong> Risiko signifikan yang memerlukan tindakan perbaikan mendesak dalam kurun waktu 24 jam. Wajib izin kerja khusus (PTW) dan pengawasan intensif HSE.</li>
@@ -231,13 +232,13 @@ const schemas = [
         <li><strong>Rendah / Low (Skor 1 - 4):</strong> Risiko dapat diterima (Broadly Acceptable). Tindakan pencegahan rutin dan pemantauan berkala saat inspeksi K3 triwulanan.</li>
       </ul>
 
-      <h3 class="sp-heading-lexend-md">2. Konsep ALARP (As Low As Reasonably Practicable)</h3>
+      <SectionTitle level={3} size="md">2. Konsep ALARP (As Low As Reasonably Practicable)</SectionTitle>
       <p class="editorial-p">
         Prinsip ALARP menetapkan bahwa tidak semua risiko di tempat kerja dapat diturunkan hingga nol mutlak (zero risk), namun setiap bahaya harus ditekan hingga ke titik di mana biaya tambahan untuk menurunkannya lagi akan sangat tidak proporsional dibanding penurunan risiko yang dicapai.
       </p>
 
       <!-- FAQ ACCORDION -->
-      <h3 class="sp-heading-lexend-lg">Pertanyaan Sering Diajukan Seputar Matriks Risiko K3 (FAQ)</h3>
+      <SectionTitle level={3} size="lg">Pertanyaan Sering Diajukan Seputar Matriks Risiko K3 (FAQ)</SectionTitle>
       <div class="faq-box">
         
         <div class="faq-item">
