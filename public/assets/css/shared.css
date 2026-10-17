@@ -1,10 +1,3 @@
 /* shared.css — rules used by 3+ pages (auto-deduplicated from per-page CSS).
    Added distinct shared utility classes to replace repeated inline styles without redesign. */
 
-/* ── SPACING & CONTAINER CLUSTERS ──────────────────────────── */
-.sp-breadcrumb-inner,
-.container.sp-breadcrumb-inner {
-  max-width: 1160px;
-  margin: 0 auto;
-  padding: 0 20px;
-}

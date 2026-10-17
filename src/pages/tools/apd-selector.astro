@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Faq from '../../components/Faq.astro';
 import SectionTitle from '../../components/SectionTitle.astro';
 import apdList from '../../../data/tools_apd.json';
 
@@ -58,6 +59,17 @@ const schemas = [
   ]
 },
   ];
+
+const toolFaqs = [
+  {
+    "q": "Bagaimana jika pekerja menolak menggunakan APD yang sudah disediakan?",
+    "a": "Pasal 12 huruf b UU No. 1 Tahun 1970 menyatakan bahwa tenaga kerja WAJIB memakai alat-alat perlindungan diri yang diwajibkan. Jika pekerja menolak memakai APD setelah diberikan pembinaan, manajemen berhak memberikan sanksi indisipliner (Surat Peringatan / SP) hingga menonaktifkan pekerja dari area bahaya demi keselamatan bersama."
+  },
+  {
+    "q": "Apakah APD bekas pekerja lama boleh dihibahkan ke pekerja baru?",
+    "a": "Untuk APD yang bersentuhan langsung dengan kulit dan bersifat higienis (seperti earplug, sepatu safety, sarung tangan kain, dan masker respirator), APD TIDAK BOLEH dipindahtangankan karena risiko penularan infeksi dermatologis dan saluran napas. Namun untuk APD struktural (seperti safety helmet atau full body harness), pemindahtanganan diperbolehkan asalkan telah melalui proses dekontaminasi dan inspeksi kelayakan fisik oleh Petugas K3."
+  }
+];
 ---
 
 <Layout
@@ -144,29 +156,7 @@ const schemas = [
 
       <!-- FAQ ACCORDION -->
       <SectionTitle level={3} size="lg">Tanya Jawab Seputar Pemilihan APD K3 (FAQ)</SectionTitle>
-      <div class="faq-box">
-        
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span>Bagaimana jika pekerja menolak menggunakan APD yang sudah disediakan?</span>
-            <span class="faq-icon">▼</span>
-          </button>
-          <div class="faq-a">
-            Pasal 12 huruf b UU No. 1 Tahun 1970 menyatakan bahwa tenaga kerja WAJIB memakai alat-alat perlindungan diri yang diwajibkan. Jika pekerja menolak memakai APD setelah diberikan pembinaan, manajemen berhak memberikan sanksi indisipliner (Surat Peringatan / SP) hingga menonaktifkan pekerja dari area bahaya demi keselamatan bersama.
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span>Apakah APD bekas pekerja lama boleh dihibahkan ke pekerja baru?</span>
-            <span class="faq-icon">▼</span>
-          </button>
-          <div class="faq-a">
-            Untuk APD yang bersentuhan langsung dengan kulit dan bersifat higienis (seperti earplug, sepatu safety, sarung tangan kain, dan masker respirator), APD TIDAK BOLEH dipindahtangankan karena risiko penularan infeksi dermatologis dan saluran napas. Namun untuk APD struktural (seperti safety helmet atau full body harness), pemindahtanganan diperbolehkan asalkan telah melalui proses dekontaminasi dan inspeksi kelayakan fisik oleh Petugas K3.
-          </div>
-        </div>
-
-      </div>
+      <Faq items={toolFaqs} variant="tool" />
 
     </div>
 
@@ -187,11 +177,6 @@ const schemas = [
         card.style.display = 'none';
       }
     });
-  }
-
-  function toggleFaq(btn) {
-    const item = btn.closest('.faq-item');
-    if (item) item.classList.toggle('active');
   }
 </script>
 </Layout>

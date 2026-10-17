@@ -19,29 +19,6 @@
   margin: 0 auto;
   padding: 0 20px;
 }
-.city-program-page .breadcrumb-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  align-items: center;
-  font-size: 13px;
-  color: var(--slate-500);
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.city-program-page .breadcrumb-list a {
-  color: var(--slate-600);
-  text-decoration: none;
-  transition: color .2s;
-}
-.city-program-page .breadcrumb-list a:hover {
-  color: var(--brand);
-}
-.city-program-page .breadcrumb-list li[aria-current="page"] {
-  color: var(--brand);
-  font-weight: 600;
-}
 
 /* ─── Hero Styling Enhancements ─── */
 .city-program-page .hero {

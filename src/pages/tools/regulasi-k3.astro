@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Faq from '../../components/Faq.astro';
 import regulasiList from '../../../data/tools_regulasi.json';
 
 const pageTitle = "Database Regulasi K3 Indonesia Terlengkap 2026: UU, PP, Permenaker & Sanksi Hukum";
@@ -55,6 +56,17 @@ const schemas = [
   ]
 },
   ];
+
+const toolFaqs = [
+  {
+    "q": "Apakah perusahaan subkontraktor wajib memiliki Ahli K3 Umum?",
+    "a": "Ya. Berdasarkan UU 1/1970 dan Permenaker No. 02/MEN/1992 juncto Permenaker No. 04/MEN/1987, setiap badan usaha (baik kontraktor utama maupun subkontraktor) yang mempekerjakan lebih dari 100 tenaga kerja atau memiliki risiko bahaya tinggi (seperti pekerjaan konstruksi, fabrikasi, kelistrikan) wajib memiliki sekurang-kurangnya satu orang Ahli K3 Umum bersertifikasi Kemnaker RI sebagai sekretaris P2K3."
+  },
+  {
+    "q": "Apa konsekuensi hukum jika perusahaan mengabaikan audit SMK3 PP 50/2012?",
+    "a": "Perusahaan yang masuk dalam kriteria wajib (pekerja ≥ 100 orang atau berisiko tinggi) namun tidak menerapkan dan mengaudit SMK3 dapat dikenakan sanksi administratif bertahap dari Pengawas Ketenagakerjaan berupa: nota pemeriksaan, peringatan tertulis, pembekuan izin operasi sementara, diskualifikasi dari tender proyek pemerintah dan BUMN, hingga sanksi pidana jika terjadi kecelakaan kerja fatal akibat ketiadaan sistem K3."
+  }
+];
 ---
 
 <Layout
@@ -140,29 +152,7 @@ const schemas = [
 
       <!-- FAQ ACCORDION -->
       <h3 style="color:var(--text);font-family:'Lexend',sans-serif;font-size:1.25rem;margin:28px 0 16px">Pertanyaan Sering Diajukan Terkait Regulasi K3 (FAQ)</h3>
-      <div class="faq-box">
-        
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span>Apakah perusahaan subkontraktor wajib memiliki Ahli K3 Umum?</span>
-            <span class="faq-icon">▼</span>
-          </button>
-          <div class="faq-a">
-            Ya. Berdasarkan UU 1/1970 dan Permenaker No. 02/MEN/1992 juncto Permenaker No. 04/MEN/1987, setiap badan usaha (baik kontraktor utama maupun subkontraktor) yang mempekerjakan lebih dari 100 tenaga kerja atau memiliki risiko bahaya tinggi (seperti pekerjaan konstruksi, fabrikasi, kelistrikan) wajib memiliki sekurang-kurangnya satu orang Ahli K3 Umum bersertifikasi Kemnaker RI sebagai sekretaris P2K3.
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span>Apa konsekuensi hukum jika perusahaan mengabaikan audit SMK3 PP 50/2012?</span>
-            <span class="faq-icon">▼</span>
-          </button>
-          <div class="faq-a">
-            Perusahaan yang masuk dalam kriteria wajib (pekerja ≥ 100 orang atau berisiko tinggi) namun tidak menerapkan dan mengaudit SMK3 dapat dikenakan sanksi administratif bertahap dari Pengawas Ketenagakerjaan berupa: nota pemeriksaan, peringatan tertulis, pembekuan izin operasi sementara, diskualifikasi dari tender proyek pemerintah dan BUMN, hingga sanksi pidana jika terjadi kecelakaan kerja fatal akibat ketiadaan sistem K3.
-          </div>
-        </div>
-
-      </div>
+      <Faq items={toolFaqs} variant="tool" />
 
     </div>
 

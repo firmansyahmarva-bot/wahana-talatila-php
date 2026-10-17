@@ -1,5 +1,3 @@
-.breadcrumb-list { list-style: none; padding-left: 0; }
-
 /* ─── Premium Executive Catalog Hero (matches pd-hero aesthetic) ─── */
 .pcat-hero {
   position: relative;
@@ -158,29 +156,6 @@
   background: color-mix(in srgb, var(--slate-900) 95%, transparent);
   padding: 10px 0;
   border-bottom: 1px solid color-mix(in srgb, var(--surface) 8%, transparent);
-}
-.breadcrumb-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  align-items: center;
-  font-size: 13px;
-  color: var(--slate-400);
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
-}
-.breadcrumb-list a {
-  color: var(--slate-300);
-  text-decoration: none;
-  transition: color 0.15s ease;
-}
-.breadcrumb-list a:hover {
-  color: var(--whatsapp);
-}
-.breadcrumb-list li[aria-current="page"] {
-  color: var(--whatsapp);
-  font-weight: 600;
 }
 
 

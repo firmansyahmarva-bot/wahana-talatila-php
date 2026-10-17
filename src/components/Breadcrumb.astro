@@ -13,10 +13,10 @@ interface Props {
 const { items = [], variant = 'default', class: className = '' } = Astro.props;
 ---
 
-<div class={`breadcrumb-bar bcr-bar bcr-bar-${variant} ${className}`.trim()}>
-  <div class={`container bcr-inner bcr-inner-${variant}`.trim()}>
+<div class={`bcr-bar bcr-bar-${variant} ${className}`.trim()}>
+  <div class={`bcr-inner bcr-inner-${variant}`.trim()}>
     <nav aria-label="Breadcrumb">
-      <ol class={`breadcrumb-list bcr-list bcr-list-${variant}`.trim()}>
+      <ol class={`bcr-list bcr-list-${variant}`.trim()}>
         {items.map((item, idx) => {
           const isLast = idx === items.length - 1;
           return (
@@ -39,7 +39,7 @@ const { items = [], variant = 'default', class: className = '' } = Astro.props;
 
 <style>
   .bcr-bar {
-    margin-top: var(--nav-h, 72px);
+    margin-top: var(--nav-h, 68px);
     background: var(--surface);
     padding: 12px 0;
     border-bottom: 1px solid var(--border);
@@ -122,8 +122,38 @@ const { items = [], variant = 'default', class: className = '' } = Astro.props;
     color: var(--slate-400);
     user-select: none;
   }
-  .bcr-current {
+  .bcr-bar-catalog {
+    background: color-mix(in srgb, var(--slate-900) 95%, transparent);
+    padding: 10px 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--surface) 8%, transparent);
+  }
+  .bcr-inner-catalog {
+    max-width: 1200px;
+    padding: 0 24px;
+  }
+  @media (max-width: 768px) {
+    .bcr-inner-catalog {
+      padding: 0 16px;
+    }
+  }
+  .bcr-list-catalog {
+    gap: 6px;
+    color: rgb(148, 163, 184);
+  }
+  .bcr-link-catalog {
+    color: rgb(203, 213, 225);
+    font-weight: 400;
+  }
+  .bcr-link-catalog:hover {
+    color: var(--whatsapp);
+  }
+  .bcr-link-city {
     color: var(--slate-600);
+    font-weight: 400;
+  }
+  .bcr-current-catalog {
+    color: var(--whatsapp);
+    font-weight: 600;
   }
   .bcr-current-category,
   .bcr-current-city,

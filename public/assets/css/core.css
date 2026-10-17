@@ -532,12 +532,6 @@ h1, h2, h3, h4,
   margin-top: var(--nav-h); background: var(--brand-light);
   padding: 12px 0; border-bottom: 1px solid var(--slate-300);
 }
-.breadcrumb-list {
-  display: flex; flex-wrap: wrap; gap: 4px; align-items: center;
-  font-size: 13px; color: var(--mut);
-}
-.breadcrumb-list a { color: var(--brand); }
-.breadcrumb-list a:hover { text-decoration: underline; }
 
 /* ─── CANONICAL FOOTER ──────────────────────────────────────── */
 .footer-photo-strip {

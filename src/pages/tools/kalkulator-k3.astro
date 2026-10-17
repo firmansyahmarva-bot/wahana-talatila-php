@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Faq from '../../components/Faq.astro';
 import SectionTitle from '../../components/SectionTitle.astro';
 
 const pageTitle = "Kalkulator K3 Online 2026: Hitung FR, SR, IR, AFR & Safe T-Score (Kepmenaker & OSHA)";
@@ -57,6 +58,21 @@ const schemas = [
   ]
 },
   ];
+
+const toolFaqs = [
+  {
+    "q": "Apa perbedaan standar pengali 1.000.000 jam kerja dan 200.000 jam kerja?",
+    "a": "Standar 1.000.000 jam kerja adalah standar resmi Depnaker/Kemnaker RI berdasarkan Kepmenaker No. KEP.372/MEN/1989 dan International Labour Organization (ILO), mewakili skala sekitar 500 pekerja penuh waktu selama 1 tahun kerja (500 org × 40 jam × 50 minggu). Sedangkan standar 200.000 jam kerja mengacu pada regulasi US OSHA (Occupational Safety and Health Administration), mewakili skala 100 pekerja penuh waktu selama 1 tahun (100 org × 40 jam × 50 minggu)."
+  },
+  {
+    "q": "Bagaimana cara membaca dan menginterpretasikan nilai Safe T-Score?",
+    "a": "Safe T-Score digunakan untuk menguji secara statistik apakah perbedaan angka Frequency Rate (FR) saat ini dibanding periode lalu murni kebetulan acak atau merupakan perubahan kinerja yang nyata:\r\n            <ul style=\"padding-left:20px;margin-top:8px\">\r\n              <li><strong>Skor antara -2.00 s/d +2.00:</strong> Variasi normal / acak. Kinerja K3 dinilai relatif stabil.</li>\r\n              <li><strong>Skor &lt; -2.00:</strong> Kinerja keselamatan MEMBAIK secara signifikan (kemungkinan program pencegahan berhasil).</li>\r\n              <li><strong>Skor &gt; +2.00:</strong> Kinerja keselamatan MEMBURUK secara signifikan (indikasi bahaya sistemik, perlu audit investigasi).</li>\r\n            </ul>"
+  },
+  {
+    "q": "Kapan suatu kecelakaan dikategorikan sebagai Lost Time Injury (LTI)?",
+    "a": "Menurut standar Kepmenaker 372/1989 dan OSHA 1904, kecelakaan kerja diklasifikasikan sebagai Lost Time Injury (LTI) jika cedera yang dialami menyebabkan pekerja tidak mampu kembali bekerja atau menjalankan tugas normalnya pada jadwal giliran kerja berikutnya (minimal 1 x 24 jam setelah kejadian), berdasarkan surat rekomendasi dokter pemeriksa."
+  }
+];
 ---
 
 <Layout
@@ -374,44 +390,7 @@ const schemas = [
 
       <!-- FAQ ACCORDION -->
       <h3 style="color:var(--text);font-family:'Lexend',sans-serif;font-size:1.25rem;margin:32px 0 16px">Pertanyaan Sering Diajukan Seputar Statistik K3 (FAQ)</h3>
-      <div class="faq-box">
-        
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span>Apa perbedaan standar pengali 1.000.000 jam kerja dan 200.000 jam kerja?</span>
-            <span class="faq-icon">▼</span>
-          </button>
-          <div class="faq-a">
-            Standar 1.000.000 jam kerja adalah standar resmi Depnaker/Kemnaker RI berdasarkan Kepmenaker No. KEP.372/MEN/1989 dan International Labour Organization (ILO), mewakili skala sekitar 500 pekerja penuh waktu selama 1 tahun kerja (500 org × 40 jam × 50 minggu). Sedangkan standar 200.000 jam kerja mengacu pada regulasi US OSHA (Occupational Safety and Health Administration), mewakili skala 100 pekerja penuh waktu selama 1 tahun (100 org × 40 jam × 50 minggu).
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span>Bagaimana cara membaca dan menginterpretasikan nilai Safe T-Score?</span>
-            <span class="faq-icon">▼</span>
-          </button>
-          <div class="faq-a">
-            Safe T-Score digunakan untuk menguji secara statistik apakah perbedaan angka Frequency Rate (FR) saat ini dibanding periode lalu murni kebetulan acak atau merupakan perubahan kinerja yang nyata:
-            <ul style="padding-left:20px;margin-top:8px">
-              <li><strong>Skor antara -2.00 s/d +2.00:</strong> Variasi normal / acak. Kinerja K3 dinilai relatif stabil.</li>
-              <li><strong>Skor &lt; -2.00:</strong> Kinerja keselamatan MEMBAIK secara signifikan (kemungkinan program pencegahan berhasil).</li>
-              <li><strong>Skor &gt; +2.00:</strong> Kinerja keselamatan MEMBURUK secara signifikan (indikasi bahaya sistemik, perlu audit investigasi).</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span>Kapan suatu kecelakaan dikategorikan sebagai Lost Time Injury (LTI)?</span>
-            <span class="faq-icon">▼</span>
-          </button>
-          <div class="faq-a">
-            Menurut standar Kepmenaker 372/1989 dan OSHA 1904, kecelakaan kerja diklasifikasikan sebagai Lost Time Injury (LTI) jika cedera yang dialami menyebabkan pekerja tidak mampu kembali bekerja atau menjalankan tugas normalnya pada jadwal giliran kerja berikutnya (minimal 1 x 24 jam setelah kejadian), berdasarkan surat rekomendasi dokter pemeriksa.
-          </div>
-        </div>
-
-      </div>
+      <Faq items={toolFaqs} variant="tool" />
 
     </div>
 

@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Faq from '../../components/Faq.astro';
 import SectionTitle from '../../components/SectionTitle.astro';
 
 const pageTitle = "Generator IBPR & HIRADC K3 2026: Identifikasi Bahaya & Penilaian Risiko";
@@ -57,6 +58,17 @@ const schemas = [
   ]
 },
   ];
+
+const toolFaqs = [
+  {
+    "q": "Apakah auditor eksternal SMK3 mewajibkan seluruh bahaya memiliki risiko sisa Rendah (Low)?",
+    "a": "Tidak harus selalu Rendah (Low). Namun seluruh risiko awal berkategori Ekstrem (Extreme) dan Tinggi (High) WAJIB diturunkan hingga mencapai kategori Sedang (Medium) atau Rendah (Low) yang memenuhi kriteria ALARP (As Low As Reasonably Practicable). Jika risiko sisa masih Tinggi, pekerjaan tersebut belum layak dijalankan tanpa izin khusus Direksi."
+  },
+  {
+    "q": "Apa perbedaan mendasar antara IBPR dan JSA?",
+    "a": "IBPR bersifat makro di tingkat fasilitas dan mencakup seluruh siklus operasional bisnis perusahaan secara periodik (tahunan). Sedangkan JSA bersifat mikro, operasional, dan dibuat spesifik untuk satu jenis pekerjaan tertentu sebelum pekerjaan fisik dilakukan di lapangan, biasanya menjadi lampiran wajib dokumen Surat Izin Kerja Aman (SIKA / PTW)."
+  }
+];
 ---
 
 <Layout
@@ -193,29 +205,7 @@ const schemas = [
 
       <!-- FAQ ACCORDION -->
       <SectionTitle level={3} size="lg">Tanya Jawab Seputar IBPR / HIRADC (FAQ)</SectionTitle>
-      <div class="faq-box">
-        
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span>Apakah auditor eksternal SMK3 mewajibkan seluruh bahaya memiliki risiko sisa Rendah (Low)?</span>
-            <span class="faq-icon">▼</span>
-          </button>
-          <div class="faq-a">
-            Tidak harus selalu Rendah (Low). Namun seluruh risiko awal berkategori Ekstrem (Extreme) dan Tinggi (High) WAJIB diturunkan hingga mencapai kategori Sedang (Medium) atau Rendah (Low) yang memenuhi kriteria ALARP (As Low As Reasonably Practicable). Jika risiko sisa masih Tinggi, pekerjaan tersebut belum layak dijalankan tanpa izin khusus Direksi.
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span>Apa perbedaan mendasar antara IBPR dan JSA?</span>
-            <span class="faq-icon">▼</span>
-          </button>
-          <div class="faq-a">
-            IBPR bersifat makro di tingkat fasilitas dan mencakup seluruh siklus operasional bisnis perusahaan secara periodik (tahunan). Sedangkan JSA bersifat mikro, operasional, dan dibuat spesifik untuk satu jenis pekerjaan tertentu sebelum pekerjaan fisik dilakukan di lapangan, biasanya menjadi lampiran wajib dokumen Surat Izin Kerja Aman (SIKA / PTW).
-          </div>
-        </div>
-
-      </div>
+      <Faq items={toolFaqs} variant="tool" />
 
     </div>
 

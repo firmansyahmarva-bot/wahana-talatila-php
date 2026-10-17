@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Faq from '../../components/Faq.astro';
 import SectionTitle from '../../components/SectionTitle.astro';
 
 const pageTitle = "Kalkulator Biaya Kecelakaan Kerja 2026: Teori Gunung Es Heinrich & Bird";
@@ -57,6 +58,17 @@ const schemas = [
   ]
 },
   ];
+
+const toolFaqs = [
+  {
+    "q": "Apakah benar seluruh biaya kecelakaan kerja ditanggung oleh BPJS Ketenagakerjaan?",
+    "a": "Tidak. BPJS Ketenagakerjaan hanya menanggung biaya medis pengobatan rumah sakit (sesuai plafon) dan santunan cacat/kematian normatif. BPJS sama sekali tidak menanggung kerugian waktu produksi pabrik yang terhenti, kerusakan mesin produksi, denda keterlambatan proyek, investigasi forensik K3, maupun penurunan harga saham/reputasi bisnis perusahaan."
+  },
+  {
+    "q": "Bagaimana cara menghitung Return on Investment (ROI) dari program K3?",
+    "a": "Rumus ROI K3 adalah: <code>ROI = [(Estimasi Total Biaya Kecelakaan yang Dicegah - Anggaran Biaya K3) / Anggaran Biaya K3] × 100%</code>. Dengan membuktikan bahwa program K3 menghasilkan rasio penghematan finansial nyata, manajemen keselamatan bertransformasi dari sekadar \"pusat biaya\" (cost center) menjadi pelindung profitabilitas bisnis (value protector)."
+  }
+];
 ---
 
 <Layout
@@ -231,29 +243,7 @@ const schemas = [
 
       <!-- FAQ ACCORDION -->
       <SectionTitle level={3} size="lg">Tanya Jawab Seputar Biaya Kecelakaan Kerja (FAQ)</SectionTitle>
-      <div class="faq-box">
-        
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span>Apakah benar seluruh biaya kecelakaan kerja ditanggung oleh BPJS Ketenagakerjaan?</span>
-            <span class="faq-icon">▼</span>
-          </button>
-          <div class="faq-a">
-            Tidak. BPJS Ketenagakerjaan hanya menanggung biaya medis pengobatan rumah sakit (sesuai plafon) dan santunan cacat/kematian normatif. BPJS sama sekali tidak menanggung kerugian waktu produksi pabrik yang terhenti, kerusakan mesin produksi, denda keterlambatan proyek, investigasi forensik K3, maupun penurunan harga saham/reputasi bisnis perusahaan.
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span>Bagaimana cara menghitung Return on Investment (ROI) dari program K3?</span>
-            <span class="faq-icon">▼</span>
-          </button>
-          <div class="faq-a">
-            Rumus ROI K3 adalah: <code>ROI = [(Estimasi Total Biaya Kecelakaan yang Dicegah - Anggaran Biaya K3) / Anggaran Biaya K3] × 100%</code>. Dengan membuktikan bahwa program K3 menghasilkan rasio penghematan finansial nyata, manajemen keselamatan bertransformasi dari sekadar "pusat biaya" (cost center) menjadi pelindung profitabilitas bisnis (value protector).
-          </div>
-        </div>
-
-      </div>
+      <Faq items={toolFaqs} variant="tool" />
 
     </div>
 

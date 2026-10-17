@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Faq from '../../components/Faq.astro';
 
 const pageTitle = "JSA Builder Online 2026: Generator Job Safety Analysis & JHA Indonesia";
 const metaDesc = "Buat dokumen Job Safety Analysis (JSA / JHA) K3 standar industri secara instan online. Dilengkapi 6 template pekerjaan risiko tinggi, hirarki pengendalian, dan cetak form resmi.";
@@ -56,6 +57,21 @@ const schemas = [
   ]
 },
   ];
+
+const toolFaqs = [
+  {
+    "q": "Apa perbedaan mendasar antara JSA dan IBPR / HIRADC?",
+    "a": "HIRADC (Hazard Identification, Risk Assessment and Determining Control) atau IBPR bersifat makro di tingkat fasilitas dan mencakup seluruh siklus operasional bisnis perusahaan secara periodik (tahunan). Sedangkan JSA bersifat mikro, operasional, dan dibuat spesifik untuk satu jenis pekerjaan tertentu sebelum pekerjaan fisik dilakukan di lapangan, biasanya menjadi lampiran wajib dokumen Surat Izin Kerja Aman (SIKA / PTW)."
+  },
+  {
+    "q": "Siapa yang wajib menandatangani formulir JSA sebelum pekerjaan dimulai?",
+    "a": "Formulir JSA resmi wajib ditandatangani oleh:\r\n            <ol style=\"padding-left:20px;margin-top:6px\">\r\n              <li><strong>Pelaksana / Mandor:</strong> Memahami langkah dan berkomitmen menerapkan kontrol.</li>\r\n              <li><strong>Pengawas Pekerjaan / Supervisor:</strong> Memverifikasi kesiapan alat dan keselamatan lapangan.</li>\r\n              <li><strong>Petugas HSE / Ahli K3 Umum:</strong> Mereview kepatuhan regulasi dan standar K3 perusahaan.</li>\r\n            </ol>"
+  },
+  {
+    "q": "Berapa lama masa berlaku suatu dokumen JSA?",
+    "a": "Dokumen JSA berlaku selama durasi pekerjaan tersebut berlangsung (sesuai masa aktif PTW, umumnya 1 shift kerja atau maksimal 1 minggu untuk pekerjaan proyek berkelanjutan). Jika terdapat perubahan kondisi lapangan, cuaca ekstrem, pergantian mesin/metode, atau terjadi insiden, JSA wajib ditinjau ulang (review) dan direvisi seketika."
+  }
+];
 ---
 
 <Layout
@@ -219,44 +235,7 @@ const schemas = [
 
       <!-- FAQ ACCORDION -->
       <h3 style="color:var(--text);font-family:'Lexend',sans-serif;font-size:1.25rem;margin:28px 0 16px">Tanya Jawab Seputar JSA / JHA (FAQ)</h3>
-      <div class="faq-box">
-        
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span>Apa perbedaan mendasar antara JSA dan IBPR / HIRADC?</span>
-            <span class="faq-icon">▼</span>
-          </button>
-          <div class="faq-a">
-            HIRADC (Hazard Identification, Risk Assessment and Determining Control) atau IBPR bersifat makro di tingkat fasilitas dan mencakup seluruh siklus operasional bisnis perusahaan secara periodik (tahunan). Sedangkan JSA bersifat mikro, operasional, dan dibuat spesifik untuk satu jenis pekerjaan tertentu sebelum pekerjaan fisik dilakukan di lapangan, biasanya menjadi lampiran wajib dokumen Surat Izin Kerja Aman (SIKA / PTW).
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span>Siapa yang wajib menandatangani formulir JSA sebelum pekerjaan dimulai?</span>
-            <span class="faq-icon">▼</span>
-          </button>
-          <div class="faq-a">
-            Formulir JSA resmi wajib ditandatangani oleh:
-            <ol style="padding-left:20px;margin-top:6px">
-              <li><strong>Pelaksana / Mandor:</strong> Memahami langkah dan berkomitmen menerapkan kontrol.</li>
-              <li><strong>Pengawas Pekerjaan / Supervisor:</strong> Memverifikasi kesiapan alat dan keselamatan lapangan.</li>
-              <li><strong>Petugas HSE / Ahli K3 Umum:</strong> Mereview kepatuhan regulasi dan standar K3 perusahaan.</li>
-            </ol>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span>Berapa lama masa berlaku suatu dokumen JSA?</span>
-            <span class="faq-icon">▼</span>
-          </button>
-          <div class="faq-a">
-            Dokumen JSA berlaku selama durasi pekerjaan tersebut berlangsung (sesuai masa aktif PTW, umumnya 1 shift kerja atau maksimal 1 minggu untuk pekerjaan proyek berkelanjutan). Jika terdapat perubahan kondisi lapangan, cuaca ekstrem, pergantian mesin/metode, atau terjadi insiden, JSA wajib ditinjau ulang (review) dan direvisi seketika.
-          </div>
-        </div>
-
-      </div>
+      <Faq items={toolFaqs} variant="tool" />
 
     </div>
 

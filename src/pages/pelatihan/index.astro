@@ -5,6 +5,7 @@ import { waUrl } from '../../lib/images';
 import TrainingCard from '../../components/TrainingCard.astro';
 import WaButton from '../../components/WaButton.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
+import Faq from '../../components/Faq.astro';
 
 // Fetch all trainings and categories
 const allTrainings = await getCollection('trainings');
@@ -92,7 +93,7 @@ const hubAccent: Record<string, string> = {
   schemas={schemas}
 >
   <Breadcrumb
-    variant="course"
+    variant="catalog"
     items={[
       { name: 'Beranda', href: '/' },
       { name: 'Pelatihan' },
@@ -445,17 +446,7 @@ const hubAccent: Record<string, string> = {
         <p class="section-eyebrow">FAQ</p>
         <h2 class="section-title">Pertanyaan Umum Seputar Pelatihan K3</h2>
       </div>
-      <div class="faq-grid">
-        {catalogFaqs.map((f) => (
-          <div class="faq-item">
-            <button type="button" class="faq-question">
-              <span>{f.q}</span>
-              <span class="faq-icon">+</span>
-            </button>
-            <div class="faq-answer"><p>{f.a}</p></div>
-          </div>
-        ))}
-      </div>
+      <Faq items={catalogFaqs} variant="catalog" />
     </div>
   </section>
 
@@ -499,18 +490,6 @@ const hubAccent: Record<string, string> = {
 </Layout>
 
 <script is:inline>
-  function toggleCatalogFaq(btn) {
-    var item = btn.closest('.faq-item');
-    if (item) item.classList.toggle('open');
-  }
-
-  // Setup FAQ toggles
-  document.querySelectorAll('.faq-question').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      toggleCatalogFaq(this);
-    });
-  });
-
   // Filter Catalog Logic
   function filterCatalog() {
     var searchEl = document.getElementById('catalog-search');

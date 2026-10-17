@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Faq from '../../components/Faq.astro';
 import SectionTitle from '../../components/SectionTitle.astro';
 
 const pageTitle = "Matriks Risiko 5x5 K3 Online 2026: Kalkulator ISO 31000 & HIRARC";
@@ -57,6 +58,21 @@ const schemas = [
   ]
 },
   ];
+
+const toolFaqs = [
+  {
+    "q": "Apa perbedaan antara Initial Risk (Risiko Awal) dan Residual Risk (Risiko Sisa)?",
+    "a": "Initial Risk adalah tingkat risiko murni dari suatu aktivitas kerja sebelum diterapkannya tindakan pengendalian keselamatan apa pun. Sedangkan Residual Risk (Risiko Sisa) adalah tingkat risiko yang masih tersisa setelah seluruh tindakan pencegahan (rekayasa teknik, SOP, APD) telah diimplementasikan secara efektif di lapangan."
+  },
+  {
+    "q": "Mengapa matriks risiko 5x5 lebih dianjurkan dibanding matriks 3x3?",
+    "a": "Matriks 3x3 cenderung menghasilkan pengelompokan yang terlalu kasar (banyak bahaya menumpuk di kategori Sedang). Matriks 5x5 memberikan diferensiasi yang jauh lebih presisi dan terukur antara cedera ringan P3K, rawat inap medis (LTI), cacat permanen, hingga fatalitas, sehingga alokasi anggaran K3 perusahaan dapat diarahkan tepat sasaran pada bahaya paling kritis."
+  },
+  {
+    "q": "Siapa yang harus melakukan evaluasi matriks risiko di perusahaan?",
+    "a": "Evaluasi matriks risiko wajib dilakukan secara multidisiplin oleh tim HIRADC yang terdiri dari: Penanggung jawab area kerja (Supervisor/Manager), Teknisi pelaksana pekerjaan yang memahami detail bahaya fisik, serta Ahli K3 Umum yang menguasai metodologi evaluasi risiko dan regulasi keselamatan nasional."
+  }
+];
 ---
 
 <Layout
@@ -239,39 +255,7 @@ const schemas = [
 
       <!-- FAQ ACCORDION -->
       <SectionTitle level={3} size="lg">Pertanyaan Sering Diajukan Seputar Matriks Risiko K3 (FAQ)</SectionTitle>
-      <div class="faq-box">
-        
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span>Apa perbedaan antara Initial Risk (Risiko Awal) dan Residual Risk (Risiko Sisa)?</span>
-            <span class="faq-icon">▼</span>
-          </button>
-          <div class="faq-a">
-            Initial Risk adalah tingkat risiko murni dari suatu aktivitas kerja sebelum diterapkannya tindakan pengendalian keselamatan apa pun. Sedangkan Residual Risk (Risiko Sisa) adalah tingkat risiko yang masih tersisa setelah seluruh tindakan pencegahan (rekayasa teknik, SOP, APD) telah diimplementasikan secara efektif di lapangan.
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span>Mengapa matriks risiko 5x5 lebih dianjurkan dibanding matriks 3x3?</span>
-            <span class="faq-icon">▼</span>
-          </button>
-          <div class="faq-a">
-            Matriks 3x3 cenderung menghasilkan pengelompokan yang terlalu kasar (banyak bahaya menumpuk di kategori Sedang). Matriks 5x5 memberikan diferensiasi yang jauh lebih presisi dan terukur antara cedera ringan P3K, rawat inap medis (LTI), cacat permanen, hingga fatalitas, sehingga alokasi anggaran K3 perusahaan dapat diarahkan tepat sasaran pada bahaya paling kritis.
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span>Siapa yang harus melakukan evaluasi matriks risiko di perusahaan?</span>
-            <span class="faq-icon">▼</span>
-          </button>
-          <div class="faq-a">
-            Evaluasi matriks risiko wajib dilakukan secara multidisiplin oleh tim HIRADC yang terdiri dari: Penanggung jawab area kerja (Supervisor/Manager), Teknisi pelaksana pekerjaan yang memahami detail bahaya fisik, serta Ahli K3 Umum yang menguasai metodologi evaluasi risiko dan regulasi keselamatan nasional.
-          </div>
-        </div>
-
-      </div>
+      <Faq items={toolFaqs} variant="tool" />
 
     </div>
 

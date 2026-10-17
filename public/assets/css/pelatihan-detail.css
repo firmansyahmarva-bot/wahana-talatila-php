@@ -47,26 +47,6 @@ html, body {
   padding: 12px 0;
   border-bottom: 1px solid var(--border);
 }
-.breadcrumb-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  align-items: center;
-  font-size: 13px;
-  color: var(--slate-500);
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
-}
-.breadcrumb-list a {
-  color: var(--mut);
-  font-weight: 500;
-  text-decoration: none;
-}
-.breadcrumb-list a:hover {
-  color: var(--brand);
-  text-decoration: underline;
-}
 
 /* Related-training grid */
 .pd-training-grid {

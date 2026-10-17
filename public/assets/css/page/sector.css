@@ -40,15 +40,7 @@ h3.sub-title{font-size:1.05rem;font-weight:700;color:var(--brand);margin:18px 0 
 .link-card:hover{border-color:var(--accent);box-shadow:0 8px 20px color-mix(in srgb, var(--brand) 10%, transparent);transform:translateY(-2px)}
 .link-card a{color:var(--slate-900);text-decoration:none;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:space-between;width:100%;transition:color .15s ease}
 .link-card a:hover{color:var(--accent)}
-.faq-list{max-width:740px;margin:0 auto}
-.faq-item{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;margin-bottom:.75rem;overflow:hidden}
-.faq-q{width:100%;background:none;border:none;text-align:left;padding:16px 20px;font-family:inherit;font-size:15px;font-weight:700;color:var(--slate-900);cursor:pointer;display:flex;justify-content:space-between;align-items:center}
-.faq-q:hover{background:var(--slate-50)}
-.faq-q[aria-expanded="true"]{background:var(--brand);color:var(--surface)}
-.faq-arrow{transition:transform .3s}
-.faq-q[aria-expanded="true"] .faq-arrow{transform:rotate(180deg)}
-.faq-a{padding:0 20px;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s;font-size:14px;color:var(--slate-700);line-height:1.75}
-.faq-a.open{max-height:300px;padding:14px 20px 18px}
+
 .final-cta{background:linear-gradient(135deg,var(--brand),var(--brand-mid));color:var(--surface);padding:56px 0;text-align:center}
 .final-cta h2{font-size:1.7rem;font-weight:800;margin-bottom:10px}
 .final-cta p{font-size:15px;color:color-mix(in srgb, var(--surface) 85%, transparent)}

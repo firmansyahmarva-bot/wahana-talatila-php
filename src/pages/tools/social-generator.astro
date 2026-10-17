@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Faq from '../../components/Faq.astro';
 import SectionTitle from '../../components/SectionTitle.astro';
 
 const pageTitle = "Generator Banner & Poster K3 2026: Bulan K3 Nasional & Slogan K3";
@@ -49,6 +50,17 @@ const schemas = [
   ]
 },
   ];
+
+const toolFaqs = [
+  {
+    "q": "Kapan Bulan K3 Nasional diperingati setiap tahunnya?",
+    "a": "Bulan K3 Nasional diperingati secara serentak di seluruh Indonesia mulai tanggal <strong>12 Januari hingga 12 Februari</strong> setiap tahunnya berdasarkan Keputusan Menteri Ketenagakerjaan RI, guna memicu momentum kampanye keselamatan secara nasional."
+  },
+  {
+    "q": "Apakah poster hasil generator ini bebas digunakan secara komersial?",
+    "a": "Ya, 100% gratis dan bebas digunakan untuk keperluan internal perusahaan, cetak spanduk di site pabrik/konstruksi, lembar buletin P2K3, maupun postingan akun LinkedIn / Instagram perusahaan."
+  }
+];
 ---
 
 <Layout
@@ -178,29 +190,7 @@ const schemas = [
 
       <!-- FAQ ACCORDION -->
       <SectionTitle level={3} size="lg">Tanya Jawab Seputar Promosi K3 (FAQ)</SectionTitle>
-      <div class="faq-box">
-        
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span>Kapan Bulan K3 Nasional diperingati setiap tahunnya?</span>
-            <span class="faq-icon">▼</span>
-          </button>
-          <div class="faq-a">
-            Bulan K3 Nasional diperingati secara serentak di seluruh Indonesia mulai tanggal <strong>12 Januari hingga 12 Februari</strong> setiap tahunnya berdasarkan Keputusan Menteri Ketenagakerjaan RI, guna memicu momentum kampanye keselamatan secara nasional.
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span>Apakah poster hasil generator ini bebas digunakan secara komersial?</span>
-            <span class="faq-icon">▼</span>
-          </button>
-          <div class="faq-a">
-            Ya, 100% gratis dan bebas digunakan untuk keperluan internal perusahaan, cetak spanduk di site pabrik/konstruksi, lembar buletin P2K3, maupun postingan akun LinkedIn / Instagram perusahaan.
-          </div>
-        </div>
-
-      </div>
+      <Faq items={toolFaqs} variant="tool" />
 
     </div>
 

@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 
-const distDir = path.join(__dirname, '..', 'dist');
+const distDir = process.env.DIST_DIR || path.join(__dirname, '..', 'dist');
 const outFile = process.argv[2] || path.join(__dirname, 'out', 'before-all.json');
 
 if (!fs.existsSync(distDir)) {
@@ -101,7 +101,7 @@ function extractMeta(content) {
 const snapshot = {};
 
 for (const file of htmlFiles) {
-  const relPath = path.relative(path.join(__dirname, '..'), file).replace(/\\/g, '/');
+  const relPath = path.relative(distDir, file).replace(/\\/g, '/');
   const content = fs.readFileSync(file, 'utf8');
   snapshot[relPath] = {
     path: relPath,

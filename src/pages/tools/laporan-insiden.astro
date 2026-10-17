@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Faq from '../../components/Faq.astro';
 import SectionTitle from '../../components/SectionTitle.astro';
 
 const pageTitle = "Formulir Laporan Insiden K3 Online 2026: Investigasi 5-Why & SCAT Model";
@@ -57,6 +58,17 @@ const schemas = [
   ]
 },
   ];
+
+const toolFaqs = [
+  {
+    "q": "Mengapa bukti fisik di Tempat Kejadian Perkara (TKP) tidak boleh diubah sebelum difoto?",
+    "a": "Mengubah posisi alat, membersihkan tumpahan oli, atau membuang material di TKP sebelum diinspeksi oleh Ahli K3 atau Pengawas Ketenagakerjaan dapat menghilangkan bukti kunci mekanis dan fisik. Pasal 5 Permenaker 03/1998 melarang mengubah keadaan tempat kecelakaan kecuali untuk pertolongan darurat korban atau mencegah bahaya yang lebih besar."
+  },
+  {
+    "q": "Siapa saja anggota tim investigasi kecelakaan kerja di perusahaan?",
+    "a": "Tim investigasi idealnya dipimpin oleh Ahli K3 Umum bersama Pengawas Lapangan (Supervisor area kejadian), teknisi ahli mesin terkait, perwakilan serikat pekerja/rekan kerja, serta didukung oleh Pimpinan P2K3 perusahaan."
+  }
+];
 ---
 
 <Layout
@@ -267,29 +279,7 @@ const schemas = [
 
       <!-- FAQ ACCORDION -->
       <SectionTitle level={3} size="lg">Tanya Jawab Seputar Investigasi Insiden K3 (FAQ)</SectionTitle>
-      <div class="faq-box">
-        
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span>Mengapa bukti fisik di Tempat Kejadian Perkara (TKP) tidak boleh diubah sebelum difoto?</span>
-            <span class="faq-icon">▼</span>
-          </button>
-          <div class="faq-a">
-            Mengubah posisi alat, membersihkan tumpahan oli, atau membuang material di TKP sebelum diinspeksi oleh Ahli K3 atau Pengawas Ketenagakerjaan dapat menghilangkan bukti kunci mekanis dan fisik. Pasal 5 Permenaker 03/1998 melarang mengubah keadaan tempat kecelakaan kecuali untuk pertolongan darurat korban atau mencegah bahaya yang lebih besar.
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span>Siapa saja anggota tim investigasi kecelakaan kerja di perusahaan?</span>
-            <span class="faq-icon">▼</span>
-          </button>
-          <div class="faq-a">
-            Tim investigasi idealnya dipimpin oleh Ahli K3 Umum bersama Pengawas Lapangan (Supervisor area kejadian), teknisi ahli mesin terkait, perwakilan serikat pekerja/rekan kerja, serta didukung oleh Pimpinan P2K3 perusahaan.
-          </div>
-        </div>
-
-      </div>
+      <Faq items={toolFaqs} variant="tool" />
 
     </div>
 

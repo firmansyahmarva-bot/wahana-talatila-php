@@ -63,7 +63,7 @@ for (const url of beforeUrls) {
   }
 
   if (b.visibleTextHash !== a.visibleTextHash) {
-    const norm = url.replace(/\\/g, '/').replace(/^dist\//, '/');
+    const norm = '/' + url.replace(/\\/g, '/').replace(/^\.?\/?(dist\/)?/, '');
 
     // Check if category hub or catalog index
     const isCategoryHub = [

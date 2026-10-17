@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Faq from '../../components/Faq.astro';
 import SectionTitle from '../../components/SectionTitle.astro';
 
 const allTools = [
@@ -148,6 +149,17 @@ const schemas = [
     ],
   },
 ];
+
+const toolFaqs = [
+  {
+    q: 'Apakah seluruh tools dan kalkulator K3 di situs ini gratis?',
+    a: 'Ya, 100% gratis dan dapat digunakan secara bebas oleh praktisi HSE, Ahli K3 Umum, mahasiswa, dan manajemen perusahaan di seluruh Indonesia tanpa perlu registrasi.'
+  },
+  {
+    q: 'Apakah hasil perhitungan kalkulator K3 sesuai dengan standar regulasi pemerintah?',
+    a: 'Seluruh formula perhitungan dan dokumen yang dihasilkan mengacu langsung pada peraturan perundang-undangan resmi Republik Indonesia, seperti Kepmenaker No. KEP.372/MEN/1989, Permenaker No. 5 Tahun 2018, Permenaker No. 03/MEN/1998, dan PP No. 50 Tahun 2012 tentang Penerapan SMK3.'
+  }
+];
 ---
 
 <Layout
@@ -228,25 +240,7 @@ const schemas = [
 
         <!-- FAQ ACCORDION -->
         <SectionTitle level={3} size="lg">Tanya Jawab Seputar Tools K3 (FAQ)</SectionTitle>
-        <div class="faq-box">
-          <details class="faq-item" style="border:1px solid var(--border); border-radius:8px; padding:12px 16px; margin-bottom:10px;">
-            <summary style="font-weight:700; cursor:pointer; color:var(--text);">
-              Apakah seluruh tools dan kalkulator K3 di situs ini gratis?
-            </summary>
-            <div style="margin-top:10px; color:var(--slate-700); line-height:1.6;">
-              Ya, 100% gratis dan dapat digunakan secara bebas oleh praktisi HSE, Ahli K3 Umum, mahasiswa, dan manajemen perusahaan di seluruh Indonesia tanpa perlu registrasi.
-            </div>
-          </details>
-
-          <details class="faq-item" style="border:1px solid var(--border); border-radius:8px; padding:12px 16px;">
-            <summary style="font-weight:700; cursor:pointer; color:var(--text);">
-              Apakah hasil perhitungan kalkulator K3 sesuai dengan standar regulasi pemerintah?
-            </summary>
-            <div style="margin-top:10px; color:var(--slate-700); line-height:1.6;">
-              Seluruh formula perhitungan dan dokumen yang dihasilkan mengacu langsung pada peraturan perundang-undangan resmi Republik Indonesia, seperti Kepmenaker No. KEP.372/MEN/1989, Permenaker No. 5 Tahun 2018, Permenaker No. 03/MEN/1998, dan PP No. 50 Tahun 2012 tentang Penerapan SMK3.
-            </div>
-          </details>
-        </div>
+        <Faq items={toolFaqs} variant="tools-index" />
       </div>
     </div>
   </section>
