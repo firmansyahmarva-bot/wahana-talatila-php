@@ -1,5 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Faq from '../../components/Faq.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
 
 const pageTitle = "Kalkulator Kebisingan K3 2026: Dosis Paparan Permenaker 5/2018 & TWA";
 const metaDesc = "Kalkulator dosis paparan kebisingan tempat kerja sesuai Permenaker No. 5/2018 & OSHA. Hitung Dosis Harian (%), TWA 8 Jam (dBA), batas waktu pajanan, serta proteksi NRR earplug & earmuff.";
@@ -56,6 +58,17 @@ const schemas = [
   ]
 },
   ];
+
+const toolFaqs = [
+  {
+    "q": "Apa itu Noise Induced Hearing Loss (NIHL)?",
+    "a": "Noise Induced Hearing Loss (NIHL) atau Tuli Akibat Kebisingan (TAK) adalah penyakit akibat kerja (PAK) yang menyebabkan kerusakan permanen pada sel-sel rambut sensorik di dalam koklea telinga bagian dalam akibat paparan suara keras secara terus menerus dalam jangka panjang. NIHL bersifat menetap, tidak dapat disembuhkan secara medis, namun 100% dapat dicegah dengan manajemen K3 yang tepat."
+  },
+  {
+    "q": "Kapan perusahaan wajib menyelenggarakan program Hearing Conservation Program (HCP)?",
+    "a": "Program Konservasi Pendengaran (HCP) wajib diterapkan oleh perusahaan apabila hasil pengukuran lingkungan kerja menunjukkan tingkat kebisingan mencapai atau melampaui Action Level 82 dBA (atau 85 dBA TWA 8-jam). Komponen HCP meliputi: survei pemetaan kebisingan, pengendalian teknik/mesin, uji audiometri berkala bagi pekerja, penyediaan APD yang teruji, serta edukasi K3."
+  }
+];
 ---
 
 <Layout
@@ -249,30 +262,8 @@ const schemas = [
       </p>
 
       <!-- FAQ ACCORDION -->
-      <h3 class="sp-heading-lexend-lg">Tanya Jawab Seputar Kebisingan Tempat Kerja (FAQ)</h3>
-      <div class="faq-box">
-        
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span>Apa itu Noise Induced Hearing Loss (NIHL)?</span>
-            <span class="faq-icon">▼</span>
-          </button>
-          <div class="faq-a">
-            Noise Induced Hearing Loss (NIHL) atau Tuli Akibat Kebisingan (TAK) adalah penyakit akibat kerja (PAK) yang menyebabkan kerusakan permanen pada sel-sel rambut sensorik di dalam koklea telinga bagian dalam akibat paparan suara keras secara terus menerus dalam jangka panjang. NIHL bersifat menetap, tidak dapat disembuhkan secara medis, namun 100% dapat dicegah dengan manajemen K3 yang tepat.
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span>Kapan perusahaan wajib menyelenggarakan program Hearing Conservation Program (HCP)?</span>
-            <span class="faq-icon">▼</span>
-          </button>
-          <div class="faq-a">
-            Program Konservasi Pendengaran (HCP) wajib diterapkan oleh perusahaan apabila hasil pengukuran lingkungan kerja menunjukkan tingkat kebisingan mencapai atau melampaui Action Level 82 dBA (atau 85 dBA TWA 8-jam). Komponen HCP meliputi: survei pemetaan kebisingan, pengendalian teknik/mesin, uji audiometri berkala bagi pekerja, penyediaan APD yang teruji, serta edukasi K3.
-          </div>
-        </div>
-
-      </div>
+      <SectionTitle level={3} size="lg">Tanya Jawab Seputar Kebisingan Tempat Kerja (FAQ)</SectionTitle>
+      <Faq items={toolFaqs} variant="tool" />
 
     </div>
 

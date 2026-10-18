@@ -1,5 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import Section from '../components/Section.astro';
+import Faq from '../components/Faq.astro';
 
 const canonical = 'https://wahanatotalita.com/catering/';
 const metaTitle = 'Jasa Catering Instansi Pemerintah & BUMN Yogyakarta — Wahana Totalita';
@@ -145,10 +148,10 @@ const schemas = [
   <main style="max-width:960px;margin:0 auto;padding:40px 20px 60px;">
 
     <!-- PAKET LAYANAN -->
-    <section class="sp-mb-48">
-      <h2 class="sp-title-underlined-24">
+    <Section spacing="md">
+      <SectionTitle level={2} underline size="24">
         Paket Layanan Catering
-      </h2>
+      </SectionTitle>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;">
         {pakets.map((p) => (
           <div style={`background:${p.bg};border-radius:10px;padding:20px;border-top:4px solid var(--brand);`}>
@@ -160,13 +163,13 @@ const schemas = [
         ))}
       </div>
       <p style="color:var(--slate-600);font-size:0.85rem;margin-top:16px;font-style:italic;">* Harga dapat berubah sesuai menu dan volume. Hubungi kami untuk penawaran resmi dan RAB yang dapat digunakan untuk pengajuan anggaran.</p>
-    </section>
+    </Section>
 
     <!-- MENU UNGGULAN -->
-    <section class="sp-mb-48">
-      <h2 class="sp-title-underlined-20">
+    <Section spacing="md">
+      <SectionTitle level={2} underline size="20">
         Pilihan Menu
-      </h2>
+      </SectionTitle>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
         {menus.map((m) => (
           <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:18px;">
@@ -176,7 +179,7 @@ const schemas = [
           </div>
         ))}
       </div>
-    </section>
+    </Section>
 
     <!-- PROCUREMENT -->
     <section style="margin-bottom:48px;background:var(--accent-light);border-radius:10px;padding:28px;">
@@ -203,10 +206,10 @@ const schemas = [
     </section>
 
     <!-- KEUNGGULAN -->
-    <section class="sp-mb-48">
-      <h2 class="sp-title-underlined-20">
+    <Section spacing="md">
+      <SectionTitle level={2} underline size="20">
         Keunggulan Wahana Totalita untuk Catering Instansi
-      </h2>
+      </SectionTitle>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;">
         {keunggulan.map((k) => (
           <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;">
@@ -216,7 +219,7 @@ const schemas = [
           </div>
         ))}
       </div>
-    </section>
+    </Section>
 
     <!-- CROSS LINKS -->
     <section style="margin-bottom:48px;background:var(--slate-50);border-radius:10px;padding:24px;">
@@ -233,20 +236,10 @@ const schemas = [
     </section>
 
     <!-- FAQ -->
-    <section class="sp-mb-48">
-      <h2 class="sp-title-underlined-24">Pertanyaan yang Sering Diajukan</h2>
-      {faqs.map((faq) => (
-        <details class="sp-faq-card">
-          <summary class="sp-faq-summary">
-            <span>{faq.q}</span>
-            <span style="font-size:1.2rem;font-weight:700;color:var(--accent);min-width:20px;text-align:center;">+</span>
-          </summary>
-          <div class="sp-faq-content">
-            {faq.a}
-          </div>
-        </details>
-      ))}
-    </section>
+    <Section spacing="md">
+      <SectionTitle level={2} underline size="24">Pertanyaan yang Sering Diajukan</SectionTitle>
+      <Faq items={faqs} />
+    </Section>
 
     <!-- CTA -->
     <section style="background:linear-gradient(135deg,var(--brand),var(--accent));color:var(--surface);border-radius:12px;padding:40px;text-align:center;">

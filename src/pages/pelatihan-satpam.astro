@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import Section from '../components/Section.astro';
 
 const canonical = 'https://wahanatotalita.com/pelatihan-satpam/';
 const metaTitle = 'Pelatihan K3 & Keamanan untuk Satuan Pengamanan (Satpam) — Wahana Totalita Yogyakarta';
@@ -96,7 +98,7 @@ const schemas = [
 
   <main class="container" style="max-width:960px;padding:48px 20px 64px;">
     <!-- BAHAYA K3 SATPAM -->
-    <section class="sp-mb-48">
+    <Section spacing="md">
       <h2 style="color:var(--brand);font-size:1.6rem;border-bottom:3px solid var(--accent);padding-bottom:8px;margin-bottom:20px;font-weight:800;">
         Bahaya K3 yang Spesifik untuk Petugas Keamanan
       </h2>
@@ -112,13 +114,13 @@ const schemas = [
           </div>
         ))}
       </div>
-    </section>
+    </Section>
 
     <!-- PROGRAM -->
-    <section class="sp-mb-48">
-      <h2 class="sp-title-underlined-24-bold">
+    <Section spacing="md">
+      <SectionTitle level={2} underline bold size="24">
         Program Pelatihan K3 untuk Satuan Pengamanan
-      </h2>
+      </SectionTitle>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:20px;">
         {programs.map((p) => (
           <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow-sm);">
@@ -139,7 +141,7 @@ const schemas = [
           </div>
         ))}
       </div>
-    </section>
+    </Section>
 
     <!-- KEWAJIBAN HUKUM -->
     <section style="margin-bottom:48px;background:var(--surface-subtle);border-radius:12px;padding:28px;border:1px solid var(--border);">
@@ -160,10 +162,10 @@ const schemas = [
     </section>
 
     <!-- FAQ -->
-    <section class="sp-mb-48">
-      <h2 class="sp-title-underlined-24-bold">
+    <Section spacing="md">
+      <SectionTitle level={2} underline bold size="24">
         Pertanyaan yang Sering Diajukan
-      </h2>
+      </SectionTitle>
       <div style="display:flex;flex-direction:column;gap:12px;">
         {faqs.map((faq) => (
           <details style="border:1px solid var(--border);border-radius:8px;padding:14px 18px;background:var(--surface);">
@@ -176,7 +178,7 @@ const schemas = [
           </details>
         ))}
       </div>
-    </section>
+    </Section>
 
     <!-- CTA -->
     <section style="background:linear-gradient(135deg,var(--slate-900),var(--brand-dark));color:var(--surface);border-radius:12px;padding:44px 24px;text-align:center;">

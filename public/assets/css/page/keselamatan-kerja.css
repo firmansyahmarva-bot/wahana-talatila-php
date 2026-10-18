@@ -27,7 +27,7 @@ h2.section-title{font-size:1.5rem;font-weight:800;color:var(--slate-900);margin-
 .prevent-list{list-style:none}
 .prevent-list li{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:12px 16px;margin-bottom:8px;font-size:14px;color:var(--slate-700);display:flex;gap:10px}
 .prevent-list li::before{content:'✓';color:var(--brand);font-weight:800;flex-shrink:0}
-.faq-a{padding:0 20px;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s;font-size:14.5px;color:var(--slate-700);line-height:1.75}
+
 .final-cta h2{font-size:1.8rem;font-weight:800;margin-bottom:10px}
 
 /* Enhanced Scheme Grid & Modern Cards */

@@ -1,5 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import Section from '../components/Section.astro';
+import Faq from '../components/Faq.astro';
 
 const canonical = 'https://wahanatotalita.com/pelatihan-teknologi-informasi/';
 const metaTitle = 'Pelatihan Teknologi Informasi & Digital untuk ASN Yogyakarta — Wahana Totalita';
@@ -172,10 +175,10 @@ const schemas = [
     </section>
 
     <!-- KLASTER KOMPETENSI -->
-    <section class="sp-mb-48">
-      <h2 class="sp-title-underlined-20">
+    <Section spacing="md">
+      <SectionTitle level={2} underline size="20">
         Klaster Kompetensi Digital yang Tersedia
-      </h2>
+      </SectionTitle>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:20px;">
         {clusters.map((c) => (
           <div style="background:var(--surface);border:1px solid var(--slate-300);border-radius:10px;padding:20px;border-top:4px solid var(--brand-mid);">
@@ -185,13 +188,13 @@ const schemas = [
           </div>
         ))}
       </div>
-    </section>
+    </Section>
 
     <!-- PROGRAM CARDS -->
-    <section class="sp-mb-48">
-      <h2 class="sp-title-underlined-20">
+    <Section spacing="md">
+      <SectionTitle level={2} underline size="20">
         Program Pelatihan IT yang Tersedia
-      </h2>
+      </SectionTitle>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:18px;">
         {programs.map((p) => (
           <div style="background:var(--slate-50);border:1px solid var(--border);border-radius:8px;padding:18px;">
@@ -206,7 +209,7 @@ const schemas = [
           </div>
         ))}
       </div>
-    </section>
+    </Section>
 
     <!-- KEAMANAN SIBER ANCAMAN -->
     <section style="margin-bottom:48px;background:var(--slate-100);border-radius:10px;padding:28px;border-left:6px solid var(--accent);">
@@ -234,30 +237,20 @@ const schemas = [
     </section>
 
     <!-- RELATED LINKS -->
-    <section class="sp-mb-48">
+    <Section spacing="md">
       <h2 style="color:var(--brand);font-size:1.4rem;border-bottom:2px solid var(--border);padding-bottom:8px;margin-bottom:16px;">Pelatihan Lain untuk ASN</h2>
       <div style="display:flex;flex-wrap:wrap;gap:12px;">
         {related.map((r) => (
           <a href={r.href} style="display:inline-block;background:var(--surface);border:1px solid var(--slate-400);border-radius:6px;padding:10px 16px;color:var(--brand-mid);text-decoration:none;font-size:0.88rem;font-weight:600;">{r.label}</a>
         ))}
       </div>
-    </section>
+    </Section>
 
     <!-- FAQ -->
-    <section class="sp-mb-48">
-      <h2 class="sp-title-underlined-24">Pertanyaan yang Sering Diajukan</h2>
-      {faqs.map((faq) => (
-        <details class="sp-faq-card">
-          <summary class="sp-faq-summary">
-            <span>{faq.q}</span>
-            <span style="font-size:1.2rem;font-weight:700;color:var(--accent);min-width:20px;text-align:center;">+</span>
-          </summary>
-          <div class="sp-faq-content">
-            {faq.a}
-          </div>
-        </details>
-      ))}
-    </section>
+    <Section spacing="md">
+      <SectionTitle level={2} underline size="24">Pertanyaan yang Sering Diajukan</SectionTitle>
+      <Faq items={faqs} />
+    </Section>
 
     <!-- CTA -->
     <section style="background:linear-gradient(135deg,var(--brand-mid),var(--brand));color:var(--surface);border-radius:12px;padding:40px;text-align:center;">

@@ -4,6 +4,12 @@ import ZhLayout from '../../layouts/ZhLayout.astro';
 const pageTitle = "印尼注册安全官 (Ahli K3 Umum) 法定配置与 P2K3 委员会设立指引 — Wahana Totalita";
 const metaDesc = "深度解析印尼企业安全生产委员会(P2K3)法定设立流程、注册安全工程师(AK3U)配置门槛与季报报送要求。帮助在印尼中资企业厘清用工合规与劳动监察风险。";
 const canonical = "https://wahanatotalita.com/zh/ahli-k3-umum/";
+const hreflangs = [
+  { lang: 'id', href: 'https://wahanatotalita.com/ahli-k3-umum/' },
+  { lang: 'en', href: 'https://wahanatotalita.com/en/safety-officer-ak3-umum-requirements/' },
+  { lang: 'zh-Hans', href: 'https://wahanatotalita.com/zh/ahli-k3-umum/' },
+  { lang: 'x-default', href: 'https://wahanatotalita.com/ahli-k3-umum/' },
+];
 
 const schemas = [
     {
@@ -104,6 +110,7 @@ const schemas = [
   title={pageTitle}
   description={metaDesc}
   canonical={canonical}
+  hreflangs={hreflangs}
   schemas={schemas}
 >
 <section class="zh-hero">

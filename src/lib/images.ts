@@ -58,7 +58,9 @@ export function getTrainingImageUrl(imagePath?: string | null, catSlug: string =
   if (GALLERY_THUMBS.length > 0) {
     const key = seed || imagePath || catSlug || 'default-training';
     const index = stringHash(key) % GALLERY_THUMBS.length;
-    return `/galeri/thumbs/${encodeURIComponent(GALLERY_THUMBS[index])}`;
+    const rawThumb = GALLERY_THUMBS[index];
+    const webpThumb = rawThumb.replace(/\.[^.]+$/, '.webp');
+    return `/galeri/thumbs/${encodeURIComponent(webpThumb)}`;
   }
 
   return CATEGORY_FALLBACKS[catSlug] || 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&q=75&auto=format&fit=crop';

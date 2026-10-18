@@ -36,13 +36,7 @@ h2.section-title{font-size:1.5rem;font-weight:800;color:var(--slate-900);margin-
 .link-card a.btn-link{background:var(--brand);color:var(--surface);padding:10px 20px;border-radius:8px;font-weight:700;font-size:13.5px;text-decoration:none}
 .faq-list{max-width:740px;margin:0 auto}
 .faq-item{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;margin-bottom:.75rem;overflow:hidden}
-.faq-q{width:100%;background:none;border:none;text-align:left;padding:16px 20px;font-family:inherit;font-size:15px;font-weight:700;color:var(--slate-900);cursor:pointer;display:flex;justify-content:space-between;align-items:center}
-.faq-q:hover{background:var(--slate-50)}
-.faq-q[aria-expanded="true"]{background:var(--brand);color:var(--surface)}
-.faq-arrow{transition:transform .3s}
-.faq-q[aria-expanded="true"] .faq-arrow{transform:rotate(180deg)}
-.faq-a{padding:0 20px;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s;font-size:14.5px;color:var(--slate-700);line-height:1.75}
-.faq-a.open{max-height:300px;padding:14px 20px 18px}
+
 .final-cta{background:linear-gradient(135deg,var(--brand),var(--brand-mid));color:var(--surface);padding:56px 0;text-align:center}
 .final-cta h2{font-size:1.8rem;font-weight:800;margin-bottom:10px}
 .final-cta p{font-size:15px;color:color-mix(in srgb, var(--surface) 85%, transparent)}

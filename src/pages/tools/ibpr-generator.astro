@@ -1,5 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Faq from '../../components/Faq.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
 
 const pageTitle = "Generator IBPR & HIRADC K3 2026: Identifikasi Bahaya & Penilaian Risiko";
 const metaDesc = "Buat tabel dokumen IBPR (Identifikasi Bahaya dan Penilaian Risiko) & HIRADC lengkap standar SMK3 PP 50/2012 dan ISO 45001:2018. Tersedia template manufaktur, konstruksi, dan tambang.";
@@ -56,6 +58,17 @@ const schemas = [
   ]
 },
   ];
+
+const toolFaqs = [
+  {
+    "q": "Apakah auditor eksternal SMK3 mewajibkan seluruh bahaya memiliki risiko sisa Rendah (Low)?",
+    "a": "Tidak harus selalu Rendah (Low). Namun seluruh risiko awal berkategori Ekstrem (Extreme) dan Tinggi (High) WAJIB diturunkan hingga mencapai kategori Sedang (Medium) atau Rendah (Low) yang memenuhi kriteria ALARP (As Low As Reasonably Practicable). Jika risiko sisa masih Tinggi, pekerjaan tersebut belum layak dijalankan tanpa izin khusus Direksi."
+  },
+  {
+    "q": "Apa perbedaan mendasar antara IBPR dan JSA?",
+    "a": "IBPR bersifat makro di tingkat fasilitas dan mencakup seluruh siklus operasional bisnis perusahaan secara periodik (tahunan). Sedangkan JSA bersifat mikro, operasional, dan dibuat spesifik untuk satu jenis pekerjaan tertentu sebelum pekerjaan fisik dilakukan di lapangan, biasanya menjadi lampiran wajib dokumen Surat Izin Kerja Aman (SIKA / PTW)."
+  }
+];
 ---
 
 <Layout
@@ -180,7 +193,7 @@ const schemas = [
         Identifikasi Bahaya, Penilaian Risiko, dan Pengendalian Risiko (IBPR) merupakan pilar utama penerapan <strong>Sistem Manajemen K3 (SMK3) berdasarkan Peraturan Pemerintah No. 50 Tahun 2012</strong> Elemen 2 tentang Perencanaan K3, serta Klausul 6.1.2 <strong>ISO 45001:2018</strong>. Dokumen ini menjadi rujukan legal apakah suatu tempat kerja telah melakukan mitigasi proaktif sebelum terjadi kecelakaan.
       </p>
 
-      <h3 class="sp-heading-lexend-md">Klasifikasi Kondisi Operasional (Rutin, Non-Rutin, Emergency)</h3>
+      <SectionTitle level={3} size="md">Klasifikasi Kondisi Operasional (Rutin, Non-Rutin, Emergency)</SectionTitle>
       <p class="editorial-p">
         Saat melakukan asesmen bahaya, tim K3 dilarang hanya melihat proses normal. Wajib mengklasifikasikan ke dalam 3 kondisi:
       </p>
@@ -191,30 +204,8 @@ const schemas = [
       </ul>
 
       <!-- FAQ ACCORDION -->
-      <h3 class="sp-heading-lexend-lg">Tanya Jawab Seputar IBPR / HIRADC (FAQ)</h3>
-      <div class="faq-box">
-        
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span>Apakah auditor eksternal SMK3 mewajibkan seluruh bahaya memiliki risiko sisa Rendah (Low)?</span>
-            <span class="faq-icon">▼</span>
-          </button>
-          <div class="faq-a">
-            Tidak harus selalu Rendah (Low). Namun seluruh risiko awal berkategori Ekstrem (Extreme) dan Tinggi (High) WAJIB diturunkan hingga mencapai kategori Sedang (Medium) atau Rendah (Low) yang memenuhi kriteria ALARP (As Low As Reasonably Practicable). Jika risiko sisa masih Tinggi, pekerjaan tersebut belum layak dijalankan tanpa izin khusus Direksi.
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span>Apa perbedaan mendasar antara IBPR dan JSA?</span>
-            <span class="faq-icon">▼</span>
-          </button>
-          <div class="faq-a">
-            IBPR bersifat makro di tingkat fasilitas dan mencakup seluruh siklus operasional bisnis perusahaan secara periodik (tahunan). Sedangkan JSA bersifat mikro, operasional, dan dibuat spesifik untuk satu jenis pekerjaan tertentu sebelum pekerjaan fisik dilakukan di lapangan, biasanya menjadi lampiran wajib dokumen Surat Izin Kerja Aman (SIKA / PTW).
-          </div>
-        </div>
-
-      </div>
+      <SectionTitle level={3} size="lg">Tanya Jawab Seputar IBPR / HIRADC (FAQ)</SectionTitle>
+      <Faq items={toolFaqs} variant="tool" />
 
     </div>
 

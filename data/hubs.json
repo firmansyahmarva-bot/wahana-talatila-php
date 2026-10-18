@@ -65,7 +65,7 @@
         },
         "programs": [
             {
-                "slug": "pelatihan-higiene-industri-muda-himu-sertifikasi-bnsp",
+                "slug": "pelatihan-ahli-higiene-industri-muda-sertifikasi-bnsp",
                 "name": "Pelatihan Higiene Industri Muda (HIMU) BNSP",
                 "cert": "Sertifikasi BNSP",
                 "mode": "Blended / Uji Kompetensi",
@@ -74,7 +74,7 @@
                 "target_peserta": "HSE officer, industrial hygienist junior, teknisi laboratorium lingkungan, staf medis perusahaan"
             },
             {
-                "slug": "pelatihan-higiene-industri-madya-hima-sertifikasi-bnsp",
+                "slug": "pelatihan-ahli-higiene-industri-madya-sertifikasi-bnsp",
                 "name": "Pelatihan Higiene Industri Madya (HIMA) BNSP",
                 "cert": "Sertifikasi BNSP",
                 "mode": "Blended / Uji Kompetensi",
@@ -212,7 +212,7 @@
         },
         "programs": [
             {
-                "slug": "pelatihan-k3-juru-las-welder-kelas-1-kemnaker-ri",
+                "slug": "pelatihan-k3-operator-welder-kelas-1-sertifikasi-kemnaker-ri",
                 "name": "Pelatihan Juru Las Kelas 1 Kemnaker RI (Posisi 6G Pipa)",
                 "cert": "Kemnaker RI",
                 "mode": "Tatap Muka & Praktik Bengkel Las",
@@ -221,7 +221,7 @@
                 "target_peserta": "Welder industri migas, tukang las boiler/pipa panas, teknisi fabrikasi galangan kapal"
             },
             {
-                "slug": "pelatihan-k3-juru-las-welder-kelas-2-kemnaker-ri",
+                "slug": "pelatihan-k3-operator-welder-kelas-1-sertifikasi-kemnaker-ri",
                 "name": "Pelatihan Juru Las Kelas 2 Kemnaker RI (Posisi 3G/4G Plat)",
                 "cert": "Kemnaker RI",
                 "mode": "Tatap Muka & Praktik Bengkel Las",
@@ -369,7 +369,7 @@
         },
         "programs": [
             {
-                "slug": "pelatihan-tkbt-tingkat-2-kemnaker-ri",
+                "slug": "pelatihan-tkbt-ii-sertifikasi-kemnaker-ri",
                 "name": "Pelatihan Tenaga Kerja Bangunan Tinggi (TKBT) Kemnaker RI",
                 "cert": "Kemnaker RI",
                 "mode": "Tatap Muka & Praktik Ketinggian",
@@ -378,7 +378,7 @@
                 "target_peserta": "Teknisi tower BTS, pemasang panel surya atap, pekerja scaffolding, maintenance gedung, safety inspector"
             },
             {
-                "slug": "pelatihan-tkpk-tingkat-1-kemnaker-ri",
+                "slug": "pelatihan-tkbt-ii-sertifikasi-kemnaker-ri",
                 "name": "Pelatihan Tenaga Kerja pada Ketinggian (TKPK) Rope Access Kemnaker RI",
                 "cert": "Kemnaker RI",
                 "mode": "Tatap Muka & Tower Rope Access",
@@ -387,7 +387,7 @@
                 "target_peserta": "Pekerja gondola gedung, window cleaner fasad, teknisi rig migas, tim SAR vertikal, juru rawat silo"
             },
             {
-                "slug": "supervisor-k3-konstruksi",
+                "slug": "ahli-k3-konstruksi-sertifikasi-bnsp",
                 "name": "Pelatihan Supervisor K3 Konstruksi & Pekerjaan Ketinggian BNSP",
                 "cert": "Sertifikasi BNSP",
                 "mode": "Blended / Online",
@@ -697,7 +697,7 @@
                 "target_peserta": "Site engineer, HSE coordinator, pelaksana proyek, konsultan pengawas sipil, calon tenaga ahli tender"
             },
             {
-                "slug": "supervisor-k3-konstruksi",
+                "slug": "ahli-k3-konstruksi-sertifikasi-bnsp",
                 "name": "Pelatihan Supervisor K3 Konstruksi Sertifikasi BNSP",
                 "cert": "Sertifikasi BNSP",
                 "mode": "Tatap Muka & Online",
@@ -1795,7 +1795,7 @@
         },
         "programs": [
             {
-                "slug": "pelatihan-pengawas-operasional-pratama-pop-pertambangan-bnsp",
+                "slug": "pelatihan-pop-pertambangan-sertifikasi-bnsp-online",
                 "name": "Pelatihan Pengawas Operasional Pratama (POP) Tambang BNSP",
                 "cert": "Sertifikasi BNSP",
                 "mode": "Blended / Uji Kompetensi",
@@ -1804,7 +1804,7 @@
                 "target_peserta": "Foreman pit, supervisor tambang, pengawas hauling road, safety officer kontraktor tambang batubara/mineral"
             },
             {
-                "slug": "operator-alat-berat",
+                "slug": "operator-alat-berat-yogyakarta",
                 "name": "Pelatihan & SIO Operator Alat Berat Tambang Kemnaker RI",
                 "cert": "Kemnaker RI",
                 "mode": "Tatap Muka & Praktik Unit",
@@ -1960,7 +1960,7 @@
                 "target_peserta": "Operator crane pabrik, teknisi hoist overhead, operator truck crane proyek konstruksi"
             },
             {
-                "slug": "operator-rigger",
+                "slug": "pelatihan-rigger-juru-ikat-beban",
                 "name": "Pelatihan Juru Ikat Beban (Rigger) Kemnaker RI",
                 "cert": "Kemnaker RI",
                 "mode": "Tatap Muka & Praktik Rigging",
@@ -2092,7 +2092,7 @@
         },
         "programs": [
             {
-                "slug": "pelatihan-k3-operator-pesawat-uap-boiler-kelas-1-kemnaker-ri",
+                "slug": "pelatihan-k3-operator-boiler-kelas-2-sertifikasi-kemnaker-ri",
                 "name": "Pelatihan Operator Boiler Kelas 1 Kemnaker RI",
                 "cert": "Kemnaker RI",
                 "mode": "Tatap Muka & Praktik Boiler",
@@ -2101,7 +2101,7 @@
                 "target_peserta": "Lead operator boiler pabrik sawit, supervisor utilitas pembangkit uap, teknisi ketel uap industri"
             },
             {
-                "slug": "pelatihan-k3-operator-pesawat-uap-boiler-kelas-2-kemnaker-ri",
+                "slug": "pelatihan-k3-operator-boiler-kelas-2-sertifikasi-kemnaker-ri",
                 "name": "Pelatihan Operator Boiler Kelas 2 Kemnaker RI",
                 "cert": "Kemnaker RI",
                 "mode": "Tatap Muka & Praktik Boiler",
@@ -2233,7 +2233,7 @@
         },
         "programs": [
             {
-                "slug": "pelatihan-higiene-industri-muda-himu-sertifikasi-bnsp",
+                "slug": "pelatihan-ahli-higiene-industri-muda-sertifikasi-bnsp",
                 "name": "Pelatihan Evaluasi Ergonomi Lingkungan Kerja BNSP",
                 "cert": "Sertifikasi BNSP",
                 "mode": "Blended / Online",
@@ -2502,7 +2502,7 @@
         },
         "programs": [
             {
-                "slug": "operator-alat-berat",
+                "slug": "operator-alat-berat-yogyakarta",
                 "name": "Pelatihan Keselamatan Operator Alat Berat & Dump Truck",
                 "cert": "Kemnaker RI",
                 "mode": "Tatap Muka & Praktik Alat",
@@ -3222,7 +3222,7 @@
         },
         "programs": [
             {
-                "slug": "pelatihan-ahli-k3-umum-sertifikasi-bnsp",
+                "slug": "pelatihan-ahli-k3-umum-sertifikasi-bnsp-online",
                 "name": "Pelatihan & Uji Kompetensi Ahli K3 Umum BNSP",
                 "cert": "Sertifikasi BNSP",
                 "mode": "Blended / Uji Kompetensi",

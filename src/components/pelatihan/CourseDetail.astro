@@ -1,0 +1,885 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { formatPrice, modeLabel, waUrl } from '../../lib/images';
+import { getTrainingFaqs } from '../../lib/trainingFaqs';
+import WaButton from '../WaButton.astro';
+import TrainingCard from '../TrainingCard.astro';
+import Breadcrumb from '../Breadcrumb.astro';
+import allBatches from '../../../data/training_batches.json';
+
+interface Props {
+  data: any;
+}
+
+const { data } = Astro.props;
+
+const HUB_MAP: Record<string, { url: string; name: string }> = {
+  k3: { url: '/keselamatan-kerja/', name: 'Keselamatan Kerja (K3)' },
+  'system-management': { url: '/pelatihan-iso/', name: 'Pelatihan ISO & QHSE' },
+  lingkungan: { url: '/k3-lingkungan/', name: 'K3 Lingkungan' },
+  mining: { url: '/k3-pertambangan/', name: 'K3 Pertambangan' },
+};
+
+const PILLAR_PROGRAMS = [
+  {
+    slug: 'ak3-bnsp',
+    url: '/pelatihan/ak3-bnsp/',
+    name: 'Sertifikasi Ahli K3 BNSP',
+    desc: 'Standarisasi kompetensi personil K3 profesional bersertifikasi Badan Nasional Sertifikasi Profesi berbasis SKKNI.',
+    badge: 'BNSP',
+  },
+  {
+    slug: 'pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri',
+    url: '/pelatihan/pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri/',
+    name: 'Pelatihan K3 Operator Forklift Kelas 2 Kemnaker RI',
+    desc: 'Lisensi K3 resmi (SIO) operator forklift untuk operasional pergudangan, logistik, dan industri manufaktur.',
+    badge: 'Kemnaker RI',
+  },
+  {
+    slug: 'pelatihan-teknisi-bejana-tekan-sertifikasi-kemnaker-ri',
+    url: '/pelatihan/pelatihan-teknisi-bejana-tekan-sertifikasi-kemnaker-ri/',
+    name: 'Pelatihan Teknisi Bejana Tekan Kemnaker RI',
+    desc: 'Kualifikasi teknisi inspeksi dan pengoperasian bejana tekan serta tangki timbun bertekanan tinggi.',
+    badge: 'Kemnaker RI',
+  },
+  {
+    slug: 'pelatihan-dan-sertifikasi-pelaksanaan-reklamasi-pada-kegiatan-petambangan-mineral-dan-batubara-sertifikasi-bnsp',
+    url: '/pelatihan/pelatihan-dan-sertifikasi-pelaksanaan-reklamasi-pada-kegiatan-petambangan-mineral-dan-batubara-sertifikasi-bnsp/',
+    name: 'Pelatihan Reklamasi Pertambangan Minerba BNSP',
+    desc: 'Kompetensi teknis perencanaan dan pelaksanaan reklamasi lingkungan pada area tambang mineral dan batubara.',
+    badge: 'BNSP',
+  },
+  {
+    slug: 'pelatihan-operator-pesawat-tenaga-produksi-ptp',
+    url: '/pelatihan/pelatihan-operator-pesawat-tenaga-produksi-ptp/',
+    name: 'Pelatihan Operator Pesawat Tenaga & Produksi (PTP)',
+    desc: 'Lisensi K3 operator mesin perkakas, mesin produksi, dan penggerak mula sesuai Permenaker No. 38/2016.',
+    badge: 'Kemnaker RI',
+  },
+  {
+    slug: 'pelatihan-dan-sertifikasi-fillet-plate-welder-sertifikasi-bnsp',
+    url: '/pelatihan/pelatihan-dan-sertifikasi-fillet-plate-welder-sertifikasi-bnsp/',
+    name: 'Pelatihan & Sertifikasi Fillet Plate Welder BNSP',
+    desc: 'Uji kompetensi juru las sambungan fillet pelat industri konstruksi, fabrikasi baja, dan manufaktur.',
+    badge: 'BNSP',
+  },
+  {
+    slug: 'pelatihan-damkar-paralel-kelas-dcba-sertifikasi-kemnaker-ri',
+    url: '/pelatihan/pelatihan-damkar-paralel-kelas-dcba-sertifikasi-kemnaker-ri/',
+    name: 'Pelatihan Damkar Paralel Kelas D, C, B, A Kemnaker RI',
+    desc: 'Sertifikasi regu penanggulangan kebakaran di tempat kerja berjenjang sesuai standar Kepmenaker 186/1999.',
+    badge: 'Kemnaker RI',
+  },
+  {
+    slug: 'tkbt-ii-surabaya',
+    url: '/pelatihan/tkbt-ii-surabaya/',
+    name: 'Pelatihan Bekerja di Ketinggian (TKBT Tingkat II)',
+    desc: 'Lisensi K3 teknisi keselamatan bekerja pada ketinggian, struktur bangunan tinggi, dan scaffolding.',
+    badge: 'Kemnaker RI',
+  },
+];
+
+const catSlug = data.category_slug || 'k3';
+const catName = data.category_name || HUB_MAP[catSlug]?.name || 'Pelatihan K3';
+const hubLink = HUB_MAP[catSlug]?.url || '/pelatihan/';
+const pageTitle = data.meta_title || `${data.name} — Wahana Totalita`;
+const pageDesc = data.meta_desc || data.description || data.name;
+const canonicalUrl = `https://wahanatotalita.com/pelatihan/${data.slug}/`;
+const htmlContent = data.long_content || '';
+
+// Parse curriculum items
+let curriculumList: string[] = [];
+if (Array.isArray(data.curriculum_data) && data.curriculum_data.length > 0) {
+  curriculumList = data.curriculum_data;
+} else if (data.curriculum) {
+  try {
+    const parsed = typeof data.curriculum === 'string' ? JSON.parse(data.curriculum) : data.curriculum;
+    if (Array.isArray(parsed)) curriculumList = parsed;
+  } catch (e) {
+    curriculumList = [];
+  }
+}
+
+// Get course FAQs
+const faqs = getTrainingFaqs(data.name, data.slug, data.price);
+
+// Filter complementary pillar programs
+const displayPillars = PILLAR_PROGRAMS.filter((p) => p.slug !== data.slug).slice(0, 4);
+
+// Fetch related trainings and articles
+const allTrainings = await getCollection('trainings');
+const relatedTrainings = allTrainings
+  .filter((t) => t.data.is_active !== 0 && t.data.slug !== data.slug && (t.data.category_slug === catSlug || t.data.category_id === data.category_id))
+  .slice(0, 4);
+
+const allArticles = await getCollection('articles');
+let relatedArticles = allArticles
+  .filter((a) => a.data.category?.toLowerCase() === catName.toLowerCase() || a.data.category?.toLowerCase() === 'k3')
+  .slice(0, 3);
+if (relatedArticles.length < 2) {
+  relatedArticles = allArticles.slice(0, 3);
+}
+
+// Batches for this course: start_date >= today, sorted ascending, max 3
+const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Jakarta' }).format(new Date());
+const courseBatches = (allBatches as any[])
+  .filter(
+    (b: any) =>
+      (b.course_id === data.id || (b.course_id && String(b.course_id) === String(data.id))) &&
+      b.is_public !== 0 &&
+      b.start_date &&
+      b.start_date >= today
+  )
+  .sort((a: any, b: any) => (a.start_date || '').localeCompare(b.start_date || ''))
+  .slice(0, 3);
+
+function formatDateIndo(dateStr?: string | null): string {
+  if (!dateStr || dateStr === '0000-00-00') return '';
+  const d = new Date(dateStr + 'T00:00:00');
+  if (isNaN(d.getTime())) return dateStr;
+  const months = [
+    'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+    'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+  ];
+  return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+}
+
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Course',
+    name: data.name,
+    description: pageDesc,
+    provider: {
+      '@type': 'Organization',
+      name: 'PT Wahana Totalita Konsultan',
+      url: 'https://wahanatotalita.com',
+    },
+    ...(typeof data.price === 'number' && data.price > 0 ? {
+      offers: {
+        '@type': 'Offer',
+        price: String(data.price),
+        priceCurrency: 'IDR',
+        category: data.certification || 'Sertifikasi K3',
+      },
+    } : {}),
+    ...(courseBatches.length > 0 ? {
+      hasCourseInstance: courseBatches.map((b: any) => {
+        const mode = b.mode === 'online' ? 'online' : b.mode === 'offline' ? 'onsite' : b.mode === 'hybrid' ? 'blended' : 'online';
+        const instance: Record<string, any> = {
+          '@type': 'CourseInstance',
+          name: `${data.name} - Batch ${formatDateIndo(b.start_date)}`,
+          startDate: b.start_date,
+          endDate: b.end_date || b.start_date,
+          courseMode: mode,
+        };
+        if ((mode === 'onsite' || mode === 'blended') && b.venue) {
+          instance.location = { '@type': 'Place', name: b.venue };
+        }
+        return instance;
+      }),
+    } : {}),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Beranda', item: 'https://wahanatotalita.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Pelatihan', item: 'https://wahanatotalita.com/pelatihan/' },
+      { '@type': 'ListItem', position: 3, name: catName, item: `https://wahanatotalita.com${hubLink}` },
+      { '@type': 'ListItem', position: 4, name: data.name, item: canonicalUrl },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: f.a,
+      },
+    })),
+  },
+];
+
+const certRaw = (data.certification || 'Sertifikasi Resmi').replace(/^sertifikasi\s+/i, '');
+const durationText = data.duration_days ? `${data.duration_days} Hari Pelatihan` : null;
+const priceFormatted = formatPrice(data.price);
+const modeText = modeLabel(data.mode);
+const defaultWaMsg = data.wa_text || `Halo Wahana Totalita, saya ingin konsultasi pendaftaran program: ${data.name}`;
+const inhouseWaMsg = `Halo Wahana Totalita, kami dari perusahaan ingin meminta penawaran in-house training resmi untuk topik: ${data.name}`;
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDesc}
+  canonical={canonicalUrl}
+  bodyClass="detail-page pd-page"
+  bodyAttrs={{ 'data-training-slug': data.slug }}
+  pageCss={['/assets/css/pelatihan-detail.css', '/assets/css/page/training-schedule-feed.css']}
+  scripts={['/assets/js/training-schedule-feed.js']}
+  schemas={schemas}
+>
+  <div class="training-detail-page">
+    <!-- BREADCRUMB -->
+    <Breadcrumb
+      variant="course"
+      items={[
+        { name: 'Beranda', href: '/' },
+        { name: 'Pelatihan', href: '/pelatihan/' },
+        { name: catName, href: hubLink },
+        { name: data.name },
+      ]}
+    />
+
+
+    <!-- DETAIL HERO -->
+    <section class="pd-hero">
+      <div class="container pd-hero-grid">
+        <div class="pd-hero-copy">
+          <div class="pd-eyebrow">
+            <span class="pd-eyebrow-pill">PJK3 RESMI KEMNAKER RI</span>
+            <span class="pd-eyebrow-dot" aria-hidden="true">&middot;</span>
+            <span class="pd-eyebrow-cert">Sertifikasi {certRaw}</span>
+            <span class="pd-eyebrow-dot" aria-hidden="true">&middot;</span>
+            <span class="pd-eyebrow-cat">{catName}</span>
+          </div>
+          <h1>{data.name}</h1>
+          <p class="pd-hero-lede">
+            {data.description ? (data.description.length > 220 ? data.description.slice(0, 220) + '…' : data.description) : `Sertifikasi resmi ${data.certification || 'Kemnaker / BNSP'}, diselenggarakan oleh Wahana Totalita Konsultan secara komprehensif.`}
+          </p>
+          <div class="pd-hero-badges">
+            {durationText && (
+              <span class="pd-hero-badge"><span class="badge-icon">⏱️</span> {durationText}</span>
+            )}
+            <span class="pd-hero-badge"><span class="badge-icon">🌐</span> {modeText}</span>
+            <span class="pd-hero-badge pd-badge-inhouse"><span class="badge-icon">🏢</span> Tersedia In-House Training</span>
+            <span class="pd-hero-badge pd-badge-accredited"><span class="badge-icon">✓</span> Terakreditasi Resmi</span>
+          </div>
+
+          <!-- ONE PRIMARY CTA IN HERO + TEXT LINKS UNDER IT -->
+          <div class="pd-hero-cta-wrap">
+            <WaButton
+              message={defaultWaMsg}
+              label="Daftar via WhatsApp"
+              variant="primary"
+              size="lg"
+              class="pd-hero-cta-btn"
+            />
+            <div class="pd-hero-sublinks">
+              <a href={waUrl(inhouseWaMsg)} class="pd-hero-sublink" target="_blank" rel="noopener">
+                🏢 Butuh penawaran in-house training perusahaan?
+              </a>
+              <span class="pd-hero-sublink-dot" aria-hidden="true">&middot;</span>
+              <a href={waUrl(`Halo Wahana Totalita, saya ingin informasi jadwal batch terdekat untuk ${data.name}`)} class="pd-hero-sublink" target="_blank" rel="noopener">
+                📅 Tanya jadwal &amp; info lebih &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- HERO QUICK CARD -->
+        <div class="pd-hero-card-wrap">
+          <div class="pd-hero-card">
+            <div class="pd-card-header">
+              <span class="pd-card-badge-top">🛡️ Terakreditasi Resmi</span>
+              <span class="pd-card-cert">{data.certification || 'Sertifikasi Resmi'}</span>
+            </div>
+            <div class="pd-card-price-block">
+              <span class="pd-card-price-label">Biaya Investasi Mulai</span>
+              <div class="pd-card-price-val">
+                {priceFormatted}
+                <span class="pd-card-price-sub">/ orang</span>
+              </div>
+            </div>
+            <div class="pd-card-inhouse-tag">
+              <span class="tag-icon">🏢</span>
+              <span>Tersedia Penawaran Khusus In-House &amp; Grup Perusahaan</span>
+            </div>
+            <ul class="pd-card-perks">
+              <li>
+                <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Sertifikat Resmi &amp; SKP Kemnaker / BNSP
+              </li>
+              <li>
+                <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Modul Materi &amp; Bimbingan Instruktur Ahli
+              </li>
+              <li>
+                <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Pelatihan Tatap Muka, Online, &amp; In-House
+              </li>
+            </ul>
+            <div class="pd-card-footer">
+              <span class="pd-card-response">⚡ Konsultasi Gratis &amp; Respon Cepat via WhatsApp</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BATCH DATES BLOCK (UNDER HERO) -->
+    <section class="tc-live-schedules pd-schedule-section">
+      <div class="tc-live-in container">
+        <span class="tc-kicker">Jadwal Batch Terdekat</span>
+        <div class="tc-live-head">
+          <div>
+            <h2>Jadwal Batch Terdekat</h2>
+            <p>Jadwal pembinaan reguler dan konfirmasi kuota kelas terdekat.</p>
+          </div>
+          <a href="/jadwal/">Semua jadwal &rarr;</a>
+        </div>
+
+        <div class="tc-live-scroll" id="live-schedule-grid">
+          {courseBatches.length > 0 &&
+            courseBatches.map((b: any, idx: number) => {
+              const startDateStr = formatDateIndo(b.start_date);
+              const place = b.mode === 'online' ? 'Online via Zoom' : (b.venue || 'Yogyakarta / Tatap Muka');
+              const batchPrice = b.price > 0 ? formatPrice(b.price) : priceFormatted;
+              return (
+                <a class="tc-schedule-card" href="/jadwal/" data-start={b.start_date}>
+                  <span>{idx === 0 ? 'Batch terdekat' : 'Pendaftaran dibuka'}</span>
+                  <b>{startDateStr || b.batch_name}</b>
+                  <small>{place} · {String(b.mode || 'offline').toUpperCase()}</small>
+                  <strong>{batchPrice}</strong>
+                  <em>Lihat detail &amp; daftar &rarr;</em>
+                </a>
+              );
+            })
+          }
+          <div class={`pd-schedule-fallback ${courseBatches.length > 0 ? 'is-hidden' : ''}`}>
+            <p class="pd-schedule-fallback-text">Jadwal batch reguler berikutnya sedang disiapkan atau disesuaikan dengan permintaan in-house perusahaan.</p>
+            <WaButton
+              message={`Halo Wahana Totalita, saya ingin tanya jadwal batch terdekat untuk program: ${data.name}`}
+              label="Tanya jadwal via WhatsApp"
+              variant="secondary"
+              size="md"
+            />
+          </div>
+        </div>
+        <script is:inline>
+          (function() {
+            var today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Jakarta' }).format(new Date());
+            var grid = document.getElementById('live-schedule-grid');
+            if (!grid) return;
+            var cards = grid.querySelectorAll('.tc-schedule-card[data-start]');
+            var visible = 0;
+            cards.forEach(function(c) {
+              var s = c.getAttribute('data-start');
+              if (s && s < today) {
+                c.remove();
+              } else {
+                visible++;
+              }
+            });
+            var fb = grid.querySelector('.pd-schedule-fallback');
+            if (visible === 0 && fb) {
+              fb.classList.remove('is-hidden');
+            }
+          })();
+        </script>
+      </div>
+    </section>
+
+    <!-- DETAIL BODY -->
+    <section class="pd-body">
+      <div class="container pd-layout">
+        <div class="pd-main">
+          
+          <!-- PROGRAM DESCRIPTION -->
+          {data.description && (
+            <div class="pd-section">
+              <p class="pd-section-eyebrow">Program</p>
+              <h2>Deskripsi Program</h2>
+              <div class="pd-desc">
+                {data.description.split('\n\n').map((para: string) => (
+                  <p style="margin-bottom: 1rem; line-height: 1.7;">{para}</p>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <!-- RICH CONTENT / LONG FORM -->
+          {htmlContent && (
+            <div class="pd-section pd-rich" set:html={htmlContent} />
+          )}
+
+          <!-- CURRICULUM -->
+          {curriculumList.length > 0 && (
+            <div class="pd-section">
+              <p class="pd-section-eyebrow">Kurikulum</p>
+              <h2>Materi Pelatihan</h2>
+              <ul class="pd-curriculum">
+                {curriculumList.map((item, idx) => (
+                  <li>
+                    <span class="pd-num">{String(idx + 1).padStart(2, '0')}</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          <!-- PROOF BLOCK (DATA FROM REPO: ACCREDITATION, CLIENT LIST, INSTRUCTORS) -->
+          <div class="pd-section pd-proof-block">
+            <p class="pd-section-eyebrow">Bukti &amp; Rekam Jejak</p>
+            <h2>Legalitas Resmi &amp; Dipercaya Industri Nasional</h2>
+            <div class="pd-proof-grid">
+              <div class="pd-proof-card">
+                <div class="pd-proof-icon">🏛️</div>
+                <div class="pd-proof-info">
+                  <h4>PJK3 Resmi Kemnaker RI</h4>
+                  <p>SKP No. Kep. 5/143/AS.02.04/X/2021 dan lisensi LSP terakreditasi BNSP dengan standar mutu nasional.</p>
+                </div>
+              </div>
+              <div class="pd-proof-card">
+                <div class="pd-proof-icon">👨‍🏫</div>
+                <div class="pd-proof-info">
+                  <h4>Instruktur Praktisi Ahli</h4>
+                  <p>Didukung instruktur dari Pusdiklat Migas Cepu, akademisi universitas terkemuka, dan praktisi industri senior.</p>
+                </div>
+              </div>
+              <div class="pd-proof-card">
+                <div class="pd-proof-icon">🤝</div>
+                <div class="pd-proof-info">
+                  <h4>Dipercaya 70+ Korporasi</h4>
+                  <p>Mitra pembinaan K3 Pertamina, Freeport Indonesia, Adaro Energy, Pupuk Kaltim, PLN, Bank Mandiri, dan Vale.</p>
+                </div>
+              </div>
+            </div>
+            <div class="pd-proof-client-strip">
+              <span class="pd-proof-client-tag">Alumni &amp; Klien:</span>
+              <span class="pd-proof-client-item">PT Pertamina (Persero)</span>
+              <span class="pd-proof-client-item">Freeport Indonesia</span>
+              <span class="pd-proof-client-item">PT Adaro Energy</span>
+              <span class="pd-proof-client-item">PT Pupuk Kaltim</span>
+              <span class="pd-proof-client-item">PT PLN (Persero)</span>
+              <span class="pd-proof-client-item">PT Bio Farma</span>
+            </div>
+          </div>
+
+          <!-- COMPLEMENTARY PILLAR INTERLINKS -->
+          {displayPillars.length > 0 && (
+            <div class="pd-section pd-pillar-recommendations">
+              <p class="pd-section-eyebrow">Pengembangan Kompetensi</p>
+              <h2>Rekomendasi Sertifikasi &amp; Lisensi K3 Terkait</h2>
+              <p class="pd-pillar-intro">
+                Untuk melengkapi kualifikasi kerja di industri dan memenuhi kepatuhan regulasi keselamatan kerja, tenaga kerja dan pengawas juga disarankan melengkapi portofolio sertifikasi kompetensi terkait berikut:
+              </p>
+              <div class="pd-pillar-grid">
+                {displayPillars.map((p) => (
+                  <article class="pd-pillar-card">
+                    <span class="pd-pillar-badge">{p.badge}</span>
+                    <h3><a href={p.url}>{p.name}</a></h3>
+                    <p>{p.desc}</p>
+                    <a href={p.url} class="pd-pillar-link">Lihat Silabus &amp; Jadwal &rarr;</a>
+                  </article>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <!-- SPECIFICATIONS TABLE -->
+          <div class="pd-section">
+            <p class="pd-section-eyebrow">Ringkasan</p>
+            <h2>Informasi Pelatihan</h2>
+            <table class="pd-spec">
+              <tbody>
+                <tr><th>Kategori</th><td>{catName}</td></tr>
+                <tr><th>Mode Pelaksanaan</th><td>{modeText}</td></tr>
+                <tr><th>Sertifikasi</th><td>{data.certification || 'Sertifikasi Resmi'}</td></tr>
+                {data.duration_days && (
+                  <tr><th>Durasi Pembinaan</th><td>{data.duration_days} Hari</td></tr>
+                )}
+                <tr><th>Investasi Mulai</th><td>{priceFormatted} / orang</td></tr>
+                <tr><th>Pendaftaran &amp; Konsultasi</th><td>Via WhatsApp (Online &amp; In-House)</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- COURSE FAQS -->
+          {faqs.length > 0 && (
+            <div class="pd-section" style="max-width:none">
+              <p class="pd-section-eyebrow">FAQ</p>
+              <h2>Pertanyaan Seputar {data.name}</h2>
+              <div class="pd-faq-list">
+                {faqs.map((f) => (
+                  <div class="pd-faq-item">
+                    <button type="button" class="pd-faq-q" aria-expanded="false">
+                      <span>{f.q}</span>
+                      <svg class="pd-faq-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <polyline points="6 9 12 15 18 9"/>
+                      </svg>
+                    </button>
+                    <div class="pd-faq-a"><p>{f.a}</p></div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <!-- RELATED ARTICLES -->
+          {relatedArticles.length > 0 && (
+            <div class="pd-section" style="max-width:none">
+              <p class="pd-section-eyebrow">Baca Juga</p>
+              <h2>Artikel Seputar Topik Ini</h2>
+              <div class="pd-related-grid">
+                {relatedArticles.map((ra) => {
+                  const snippet = (ra.data.meta_desc || ra.data.title || '').slice(0, 100);
+                  return (
+                    <div class="pd-related-card">
+                      <h3><a href={`/artikel/${ra.data.slug}/`}>{ra.data.title}</a></h3>
+                      <p>{snippet}...</p>
+                      <a href={`/artikel/${ra.data.slug}/`} class="pd-related-link">Baca Artikel &rarr;</a>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          <!-- BOTTOM CTA BOX (KEPT, MIDDLE ONE REMOVED) -->
+          <div class="pd-cta-box">
+            <div class="pd-cta-box-copy">
+              <h3>Tertarik dengan program ini?</h3>
+              <p>Hubungi tim konsultan kami via WhatsApp untuk informasi jadwal, syarat administrasi peserta, dan penawaran rombongan korporasi.</p>
+            </div>
+            <WaButton
+              message={defaultWaMsg}
+              label="Daftar via WhatsApp"
+              variant="primary"
+              size="md"
+            />
+          </div>
+
+        </div><!-- /.pd-main -->
+
+        <!-- STICKY REGISTRATION SIDEBAR (DESKTOP) -->
+        <aside class="pd-sidebar">
+          <div class="pd-ticket">
+            <div class="pd-ticket-header">
+              <span class="pd-ticket-header-badge">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13" aria-hidden="true">
+                  <path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5zm-2 16l-4-4 1.41-1.41L10 15.17l6.59-6.59L18 10l-8 8z"/>
+                </svg>
+                Sertifikasi Resmi {certRaw}
+              </span>
+            </div>
+
+            <div class="pd-ticket-inner">
+              <div class="pd-ticket-price-box">
+                <span class="pd-ticket-label">Investasi Pelatihan</span>
+                <div class="pd-ticket-price-row">
+                  <span class="pd-ticket-price">{priceFormatted}</span>
+                  <span class="pd-ticket-unit">/ orang</span>
+                </div>
+              </div>
+
+              <div class="pd-ticket-specs">
+                {data.duration_days && (
+                  <div class="pd-ticket-row">
+                    <span class="pd-ticket-k">Durasi</span>
+                    <span class="pd-ticket-v">{data.duration_days} Hari</span>
+                  </div>
+                )}
+                <div class="pd-ticket-row">
+                  <span class="pd-ticket-k">Jadwal</span>
+                  <span class="pd-ticket-v">Reguler Bulanan &amp; In-House</span>
+                </div>
+                <div class="pd-ticket-row">
+                  <span class="pd-ticket-k">Sertifikat</span>
+                  <span class="pd-ticket-v">{data.certification || 'Sertifikasi Resmi'}</span>
+                </div>
+                <div class="pd-ticket-row">
+                  <span class="pd-ticket-k">Mode</span>
+                  <span class="pd-ticket-v">{modeText}</span>
+                </div>
+              </div>
+
+              <div class="pd-ticket-cta-group">
+                <!-- PRIMARY CTA -->
+                <WaButton
+                  message={defaultWaMsg}
+                  label="Daftar Program Ini"
+                  variant="primary"
+                  size="md"
+                  class="pd-ticket-wa-primary"
+                />
+
+                <!-- IN-HOUSE SECONDARY LINK -->
+                <a href={waUrl(inhouseWaMsg)} class="pd-ticket-inhouse-link" target="_blank" rel="noopener">
+                  🏢 Minta Penawaran In-House &rarr;
+                </a>
+              </div>
+
+              <div class="pd-ticket-trust">
+                <span class="pd-trust-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+                  Sertifikat resmi diakui Kemnaker / BNSP
+                </span>
+                <span class="pd-trust-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+                  Tersedia In-House di lokasi perusahaan Anda
+                </span>
+                <span class="pd-trust-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+                  Proposal resmi &amp; konsultasi teknis gratis
+                </span>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- RELATED TRAININGS GRID (USES UNIFIED TRAININGCARD) -->
+    {relatedTrainings.length > 0 && (
+      <section class="pd-related-trainings pd-page">
+        <div class="container">
+          <p class="pd-section-eyebrow">Program Sejenis</p>
+          <h2>Program Lainnya dalam Kategori {catName}</h2>
+          <div class="pd-training-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-top: 20px;">
+            {relatedTrainings.map((t) => (
+              <TrainingCard
+                training={t}
+                headingLevel="h3"
+                categoryName={catName}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- MOBILE STICKY BOTTOM BAR (MAX-WIDTH 768PX) -->
+    <div class="pd-sticky-mobile-bar" aria-label="Pendaftaran Cepat">
+      <div class="pd-sticky-price-wrap">
+        <span class="pd-sticky-price-label">Biaya Investasi</span>
+        <span class="pd-sticky-price-val">{priceFormatted}</span>
+      </div>
+      <WaButton
+        message={defaultWaMsg}
+        label="Daftar"
+        variant="primary"
+        size="sm"
+        class="pd-sticky-wa-btn"
+      />
+    </div>
+  </div>
+</Layout>
+
+<style>
+  /* HERO CTA WRAPPER & SUBLINKS */
+  .pd-hero-cta-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-top: 24px;
+  }
+  .pd-hero-sublinks {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    font-size: 13.5px;
+  }
+  .pd-hero-sublink {
+    color: var(--on-brand);
+    text-decoration: underline;
+    opacity: 0.9;
+    transition: opacity 0.15s ease;
+  }
+  .pd-hero-sublink:hover {
+    opacity: 1;
+  }
+  .pd-hero-sublink-dot {
+    color: var(--on-brand);
+    opacity: 0.5;
+  }
+
+  /* SCHEDULE SECTION & FALLBACK */
+  .pd-schedule-section {
+    border-bottom: 1px solid var(--border);
+  }
+  .pd-schedule-fallback {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 32px 20px;
+    background: var(--surface);
+    border: 1px dashed var(--border);
+    border-radius: 12px;
+    width: 100%;
+    gap: 14px;
+  }
+  .pd-schedule-fallback.is-hidden {
+    display: none;
+  }
+  .pd-schedule-fallback-text {
+    margin: 0;
+    color: var(--slate-600);
+    font-size: 14.5px;
+    max-width: 540px;
+  }
+
+  /* SIDEBAR IN-HOUSE LINK */
+  .pd-ticket-inhouse-link {
+    display: block;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--brand);
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    transition: background 0.15s ease, border-color 0.15s ease;
+  }
+  .pd-ticket-inhouse-link:hover {
+    background: var(--surface-alt);
+    border-color: var(--brand);
+  }
+
+  /* PROOF BLOCK */
+  .pd-proof-block {
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    margin: 36px 0;
+  }
+  .pd-proof-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 20px 0;
+  }
+  .pd-proof-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .pd-proof-icon {
+    font-size: 26px;
+  }
+  .pd-proof-info h4 {
+    margin: 0 0 6px 0;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--brand);
+  }
+  .pd-proof-info p {
+    margin: 0;
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: var(--slate-600);
+  }
+  .pd-proof-client-strip {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-size: 12.5px;
+  }
+  .pd-proof-client-tag {
+    font-weight: 700;
+    color: var(--brand);
+  }
+  .pd-proof-client-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 3px 10px;
+    border-radius: 999px;
+    color: var(--slate-700);
+    font-weight: 500;
+  }
+
+  /* MOBILE STICKY BAR */
+  .pd-sticky-mobile-bar {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .pd-proof-grid {
+      grid-template-columns: 1fr;
+    }
+    .pd-hero-sublinks {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+    .pd-hero-sublink-dot {
+      display: none;
+    }
+    .pd-sticky-mobile-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--surface);
+      padding: 10px 16px;
+      border-top: 1px solid var(--border);
+      box-shadow: 0 -4px 16px color-mix(in srgb, var(--brand) 10%, transparent);
+      z-index: 99;
+    }
+    .pd-sticky-price-wrap {
+      display: flex;
+      flex-direction: column;
+    }
+    .pd-sticky-price-label {
+      font-size: 11px;
+      color: var(--text-subtle);
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .pd-sticky-price-val {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--brand);
+    }
+    :global(body.pd-page) {
+      padding-bottom: 74px !important;
+    }
+    :global(body.pd-page .wa-float) {
+      display: none !important;
+    }
+  }
+</style>
+
+<script is:inline>
+  // FAQ accordion interaction
+  document.querySelectorAll('.pd-faq-q').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', !expanded);
+      var answer = this.parentElement.querySelector('.pd-faq-a');
+      if (answer) {
+        answer.classList.toggle('open', !expanded);
+      }
+    });
+  });
+</script>

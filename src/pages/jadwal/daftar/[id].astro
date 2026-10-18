@@ -1,5 +1,6 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
 import batchesRaw from '../../../../data/training_batches.json';
 import trainingsRaw from '../../../../data/trainings.json';
 import { formatPrice, waUrl } from '../../../lib/images';
@@ -54,21 +55,15 @@ const waMsg = `Halo Wahana Totalita, saya ingin mendaftar pelatihan:\n*${trainin
   description={`Formulir pendaftaran resmi pelatihan ${trainingName} batch ${dateStr}. Sertifikasi ${certification}.`}
   canonical={canonical}
 >
-  <div class="breadcrumb-bar sp-breadcrumb-wrap">
-    <div class="container" style="max-width:800px;margin:0 auto;padding:0 20px;">
-      <nav aria-label="Breadcrumb">
-        <ol class="breadcrumb-list sp-breadcrumb-list">
-          <li><a href="/" style="color:var(--slate-600);text-decoration:none;">Beranda</a></li>
-          <li aria-hidden="true">›</li>
-          <li><a href="/jadwal/" style="color:var(--slate-600);text-decoration:none;">Jadwal</a></li>
-          <li aria-hidden="true">›</li>
-          <li><a href={`/jadwal/${batch.id}/`} style="color:var(--slate-600);text-decoration:none;">Batch #{batch.id}</a></li>
-          <li aria-hidden="true">›</li>
-          <li aria-current="page" style="color:var(--brand);font-weight:600;">Pendaftaran</li>
-        </ol>
-      </nav>
-    </div>
-  </div>
+  <Breadcrumb
+    variant="800"
+    items={[
+      { name: 'Beranda', href: '/' },
+      { name: 'Jadwal', href: '/jadwal/' },
+      { name: `Batch #${batch.id}`, href: `/jadwal/${batch.id}/` },
+      { name: 'Pendaftaran' },
+    ]}
+  />
 
   <div style="max-width:800px;margin:40px auto 80px;padding:0 20px;">
     <div style="background:var(--surface);border-radius:20px;border:1px solid var(--border);padding:36px;box-shadow:0 12px 36px -10px color-mix(in srgb,var(--brand) 10%,transparent);">

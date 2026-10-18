@@ -137,8 +137,8 @@
   --info-border:    var(--blue-200);
 
   /* Typography Stacks (Default ID) */
-  --font-body:      'Source Sans 3', system-ui, -apple-system, sans-serif;
-  --font-heading:   'Lexend', system-ui, -apple-system, sans-serif;
+  --font-body:      'Source Sans 3', 'Source Sans 3 Fallback', system-ui, -apple-system, sans-serif;
+  --font-heading:   'Lexend', 'Lexend Fallback', system-ui, -apple-system, sans-serif;
 
   /* Layout & Elevations (Stripe Multi-Layer Soft Shadows) */
   --container:      1200px;
@@ -201,8 +201,8 @@
 
 /* Language-specific typography stacks */
 html[lang="en"] {
-  --font-body:    'Inter', system-ui, -apple-system, sans-serif;
-  --font-heading: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-body:    'Inter', 'Inter Fallback', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Plus Jakarta Sans', 'Plus Jakarta Sans Fallback', system-ui, -apple-system, sans-serif;
 }
 
 html[lang="zh"],

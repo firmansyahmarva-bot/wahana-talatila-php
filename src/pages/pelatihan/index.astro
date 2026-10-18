@@ -1,7 +1,11 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
-import { getTrainingImageUrl, formatPrice, modeLabel, waUrl } from '../../lib/images';
+import { waUrl } from '../../lib/images';
+import TrainingCard from '../../components/TrainingCard.astro';
+import WaButton from '../../components/WaButton.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import Faq from '../../components/Faq.astro';
 
 // Fetch all trainings and categories
 const allTrainings = await getCollection('trainings');
@@ -73,10 +77,10 @@ const hubIcons: Record<string, string> = {
 };
 
 const hubAccent: Record<string, string> = {
-  k3: 'var(--success, var(--success))',
-  'system-management': 'var(--brand, var(--brand))',
-  lingkungan: 'var(--accent, var(--brand-mid))',
-  mining: 'var(--accent-dark, var(--brand-dark))',
+  k3: 'var(--success)',
+  'system-management': 'var(--brand)',
+  lingkungan: 'var(--accent)',
+  mining: 'var(--accent-dark)',
 };
 ---
 
@@ -88,29 +92,190 @@ const hubAccent: Record<string, string> = {
   pageCss={['/assets/css/page/pelatihan-catalog.css']}
   schemas={schemas}
 >
-  <div class="breadcrumb-bar">
-    <div class="container">
-      <nav aria-label="Breadcrumb">
-        <ol class="breadcrumb-list">
-          <li><a href="/">Beranda</a></li>
-          <li aria-hidden="true">›</li>
-          <li aria-current="page">Pelatihan</li>
-        </ol>
-      </nav>
-    </div>
-  </div>
+  <Breadcrumb
+    variant="catalog"
+    items={[
+      { name: 'Beranda', href: '/' },
+      { name: 'Pelatihan' },
+    ]}
+  />
 
-  <!-- HERO -->
+  <!-- HERO (SHORT HERO + SEARCH BOX + MODE FILTER RIGHT UNDER IT) -->
   <section class="pcat-hero">
     <div class="container">
       <div class="pcat-eyebrow">PJK3 RESMI KEMNAKER RI &amp; BNSP</div>
       <h1>Katalog Pelatihan K3 &amp; Sertifikasi Resmi</h1>
-      <p>Pilih dan temukan program sertifikasi kompetensi K3 resmi Kemnaker RI dan BNSP — tersedia kelas online interaktif via Zoom, tatap muka di Yogyakarta, dan in-house training perusahaan di seluruh Indonesia.</p>
-      <div class="pcat-badges">
-        <span class="pcat-badge"><span class="pcat-badge-dot"></span> Kemnaker RI &amp; BNSP</span>
-        <span class="pcat-badge"><span class="pcat-badge-dot"></span> Online &amp; Tatap Muka</span>
-        <span class="pcat-badge"><span class="pcat-badge-dot"></span> In-House Training Korporasi</span>
-        <span class="pcat-badge"><span class="pcat-badge-dot"></span> Terakreditasi Nasional</span>
+      <p>Pilih dan temukan program sertifikasi kompetensi K3 resmi Kemnaker RI dan BNSP — kelas online via Zoom, tatap muka di Yogyakarta, dan in-house training perusahaan di seluruh Indonesia.</p>
+
+      <div class="filter-bar" style="width:100%;max-width:780px;margin:24px auto 0;">
+        <div class="catalog-search-wrap">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="search" id="catalog-search" placeholder="Cari nama program pelatihan K3, sertifikasi..." />
+        </div>
+        <div class="filter-group">
+          <button type="button" class="filter-mode active" data-mode="all">Semua</button>
+          <button type="button" class="filter-mode" data-mode="online">Online</button>
+          <button type="button" class="filter-mode" data-mode="offline">Offline</button>
+        </div>
+      </div>
+
+      <div class="pcat-cat-pills-wrap" style="margin-top:16px;">
+        <button type="button" class="pcat-cat-pill active" data-cat="all" id="btn-cat-all">Semua Kategori ({totalPrograms})</button>
+        {groups.map((group) => (
+          <button type="button" class="pcat-cat-pill" data-cat={group.cat.slug}>
+            {hubIcons[group.cat.slug] || group.cat.icon || '📄'} {group.cat.name} ({group.trainings.length})
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- COURSE LIST GROUPED BY CATEGORY + STICKY WHATSAPP SIDEBAR -->
+  <section class="detail-body" style="padding-top:24px">
+    <div class="container">
+      <div class="pcat-catalog-layout">
+        
+        <!-- LEFT: CATALOG COURSE GRID -->
+        <div class="pcat-content-col">
+          {groups.map((group, gi) => (
+            <div class={`detail-section${gi >= 1 ? ' pcat-btf-group' : ''}`} id={`cat-${group.cat.slug}`} style="margin-bottom:40px;">
+              <div class="pcat-cat-header">
+                <h2 class="pcat-cat-title">
+                  <span>{hubIcons[group.cat.slug] || group.cat.icon || '📄'}</span>
+                  <span>{group.cat.name}</span>
+                </h2>
+                <span class="pcat-cat-count">{group.trainings.length} Program Tersedia</span>
+              </div>
+              <div class="training-grid">
+                {group.trainings.map((t) => (
+                  <TrainingCard
+                    training={t}
+                    headingLevel="h3"
+                    categoryIcon={hubIcons[group.cat.slug] || group.cat.icon || '📄'}
+                    categoryName={group.cat.name}
+                  />
+                ))}
+              </div>
+            </div>
+          ))}
+
+          <div id="catalog-empty" class="filter-empty" style="display:none">
+            <p style="font-size:16px; font-weight:700; color:var(--slate-800); margin-bottom:8px;">Tidak ada program yang sesuai dengan pencarian Anda.</p>
+            <p style="color:var(--slate-500); margin-bottom:16px;">Silakan coba kata kunci lain atau hubungi konsultan kami langsung untuk menanyakan jadwal program spesifik.</p>
+            <WaButton
+              message="Halo Wahana Totalita, saya mencari program pelatihan tertentu yang belum saya temukan di katalog website."
+              label="Tanya Admin via WhatsApp"
+              variant="primary"
+              size="md"
+            />
+          </div>
+        </div>
+
+        <!-- RIGHT: STRIPE-GRADE STICKY WHATSAPP SIDEBAR -->
+        <aside class="pcat-sidebar-col">
+          <div class="stripe-wa-card">
+            <div class="stripe-wa-header">
+              <div class="stripe-wa-status">
+                <span class="stripe-wa-dot"></span>
+                <span>KONSULTAN K3 ONLINE</span>
+              </div>
+              <h3 class="stripe-wa-title">Konsultasi &amp; Pendaftaran</h3>
+              <p class="stripe-wa-sub">Dapatkan silabus materi, tanggal batch terdekat, &amp; penawaran corporate resmi.</p>
+            </div>
+            
+            <div class="stripe-wa-body">
+              <WaButton
+                message="Halo Wahana Totalita, saya ingin konsultasi pendaftaran pelatihan K3 & sertifikasi resmi."
+                label="Chat WhatsApp Sekarang"
+                variant="primary"
+                size="lg"
+                class="stripe-wa-btn-main"
+              />
+              <div class="stripe-wa-micro">⚡ Respon cepat dalam 3–5 menit</div>
+
+              <div class="stripe-wa-quick-title">PILIHAN KONSULTASI CEPAT</div>
+              <div class="stripe-wa-quick-list">
+                <a
+                  href={waUrl('Halo Wahana Totalita, saya ingin meminta jadwal batch terdekat untuk program pelatihan.')}
+                  class="stripe-wa-quick-item"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <span>📅 Tanya Jadwal Batch Terdekat</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <a
+                  href={waUrl('Halo Wahana Totalita, saya ingin meminta silabus lengkap & brosur penawaran resmi.')}
+                  class="stripe-wa-quick-item"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <span>📄 Minta Silabus &amp; Brosur</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <a
+                  href={waUrl('Halo Wahana Totalita, kami perusahaan ingin penawaran in-house training rombongan.')}
+                  class="stripe-wa-quick-item"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <span>🏢 Penawaran In-House Korporasi</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <a
+                  href={waUrl('Halo Wahana Totalita, saya ingin konsultasi persyaratan Ahli K3 Umum Kemnaker RI.')}
+                  class="stripe-wa-quick-item"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <span>🦺 Syarat Ahli K3 Umum</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </div>
+
+              <div class="stripe-wa-trust-box">
+                <div class="stripe-wa-trust-row">
+                  <span class="stripe-wa-trust-icon">🏛️</span>
+                  <span><strong>PJK3 Resmi Kemnaker RI:</strong> SKP No. Kep. 5/143/AS.02.04/X/2021</span>
+                </div>
+                <div class="stripe-wa-trust-row">
+                  <span class="stripe-wa-trust-icon">🏅</span>
+                  <span><strong>LSP Terakreditasi BNSP:</strong> Sertifikasi berlogo Garuda Emas diakui nasional</span>
+                </div>
+                <div class="stripe-wa-trust-row">
+                  <span class="stripe-wa-trust-icon">🤝</span>
+                  <span><strong>500+ Korporasi:</strong> Dipercaya BUMN, kontraktor EPC, manufaktur &amp; migas</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORY DIRECTORY SECTION -->
+  <section class="section-services">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Direktori Kategori</p>
+        <h2 class="section-title">Kategori Program Pelatihan</h2>
+        <p class="pcat-dir-intro">Pilih kategori pelatihan untuk melihat silabus lengkap, jadwal batch, dan sertifikasi resmi Kemnaker RI &amp; BNSP.</p>
+      </div>
+      <div class="services-grid">
+        {groups.map((group) => (
+          <a
+            href={`/pelatihan/${group.cat.slug}/`}
+            class="service-card"
+            style={`--accent: ${hubAccent[group.cat.slug] || 'var(--accent)'}; text-decoration:none;`}
+          >
+            <div class="service-card-icon">{hubIcons[group.cat.slug] || group.cat.icon || '📄'}</div>
+            <div class="service-card-title">{group.cat.name}</div>
+            <div class="service-card-desc">Daftar lengkap program pelatihan dan sertifikasi {group.cat.name} ({group.trainings.length} program).</div>
+            <div class="service-card-arrow">→</div>
+          </a>
+        ))}
       </div>
     </div>
   </section>
@@ -136,31 +301,6 @@ const hubAccent: Record<string, string> = {
       <div class="stat-item">
         <span class="stat-number" style="font-size:15px">Online &amp; Offline</span>
         <span class="stat-label">Mode Pelatihan</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- CATEGORY DIRECTORY -->
-  <section class="section-services">
-    <div class="container">
-      <div class="section-header">
-        <p class="section-eyebrow">Direktori Kategori</p>
-        <h2 class="section-title">Kategori Program Pelatihan</h2>
-        <p class="pcat-dir-intro">Pilih kategori pelatihan untuk melihat silabus lengkap, jadwal batch, dan sertifikasi resmi Kemnaker RI &amp; BNSP.</p>
-      </div>
-      <div class="services-grid">
-        {groups.map((group, cIdx) => (
-          <a
-            href={`/pelatihan/${group.cat.slug}/`}
-            class="service-card"
-            style={`--accent: ${hubAccent[group.cat.slug] || 'var(--accent)'}; text-decoration:none;`}
-          >
-            <div class="service-card-icon">{hubIcons[group.cat.slug] || group.cat.icon || '📄'}</div>
-            <div class="service-card-title">{group.cat.name}</div>
-            <div class="service-card-desc">Daftar lengkap program pelatihan dan sertifikasi {group.cat.name} ({group.trainings.length} program).</div>
-            <div class="service-card-arrow">→</div>
-          </a>
-        ))}
       </div>
     </div>
   </section>
@@ -233,274 +373,71 @@ const hubAccent: Record<string, string> = {
     </div>
   </section>
 
-  <!-- SEARCH + MODE FILTER + CATEGORY PILLS -->
-  <div class="container pcat-filter-row">
-    <div class="pcat-cat-pills-wrap">
-      <button type="button" class="pcat-cat-pill active" data-cat="all" id="btn-cat-all">Semua Kategori ({totalPrograms})</button>
-      {groups.map((group) => (
-        <button type="button" class="pcat-cat-pill" data-cat={group.cat.slug}>
-          {hubIcons[group.cat.slug] || group.cat.icon || '📄'} {group.cat.name} ({group.trainings.length})
-        </button>
-      ))}
-    </div>
-    <div class="filter-bar" style="width:100%;max-width:780px;">
-      <div class="catalog-search-wrap">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <input type="search" id="catalog-search" placeholder="Cari nama program pelatihan K3, sertifikasi..." />
+  <!-- IN-HOUSE B2B BANNER -->
+  <div class="pcat-b2b-box container" style="margin-top:48px;margin-bottom:48px;">
+    <div class="pcat-b2b-inner">
+      <div>
+        <h2>🏢 Solusi Pelatihan In-House untuk Perusahaan &amp; Industri</h2>
+        <p>Ingin melatih tim dalam jumlah besar tanpa mengganggu operasional harian pabrik, tambang, atau proyek Anda? Wahana Totalita menyediakan program in-house training dengan fleksibilitas penuh di seluruh Indonesia.</p>
+        <ul class="pcat-b2b-features">
+          <li><span>✔</span> Instruktur praktisi senior dikirim langsung ke lokasi site/fasilitas perusahaan Anda.</li>
+          <li><span>✔</span> Jadwal dan durasi pelatihan fleksibel disesuaikan dengan shift operasional kerja tim.</li>
+          <li><span>✔</span> Kurikulum disesuaikan dengan studi kasus dan potensi bahaya riil di tempat kerja.</li>
+          <li><span>✔</span> Penawaran harga corporate khusus dan efisien untuk rombongan minimal 5–10 peserta.</li>
+        </ul>
       </div>
-      <div class="filter-group">
-        <button type="button" class="filter-mode active" data-mode="all">Semua</button>
-        <button type="button" class="filter-mode" data-mode="online">Online</button>
-        <button type="button" class="filter-mode" data-mode="offline">Offline</button>
+      <div class="pcat-b2b-actions">
+        <WaButton
+          message="Halo Wahana Totalita, kami dari perusahaan ingin meminta penawaran in-house training."
+          label="Konsultasi In-House via WhatsApp"
+          variant="primary"
+          size="md"
+          class="btn-b2b-wa"
+        />
+        <a href="/in-house-training/" style="color:var(--success-border); font-size:13.5px; text-decoration:underline; text-align:center; padding:4px;">
+          Lihat Portal &amp; Hub Regional In-House &rarr;
+        </a>
       </div>
     </div>
   </div>
 
-  <!-- MAIN CATALOG CONTENT + STICKY WHATSAPP SIDEBAR -->
-  <section class="detail-body" style="padding-top:16px">
-    <div class="container">
-      <div class="pcat-catalog-layout">
-        
-        <!-- LEFT: CATALOG COURSE GRID -->
-        <div class="pcat-content-col">
-          {groups.map((group) => (
-            <div class="detail-section" id={`cat-${group.cat.slug}`} style="margin-bottom:40px;">
-              <div class="pcat-cat-header">
-                <h2 class="pcat-cat-title">
-                  <span>{hubIcons[group.cat.slug] || group.cat.icon || '📄'}</span>
-                  <span>{group.cat.name}</span>
-                </h2>
-                <span class="pcat-cat-count">{group.trainings.length} Program Tersedia</span>
-              </div>
-              <div class="training-grid">
-                {group.trainings.map((t) => {
-                  const imageSrc = getTrainingImageUrl(t.data.image_path, t.data.category_slug || group.cat.slug, t.data.slug);
-                  const priceStr = formatPrice(t.data.price);
-                  const modeText = modeLabel(t.data.mode);
-                  const certText = t.data.certification || 'Kemnaker / BNSP';
-                  const waText = t.data.wa_text || `Halo Wahana Totalita, saya tertarik mendaftar program ${t.data.name}. Mohon informasi jadwal batch terdekat dan investasinya.`;
-
-                  return (
-                    <article
-                      class="training-card"
-                      data-cat={t.data.category_slug || group.cat.slug}
-                      data-mode={(t.data.mode || 'offline').toLowerCase()}
-                      style={`--accent: ${t.data.accent_color || hubAccent[group.cat.slug] || 'var(--accent)'};`}
-                    >
-                      <a href={`/pelatihan/${t.data.slug}/`} class="training-card-img-wrap">
-                        <img
-                          src={imageSrc}
-                          alt={`Pelatihan ${t.data.name} ${certText}`}
-                          loading="lazy"
-                          width="400"
-                          height="250"
-                          decoding="async"
-                        />
-                        <span class="training-card-cat-badge">
-                          {hubIcons[group.cat.slug] || group.cat.icon || '📄'} {group.cat.name}
-                        </span>
-                      </a>
-                      <div class="training-card-body">
-                        <div class="training-card-meta">
-                          <span class="badge-mode">{modeText}</span>
-                          <span class="badge-cert">{certText}</span>
-                        </div>
-                        <h3 class="training-card-title">
-                          <a href={`/pelatihan/${t.data.slug}/`}>{t.data.name}</a>
-                        </h3>
-                        <div class="training-card-footer">
-                          <span class="training-price">
-                            {priceStr} <small>/orang</small>
-                          </span>
-                          <a
-                            href={waUrl(waText)}
-                            class="btn-wa-card"
-                            target="_blank"
-                            rel="noopener"
-                          >
-                            Daftar
-                          </a>
-                        </div>
-                      </div>
-                    </article>
-                  );
-                })}
-              </div>
-            </div>
-          ))}
-
-          <div id="catalog-empty" class="filter-empty" style="display:none">
-            <p style="font-size:16px; font-weight:700; color:var(--slate-800); margin-bottom:8px;">Tidak ada program yang sesuai dengan pencarian Anda.</p>
-            <p style="color:var(--slate-500); margin-bottom:16px;">Silakan coba kata kunci lain atau hubungi konsultan kami langsung untuk menanyakan jadwal program spesifik.</p>
-            <a
-              href={waUrl('Halo Wahana Totalita, saya mencari program pelatihan tertentu yang belum saya temukan di katalog website.')}
-              class="btn-b2b-wa"
-              target="_blank"
-              rel="noopener"
-            >
-              Tanya Admin via WhatsApp
-            </a>
-          </div>
-        </div>
-
-        <!-- RIGHT: STRIPE-GRADE STICKY WHATSAPP SIDEBAR -->
-        <aside class="pcat-sidebar-col">
-          <div class="stripe-wa-card">
-            <div class="stripe-wa-header">
-              <div class="stripe-wa-status">
-                <span class="stripe-wa-dot"></span>
-                <span>KONSULTAN K3 ONLINE</span>
-              </div>
-              <h3 class="stripe-wa-title">Konsultasi &amp; Pendaftaran</h3>
-              <p class="stripe-wa-sub">Dapatkan silabus materi, tanggal batch terdekat, &amp; penawaran corporate resmi.</p>
-            </div>
-            
-            <div class="stripe-wa-body">
-              <a
-                href={waUrl('Halo Wahana Totalita, saya ingin konsultasi pendaftaran pelatihan K3 & sertifikasi resmi.')}
-                class="stripe-wa-btn-main"
-                target="_blank"
-                rel="noopener"
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
-                </svg>
-                Chat WhatsApp Sekarang
-              </a>
-              <div class="stripe-wa-micro">⚡ Respon cepat dalam 3–5 menit</div>
-
-              <div class="stripe-wa-quick-title">PILIHAN KONSULTASI CEPAT</div>
-              <div class="stripe-wa-quick-list">
-                <a
-                  href={waUrl('Halo Wahana Totalita, saya ingin meminta jadwal batch terdekat untuk program pelatihan.')}
-                  class="stripe-wa-quick-item"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  <span>📅 Tanya Jadwal Batch Terdekat</span>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
-                <a
-                  href={waUrl('Halo Wahana Totalita, saya ingin meminta silabus lengkap & brosur penawaran resmi.')}
-                  class="stripe-wa-quick-item"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  <span>📄 Minta Silabus &amp; Brosur</span>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
-                <a
-                  href={waUrl('Halo Wahana Totalita, kami perusahaan ingin penawaran in-house training rombongan.')}
-                  class="stripe-wa-quick-item"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  <span>🏢 Penawaran In-House Korporasi</span>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
-                <a
-                  href={waUrl('Halo Wahana Totalita, saya ingin konsultasi persyaratan Ahli K3 Umum Kemnaker RI.')}
-                  class="stripe-wa-quick-item"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  <span>🦺 Syarat Ahli K3 Umum</span>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
-              </div>
-
-              <div class="stripe-wa-trust-box">
-                <div class="stripe-wa-trust-row">
-                  <span class="stripe-wa-trust-icon">🏛️</span>
-                  <span><strong>PJK3 Resmi Kemnaker RI:</strong> SKP No. Kep. 5/143/AS.02.04/X/2021</span>
-                </div>
-                <div class="stripe-wa-trust-row">
-                  <span class="stripe-wa-trust-icon">🏅</span>
-                  <span><strong>LSP Terakreditasi BNSP:</strong> Sertifikasi berlogo Garuda Emas diakui nasional</span>
-                </div>
-                <div class="stripe-wa-trust-row">
-                  <span class="stripe-wa-trust-icon">🤝</span>
-                  <span><strong>500+ Korporasi:</strong> Dipercaya BUMN, kontraktor EPC, manufaktur &amp; migas</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </aside>
-
-      </div>
-
-      <!-- IN-HOUSE B2B BANNER -->
-      <div class="pcat-b2b-box">
-        <div class="pcat-b2b-inner">
-          <div>
-            <h2>🏢 Solusi Pelatihan In-House untuk Perusahaan &amp; Industri</h2>
-            <p>Ingin melatih tim dalam jumlah besar tanpa mengganggu operasional harian pabrik, tambang, atau proyek Anda? Wahana Totalita menyediakan program in-house training dengan fleksibilitas penuh di seluruh Indonesia.</p>
-            <ul class="pcat-b2b-features">
-              <li><span>✔</span> Instruktur praktisi senior dikirim langsung ke lokasi site/fasilitas perusahaan Anda.</li>
-              <li><span>✔</span> Jadwal dan durasi pelatihan fleksibel disesuaikan dengan shift operasional kerja tim.</li>
-              <li><span>✔</span> Kurikulum disesuaikan dengan studi kasus dan potensi bahaya riil di tempat kerja.</li>
-              <li><span>✔</span> Penawaran harga corporate khusus dan efisien untuk rombongan minimal 5–10 peserta.</li>
-            </ul>
-          </div>
-          <div class="pcat-b2b-actions">
-            <a
-              href={waUrl('Halo Wahana Totalita, kami dari perusahaan ingin meminta penawaran in-house training.')}
-              class="btn-b2b-wa"
-              target="_blank"
-              rel="noopener"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
-              </svg>
-              Konsultasi In-House via WhatsApp
-            </a>
-            <a href="/in-house-training/" style="color:var(--success-border); font-size:13.5px; text-decoration:underline; text-align:center; padding:4px;">
-              Lihat Portal &amp; Hub Regional In-House &rarr;
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- TRUST & QUALITY GUARANTEE -->
-      <div class="pcat-trust-section">
-        <div class="section-header" style="margin-bottom:10px;">
-          <p class="section-eyebrow">Standar Kualitas</p>
-          <h2 class="section-title">Keunggulan Pelatihan Wahana Totalita</h2>
-        </div>
-        <div class="pcat-trust-grid">
-          <div class="pcat-trust-item">
-            <div class="pcat-trust-icon">🏛️</div>
-            <div>
-              <h4>PJK3 Resmi Berlisensi</h4>
-              <p>Terdaftar resmi di Kemnaker RI dengan SKP Penunjukan sah dan berlisensi LSP terakreditasi BNSP.</p>
-            </div>
-          </div>
-          <div class="pcat-trust-item">
-            <div class="pcat-trust-icon">👨‍🏫</div>
-            <div>
-              <h4>Instruktur Praktisi Senior</h4>
-              <p>Materi diampu langsung oleh praktisi berpengalaman 10+ tahun di sektor migas, tambang, dan industri.</p>
-            </div>
-          </div>
-          <div class="pcat-trust-item">
-            <div class="pcat-trust-icon">🔍</div>
-            <div>
-              <h4>Sertifikat Resmi &amp; Terverifikasi</h4>
-              <p>Sertifikat resmi ber-SKP atau berlogo Garuda Emas, dapat divalidasi keasliannya di portal resmi.</p>
-            </div>
-          </div>
-          <div class="pcat-trust-item">
-            <div class="pcat-trust-icon">🤝</div>
-            <div>
-              <h4>Dipercaya 500+ Korporasi</h4>
-              <p>Telah melatih dan menyertifikasi ribuan profesional dari berbagai BUMN, multinasional, dan swasta.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
+  <!-- TRUST & QUALITY GUARANTEE (WHY US) -->
+  <div class="pcat-trust-section container" style="margin-bottom:48px;">
+    <div class="section-header" style="margin-bottom:10px;">
+      <p class="section-eyebrow">Standar Kualitas</p>
+      <h2 class="section-title">Keunggulan Pelatihan Wahana Totalita</h2>
     </div>
-  </section>
+    <div class="pcat-trust-grid">
+      <div class="pcat-trust-item">
+        <div class="pcat-trust-icon">🏛️</div>
+        <div>
+          <h4>PJK3 Resmi Berlisensi</h4>
+          <p>Terdaftar resmi di Kemnaker RI dengan SKP Penunjukan sah dan berlisensi LSP terakreditasi BNSP.</p>
+        </div>
+      </div>
+      <div class="pcat-trust-item">
+        <div class="pcat-trust-icon">👨‍🏫</div>
+        <div>
+          <h4>Instruktur Praktisi Senior</h4>
+          <p>Materi diampu langsung oleh praktisi berpengalaman 10+ tahun di sektor migas, tambang, dan industri.</p>
+        </div>
+      </div>
+      <div class="pcat-trust-item">
+        <div class="pcat-trust-icon">🔍</div>
+        <div>
+          <h4>Sertifikat Resmi &amp; Terverifikasi</h4>
+          <p>Sertifikat resmi ber-SKP atau berlogo Garuda Emas, dapat divalidasi keasliannya di portal resmi.</p>
+        </div>
+      </div>
+      <div class="pcat-trust-item">
+        <div class="pcat-trust-icon">🤝</div>
+        <div>
+          <h4>Dipercaya 500+ Korporasi</h4>
+          <p>Telah melatih dan menyertifikasi ribuan profesional dari berbagai BUMN, multinasional, dan swasta.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- FAQ SECTION -->
   <section class="section-faq">
@@ -509,16 +446,29 @@ const hubAccent: Record<string, string> = {
         <p class="section-eyebrow">FAQ</p>
         <h2 class="section-title">Pertanyaan Umum Seputar Pelatihan K3</h2>
       </div>
-      <div class="faq-grid">
-        {catalogFaqs.map((f) => (
-          <div class="faq-item">
-            <button type="button" class="faq-question">
-              <span>{f.q}</span>
-              <span class="faq-icon">+</span>
-            </button>
-            <div class="faq-answer"><p>{f.a}</p></div>
-          </div>
-        ))}
+      <Faq items={catalogFaqs} variant="catalog" />
+    </div>
+  </section>
+
+  <!-- FINAL WA BLOCK -->
+  <section class="pcat-final-wa-section container" style="margin-top:48px;margin-bottom:48px;">
+    <div class="stripe-wa-card" style="max-width:860px;margin:0 auto;text-align:center;">
+      <div class="stripe-wa-header" style="text-align:center;">
+        <div class="stripe-wa-status" style="justify-content:center;">
+          <span class="stripe-wa-dot"></span>
+          <span>LAYANAN KONSULTASI RESMI PJK3</span>
+        </div>
+        <h3 class="stripe-wa-title" style="font-size:22px;margin:8px 0;">Butuh Rekomendasi Program Pelatihan atau Jadwal Khusus?</h3>
+        <p class="stripe-wa-sub" style="margin:0 auto 16px;max-width:620px;">Tim konsultan Wahana Totalita siap membantu menganalisis kebutuhan regulasi K3 di tempat kerja Anda serta memberikan penawaran terbaik.</p>
+      </div>
+      <div class="stripe-wa-body" style="display:flex;flex-direction:column;align-items:center;gap:12px;">
+        <WaButton
+          message="Halo Wahana Totalita, saya ingin konsultasi mengenai program pelatihan K3 yang tepat untuk instansi/perusahaan saya."
+          label="Hubungi Konsultan Kami via WhatsApp"
+          variant="primary"
+          size="lg"
+        />
+        <span style="font-size:12.5px;color:var(--text-subtle);">Layanan konsultasi resmi · Respon cepat Senin–Sabtu 08.00–17.00 WIB</span>
       </div>
     </div>
   </section>
@@ -529,33 +479,25 @@ const hubAccent: Record<string, string> = {
       <span class="mobile-wa-label">Konsultan Online</span>
       <span class="mobile-wa-sub">Butuh info pelatihan K3?</span>
     </div>
-    <a
-      href={waUrl('Halo Wahana Totalita, saya ingin informasi pelatihan K3 via WhatsApp.')}
+    <WaButton
+      message="Halo Wahana Totalita, saya ingin informasi pelatihan K3 via WhatsApp."
+      label="Chat Sekarang"
+      variant="primary"
+      size="sm"
       class="mobile-wa-btn"
-      target="_blank"
-      rel="noopener"
-    >
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
-      </svg>
-      Chat Sekarang
-    </a>
+    />
   </div>
 </Layout>
 
-<script is:inline>
-  function toggleCatalogFaq(btn) {
-    var item = btn.closest('.faq-item');
-    if (item) item.classList.toggle('open');
+<style>
+  /* Below-the-fold catalog groups: skip rendering until near viewport */
+  .pcat-btf-group {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 600px;
   }
+</style>
 
-  // Setup FAQ toggles
-  document.querySelectorAll('.faq-question').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      toggleCatalogFaq(this);
-    });
-  });
-
+<script is:inline>
   // Filter Catalog Logic
   function filterCatalog() {
     var searchEl = document.getElementById('catalog-search');
@@ -575,7 +517,7 @@ const hubAccent: Record<string, string> = {
 
       var sectionHasVisible = false;
       section.querySelectorAll('.training-card').forEach(function(card) {
-        var titleEl = card.querySelector('.training-card-title');
+        var titleEl = card.querySelector('.training-card-title, .tc-card-title');
         var name = titleEl ? titleEl.textContent.toLowerCase() : '';
         var cardMode = (card.dataset.mode || '').toLowerCase();
         

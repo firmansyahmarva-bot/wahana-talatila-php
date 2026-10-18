@@ -1,5 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Faq from '../../components/Faq.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
 
 const pageTitle = "Formulir Laporan Insiden K3 Online 2026: Investigasi 5-Why & SCAT Model";
 const metaDesc = "Buat formulir laporan investigasi kecelakaan kerja K3 resmi sesuai Permenaker 03/1998. Dilengkapi analisis akar masalah 5-Why, SCAT model, matriks CAPA, dan cetak form gratis.";
@@ -56,6 +58,17 @@ const schemas = [
   ]
 },
   ];
+
+const toolFaqs = [
+  {
+    "q": "Mengapa bukti fisik di Tempat Kejadian Perkara (TKP) tidak boleh diubah sebelum difoto?",
+    "a": "Mengubah posisi alat, membersihkan tumpahan oli, atau membuang material di TKP sebelum diinspeksi oleh Ahli K3 atau Pengawas Ketenagakerjaan dapat menghilangkan bukti kunci mekanis dan fisik. Pasal 5 Permenaker 03/1998 melarang mengubah keadaan tempat kecelakaan kecuali untuk pertolongan darurat korban atau mencegah bahaya yang lebih besar."
+  },
+  {
+    "q": "Siapa saja anggota tim investigasi kecelakaan kerja di perusahaan?",
+    "a": "Tim investigasi idealnya dipimpin oleh Ahli K3 Umum bersama Pengawas Lapangan (Supervisor area kejadian), teknisi ahli mesin terkait, perwakilan serikat pekerja/rekan kerja, serta didukung oleh Pimpinan P2K3 perusahaan."
+  }
+];
 ---
 
 <Layout
@@ -254,7 +267,7 @@ const schemas = [
         Berdasarkan <strong>Peraturan Menteri Tenaga Kerja RI No. PER.03/MEN/1998 tentang Tata Cara Pelaporan dan Pemeriksaan Kecelakaan Kerja</strong>, setiap kecelakaan yang menimpa tenaga kerja wajib dilaporkan kepada Kantor Departemen Tenaga Kerja setempat dalam kurun waktu <strong>2 x 24 jam</strong> sejak terjadinya kecelakaan.
       </p>
 
-      <h3 class="sp-heading-lexend-md">Prinsip Analisis SCAT (Systematic Cause Analysis Technique)</h3>
+      <SectionTitle level={3} size="md">Prinsip Analisis SCAT (Systematic Cause Analysis Technique)</SectionTitle>
       <p class="editorial-p">
         Model SCAT membagi penyebab kecelakaan menjadi 3 lapisan kausalitas:
       </p>
@@ -265,30 +278,8 @@ const schemas = [
       </ol>
 
       <!-- FAQ ACCORDION -->
-      <h3 class="sp-heading-lexend-lg">Tanya Jawab Seputar Investigasi Insiden K3 (FAQ)</h3>
-      <div class="faq-box">
-        
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span>Mengapa bukti fisik di Tempat Kejadian Perkara (TKP) tidak boleh diubah sebelum difoto?</span>
-            <span class="faq-icon">▼</span>
-          </button>
-          <div class="faq-a">
-            Mengubah posisi alat, membersihkan tumpahan oli, atau membuang material di TKP sebelum diinspeksi oleh Ahli K3 atau Pengawas Ketenagakerjaan dapat menghilangkan bukti kunci mekanis dan fisik. Pasal 5 Permenaker 03/1998 melarang mengubah keadaan tempat kecelakaan kecuali untuk pertolongan darurat korban atau mencegah bahaya yang lebih besar.
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span>Siapa saja anggota tim investigasi kecelakaan kerja di perusahaan?</span>
-            <span class="faq-icon">▼</span>
-          </button>
-          <div class="faq-a">
-            Tim investigasi idealnya dipimpin oleh Ahli K3 Umum bersama Pengawas Lapangan (Supervisor area kejadian), teknisi ahli mesin terkait, perwakilan serikat pekerja/rekan kerja, serta didukung oleh Pimpinan P2K3 perusahaan.
-          </div>
-        </div>
-
-      </div>
+      <SectionTitle level={3} size="lg">Tanya Jawab Seputar Investigasi Insiden K3 (FAQ)</SectionTitle>
+      <Faq items={toolFaqs} variant="tool" />
 
     </div>
 

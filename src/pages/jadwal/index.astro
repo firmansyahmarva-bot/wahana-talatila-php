@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 import batchesRaw from '../../../data/training_batches.json';
 import trainingsRaw from '../../../data/trainings.json';
 import { formatPrice, waUrl } from '../../lib/images';
@@ -93,21 +94,17 @@ const eventSchemas = batches.slice(0, 30).map((b) => {
   pageCss={['/assets/css/page/jadwal.css']}
 >
   <!-- BREADCRUMB -->
-  <div class="breadcrumb-bar sp-breadcrumb-wrap">
-    <div class="container sp-breadcrumb-inner">
-      <nav aria-label="Breadcrumb">
-        <ol class="breadcrumb-list sp-breadcrumb-list">
-          <li><a href="/" style="color:var(--slate-600);text-decoration:none;">Beranda</a></li>
-          <li aria-hidden="true">›</li>
-          <li aria-current="page" style="color:var(--brand);font-weight:600;">Jadwal Pelatihan</li>
-        </ol>
-      </nav>
-    </div>
-  </div>
+  <Breadcrumb
+    variant="city"
+    items={[
+      { name: 'Beranda', href: '/' },
+      { name: 'Jadwal Pelatihan' },
+    ]}
+  />
 
   <!-- HERO -->
   <section class="jadwal-hero" style="background:linear-gradient(135deg,var(--brand-dark,var(--brand-dark)) 0%,var(--brand,var(--brand)) 100%);padding:56px 0;color:var(--surface);text-align:center;">
-    <div class="container sp-breadcrumb-inner">
+    <div class="container" style="max-width:1160px;margin:0 auto;padding:0 20px;">
       <span class="jadwal-eyebrow" style="display:inline-block;padding:4px 14px;border-radius:999px;background:color-mix(in srgb,var(--surface) 12%,transparent);color:var(--success-border);font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;border:1px solid color-mix(in srgb,var(--surface) 18%,transparent);">
         JADWAL RESMI TAHUN 2026
       </span>
@@ -133,7 +130,7 @@ const eventSchemas = batches.slice(0, 30).map((b) => {
 
   <!-- FILTER CONTROLS -->
   <div class="jadwal-filters" style="background:var(--surface);border-bottom:1px solid var(--border);padding:18px 0;position:sticky;top:var(--nav-h,72px);z-index:90;box-shadow:0 2px 8px color-mix(in srgb,var(--black) 3%,transparent);">
-    <div class="container sp-breadcrumb-inner">
+    <div class="container" style="max-width:1160px;margin:0 auto;padding:0 20px;">
       <div class="filter-row" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
         <div style="flex:1;min-width:240px;position:relative;">
           <input

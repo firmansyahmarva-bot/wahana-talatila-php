@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Faq from '../../components/Faq.astro';
 
 const canonical = 'https://wahanatotalita.com/in-house-training/';
 const metaTitle = 'In-House Training K3 Perusahaan: Layanan Sertifikasi On-Site Seluruh Indonesia | Wahana Totalita';
@@ -257,17 +258,7 @@ const schemas = [
           <h2>Pertanyaan Umum Seputar In-House Training</h2>
         </div>
         <div class="faq-grid" style="max-width:860px;margin:0 auto;">
-          {faqs.map((f) => (
-            <details class="faq-item sp-faq-card">
-              <summary class="sp-faq-summary">
-                <span>{f.q}</span>
-                <span class="faq-icon" style="font-size:1.2rem;font-weight:700;color:var(--accent);min-width:20px;text-align:center;">+</span>
-              </summary>
-              <div class="faq-answer sp-faq-content">
-                <p style="margin:0;">{f.a}</p>
-              </div>
-            </details>
-          ))}
+          <Faq items={faqs} variant="inhouse" />
         </div>
       </div>
     </section>

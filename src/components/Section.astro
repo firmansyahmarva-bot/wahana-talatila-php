@@ -1,0 +1,28 @@
+---
+interface Props {
+  spacing?: 'md' | 'lg' | 'none';
+  class?: string;
+}
+
+const { spacing = 'md', class: className = '' } = Astro.props;
+---
+
+<section class={`secw-section secw-mb-${spacing} ${className}`.trim()}>
+  <slot />
+</section>
+
+<style>
+  .secw-section {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .secw-mb-md {
+    margin-bottom: 48px;
+  }
+  .secw-mb-lg {
+    margin-bottom: 72px;
+  }
+  .secw-mb-none {
+    margin-bottom: 0;
+  }
+</style>

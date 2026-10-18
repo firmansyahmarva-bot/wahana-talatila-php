@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
 import { getCollection } from 'astro:content';
 
 const year = new Date().getFullYear();
@@ -142,19 +143,14 @@ const schemas = [
   pageCss={['/assets/css/page/ahli-k3-umum.css']}
 >
   <!-- BREADCRUMB -->
-  <div class="breadcrumb-bar sp-breadcrumb-wrap">
-    <div class="container sp-breadcrumb-inner">
-      <nav aria-label="Breadcrumb">
-        <ol class="breadcrumb-list sp-breadcrumb-list">
-          <li><a href="/" style="color:var(--slate-600);text-decoration:none;">Beranda</a></li>
-          <li aria-hidden="true">›</li>
-          <li><a href="/pelatihan/" style="color:var(--slate-600);text-decoration:none;">Pelatihan</a></li>
-          <li aria-hidden="true">›</li>
-          <li aria-current="page" style="color:var(--brand);font-weight:600;">Ahli K3 Umum (AK3U)</li>
-        </ol>
-      </nav>
-    </div>
-  </div>
+  <Breadcrumb
+    variant="city"
+    items={[
+      { name: 'Beranda', href: '/' },
+      { name: 'Pelatihan', href: '/pelatihan/' },
+      { name: 'Ahli K3 Umum (AK3U)' },
+    ]}
+  />
 
   <!-- HERO SECTION -->
   <section class="ak-hero">

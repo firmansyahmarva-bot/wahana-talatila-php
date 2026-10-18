@@ -1,0 +1,59 @@
+---
+interface Props {
+  level?: 2 | 3;
+  underline?: boolean;
+  bold?: boolean;
+  size?: 'md' | 'lg' | '20' | '24';
+  class?: string;
+}
+
+const {
+  level = 2,
+  underline = false,
+  bold = false,
+  size = underline ? '20' : 'md',
+  class: className = '',
+} = Astro.props;
+
+const Tag = level === 3 ? 'h3' : 'h2';
+---
+
+<Tag
+  class={`sct-heading ${underline ? 'sct-underlined' : ''} ${bold ? 'sct-bold' : ''} sct-size-${size} ${className}`.trim()}
+>
+  <slot />
+</Tag>
+
+<style>
+  .sct-heading {
+    margin: 0;
+    line-height: 1.35;
+  }
+  .sct-underlined {
+    color: var(--brand);
+    font-size: 1.6rem;
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 8px;
+  }
+  .sct-bold {
+    font-weight: 800;
+  }
+  .sct-underlined.sct-size-20 {
+    margin-bottom: 20px;
+  }
+  .sct-underlined.sct-size-24 {
+    margin-bottom: 24px;
+  }
+  .sct-size-lg {
+    color: var(--text);
+    font-family: 'Lexend', sans-serif;
+    font-size: 1.25rem;
+    margin: 28px 0 16px;
+  }
+  .sct-size-md {
+    color: var(--text);
+    font-family: 'Lexend', sans-serif;
+    font-size: 1.15rem;
+    margin: 22px 0 10px;
+  }
+</style>

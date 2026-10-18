@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Faq from '../../components/Faq.astro';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -214,14 +215,7 @@ if (schemaFaqs.length > 0) {
           {item.faqs && item.faqs.length > 0 && (
             <section class="skkni-section-card">
               <h2 class="skkni-section-title">❓ Tanya Jawab Seputar {item.judul}</h2>
-              <div>
-                {item.faqs.map((faq) => (
-                  <div class="faq-item">
-                    <h3 class="faq-q">{faq.q}</h3>
-                    <p class="faq-a">{faq.a}</p>
-                  </div>
-                ))}
-              </div>
+              <Faq items={item.faqs} variant="skkni" icon="" />
             </section>
           )}
         </article>

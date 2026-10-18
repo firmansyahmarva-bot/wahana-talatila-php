@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -249,19 +250,14 @@ const schemas = [
   pageCss={['/assets/css/page/kota.css']}
 >
   <!-- BREADCRUMB -->
-  <div class="breadcrumb-bar sp-breadcrumb-wrap">
-    <div class="container sp-breadcrumb-inner">
-      <nav aria-label="Breadcrumb">
-        <ol class="breadcrumb-list sp-breadcrumb-list">
-          <li><a href="/" style="color:var(--slate-600);text-decoration:none;">Beranda</a></li>
-          <li aria-hidden="true">›</li>
-          <li><a href="/pelatihan/" style="color:var(--slate-600);text-decoration:none;">Pelatihan</a></li>
-          <li aria-hidden="true">›</li>
-          <li aria-current="page" style="color:var(--brand);font-weight:600;">Pelatihan K3 {cityData.name}</li>
-        </ol>
-      </nav>
-    </div>
-  </div>
+  <Breadcrumb
+    variant="city"
+    items={[
+      { name: 'Beranda', href: '/' },
+      { name: 'Pelatihan', href: '/pelatihan/' },
+      { name: `Pelatihan K3 ${cityData.name}` },
+    ]}
+  />
 
   <!-- City Hero -->
   <section class="hero-section" style="background: linear-gradient(135deg, var(--brand-dark, var(--brand-dark)) 0%, var(--brand, var(--brand)) 100%); color: var(--surface); padding: 56px 0 50px;">

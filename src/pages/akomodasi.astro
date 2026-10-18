@@ -1,5 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import Section from '../components/Section.astro';
+import Faq from '../components/Faq.astro';
 
 const canonical = 'https://wahanatotalita.com/akomodasi/';
 const metaTitle = 'Jasa Akomodasi & Hotel Arrangement Instansi Pemerintah Yogyakarta — Wahana Totalita';
@@ -137,10 +140,10 @@ const schemas = [
   <main style="max-width:960px;margin:0 auto;padding:40px 20px 60px;">
 
     <!-- LAYANAN -->
-    <section class="sp-mb-48">
-      <h2 class="sp-title-underlined-24">
+    <Section spacing="md">
+      <SectionTitle level={2} underline size="24">
         Layanan Akomodasi yang Kami Sediakan
-      </h2>
+      </SectionTitle>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;">
         {services.map((s) => (
           <div style={`background:${s.bg};border-radius:10px;padding:20px;border-top:4px solid var(--brand);`}>
@@ -150,13 +153,13 @@ const schemas = [
           </div>
         ))}
       </div>
-    </section>
+    </Section>
 
     <!-- KATEGORI HOTEL & SBM -->
-    <section class="sp-mb-48">
-      <h2 class="sp-title-underlined-20">
+    <Section spacing="md">
+      <SectionTitle level={2} underline size="20">
         Kategori Hotel &amp; Kesesuaian SBM Kemenkeu
-      </h2>
+      </SectionTitle>
       <p style="line-height:1.8;color:var(--slate-800);margin-bottom:16px;">
         Pemilihan kategori hotel untuk kegiatan dinas harus sesuai dengan <strong>Standar Biaya Masukan (SBM)</strong> yang ditetapkan Kementerian Keuangan setiap tahun berdasarkan golongan atau eselon pegawai. Kami membantu memastikan pilihan hotel sesuai ketentuan ini agar SPJ dapat dipertanggungjawabkan.
       </p>
@@ -183,7 +186,7 @@ const schemas = [
         </table>
       </div>
       <p style="color:var(--slate-500);font-size:0.82rem;margin-top:10px;font-style:italic;">* Kisaran tarif perkiraan, dapat berubah sesuai musim dan ketersediaan. Tarif SBM resmi mengacu pada Peraturan Menteri Keuangan yang berlaku di tahun berjalan.</p>
-    </section>
+    </Section>
 
     <!-- PROCUREMENT SECTION -->
     <section style="margin-bottom:48px;background:var(--accent-light);border-radius:10px;padding:28px;">
@@ -201,10 +204,10 @@ const schemas = [
     </section>
 
     <!-- PAKET TERPADU -->
-    <section class="sp-mb-48">
-      <h2 class="sp-title-underlined-20">
+    <Section spacing="md">
+      <SectionTitle level={2} underline size="20">
         Paket Terpadu — Satu Vendor, Semua Kebutuhan
-      </h2>
+      </SectionTitle>
       <p style="line-height:1.8;color:var(--slate-800);margin-bottom:20px;">
         Wahana Totalita adalah <strong>one-stop solution</strong> untuk seluruh kebutuhan kegiatan instansi pemerintah dan BUMN. Gabungkan akomodasi dengan layanan lain dalam satu kontrak untuk menyederhanakan proses administrasi.
       </p>
@@ -217,23 +220,13 @@ const schemas = [
           </a>
         ))}
       </div>
-    </section>
+    </Section>
 
     <!-- FAQ -->
-    <section class="sp-mb-48">
-      <h2 class="sp-title-underlined-24">Pertanyaan yang Sering Diajukan</h2>
-      {faqs.map((faq) => (
-        <details class="sp-faq-card">
-          <summary class="sp-faq-summary">
-            <span>{faq.q}</span>
-            <span style="font-size:1.2rem;font-weight:700;color:var(--accent);min-width:20px;text-align:center;">+</span>
-          </summary>
-          <div class="sp-faq-content">
-            {faq.a}
-          </div>
-        </details>
-      ))}
-    </section>
+    <Section spacing="md">
+      <SectionTitle level={2} underline size="24">Pertanyaan yang Sering Diajukan</SectionTitle>
+      <Faq items={faqs} variant="plain" />
+    </Section>
 
     <!-- CTA -->
     <section style="background:linear-gradient(135deg,var(--brand),var(--brand-mid));color:var(--surface);border-radius:12px;padding:40px;text-align:center;">

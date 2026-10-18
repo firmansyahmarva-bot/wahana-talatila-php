@@ -1,0 +1,460 @@
+---
+export interface FaqItem {
+  q: string;
+  a: string;
+}
+
+interface Props {
+  items: FaqItem[];
+  title?: string;
+  variant?: 'default' | 'tool' | 'catalog' | 'skkni' | 'inhouse' | 'safety-talk' | 'simple' | string;
+  class?: string;
+  icon?: string;
+}
+
+const { items = [], title = '', variant = '', class: className = '', icon: customIcon } = Astro.props;
+
+// Determine icon character: tool uses ▼, empty for skkni/safety-talk/simple/tools-index, default +
+const iconChar = customIcon !== undefined
+  ? customIcon
+  : (variant === 'tool' ? '▼' : (variant === 'none' || variant === 'skkni' || variant === 'safety-talk' || variant === 'simple' || variant === 'tools-index' ? '' : '+'));
+---
+
+<div class={`fqc-wrap ${variant ? 'fqc-var-' + variant : ''} ${className}`.trim()}>
+  {title && <h2 class="fqc-title">{title}</h2>}
+  <div class="fqc-list">
+    {items.map((item) => (
+      <details class="fqc-item" open={variant === 'safety-talk' ? true : undefined}>
+        <summary class="fqc-summary">
+          <span class="fqc-q-text">{item.q}</span>
+          {iconChar && <span class="fqc-icon" aria-hidden="true">{iconChar}</span>}
+        </summary>
+        <div class="fqc-answer">
+          <p class="fqc-a-text">{/<[a-z]/i.test(item.a) ? <Fragment set:html={item.a} /> : item.a}</p>
+        </div>
+      </details>
+    ))}
+  </div>
+</div>
+
+<style>
+  .fqc-wrap {
+    width: 100%;
+  }
+  .fqc-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--brand);
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .fqc-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .fqc-item {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 12px;
+    background: var(--surface);
+    overflow: hidden;
+    transition: border-color var(--dur-fast, 0.2s) var(--ease-standard, ease), box-shadow var(--dur-fast, 0.2s) var(--ease-standard, ease);
+    box-shadow: 0 6px 24px -10px color-mix(in srgb, var(--brand) 12%, transparent);
+  }
+  .fqc-var-plain .fqc-item {
+    box-shadow: none;
+  }
+  .fqc-summary {
+    padding: 16px 20px;
+    background: var(--slate-50);
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--brand);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    min-height: 44px;
+    box-sizing: border-box;
+    user-select: none;
+    transition: background-color var(--dur-fast, 0.2s) var(--ease-standard, ease), color var(--dur-fast, 0.2s) var(--ease-standard, ease);
+  }
+  .fqc-summary::-webkit-details-marker,
+  .fqc-summary::marker {
+    display: none;
+    content: "";
+  }
+  .fqc-summary:focus-visible {
+    outline: 2px solid var(--cta);
+    outline-offset: -2px;
+  }
+  .fqc-icon {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1;
+    transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+    flex-shrink: 0;
+    margin-left: 12px;
+    color: var(--brand);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .fqc-item[open] > .fqc-summary > .fqc-icon {
+    transform: rotate(45deg);
+  }
+  .fqc-answer {
+    display: block;
+    padding: 16px 20px;
+    color: var(--slate-700);
+    line-height: 1.8;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    font-size: 0.92rem;
+  }
+  .fqc-a-text {
+    margin: 0;
+  }
+
+  /* ── TOOL VARIANT ────────────────────────────────────────── */
+  .fqc-var-tool .fqc-item {
+    border: 0px none rgb(0, 0, 0);
+    border-radius: 12px;
+    margin: 0 0 12px;
+    background: var(--surface);
+    box-shadow: 0 6px 24px -10px color-mix(in srgb, var(--brand) 12%, transparent);
+  }
+  .fqc-var-tool .fqc-summary {
+    padding: 16px 20px;
+    margin: 0;
+    background: var(--surface);
+    font-family: 'Lexend', sans-serif;
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: rgb(0, 0, 0);
+    line-height: normal;
+    border: 0px none rgb(0, 0, 0);
+  }
+  .fqc-var-tool .fqc-summary:hover {
+    background: var(--slate-50);
+  }
+  .fqc-var-tool .fqc-icon {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 16px;
+    color: var(--brand);
+    background: rgba(0, 0, 0, 0);
+    margin: 1px 0 0;
+    transform: none;
+  }
+  .fqc-kalkulator-k3 .fqc-icon {
+    font-size: 0.8rem;
+    line-height: 0.8rem;
+  }
+  .fqc-var-tool .fqc-item[open] > .fqc-summary > .fqc-icon {
+    transform: matrix(-1, 0, 0, -1, 0, 0);
+  }
+  .fqc-var-tool details:not([open]) > .fqc-answer {
+    display: none !important;
+  }
+  .fqc-var-tool details[open] > .fqc-answer {
+    display: block !important;
+  }
+  .fqc-var-tool .fqc-answer {
+    padding: 0 20px 18px;
+    margin: 0;
+    color: rgb(0, 0, 0);
+    font-size: 0.92rem;
+    line-height: 1.65;
+    background: rgba(0, 0, 0, 0);
+    border: 0px none rgb(0, 0, 0);
+  }
+
+  /* ── CATALOG VARIANT ─────────────────────────────────────── */
+  .fqc-var-catalog .fqc-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    max-width: 920px;
+    margin: 0 auto;
+  }
+  @media (max-width: 700px) {
+    .fqc-var-catalog .fqc-list {
+      grid-template-columns: 1fr;
+    }
+  }
+  .fqc-var-catalog .fqc-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    margin: 0;
+    box-shadow: 0 6px 24px -10px color-mix(in srgb, var(--brand) 12%, transparent);
+  }
+  .fqc-var-catalog .fqc-item[open] {
+    border: 1px solid var(--border);
+    box-shadow: 0 6px 24px -10px color-mix(in srgb, var(--brand) 12%, transparent);
+  }
+  .fqc-var-catalog .fqc-summary {
+    padding: 16px 18px;
+    background: rgba(0, 0, 0, 0);
+    border: 0px none rgb(8, 28, 21);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--brand-dark);
+    line-height: 1.5;
+  }
+  .fqc-var-catalog .fqc-item[open] > .fqc-summary {
+    color: rgb(45, 106, 79);
+    border: 0px none rgb(45, 106, 79);
+  }
+  .fqc-var-catalog .fqc-icon {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--slate-100);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--brand);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 16px;
+    margin: 1px 0 0;
+    transform: none;
+  }
+  .fqc-var-catalog .fqc-item[open] > .fqc-summary > .fqc-icon {
+    background: var(--slate-100);
+    color: var(--brand);
+    transform: none;
+  }
+  .fqc-var-catalog .fqc-answer {
+    display: grid !important;
+    grid-template-rows: 0fr;
+    padding: 0 18px;
+    background: rgba(0, 0, 0, 0);
+    border: 0px none rgb(71, 85, 105);
+    font-size: 14px;
+    color: var(--slate-600);
+    line-height: 1.7;
+  }
+  .fqc-var-catalog .fqc-answer > *,
+  .fqc-var-inhouse .fqc-answer > * {
+    min-height: 0;
+    overflow: hidden;
+  }
+  .fqc-var-catalog .fqc-item[open] > .fqc-answer {
+    grid-template-rows: 0fr;
+    padding: 0 18px;
+  }
+
+  /* ── IN-HOUSE VARIANT ────────────────────────────────────── */
+  .fqc-var-inhouse .fqc-item {
+    margin: 0 0 12px;
+    border: 1px solid rgb(226, 232, 240);
+    border-radius: 8px;
+    box-shadow: 0 6px 24px -10px color-mix(in srgb, var(--brand) 12%, transparent);
+    background: rgb(255, 255, 255);
+  }
+  .fqc-var-inhouse .fqc-item[open] {
+    border: 1px solid rgb(226, 232, 240);
+    box-shadow: 0 6px 24px -10px color-mix(in srgb, var(--brand) 12%, transparent);
+  }
+  .fqc-var-inhouse .fqc-summary {
+    padding: 16px 20px;
+    margin: 0;
+    font-size: 15.2px;
+    font-weight: 600;
+    line-height: 25.84px;
+    color: rgb(27, 67, 50);
+    background: rgb(248, 250, 252);
+    border: 0px none rgb(27, 67, 50);
+  }
+  .fqc-var-inhouse .fqc-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgb(241, 245, 249);
+    color: rgb(45, 106, 79);
+    font-size: 19.2px;
+    font-weight: 700;
+    line-height: 19.2px;
+    margin: 1px 0 0;
+    transform: none;
+  }
+  .fqc-var-inhouse .fqc-item[open] > .fqc-summary > .fqc-icon {
+    transform: none;
+  }
+  .fqc-var-inhouse .fqc-answer {
+    display: grid !important;
+    grid-template-rows: 0fr;
+    padding: 16px 20px;
+    margin: 0;
+    font-size: 14.72px;
+    line-height: 26.496px;
+    color: rgb(51, 65, 85);
+    background: rgb(255, 255, 255);
+    border: 1px solid rgb(226, 232, 240);
+  }
+  .fqc-var-inhouse .fqc-item[open] > .fqc-answer {
+    grid-template-rows: 0fr;
+    padding: 16px 20px;
+  }
+
+  /* ── SKKNI VARIANT ───────────────────────────────────────── */
+  .fqc-var-skkni .fqc-item {
+    background: var(--slate-50);
+    border: 1px solid var(--slate-200);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin: 0 0 12px;
+    box-shadow: 0 6px 24px -10px color-mix(in srgb, var(--brand) 12%, transparent);
+  }
+  .fqc-var-skkni .fqc-summary {
+    display: block;
+    padding: 0;
+    margin: 0 0 8px;
+    background: transparent;
+    border: 0;
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: var(--slate-900);
+    cursor: pointer;
+    list-style: none;
+  }
+  .fqc-var-skkni .fqc-summary::-webkit-details-marker {
+    display: none;
+  }
+  .fqc-var-skkni .fqc-answer {
+    display: block;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border: 0;
+    font-size: 0.92rem;
+    color: var(--slate-600);
+    line-height: 1.65;
+  }
+
+  /* ── SAFETY TALK VARIANT ─────────────────────────────────── */
+  .fqc-var-safety-talk .fqc-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .fqc-var-safety-talk .fqc-item {
+    padding: 18px 22px;
+    margin: 0;
+    background: rgb(248, 250, 252);
+    border: 1px solid rgb(226, 232, 240);
+    border-radius: 12px;
+    box-shadow: none;
+  }
+  .fqc-var-safety-talk .fqc-summary {
+    display: block;
+    padding: 0;
+    margin: 0 0 8px;
+    background: transparent;
+    border: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--slate-900);
+    cursor: default;
+    list-style: none;
+  }
+  .fqc-var-safety-talk .fqc-summary::-webkit-details-marker {
+    display: none;
+  }
+  .fqc-var-safety-talk .fqc-answer {
+    display: block;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border: 0;
+    font-size: 0.92rem;
+    color: var(--slate-600);
+    line-height: 1.6;
+  }
+
+  /* ── SIMPLE VARIANT ──────────────────────────────────────── */
+  .fqc-var-simple .fqc-item {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin: 0 0 12px;
+    padding: 12px 16px;
+    background: var(--surface);
+    box-shadow: 0 6px 24px -10px color-mix(in srgb, var(--brand) 12%, transparent);
+  }
+  .fqc-var-simple .fqc-summary {
+    display: list-item;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border: 0px none rgb(15, 23, 42);
+    font-size: 16px;
+    font-weight: 700;
+    color: rgb(15, 23, 42);
+    line-height: 27.2px;
+    cursor: pointer;
+  }
+  .fqc-var-simple .fqc-summary::-webkit-details-marker {
+    display: list-item;
+  }
+  .fqc-var-simple .fqc-summary::marker {
+    display: list-item;
+  }
+  .fqc-var-simple .fqc-answer {
+    display: block;
+    padding: 0;
+    margin-top: 10px;
+    background: transparent;
+    border: 0;
+    color: var(--slate-600);
+    line-height: 1.6;
+    font-size: 0.92rem;
+  }
+
+  /* ── TOOLS INDEX VARIANT ─────────────────────────────────── */
+  .fqc-var-tools-index .fqc-item {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin: 0 0 10px;
+    padding: 12px 16px;
+    background: var(--surface);
+    box-shadow: 0 6px 24px -10px color-mix(in srgb, var(--brand) 12%, transparent);
+  }
+  .fqc-var-tools-index .fqc-summary {
+    display: list-item;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border: 0px none rgb(0, 0, 0);
+    font-size: 16px;
+    font-weight: 700;
+    color: rgb(0, 0, 0);
+    line-height: 1.6;
+    cursor: pointer;
+  }
+  .fqc-var-tools-index .fqc-summary::-webkit-details-marker {
+    display: list-item;
+  }
+  .fqc-var-tools-index .fqc-summary::marker {
+    display: list-item;
+  }
+  .fqc-var-tools-index .fqc-answer {
+    display: block;
+    padding: 0;
+    margin-top: 10px;
+    background: transparent;
+    border: 0;
+    color: var(--slate-700);
+    line-height: 1.6;
+    font-size: 0.92rem;
+  }
+</style>

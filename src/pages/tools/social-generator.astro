@@ -1,5 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Faq from '../../components/Faq.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
 
 const pageTitle = "Generator Banner & Poster K3 2026: Bulan K3 Nasional & Slogan K3";
 const metaDesc = "Buat poster dan banner K3 profesional online gratis untuk Bulan K3 Nasional, kampanye APD, dan media sosial. Download grafis keselamatan kerja siap cetak dan share.";
@@ -48,6 +50,17 @@ const schemas = [
   ]
 },
   ];
+
+const toolFaqs = [
+  {
+    "q": "Kapan Bulan K3 Nasional diperingati setiap tahunnya?",
+    "a": "Bulan K3 Nasional diperingati secara serentak di seluruh Indonesia mulai tanggal <strong>12 Januari hingga 12 Februari</strong> setiap tahunnya berdasarkan Keputusan Menteri Ketenagakerjaan RI, guna memicu momentum kampanye keselamatan secara nasional."
+  },
+  {
+    "q": "Apakah poster hasil generator ini bebas digunakan secara komersial?",
+    "a": "Ya, 100% gratis dan bebas digunakan untuk keperluan internal perusahaan, cetak spanduk di site pabrik/konstruksi, lembar buletin P2K3, maupun postingan akun LinkedIn / Instagram perusahaan."
+  }
+];
 ---
 
 <Layout
@@ -168,7 +181,7 @@ const schemas = [
         Komunikasi visual melalui spanduk, banner, dan poster keselamatan kerja merupakan sarana vital dalam pembentukan budaya K3 (<em>Safety Culture</em>) sesuai dengan <strong>Permenaker No. 05 Tahun 1996 dan PP No. 50 Tahun 2012</strong> tentang Penerapan SMK3 Klausul Komunikasi dan Konsultasi.
       </p>
 
-      <h3 class="sp-heading-lexend-md">Prinsip Pesan Keselamatan Kerja yang Efektif</h3>
+      <SectionTitle level={3} size="md">Prinsip Pesan Keselamatan Kerja yang Efektif</SectionTitle>
       <ul style="padding-left:22px;color:var(--slate-700);line-height:1.75;margin-bottom:18px">
         <li><strong>Ringkas dan Langsung (Clear &amp; Actionable):</strong> Hindari kalimat bertele-tele. Fokus pada pesan aksi nyata, seperti "Pakai Harness Anda" atau "Periksa Sebelum Naik".</li>
         <li><strong>Pendekatan Psikologis Positif:</strong> Mengingatkan pekerja tentang keluarga yang menunggu di rumah terbukti secara psikologis lebih efektif menurunkan perilaku berisiko dibanding pesan yang sekadar bernada ancaman hukuman.</li>
@@ -176,30 +189,8 @@ const schemas = [
       </ul>
 
       <!-- FAQ ACCORDION -->
-      <h3 class="sp-heading-lexend-lg">Tanya Jawab Seputar Promosi K3 (FAQ)</h3>
-      <div class="faq-box">
-        
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span>Kapan Bulan K3 Nasional diperingati setiap tahunnya?</span>
-            <span class="faq-icon">▼</span>
-          </button>
-          <div class="faq-a">
-            Bulan K3 Nasional diperingati secara serentak di seluruh Indonesia mulai tanggal <strong>12 Januari hingga 12 Februari</strong> setiap tahunnya berdasarkan Keputusan Menteri Ketenagakerjaan RI, guna memicu momentum kampanye keselamatan secara nasional.
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)">
-            <span>Apakah poster hasil generator ini bebas digunakan secara komersial?</span>
-            <span class="faq-icon">▼</span>
-          </button>
-          <div class="faq-a">
-            Ya, 100% gratis dan bebas digunakan untuk keperluan internal perusahaan, cetak spanduk di site pabrik/konstruksi, lembar buletin P2K3, maupun postingan akun LinkedIn / Instagram perusahaan.
-          </div>
-        </div>
-
-      </div>
+      <SectionTitle level={3} size="lg">Tanya Jawab Seputar Promosi K3 (FAQ)</SectionTitle>
+      <Faq items={toolFaqs} variant="tool" />
 
     </div>
 

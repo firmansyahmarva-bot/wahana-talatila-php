@@ -1,0 +1,91 @@
+---
+export interface HreflangItem {
+  lang: string;
+  href: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  canonical: string;
+  ogImage?: string;
+  ogType?: string;
+  ogLocale?: string;
+  siteName?: string;
+  robots?: string;
+  hreflangs?: HreflangItem[];
+  schemas?: any[];
+  author?: string;
+  lang?: 'id' | 'en' | 'zh';
+}
+
+const {
+  title,
+  description,
+  canonical,
+  ogImage = 'https://wahanatotalita.com/assets/img/og-cover.jpg',
+  ogType = 'website',
+  ogLocale = 'id_ID',
+  siteName = 'PT Wahana Totalita Konsultan',
+  robots,
+  hreflangs = [],
+  schemas = [],
+  author,
+  lang = 'id'
+} = Astro.props;
+
+// Default robots if none existed today: max-image-preview:large
+const robotsContent = robots !== undefined ? robots : (lang === 'id' ? 'index,follow,max-image-preview:large' : 'index, follow');
+
+// Ensure schemas have @context if missing
+const normalizedSchemas = schemas.map((schema) => {
+  if (typeof schema === 'string') return schema;
+  if (typeof schema === 'object' && schema !== null && !schema['@context']) {
+    return { '@context': 'https://schema.org', ...schema };
+  }
+  return schema;
+});
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+
+{hreflangs.map((item) => (
+  <link rel="alternate" hreflang={item.lang} href={item.href} />
+))}
+
+{robotsContent && <meta name="robots" content={robotsContent} />}
+{author && <meta name="author" content={author} />}
+
+<!-- Favicons -->
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicon-180.png" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={ogType} />
+<meta property="og:site_name" content={siteName} />
+<meta property="og:locale" content={ogLocale} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+<meta name="theme-color" content="#1b4332" />
+
+<!-- Structured Data JSON-LD Schemas -->
+{normalizedSchemas.map((schema) => (
+  <script type="application/ld+json" set:html={typeof schema === 'string' ? schema : JSON.stringify(schema)} />
+))}
+<slot />

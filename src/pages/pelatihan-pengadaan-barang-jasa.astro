@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import Section from '../components/Section.astro';
 
 const canonical = 'https://wahanatotalita.com/pelatihan-pengadaan-barang-jasa/';
 const metaTitle = 'Pelatihan Pengadaan Barang Jasa Pemerintah (PBJP) Yogyakarta — Wahana Totalita';
@@ -128,10 +130,10 @@ const schemas = [
 
   <main class="container" style="max-width:960px;padding:48px 20px 64px;">
     <!-- REGULASI -->
-    <section class="sp-mb-48">
-      <h2 class="sp-title-underlined-24-bold">
+    <Section spacing="md">
+      <SectionTitle level={2} underline bold size="24">
         Regulasi Utama Pengadaan Barang/Jasa Pemerintah
-      </h2>
+      </SectionTitle>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;">
         {regs.map((r) => (
           <div style={`background:${r.bg};border-radius:10px;padding:20px;border-left:5px solid var(--brand);`}>
@@ -141,13 +143,13 @@ const schemas = [
           </div>
         ))}
       </div>
-    </section>
+    </Section>
 
     <!-- METODE PENGADAAN -->
-    <section class="sp-mb-48">
-      <h2 class="sp-title-underlined-20-bold">
+    <Section spacing="md">
+      <SectionTitle level={2} underline bold size="20">
         Metode Pengadaan (Perpres 16/2018 jo 12/2021)
-      </h2>
+      </SectionTitle>
       <div style="overflow-x:auto;">
         <table style="width:100%;border-collapse:collapse;font-size:0.88rem;border:1px solid var(--border);">
           <thead>
@@ -170,13 +172,13 @@ const schemas = [
           </tbody>
         </table>
       </div>
-    </section>
+    </Section>
 
     <!-- PERAN DALAM PENGADAAN -->
-    <section class="sp-mb-48">
-      <h2 class="sp-title-underlined-20-bold">
+    <Section spacing="md">
+      <SectionTitle level={2} underline bold size="20">
         Peran &amp; Tanggung Jawab dalam Pengadaan
-      </h2>
+      </SectionTitle>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;">
         {roles.map((r) => (
           <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;border-top:4px solid var(--brand);box-shadow:var(--shadow-sm);">
@@ -186,7 +188,7 @@ const schemas = [
           </div>
         ))}
       </div>
-    </section>
+    </Section>
 
     <!-- TEMUAN BPK -->
     <section style="margin-bottom:48px;background:var(--surface-subtle);border-radius:12px;padding:28px;border:1px solid var(--border);border-left:6px solid var(--warning);">
@@ -208,10 +210,10 @@ const schemas = [
     </section>
 
     <!-- PROGRAM PELATIHAN -->
-    <section class="sp-mb-48">
-      <h2 class="sp-title-underlined-20-bold">
+    <Section spacing="md">
+      <SectionTitle level={2} underline bold size="20">
         Program Pelatihan PBJP yang Tersedia
-      </h2>
+      </SectionTitle>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;">
         {programs.map((p) => (
           <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;">
@@ -226,7 +228,7 @@ const schemas = [
           </div>
         ))}
       </div>
-    </section>
+    </Section>
 
     <!-- ALUR PENGADAAN LANGSUNG -->
     <section style="margin-bottom:48px;background:var(--surface-subtle);border-radius:12px;padding:28px;border:1px solid var(--border);">
@@ -250,10 +252,10 @@ const schemas = [
     </section>
 
     <!-- FAQ -->
-    <section class="sp-mb-48">
-      <h2 class="sp-title-underlined-24-bold">
+    <Section spacing="md">
+      <SectionTitle level={2} underline bold size="24">
         Pertanyaan yang Sering Diajukan
-      </h2>
+      </SectionTitle>
       <div style="display:flex;flex-direction:column;gap:12px;">
         {faqs.map((faq) => (
           <details style="border:1px solid var(--border);border-radius:8px;padding:14px 18px;background:var(--surface);">
@@ -266,7 +268,7 @@ const schemas = [
           </details>
         ))}
       </div>
-    </section>
+    </Section>
 
     <!-- CTA -->
     <section style="background:linear-gradient(135deg,var(--brand),var(--brand-dark));color:var(--surface);border-radius:12px;padding:44px 24px;text-align:center;">
