@@ -1,0 +1,386 @@
+# ============================================================
+#  Wahana Totalita Konsultan — Production .htaccess (Astro Migration)
+#  Ships directly inside dist/ via Astro public/ directory
+# ============================================================
+
+Options -Indexes -MultiViews
+RewriteEngine On
+
+# Pass Authorization header to PHP environment
+SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
+
+# ------------------------------------------------------------
+# 1. Host Canonicalization & HTTPS (Step 1a)
+# ------------------------------------------------------------
+RewriteCond %{HTTP_HOST} ^origen\.wahanatotalita\.com$ [NC]
+RewriteRule ^ https://wahanatotalita.com%{REQUEST_URI} [R=301,L,NE]
+
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+
+# ------------------------------------------------------------
+# 2. Block direct access to sensitive files
+# ------------------------------------------------------------
+<FilesMatch "(config\.php|setup\.php|secrets\.php|secrets\.example\.php|composer\.json|composer\.lock|\.env|database\.sql|admin_schema\.sql|artikel-schema\.sql|package\.json|package-lock\.json|tsconfig\.json)$">
+    Require all denied
+</FilesMatch>
+
+# Block PHP execution in uploads
+<FilesMatch "\.php$">
+    <If "%{REQUEST_URI} =~ m|^/assets/uploads/|">
+        Require all denied
+    </If>
+</FilesMatch>
+
+# ------------------------------------------------------------
+# 3. Joomla com_content query redirects & WP scans (Step 1b)
+# ------------------------------------------------------------
+RewriteCond %{QUERY_STRING} option=com_content [NC]
+RewriteCond %{QUERY_STRING} (^|&)id=5(&|$) [NC]
+RewriteRule ^index\.php$ /perusahaan/? [R=301,L]
+
+RewriteCond %{QUERY_STRING} option=com_content [NC]
+RewriteCond %{QUERY_STRING} (^|&)id=8(&|$) [NC]
+RewriteRule ^index\.php$ /klien/? [R=301,L]
+
+RewriteCond %{QUERY_STRING} option=com_content [NC]
+RewriteCond %{QUERY_STRING} (^|&)id=9(&|$) [NC]
+RewriteRule ^index\.php$ /instruktur/? [R=301,L]
+
+RewriteCond %{QUERY_STRING} option=com_content [NC]
+RewriteCond %{QUERY_STRING} (^|&)id=10(&|$) [NC]
+RewriteRule ^index\.php$ /jadwal/? [R=301,L]
+
+RewriteCond %{QUERY_STRING} option=com_content [NC]
+RewriteCond %{QUERY_STRING} (^|&)id=13(&|$) [NC]
+RewriteRule ^index\.php$ /k3-migas/? [R=301,L]
+
+# Any other Joomla com_content query string -> 410 Gone
+RewriteCond %{QUERY_STRING} option=com_content [NC]
+RewriteRule .* - [G,L]
+
+# WordPress legacy paths -> 301 /
+RewriteRule ^wp-(admin|content|includes|login|config|load|json|cron|signup|mail|trackback|comments)(/?|\.php.*)?$ / [R=301,L]
+
+# ------------------------------------------------------------
+# 4. Specific Old URL 301s & Legacy Redirects (Step 1b)
+# ------------------------------------------------------------
+RewriteRule ^news/dasar-hukum-keselamatan-dan-kesehatan-kerja\.html$ /artikel/dasar-hukum-keselamatan-dan-kesehatan-kerja/ [R=301,L]
+RewriteRule ^news/pentingnya-k3-di-tempat-kerja\.html$ /artikel/pentingnya-k3-di-tempat-kerja/ [R=301,L]
+RewriteRule ^profil/tentang-kami\.html$ /perusahaan/ [R=301,L]
+RewriteRule ^sertifikasi\.html$ /pelatihan/ [R=301,L]
+RewriteRule ^partner\.html$ /perusahaan/ [R=301,L]
+RewriteRule ^foto(/.*)?$ / [R=301,L]
+RewriteRule ^video\.html$ / [R=301,L]
+RewriteRule ^info(/.*)?$ /perusahaan/ [R=301,L]
+
+# 410 Gone — legacy /news/ URLs (Step 1b)
+RewriteCond %{REQUEST_URI} ^/news/ [NC]
+RewriteRule .* - [G,L]
+
+# Legacy sections
+RewriteRule ^layanan/?$ /pelatihan/ [R=301,L]
+RewriteRule ^jadwal-pelatihan/?$ /jadwal/ [R=301,L]
+RewriteRule ^k3(/.*)?$ /pelatihan/k3/ [R=301,L]
+
+# In-house-training slashless -> slash
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^in-house-training$ /in-house-training/ [R=301,L]
+
+# Pelatihan-k3-{slug} slashless -> slash
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^pelatihan-k3-([a-z0-9\-]+)$ /pelatihan-k3-$1/ [R=301,L]
+
+# Tools clean URLs: /tools/*.php -> /tools/*/
+RewriteCond %{THE_REQUEST} \s/+tools/index\.php[\s?] [NC]
+RewriteRule ^tools/index\.php$ /tools/ [R=301,L]
+
+RewriteCond %{THE_REQUEST} \s/+tools/([a-z0-9\-]+)\.php[\s?] [NC]
+RewriteRule ^tools/([a-z0-9\-]+)\.php$ /tools/$1/ [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^tools/([a-z0-9\-]+)$ /tools/$1/ [R=301,L]
+
+# /in-house/* -> /in-house-training/* (Step 1f)
+RewriteRule ^in-house/?$ /in-house-training/ [R=301,L]
+RewriteRule ^in-house/([a-z0-9\-]+)/?$ /in-house-training/$1/ [R=301,L]
+
+# ------------------------------------------------------------
+# 5. Old Split Sitemaps -> /sitemap.xml (Step 1g)
+# ------------------------------------------------------------
+RewriteRule ^(sitemap-core|sitemap-pelatihan|sitemap-artikel|sitemap-kota|sitemap-platform|sitemap-glosarium|sitemap-regulasi|sitemap-skkni|sitemap-riksa-uji|sitemap-perpanjangan-skp|sitemap-purnabakti|sitemap-event|sitemap-kota-pelatihan)\.xml$ /sitemap.xml [R=301,L]
+
+# ------------------------------------------------------------
+# 6. Forklift and Ahli K3 Umum Permutation 301s (Step 1e)
+# ------------------------------------------------------------
+RewriteRule ^pelatihan/(operator-forklift|sio-forklift)(-kelas-[0-9a-z]+)?(-[a-z0-9\-]+)?(\.(html|php))?/?$ /pelatihan/pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri/ [R=301,L]
+RewriteRule ^pelatihan/(ahli-k3-umum(-[a-z0-9\-]+)?|pelatihan-ahli-k3-umum-sertifikasi-bnsp-online)(\.(html|php))?/?$ /pelatihan/ak3-bnsp/ [R=301,L]
+
+# ------------------------------------------------------------
+# 7. Exact-Match 301 Rules from 404.php (Step 1c)
+# ------------------------------------------------------------
+# Legacy Course Map (Direct Course-to-Course 301)
+RewriteRule ^pelatihan/pelatihan-auditor-smk3-kemnaker-ri-online/?$ /pelatihan/pelatihan-auditor-sistem-manajemen-k3-sertifikasi-kemnaker-ri/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-k3-listrik-teknisi-kemnaker-ri/?$ /pelatihan/pelatihan-k3-teknisi-listrik-sertifikasi-kemnaker-ri/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-k3-bekerja-di-ketinggian-tkbt-tkpk-kemnaker/?$ /pelatihan/pelatihan-tkbt-ii-sertifikasi-kemnaker-ri/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-k3-ruang-terbatas-confined-space-kemnaker/?$ /pelatihan/pelatihan-teknisi-ruang-terbatas-sertifikasi-bnsp/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-k3-pesawat-uap-bejana-tekan-kemnaker/?$ /pelatihan/pelatihan-k3-operator-boiler-kelas-2-sertifikasi-kemnaker-ri/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-pengawas-operasional-pertama-pop-minerba-bnsp/?$ /pelatihan/pelatihan-pop-pertambangan-sertifikasi-bnsp-online/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-pengawas-operasional-madya-pom-minerba-bnsp/?$ /pelatihan/pelatihan-pom-pertambangan-sertifikasi-bnsp-online/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-penanggung-jawab-operasional-pengolahan-air-limbah-popal-bnsp/?$ /pelatihan/pelatihan-penanggung-jawab-operasional-pengolahan-air-limbah-popal-sertifikasi-bnsp/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-pengelolaan-limbah-b3-plb3-bnsp/?$ /pelatihan/pelatihan-pemantauan-pengelolaan-limbah-bahan-berbahaya-dan-beracun-level-pengawas-pplb3-sertifikasi-bnsp/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-penanggung-jawab-pengendalian-pencemaran-udara-poppua-bnsp/?$ /pelatihan/pelatihan-penanggung-jawab-pengendalian-pencemaran-udara-pppu-sertifikasi-bnsp/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-internal-auditor-iso-9001-14001-45001-qhse-online/?$ /pelatihan/pelatihan-qhse-awareness-terintegrasi-iso-online/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-higiene-industri-muda-himu-bnsp/?$ /pelatihan/pelatihan-ahli-higiene-industri-muda-sertifikasi-bnsp/ [R=301,L]
+
+# Exact-Match 404.php Path Redirects
+RewriteRule ^kontak/?$ /perusahaan/ [R=301,L]
+RewriteRule ^kontak/?$ /perusahaan/ [R=301,L]
+RewriteRule ^pelatihan-ahli-k3-umum/?$ /ahli-k3-umum/ [R=301,L]
+RewriteRule ^pelatihan-ahli-k3-umum/?$ /ahli-k3-umum/ [R=301,L]
+RewriteRule ^pelatihan-k3/?$ /pelatihan/ [R=301,L]
+RewriteRule ^pelatihan-k3/?$ /pelatihan/ [R=301,L]
+RewriteRule ^refreshing-k3/?$ /perpanjangan-skp/ [R=301,L]
+RewriteRule ^refreshing-k3/?$ /perpanjangan-skp/ [R=301,L]
+RewriteRule ^artikel/investigasi-kecelakaan-kerja-metode-langkah/?$ /artikel/metode-investigasi-kecelakaan-kerja-root-cause-analysis-scat/ [R=301,L]
+RewriteRule ^artikel/investigasi-kecelakaan-kerja-metode-langkah/?$ /artikel/metode-investigasi-kecelakaan-kerja-root-cause-analysis-scat/ [R=301,L]
+RewriteRule ^pelatihan/operator-rigger/?$ /artikel/pelatihan-rigger-juru-ikat-beban/ [R=301,L]
+RewriteRule ^pelatihan/operator-rigger/?$ /artikel/pelatihan-rigger-juru-ikat-beban/ [R=301,L]
+RewriteRule ^pelatihan/operator-alat-berat/?$ /operator-alat-berat/ [R=301,L]
+RewriteRule ^pelatihan/operator-alat-berat/?$ /operator-alat-berat/ [R=301,L]
+RewriteRule ^pelatihan/supervisor-k3-konstruksi/?$ /k3-konstruksi/ [R=301,L]
+RewriteRule ^pelatihan/supervisor-k3-konstruksi/?$ /k3-konstruksi/ [R=301,L]
+RewriteRule ^pelatihan/operator-motor-diesel-genset/?$ /pelatihan/pelatihan-k3-operator-motor-diesel-genset-sertifikasi-kemnaker-ri/ [R=301,L]
+RewriteRule ^pelatihan/operator-motor-diesel-genset/?$ /pelatihan/pelatihan-k3-operator-motor-diesel-genset-sertifikasi-kemnaker-ri/ [R=301,L]
+RewriteRule ^pelatihan/petugas-pemadam-kebakaran-kelas-d/?$ /pelatihan/pelatihan-petugas-peran-kebakaran-kelas-d-kemnaker-ri/ [R=301,L]
+RewriteRule ^pelatihan/petugas-pemadam-kebakaran-kelas-d/?$ /pelatihan/pelatihan-petugas-peran-kebakaran-kelas-d-kemnaker-ri/ [R=301,L]
+RewriteRule ^pelatihan/operator-boiler-kelas-2/?$ /pelatihan/pelatihan-k3-operator-boiler-kelas-2-sertifikasi-kemnaker-ri/ [R=301,L]
+RewriteRule ^pelatihan/operator-boiler-kelas-2/?$ /pelatihan/pelatihan-k3-operator-boiler-kelas-2-sertifikasi-kemnaker-ri/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-tkbt-tingkat-2-kemnaker-ri/?$ /pelatihan/pelatihan-tkbt-ii-sertifikasi-kemnaker-ri/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-tkbt-tingkat-2-kemnaker-ri/?$ /pelatihan/pelatihan-tkbt-ii-sertifikasi-kemnaker-ri/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-tkpk-tingkat-1-kemnaker-ri/?$ /k3-ketinggian/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-tkpk-tingkat-1-kemnaker-ri/?$ /k3-ketinggian/ [R=301,L]
+RewriteRule ^event-orgniser/?$ /event-organizer/ [R=301,L]
+RewriteRule ^klient/?$ /klien/ [R=301,L]
+RewriteRule ^tools/seafty-talk/?$ /tools/safety-talk/ [R=301,L]
+RewriteRule ^artikel/gaji-ahli-k3-umum-di-indonesia/?$ /artikel/ahli-k3-umum-ak3u-syarat-tugas-sertifikasi/ [R=301,L]
+RewriteRule ^artikel/pengawas-operasional-pertama-pop-pertambangan/?$ /artikel/pengawas-operasional-pertama-pop-pertambangan/ [R=301,L]
+RewriteRule ^artikel/pelatihan-pengelolaan-lingkungan-hidup-ukl-upl-proper/?$ /artikel/pelatihan-pengelolaan-lingkungan-hidup-untuk-perusahaan-ukl-upl-dan-proper/ [R=301,L]
+RewriteRule ^pelatihan/pengawas-k3-listrik/?$ /pelatihan/pelatihan-ahli-k3-listrik-sertifikasi-bnsp/ [R=301,L]
+RewriteRule ^pelatihan/ahli-k3-penanggulangan-kebakaran-kelas-a/?$ /pelatihan/pelatihan-ahli-k3-penanggulangan-keb-kelas-a-sertifikasi-kemnaker-ri/ [R=301,L]
+RewriteRule ^pelatihan/amdal-penyusun/?$ /pelatihan/pelatihan-teknis-pertek-limbah-b3-dan-emisi-udara-sertifikasi-bnsp/ [R=301,L]
+RewriteRule ^pelatihan/ahli-k3-umum/?$ /pelatihan/pelatihan-ahli-k3-umum-sertifikasi-kemnaker-ri/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-ahli-k3-umum-sertifikasi-bnsp-online/?$ /pelatihan/ak3-bnsp/ [R=301,L]
+RewriteRule ^pelatihan/hazops/?$ /pelatihan/pelatihan-hazard-dan-operability-studies-hazops-sertifikasi-bnsp/ [R=301,L]
+RewriteRule ^pelatihan/operator-forklift/?$ /pelatihan/pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri/ [R=301,L]
+RewriteRule ^pelatihan/ahli-k3-penanggulangan-kebakaran-kelas-a-tangerang\.html$ /pelatihan/pelatihan-ahli-k3-penanggulangan-keb-kelas-a-sertifikasi-kemnaker-ri/ [R=301,L]
+RewriteRule ^pelatihan/ahli-k3-listrik-bnsp/?$ /pelatihan/pelatihan-ahli-k3-listrik-sertifikasi-bnsp/ [R=301,L]
+RewriteRule ^pelatihan/regu-penanggulangan-kebakaran-kelas-c/?$ /pelatihan/pelatihan-regu-penanggulangan-kebakaran-kelas-c-sertifikasi-kemnaker-ri/ [R=301,L]
+RewriteRule ^pelatihan/tkbt-ii-banggai\.html$ /pelatihan/pelatihan-tkbt-ii-sertifikasi-kemnaker-ri/ [R=301,L]
+RewriteRule ^pelatihan/ahli-k3-umum-sumbawa\.html$ /pelatihan/pelatihan-ahli-k3-umum-sertifikasi-kemnaker-ri/ [R=301,L]
+RewriteRule ^pelatihan/ahli-k3-konstruksi/?$ /pelatihan/ahli-k3-konstruksi-sertifikasi-bnsp/ [R=301,L]
+RewriteRule ^pelatihan/auditor-internal-k3/?$ /pelatihan/pelatihan-auditor-sistem-manajemen-k3-sertifikasi-bnsp/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-ahli-k3-listrik/?$ /pelatihan/pelatihan-ahli-k3-listrik-sertifikasi-kemnaker-ri/ [R=301,L]
+RewriteRule ^pelatihan-dan-sertifikasi-pengoperasian-alat-gali-muat-excavator-back-hoe-sertifikasi-bnsp/?$ /pelatihan/pelatihan-dan-sertifikasi-pengoperasian-alat-gali-muat-excavator-back-hoe-sertifikasi-bnsp/ [R=301,L]
+RewriteRule ^pelatihan/penyusun-amdal/?$ /pelatihan/pelatihan-teknis-pertek-limbah-b3-dan-emisi-udara-sertifikasi-bnsp/ [R=301,L]
+RewriteRule ^pelatihan-catalog/?$ /pelatihan/ [R=301,L]
+RewriteRule ^pelatihan-kategori/?$ /pelatihan/ [R=301,L]
+RewriteRule ^pelnanggulangan-kebakaran/?$ /pelatihan/k3/ [R=301,L]
+RewriteRule ^resources/template-hiradc-ibpr/?$ /pelatihan/k3/ [R=301,L]
+RewriteRule ^resources/materi-safety-talk-toolbox-meeting/?$ /pelatihan/k3/ [R=301,L]
+RewriteRule ^kota/?$ /pelatihan-k3-balikpapan/ [R=301,L]
+RewriteRule ^kota/jakarta/?$ /pelatihan-k3-jakarta/ [R=301,L]
+RewriteRule ^outbond/?$ /pelatihan/ [R=301,L]
+RewriteRule ^galeri/index/?$ /galeri/ [R=301,L]
+RewriteRule ^dafter/?$ /jadwal/ [R=301,L]
+RewriteRule ^jadwal/daftar/83/?$ /jadwal/ [R=301,L]
+RewriteRule ^jadwal/daftar/79/?$ /jadwal/ [R=301,L]
+RewriteRule ^jadwal/daftar/39/?$ /jadwal/ [R=301,L]
+RewriteRule ^jadwal/daftar/37/?$ /jadwal/ [R=301,L]
+RewriteRule ^pelatihan/operator-scaffolding/?$ /pelatihan/pelatihan-k3-operator-scaffolding-sertifikasi-kemnaker-ri/ [R=301,L]
+RewriteRule ^pelatihan/operator-welder-kelas-1/?$ /pelatihan/pelatihan-k3-operator-welder-kelas-1-sertifikasi-kemnaker-ri/ [R=301,L]
+RewriteRule ^pelatihan/ahli-higiene-industri-muda/?$ /pelatihan/pelatihan-ahli-higiene-industri-muda-sertifikasi-bnsp/ [R=301,L]
+RewriteRule ^pelatihan/teknisi-ruang-terbatas/?$ /pelatihan/pelatihan-teknisi-ruang-terbatas-sertifikasi-bnsp/ [R=301,L]
+RewriteRule ^pelatihan/ahli-utama-ruang-terbatas-binjai/?$ /pelatihan/pelatihan-ahli-utama-ruang-terbatas-sertifikasi-bnsp/ [R=301,L]
+RewriteRule ^pelatihan/petugas-peran-kebakaran-kelas-d-kudus/?$ /pelatihan/pelatihan-petugas-peran-kebakaran-kelas-d-kemnaker-ri/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-petugas-peran-kebakaran-kelas-d/?$ /pelatihan/pelatihan-petugas-peran-kebakaran-kelas-d-kemnaker-ri/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-petugas-p3k-kemnaker-ri/?$ /pelatihan/pelatihan-petugas-p3k-sertifikasi-kemnaker-ri/ [R=301,L]
+RewriteRule ^pelatihan/operator-forklift-kelas-2/?$ /pelatihan/pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri/ [R=301,L]
+RewriteRule ^pelatihan/ahli-muda-lingkungan-kerja/?$ /pelatihan/pelatihan-ahli-muda-lingkungan-kerja-sertifikasi-kemnaker-ri/ [R=301,L]
+RewriteRule ^pelatihan/penanganan-bahaya-gas-h2s/?$ /pelatihan/pelatihan-penanganan-bahaya-gas-h2s-sertifikasi-bnsp/ [R=301,L]
+RewriteRule ^pelatihan/penanganan-bahaya-gas-h2s-maros\.html$ /pelatihan/pelatihan-penanganan-bahaya-gas-h2s-sertifikasi-bnsp/ [R=301,L]
+RewriteRule ^pelatihan/penyusun-amdal/?$ /pelatihan/pelatihan-teknis-pertek-limbah-b3-dan-emisi-udara-sertifikasi-bnsp/ [R=301,L]
+RewriteRule ^pelatihan/operator-motor-diesel-genset-mojokerto/?$ /pelatihan/pelatihan-k3-operator-motor-diesel-genset-sertifikasi-kemnaker-ri/ [R=301,L]
+RewriteRule ^pelatihan/operator-crane-kelas-3/?$ /pelatihan/pelatihan-k3-operator-crane-kelas-3-sertifikasi-kemnaker-ri/ [R=301,L]
+RewriteRule ^artikel/pelatihan-pengelolaan-lingkungan-hidup-ukl-upl-proper/?$ /artikel/pelatihan-pengelolaan-lingkungan-hidup-untuk-perusahaan-ukl-upl-dan-proper/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-operator-pesawat-tenaga-produksi-ptp/%20s/?$ /pelatihan/pelatihan-operator-pesawat-tenaga-produksi-ptp/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-operator-pesawat-tenaga-produksi-ptp%20%20show/?$ /pelatihan/pelatihan-operator-pesawat-tenaga-produksi-ptp/ [R=301,L]
+RewriteRule ^forum/?$ / [R=301,L]
+RewriteRule ^forum/?$ / [R=301,L]
+
+# City Specific Redirects (from 404.php Section 8b)
+RewriteRule ^.*operator-crane-kelas-3.*$ /pelatihan/pelatihan-k3-operator-crane-kelas-3-sertifikasi-kemnaker-ri/ [R=301,L]
+RewriteRule ^.*operator-scaffolding-palangka-raya.*$ /pelatihan/pelatihan-k3-operator-scaffolding-sertifikasi-kemnaker-ri/ [R=301,L]
+RewriteRule ^.*tkbt-ii-paser.*$ /pelatihan/pelatihan-tkbt-ii-sertifikasi-kemnaker-ri/ [R=301,L]
+RewriteRule ^.*tkbt-ii-maros.*$ /pelatihan/pelatihan-tkbt-ii-sertifikasi-kemnaker-ri/ [R=301,L]
+RewriteRule ^.*ahli-muda-lingkungan-kerja-morowali.*$ /pelatihan/pelatihan-ahli-muda-lingkungan-kerja-sertifikasi-kemnaker-ri/ [R=301,L]
+RewriteRule ^.*regu-penanggulangan-kebakaran-kelas-c-bojonegoro.*$ /pelatihan/pelatihan-regu-penanggulangan-kebakaran-kelas-c-sertifikasi-kemnaker-ri/ [R=301,L]
+RewriteRule ^.*ahli-utama-ruang-terbatas-gorontalo.*$ /pelatihan/pelatihan-ahli-utama-ruang-terbatas-sertifikasi-bnsp/ [R=301,L]
+RewriteRule ^.*operator-conveyor.*$ /pelatihan/ [R=301,L]
+
+# ------------------------------------------------------------
+# 8. Training Redirects (data/training_redirects.json - Step 1d)
+# ------------------------------------------------------------
+RewriteRule ^pelatihan/pelatihan-teknis-pertek-limbah-b3-dan-emisi-udara-sertifikasi-bnsp-1/?$ /pelatihan/pelatihan-teknis-pertek-limbah-b3-dan-emisi-udara-sertifikasi-bnsp/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-penanggung-jawab-operasional-pengolahan-air-limbah-popal-sertifikasi-bnsp-1/?$ /pelatihan/pelatihan-penanggung-jawab-operasional-pengolahan-air-limbah-popal-sertifikasi-bnsp/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-pengambilan-contoh-uji-air-pcua-sertifikasi-bnsp-1/?$ /pelatihan/pelatihan-pengambilan-contoh-uji-air-pcua-sertifikasi-bnsp/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-operator-pengumpulan-limbah-b3-jenjang-kualifikasi-3-level-pelaksana-oplb3-sertifikasi-bnsp-1/?$ /pelatihan/pelatihan-operator-pengumpulan-limbah-b3-jenjang-kualifikasi-3-level-pelaksana-oplb3-sertifikasi-bnsp/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-penanggung-jawab-operasional-instalasi-pengendalian-pencemaran-udara-poippu-sertifikasi-bnsp-1/?$ /pelatihan/pelatihan-penanggung-jawab-operasional-instalasi-pengendalian-pencemaran-udara-poippu-sertifikasi-bnsp/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-pemantauan-pengelolaan-limbah-bahan-berbahaya-dan-beracun-level-pengawas-pplb3-sertifikasi-bnsp-1/?$ /pelatihan/pelatihan-pemantauan-pengelolaan-limbah-bahan-berbahaya-dan-beracun-level-pengawas-pplb3-sertifikasi-bnsp/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-penanggung-jawab-pengendalian-pencemaran-air-pppa-sertifikasi-bnsp-1/?$ /pelatihan/pelatihan-penanggung-jawab-pengendalian-pencemaran-air-pppa-sertifikasi-bnsp/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-penanggung-jawab-pengendalian-pencemaran-udara-pppu-sertifikasi-bnsp-1/?$ /pelatihan/pelatihan-penanggung-jawab-pengendalian-pencemaran-udara-pppu-sertifikasi-bnsp/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-manajer-pengolahan-limbah-b3-jenjang-kualifikasi-6-level-pengawas-mplb3-sertifikasi-bnsp-1/?$ /pelatihan/pelatihan-manajer-pengolahan-limbah-b3-jenjang-kualifikasi-6-level-pengawas-mplb3-sertifikasi-bnsp/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-pengumpulan-limbah-b3-jenjang-kualifikasi-6-level-pengawas-mplb3-sertifikasi-bnsp-1/?$ /pelatihan/pelatihan-manajer-pengolahan-limbah-b3-jenjang-kualifikasi-6-level-pengawas-mplb3-sertifikasi-bnsp/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-ahli-k3-umum-sertifikasi-bnsp/?$ /pelatihan/pelatihan-ahli-k3-umum-sertifikasi-bnsp-online/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-ahli-k3-umum-kemnaker-offline/?$ /pelatihan/pelatihan-ahli-k3-umum-sertifikasi-kemnaker-ri/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-unit-p-keb-kelas-c-sertifikasi-kemnaker-ri/?$ /pelatihan/pelatihan-koordinator-unit-p-keb-kelas-b-sertifikasi-kemnaker-ri/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-pppa-online/?$ /pelatihan/pelatihan-penanggung-jawab-pengendalian-pencemaran-air-pppa-sertifikasi-bnsp/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-oplb3-online/?$ /pelatihan/pelatihan-pengambilan-contoh-uji-air-pcua-sertifikasi-bnsp/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-hazops-online/?$ /pelatihan/pelatihan-hazard-dan-operability-studies-hazops-sertifikasi-bnsp/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-higiene-industri-madya-hima-online/?$ /pelatihan/pelatihan-ahli-higiene-industri-madya-sertifikasi-bnsp/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-ahli-k3-listrik-online/?$ /pelatihan/pelatihan-ahli-k3-listrik-sertifikasi-bnsp/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-pengawas-k3-migas-online/?$ /pelatihan/pelatihan-pengawas-k3-fasyankes-sertifikasi-bnsp// [R=301,L]
+RewriteRule ^pelatihan/pelatihan-popal-penanggung-jawab-pengendalian-pencemaran-air-limbah/?$ /pelatihan/pelatihan-penanggung-jawab-operasional-pengolahan-air-limbah-popal-sertifikasi-bnsp// [R=301,L]
+RewriteRule ^pelatihan/pelatihan-pppu-online/?$ /pelatihan/pelatihan-penanggung-jawab-pengendalian-pencemaran-udara-pppu-sertifikasi-bnsp/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-poippu-online/?$ /pelatihan/pelatihan-penanggung-jawab-operasional-instalasi-pengendalian-pencemaran-udara-poippu-sertifikasi-bnsp/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-pcua-online/?$ /pelatihan/pelatihan-pengambilan-contoh-uji-air-pcua-sertifikasi-bnsp// [R=301,L]
+RewriteRule ^pelatihan/pelatihan-pertek-limbah-b3-online/?$ /pelatihan/pelatihan-teknis-pertek-limbah-b3-dan-emisi-udara-sertifikasi-bnsp/ [R=301,L]
+RewriteRule ^pelatihan/pelatihan-authorized-gas-tester-sertifikasi-bnsp/?$ /pelatihan/pelatihan-authorized-gas-tester-agt-online/ [R=301,L]
+RewriteRule ^pelatihan/pelatihanpelatihan-authorized-gas-tester-agt-online/?$ /pelatihan/pelatihan-authorized-gas-tester-agt-online/ [R=301,L]
+
+# Enforce Trailing Slash on /pelatihan and /pelatihan/{slug}
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^pelatihan$ /pelatihan/ [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^pelatihan/([a-z0-9\-]+)$ /pelatihan/$1/ [R=301,L]
+
+# ------------------------------------------------------------
+# 9. PHP-only Features Retained (forum, verifikasi, newsletter, workplace, lp, api, admin, resources/download, jadwal/daftar)
+# ------------------------------------------------------------
+
+# Physical admin directory / scripts
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^admin(/.*)?$ admin/index.php [QSA,L]
+
+# Forum
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^forum/?$ forum/index.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^forum/([a-z0-9\-]+)/?$ forum/kategori.php?slug=$1 [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^forum/topik/([a-z0-9\-]+)/?$ forum/topik.php?slug=$1 [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^forum/buat/?$ forum/buat.php [QSA,L]
+
+# Certificate Verification
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^verifikasi/?$ verifikasi/index.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^verifikasi/([A-Z0-9\-]+)/?$ verifikasi/index.php?cert=$1 [QSA,L]
+
+# Workplace K3 & Dashboard Perusahaan
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^workplace(/.*)?$ workplace/index.php [QSA,L]
+
+# Newsletter
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^newsletter/unsubscribe/?$ newsletter/unsubscribe.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^newsletter/?$ newsletter/subscribe.php [QSA,L]
+
+# Landing pages: /lp/k3-umum -> /lp/k3-umum.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^lp/([a-z0-9\-]+)/?$ lp/$1.php [QSA,L]
+
+# API Endpoints
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^api/trainings/?$ api/trainings.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^api/articles/?$ api/articles.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^api/content/?$ api/content.php [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^api/([a-z0-9\-]+)/?$ api/$1.php [QSA,L]
+
+# Resource Downloads
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^resources/download/([0-9]+)/?$ resources/download.php?id=$1 [QSA,L]
+
+# Registration details & booking
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^jadwal/daftar/([0-9]+)/?$ jadwal/daftar.php?batch_id=$1 [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^jadwal/kalender/?$ jadwal/kalender.php [QSA,L]
+
+# ------------------------------------------------------------
+# 10. Security, Compression, Caching Headers (Step 1h & 1i)
+# ------------------------------------------------------------
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options  "nosniff"
+    Header always set X-Frame-Options         "SAMEORIGIN"
+    Header always set X-XSS-Protection        "1; mode=block"
+    Header always set Referrer-Policy         "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy      "geolocation=(), microphone=(), camera=()"
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    # Content Security Policy: allows self-hosted fonts and Google Fonts for /zh/
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://*.google-analytics.com https://ssl.google-analytics.com https://*.clarity.ms https://www.clarity.ms https://clarity.ms https://c.bing.com https://www.googleadservices.com https://*.doubleclick.net https://*.googlesyndication.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https: https://ad.doubleclick.net; frame-src 'self' https://www.googletagmanager.com https://*.doubleclick.net https://*.google.com; object-src 'none'; base-uri 'self'; form-action 'self' https://wa.me"
+</IfModule>
+
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css text/javascript
+    AddOutputFilterByType DEFLATE application/javascript application/json application/manifest+json
+    AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css              "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType image/jpeg            "access plus 6 months"
+    ExpiresByType image/png             "access plus 6 months"
+    ExpiresByType image/webp            "access plus 6 months"
+    ExpiresByType image/svg+xml         "access plus 1 month"
+    ExpiresByType image/x-icon          "access plus 1 year"
+    ExpiresByType application/manifest+json "access plus 1 week"
+</IfModule>
+
+<IfModule mod_headers.c>
+    <FilesMatch "\.(css)$">
+        Header set Cache-Control "public, max-age=2592000, immutable"
+    </FilesMatch>
+</IfModule>
+
+<IfModule mod_mime.c>
+    AddType application/manifest+json .webmanifest
+    AddType application/manifest+json .json
+</IfModule>
+
+# ------------------------------------------------------------
+# 11. Static 404 Error Document (Step 1i)
+# ------------------------------------------------------------
+ErrorDocument 404 /404.html
