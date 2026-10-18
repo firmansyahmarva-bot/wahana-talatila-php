@@ -54,6 +54,7 @@ const langConfig = {
         ]
       : (hreflangs || []),
     baseStyles: [
+      '/assets/css/fonts.css',
       '/assets/css/tokens.css',
       '/assets/css/core.css',
       '/assets/css/components.css',
@@ -77,6 +78,7 @@ const langConfig = {
         ]
       : (hreflangs || []),
     baseStyles: [
+      '/assets/css/fonts.css',
       '/assets/css/tokens.css'
     ],
     defaultPageCss: ['/assets/css/page/en.css'],
@@ -97,6 +99,7 @@ const langConfig = {
         ]
       : (hreflangs || []),
     baseStyles: [
+      '/assets/css/fonts.css',
       '/assets/css/tokens.css'
     ],
     defaultPageCss: ['/assets/css/page/zh.css'],
@@ -127,12 +130,17 @@ const finalPageCss = pageCss !== undefined ? pageCss : currentConfig.defaultPage
     lang={lang}
   />
 
-  <!-- Fonts & Master Stylesheet -->
+  <!-- Font Preloads & Fallbacks -->
+  {lang === 'id' && (
+    <>
+      <link rel="preload" href="/assets/fonts/source-sans-3-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+      <link rel="preload" href="/assets/fonts/lexend-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin />
+    </>
+  )}
   {lang === 'en' && (
     <>
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" />
+      <link rel="preload" href="/assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+      <link rel="preload" href="/assets/fonts/plus-jakarta-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin />
     </>
   )}
   {lang === 'zh' && (
