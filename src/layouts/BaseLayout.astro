@@ -19,6 +19,8 @@ export interface BaseLayoutProps {
   scripts?: string[];
 }
 
+type Props = BaseLayoutProps;
+
 const {
   lang = 'id',
   title,
@@ -152,10 +154,10 @@ const finalPageCss = pageCss !== undefined ? pageCss : currentConfig.defaultPage
   )}
 
   <!-- Base Stylesheets -->
-  {currentConfig.baseStyles.map((cssHref) => (
+  {currentConfig.baseStyles.map((cssHref: string) => (
     <link rel="stylesheet" href={cssHref} />
   ))}
-  {finalPageCss.map((cssHref) => (
+  {finalPageCss.map((cssHref: string) => (
     <link rel="stylesheet" href={cssHref} />
   ))}
 </head>
@@ -205,7 +207,7 @@ const finalPageCss = pageCss !== undefined ? pageCss : currentConfig.defaultPage
     <>
       <Footer />
       <script src="/assets/js/main.js" defer></script>
-      {scripts.map((s) => (
+      {scripts.map((s: string) => (
         <script src={s} defer></script>
       ))}
     </>

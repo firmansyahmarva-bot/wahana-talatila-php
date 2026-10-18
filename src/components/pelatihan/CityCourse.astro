@@ -41,11 +41,12 @@ const breadcrumbElements: any[] = [
 ];
 
 if (cityName) {
+  const citySlug = (cityName.toLowerCase() === 'bantul' || cityName.toLowerCase() === 'sleman') ? 'yogyakarta' : cityName.toLowerCase();
   breadcrumbElements.push({
     '@type': 'ListItem',
     position: 3,
     name: `Pelatihan K3 ${cityName}`,
-    item: `https://wahanatotalita.com/pelatihan-k3-${cityName.toLowerCase()}/`,
+    item: `https://wahanatotalita.com/pelatihan-k3-${citySlug}/`,
   });
   breadcrumbElements.push({
     '@type': 'ListItem',
@@ -99,7 +100,7 @@ const cityScripts = [
       items={[
         { name: 'Beranda', href: '/' },
         { name: 'Pelatihan', href: '/pelatihan/' },
-        ...(cityName ? [{ name: `Pelatihan K3 ${cityName}`, href: `/pelatihan-k3-${cityName.toLowerCase()}/` }] : []),
+        ...(cityName ? [{ name: `Pelatihan K3 ${cityName}`, href: `/pelatihan-k3-${(cityName.toLowerCase() === 'bantul' || cityName.toLowerCase() === 'sleman') ? 'yogyakarta' : cityName.toLowerCase()}/` }] : []),
         { name: programmaticTitle },
       ]}
     />

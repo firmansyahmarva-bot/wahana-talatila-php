@@ -42,6 +42,7 @@ function checkPathExists(p) {
     clean += 'index.html';
   }
   if (allDistFiles.has(clean)) return true;
+  if (allDistFiles.has(clean + '/index.html')) return true;
   if (allDistFiles.has(clean + '.html')) return true;
   if (allDistFiles.has(clean.replace(/\/index\.html$/, '.html'))) return true;
   return false;
