@@ -119,6 +119,26 @@ const faqs = [
 const schemas = [
   {
     '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: 'PT Wahana Totalita Konsultan',
+    url: 'https://wahanatotalita.com',
+    logo: 'https://wahanatotalita.com/assets/img/logo-wt.png',
+    telephone: '+6287759151278',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Jl. Wonosari KM 8.5, Berbah',
+      addressLocality: 'Sleman',
+      addressRegion: 'D.I. Yogyakarta',
+      postalCode: '55573',
+      addressCountry: 'ID',
+    },
+    sameAs: [
+      'https://instagram.com/wahanatotalita',
+      'https://facebook.com/wahanatotalita',
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
     '@type': 'FAQPage',
     mainEntity: faqs.map((f) => ({
       '@type': 'Question',

@@ -5,6 +5,12 @@ import EnSidebar from '../../components/EnSidebar.astro';
 const title = "Ahli K3 Umum (AK3U) Certification Indonesia: Safety Officer Legal Guide — Wahana Totalita";
 const description = "<?= htmlspecialchars($meta_desc, ENT_QUOTES,";
 const canonical = "https://wahanatotalita.com/en/safety-officer-ak3-umum-requirements/";
+const hreflangs = [
+  { lang: 'id', href: 'https://wahanatotalita.com/ahli-k3-umum/' },
+  { lang: 'en', href: 'https://wahanatotalita.com/en/safety-officer-ak3-umum-requirements/' },
+  { lang: 'zh-Hans', href: 'https://wahanatotalita.com/zh/ahli-k3-umum/' },
+  { lang: 'x-default', href: 'https://wahanatotalita.com/ahli-k3-umum/' },
+];
 const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","@id":"https://wahanatotalita.com/en/safety-officer-ak3-umum-requirements/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://wahanatotalita.com/"},{"@type":"ListItem","position":2,"name":"English OHS Hub","item":"https://wahanatotalita.com/en/"},{"@type":"ListItem","position":3,"name":"Ahli K3 Umum Requirements","item":"https://wahanatotalita.com/en/safety-officer-ak3-umum-requirements/"}]},{"@type":"Article","@id":"https://wahanatotalita.com/en/safety-officer-ak3-umum-requirements/#article","headline":"Ahli K3 Umum (AK3U) Certification Indonesia: Safety Officer Guide","description":"<?= htmlspecialchars($meta_desc, ENT_QUOTES,","inLanguage":"en-US","mainEntityOfPage":"https://wahanatotalita.com/en/safety-officer-ak3-umum-requirements/","datePublished":"2026-09-01T08:00:00+07:00","dateModified":"2026-10-01T12:00:00+07:00","publisher":{"@type":"Organization","name":"PT Wahana Totalita Konsultan","url":"https://wahanatotalita.com","logo":{"@type":"ImageObject","url":"https://wahanatotalita.com/assets/img/logo-wt.png"}}}]}];
 ---
 
@@ -12,6 +18,7 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
   title={title}
   description={description}
   canonical={canonical}
+  hreflangs={hreflangs}
   schemas={schemas}
 >
 <section class="en-hero">

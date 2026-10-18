@@ -163,6 +163,15 @@ const schemas = [
       priceCurrency: 'IDR',
       category: data.certification || 'Sertifikasi K3',
     },
+    ...(courseBatches.length > 0 ? {
+      hasCourseInstance: courseBatches.map((b: any) => ({
+        '@type': 'CourseInstance',
+        name: `${data.name} - Batch ${formatDateIndo(b.start_date)}`,
+        startDate: b.start_date,
+        endDate: b.end_date || b.start_date,
+        courseMode: b.location ? 'onsite' : 'online',
+      })),
+    } : {}),
   },
   {
     '@context': 'https://schema.org',

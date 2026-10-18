@@ -10,6 +10,8 @@
     "astro": "astro",
     "check": "astro check",
     "lint:design": "node scripts/lint-design.cjs",
+    "seo:audit": "node scripts/seo-audit.cjs",
+    "verify": "astro build && astro check && node scripts/lint-design.cjs && node scripts/seo-audit.cjs",
     "baseline:capture": "node scripts/capture-baseline.cjs",
     "baseline:compare": "node scripts/compare-screenshots.cjs"
   },

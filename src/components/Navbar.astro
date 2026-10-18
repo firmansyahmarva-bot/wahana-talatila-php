@@ -10,7 +10,7 @@ const { currentPath = '/', isHome = false } = Astro.props;
 <nav class={`navbar ${isHome ? '' : 'on-light-hero'}`} id="navbar">
   <div class="container nav-inner">
     <a href="/" class="nav-logo" aria-label="Wahana Totalita Konsultan — Pelatihan K3 & Sertifikasi Resmi">
-      <img src="/assets/img/logo-wt.png" alt="Wahana Totalita" class="nav-logo-img" width="160" height="40" />
+      <img src="/assets/img/logo-wt.png" alt="Wahana Totalita" class="nav-logo-img" width="160" height="40" loading="eager" decoding="async" fetchpriority="high" />
       <span class="nav-logo-text">
         <strong>Wahana Totalita</strong>
       </span>
@@ -70,7 +70,7 @@ const { currentPath = '/', isHome = false } = Astro.props;
                 <span class="nav-di-icon">🧗</span>
                 <span><strong>K3 Ketinggian (TKBT/TKPK)</strong><br><small>Rope access &amp; tower</small></span>
               </a>
-              <a href="/k3-kebakaran/" class="nav-dropdown-item">
+              <a href="/penanggulangan-kebakaran/" class="nav-dropdown-item">
                 <span class="nav-di-icon">🔥</span>
                 <span><strong>K3 Kebakaran</strong><br><small>Regu Damkar &amp; Ahli K3</small></span>
               </a>
