@@ -157,20 +157,29 @@ const schemas = [
       name: 'PT Wahana Totalita Konsultan',
       url: 'https://wahanatotalita.com',
     },
-    offers: {
-      '@type': 'Offer',
-      price: data.price ? String(data.price) : '0',
-      priceCurrency: 'IDR',
-      category: data.certification || 'Sertifikasi K3',
-    },
+    ...(typeof data.price === 'number' && data.price > 0 ? {
+      offers: {
+        '@type': 'Offer',
+        price: String(data.price),
+        priceCurrency: 'IDR',
+        category: data.certification || 'Sertifikasi K3',
+      },
+    } : {}),
     ...(courseBatches.length > 0 ? {
-      hasCourseInstance: courseBatches.map((b: any) => ({
-        '@type': 'CourseInstance',
-        name: `${data.name} - Batch ${formatDateIndo(b.start_date)}`,
-        startDate: b.start_date,
-        endDate: b.end_date || b.start_date,
-        courseMode: b.location ? 'onsite' : 'online',
-      })),
+      hasCourseInstance: courseBatches.map((b: any) => {
+        const mode = b.mode === 'online' ? 'online' : b.mode === 'offline' ? 'onsite' : b.mode === 'hybrid' ? 'blended' : 'online';
+        const instance: Record<string, any> = {
+          '@type': 'CourseInstance',
+          name: `${data.name} - Batch ${formatDateIndo(b.start_date)}`,
+          startDate: b.start_date,
+          endDate: b.end_date || b.start_date,
+          courseMode: mode,
+        };
+        if ((mode === 'onsite' || mode === 'blended') && b.venue) {
+          instance.location = { '@type': 'Place', name: b.venue };
+        }
+        return instance;
+      }),
     } : {}),
   },
   {

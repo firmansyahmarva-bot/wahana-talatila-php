@@ -137,8 +137,8 @@ const hubAccent: Record<string, string> = {
         
         <!-- LEFT: CATALOG COURSE GRID -->
         <div class="pcat-content-col">
-          {groups.map((group) => (
-            <div class="detail-section" id={`cat-${group.cat.slug}`} style="margin-bottom:40px;">
+          {groups.map((group, gi) => (
+            <div class={`detail-section${gi >= 1 ? ' pcat-btf-group' : ''}`} id={`cat-${group.cat.slug}`} style="margin-bottom:40px;">
               <div class="pcat-cat-header">
                 <h2 class="pcat-cat-title">
                   <span>{hubIcons[group.cat.slug] || group.cat.icon || '📄'}</span>
@@ -488,6 +488,14 @@ const hubAccent: Record<string, string> = {
     />
   </div>
 </Layout>
+
+<style>
+  /* Below-the-fold catalog groups: skip rendering until near viewport */
+  .pcat-btf-group {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 600px;
+  }
+</style>
 
 <script is:inline>
   // Filter Catalog Logic
