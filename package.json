@@ -13,7 +13,9 @@
     "seo:audit": "node scripts/seo-audit.cjs",
     "verify": "astro build && astro check && node scripts/lint-design.cjs && node scripts/seo-audit.cjs",
     "baseline:capture": "node scripts/capture-baseline.cjs",
-    "baseline:compare": "node scripts/compare-screenshots.cjs"
+    "baseline:compare": "node scripts/compare-screenshots.cjs",
+    "banners": "node scripts/generate-banners.cjs",
+    "download-fallbacks": "node scripts/download-fallbacks.cjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.10",
