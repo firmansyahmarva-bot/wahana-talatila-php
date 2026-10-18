@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
-import { formatPrice, modeLabel, waUrl } from '../../lib/images';
+import { getCourseBanner, getCourseOgBanner, formatPrice, modeLabel, waUrl } from '../../lib/images';
 import { getTrainingFaqs } from '../../lib/trainingFaqs';
 import WaButton from '../WaButton.astro';
 import TrainingCard from '../TrainingCard.astro';
@@ -210,6 +210,8 @@ const certRaw = (data.certification || 'Sertifikasi Resmi').replace(/^sertifikas
 const durationText = data.duration_days ? `${data.duration_days} Hari Pelatihan` : null;
 const priceFormatted = formatPrice(data.price);
 const modeText = modeLabel(data.mode);
+const courseBannerSrc = getCourseBanner(data.slug, catSlug);
+const courseOgBanner = `https://wahanatotalita.com${getCourseOgBanner(data.slug)}`;
 const defaultWaMsg = data.wa_text || `Halo Wahana Totalita, saya ingin konsultasi pendaftaran program: ${data.name}`;
 const inhouseWaMsg = `Halo Wahana Totalita, kami dari perusahaan ingin meminta penawaran in-house training resmi untuk topik: ${data.name}`;
 ---
@@ -218,6 +220,7 @@ const inhouseWaMsg = `Halo Wahana Totalita, kami dari perusahaan ingin meminta p
   title={pageTitle}
   description={pageDesc}
   canonical={canonicalUrl}
+  ogImage={courseOgBanner}
   bodyClass="detail-page pd-page"
   bodyAttrs={{ 'data-training-slug': data.slug }}
   pageCss={['/assets/css/pelatihan-detail.css', '/assets/css/page/training-schedule-feed.css']}
@@ -236,8 +239,21 @@ const inhouseWaMsg = `Halo Wahana Totalita, kami dari perusahaan ingin meminta p
       ]}
     />
 
+    <!-- COURSE BANNER -->
+    <div class="pdb-wrap">
+      <img
+        src={courseBannerSrc}
+        alt={`Pelatihan ${data.name}`}
+        width="1822"
+        height="662"
+        fetchpriority="high"
+        decoding="async"
+        class="pdb-img"
+      />
+    </div>
 
     <!-- DETAIL HERO -->
+
     <section class="pd-hero">
       <div class="container pd-hero-grid">
         <div class="pd-hero-copy">
@@ -679,6 +695,27 @@ const inhouseWaMsg = `Halo Wahana Totalita, kami dari perusahaan ingin meminta p
 </Layout>
 
 <style>
+  /* COURSE BANNER */
+  .pdb-wrap {
+    width: 100%;
+    line-height: 0;
+    margin-bottom: 0;
+  }
+  .pdb-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    aspect-ratio: 1822 / 662;
+    object-fit: cover;
+  }
+  @media (max-width: 640px) {
+    .pdb-img {
+      border-radius: var(--radius);
+    }
+  }
+
   /* HERO CTA WRAPPER & SUBLINKS */
   .pd-hero-cta-wrap {
     display: flex;

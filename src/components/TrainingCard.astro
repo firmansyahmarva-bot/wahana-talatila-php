@@ -1,5 +1,5 @@
 ---
-import { getTrainingImageUrl, formatPrice, modeLabel } from '../lib/images';
+import { getCourseBanner, formatPrice, modeLabel } from '../lib/images';
 import WaButton from './WaButton.astro';
 
 interface Props {
@@ -21,7 +21,7 @@ const {
 const item = training && training.data ? training.data : training;
 const Heading = headingLevel;
 
-const imageSrc = getTrainingImageUrl(item.image_path, item.category_slug, item.slug);
+const imageSrc = getCourseBanner(item.slug, item.category_slug);
 const priceStr = formatPrice(item.price);
 const modeText = modeLabel(item.mode);
 const certText = item.certification || 'Kemnaker / BNSP';
@@ -42,8 +42,8 @@ const trainingUrl = `/pelatihan/${item.slug}/`;
       src={imageSrc}
       alt={`Pelatihan ${item.name} ${certText}`}
       loading="lazy"
-      width="400"
-      height="250"
+      width="1822"
+      height="662"
       decoding="async"
       class="tc-card-img"
     />
