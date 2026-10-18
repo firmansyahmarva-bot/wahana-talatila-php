@@ -229,7 +229,7 @@ const introParagraphs = Array.isArray(hub.intro) ? hub.intro : [hub.intro].filte
 
             <div class="hub-program-cards">
               {hub.programs.map((prog: any, pIdx: number) => {
-                const progUrl = `/pelatihan/${prog.slug.replace(/^\/+|\/+$/g, '')}/`;
+                const progUrl = prog.url || (prog.slug === 'pelatihan-rigger-juru-ikat-beban' ? `/artikel/${prog.slug}/` : `/pelatihan/${prog.slug.replace(/^\/+|\/+$/g, '')}/`);
                 const progWaMsg = prog.wa_text || `Halo Wahana Totalita, saya ingin informasi biaya dan jadwal terdekat pelatihan ${prog.name}`;
                 const progWaUrl = `https://api.whatsapp.com/send?phone=${waNumber}&text=${encodeURIComponent(progWaMsg)}`;
                 const progImg = '/assets/img/og-cover.jpg';
