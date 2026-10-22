@@ -167,19 +167,8 @@ if (type === 'category') {
     });
   }
 }
-let introHtml = '';
-let restHtml = '';
 let articleWaMsg = '';
 if (type === 'article') {
-  const fullContent = data.content || '';
-  const firstH2 = fullContent.search(/<h2\b/i);
-  if (firstH2 !== -1) {
-    introHtml = fullContent.slice(0, firstH2);
-    restHtml = fullContent.slice(firstH2);
-  } else {
-    introHtml = fullContent;
-    restHtml = '';
-  }
   articleWaMsg = `Halo Wahana Totalita, saya membaca artikel "${data.title}" dan ingin konsultasi program pelatihan K3 terkait.`;
 }
 ---
@@ -242,15 +231,15 @@ if (type === 'article') {
     </div>
   ) : (
     <div class="single-article-page">
-      <div class="breadcrumb-bar" style="margin-top: var(--nav-h, 72px); background: var(--surface-subtle); border-bottom: 1px solid var(--border); padding: 12px 0;">
-        <div class="container" style="max-width: 720px; margin: 0 auto; padding: 0 20px; font-size: 13px; color: var(--mut);">
+      <div class="breadcrumb-bar" style="margin-top: calc(var(--nav-h, 68px) + 16px); background: var(--surface-subtle); border-bottom: 1px solid var(--border); padding: 12px 0;">
+        <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 20px; font-size: 13px; color: var(--mut);">
           <a href="/" style="color: var(--mut); text-decoration: none;">Beranda</a> &rsaquo;
           <a href="/artikel/" style="color: var(--mut); text-decoration: none;">Artikel</a> &rsaquo;
           <span style="color: var(--brand); font-weight: 600;">{data.category || 'K3'}</span>
         </div>
       </div>
 
-      <article class="article-reading-col" style="margin: 40px auto 60px;">
+      <article class="article-reading-col" style="max-width: 900px; margin: 40px auto 60px; padding: 0 20px;">
         <header style="margin-bottom: 30px;">
           <span style="display: inline-block; background: var(--accent-light); color: var(--accent); font-weight: 700; font-size: 12px; padding: 4px 10px; border-radius: 4px; text-transform: uppercase; margin-bottom: 12px;">
             {data.category || 'K3 & Regulasi'}
@@ -265,26 +254,7 @@ if (type === 'article') {
           </div>
         </header>
 
-        <div class="article-body" set:html={introHtml} />
-
-        <!-- Short CTA after intro -->
-        <div class="article-cta-box article-cta-intro">
-          <div class="article-cta-copy">
-            <span class="article-cta-tag">KONSULTASI RESMI</span>
-            <p class="article-cta-title">Butuh Pelatihan Terkait Topik Ini?</p>
-            <p class="article-cta-desc">Dapatkan silabus materi resmi Kemnaker & BNSP, jadwal batch terdekat, dan penawaran in-house training perusahaan.</p>
-          </div>
-          <div class="article-cta-action">
-            <WaButton
-              message={articleWaMsg}
-              label="Konsultasi via WA"
-              variant="primary"
-              size="md"
-            />
-          </div>
-        </div>
-
-        {restHtml && <div class="article-body" set:html={restHtml} />}
+        <div class="article-body" set:html={data.content} />
 
         <!-- CTA at end of article -->
         <div class="article-cta-box article-cta-end">

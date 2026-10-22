@@ -5,7 +5,7 @@
    Article Reading Column & Long Content Typography
    ============================================================ */
 .article-reading-col {
-  max-width: 720px;
+  max-width: 900px;
   margin-left: auto;
   margin-right: auto;
   padding-left: 20px;
@@ -14,11 +14,9 @@
 }
 
 .article-body {
-  max-width: 720px;
-  margin-left: auto;
-  margin-right: auto;
+  max-width: 100%;
   font-family: var(--font-body);
-  font-size: 17.5px;
+  font-size: 16px;
   line-height: 1.8;
   color: var(--text);
   word-break: break-word;
@@ -27,8 +25,8 @@
 
 @media (max-width: 768px) {
   .article-body {
-    font-size: 16px;
-    line-height: 1.75;
+    font-size: 15px;
+    line-height: 1.7;
   }
 }
 
