@@ -243,4 +243,42 @@ const trainingUrl = `/pelatihan/${item.slug}/`;
     outline: 2px solid var(--cta);
     outline-offset: 2px;
   }
+  @media (max-width: 640px) {
+    .tc-card-body {
+      padding: 12px;
+    }
+    .tc-card-title {
+      font-size: 13.5px;
+      line-height: 1.35;
+      margin-bottom: 10px;
+      display: block;
+      -webkit-line-clamp: unset;
+      overflow: visible;
+    }
+    .tc-card-footer {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 8px;
+      padding-top: 10px;
+    }
+    .tc-card-actions {
+      display: flex;
+      gap: 6px;
+      width: 100%;
+    }
+    .tc-card-syllabus-link {
+      flex: 1;
+      min-height: 36px;
+      padding: 6px 8px;
+      font-size: 11.5px;
+      text-align: center;
+    }
+    :global(.tc-card-wa-btn) {
+      flex: 1;
+      min-height: 36px;
+      padding: 6px 8px !important;
+      font-size: 11.5px !important;
+      justify-content: center;
+    }
+  }
 </style>
