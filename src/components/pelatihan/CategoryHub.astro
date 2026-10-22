@@ -2,6 +2,8 @@
 import Layout from '../../layouts/Layout.astro';
 import TrainingCard from '../TrainingCard.astro';
 import Breadcrumb from '../Breadcrumb.astro';
+import { getUpcomingBatches, formatBatchRange } from '../../lib/jadwal';
+import { waUrl } from '../../lib/images';
 
 interface Props {
   data: {
@@ -12,6 +14,7 @@ interface Props {
 }
 
 const { data } = Astro.props;
+const isK3Hub = data.category.slug === 'k3';
 
 const HUB_MAP: Record<string, { url: string; name: string }> = {
   k3: { url: '/keselamatan-kerja/', name: 'Keselamatan Kerja (K3)' },
@@ -22,9 +25,9 @@ const HUB_MAP: Record<string, { url: string; name: string }> = {
 
 const CATEGORY_SEO: Record<string, { title: string; h1: string; desc: string }> = {
   k3: {
-    title: 'Pelatihan K3 Resmi Kemnaker RI & BNSP | Wahana Totalita',
-    h1: 'Pelatihan K3 & Sertifikasi Keselamatan Kerja',
-    desc: 'Daftar program pelatihan K3 bersertifikasi resmi Kemnaker RI & BNSP. Pembinaan kompetensi keselamatan kerja industri, kelas online & tatap muka.',
+    title: 'Pelatihan K3 Kemnaker & BNSP 2026 | Jadwal & Biaya',
+    h1: 'Pelatihan K3 Kemnaker RI & BNSP',
+    desc: 'Lembaga pelatihan K3 & PJK3 resmi Kemnaker RI & BNSP. Jadwal batch 2026, biaya pelatihan K3, sertifikasi Ahli K3 Umum, teknisi, operator di Jakarta, Jogja & kota lainnya.',
   },
   lingkungan: {
     title: 'Pelatihan K3 Lingkungan & Limbah BNSP | Wahana Totalita',
@@ -57,7 +60,75 @@ const catSlug = data.category.slug;
 const catName = data.category.name;
 const hubLink = HUB_MAP[catSlug]?.url || '/pelatihan/';
 
-const schemas = [
+// City coverage mapping for K3 Hub
+const k3Cities = [
+  { name: 'Jakarta', slug: 'jakarta', keyword: 'Pelatihan K3 Jakarta', note: 'Pusat Bisnis, Konstruksi & Gedung Bertingkat' },
+  { name: 'Surabaya', slug: 'surabaya', keyword: 'Pelatihan K3 Surabaya', note: 'Sentra Maritim, Manufaktur & Pergudangan' },
+  { name: 'Yogyakarta', slug: 'yogyakarta', keyword: 'Pelatihan K3 Jogja / Yogyakarta', note: 'Training Center Headquarter & Tatap Muka' },
+  { name: 'Bandung', slug: 'bandung', keyword: 'Pelatihan K3 Bandung', note: 'Tekstil, Manufaktur Presisi & Laboratorium' },
+  { name: 'Semarang', slug: 'semarang', keyword: 'Pelatihan K3 Semarang', note: 'Kawasan Industri Pelabuhan & Logistik' },
+  { name: 'Bekasi', slug: 'bekasi', keyword: 'Pelatihan K3 Bekasi', note: 'Kawasan Industri MM2100 & Fabrikasi' },
+  { name: 'Tangerang', slug: 'tangerang', keyword: 'Pelatihan K3 Tangerang', note: 'Sentra Bandara, Pergudangan & Pabrik Kimia' },
+  { name: 'Karawang (Cikarang)', slug: 'karawang', keyword: 'Pelatihan K3 Karawang & Cikarang', note: 'Koridor Otomotif & Pabrik Multinasional' },
+  { name: 'Medan', slug: 'medan', keyword: 'Pelatihan K3 Medan', note: 'Agroindustri, Sawit & Pelabuhan Belawan' },
+  { name: 'Makassar', slug: 'makassar', keyword: 'Pelatihan K3 Makassar', note: 'Hub Maritim, Smelter Nikel & Logistik Timur' },
+  { name: 'Balikpapan', slug: 'balikpapan', keyword: 'Pelatihan K3 Balikpapan', note: 'Jantung Migas, Batubara & Penyangga IKN' },
+  { name: 'Cilegon', slug: 'cilegon', keyword: 'Pelatihan K3 Cilegon', note: 'Kawasan Industri Baja, Petrokimia & Energi' },
+];
+
+// Live upcoming batches for prominent K3 courses
+const k3FeaturedBatches = isK3Hub ? [
+  ...getUpcomingBatches('pelatihan-ahli-k3-umum-sertifikasi-kemnaker-ri', undefined, 2).map((b) => ({
+    ...b,
+    progName: 'Ahli K3 Umum Kemnaker RI',
+    progSlug: 'pelatihan-ahli-k3-umum-sertifikasi-kemnaker-ri',
+    cert: 'Kemnaker RI',
+  })),
+  ...getUpcomingBatches('pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri', undefined, 2).map((b) => ({
+    ...b,
+    progName: 'Operator Forklift Kelas II (SIO)',
+    progSlug: 'pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri',
+    cert: 'Kemnaker RI',
+  })),
+  ...getUpcomingBatches('pelatihan-damkar-paralel-kelas-dcba-sertifikasi-kemnaker-ri', undefined, 2).map((b) => ({
+    ...b,
+    progName: 'K3 Penanggulangan Kebakaran (Damkar)',
+    progSlug: 'pelatihan-damkar-paralel-kelas-dcba-sertifikasi-kemnaker-ri',
+    cert: 'Kemnaker RI',
+  })),
+  ...getUpcomingBatches('pelatihan-petugas-p3k-first-aid-online', undefined, 2).map((b) => ({
+    ...b,
+    progName: 'Petugas P3K di Tempat Kerja',
+    progSlug: 'pelatihan-petugas-p3k-first-aid-online',
+    cert: 'Kemnaker RI',
+  })),
+] : [];
+
+// FAQs targeting commercial queries for K3 Hub
+const k3Faqs = [
+  {
+    q: 'Berapa biaya pelatihan K3 resmi di Wahana Totalita?',
+    a: 'Biaya pelatihan K3 bergantung pada jenis lisensi (Kemnaker RI atau BNSP), durasi, dan metode pembelajaran. Untuk kelas teknis dan online Zoom interaktif, biaya mulai dari Rp 1.500.000 hingga Rp 3.500.000. Sementara program sertifikasi intensif seperti pembinaan Ahli K3 Umum Kemnaker RI berkisar Rp 7.500.000 hingga Rp 10.500.000, sudah mencakup sertifikat resmi, lisensi/SKP, modul pelatihan, seminar kit, dan ujian evaluasi resmi.',
+  },
+  {
+    q: 'Apa perbedaan antara Pelatihan K3 Kemnaker RI dan Sertifikasi K3 BNSP?',
+    a: 'Pelatihan K3 Kemnaker RI berorientasi pada kepatuhan perundangan dan penunjukan kewenangan hukum (Surat Keputusan Penunjukan/SKP dan Lisensi K3) yang diwajibkan bagi perusahaan di Indonesia. Sedangkan Sertifikasi K3 BNSP (Badan Nasional Sertifikasi Profesi) berbasis Standar Kompetensi Kerja Nasional Indonesia (SKKNI) yang menguji pengakuan kompetensi individu secara profesi nasional dan regional (MEA).',
+  },
+  {
+    q: 'Kapan jadwal pelatihan K3 2026 terdekat diselenggarakan?',
+    a: 'Jadwal pelatihan K3 dibuka secara berkala setiap bulan. Kelas online Zoom diselenggarakan setiap minggu untuk kemudahan fleksibilitas kerja, sedangkan kelas tatap muka reguler dijadwalkan setiap bulan di Training Center Yogyakarta serta sentra industri kota besar (Jakarta, Surabaya, Bandung, Bekasi, Medan, Makassar). Pendaftaran ditutup H-3 sebelum pelaksanaan batch.',
+  },
+  {
+    q: 'Apa saja syarat pendaftaran peserta pelatihan Ahli K3 Umum dan sertifikasi K3 lainnya?',
+    a: 'Untuk program Ahli K3 Umum Kemnaker RI, syarat formal adalah pendidikan minimal D3 atau S1 semua jurusan, menyertakan salinan ijazah, KTP, pas foto latar merah/biru, dan surat keterangan/rekomendasi perusahaan jika mewakili instansi. Untuk pelatihan operator alat berat (forklift, crane) atau teknisi K3, syarat pendidikan minimal SMA/SMK sederajat.',
+  },
+  {
+    q: 'Apakah Wahana Totalita melayani In-House Training K3 untuk perusahaan?',
+    a: 'Ya, sebagai lembaga pelatihan K3 dan PJK3 resmi Kemnaker RI, Wahana Totalita menyediakan program In-House Training K3 langsung di lokasi pabrik, proyek konstruksi, atau kantor perusahaan klien di seluruh Indonesia dengan jadwal yang dapat disesuaikan dan studi kasus khusus industri Anda.',
+  },
+];
+
+const schemas: any[] = [
   {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
@@ -79,6 +150,21 @@ const schemas = [
     ],
   },
 ];
+
+if (isK3Hub) {
+  schemas.push({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: k3Faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: f.a,
+      },
+    })),
+  });
+}
 ---
 
 <Layout
@@ -99,34 +185,99 @@ const schemas = [
       ]}
     />
 
+    <!-- HERO BANNER -->
     <section class="cat-hero-banner" style={`--cat-accent: ${data.category.accent_color || 'var(--accent)'}`}>
       <div class="container cat-hero-inner">
         {data.category.icon && <span class="cat-hero-icon">{data.category.icon}</span>}
         <h1 class="cat-hero-title">{pageH1}</h1>
-        <p class="cat-hero-sub">{data.trainings.length} program pelatihan bersertifikasi resmi Kemnaker RI &amp; BNSP, siap tatap muka di Yogyakarta maupun in-house di lokasi perusahaan Anda di seluruh Indonesia.</p>
+        <p class="cat-hero-sub">
+          {isK3Hub ? (
+            <>Pusat pembinaan kompetensi keselamatan dan kesehatan kerja (K3) berlisensi resmi <strong>Kemnaker RI</strong> dan <strong>BNSP</strong>. Tersedia kelas Online via Zoom, Tatap Muka di Training Center, dan In-House Training perusahaan di seluruh Indonesia.</>
+          ) : (
+            <>{data.trainings.length} program pelatihan bersertifikasi resmi Kemnaker RI &amp; BNSP, siap tatap muka di Yogyakarta maupun in-house di lokasi perusahaan Anda di seluruh Indonesia.</>
+          )}
+        </p>
         <div class="cat-hero-badges">
-          <span class="cat-hero-badge">🏛️ Sertifikasi Resmi Kemnaker &amp; BNSP</span>
-          <span class="cat-hero-badge">💻 Online Virtual &amp; Tatap Muka</span>
-          <span class="cat-hero-badge">🏢 Siap In-House Training</span>
+          <span class="cat-hero-badge">🏛️ PJK3 Resmi Kemnaker RI</span>
+          <span class="cat-hero-badge">🏆 Lisensi BNSP Berbasis SKKNI</span>
+          <span class="cat-hero-badge">💻 Online Zoom &amp; Tatap Muka</span>
+          <span class="cat-hero-badge">🏢 In-House Training Seluruh Indonesia</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISIBLE SEARCH & QUICK FILTER BAR -->
+    <section class="k3hub-search-section">
+      <div class="container">
+        <div class="k3hub-search-card">
+          <div class="k3hub-search-input-wrap">
+            <svg class="k3hub-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input
+              type="search"
+              id="k3hub-search-input"
+              class="k3hub-search-input"
+              placeholder={`Cari nama pelatihan ${catName} (contoh: Ahli K3 Umum, Forklift, Damkar, P3K, Ketinggian)...`}
+              aria-label="Pencarian Program Pelatihan"
+            />
+          </div>
+
+          <div class="k3hub-pills-bar">
+            <span class="k3hub-pills-label">Filter Cepat:</span>
+            <div class="k3hub-pills-wrap">
+              <button type="button" class="k3hub-pill active" data-filter="all">Semua Program</button>
+              <button type="button" class="k3hub-pill" data-filter="ahli k3">Ahli K3 Umum</button>
+              <button type="button" class="k3hub-pill" data-filter="forklift">Operator &amp; SIO</button>
+              <button type="button" class="k3hub-pill" data-filter="kebakaran">K3 Kebakaran</button>
+              <button type="button" class="k3hub-pill" data-filter="ketinggian">Ketinggian / TKBT</button>
+              <button type="button" class="k3hub-pill" data-filter="p3k">Petugas P3K</button>
+              <button type="button" class="k3hub-pill" data-filter="auditor">Auditor SMK3</button>
+              <button type="button" class="k3hub-pill" data-filter="online">Online Zoom</button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <main class="cat-section">
       <div class="container">
+        <!-- TOP META: COUNT & HUB LINK -->
         <div class="cat-top-meta">
-          <span class="cat-count-pill">Menampilkan <strong>{data.trainings.length}</strong> Program Pelatihan</span>
+          <span class="cat-count-pill">Menampilkan <strong id="k3hub-count">{data.trainings.length}</strong> Program Pelatihan</span>
           {hubLink && (
-            <a href={hubLink} class="cat-hub-link" style="margin-left: auto; font-weight: 600; text-decoration: none; color: var(--accent);">Kunjungi Hub {catName} &rarr;</a>
+            <a href={hubLink} class="cat-hub-link" style="margin-left: auto; font-weight: 700; text-decoration: none; color: var(--accent);">
+              Pelajari Panduan Regulasi &amp; Hub {catName} &rarr;
+            </a>
           )}
         </div>
 
-        <div class="cat-section-header" style="margin-top:24px;margin-bottom:16px;">
-          <h2 class="cat-section-title" style="font-size:1.5rem;font-weight:700;color:var(--brand);margin:0;">
-            Daftar Program {data.category.name}
+        <!-- PROGRAM LIST HEADER -->
+        <div class="cat-section-header" style="margin-top:12px;margin-bottom:20px;">
+          <h2 class="cat-section-title" style="font-size:1.6rem;font-weight:800;color:var(--brand);margin:0 0 6px;">
+            Katalog Program Pelatihan K3 &amp; Sertifikasi Resmi
           </h2>
+          <p style="color:var(--text-muted);font-size:14.5px;margin:0;">
+            Temukan program sertifikasi kompetensi K3 yang sesuai dengan kebutuhan kualifikasi personalia dan kepatuhan regulasi perusahaan Anda.
+          </p>
         </div>
 
+        <!-- EMPTY STATE (WHEN FILTER RESULTS IN 0) -->
+        <div id="k3hub-empty" class="k3hub-empty-state" style="display:none;">
+          <p class="k3hub-empty-title">Program pelatihan tidak ditemukan.</p>
+          <p class="k3hub-empty-sub">Coba gunakan kata kunci lain atau konsultasikan langsung jadwal dan silabus program yang Anda cari kepada konsultan kami via WhatsApp.</p>
+          <a
+            href={waUrl('Halo Wahana Totalita, saya ingin konsultasi program pelatihan K3 yang belum saya temukan di katalog website.')}
+            target="_blank"
+            rel="noopener"
+            class="k3hub-btn-wa"
+          >
+            Tanya Jadwal &amp; Program via WhatsApp &rarr;
+          </a>
+        </div>
+
+        <!-- TRAINING CARDS GRID -->
         <div class="training-grid" id="training-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; margin-top: 16px;">
           {data.trainings.map((t: any) => (
             <TrainingCard
@@ -138,17 +289,225 @@ const schemas = [
           ))}
         </div>
 
+        {/* -------------------------------------------------------------
+            K3 AUTHORITY CONTENT SECTION (300-700 WORDS SEO HUB CONTENT)
+        ------------------------------------------------------------- */}
+        {isK3Hub && (
+          <div class="k3hub-content-wrap">
+            
+            <!-- SECTION 1: OVERVIEW & WHY CHOOSE WAHANA TOTALITA -->
+            <section class="k3hub-block">
+              <h2 class="k3hub-h2">Pusat Pelatihan K3 Resmi Kemnaker RI &amp; Sertifikasi Profesi BNSP</h2>
+              <p class="k3hub-text">
+                Sebagai <strong>lembaga pelatihan K3</strong> dan <strong>PJK3 Kemnaker</strong> (Perusahaan Jasa Keselamatan dan Kesehatan Kerja) resmi, PT Wahana Totalita Konsultan menghadirkan ekosistem <strong>training K3</strong> terlengkap di Indonesia. Kami mendukung korporasi dan tenaga kerja profesional dalam mewujudkan lingkungan kerja nir-kecelakaan (<em>zero accident</em>) serta memenuhi kewajiban hukum sesuai <strong>UU No. 1 Tahun 1970</strong> tentang Keselamatan Kerja dan <strong>PP No. 50 Tahun 2012</strong> tentang Penerapan Sistem Manajemen K3 (SMK3).
+              </p>
+              <p class="k3hub-text">
+                Seluruh kurikulum <strong>pelatihan K3</strong> dirancang secara komprehensif oleh praktisi industri senior dan instruktur bersertifikasi. Kami memastikan peserta tidak hanya lulus ujian sertifikasi, tetapi juga menguasai implementasi nyata identifikasi bahaya, penilaian risiko (IBPR/HIRADC), inspeksi K3 berkala, investigasi insiden, hingga penyusunan prosedur darurat di tempat kerja.
+              </p>
+            </section>
+
+            <!-- SECTION 2: JENIS PELATIHAN K3 & SERTIFIKASI RESMI -->
+            <section class="k3hub-block">
+              <h2 class="k3hub-h2">Jenis Pelatihan K3 &amp; Skema Sertifikasi Resmi di Indonesia</h2>
+              <p class="k3hub-text">
+                Dalam dunia industri nasional, <strong>sertifikasi K3</strong> terbagi ke dalam dua jalur pembinaan utama dengan fungsi dan legitimasi yang saling melengkapi:
+              </p>
+
+              <div class="k3hub-dual-grid">
+                <div class="k3hub-dual-card">
+                  <h3 class="k3hub-h3">1. Pelatihan K3 Kemnaker RI (Lisensi Kewenangan &amp; SKP)</h3>
+                  <p class="k3hub-text-sm">
+                    <strong>Pelatihan K3 Kemnaker</strong> ditujukan untuk pemenuhan kepatuhan hukum wajib (mandatory compliance) instansi. Lulusan memperoleh Surat Keputusan Penunjukan (SKP) dan Lisensi Kewenangan K3 dari Kementerian Ketenagakerjaan Republik Indonesia:
+                  </p>
+                  <ul class="k3hub-list">
+                    <li><a href="/pelatihan/pelatihan-ahli-k3-umum-sertifikasi-kemnaker-ri/" class="k3hub-link"><strong>Ahli K3 Umum (AK3U) Kemnaker RI</strong></a>: Pembinaan reguler 12 hari untuk calon sekretaris P2K3 perusahaan (tersedia juga di <a href="/ahli-k3-umum/" class="k3hub-link">halaman resmi Ahli K3 Umum</a>).</li>
+                    <li><a href="/pelatihan/pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri/" class="k3hub-link"><strong>K3 Operator Alat Berat / SIO</strong></a>: Lisensi Operator Forklift Kelas I/II, Crane, Loader, dan Excavator sesuai Permenaker No. 08/2020.</li>
+                    <li><a href="/pelatihan/pelatihan-damkar-paralel-kelas-dcba-sertifikasi-kemnaker-ri/" class="k3hub-link"><strong>K3 Penanggulangan Kebakaran (Damkar)</strong></a>: Sertifikasi Petugas Peran Kebakaran Kelas D, Regu Damkar Kelas C, Koordinator Kelas B, hingga Ahli K3 Kebakaran Kelas A.</li>
+                    <li><a href="/pelatihan/pelatihan-tkbt-ii-sertifikasi-kemnaker-ri/" class="k3hub-link"><strong>K3 Bekerja di Ketinggian (TKBT &amp; TKPK)</strong></a>: Pembinaan Tenaga Kerja Bangunan Tinggi dan Rope Access berstandar keselamatan elevasi.</li>
+                    <li><a href="/pelatihan/pelatihan-petugas-p3k-first-aid-online/" class="k3hub-link"><strong>Petugas P3K di Tempat Kerja</strong></a>: Kualifikasi pertolongan pertama pada kecelakaan kerja sesuai Permenaker No. 15/2008.</li>
+                    <li><a href="/pelatihan/pelatihan-auditor-sistem-manajemen-k3-sertifikasi-kemnaker-ri/" class="k3hub-link"><strong>Auditor SMK3 PP 50/2012</strong></a>: Kualifikasi auditor internal dan eksternal sistem manajemen keselamatan kerja.</li>
+                  </ul>
+                </div>
+
+                <div class="k3hub-dual-card">
+                  <h3 class="k3hub-h3">2. Pelatihan K3 BNSP (Standar Kompetensi Kerja SKKNI)</h3>
+                  <p class="k3hub-text-sm">
+                    <strong>Pelatihan K3 BNSP</strong> berfokus pada pengujian kompetensi profesi individu secara independen melalui Lembaga Sertifikasi Profesi (LSP) terlisensi Badan Nasional Sertifikasi Profesi:
+                  </p>
+                  <ul class="k3hub-list">
+                    <li><a href="/pelatihan/ak3-bnsp/" class="k3hub-link"><strong>Ahli K3 Umum BNSP</strong></a>: Asesmen portofolio dan wawancara kompetensi profesi K3 diakui secara nasional dan regional (ASEAN/MEA).</li>
+                    <li><a href="/pelatihan/pelatihan-pop-pertambangan-sertifikasi-bnsp-online/" class="k3hub-link"><strong>Pengawas Operasional Pertama (POP) Pertambangan BNSP</strong></a>: Sertifikasi wajib pengawas operasional lapangan sektor minerba dan batubara.</li>
+                    <li><strong>K3 Migas &amp; Pengawas Lingkungan Hidup</strong>: Skema kompetensi personil keselamatan operasi minyak, gas bumi, dan pengelolaan limbah industri.</li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+
+            <!-- SECTION 3: JADWAL PELATIHAN K3 2026 -->
+            <section class="k3hub-block">
+              <div class="k3hub-block-header">
+                <div>
+                  <h2 class="k3hub-h2">Jadwal Pelatihan K3 2026 &amp; Batch Pendaftaran Terdekat</h2>
+                  <p class="k3hub-text" style="margin-bottom:0;">
+                    Pilih tanggal pelaksanaan yang paling fleksibel untuk agenda kerja Anda. Seluruh jadwal dijamin pasti jalan (<em>guaranteed running</em>).
+                  </p>
+                </div>
+                <a href="/jadwal/" class="k3hub-link-btn">Lihat Semua Jadwal &rarr;</a>
+              </div>
+
+              <div class="k3hub-batches-grid">
+                {k3FeaturedBatches.map((b: any) => {
+                  const range = formatBatchRange(b.start_date, b.end_date);
+                  const venue = b.mode === 'online' ? 'Online via Zoom Interaktif' : (b.venue || 'Training Center Yogyakarta');
+                  const msg = `Halo Wahana Totalita, saya ingin daftar ${b.progName} batch ${range} (${b.mode.toUpperCase()})`;
+                  return (
+                    <div class="k3hub-batch-card">
+                      <div class="k3hub-batch-top">
+                        <span class="k3hub-batch-mode">{b.mode.toUpperCase()}</span>
+                        <span class="k3hub-batch-cert">{b.cert}</span>
+                      </div>
+                      <h4 class="k3hub-batch-name">{b.progName}</h4>
+                      <div class="k3hub-batch-date">📅 {range}</div>
+                      <div class="k3hub-batch-venue">📍 {venue}</div>
+                      <a href={waUrl(msg)} target="_blank" rel="noopener" class="k3hub-batch-cta">
+                        Daftar Batch Ini &rarr;
+                      </a>
+                    </div>
+                  );
+                })}
+              </div>
+            </section>
+
+            <!-- SECTION 4: METODE & BIAYA PELATIHAN K3 -->
+            <section class="k3hub-block">
+              <div class="k3hub-dual-grid">
+                <div>
+                  <h2 class="k3hub-h2">Metode Pelatihan: Online, Tatap Muka &amp; In-House</h2>
+                  <p class="k3hub-text">
+                    Wahana Totalita menyediakan 3 pilihan metode <strong>training K3</strong> agar memudahkan partisipasi peserta perorangan maupun delegasi korporat:
+                  </p>
+                  <ul class="k3hub-list">
+                    <li><strong>Online Virtual Class (via Zoom)</strong>: Efisien tanpa biaya perjalanan dan akomodasi, tetap interaktif dengan simulasi studi kasus live.</li>
+                    <li><strong>Public Training Tatap Muka</strong>: Terselenggara di Training Center modern Wahana Totalita Yogyakarta dan hotel berbintang di kota-kota besar.</li>
+                    <li><strong>In-House Training Perusahaan</strong>: Tim instruktur dan asesor kami hadir langsung di pabrik atau site proyek Anda dengan silabus yang dikustomisasi.</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h2 class="k3hub-h2">Estimasi Biaya Pelatihan K3 Resmi</h2>
+                  <p class="k3hub-text">
+                    <strong>Biaya pelatihan K3</strong> di Wahana Totalita bersifat transparan tanpa biaya tersembunyi (<em>all-inclusive</em>). Struktur investasi mencakup:
+                  </p>
+                  <ul class="k3hub-list">
+                    <li><strong>Kelas Teknis &amp; Online (P3K, Damkar D, TKBT, Higiene)</strong>: Mulai dari Rp 1.500.000 – Rp 3.500.000 / peserta.</li>
+                    <li><strong>Sertifikasi Ahli K3 Umum &amp; Spesialis Kemnaker RI</strong>: Kisaran Rp 7.500.000 – Rp 10.500.000 / peserta (termasuk sertifikat, SKP, dan lisensi).</li>
+                    <li><strong>In-House Training Corporate</strong>: Penawaran khusus paket rombongan dengan efisiensi biaya maksimal per delegasi.</li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+
+            <!-- SECTION 5: SYARAT PENDAFTARAN -->
+            <section class="k3hub-block">
+              <h2 class="k3hub-h2">Syarat Pendaftaran Peserta Pelatihan K3</h2>
+              <p class="k3hub-text">
+                Untuk memastikan legalitas penerbitan sertifikat dan lisensi resmi, peserta diwajibkan melengkapi berkas administrasi berikut sebelum pelatihan dimulai:
+              </p>
+              <div class="k3hub-req-grid">
+                <div class="k3hub-req-card">
+                  <h4 class="k3hub-req-title">🎓 Ahli K3 Umum &amp; Auditor SMK3</h4>
+                  <p class="k3hub-req-desc">Pendidikan minimal D3 atau S1 semua jurusan. Melampirkan salinan ijazah terakhir, KTP, surat rekomendasi/tugas dari perusahaan (jika utusan kantor), dan pas foto resmi.</p>
+                </div>
+                <div class="k3hub-req-card">
+                  <h4 class="k3hub-req-title">🚜 Operator Alat Berat, Forklift &amp; Crane</h4>
+                  <p class="k3hub-req-desc">Pendidikan minimal SMA/SMK sederajat. Melampirkan KTP, surat keterangan sehat dokter (tidak buta warna), dan surat pengalaman mengemudi/mengoperasikan alat.</p>
+                </div>
+                <div class="k3hub-req-card">
+                  <h4 class="k3hub-req-title">🚒 Damkar, Bekerja di Ketinggian &amp; P3K</h4>
+                  <p class="k3hub-req-desc">Pendidikan minimal SMA/SMK sederajat, salinan KTP aktif, surat keterangan sehat jasmani &amp; rohani (bebas vertigo untuk ketinggian), dan pas foto latar merah.</p>
+                </div>
+              </div>
+            </section>
+
+            <!-- SECTION 6: CITY COVERAGE & LOKASI PENYELENGGARAAN -->
+            <section class="k3hub-block">
+              <h2 class="k3hub-h2">Jangkauan Lokasi &amp; Kota Penyelenggaraan Pelatihan K3</h2>
+              <p class="k3hub-text">
+                Wahana Totalita menyelenggarakan layanan <strong>pelatihan K3</strong> di berbagai sentra industri strategis di Indonesia. Dapatkan kemudahan pendaftaran dan jadwal batch terdekat untuk wilayah domisili Anda:
+              </p>
+              <div class="k3hub-cities-grid">
+                {k3Cities.map((c) => (
+                  <a href={`/pelatihan-k3-${c.slug}/`} class="k3hub-city-card">
+                    <span class="k3hub-city-name">{c.keyword}</span>
+                    <span class="k3hub-city-note">{c.note}</span>
+                    <span class="k3hub-city-link">Lihat Jadwal {c.name} &rarr;</span>
+                  </a>
+                ))}
+              </div>
+              <p class="k3hub-text-sm" style="margin-top:14px;color:var(--text-muted);">
+                Memerlukan pelatihan di kota lain seperti <strong>Pelatihan K3 Cikarang</strong>, Solo, Malang, Palembang, atau Pekanbaru? Kami siap menyelenggarakan in-house training langsung di perusahaan Anda.
+              </p>
+            </section>
+
+            <!-- SECTION 7: FAQ SEPUTAR PELATIHAN K3 -->
+            <section class="k3hub-block">
+              <h2 class="k3hub-h2">Pertanyaan Umum Seputar Pelatihan K3 (FAQ)</h2>
+              <div class="k3hub-faq-list">
+                {k3Faqs.map((faq, idx) => (
+                  <div class="k3hub-faq-item">
+                    <h3 class="k3hub-faq-q">
+                      <span class="k3hub-faq-num">{idx + 1}.</span> {faq.q}
+                    </h3>
+                    <p class="k3hub-faq-a">{faq.a}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            <!-- SECTION 8: BOTTOM CONVERSION CTA -->
+            <section class="k3hub-cta-banner">
+              <div class="k3hub-cta-inner">
+                <h3 class="k3hub-cta-title">Siap Meningkatkan Kualifikasi K3 Anda &amp; Perusahaan?</h3>
+                <p class="k3hub-cta-sub">
+                  Konsultasikan jadwal batch terdekat, silabus materi resmi, dan rincian penawaran biaya pelatihan K3 bersama konsultan ahli kami hari ini.
+                </p>
+                <div class="k3hub-cta-actions">
+                  <a
+                    href={waUrl('Halo Wahana Totalita, saya ingin konsultasi pendaftaran pelatihan K3 resmi Kemnaker RI & BNSP.')}
+                    target="_blank"
+                    rel="noopener"
+                    class="k3hub-cta-btn-primary"
+                  >
+                    Konsultasi Pendaftaran via WhatsApp
+                  </a>
+                  <a href="/jadwal/" class="k3hub-cta-btn-secondary">
+                    Cek Kalender Jadwal Lengkap
+                  </a>
+                </div>
+              </div>
+            </section>
+
+          </div>
+        )}
+
+        <!-- ARTICLES SECTION -->
         {data.articles && data.articles.length > 0 && (
           <div class="cat-articles-section" style="margin-top: 60px;">
-            <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 24px;">Panduan &amp; Artikel Terkait {data.category.name}</h2>
+            <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 24px; color: var(--brand);">
+              Panduan &amp; Artikel Terkait {data.category.name}
+            </h2>
             <div class="article-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
               {data.articles.map((art: any) => (
-                <article class="article-card" style="background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px;">
-                  <h3 style="font-size: 1.05rem; font-weight: 600; line-height: 1.4; margin-bottom: 8px;">
-                    <a href={`/artikel/${art.slug}/`} style="color: inherit; text-decoration: none;">{art.title}</a>
+                <article class="article-card" style="background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px;">
+                  <h3 style="font-size: 1.05rem; font-weight: 700; line-height: 1.4; margin-bottom: 8px;">
+                    <a href={`/artikel/${art.slug}/`} style="color: var(--brand); text-decoration: none;">{art.title}</a>
                   </h3>
-                  <p style="font-size: 0.875rem; color: var(--text-muted, var(--text-subtle)); line-height: 1.5; margin-bottom: 12px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">{art.meta_desc || art.title}</p>
-                  <a href={`/artikel/${art.slug}/`} style="font-size: 0.875rem; font-weight: 600; color: var(--accent); text-decoration: none;">Baca Panduan &rarr;</a>
+                  <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 12px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                    {art.meta_desc || art.title}
+                  </p>
+                  <a href={`/artikel/${art.slug}/`} style="font-size: 0.875rem; font-weight: 700; color: var(--accent); text-decoration: none;">
+                    Baca Panduan Lengkap &rarr;
+                  </a>
                 </article>
               ))}
             </div>
@@ -158,3 +517,519 @@ const schemas = [
     </main>
   </div>
 </Layout>
+
+<!-- CLIENT-SIDE SEARCH & REAL-TIME FILTER SCRIPT -->
+<script is:inline>
+  (function () {
+    var searchInput = document.getElementById('k3hub-search-input');
+    var pills = document.querySelectorAll('.k3hub-pill');
+    var cards = document.querySelectorAll('#training-grid .training-card');
+    var countEl = document.getElementById('k3hub-count');
+    var emptyBox = document.getElementById('k3hub-empty');
+    var activeFilter = 'all';
+
+    function applyFilter() {
+      var query = (searchInput ? searchInput.value : '').toLowerCase().trim();
+      var visibleCount = 0;
+
+      cards.forEach(function (card) {
+        var text = (card.textContent || '').toLowerCase();
+        var mode = (card.dataset.mode || '').toLowerCase();
+
+        var matchesQuery = !query || text.indexOf(query) !== -1;
+        var matchesPill = true;
+        if (activeFilter !== 'all') {
+          if (activeFilter === 'online') {
+            matchesPill = mode.indexOf('online') !== -1 || text.indexOf('online') !== -1;
+          } else {
+            matchesPill = text.indexOf(activeFilter) !== -1;
+          }
+        }
+
+        var isVisible = matchesQuery && matchesPill;
+        card.style.display = isVisible ? '' : 'none';
+        if (isVisible) visibleCount++;
+      });
+
+      if (countEl) countEl.textContent = String(visibleCount);
+      if (emptyBox) emptyBox.style.display = visibleCount === 0 ? 'block' : 'none';
+    }
+
+    if (searchInput) {
+      searchInput.addEventListener('input', applyFilter);
+      searchInput.addEventListener('search', applyFilter);
+    }
+
+    pills.forEach(function (pill) {
+      pill.addEventListener('click', function () {
+        pills.forEach(function (p) {
+          p.classList.remove('active');
+        });
+        this.classList.add('active');
+        activeFilter = (this.dataset.filter || 'all').toLowerCase();
+        applyFilter();
+      });
+    });
+  })();
+</script>
+
+<style>
+  /* Search & Filter Bar */
+  .k3hub-search-section {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 0;
+    position: relative;
+    z-index: 2;
+  }
+  .k3hub-search-card {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 980px;
+    margin: 0 auto;
+  }
+  .k3hub-search-input-wrap {
+    position: relative;
+    width: 100%;
+  }
+  .k3hub-search-icon {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--slate-400);
+    pointer-events: none;
+  }
+  .k3hub-search-input {
+    width: 100%;
+    height: 52px;
+    padding: 0 20px 0 52px;
+    background: var(--slate-50);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-lg);
+    font-size: 15px;
+    color: var(--text);
+    outline: none;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+  }
+  .k3hub-search-input:focus {
+    border-color: var(--brand);
+    background: var(--surface);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand) 12%, transparent);
+  }
+  .k3hub-pills-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .k3hub-pills-label {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .k3hub-pills-wrap {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .k3hub-pill {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--slate-700);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .k3hub-pill:hover {
+    border-color: var(--brand);
+    color: var(--brand);
+  }
+  .k3hub-pill.active {
+    background: var(--brand);
+    border-color: var(--brand);
+    color: var(--on-brand);
+  }
+
+  /* Empty state */
+  .k3hub-empty-state {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 40px 24px;
+    text-align: center;
+    margin: 24px 0;
+  }
+  .k3hub-empty-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--brand);
+    margin-bottom: 8px;
+  }
+  .k3hub-empty-sub {
+    font-size: 14.5px;
+    color: var(--text-muted);
+    max-width: 580px;
+    margin: 0 auto 20px;
+    line-height: 1.6;
+  }
+  .k3hub-btn-wa {
+    display: inline-block;
+    background: var(--whatsapp);
+    color: var(--brand-dark);
+    font-weight: 800;
+    padding: 10px 22px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-size: 14px;
+  }
+
+  /* Authority Content Sections */
+  .k3hub-content-wrap {
+    margin-top: 64px;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+  .k3hub-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 32px 36px;
+    box-shadow: var(--shadow-sm);
+  }
+  .k3hub-block-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .k3hub-h2 {
+    font-family: 'Lexend', sans-serif;
+    font-size: clamp(1.35rem, 2.5vw, 1.7rem);
+    font-weight: 800;
+    color: var(--brand);
+    margin: 0 0 14px;
+    line-height: 1.3;
+  }
+  .k3hub-h3 {
+    font-family: 'Lexend', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--brand);
+    margin: 0 0 10px;
+    line-height: 1.35;
+  }
+  .k3hub-text {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--slate-700);
+    margin: 0 0 14px;
+  }
+  .k3hub-text-sm {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--slate-600);
+    margin: 0 0 12px;
+  }
+  .k3hub-list {
+    margin: 0;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--slate-700);
+  }
+  .k3hub-link {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .k3hub-link:hover {
+    text-decoration: underline;
+  }
+  .k3hub-link-btn {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--brand);
+    text-decoration: none;
+  }
+  .k3hub-link-btn:hover {
+    text-decoration: underline;
+  }
+
+  /* Dual cards */
+  .k3hub-dual-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    margin-top: 18px;
+  }
+  .k3hub-dual-card {
+    background: var(--slate-50);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+  }
+
+  /* Batches Grid */
+  .k3hub-batches-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .k3hub-batch-card {
+    background: var(--slate-50);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .k3hub-batch-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .k3hub-batch-mode {
+    font-size: 10px;
+    font-weight: 800;
+    background: var(--brand);
+    color: var(--on-brand);
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+  }
+  .k3hub-batch-cert {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .k3hub-batch-name {
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--brand);
+    margin: 0 0 8px;
+    line-height: 1.35;
+  }
+  .k3hub-batch-date {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--slate-800);
+    margin-bottom: 4px;
+  }
+  .k3hub-batch-venue {
+    font-size: 12px;
+    color: var(--slate-600);
+    margin-bottom: 14px;
+  }
+  .k3hub-batch-cta {
+    display: block;
+    background: var(--brand);
+    color: var(--on-brand);
+    text-align: center;
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 12.5px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .k3hub-batch-cta:hover {
+    opacity: 0.9;
+  }
+
+  /* Requirement Cards */
+  .k3hub-req-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+    margin-top: 16px;
+  }
+  .k3hub-req-card {
+    background: var(--slate-50);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+  }
+  .k3hub-req-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--brand);
+    margin: 0 0 8px;
+  }
+  .k3hub-req-desc {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--slate-700);
+    margin: 0;
+  }
+
+  /* Cities Grid */
+  .k3hub-cities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+    margin-top: 18px;
+  }
+  .k3hub-city-card {
+    background: var(--slate-50);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+  .k3hub-city-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--brand);
+    background: var(--surface);
+  }
+  .k3hub-city-name {
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--brand);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .k3hub-city-note {
+    font-size: 12px;
+    color: var(--slate-600);
+    line-height: 1.45;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .k3hub-city-link {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+    display: inline-block;
+  }
+
+  /* FAQs */
+  .k3hub-faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 18px;
+  }
+  .k3hub-faq-item {
+    background: var(--slate-50);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+  }
+  .k3hub-faq-q {
+    font-family: 'Lexend', sans-serif;
+    font-size: 15.5px;
+    font-weight: 700;
+    color: var(--brand);
+    margin: 0 0 10px;
+    line-height: 1.4;
+  }
+  .k3hub-faq-num {
+    color: var(--accent);
+  }
+  .k3hub-faq-a {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--slate-700);
+    margin: 0;
+  }
+
+  /* Bottom CTA */
+  .k3hub-cta-banner {
+    background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand) 100%);
+    border-radius: var(--radius-lg);
+    padding: 44px 32px;
+    color: var(--surface);
+    text-align: center;
+    box-shadow: var(--shadow-md);
+  }
+  .k3hub-cta-inner {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .k3hub-cta-title {
+    font-family: 'Lexend', sans-serif;
+    font-size: clamp(1.4rem, 2.8vw, 1.9rem);
+    font-weight: 800;
+    color: var(--surface);
+    margin: 0 0 12px;
+    line-height: 1.25;
+  }
+  .k3hub-cta-sub {
+    font-size: 15px;
+    color: var(--slate-200);
+    line-height: 1.65;
+    margin: 0 0 24px;
+  }
+  .k3hub-cta-actions {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .k3hub-cta-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    background: var(--whatsapp);
+    color: var(--brand-dark);
+    font-weight: 800;
+    font-size: 14.5px;
+    padding: 12px 26px;
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    transition: transform 0.15s ease;
+  }
+  .k3hub-cta-btn-primary:hover {
+    transform: translateY(-2px);
+  }
+  .k3hub-cta-btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    background: color-mix(in srgb, var(--surface) 15%, transparent);
+    color: var(--surface);
+    border: 1px solid color-mix(in srgb, var(--surface) 25%, transparent);
+    font-weight: 700;
+    font-size: 14.5px;
+    padding: 12px 24px;
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    transition: background 0.15s ease;
+  }
+  .k3hub-cta-btn-secondary:hover {
+    background: color-mix(in srgb, var(--surface) 25%, transparent);
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .k3hub-block {
+      padding: 24px 20px;
+    }
+    .k3hub-dual-grid {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+    .k3hub-pills-bar {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>
