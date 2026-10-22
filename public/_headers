@@ -1,0 +1,21 @@
+# Security, CSP, and Caching Headers for Cloudflare Pages
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://*.google-analytics.com https://ssl.google-analytics.com https://*.clarity.ms https://www.clarity.ms https://clarity.ms https://c.bing.com https://www.googleadservices.com https://*.doubleclick.net https://*.googlesyndication.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https: https://ad.doubleclick.net; frame-src 'self' https://www.googletagmanager.com https://*.doubleclick.net https://*.google.com; object-src 'none'; base-uri 'self'; form-action 'self' https://wa.me
+
+# Short cache for HTML
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Immutable long cache for static hashed/versioned assets and fonts
+/assets/*
+  Cache-Control: public, max-age=2592000, immutable
+
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
