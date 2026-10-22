@@ -1,0 +1,1462 @@
+{
+  "default": {
+    "rule": "2_per_month",
+    "days": [
+      1,
+      3
+    ],
+    "mode": "online",
+    "venue": "Online via Zoom"
+  },
+  "categories": {
+    "k3": {
+      "rule": "2_per_month",
+      "description": "Dua batch setiap bulan (awal dan pertengahan bulan)"
+    },
+    "mining": {
+      "rule": "monthly",
+      "description": "Satu batch setiap bulan (minggu kedua)"
+    },
+    "lingkungan": {
+      "rule": "2_per_month",
+      "description": "Dua batch setiap bulan (minggu ke-1 dan ke-3)"
+    },
+    "system-management": {
+      "rule": "monthly",
+      "description": "Satu batch setiap bulan (minggu ketiga)"
+    }
+  },
+  "programs": {
+    "ahli-k3-konstruksi-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "ak3-bnsp": {
+      "rule": "weekly_monday",
+      "dayOfWeek": 1,
+      "frequency": "weekly",
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "cash-flow-management-training-reguler": {
+      "rule": "monthly",
+      "weeks": [
+        2
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "communication-skills-training-reguler": {
+      "rule": "monthly",
+      "weeks": [
+        2
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "contract-drafting-and-negotiation-skill-training-training-reguler": {
+      "rule": "monthly",
+      "weeks": [
+        2
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "digital-marketing-specialist-training-reguler": {
+      "rule": "monthly",
+      "weeks": [
+        2
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "fiber-optic-fundamental-training-reguler": {
+      "rule": "monthly",
+      "weeks": [
+        2
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "financial-accounting-training-reguler": {
+      "rule": "monthly",
+      "weeks": [
+        2
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "hydraulic-and-pneumatic-operation-and-maintenance-training-reguler": {
+      "rule": "monthly",
+      "weeks": [
+        2
+      ],
+      "dayOfWeek": 1,
+      "mode": "offline",
+      "venue": "Yogyakarta"
+    },
+    "logistic-transportation-distribution-training-reguler": {
+      "rule": "monthly",
+      "weeks": [
+        2
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "manajemen-hutang-usaha-sertifikasi-reguler": {
+      "rule": "monthly",
+      "weeks": [
+        2
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "online-training-fire-watcher": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-accident-investigation-online": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-ahli-higiene-industri-madya-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-ahli-higiene-industri-muda-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-ahli-higiene-industri-utama-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-ahli-k3-kimia-sertifikasi-kemnaker-ri": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "both",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-ahli-k3-listrik-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-ahli-k3-listrik-sertifikasi-kemnaker-ri": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "both",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-ahli-k3-penanggulangan-keb-kelas-a-sertifikasi-kemnaker-ri": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "both",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-ahli-k3-umum-fresh-graduate-kemnaker-online": {
+      "rule": "weekly_monday",
+      "dayOfWeek": 1,
+      "frequency": "weekly",
+      "mode": "both",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-ahli-k3-umum-sertifikasi-kemnaker-ri": {
+      "rule": "weekly_monday",
+      "dayOfWeek": 1,
+      "frequency": "weekly",
+      "mode": "both",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-ahli-madya-ruang-terbatas-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-ahli-muda-k3-konstruksi-online": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-ahli-muda-k3-konstruksi-sertifikasi-kemnaker-ri": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "both",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-ahli-muda-lingkungan-kerja-sertifikasi-kemnaker-ri": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "both",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-ahli-muda-ruang-terbatas-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-ahli-utama-ruang-terbatas-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-auditor-sistem-manajemen-k3-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-auditor-sistem-manajemen-k3-sertifikasi-kemnaker-ri": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "both",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-authorized-gas-tester-agt-online": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-csms-pengawas-smk3-kontraktor-online": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-damkar-paralel-kelas-dcba-sertifikasi-kemnaker-ri": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "both",
+      "venue": "Online & Yogyakarta"
+    },
+    "pelatihan-dan-sertifikasi-data-scientist-sertifikasi-bnsp": {
+      "rule": "monthly",
+      "weeks": [
+        2
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-dan-sertifikasi-fillet-plate-welder-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-dan-sertifikasi-k3-operator-batching-plant-sertifikasi-kemnaker": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "both",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-dan-sertifikasi-operator-angkat-angkut-overhead-crane-kelas-iii": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "both",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-dan-sertifikasi-operator-conveyor-sertifikasi-kemnaker-ri": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "both",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-dan-sertifikasi-pelaksana-pascatambang-pada-kegiatan-pertambangan-mineral-dan-batubara-sertifikasi-bnsp": {
+      "rule": "monthly",
+      "weeks": [
+        2
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-dan-sertifikasi-pelaksana-pemantauan-hasil-pascatambang-pada-kegiatan-pertambangan-mineral-dan-batubara-sertifikasi-bnsp": {
+      "rule": "monthly",
+      "weeks": [
+        2
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-dan-sertifikasi-pelaksanaan-reklamasi-pada-kegiatan-petambangan-mineral-dan-batubara-sertifikasi-bnsp": {
+      "rule": "monthly",
+      "weeks": [
+        2
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-dan-sertifikasi-pengambil-contoh-uji-emisi-sumber-tidak-bergerak-jenjang-kualifikasi-3": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-dan-sertifikasi-penggerak-mula-kompressor-kelas-1-sertifikasi-kemnaker": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "both",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-dan-sertifikasi-pengoperasian-alat-gali-muat-excavator-back-hoe-sertifikasi-bnsp": {
+      "rule": "monthly",
+      "weeks": [
+        2
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-dan-sertifikasi-pengoperasian-alat-gali-muat-excavator-front-shovel-sertifikat-bnsp": {
+      "rule": "monthly",
+      "weeks": [
+        2
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-dan-sertifikasi-perencana-pascatambang-mineral-dan-batubara-sertifikasi-bnsp": {
+      "rule": "monthly",
+      "weeks": [
+        2
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-dan-sertifikasi-perencanaan-operasional-tambang-terbuka-jangka-pendek-sertifikat-bnsp": {
+      "rule": "monthly",
+      "weeks": [
+        2
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-dan-sertifikasi-perencanaan-reklamasi-pada-kegiatan-pertambangan-mineral-dan-batubara-sertifikasi-bnsp": {
+      "rule": "monthly",
+      "weeks": [
+        2
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-dan-sertifikasi-pipe-fitter-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "offline",
+      "venue": "Yogyakarta"
+    },
+    "pelatihan-dan-sertifikasi-pipe-group-welder-welding-inspector-basic-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-dan-sertifikasi-training-of-trainer-tot-instruktur-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-dan-sertifikasi-welding-engineer-sertifikasi-bns": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-dan-sertifikasi-welding-foreman-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-dan-sertifikasi-welding-inspector-comprehensive-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-dan-sertifikasi-welding-inspector-standard-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-dan-sertifikasi-welding-practitioner-welding-instructur-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-dan-sertifikasi-welding-specialistsupervisor": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-dan-sertifikasi-welding-technologistsuperintendent-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-hazard-dan-operability-studies-hazops-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-incident-commander-ic-online": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-internal-auditor-iso-14001-online": {
+      "rule": "monthly",
+      "weeks": [
+        2
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-internal-auditor-iso-45001-online": {
+      "rule": "monthly",
+      "weeks": [
+        2
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-internal-auditor-iso-9001-online": {
+      "rule": "monthly",
+      "weeks": [
+        2
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-investigasi-kecelakaan-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-k3-confined-space-online": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-k3-operator-alat-berat-sertifikasi-kemnaker-ri": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "both",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-k3-operator-boiler-kelas-2-sertifikasi-kemnaker-ri": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "both",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-k3-operator-crane-kelas-3-sertifikasi-kemnaker-ri": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "both",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "both",
+      "venue": "Online & Yogyakarta"
+    },
+    "pelatihan-k3-operator-lift-barang-sertifikasi-kemnaker-ri": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "both",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-k3-operator-motor-diesel-genset-sertifikasi-kemnaker-ri": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "both",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-k3-operator-scaffolding-sertifikasi-kemnaker-ri": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "both",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-k3-operator-welder-kelas-1-sertifikasi-kemnaker-ri": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "both",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-k3-operator-welder-kelas-3-sertifikasi-kemnaker-ri": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "both",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-k3-teknisi-listrik-sertifikasi-kemnaker-ri": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "both",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-koordinator-unit-p-keb-kelas-b-sertifikasi-kemnaker-ri": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "both",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-lead-auditor-iso-45001-online": {
+      "rule": "monthly",
+      "weeks": [
+        2
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-manajer-pengolahan-limbah-b3-jenjang-kualifikasi-6-level-pengawas-mplb3-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-operator-k3-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-operator-pengumpulan-limbah-b3-jenjang-kualifikasi-3-level-pelaksana-oplb3-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-operator-penyimpanan-limbah-b3-jenjang-kualifikasi-3-level-pelaksana-sertifikasi-bnsp-1": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "offline",
+      "venue": "Yogyakarta"
+    },
+    "pelatihan-operator-pesawat-tenaga-produksi-ptp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-paramedis-k3-madya-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-paramedis-k3-muda-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-paramedis-k3-utama-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-pemantauan-pengelolaan-limbah-bahan-berbahaya-dan-beracun-level-pengawas-pplb3-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-penanganan-bahaya-gas-h2s-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-penanggung-jawab-operasional-instalasi-pengendalian-pencemaran-udara-poippu-offline": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "offline",
+      "venue": "Yogyakarta"
+    },
+    "pelatihan-penanggung-jawab-operasional-instalasi-pengendalian-pencemaran-udara-poippu-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-penanggung-jawab-operasional-pengolahan-air-limbah-popal-offline": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "offline",
+      "venue": "Yogyakarta"
+    },
+    "pelatihan-penanggung-jawab-operasional-pengolahan-air-limbah-popal-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-penanggung-jawab-pengendalian-pencemaran-air-pppa-oflline": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "offline",
+      "venue": "Yogyakarta"
+    },
+    "pelatihan-penanggung-jawab-pengendalian-pencemaran-air-pppa-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-penanggung-jawab-pengendalian-pencemaran-udara-pppu-offline": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "offline",
+      "venue": "Yogyakarta"
+    },
+    "pelatihan-penanggung-jawab-pengendalian-pencemaran-udara-pppu-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-pengambilan-contoh-uji-air-pcua-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-pengawas-k3-fasyankes-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-pengawas-k3-industri-migas-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-pengawas-k3-laboratorium-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-pengawas-k3-migas-online": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-pengawas-k3-rumah-sakit-sertifikasi-bnsp-online": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-pengkaji-teknis-proteksi-kebakaran-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-petugas-k3-kimia-sertifikasi-kemnaker-ri": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "both",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-petugas-k3-rumah-sakit-sertifikasi-bnsp-online": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-petugas-k3-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-petugas-p3k-first-aid-online": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online & Yogyakarta"
+    },
+    "pelatihan-petugas-p3k-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online & Yogyakarta"
+    },
+    "pelatihan-petugas-p3k-sertifikasi-kemnaker-ri": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "both",
+      "venue": "Online & Yogyakarta"
+    },
+    "pelatihan-petugas-peran-kebakaran-kelas-d-kemnaker-ri": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "both",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-pom-pengawas-operasional-madya": {
+      "rule": "2_per_month",
+      "weeks": [
+        2,
+        4
+      ],
+      "dayOfWeek": 2,
+      "mode": "offline",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-pom-pertambangan-sertifikasi-bnsp-online": {
+      "rule": "2_per_month",
+      "weeks": [
+        2,
+        4
+      ],
+      "dayOfWeek": 2,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-pop-pengawas-operasional-pertama-offline": {
+      "rule": "2_per_month",
+      "weeks": [
+        2,
+        4
+      ],
+      "dayOfWeek": 2,
+      "mode": "offline",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-pop-pertambangan-sertifikasi-bnsp-online": {
+      "rule": "2_per_month",
+      "weeks": [
+        2,
+        4
+      ],
+      "dayOfWeek": 2,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-pou-pengawas-operasional-utama-offline": {
+      "rule": "2_per_month",
+      "weeks": [
+        2,
+        4
+      ],
+      "dayOfWeek": 2,
+      "mode": "offline",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-pou-pertambangan-sertifikasi-bnsp-online": {
+      "rule": "2_per_month",
+      "weeks": [
+        2,
+        4
+      ],
+      "dayOfWeek": 2,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-pplb3-online": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-qhse-awareness-iso-online": {
+      "rule": "monthly",
+      "weeks": [
+        2
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-qhse-awareness-terintegrasi-iso-online": {
+      "rule": "monthly",
+      "weeks": [
+        2
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-regu-penanggulangan-kebakaran-kelas-c-sertifikasi-kemnaker-ri": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "both",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-safety-inspector-online": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-scuba-diving-sertifikasi-reguler": {
+      "rule": "monthly",
+      "weeks": [
+        2
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-sertifikasi-human-resources-manajer-sertifikasi-bnsp": {
+      "rule": "monthly",
+      "weeks": [
+        2
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-sertifikasi-operator-hydraulic-drilling-rig-kelas-1-sertifikasi-kemnaker-ri": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "both",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-sertifikasi-pengoperasian-alat-angkat-tele-handler-sertifikasi-bnsp": {
+      "rule": "monthly",
+      "weeks": [
+        2
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-sertifikasi-pengoperasian-alat-angkut-underground-truck-sertifikasi-bnsp": {
+      "rule": "monthly",
+      "weeks": [
+        2
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-sertifikasi-peralatan-pendukung-bulldozer-sertifikasi-bnsp": {
+      "rule": "monthly",
+      "weeks": [
+        2
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-sertifikasi-peralatan-pendukung-compactor-sertifikasi-bnsp": {
+      "rule": "monthly",
+      "weeks": [
+        2
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-sertifikasi-peralatan-pendukung-fuel-truck-sertifikasi-bnsp": {
+      "rule": "monthly",
+      "weeks": [
+        2
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-sertifikasi-peralatan-pendukung-motor-grader-sertifikasi-bnsp": {
+      "rule": "monthly",
+      "weeks": [
+        2
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-sertifikasi-peralatan-pendukung-service-truck-sertifikasi-bnsp": {
+      "rule": "monthly",
+      "weeks": [
+        2
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-sertifikasi-peralatan-pendukung-water-truck-sertifikasi-bnsp": {
+      "rule": "monthly",
+      "weeks": [
+        2
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-sertifikasi-rotating-equipment-kompressor-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "offline",
+      "venue": "Yogyakarta"
+    },
+    "pelatihan-teknis-pertek-limbah-b3-dan-emisi-udara-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-teknisi-bejana-tekan-sertifikasi-kemnaker-ri": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "both",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-teknisi-confined-space-sertifikasi-kemnaker-ri": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "both",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-teknisi-k3-listrik-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-teknisi-ruang-terbatas-sertifikasi-bnsp": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-tkbt-1-bangunan-tinggi-online": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-tkbt-2-bangunan-tinggi-online": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "pelatihan-tkbt-ii-sertifikasi-kemnaker-ri": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "both",
+      "venue": "Online via Zoom"
+    },
+    "pengadaan-barang-dan-jasa-training-reguler": {
+      "rule": "monthly",
+      "weeks": [
+        2
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "perpanjangan-sertifikasi-bnsp-online": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "project-cost-management-training-reguler": {
+      "rule": "monthly",
+      "weeks": [
+        2
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "sosial-media-marketing-training-reguler": {
+      "rule": "2_per_month",
+      "weeks": [
+        1,
+        3
+      ],
+      "dayOfWeek": 1,
+      "mode": "offline",
+      "venue": "Yogyakarta"
+    },
+    "system-management-vendor-training-reguler": {
+      "rule": "monthly",
+      "weeks": [
+        2
+      ],
+      "dayOfWeek": 1,
+      "mode": "online",
+      "venue": "Online via Zoom"
+    },
+    "training-public-speaking-and-communication-skill": {
+      "rule": "monthly",
+      "weeks": [
+        2
+      ],
+      "dayOfWeek": 1,
+      "mode": "offline",
+      "venue": "Yogyakarta"
+    }
+  },
+  "cityOverrides": {
+    "yogyakarta": {
+      "venue": "Training Center Wahana Totalita Yogyakarta",
+      "mode": "offline"
+    },
+    "jakarta": {
+      "venue": "Hotel Menara Peninsula / Training Center Jakarta",
+      "mode": "offline"
+    },
+    "surabaya": {
+      "venue": "Hotel Santika Pandegiling Surabaya",
+      "mode": "offline"
+    },
+    "balikpapan": {
+      "venue": "Hotel Gran Senyiur Balikpapan",
+      "mode": "offline"
+    }
+  }
+}
