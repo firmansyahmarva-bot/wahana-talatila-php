@@ -82,7 +82,6 @@ export const JUNK_PATTERNS = [
   "/ib.bri.co.id",
   "https://wahanatotalita.com",
   "/assets/uploads/",
-  "/jadwal/daftar/",
   "/sitemap-wahana",
   "/sitemap_index.xml"
 ];
@@ -322,6 +321,12 @@ export const SUBSTRING_REDIRECTS = [
 // 5. Pattern / Regex Rules (origin: .htaccess WP, news, tools, sitemaps, permutations)
 // ---------------------------------------------------------------------------
 export const REGEX_RULES = [
+  // Redirect legacy /jadwal/daftar/:id or /jadwal/daftar/ -> /jadwal/:id or /jadwal/
+  {
+    regex: /^jadwal\/daftar\/?(.*)$/i,
+    target: (m) => m[1] ? `/jadwal/${m[1]}` : '/jadwal/',
+    status: 301
+  },
   // Old split sitemaps -> /sitemap.xml
   {
     regex: /^(sitemap-core|sitemap-pelatihan|sitemap-artikel|sitemap-kota|sitemap-platform|sitemap-glosarium|sitemap-regulasi|sitemap-skkni|sitemap-riksa-uji|sitemap-perpanjangan-skp|sitemap-purnabakti|sitemap-event|sitemap-kota-pelatihan)\.xml$/i,

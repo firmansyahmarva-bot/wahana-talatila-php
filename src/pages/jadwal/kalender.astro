@@ -3,33 +3,70 @@ import Layout from '../../layouts/Layout.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import batchesRaw from '../../../data/training_batches.json';
 import trainingsRaw from '../../../data/trainings.json';
-import { waUrl } from '../../lib/images';
+import { getUpcomingBatches } from '../../lib/jadwal';
 
 const trainingMap = new Map();
 for (const t of (trainingsRaw as any[])) {
   trainingMap.set(t.id, t);
 }
 
-const batches = (batchesRaw as any[])
-  .filter((b) => b.is_public !== 0)
+// Build events from today onward (matching index.astro logic)
+const todayStr = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Jakarta' }).format(new Date());
+
+const existingFutureBatches = (batchesRaw as any[])
+  .filter((b) => b.is_public !== 0 && b.start_date && b.start_date >= todayStr)
   .map((b) => {
     const training = trainingMap.get(b.course_id);
     return {
-      ...b,
+      id: b.id,
       training_name: training?.name || b.batch_name || 'Pelatihan K3',
       training_slug: training?.slug || '',
+      start_date: b.start_date,
+      end_date: b.end_date || b.start_date,
+      mode: b.mode || 'offline',
+      url: `/jadwal/${b.id}/`,
     };
   });
 
+const coveredCourseIds = new Set((batchesRaw as any[])
+  .filter((b) => b.is_public !== 0 && b.start_date && b.start_date >= todayStr)
+  .map(b => b.course_id));
+
+const supplementedBatches: any[] = [];
+for (const t of (trainingsRaw as any[])) {
+  if (t.is_active === 0) continue;
+  if (!coveredCourseIds.has(t.id)) {
+    const nextBatches = getUpcomingBatches(t.slug, undefined, 2);
+    for (const nb of nextBatches) {
+      if (nb.start_date >= todayStr) {
+        supplementedBatches.push({
+          id: nb.id,
+          training_name: t.name,
+          training_slug: t.slug,
+          start_date: nb.start_date,
+          end_date: nb.end_date || nb.start_date,
+          mode: nb.mode || 'online',
+          url: typeof nb.id === 'number' ? `/jadwal/${nb.id}/` : `/jadwal/${t.slug}/`,
+        });
+      }
+    }
+  }
+}
+
+const allEventsList = [...existingFutureBatches, ...supplementedBatches].sort((a, b) =>
+  a.start_date.localeCompare(b.start_date)
+);
+
 // Prepare events grouped by month/year for interactive calendar
 const eventsJson = JSON.stringify(
-  batches.map((b) => ({
+  allEventsList.map((b) => ({
     id: b.id,
     name: b.training_name,
     slug: b.training_slug,
     start: b.start_date,
     end: b.end_date,
-    mode: b.mode || 'offline',
+    mode: b.mode,
+    url: b.url,
   }))
 );
 ---
@@ -114,8 +151,9 @@ const eventsJson = JSON.stringify(
       'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
     ];
 
-    let currentYear = 2026;
-    let currentMonth = 7; // August (0-indexed: 7)
+    const now = new Date();
+    let currentYear = now.getFullYear();
+    let currentMonth = now.getMonth();
 
     const titleEl = document.getElementById('cal-month-title');
     const daysEl = document.getElementById('calendar-days');
@@ -155,7 +193,7 @@ const eventsJson = JSON.stringify(
         dayEvents.slice(0, 3).forEach(ev => {
           const pill = document.createElement('a');
           const isOnline = ev.mode === 'online';
-          pill.href = ev.slug ? `/pelatihan/${ev.slug}/` : '/jadwal/';
+          pill.href = ev.url || (ev.slug ? `/jadwal/${ev.slug}/` : "/jadwal/");
           pill.style.cssText = `font-size:11px;font-weight:700;padding:3px 6px;border-radius:4px;text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:${isOnline ? 'var(--brand-light)' : 'var(--brand-light)'};color:${isOnline ? 'var(--brand)' : 'var(--brand)'};border-left:2.5px solid ${isOnline ? 'var(--whatsapp)' : 'var(--brand)'};display:block;`;
           pill.textContent = ev.name;
           pill.title = ev.name;

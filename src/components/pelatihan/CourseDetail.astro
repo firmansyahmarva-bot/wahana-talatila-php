@@ -6,7 +6,7 @@ import { getTrainingFaqs } from '../../lib/trainingFaqs';
 import WaButton from '../WaButton.astro';
 import TrainingCard from '../TrainingCard.astro';
 import PageHeader from '../PageHeader.astro';
-import { getUpcomingBatches, formatDateIndo, formatBatchRange } from '../../lib/jadwal';
+import { getUpcomingBatches, formatDateIndo, formatBatchRange, formatIsoWithTz } from '../../lib/jadwal';
 
 interface Props {
   data: any;
@@ -150,8 +150,8 @@ const schemas = [
         const instance: Record<string, any> = {
           '@type': 'CourseInstance',
           name: `${data.name} - Batch ${formatDateIndo(b.start_date)}`,
-          startDate: b.start_date,
-          endDate: b.end_date || b.start_date,
+          startDate: formatIsoWithTz(b.start_date, '08:00:00'),
+          endDate: formatIsoWithTz(b.end_date || b.start_date, '17:00:00'),
           courseMode: mode,
         };
         if ((mode === 'onsite' || mode === 'blended') && b.venue) {

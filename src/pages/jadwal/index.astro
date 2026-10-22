@@ -4,7 +4,7 @@ import PageHeader from '../../components/PageHeader.astro';
 import batchesRaw from '../../../data/training_batches.json';
 import trainingsRaw from '../../../data/trainings.json';
 import { formatPrice, waUrl } from '../../lib/images';
-import { getUpcomingBatches } from '../../lib/jadwal';
+import { getUpcomingBatches, formatIsoWithTz } from '../../lib/jadwal';
 
 // Build a map of trainings by course_id
 const trainingMap = new Map();
@@ -100,8 +100,8 @@ const eventSchemas = batches.slice(0, 30).map((b) => {
     '@type': 'EducationalEvent',
     name: `Pelatihan ${b.training_name} - Batch ${formatDateIndo(b.start_date)}`,
     description: `Jadwal resmi pelatihan ${b.training_name} sertifikasi ${b.certification}. Diselenggarakan oleh PT Wahana Totalita Konsultan.`,
-    startDate: b.start_date,
-    endDate: b.end_date && b.end_date !== '0000-00-00' ? b.end_date : b.start_date,
+    startDate: formatIsoWithTz(b.start_date, '08:00:00'),
+    endDate: formatIsoWithTz(b.end_date && b.end_date !== '0000-00-00' ? b.end_date : b.start_date, '17:00:00'),
     eventAttendanceMode: evMode,
     eventStatus: 'https://schema.org/EventScheduled',
     location,

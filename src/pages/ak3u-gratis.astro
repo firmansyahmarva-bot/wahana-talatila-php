@@ -1,12 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Faq from '../components/Faq.astro';
+import { getUpcomingBatches, formatBatchRange } from '../lib/jadwal';
 
 const canonical = 'https://wahanatotalita.com/ak3u-gratis/';
 const metaTitle = 'Belajar K3 Gratis — Panduan & Simulasi Soal Ahli K3 Umum | Wahana Totalita';
 const metaDesc = 'Akses panduan belajar K3 gratis, kisi-kisi soal AK3U, dan materi dasar Keselamatan dan Kesehatan Kerja. Wahana Totalita Konsultan Yogyakarta.';
 
 const waUrl = 'https://wa.me/6287759151278?text=Halo%2C%20saya%20ingin%20tanya%20jadwal%20dan%20biaya%20pelatihan%20AK3U';
+const upcomingBatches = getUpcomingBatches('pelatihan-ahli-k3-umum-sertifikasi-kemnaker-ri', undefined, 3);
 
 const dasarHukum = [
   { title: 'UU No. 1 Tahun 1970', desc: 'Undang-undang dasar Keselamatan Kerja di Indonesia — payung hukum utama seluruh regulasi K3.' },
@@ -148,11 +150,49 @@ const schemas = [
     </div>
   </section>
 
-  <section class="final-cta">
-    <div class="container-sm">
-      <h2>Siap Ikut Pelatihan Resmi?</h2>
-      <p>Hubungi kami untuk jadwal dan biaya pelatihan Ahli K3 Umum terbaru.</p>
-      <a href={waUrl} class="btn-wa" target="_blank" rel="noopener">💬 Tanya Jadwal &amp; Biaya AK3U</a>
+  <section class="final-cta" style="padding: 60px 0;">
+    <div class="container-sm" style="max-width: 900px; margin: 0 auto; padding: 0 20px;">
+      <h2 style="text-align: center; margin-bottom: 12px; font-family: var(--font-heading); font-size: clamp(1.5rem, 2.5vw, 2rem);">Siap Ikut Pelatihan Resmi Ahli K3 Umum?</h2>
+      <p style="text-align: center; color: var(--mut); margin-bottom: 30px; font-size: 15px;">
+        Berikut jadwal batch pendaftaran terdekat untuk sertifikasi resmi Kemnaker RI:
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 32px;">
+        {upcomingBatches.map((b, idx) => {
+          const rangeStr = formatBatchRange(b.start_date, b.end_date);
+          const place = b.mode === 'online' ? 'Online via Zoom' : (b.venue || 'Training Center Yogyakarta');
+          const batchWaMsg = `Halo Wahana Totalita, saya ingin daftar Pelatihan Ahli K3 Umum batch ${rangeStr} (${place}). Mohon info formulir dan rincian biaya.`;
+          return (
+            <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-sm); text-align: left;">
+              <div>
+                <span style="font-size: 11px; font-weight: 700; color: var(--accent); display: block; margin-bottom: 6px; text-transform: uppercase;">
+                  {idx === 0 ? 'Batch Terdekat' : `Batch ${idx + 1}`}
+                </span>
+                <strong style="font-size: 16px; color: var(--brand); display: block; margin-bottom: 6px; font-family: var(--font-heading);">
+                  {rangeStr}
+                </strong>
+                <small style="font-size: 12.5px; color: var(--slate-600); display: block; margin-bottom: 16px;">
+                  {place} &bull; {String(b.mode || 'online').toUpperCase()}
+                </small>
+              </div>
+              <a
+                href={`https://wa.me/6287759151278?text=${encodeURIComponent(batchWaMsg)}`}
+                target="_blank"
+                rel="noopener"
+                style="display: block; background: var(--cta); color: var(--on-brand); text-align: center; padding: 10px 14px; border-radius: 8px; font-size: 13px; font-weight: 700; text-decoration: none;"
+              >
+                Daftar Batch Ini &rarr;
+              </a>
+            </div>
+          );
+        })}
+      </div>
+
+      <div style="text-align: center;">
+        <a href="/jadwal/pelatihan-ahli-k3-umum-sertifikasi-kemnaker-ri/" style="font-size: 14px; font-weight: 700; color: var(--brand); text-decoration: none;">
+          Lihat Semua Jadwal &amp; Silabus Ahli K3 Umum &rarr;
+        </a>
+      </div>
     </div>
   </section>
 </Layout>

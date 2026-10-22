@@ -4,7 +4,7 @@ import PageHeader from '../../components/PageHeader.astro';
 import batchesRaw from '../../../data/training_batches.json';
 import trainingsRaw from '../../../data/trainings.json';
 import { formatPrice, waUrl } from '../../lib/images';
-import { getUpcomingBatches, formatDateIndo, formatBatchRange } from '../../lib/jadwal';
+import { getUpcomingBatches, formatDateIndo, formatBatchRange, formatIsoWithTz } from '../../lib/jadwal';
 
 export async function getStaticPaths() {
   const trainingMap = new Map();
@@ -103,8 +103,8 @@ const eventSchemas = isProgramPage
         '@type': 'EducationalEvent',
         name: `Jadwal Pelatihan ${trainingName} - Batch ${formatDateIndo(b.start_date)}`,
         description: pageDesc,
-        startDate: b.start_date,
-        endDate: b.end_date || b.start_date,
+        startDate: formatIsoWithTz(b.start_date, '08:00:00'),
+        endDate: formatIsoWithTz(b.end_date || b.start_date, '17:00:00'),
         eventAttendanceMode: bMode === 'online'
           ? 'https://schema.org/OnlineEventAttendanceMode'
           : 'https://schema.org/OfflineEventAttendanceMode',
@@ -142,8 +142,8 @@ const eventSchemas = isProgramPage
         '@type': 'EducationalEvent',
         name: `Jadwal Pelatihan ${trainingName} (${singleBatchDateStr})`,
         description: pageDesc,
-        startDate: batch.start_date,
-        endDate: batch.end_date && batch.end_date !== '0000-00-00' ? batch.end_date : batch.start_date,
+        startDate: formatIsoWithTz(batch.start_date, '08:00:00'),
+        endDate: formatIsoWithTz(batch.end_date && batch.end_date !== '0000-00-00' ? batch.end_date : batch.start_date, '17:00:00'),
         eventAttendanceMode: mode === 'online'
           ? 'https://schema.org/OnlineEventAttendanceMode'
           : 'https://schema.org/OfflineEventAttendanceMode',

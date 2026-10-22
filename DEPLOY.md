@@ -20,3 +20,8 @@
 
 ## 5. How to Add a Redirect Later
 - Open `functions/redirect-rules.js` and add your route under `EXACT_REDIRECTS` (e.g. `'/old-url/': '/new-url/'`). Commit & push.
+
+
+## 6. Daily Scheduled Rebuild & Deploy
+- Create a Deploy Hook in Cloudflare Pages (**Settings** > **Builds & deployments** > **Deploy hooks**).
+- Save its URL as the GitHub secret CF_PAGES_DEPLOY_HOOK in your repository (**Settings** > **Secrets and variables** > **Actions**).

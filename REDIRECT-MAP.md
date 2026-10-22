@@ -1,10 +1,10 @@
 # Redirect & Route Evaluation Map
 
-Generated on: 2026-10-18T12:42:34.648Z
+Generated on: 2026-10-22T19:40:35.559Z
 
 ## Summary Statistics
 
-- **Total Dist Static Pages Tested**: 1538 (100% untouched 200 OK)
+- **Total Dist Static Pages Tested**: 1684 (100% untouched 200 OK)
 - **Sample & Legacy URLs Audited**: 251
 - **Redirect Chains (> 1 hop)**: 0
 - **Redirect Loops**: 0
@@ -89,10 +89,10 @@ Generated on: 2026-10-18T12:42:34.648Z
 | `/outbond` | **301** | `/pelatihan/` |
 | `/galeri/index` | **200** | - |
 | `/dafter` | **301** | `/jadwal/` |
-| `/jadwal/daftar/83/` | **410** | - |
-| `/jadwal/daftar/79/` | **410** | - |
-| `/jadwal/daftar/39/` | **410** | - |
-| `/jadwal/daftar/37/` | **410** | - |
+| `/jadwal/daftar/83/` | **301** | `/jadwal/` |
+| `/jadwal/daftar/79/` | **301** | `/jadwal/` |
+| `/jadwal/daftar/39/` | **301** | `/jadwal/` |
+| `/jadwal/daftar/37/` | **301** | `/jadwal/` |
 | `/pelatihan/operator-scaffolding/` | **301** | `/pelatihan/pelatihan-k3-operator-scaffolding-sertifikasi-kemnaker-ri/` |
 | `/pelatihan/operator-welder-kelas-1/` | **301** | `/pelatihan/pelatihan-k3-operator-welder-kelas-1-sertifikasi-kemnaker-ri/` |
 | `/pelatihan/ahli-higiene-industri-muda/` | **301** | `/pelatihan/pelatihan-ahli-higiene-industri-muda-sertifikasi-bnsp/` |

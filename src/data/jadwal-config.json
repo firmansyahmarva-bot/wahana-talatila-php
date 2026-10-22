@@ -8,24 +8,6 @@
     "mode": "online",
     "venue": "Online via Zoom"
   },
-  "categories": {
-    "k3": {
-      "rule": "2_per_month",
-      "description": "Dua batch setiap bulan (awal dan pertengahan bulan)"
-    },
-    "mining": {
-      "rule": "monthly",
-      "description": "Satu batch setiap bulan (minggu kedua)"
-    },
-    "lingkungan": {
-      "rule": "2_per_month",
-      "description": "Dua batch setiap bulan (minggu ke-1 dan ke-3)"
-    },
-    "system-management": {
-      "rule": "monthly",
-      "description": "Satu batch setiap bulan (minggu ketiga)"
-    }
-  },
   "programs": {
     "ahli-k3-konstruksi-sertifikasi-bnsp": {
       "rule": "2_per_month",

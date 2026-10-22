@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import { getCollection } from 'astro:content';
-import { getUpcomingBatches, formatBatchRange, formatDateIndo } from '../lib/jadwal';
+import { getUpcomingBatches, formatBatchRange, formatDateIndo, formatIsoWithTz } from '../lib/jadwal';
 
 export async function getStaticPaths() {
   const citiesMap: Record<string, any> = {
@@ -248,8 +248,8 @@ const schemas = [
     '@type': 'EducationalEvent',
     name: `Pelatihan K3 ${cityData.name} - Batch ${formatDateIndo(b.start_date)}`,
     description: `Jadwal resmi pelatihan K3 sertifikasi Kemnaker RI & BNSP untuk wilayah ${cityData.name}.`,
-    startDate: b.start_date,
-    endDate: b.end_date || b.start_date,
+    startDate: formatIsoWithTz(b.start_date, '08:00:00'),
+    endDate: formatIsoWithTz(b.end_date || b.start_date, '17:00:00'),
     eventAttendanceMode: b.mode === 'online'
       ? 'https://schema.org/OnlineEventAttendanceMode'
       : 'https://schema.org/OfflineEventAttendanceMode',

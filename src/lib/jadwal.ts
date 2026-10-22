@@ -39,6 +39,12 @@ export function formatDateIndo(dateStr?: string | null): string {
   return `${d.getDate()} ${MONTHS_INDO[d.getMonth()]} ${d.getFullYear()}`;
 }
 
+export function formatIsoWithTz(dateStr?: string | null, defaultTime = '08:00:00'): string {
+  if (!dateStr || dateStr === '0000-00-00') return '';
+  const datePart = dateStr.includes('T') ? dateStr.split('T')[0] : dateStr;
+  return `${datePart}T${defaultTime}+07:00`;
+}
+
 export function formatBatchRange(startDate: string, endDate?: string | null): string {
   if (!startDate) return '';
   if (!endDate || endDate === startDate) return formatDateIndo(startDate);
