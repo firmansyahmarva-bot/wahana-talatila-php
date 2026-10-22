@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import { getTrainingImageUrl, formatPrice, modeLabel, waUrl } from '../lib/images';
+import { getUpcomingBatches } from '../lib/jadwal';
 
 const allTrainings = await getCollection('trainings');
 const allCategories = await getCollection('categories');
@@ -39,11 +40,27 @@ for (const t of orderedAll) {
   }
 }
 
-// 4 Nearest public batches
-const upcomingBatches = allBatches
-  .filter((b) => b.data.is_public !== 0)
-  .sort((a, b) => (a.data.start_date || '').localeCompare(b.data.start_date || ''))
-  .slice(0, 4);
+// 4 Nearest batches: guaranteed upcoming from top programs via getUpcomingBatches
+const prioritySlugs = [
+  'pelatihan-ahli-k3-umum-sertifikasi-kemnaker-ri',
+  'ak3-bnsp',
+  'pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri',
+  'pelatihan-pop-pertambangan-sertifikasi-bnsp-online'
+];
+const upcomingBatches = prioritySlugs.map((slug) => {
+  const b = getUpcomingBatches(slug, undefined, 1)[0];
+  return {
+    data: {
+      id: typeof b.id === 'number' ? b.id : slug,
+      batch_name: b.batch_name,
+      start_date: b.start_date,
+      end_date: b.end_date,
+      mode: b.mode,
+      venue: b.venue,
+      max_participants: 20
+    }
+  };
+});
 
 const totalPrograms = allTrainings.length > 0 ? allTrainings.length : 146;
 

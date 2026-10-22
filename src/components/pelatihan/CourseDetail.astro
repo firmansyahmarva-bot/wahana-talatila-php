@@ -6,7 +6,7 @@ import { getTrainingFaqs } from '../../lib/trainingFaqs';
 import WaButton from '../WaButton.astro';
 import TrainingCard from '../TrainingCard.astro';
 import Breadcrumb from '../Breadcrumb.astro';
-import allBatches from '../../../data/training_batches.json';
+import { getUpcomingBatches, formatDateIndo, formatBatchRange } from '../../lib/jadwal';
 
 interface Props {
   data: any;
@@ -121,29 +121,8 @@ if (relatedArticles.length < 2) {
   relatedArticles = allArticles.slice(0, 3);
 }
 
-// Batches for this course: start_date >= today, sorted ascending, max 3
-const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Jakarta' }).format(new Date());
-const courseBatches = (allBatches as any[])
-  .filter(
-    (b: any) =>
-      (b.course_id === data.id || (b.course_id && String(b.course_id) === String(data.id))) &&
-      b.is_public !== 0 &&
-      b.start_date &&
-      b.start_date >= today
-  )
-  .sort((a: any, b: any) => (a.start_date || '').localeCompare(b.start_date || ''))
-  .slice(0, 3);
-
-function formatDateIndo(dateStr?: string | null): string {
-  if (!dateStr || dateStr === '0000-00-00') return '';
-  const d = new Date(dateStr + 'T00:00:00');
-  if (isNaN(d.getTime())) return dateStr;
-  const months = [
-    'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
-    'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
-  ];
-  return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
-}
+// Batches for this course: auto-generated from jadwal-config or real records (guaranteed 3-4 dates)
+const courseBatches = getUpcomingBatches(data.slug, undefined, 4);
 
 
 const schemas = [
@@ -351,59 +330,28 @@ const inhouseWaMsg = `Halo Wahana Totalita, kami dari perusahaan ingin meminta p
         <div class="tc-live-head">
           <div>
             <h2>Jadwal Batch Terdekat</h2>
-            <p>Jadwal pembinaan reguler dan konfirmasi kuota kelas terdekat.</p>
+            <p>Jadwal pembinaan reguler resmi terdekat untuk kelas Online &amp; Tatap Muka.</p>
           </div>
-          <a href="/jadwal/">Semua jadwal &rarr;</a>
+          <a href={`/jadwal/${data.slug}/`}>Lihat halaman jadwal lengkap &rarr;</a>
         </div>
 
         <div class="tc-live-scroll" id="live-schedule-grid">
-          {courseBatches.length > 0 &&
-            courseBatches.map((b: any, idx: number) => {
-              const startDateStr = formatDateIndo(b.start_date);
-              const place = b.mode === 'online' ? 'Online via Zoom' : (b.venue || 'Yogyakarta / Tatap Muka');
-              const batchPrice = b.price > 0 ? formatPrice(b.price) : priceFormatted;
-              return (
-                <a class="tc-schedule-card" href="/jadwal/" data-start={b.start_date}>
-                  <span>{idx === 0 ? 'Batch terdekat' : 'Pendaftaran dibuka'}</span>
-                  <b>{startDateStr || b.batch_name}</b>
-                  <small>{place} · {String(b.mode || 'offline').toUpperCase()}</small>
-                  <strong>{batchPrice}</strong>
-                  <em>Lihat detail &amp; daftar &rarr;</em>
-                </a>
-              );
-            })
-          }
-          <div class={`pd-schedule-fallback ${courseBatches.length > 0 ? 'is-hidden' : ''}`}>
-            <p class="pd-schedule-fallback-text">Jadwal batch reguler berikutnya sedang disiapkan atau disesuaikan dengan permintaan in-house perusahaan.</p>
-            <WaButton
-              message={`Halo Wahana Totalita, saya ingin tanya jadwal batch terdekat untuk program: ${data.name}`}
-              label="Tanya jadwal via WhatsApp"
-              variant="secondary"
-              size="md"
-            />
-          </div>
+          {courseBatches.map((b: any, idx: number) => {
+            const dateRangeStr = formatBatchRange(b.start_date, b.end_date);
+            const place = b.mode === 'online' ? 'Online via Zoom' : (b.venue || 'Yogyakarta / Tatap Muka');
+            const batchPrice = b.price > 0 ? formatPrice(b.price) : priceFormatted;
+            const targetUrl = typeof b.id === 'number' ? `/jadwal/${b.id}/` : `/jadwal/${data.slug}/`;
+            return (
+              <a class="tc-schedule-card" href={targetUrl} data-start={b.start_date}>
+                <span>{idx === 0 ? 'Batch terdekat' : 'Pendaftaran dibuka'}</span>
+                <b>{dateRangeStr}</b>
+                <small>{place} · {String(b.mode || 'offline').toUpperCase()}</small>
+                <strong>{batchPrice}</strong>
+                <em>Lihat detail &amp; daftar &rarr;</em>
+              </a>
+            );
+          })}
         </div>
-        <script is:inline>
-          (function() {
-            var today = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Jakarta' }).format(new Date());
-            var grid = document.getElementById('live-schedule-grid');
-            if (!grid) return;
-            var cards = grid.querySelectorAll('.tc-schedule-card[data-start]');
-            var visible = 0;
-            cards.forEach(function(c) {
-              var s = c.getAttribute('data-start');
-              if (s && s < today) {
-                c.remove();
-              } else {
-                visible++;
-              }
-            });
-            var fb = grid.querySelector('.pd-schedule-fallback');
-            if (visible === 0 && fb) {
-              fb.classList.remove('is-hidden');
-            }
-          })();
-        </script>
       </div>
     </section>
 

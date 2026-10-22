@@ -4,49 +4,179 @@ import Breadcrumb from '../../components/Breadcrumb.astro';
 import batchesRaw from '../../../data/training_batches.json';
 import trainingsRaw from '../../../data/trainings.json';
 import { formatPrice, waUrl } from '../../lib/images';
+import { getUpcomingBatches, formatDateIndo, formatBatchRange } from '../../lib/jadwal';
 
 export async function getStaticPaths() {
   const trainingMap = new Map();
   for (const t of (trainingsRaw as any[])) {
     trainingMap.set(t.id, t);
+    trainingMap.set(t.slug, t);
   }
 
-  return (batchesRaw as any[]).map((b) => {
+  const paths: any[] = [];
+
+  // 1. Existing numeric batch IDs (94 batches)
+  for (const b of (batchesRaw as any[])) {
     const training = trainingMap.get(b.course_id);
-    return {
+    paths.push({
       params: { id: String(b.id) },
       props: {
+        pageType: 'batch',
         batch: b,
         training: training || null,
+        slug: training?.slug || null,
       },
-    };
-  });
+    });
+  }
+
+  // 2. Program slugs (146 active courses) -> /jadwal/{program-slug}/
+  for (const t of (trainingsRaw as any[])) {
+    if (t.is_active === 0) continue;
+    paths.push({
+      params: { id: t.slug },
+      props: {
+        pageType: 'program',
+        batch: null,
+        training: t,
+        slug: t.slug,
+      },
+    });
+  }
+
+  return paths;
 }
 
-const { batch, training } = Astro.props;
+const { pageType, batch, training, slug } = Astro.props;
 
-const trainingName = training?.name || batch.batch_name || 'Pelatihan K3';
-const trainingSlug = training?.slug || '';
+const isProgramPage = pageType === 'program';
+
+const trainingName = training?.name || batch?.batch_name || 'Pelatihan K3';
+const trainingSlug = training?.slug || slug || '';
 const certification = training?.certification || 'Kemnaker RI / BNSP';
 const durationDays = training?.duration_days || 3;
-const price = batch.price || training?.price || 0;
-const mode = batch.mode || 'offline';
-const venue = batch.venue || (mode === 'online' ? 'Online via Zoom Interaktif' : 'Training Center Wahana Totalita Yogyakarta');
+const price = (batch?.price && batch.price > 0) ? batch.price : (training?.price || 0);
+const mode = (batch?.mode || training?.mode || 'online').toLowerCase();
+const venue = batch?.venue || (mode === 'online' ? 'Online via Zoom Interaktif' : 'Training Center Wahana Totalita Yogyakarta');
 
-function formatDateIndo(dateStr: string): string {
-  if (!dateStr || dateStr === '0000-00-00') return '';
-  const d = new Date(dateStr);
-  if (isNaN(d.getTime())) return dateStr;
-  const months = [
-    'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
-    'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
-  ];
-  return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+// Generate 3-4 upcoming dates for this program
+const upcomingBatches = getUpcomingBatches(trainingSlug, undefined, 4);
+const firstBatch = upcomingBatches[0];
+
+// Date strings
+const singleBatchDateStr = batch ? formatDateIndo(batch.start_date) : '';
+const singleBatchEndDateStr = batch?.end_date && batch.end_date !== batch.start_date ? formatDateIndo(batch.end_date) : '';
+
+// Titles & meta
+let pageTitle: string;
+let pageDesc: string;
+let canonical: string;
+
+if (isProgramPage) {
+  // Requirement: Short unique title (under 60 chars) and meta description (under 155 chars)
+  const shortName = trainingName.length > 40 ? trainingName.slice(0, 38).trimEnd() + '…' : trainingName;
+  pageTitle = `Jadwal ${shortName} — Wahana Totalita`;
+  if (pageTitle.length > 60) {
+    pageTitle = `Jadwal ${trainingName.slice(0, 32)}… — Wahana`;
+  }
+  pageDesc = `Jadwal resmi pelatihan ${trainingName} sertifikasi ${certification}. Pilihan kelas Online & Tatap Muka. Cek tanggal batch & daftar langsung.`;
+  if (pageDesc.length > 155) {
+    pageDesc = pageDesc.slice(0, 152) + '…';
+  }
+  canonical = `https://wahanatotalita.com/jadwal/${trainingSlug}/`;
+} else {
+  pageTitle = `Jadwal ${trainingName} (${singleBatchDateStr}) — Wahana Totalita`;
+  pageDesc = `Jadwal resmi pelatihan ${trainingName} tanggal ${singleBatchDateStr} (${mode.toUpperCase()}). Sertifikasi ${certification}. Kurikulum resmi & pendaftaran.`;
+  canonical = `https://wahanatotalita.com/jadwal/${batch.id}/`;
 }
 
-const dateStr = formatDateIndo(batch.start_date);
-const endDateStr = batch.end_date && batch.end_date !== batch.start_date ? formatDateIndo(batch.end_date) : '';
+// WhatsApp inquiry message
+const waMsg = isProgramPage
+  ? `Halo Wahana Totalita, saya ingin mendaftar pelatihan:\n*${trainingName}*\nMohon informasi jadwal terdekat (${firstBatch ? formatBatchRange(firstBatch.start_date, firstBatch.end_date) : 'Batch Terdekat'}) dan invoice pendaftaran.`
+  : `Halo Wahana Totalita, saya ingin mendaftar jadwal pelatihan:\n*${trainingName}*\nTanggal: ${singleBatchDateStr}\nMode: ${mode.toUpperCase()}\nURL batch: ${canonical}`;
 
+// Event JSON-LD Schemas
+const eventSchemas = isProgramPage
+  ? upcomingBatches.map((b) => {
+      const bMode = (b.mode || 'online').toLowerCase();
+      return {
+        '@context': 'https://schema.org',
+        '@type': 'EducationalEvent',
+        name: `Jadwal Pelatihan ${trainingName} - Batch ${formatDateIndo(b.start_date)}`,
+        description: pageDesc,
+        startDate: b.start_date,
+        endDate: b.end_date || b.start_date,
+        eventAttendanceMode: bMode === 'online'
+          ? 'https://schema.org/OnlineEventAttendanceMode'
+          : 'https://schema.org/OfflineEventAttendanceMode',
+        eventStatus: 'https://schema.org/EventScheduled',
+        url: canonical,
+        organizer: {
+          '@type': 'Organization',
+          name: 'PT Wahana Totalita Konsultan',
+          url: 'https://wahanatotalita.com',
+        },
+        location: bMode === 'online'
+          ? { '@type': 'VirtualLocation', url: canonical }
+          : {
+              '@type': 'Place',
+              name: b.venue || 'Training Center Wahana Totalita',
+              address: {
+                '@type': 'PostalAddress',
+                addressLocality: 'Yogyakarta',
+                addressRegion: 'DI Yogyakarta',
+                addressCountry: 'ID',
+              },
+            },
+        offers: {
+          '@type': 'Offer',
+          price: String(b.price || price || 0),
+          priceCurrency: 'IDR',
+          availability: 'https://schema.org/InStock',
+          url: canonical,
+        },
+      };
+    })
+  : [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'EducationalEvent',
+        name: `Jadwal Pelatihan ${trainingName} (${singleBatchDateStr})`,
+        description: pageDesc,
+        startDate: batch.start_date,
+        endDate: batch.end_date && batch.end_date !== '0000-00-00' ? batch.end_date : batch.start_date,
+        eventAttendanceMode: mode === 'online'
+          ? 'https://schema.org/OnlineEventAttendanceMode'
+          : 'https://schema.org/OfflineEventAttendanceMode',
+        eventStatus: 'https://schema.org/EventScheduled',
+        url: canonical,
+        organizer: {
+          '@type': 'Organization',
+          name: 'PT Wahana Totalita Konsultan',
+          url: 'https://wahanatotalita.com',
+        },
+        location: mode === 'online'
+          ? { '@type': 'VirtualLocation', url: canonical }
+          : {
+              '@type': 'Place',
+              name: venue,
+              address: {
+                '@type': 'PostalAddress',
+                addressLocality: 'Yogyakarta',
+                addressRegion: 'DI Yogyakarta',
+                addressCountry: 'ID',
+              },
+            },
+        offers: {
+          '@type': 'Offer',
+          price: String(price),
+          priceCurrency: 'IDR',
+          availability: 'https://schema.org/InStock',
+          url: canonical,
+        },
+      },
+    ];
+
+// Curriculum parsing
 let curriculumList: string[] = [];
 if (Array.isArray(training?.curriculum_data) && training.curriculum_data.length > 0) {
   curriculumList = training.curriculum_data;
@@ -59,56 +189,16 @@ if (Array.isArray(training?.curriculum_data) && training.curriculum_data.length 
   }
 }
 
-const pageTitle = `Jadwal ${trainingName} (${dateStr}) — Wahana Totalita`;
-const pageDesc = `Jadwal resmi pelatihan ${trainingName} tanggal ${dateStr} (${mode.toUpperCase()}). Sertifikasi ${certification}. Kurikulum resmi, rincian biaya, dan registrasi batch terdekat.`;
-const canonical = `https://wahanatotalita.com/jadwal/${batch.id}/`;
-
-const waMsg = `Halo Wahana Totalita, saya ingin mendaftar jadwal pelatihan:\n*${trainingName}*\nTanggal: ${dateStr}\nMode: ${mode.toUpperCase()}\nURL batch: ${canonical}`;
-
-const eventSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'EducationalEvent',
-  name: `Jadwal Pelatihan ${trainingName} (${dateStr})`,
-  description: pageDesc,
-  startDate: batch.start_date,
-  endDate: batch.end_date && batch.end_date !== '0000-00-00' ? batch.end_date : batch.start_date,
-  eventAttendanceMode: mode === 'online'
-    ? 'https://schema.org/OnlineEventAttendanceMode'
-    : 'https://schema.org/OfflineEventAttendanceMode',
-  eventStatus: 'https://schema.org/EventScheduled',
-  url: canonical,
-  organizer: {
-    '@type': 'Organization',
-    name: 'PT Wahana Totalita Konsultan',
-    url: 'https://wahanatotalita.com',
-  },
-  location: mode === 'online'
-    ? { '@type': 'VirtualLocation', url: canonical }
-    : {
-        '@type': 'Place',
-        name: venue,
-        address: {
-          '@type': 'PostalAddress',
-          addressLocality: 'Yogyakarta',
-          addressRegion: 'DI Yogyakarta',
-          addressCountry: 'ID',
-        },
-      },
-  offers: {
-    '@type': 'Offer',
-    price: String(price),
-    priceCurrency: 'IDR',
-    availability: 'https://schema.org/InStock',
-    url: canonical,
-  },
-};
+// Format "Last updated" date in Indonesian
+const todayDate = new Date();
+const lastUpdatedStr = `${todayDate.getDate()} ${['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'][todayDate.getMonth()]} ${todayDate.getFullYear()}`;
 ---
 
 <Layout
   title={pageTitle}
   description={pageDesc}
   canonical={canonical}
-  schemas={[eventSchema]}
+  schemas={eventSchemas}
   pageCss={['/assets/css/page/jadwal-detail.css']}
 >
   <!-- BREADCRUMB -->
@@ -124,22 +214,36 @@ const eventSchema = {
   <!-- HERO -->
   <section class="detail-hero" style="background:linear-gradient(135deg,var(--brand-dark,var(--brand-dark)) 0%,var(--brand,var(--brand)) 100%);padding:48px 0;color:var(--surface);">
     <div class="container" style="max-width:1160px;margin:0 auto;padding:0 20px;">
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap;">
         <span class="badge-mode" style="background:color-mix(in srgb,var(--surface) 15%,transparent);color:var(--success-border);padding:4px 12px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.05em;border:1px solid color-mix(in srgb,var(--surface) 20%,transparent);">
           {mode.toUpperCase()}
         </span>
-        <span style="font-size:13px;color:rgba(255,255,255,0.8);">
+        <span style="font-size:13px;color:rgba(255,255,255,0.85);">
           🎓 Sertifikasi: <strong>{certification}</strong>
+        </span>
+        <span style="font-size:12px;color:rgba(255,255,255,0.7);margin-left:auto;">
+          Diperbarui: {lastUpdatedStr}
         </span>
       </div>
       <h1 style="font-family:'Lexend',sans-serif;font-size:clamp(1.8rem,3.2vw,2.5rem);font-weight:800;margin:0 0 16px;color: var(--surface);line-height:1.25;">
-        Jadwal Pelatihan {trainingName}
+        Jadwal {trainingName}
       </h1>
       <div class="meta-grid" style="display:flex;gap:20px;flex-wrap:wrap;font-size:14px;color:rgba(255,255,255,0.9);">
-        <span>📅 <strong>{dateStr} {endDateStr ? `— ${endDateStr}` : ''}</strong></span>
-        <span>📍 {venue}</span>
-        <span>⏱ {durationDays} Hari Pelatihan</span>
-        <span>🏛️ Sertifikasi Resmi {certification}</span>
+        {isProgramPage ? (
+          <>
+            <span>📅 <strong>{upcomingBatches.length} Batch Tersedia</strong></span>
+            <span>📍 Online via Zoom &amp; Tatap Muka</span>
+            <span>⏱ {durationDays} Hari Pelatihan</span>
+            <span>🏛️ Sertifikasi Resmi {certification}</span>
+          </>
+        ) : (
+          <>
+            <span>📅 <strong>{singleBatchDateStr} {singleBatchEndDateStr ? `— ${singleBatchEndDateStr}` : ''}</strong></span>
+            <span>📍 {venue}</span>
+            <span>⏱ {durationDays} Hari Pelatihan</span>
+            <span>🏛️ Sertifikasi Resmi {certification}</span>
+          </>
+        )}
       </div>
     </div>
   </section>
@@ -149,6 +253,53 @@ const eventSchema = {
     <div class="content-grid" style="display:grid;grid-template-columns:1fr 360px;gap:36px;align-items:start;">
       <!-- MAIN BODY -->
       <div>
+        <!-- UPCOMING BATCHES TABLE (Prominent on Program Pages) -->
+        <div class="content-card" style="background:var(--surface);border-radius:14px;border:1px solid var(--border);padding:28px;margin-bottom:24px;box-shadow:0 2px 8px color-mix(in srgb,var(--brand) 3%,transparent);">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
+            <h2 style="font-family:'Lexend',sans-serif;font-size:1.25rem;font-weight:700;color:var(--brand);margin:0;">
+              📅 Batch Pendaftaran Terdekat
+            </h2>
+            <span style="font-size:12px;color:var(--slate-500);">Terakhir diperbarui: {lastUpdatedStr}</span>
+          </div>
+          
+          <div style="display:grid;gap:12px;">
+            {upcomingBatches.map((b, idx) => {
+              const rangeStr = formatBatchRange(b.start_date, b.end_date);
+              const bPlace = b.mode === 'online' ? 'Online via Zoom' : (b.venue || 'Yogyakarta');
+              const bPriceFormatted = b.price > 0 ? formatPrice(b.price) : (price > 0 ? formatPrice(price) : 'Hubungi Kami');
+              const itemWaMsg = `Halo Wahana Totalita, saya ingin daftar pelatihan ${trainingName} batch ${rangeStr} (${b.mode.toUpperCase()})`;
+              return (
+                <div style="background:var(--slate-50);border:1px solid var(--border);border-radius:10px;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;">
+                  <div style="min-width:200px;">
+                    <span style="font-size:11px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:4px;">
+                      {idx === 0 ? '🔥 Batch Terdekat' : `Batch ${idx + 1}`}
+                    </span>
+                    <strong style="font-size:16px;color:var(--brand);display:block;margin-bottom:2px;">
+                      {rangeStr}
+                    </strong>
+                    <span style="font-size:13px;color:var(--slate-600);">
+                      {bPlace} &bull; <span style="text-transform:uppercase;font-weight:600;">{b.mode}</span>
+                    </span>
+                  </div>
+                  <div style="text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+                    <span style="font-size:15px;font-weight:800;color:var(--brand);">
+                      {bPriceFormatted}
+                    </span>
+                    <a
+                      href={waUrl(itemWaMsg)}
+                      target="_blank"
+                      rel="noopener"
+                      style="display:inline-block;background:var(--brand);color:var(--on-brand);padding:6px 14px;border-radius:6px;font-size:12.5px;font-weight:700;text-decoration:none;"
+                    >
+                      Daftar Batch Ini &rarr;
+                    </a>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
         {training?.description && (
           <div class="content-card" style="background:var(--surface);border-radius:14px;border:1px solid var(--border);padding:28px;margin-bottom:24px;box-shadow:0 2px 8px color-mix(in srgb,var(--brand) 3%,transparent);">
             <h2 style="font-family:'Lexend',sans-serif;font-size:1.25rem;font-weight:700;color:var(--brand);margin:0 0 14px;">
@@ -218,8 +369,8 @@ const eventSchema = {
 
           <div class="info-rows" style="border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:14px 0;margin-bottom:20px;">
             <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:13.5px;">
-              <span style="color:var(--slate-500);">📅 Tanggal</span>
-              <strong style="color:var(--brand);">{dateStr}</strong>
+              <span style="color:var(--slate-500);">📅 Batch 1</span>
+              <strong style="color:var(--brand);text-align:right;">{firstBatch ? formatBatchRange(firstBatch.start_date, firstBatch.end_date) : singleBatchDateStr}</strong>
             </div>
             <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:13.5px;">
               <span style="color:var(--slate-500);">🖥 Metode</span>
@@ -251,7 +402,7 @@ const eventSchema = {
                 href={`/pelatihan/${trainingSlug}/`}
                 style="font-size:13px;color:var(--accent);font-weight:700;text-decoration:none;"
               >
-                Lihat Halaman Lengkap Program →
+                Lihat Halaman Lengkap Program &rarr;
               </a>
             </div>
           )}
