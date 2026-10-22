@@ -907,14 +907,3 @@ a { color: inherit; text-decoration: none; }
   .st-modal-dialog { padding: 20px 16px; border-radius: 20px 20px 0 0; max-height: 92vh; }
   .st-modal-overlay { padding: 0; align-items: flex-end; }
 }
-
-body{font-family:'Segoe UI',Arial,sans-serif;padding:24px;max-width:720px;margin:0 auto;color:var(--slate-800);line-height:1.5}
-  h1{font-size:16pt;border-bottom:2px solid var(--brand);padding-bottom:8px;margin-bottom:12px;color:var(--brand)}
-  h3{font-size:11pt;color:var(--brand);margin-top:16px;margin-bottom:6px}
-  .stat{background:var(--success-bg);padding:10px 14px;border-radius:6px;font-size:9pt;margin:12px 0;border:1px solid var(--success-border);color:var(--brand)}
-  ol,ul{padding-left:20px;line-height:1.6;font-size:9.5pt}
-  li{margin-bottom:4px}
-  .footer{margin-top:28px;border-top:1px solid var(--slate-200);padding-top:8px;font-size:8pt;color:var(--slate-500);text-align:center}
-  table{width:100%;margin-top:10px;border-collapse:collapse;font-size:8.5pt}
-  th{border:1px solid var(--slate-300);padding:6px;background:var(--slate-50);text-align:left}
-  td{border:1px solid var(--slate-300);padding:6px;height:24px}

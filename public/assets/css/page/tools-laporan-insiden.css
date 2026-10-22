@@ -222,12 +222,3 @@ textarea.form-input { min-height: 80px; resize: vertical; }
   line-height: 1.7;
   margin-bottom: 16px;
 }
-body{font-family:'Segoe UI',Arial,sans-serif;padding:32px;max-width:860px;margin:0 auto;color:var(--slate-900);line-height:1.5}
-    h1{font-size:16pt;margin:0;color:var(--brand);border-bottom:2px solid var(--brand);padding-bottom:8px}
-    .sub{font-size:8.5pt;color:var(--slate-500);margin:6px 0 16px}
-    table{width:100%;border-collapse:collapse;margin:12px 0;font-size:9pt}
-    th,td{border:1px solid var(--slate-300);padding:8px 10px;text-align:left}
-    th{background:var(--slate-100);color:var(--brand);width:24%}
-    .why-box{background:var(--slate-50);border:1px solid var(--slate-300);padding:10px;margin:6px 0;font-size:8.5pt}
-    .sig{margin-top:40px;display:grid;grid-template-columns:1fr 1fr;gap:40px;text-align:center;font-size:9pt}
-    .line{margin-top:60px;border-top:1px solid var(--black);font-weight:bold}

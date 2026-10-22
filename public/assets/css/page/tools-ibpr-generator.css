@@ -266,11 +266,3 @@ body {
   line-height: 1.7;
   margin-bottom: 16px;
 }
-body{font-family:'Segoe UI',Arial,sans-serif;padding:24px;max-width:1050px;margin:0 auto;color:var(--slate-900);line-height:1.4}
-    h1{font-size:16pt;margin:0;color:var(--brand);border-bottom:2px solid var(--brand);padding-bottom:6px}
-    .sub{font-size:8.5pt;color:var(--slate-500);margin:4px 0 12px}
-    table{width:100%;border-collapse:collapse;margin:10px 0;font-size:8.5pt}
-    th,td{border:1px solid var(--slate-300);padding:6px 8px;text-align:left;vertical-align:top}
-    th{background:var(--brand);color:var(--surface)}
-    .sig{margin-top:30px;display:grid;grid-template-columns:1fr 1fr;gap:40px;text-align:center;font-size:9pt}
-    .line{margin-top:50px;border-top:1px solid var(--black);font-weight:bold}
