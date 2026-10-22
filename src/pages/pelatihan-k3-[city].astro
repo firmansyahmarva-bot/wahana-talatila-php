@@ -358,14 +358,19 @@ const schemas = [
       <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:24px;flex-wrap:wrap;gap:12px;">
         <div>
           <span style="font-size:12px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:4px;">
-            Jadwal Batch Resmi Wilayah {cityData.name}
+            Agenda Pembinaan K3 Resmi
           </span>
           <h2 style="font-size:24px;font-weight:800;color:var(--brand);margin:0;">
-            Agenda Pembinaan K3 Terdekat
+            Jadwal Pelatihan K3 {cityData.name}
           </h2>
         </div>
-        <a href="/jadwal/" style="color:var(--brand);font-weight:700;font-size:14px;text-decoration:none;">
-          Semua Jadwal &rarr;
+        <a
+          href={`https://wa.me/6287759151278?text=${encodeURIComponent('Halo Wahana Totalita, saya ingin daftar dan tanya jadwal pelatihan K3 di ' + cityData.name)}`}
+          target="_blank"
+          rel="noopener"
+          style="display:inline-flex;align-items:center;gap:6px;background:var(--brand);color:var(--on-brand);padding:8px 16px;border-radius:6px;font-weight:700;font-size:13px;text-decoration:none;"
+        >
+          Daftar Pelatihan di {cityData.name} &rarr;
         </a>
       </div>
 
@@ -377,7 +382,7 @@ const schemas = [
             <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:var(--shadow-sm);">
               <div>
                 <span style="font-size:11px;font-weight:700;color:var(--accent);display:block;margin-bottom:6px;">
-                  {idx === 0 ? 'Batch terdekat' : 'Pendaftaran dibuka'}
+                  {idx === 0 ? `Jadwal Terdekat ${cityData.name}` : `Batch Pendaftaran ${cityData.name}`}
                 </span>
                 <strong style="font-size:16px;color:var(--brand);display:block;margin-bottom:6px;">
                   {rangeStr}
@@ -387,7 +392,7 @@ const schemas = [
                 </small>
               </div>
               <a
-                href={`https://wa.me/6287759151278?text=${encodeURIComponent('Halo Wahana Totalita, saya ingin daftar pelatihan batch ' + rangeStr + ' wilayah ' + cityData.name)}`}
+                href={`https://wa.me/6287759151278?text=${encodeURIComponent('Halo Wahana Totalita, saya ingin daftar pelatihan K3 ' + cityData.name + ' batch ' + rangeStr)}`}
                 target="_blank"
                 rel="noopener"
                 style="display:block;background:var(--brand);color:var(--on-brand);text-align:center;padding:8px 12px;border-radius:6px;font-size:12px;font-weight:700;text-decoration:none;"
