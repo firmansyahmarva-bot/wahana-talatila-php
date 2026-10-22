@@ -305,5 +305,255 @@ const toolFaqs = [
   <div class="st-modal-dialog" id="modalContent"></div>
 </div>
 
+
+<script is:inline define:vars={{ talks: talksList }}>
+  let activeCat = 'all';
+  let visibleLimit = 12;
+  let currentTalks = talks;
+
+  function renderTalks(list, resetLimit = false) {
+    if (resetLimit) visibleLimit = 12;
+    currentTalks = list;
+    const grid = document.getElementById('talkGrid');
+    const resultsCount = document.getElementById('stResultsCount');
+    const loadMore = document.getElementById('stLoadMore');
+    if (resultsCount) resultsCount.textContent = list.length + ' topik';
+    
+    if (!grid) return;
+
+    if (!list.length) {
+      grid.innerHTML = '<div style="color:var(--st-slate-600);text-align:center;padding:50px 20px;grid-column:1/-1;background:var(--surface);border-radius:16px;border:1px dashed var(--st-slate-300);">' +
+        '<p style="font-family:Lexend,sans-serif;font-size:1.15rem;font-weight:700;color:var(--st-slate-900);margin-bottom:6px">Topik Tidak Ditemukan</p>' +
+        '<p style="font-size:0.9rem;margin-bottom:16px">Coba kata kunci lain atau bersihkan pencarian untuk melihat seluruh 100 topik.</p>' +
+        '<button type="button" onclick="resetFilter()" style="background:var(--st-forest);color:var(--surface);border:none;border-radius:999px;padding:9px 20px;font-family:Lexend,sans-serif;font-weight:700;font-size:0.82rem;cursor:pointer">Tampilkan Semua Topik</button>' +
+        '</div>';
+      if (loadMore) loadMore.hidden = true;
+      return;
+    }
+    
+    grid.innerHTML = list.slice(0, visibleLimit).map((t, idx) => {
+      const realIndex = talks.findIndex((item) => item.w === t.w);
+      const targetIndex = realIndex !== -1 ? realIndex : idx;
+      return '<div class="st-card" data-cat="' + t.cat + '" onclick="openModal(' + targetIndex + ')">' +
+        '<div class="st-card-top">' +
+          '<span class="st-cat-badge cat-' + t.cat + '">' + t.cat.toUpperCase() + '</span>' +
+          '<span class="st-topic-id">Topik #' + t.w + '</span>' +
+        '</div>' +
+        '<div class="st-card-header">' +
+          '<h3>' + t.title + '</h3>' +
+        '</div>' +
+        '<div class="st-card-body">' + t.desc + '</div>' +
+        '<div class="st-card-tags">' +
+          (t.tags || []).map((tg) => '<span class="st-tag">' + tg + '</span>').join('') +
+        '</div>' +
+        '<a class="st-card-related" href="' + (t.related ? t.related.url : '/pelatihan/pelatihan-ahli-k3-umum-sertifikasi-kemnaker-ri/') + '" onclick="event.stopPropagation()">' +
+          '<span>Pelajari: ' + (t.related ? t.related.label : 'Program Ahli K3 Umum Kemnaker RI') + '</span>' +
+          '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>' +
+        '</a>' +
+        '<div class="st-card-footer">' +
+          '<button class="st-btn-detail" onclick="event.stopPropagation();openModal(' + targetIndex + ')" type="button">' +
+            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>' +
+            '<span>Lihat Detail</span>' +
+          '</button>' +
+          '<button class="st-btn-print" onclick="event.stopPropagation();printTalk(' + targetIndex + ')" type="button" title="Cetak materi dan lembar absensi">' +
+            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>' +
+            '<span>Cetak</span>' +
+          '</button>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+    
+    if (loadMore) {
+      const remaining = Math.max(0, list.length - visibleLimit);
+      loadMore.hidden = remaining === 0;
+      if (remaining) {
+        loadMore.innerHTML = '<span>Tampilkan ' + Math.min(12, remaining) + ' Topik Lagi (' + remaining + ' tersisa)</span>' +
+          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>';
+      }
+    }
+  }
+
+  function resetFilter() {
+    const input = document.getElementById('stSearch');
+    if (input) input.value = '';
+    document.querySelectorAll('.st-cat-btn').forEach((b) => b.classList.remove('active'));
+    const allBtn = document.querySelector('.st-cat-btn');
+    if (allBtn) allBtn.classList.add('active');
+    activeCat = 'all';
+    filterTalks();
+  }
+
+  function quickSearch(keyword) {
+    const input = document.getElementById('stSearch');
+    if (input) input.value = keyword;
+    document.querySelectorAll('.st-cat-btn').forEach((b) => b.classList.remove('active'));
+    const allBtn = document.querySelector('.st-cat-btn');
+    if (allBtn) allBtn.classList.add('active');
+    activeCat = 'all';
+    filterTalks();
+    
+    const target = document.getElementById('talkGrid');
+    if (target) {
+      const offset = 140;
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = target.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+    }
+  }
+
+  function filterTalks() {
+    const searchEl = document.getElementById('stSearch');
+    const q = (searchEl ? searchEl.value : '').toLowerCase().trim();
+    let list = talks;
+    if (activeCat !== 'all') list = list.filter((t) => t.cat === activeCat);
+    if (q) list = list.filter((t) => (t.w + ' ' + t.title + ' ' + t.desc + ' ' + (t.tags || []).join(' ')).toLowerCase().includes(q));
+    renderTalks(list, true);
+  }
+
+  function filterCat(btn, cat) {
+    document.querySelectorAll('.st-cat-btn').forEach((b) => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+    activeCat = cat;
+    filterTalks();
+  }
+
+  function openModal(idx) {
+    const t = talks[idx];
+    if (!t) return;
+    const modal = document.getElementById('modalContent');
+    const overlay = document.getElementById('modalOverlay');
+    if (!modal || !overlay) return;
+
+    modal.innerHTML = 
+      '<div class="st-modal-head">' +
+        '<div>' +
+          '<span class="st-cat-badge cat-' + t.cat + '" style="margin-bottom:6px;display:inline-block">' + t.cat.toUpperCase() + '</span>' +
+          '<h2>Topik ' + t.w + ': ' + t.title + '</h2>' +
+        '</div>' +
+        '<button class="st-btn-close" onclick="closeModal()" type="button">✕ Tutup</button>' +
+      '</div>' +
+      
+      '<div class="st-stat-box">' +
+        '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:2px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>' +
+        '<div>' +
+          '<strong>Fakta &amp; Statistik K3:</strong> ' + t.stat +
+        '</div>' +
+      '</div>' +
+      
+      '<div class="st-modal-section">' +
+        '<h4>Ringkasan Materi</h4>' +
+        '<p>' + t.desc + '</p>' +
+      '</div>' +
+      
+      '<div class="st-modal-section">' +
+        '<h4>Poin Diskusi Toolbox Meeting (2 Arah)</h4>' +
+        (t.points || []).map((p, i) => '<div class="st-discuss-box"><strong>' + (i + 1) + '.</strong> ' + p + '</div>').join('') +
+      '</div>' +
+      
+      '<div class="st-modal-section">' +
+        '<h4>Langkah Tindakan Lapangan (Action Points)</h4>' +
+        '<ol class="st-action-steps">' + (t.steps || []).map((s) => '<li>' + s + '</li>').join('') + '</ol>' +
+      '</div>' +
+      
+      '<a class="st-modal-related" href="' + (t.related ? t.related.url : '/pelatihan/pelatihan-ahli-k3-umum-sertifikasi-kemnaker-ri/') + '">' +
+        '<span>Program Pelatihan Terkait: <strong>' + (t.related ? t.related.label : 'Program Ahli K3 Umum Kemnaker RI') + '</strong></span>' +
+        '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>' +
+      '</a>' +
+      
+      '<div class="st-modal-actions">' +
+        '<button onclick="printTalk(' + idx + ')" class="st-btn-detail" type="button" style="padding:11px 20px;font-size:0.84rem">' +
+          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>' +
+          '<span>Print Materi &amp; Lembar Absensi</span>' +
+        '</button>' +
+        '<a href="https://wa.me/6287759151278?text=' + encodeURIComponent('Halo Wahana, saya gunakan materi safety talk topik #' + t.w + ' (' + t.title + ') dan ingin tanya pelatihan K3') + '" target="_blank" rel="noopener" class="st-btn-wa" style="padding:11px 20px;font-size:0.84rem">' +
+          '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.97.53 1.871.815 2.795.815 3.183 0 5.769-2.587 5.77-5.767 0-3.181-2.587-5.766-5.769-5.766zm3.376 8.21c-.14.394-.712.723-1.026.768-.314.045-.697.07-2.008-.475-1.583-.658-2.607-2.274-2.686-2.38-.079-.105-.634-.844-.634-1.611 0-.767.4-1.144.542-1.299.143-.155.314-.194.42-.194.105 0 .211.002.303.007.098.005.228-.037.356.27.132.316.45 1.097.489 1.176.04.079.066.172.013.277-.053.106-.079.172-.158.264-.079.092-.167.206-.238.277-.08.079-.163.165-.07.324.093.159.412.68.884 1.101.608.542 1.121.71 1.28.789.158.08.264.119.303.185.04.066.04.382-.1.776zM12 2C6.477 2 2 6.477 2 12c0 1.891.524 3.662 1.435 5.178L2 22l4.957-1.398A9.957 9.957 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>' +
+          '<span>Tanya Pelatihan K3</span>' +
+        '</a>' +
+      '</div>';
+    overlay.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(e) {
+    if (!e || e.target === document.getElementById('modalOverlay') || (e.target && e.target.classList && e.target.classList.contains('st-btn-close'))) {
+      const overlay = document.getElementById('modalOverlay');
+      if (overlay) overlay.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+  }
+
+  function printTalk(idx) {
+    const t = talks[idx];
+    if (!t) return;
+    const win = window.open('', '_blank');
+    if (!win) return;
+    win.document.write('<!DOCTYPE html><html><head><title>Safety Talk Topik ' + t.w + ': ' + t.title + '</title>' +
+    '<style>' +
+      'body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 24px; color: var(--text, black); line-height: 1.5; font-size: 10pt; }' +
+      'h1 { font-size: 16pt; margin: 0 0 12px; color: var(--brand, darkgreen); }' +
+      'h3 { font-size: 11pt; margin: 14px 0 6px; color: var(--brand, darkgreen); }' +
+      '.stat { background: var(--surface-subtle, #f0fdf4); border-left: 4px solid var(--brand, darkgreen); padding: 8px 12px; margin-bottom: 12px; font-size: 9.5pt; }' +
+      'ol, ul { margin: 6px 0 12px 20px; padding: 0; }' +
+      'li { margin-bottom: 4px; }' +
+      'table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 9pt; }' +
+      'th, td { border: 1px solid var(--border, gray); padding: 6px 8px; text-align: left; }' +
+      'th { background: var(--surface-alt, #f8fafc); font-weight: bold; }' +
+      '.footer { margin-top: 24px; font-size: 8pt; color: var(--text-muted, gray); text-align: center; border-top: 1px solid var(--border, gray); padding-top: 8px; }' +
+    '</style>' +
+    '</head><body>' +
+    '<h1>Safety Talk — Topik #' + t.w + ': ' + t.title + '</h1>' +
+    '<div class="stat"><strong>Fakta K3:</strong> ' + t.stat + '</div>' +
+    '<p style="font-size:9.5pt;line-height:1.6">' + t.desc + '</p>' +
+    '<h3>Poin Diskusi Toolbox Meeting (2 Arah)</h3>' +
+    '<ol>' + (t.points || []).map((p) => '<li>' + p + '</li>').join('') + '</ol>' +
+    '<h3>Langkah Tindakan Lapangan (Action Steps)</h3>' +
+    '<ol>' + (t.steps || []).map((s) => '<li>' + s + '</li>').join('') + '</ol>' +
+    '<div style="margin-top:18px;border:1px solid #cbd5e1;border-radius:6px;padding:12px">' +
+      '<strong style="font-size:10pt;color:#1b4332">Daftar Hadir Toolbox Meeting (TBM)</strong><br>' +
+      '<div style="margin-top:6px;font-size:8.5pt;color:#475569">' +
+        'Tanggal: _______________ | Departemen/Area: _______________ | Pengawas/Fasilitator: _______________<br>' +
+        '<table>' +
+          '<tr><th style="width:36px;text-align:center">No</th><th>Nama Pekerja</th><th>Jabatan</th><th style="width:120px">Tanda Tangan</th></tr>' +
+          [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => '<tr><td style="text-align:center">' + n + '</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>').join('') +
+        '</table>' +
+      '</div>' +
+    '</div>' +
+    '<div class="footer">Materi K3 Resmi dari wahanatotalita.com/tools/safety-talk/ — Wahana Totalita Konsultan</div>' +
+    '</body></html>');
+    win.document.close();
+    win.focus();
+    setTimeout(() => win.print(), 300);
+  }
+
+  // Keydown ESC to close
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      const overlay = document.getElementById('modalOverlay');
+      if (overlay) overlay.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+  });
+
+  // Load More Button
+  const loadMoreBtn = document.getElementById('stLoadMore');
+  if (loadMoreBtn) {
+    loadMoreBtn.addEventListener('click', function () {
+      visibleLimit += 12;
+      renderTalks(currentTalks);
+    });
+  }
+
+  // Bind globals to window for inline onclick handlers
+  window.openModal = openModal;
+  window.closeModal = closeModal;
+  window.printTalk = printTalk;
+  window.filterTalks = filterTalks;
+  window.filterCat = filterCat;
+  window.quickSearch = quickSearch;
+  window.resetFilter = resetFilter;
+</script>
+
 </main>
 </Layout>
