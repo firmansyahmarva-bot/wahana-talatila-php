@@ -1,5 +1,5 @@
 ---
-import { getCourseBanner, formatPrice, modeLabel } from '../lib/images';
+import { getCourseBanner, getCourseBannerSrcSet, formatPrice, modeLabel } from '../lib/images';
 import WaButton from './WaButton.astro';
 
 interface Props {
@@ -40,6 +40,8 @@ const trainingUrl = `/pelatihan/${item.slug}/`;
   <a href={trainingUrl} class="tc-card-img-wrap">
     <img
       src={imageSrc}
+      srcset={getCourseBannerSrcSet(item.slug)}
+      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
       alt={`Pelatihan ${item.name} ${certText}`}
       loading="lazy"
       width="1822"

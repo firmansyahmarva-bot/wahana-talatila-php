@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
-import { getCourseBanner, getCourseOgBanner, formatPrice, modeLabel, waUrl } from '../../lib/images';
+import { getCourseBanner, getCourseBannerSrcSet, getCourseOgBanner, formatPrice, modeLabel, waUrl } from '../../lib/images';
 import { getTrainingFaqs } from '../../lib/trainingFaqs';
 import WaButton from '../WaButton.astro';
 import TrainingCard from '../TrainingCard.astro';
@@ -229,6 +229,8 @@ const inhouseWaMsg = `Halo Wahana Totalita, kami dari perusahaan ingin meminta p
       <div class="pdb-wrap" slot="pre">
         <img
           src={courseBannerSrc}
+          srcset={getCourseBannerSrcSet(data.slug)}
+          sizes="(max-width: 1200px) 100vw, 1200px"
           alt={`Pelatihan ${data.name}`}
           width="1822"
           height="662"
