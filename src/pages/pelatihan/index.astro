@@ -4,7 +4,7 @@ import { getCollection } from 'astro:content';
 import { waUrl } from '../../lib/images';
 import TrainingCard from '../../components/TrainingCard.astro';
 import WaButton from '../../components/WaButton.astro';
-import Breadcrumb from '../../components/Breadcrumb.astro';
+import PageHeader from '../../components/PageHeader.astro';
 import Faq from '../../components/Faq.astro';
 
 // Fetch all trainings and categories
@@ -92,43 +92,42 @@ const hubAccent: Record<string, string> = {
   pageCss={['/assets/css/page/pelatihan-catalog.css']}
   schemas={schemas}
 >
-  <Breadcrumb
-    variant="catalog"
-    items={[
-      { name: 'Beranda', href: '/' },
-      { name: 'Pelatihan' },
-    ]}
-  />
-
   <!-- HERO (SHORT HERO + SEARCH BOX + MODE FILTER RIGHT UNDER IT) -->
-  <section class="pcat-hero">
-    <div class="container">
-      <div class="pcat-eyebrow">PJK3 RESMI KEMNAKER RI &amp; BNSP</div>
-      <h1>Katalog Pelatihan K3 &amp; Sertifikasi Resmi</h1>
-      <p>Pilih dan temukan program sertifikasi kompetensi K3 resmi Kemnaker RI dan BNSP — kelas online via Zoom, tatap muka di Yogyakarta, dan in-house training perusahaan di seluruh Indonesia.</p>
+  <PageHeader
+    title="Katalog Pelatihan K3 & Sertifikasi Resmi"
+    subtitle="Pilih dan temukan program sertifikasi kompetensi K3 resmi Kemnaker RI dan BNSP — kelas online via Zoom, tatap muka di Yogyakarta, dan in-house training perusahaan di seluruh Indonesia."
+    breadcrumb={{
+      variant: 'catalog',
+      items: [
+        { name: 'Beranda', href: '/' },
+        { name: 'Pelatihan' },
+      ],
+    }}
+    sectionClass="pcat-hero"
+  >
+    <div class="pcat-eyebrow" slot="eyebrow">PJK3 RESMI KEMNAKER RI &amp; BNSP</div>
 
-      <div class="filter-bar" style="width:100%;max-width:780px;margin:24px auto 0;">
-        <div class="catalog-search-wrap">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="search" id="catalog-search" placeholder="Cari nama program pelatihan K3, sertifikasi..." />
-        </div>
-        <div class="filter-group">
-          <button type="button" class="filter-mode active" data-mode="all">Semua</button>
-          <button type="button" class="filter-mode" data-mode="online">Online</button>
-          <button type="button" class="filter-mode" data-mode="offline">Offline</button>
-        </div>
+    <div class="filter-bar" style="width:100%;max-width:780px;margin:24px auto 0;">
+      <div class="catalog-search-wrap">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" id="catalog-search" placeholder="Cari nama program pelatihan K3, sertifikasi..." />
       </div>
-
-      <div class="pcat-cat-pills-wrap" style="margin-top:16px;">
-        <button type="button" class="pcat-cat-pill active" data-cat="all" id="btn-cat-all">Semua Kategori ({totalPrograms})</button>
-        {groups.map((group) => (
-          <button type="button" class="pcat-cat-pill" data-cat={group.cat.slug}>
-            {hubIcons[group.cat.slug] || group.cat.icon || '📄'} {group.cat.name} ({group.trainings.length})
-          </button>
-        ))}
+      <div class="filter-group">
+        <button type="button" class="filter-mode active" data-mode="all">Semua</button>
+        <button type="button" class="filter-mode" data-mode="online">Online</button>
+        <button type="button" class="filter-mode" data-mode="offline">Offline</button>
       </div>
     </div>
-  </section>
+
+    <div class="pcat-cat-pills-wrap" style="margin-top:16px;">
+      <button type="button" class="pcat-cat-pill active" data-cat="all" id="btn-cat-all">Semua Kategori ({totalPrograms})</button>
+      {groups.map((group) => (
+        <button type="button" class="pcat-cat-pill" data-cat={group.cat.slug}>
+          {hubIcons[group.cat.slug] || group.cat.icon || '📄'} {group.cat.name} ({group.trainings.length})
+        </button>
+      ))}
+    </div>
+  </PageHeader>
 
   <!-- COURSE LIST GROUPED BY CATEGORY + STICKY WHATSAPP SIDEBAR -->
   <section class="detail-body" style="padding-top:24px">

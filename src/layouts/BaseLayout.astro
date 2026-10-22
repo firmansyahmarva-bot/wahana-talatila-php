@@ -1,6 +1,7 @@
 ---
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import StickyCta from '../components/StickyCta.astro';
 import Seo, { type HreflangItem } from '../components/Seo.astro';
 
 export interface BaseLayoutProps {
@@ -111,6 +112,14 @@ const langConfig = {
 
 const currentConfig = langConfig[lang];
 const finalHreflangs = hreflangs !== undefined ? hreflangs : currentConfig.defaultHreflangs;
+const pathname = Astro.url.pathname;
+const isTool = pathname.startsWith('/tools');
+const isProgram = pathname.startsWith('/pelatihan');
+const isCity = pathname.startsWith('/kota') || /^\/pelatihan-k3-[^/]+/.test(pathname);
+const isJadwal = pathname.startsWith('/jadwal');
+const isArticle = pathname.startsWith('/artikel');
+const hasStickyCta = lang === 'id' && !isTool && (isProgram || isCity || isJadwal || isArticle);
+
 const finalPageCss = pageCss !== undefined ? pageCss : currentConfig.defaultPageCss;
 ---
 
@@ -161,7 +170,7 @@ const finalPageCss = pageCss !== undefined ? pageCss : currentConfig.defaultPage
     <link rel="stylesheet" href={cssHref} />
   ))}
 </head>
-<body class={bodyClass || undefined} {...bodyAttrs}>
+<body class={[bodyClass, hasStickyCta ? 'has-sticky-cta' : ''].filter(Boolean).join(' ') || undefined} {...bodyAttrs}>
   {lang === 'id' && (
     <Navbar currentPath={Astro.url.pathname} isHome={isHome} />
   )}
@@ -206,6 +215,7 @@ const finalPageCss = pageCss !== undefined ? pageCss : currentConfig.defaultPage
   {lang === 'id' && (
     <>
       <Footer />
+      <StickyCta title={title} />
       <script src="/assets/js/main.js" defer></script>
       {scripts.map((s: string) => (
         <script src={s} defer></script>

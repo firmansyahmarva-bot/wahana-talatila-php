@@ -484,12 +484,12 @@ html, body {
 .ak-content { min-width: 0; }
 
 .ak-article-body.prose {
-  font-family: 'Lora', Georgia, serif;
+  font-family: var(--font-body);
   font-size: 1.075rem; line-height: 1.9; color: var(--slate-800);
   max-width: 740px;
 }
 .prose h2 {
-  font-family: 'Lexend', system-ui, sans-serif;
+  font-family: var(--font-heading);
   font-size: 1.7rem; font-weight: 800; color: var(--slate-900);
   margin: 3rem 0 1rem;
   padding-bottom: .6rem;
@@ -505,7 +505,7 @@ html, body {
   background: var(--accent,var(--accent));
 }
 .prose h3 {
-  font-family: 'Lexend', system-ui, sans-serif;
+  font-family: var(--font-heading);
   font-size: 1.2rem; font-weight: 800; color: var(--slate-800);
   margin: 2.25rem 0 .75rem; scroll-margin-top: 88px;
   letter-spacing: -.01em;
@@ -601,7 +601,7 @@ html, body {
   max-width: 740px;
 }
 .ak-faq h2 {
-  font-family: 'Lexend', sans-serif;
+  font-family: var(--font-heading);
   font-size: 1.5rem; font-weight: 800; color: var(--slate-900);
   margin: 0 0 1.5rem;
   display: flex; align-items: center; gap: .5rem;
@@ -619,7 +619,7 @@ html, body {
   align-items: flex-start; gap: 1rem;
   background: none; border: none; cursor: pointer;
   padding: 1.25rem 1.5rem; text-align: left;
-  font-family: 'Lexend', sans-serif;
+  font-family: var(--font-heading);
   font-size: 15px; font-weight: 700; color: var(--slate-900);
   transition: background .15s, color .15s;
 }
@@ -901,7 +901,7 @@ html, body {
   gap: 8px;
   background: var(--success-soft);
   color: var(--success-dark);
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-family: var(--font-heading);
   font-size: 11.5px;
   font-weight: 700;
   text-transform: uppercase;
@@ -912,7 +912,7 @@ html, body {
   border: 1px solid color-mix(in srgb, var(--whatsapp-dark) 25%, transparent);
 }
 .ak-top-hook-title {
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-family: var(--font-heading);
   font-size: 1.2rem;
   font-weight: 800;
   color: var(--slate-900);
@@ -921,7 +921,7 @@ html, body {
   letter-spacing: -0.015em;
 }
 .ak-top-hook-desc {
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-family: var(--font-heading);
   font-size: 13.5px;
   color: var(--slate-600);
   line-height: 1.55;
@@ -935,7 +935,7 @@ html, body {
   flex-shrink: 0;
 }
 .ak-top-hook-note {
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-family: var(--font-heading);
   font-size: 11.5px;
   color: var(--slate-500);
   font-weight: 600;
@@ -954,7 +954,7 @@ html, body {
   gap: 9px;
   background: linear-gradient(180deg, var(--whatsapp) 0%, var(--whatsapp) 100%);
   color: var(--surface) !important;
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-family: var(--font-heading);
   font-weight: 700;
   text-decoration: none !important;
   border-radius: 12px;
@@ -1009,7 +1009,7 @@ html, body {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-family: var(--font-heading);
   font-size: 11px;
   font-weight: 700;
   color: var(--success-dark);
@@ -1018,7 +1018,7 @@ html, body {
   margin-bottom: 0.35rem;
 }
 .ak-slc-title {
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-family: var(--font-heading);
   font-size: 14.5px;
   font-weight: 800;
   color: var(--brand);
@@ -1033,7 +1033,7 @@ html, body {
   display: flex;
   align-items: flex-start;
   gap: 8px;
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-family: var(--font-heading);
   font-size: 12.5px;
   color: var(--slate-700);
   line-height: 1.45;
@@ -1059,7 +1059,7 @@ html, body {
   text-align: center;
 }
 .ak-slc-schedule-link {
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-family: var(--font-heading);
   font-size: 12px;
   font-weight: 700;
   color: var(--brand, var(--brand));
@@ -1069,7 +1069,7 @@ html, body {
   color: var(--accent, var(--accent));
 }
 .ak-slc-phone {
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-family: var(--font-heading);
   font-size: 11px;
   color: var(--slate-400);
 }
@@ -1097,7 +1097,7 @@ html, body {
 }
 .ak-lead-tag {
   display: inline-block;
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-family: var(--font-heading);
   font-size: 11px;
   font-weight: 800;
   color: var(--brand);
@@ -1107,13 +1107,13 @@ html, body {
   letter-spacing: 0.04em;
 }
 .ak-lead-time {
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-family: var(--font-heading);
   font-size: 11.5px;
   color: var(--slate-500);
   font-weight: 600;
 }
 .ak-lead-title {
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important;
+  font-family: var(--font-heading) !important;
   font-size: 1.15rem !important;
   font-weight: 800 !important;
   color: var(--slate-900) !important;
@@ -1123,7 +1123,7 @@ html, body {
   padding-bottom: 0 !important;
 }
 .ak-lead-desc {
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important;
+  font-family: var(--font-heading) !important;
   font-size: 14px !important;
   line-height: 1.6 !important;
   color: var(--slate-600) !important;
@@ -1168,7 +1168,7 @@ html, body {
   background: color-mix(in srgb, var(--surface) 12%, transparent);
   border: 1px solid color-mix(in srgb, var(--surface) 22%, transparent);
   color: var(--slate-50);
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-family: var(--font-heading);
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.05em;
@@ -1177,7 +1177,7 @@ html, body {
   margin-bottom: 0.75rem;
 }
 .ak-lead-mid-title {
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important;
+  font-family: var(--font-heading) !important;
   font-size: 1.3rem !important;
   font-weight: 800 !important;
   color: var(--surface) !important;
@@ -1187,7 +1187,7 @@ html, body {
   padding-bottom: 0 !important;
 }
 .ak-lead-mid-desc {
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important;
+  font-family: var(--font-heading) !important;
   font-size: 14.5px !important;
   line-height: 1.65 !important;
   color: var(--slate-200) !important;
@@ -1200,7 +1200,7 @@ html, body {
   margin-bottom: 1.5rem;
 }
 .ak-lead-mid-features span {
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-family: var(--font-heading);
   font-size: 12.5px;
   font-weight: 600;
   color: var(--success-border);
@@ -1220,7 +1220,7 @@ html, body {
   font-size: 14.5px;
 }
 .ak-link-secondary {
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-family: var(--font-heading);
   font-size: 13.5px;
   font-weight: 700;
   color: var(--surface);
@@ -1268,7 +1268,7 @@ html, body {
   display: inline-block;
   background: var(--accent, var(--accent));
   color: var(--surface);
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-family: var(--font-heading);
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.05em;
@@ -1278,7 +1278,7 @@ html, body {
   margin-bottom: 0.5rem;
 }
 .ak-bc-title {
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important;
+  font-family: var(--font-heading) !important;
   font-size: 1.25rem !important;
   font-weight: 800 !important;
   color: var(--surface) !important;
@@ -1288,7 +1288,7 @@ html, body {
   padding-bottom: 0 !important;
 }
 .ak-bc-desc {
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important;
+  font-family: var(--font-heading) !important;
   font-size: 14px !important;
   line-height: 1.6 !important;
   color: var(--slate-200) !important;
@@ -1370,7 +1370,7 @@ html, body {
     display: flex;
     align-items: center;
     gap: 6px;
-    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-family: var(--font-heading);
     font-size: 11px;
     font-weight: 700;
     color: var(--success-dark);
@@ -1380,7 +1380,7 @@ html, body {
     margin-bottom: 3px;
   }
   .ak-msb-text {
-    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-family: var(--font-heading);
     font-size: 12.5px;
     font-weight: 700;
     color: var(--slate-900);

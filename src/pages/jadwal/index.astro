@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import Breadcrumb from '../../components/Breadcrumb.astro';
+import PageHeader from '../../components/PageHeader.astro';
 import batchesRaw from '../../../data/training_batches.json';
 import trainingsRaw from '../../../data/trainings.json';
 import { formatPrice, waUrl } from '../../lib/images';
@@ -128,40 +128,35 @@ const eventSchemas = batches.slice(0, 30).map((b) => {
   schemas={eventSchemas}
   pageCss={['/assets/css/page/jadwal.css']}
 >
-  <!-- BREADCRUMB -->
-  <Breadcrumb
-    variant="city"
-    items={[
-      { name: 'Beranda', href: '/' },
-      { name: 'Jadwal Pelatihan' },
-    ]}
-  />
-
   <!-- HERO -->
-  <section class="jadwal-hero" style="background:linear-gradient(135deg,var(--brand-dark,var(--brand-dark)) 0%,var(--brand,var(--brand)) 100%);padding:56px 0;color:var(--surface);text-align:center;">
-    <div class="container" style="max-width:1160px;margin:0 auto;padding:0 20px;">
-      <span class="jadwal-eyebrow" style="display:inline-block;padding:4px 14px;border-radius:999px;background:color-mix(in srgb,var(--surface) 12%,transparent);color:var(--success-border);font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;border:1px solid color-mix(in srgb,var(--surface) 18%,transparent);">
+  <PageHeader
+    title="Jadwal Pelatihan K3 & Sertifikasi"
+    subtitle="Pelatihan sertifikasi resmi KEMNAKER RI & BNSP — metode Online interaktif via Zoom, Tatap Muka Offline di Training Center, dan In-House Perusahaan."
+    breadcrumb={{
+      variant: 'city',
+      items: [
+        { name: 'Beranda', href: '/' },
+        { name: 'Jadwal Pelatihan' },
+      ],
+    }}
+    size="lg"
+    class="jadwal-hero"
+  >
+      <span class="jadwal-eyebrow" slot="eyebrow" style="display:inline-block;padding:4px 14px;border-radius:999px;background:color-mix(in srgb,var(--surface) 12%,transparent);color:var(--success-border);font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;border:1px solid color-mix(in srgb,var(--surface) 18%,transparent);">
         JADWAL RESMI TAHUN 2026
       </span>
-      <h1 style="font-family:'Lexend',sans-serif;font-size:clamp(2rem,3.8vw,3rem);font-weight:800;margin:0 0 14px;letter-spacing:-.02em;color: var(--surface);">
-        Jadwal Pelatihan K3 &amp; Sertifikasi
-      </h1>
-      <p style="color:rgba(255,255,255,0.85);max-width:640px;margin:0 auto 24px;font-size:16.5px;line-height:1.65;">
-        Pelatihan sertifikasi resmi KEMNAKER RI &amp; BNSP — metode Online interaktif via Zoom, Tatap Muka Offline di Training Center, dan In-House Perusahaan.
-      </p>
-      <div class="stat-pills" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-        <span class="stat-pill" style="background:color-mix(in srgb,var(--surface) 12%,transparent);padding:8px 18px;border-radius:999px;font-size:13px;font-weight:600;border:1px solid color-mix(in srgb,var(--surface) 16%,transparent);">
-          🎓 {totalCount}+ Batch Terdaftar
-        </span>
-        <span class="stat-pill" style="background:color-mix(in srgb,var(--surface) 12%,transparent);padding:8px 18px;border-radius:999px;font-size:13px;font-weight:600;border:1px solid color-mix(in srgb,var(--surface) 16%,transparent);">
-          🏛️ Akreditasi KEMNAKER RI
-        </span>
-        <span class="stat-pill" style="background:color-mix(in srgb,var(--surface) 12%,transparent);padding:8px 18px;border-radius:999px;font-size:13px;font-weight:600;border:1px solid color-mix(in srgb,var(--surface) 16%,transparent);">
-          ✅ Lisensi BNSP Resmi
-        </span>
-      </div>
+    <div class="stat-pills" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <span class="stat-pill" style="background:color-mix(in srgb,var(--surface) 12%,transparent);padding:8px 18px;border-radius:999px;font-size:13px;font-weight:600;border:1px solid color-mix(in srgb,var(--surface) 16%,transparent);">
+        🎓 {totalCount}+ Batch Terdaftar
+      </span>
+      <span class="stat-pill" style="background:color-mix(in srgb,var(--surface) 12%,transparent);padding:8px 18px;border-radius:999px;font-size:13px;font-weight:600;border:1px solid color-mix(in srgb,var(--surface) 16%,transparent);">
+        🏛️ Akreditasi KEMNAKER RI
+      </span>
+      <span class="stat-pill" style="background:color-mix(in srgb,var(--surface) 12%,transparent);padding:8px 18px;border-radius:999px;font-size:13px;font-weight:600;border:1px solid color-mix(in srgb,var(--surface) 16%,transparent);">
+        ✅ Lisensi BNSP Resmi
+      </span>
     </div>
-  </section>
+  </PageHeader>
 
   <!-- FILTER CONTROLS -->
   <div class="jadwal-filters" style="background:var(--surface);border-bottom:1px solid var(--border);padding:18px 0;position:sticky;top:var(--nav-h,72px);z-index:90;box-shadow:0 2px 8px color-mix(in srgb,var(--black) 3%,transparent);">
@@ -215,7 +210,7 @@ const eventSchemas = batches.slice(0, 30).map((b) => {
                   {b.mode || 'OFFLINE'}
                 </span>
               </div>
-              <h3 style="font-family:'Lexend',sans-serif;font-size:1.15rem;font-weight:700;margin:0;line-height:1.35;color: var(--surface);">
+              <h3 style="font-family: var(--font-heading);font-size:1.15rem;font-weight:700;margin:0;line-height:1.35;color: var(--surface);">
                 {b.training_name}
               </h3>
             </div>
@@ -273,7 +268,7 @@ const eventSchemas = batches.slice(0, 30).map((b) => {
     <!-- Empty State for Search Filter -->
     <div id="batch-empty" style="display:none;text-align:center;padding:60px 20px;">
       <span style="font-size:3.5rem;display:block;margin-bottom:12px;">🔍</span>
-      <h3 style="font-family:'Lexend',sans-serif;font-size:20px;color:var(--brand);margin-bottom:8px;">Jadwal Tidak Ditemukan</h3>
+      <h3 style="font-family: var(--font-heading);font-size:20px;color:var(--brand);margin-bottom:8px;">Jadwal Tidak Ditemukan</h3>
       <p style="color:var(--slate-600);max-width:480px;margin:0 auto 20px;">
         Program yang Anda cari belum memiliki batch terbuka. Anda dapat request jadwal baru atau in-house training untuk perusahaan.
       </p>
@@ -291,7 +286,7 @@ const eventSchemas = batches.slice(0, 30).map((b) => {
   <!-- IN-HOUSE BANNER -->
   <section style="background:linear-gradient(135deg,var(--brand-dark,var(--brand-dark)) 0%,var(--brand,var(--brand)) 100%);padding:56px 0;text-align:center;color:var(--surface);">
     <div class="container" style="max-width:800px;margin:0 auto;padding:0 20px;">
-      <h2 style="font-family:'Lexend',sans-serif;font-size:clamp(1.6rem,2.8vw,2.2rem);font-weight:800;margin:0 0 12px;color: var(--on-brand);">
+      <h2 style="font-family: var(--font-heading);font-size:clamp(1.6rem,2.8vw,2.2rem);font-weight:800;margin:0 0 12px;color: var(--on-brand);">
         Butuh Jadwal Khusus untuk Perusahaan?
       </h2>
       <p style="color:rgba(255,255,255,0.85);margin-bottom:24px;font-size:16px;line-height:1.65;">

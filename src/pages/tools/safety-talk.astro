@@ -323,9 +323,9 @@ const toolFaqs = [
 
     if (!list.length) {
       grid.innerHTML = '<div style="color:var(--st-slate-600);text-align:center;padding:50px 20px;grid-column:1/-1;background:var(--surface);border-radius:16px;border:1px dashed var(--st-slate-300);">' +
-        '<p style="font-family:Lexend,sans-serif;font-size:1.15rem;font-weight:700;color:var(--st-slate-900);margin-bottom:6px">Topik Tidak Ditemukan</p>' +
+        '<p style="font-family: var(--font-heading);font-size:1.15rem;font-weight:700;color:var(--st-slate-900);margin-bottom:6px">Topik Tidak Ditemukan</p>' +
         '<p style="font-size:0.9rem;margin-bottom:16px">Coba kata kunci lain atau bersihkan pencarian untuk melihat seluruh 100 topik.</p>' +
-        '<button type="button" onclick="resetFilter()" style="background:var(--st-forest);color:var(--surface);border:none;border-radius:999px;padding:9px 20px;font-family:Lexend,sans-serif;font-weight:700;font-size:0.82rem;cursor:pointer">Tampilkan Semua Topik</button>' +
+        '<button type="button" onclick="resetFilter()" style="background:var(--st-forest);color:var(--surface);border:none;border-radius:999px;padding:9px 20px;font-family: var(--font-heading);font-weight:700;font-size:0.82rem;cursor:pointer">Tampilkan Semua Topik</button>' +
         '</div>';
       if (loadMore) loadMore.hidden = true;
       return;
@@ -491,7 +491,7 @@ const toolFaqs = [
     if (!win) return;
     win.document.write('<!DOCTYPE html><html><head><title>Safety Talk Topik ' + t.w + ': ' + t.title + '</title>' +
     '<style>' +
-      'body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 24px; color: var(--text, black); line-height: 1.5; font-size: 10pt; }' +
+      'body { font-family: var(--font-body), sans-serif; padding: 24px; color: var(--text, black); line-height: 1.5; font-size: 10pt; }' +
       'h1 { font-size: 16pt; margin: 0 0 12px; color: var(--brand, darkgreen); }' +
       'h3 { font-size: 11pt; margin: 14px 0 6px; color: var(--brand, darkgreen); }' +
       '.stat { background: var(--surface-subtle, #f0fdf4); border-left: 4px solid var(--brand, darkgreen); padding: 8px 12px; margin-bottom: 12px; font-size: 9.5pt; }' +

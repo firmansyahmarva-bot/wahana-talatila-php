@@ -1,0 +1,225 @@
+---
+/**
+ * PageHeader - shared page header (breadcrumb bar + hero section).
+ *
+ * - No `image`: brand gradient (only when no `sectionClass` is passed - pages that already
+ *   own a hero style keep it by passing their class names).
+ * - With `image`: fixed aspect ratio, optimized <Picture> (avif + webp, responsive),
+ *   first image on the page so it is loaded eagerly (`priority`), dark `--overlay-hero` scrim
+ *   so the title is always readable. Header photos live in src/assets/headers/.
+ *
+ * Slots: `pre` (between breadcrumb and header), `eyebrow` (above title), `subtitle`
+ * (replaces the `subtitle` prop), default (below subtitle), `aside` (after the copy block).
+ */
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import Breadcrumb from './Breadcrumb.astro';
+import type { BreadcrumbItem } from './Breadcrumb.astro';
+
+interface HeaderImage {
+  src: ImageMetadata;
+  /** Required. Use an empty string only for purely decorative photos. */
+  alt: string;
+  /** CSS object-position, e.g. "center 30%". */
+  position?: string;
+}
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  breadcrumb?: { items: BreadcrumbItem[]; variant?: string };
+  cta?: { label: string; href: string; external?: boolean };
+  image?: HeaderImage;
+  align?: 'center' | 'left';
+  size?: 'md' | 'lg';
+  /** Existing page classes so a page keeps its own hero styling. */
+  sectionClass?: string;
+  innerClass?: string;
+  copyClass?: string;
+  titleClass?: string;
+  subtitleClass?: string;
+  /** Extra classes that do not switch off the default look (e.g. an existing page hero class). */
+  class?: string;
+  style?: string;
+}
+
+const {
+  title,
+  subtitle,
+  breadcrumb,
+  cta,
+  image,
+  align = 'center',
+  size = 'md',
+  sectionClass,
+  innerClass,
+  copyClass,
+  titleClass,
+  subtitleClass,
+  class: extraClass,
+  style,
+} = Astro.props;
+
+const themed = !sectionClass;
+const sectionClasses = [
+  'ph',
+  themed ? `ph--themed ph--${size} ph--${align}` : sectionClass,
+  image ? 'ph--image' : '',
+  extraClass,
+]
+  .filter(Boolean)
+  .join(' ');
+const innerClasses = ['ph-layer', themed ? 'ph-inner' : 'container', innerClass].filter(Boolean).join(' ');
+---
+
+{breadcrumb && <Breadcrumb items={breadcrumb.items} variant={breadcrumb.variant} />}
+
+<slot name="pre" />
+
+<section class={sectionClasses} style={style}>
+  {
+    image && (
+      <div class="ph-media" aria-hidden={image.alt === '' ? 'true' : undefined}>
+        <Picture
+          src={image.src}
+          alt={image.alt}
+          formats={['avif', 'webp']}
+          layout="full-width"
+          fit="cover"
+          position={image.position}
+          priority
+        />
+      </div>
+    )
+  }
+  {image && <div class="ph-overlay" aria-hidden="true" />}
+  <div class={innerClasses}>
+    <div class={copyClass ?? 'ph-copy'}>
+      <slot name="eyebrow" />
+      <h1 class:list={['ph-title', titleClass]}>{title}</h1>
+      <slot name="subtitle">
+        {subtitle && <p class:list={['ph-subtitle', subtitleClass]}>{subtitle}</p>}
+      </slot>
+      <slot />
+      {
+        cta && (
+          <a
+            class="btn-primary ph-cta"
+            href={cta.href}
+            target={cta.external ? '_blank' : undefined}
+            rel={cta.external ? 'noopener' : undefined}
+          >
+            {cta.label}
+          </a>
+        )
+      }
+    </div>
+    <slot name="aside" />
+  </div>
+</section>
+
+<style>
+  .ph {
+    position: relative;
+  }
+
+  /* Default look (no existing page hero class): brand gradient. */
+  .ph.ph--themed {
+    background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand) 100%);
+    color: var(--on-brand);
+  }
+  .ph.ph--md {
+    padding: 48px 0;
+  }
+  .ph.ph--lg {
+    padding: 56px 0;
+  }
+  .ph.ph--center {
+    text-align: center;
+  }
+  .ph-inner {
+    width: 100%;
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+  .ph.ph--themed .ph-title {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+    margin: 0 0 14px;
+    color: var(--on-brand);
+  }
+  .ph.ph--md .ph-title {
+    font-size: clamp(1.8rem, 3.2vw, 2.5rem);
+  }
+  .ph.ph--lg .ph-title {
+    font-size: clamp(2rem, 3.8vw, 3rem);
+  }
+  .ph.ph--themed .ph-subtitle {
+    color: color-mix(in srgb, var(--on-brand) 85%, transparent);
+    line-height: 1.65;
+    margin: 0;
+  }
+  .ph.ph--md .ph-subtitle {
+    font-size: 15.5px;
+    margin-bottom: 18px;
+  }
+  .ph.ph--lg .ph-subtitle {
+    font-size: 16.5px;
+    margin-bottom: 24px;
+  }
+  .ph.ph--center .ph-subtitle {
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Wrapper keeps page markup flat unless the page gives it its own class. */
+  .ph-copy {
+    display: contents;
+  }
+  .ph-layer {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* With photo: fixed aspect ratio (grows only if the text needs more room). */
+  .ph--image {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    aspect-ratio: 21 / 8;
+  }
+  .ph--image .ph-layer {
+    width: 100%;
+  }
+  .ph-media {
+    position: absolute;
+    inset: 0;
+  }
+  .ph-media :global(picture),
+  .ph-media :global(img) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .ph-overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--overlay-hero);
+  }
+  .ph--image .ph-title,
+  .ph--image .ph-subtitle {
+    color: var(--on-brand);
+  }
+
+  @media (max-width: 768px) {
+    .ph--image {
+      aspect-ratio: 4 / 3;
+    }
+  }
+</style>

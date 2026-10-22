@@ -39,7 +39,7 @@
   margin-bottom: 18px;
 }
 .pcat-hero h1 {
-  font-family: 'Lexend', system-ui, sans-serif;
+  font-family: var(--font-heading);
   font-size: clamp(2rem, 4.2vw, 2.9rem);
   font-weight: 800;
   color: var(--surface);
@@ -85,7 +85,7 @@
 }
 .catalog-page .stat-number {
   color: var(--surface);
-  font-family: 'Lexend', sans-serif;
+  font-family: var(--font-heading);
 }
 .catalog-page .stat-label {
   color: var(--slate-400);
@@ -243,7 +243,7 @@
 }
 
 .stripe-wa-title {
-  font-family: 'Lexend', system-ui, sans-serif;
+  font-family: var(--font-heading);
   font-size: 1.15rem;
   font-weight: 800;
   color: var(--surface);
@@ -269,7 +269,7 @@
   width: 100%;
   background: var(--whatsapp);
   color: var(--on-brand) !important;
-  font-family: 'Lexend', system-ui, sans-serif;
+  font-family: var(--font-heading);
   font-weight: 700;
   font-size: 14.5px;
   padding: 13px 18px;
@@ -366,7 +366,7 @@
   border-bottom: 2px solid var(--slate-200);
 }
 .pcat-cat-title {
-  font-family: 'Lexend', system-ui, sans-serif;
+  font-family: var(--font-heading);
   font-size: 1.45rem;
   font-weight: 800;
   color: var(--slate-900);

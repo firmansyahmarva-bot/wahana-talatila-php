@@ -104,6 +104,7 @@
   /* Contrast Text On Dark / Colored Surfaces */
   --on-brand:       var(--pure-white);
   --on-cta:         var(--pure-white);
+  --overlay-hero:   color-mix(in srgb, var(--slate-900) 62%, transparent); /* dark scrim over header photos */
 
   /* Borders & Dividers */
   --border:         var(--slate-200);

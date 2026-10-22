@@ -1,0 +1,133 @@
+---
+import WaButton from './WaButton.astro';
+
+interface Props {
+  title?: string;
+}
+
+const pathname = Astro.url.pathname;
+
+// Do not show on tools pages
+const isTool = pathname.startsWith('/tools');
+
+// Show on program, city, jadwal, and article pages
+const isProgram = pathname.startsWith('/pelatihan');
+const isCity = pathname.startsWith('/kota') || /^\/pelatihan-k3-[^/]+/.test(pathname);
+const isJadwal = pathname.startsWith('/jadwal');
+const isArticle = pathname.startsWith('/artikel');
+
+const shouldShow = !isTool && (isProgram || isCity || isJadwal || isArticle);
+
+const { title = '' } = Astro.props;
+
+const primaryLabel = isJadwal ? 'Daftar' : 'Lihat Jadwal';
+const primaryHref = isJadwal ? '/jadwal/' : '/jadwal/';
+
+const defaultMsg = isArticle && title
+  ? `Halo Wahana Totalita, saya membaca artikel "${title}" dan ingin konsultasi program pelatihan K3 terkait.`
+  : title
+    ? `Halo Wahana Totalita, saya ingin informasi dan konsultasi mengenai ${title}.`
+    : 'Halo Wahana Totalita, saya ingin konsultasi pendaftaran pelatihan K3 resmi.';
+---
+
+{shouldShow && (
+  <aside class="scta-wrap" aria-label="Aksi Cepat Mobile">
+    <div class="scta-bar">
+      <a href={primaryHref} class="scta-btn scta-primary">
+        {primaryLabel}
+      </a>
+      <div class="scta-wa-wrap">
+        <WaButton
+          message={defaultMsg}
+          label="WhatsApp"
+          variant="primary"
+          size="md"
+          class="scta-wa-btn"
+        />
+      </div>
+    </div>
+  </aside>
+)}
+
+<style>
+  .scta-wrap {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .scta-wrap {
+      display: block;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 999;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      box-shadow: 0 -4px 16px color-mix(in srgb, var(--brand) 12%, transparent);
+      padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0));
+      box-sizing: border-box;
+    }
+
+    .scta-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .scta-btn {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 14px;
+      text-decoration: none;
+      box-sizing: border-box;
+      transition: background 0.15s ease, transform 0.15s ease;
+      cursor: pointer;
+    }
+
+    .scta-primary {
+      background: var(--cta);
+      color: var(--on-cta);
+      border: 1px solid var(--cta);
+    }
+
+    .scta-primary:hover {
+      background: var(--cta-hover);
+      color: var(--on-cta);
+    }
+
+    .scta-wa-wrap {
+      flex: 1;
+      display: flex;
+    }
+
+    :global(.scta-wa-btn) {
+      width: 100% !important;
+      justify-content: center !important;
+      font-family: var(--font-heading) !important;
+      font-size: 14px !important;
+      border-radius: var(--radius-sm) !important;
+    }
+
+    /* Hide the floating WhatsApp button on mobile when Sticky CTA is active */
+    :global(body.has-sticky-cta .wa-float),
+    :global(body:has(.scta-wrap) .wa-float) {
+      display: none !important;
+    }
+
+    /* Add bottom padding to body so sticky CTA never covers content */
+    :global(body.has-sticky-cta),
+    :global(body:has(.scta-wrap)) {
+      padding-bottom: calc(74px + env(safe-area-inset-bottom, 0)) !important;
+    }
+  }
+</style>

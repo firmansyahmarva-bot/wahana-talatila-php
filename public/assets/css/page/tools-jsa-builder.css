@@ -19,7 +19,7 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body {
-  font-family: 'Source Sans 3', system-ui, -apple-system, sans-serif;
+  font-family: var(--font-body);
   background: var(--slate-50);
   color: var(--slate-900);
   line-height: 1.6;
@@ -60,7 +60,7 @@ body {
   margin-bottom: 14px;
 }
 .jsa-hero h1 {
-  font-family: 'Lexend', sans-serif;
+  font-family: var(--font-heading);
   font-size: clamp(1.8rem, 3.6vw, 2.7rem);
   font-weight: 800;
   line-height: 1.2;
@@ -104,7 +104,7 @@ body {
   gap: 12px;
 }
 .card-title {
-  font-family: 'Lexend', sans-serif;
+  font-family: var(--font-heading);
   font-size: 1.25rem;
   font-weight: 700;
   color: var(--text);
@@ -295,7 +295,7 @@ body {
   margin-bottom: 32px;
 }
 .editorial-title {
-  font-family: 'Lexend', sans-serif;
+  font-family: var(--font-heading);
   font-size: 1.45rem;
   font-weight: 800;
   color: var(--text);

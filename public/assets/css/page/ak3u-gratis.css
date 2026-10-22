@@ -1,5 +1,5 @@
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Source Sans 3',system-ui,sans-serif;color:var(--slate-900);line-height:1.7;-webkit-font-smoothing:antialiased}
+body{font-family: var(--font-body);color:var(--slate-900);line-height:1.7;-webkit-font-smoothing:antialiased}
 .container{max-width:900px;margin:0 auto;padding:0 20px}
 .container-sm{max-width:680px;margin:0 auto;padding:0 20px}
 .hero{background:linear-gradient(160deg,var(--brand) 0%,var(--brand-mid) 100%);color:var(--surface);padding:64px 0 56px;position:relative;overflow:hidden;text-align:center}

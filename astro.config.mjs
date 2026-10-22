@@ -7,6 +7,9 @@ export default defineConfig({
   site: 'https://wahanatotalita.com',
   trailingSlash: 'always',
   integrations: [sitemap()],
+  image: {
+    responsiveStyles: true
+  },
   build: {
     format: 'directory'
   },

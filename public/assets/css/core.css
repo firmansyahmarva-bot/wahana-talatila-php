@@ -16,7 +16,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  font-family: 'Source Sans 3', system-ui, -apple-system, sans-serif;
+  font-family: var(--font-body);
 }
 @media (max-width: 768px) {
   html, body {
@@ -84,7 +84,7 @@ h1, h2, h3, h4,
 .hero26-title,
 .section-title,
 .sp-card-name {
-  font-family: 'Lexend', system-ui, -apple-system, sans-serif;
+  font-family: var(--font-heading);
   letter-spacing: -.02em;
 }
 

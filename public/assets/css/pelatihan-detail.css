@@ -88,8 +88,8 @@ html, body {
   --pd-shadow-soft:  var(--shadow-md);
   --pd-shadow-lift:  var(--shadow-lg);
 
-  --pd-font-display: 'Lexend', system-ui, sans-serif;
-  --pd-font-body:    'Source Sans 3', system-ui, sans-serif;
+  --pd-font-display: var(--font-heading);
+  --pd-font-body:    var(--font-body);
   --pd-font-mono:    ui-monospace, monospace;
 
   --pd-space-1: 4px;  --pd-space-2: 8px;  --pd-space-3: 12px;

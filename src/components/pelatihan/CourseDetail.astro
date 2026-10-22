@@ -5,7 +5,7 @@ import { getCourseBanner, getCourseOgBanner, formatPrice, modeLabel, waUrl } fro
 import { getTrainingFaqs } from '../../lib/trainingFaqs';
 import WaButton from '../WaButton.astro';
 import TrainingCard from '../TrainingCard.astro';
-import Breadcrumb from '../Breadcrumb.astro';
+import PageHeader from '../PageHeader.astro';
 import { getUpcomingBatches, formatDateIndo, formatBatchRange } from '../../lib/jadwal';
 
 interface Props {
@@ -207,121 +207,117 @@ const inhouseWaMsg = `Halo Wahana Totalita, kami dari perusahaan ingin meminta p
   schemas={schemas}
 >
   <div class="training-detail-page">
-    <!-- BREADCRUMB -->
-    <Breadcrumb
-      variant="course"
-      items={[
-        { name: 'Beranda', href: '/' },
-        { name: 'Pelatihan', href: '/pelatihan/' },
-        { name: catName, href: hubLink },
-        { name: data.name },
-      ]}
-    />
-
-    <!-- COURSE BANNER -->
-    <div class="pdb-wrap">
-      <img
-        src={courseBannerSrc}
-        alt={`Pelatihan ${data.name}`}
-        width="1822"
-        height="662"
-        fetchpriority="high"
-        decoding="async"
-        class="pdb-img"
-      />
-    </div>
-
     <!-- DETAIL HERO -->
+    <PageHeader
+      title={data.name}
+      subtitle={data.description ? (data.description.length > 220 ? data.description.slice(0, 220) + '…' : data.description) : `Sertifikasi resmi ${data.certification || 'Kemnaker / BNSP'}, diselenggarakan oleh Wahana Totalita Konsultan secara komprehensif.`}
+      breadcrumb={{
+        variant: 'course',
+        items: [
+          { name: 'Beranda', href: '/' },
+          { name: 'Pelatihan', href: '/pelatihan/' },
+          { name: catName, href: hubLink },
+          { name: data.name },
+        ],
+      }}
+      sectionClass="pd-hero"
+      innerClass="pd-hero-grid"
+      copyClass="pd-hero-copy"
+      subtitleClass="pd-hero-lede"
+    >
+      <!-- COURSE BANNER -->
+      <div class="pdb-wrap" slot="pre">
+        <img
+          src={courseBannerSrc}
+          alt={`Pelatihan ${data.name}`}
+          width="1822"
+          height="662"
+          fetchpriority="high"
+          decoding="async"
+          class="pdb-img"
+        />
+      </div>
 
-    <section class="pd-hero">
-      <div class="container pd-hero-grid">
-        <div class="pd-hero-copy">
-          <div class="pd-eyebrow">
-            <span class="pd-eyebrow-pill">PJK3 RESMI KEMNAKER RI</span>
-            <span class="pd-eyebrow-dot" aria-hidden="true">&middot;</span>
-            <span class="pd-eyebrow-cert">Sertifikasi {certRaw}</span>
-            <span class="pd-eyebrow-dot" aria-hidden="true">&middot;</span>
-            <span class="pd-eyebrow-cat">{catName}</span>
-          </div>
-          <h1>{data.name}</h1>
-          <p class="pd-hero-lede">
-            {data.description ? (data.description.length > 220 ? data.description.slice(0, 220) + '…' : data.description) : `Sertifikasi resmi ${data.certification || 'Kemnaker / BNSP'}, diselenggarakan oleh Wahana Totalita Konsultan secara komprehensif.`}
-          </p>
-          <div class="pd-hero-badges">
-            {durationText && (
-              <span class="pd-hero-badge"><span class="badge-icon">⏱️</span> {durationText}</span>
-            )}
-            <span class="pd-hero-badge"><span class="badge-icon">🌐</span> {modeText}</span>
-            <span class="pd-hero-badge pd-badge-inhouse"><span class="badge-icon">🏢</span> Tersedia In-House Training</span>
-            <span class="pd-hero-badge pd-badge-accredited"><span class="badge-icon">✓</span> Terakreditasi Resmi</span>
-          </div>
+        <div class="pd-eyebrow" slot="eyebrow">
+          <span class="pd-eyebrow-pill">PJK3 RESMI KEMNAKER RI</span>
+          <span class="pd-eyebrow-dot" aria-hidden="true">&middot;</span>
+          <span class="pd-eyebrow-cert">Sertifikasi {certRaw}</span>
+          <span class="pd-eyebrow-dot" aria-hidden="true">&middot;</span>
+          <span class="pd-eyebrow-cat">{catName}</span>
+        </div>
+        <div class="pd-hero-badges">
+          {durationText && (
+            <span class="pd-hero-badge"><span class="badge-icon">⏱️</span> {durationText}</span>
+          )}
+          <span class="pd-hero-badge"><span class="badge-icon">🌐</span> {modeText}</span>
+          <span class="pd-hero-badge pd-badge-inhouse"><span class="badge-icon">🏢</span> Tersedia In-House Training</span>
+          <span class="pd-hero-badge pd-badge-accredited"><span class="badge-icon">✓</span> Terakreditasi Resmi</span>
+        </div>
 
-          <!-- ONE PRIMARY CTA IN HERO + TEXT LINKS UNDER IT -->
-          <div class="pd-hero-cta-wrap">
-            <WaButton
-              message={defaultWaMsg}
-              label="Daftar via WhatsApp"
-              variant="primary"
-              size="lg"
-              class="pd-hero-cta-btn"
-            />
-            <div class="pd-hero-sublinks">
-              <a href={waUrl(inhouseWaMsg)} class="pd-hero-sublink" target="_blank" rel="noopener">
-                🏢 Butuh penawaran in-house training perusahaan?
-              </a>
-              <span class="pd-hero-sublink-dot" aria-hidden="true">&middot;</span>
-              <a href={waUrl(`Halo Wahana Totalita, saya ingin informasi jadwal batch terdekat untuk ${data.name}`)} class="pd-hero-sublink" target="_blank" rel="noopener">
-                📅 Tanya jadwal &amp; info lebih &rarr;
-              </a>
-            </div>
+        <!-- ONE PRIMARY CTA IN HERO + TEXT LINKS UNDER IT -->
+        <div class="pd-hero-cta-wrap">
+          <WaButton
+            message={defaultWaMsg}
+            label="Daftar via WhatsApp"
+            variant="primary"
+            size="lg"
+            class="pd-hero-cta-btn"
+          />
+          <div class="pd-hero-sublinks">
+            <a href={waUrl(inhouseWaMsg)} class="pd-hero-sublink" target="_blank" rel="noopener">
+              🏢 Butuh penawaran in-house training perusahaan?
+            </a>
+            <span class="pd-hero-sublink-dot" aria-hidden="true">&middot;</span>
+            <a href={waUrl(`Halo Wahana Totalita, saya ingin informasi jadwal batch terdekat untuk ${data.name}`)} class="pd-hero-sublink" target="_blank" rel="noopener">
+              📅 Tanya jadwal &amp; info lebih &rarr;
+            </a>
           </div>
         </div>
 
-        <!-- HERO QUICK CARD -->
-        <div class="pd-hero-card-wrap">
-          <div class="pd-hero-card">
-            <div class="pd-card-header">
-              <span class="pd-card-badge-top">🛡️ Terakreditasi Resmi</span>
-              <span class="pd-card-cert">{data.certification || 'Sertifikasi Resmi'}</span>
+      <!-- HERO QUICK CARD -->
+      <div class="pd-hero-card-wrap" slot="aside">
+        <div class="pd-hero-card">
+          <div class="pd-card-header">
+            <span class="pd-card-badge-top">🛡️ Terakreditasi Resmi</span>
+            <span class="pd-card-cert">{data.certification || 'Sertifikasi Resmi'}</span>
+          </div>
+          <div class="pd-card-price-block">
+            <span class="pd-card-price-label">Biaya Investasi Mulai</span>
+            <div class="pd-card-price-val">
+              {priceFormatted}
+              <span class="pd-card-price-sub">/ orang</span>
             </div>
-            <div class="pd-card-price-block">
-              <span class="pd-card-price-label">Biaya Investasi Mulai</span>
-              <div class="pd-card-price-val">
-                {priceFormatted}
-                <span class="pd-card-price-sub">/ orang</span>
-              </div>
-            </div>
-            <div class="pd-card-inhouse-tag">
-              <span class="tag-icon">🏢</span>
-              <span>Tersedia Penawaran Khusus In-House &amp; Grup Perusahaan</span>
-            </div>
-            <ul class="pd-card-perks">
-              <li>
-                <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16" aria-hidden="true">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                </svg>
-                Sertifikat Resmi &amp; SKP Kemnaker / BNSP
-              </li>
-              <li>
-                <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16" aria-hidden="true">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                </svg>
-                Modul Materi &amp; Bimbingan Instruktur Ahli
-              </li>
-              <li>
-                <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16" aria-hidden="true">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                </svg>
-                Pelatihan Tatap Muka, Online, &amp; In-House
-              </li>
-            </ul>
-            <div class="pd-card-footer">
-              <span class="pd-card-response">⚡ Konsultasi Gratis &amp; Respon Cepat via WhatsApp</span>
-            </div>
+          </div>
+          <div class="pd-card-inhouse-tag">
+            <span class="tag-icon">🏢</span>
+            <span>Tersedia Penawaran Khusus In-House &amp; Grup Perusahaan</span>
+          </div>
+          <ul class="pd-card-perks">
+            <li>
+              <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16" aria-hidden="true">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              Sertifikat Resmi &amp; SKP Kemnaker / BNSP
+            </li>
+            <li>
+              <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16" aria-hidden="true">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              Modul Materi &amp; Bimbingan Instruktur Ahli
+            </li>
+            <li>
+              <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16" aria-hidden="true">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              Pelatihan Tatap Muka, Online, &amp; In-House
+            </li>
+          </ul>
+          <div class="pd-card-footer">
+            <span class="pd-card-response">⚡ Konsultasi Gratis &amp; Respon Cepat via WhatsApp</span>
           </div>
         </div>
       </div>
-    </section>
+    </PageHeader>
 
     <!-- BATCH DATES BLOCK (UNDER HERO) -->
     <section class="tc-live-schedules pd-schedule-section">

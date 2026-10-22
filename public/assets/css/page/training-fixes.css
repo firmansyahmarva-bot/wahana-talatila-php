@@ -33,7 +33,7 @@
   backdrop-filter: blur(8px);
 }
 .city-program-page .hero h1 {
-  font-family: 'Lexend', sans-serif;
+  font-family: var(--font-heading);
   letter-spacing: -0.025em;
   color: var(--surface);
 }

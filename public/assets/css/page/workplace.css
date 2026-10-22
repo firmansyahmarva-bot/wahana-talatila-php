@@ -32,7 +32,7 @@
   margin-bottom: 18px;
 }
 .wp-hero h1 {
-  font-family: 'Lexend', system-ui, sans-serif;
+  font-family: var(--font-heading);
   font-size: clamp(2rem, 4.4vw, 3rem);
   font-weight: 800;
   color: var(--surface);
@@ -166,7 +166,7 @@
   font-size: 1.85rem;
   font-weight: 800;
   color: var(--surface);
-  font-family: 'Lexend', sans-serif;
+  font-family: var(--font-heading);
 }
 .wp-metric-val.green { color: var(--whatsapp); }
 .wp-metric-val.orange { color: var(--accent); }
