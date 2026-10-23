@@ -293,3 +293,18 @@
 }
 
 @media (prefers-reduced-motion: reduce) { .course-experience *, .course-experience *::before, .course-experience *::after { animation: none; transition: none; scroll-behavior: auto; } }
+
+/* Individual batch pages emphasize their own dates instead of a generic poster. */
+.ce-batch-details { padding: 30px; border: 1px solid var(--slate-700); border-radius: 12px; background: var(--slate-900); color: var(--on-brand); }
+.ce-batch-label { display: flex; align-items: center; gap: 10px; color: var(--slate-300); font-size: 11px; font-weight: 600; letter-spacing: .08em; }
+.ce-batch-label svg { color: var(--lead-action); }
+.course-experience .ce-batch-details h2 { color: var(--on-brand); margin: 22px 0 12px; font-size: clamp(25px, 3vw, 36px); line-height: 1.35; letter-spacing: -.035em; }
+.course-experience .ce-batch-name { color: var(--slate-300); font-size: 14px; line-height: 1.8; margin-bottom: 25px; }
+.ce-batch-location { display: flex; flex-wrap: wrap; gap: 12px 24px; padding-top: 20px; border-top: 1px solid var(--slate-700); color: var(--slate-300); font-size: 12px; }
+.ce-batch-location > span { display: flex; align-items: flex-start; gap: 8px; min-width: 0; }
+@media (max-width: 768px) {
+  .ce-batch-details { padding: 23px; border-radius: 9px; }
+  .course-experience .ce-batch-details h2 { font-size: 26px; margin-top: 20px; }
+  .course-experience .ce-batch-name { font-size: 13px; }
+  .ce-batch-location { font-size: 11px; gap: 13px; flex-direction: column; }
+}

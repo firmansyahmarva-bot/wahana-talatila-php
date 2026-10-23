@@ -22,15 +22,30 @@ interface Props extends Pick<LayoutProps, 'title' | 'description' | 'canonical' 
   breadcrumbs?: HeroProps['breadcrumbs'];
   poster?: HeroProps['poster'];
   updatedAt?: string;
+  selectedBatch?: BatchItem;
+  showPoster?: boolean;
+  venue?: string;
 }
-const { data, batches, category = data.category_name || 'Pelatihan', hubLink = '/pelatihan/', certification, message, inhouseMessage, hasCurriculum, hasFaq = false, schedule = false, heroTitle, heroSummary, breadcrumbs, poster, updatedAt, ...seo } = Astro.props;
+const { data, batches, category = data.category_name || 'Pelatihan', hubLink = '/pelatihan/', certification, message, inhouseMessage, hasCurriculum, hasFaq = false, schedule = false, heroTitle, heroSummary, breadcrumbs, poster, updatedAt, selectedBatch, showPoster = true, venue, ...seo } = Astro.props;
 ---
-<Layout {...seo} bodyClass={schedule ? 'course-page schedule-program-page' : 'course-page'} bodyAttrs={{'data-training-slug': data.slug}} pageCss={['/assets/css/course-experience.css']} contactUrl={waUrl(message)}>
+<Layout {...seo} bodyClass={schedule ? 'course-page schedule-program-page' : 'course-page'} bodyAttrs={{'data-training-slug': data.slug, 'data-batch-id': selectedBatch?.id}} pageCss={['/assets/css/course-experience.css']} contactUrl={waUrl(message)}>
   <div class="course-experience">
-    <CourseHero {data} {category} {hubLink} {certification} {message} {inhouseMessage} nextBatch={batches[0]} title={heroTitle} summary={heroSummary} {breadcrumbs} {poster} {schedule} />
+    <CourseHero {data} {category} {hubLink} {certification} {message} {inhouseMessage} nextBatch={selectedBatch || batches[0]} title={heroTitle} summary={heroSummary} {breadcrumbs} {poster} {schedule} selectedBatch={!!selectedBatch} {showPoster} {venue}><slot name="hero-details" /></CourseHero>
     <CourseSectionNav {hasCurriculum} {hasFaq} />
     <CourseSchedules name={data.name} slug={data.slug} isActive={data.is_active !== 0} batches={batches} price={data.price} {schedule} {updatedAt} />
     <CourseInhouse name={data.name} message={inhouseMessage} />
     <slot />
   </div>
 </Layout>
+
+<script>
+  // Keep the floating shortcut from covering the primary registration action.
+  const registration = document.querySelector('.ce-registration > .ce-button');
+  const shortcut = document.querySelector<HTMLElement>('.home-wa-float');
+  if (registration && shortcut && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(([entry]) => {
+      shortcut.style.visibility = entry.isIntersecting && entry.intersectionRatio >= .5 ? 'hidden' : '';
+    }, {rootMargin: '0px 0px -70px 0px', threshold: [0, .5, 1]});
+    observer.observe(registration);
+  }
+</script>

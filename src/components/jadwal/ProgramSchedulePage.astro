@@ -1,7 +1,6 @@
 ---
 import CourseFrame from '../pelatihan/CourseFrame.astro';
-import CourseCurriculum from '../pelatihan/CourseCurriculum.astro';
-import CourseGuide from '../pelatihan/CourseGuide.astro';
+import ScheduleContent from './ScheduleContent.astro';
 import { getSchedulePage, type SchedulePageProps } from '../../lib/schedulePage';
 type Props = SchedulePageProps;
 const { training } = Astro.props;
@@ -17,42 +16,5 @@ const inhouseMessage = `Halo Wahana Totalita, kami dari perusahaan ingin meminta
   heroSummary={`${page.upcomingBatches.length} Batch Tersedia · Online via Zoom & Tatap Muka · ${page.durationDays} Hari Pelatihan · Sertifikasi Resmi ${page.certification.replace(/^sertifikasi\s+/i, '')}. Diperbarui: ${page.lastUpdatedStr}`}
   breadcrumbs={[{name: 'Beranda', href: '/'}, {name: 'Jadwal Pelatihan', href: '/jadwal/'}, {name: training.name}]}
 >
-  <section class="pd-body" id="tentang-program">
-    <div class="ce-container pd-layout">
-      <div class="pd-main">
-        {training.description && <section class="pd-section"><h2>📋 Tentang Pelatihan</h2><div class="pd-desc"><p>{training.description}</p></div></section>}
-        <CourseCurriculum items={page.curriculumList} heading="📚 Materi & Silabus Pelatihan" />
-        <section class="pd-section">
-          <h2>ℹ️ Persyaratan Peserta</h2>
-          <ul>
-            <li>Pendidikan minimal sesuai kualifikasi program ({page.certification})</li>
-            <li>Scan identitas diri (KTP / SIM / Paspor yang masih berlaku)</li>
-            <li>Pas foto formal dengan latar belakang merah / biru</li>
-            <li>Surat rekomendasi / penunjukan dari perusahaan (bila diutus perusahaan)</li>
-            <li>Mengikuti seluruh sesi teori, simulasi praktik, dan evaluasi kelulusan</li>
-          </ul>
-        </section>
-        <section class="pd-section">
-          <h2>📜 Fasilitas &amp; Sertifikasi Resmi</h2>
-          <p>Setelah menyelesaikan rangkaian pembinaan dan dinyatakan kompeten, peserta akan memperoleh:</p>
-          <ul>
-            <li><strong>Sertifikat resmi berlisensi {page.certification}</strong> diakui secara nasional</li>
-            <li>Lisensi Kewenangan / SKP (Surat Keputusan Penunjukan) resmi</li>
-            <li>Modul pelatihan, hardcopy/softcopy materi, dan training kit</li>
-            <li>Surat Keterangan Lulus (SKL) sementara saat sertifikat dalam proses penerbitan</li>
-          </ul>
-        </section>
-        <section class="pd-section">
-          <h2>Informasi Pelaksanaan</h2>
-          <table class="pd-spec"><tbody>
-            <tr><th>Metode</th><td>{page.mode.toUpperCase()}</td></tr>
-            <tr><th>Durasi</th><td>{page.durationDays} Hari</td></tr>
-            <tr><th>Lokasi</th><td>{page.venue}</td></tr>
-          </tbody></table>
-          <p><a href={`/pelatihan/${training.slug}/`}>Lihat Halaman Lengkap Program →</a></p>
-        </section>
-      </div>
-      <CourseGuide price={training.price} message={page.waMsg} {inhouseMessage} courseSlug={training.slug} />
-    </div>
-  </section>
+  <ScheduleContent {training} {page} {inhouseMessage} />
 </CourseFrame>

@@ -36,11 +36,14 @@ for (const [name, html] of coursePages) {
   assert.ok(html.includes('id="in-house-training"'), name + ' dedicated in-house card');
   assert.ok(!html.includes('Tertarik dengan program ini?'), name + ' course-specific closing CTA');
   assert.ok(!html.includes('pelatihan-detail.css'), name + ' legacy stylesheet removed');
-  const image = html.match(/<figure class="ce-hero-image"><img[^>]*src="([^\"]+)"/);
-  assert.ok(image && fs.existsSync(path.join('public', image[1])), name + ' existing hero image');
+  if (html.includes('data-batch-id=')) assert.ok(html.includes('data-course-selected-date'), name + ' selected batch date');
+  else {
+    const image = html.match(/<figure class="ce-hero-image"><img[^>]*src="([^\"]+)"/);
+    assert.ok(image && fs.existsSync(path.join('public', image[1])), name + ' existing hero image');
+  }
 }
 console.log(`${coursePages.length} course and schedule pages have a complete hero, schedule and registration.`);
-const programSchedules = coursePages.filter(([name]) => name.startsWith('jadwal' + path.sep));
+const programSchedules = coursePages.filter(([name, html]) => name.startsWith('jadwal' + path.sep) && !html.includes('data-batch-id='));
 for (const [name, html] of programSchedules) {
   const courseFile = name.replace(/^jadwal/, 'pelatihan');
   const course = pages[courseFile];
@@ -51,6 +54,18 @@ for (const [name, html] of programSchedules) {
   }
 }
 console.log(`${programSchedules.length} schedule pages match course names, prices, curriculum and dates.`);
+
+const batches = JSON.parse(fs.readFileSync('data/training_batches.json', 'utf8'));
+const batchPages = coursePages.filter(([, html]) => html.includes('data-batch-id='));
+assert.equal(batchPages.length, batches.length, 'Every numeric batch uses the shared template');
+for (const batch of batches) {
+  const html = pages[path.join('jadwal', String(batch.id), 'index.html')];
+  assert.ok(html.includes('data-batch-id="' + batch.id + '"'), 'Selected batch ID ' + batch.id);
+  assert.ok(html.includes('datetime="' + batch.start_date + '"'), 'Selected batch start date ' + batch.id);
+  assert.ok(html.includes('data-course-selected-date'), 'Selected date is protected from the course feed');
+}
+console.log(`${batchPages.length} numeric batch pages retain their selected IDs and dates.`);
+
 if (process.argv.includes('--seo-only')) process.exit(0);
 const origin = 'http://course-preview.test';
 const browser = await chromium.launch({ headless: true });
@@ -72,7 +87,7 @@ try {
   for (const width of [320, 390, 768, 1024, 1440]) {
     const page = await browser.newPage({ viewport: { width, height: 1000 } });
     await page.route('**/*', serveBuild);
-    for (const route of [...routes, ...scheduleRoutes]) {
+    for (const route of (process.argv.includes('--batch-only') ? [] : [...routes, ...scheduleRoutes])) {
       const isSchedule = route.startsWith('/jadwal/');
       const errors = [];
       const onError = error => errors.push(error.message);
@@ -125,6 +140,43 @@ try {
     }
     await page.close();
   }
+
+  for (const width of [320, 390, 768, 1024, 1440]) {
+    const batchPage = await browser.newPage({viewport: {width, height: 1000}});
+    await batchPage.route('**/*', serveBuild);
+    for (const id of [106, 109, 111]) {
+      const selected = batches.find(batch => batch.id === id);
+      await batchPage.goto(origin + '/jadwal/' + id + '/', {waitUntil: 'networkidle'});
+      assert.equal(await batchPage.locator('h1').count(), 1);
+      assert.equal(await batchPage.locator('.ce-batch-details time').getAttribute('datetime'), selected.start_date);
+      assert.equal(await batchPage.locator('[data-course-selected-date]').textContent(), await batchPage.locator('.ce-batch-details h2').textContent());
+      assert.equal(await batchPage.locator('[data-course-next-date]').count(), 0, 'Batch date does not bind to the course feed');
+      assert.ok((await batchPage.locator('.ce-registration').textContent()).includes(selected.venue), 'Registration keeps the batch venue');
+      assert.ok((await batchPage.locator('.ce-price').textContent()).includes(Number(selected.price).toLocaleString('id-ID')), 'Registration keeps the batch price override');
+      const registration = new URL(await batchPage.locator('.ce-registration > .ce-button').getAttribute('href'));
+      assert.equal(registration.hostname, 'wa.me');
+      assert.ok(registration.searchParams.get('text').includes('Batch: #' + id));
+      assert.ok(registration.searchParams.get('text').includes(selected.venue));
+      assert.equal(await batchPage.evaluate(() => document.documentElement.scrollWidth > innerWidth), false, 'Batch layout fits ' + width);
+      assert.equal(await batchPage.locator('link[rel="canonical"]').getAttribute('href'), 'https://wahanatotalita.com/jadwal/' + (await batchPage.locator('body').getAttribute('data-training-slug')) + '/');
+      for (const link of await batchPage.locator('.ce-section-nav a').all()) assert.equal(await batchPage.locator(await link.getAttribute('href')).count(), 1);
+      if (id === 109 && [390,1440].includes(width)) await batchPage.screenshot({path: output + '/batch-' + width + '.png'});
+      await batchPage.locator('.ce-registration > .ce-button').scrollIntoViewIfNeeded();
+      await batchPage.waitForFunction(() => getComputedStyle(document.querySelector('.home-wa-float')).visibility === 'hidden');
+      checks++;
+    }
+    await batchPage.close();
+  }
+  const fixedBatch = await browser.newPage();
+  await fixedBatch.route('**/*', serveBuild);
+  await fixedBatch.route(url => url.pathname === '/api/public-schedules.php', route => route.fulfill({status: 200, contentType: 'application/json', body: JSON.stringify({success: true, schedules: [{start_date: '2030-01-07', end_date: '2030-01-09', mode: 'online', price: 3650000}]})}));
+  await fixedBatch.goto(origin + '/jadwal/109/', {waitUntil: 'networkidle'});
+  await fixedBatch.waitForFunction(() => document.querySelector('.ce-schedule-card h3')?.textContent?.includes('2030'));
+  assert.equal(await fixedBatch.locator('.ce-batch-details h2').textContent(), await fixedBatch.locator('[data-course-selected-date]').textContent(), 'Live course schedules never replace the selected batch');
+  assert.ok(!(await fixedBatch.locator('[data-course-selected-date]').textContent()).includes('2030'));
+  assert.ok(new URL(await fixedBatch.locator('.ce-registration > .ce-button').getAttribute('href')).searchParams.get('text').includes('Batch: #109'));
+  await fixedBatch.close();
+
   const livePage = await browser.newPage();
   await livePage.route('**/*', serveBuild);
   await livePage.route(url => url.pathname === '/api/public-schedules.php', route => route.fulfill({status: 200, contentType: 'application/json', body: JSON.stringify({success: true, schedules: [{start_date: '2030-01-07', end_date: '2030-01-09', mode: 'online', price: 3650000, url: '/jadwal/123/'}]})}));

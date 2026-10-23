@@ -4,7 +4,7 @@
 
 ## Shared presentation
 
-Both `/pelatihan/{slug}/` and `/jadwal/{slug}/` use `components/pelatihan/CourseFrame.astro`. The frame owns the shared stylesheet, hero, registration, section navigation, schedule cards and in-house enquiry. Edit these components once for both page types:
+`/pelatihan/{slug}/`, `/jadwal/{slug}/` and numeric `/jadwal/{id}/` pages use `components/pelatihan/CourseFrame.astro`. The frame owns the shared stylesheet, hero, registration, section navigation, schedule cards and in-house enquiry. Edit these components once for both page types:
 
 - `CourseHero`: title, introduction and existing generated poster. Schedule pages provide their schedule title and poster variant.
 - `CourseRegistration`: price, next date and individual registration.
@@ -21,7 +21,7 @@ All shared styling lives in `public/assets/css/course-experience.css`. Header, f
 
 `CourseDetail.astro` retains the course's long-form content, recommendations, FAQ and Course schema. `components/jadwal/ProgramSchedulePage.astro` composes the schedule-specific body using the shared frame. `lib/schedulePage.ts` retains existing schedule titles, descriptions, canonicals and EducationalEvent schemas. Schedule posters and Open Graph images retain their existing mapping. Visual sharing does not merge either page's SEO identity.
 
-`pages/jadwal/[id].astro` only dispatches routes. Existing numeric batch pages use `components/jadwal/BatchSchedulePage.astro`, preserving their existing layout and canonical behaviour.
+`pages/jadwal/[id].astro` only dispatches routes. Numeric pages use `components/jadwal/BatchSchedulePage.astro` with the same shared frame and `ScheduleContent` body as program schedule pages. They preserve their existing metadata and canonical behaviour while overriding course price, mode and venue with the selected batch values. A `BatchDetails` date panel replaces the general course poster to avoid displaying a course price printed into an image that differs from the batch price. The selected date uses `data-course-selected-date`; only the upcoming schedule grid and `data-course-next-date` may update from the live feed. Never bind the selected batch date to the next generated course date.
 
 ## Behaviour and verification
 

@@ -1,0 +1,12 @@
+---
+import Icon from '../home/HomeIcon.astro';
+import { formatBatchRange } from '../../lib/jadwal';
+interface Props { batch: {id: string | number; batch_name: string; start_date: string; end_date: string}; mode: string; venue: string; }
+const { batch, mode, venue } = Astro.props;
+---
+<section class="ce-batch-details" aria-label="Detail batch yang dipilih">
+  <div class="ce-batch-label"><Icon name="calendar" size={20} /><span>BATCH #{batch.id}</span></div>
+  <h2><time datetime={batch.start_date}>{formatBatchRange(batch.start_date, batch.end_date)}</time></h2>
+  <p class="ce-batch-name">{batch.batch_name}</p>
+  <div class="ce-batch-location"><span><Icon name="monitor" size={17} />{mode}</span><span><Icon name="pin" size={17} />{venue}</span></div>
+</section>

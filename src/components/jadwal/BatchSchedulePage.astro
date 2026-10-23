@@ -1,241 +1,33 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import PageHeader from '../PageHeader.astro';
-import { formatPrice, waUrl } from '../../lib/images';
-import { formatBatchRange } from '../../lib/jadwal';
+import CourseFrame from '../pelatihan/CourseFrame.astro';
+import BatchDetails from './BatchDetails.astro';
+import ScheduleContent from './ScheduleContent.astro';
+import { formatPrice, modeLabel } from '../../lib/images';
+import { formatBatchRange, type BatchItem } from '../../lib/jadwal';
 import { getSchedulePage, type SchedulePageProps } from '../../lib/schedulePage';
 type Props = SchedulePageProps;
-const { training } = Astro.props;
-const { isProgramPage, trainingName, trainingSlug, schedulePoster, certification, durationDays, price, mode, venue, upcomingBatches, firstBatch, singleBatchDateStr, singleBatchEndDateStr, pageTitle, pageDesc, canonical, waMsg, eventSchemas, curriculumList, lastUpdatedStr } = getSchedulePage(Astro.props);
+const { training, batch } = Astro.props;
+const page = getSchedulePage(Astro.props);
+const selectedBatch: BatchItem = {
+  id: batch.id, batch_name: batch.batch_name || page.trainingName,
+  start_date: batch.start_date,
+  end_date: batch.end_date && batch.end_date !== '0000-00-00' ? batch.end_date : batch.start_date,
+  mode: page.mode, venue: page.venue, price: Number(page.price),
+};
+// Batch-specific values override the shared course record for this page only.
+const data = {...training, name: page.trainingName, slug: page.trainingSlug, price: page.price, mode: page.mode, duration_days: page.durationDays, certification: page.certification};
+const range = formatBatchRange(selectedBatch.start_date, selectedBatch.end_date);
+const message = `Halo Wahana Totalita, saya ingin mendaftar ${page.trainingName}.\nBatch: #${batch.id}\nTanggal: ${range}\nMetode: ${modeLabel(page.mode)}\nLokasi: ${page.venue}\nBiaya: ${formatPrice(page.price)}\nURL batch: https://wahanatotalita.com/jadwal/${batch.id}/`;
+const inhouseMessage = `Halo Wahana Totalita, kami dari perusahaan ingin meminta penawaran in-house training resmi untuk topik: ${page.trainingName}`;
 ---
-<Layout
-  title={pageTitle}
-  description={pageDesc}
-  canonical={canonical}
-  schemas={eventSchemas}
-  ogImage={schedulePoster ? `https://wahanatotalita.com${schedulePoster.ogImage}` : undefined}
-  pageCss={['/assets/css/page/jadwal-detail.css']}
+<CourseFrame {data} title={page.pageTitle} description={page.pageDesc} canonical={page.canonical} schemas={page.eventSchemas}
+  batches={page.upcomingBatches} certification={page.certification.replace(/^sertifikasi\s+/i, '')}
+  {message} {inhouseMessage} hasCurriculum={page.curriculumList.length > 0} schedule
+  {selectedBatch} showPoster={false} venue={page.venue} updatedAt={page.lastUpdatedStr}
+  heroTitle={`Jadwal ${page.trainingName}`}
+  heroSummary={`Informasi batch #${batch.id}: ${range}. ${modeLabel(page.mode)}, ${page.venue}. ${page.durationDays} Hari Pelatihan. Diperbarui: ${page.lastUpdatedStr}`}
+  breadcrumbs={[{name: 'Beranda', href: '/'}, {name: 'Jadwal Pelatihan', href: '/jadwal/'}, {name: page.trainingName}]}
 >
-  <!-- HERO -->
-  <PageHeader
-    title={`Jadwal ${trainingName}`}
-    breadcrumb={{
-      variant: 'city',
-      items: [
-        { name: 'Beranda', href: '/' },
-        { name: 'Jadwal Pelatihan', href: '/jadwal/' },
-        { name: trainingName },
-      ],
-    }}
-    align="left"
-    class="detail-hero"
-    style={isProgramPage ? 'background:linear-gradient(135deg,#64101a,#8b1420);padding:36px 0;' : undefined}
-  >
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap;" slot="eyebrow">
-        <span class="badge-mode" style="background:color-mix(in srgb,var(--surface) 15%,transparent);color:var(--success-border);padding:4px 12px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.05em;border:1px solid color-mix(in srgb,var(--surface) 20%,transparent);">
-          {mode.toUpperCase()}
-        </span>
-        <span style="font-size:13px;color:rgba(255,255,255,0.85);">
-          🎓 Sertifikasi: <strong>{certification}</strong>
-        </span>
-        <span style="font-size:12px;color:rgba(255,255,255,0.7);margin-left:auto;">
-          Diperbarui: {lastUpdatedStr}
-        </span>
-      </div>
-    <div class="meta-grid" style="display:flex;gap:20px;flex-wrap:wrap;font-size:14px;color:color-mix(in srgb,var(--on-brand) 90%,transparent);">
-      {isProgramPage ? (
-        <>
-          <span>📅 <strong>{upcomingBatches.length} Batch Tersedia</strong></span>
-          <span>📍 Online via Zoom &amp; Tatap Muka</span>
-          <span>⏱ {durationDays} Hari Pelatihan</span>
-          <span>🏛️ Sertifikasi Resmi {certification}</span>
-        </>
-      ) : (
-        <>
-          <span>📅 <strong>{singleBatchDateStr} {singleBatchEndDateStr ? `— ${singleBatchEndDateStr}` : ''}</strong></span>
-          <span>📍 {venue}</span>
-          <span>⏱ {durationDays} Hari Pelatihan</span>
-          <span>🏛️ Sertifikasi Resmi {certification}</span>
-        </>
-      )}
-    </div>
-    {schedulePoster && (
-      <div class="jadwal-program-poster">
-        <img
-          src={schedulePoster.image}
-          srcset={`${schedulePoster.image640} 640w, ${schedulePoster.image1200} 1200w, ${schedulePoster.image} 1822w`}
-          sizes="(max-width: 1160px) calc(100vw - 40px), 1120px"
-          width="1822"
-          height="662"
-          alt={schedulePoster.alt}
-          loading="eager"
-          fetchpriority="high"
-          decoding="async"
-        />
-      </div>
-    )}
-  </PageHeader>
-
-  <!-- CONTENT & REGISTRATION CARD GRID -->
-  <div class="container" style="max-width:1160px;margin:40px auto 70px;padding:0 20px;">
-    <div class="content-grid" style="display:grid;grid-template-columns:1fr 360px;gap:36px;align-items:start;">
-      <!-- MAIN BODY -->
-      <div>
-        <!-- UPCOMING BATCHES TABLE (Prominent on Program Pages) -->
-        <div class="content-card" style="background:var(--surface);border-radius:14px;border:1px solid var(--border);padding:28px;margin-bottom:24px;box-shadow:0 2px 8px color-mix(in srgb,var(--brand) 3%,transparent);">
-          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
-            <h2 style="font-family: var(--font-heading);font-size:1.25rem;font-weight:700;color:var(--brand);margin:0;">
-              📅 Batch Pendaftaran Terdekat
-            </h2>
-            <span style="font-size:12px;color:var(--slate-500);">Terakhir diperbarui: {lastUpdatedStr}</span>
-          </div>
-
-          <div style="display:grid;gap:12px;">
-            {upcomingBatches.map((b, idx) => {
-              const rangeStr = formatBatchRange(b.start_date, b.end_date);
-              const bPlace = b.mode === 'online' ? 'Online via Zoom' : (b.venue || 'Yogyakarta');
-              const bPriceFormatted = b.price > 0 ? formatPrice(b.price) : (price > 0 ? formatPrice(price) : 'Hubungi Kami');
-              const itemWaMsg = `Halo Wahana Totalita, saya ingin daftar pelatihan ${trainingName} batch ${rangeStr} (${b.mode.toUpperCase()})`;
-              return (
-                <div style="background:var(--slate-50);border:1px solid var(--border);border-radius:10px;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;">
-                  <div style="min-width:200px;">
-                    <span style="font-size:11px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:4px;">
-                      {idx === 0 ? '🔥 Batch Terdekat' : `Batch ${idx + 1}`}
-                    </span>
-                    <strong style="font-size:16px;color:var(--brand);display:block;margin-bottom:2px;">
-                      {rangeStr}
-                    </strong>
-                    <span style="font-size:13px;color:var(--slate-600);">
-                      {bPlace} &bull; <span style="text-transform:uppercase;font-weight:600;">{b.mode}</span>
-                    </span>
-                  </div>
-                  <div style="text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
-                    <span style="font-size:15px;font-weight:800;color:var(--brand);">
-                      {bPriceFormatted}
-                    </span>
-                    <a
-                      href={waUrl(itemWaMsg)}
-                      target="_blank"
-                      rel="noopener"
-                      style="display:inline-block;background:var(--brand);color:var(--on-brand);padding:6px 14px;border-radius:6px;font-size:12.5px;font-weight:700;text-decoration:none;"
-                    >
-                      Daftar Batch Ini &rarr;
-                    </a>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {training?.description && (
-          <div class="content-card" style="background:var(--surface);border-radius:14px;border:1px solid var(--border);padding:28px;margin-bottom:24px;box-shadow:0 2px 8px color-mix(in srgb,var(--brand) 3%,transparent);">
-            <h2 style="font-family: var(--font-heading);font-size:1.25rem;font-weight:700;color:var(--brand);margin:0 0 14px;">
-              📋 Tentang Pelatihan
-            </h2>
-            <p style="color:var(--slate-700);line-height:1.75;font-size:15px;margin:0;">
-              {training.description}
-            </p>
-          </div>
-        )}
-
-        {curriculumList.length > 0 && (
-          <div class="content-card" style="background:var(--surface);border-radius:14px;border:1px solid var(--border);padding:28px;margin-bottom:24px;box-shadow:0 2px 8px color-mix(in srgb,var(--brand) 3%,transparent);">
-            <h2 style="font-family: var(--font-heading);font-size:1.25rem;font-weight:700;color:var(--brand);margin:0 0 16px;">
-              📚 Materi &amp; Silabus Pelatihan
-            </h2>
-            <ul class="module-list" style="list-style:none;padding:0;margin:0;display:grid;gap:10px;">
-              {curriculumList.map((m: any, idx: number) => (
-                <li style="padding:10px 14px;background:var(--slate-50);border-radius:8px;border:1px solid var(--border);display:flex;gap:12px;align-items:flex-start;font-size:14px;color:var(--slate-800);">
-                  <strong style="color:var(--accent);min-width:24px;">{idx + 1}.</strong>
-                  <span>{typeof m === 'string' ? m : (m.title || m.name || JSON.stringify(m))}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        <div class="content-card" style="background:var(--surface);border-radius:14px;border:1px solid var(--border);padding:28px;margin-bottom:24px;box-shadow:0 2px 8px color-mix(in srgb,var(--brand) 3%,transparent);">
-          <h2 style="font-family: var(--font-heading);font-size:1.25rem;font-weight:700;color:var(--brand);margin:0 0 14px;">
-            ℹ️ Persyaratan Peserta
-          </h2>
-          <ul style="margin:0;padding-left:20px;line-height:2;color:var(--slate-700);font-size:14.5px;">
-            <li>Pendidikan minimal sesuai kualifikasi program ({certification})</li>
-            <li>Scan identitas diri (KTP / SIM / Paspor yang masih berlaku)</li>
-            <li>Pas foto formal dengan latar belakang merah / biru</li>
-            <li>Surat rekomendasi / penunjukan dari perusahaan (bila diutus perusahaan)</li>
-            <li>Mengikuti seluruh sesi teori, simulasi praktik, dan evaluasi kelulusan</li>
-          </ul>
-        </div>
-
-        <div class="content-card" style="background:var(--surface);border-radius:14px;border:1px solid var(--border);padding:28px;box-shadow:0 2px 8px color-mix(in srgb,var(--brand) 3%,transparent);">
-          <h2 style="font-family: var(--font-heading);font-size:1.25rem;font-weight:700;color:var(--brand);margin:0 0 14px;">
-            📜 Fasilitas &amp; Sertifikasi Resmi
-          </h2>
-          <p style="color:var(--slate-700);line-height:1.7;font-size:14.5px;margin:0 0 12px;">
-            Setelah menyelesaikan rangkaian pembinaan dan dinyatakan kompeten, peserta akan memperoleh:
-          </p>
-          <ul style="margin:0;padding-left:20px;line-height:2;color:var(--slate-700);font-size:14.5px;">
-            <li><strong>Sertifikat resmi berlisensi {certification}</strong> diakui secara nasional</li>
-            <li>Lisensi Kewenangan / SKP (Surat Keputusan Penunjukan) resmi</li>
-            <li>Modul pelatihan, hardcopy/softcopy materi, dan training kit</li>
-            <li>Surat Keterangan Lulus (SKL) sementara saat sertifikat dalam proses penerbitan</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- SIDEBAR REGISTRATION TICKET -->
-      <aside style="position: sticky; top: 100px; align-self: start;">
-        <div class="reg-card" style="background:var(--surface);border-radius:16px;border:2px solid var(--brand);padding:28px;box-shadow:0 12px 30px -8px color-mix(in srgb,var(--brand) 15%,transparent);">
-          <span style="font-size:11px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;">TIKET PENDAFTARAN</span>
-          <h3 style="font-family: var(--font-heading);color:var(--brand);margin:6px 0 14px;font-size:1.25rem;">
-            Investasi Pelatihan
-          </h3>
-          <div class="price-big" style="font-size:2rem;font-weight:800;color:var(--brand);margin-bottom:18px;">
-            {price > 0 ? formatPrice(price) : 'Hubungi Admin'}
-          </div>
-
-          <div class="info-rows" style="border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:14px 0;margin-bottom:20px;">
-            <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:13.5px;">
-              <span style="color:var(--slate-500);">📅 Batch 1</span>
-              <strong style="color:var(--brand);text-align:right;">{firstBatch ? formatBatchRange(firstBatch.start_date, firstBatch.end_date) : singleBatchDateStr}</strong>
-            </div>
-            <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:13.5px;">
-              <span style="color:var(--slate-500);">🖥 Metode</span>
-              <strong style="color:var(--brand);text-transform:uppercase;">{mode}</strong>
-            </div>
-            <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:13.5px;">
-              <span style="color:var(--slate-500);">⏱ Durasi</span>
-              <strong style="color:var(--brand);">{durationDays} Hari</strong>
-            </div>
-            <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:13.5px;">
-              <span style="color:var(--slate-500);">📍 Lokasi</span>
-              <strong style="color:var(--brand);text-align:right;max-width:180px;">{venue}</strong>
-            </div>
-          </div>
-
-          <a
-            href={waUrl(waMsg)}
-            target="_blank"
-            rel="noopener"
-            class="btn-reg"
-            style="display:flex;align-items:center;justify-content:center;gap:8px;background:var(--whatsapp,var(--whatsapp));color:var(--brand-dark);padding:14px;border-radius:12px;font-weight:800;font-size:15px;text-align:center;text-decoration:none;box-shadow:0 4px 14px color-mix(in srgb,var(--whatsapp) 35%,transparent);transition:transform .2s;"
-          >
-            <span>Daftar via WhatsApp</span>
-          </a>
-
-          {trainingSlug && (
-            <div style="margin-top:16px;text-align:center;">
-              <a
-                href={`/pelatihan/${trainingSlug}/`}
-                style="font-size:13px;color:var(--accent);font-weight:700;text-decoration:none;"
-              >
-                Lihat Halaman Lengkap Program &rarr;
-              </a>
-            </div>
-          )}
-        </div>
-      </aside>
-    </div>
-  </div>
-</Layout>
+  <BatchDetails slot="hero-details" batch={selectedBatch} mode={modeLabel(page.mode)} venue={page.venue} />
+  <ScheduleContent training={data} {page} {inhouseMessage} />
+</CourseFrame>

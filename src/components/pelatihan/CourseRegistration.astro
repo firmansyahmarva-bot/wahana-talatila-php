@@ -2,8 +2,8 @@
 import Icon from '../home/HomeIcon.astro';
 import { formatPrice, waUrl } from '../../lib/images';
 import { formatBatchRange, type BatchItem } from '../../lib/jadwal';
-interface Props { name: string; price?: number | string; certification: string; duration?: number; mode: string; message: string; inhouseMessage: string; nextBatch?: BatchItem; }
-const { name, price, certification, duration, mode, message, inhouseMessage, nextBatch } = Astro.props;
+interface Props { name: string; price?: number | string; certification: string; duration?: number; mode: string; message: string; inhouseMessage: string; nextBatch?: BatchItem; selectedBatch?: boolean; venue?: string; }
+const { name, price, certification, duration, mode, message, inhouseMessage, nextBatch, selectedBatch = false, venue } = Astro.props;
 ---
 <aside class="ce-registration" aria-label={`Biaya dan pendaftaran ${name}`}>
   <div class="ce-registration-top"><span class="ce-kicker">INVESTASI PELATIHAN</span><span class="ce-registration-cert"><Icon name="shield" size={15} />{certification}</span></div>
@@ -13,9 +13,10 @@ const { name, price, certification, duration, mode, message, inhouseMessage, nex
     {duration && <div><dt><Icon name="calendar" size={17} />Durasi</dt><dd>{duration} hari</dd></div>}
     <div><dt><Icon name="monitor" size={17} />Pelaksanaan</dt><dd>{mode}</dd></div>
     <div><dt><Icon name="document" size={17} />Sertifikasi</dt><dd>{certification}</dd></div>
+    {venue && <div><dt><Icon name="pin" size={17} />Lokasi</dt><dd>{venue}</dd></div>}
   </dl>
-  <div class="ce-next-batch"><span class="ce-kicker">{nextBatch ? 'JADWAL TERDEKAT' : 'INFORMASI JADWAL'}</span><strong data-course-next-date>{nextBatch ? formatBatchRange(nextBatch.start_date, nextBatch.end_date) : 'Konsultasikan jadwal pilihan Anda'}</strong><a href="#jadwal-pelatihan">Lihat pilihan jadwal<Icon name="arrow" size={15} /></a></div>
-  <a class="ce-button ce-button-primary" href={waUrl(message)} target="_blank" rel="noopener noreferrer"><Icon name="whatsapp" size={20} />Daftar via WhatsApp<Icon name="arrow" size={18} /></a>
+  <div class="ce-next-batch"><span class="ce-kicker">{selectedBatch ? 'TANGGAL BATCH INI' : nextBatch ? 'JADWAL TERDEKAT' : 'INFORMASI JADWAL'}</span><strong data-course-next-date={selectedBatch ? undefined : true} data-course-selected-date={selectedBatch ? true : undefined}>{nextBatch ? formatBatchRange(nextBatch.start_date, nextBatch.end_date) : 'Konsultasikan jadwal pilihan Anda'}</strong><a href="#jadwal-pelatihan">{selectedBatch ? 'Lihat jadwal lainnya' : 'Lihat pilihan jadwal'}<Icon name="arrow" size={15} /></a></div>
+  <a class="ce-button ce-button-primary" href={waUrl(message)} target="_blank" rel="noopener noreferrer"><Icon name="whatsapp" size={20} />{selectedBatch ? 'Daftar Batch Ini' : 'Daftar via WhatsApp'}<Icon name="arrow" size={18} /></a>
   <span class="ce-contact-note">Tanya jadwal, biaya &amp; persyaratan sebelum mendaftar.</span>
   <div class="ce-inhouse"><span><Icon name="users" size={21} /></span><div><strong>Untuk tim perusahaan?</strong><a href={waUrl(inhouseMessage)} target="_blank" rel="noopener noreferrer">Minta penawaran in-house<Icon name="arrow" size={14} /></a></div></div>
 </aside>

@@ -14,10 +14,13 @@ export interface Props {
   title?: string;
   summary?: string;
   schedule?: boolean;
+  selectedBatch?: boolean;
+  showPoster?: boolean;
+  venue?: string;
   breadcrumbs?: {name: string; href?: string}[];
   poster?: {image: string; image640: string; image1200: string; alt: string};
 }
-const { data, category, hubLink, certification, message, inhouseMessage, nextBatch, title = data.name, summary: customSummary, breadcrumbs, poster, schedule = false } = Astro.props;
+const { data, category, hubLink, certification, message, inhouseMessage, nextBatch, title = data.name, summary: customSummary, breadcrumbs, poster, schedule = false, selectedBatch = false, showPoster = true, venue } = Astro.props;
 const summary = customSummary ?? (data.description ? (data.description.length > 220 ? data.description.slice(0, 220) + '…' : data.description) : `Sertifikasi resmi ${data.certification || 'Kemnaker / BNSP'}, diselenggarakan oleh Wahana Totalita Konsultan secara komprehensif.`);
 const image = poster?.image || getCourseBanner(data.slug, data.category_slug);
 const srcset = poster ? `${poster.image640} 640w, ${poster.image1200} 1200w, ${poster.image} 1822w` : getCourseBannerSrcSet(data.slug);
@@ -33,13 +36,14 @@ const srcset = poster ? `${poster.image640} 640w, ${poster.image1200} 1200w, ${p
         <h1 id="course-title">{title}</h1>
         <p class="ce-hero-summary">{summary}</p>
         <a class="ce-hero-mobile-link" href="#pendaftaran">Lihat biaya &amp; daftar<Icon name="arrow" size={17} /></a>
-        <figure class="ce-hero-image">
+        <slot />
+        {showPoster && <figure class="ce-hero-image">
           <img src={image} srcset={srcset} sizes="(max-width: 900px) calc(100vw - 40px), (max-width: 1280px) 65vw, 800px" width="1822" height="662" alt={poster?.alt || `Pelatihan ${data.name}`} fetchpriority="high" decoding="async" />
           <figcaption><span><Icon name="shield" size={16} />Sertifikasi {certification}</span><span><Icon name="monitor" size={16} />{modeLabel(data.mode)}</span></figcaption>
-        </figure>
+        </figure>}
         <div class="ce-hero-trust"><span><Icon name="shield" size={18} />PJK3 resmi Kemnaker RI</span><span><Icon name="person" size={18} />Instruktur praktisi</span><span><Icon name="users" size={18} />Publik &amp; in-house</span></div>
       </div>
-      <div id="pendaftaran"><CourseRegistration name={data.name} price={data.price} certification={data.certification || 'Sertifikasi Resmi'} duration={data.duration_days} mode={modeLabel(data.mode)} message={message} inhouseMessage={inhouseMessage} nextBatch={nextBatch} /></div>
+      <div id="pendaftaran"><CourseRegistration name={data.name} price={data.price} certification={data.certification || 'Sertifikasi Resmi'} duration={data.duration_days} mode={modeLabel(data.mode)} message={message} inhouseMessage={inhouseMessage} nextBatch={nextBatch} selectedBatch={selectedBatch} venue={venue} /></div>
     </div>
   </div>
 </section>
