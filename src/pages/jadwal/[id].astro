@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import PageHeader from '../../components/PageHeader.astro';
+import jadwalPosters from '../../lib/jadwal-posters.json';
 import batchesRaw from '../../../data/training_batches.json';
 import trainingsRaw from '../../../data/trainings.json';
 import { formatPrice, waUrl } from '../../lib/images';
@@ -52,6 +53,9 @@ const isProgramPage = pageType === 'program';
 
 const trainingName = training?.name || batch?.batch_name || 'Pelatihan K3';
 const trainingSlug = training?.slug || slug || '';
+const schedulePoster = isProgramPage
+  ? (jadwalPosters as Record<string, { image: string; image1200: string; image640: string; ogImage: string; alt: string }>)[trainingSlug]
+  : undefined;
 const certification = training?.certification || 'Kemnaker RI / BNSP';
 const durationDays = training?.duration_days || 3;
 const price = (batch?.price && batch.price > 0) ? batch.price : (training?.price || 0);
@@ -202,6 +206,7 @@ const lastUpdatedStr = `${todayDate.getDate()} ${['Januari', 'Februari', 'Maret'
   description={pageDesc}
   canonical={canonical}
   schemas={eventSchemas}
+  ogImage={schedulePoster ? `https://wahanatotalita.com${schedulePoster.ogImage}` : undefined}
   pageCss={['/assets/css/page/jadwal-detail.css']}
 >
   <!-- HERO -->
@@ -217,6 +222,7 @@ const lastUpdatedStr = `${todayDate.getDate()} ${['Januari', 'Februari', 'Maret'
     }}
     align="left"
     class="detail-hero"
+    style={isProgramPage ? 'background:linear-gradient(135deg,#64101a,#8b1420);padding:36px 0;' : undefined}
   >
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap;" slot="eyebrow">
         <span class="badge-mode" style="background:color-mix(in srgb,var(--surface) 15%,transparent);color:var(--success-border);padding:4px 12px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.05em;border:1px solid color-mix(in srgb,var(--surface) 20%,transparent);">
@@ -246,6 +252,21 @@ const lastUpdatedStr = `${todayDate.getDate()} ${['Januari', 'Februari', 'Maret'
         </>
       )}
     </div>
+    {schedulePoster && (
+      <div class="jadwal-program-poster">
+        <img
+          src={schedulePoster.image}
+          srcset={`${schedulePoster.image640} 640w, ${schedulePoster.image1200} 1200w, ${schedulePoster.image} 1822w`}
+          sizes="(max-width: 1160px) calc(100vw - 40px), 1120px"
+          width="1822"
+          height="662"
+          alt={schedulePoster.alt}
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </div>
+    )}
   </PageHeader>
 
   <!-- CONTENT & REGISTRATION CARD GRID -->

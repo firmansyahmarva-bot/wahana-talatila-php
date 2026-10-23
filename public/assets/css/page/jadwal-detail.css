@@ -1,6 +1,8 @@
 .detail-hero{background:linear-gradient(135deg,var(--brand),var(--brand-mid));padding:calc(var(--nav-h,68px) + 48px) 0 48px;color:var(--surface)}
 .detail-hero h1{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;margin:0 0 12px}
 .detail-hero .meta-grid{display:flex;gap:24px;flex-wrap:wrap;margin-top:16px;font-size:.9rem;opacity:.85}
+.jadwal-program-poster{margin-top:24px;overflow:hidden;border-radius:12px;background:#eef0f2}
+.jadwal-program-poster img{display:block;width:100%;height:auto}
 .badge-mode{display:inline-block;padding:4px 12px;border-radius:100px;font-size:.8rem;font-weight:700;background:color-mix(in srgb, var(--surface) 20%, transparent)}
 .content-grid{display:grid;grid-template-columns:1fr 360px;gap:32px;padding:40px 0}
 .content-card{background:var(--surface);border-radius:12px;border:1px solid var(--border);padding:28px;margin-bottom:24px}
