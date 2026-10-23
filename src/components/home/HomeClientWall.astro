@@ -1,0 +1,44 @@
+---
+import Icon from './HomeIcon.astro';
+
+const clients = [
+  { name: 'PT Pertamina (Persero)', logo: '/assets/img/clients/pertamina.svg', sector: 'Minyak & Gas Bumi' },
+  { name: 'PT Freeport Indonesia', logo: '/assets/img/clients/freeport.svg', sector: 'Pertambangan & Smelter' },
+  { name: 'PT PLN (Persero)', logo: '/assets/img/clients/pln.svg', sector: 'Ketenagalistrikan Nasional' },
+  { name: 'PT Adaro Energy Tbk', logo: '/assets/img/clients/adaro.svg', sector: 'Energi & Batubara' },
+  { name: 'PT Wijaya Karya (WIKA)', logo: '/assets/img/clients/wika.svg', sector: 'Konstruksi & Infrastruktur' },
+  { name: 'PT Bank Mandiri (Persero) Tbk', logo: '/assets/img/clients/mandiri.svg', sector: 'Perbankan & Fasilitas Gedung' },
+  { name: 'PT Telkom Indonesia Tbk', logo: '/assets/img/clients/telkom.svg', sector: 'Telekomunikasi & Jaringan' },
+  { name: 'PT Pupuk Indonesia (Persero)', logo: '/assets/img/clients/pupuk-indonesia.svg', sector: 'Industri Pupuk & Petrokimia' },
+];
+---
+<section class="hm-section hm-clients-section" aria-label="Portofolio Klien Perusahaan">
+  <div class="hm-container">
+    <div class="hm-clients-header">
+      <p class="hm-eyebrow">REKAM JEJAK &amp; PORTOFOLIO KORPORASI</p>
+      <h2>Dipercaya oleh 500+ Korporasi BUMN, Migas, dan Industri Nasional</h2>
+      <p class="hm-clients-desc">
+        Wahana Totalita Konsultan menjadi mitra kepatuhan K3, sertifikasi tenaga kerja, dan in-house training berskala ratusan personel untuk korporasi terkemuka di seluruh Indonesia.
+      </p>
+    </div>
+
+    <div class="hm-clients-grid">
+      {clients.map(client => (
+        <div class="hm-client-card">
+          <div class="hm-client-logo-wrap">
+            <img src={client.logo} alt={client.name} width="160" height="42" loading="lazy" decoding="async" />
+          </div>
+          <span class="hm-client-sector">{client.sector}</span>
+        </div>
+      ))}
+    </div>
+
+    <div class="hm-clients-footer">
+      <span>Mendukung pengadaan vendor BUMN &amp; Instansi melalui <strong>e-Katalog, LPSE, PaDi UMKM, dan SIPLah</strong>.</span>
+      <a href="/klien/" class="hm-text-link">
+        Lihat portofolio 70+ klien perusahaan
+        <Icon name="arrow" size={17} />
+      </a>
+    </div>
+  </div>
+</section>

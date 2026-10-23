@@ -46,6 +46,31 @@ html:has(body.home-market), body.home-market { overflow-x: clip; }
 .hm-hero-picture figcaption { position: absolute; z-index: 2; bottom: 18px; left: 24px; right: 18px; display: flex; align-items: center; gap: 7px; flex-wrap: wrap; width: fit-content; max-width: calc(100% - 42px); padding: 9px 12px; background: var(--surface); border-radius: 4px; font-size: 10px; font-weight: 600; box-shadow: var(--shadow-sm); }
 .hm-photo-dot { width: 6px; height: 6px; background: var(--lead-action); border-radius: 50%; }
 .hm-hero-picture figcaption a { display: inline-flex; align-items: center; gap: 6px; color: var(--lead-action); margin-left: 7px; }
+
+/* Trust Accreditation Strip */
+.hm-trust-strip { background: var(--surface-subtle); border-bottom: 1px solid var(--border); padding: 16px 0; }
+.hm-trust-grid { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+.hm-trust-item { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; }
+.hm-trust-badge { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 6px; background: var(--surface); border: 1px solid var(--border); color: var(--lead-action); flex-shrink: 0; box-shadow: var(--shadow-sm); }
+.hm-trust-info strong { display: block; font-size: 12px; font-weight: 800; color: var(--text); line-height: 1.2; font-family: var(--font-heading); }
+.hm-trust-info span { display: block; font-size: 10px; color: var(--text-muted); font-weight: 500; margin-top: 2px; }
+
+/* About PJK3 Institutional Section */
+.hm-about-section { background: var(--surface); border-bottom: 1px solid var(--border); padding: 48px 0; }
+.hm-about-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 40px; align-items: center; }
+.hm-about-copy .hm-eyebrow { margin-bottom: 12px; }
+.home-market .hm-about-copy h2 { font-size: clamp(24px, 2.7vw, 34px); font-weight: 800; letter-spacing: -.035em; line-height: 1.25; margin-bottom: 14px; }
+.hm-about-desc { font-size: 14px; line-height: 1.7; color: var(--text-muted); margin-bottom: 24px; }
+.hm-about-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; padding-top: 20px; border-top: 1px solid var(--border); }
+.hm-about-stat strong { display: block; font-size: clamp(22px, 2.4vw, 30px); font-weight: 800; color: var(--lead-action); font-family: var(--font-heading); line-height: 1; }
+.hm-about-stat span { display: block; font-size: 11px; color: var(--text-muted); margin-top: 6px; font-weight: 600; }
+
+.hm-about-pillars { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.hm-pillar-card { background: var(--surface-subtle); border: 1px solid var(--border); border-radius: 6px; padding: 18px; display: flex; flex-direction: column; gap: 8px; transition: border-color .15s; }
+.hm-pillar-card:hover { border-color: var(--lead-action); }
+.hm-pillar-card svg { color: var(--lead-action); flex-shrink: 0; }
+.hm-pillar-card h3 { font-size: 13px; font-weight: 800; margin: 0; color: var(--text); }
+.hm-pillar-card p { font-size: 11px; line-height: 1.6; color: var(--text-muted); margin: 0; }
 .hm-section { padding: 32px 0 0; scroll-margin-top: 96px; }
 .hm-section-heading { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 18px; }
 .home-market .hm-section-heading h2 { font-size: clamp(22px, 2.3vw, 29px); font-weight: 800; letter-spacing: -.035em; line-height: 1.3; }
@@ -179,6 +204,10 @@ html:has(body.home-market), body.home-market { overflow-x: clip; }
   .hm-faq-section { padding-bottom: 28px; }
   .hm-faq-grid { grid-template-columns: 1fr; gap: 10px; }
   .hm-faq-grid summary { font-size: 13px; min-height: 56px; }
+  .hm-trust-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 12px; }
+  .hm-about-grid { grid-template-columns: 1fr; gap: 28px; }
+  .hm-about-pillars { grid-template-columns: 1fr; }
+  .hm-about-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
 }
 @media (max-width: 640px) {
   .hm-course-grid { grid-template-columns: 1fr; gap: 12px; }
@@ -238,4 +267,157 @@ html:has(body.home-market), body.home-market { overflow-x: clip; }
 .hm-search-section { padding: 24px 0 4px; }
 @media (max-width: 768px) {
   .hm-search-section { padding-top: 20px; }
+}
+
+/* Corporate Clients Grid */
+.hm-clients-section { background: var(--surface-subtle); border-bottom: 1px solid var(--border); padding-bottom: 36px; }
+.hm-clients-header { max-width: 760px; margin-bottom: 22px; }
+.hm-clients-header .hm-eyebrow { margin-bottom: 10px; }
+.home-market .hm-clients-header h2 { font-size: clamp(22px, 2.4vw, 30px); font-weight: 800; letter-spacing: -.035em; line-height: 1.3; margin-bottom: 10px; }
+.hm-clients-desc { font-size: 13.5px; line-height: 1.7; color: var(--text-muted); }
+.hm-clients-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.hm-client-card { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 14px 16px; display: flex; flex-direction: column; justify-content: center; transition: border-color .18s, transform .18s, box-shadow .18s; }
+.hm-client-card:hover { border-color: var(--lead-action); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+.hm-client-name { font-size: 13px; font-weight: 800; color: var(--text); font-family: var(--font-heading); line-height: 1.3; }
+.hm-client-sector { font-size: 10.5px; color: var(--text-muted); margin-top: 4px; }
+.hm-clients-footer { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text-muted); flex-wrap: wrap; }
+.hm-section-sub { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-top: 4px; }
+.hm-button-single-cta { width: 100%; font-size: 12px; font-weight: 700; }
+@media (max-width: 1024px) {
+  .hm-clients-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 768px) {
+  .hm-clients-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+}
+
+/* Infinite Auto-Scrolling Photo Strip with smooth motion */
+.hm-photo-marquee-wrap {
+  width: 100%;
+  overflow: hidden;
+  background: var(--slate-900);
+  padding: 24px 0 20px;
+  position: relative;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  user-select: none;
+}
+.hm-photo-marquee-wrap::before, .hm-photo-marquee-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 90px;
+  z-index: 3;
+  pointer-events: none;
+}
+.hm-photo-marquee-wrap::before {
+  left: 0;
+  background: linear-gradient(to right, var(--slate-900) 20%, transparent);
+}
+.hm-photo-marquee-wrap::after {
+  right: 0;
+  background: linear-gradient(to left, var(--slate-900) 20%, transparent);
+}
+.hm-photo-marquee {
+  width: 100%;
+  overflow: hidden;
+}
+.hm-photo-track {
+  display: flex;
+  width: max-content;
+  gap: 16px;
+  animation: hmPhotoMarquee 38s linear infinite;
+}
+.hm-photo-track:hover {
+  animation-play-state: paused;
+}
+.hm-photo-group {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.hm-photo-card {
+  position: relative;
+  flex: 0 0 230px;
+  height: 145px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--slate-800);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+  cursor: pointer;
+}
+.hm-photo-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  border-color: var(--lead-action);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5);
+}
+.hm-photo-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.hm-photo-card::after {
+  content: '';
+  position: absolute;
+  inset: 40% 0 0;
+  background: linear-gradient(transparent, rgba(15, 23, 42, 0.85));
+  pointer-events: none;
+}
+.hm-photo-label {
+  position: absolute;
+  bottom: 8px;
+  left: 10px;
+  right: 10px;
+  font-size: 10px;
+  line-height: 1.35;
+  font-weight: 600;
+  color: var(--pure-white);
+  z-index: 2;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+@keyframes hmPhotoMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Enhanced Course Card Motion */
+.hm-course {
+  transition: transform .22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow .22s ease, border-color .22s ease;
+}
+.hm-course:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--lead-action);
+}
+.hm-course-image {
+  overflow: hidden;
+}
+.hm-course-image img {
+  transition: transform .35s ease;
+}
+.hm-course:hover .hm-course-image img {
+  transform: scale(1.05);
+}
+
+/* Client Logo Styling */
+.hm-client-logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  margin-bottom: 6px;
+}
+.hm-client-logo-wrap img {
+  max-width: 100%;
+  max-height: 40px;
+  object-fit: contain;
+  filter: grayscale(20%);
+  transition: filter .2s ease, transform .2s ease;
+}
+.hm-client-card:hover .hm-client-logo-wrap img {
+  filter: grayscale(0%);
+  transform: scale(1.04);
 }

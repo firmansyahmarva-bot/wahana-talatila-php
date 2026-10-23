@@ -1,0 +1,36 @@
+---
+const photos = [
+  { src: '/galeri/thumbs/17.webp', alt: 'Praktik pemadaman api APAR & Fire drill' },
+  { src: '/galeri/thumbs/DSC_0166.webp', alt: 'Inspeksi dan uji praktik operator forklift' },
+  { src: '/galeri/thumbs/DSC_0200.webp', alt: 'Pembekalan materi regulasi K3 di kelas' },
+  { src: '/galeri/thumbs/DSC_0007.webp', alt: 'Pelatihan first aid P3K dan teknik CPR' },
+  { src: '/galeri/thumbs/DSC_0039.webp', alt: 'Simulasi observasi bahaya industri di lapangan' },
+  { src: '/galeri/thumbs/DSC_0100.webp', alt: 'Sesi evaluasi dan foto bersama peserta' },
+  { src: '/galeri/thumbs/DSC_0034.webp', alt: 'Pelatihan pengelolaan limbah dan lingkungan' },
+  { src: '/galeri/thumbs/DSC_0001.webp', alt: 'Sesi pembinaan calon Ahli K3 Umum' },
+];
+---
+<section class="hm-photo-marquee-wrap" aria-label="Dokumentasi Pelaksanaan Pelatihan">
+  <div class="hm-photo-marquee">
+    <div class="hm-photo-track">
+      {/* First set of photos */}
+      <div class="hm-photo-group">
+        {photos.map(p => (
+          <div class="hm-photo-card">
+            <img src={p.src} alt={p.alt} width="240" height="150" loading="lazy" decoding="async" />
+            <span class="hm-photo-label">{p.alt}</span>
+          </div>
+        ))}
+      </div>
+      {/* Duplicate set for seamless continuous marquee loop */}
+      <div class="hm-photo-group" aria-hidden="true">
+        {photos.map(p => (
+          <div class="hm-photo-card">
+            <img src={p.src} alt="" width="240" height="150" loading="lazy" decoding="async" />
+            <span class="hm-photo-label">{p.alt}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

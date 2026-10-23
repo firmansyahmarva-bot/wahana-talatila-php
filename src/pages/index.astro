@@ -2,6 +2,10 @@
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import HomeHero from '../components/design/HomeHero.astro';
+import HomeTrustStrip from '../components/home/HomeTrustStrip.astro';
+import HomeClientWall from '../components/home/HomeClientWall.astro';
+import HomePhotoStrip from '../components/home/HomePhotoStrip.astro';
+
 import Finder from '../components/home/HomeFinder.astro';
 import CourseCard from '../components/home/HomeCourseCard.astro';
 import Schedule from '../components/home/HomeSchedule.astro';
@@ -10,63 +14,329 @@ import { getUpcomingBatches } from '../lib/jadwal';
 import { waUrl } from '../lib/images';
 
 const trainings = (await getCollection('trainings')).filter(t => t.data.is_active !== 0);
+
 const selections = [
-  { slug: 'pelatihan-ahli-k3-umum-sertifikasi-kemnaker-ri', title: 'Ahli K3 Umum', image: '/galeri/thumbs/DSC_0196.webp', imageAlt: 'Dokumentasi kelas Wahana Totalita' },
-  { slug: 'pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri', title: 'Operator Forklift', image: '/galeri/thumbs/DSC_0166.webp', imageAlt: 'Dokumentasi peserta pelatihan operator' },
-  { slug: 'pelatihan-damkar-paralel-kelas-dcba-sertifikasi-kemnaker-ri', title: 'Petugas Damkar', image: '/galeri/thumbs/17.webp', imageAlt: 'Dokumentasi praktik pemadaman' },
-  { slug: 'pelatihan-penanggung-jawab-operasional-pengolahan-air-limbah-popal-sertifikasi-bnsp', title: 'Pengelolaan Lingkungan', image: '/galeri/thumbs/DSC_0034.webp', imageAlt: 'Dokumentasi pembelajaran di kelas' },
+  { slug: 'pelatihan-ahli-k3-umum-sertifikasi-kemnaker-ri', title: 'Ahli K3 Umum Kemnaker RI', image: '/galeri/thumbs/DSC_0196.webp', imageAlt: 'Dokumentasi pelatihan Ahli K3 Umum Kemnaker RI' },
+  { slug: 'ak3-bnsp', title: 'Ahli K3 Umum BNSP', image: '/galeri/thumbs/DSC_0001.webp', imageAlt: 'Dokumentasi sertifikasi kompetensi Ahli K3 Umum BNSP' },
+  { slug: 'pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri', title: 'Operator Forklift Kelas 2', image: '/galeri/thumbs/DSC_0166.webp', imageAlt: 'Praktik inspeksi dan manuver unit forklift' },
+  { slug: 'pelatihan-damkar-paralel-kelas-dcba-sertifikasi-kemnaker-ri', title: 'Petugas Damkar D, C, B, A', image: '/galeri/thumbs/17.webp', imageAlt: 'Praktik pemadaman api APAR dan fire drill' },
+  { slug: 'pelatihan-pop-pertambangan-sertifikasi-bnsp-online', title: 'POP Pertambangan Minerba', image: '/galeri/thumbs/DSC_0039.webp', imageAlt: 'Pelatihan pengawas operasional pertama pertambangan' },
+  { slug: 'pelatihan-petugas-p3k-sertifikasi-kemnaker-ri', title: 'Petugas P3K Tempat Kerja', image: '/galeri/thumbs/DSC_0007.webp', imageAlt: 'Praktik pertolongan pertama CPR dan evakuasi darurat' },
+  { slug: 'pelatihan-penanggung-jawab-operasional-pengolahan-air-limbah-popal-sertifikasi-bnsp', title: 'Pengelolaan Lingkungan POPAL', image: '/galeri/thumbs/DSC_0034.webp', imageAlt: 'Pelatihan penanggung jawab operasional air limbah' },
+  { slug: 'pelatihan-auditor-sistem-manajemen-k3-sertifikasi-kemnaker-ri', title: 'Auditor SMK3 PP 50/2012', image: '/galeri/thumbs/DSC_0100.webp', imageAlt: 'Pembekalan audit sistem manajemen K3' },
 ];
+
 const featured = selections.flatMap(selection => {
   const training = trainings.find(t => t.data.slug === selection.slug);
   return training ? [{ ...selection, training: training.data }] : [];
 });
-const schedules = featured.slice(0, 3).flatMap(item => {
+
+const schedules = featured.slice(0, 6).flatMap(item => {
   const batch = getUpcomingBatches(item.slug, undefined, 1)[0];
   return batch ? [{ title: item.title, image: item.image, slug: item.slug, batch }] : [];
 });
+
 const documentation = [
-  { image: '/galeri/thumbs/DSC_0200.webp', alt: 'Instruktur memberikan materi kepada peserta pelatihan di kelas', caption: 'Pembelajaran bersama instruktur' },
-  { image: '/galeri/thumbs/DSC_0039.webp', alt: 'Peserta berhelm keselamatan mengamati peralatan di fasilitas industri', caption: 'Kunjungan & pembelajaran lapangan' },
-  { image: '/galeri/thumbs/DSC_0100.webp', alt: 'Foto bersama peserta dalam dokumentasi kegiatan Wahana Totalita', caption: 'Peserta dari berbagai bidang industri' },
+  { image: '/galeri/thumbs/17.webp', alt: 'Peserta dan instruktur mempraktikkan pemadaman api menggunakan selang hydrant', caption: 'Praktik pemadaman api APAR & Fire Drill' },
+  { image: '/galeri/thumbs/DSC_0166.webp', alt: 'Peserta melakukan inspeksi keselamatan dan uji manuver unit forklift', caption: 'Uji praktik dan inspeksi unit forklift' },
+  { image: '/galeri/thumbs/DSC_0200.webp', alt: 'Instruktur memberikan pembekalan regulasi dan standar K3 di ruang kelas', caption: 'Pembekalan teori & regulasi K3 di kelas' },
+  { image: '/galeri/thumbs/DSC_0007.webp', alt: 'Peserta mempraktikkan teknik CPR dan pertolongan pertama pada korban darurat', caption: 'Praktik first aid (P3K) & teknik CPR' },
+  { image: '/galeri/thumbs/DSC_0039.webp', alt: 'Peserta berhelm keselamatan melakukan observasi dan simulasi identifikasi bahaya di lapangan', caption: 'Observasi & identifikasi bahaya lapangan' },
+  { image: '/galeri/thumbs/DSC_0100.webp', alt: 'Foto bersama instruktur dan peserta pelatihan dari berbagai sektor industri', caption: 'Evaluasi & penyerahan sertifikat kelulusan' },
 ];
+
 const faqs = [
-  { q: 'Bagaimana memilih sertifikasi yang sesuai?', a: 'Sesuaikan pilihan dengan profesi, persyaratan perusahaan, dan jenis kompetensi yang dibutuhkan. Tim kami membantu menjelaskan perbedaan program, persyaratan peserta, dan proses sertifikasinya sebelum Anda mendaftar.' },
-  { q: 'Apakah bisa pelatihan in-house di perusahaan kami?', a: 'Bisa. Sampaikan bidang pelatihan, jumlah peserta, lokasi, dan jadwal yang Anda inginkan. Tim kami akan menyusun penawaran sesuai kebutuhan kompetensi dan operasional perusahaan.' },
-  { q: 'Bagaimana cara mendaftar pelatihan?', a: 'Pilih program lalu hubungi kami melalui WhatsApp untuk konfirmasi jadwal dan ketersediaan. Admin akan menjelaskan persyaratan, rincian biaya, serta langkah pendaftaran dan pembayaran.' },
+  {
+    q: 'Apa perbedaan sertifikasi Kemnaker RI dan sertifikasi BNSP?',
+    a: 'Sertifikasi Kemnaker RI diterbitkan langsung oleh Kementerian Ketenagakerjaan RI untuk pemenuhan kewajiban regulasi hukum ketenagakerjaan (seperti Ahli K3 Umum, Lisensi K3 Operator Forklift, dan Petugas Damkar). Sertifikasi BNSP menguji dan mengakui kompetensi kerja profesi berbasis SKKNI yang diakui luas di sektor industri migas, pertambangan, dan lingkungan.'
+  },
+  {
+    q: 'Apakah pelatihan online via Zoom sah dan diakui perusahaan?',
+    a: 'Ya, sah dan resmi. Pelatihan online interaktif via Zoom mengikuti standar kurikulum dan jam pelajaran resmi Kemnaker RI dan BNSP. Evaluasi ujian teori dan pemaparan materi diselenggarakan secara daring dengan sertifikat fisik dan lisensi resmi yang sama persis dengan kelas tatap muka.'
+  },
+  {
+    q: 'Bagaimana prosedur pendaftaran in-house training untuk perusahaan?',
+    a: 'Sampaikan kebutuhan program pelatihan, perkiraan jumlah peserta, dan rencana jadwal kepada tim kami via WhatsApp atau email. Tim kami akan segera menerbitkan surat penawaran resmi (RFP), silabus, dan jadwal pelaksanaan fleksibel yang dapat diadakan langsung di lokasi kantor atau fasilitas pabrik perusahaan Anda.'
+  },
+  {
+    q: 'Berapa lama proses penerbitan sertifikat setelah pelatihan selesai?',
+    a: 'Untuk sertifikasi BNSP, sertifikat kompetensi umumnya terbit dalam 14–30 hari kerja setelah peserta dinyatakan kompeten oleh tim asesor. Untuk sertifikasi Kemnaker RI, proses penerbitan SKP dan Lisensi Kewenangan mengikuti prosedur sistem kementerian (TemanK3), dan Surat Keterangan Lulus (SKL) resmi dapat diterbitkan terlebih dahulu untuk keperluan administrasi pekerjaan.'
+  },
+  {
+    q: 'Apakah PT Wahana Totalita Konsultan terdaftar di sistem pengadaan pemerintah dan BUMN?',
+    a: 'Ya. PT Wahana Totalita Konsultan adalah badan usaha PJK3 berbadan hukum resmi yang terdaftar di LPSE, PaDi UMKM, dan SIPLah. Setiap kerja sama korporat dan instansi didukung dokumen legalitas lengkap, invoice resmi, SPJ, kwitansi dinas, dan faktur pajak.'
+  },
+  {
+    q: 'Apakah melayani perpanjangan SKP dan Lisensi K3 yang telah habis masa berlakunya?',
+    a: 'Ya. Kami melayani perpanjangan Surat Keputusan Penunjukan (SKP) Ahli K3 Umum dan Lisensi Kewenangan K3 (Operator, Teknisi, Petugas) secara resmi tanpa perlu mengulang pelatihan dari awal, selama memenuhi berkas administrasi dan laporan kegiatan K3.'
+  }
 ];
+
 const schemas = [
-  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
-  { '@context': 'https://schema.org', '@type': 'LocalBusiness', '@id': 'https://wahanatotalita.com/#organization', name: 'PT Wahana Totalita Konsultan', url: 'https://wahanatotalita.com/', logo: 'https://wahanatotalita.com/assets/img/logo-wt.png', telephone: '+6287759151278', address: { '@type': 'PostalAddress', streetAddress: 'Jl. Wonosari KM 8.5, Berbah', addressLocality: 'Sleman', addressRegion: 'D.I. Yogyakarta', postalCode: '55573', addressCountry: 'ID' } },
-  { '@context': 'https://schema.org', '@type': 'WebSite', '@id': 'https://wahanatotalita.com/#website', url: 'https://wahanatotalita.com/', name: 'Wahana Totalita Konsultan', inLanguage: 'id-ID', publisher: { '@id': 'https://wahanatotalita.com/#organization' } },
-  { '@context': 'https://schema.org', '@type': 'ItemList', name: 'Program Pelatihan K3 Pilihan', itemListElement: featured.map((item, index) => ({ '@type': 'ListItem', position: index + 1, name: item.training.name, url: `https://wahanatotalita.com/pelatihan/${item.slug}/` })) },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(f => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a }
+    }))
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    '@id': 'https://wahanatotalita.com/#organization',
+    name: 'PT Wahana Totalita Konsultan',
+    url: 'https://wahanatotalita.com/',
+    logo: 'https://wahanatotalita.com/assets/img/logo-wt.png',
+    telephone: '+6287759151278',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Jl. Wonosari KM 8.5, Berbah',
+      addressLocality: 'Sleman',
+      addressRegion: 'D.I. Yogyakarta',
+      postalCode: '55573',
+      addressCountry: 'ID'
+    }
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': 'https://wahanatotalita.com/#website',
+    url: 'https://wahanatotalita.com/',
+    name: 'Wahana Totalita Konsultan',
+    inLanguage: 'id-ID',
+    publisher: { '@id': 'https://wahanatotalita.com/#organization' }
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Program Pelatihan & Sertifikasi K3 Unggulan',
+    itemListElement: featured.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.training.name,
+      url: `https://wahanatotalita.com/pelatihan/${item.slug}/`
+    }))
+  }
 ];
 ---
-<Layout title="Pelatihan K3 Kemnaker RI & BNSP | Wahana Totalita" description="Pelatihan dan sertifikasi K3 Kemnaker RI & BNSP di Yogyakarta. Pilihan online, tatap muka, dan in-house untuk perusahaan. Cek program, biaya, dan jadwal." isHome canonical="https://wahanatotalita.com/" pageCss={['/assets/css/page/home.css']} bodyClass="wt-home home-market" schemas={schemas}>
+<Layout
+  title="PJK3 Resmi Kemnaker RI & Sertifikasi K3 BNSP 2026 | Wahana Totalita"
+  description="PJK3 resmi Kemnaker RI & Lembaga Sertifikasi BNSP terpercaya sejak 2008. Layanan Ahli K3 Umum, Forklift, Damkar, POP Mining & In-House Training perusahaan seluruh Indonesia."
+  isHome
+  canonical="https://wahanatotalita.com/"
+  pageCss={['/assets/css/page/home.css']}
+  bodyClass="wt-home home-market"
+  schemas={schemas}
+>
   <HomeHero programCount={trainings.length} />
+  <HomeTrustStrip />
   <Finder />
 
-  <section class="hm-section" id="produk"><div class="hm-container">
-    <div class="hm-section-heading"><h2>Program Pilihan</h2><a class="hm-text-link" href="/pelatihan/">Lihat semua program<Icon name="arrow" size={17} /></a></div>
-    <div class="hm-course-grid">{featured.map(item => <CourseCard title={item.title} name={item.training.name} slug={item.slug} image={item.image} imageAlt={item.imageAlt} certification={item.training.certification} mode={item.training.mode} duration={item.training.duration_days} />)}</div>
-    <nav class="hm-category-links" aria-label="Bidang pelatihan lainnya"><span>Bidang lainnya:</span><a href="/keselamatan-kerja/">Keselamatan Kerja</a><a href="/pelatihan-iso/">ISO &amp; Manajemen</a><a href="/k3-pertambangan/">Pertambangan</a><a href="/k3-lingkungan/">Lingkungan</a></nav>
-  </div></section>
+  <!-- Program Terpopuler (8 Flagship Courses with SEO Heading) -->
+  <section class="hm-section" id="produk">
+    <div class="hm-container">
+      <div class="hm-section-heading">
+        <div>
+          <h2>Pelatihan K3 &amp; Sertifikasi Kemnaker RI / BNSP Terpopuler</h2>
+          <p class="hm-section-sub">Program sertifikasi resmi yang paling banyak diikuti profesional HSE dan diwajibkan regulasi ketenagakerjaan di Indonesia.</p>
+        </div>
+        <a class="hm-text-link" href="/pelatihan/">
+          Lihat semua {trainings.length}+ program
+          <Icon name="arrow" size={17} />
+        </a>
+      </div>
+      <div class="hm-course-grid">
+        {featured.map(item => (
+          <CourseCard
+            title={item.title}
+            name={item.training.name}
+            slug={item.slug}
+            image={item.image}
+            imageAlt={item.imageAlt}
+            certification={item.training.certification}
+            mode={item.training.mode}
+            duration={item.training.duration_days}
+          />
+        ))}
+      </div>
+      <nav class="hm-category-links" aria-label="Bidang pelatihan lainnya">
+        <span>Bidang keahlian:</span>
+        <a href="/keselamatan-kerja/">Keselamatan Kerja (K3)</a>
+        <a href="/k3-lingkungan/">Manajemen Lingkungan</a>
+        <a href="/k3-pertambangan/">K3 Pertambangan</a>
+        <a href="/pelatihan-iso/">ISO &amp; Sistem Manajemen</a>
+        <a href="/k3-konstruksi/">K3 Konstruksi</a>
+        <a href="/k3-migas/">K3 Minyak &amp; Gas</a>
+      </nav>
+    </div>
+  </section>
 
-  <section class="hm-section" id="jadwal-terdekat"><div class="hm-container">
-    <div class="hm-section-heading"><h2>Jadwal Pelatihan</h2><a class="hm-text-link" href="/jadwal/">Lihat semua jadwal<Icon name="arrow" size={17} /></a></div>
-    <Schedule rows={schedules} />
-    <p class="hm-section-note">Jadwal dan ketersediaan peserta perlu dikonfirmasi kepada admin sebelum pendaftaran.</p>
-  </div></section>
+  <!-- Jadwal Pelatihan Terdekat with SEO Heading -->
+  <section class="hm-section" id="jadwal-terdekat">
+    <div class="hm-container">
+      <div class="hm-section-heading">
+        <div>
+          <h2>Jadwal Pelatihan K3 Kemnaker RI &amp; Sertifikasi BNSP 2026</h2>
+          <p class="hm-section-sub">Pilih jadwal batch terdekat untuk kelas Online via Zoom (seluruh Indonesia) maupun Tatap Muka di Training Center.</p>
+        </div>
+        <a class="hm-text-link" href="/jadwal/">
+          Lihat kalender jadwal lengkap
+          <Icon name="arrow" size={17} />
+        </a>
+      </div>
+      <Schedule rows={schedules} />
+      <p class="hm-section-note">Pendaftaran dapat dilakukan perorangan maupun kolektif perusahaan. Hubungi admin untuk konfirmasi kuota dan penawaran khusus.</p>
+    </div>
+  </section>
 
-  <section class="hm-section hm-proof"><div class="hm-container">
-    <div class="hm-section-heading"><h2>Pelatihan nyata. Kompetensi nyata.</h2><a class="hm-text-link" href="/galeri/">Lihat dokumentasi<Icon name="arrow" size={17} /></a></div>
-    <div class="hm-proof-grid">{documentation.map(photo => <a href="/galeri/" class="hm-proof-photo"><img src={photo.image} alt={photo.alt} width="640" height="400" loading="lazy" decoding="async" /><span>{photo.caption}</span></a>)}</div>
-    <nav class="hm-proof-links" aria-label="Kenali Wahana Totalita"><a href="/galeri/"><Icon name="camera" />Dokumentasi kegiatan<Icon name="arrow" size={16} /></a><a href="/instruktur/"><Icon name="person" />Profil instruktur<Icon name="arrow" size={16} /></a><a href="/perusahaan/"><Icon name="document" />Layanan perusahaan<Icon name="arrow" size={16} /></a></nav>
-  </div></section>
+  <!-- Corporate Client Wall (BUMN & National Multinationals with Vector Logos) -->
+  <HomeClientWall />
 
-  <section class="hm-section hm-corporate-wrap"><div class="hm-container"><div class="hm-corporate">
-    <div><p class="hm-eyebrow">UNTUK PERUSAHAAN &amp; INSTANSI</p><h2>Siapkan kompetensi tim Anda.</h2><p>Program in-house training untuk perusahaan, dengan materi yang dapat disesuaikan dengan kebutuhan industri Anda.</p><a class="hm-button hm-button-orange" href={waUrl('Halo Wahana Totalita, kami ingin konsultasi in-house training untuk perusahaan. Mohon info program dan penawarannya.')} target="_blank" rel="noopener noreferrer">Konsultasi In-House Training<Icon name="arrow" size={18} /></a></div>
-    <img src="/galeri/thumbs/IMG_0035.webp" alt="Sesi pelatihan bersama instruktur dan peserta perusahaan" width="640" height="400" loading="lazy" decoding="async" />
-  </div></div></section>
+  <!-- Tentang PT Wahana Totalita Konsultan (Institutional Authority) -->
+  <section class="hm-about-section" id="tentang-kami">
+    <div class="hm-container hm-about-grid">
+      <div class="hm-about-copy">
+        <p class="hm-eyebrow">LEMBAGA PJK3 RESMI TINGKAT NASIONAL</p>
+        <h2>PJK3 Resmi Kemnaker RI &amp; Lembaga Pembinaan K3 Nasional</h2>
+        <p class="hm-about-desc">
+          PT Wahana Totalita Konsultan adalah Perusahaan Jasa Keselamatan dan Kesehatan Kerja (PJK3) berizin resmi Kementerian Ketenagakerjaan RI serta mitra Lembaga Sertifikasi Profesi (LSP) BNSP. Kami dipercaya ratusan perusahaan swasta, BUMN, dan institusi pemerintahan dalam pembinaan keselamatan kerja, lisensi operator, manajemen lingkungan, dan audit kepatuhan HSE berskala nasional.
+        </p>
+        <div class="hm-about-stats">
+          <div class="hm-about-stat">
+            <strong>146+</strong>
+            <span>Program Sertifikasi</span>
+          </div>
+          <div class="hm-about-stat">
+            <strong>120.000+</strong>
+            <span>Alumni Bersertifikat</span>
+          </div>
+          <div class="hm-about-stat">
+            <strong>500+</strong>
+            <span>Perusahaan Mitra</span>
+          </div>
+        </div>
+      </div>
+      <div class="hm-about-pillars">
+        <div class="hm-pillar-card">
+          <Icon name="shield" size={24} />
+          <h3>Legalitas &amp; Lisensi Sah</h3>
+          <p>Terdaftar resmi di sistem TemanK3 Kemnaker RI dan Badan Nasional Sertifikasi Profesi (BNSP).</p>
+        </div>
+        <div class="hm-pillar-card">
+          <Icon name="person" size={24} />
+          <h3>Instruktur Praktisi Senior</h3>
+          <p>Seluruh materi dibimbing oleh praktisi industri migas, manufaktur, dan dokter hiperkes berlisensi.</p>
+        </div>
+        <div class="hm-pillar-card">
+          <Icon name="monitor" size={24} />
+          <h3>Metode Fleksibel</h3>
+          <p>Pilihan kelas daring Zoom, tatap muka, serta in-house training langsung ke lokasi kerja perusahaan.</p>
+        </div>
+        <div class="hm-pillar-card">
+          <Icon name="document" size={24} />
+          <h3>Pengadaan Resmi BUMN/LPSE</h3>
+          <p>Terdaftar di LPSE, PaDi UMKM, dan SIPLah dengan kelengkapan dokumen SPJ dan faktur pajak resmi.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <section class="hm-section hm-faq-section"><div class="hm-container"><div class="hm-section-heading"><h2>Pertanyaan yang sering ditanyakan</h2><a class="hm-text-link" href={waUrl('Halo Wahana Totalita, saya ingin bertanya mengenai program dan proses pendaftaran pelatihan.')} target="_blank" rel="noopener noreferrer">Tanya tim kami<Icon name="arrow" size={17} /></a></div><div class="hm-faq-grid">{faqs.map((faq, index) => <details><summary><span>{index + 1}. {faq.q}</span><span class="hm-faq-plus" aria-hidden="true">+</span></summary><p>{faq.a}</p></details>)}</div></div></section>
+  <!-- Dokumentasi Kegiatan & Praktik Lapangan (6 High-res Photos) -->
+  <section class="hm-section hm-proof" id="dokumentasi">
+    <div class="hm-container">
+      <div class="hm-section-heading">
+        <div>
+          <h2>Dokumentasi Pelatihan K3 &amp; Fasilitas Praktik Industri</h2>
+          <p class="hm-section-sub">Dokumentasi nyata kegiatan pembinaan keselamatan kerja, simulasi fire drill, praktik alat berat, dan evaluasi sertifikasi.</p>
+        </div>
+        <a class="hm-text-link" href="/galeri/">
+          Lihat seluruh dokumentasi
+          <Icon name="arrow" size={17} />
+        </a>
+      </div>
+      <div class="hm-proof-grid">
+        {documentation.map(photo => (
+          <a href="/galeri/" class="hm-proof-photo">
+            <img src={photo.image} alt={photo.alt} width="640" height="400" loading="lazy" decoding="async" />
+            <span>{photo.caption}</span>
+          </a>
+        ))}
+      </div>
+      <nav class="hm-proof-links" aria-label="Informasi perusahaan lebih lanjut">
+        <a href="/galeri/">
+          <Icon name="camera" />
+          <span>Galeri dokumentasi lengkap</span>
+          <Icon name="arrow" size={16} />
+        </a>
+        <a href="/instruktur/">
+          <Icon name="person" />
+          <span>Profil tim instruktur</span>
+          <Icon name="arrow" size={16} />
+        </a>
+        <a href="/perusahaan/">
+          <Icon name="document" />
+          <span>Profil &amp; layanan perusahaan</span>
+          <Icon name="arrow" size={16} />
+        </a>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Infinite Auto-Scrolling Photo Marquee (Smooth Motion Strip) -->
+  <HomePhotoStrip />
+
+  <!-- In-House Training Hub Perusahaan (B2B Engine) -->
+  <section class="hm-section hm-corporate-wrap">
+    <div class="hm-container">
+      <div class="hm-corporate">
+        <div>
+          <p class="hm-eyebrow">LAYANAN IN-HOUSE TRAINING PERUSAHAAN</p>
+          <h2>Tingkatkan Standar K3 di Perusahaan Anda</h2>
+          <p>
+            Kami menyelenggarakan pelatihan in-house khusus tim kerja perusahaan dengan jadwal fleksibel, modul yang disesuaikan dengan profil risiko fasilitas industri Anda, serta pelaksanaan langsung di lokasi pabrik atau site proyek Anda di seluruh Indonesia.
+          </p>
+          <a
+            class="hm-button hm-button-orange"
+            href={waUrl('Halo Wahana Totalita, kami dari perusahaan ingin konsultasi in-house training K3 untuk karyawan. Mohon informasi silabus dan surat penawarannya.')}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Minta Penawaran In-House
+            <Icon name="arrow" size={18} />
+          </a>
+        </div>
+        <img src="/galeri/thumbs/IMG_0035.webp" alt="Sesi pelatihan in-house bersama tim perusahaan" width="640" height="400" loading="lazy" decoding="async" />
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section with SEO Heading -->
+  <section class="hm-section hm-faq-section" id="faq">
+    <div class="hm-container">
+      <div class="hm-section-heading">
+        <div>
+          <h2>FAQ Pelatihan K3, Biaya &amp; Sertifikasi Resmi Kemnaker RI</h2>
+          <p class="hm-section-sub">Informasi lengkap mengenai keabsahan sertifikat TemanK3, mekanisme in-house training perusahaan, dan biaya pelatihan.</p>
+        </div>
+        <a class="hm-text-link" href={waUrl('Halo Wahana Totalita, saya ingin bertanya lebih lanjut seputar program pelatihan K3.')} target="_blank" rel="noopener noreferrer">
+          Konsultasi via WhatsApp
+          <Icon name="arrow" size={17} />
+        </a>
+      </div>
+      <div class="hm-faq-grid">
+        {faqs.map((faq, index) => (
+          <details>
+            <summary>
+              <span>{index + 1}. {faq.q}</span>
+              <span class="hm-faq-plus" aria-hidden="true">+</span>
+            </summary>
+            <p>{faq.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
 </Layout>

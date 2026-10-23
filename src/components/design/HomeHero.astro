@@ -6,12 +6,25 @@ const { programCount } = Astro.props;
 ---
 <section class="hm-hero"><div class="hm-container hm-hero-grid">
   <div class="hm-hero-copy">
-    <p class="hm-eyebrow">WAHANA TOTALITA KONSULTAN</p>
-    <h1>Pelatihan &amp;<br />Sertifikasi K3<span class="hm-hero-certification">Kemnaker RI &amp; BNSP</span></h1>
-    <p class="hm-hero-description">Pilih program sesuai profesi Anda.<br class="hm-desktop-break" /> Online, tatap muka, dan in-house training.</p>
-    <div class="hm-hero-actions"><a class="hm-button hm-button-orange" href={waUrl('Halo Wahana Totalita, saya ingin tanya biaya, jadwal, dan persyaratan pelatihan K3.')} target="_blank" rel="noopener noreferrer">Tanya Biaya &amp; Jadwal<Icon name="arrow" size={19} /></a><a class="hm-button hm-button-dark-outline" href="#produk">Lihat Program</a></div>
-    <div class="hm-hero-benefits"><span><Icon name="monitor" size={18} />Online &amp; Tatap Muka</span><span><Icon name="users" size={18} />Individu &amp; Perusahaan</span></div>
-    <p class="hm-hero-count">{programCount} program aktif <span aria-hidden="true">·</span> Konsultasikan pilihan Anda sebelum mendaftar</p>
+    <p class="hm-eyebrow">PJK3 RESMI KEMNAKER RI &bull; LEMBAGA SERTIFIKASI BNSP</p>
+    <h1>Pusat Pelatihan &amp;<br />Sertifikasi K3<span class="hm-hero-certification">Resmi Kemnaker RI &amp; BNSP</span></h1>
+    <p class="hm-hero-description">Lembaga Pembinaan K3 resmi untuk perorangan dan tim perusahaan di seluruh Indonesia. Pilihan kelas Online via Zoom, Tatap Muka, dan In-House Training.</p>
+    <div class="hm-hero-actions">
+      <a class="hm-button hm-button-orange" href={waUrl('Halo Wahana Totalita, saya ingin konsultasi program pelatihan dan jadwal terdekat.')} target="_blank" rel="noopener noreferrer">Konsultasi Pelatihan<Icon name="whatsapp" size={19} /></a>
+      <a class="hm-button hm-button-dark-outline" href="#produk">Lihat Semua Program<Icon name="arrow" size={18} /></a>
+    </div>
+    <div class="hm-hero-benefits">
+      <span><Icon name="shield" size={18} />PJK3 Berizin Resmi</span>
+      <span><Icon name="monitor" size={18} />Online &amp; Tatap Muka</span>
+      <span><Icon name="users" size={18} />In-House Skala Nasional</span>
+    </div>
+    <p class="hm-hero-count">{programCount} program sertifikasi aktif <span aria-hidden="true">&bull;</span> Melayani pelatihan perusahaan &amp; instansi</p>
   </div>
-  <figure class="hm-hero-picture"><img src="/galeri/17.jpeg" srcset="/galeri/thumbs/17.webp 640w, /galeri/17.jpeg 1280w" sizes="(max-width: 768px) 100vw, 55vw" alt="Instruktur dan peserta Wahana Totalita mempraktikkan penggunaan selang pemadam di luar ruangan" width="1280" height="960" fetchpriority="high" decoding="async" /><figcaption><span class="hm-photo-dot" aria-hidden="true"></span>Dokumentasi pelatihan Wahana Totalita<a href="/galeri/">Lihat galeri<Icon name="arrow" size={15} /></a></figcaption></figure>
+  <figure class="hm-hero-picture">
+    <img src="/galeri/17.jpeg" srcset="/galeri/thumbs/17.webp 640w, /galeri/17.jpeg 1280w" sizes="(max-width: 768px) 100vw, 55vw" alt="Instruktur dan peserta Wahana Totalita mempraktikkan penggunaan selang pemadam di luar ruangan" width="1280" height="960" fetchpriority="high" decoding="async" />
+    <figcaption>
+      <span class="hm-photo-dot" aria-hidden="true"></span>Dokumentasi kegiatan pelatihan Wahana Totalita
+      <a href="/galeri/">Lihat galeri<Icon name="arrow" size={15} /></a>
+    </figcaption>
+  </figure>
 </div></section>
