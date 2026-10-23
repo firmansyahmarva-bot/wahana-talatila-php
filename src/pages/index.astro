@@ -2,7 +2,6 @@
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import HomeHero from '../components/design/HomeHero.astro';
-import HomeContactDock from '../components/design/HomeContactDock.astro';
 import Finder from '../components/home/HomeFinder.astro';
 import CourseCard from '../components/home/HomeCourseCard.astro';
 import Schedule from '../components/home/HomeSchedule.astro';
@@ -70,5 +69,4 @@ const schemas = [
   </div></div></section>
 
   <section class="hm-section hm-faq-section"><div class="hm-container"><div class="hm-section-heading"><h2>Pertanyaan yang sering ditanyakan</h2><a class="hm-text-link" href={waUrl('Halo Wahana Totalita, saya ingin bertanya mengenai program dan proses pendaftaran pelatihan.')} target="_blank" rel="noopener noreferrer">Tanya tim kami<Icon name="arrow" size={17} /></a></div><div class="hm-faq-grid">{faqs.map((faq, index) => <details><summary><span>{index + 1}. {faq.q}</span><span class="hm-faq-plus" aria-hidden="true">+</span></summary><p>{faq.a}</p></details>)}</div></div></section>
-  <HomeContactDock />
 </Layout>

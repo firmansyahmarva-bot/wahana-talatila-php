@@ -42,4 +42,4 @@ const information = [
     <nav class="hm-footer-information" aria-label="Perusahaan dan sumber informasi K3"><h2>Perusahaan &amp; Panduan</h2><div>{information.map(link => <a href={link.href}>{link.label}</a>)}</div><p class="hm-footer-confirmation">Konfirmasikan persyaratan peserta, cakupan biaya, dan proses sertifikasi sebelum mendaftar.</p></nav>
   </div>
   <div class="hm-footer-bottom"><p>© {year} PT Wahana Totalita Konsultan</p><div><a href="/kebijakan-privasi/">Kebijakan Privasi</a><a href="/sitemap-index.xml">Peta Situs</a><a href="/en/" lang="en">English</a><a href="/zh/" lang="zh">中文</a></div></div>
-</div></footer>
+</div><slot /></footer>

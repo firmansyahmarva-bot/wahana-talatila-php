@@ -1,15 +1,28 @@
 ---
 import Icon from './HomeIcon.astro';
 import { waUrl } from '../../lib/images';
-const links = [{ href: '/pelatihan/', label: 'Program' }, { href: '/jadwal/', label: 'Jadwal' }, { href: '/in-house-training/', label: 'Perusahaan' }, { href: '/perusahaan/', label: 'Tentang Kami' }];
+interface Props { lang?: 'id' | 'en' | 'zh'; contactUrl?: string }
+const { lang = 'id', contactUrl } = Astro.props;
+const copy = {
+  id: { home: '/', skip: 'Lewati ke konten utama', search: 'Cari pelatihan…', submit: 'Cari', menu: 'Buka menu navigasi', nav: 'Navigasi utama', gallery: 'Dokumentasi Kegiatan', labels: ['Program', 'Jadwal', 'Perusahaan', 'Tentang Kami'] },
+  en: { home: '/en/', skip: 'Skip to main content', search: 'Find training…', submit: 'Search', menu: 'Open navigation menu', nav: 'Main navigation', gallery: 'Training Gallery', labels: ['English Guides', 'Schedule', 'Corporate Training', 'About Us'] },
+  zh: { home: '/zh/', skip: '跳至主要内容', search: '搜索培训…', submit: '搜索', menu: '打开导航菜单', nav: '主导航', gallery: '培训图库', labels: ['中文指南', '培训日程', '企业培训', '关于我们'] },
+}[lang];
+const links = [
+  { href: lang === 'id' ? '/pelatihan/' : copy.home, label: copy.labels[0] },
+  { href: '/jadwal/', label: copy.labels[1] },
+  { href: '/in-house-training/', label: copy.labels[2] },
+  { href: '/perusahaan/', label: copy.labels[3] },
+];
+const pathname = Astro.url.pathname;
 ---
-<a class="wt-skip" href="#konten-utama">Lewati ke konten utama</a>
+<a class="wt-skip" href="#konten-utama">{copy.skip}</a>
 <header class="hm-header"><div class="hm-container hm-header-row">
-  <a class="hm-logo" href="/" aria-label="Wahana Totalita — Beranda"><img src="/assets/img/logo-wt.png" alt="" width="56" height="40" /><span>WAHANA TOTALITA</span></a>
-  <form class="hm-header-search" action="/pelatihan/" role="search"><Icon name="search" size={16} /><input type="search" name="q" aria-label="Cari program pelatihan" placeholder="Cari pelatihan…" enterkeyhint="search" /><button type="submit" aria-label="Cari program">Cari</button></form>
-  <nav class="hm-desktop-nav" aria-label="Navigasi utama">{links.map(link => <a href={link.href}>{link.label}</a>)}</nav>
-  <a class="hm-nav-wa" href={waUrl('Halo Wahana Totalita, saya ingin konsultasi program, biaya, dan jadwal pelatihan.')} target="_blank" rel="noopener noreferrer"><Icon name="whatsapp" size={19} />WhatsApp</a>
-  <details class="hm-mobile-menu"><summary aria-label="Buka menu navigasi"><Icon name="menu" size={25} /></summary><div><nav aria-label="Navigasi ponsel">{links.map(link => <a href={link.href}>{link.label}<Icon name="arrow" size={17} /></a>)}<a href="/galeri/">Dokumentasi Kegiatan<Icon name="arrow" size={17} /></a></nav></div></details>
+  <a class="hm-logo" href={copy.home} aria-label="Wahana Totalita"><img src="/assets/img/logo-wt.png" alt="" width="56" height="40" /><span>WAHANA TOTALITA</span></a>
+  <form class="hm-header-search" action="/pelatihan/" role="search"><Icon name="search" size={16} /><input type="search" name="q" aria-label={copy.search} placeholder={copy.search} enterkeyhint="search" /><button type="submit">{copy.submit}</button></form>
+  <nav class="hm-desktop-nav" aria-label={copy.nav}>{links.map(link => <a href={link.href} aria-current={pathname === link.href ? 'page' : undefined}>{link.label}</a>)}</nav>
+  <a class="hm-nav-wa" href={contactUrl || waUrl('Halo Wahana Totalita, saya ingin konsultasi program, biaya, dan jadwal pelatihan.')} target="_blank" rel="noopener noreferrer"><Icon name="whatsapp" size={19} />WhatsApp</a>
+  <details class="hm-mobile-menu"><summary aria-label={copy.menu}><Icon name="menu" size={25} /></summary><div><nav aria-label={copy.nav}>{links.map(link => <a href={link.href} aria-current={pathname === link.href ? 'page' : undefined}>{link.label}<Icon name="arrow" size={17} /></a>)}<a href="/galeri/">{copy.gallery}<Icon name="arrow" size={17} /></a></nav></div></details>
 </div></header>
 <script>
   const menu = document.querySelector<HTMLDetailsElement>('.hm-mobile-menu');

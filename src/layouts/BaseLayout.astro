@@ -1,10 +1,8 @@
 ---
-import Navbar from '../components/Navbar.astro';
-import Footer from '../components/Footer.astro';
 import { versionStylesheet } from '../lib/assetVersion';
 import HomeHeader from '../components/home/HomeHeader.astro';
 import HomeFooter from '../components/home/HomeFooter.astro';
-import StickyCta from '../components/StickyCta.astro';
+import HomeContactDock from '../components/design/HomeContactDock.astro';
 import Seo, { type HreflangItem } from '../components/Seo.astro';
 
 export interface BaseLayoutProps {
@@ -116,14 +114,6 @@ const langConfig = {
 
 const currentConfig = langConfig[lang];
 const finalHreflangs = hreflangs !== undefined ? hreflangs : currentConfig.defaultHreflangs;
-const pathname = Astro.url.pathname;
-const isTool = pathname.startsWith('/tools');
-const isProgram = pathname.startsWith('/pelatihan');
-const isCity = pathname.startsWith('/kota') || /^\/pelatihan-k3-[^/]+/.test(pathname);
-const isJadwal = pathname.startsWith('/jadwal');
-const isArticle = pathname.startsWith('/artikel');
-const hasStickyCta = lang === 'id' && !isTool && (isProgram || isCity || isJadwal || isArticle);
-
 const finalPageCss = pageCss !== undefined ? pageCss : currentConfig.defaultPageCss;
 ---
 
@@ -179,44 +169,10 @@ const finalPageCss = pageCss !== undefined ? pageCss : currentConfig.defaultPage
   {finalPageCss.map((cssHref: string) => (
     <link rel="stylesheet" href={versionStylesheet(cssHref)} />
   ))}
+  <link rel="stylesheet" href={versionStylesheet('/assets/css/site-shell.css')} />
 </head>
-<body class={[bodyClass, hasStickyCta ? 'has-sticky-cta' : ''].filter(Boolean).join(' ') || undefined} {...bodyAttrs}>
-  {lang === 'id' && (
-    isHome ? <HomeHeader /> : <Navbar currentPath={Astro.url.pathname} isHome={isHome} />
-  )}
-
-  {lang === 'en' && (
-    <header class="en-nav">
-      <div class="en-nav-inner">
-        <a href="/en/" class="en-logo">
-          <img src="/assets/img/logo-wt.webp" alt="Wahana Totalita Logo" width="160" height="38" loading="eager" decoding="async" onerror="this.onerror=null;this.src='/assets/img/logo-wt.png'" />
-          <span class="en-lang-badge">Indonesia HSE Portal</span>
-        </a>
-        <div class="en-nav-links">
-          <a href="/en/" class="en-nav-back">&larr; All English Guides</a>
-          <a href={currentConfig.waUrl} class="en-nav-contact" target="_blank" rel="noopener noreferrer">
-            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
-            <span>Contact Legal HSE Team</span>
-          </a>
-        </div>
-      </div>
-    </header>
-  )}
-
-  {lang === 'zh' && (
-    <header class="zh-nav">
-      <div class="zh-nav-inner">
-        <a href="/zh/" class="zh-logo">
-          <img src="/assets/img/logo-wt.webp" alt="Wahana Totalita Logo" width="160" height="38" loading="eager" decoding="async" onerror="this.onerror=null;this.src='/assets/img/logo-wt.png'" />
-          <span class="zh-lang-badge">中文版 / 中资企业合规指南</span>
-        </a>
-        <a href={currentConfig.waUrl} class="zh-nav-contact" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
-          <span>商务与技术合规咨询</span>
-        </a>
-      </div>
-    </header>
-  )}
+<body class={[bodyClass, 'has-site-navigation'].filter(Boolean).join(' ') || undefined} {...bodyAttrs}>
+  <HomeHeader lang={lang} contactUrl={currentConfig.waUrl || undefined} />
 
   <main id="konten-utama">
     <slot />
@@ -224,8 +180,7 @@ const finalPageCss = pageCss !== undefined ? pageCss : currentConfig.defaultPage
 
   {lang === 'id' && (
     <>
-      {isHome ? <HomeFooter /> : <Footer />}
-      <StickyCta title={title} />
+
       <script src="/assets/js/main.js" defer></script>
       {scripts.map((s: string) => (
         <script src={s} defer></script>
@@ -235,7 +190,39 @@ const finalPageCss = pageCss !== undefined ? pageCss : currentConfig.defaultPage
 
   {lang === 'en' && (
     <>
-      <footer class="en-footer">
+
+      <script is:inline>
+        function toggleEnFaq(btn) {
+          var ans = btn.nextElementSibling;
+          var isOpen = ans.classList.contains('open');
+          document.querySelectorAll('.en-faq-a').forEach(function(el) { el.classList.remove('open'); });
+          if (!isOpen) { ans.classList.add('open'); }
+        }
+      </script>
+    </>
+  )}
+
+  {lang === 'zh' && (
+    <>
+
+      <script is:inline>
+        function toggleZhFaq(btn) {
+          var ans = btn.nextElementSibling;
+          var isOpen = ans.classList.contains('open');
+          document.querySelectorAll('.zh-faq-a').forEach(function(el) {
+            el.classList.remove('open');
+          });
+          if (!isOpen) {
+            ans.classList.add('open');
+          }
+        }
+      </script>
+    </>
+  )}
+
+  <HomeFooter>
+    {lang === 'en' && (
+      <section class="en-footer">
         <div class="en-footer-inner">
           <div>
             <h4>PT Wahana Totalita Konsultan — Statutory HSE &amp; Technical Inspection Body</h4>
@@ -257,33 +244,10 @@ const finalPageCss = pageCss !== undefined ? pageCss : currentConfig.defaultPage
         <div class="en-footer-bottom">
           &copy; 2008 - 2026 PT Wahana Totalita Konsultan. All rights reserved.
         </div>
-      </footer>
-
-      <div class="en-mobile-bar">
-        <div>
-          <div class="en-mb-text">Indonesia HSE &amp; Licensing Advisory</div>
-          <div class="en-mb-sub">Ministry of Manpower Licensed PJK3 Body</div>
-        </div>
-        <a href={currentConfig.waUrl} class="en-mb-btn" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
-          <span>Consult Now</span>
-        </a>
-      </div>
-
-      <script is:inline>
-        function toggleEnFaq(btn) {
-          var ans = btn.nextElementSibling;
-          var isOpen = ans.classList.contains('open');
-          document.querySelectorAll('.en-faq-a').forEach(function(el) { el.classList.remove('open'); });
-          if (!isOpen) { ans.classList.add('open'); }
-        }
-      </script>
-    </>
-  )}
-
-  {lang === 'zh' && (
-    <>
-      <footer class="zh-footer">
+      </section>
+    )}
+    {lang === 'zh' && (
+      <section class="zh-footer">
         <div class="zh-footer-inner">
           <div>
             <h4>PT Wahana Totalita Konsultan — 法定合规咨询机构</h4>
@@ -305,33 +269,10 @@ const finalPageCss = pageCss !== undefined ? pageCss : currentConfig.defaultPage
         <div class="zh-footer-bottom">
           &copy; 2008 - 2026 PT Wahana Totalita Konsultan. 版权所有，保留所有权利。
         </div>
-      </footer>
-
-      <div class="zh-mobile-bar">
-        <div>
-          <div class="zh-mb-text">中资企业安全生产(K3)合规咨询</div>
-          <div class="zh-mb-sub">印尼劳工部官方授权机构 · 快速对接</div>
-        </div>
-        <a href={currentConfig.waUrl} class="zh-mb-btn" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
-          <span>在线咨询</span>
-        </a>
-      </div>
-
-      <script is:inline>
-        function toggleZhFaq(btn) {
-          var ans = btn.nextElementSibling;
-          var isOpen = ans.classList.contains('open');
-          document.querySelectorAll('.zh-faq-a').forEach(function(el) {
-            el.classList.remove('open');
-          });
-          if (!isOpen) {
-            ans.classList.add('open');
-          }
-        }
-      </script>
-    </>
-  )}
+      </section>
+    )}
+  </HomeFooter>
+  <HomeContactDock lang={lang} contactUrl={currentConfig.waUrl || undefined} />
 
   <!-- Shared Lead & CTA Tracking (WhatsApp & Registration Buttons) -->
   <script is:inline>
