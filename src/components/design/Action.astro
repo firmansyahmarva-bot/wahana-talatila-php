@@ -1,0 +1,5 @@
+---
+interface Props { href: string; variant?: 'primary' | 'outline' | 'light'; external?: boolean; }
+const { href, variant = 'primary', external = false } = Astro.props;
+---
+<a class={`wt-action wt-action--${variant}`} href={href} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}><slot /><span aria-hidden="true">↗</span></a>

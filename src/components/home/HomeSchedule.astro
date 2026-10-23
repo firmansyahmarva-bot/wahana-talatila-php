@@ -1,0 +1,11 @@
+---
+import Icon from './HomeIcon.astro';
+import { waUrl } from '../../lib/images';
+import { formatBatchRange, type BatchItem } from '../../lib/jadwal';
+interface Props { rows: { title: string; image: string; slug: string; batch: BatchItem }[]; }
+const { rows } = Astro.props;
+---
+<div class="hm-schedule" role="table" aria-label="Jadwal pelatihan pilihan">
+  <div class="hm-schedule-head" role="row"><span role="columnheader">Program</span><span role="columnheader">Mode</span><span role="columnheader">Jadwal</span><span role="columnheader">Konsultasi</span></div>
+  {rows.map(({ title, image, slug, batch }) => <div class="hm-schedule-row" role="row"><div role="cell" class="hm-schedule-program"><img src={image} width="66" height="48" alt="" loading="lazy" decoding="async" /><a href={`/pelatihan/${slug}/`}>{title}</a></div><div role="cell" class="hm-schedule-mode">{batch.mode === 'online' ? 'Online via Zoom' : batch.venue || 'Tatap Muka'}</div><div role="cell" class="hm-schedule-date">{batch.is_generated ? <><strong>Konfirmasi admin</strong><small>Rencana: {formatBatchRange(batch.start_date, batch.end_date)}</small></> : <><strong>{formatBatchRange(batch.start_date, batch.end_date)}</strong><small>Konfirmasi ketersediaan</small></>}</div><div role="cell" class="hm-schedule-actions"><a class="hm-button hm-button-orange-outline" href={waUrl(`Halo Wahana Totalita, saya ingin konfirmasi jadwal dan ketersediaan ${title}, ${formatBatchRange(batch.start_date, batch.end_date)}.`)} target="_blank" rel="noopener noreferrer" aria-label={`Tanya jadwal ${title}`}>Tanya jadwal</a><a class="hm-button hm-button-wa-outline" href={waUrl(`Halo Wahana Totalita, saya ingin daftar ${title}. Mohon info biaya dan persyaratannya.`)} target="_blank" rel="noopener noreferrer" aria-label={`Daftar ${title} via WhatsApp`}><Icon name="whatsapp" size={17} />WhatsApp</a></div></div>)}
+</div>
