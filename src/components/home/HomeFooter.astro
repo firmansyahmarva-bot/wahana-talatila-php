@@ -1,12 +1,45 @@
 ---
 import Icon from './HomeIcon.astro';
+import { waUrl } from '../../lib/images';
+import { getAllCityHubs } from '../../lib/city-hubs';
 const year = new Date().getFullYear();
+const citySlugs = ['yogyakarta', 'solo', 'surabaya', 'jakarta', 'semarang', 'bandung', 'balikpapan', 'cilegon'];
+const cities = citySlugs.flatMap(slug => {
+  const city = getAllCityHubs().find(item => item.slug === slug);
+  return city ? [city] : [];
+});
+const programs = [
+  { href: '/ahli-k3-umum/', label: 'Ahli K3 Umum Kemnaker RI' },
+  { href: '/pelatihan/ak3-bnsp/', label: 'Ahli K3 Umum BNSP' },
+  { href: '/pelatihan/pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri/', label: 'Sertifikasi Operator Forklift' },
+  { href: '/penanggulangan-kebakaran/', label: 'Pelatihan Petugas Damkar' },
+  { href: '/pelatihan/pelatihan-petugas-p3k-sertifikasi-kemnaker-ri/', label: 'Pelatihan Petugas P3K' },
+  { href: '/pelatihan-iso/', label: 'ISO & Sistem Manajemen' },
+  { href: '/k3-lingkungan/', label: 'Pelatihan K3 Lingkungan' },
+  { href: '/k3-pertambangan/', label: 'Sertifikasi K3 Pertambangan' },
+];
+const information = [
+  { href: '/perusahaan/', label: 'Layanan Perusahaan' },
+  { href: '/in-house-training/', label: 'In-House Training K3' },
+  { href: '/instruktur/', label: 'Profil Instruktur' },
+  { href: '/galeri/', label: 'Dokumentasi Pelatihan' },
+  { href: '/perpanjangan-skp/', label: 'Perpanjangan SKP & Lisensi' },
+  { href: '/regulasi/', label: 'Regulasi Keselamatan Kerja' },
+  { href: '/skkni/', label: 'Standar Kompetensi (SKKNI)' },
+  { href: '/artikel/', label: 'Panduan & Artikel K3' },
+];
 ---
 <footer class="hm-footer"><div class="hm-container">
-  <div class="hm-footer-grid"><div><a href="/" class="hm-logo"><img src="/assets/img/logo-wt.png" width="56" height="40" alt="" /><span>WAHANA TOTALITA</span></a><p>Penyedia pelatihan dan sertifikasi K3 untuk individu dan perusahaan. Berbasis di Yogyakarta dan melayani seluruh Indonesia.</p></div>
-    <nav aria-label="Program di footer"><h2>Program Pelatihan</h2><a href="/ahli-k3-umum/">Ahli K3 Umum</a><a href="/pelatihan/pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri/">Operator Forklift</a><a href="/penanggulangan-kebakaran/">Petugas Damkar</a><a href="/k3-lingkungan/">Pengelolaan Lingkungan</a><a href="/pelatihan/">Lihat semua program →</a></nav>
-    <nav aria-label="Perusahaan di footer"><h2>Tentang Kami</h2><a href="/perusahaan/">Profil &amp; Legalitas</a><a href="/instruktur/">Tim Instruktur</a><a href="/galeri/">Dokumentasi Kegiatan</a><a href="/artikel/">Artikel &amp; Informasi</a><a href="/layanan-pemerintah/">Layanan Pemerintah</a></nav>
-    <div class="hm-footer-contact"><h2>Kontak</h2><a href="tel:+6287759151278"><Icon name="phone" size={17} />0877-5915-1278</a><a href="mailto:info@wahanatotalita.com"><Icon name="mail" size={17} />info@wahanatotalita.com</a><p><Icon name="pin" size={17} /><span>Jl. Wonosari KM 8.5, Berbah<br />Sleman, D.I. Yogyakarta 55573</span></p></div>
+  <div class="hm-footer-grid">
+    <section class="hm-footer-about" aria-labelledby="footer-about-title">
+      <a href="/" class="hm-logo" aria-label="Wahana Totalita — Beranda"><img src="/assets/img/logo-wt.png" width="56" height="40" alt="" /><span>WAHANA TOTALITA</span></a>
+      <h2 id="footer-about-title">Tentang Wahana Totalita</h2>
+      <p>PT Wahana Totalita Konsultan menyediakan pelatihan K3, lingkungan, ISO, dan pertambangan untuk individu serta perusahaan. Berbasis di Yogyakarta, dengan pilihan online, tatap muka, dan in-house sesuai program.</p>
+      <address class="hm-footer-contact"><p><Icon name="pin" size={16} /><span>Jl. Wonosari KM 8.5, Berbah<br />Sleman, D.I. Yogyakarta 55573</span></p><a href={waUrl('Halo Wahana Totalita, saya ingin konfirmasi program, jadwal, dan biaya pelatihan.')} target="_blank" rel="noopener noreferrer"><Icon name="whatsapp" size={16} />WhatsApp: 0877-5915-1278</a><a href="mailto:info@wahanatotalita.com"><Icon name="mail" size={16} />info@wahanatotalita.com</a></address>
+    </section>
+    <nav aria-label="Program pelatihan K3 utama"><h2>Program &amp; Sertifikasi</h2>{programs.map(link => <a href={link.href}>{link.label}</a>)}<a class="hm-footer-directory" href="/pelatihan/">Semua program pelatihan →</a><a href="/jadwal/">Jadwal pelatihan terbaru →</a></nav>
+    <nav aria-label="Pelatihan K3 berdasarkan kota"><h2>Pelatihan K3 di Kota Anda</h2><p class="hm-footer-city-note">Online &amp; in-house sesuai kebutuhan. Konfirmasi lokasi dan jadwal tatap muka.</p>{cities.map(city => <a href={`/pelatihan-k3-${city.slug}/`}>Pelatihan K3 {city.name}{city.slug === 'yogyakarta' ? ' (Jogja)' : ''}</a>)}<a class="hm-footer-directory" href="/kota/">Semua kota layanan →</a></nav>
+    <nav class="hm-footer-information" aria-label="Perusahaan dan sumber informasi K3"><h2>Perusahaan &amp; Panduan</h2><div>{information.map(link => <a href={link.href}>{link.label}</a>)}</div><p class="hm-footer-confirmation">Konfirmasikan persyaratan peserta, cakupan biaya, dan proses sertifikasi sebelum mendaftar.</p></nav>
   </div>
-  <div class="hm-footer-bottom"><p>© {year} PT Wahana Totalita Konsultan</p><div><a href="/kebijakan-privasi/">Kebijakan Privasi</a><a href="/en/" lang="en">English</a><a href="/zh/" lang="zh">中文</a></div></div>
+  <div class="hm-footer-bottom"><p>© {year} PT Wahana Totalita Konsultan</p><div><a href="/kebijakan-privasi/">Kebijakan Privasi</a><a href="/sitemap-index.xml">Peta Situs</a><a href="/en/" lang="en">English</a><a href="/zh/" lang="zh">中文</a></div></div>
 </div></footer>

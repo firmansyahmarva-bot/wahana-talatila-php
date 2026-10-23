@@ -13,9 +13,9 @@
 /*.html
   Cache-Control: public, max-age=0, must-revalidate
 
-# Immutable long cache for static hashed/versioned assets and fonts
+# Public assets have mutable filenames; revalidate instead of treating them as immutable.
 /assets/*
-  Cache-Control: public, max-age=2592000, immutable
+  Cache-Control: public, max-age=3600, must-revalidate
 
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable

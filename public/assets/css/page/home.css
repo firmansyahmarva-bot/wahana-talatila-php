@@ -300,3 +300,31 @@ html:has(body.home-market), body.home-market { overflow-x: clip; }
   .hm-mobile-menu summary { width: 36px; height: 44px; }
   .hm-section { scroll-margin-top: 76px; }
 }
+
+/* Compact crawlable footer directories, grouped by visitor intent. */
+.hm-footer { padding-top: 28px; }
+.hm-footer-grid { grid-template-columns: 1.25fr 1fr 1.05fr 1fr; gap: 28px; padding-bottom: 22px; }
+.hm-footer-about > p { font-size: 11px; line-height: 1.8; margin-bottom: 15px; }
+.hm-footer .hm-logo { margin-bottom: 12px; }
+.home-market .hm-footer h2 { font-size: 12px; margin-bottom: 10px; }
+.hm-footer nav > a, .hm-footer-information > div > a { display: block; font-size: 11px; line-height: 1.65; padding-block: 3px; }
+.hm-footer-contact { font-style: normal; }
+.hm-footer-contact > p, .hm-footer-contact > a { font-size: 10px; margin-bottom: 7px; }
+.hm-footer-city-note { font-size: 10px; line-height: 1.7; margin-bottom: 9px; color: var(--slate-300); }
+.hm-footer-confirmation { font-size: 10px; line-height: 1.8; margin-top: 14px; color: var(--slate-300); }
+.hm-footer-directory { margin-top: 5px; font-weight: 600; }
+.hm-footer-bottom { padding-block: 15px; }
+.hm-search-section { padding: 24px 0 4px; }
+@media (max-width: 1024px) {
+  .hm-footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 28px; }
+}
+@media (max-width: 768px) {
+  .hm-footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 18px; }
+  .hm-footer-about, .hm-footer-information { grid-column: 1/-1; }
+  .hm-footer-about > p { max-width: none; font-size: 12px; }
+  .hm-footer-contact > p, .hm-footer-contact > a { font-size: 11px; }
+  .hm-footer nav > a, .hm-footer-information > div > a { display: flex; align-items: center; min-height: 34px; font-size: 11px; padding-block: 5px; }
+  .hm-footer-information > div { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 18px; }
+  .hm-footer-bottom > div { flex-wrap: wrap; gap: 12px 16px; }
+  .hm-search-section { padding-top: 20px; }
+}

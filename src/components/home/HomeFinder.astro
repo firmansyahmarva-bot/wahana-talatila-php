@@ -1,10 +1,6 @@
 ---
 import TrainingSearch from '../TrainingSearch.astro';
-const popular = ['Ahli K3 Umum', 'Forklift', 'Damkar', 'BNSP'];
 ---
-<section class="hm-container hm-search-section" aria-labelledby="home-search-heading">
-  <h2 id="home-search-heading">Cari pelatihan yang Anda butuhkan.</h2>
-  <p>Temukan program, sertifikasi, dan pilihan jadwal sesuai profesi Anda.</p>
+<section class="hm-container hm-search-section" aria-label="Pencarian pelatihan">
   <TrainingSearch id="home-training-search" label="Cari program pelatihan di katalog" placeholder="Cari pelatihan…" />
-  <nav class="hm-popular-searches" aria-label="Pencarian pelatihan populer"><span>Sering dicari:</span>{popular.map(query => <a href={`/pelatihan/?q=${encodeURIComponent(query)}`}>{query}</a>)}</nav>
 </section>

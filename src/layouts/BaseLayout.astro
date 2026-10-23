@@ -1,6 +1,7 @@
 ---
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import { versionStylesheet } from '../lib/assetVersion';
 import HomeHeader from '../components/home/HomeHeader.astro';
 import HomeFooter from '../components/home/HomeFooter.astro';
 import StickyCta from '../components/StickyCta.astro';
@@ -173,10 +174,10 @@ const finalPageCss = pageCss !== undefined ? pageCss : currentConfig.defaultPage
 
   <!-- Base Stylesheets -->
   {currentConfig.baseStyles.map((cssHref: string) => (
-    <link rel="stylesheet" href={cssHref} />
+    <link rel="stylesheet" href={versionStylesheet(cssHref)} />
   ))}
   {finalPageCss.map((cssHref: string) => (
-    <link rel="stylesheet" href={cssHref} />
+    <link rel="stylesheet" href={versionStylesheet(cssHref)} />
   ))}
 </head>
 <body class={[bodyClass, hasStickyCta ? 'has-sticky-cta' : ''].filter(Boolean).join(' ') || undefined} {...bodyAttrs}>
