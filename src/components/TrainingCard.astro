@@ -25,8 +25,6 @@ const imageSrc = getCourseBanner(item.slug, item.category_slug);
 const priceStr = formatPrice(item.price);
 const modeText = modeLabel(item.mode);
 const certText = item.certification || 'Kemnaker / BNSP';
-const catDisplayName = categoryName || item.category_name || '';
-const iconDisplay = categoryIcon || '';
 const waMessage = item.wa_text || `Halo Wahana Totalita, saya tertarik mendaftar program ${item.name}. Mohon informasi jadwal batch terdekat dan investasinya.`;
 const trainingUrl = `/pelatihan/${item.slug}/`;
 ---
@@ -104,7 +102,7 @@ const trainingUrl = `/pelatihan/${item.slug}/`;
     position: relative;
     overflow: hidden;
     text-decoration: none;
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 1822 / 662;
     background: var(--surface-alt);
   }
   .tc-card-img {
@@ -117,23 +115,7 @@ const trainingUrl = `/pelatihan/${item.slug}/`;
   .tc-card:hover .tc-card-img {
     transform: scale(1.03);
   }
-  .tc-card-cat-badge {
-    display: none;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background: color-mix(in srgb, var(--brand) 85%, transparent);
-    color: var(--on-brand);
-    padding: 4px 10px;
-    border-radius: 6px;
-    font-size: 11px;
-    font-weight: 700;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    backdrop-filter: blur(4px);
-    z-index: 1;
-  }
+  
   .tc-card-body {
     padding: 16px;
     display: flex;
