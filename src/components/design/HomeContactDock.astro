@@ -64,35 +64,37 @@ const whatsappPath = 'M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.
 
   @media (max-width: 768px) {
     /* Legacy mobile styles force 74px on every body; reserve the full dock height here. */
-    :global(body.wt-home) { padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px)) !important; }
+    :global(body.wt-home) { padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)) !important; }
     :global(html:has(body.wt-home)) { scroll-padding-bottom: calc(100px + env(safe-area-inset-bottom, 0px)); }
     .home-wa-float {
       right: 16px;
-      bottom: calc(96px + env(safe-area-inset-bottom, 0px));
-      width: 58px;
-      height: 58px;
-      min-height: 58px;
-      padding: 13px;
+      bottom: calc(100px + env(safe-area-inset-bottom, 0px));
+      width: 52px;
+      height: 52px;
+      min-height: 52px;
+      padding: 10px;
       justify-content: center;
     }
     .home-wa-float > span { display: none; }
     .home-contact-bar {
       position: fixed;
-      inset: auto 0 0;
+      inset: auto 12px calc(12px + env(safe-area-inset-bottom, 0px));
       z-index: 997;
       display: block;
-      padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
-      background: var(--surface);
-      border-top: 1px solid var(--border);
-      box-shadow: 0 -4px 20px color-mix(in srgb, var(--brand-dark) 12%, transparent);
+      padding: 0;
     }
     .home-contact-inner {
       display: grid;
-      grid-template-columns: .8fr .8fr 1.6fr;
+      grid-template-columns: .9fr .9fr 1.5fr;
       align-items: stretch;
       gap: 8px;
       max-width: 560px;
       margin: 0 auto;
+      padding: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: 0 5px 28px color-mix(in srgb, var(--brand-dark) 16%, transparent);
     }
     .home-contact-link {
       display: flex;
@@ -100,10 +102,10 @@ const whatsappPath = 'M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.
       align-items: center;
       justify-content: center;
       gap: 3px;
-      min-height: 58px;
-      color: var(--brand);
-      font-size: 13px;
-      font-weight: 700;
+      min-height: 48px;
+      color: var(--text-muted);
+      font-size: 10px;
+      font-weight: 600;
       line-height: 1.3;
       border-radius: var(--radius-sm);
     }
@@ -114,16 +116,16 @@ const whatsappPath = 'M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.
       align-items: center;
       gap: 8px;
       padding: 8px;
-      min-height: 58px;
-      border-radius: var(--radius-sm);
-      background: var(--whatsapp);
-      color: var(--brand-dark);
-      font-size: 16px;
+      min-height: 48px;
+      border-radius: 11px;
+      background: var(--success-dark);
+      color: var(--on-brand);
+      font-size: 13px;
       font-weight: 700;
       line-height: 1.3;
     }
-    .home-contact-whatsapp:hover { background: var(--whatsapp-dark); }
+    .home-contact-whatsapp:hover { background: var(--brand-dark); }
     .home-contact-whatsapp svg { flex-shrink: 0; }
-    .home-contact-whatsapp small { display: block; font-size: 11px; font-weight: 600; margin-top: 3px; }
+    .home-contact-whatsapp small { display: none; }
   }
 </style>

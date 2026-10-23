@@ -1,34 +1,10 @@
 ---
-import Icon from './HomeIcon.astro';
-interface Props { programs: { slug: string; name: string; certification: string }[]; }
-const { programs } = Astro.props;
+import TrainingSearch from '../TrainingSearch.astro';
+const popular = ['Ahli K3 Umum', 'Forklift', 'Damkar', 'BNSP'];
 ---
-<section class="hm-container hm-finder-wrap" aria-label="Temukan pelatihan">
-  <form class="hm-finder" action="/pelatihan/" method="get" data-home-finder>
-    <h2>Temukan pelatihan Anda.</h2>
-    <div class="hm-field"><label for="home-program">Pilih program pelatihan</label><select id="home-program" name="program"><option value="">Semua program</option>{programs.map(program => <option value={program.slug} data-certification={program.certification}>{program.name}</option>)}</select></div>
-    <div class="hm-field"><label for="home-certification">Pilih jenis sertifikasi</label><select id="home-certification" name="q"><option value="">Semua sertifikasi</option><option value="Kemnaker">Kemnaker RI</option><option value="BNSP">BNSP</option></select></div>
-    <button class="hm-button hm-button-orange" type="submit"><Icon name="search" size={19} />Cari Pelatihan</button>
-  </form>
+<section class="hm-container hm-search-section" aria-labelledby="home-search-heading">
+  <h2 id="home-search-heading">Cari pelatihan yang Anda butuhkan.</h2>
+  <p>Temukan program, sertifikasi, dan pilihan jadwal sesuai profesi Anda.</p>
+  <TrainingSearch id="home-training-search" label="Cari program pelatihan di katalog" placeholder="Cari pelatihan…" />
+  <nav class="hm-popular-searches" aria-label="Pencarian pelatihan populer"><span>Sering dicari:</span>{popular.map(query => <a href={`/pelatihan/?q=${encodeURIComponent(query)}`}>{query}</a>)}</nav>
 </section>
-<script>
-  const finder = document.querySelector<HTMLFormElement>('[data-home-finder]');
-  const certification = finder?.querySelector<HTMLSelectElement>('[name="q"]');
-  certification?.addEventListener('change', () => {
-    const program = finder?.querySelector<HTMLSelectElement>('[name="program"]');
-    if (!program) return;
-    for (const option of program.options) {
-      const matches = !option.value || !certification.value || (option.dataset.certification || '').toLowerCase().includes(certification.value.toLowerCase());
-      option.disabled = !matches;
-      option.hidden = !matches;
-    }
-    if (program.selectedOptions[0]?.disabled) program.value = '';
-  });
-  finder?.addEventListener('submit', (event) => {
-    const selected = finder.querySelector<HTMLSelectElement>('[name="program"]')?.value;
-    if (selected) {
-      event.preventDefault();
-      window.location.assign(`/pelatihan/${encodeURIComponent(selected)}/`);
-    }
-  });
-</script>

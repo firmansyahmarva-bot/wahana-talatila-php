@@ -60,12 +60,6 @@ html:has(body.home-market), body.home-market { overflow-x: clip; }
 .hm-hero-picture figcaption { position: absolute; z-index: 2; bottom: 18px; left: 24px; right: 18px; display: flex; align-items: center; gap: 7px; flex-wrap: wrap; width: fit-content; max-width: calc(100% - 42px); padding: 9px 12px; background: var(--surface); border-radius: 4px; font-size: 10px; font-weight: 600; box-shadow: var(--shadow-sm); }
 .hm-photo-dot { width: 6px; height: 6px; background: var(--lead-action); border-radius: 50%; }
 .hm-hero-picture figcaption a { display: inline-flex; align-items: center; gap: 6px; color: var(--lead-action); margin-left: 7px; }
-.hm-finder-wrap { margin-top: 24px; }
-.hm-finder { display: grid; grid-template-columns: .9fr 1.35fr 1.15fr .9fr; gap: 20px; align-items: end; padding: 22px; border: 1px solid var(--border); border-radius: 7px; box-shadow: var(--shadow-sm); }
-.home-market .hm-finder h2 { font-size: 17px; font-weight: 800; letter-spacing: -.035em; line-height: 1.4; align-self: center; }
-.hm-field { min-width: 0; }
-.hm-field label { display: block; font-size: 11px; font-weight: 600; margin-bottom: 7px; color: var(--text-muted); }
-.hm-field select { width: 100%; min-width: 0; height: 44px; padding: 9px 30px 9px 11px; color: var(--text); font: inherit; font-size: 12px; background: var(--surface); border: 1px solid var(--border); border-radius: 4px; text-overflow: ellipsis; }
 .hm-section { padding: 32px 0 0; scroll-margin-top: 96px; }
 .hm-section-heading { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 18px; }
 .home-market .hm-section-heading h2 { font-size: clamp(22px, 2.3vw, 29px); font-weight: 800; letter-spacing: -.035em; line-height: 1.3; }
@@ -151,10 +145,6 @@ html:has(body.home-market), body.home-market { overflow-x: clip; }
   .hm-hero h1 { font-size: 45px; }
   .hm-hero-actions .hm-button { padding-inline: 15px; font-size: 12px; }
   .hm-hero-benefits { gap: 12px; }
-  .hm-finder { grid-template-columns: 1fr 1fr; }
-  .hm-finder h2 br { display: none; }
-  .hm-finder h2 { grid-column: 1/-1; }
-  .hm-finder .hm-button { grid-column: 1/-1; }
   .hm-course-grid { gap: 12px; }
   .hm-course-content { padding: 12px; }
   .hm-course-actions { grid-template-columns: 1fr; }
@@ -197,11 +187,6 @@ html:has(body.home-market), body.home-market { overflow-x: clip; }
   .hm-hero-picture:before { display: none; }
   .hm-hero-picture figcaption { left: 18px; right: 18px; bottom: 12px; padding: 7px 9px; font-size: 9px; }
   .hm-hero-picture figcaption a { display: none; }
-  .hm-finder-wrap { margin-top: 18px; }
-  .hm-finder { grid-template-columns: 1fr 1fr; gap: 14px; padding: 18px; }
-  .home-market .hm-finder h2 { font-size: 17px; }
-  .hm-field select { font-size: 16px; height: 46px; }
-  .hm-field label { font-size: 10px; }
   .hm-section { padding-top: 27px; scroll-margin-top: 80px; }
   .hm-section-heading { gap: 14px; align-items: flex-start; margin-bottom: 14px; }
   .home-market .hm-section-heading h2 { font-size: 23px; line-height: 1.3; }
@@ -247,8 +232,6 @@ html:has(body.home-market), body.home-market { overflow-x: clip; }
   .hm-footer-bottom { flex-direction: column; gap: 12px; padding-bottom: 24px; }
 }
 @media (max-width: 640px) {
-  .hm-finder { grid-template-columns: 1fr; }
-  .hm-field label { font-size: 11px; }
   .hm-course-grid { grid-template-columns: 1fr; gap: 12px; }
   .hm-course { display: grid; grid-template-columns: 105px minmax(0, 1fr); }
   .hm-course-image { aspect-ratio: auto; height: 100%; }
@@ -277,4 +260,26 @@ html:has(body.home-market), body.home-market { overflow-x: clip; }
 }
 @media (prefers-reduced-motion: reduce) {
   .hm-button, .hm-course { transition: none; }
+}
+
+/* Shared training search: large below the hero, compact in the phone header. */
+.hm-hero-certification { display: block; }
+.hm-mobile-search { display: none; }
+.hm-search-section { max-width: 900px; padding: 34px 0 8px; text-align: center; }
+.home-market .hm-search-section h2 { font-size: 22px; font-weight: 700; line-height: 1.4; letter-spacing: -.025em; }
+.hm-search-section > p { color: var(--text-muted); font-size: 13px; line-height: 1.7; margin: 8px 0 20px; }
+.hm-popular-searches { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: 14px; color: var(--text-muted); font-size: 11px; }
+.hm-popular-searches > span { margin-right: 3px; }
+.hm-popular-searches a { display: inline-flex; align-items: center; padding: 5px 11px; min-height: 32px; border: 1px solid var(--border); border-radius: 999px; color: var(--text-muted); background: var(--surface); }
+.hm-popular-searches a:hover { color: var(--lead-action); border-color: var(--lead-action); }
+@media (max-width: 768px) {
+  .hm-mobile-search { display: block; padding-bottom: 10px; }
+  .hm-header-row { min-height: 58px; }
+  .hm-search-section { padding-top: 26px; }
+  .home-market .hm-search-section h2 { font-size: 20px; max-width: 300px; margin-inline: auto; }
+  .hm-search-section > p { font-size: 12px; margin-bottom: 16px; }
+  .hm-popular-searches { gap: 7px; font-size: 10px; }
+  .hm-popular-searches > span { width: 100%; margin: 0 0 3px; }
+  .hm-popular-searches a { padding-inline: 10px; }
+  .hm-section { scroll-margin-top: 132px; }
 }

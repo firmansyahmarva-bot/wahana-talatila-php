@@ -1,5 +1,6 @@
 ---
 import Icon from './HomeIcon.astro';
+import TrainingSearch from '../TrainingSearch.astro';
 import { waUrl } from '../../lib/images';
 const links = [{ href: '/pelatihan/', label: 'Program' }, { href: '/jadwal/', label: 'Jadwal' }, { href: '/in-house-training/', label: 'Perusahaan' }, { href: '/perusahaan/', label: 'Tentang Kami' }];
 ---
@@ -11,7 +12,7 @@ const links = [{ href: '/pelatihan/', label: 'Program' }, { href: '/jadwal/', la
   <nav class="hm-desktop-nav" aria-label="Navigasi utama">{links.map(link => <a href={link.href}>{link.label}</a>)}</nav>
   <a class="hm-nav-wa" href={waUrl('Halo Wahana Totalita, saya ingin konsultasi program, biaya, dan jadwal pelatihan.')} target="_blank" rel="noopener noreferrer"><Icon name="whatsapp" size={19} />WhatsApp</a>
   <details class="hm-mobile-menu"><summary aria-label="Buka menu navigasi"><Icon name="menu" size={23} /></summary><div><form action="/pelatihan/" role="search"><input type="search" name="q" aria-label="Cari pelatihan di menu" placeholder="Cari pelatihan…" /><button type="submit" aria-label="Cari"><Icon name="search" /></button></form><nav aria-label="Navigasi ponsel">{links.map(link => <a href={link.href}>{link.label}<Icon name="arrow" size={17} /></a>)}<a href="/galeri/">Dokumentasi Kegiatan<Icon name="arrow" size={17} /></a></nav></div></details>
-</div></header>
+</div><div class="hm-container hm-mobile-search"><TrainingSearch id="home-mobile-search" label="Cari pelatihan dari navigasi" placeholder="Cari pelatihan…" compact /></div></header>
 <script>
   const menu = document.querySelector<HTMLDetailsElement>('.hm-mobile-menu');
   document.addEventListener('keydown', (event) => {

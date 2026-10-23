@@ -21,7 +21,6 @@ const featured = selections.flatMap(selection => {
   const training = trainings.find(t => t.data.slug === selection.slug);
   return training ? [{ ...selection, training: training.data }] : [];
 });
-const programOptions = [...trainings].sort((a, b) => a.data.name.localeCompare(b.data.name, 'id')).map(t => ({ slug: t.data.slug, name: t.data.name, certification: t.data.certification || '' }));
 const schedules = featured.slice(0, 3).flatMap(item => {
   const batch = getUpcomingBatches(item.slug, undefined, 1)[0];
   return batch ? [{ title: item.title, image: item.image, slug: item.slug, batch }] : [];
@@ -38,12 +37,14 @@ const faqs = [
 ];
 const schemas = [
   { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
-  { '@context': 'https://schema.org', '@type': 'LocalBusiness', name: 'PT Wahana Totalita Konsultan', url: 'https://wahanatotalita.com', telephone: '+6287759151278', address: { '@type': 'PostalAddress', streetAddress: 'Jl. Wonosari KM 8.5, Berbah', addressLocality: 'Sleman', addressRegion: 'D.I. Yogyakarta', postalCode: '55573', addressCountry: 'ID' } },
+  { '@context': 'https://schema.org', '@type': 'LocalBusiness', '@id': 'https://wahanatotalita.com/#organization', name: 'PT Wahana Totalita Konsultan', url: 'https://wahanatotalita.com/', logo: 'https://wahanatotalita.com/assets/img/logo-wt.png', telephone: '+6287759151278', address: { '@type': 'PostalAddress', streetAddress: 'Jl. Wonosari KM 8.5, Berbah', addressLocality: 'Sleman', addressRegion: 'D.I. Yogyakarta', postalCode: '55573', addressCountry: 'ID' } },
+  { '@context': 'https://schema.org', '@type': 'WebSite', '@id': 'https://wahanatotalita.com/#website', url: 'https://wahanatotalita.com/', name: 'Wahana Totalita Konsultan', inLanguage: 'id-ID', publisher: { '@id': 'https://wahanatotalita.com/#organization' } },
+  { '@context': 'https://schema.org', '@type': 'ItemList', name: 'Program Pelatihan K3 Pilihan', itemListElement: featured.map((item, index) => ({ '@type': 'ListItem', position: index + 1, name: item.training.name, url: `https://wahanatotalita.com/pelatihan/${item.slug}/` })) },
 ];
 ---
-<Layout title="Pelatihan K3 Resmi Kemnaker & BNSP | Wahana Konsultan K3" description="Temukan pelatihan K3, lingkungan, dan sertifikasi Kemnaker RI & BNSP. Konsultasikan biaya, jadwal, serta kebutuhan pelatihan individu dan perusahaan." isHome canonical="https://wahanatotalita.com/" pageCss={['/assets/css/page/home.css']} bodyClass="wt-home home-market" schemas={schemas}>
+<Layout title="Pelatihan K3 Kemnaker RI & BNSP | Wahana Totalita" description="Pelatihan dan sertifikasi K3 Kemnaker RI & BNSP di Yogyakarta. Pilihan online, tatap muka, dan in-house untuk perusahaan. Cek program, biaya, dan jadwal." isHome canonical="https://wahanatotalita.com/" pageCss={['/assets/css/page/home.css']} bodyClass="wt-home home-market" schemas={schemas}>
   <HomeHero programCount={trainings.length} />
-  <Finder programs={programOptions} />
+  <Finder />
 
   <section class="hm-section" id="produk"><div class="hm-container">
     <div class="hm-section-heading"><h2>Program Pilihan</h2><a class="hm-text-link" href="/pelatihan/">Lihat semua program<Icon name="arrow" size={17} /></a></div>
