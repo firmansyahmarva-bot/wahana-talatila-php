@@ -47,6 +47,8 @@
   --slate-100:      #F1F5F9;
   --slate-50:       #F8FAFC;
 
+  --warm-50:        #F6F6F0;
+  --surface-warm:   var(--warm-50);
   --pure-white:     #FFFFFF;
   --pure-black:     #000000;
 
