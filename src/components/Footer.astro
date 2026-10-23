@@ -1,4 +1,141 @@
 ---
-import SiteFooter from './design/SiteFooter.astro';
+const currentYear = new Date().getFullYear();
 ---
-<SiteFooter />
+
+<footer class="footer">
+  <div class="footer-contact-strip">
+    <div class="container fcs-inner">
+      <a href="mailto:info@wahanatotalita.com" class="fcs-btn">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+        </svg>
+        <span>Email Kami</span>
+      </a>
+      <a href="https://wa.me/6287759151278?text=Halo%20Wahana%20Totalita,%20saya%20ingin%20tanya%20jadwal%20dan%20biaya%20pelatihan%20K3" target="_blank" rel="noopener" class="fcs-btn fcs-wa">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"></path>
+        </svg>
+        <span>WhatsApp Konsultasi</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="container footer-inner">
+    <!-- Col 1: Brand -->
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <img src="/assets/img/logo-wt.png" alt="Wahana Totalita" width="160" height="40" loading="lazy" decoding="async" />
+        <span><strong>Wahana Totalita Konsultan</strong></span>
+      </div>
+      <p>Lembaga pelatihan &amp; sertifikasi K3 resmi berlisensi Kemnaker RI &amp; terakreditasi BNSP. Melayani public training di Yogyakarta dan in-house di seluruh Indonesia.</p>
+      <div class="footer-socials">
+        <a href="https://instagram.com/wahanatotalita" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><rect x="2" y="2" width="20" height="20" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r=".5" fill="currentColor" stroke="none"></circle></svg>
+        </a>
+        <a href="https://facebook.com/wahanatotalita" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Col 2: Program K3 Kemnaker RI -->
+    <div class="footer-nav">
+      <h4>Pelatihan Kemnaker RI</h4>
+      <ul>
+        <li><a href="/ahli-k3-umum/"><strong>Ahli K3 Umum (AK3U)</strong></a></li>
+        <li><a href="/pelatihan/pelatihan-ahli-k3-umum-fresh-graduate-kemnaker-online/">Ahli K3 Umum Fresh Grad</a></li>
+        <li><a href="/pelatihan/pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri/">Operator Forklift Kelas II</a></li>
+        <li><a href="/pelatihan/pelatihan-damkar-paralel-kelas-dcba-sertifikasi-kemnaker-ri/">Damkar Kelas D, C, B, A</a></li>
+        <li><a href="/pelatihan/pelatihan-petugas-p3k-first-aid-online/">Petugas P3K / First Aid</a></li>
+        <li><a href="/pelatihan/pelatihan-auditor-sistem-manajemen-k3-sertifikasi-kemnaker-ri/">Auditor SMK3 PP 50/2012</a></li>
+        <li><a href="/pelatihan/pelatihan-k3-teknisi-listrik-sertifikasi-kemnaker-ri/">Teknisi &amp; Ahli K3 Listrik</a></li>
+        <li><a href="/pelatihan/pelatihan-tkbt-ii-sertifikasi-kemnaker-ri/">Bekerja di Ketinggian (TKBT)</a></li>
+      </ul>
+    </div>
+
+    <!-- Col 3: Program BNSP & ISO -->
+    <div class="footer-nav">
+      <h4>Sertifikasi BNSP &amp; ISO</h4>
+      <ul>
+        <li><a href="/pelatihan/ak3-bnsp/"><strong>Ahli K3 Umum BNSP</strong></a></li>
+        <li><a href="/pelatihan/pelatihan-pop-pertambangan-sertifikasi-bnsp-online/">POP Pertambangan Minerba</a></li>
+        <li><a href="/pelatihan/pelatihan-pom-pertambangan-sertifikasi-bnsp-online/">POM Pertambangan Minerba</a></li>
+        <li><a href="/pelatihan/pelatihan-penanggung-jawab-operasional-pengolahan-air-limbah-popal-sertifikasi-bnsp/">POPAL Pengolahan Air Limbah</a></li>
+        <li><a href="/pelatihan/pelatihan-pemantauan-pengelolaan-limbah-bahan-berbahaya-dan-beracun-level-pengawas-pplb3-sertifikasi-bnsp/">Pengelolaan Limbah B3 (PLB3)</a></li>
+        <li><a href="/pelatihan/pelatihan-internal-auditor-iso-45001-online/">Internal Auditor ISO 45001</a></li>
+        <li><a href="/pelatihan/">Katalog Semua 140+ Program &rarr;</a></li>
+      </ul>
+    </div>
+
+    <!-- Col 4: Layanan Korporasi -->
+    <div class="footer-nav">
+      <h4>Layanan &amp; Fitur</h4>
+      <ul>
+        <li><a href="/jadwal/">Jadwal Pelatihan {currentYear}</a></li>
+        <li><a href="/riksa-uji/"><strong>Jasa Riksa Uji K3 (Alat &amp; Instalasi)</strong></a></li>
+        <li><a href="/perpanjangan-skp/"><strong>Perpanjangan SKP &amp; Lisensi K3</strong></a></li>
+        <li><a href="/purnabakti/"><strong>Pelatihan Purnabakti (MPP)</strong></a></li>
+        <li><a href="/in-house-training/">In-House Training Perusahaan</a></li>
+        <li><a href="https://wa.me/6287759151278?text=Halo%20Wahana%20Totalita,%20saya%20ingin%20verifikasi%20keaslian%20sertifikat%20K3" target="_blank" rel="noopener">Verifikasi Keaslian Sertifikat</a></li>
+        <li><a href="/keselamatan-kerja/">Direktori 23 Bidang K3 &rarr;</a></li>
+      </ul>
+    </div>
+
+    <!-- Col 5: Wilayah & Kontak -->
+    <div class="footer-contact">
+      <h4>Wilayah &amp; Kontak</h4>
+      <ul>
+        <li><a href="/in-house-training/balikpapan-ikn/">In-House Balikpapan &amp; IKN</a></li>
+        <li><a href="/in-house-training/cilegon-karawang/">In-House Cilegon &amp; Karawang</a></li>
+        <li><a href="/in-house-training/morowali-weda-bay/">In-House Morowali &amp; Weda Bay</a></li>
+        <li style="margin-top:6px;font-size:12px;color:var(--slate-400);line-height:1.6;">
+          <strong style="color:var(--surface);">Jawa:</strong> 
+          <a href="/pelatihan-k3-yogyakarta/">Jogja</a> · 
+          <a href="/pelatihan-k3-jakarta/">Jakarta</a> · 
+          <a href="/pelatihan-k3-surabaya/">Surabaya</a> · 
+          <a href="/pelatihan-k3-bandung/">Bandung</a> · 
+          <a href="/pelatihan-k3-semarang/">Semarang</a> · 
+          <a href="/pelatihan-k3-solo/">Solo</a> · 
+          <a href="/pelatihan-k3-cilegon/">Cilegon</a> · 
+          <a href="/pelatihan-k3-bekasi/">Bekasi</a>
+        </li>
+        <li style="margin-top:4px;font-size:12px;color:var(--slate-400);line-height:1.6;">
+          <strong style="color:var(--surface);">Luar Jawa:</strong> 
+          <a href="/pelatihan-k3-balikpapan/">Balikpapan</a> · 
+          <a href="/pelatihan-k3-samarinda/">Samarinda</a> · 
+          <a href="/pelatihan-k3-medan/">Medan</a> · 
+          <a href="/pelatihan-k3-palembang/">Palembang</a> · 
+          <a href="/pelatihan-k3-batam/">Batam</a> · 
+          <a href="/pelatihan-k3-makassar/">Makassar</a>
+        </li>
+        <li style="margin-top:8px;"><a href="/kota/" style="color:var(--cta);font-weight:700;">📍 Direktori 20 Kota Layanan &rarr;</a></li>
+        <li style="margin-top:6px;"><a href="https://wa.me/6287759151278" target="_blank" rel="noopener">📱 WhatsApp: 0877-5915-1278</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container">
+      <p>© {currentYear} PT Wahana Totalita Konsultan. All rights reserved.
+        · <a href="/perusahaan/" style="opacity:.7;text-decoration:none">Tentang Kami</a>
+        · <a href="/regulasi/" style="opacity:.7;text-decoration:none">Regulasi K3</a>
+        · <a href="/skkni/" style="opacity:.7;text-decoration:none">Standar SKKNI</a>
+        · <a href="/artikel/" style="opacity:.7;text-decoration:none">Artikel</a>
+        · <a href="/sitemap-index.xml" style="opacity:.7;text-decoration:none">Sitemap</a>
+        · <a href="/kebijakan-privasi/" style="opacity:.7;text-decoration:none">Privasi</a>
+        · <a href="/en/" style="opacity:.7;text-decoration:none">English (EN)</a>
+        · <a href="/zh/" style="opacity:.7;text-decoration:none">中文 (ZH)</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp floating button -->
+<a href="https://wa.me/6287759151278?text=Halo%20Wahana%20Totalita,%20saya%20ingin%20konsultasi%20pelatihan%20K3"
+   class="wa-float" target="_blank" rel="noopener" aria-label="Konsultasi WhatsApp">
+  <span class="wa-badge" aria-label="1 pesan">1</span>
+  <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"></path>
+  </svg>
+</a>

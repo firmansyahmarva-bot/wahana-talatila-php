@@ -1,8 +1,0 @@
----
-import { formatPrice, modeLabel, getTrainingImageUrl } from '../../lib/images';
-interface Props { name: string; slug: string; certification?: string | null; mode?: string | null; price?: number | string | null; image?: string | null; category?: string | null; duration?: number | string | null; }
-const { name, slug, certification, mode, price, image, category, duration } = Astro.props;
-const imageUrl = getTrainingImageUrl(image, category || 'k3', slug);
-const delivery = mode === 'both' ? 'Online / Tatap Muka' : modeLabel(mode);
----
-<article class="wt-course"><a class="wt-course-image" href={`/pelatihan/${slug}/`} tabindex="-1" aria-hidden="true"><img src={imageUrl} alt="" width="640" height="400" loading="lazy" decoding="async" /><span>{certification || 'Pelatihan Profesional'}</span></a><div class="wt-course-body"><p class="wt-course-meta">{delivery}{duration ? ` · ${duration} hari` : ''}</p><h3><a href={`/pelatihan/${slug}/`}>{name}</a></h3><div class="wt-course-bottom"><div><small>{price ? 'Biaya per peserta' : 'Informasi biaya'}</small><strong>{formatPrice(price)}</strong></div><a href={`/pelatihan/${slug}/`} aria-label={`Detail ${name}`} class="wt-circle-link">↗</a></div></div></article>

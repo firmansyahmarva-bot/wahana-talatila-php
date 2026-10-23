@@ -1,8 +1,6 @@
 ---
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
-import HomeHeader from '../components/home/HomeHeader.astro';
-import HomeFooter from '../components/home/HomeFooter.astro';
 import StickyCta from '../components/StickyCta.astro';
 import Seo, { type HreflangItem } from '../components/Seo.astro';
 
@@ -63,8 +61,7 @@ const langConfig = {
       '/assets/css/tokens.css',
       '/assets/css/core.css',
       '/assets/css/components.css',
-      '/assets/css/shared.css',
-      '/assets/css/design-system.css'
+      '/assets/css/shared.css'
     ],
     defaultPageCss: [] as string[],
     waUrl: ''
@@ -145,16 +142,10 @@ const finalPageCss = pageCss !== undefined ? pageCss : currentConfig.defaultPage
   />
 
   <!-- Font Preloads & Fallbacks -->
-  {lang === 'id' && !isHome && (
+  {lang === 'id' && (
     <>
       <link rel="preload" href="/assets/fonts/source-sans-3-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
       <link rel="preload" href="/assets/fonts/lexend-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin />
-    </>
-  )}
-  {lang === 'id' && isHome && (
-    <>
-      <link rel="preload" href="/assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
-      <link rel="preload" href="/assets/fonts/plus-jakarta-sans-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin />
     </>
   )}
   {lang === 'en' && (
@@ -181,7 +172,7 @@ const finalPageCss = pageCss !== undefined ? pageCss : currentConfig.defaultPage
 </head>
 <body class={[bodyClass, hasStickyCta ? 'has-sticky-cta' : ''].filter(Boolean).join(' ') || undefined} {...bodyAttrs}>
   {lang === 'id' && (
-    isHome ? <HomeHeader /> : <Navbar currentPath={Astro.url.pathname} isHome={isHome} />
+    <Navbar currentPath={Astro.url.pathname} isHome={isHome} />
   )}
 
   {lang === 'en' && (
@@ -223,7 +214,7 @@ const finalPageCss = pageCss !== undefined ? pageCss : currentConfig.defaultPage
 
   {lang === 'id' && (
     <>
-      {isHome ? <HomeFooter /> : <Footer />}
+      <Footer />
       <StickyCta title={title} />
       <script src="/assets/js/main.js" defer></script>
       {scripts.map((s: string) => (

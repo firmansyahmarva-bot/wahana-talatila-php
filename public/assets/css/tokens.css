@@ -13,8 +13,6 @@
    ============================================================ */
 
 :root {
-  --lead-action: #D83F07;
-  --lead-action-hover: #B83305;
   /* ─── 1. PALETTE LAYER (Raw Values) ────────────────────────── */
   --green-950:      #051c14;
   --green-900:      #081c15;
@@ -49,8 +47,6 @@
   --slate-100:      #F1F5F9;
   --slate-50:       #F8FAFC;
 
-  --warm-50:        #F6F6F0;
-  --surface-warm:   var(--warm-50);
   --pure-white:     #FFFFFF;
   --pure-black:     #000000;
 

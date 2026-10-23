@@ -1,7 +1,0 @@
----
-import { formatBatchRange, type BatchItem } from '../../lib/jadwal';
-import { waUrl } from '../../lib/images';
-interface Props { batches: BatchItem[]; }
-const { batches } = Astro.props;
----
-<div class="wt-schedule-list">{batches.map((batch) => <article class="wt-schedule-row"><div class="wt-schedule-date"><span>{batch.is_generated ? 'Rencana batch' : 'Jadwal batch'}</span><strong>{formatBatchRange(batch.start_date, batch.end_date)}</strong></div><div class="wt-schedule-course"><h3>{batch.batch_name}</h3><p>{batch.mode === 'online' ? 'Online via Zoom' : batch.venue || 'Tatap muka'} · Konfirmasi ketersediaan ke admin</p></div><a class="wt-schedule-link" href={waUrl(`Halo, saya ingin konfirmasi jadwal, biaya, dan ketersediaan ${batch.batch_name}, ${formatBatchRange(batch.start_date, batch.end_date)}.`)} target="_blank" rel="noopener noreferrer" aria-label={`Tanya jadwal ${batch.batch_name}`}>Tanya jadwal <span aria-hidden="true">↗</span></a></article>)}</div>
