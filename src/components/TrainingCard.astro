@@ -49,12 +49,6 @@ const trainingUrl = `/pelatihan/${item.slug}/`;
       decoding="async"
       class="tc-card-img"
     />
-    {(catDisplayName || iconDisplay) && (
-      <span class="tc-card-cat-badge">
-        {iconDisplay && <span>{iconDisplay}</span>}
-        {catDisplayName && <span>{catDisplayName}</span>}
-      </span>
-    )}
   </a>
 
   <div class="tc-card-body">
@@ -110,14 +104,13 @@ const trainingUrl = `/pelatihan/${item.slug}/`;
     position: relative;
     overflow: hidden;
     text-decoration: none;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 16 / 10;
     background: var(--surface-alt);
   }
   .tc-card-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: right center;
     display: block;
     transition: transform 0.3s ease;
   }
