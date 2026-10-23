@@ -1,233 +1,53 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
-import { getCollection } from 'astro:content';
 import { getUpcomingBatches, formatBatchRange, formatDateIndo, formatIsoWithTz } from '../lib/jadwal';
+import {
+  getAllCityHubs,
+  getCityPrograms,
+  getCityWhyCards,
+  getCityFaqs,
+  type CityHub
+} from '../lib/city-hubs';
 
 export async function getStaticPaths() {
-  const citiesMap: Record<string, any> = {
-    jakarta: {
-      name: 'Jakarta',
-      province: 'DKI Jakarta',
-      title: 'Pelatihan K3 Jakarta – Sertifikasi KEMNAKER RI & BNSP | Wahana Totalita',
-      desc: 'Sertifikasi Ahli K3 Umum (AK3U) BNSP & Kemnaker RI di Jakarta, plus K3 Konstruksi, K3 Listrik, dan K3 Migas.',
-      industries: 'konstruksi gedung bertingkat, industri manufaktur, minyak dan gas, logistik dan pergudangan',
-      demand: 'Jakarta sebagai ibu kota memiliki kepadatan industri tertinggi di Indonesia dengan kebutuhan sertifikasi K3 yang masif.',
-      companies: 'Pertamina, PLN, Wijaya Karya, Adhi Karya, Waskita Karya',
-    },
-    surabaya: {
-      name: 'Surabaya',
-      province: 'Jawa Timur',
-      title: 'Pelatihan K3 Surabaya – Sertifikasi KEMNAKER RI & BNSP | Wahana Totalita',
-      desc: 'Sertifikasi Ahli K3 Umum (AK3U) BNSP & Kemnaker RI di Surabaya untuk industri perkapalan, petrokimia, dan manufaktur berat.',
-      industries: 'industri perkapalan, petrokimia Gresik, manufaktur berat, logistik pelabuhan Tanjung Perak',
-      demand: 'Surabaya adalah pusat industri terbesar kedua Indonesia dengan kawasan industri SIER, PIER, dan kompleks petrokimia.',
-      companies: 'PT Petrokimia Gresik, PAL Indonesia, Pelindo, Semen Indonesia',
-    },
-    yogyakarta: {
-      name: 'Yogyakarta',
-      province: 'D.I. Yogyakarta',
-      title: 'Pelatihan K3 Yogyakarta – Pusat Diklat Tatap Muka Resmi | Wahana Totalita',
-      desc: 'Pelatihan K3 tatap muka & online di Yogyakarta. Pusat pembinaan Ahli K3 Umum, BNSP, dan sertifikasi Kemnaker RI terpercaya.',
-      industries: 'pendidikan tinggi, pariwisata dan perhotelan, UMKM manufaktur, rumah sakit dan fasyankes',
-      demand: 'Yogyakarta merupakan training center utama Wahana Totalita yang melayani ribuan peserta dari seluruh penjuru Indonesia setiap tahunnya.',
-      companies: 'Hotel Bintang 4-5, RSUP Dr. Sardjito, Bandara YIA, Berbagai Perguruan Tinggi',
-    },
-    bandung: {
-      name: 'Bandung',
-      province: 'Jawa Barat',
-      title: 'Pelatihan K3 Bandung – Sertifikasi KEMNAKER RI & BNSP | Wahana Totalita',
-      desc: 'Sertifikasi Ahli K3 Umum, K3 Listrik, dan K3 Kimia di Bandung untuk industri tekstil, farmasi, dan manufaktur presisi.',
-      industries: 'tekstil dan garmen, farmasi dan kimia, teknologi informasi, pariwisata',
-      demand: 'Bandung dan sekitarnya (Cimahi, Padalarang) memiliki ratusan pabrik tekstil dan farmasi yang wajib audit SMK3 PP 50/2012.',
-      companies: 'Bio Farma, PT Dirgantara Indonesia, Pindad, Kimia Farma',
-    },
-    semarang: {
-      name: 'Semarang',
-      province: 'Jawa Tengah',
-      title: 'Pelatihan K3 Semarang – Sertifikasi KEMNAKER RI & BNSP | Wahana Totalita',
-      desc: 'Pelatihan K3 Semarang: Ahli K3 Umum Kemnaker RI, BNSP, Operator Forklift & Boiler kawasan industri Wijayakusuma dan Kendal.',
-      industries: 'manufaktur ekspor, industri makanan minuman, logistik Pelabuhan Tanjung Emas, tekstil Kendal',
-      demand: 'Kawasan Industri Kendal (KIK) dan Wijayakusuma mengalami ekspansi pesat yang membutuhkan personel K3 berlisensi resmi.',
-      companies: 'Kawasan Industri Kendal (KIK), PT Sido Muncul, PT Phapros, Pelindo',
-    },
-    cilegon: {
-      name: 'Cilegon',
-      province: 'Banten',
-      title: 'Pelatihan K3 Cilegon – Ahli K3 Kimia, Industri Baja & Petrokimia | Wahana Totalita',
-      desc: 'Pusat pelatihan K3 Cilegon: Ahli K3 Kimia, AK3U Kemnaker, dan K3 Ruang Terbatas untuk industri baja Krakatau dan petrokimia.',
-      industries: 'industri baja dan logam berat, petrokimia Cilegon-Anyer, pembangkitan listrik PLTU Suralaya',
-      demand: 'Cilegon adalah sentra industri kimia dan baja terberat di Pulau Jawa dengan hazard tingkat tinggi yang mewajibkan sertifikasi resmi.',
-      companies: 'Krakatau Steel, Chandra Asri Petrochemical, Lotte Chemical, PLTU Suralaya',
-    },
-    karawang: {
-      name: 'Karawang',
-      province: 'Jawa Barat',
-      title: 'Pelatihan K3 Karawang – Sentra Manufaktur Otomotif & Elektronik | Wahana Totalita',
-      desc: 'Pelatihan K3 Karawang: KIIC, Suryacipta, KIM. Pembinaan Ahli K3 Umum, Operator Crane/Forklift & Teknisi Listrik Kemnaker RI.',
-      industries: 'manufaktur otomotif, perakitan elektronik, komponen presisi, logistik industri',
-      demand: 'Karawang memiliki kawasan industri terluas di Asia Tenggara dengan ribuan pabrik otomotif dan elektronik internasional.',
-      companies: 'Toyota Motor Manufacturing, Astra Honda Motor, Daihatsu, Yamaha',
-    },
-    balikpapan: {
-      name: 'Balikpapan',
-      province: 'Kalimantan Timur',
-      title: 'Pelatihan K3 Balikpapan & IKN – Sertifikasi Migas, Tambang & Konstruksi | Wahana Totalita',
-      desc: 'Pelatihan K3 Balikpapan: Ahli K3 Migas, POP Pertambangan BNSP, K3 Konstruksi IKN Nusantara. PJK3 Resmi Kemnaker RI.',
-      industries: 'minyak dan gas bumi, penunjang pertambangan batubara, mega proyek konstruksi IKN Nusantara',
-      demand: 'Balikpapan adalah gerbang utama IKN Nusantara dan hub migas Kalimantan yang membutuhkan kualifikasi HSE berstandar tinggi.',
-      companies: 'Pertamina RU V Balikpapan, TotalEnergies, Petrosea, Thiess, Hexindo',
-    },
-    samarinda: {
-      name: 'Samarinda',
-      province: 'Kalimantan Timur',
-      title: 'Pelatihan K3 Samarinda – Sertifikasi Tambang Batubara & Lingkungan | Wahana Totalita',
-      desc: 'Sertifikasi K3 Samarinda: POP/POM Pertambangan Minerba BNSP, Pengelolaan Limbah B3, dan Ahli K3 Umum Kemnaker RI.',
-      industries: 'pertambangan batubara, kehutanan dan perkayuan, logistik tongkang Sungai Mahakam',
-      demand: 'Industri batubara dan energi di Samarinda mewajibkan setiap penanggung jawab teknis memiliki sertifikat kompetensi POP/POM ESDM.',
-      companies: 'PT Kaltim Prima Coal, Bayan Resources, BUMA, Kideco Jaya Agung',
-    },
-    medan: {
-      name: 'Medan',
-      province: 'Sumatera Utara',
-      title: 'Pelatihan K3 Medan – Sertifikasi Perkebunan Sawit & Manufaktur | Wahana Totalita',
-      desc: 'Pelatihan K3 Medan & Sumut: Ahli K3 Umum Kemnaker RI, K3 Pabrik Kelapa Sawit (PKS), Operator Boiler & Bejana Tekan.',
-      industries: 'perkebunan dan industri kelapa sawit (PKS), pengolahan karet, logistik Pelabuhan Belawan',
-      demand: 'Sumatera Utara merupakan sentra agroindustri sawit terbesar dengan ratusan PKS yang wajib menempatkan Ahli K3 Umum dan operator berlisensi.',
-      companies: 'PTPN Group, Musim Mas, Wilmar International, Socfin Indonesia',
-    },
-    makassar: {
-      name: 'Makassar',
-      province: 'Sulawesi Selatan',
-      title: 'Pelatihan K3 Makassar – Hub Industri & Smelter Indonesia Timur | Wahana Totalita',
-      desc: 'Pelatihan K3 Makassar: Ahli K3 Umum, K3 Konstruksi & Smelter Nikel. Hub pelatihan resmi Kemnaker RI untuk kawasan Indonesia Timur.',
-      industries: 'pusat logistik maritim Kawasan Timur Indonesia, industri semen, penunjang smelter nikel Morowali/Pomalaa',
-      demand: 'Makassar berperan sebagai hub utama logistik dan tenaga kerja teknis bagi kawasan hilirisasi tambang nikel di Sulawesi.',
-      companies: 'PT Semen Tonasa, Bosowa Semen, Pelindo IV, KIMA',
-    },
-    batam: {
-      name: 'Batam',
-      province: 'Kepulauan Riau',
-      title: 'Pelatihan K3 Batam – Galangan Kapal, Elektronik & Fabrikasi Offshore | Wahana Totalita',
-      desc: 'Pelatihan K3 Batam: Ahli K3 Konstruksi, Juru Las (Welder), Operator Crane, dan CSMS Migas untuk kawasan industri galangan kapal.',
-      industries: 'shipyard dan galangan kapal, fabrikasi migas offshore, industri manufaktur semikonduktor',
-      demand: 'Batam memiliki regulasi keselamatan maritim dan offshore yang ketat sesuai standar keselamatan internasional.',
-      companies: 'McDermott Indonesia, Batamindo, ASL Shipyard, Citra Tubindo',
-    },
-    solo: {
-      name: 'Solo',
-      province: 'Jawa Tengah',
-      title: 'Pelatihan K3 Solo – Sertifikasi Manufaktur & Tekstil Surakarta | Wahana Totalita',
-      desc: 'Sertifikasi K3 Solo (Surakarta): Ahli K3 Umum Kemnaker RI, Petugas P3K, dan Damkar untuk industri tekstil dan manufaktur Soloraya.',
-      industries: 'tekstil dan garmen Sukoharjo-Karanganyar, pariwisata dan kuliner, manufaktur furnitur',
-      demand: 'Klaster industri di Soloraya terus meningkatkan standar keselamatan kerja guna memenuhi kriteria audit buyers ekspor.',
-      companies: 'Sritex Group, Danliris, Konimex, Indo Acidatama',
-    },
-    malang: {
-      name: 'Malang',
-      province: 'Jawa Timur',
-      title: 'Pelatihan K3 Malang – Sertifikasi Industri Manufaktur & Fasyankes | Wahana Totalita',
-      desc: 'Pelatihan K3 Malang: Ahli K3 Umum Kemnaker RI, K3 Rumah Sakit & Fasyankes, ISO 45001. Kelas online & in-house corporate.',
-      industries: 'industri rokok dan tembakau, manufaktur olahan makanan, pariwisata, fasilitas kesehatan',
-      demand: 'Malang Raya memiliki puluhan fasilitas kesehatan besar dan industri manufaktur yang membutuhkan sertifikasi kepatuhan K3.',
-      companies: 'PT Bentoel Group, Greenfields Indonesia, Rumah Sakit Besar Malang Raya',
-    },
-    denpasar: {
-      name: 'Denpasar',
-      province: 'Bali',
-      title: 'Pelatihan K3 Bali (Denpasar) – Standar K3 Pariwisata, Hotel & Konstruksi | Wahana Totalita',
-      desc: 'Pelatihan K3 di Bali: Ahli K3 Umum Kemnaker RI, K3 Perhotelan, Penanggulangan Kebakaran & Petugas P3K. Sertifikat resmi nasional.',
-      industries: 'perhotelan dan pariwisata internasional, konstruksi resort dan villa, bandara dan logistik',
-      demand: 'Sektor pariwisata Bali mewajibkan standar safety tinggi guna menjamin keselamatan wisatawan domestik dan mancanegara.',
-      companies: 'Resort & Hotel Bintang 5 Internasional, Angkasa Pura I Bandara Ngurah Rai',
-    },
-    palembang: {
-      name: 'Palembang',
-      province: 'Sumatera Selatan',
-      title: 'Pelatihan K3 Palembang – Sertifikasi Pupuk, Batubara & Petrokimia | Wahana Totalita',
-      desc: 'Pelatihan K3 Palembang: Ahli K3 Kimia, POP Tambang BNSP, dan AK3U Kemnaker RI untuk sentra industri pupuk dan energi Sumsel.',
-      industries: 'pupuk dan petrokimia, pertambangan batubara dan gas bumi, perkebunan kelapa sawit dan karet',
-      demand: 'Palembang memiliki kompleks petrokimia Pusri dan jalur logistik energi batubara yang mewajibkan pengawasan K3 ketat.',
-      companies: 'PT Pupuk Sriwidjaja (Pusri), PT Bukit Asam (PTBA), Pertamina Plaju',
-    },
-    bekasi: {
-      name: 'Bekasi',
-      province: 'Jawa Barat',
-      title: 'Pelatihan K3 Bekasi – Sentra Industri Manufaktur Cikarang & MM2100 | Wahana Totalita',
-      desc: 'Pelatihan K3 Bekasi & Cikarang: MM2100, Jababeka, EJIP. Ahli K3 Umum, Operator Forklift, Teknisi Listrik & Auditor SMK3.',
-      industries: 'manufaktur berat dan elektronik, perakitan otomotif, kawasan industri Cikarang',
-      demand: 'Bekasi dan Cikarang menampung konsentrasi pabrik multinasional terbesar yang menuntut kepatuhan zero accident.',
-      companies: 'Kawasan Industri Jababeka, MM2100, EJIP, GIIC Cikarang',
-    },
-    tangerang: {
-      name: 'Tangerang',
-      province: 'Banten',
-      title: 'Pelatihan K3 Tangerang – Kawasan Industri Balaraja & Bandara Soetta | Wahana Totalita',
-      desc: 'Sertifikasi K3 Tangerang: Ahli K3 Umum Kemnaker RI, Petugas Damkar, K3 Kimia untuk industri manufaktur dan pergudangan logistik.',
-      industries: 'manufaktur kimia dan plastik, logistik Bandara Soekarno-Hatta, pergudangan modern',
-      demand: 'Tangerang merupakan pintu gerbang kargo udara nasional dengan ribuan gudang dan pabrik manufaktur.',
-      companies: 'Kawasan Industri Jatake, Manis, Balaraja, Pergudangan Bandara Mas',
-    },
-    bogor: {
-      name: 'Bogor',
-      province: 'Jawa Barat',
-      title: 'Pelatihan K3 Bogor – Kawasan Industri Sentul & Manufaktur Semen | Wahana Totalita',
-      desc: 'Pelatihan K3 Bogor: Ahli K3 Umum Kemnaker RI, K3 Konstruksi, Pengendalian Lingkungan BNSP kawasan Sentul dan Gunung Putri.',
-      industries: 'industri semen dan bahan bangunan, manufaktur makanan minuman Sentul, riset pertanian dan hayati',
-      demand: 'Kawasan industri Gunung Putri dan Sentul memiliki pabrik-pabrik berskala besar dengan regulasi SMK3 terintegrasi.',
-      companies: 'Indocement Tunggal Prakarsa, Kawasan Industri Sentul, PT Tirta Investama',
-    },
-    pekanbaru: {
-      name: 'Pekanbaru',
-      province: 'Riau',
-      title: 'Pelatihan K3 Pekanbaru – Sentra Industri Migas Blok Rokan & Pulp Paper | Wahana Totalita',
-      desc: 'Pelatihan K3 Pekanbaru & Riau: Ahli K3 Migas, POP Pertambangan, K3 Pabrik Sawit dan K3 Bejana Tekan Kemnaker RI.',
-      industries: 'eksplorasi minyak bumi Blok Rokan, industri pulp and paper, perkebunan kelapa sawit terbesar nasional',
-      demand: 'Riau adalah produsen sawit dan minyak bumi utama di Indonesia yang mewajibkan sertifikasi keselamatan kerja standar CSMS.',
-      companies: 'Pertamina Hulu Rokan (PHR), RAPP (April Group), Indah Kiat Pulp & Paper',
-    },
-  };
-
-  // Supplement remaining cities from cities.json
-  const citiesJson = await getCollection('cities');
-  for (const c of citiesJson) {
-    if (!citiesMap[c.data.slug]) {
-      citiesMap[c.data.slug] = {
-        name: c.data.name,
-        province: c.data.province || 'Indonesia',
-        title: `Pelatihan K3 ${c.data.name} – Sertifikasi KEMNAKER RI & BNSP | Wahana Totalita`,
-        desc: `Sertifikasi Ahli K3 Umum (AK3U) Kemnaker RI & BNSP di ${c.data.name}. Tersedia kelas online, in-house perusahaan, dan sertifikasi resmi nasional.`,
-        industries: c.data.industry_type || 'manufaktur, industri jasa, logistik, dan konstruksi',
-        demand: `Pertumbuhan industri di ${c.data.name} mendorong tingginya kebutuhan tenaga kerja bersertifikat K3 resmi.`,
-        companies: 'Perusahaan BUMN, Swasta Nasional, dan Kontraktor Daerah',
-      };
-    }
-  }
-
-  return Object.entries(citiesMap).map(([citySlug, cityData]) => ({
-    params: { city: citySlug },
-    props: { citySlug, cityData },
+  const hubs = getAllCityHubs();
+  return hubs.map((cityData) => ({
+    params: { city: cityData.slug },
+    props: { citySlug: cityData.slug, cityData },
   }));
+}
+
+interface Props {
+  citySlug: string;
+  cityData: CityHub;
 }
 
 const { citySlug, cityData } = Astro.props;
 const canonicalUrl = `https://wahanatotalita.com/pelatihan-k3-${citySlug}/`;
+const waNumber = '6287759151278';
 
-const programs = [
-  { name: 'Ahli K3 Umum (AK3U) Kemnaker RI', tag1: 'Kemnaker RI', tag2: 'Online / Jogja', slug: 'pelatihan-ahli-k3-umum-sertifikasi-kemnaker-ri' },
-  { name: 'Ahli K3 Umum Sertifikasi BNSP', tag1: 'BNSP Garuda', tag2: 'Online Asesmen', slug: 'ak3-bnsp' },
-  { name: 'POP Pertambangan Minerba BNSP', tag1: 'ESDM / BNSP', tag2: 'Online / Offline', slug: 'pelatihan-pop-pertambangan-sertifikasi-bnsp-online' },
-  { name: 'K3 Operator Forklift Kelas II', tag1: 'Kemnaker RI', tag2: 'Lisensi SIO', slug: 'pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri' },
-  { name: 'K3 Penanggulangan Kebakaran (Damkar)', tag1: 'Kemnaker RI', tag2: 'Kelas D/C/B/A', slug: 'pelatihan-damkar-paralel-kelas-dcba-sertifikasi-kemnaker-ri' },
-  { name: 'Petugas P3K di Tempat Kerja', tag1: 'Kemnaker RI', tag2: 'First Aid Pro', slug: 'pelatihan-petugas-p3k-first-aid-online' },
-  { name: 'Auditor SMK3 PP No. 50/2012', tag1: 'Kemnaker RI', tag2: 'Audit Emas', slug: 'pelatihan-auditor-sistem-manajemen-k3-sertifikasi-kemnaker-ri' },
-  { name: 'K3 Bekerja di Ketinggian (TKBT)', tag1: 'Kemnaker RI', tag2: 'Rope Access', slug: 'pelatihan-tkbt-ii-sertifikasi-kemnaker-ri' },
-];
+// Programs & Dynamic Local Content
+const programs = getCityPrograms(cityData);
+const whyCards = getCityWhyCards(cityData);
+const faqs = getCityFaqs(cityData);
 
-// Collect 3-4 upcoming batch dates for the city's priority program (Ahli K3 Umum)
+// Sibling Cities for regional mesh
+const allCities = getAllCityHubs();
+const siblingCities = allCities
+  .filter((c) => c.slug !== citySlug)
+  .slice(0, 8);
+
+// Upcoming batch dates for this city's top program
 const cityBatches = getUpcomingBatches('pelatihan-ahli-k3-umum-sertifikasi-kemnaker-ri', citySlug, 4);
 
-const schemas = [
+// Date strings
+const today = new Date();
+const currentMonthIndo = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'][today.getMonth()];
+const currentYear = today.getFullYear();
+
+// Structured Data Graphs (Service + EducationalEvents + FAQPage + BreadcrumbList)
+const schemas: any[] = [
   {
     '@context': 'https://schema.org',
     '@type': 'Service',
@@ -242,6 +62,27 @@ const schemas = [
       '@type': 'City',
       name: cityData.name,
     },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Beranda', item: 'https://wahanatotalita.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Pelatihan', item: 'https://wahanatotalita.com/pelatihan/' },
+      { '@type': 'ListItem', position: 3, name: `Pelatihan K3 ${cityData.name}`, item: canonicalUrl },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: f.a,
+      },
+    })),
   },
   ...cityBatches.map((b) => ({
     '@context': 'https://schema.org',
@@ -293,57 +134,208 @@ const schemas = [
     ]}
   />
 
-  <!-- City Hero -->
-  <section class="hero-section" style="background: linear-gradient(135deg, var(--brand-dark, var(--brand-dark)) 0%, var(--brand, var(--brand)) 100%); color: var(--surface); padding: 56px 0 50px;">
-    <div class="container" style="max-width: 1000px; margin: 0 auto; padding: 0 20px; text-align: center;">
-      <span style="display: inline-block; background: color-mix(in srgb, var(--surface) 12%, transparent); color: var(--success-border); padding: 4px 14px; border-radius: 999px; font-weight: 700; font-size: 12.5px; margin-bottom: 16px; border: 1px solid color-mix(in srgb, var(--surface) 18%, transparent); text-transform: uppercase; letter-spacing: 0.05em;">
+  <!-- 1. CITY EXECUTIVE HERO -->
+  <section class="city-hero-wrapper" style="background: linear-gradient(135deg, var(--brand-dark, var(--brand-dark)) 0%, var(--brand, var(--brand)) 100%); color: var(--surface); padding: 56px 0 52px;">
+    <div class="container" style="max-width: 1040px; margin: 0 auto; padding: 0 20px; text-align: center;">
+      <span style="display: inline-block; background: color-mix(in srgb, var(--surface) 12%, transparent); color: var(--success-border, var(--success-border)); padding: 5px 16px; border-radius: 999px; font-weight: 700; font-size: 12.5px; margin-bottom: 16px; border: 1px solid color-mix(in srgb, var(--surface) 20%, transparent); text-transform: uppercase; letter-spacing: 0.05em;">
         📍 Layanan Resmi K3 Wilayah {cityData.name} &amp; {cityData.province}
       </span>
-      <h1 style="font-family: var(--font-heading); font-size: clamp(26px, 4vw, 42px); font-weight: 800; line-height: 1.25; margin-bottom: 18px; color: var(--surface); letter-spacing: -0.02em;">
+      <h1 style="font-family: var(--font-heading); font-size: clamp(26px, 4.2vw, 44px); font-weight: 800; line-height: 1.25; margin-bottom: 18px; color: var(--surface); letter-spacing: -0.02em;">
         Pelatihan K3 &amp; Sertifikasi BNSP di {cityData.name}
       </h1>
-      <p style="font-size: 16.5px; line-height: 1.65; max-width: 760px; margin: 0 auto 25px; color: rgba(255, 255, 255, 0.88);">
-        Penyedia resmi sertifikasi Ahli K3 Umum, BNSP, K3 Konstruksi, Migas, dan Operator Alat Berat untuk tenaga kerja dan perusahaan di {cityData.name}.
+      <p style="font-size: 17px; line-height: 1.65; max-width: 780px; margin: 0 auto 20px; color: rgba(255, 255, 255, 0.9);">
+        Pusat pembinaan sertifikasi Ahli K3 Umum, BNSP, K3 Konstruksi, Migas, dan Operator Lisensi Kemnaker RI terakreditasi resmi untuk wilayah {cityData.name}.
       </p>
+      {cityData.highlight && (
+        <div style="display: inline-block; background: rgba(0,0,0,0.2); padding: 6px 16px; border-radius: 8px; font-size: 13.5px; color: var(--amber-200); font-weight: 600; margin-bottom: 25px; border: 1px solid rgba(253, 224, 71, 0.25);">
+          ⭐ {cityData.highlight}
+        </div>
+      )}
       <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-        <a href={`https://wa.me/6287759151278?text=${encodeURIComponent('Halo Wahana Totalita, saya ingin informasi pelatihan K3 wilayah ' + cityData.name)}`} class="btn btn-primary" target="_blank" rel="noopener" style="background: var(--whatsapp, var(--whatsapp)); color: var(--brand-dark); padding: 12px 24px; border-radius: 10px; font-weight: 800; text-decoration: none; box-shadow: 0 4px 14px color-mix(in srgb, var(--whatsapp) 30%, transparent); display: inline-flex; align-items: center; gap: 6px;">
-          <span>Konsultasi Jadwal {cityData.name}</span>
+        <a
+          href={`https://wa.me/${waNumber}?text=${encodeURIComponent('Halo Wahana Totalita, saya ingin konsultasi pelatihan K3 wilayah ' + cityData.name)}`}
+          class="btn btn-primary"
+          target="_blank"
+          rel="noopener"
+          style="background: var(--whatsapp, var(--whatsapp)); color: var(--brand-dark, var(--brand-dark)); padding: 13px 26px; border-radius: 10px; font-weight: 800; text-decoration: none; box-shadow: 0 4px 14px color-mix(in srgb, var(--whatsapp) 30%, transparent); display: inline-flex; align-items: center; gap: 6px;"
+        >
+          <span>💬 Konsultasi Jadwal &amp; Biaya {cityData.name}</span>
         </a>
-        <a href="#program" style="background: rgba(255,255,255,0.1); color: var(--surface); border: 1px solid rgba(255,255,255,0.3); padding: 12px 24px; border-radius: 10px; font-weight: 700; text-decoration: none;">
+        <a
+          href="#program"
+          style="background: rgba(255,255,255,0.12); color: var(--surface); border: 1px solid rgba(255,255,255,0.3); padding: 13px 24px; border-radius: 10px; font-weight: 700; text-decoration: none;"
+        >
           Pilih Program Pelatihan &darr;
         </a>
       </div>
     </div>
   </section>
 
-  <!-- Programs Grid -->
+  <!-- 2. QUICK QUOTE CALCULATOR & METHOD COMPARISON -->
+  <section class="section" style="padding: 48px 0; background: var(--surface);">
+    <div class="container" style="max-width: 1050px; margin: 0 auto; padding: 0 20px;">
+      
+      <div class="lead-calculator">
+        <h3>⚡ Kalkulator Biaya &amp; Jadwal Pelatihan K3 {cityData.name}</h3>
+        <p>Pilih program sertifikasi yang Anda butuhkan untuk mendapatkan estimasi jadwal terdekat dan proposal rincian biaya resmi langsung via WhatsApp.</p>
+        <form id="calc-form">
+          <div class="calc-grid">
+            <div class="calc-field">
+              <label for="calc-prog">Pilihan Program Pelatihan:</label>
+              <select id="calc-prog">
+                {programs.map((p) => (
+                  <option value={p.name}>{p.name} ({p.body})</option>
+                ))}
+              </select>
+            </div>
+            <div class="calc-field">
+              <label for="calc-type">Kategori Peserta / Perusahaan:</label>
+              <select id="calc-type">
+                <option value="Perorangan / Mandiri">Perorangan / Profesional Mandiri</option>
+                <option value="Fresh Graduate (Online Zoom)">Fresh Graduate (Online Zoom)</option>
+                <option value="Rombongan Perusahaan / In-House">Rombongan Perusahaan / In-House Training</option>
+              </select>
+            </div>
+            <button type="submit" class="calc-btn">💬 Dapatkan Penawaran Cepat &rarr;</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Pilihan Metode: Online vs Tatap Muka -->
+      <div class="method-grid" style="margin-top: 32px;">
+        <div class="method-card">
+          <h3>💻 Pelatihan K3 Online (Webinar Zoom)</h3>
+          <p>Solusi hemat biaya dan waktu bagi peserta di {cityData.name} dan {cityData.province}. Belajar interaktif langsung bersama instruktur praktisi tanpa meninggalkan rutinitas kerja.</p>
+          <ul>
+            <li>✅ Jadwal rutin setiap bulan tahun {currentYear}</li>
+            <li>✅ Modul digital, e-book regulasi, &amp; rekaman materi lengkap</li>
+            <li>✅ Ujian online resmi berlisensi Kemnaker RI &amp; BNSP</li>
+          </ul>
+          <a
+            href={`https://wa.me/${waNumber}?text=${encodeURIComponent('Halo Wahana Totalita, saya ingin daftar Pelatihan K3 Online untuk wilayah ' + cityData.name)}`}
+            target="_blank"
+            rel="noopener"
+            style="font-weight:700;font-size:13.5px;color:var(--brand);text-decoration:none;"
+          >
+            Tanya Kelas Online &rarr;
+          </a>
+        </div>
+        <div class="method-card">
+          <h3>🏢 Pelatihan Tatap Muka &amp; In-House Site</h3>
+          <p>Praktik lapangan dan simulasi studi kasus di fasilitas training center kami atau langsung di lokasi site, pabrik, dan proyek perusahaan Anda di {cityData.name}.</p>
+          <ul>
+            <li>✅ Praktik alat berat, kelistrikan, &amp; simulasi tanggap darurat</li>
+            <li>✅ Kurikulum disesuaikan dengan potensi bahaya di {cityData.name}</li>
+            <li>✅ Invoice resmi corporate, penawaran B2B, &amp; faktur pajak</li>
+          </ul>
+          <a
+            href={`https://wa.me/${waNumber}?text=${encodeURIComponent('Halo Wahana Totalita, saya ingin info Pelatihan K3 Tatap Muka / In-House di ' + cityData.name)}`}
+            target="_blank"
+            rel="noopener"
+            style="font-weight:700;font-size:13.5px;color:var(--brand);text-decoration:none;"
+          >
+            Tanya Kelas Tatap Muka &rarr;
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 3. TRANSPARENT PRICING & SCHEDULE MATRIX TABLE -->
+  <section class="section" style="padding: 40px 0; background: var(--surface-subtle); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="container" style="max-width: 1050px; margin: 0 auto; padding: 0 20px;">
+      <div style="text-align: center; margin-bottom: 28px;">
+        <h2 style="font-size: 24px; font-weight: 800; color: var(--brand); margin-bottom: 6px;">
+          Tabel Biaya &amp; Jadwal Pelatihan K3 {cityData.name} {currentYear}
+        </h2>
+        <p style="color: var(--slate-600); font-size: 14.5px;">
+          Rincian biaya resmi pembinaan dan sertifikasi kompetensi tenaga kerja untuk wilayah {cityData.name} dan sekitarnya.
+        </p>
+      </div>
+
+      <div class="price-schedule-wrap" id="tabel-biaya">
+        <table class="price-table">
+          <thead>
+            <tr>
+              <th>Program Pelatihan &amp; Sertifikasi {cityData.name}</th>
+              <th>Badan Sertifikasi</th>
+              <th>Metode Belajar</th>
+              <th>Durasi</th>
+              <th>Jadwal Batch</th>
+              <th>Rincian Biaya</th>
+            </tr>
+          </thead>
+          <tbody>
+            {programs.map((p) => {
+              const isBnsp = p.body === 'BNSP';
+              const certBadgeClass = isBnsp ? 'badge-cert-bnsp' : 'badge-cert-kemnaker';
+              const waText = `Halo Wahana Totalita, saya ingin informasi biaya resmi dan jadwal batch terdekat untuk ${p.name} di ${cityData.name}`;
+              return (
+                <tr>
+                  <td>
+                    <span class="price-prog-title">{p.name}</span>
+                    <span class="price-prog-sub">Wilayah {cityData.name} &amp; sekitarnya</span>
+                  </td>
+                  <td><span class={certBadgeClass}>{p.body}</span></td>
+                  <td><span class="badge-mode">Online &amp; Tatap Muka</span></td>
+                  <td><strong>{p.duration}</strong></td>
+                  <td><span style="color:var(--brand);font-weight:700">Batch {currentMonthIndo} {currentYear}</span></td>
+                  <td>
+                    <a
+                      href={`https://wa.me/${waNumber}?text=${encodeURIComponent(waText)}`}
+                      target="_blank"
+                      rel="noopener"
+                      class="price-cta-btn"
+                    >
+                      <span>💬 Cek Biaya</span>
+                    </a>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. FEATURED PROGRAMS GRID -->
   <section id="program" style="padding: 60px 0; max-width: 1050px; margin: 0 auto; padding-left: 20px; padding-right: 20px;">
     <div style="text-align: center; margin-bottom: 35px;">
       <h2 style="font-size: 26px; font-weight: 800; color: var(--brand); margin-bottom: 8px;">
         Program Pembinaan K3 Terfavorit di {cityData.name}
       </h2>
-      <p style="color: var(--mut); font-size: 14px;">
-        Tersedia jalur Online Interaktif via Zoom, Tatap Muka di Training Center, dan In-House Training di pabrik/kantor Anda.
+      <p style="color: var(--slate-600); font-size: 14.5px;">
+        Tersedia pilihan sertifikasi resmi berlisensi Kemnaker RI dan BNSP berlogo Garuda Emas.
       </p>
     </div>
 
     <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px;">
       {programs.map((p) => (
-        <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; display: flex; flex-direction: column;">
-          <div style="display: flex; gap: 6px; margin-bottom: 10px;">
-            <span style="font-size: 10px; font-weight: 700; background: var(--accent-light); color: var(--accent); padding: 3px 8px; border-radius: 4px;">{p.tag1}</span>
-            <span style="font-size: 10px; font-weight: 700; background: var(--surface-subtle); color: var(--mut); padding: 3px 8px; border-radius: 4px;">{p.tag2}</span>
+        <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; box-shadow: 0 2px 8px color-mix(in srgb, var(--brand) 4%, transparent);">
+          <div style="display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap;">
+            <span style="font-size: 10.5px; font-weight: 700; background: var(--accent-light, var(--blue-50)); color: var(--accent, var(--blue-600)); padding: 3px 8px; border-radius: 4px;">{p.tag1}</span>
+            <span style="font-size: 10.5px; font-weight: 700; background: var(--surface-subtle, var(--slate-100)); color: var(--slate-600, var(--slate-600)); padding: 3px 8px; border-radius: 4px;">{p.tag2}</span>
           </div>
-          <h3 style="font-size: 16px; font-weight: 700; line-height: 1.35; margin-bottom: 15px; flex: 1;">
+          <h3 style="font-size: 16px; font-weight: 700; line-height: 1.35; margin-bottom: 10px;">
             <a href={`/pelatihan/${p.slug}/`} style="color: var(--brand); text-decoration: none;">
               {p.name}
             </a>
           </h3>
-          <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 12px; font-size: 12px;">
+          <p style="font-size: 13px; color: var(--slate-600); line-height: 1.5; margin-bottom: 16px; flex: 1;">
+            {p.desc}
+          </p>
+          <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 14px; font-size: 12.5px;">
             <a href={`/pelatihan/${p.slug}/`} style="color: var(--accent); font-weight: 700; text-decoration: none;">
-              Detail Program &rarr;
+              Lihat Silabus &rarr;
             </a>
-            <a href={`https://wa.me/6287759151278?text=${encodeURIComponent('Halo Wahana Totalita, saya ingin daftar ' + p.name + ' di ' + cityData.name)}`} target="_blank" rel="noopener" style="background: var(--brand); color: var(--on-brand); padding: 4px 10px; border-radius: 4px; font-weight: 700; text-decoration: none;">
+            <a
+              href={`https://wa.me/${waNumber}?text=${encodeURIComponent('Halo Wahana Totalita, saya ingin daftar ' + p.name + ' di ' + cityData.name)}`}
+              target="_blank"
+              rel="noopener"
+              style="background: var(--brand); color: var(--on-brand); padding: 6px 12px; border-radius: 6px; font-weight: 700; text-decoration: none;"
+            >
               Daftar
             </a>
           </div>
@@ -352,20 +344,20 @@ const schemas = [
     </div>
   </section>
 
-  <!-- Jadwal Batch Terdekat Wilayah City -->
+  <!-- 5. UPCOMING BATCHES (REAL DATES FROM getUpcomingBatches) -->
   <section class="tc-live-schedules" style="background:var(--surface-alt);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:48px 0;">
     <div class="container" style="max-width:1050px;margin:0 auto;padding:0 20px;">
       <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:24px;flex-wrap:wrap;gap:12px;">
         <div>
           <span style="font-size:12px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:4px;">
-            Agenda Pembinaan K3 Resmi
+            Agenda Pembinaan K3 Terjadwal
           </span>
           <h2 style="font-size:24px;font-weight:800;color:var(--brand);margin:0;">
-            Jadwal Pelatihan K3 {cityData.name}
+            Jadwal Batch Pelatihan Terdekat — {cityData.name}
           </h2>
         </div>
         <a
-          href={`https://wa.me/6287759151278?text=${encodeURIComponent('Halo Wahana Totalita, saya ingin daftar dan tanya jadwal pelatihan K3 di ' + cityData.name)}`}
+          href={`https://wa.me/${waNumber}?text=${encodeURIComponent('Halo Wahana Totalita, saya ingin daftar dan tanya jadwal pelatihan K3 di ' + cityData.name)}`}
           target="_blank"
           rel="noopener"
           style="display:inline-flex;align-items:center;gap:6px;background:var(--brand);color:var(--on-brand);padding:8px 16px;border-radius:6px;font-weight:700;font-size:13px;text-decoration:none;"
@@ -379,23 +371,23 @@ const schemas = [
           const rangeStr = formatBatchRange(b.start_date, b.end_date);
           const place = b.mode === 'online' ? 'Online via Zoom' : (b.venue || `Training Center ${cityData.name}`);
           return (
-            <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:var(--shadow-sm);">
+            <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 2px 8px color-mix(in srgb,var(--brand) 4%,transparent);">
               <div>
-                <span style="font-size:11px;font-weight:700;color:var(--accent);display:block;margin-bottom:6px;">
-                  {idx === 0 ? `Jadwal Terdekat ${cityData.name}` : `Batch Pendaftaran ${cityData.name}`}
+                <span style="font-size:11px;font-weight:800;color:var(--accent);text-transform:uppercase;display:block;margin-bottom:6px;letter-spacing:.05em;">
+                  {idx === 0 ? `🔥 Batch Terdekat ${cityData.name}` : `Batch Pendaftaran ${idx + 1}`}
                 </span>
                 <strong style="font-size:16px;color:var(--brand);display:block;margin-bottom:6px;">
                   {rangeStr}
                 </strong>
-                <small style="font-size:12.5px;color:var(--slate-600);display:block;margin-bottom:12px;">
-                  {place} &bull; {String(b.mode || 'offline').toUpperCase()}
+                <small style="font-size:12.5px;color:var(--slate-600);display:block;margin-bottom:14px;">
+                  📍 {place} &bull; <span style="font-weight:700;text-transform:uppercase;">{String(b.mode || 'online')}</span>
                 </small>
               </div>
               <a
-                href={`https://wa.me/6287759151278?text=${encodeURIComponent('Halo Wahana Totalita, saya ingin daftar pelatihan K3 ' + cityData.name + ' batch ' + rangeStr)}`}
+                href={`https://wa.me/${waNumber}?text=${encodeURIComponent('Halo Wahana Totalita, saya ingin daftar pelatihan K3 ' + cityData.name + ' batch ' + rangeStr)}`}
                 target="_blank"
                 rel="noopener"
-                style="display:block;background:var(--brand);color:var(--on-brand);text-align:center;padding:8px 12px;border-radius:6px;font-size:12px;font-weight:700;text-decoration:none;"
+                style="display:block;background:var(--brand);color:var(--on-brand);text-align:center;padding:8px 12px;border-radius:6px;font-size:12.5px;font-weight:700;text-decoration:none;"
               >
                 Daftar Batch Ini &rarr;
               </a>
@@ -406,33 +398,141 @@ const schemas = [
     </div>
   </section>
 
-  <!-- Industry Context & Demand -->
-  <section style="background: var(--surface-subtle); padding: 50px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <!-- 6. LOCAL INDUSTRY CONTEXT & COMPLIANCE DEMAND -->
+  <section style="background: var(--surface); padding: 56px 0; border-bottom: 1px solid var(--border);">
     <div style="max-width: 1000px; margin: 0 auto; padding: 0 20px;">
-      <h2 style="font-size: 22px; font-weight: 800; color: var(--brand); margin-bottom: 15px;">
+      <h2 style="font-size: 24px; font-weight: 800; color: var(--brand); margin-bottom: 16px;">
         Kebutuhan Kepatuhan K3 &amp; Sektor Industri di {cityData.name}
       </h2>
-      <p style="font-size: 15px; line-height: 1.7; color: var(--text); margin-bottom: 15px;">
+      <p style="font-size: 15.5px; line-height: 1.75; color: var(--text); margin-bottom: 18px;">
         {cityData.demand}
       </p>
-      <p style="font-size: 14px; line-height: 1.6; color: var(--mut);">
-        <strong>Klaster &amp; Sektor Unggulan:</strong> {cityData.industries}. Keberadaan korporasi seperti {cityData.companies} mewajibkan pemenuhan standar kepatuhan K3 tingkat tinggi serta ketersediaan personel bersertifikat resmi.
+      <div style="background: var(--surface-subtle); border-left: 4px solid var(--brand); padding: 18px 22px; border-radius: 0 8px 8px 0; font-size: 14.5px; line-height: 1.65; color: var(--slate-700);">
+        <strong>Klaster &amp; Sektor Unggulan:</strong> {cityData.industries}. Keberadaan korporasi terkemuka seperti <em>{cityData.companies}</em> mewajibkan pemenuhan standar kepatuhan keselamatan kerja tingkat tinggi serta ketersediaan personel bersertifikat resmi Kemnaker RI dan BNSP.
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. WHY US VALUE PROPOSITION CARDS (TAILORED BY CITY TYPE) -->
+  <section class="section" style="padding: 56px 0; background: var(--surface-subtle); border-bottom: 1px solid var(--border);">
+    <div class="container" style="max-width: 1050px; margin: 0 auto; padding: 0 20px;">
+      <div style="text-align: center; margin-bottom: 36px;">
+        <h2 style="font-size: 26px; font-weight: 800; color: var(--brand); margin-bottom: 8px;">
+          Mengapa Perusahaan di {cityData.name} Memilih Wahana Totalita?
+        </h2>
+        <p style="color: var(--slate-600); font-size: 15px; max-width: 700px; margin: 0 auto;">
+          Solusi terpercaya bagi profesional dan korporasi di {cityData.name} dalam pemenuhan sertifikasi keselamatan kerja resmi.
+        </p>
+      </div>
+
+      <div class="why-grid">
+        {whyCards.map((w) => (
+          <div class="why-card">
+            <div class="why-icon">{w.icon}</div>
+            <h4>{w.title}</h4>
+            <p>{w.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. NEARBY CLUSTERS & REGIONAL CITY MESH -->
+  <section class="section section-alt" style="padding: 48px 0; background: var(--surface); border-bottom: 1px solid var(--border);">
+    <div class="container" style="max-width: 1050px; margin: 0 auto; padding: 0 20px;">
+      <h2 style="font-size: 22px; font-weight: 800; color: var(--brand); margin-bottom: 10px;">
+        Layanan Pelatihan K3 Terdekat di {cityData.name} &amp; {cityData.province}
+      </h2>
+      <p style="color: var(--slate-600); font-size: 14.5px; margin-bottom: 18px;">
+        Selain melayani area pusat {cityData.name}, program sertifikasi kami menjangkau seluruh kawasan industri dan kota penyangga sekitarnya:
+      </p>
+
+      <div class="nearby-list" style="margin-bottom: 24px;">
+        {cityData.nearby.map((nb) => (
+          <span class="nearby-tag">📍 {nb}</span>
+        ))}
+      </div>
+
+      <div class="related-cities">
+        <span class="rc-label">Pelatihan K3 di Kota Lain:</span>
+        {siblingCities.map((sc) => (
+          <a href={`/pelatihan-k3-${sc.slug}/`}>Pelatihan K3 {sc.name}</a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. LOCAL FAQ SECTION -->
+  <section class="faq-section" id="faq" style="padding: 60px 0; background: var(--surface-subtle); border-bottom: 1px solid var(--border);">
+    <div class="container" style="max-width: 1000px; margin: 0 auto; padding: 0 20px;">
+      <div style="text-align: center; margin-bottom: 36px;">
+        <span style="font-size: 12px; font-weight: 800; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 6px;">
+          Tanya Jawab Seputar Pelatihan
+        </span>
+        <h2 style="font-size: 26px; font-weight: 800; color: var(--brand); margin: 0;">
+          Pertanyaan Umum Seputar Biaya &amp; Pelatihan K3 {cityData.name}
+        </h2>
+      </div>
+
+      <div class="faq-list">
+        {faqs.map((f) => (
+          <div class="faq-item">
+            <h3>{f.q}</h3>
+            <p>{f.a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. EXECUTIVE CTA BOX -->
+  <section class="section" style="padding: 64px 0 80px; max-width: 980px; margin: 0 auto; padding-left: 20px; padding-right: 20px;">
+    <div class="cta-box" style="background: linear-gradient(135deg, var(--brand-dark, var(--brand-dark)) 0%, var(--brand, var(--brand)) 100%); padding: 48px 32px; border-radius: 20px; text-align: center; color: var(--surface); box-shadow: 0 20px 40px -12px color-mix(in srgb, var(--brand) 35%, transparent);">
+      <h2 style="font-family: var(--font-heading); font-size: clamp(22px, 3.2vw, 32px); font-weight: 800; margin-bottom: 14px; color: var(--surface);">
+        Siap Daftar Pelatihan K3 di {cityData.name}?
+      </h2>
+      <p style="font-size: 16px; color: rgba(255,255,255,0.9); margin-bottom: 28px; line-height: 1.65; max-width: 660px; margin-left: auto; margin-right: auto;">
+        Dapatkan jadwal batch terdekat, rincian biaya penawaran resmi, silabus lengkap, dan konsultasi gratis pemilihan program sertifikasi yang tepat untuk kebutuhan personal maupun perusahaan Anda.
+      </p>
+      <a
+        href={`https://wa.me/${waNumber}?text=${encodeURIComponent('Halo Wahana Totalita, saya ingin informasi biaya resmi dan jadwal pelatihan K3 di ' + cityData.name)}`}
+        target="_blank"
+        rel="noopener"
+        class="cta-btn"
+        style="display: inline-flex; align-items: center; gap: 8px; background: var(--whatsapp, var(--whatsapp)); color: var(--brand-dark, var(--brand-dark)); padding: 14px 34px; border-radius: 999px; font-weight: 800; text-decoration: none; font-size: 15.5px; box-shadow: 0 4px 16px color-mix(in srgb, var(--whatsapp) 40%, transparent);"
+      >
+        <span>💬 Hubungi via WhatsApp Sekarang</span>
+      </a>
+      <p style="margin-top: 18px; font-size: 13.5px; opacity: 0.85;">
+        WhatsApp Resmi: 0877-5915-1278 · Email: info@wahanatotalita.com
       </p>
     </div>
   </section>
 
-  <!-- CTA Box -->
-  <section style="padding: 60px 0 80px; max-width: 960px; margin: 0 auto; padding-left: 20px; padding-right: 20px;">
-    <div style="background: linear-gradient(135deg, var(--brand-dark, var(--brand-dark)) 0%, var(--brand, var(--brand)) 100%); padding: 48px 32px; border-radius: 20px; text-align: center; color: var(--surface); box-shadow: 0 20px 40px -12px color-mix(in srgb, var(--brand) 35%, transparent);">
-      <h2 style="font-family: var(--font-heading); font-size: clamp(22px, 3vw, 30px); font-weight: 800; margin-bottom: 12px; color: var(--surface);">
-        Siap Mengikuti Pelatihan K3 di {cityData.name}?
-      </h2>
-      <p style="font-size: 16px; color: rgba(255,255,255,0.85); margin-bottom: 25px; line-height: 1.6; max-width: 620px; margin-left: auto; margin-right: auto;">
-        Dapatkan jadwal batch terdekat, rincian biaya penawaran resmi, silabus pelatihan, dan konsultasi pendaftaran gratis via WhatsApp.
-      </p>
-      <a href={`https://wa.me/6287759151278?text=${encodeURIComponent('Halo Wahana Totalita, saya ingin konsultasi pelatihan K3 wilayah ' + cityData.name)}`} target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; background: var(--whatsapp, var(--whatsapp)); color: var(--brand-dark); padding: 14px 32px; border-radius: 999px; font-weight: 800; text-decoration: none; font-size: 15px; box-shadow: 0 4px 16px color-mix(in srgb, var(--whatsapp) 40%, transparent);">
-        <span>Hubungi Konsultan via WhatsApp</span>
+  <!-- 11. STICKY MOBILE BAR -->
+  <div class="sticky-mobile-bar">
+    <div class="inner">
+      <a
+        href={`https://wa.me/${waNumber}?text=${encodeURIComponent('Halo Wahana Totalita, saya ingin tanya biaya & jadwal pelatihan K3 di ' + cityData.name)}`}
+        target="_blank"
+        rel="noopener"
+        class="sticky-btn-wa"
+      >
+        💬 Tanya Biaya &amp; Jadwal
+      </a>
+      <a href="#tabel-biaya" class="sticky-btn-schedule">
+        📅 Jadwal
       </a>
     </div>
-  </section>
+  </div>
+
+  <script is:inline define:vars={{ citySlug, cityName: cityData.name, waNumber }}>
+    document.getElementById('calc-form')?.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var prog = document.getElementById('calc-prog')?.value || '';
+      var type = document.getElementById('calc-type')?.value || '';
+      var text = 'Halo Wahana Totalita, saya ingin informasi biaya, jadwal terdekat, dan penawaran untuk program ' + prog + ' kategori ' + type + ' di ' + cityName + '.';
+      window.open('https://wa.me/' + waNumber + '?text=' + encodeURIComponent(text), '_blank');
+    });
+  </script>
 </Layout>

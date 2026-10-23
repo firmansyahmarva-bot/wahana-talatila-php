@@ -1,0 +1,503 @@
+{
+  "jakarta": {
+    "slug": "jakarta",
+    "name": "Jakarta",
+    "province": "DKI Jakarta",
+    "title": "Pelatihan K3 Jakarta – Sertifikasi KEMNAKER RI & BNSP | Wahana Totalita",
+    "desc": "Sertifikasi Ahli K3 Umum (AK3U) BNSP & Kemnaker RI di Jakarta, plus K3 Konstruksi, K3 Listrik, dan K3 Migas. Untuk industri konstruksi, manufaktur, dan energi. Sertifikat berlaku nasional. Daftar sekarang.",
+    "industries": "konstruksi gedung bertingkat, industri manufaktur, minyak dan gas, perbankan dan jasa, logistik dan pergudangan, kelistrikan PLN",
+    "demand": "Jakarta sebagai ibu kota memiliki kepadatan industri tertinggi di Indonesia. Ribuan proyek konstruksi, kawasan industri Pulogadung, Cakung, dan Pulo Anem, serta kantor pusat perusahaan energi nasional menjadikan Jakarta sebagai pasar K3 terbesar.",
+    "highlight": "Pusat bisnis dan konstruksi terbesar Indonesia",
+    "companies": "Pertamina, PLN, Wijaya Karya, Adhi Karya, Waskita Karya, Total Bangun Persada, Hutama Karya",
+    "nearby": [
+      "Bekasi",
+      "Tangerang",
+      "Depok",
+      "Bogor"
+    ],
+    "type": "urban"
+  },
+  "surabaya": {
+    "slug": "surabaya",
+    "name": "Surabaya",
+    "province": "Jawa Timur",
+    "title": "Pelatihan K3 Surabaya – Sertifikasi KEMNAKER RI & BNSP | Wahana Totalita",
+    "desc": "Sertifikasi Ahli K3 Umum (AK3U) BNSP & Kemnaker RI di Surabaya untuk industri perkapalan, petrokimia, dan manufaktur berat. Plus K3 Konstruksi, Operator Crane & Forklift. Daftar sekarang.",
+    "industries": "industri perkapalan dan galangan kapal, petrokimia Gresik, manufaktur berat, pergudangan dan logistik pelabuhan Tanjung Perak, konstruksi infrastruktur",
+    "demand": "Surabaya adalah kota industri terbesar kedua Indonesia. Kawasan industri SIER, PIER Pasuruan, dan kompleks petrokimia Gresik-Tuban membutuhkan ribuan tenaga K3 bersertifikat setiap tahunnya. Pelabuhan Tanjung Perak juga mengharuskan operator alat angkat bersertifikat.",
+    "highlight": "Kota industri terbesar kedua Indonesia",
+    "companies": "PT Petrokimia Gresik, PAL Indonesia, Pelindo III, Semen Indonesia, Charoen Pokphand, Japfa Comfeed",
+    "nearby": [
+      "Sidoarjo",
+      "Gresik",
+      "Mojokerto",
+      "Pasuruan"
+    ],
+    "type": "industrial"
+  },
+  "bandung": {
+    "slug": "bandung",
+    "name": "Bandung",
+    "province": "Jawa Barat",
+    "title": "Pelatihan K3 Bandung – Sertifikasi KEMNAKER RI & BNSP | Wahana Totalita",
+    "desc": "Sertifikasi Ahli K3 Umum (AK3U) BNSP & Kemnaker RI di Bandung untuk industri tekstil, manufaktur, dan pertahanan. Plus K3 Konstruksi, AMDAL, Operator Forklift. Daftar sekarang.",
+    "industries": "industri tekstil dan garmen, manufaktur elektronik, pertahanan (PT Pindad, PT Dirgantara Indonesia), konstruksi, IT dan startup teknologi",
+    "demand": "Bandung memiliki kawasan industri Rancaekek, Majalaya, dan KIIC Karawang yang berdekatan. Industri tekstil dan garmen yang padat karya membutuhkan Ahli K3 Umum dalam jumlah besar. Proyek infrastruktur Kereta Cepat Jakarta-Bandung juga membuka kebutuhan K3 konstruksi.",
+    "highlight": "Pusat industri tekstil, manufaktur & pertahanan",
+    "companies": "PT Pindad, PT Dirgantara Indonesia, PT Kahatex, PT Pan Brothers, PT Trisula Textile",
+    "nearby": [
+      "Cimahi",
+      "Cileunyi",
+      "Soreang",
+      "Padalarang"
+    ],
+    "type": "urban"
+  },
+  "medan": {
+    "slug": "medan",
+    "name": "Medan",
+    "province": "Sumatera Utara",
+    "title": "Pelatihan K3 Medan – Sertifikasi KEMNAKER RI & BNSP | Wahana Totalita",
+    "desc": "Sertifikasi Ahli K3 Umum (AK3U) BNSP & Kemnaker RI di Medan untuk industri kelapa sawit, karet, dan pertambangan. Sertifikat berlaku nasional. Online & tatap muka. Daftar sekarang.",
+    "industries": "perkebunan kelapa sawit dan karet, industri pengolahan CPO, pertambangan batu bara Sumatera Utara, pelabuhan Belawan, konstruksi infrastruktur",
+    "demand": "Medan adalah pintu gerbang industri Sumatera. Ratusan perusahaan perkebunan kelapa sawit di Sumatera Utara, Riau, dan Aceh mengirimkan karyawan untuk sertifikasi K3 ke Medan. Pelabuhan Belawan yang aktif membutuhkan operator alat berat bersertifikat.",
+    "highlight": "Gateway industri perkebunan & sawit Sumatera",
+    "companies": "PT Socfin Indonesia, PT Perkebunan Nusantara II/III/IV, PT Asian Agri, PT Musim Mas, PTPN IV",
+    "nearby": [
+      "Deli Serdang",
+      "Binjai",
+      "Tebing Tinggi",
+      "Pematang Siantar"
+    ],
+    "type": "energy_mining"
+  },
+  "makassar": {
+    "slug": "makassar",
+    "name": "Makassar",
+    "province": "Sulawesi Selatan",
+    "title": "Pelatihan K3 Makassar – Sertifikasi KEMNAKER RI & BNSP | Wahana Totalita",
+    "desc": "Sertifikasi Ahli K3 Umum (AK3U) BNSP & Kemnaker RI di Makassar untuk industri nikel, semen, dan konstruksi. Blended learning tersedia. Daftar sekarang.",
+    "industries": "industri nikel dan smelting (Sorowako, Morowali), semen (Tonasa, Bosowa), pelabuhan Soekarno-Hatta, konstruksi infrastruktur IKN, perikanan dan cold storage",
+    "demand": "Makassar menjadi hub K3 untuk seluruh Kawasan Timur Indonesia. Boom industri nikel di Morowali dan Sorowako, proyek IKN di Kalimantan, serta kawasan industri KIMA mendorong permintaan sertifikasi K3 yang sangat tinggi.",
+    "highlight": "Hub industri nikel & gateway Kawasan Timur Indonesia",
+    "companies": "PT Vale Indonesia, PT Semen Tonasa, PT Bosowa Mediatama, PT Pelindo IV, PT Smelting",
+    "nearby": [
+      "Gowa",
+      "Maros",
+      "Takalar",
+      "Pangkajene"
+    ],
+    "type": "energy_mining"
+  },
+  "semarang": {
+    "slug": "semarang",
+    "name": "Semarang",
+    "province": "Jawa Tengah",
+    "title": "Pelatihan K3 Semarang – Sertifikasi KEMNAKER RI & BNSP | Wahana Totalita",
+    "desc": "Sertifikasi Ahli K3 Umum (AK3U) BNSP & Kemnaker RI di Semarang, plus K3 Konstruksi dan Operator Forklift. Untuk industri manufaktur dan logistik Jawa Tengah. Daftar sekarang.",
+    "industries": "industri manufaktur kawasan Terboyo dan Gatot Subroto, logistik dan distribusi, konstruksi jalan tol Trans Jawa, industri makanan dan minuman",
+    "demand": "Semarang sebagai ibu kota Jawa Tengah memiliki kawasan industri yang berkembang pesat. Proyek tol Trans Jawa dan pembangunan Pelabuhan Kendal mendorong kebutuhan K3 konstruksi. Kedekatan dengan Yogyakarta memungkinkan pelatihan tatap muka di kota manapun.",
+    "highlight": "Pusat logistik dan manufaktur Jawa Tengah",
+    "companies": "PT Phapros, PT Sari Husada, PT Sido Muncul, PT Apac Inti Corpora, PT KAI Daop 4",
+    "nearby": [
+      "Demak",
+      "Kendal",
+      "Ungaran",
+      "Salatiga"
+    ],
+    "type": "industrial"
+  },
+  "batam": {
+    "slug": "batam",
+    "name": "Batam",
+    "province": "Kepulauan Riau",
+    "title": "Pelatihan K3 Batam – Sertifikasi KEMNAKER RI & BNSP | Wahana Totalita",
+    "desc": "Sertifikasi Ahli K3 Umum (AK3U) BNSP & Kemnaker RI di Batam untuk industri galangan kapal, elektronik, dan manufaktur. Blended learning online. Daftar sekarang.",
+    "industries": "galangan kapal dan offshore, manufaktur elektronik dan PCB, kawasan industri bebas Batamindo, logistik dan transshipment, konstruksi infrastruktur",
+    "demand": "Batam adalah kawasan industri bebas terbesar Indonesia dengan ratusan perusahaan multinasional. Industri galangan kapal mewajibkan sertifikasi Juru Las, Rigger, dan K3 Umum. Kawasan Batamindo Industrial Park dengan 100+ perusahaan elektronik membutuhkan K3 rutin.",
+    "highlight": "Kawasan industri bebas — galangan kapal & elektronik",
+    "companies": "PT McDermott, PT Drydocks World, PT Batamec, Infineon Technologies, ST Electronics",
+    "nearby": [
+      "Bintan",
+      "Tanjung Pinang",
+      "Karimun"
+    ],
+    "type": "industrial"
+  },
+  "pekanbaru": {
+    "slug": "pekanbaru",
+    "name": "Pekanbaru",
+    "province": "Riau",
+    "title": "Pelatihan K3 Pekanbaru – Sertifikasi KEMNAKER RI & BNSP | Wahana Totalita",
+    "desc": "Sertifikasi Ahli K3 Umum (AK3U) BNSP & Kemnaker RI di Pekanbaru untuk industri migas, kelapa sawit, dan batubara Riau. Plus K3 Konstruksi, K3 Listrik. Daftar sekarang.",
+    "industries": "minyak dan gas bumi (Chevron, CPI, PHR), perkebunan kelapa sawit, pertambangan batu bara, industri pengolahan CPO, konstruksi dan infrastruktur",
+    "demand": "Pekanbaru adalah pusat industri migas Riau. PT Chevron Pacific Indonesia (kini PHR) yang beroperasi di Duri dan Minas membutuhkan ribuan tenaga K3 migas bersertifikat. Perkebunan sawit yang masif di Riau juga mendorong permintaan K3 umum dan lingkungan.",
+    "highlight": "Jantung industri migas dan sawit Riau",
+    "companies": "PT Pertamina Hulu Riau (PHR), PT Chevron Pacific Indonesia, PT RAPP, PT Asian Agri, PT Indah Kiat",
+    "nearby": [
+      "Dumai",
+      "Bengkalis",
+      "Siak",
+      "Kampar"
+    ],
+    "type": "energy_mining"
+  },
+  "balikpapan": {
+    "slug": "balikpapan",
+    "name": "Balikpapan",
+    "province": "Kalimantan Timur",
+    "title": "Pelatihan K3 Balikpapan – Sertifikasi KEMNAKER RI & BNSP | Wahana Totalita",
+    "desc": "Sertifikasi Ahli K3 Umum (AK3U) BNSP & Kemnaker RI di Balikpapan untuk industri migas, batubara, dan konstruksi IKN. Blended learning online. Daftar sekarang.",
+    "industries": "pengilangan minyak Pertamina RU V, distribusi energi Kalimantan, pertambangan batu bara, konstruksi IKN Nusantara, logistik dan pelabuhan",
+    "demand": "Balikpapan adalah kota minyak Indonesia dengan kilang minyak terbesar Pertamina. Proyek IKN Nusantara yang sedang dibangun membuka ribuan lowongan HSE dan membutuhkan masif sertifikasi K3 konstruksi. Kota ini menjadi batu loncatan tenaga K3 seluruh Kalimantan.",
+    "highlight": "Kota minyak + konstruksi IKN Nusantara",
+    "companies": "Pertamina RU V, Total E&P, Chevron Indonesia, PT Adaro, PT Kaltim Prima Coal, Waskita IKN",
+    "nearby": [
+      "Samarinda",
+      "Penajam Paser Utara (IKN)",
+      "Bontang",
+      "Kutai Kartanegara"
+    ],
+    "type": "energy_mining"
+  },
+  "yogyakarta": {
+    "slug": "yogyakarta",
+    "name": "Yogyakarta",
+    "province": "DI Yogyakarta",
+    "title": "Pelatihan K3 Yogyakarta – Sertifikasi KEMNAKER RI & BNSP | Wahana Totalita",
+    "desc": "Sertifikasi Ahli K3 Umum (AK3U) BNSP & Kemnaker RI di Yogyakarta — pusat pelatihan K3 kami. Plus K3 Konstruksi, AMDAL, Operator Forklift. Jadwal rutin bulanan. Daftar sekarang.",
+    "industries": "industri manufaktur dan kerajinan, pariwisata dan perhotelan, konstruksi, pendidikan tinggi, industri kreatif dan percetakan",
+    "demand": "Yogyakarta adalah kota basis Wahana Totalita Konsultan. Kami menyelenggarakan jadwal pelatihan K3 rutin setiap bulan di Yogyakarta dengan fasilitas training center lengkap. Yogyakarta juga melayani peserta dari Jawa Tengah, Jawa Timur bagian barat, dan seluruh Indonesia via program online.",
+    "highlight": "Kota basis Wahana Totalita — jadwal rutin bulanan",
+    "companies": "PT Hartono Istana Teknologi (Polytron), PT Sarihusada, PT Mirota KSM, Hyatt Regency Yogyakarta, PT Taman Wisata Candi",
+    "nearby": [
+      "Sleman",
+      "Bantul",
+      "Kulonprogo",
+      "Klaten",
+      "Magelang"
+    ],
+    "type": "urban"
+  },
+  "palembang": {
+    "slug": "palembang",
+    "name": "Palembang",
+    "province": "Sumatera Selatan",
+    "title": "Pelatihan K3 Palembang – Sertifikasi KEMNAKER RI & BNSP | Wahana Totalita",
+    "desc": "Sertifikasi Ahli K3 Umum (AK3U) BNSP & Kemnaker RI di Palembang untuk industri migas, batubara, dan pupuk Sumatera Selatan. Sertifikat berlaku nasional. Daftar sekarang.",
+    "industries": "minyak dan gas (Pertamina RU III), pertambangan batu bara (Bukit Asam), industri pupuk Pusri, perkebunan karet dan sawit",
+    "demand": "Palembang memiliki kilang minyak Pertamina RU III yang beroperasi sejak 1926 dan menjadi salah satu yang terbesar di Indonesia. PT Bukit Asam sebagai produsen batu bara terbesar di Sumatera Selatan membutuhkan tim K3 pertambangan bersertifikat secara rutin.",
+    "highlight": "Kilang Pertamina RU III & tambang batu bara Bukit Asam",
+    "companies": "Pertamina RU III, PT Bukit Asam, PT Pusri, PT Semen Baturaja, PT Pupuk Sriwidjaja",
+    "nearby": [
+      "Banyuasin",
+      "Ogan Ilir",
+      "Prabumulih",
+      "Lahat"
+    ],
+    "type": "energy_mining"
+  },
+  "bekasi": {
+    "slug": "bekasi",
+    "name": "Bekasi",
+    "province": "Jawa Barat",
+    "title": "Pelatihan K3 Bekasi – Sertifikasi KEMNAKER RI & BNSP | Wahana Totalita",
+    "desc": "Sertifikasi Ahli K3 Umum (AK3U) BNSP & Kemnaker RI di Bekasi untuk kawasan industri MM2100, EJIP, dan Jababeka. Online & tatap muka. Daftar sekarang.",
+    "industries": "kawasan industri terbesar ASEAN (MM2100, EJIP, Jababeka, Hyundai), manufaktur otomotif dan elektronik, logistik dan pergudangan, konstruksi properti",
+    "demand": "Bekasi adalah kota dengan konsentrasi kawasan industri tertinggi di Indonesia. Kawasan MM2100, EJIP, dan Jababeka menampung ratusan perusahaan multinasional yang semuanya mensyaratkan tenaga K3 bersertifikat. Permintaan Ahli K3 Umum dan K3 Konstruksi di Bekasi sangat tinggi sepanjang tahun.",
+    "highlight": "Konsentrasi kawasan industri tertinggi Indonesia",
+    "companies": "Toyota, Honda, LG Electronics, Samsung, Hyundai, Bridgestone, Astra International",
+    "nearby": [
+      "Cikarang",
+      "Karawang",
+      "Depok",
+      "Jakarta Timur"
+    ],
+    "type": "industrial"
+  },
+  "cilegon": {
+    "slug": "cilegon",
+    "name": "Cilegon",
+    "province": "Banten",
+    "title": "Pelatihan K3 Cilegon – Sertifikasi KEMNAKER RI & BNSP | Wahana Totalita",
+    "desc": "Sertifikasi Ahli K3 Umum (AK3U) BNSP & Kemnaker RI di Cilegon untuk industri baja Krakatau Steel, petrokimia, dan pelabuhan. Blended learning online. Daftar sekarang.",
+    "industries": "industri baja Krakatau Steel, petrokimia dan kimia dasar, pelabuhan Merak dan Cigading, industri semen, kawasan industri KS dan Krakatau Industrial Estate",
+    "demand": "Cilegon adalah kota baja dan petrokimia Indonesia. Krakatau Steel, Chandra Asri, dan puluhan pabrik kimia di Cilegon membutuhkan Ahli K3 Kimia, K3 Listrik, dan K3 Umum dalam jumlah besar. Risiko industri yang sangat tinggi membuat sertifikasi K3 menjadi kewajiban mutlak.",
+    "highlight": "Kota baja & petrokimia — risiko industri tertinggi",
+    "companies": "PT Krakatau Steel, PT Chandra Asri Petrochemical, PT Asahimas Chemical, PT Banten Inti Gasindo",
+    "nearby": [
+      "Serang",
+      "Anyer",
+      "Merak",
+      "Tangerang"
+    ],
+    "type": "industrial"
+  },
+  "samarinda": {
+    "slug": "samarinda",
+    "name": "Samarinda",
+    "province": "Kalimantan Timur",
+    "title": "Pelatihan K3 Samarinda – Sertifikasi K3 Pertambangan & BNSP | Wahana Totalita",
+    "desc": "Sertifikasi Ahli K3 Umum (AK3U) BNSP & Kemnaker RI di Samarinda, plus POP, POM, POU Pertambangan dan Ahli K3 Batu Bara. Blended learning. Daftar sekarang.",
+    "industries": "pertambangan batu bara (produsen terbesar dunia), minyak dan gas bumi, perkebunan kelapa sawit, konstruksi infrastruktur, pelabuhan Samarinda",
+    "demand": "Samarinda adalah ibu kota Kalimantan Timur dan pusat administrasi industri batu bara terbesar di dunia. Kalimantan Timur menghasilkan 30%+ produksi batu bara Indonesia. Ribuan pengawas operasional tambang membutuhkan sertifikat POP, POM, dan POU setiap tahunnya.",
+    "highlight": "Pusat administrasi industri batu bara terbesar dunia",
+    "companies": "PT Kaltim Prima Coal, PT Berau Coal, PT Adaro, PT Kideco Jaya Agung, PT Mahakam Resources",
+    "nearby": [
+      "Balikpapan",
+      "Kutai Kartanegara",
+      "Bontang",
+      "Tenggarong"
+    ],
+    "type": "energy_mining"
+  },
+  "denpasar": {
+    "slug": "denpasar",
+    "name": "Denpasar",
+    "province": "Bali",
+    "title": "Pelatihan K3 Bali Denpasar – Sertifikasi KEMNAKER RI & BNSP | Wahana Totalita",
+    "desc": "Sertifikasi Ahli K3 Umum (AK3U) BNSP & Kemnaker RI di Bali & Denpasar untuk industri pariwisata dan konstruksi resort. Plus K3 Konstruksi, Operator Forklift. Daftar sekarang.",
+    "industries": "industri pariwisata dan perhotelan, konstruksi resort dan villa, industri makanan dan minuman, bandara Ngurah Rai, MICE dan event organizer",
+    "demand": "Bali memiliki ribuan hotel berbintang, resort, dan kawasan wisata yang membutuhkan tenaga K3 bersertifikat untuk memenuhi standar keselamatan tamu dan karyawan. Konstruksi yang terus-menerus di Badung, Gianyar, dan Denpasar juga mendorong permintaan K3 Konstruksi yang tinggi.",
+    "highlight": "Pusat pariwisata & konstruksi resort kelas dunia",
+    "companies": "PT Bali Tourism Development, Marriott International, Hyatt Hotels, Aman Resorts, PT Angkasa Pura I",
+    "nearby": [
+      "Badung",
+      "Gianyar",
+      "Tabanan",
+      "Nusa Dua"
+    ],
+    "type": "urban"
+  },
+  "malang": {
+    "slug": "malang",
+    "name": "Malang",
+    "province": "Jawa Timur",
+    "title": "Pelatihan K3 Malang – Sertifikasi KEMNAKER RI & BNSP | Wahana Totalita",
+    "desc": "Sertifikasi Ahli K3 Umum (AK3U) BNSP & Kemnaker RI di Malang untuk industri makanan-minuman dan manufaktur. Plus K3 Konstruksi, Operator Alat Berat. Dekat Surabaya. Daftar sekarang.",
+    "industries": "industri makanan dan minuman (Malang Raya), manufaktur rokok (Sampoerna, Gudang Garam area), konstruksi perumahan dan infrastruktur, pertanian apel dan hortikultura",
+    "demand": "Malang adalah kota industri makanan dan minuman terbesar di Jawa Timur. Pabrik-pabrik di Pandaan, Pasuruan, dan kawasan Malang membutuhkan tenaga K3 untuk pemenuhan standar industri FMCG. Pertumbuhan properti yang pesat juga mendorong permintaan K3 Konstruksi.",
+    "highlight": "Pusat industri FMCG dan manufaktur Jawa Timur bagian selatan",
+    "companies": "PT Bentoel, PT Tiga Pilar Sejahtera, PT Indomie (Indofood), Selecta, PT Inka",
+    "nearby": [
+      "Batu",
+      "Pasuruan",
+      "Blitar",
+      "Lumajang"
+    ],
+    "type": "urban"
+  },
+  "solo": {
+    "slug": "solo",
+    "name": "Solo",
+    "province": "Jawa Tengah",
+    "title": "Pelatihan K3 Solo Surakarta – Sertifikasi KEMNAKER RI & BNSP | Wahana Totalita",
+    "desc": "Sertifikasi Ahli K3 Umum (AK3U) BNSP & Kemnaker RI di Solo & Surakarta untuk industri tekstil dan manufaktur furnitur. Plus K3 Konstruksi, Operator Forklift. Dekat Yogyakarta. Daftar sekarang.",
+    "industries": "industri tekstil dan batik, manufaktur furnitur dan rotan, percetakan dan penerbitan, konstruksi, perdagangan dan UMKM",
+    "demand": "Solo dan kawasan Soloraya (Sukoharjo, Boyolali, Klaten, Sragen, Karanganyar, Wonogiri) memiliki ratusan pabrik tekstil dan garmen yang membutuhkan Ahli K3 Umum. Kedekatan dengan Yogyakarta (±1 jam) memudahkan akses ke program tatap muka kami.",
+    "highlight": "Pusat tekstil, batik & manufaktur Soloraya",
+    "companies": "PT Sritex, PT Dan Liris, PT Batik Keris, PT Tyfountex, PT Konimex",
+    "nearby": [
+      "Sukoharjo",
+      "Klaten",
+      "Boyolali",
+      "Karanganyar",
+      "Yogyakarta"
+    ],
+    "type": "urban"
+  },
+  "karawang": {
+    "slug": "karawang",
+    "name": "Karawang",
+    "province": "Jawa Barat",
+    "title": "Pelatihan K3 Karawang – Sertifikasi KEMNAKER RI & BNSP | Wahana Totalita",
+    "desc": "Sertifikasi Ahli K3 Umum (AK3U) BNSP & Kemnaker RI di Karawang untuk kawasan industri otomotif KIIC dan Surya Cipta. Online & tatap muka. Daftar sekarang.",
+    "industries": "industri otomotif (Toyota, Honda, Mitsubishi), kawasan industri KIIC, Kota Bukit Indah, Surya Cipta, manufaktur komponen dan elektronik",
+    "demand": "Karawang adalah Detroit-nya Indonesia — pusat industri otomotif dengan Toyota, Honda, Mitsubishi, dan ratusan pemasok tier-1 dan tier-2. Semua pabrik otomotif ini mewajibkan tenaga K3 bersertifikat dan mengadakan pelatihan K3 secara rutin.",
+    "highlight": "Detroit Indonesia — jantung industri otomotif nasional",
+    "companies": "Toyota Manufacturing Indonesia, Honda Prospect Motor, Mitsubishi Motors, Bridgestone, Denso Indonesia",
+    "nearby": [
+      "Bekasi",
+      "Purwakarta",
+      "Subang",
+      "Cikampek"
+    ],
+    "type": "industrial"
+  },
+  "tangerang": {
+    "slug": "tangerang",
+    "name": "Tangerang",
+    "province": "Banten",
+    "title": "Pelatihan K3 Tangerang – Sertifikasi KEMNAKER RI & BNSP | Wahana Totalita",
+    "desc": "Sertifikasi Ahli K3 Umum (AK3U) BNSP & Kemnaker RI di Tangerang untuk kawasan industri BSD, Cikupa, dan Balaraja. Online & tatap muka. Daftar sekarang.",
+    "industries": "industri farmasi dan kosmetik (terbesar di Indonesia), tekstil, makanan dan minuman, bandara Soekarno-Hatta, logistik dan pergudangan",
+    "demand": "Tangerang adalah pusat industri farmasi dan kosmetik Indonesia. Hampir 60% produksi farmasi nasional berasal dari Tangerang. Industri farmasi memiliki standar K3 yang sangat ketat (GMP + K3) sehingga permintaan sertifikasi K3 sangat konsisten sepanjang tahun.",
+    "highlight": "Pusat industri farmasi & kosmetik Indonesia",
+    "companies": "PT Kalbe Farma, PT Kimia Farma, PT Sanbe Farma, PT Wardah (Paragon), PT Unilever Indonesia",
+    "nearby": [
+      "Tangerang Selatan",
+      "Serpong",
+      "Balaraja",
+      "Cikupa",
+      "Jakarta Barat"
+    ],
+    "type": "industrial"
+  },
+  "bogor": {
+    "slug": "bogor",
+    "name": "Bogor",
+    "province": "Jawa Barat",
+    "title": "Pelatihan K3 Bogor – Sertifikasi KEMNAKER RI & BNSP | Wahana Totalita",
+    "desc": "Sertifikasi Ahli K3 Umum (AK3U) BNSP & Kemnaker RI di Bogor untuk industri makanan, farmasi, dan konstruksi. Online & tatap muka. Daftar sekarang.",
+    "industries": "industri makanan dan minuman (Indofood, Wings, Nutrifood), agribisnis dan perkebunan, industri farmasi dan jamu, konstruksi perumahan dan infrastruktur",
+    "demand": "Bogor memiliki konsentrasi industri makanan dan minuman yang tinggi, didukung oleh IPB sebagai sumber SDM pertanian dan pangan. Kawasan Industri Sentul dan berbagai pabrik di Cibinong membutuhkan tenaga K3 bersertifikat secara konsisten.",
+    "highlight": "Pusat agribisnis & industri pangan Jawa Barat",
+    "companies": "PT Indofood CBP, PT Wings Food, PT Nutrifood, PT Sido Muncul, PT Kimia Farma Bogor",
+    "nearby": [
+      "Depok",
+      "Cibinong",
+      "Sentul",
+      "Ciawi",
+      "Sukabumi"
+    ],
+    "type": "urban"
+  },
+  "jakarta-pusat": {
+    "slug": "jakarta-pusat",
+    "name": "Jakarta Pusat",
+    "province": "DKI Jakarta",
+    "title": "Pelatihan K3 Jakarta Pusat – Sertifikasi KEMNAKER RI & BNSP | Wahana Totalita",
+    "desc": "Pelatihan K3 di Jakarta Pusat: Ahli K3 Umum, K3 Konstruksi, dan K3 Listrik untuk gedung bertingkat, BUMN, dan kementerian.",
+    "industries": "perkantoran kementerian, kantor pusat korporasi, fasilitas perhotelan dan faskes, konstruksi gedung bertingkat",
+    "demand": "Jakarta Pusat merupakan pusat pemerintahan dan kantor pusat korporasi nasional dengan kewajiban regulasi SMK3 PP 50/2012 yang sangat ketat.",
+    "highlight": "Pusat Pemerintahan & Perkantoran Nasional",
+    "companies": "Pertamina, PLN, Telkom Indonesia, Kementerian BUMN, Bank Mandiri",
+    "nearby": [
+      "Jakarta Selatan",
+      "Jakarta Timur",
+      "Jakarta Barat",
+      "Jakarta Utara"
+    ],
+    "type": "urban"
+  },
+  "jakarta-selatan": {
+    "slug": "jakarta-selatan",
+    "name": "Jakarta Selatan",
+    "province": "DKI Jakarta",
+    "title": "Pelatihan K3 Jakarta Selatan – Sertifikasi KEMNAKER RI & BNSP | Wahana Totalita",
+    "desc": "Sertifikasi Ahli K3 Umum (AK3U), CSMS, dan K3 Migas di Jakarta Selatan. Pembinaan resmi Kemnaker RI & BNSP untuk korporasi dan umum.",
+    "industries": "kantor pusat perusahaan migas dan energi, korporasi multinasional, konstruksi komersial, perbankan",
+    "demand": "Kawasan bisnis TB Simatupang dan SCBD menampung ratusan kontraktor EPC dan perusahaan energi yang mensyaratkan standar CSMS tinggi.",
+    "highlight": "Jantung Bisnis Energi & Multinasional",
+    "companies": "Medco Energi, Schlumberger, Baker Hughes, Adaro Energy, Astra International",
+    "nearby": [
+      "Jakarta Pusat",
+      "Depok",
+      "Tangerang Selatan",
+      "Jakarta Timur"
+    ],
+    "type": "urban"
+  },
+  "depok": {
+    "slug": "depok",
+    "name": "Depok",
+    "province": "Jawa Barat",
+    "title": "Pelatihan K3 Depok – Sertifikasi KEMNAKER RI & BNSP | Wahana Totalita",
+    "desc": "Pelatihan K3 di Depok: Ahli K3 Umum, Petugas P3K, dan K3 Listrik untuk faskes, pendidikan, dan manufaktur ringan.",
+    "industries": "rumah sakit dan fasilitas kesehatan, perguruan tinggi dan riset, manufaktur ringan Cimanggis, industri kreatif",
+    "demand": "Pertumbuhan faskes dan kawasan industri Cimanggis membutuhkan Ahli K3 Umum dan Petugas P3K berlisensi resmi Kemnaker RI.",
+    "highlight": "Sentra Pendidikan, Medis & Manufaktur Cimanggis",
+    "companies": "RSUI, RS Hermina, PT Bayer Indonesia, PT Panasonic Gobel",
+    "nearby": [
+      "Jakarta Selatan",
+      "Bogor",
+      "Bekasi"
+    ],
+    "type": "urban"
+  },
+  "manado": {
+    "slug": "manado",
+    "name": "Manado",
+    "province": "Sulawesi Utara",
+    "title": "Pelatihan K3 Manado – Sertifikasi KEMNAKER RI & BNSP | Wahana Totalita",
+    "desc": "Pelatihan K3 Manado: Ahli K3 Umum, K3 Listrik Geothermal, dan K3 Kelautan/Selam bersertifikasi resmi Kemnaker RI & BNSP.",
+    "industries": "pembangkit listrik panas bumi (geothermal), maritim dan perikanan ekspor, industri pariwisata bahari, konstruksi",
+    "demand": "Manado dan sekitarnya (Bitung, Tomohon) merupakan hub KEK Bitung dan energi geotermal yang mewajibkan standar HSE internasional.",
+    "highlight": "Gerbang Ekonomi Pasifik & Geothermal Sulut",
+    "companies": "PGE Lahendong, Pelindo Bitung, PT Meares Soputan Mining (MSM), PLN UIP Suluttenggo",
+    "nearby": [
+      "Bitung",
+      "Tomohon",
+      "Minahasa Utara"
+    ],
+    "type": "industrial"
+  },
+  "jayapura": {
+    "slug": "jayapura",
+    "name": "Jayapura",
+    "province": "Papua",
+    "title": "Pelatihan K3 Jayapura – Sertifikasi KEMNAKER RI & BNSP | Wahana Totalita",
+    "desc": "Sertifikasi Ahli K3 Umum, K3 Konstruksi, dan POP Pertambangan BNSP di Jayapura & Papua. Kelas online & in-house resmi.",
+    "industries": "konstruksi infrastruktur sipil, pertambangan mineral dan emas, logistik pelabuhan dan bandara, kehutanan",
+    "demand": "Pembangunan infrastruktur Trans Papua dan industri ekstraktif menuntut kepatuhan K3 tingkat tinggi bagi seluruh kontraktor lokal.",
+    "highlight": "Pusat Logistik & Pembangunan Infrastruktur Papua",
+    "companies": "PT Freeport Indonesia, PT PP, Wijaya Karya Papua, Pelindo Jayapura",
+    "nearby": [
+      "Keerom",
+      "Sentani",
+      "Sarmi"
+    ],
+    "type": "energy_mining"
+  },
+  "pontianak": {
+    "slug": "pontianak",
+    "name": "Pontianak",
+    "province": "Kalimantan Barat",
+    "title": "Pelatihan K3 Pontianak – Sertifikasi KEMNAKER RI & BNSP | Wahana Totalita",
+    "desc": "Pelatihan K3 Pontianak: Ahli K3 Umum Kemnaker RI, K3 Pabrik Sawit, Operator Forklift & Boiler, serta POP Tambang Bauksit BNSP.",
+    "industries": "perkebunan dan PKS kelapa sawit, pertambangan bauksit dan smelter alumina, industri perkayuan dan logistik pelabuhan Kijing",
+    "demand": "Kalimantan Barat mengalami lonjakan industri sawit dan smelter bauksit Kijing yang membutuhkan ribuan tenaga K3 bersertifikat.",
+    "highlight": "Sentra Hilirisasi Bauksit & Kelapa Sawit Kalbar",
+    "companies": "PT Antam Tayan, PT Well Harvest Winning Alumina, Sinarmas Agribusiness, Pelindo Kijing",
+    "nearby": [
+      "Kubu Raya",
+      "Mempawah",
+      "Singkawang"
+    ],
+    "type": "energy_mining"
+  },
+  "banjarmasin": {
+    "slug": "banjarmasin",
+    "name": "Banjarmasin",
+    "province": "Kalimantan Selatan",
+    "title": "Pelatihan K3 Banjarmasin – Sertifikasi KEMNAKER RI & BNSP | Wahana Totalita",
+    "desc": "Sertifikasi K3 Banjarmasin: Ahli K3 Umum, POP Pertambangan Batubara BNSP, dan K3 Maritim Pelayaran Sungai.",
+    "industries": "pertambangan batu bara, pelayaran dan logistik tongkang batubara sungai Barito, perkebunan kelapa sawit",
+    "demand": "Sungai Barito dan tambang Kalsel menampung ribuan armada tongkang dan alat berat yang membutuhkan pengawasan K3 intensif.",
+    "highlight": "Jantung Batubara & Logistik Sungai Barito",
+    "companies": "PT Adaro Indonesia, PT Arutmin Indonesia, Hasnur Group, Pelindo Banjarmasin",
+    "nearby": [
+      "Banjarbaru",
+      "Martapura",
+      "Barito Kuala"
+    ],
+    "type": "energy_mining"
+  },
+  "mataram": {
+    "slug": "mataram",
+    "name": "Mataram",
+    "province": "Nusa Tenggara Barat",
+    "title": "Pelatihan K3 Mataram & Lombok – Sertifikasi KEMNAKER RI & BNSP | Wahana Totalita",
+    "desc": "Pelatihan K3 Mataram: Ahli K3 Umum, POP Tambang Emas Tembaga BNSP, dan K3 Pariwisata & Event Internasional Mandalika.",
+    "industries": "pertambangan tembaga dan emas Sumbawa, pariwisata sirkuit internasional Mandalika, konstruksi dan perhotelan",
+    "demand": "Ekspansi tambang tembaga Sumbawa dan destinasi KEK Mandalika mendorong kebutuhan sertifikasi K3 standar global di NTB.",
+    "highlight": "Hub Pariwisata Mandalika & Pertambangan Tambora",
+    "companies": "PT Amman Mineral Nusa Tenggara (AMNT), ITDC Mandalika, PLN UIW NTB",
+    "nearby": [
+      "Lombok Barat",
+      "Lombok Tengah (Mandalika)",
+      "Sumbawa"
+    ],
+    "type": "energy_mining"
+  }
+}
