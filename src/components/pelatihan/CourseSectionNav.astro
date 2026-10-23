@@ -1,0 +1,21 @@
+---
+interface Props { hasCurriculum: boolean; hasFaq: boolean; }
+const { hasCurriculum, hasFaq } = Astro.props;
+const links = [{ href: '#ikhtisar', label: 'Ringkasan' }, { href: '#jadwal-pelatihan', label: 'Jadwal & biaya' }, { href: '#in-house-training', label: 'In-house' }, { href: '#tentang-program', label: 'Tentang program' }, ...(hasCurriculum ? [{href:'#materi-pelatihan',label:'Materi pelatihan'}] : []), ...(hasFaq ? [{href:'#faq-pelatihan',label:'FAQ'}] : [])];
+---
+<nav class="ce-section-nav" aria-label="Navigasi detail program"><div class="ce-container">{links.map((link,index) => <a href={link.href} aria-current={index === 0 ? 'location' : undefined}>{link.label}</a>)}<a class="ce-nav-register" href="#pendaftaran">Daftar program <span aria-hidden="true">↗</span></a></div></nav>
+<script>
+  const nav = document.querySelector('.ce-section-nav');
+  if (nav) {
+    const links = [...nav.querySelectorAll<HTMLAnchorElement>('a:not(.ce-nav-register)')];
+    const sections = links.map(link => document.querySelector(link.hash)).filter((section): section is Element => !!section);
+    const update = () => {
+      const offset = nav.getBoundingClientRect().bottom + 30;
+      const active = [...sections].reverse().find(section => section.getBoundingClientRect().top <= offset) || sections[0];
+      links.forEach(link => { if (link.hash === '#' + active?.id) link.setAttribute('aria-current', 'location'); else link.removeAttribute('aria-current'); });
+    };
+    let scheduled = false;
+    window.addEventListener('scroll', () => { if (!scheduled) { scheduled = true; requestAnimationFrame(() => { update(); scheduled = false; }); } }, {passive:true});
+    update();
+  }
+</script>

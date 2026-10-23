@@ -1,0 +1,22 @@
+---
+import Icon from '../home/HomeIcon.astro';
+import { waUrl } from '../../lib/images';
+interface Props { name: string; message: string; }
+const { name, message } = Astro.props;
+const topic = name.replace(/^pelatihan\s+(?:dan\s+sertifikasi\s+|&\s+sertifikasi\s+)?/i, '');
+---
+<section class="ce-inhouse-section" id="in-house-training" aria-labelledby="course-inhouse-title">
+  <div class="ce-container ce-inhouse-card">
+    <div class="ce-inhouse-copy">
+      <span class="ce-inhouse-eyebrow"><Icon name="users" size={18} />KHUSUS TIM PERUSAHAAN</span>
+      <h2 id="course-inhouse-title">In-House Training {topic}</h2>
+      <p>Rencanakan pelatihan bersama tim Anda. Diskusikan kebutuhan peserta, lokasi pelaksanaan, dan pilihan jadwal langsung dengan konsultan kami.</p>
+      <a class="ce-button ce-button-primary" href={waUrl(message)} target="_blank" rel="noopener noreferrer"><Icon name="whatsapp" size={19} />Minta Penawaran In-House<Icon name="arrow" size={18} /></a>
+    </div>
+    <div class="ce-inhouse-benefits">
+      <div><Icon name="calendar" size={21} /><div><strong>Rencanakan jadwal tim</strong><p>Konsultasikan tanggal sesuai rencana kerja perusahaan.</p></div></div>
+      <div><Icon name="pin" size={21} /><div><strong>Diskusikan lokasi pelaksanaan</strong><p>Konfirmasikan pilihan online atau di lokasi perusahaan sesuai program.</p></div></div>
+      <div><Icon name="document" size={21} /><div><strong>Minta proposal &amp; rincian biaya</strong><p>Sampaikan jumlah peserta dan kebutuhan pelatihan untuk penawaran perusahaan.</p></div></div>
+    </div>
+  </div>
+</section>

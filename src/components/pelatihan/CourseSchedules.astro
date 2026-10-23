@@ -1,0 +1,25 @@
+---
+import Icon from '../home/HomeIcon.astro';
+import { formatPrice, waUrl } from '../../lib/images';
+import { formatBatchRange, type BatchItem } from '../../lib/jadwal';
+interface Props { name: string; slug: string; isActive?: boolean; batches: BatchItem[]; price?: number | string; }
+const { name, slug, isActive = true, batches, price } = Astro.props;
+---
+<section class="ce-schedules" id="jadwal-pelatihan" aria-labelledby="course-schedule-title">
+  <div class="ce-container">
+    <div class="ce-section-heading"><div><p class="ce-kicker">RENCANAKAN PELATIHAN ANDA</p><h2 id="course-schedule-title">Jadwal {name}</h2><p>Pilih tanggal yang sesuai. Konfirmasikan ketersediaan kelas dengan tim kami.</p></div>{isActive && <a class="ce-text-link" href={`/jadwal/${slug}/`} aria-label={`Semua jadwal ${name}`}>Semua jadwal program ini<Icon name="arrow" size={17} /></a>}</div>
+    <div class="ce-schedule-grid" data-course-name={name} data-course-price={price}>
+      {batches.map((batch, index) => {
+        const date = formatBatchRange(batch.start_date, batch.end_date);
+        const message = `Halo Wahana Totalita, saya ingin mendaftar ${name}, batch ${date}. Mohon konfirmasi ketersediaan kelas, biaya, dan persyaratan.`;
+        return <article class:list={['ce-schedule-card', { 'ce-schedule-first': index === 0 }]}><span class="ce-schedule-label">{index === 0 ? 'Batch terdekat' : 'Pilihan batch'}</span><h3>{date}</h3><p><Icon name={batch.mode === 'online' ? 'monitor' : 'pin'} size={16} />{batch.mode === 'online' ? 'Online via Zoom' : batch.venue || 'Konfirmasi lokasi pelatihan'}</p><div class="ce-schedule-footer"><strong>{formatPrice(batch.price > 0 ? batch.price : price)}</strong><a href={waUrl(message)} target="_blank" rel="noopener noreferrer" aria-label={`Daftar ${name} batch ${date}`}><Icon name="whatsapp" size={16} />Daftar WhatsApp</a></div></article>;
+      })}
+      {batches.length === 0 && <div class="ce-schedule-empty"><Icon name="calendar" size={30} /><div><h3>Konsultasikan jadwal pelatihan</h3><p>Hubungi tim kami untuk jadwal reguler dan pilihan in-house perusahaan.</p></div><a class="ce-button ce-button-primary" href={waUrl(`Halo Wahana Totalita, mohon informasi jadwal terdekat untuk ${name}.`)} target="_blank" rel="noopener noreferrer">Tanya jadwal<Icon name="arrow" size={17} /></a></div>}
+    </div>
+  </div>
+</section>
+
+<script>
+  import { enhanceCourseSchedules } from '../../lib/courseSchedulesClient';
+  enhanceCourseSchedules();
+</script>
