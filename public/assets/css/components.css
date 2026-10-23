@@ -233,10 +233,10 @@
 .training-card[data-hidden="true"] { display: none; }
 .training-card-img-wrap {
   display: block; position: relative; overflow: hidden;
-  aspect-ratio: 1822 / 662; background: var(--brand-light);
+  aspect-ratio: 16 / 9; background: var(--brand-light);
 }
 .training-card-img-wrap img {
-  width: 100%; height: 100%; object-fit: cover;
+  width: 100%; height: 100%; object-fit: cover; object-position: right center;
   transition: transform var(--dur-base) var(--ease-standard);
 }
 .training-card:hover .training-card-img-wrap img { transform: scale(1.05); }
@@ -592,7 +592,7 @@
   .section-catalog .container { padding: 0; }
   .section-catalog .section-header { padding: 20px 16px 0; }
   .training-grid { grid-template-columns: 1fr 1fr !important; gap: 10px !important; padding: 12px 10px; }
-  .training-card-img-wrap img { aspect-ratio: 1822 / 662; object-fit: cover; }
+  .training-card-img-wrap img { aspect-ratio: 16 / 9; object-fit: cover; object-position: right center; }
   .training-card-body { padding: 10px; }
   .training-card-meta { gap: 4px; margin-bottom: 6px; }
   .training-card-title {
@@ -898,7 +898,7 @@
   content-visibility: auto;
   contain-intrinsic-size: 0 600px;
 }
-.training-card-img-wrap { aspect-ratio: 1822 / 662; }
+.training-card-img-wrap { aspect-ratio: 16 / 9; }
 
 .nav-links a { position: relative; }
 .nav-links a::after {
