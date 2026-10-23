@@ -1,0 +1,6 @@
+---
+import Icon from '../home/HomeIcon.astro';
+interface Props { href: string; label: string; icon?: 'arrow' | 'whatsapp' | 'calendar' | 'document'; secondary?: boolean; external?: boolean; }
+const {href,label,icon='arrow',secondary=false,external=false}=Astro.props;
+---
+<a class:list={['ui-action',{'ui-action-secondary':secondary}]} {href} target={external?'_blank':undefined} rel={external?'noopener noreferrer':undefined}>{label}<Icon name={icon} size={18}/></a>

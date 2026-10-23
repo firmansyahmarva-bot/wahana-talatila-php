@@ -1,0 +1,11 @@
+---
+import {archiveUrl,type ArticleTopic} from '../../lib/articles';
+interface Props {page:number;total:number;topic?:ArticleTopic;}
+const {page,total,topic}=Astro.props;
+const numbers=[...new Set([1,total,page-1,page,page+1].filter(value=>value>=1&&value<=total))].sort((a,b)=>a-b);
+---
+{total>1&&<nav class="ar-pagination" aria-label="Halaman artikel">
+  {page>1?<a rel="prev" href={archiveUrl(page-1,topic)}>← Sebelumnya</a>:<span aria-disabled="true">← Sebelumnya</span>}
+  <div>{numbers.map((number,index)=><>{index>0&&number-numbers[index-1]>1&&<span>…</span>}<a href={archiveUrl(number,topic)} aria-current={number===page?'page':undefined}>{number}</a></>)}</div>
+  {page<total?<a rel="next" href={archiveUrl(page+1,topic)}>Berikutnya →</a>:<span aria-disabled="true">Berikutnya →</span>}
+</nav>}

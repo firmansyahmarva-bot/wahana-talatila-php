@@ -37,15 +37,3 @@ const { data, batches, category = data.category_name || 'Pelatihan', hubLink = '
     <slot />
   </div>
 </Layout>
-
-<script>
-  // Keep the floating shortcut from covering the primary registration action.
-  const registration = document.querySelector('.ce-registration > .ce-button');
-  const shortcut = document.querySelector<HTMLElement>('.home-wa-float');
-  if (registration && shortcut && 'IntersectionObserver' in window) {
-    const observer = new IntersectionObserver(([entry]) => {
-      shortcut.style.visibility = entry.isIntersecting && entry.intersectionRatio >= .5 ? 'hidden' : '';
-    }, {rootMargin: '0px 0px -70px 0px', threshold: [0, .5, 1]});
-    observer.observe(registration);
-  }
-</script>

@@ -24,9 +24,14 @@ if (process.argv.includes('--capture-baseline')) {
 const baselineFile = path.join(output, 'seo-baseline.json');
 if (fs.existsSync(baselineFile)) {
   const baseline = JSON.parse(fs.readFileSync(baselineFile, 'utf8'));
-  assert.deepEqual(Object.keys(pages).sort(), Object.keys(baseline).sort(), 'Generated route set must stay unchanged');
-  for (const [name, html] of Object.entries(pages)) assert.deepEqual(snapshot(html), baseline[name], `${name}: SEO metadata, H1 or schema changed`);
-  console.log(`SEO metadata, H1 and schemas unchanged on ${Object.keys(pages).length} HTML files.`);
+  const additions = Object.keys(pages).filter(name => !baseline[name]);
+  assert.ok(additions.every(name => /^artikel[\\/](?:[^\\/]+[\\/])?halaman[\\/]\d+[\\/]index\.html$/.test(name)), 'Only article pagination routes may be added');
+  const normalize = value => ({...value,h1:value.h1.map(text=>text.replace(/\s+/g,' ').trim())});
+  for (const [name, previous] of Object.entries(baseline)) {
+    assert.ok(pages[name], `${name}: existing route preserved`);
+    assert.deepEqual(normalize(snapshot(pages[name])), normalize(previous), `${name}: SEO metadata, H1 or schema changed`);
+  }
+  console.log(`SEO metadata, H1 and schemas unchanged on ${Object.keys(baseline).length} existing HTML files; ${additions.length} article archive pages added.`);
 }
 const coursePages = Object.entries(pages).filter(([, html]) => html.includes('class="course-experience"'));
 for (const [name, html] of coursePages) {

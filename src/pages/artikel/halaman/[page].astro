@@ -1,0 +1,8 @@
+---
+import ArticleArchive from '../../../components/articles/ArticleArchive.astro';
+import {getArticleCatalog,ARTICLE_PAGE_SIZE,archiveUrl} from '../../../lib/articles';
+export async function getStaticPaths(){const catalog=await getArticleCatalog();return Array.from({length:Math.max(0,Math.ceil(catalog.articles.length/ARTICLE_PAGE_SIZE)-1)},(_,index)=>({params:{page:String(index+2)}}));}
+const page=Number(Astro.params.page);const catalog=await getArticleCatalog();
+const seo={title:`Artikel & Panduan K3 — Halaman ${page} | Wahana Totalita`,description:`Jelajahi artikel dan panduan keselamatan kerja, lingkungan, pertambangan, ISO dan SMK3. Halaman ${page}.`,canonical:`https://wahanatotalita.com${archiveUrl(page)}`};
+---
+<ArticleArchive articles={catalog.articles} {seo} {page} h1={`Pusat Panduan & Edukasi K3 — Halaman ${page}`} description="Temukan panduan berikutnya untuk kebutuhan kerja dan pengembangan kompetensi Anda."/>

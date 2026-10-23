@@ -1,0 +1,8 @@
+---
+import ActionLink from '../shared/ActionLink.astro';
+import {waUrl} from '../../lib/images';
+interface Props {title:string;scheduleUrl?:string;}
+const {title,scheduleUrl='/jadwal/'}=Astro.props;
+const message=`Halo Wahana Totalita, saya membaca artikel "${title}" dan ingin konsultasi program pelatihan K3 terkait.`;
+---
+<section class="ar-conversion"><div><p class="ui-kicker">SERTIFIKASI KEMNAKER &amp; BNSP</p><h2>Tingkatkan Kompetensi K3 Perusahaan Anda</h2><p>Wahana Totalita melayani sertifikasi resmi KEMNAKER RI dan BNSP di seluruh Indonesia — kelas online via Zoom, tatap muka di Training Center, dan in-house training di lokasi kerja Anda.</p></div><div class="ar-conversion-actions"><ActionLink href={waUrl(message)} label="Tanya Jadwal & Biaya via WA" icon="whatsapp" external/><ActionLink href={scheduleUrl} label="Lihat Jadwal Pelatihan" secondary/></div></section>

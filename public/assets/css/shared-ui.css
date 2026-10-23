@@ -1,0 +1,39 @@
+/* Shared actions and contact surface. Colours come from tokens.css. */
+.ui-container { width: min(1240px, calc(100% - 64px)); margin-inline: auto; }
+.ui-kicker { color: var(--text-subtle); font-size: 10px; font-weight: 700; letter-spacing: .12em; line-height: 1.7; text-transform: uppercase; }
+.ui-action { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 46px; padding: 12px 18px; border: 1px solid var(--lead-action); border-radius: 8px; background: var(--lead-action); color: var(--on-brand); font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 650; line-height: 1.6; text-decoration: none; transition: background .18s ease, transform .18s ease; box-sizing: border-box; }
+.ui-action:hover { background: var(--lead-action-hover); color: var(--on-brand); }
+.ui-action svg { flex-shrink: 0; }
+.ui-action-secondary { border-color: var(--border); background: var(--surface); color: var(--text); }
+.ui-action-secondary:hover { background: var(--surface-subtle); color: var(--text); }
+.ui-action:focus-visible { outline: 3px solid var(--lead-action); outline-offset: 3px; }
+.site-contact { position: fixed; right: 24px; bottom: 24px; z-index: 998; font-family: 'Inter', sans-serif; color: var(--text); line-height: 1.7; }
+.site-contact *, .site-contact *::before, .site-contact *::after { box-sizing: border-box; }
+.contact-trigger { display: flex; align-items: center; justify-content: center; gap: 11px; min-height: 56px; padding: 8px 17px 8px 8px; list-style: none; border: 1px solid var(--slate-700); border-radius: var(--radius-full); background: var(--slate-900); color: var(--on-brand); box-shadow: var(--shadow-lg); cursor: pointer; font-size: 12px; font-weight: 600; transition: transform .2s ease, background .2s ease; }
+.contact-trigger::-webkit-details-marker { display: none; }
+.contact-trigger:hover { transform: translateY(-2px); background: var(--slate-800); }
+.contact-trigger-icon { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; background: var(--lead-action); }
+.contact-trigger-plus { font-size: 20px; font-weight: 400; margin-left: 3px; transition: transform .2s ease; }
+.site-contact[open] .contact-trigger-plus { transform: rotate(45deg); }
+.contact-panel { position: absolute; right: 0; bottom: calc(100% + 12px); width: 340px; max-width: calc(100vw - 32px); max-height: calc(100dvh - 180px); overflow: auto; padding: 23px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface); box-shadow: var(--shadow-lg); }
+.site-contact[open] .contact-panel { animation: contact-open .22s ease-out; }
+.contact-panel-top { display: flex; justify-content: space-between; align-items: center; gap: 18px; margin-bottom: 19px; }
+.contact-panel-top > span { color: var(--text-subtle); font-size: 9px; font-weight: 700; letter-spacing: .1em; }
+.contact-close { display: grid; place-items: center; width: 32px; height: 32px; padding: 0; border: 1px solid var(--border); border-radius: 6px; background: var(--surface-subtle); color: var(--text); font-size: 23px; cursor: pointer; }
+.contact-panel h2 { margin: 0 0 10px; font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text); font-size: 22px; font-weight: 750; line-height: 1.35; letter-spacing: -.035em; }
+.contact-panel > p { color: var(--text-muted); margin: 0 0 20px; font-size: 12px; line-height: 1.85; }
+.contact-topics { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 17px; }
+.contact-topics a { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 13px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface-subtle); color: var(--text); font-size: 11px; line-height: 1.6; text-decoration: none; transition: border-color .2s ease; }
+.contact-topics a:hover { border-color: var(--lead-action); }
+.contact-panel > .ui-action { display: flex; width: 100%; }
+.site-contact summary:focus-visible, .site-contact a:focus-visible, .site-contact button:focus-visible { outline: 3px solid var(--lead-action); outline-offset: 3px; }
+@keyframes contact-open { from { opacity: 0; transform: translateY(10px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@media (max-width: 768px) {
+  .ui-container { width: calc(100% - 36px); }
+  .site-contact { right: 16px; bottom: calc(78px + env(safe-area-inset-bottom, 0px)); }
+  .contact-trigger { min-height: 48px; padding: 6px 12px 6px 6px; gap: 8px; font-size: 11px; }
+  .contact-trigger-icon { width: 34px; height: 34px; }
+  .contact-trigger-plus { font-size: 18px; }
+  .contact-panel { padding: 21px; }
+}
+@media (prefers-reduced-motion: reduce) { .site-contact *, .ui-action { animation: none !important; transition: none; } }

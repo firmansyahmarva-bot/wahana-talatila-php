@@ -1,0 +1,42 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumb from '../Breadcrumb.astro';
+import Icon from '../home/HomeIcon.astro';
+import CourseFaq from '../pelatihan/CourseFaq.astro';
+import TrainingCard from '../TrainingCard.astro';
+import ArticleCard from './ArticleCard.astro';
+import ArticleToc from './ArticleToc.astro';
+import ArticleConversion from './ArticleConversion.astro';
+import {getArticleSeo} from '../../lib/articleSeo';
+import {getArticleCatalog,prepareArticleContent,readingMinutes,articleDate,topicFor,ARTICLE_TOPICS,type ArticleRecord} from '../../lib/articles';
+import {waUrl} from '../../lib/images';
+interface Props {data:ArticleRecord;}
+const {data}=Astro.props;const seo=getArticleSeo('article',data);
+const catalog=await getArticleCatalog();const related=catalog.related(data);
+const content=prepareArticleContent(data.content || '');
+const topic=ARTICLE_TOPICS.find(topic=>topic.slug===topicFor(data))!;
+const faqs=(Array.isArray(data.faq_list)?data.faq_list:[]).map(item=>({q:item.q||item.question,a:item.a||item.answer}));
+const message=`Halo Wahana Totalita, saya membaca artikel "${data.title}" dan ingin konsultasi program pelatihan K3 terkait.`;
+---
+<Layout {...seo} ogType="article" bodyClass="editorial-page" pageCss={['/assets/css/article-experience.css']} contactUrl={waUrl(message)}>
+  <article class="editorial ar-article">
+    <progress class="ar-progress" max="1" value="0" aria-label="Kemajuan membaca"></progress>
+    <Breadcrumb variant="article-cat" items={[{name:'Beranda',href:'/'},{name:'Artikel',href:'/artikel/'},{name:topic.label,href:`/artikel/${topic.slug}/`},{name:data.title}]}/>
+    <header class="ar-article-header ui-container"><a class="ar-topic-tag" href={`/artikel/${topic.slug}/`}>{data.category||'K3 & Regulasi'}</a><h1>{data.title}</h1>{data.meta_desc&&<p class="ar-lede">{data.meta_desc}</p>}<div class="ar-byline"><span><Icon name="person" size={17}/>{data.author||'Tim Ahli K3'}</span>{data.published_at&&<time datetime={data.published_at}>{articleDate(data.published_at)}</time>}<span>{readingMinutes(data)} menit baca</span></div></header>
+    <div class="ar-reading-grid ui-container">
+      <aside class="ar-sidebar"><ArticleToc headings={content.headings}/><a class="ar-all-topics" href={`/artikel/${topic.slug}/`}>Jelajahi {topic.label}<Icon name="arrow" size={16}/></a></aside>
+      <div class="ar-main">
+        {data.thumbnail&&<figure class="ar-article-image"><img src={data.thumbnail} alt={data.title} width="1200" height="600" loading="lazy" decoding="async"/></figure>}
+        <div class="ar-prose article-body" id="article-content" set:html={content.html}/>
+        {faqs.length>0&&<CourseFaq {faqs} name={data.title} heading="Pertanyaan Umum (FAQ)" id="article-faq"/>}
+        <ArticleConversion title={data.title} scheduleUrl={related.trainings[0]?`/jadwal/${related.trainings[0].slug}/`:undefined}/>
+        {related.trainings.length>0&&<section class="ar-training-section"><p class="ui-kicker">LANJUTKAN KE KOMPETENSI PRAKTIS</p><h2>Pelatihan yang berkaitan dengan panduan ini</h2><div class="ar-training-grid">{related.trainings.map(training=><TrainingCard {training} headingLevel="h3"/>)}</div></section>}
+      </div>
+    </div>
+    {related.articles.length>0&&<section class="ar-related ui-container"><div class="ar-section-title"><div><p class="ui-kicker">PERDALAM TOPIK INI</p><h2>Panduan terkait untuk Anda</h2></div><a href={`/artikel/${topic.slug}/`}>Semua panduan {topic.label}<Icon name="arrow" size={17}/></a></div><div class="ar-card-grid">{related.articles.map(article=><ArticleCard {article} heading="h3"/>)}</div></section>}
+  </article>
+</Layout>
+<script>
+  import {initArticleReader} from '../../lib/articleReaderClient';
+  initArticleReader();
+</script>

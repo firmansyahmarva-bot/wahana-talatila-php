@@ -1,0 +1,9 @@
+---
+interface Props {headings:{id:string;text:string;level:number}[];}
+const {headings}=Astro.props;
+---
+{headings.length>1&&<details class="ar-toc"><summary>Dalam panduan ini<span aria-hidden="true">⌄</span></summary><nav aria-label="Daftar isi artikel"><ol>{headings.map(heading=><li class:list={[{'ar-toc-sub':heading.level===3}]}><a href={`#${encodeURIComponent(heading.id)}`}>{heading.text}</a></li>)}</ol></nav></details>}
+<script>
+  const toc=document.querySelector<HTMLDetailsElement>('.ar-toc');
+  if(toc){const media=matchMedia('(min-width: 1000px)');const adapt=()=>{toc.open=media.matches;};adapt();media.addEventListener('change',adapt);}
+</script>

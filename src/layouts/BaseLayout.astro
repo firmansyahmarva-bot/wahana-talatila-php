@@ -172,6 +172,7 @@ const finalPageCss = pageCss !== undefined ? pageCss : currentConfig.defaultPage
     <link rel="stylesheet" href={versionStylesheet(cssHref)} />
   ))}
   <link rel="stylesheet" href={versionStylesheet('/assets/css/site-shell.css')} />
+  <link rel="stylesheet" href={versionStylesheet('/assets/css/shared-ui.css')} />
 </head>
 <body class={[bodyClass, 'has-site-navigation'].filter(Boolean).join(' ') || undefined} {...bodyAttrs}>
   <HomeHeader lang={lang} contactUrl={contactUrl || currentConfig.waUrl || undefined} />

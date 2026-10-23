@@ -1,8 +1,8 @@
 ---
-interface Props { faqs: { q: string; a: string }[]; name: string; }
-const { faqs, name } = Astro.props;
+interface Props { faqs: { q: string; a: string }[]; name: string; heading?: string; id?: string; }
+const { faqs, name, heading = `Pertanyaan Seputar ${name}`, id = 'faq-pelatihan' } = Astro.props;
 ---
-<section class="pd-section ce-faq" id="faq-pelatihan" aria-labelledby="course-faq-title">
-  <p class="pd-section-eyebrow">FAQ</p><h2 id="course-faq-title">Pertanyaan Seputar {name}</h2>
+<section class="pd-section ce-faq" id={id} aria-labelledby={`${id}-title`}>
+  <p class="pd-section-eyebrow">FAQ</p><h2 id={`${id}-title`}>{heading}</h2>
   <div class="ce-faq-list">{faqs.map(faq => <details><summary>{faq.q}<span aria-hidden="true">+</span></summary><div><p>{faq.a}</p></div></details>)}</div>
 </section>

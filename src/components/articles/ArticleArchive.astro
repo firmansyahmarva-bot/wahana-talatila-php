@@ -1,0 +1,29 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumb from '../Breadcrumb.astro';
+import ArticleCard from './ArticleCard.astro';
+import ArticlePagination from './ArticlePagination.astro';
+import Icon from '../home/HomeIcon.astro';
+import {ARTICLE_TOPICS,ARTICLE_PAGE_SIZE,type ArticleRecord,type ArticleTopic} from '../../lib/articles';
+interface Props {articles:ArticleRecord[];seo:any;h1:string;description:string;topic?:ArticleTopic;page?:number;}
+const {articles,seo,h1,description,topic,page=1}=Astro.props;
+const total=Math.max(1,Math.ceil(articles.length/ARTICLE_PAGE_SIZE));
+const visible=articles.slice((page-1)*ARTICLE_PAGE_SIZE,page*ARTICLE_PAGE_SIZE);
+---
+<Layout {...seo} bodyClass="editorial-page" pageCss={['/assets/css/article-experience.css']}>
+  <div class="editorial ar-archive">
+    <Breadcrumb variant="article-cat" items={[{name:'Beranda',href:'/'},{name:'Artikel',href:topic?'/artikel/':undefined},...(topic?[{name:ARTICLE_TOPICS.find(item=>item.slug===topic)!.label}]:[])]}/>
+    <header class="ar-archive-header ui-container"><p class="ui-kicker">WAWASAN UNTUK DUNIA KERJA YANG LEBIH AMAN</p><h1>{h1}</h1><p>{description}</p></header>
+    <div class="ui-container">
+      <nav class="ar-topics" aria-label="Topik artikel"><a href="/artikel/" aria-current={!topic?'page':undefined}>Semua panduan</a>{ARTICLE_TOPICS.map(item=><a href={`/artikel/${item.slug}/`} aria-current={topic===item.slug?'page':undefined}>{item.label}</a>)}</nav>
+      <div class="ar-library-controls"><p><strong>{articles.length}</strong> artikel dan panduan{page>1&&<span> · Halaman {page} dari {total}</span>}</p><form class="ar-search" action="/artikel/" role="search"><Icon name="search" size={18}/><input type="search" name="q" placeholder="Cari topik, regulasi, atau kompetensi…" aria-label="Cari di semua artikel" autocomplete="off"/><button type="submit">Cari</button></form></div>
+      <p class="ar-search-status" role="status" aria-live="polite"></p><noscript><p>Gunakan pilihan topik dan nomor halaman untuk menjelajahi artikel.</p></noscript>
+      <div class="ar-archive-content"><div class="ar-card-grid">{visible.map(article=><ArticleCard {article}/>)}</div><ArticlePagination {page} {total} {topic}/></div>
+      <div class="ar-search-results" hidden></div>
+    </div>
+  </div>
+</Layout>
+<script>
+  import {initArticleSearch} from '../../lib/articleSearchClient';
+  initArticleSearch();
+</script>

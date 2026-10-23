@@ -1,0 +1,34 @@
+---
+import Icon from '../home/HomeIcon.astro';
+interface Props {href:string;lang?:'id'|'en'|'zh';}
+const {href,lang='id'}=Astro.props;
+const copy={
+ id:{trigger:'Tanya tim kami',title:'Ada yang ingin ditanyakan?',body:'Pilih kebutuhan Anda dan lanjutkan percakapan dengan tim Wahana Totalita di WhatsApp.',primary:'Lanjut ke WhatsApp',dates:'Jadwal & biaya',company:'In-house training',close:'Tutup panel konsultasi'},
+ en:{trigger:'Ask our team',title:'How can we help?',body:'Choose a topic and continue with the Wahana Totalita team on WhatsApp.',primary:'Continue on WhatsApp',dates:'Dates & fees',company:'Corporate training',close:'Close contact panel'},
+ zh:{trigger:'咨询团队',title:'需要了解更多信息？',body:'选择咨询主题，在 WhatsApp 与 Wahana Totalita 团队联系。',primary:'前往 WhatsApp',dates:'日程与费用',company:'企业内训',close:'关闭咨询面板'},
+}[lang];
+function topicLink(topic:string){const url=new URL(href);url.searchParams.set('text',(url.searchParams.get('text')||'')+'\n'+topic);return url.href;}
+---
+<details class="site-contact">
+  <summary class="contact-trigger" aria-controls="site-contact-panel"><span class="contact-trigger-icon"><Icon name="whatsapp" size={22}/></span><span>{copy.trigger}</span><span class="contact-trigger-plus" aria-hidden="true">+</span></summary>
+  <section class="contact-panel" id="site-contact-panel" aria-label={copy.title}>
+    <div class="contact-panel-top"><span>WAHANA TOTALITA</span><button type="button" class="contact-close" aria-label={copy.close}>×</button></div>
+    <h2>{copy.title}</h2><p>{copy.body}</p>
+    <div class="contact-topics"><a href={topicLink(copy.dates)} target="_blank" rel="noopener noreferrer"><Icon name="calendar" size={17}/>{copy.dates}</a><a href={topicLink(copy.company)} target="_blank" rel="noopener noreferrer"><Icon name="users" size={17}/>{copy.company}</a></div>
+    <a class="ui-action home-wa-float" {href} target="_blank" rel="noopener noreferrer">{copy.primary}<Icon name="arrow" size={18}/></a>
+  </section>
+</details>
+<script>
+  const root=document.querySelector<HTMLDetailsElement>('.site-contact');
+  if(root){
+    const trigger=root.querySelector<HTMLElement>('summary');
+    const visible=new Set<Element>();
+    const visibility=()=>{root.style.visibility=!root.open&&visible.size?'hidden':'';};
+    const close=(focus=false)=>{root.open=false;if(focus)trigger?.focus();};
+    root.querySelector('.contact-close')?.addEventListener('click',()=>close(true));
+    document.addEventListener('keydown',event=>{if(event.key==='Escape'&&root.open)close(true);});
+    document.addEventListener('click',event=>{if(root.open&&event.target instanceof Node&&!root.contains(event.target))close();});
+    root.addEventListener('toggle',visibility);
+    if('IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>{for(const entry of entries){if(entry.isIntersecting&&entry.intersectionRatio>=.5)visible.add(entry.target);else visible.delete(entry.target);}visibility();},{rootMargin:'0px 0px -70px 0px',threshold:[0,.5,1]});document.querySelectorAll('.ce-registration > .ce-button, .ar-conversion .ui-action:not(.ui-action-secondary)').forEach(node=>observer.observe(node));}
+  }
+</script>

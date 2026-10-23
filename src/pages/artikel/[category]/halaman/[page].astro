@@ -1,0 +1,11 @@
+---
+import ArticleArchive from '../../../../components/articles/ArticleArchive.astro';
+import {getArticleCatalog,ARTICLE_PAGE_SIZE,archiveUrl,type ArticleTopic} from '../../../../lib/articles';
+import {getArticleSeo,CATEGORY_TITLES} from '../../../../lib/articleSeo';
+import {getCollection} from 'astro:content';
+export async function getStaticPaths(){const catalog=await getArticleCatalog();const categories=await getCollection('categories');return categories.flatMap(category=>Array.from({length:Math.max(0,Math.ceil(catalog.forTopic(category.data.slug as ArticleTopic).length/ARTICLE_PAGE_SIZE)-1)},(_,index)=>({params:{category:category.data.slug,page:String(index+2)},props:{category:category.data}})));}
+const {category}=Astro.props;const topic=category.slug as ArticleTopic;const page=Number(Astro.params.page);const catalog=await getArticleCatalog();
+const base=getArticleSeo('category',{category});const canonical=`https://wahanatotalita.com${archiveUrl(page,topic)}`;
+const seo={...base,title:`${base.title} — Halaman ${page}`,canonical,schemas:[{'@context':'https://schema.org','@type':'CollectionPage',name:`${CATEGORY_TITLES[topic].h1} — Halaman ${page}`,description:base.description,url:canonical}]};
+---
+<ArticleArchive articles={catalog.forTopic(topic)} {seo} {topic} {page} h1={`${CATEGORY_TITLES[topic].h1} — Halaman ${page}`} description={base.description}/>

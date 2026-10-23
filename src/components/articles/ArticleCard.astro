@@ -1,0 +1,13 @@
+---
+import Icon from '../home/HomeIcon.astro';
+import { articleDate, readingMinutes, topicFor, ARTICLE_TOPICS, type ArticleRecord } from '../../lib/articles';
+interface Props {article:ArticleRecord; heading?:'h2'|'h3';}
+const {article,heading='h2'}=Astro.props;const Heading=heading;
+const topic=ARTICLE_TOPICS.find(topic=>topic.slug===topicFor(article))!;
+---
+<article class="ar-card">
+  <div class="ar-card-meta"><a href={`/artikel/${topic.slug}/`}>{topic.label}</a><span>{readingMinutes(article)} menit baca</span></div>
+  <Heading><a href={`/artikel/${article.slug}/`}>{article.title}</a></Heading>
+  <p>{article.meta_desc || article.title}</p>
+  <div class="ar-card-bottom"><time datetime={article.published_at || undefined}>{articleDate(article.published_at)}</time><a href={`/artikel/${article.slug}/`} aria-label={`Baca ${article.title}`}>Baca panduan<Icon name="arrow" size={16}/></a></div>
+</article>
