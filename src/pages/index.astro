@@ -2,38 +2,72 @@
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import HomeHero from '../components/design/HomeHero.astro';
-import SectionHeading from '../components/design/SectionHeading.astro';
-import CourseCard from '../components/design/CourseCard.astro';
-import ScheduleList from '../components/design/ScheduleList.astro';
-import TrustPanel from '../components/design/TrustPanel.astro';
-import Action from '../components/design/Action.astro';
+import HomeContactDock from '../components/design/HomeContactDock.astro';
+import Finder from '../components/home/HomeFinder.astro';
+import CourseCard from '../components/home/HomeCourseCard.astro';
+import Schedule from '../components/home/HomeSchedule.astro';
+import Icon from '../components/home/HomeIcon.astro';
 import { getUpcomingBatches } from '../lib/jadwal';
 import { waUrl } from '../lib/images';
+
 const trainings = (await getCollection('trainings')).filter(t => t.data.is_active !== 0);
-const prioritySlugs = ['pelatihan-ahli-k3-umum-sertifikasi-kemnaker-ri', 'ak3-bnsp', 'pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri', 'pelatihan-pop-pertambangan-sertifikasi-bnsp-online'];
-const featured = prioritySlugs.map(slug => trainings.find(t => t.data.slug === slug)).filter((t): t is NonNullable<typeof t> => Boolean(t));
-const batches = prioritySlugs.flatMap(slug => getUpcomingBatches(slug, undefined, 1)).sort((a,b) => a.start_date.localeCompare(b.start_date));
-const fields = [
-  {n:'01', title:'Keselamatan & Kesehatan Kerja', label:'K3', text:'Kompetensi untuk personel, operator, dan profesional keselamatan kerja.', href:'/keselamatan-kerja/'},
-  {n:'02', title:'Lingkungan', label:'LINGKUNGAN', text:'Pengelolaan limbah, pengendalian pencemaran, dan kompetensi lingkungan.', href:'/k3-lingkungan/'},
-  {n:'03', title:'ISO & Sistem Manajemen', label:'MANAJEMEN', text:'Bangun pemahaman sistem dan kemampuan audit internal perusahaan.', href:'/pelatihan-iso/'},
-  {n:'04', title:'Pertambangan', label:'MINING', text:'Pengembangan kompetensi pengawas operasional industri pertambangan.', href:'/k3-pertambangan/'}
+const selections = [
+  { slug: 'pelatihan-ahli-k3-umum-sertifikasi-kemnaker-ri', title: 'Ahli K3 Umum', image: '/galeri/thumbs/DSC_0196.webp', imageAlt: 'Dokumentasi kelas Wahana Totalita' },
+  { slug: 'pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri', title: 'Operator Forklift', image: '/galeri/thumbs/DSC_0166.webp', imageAlt: 'Dokumentasi peserta pelatihan operator' },
+  { slug: 'pelatihan-damkar-paralel-kelas-dcba-sertifikasi-kemnaker-ri', title: 'Petugas Damkar', image: '/galeri/thumbs/17.webp', imageAlt: 'Dokumentasi praktik pemadaman' },
+  { slug: 'pelatihan-penanggung-jawab-operasional-pengolahan-air-limbah-popal-sertifikasi-bnsp', title: 'Pengelolaan Lingkungan', image: '/galeri/thumbs/DSC_0034.webp', imageAlt: 'Dokumentasi pembelajaran di kelas' },
+];
+const featured = selections.flatMap(selection => {
+  const training = trainings.find(t => t.data.slug === selection.slug);
+  return training ? [{ ...selection, training: training.data }] : [];
+});
+const programOptions = [...trainings].sort((a, b) => a.data.name.localeCompare(b.data.name, 'id')).map(t => ({ slug: t.data.slug, name: t.data.name, certification: t.data.certification || '' }));
+const schedules = featured.slice(0, 3).flatMap(item => {
+  const batch = getUpcomingBatches(item.slug, undefined, 1)[0];
+  return batch ? [{ title: item.title, image: item.image, slug: item.slug, batch }] : [];
+});
+const documentation = [
+  { image: '/galeri/thumbs/DSC_0200.webp', alt: 'Instruktur memberikan materi kepada peserta pelatihan di kelas', caption: 'Pembelajaran bersama instruktur' },
+  { image: '/galeri/thumbs/DSC_0039.webp', alt: 'Peserta berhelm keselamatan mengamati peralatan di fasilitas industri', caption: 'Kunjungan & pembelajaran lapangan' },
+  { image: '/galeri/thumbs/DSC_0100.webp', alt: 'Foto bersama peserta dalam dokumentasi kegiatan Wahana Totalita', caption: 'Peserta dari berbagai bidang industri' },
 ];
 const faqs = [
-  {q:'Bagaimana memilih program yang sesuai?', a:'Mulai dari bidang pekerjaan dan jenis sertifikasi yang dibutuhkan perusahaan. Tim kami dapat membantu menjelaskan persyaratan, materi, dan pilihan jadwal sebelum Anda mendaftar.'},
-  {q:'Apakah tersedia pelatihan online?', a:'Tersedia pilihan online dan tatap muka sesuai program. Periksa halaman program untuk mengetahui mode belajar dan kebutuhan praktiknya.'},
-  {q:'Apa yang termasuk dalam biaya pelatihan?', a:'Cakupan biaya berbeda untuk setiap program. Minta penawaran tertulis yang merinci materi, ujian, sertifikasi, dan fasilitas sebelum melakukan pembayaran.'},
-  {q:'Apakah bisa mengadakan pelatihan untuk satu perusahaan?', a:'Bisa. Diskusikan jumlah peserta, lokasi, kompetensi yang dibutuhkan, dan jadwal yang diinginkan untuk mendapatkan penawaran in-house training.'}
+  { q: 'Bagaimana memilih sertifikasi yang sesuai?', a: 'Sesuaikan pilihan dengan profesi, persyaratan perusahaan, dan jenis kompetensi yang dibutuhkan. Tim kami membantu menjelaskan perbedaan program, persyaratan peserta, dan proses sertifikasinya sebelum Anda mendaftar.' },
+  { q: 'Apakah bisa pelatihan in-house di perusahaan kami?', a: 'Bisa. Sampaikan bidang pelatihan, jumlah peserta, lokasi, dan jadwal yang Anda inginkan. Tim kami akan menyusun penawaran sesuai kebutuhan kompetensi dan operasional perusahaan.' },
+  { q: 'Bagaimana cara mendaftar pelatihan?', a: 'Pilih program lalu hubungi kami melalui WhatsApp untuk konfirmasi jadwal dan ketersediaan. Admin akan menjelaskan persyaratan, rincian biaya, serta langkah pendaftaran dan pembayaran.' },
 ];
-const schemas = [{ '@context':'https://schema.org', '@type':'FAQPage', mainEntity:faqs.map(f => ({'@type':'Question',name:f.q,acceptedAnswer:{'@type':'Answer',text:f.a}})) }, { '@context':'https://schema.org', '@type':'LocalBusiness', name:'PT Wahana Totalita Konsultan',url:'https://wahanatotalita.com',telephone:'+6287759151278',address:{'@type':'PostalAddress',streetAddress:'Jl. Wonosari KM 8.5, Berbah',addressLocality:'Sleman',addressRegion:'D.I. Yogyakarta',postalCode:'55573',addressCountry:'ID'}}];
+const schemas = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+  { '@context': 'https://schema.org', '@type': 'LocalBusiness', name: 'PT Wahana Totalita Konsultan', url: 'https://wahanatotalita.com', telephone: '+6287759151278', address: { '@type': 'PostalAddress', streetAddress: 'Jl. Wonosari KM 8.5, Berbah', addressLocality: 'Sleman', addressRegion: 'D.I. Yogyakarta', postalCode: '55573', addressCountry: 'ID' } },
+];
 ---
-<Layout title="Pelatihan K3 Resmi Kemnaker & BNSP | Wahana Konsultan K3" description="Temukan pelatihan K3, lingkungan, ISO, dan pertambangan bersama Wahana Totalita Konsultan. Online, tatap muka, dan in-house training." isHome canonical="https://wahanatotalita.com/" pageCss={['/assets/css/page/home.css']} bodyClass="wt-home" schemas={schemas}>
+<Layout title="Pelatihan K3 Resmi Kemnaker & BNSP | Wahana Konsultan K3" description="Temukan pelatihan K3, lingkungan, dan sertifikasi Kemnaker RI & BNSP. Konsultasikan biaya, jadwal, serta kebutuhan pelatihan individu dan perusahaan." isHome canonical="https://wahanatotalita.com/" pageCss={['/assets/css/page/home.css']} bodyClass="wt-home home-market" schemas={schemas}>
   <HomeHero programCount={trainings.length} />
-  <div class="wt-intro-strip"><div class="wt-shell"><p>JALUR SERTIFIKASI</p><strong>Kemnaker RI</strong><span aria-hidden="true">/</span><strong>BNSP</strong><p class="wt-strip-note">Pilih sesuai program &amp; kebutuhan profesi</p></div></div>
-  <section class="wt-section" id="produk"><div class="wt-shell"><SectionHeading eyebrow="PILIH LANGKAH BERIKUTNYA" title="Program untuk perkembangan Anda." description="Mulai dari pilihan utama kami, atau jelajahi seluruh katalog pelatihan."><a class="wt-text-link" href="/pelatihan/">Semua program ↗</a></SectionHeading><div class="wt-course-grid">{featured.map(t => <CourseCard name={t.data.name} slug={t.data.slug} certification={t.data.certification} mode={t.data.mode} price={t.data.price} image={t.data.image_path} category={t.data.category_slug} duration={t.data.duration_days} />)}</div><form class="wt-program-search" action="/pelatihan/" method="get" role="search"><label for="home-program-search">Sudah tahu program yang dicari?</label><div><input id="home-program-search" name="q" type="search" placeholder="Contoh: forklift, P3K, ahli K3..." /><button type="submit">Cari program <span aria-hidden="true">→</span></button></div></form></div></section>
-  <section class="wt-section wt-section-alt" id="layanan"><div class="wt-shell"><SectionHeading eyebrow="EMPAT BIDANG KEAHLIAN" title="Temukan bidang Anda." /><div class="wt-fields">{fields.map(field => <a href={field.href}><span class="wt-field-top"><span>{field.label}</span><span>{field.n}</span></span><h3>{field.title}</h3><p>{field.text}</p><span class="wt-field-link">Jelajahi program <span aria-hidden="true">↗</span></span></a>)}</div></div></section>
-  <section class="wt-section" id="jadwal-terdekat"><div class="wt-shell"><SectionHeading eyebrow="RENCANAKAN WAKTU BELAJAR" title="Jadwal berikutnya." description="Temukan waktu yang sesuai. Konfirmasikan jadwal final dan ketersediaan dengan tim kami."><a class="wt-text-link" href="/jadwal/">Kalender lengkap ↗</a></SectionHeading><ScheduleList batches={batches} /></div></section>
-  <TrustPanel />
-  <section class="wt-section"><div class="wt-shell"><div class="wt-business"><div><p class="wt-eyebrow">UNTUK PERUSAHAAN &amp; INSTANSI</p><h2>Satu tim.<br />Tujuan yang sama.</h2><p>Rencanakan pelatihan sesuai kebutuhan kompetensi, lokasi, dan operasional perusahaan Anda.</p><Action href="/in-house-training/" variant="light">Diskusikan In-House Training</Action></div><ol><li><span>01</span><div><h3>Ceritakan kebutuhan tim</h3><p>Tentukan bidang, jumlah peserta, dan target kompetensi.</p></div></li><li><span>02</span><div><h3>Susun program bersama</h3><p>Diskusikan materi, mode belajar, jadwal, dan penawaran.</p></div></li><li><span>03</span><div><h3>Siapkan pelaksanaan</h3><p>Lengkapi persyaratan dan koordinasikan kebutuhan peserta.</p></div></li></ol></div></div></section>
-  <section class="wt-section wt-section-alt"><div class="wt-shell wt-faq-grid"><div><p class="wt-eyebrow">SEBELUM ANDA MENDAFTAR</p><h2>Masih ada<br />pertanyaan?</h2><p class="wt-description">Kami bantu Anda memahami pilihan dan prosesnya.</p><a class="wt-text-link" href={waUrl('Halo, saya ingin bertanya tentang persyaratan dan proses pendaftaran pelatihan.')} target="_blank" rel="noopener noreferrer">Tanya tim kami ↗</a></div><div class="wt-faq">{faqs.map(f => <details><summary>{f.q}<span aria-hidden="true">+</span></summary><p>{f.a}</p></details>)}</div></div></section>
+  <Finder programs={programOptions} />
+
+  <section class="hm-section" id="produk"><div class="hm-container">
+    <div class="hm-section-heading"><h2>Program Pilihan</h2><a class="hm-text-link" href="/pelatihan/">Lihat semua program<Icon name="arrow" size={17} /></a></div>
+    <div class="hm-course-grid">{featured.map(item => <CourseCard title={item.title} name={item.training.name} slug={item.slug} image={item.image} imageAlt={item.imageAlt} certification={item.training.certification} mode={item.training.mode} duration={item.training.duration_days} />)}</div>
+    <nav class="hm-category-links" aria-label="Bidang pelatihan lainnya"><span>Bidang lainnya:</span><a href="/keselamatan-kerja/">Keselamatan Kerja</a><a href="/pelatihan-iso/">ISO &amp; Manajemen</a><a href="/k3-pertambangan/">Pertambangan</a><a href="/k3-lingkungan/">Lingkungan</a></nav>
+  </div></section>
+
+  <section class="hm-section" id="jadwal-terdekat"><div class="hm-container">
+    <div class="hm-section-heading"><h2>Jadwal Pelatihan</h2><a class="hm-text-link" href="/jadwal/">Lihat semua jadwal<Icon name="arrow" size={17} /></a></div>
+    <Schedule rows={schedules} />
+    <p class="hm-section-note">Jadwal dan ketersediaan peserta perlu dikonfirmasi kepada admin sebelum pendaftaran.</p>
+  </div></section>
+
+  <section class="hm-section hm-proof"><div class="hm-container">
+    <div class="hm-section-heading"><h2>Pelatihan nyata. Kompetensi nyata.</h2><a class="hm-text-link" href="/galeri/">Lihat dokumentasi<Icon name="arrow" size={17} /></a></div>
+    <div class="hm-proof-grid">{documentation.map(photo => <a href="/galeri/" class="hm-proof-photo"><img src={photo.image} alt={photo.alt} width="640" height="400" loading="lazy" decoding="async" /><span>{photo.caption}</span></a>)}</div>
+    <nav class="hm-proof-links" aria-label="Kenali Wahana Totalita"><a href="/galeri/"><Icon name="camera" />Dokumentasi kegiatan<Icon name="arrow" size={16} /></a><a href="/instruktur/"><Icon name="person" />Profil instruktur<Icon name="arrow" size={16} /></a><a href="/perusahaan/"><Icon name="document" />Profil &amp; legalitas<Icon name="arrow" size={16} /></a></nav>
+  </div></section>
+
+  <section class="hm-section hm-corporate-wrap"><div class="hm-container"><div class="hm-corporate">
+    <div><p class="hm-eyebrow">UNTUK PERUSAHAAN &amp; INSTANSI</p><h2>Siapkan kompetensi tim Anda.</h2><p>Program in-house training untuk perusahaan, dengan materi yang dapat disesuaikan dengan kebutuhan industri Anda.</p><a class="hm-button hm-button-orange" href={waUrl('Halo Wahana Totalita, kami ingin konsultasi in-house training untuk perusahaan. Mohon info program dan penawarannya.')} target="_blank" rel="noopener noreferrer">Konsultasi In-House Training<Icon name="arrow" size={18} /></a></div>
+    <img src="/galeri/thumbs/IMG_0035.webp" alt="Sesi pelatihan bersama instruktur dan peserta perusahaan" width="640" height="400" loading="lazy" decoding="async" />
+  </div></div></section>
+
+  <section class="hm-section hm-faq-section"><div class="hm-container"><div class="hm-section-heading"><h2>Pertanyaan yang sering ditanyakan</h2><a class="hm-text-link" href={waUrl('Halo Wahana Totalita, saya ingin bertanya mengenai program dan proses pendaftaran pelatihan.')} target="_blank" rel="noopener noreferrer">Tanya tim kami<Icon name="arrow" size={17} /></a></div><div class="hm-faq-grid">{faqs.map((faq, index) => <details><summary><span>{index + 1}. {faq.q}</span><span class="hm-faq-plus" aria-hidden="true">+</span></summary><p>{faq.a}</p></details>)}</div></div></section>
+  <HomeContactDock />
 </Layout>

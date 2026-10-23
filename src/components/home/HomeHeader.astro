@@ -1,0 +1,23 @@
+---
+import Icon from './HomeIcon.astro';
+import { waUrl } from '../../lib/images';
+const links = [{ href: '/pelatihan/', label: 'Program' }, { href: '/jadwal/', label: 'Jadwal' }, { href: '/in-house-training/', label: 'Perusahaan' }, { href: '/perusahaan/', label: 'Tentang Kami' }];
+---
+<a class="wt-skip" href="#konten-utama">Lewati ke konten utama</a>
+<div class="hm-utility"><div class="hm-container"><span>Yogyakarta <span aria-hidden="true">·</span> Melayani seluruh Indonesia</span><a href="tel:+6287759151278"><Icon name="phone" size={13} />0877-5915-1278</a></div></div>
+<header class="hm-header"><div class="hm-container hm-header-row">
+  <a class="hm-logo" href="/" aria-label="Wahana Totalita — Beranda"><img src="/assets/img/logo-wt.png" alt="" width="56" height="40" /><span>WAHANA TOTALITA</span></a>
+  <form class="hm-header-search" action="/pelatihan/" role="search"><Icon name="search" size={18} /><input type="search" name="q" aria-label="Cari program pelatihan" placeholder="Cari pelatihan, misalnya Ahli K3, Forklift…" /><button type="submit" aria-label="Cari program"><Icon name="arrow" size={17} /></button></form>
+  <nav class="hm-desktop-nav" aria-label="Navigasi utama">{links.map(link => <a href={link.href}>{link.label}</a>)}</nav>
+  <a class="hm-nav-wa" href={waUrl('Halo Wahana Totalita, saya ingin konsultasi program, biaya, dan jadwal pelatihan.')} target="_blank" rel="noopener noreferrer"><Icon name="whatsapp" size={19} />WhatsApp</a>
+  <details class="hm-mobile-menu"><summary aria-label="Buka menu navigasi"><Icon name="menu" size={23} /></summary><div><form action="/pelatihan/" role="search"><input type="search" name="q" aria-label="Cari pelatihan di menu" placeholder="Cari pelatihan…" /><button type="submit" aria-label="Cari"><Icon name="search" /></button></form><nav aria-label="Navigasi ponsel">{links.map(link => <a href={link.href}>{link.label}<Icon name="arrow" size={17} /></a>)}<a href="/galeri/">Dokumentasi Kegiatan<Icon name="arrow" size={17} /></a></nav></div></details>
+</div></header>
+<script>
+  const menu = document.querySelector<HTMLDetailsElement>('.hm-mobile-menu');
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && menu?.open) { menu.open = false; menu.querySelector('summary')?.focus(); }
+  });
+  document.addEventListener('click', (event) => {
+    if (menu?.open && event.target instanceof Node && !menu.contains(event.target)) menu.open = false;
+  });
+</script>

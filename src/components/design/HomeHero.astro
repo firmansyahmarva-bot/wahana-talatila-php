@@ -1,14 +1,18 @@
 ---
-import Action from './Action.astro';
+import Icon from '../home/HomeIcon.astro';
 import { waUrl } from '../../lib/images';
 interface Props { programCount: number; }
 const { programCount } = Astro.props;
 ---
-<section class="wt-hero"><div class="wt-shell wt-hero-grid"><div class="wt-hero-copy">
-  <p class="wt-eyebrow"><span class="wt-mark" aria-hidden="true"></span> KOMPETENSI UNTUK DUNIA KERJA</p>
-  <h1>Langkah profesional.<br /><em>Kerja lebih aman.</em></h1>
-  <p class="wt-hero-description">Pelatihan K3 dan sertifikasi Kemnaker RI &amp; BNSP. Temukan program yang sesuai dengan profesi Anda, bersama Wahana Totalita Konsultan.</p>
-  <div class="wt-actions"><Action href="/pelatihan/">Temukan Program</Action><Action href="/jadwal/" variant="outline">Lihat Jadwal</Action></div>
-  <div class="wt-hero-note"><span aria-hidden="true">✓</span> Online &amp; tatap muka <span aria-hidden="true">·</span> Individu &amp; perusahaan</div>
-  <div class="wt-hero-facts"><div><strong>{programCount}</strong><span>Program aktif</span></div><div><strong>4 bidang</strong><span>K3, lingkungan, ISO, mining</span></div><div><strong>Yogyakarta</strong><span>Melayani seluruh Indonesia</span></div></div>
-</div><div class="wt-hero-visual"><img src="/assets/img/hero-bg.webp" alt="Pekerja dengan perlengkapan keselamatan di area konstruksi" width="1600" height="1060" fetchpriority="high" decoding="async" /><div class="wt-photo-label"><span>KESELAMATAN DIMULAI DARI KOMPETENSI</span><p>Bekal yang tepat.<br />Dampak yang nyata.</p></div><a class="wt-photo-link" href={waUrl('Halo Wahana Totalita, bantu saya memilih pelatihan yang sesuai dengan profesi saya.')} target="_blank" rel="noopener noreferrer"><span>Belum tahu harus mulai dari mana?<strong>Bicara dengan konsultan</strong></span><span aria-hidden="true">↗</span></a></div></div></section>
+<section class="hm-hero"><div class="hm-container hm-hero-grid">
+  <div class="hm-hero-copy">
+    <p class="hm-eyebrow">WAHANA TOTALITA KONSULTAN</p>
+    <h1>Pelatihan &amp;<br />Sertifikasi K3</h1>
+    <p class="hm-hero-certification">Kemnaker RI &amp; BNSP</p>
+    <p class="hm-hero-description">Pilih program sesuai profesi Anda.<br class="hm-desktop-break" /> Online, tatap muka, dan in-house training.</p>
+    <div class="hm-hero-actions"><a class="hm-button hm-button-orange" href={waUrl('Halo Wahana Totalita, saya ingin tanya biaya, jadwal, dan persyaratan pelatihan K3.')} target="_blank" rel="noopener noreferrer">Tanya Biaya &amp; Jadwal<Icon name="arrow" size={19} /></a><a class="hm-button hm-button-dark-outline" href="#produk">Lihat Program</a></div>
+    <div class="hm-hero-benefits"><span><Icon name="monitor" size={18} />Online &amp; Tatap Muka</span><span><Icon name="users" size={18} />Individu &amp; Perusahaan</span></div>
+    <p class="hm-hero-count">{programCount} program aktif <span aria-hidden="true">·</span> Konsultasikan pilihan Anda sebelum mendaftar</p>
+  </div>
+  <figure class="hm-hero-picture"><img src="/galeri/17.jpeg" srcset="/galeri/thumbs/17.webp 640w, /galeri/17.jpeg 1280w" sizes="(max-width: 768px) 100vw, 55vw" alt="Instruktur dan peserta Wahana Totalita mempraktikkan penggunaan selang pemadam di luar ruangan" width="1280" height="960" fetchpriority="high" decoding="async" /><figcaption><span class="hm-photo-dot" aria-hidden="true"></span>Dokumentasi pelatihan Wahana Totalita<a href="/galeri/">Lihat galeri<Icon name="arrow" size={15} /></a></figcaption></figure>
+</div></section>
