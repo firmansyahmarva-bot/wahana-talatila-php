@@ -1,0 +1,36 @@
+---
+import Layout, { type Props as LayoutProps } from '../../layouts/Layout.astro';
+import CourseHero, { type Props as HeroProps } from './CourseHero.astro';
+import CourseSectionNav from './CourseSectionNav.astro';
+import CourseSchedules from './CourseSchedules.astro';
+import CourseInhouse from './CourseInhouse.astro';
+import { waUrl } from '../../lib/images';
+import type { BatchItem } from '../../lib/jadwal';
+interface Props extends Pick<LayoutProps, 'title' | 'description' | 'canonical' | 'ogImage' | 'schemas'> {
+  data: any;
+  batches: BatchItem[];
+  category?: string;
+  hubLink?: string;
+  certification: string;
+  message: string;
+  inhouseMessage: string;
+  hasCurriculum: boolean;
+  hasFaq?: boolean;
+  schedule?: boolean;
+  heroTitle?: string;
+  heroSummary?: string;
+  breadcrumbs?: HeroProps['breadcrumbs'];
+  poster?: HeroProps['poster'];
+  updatedAt?: string;
+}
+const { data, batches, category = data.category_name || 'Pelatihan', hubLink = '/pelatihan/', certification, message, inhouseMessage, hasCurriculum, hasFaq = false, schedule = false, heroTitle, heroSummary, breadcrumbs, poster, updatedAt, ...seo } = Astro.props;
+---
+<Layout {...seo} bodyClass={schedule ? 'course-page schedule-program-page' : 'course-page'} bodyAttrs={{'data-training-slug': data.slug}} pageCss={['/assets/css/course-experience.css']} contactUrl={waUrl(message)}>
+  <div class="course-experience">
+    <CourseHero {data} {category} {hubLink} {certification} {message} {inhouseMessage} nextBatch={batches[0]} title={heroTitle} summary={heroSummary} {breadcrumbs} {poster} {schedule} />
+    <CourseSectionNav {hasCurriculum} {hasFaq} />
+    <CourseSchedules name={data.name} slug={data.slug} isActive={data.is_active !== 0} batches={batches} price={data.price} {schedule} {updatedAt} />
+    <CourseInhouse name={data.name} message={inhouseMessage} />
+    <slot />
+  </div>
+</Layout>

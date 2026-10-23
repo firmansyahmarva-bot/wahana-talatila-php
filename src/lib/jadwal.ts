@@ -4,7 +4,7 @@
  * Every program always returns at least 3-4 upcoming dates from today onward.
  */
 import config from '../data/jadwal-config.json';
-import trainingsRaw from '../../data/trainings.json';
+import { trainingCatalog as trainingsRaw } from './trainingCatalog';
 import batchesRaw from '../../data/training_batches.json';
 
 export interface BatchItem {

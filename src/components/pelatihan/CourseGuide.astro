@@ -1,0 +1,18 @@
+---
+import Icon from '../home/HomeIcon.astro';
+import { formatPrice, waUrl } from '../../lib/images';
+interface Props { price?: number | string | null; message: string; inhouseMessage: string; courseSlug?: string; }
+const { price, message, inhouseMessage, courseSlug } = Astro.props;
+---
+<aside class="ce-course-guide" aria-label="Panduan pendaftaran">
+  <div class="ce-guide-inner">
+    <span class="ce-kicker">LANGKAH BERIKUTNYA</span>
+    <h2>Siap mengikuti pelatihan?</h2>
+    <p>Tim kami membantu Anda memilih jadwal dan menyiapkan persyaratan peserta.</p>
+    <ol><li><span>01</span>Konfirmasikan jadwal &amp; biaya</li><li><span>02</span>Siapkan dokumen persyaratan</li><li><span>03</span>Daftar bersama tim kami</li></ol>
+    <a class="ce-button ce-button-primary" href={waUrl(message)} target="_blank" rel="noopener noreferrer">Konsultasi program<Icon name="arrow" size={17} /></a>
+    <a class="ce-guide-company" href={waUrl(inhouseMessage)} target="_blank" rel="noopener noreferrer">Penawaran untuk perusahaan<Icon name="arrow" size={16} /></a>
+    {courseSlug && <a class="ce-guide-company" href={`/pelatihan/${courseSlug}/`}>Lihat Halaman Lengkap Program<Icon name="arrow" size={16} /></a>}
+    <div class="ce-guide-price"><span>Investasi pelatihan</span><strong>{formatPrice(price)}</strong></div>
+  </div>
+</aside>

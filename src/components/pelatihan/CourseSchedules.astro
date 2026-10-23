@@ -2,12 +2,12 @@
 import Icon from '../home/HomeIcon.astro';
 import { formatPrice, waUrl } from '../../lib/images';
 import { formatBatchRange, type BatchItem } from '../../lib/jadwal';
-interface Props { name: string; slug: string; isActive?: boolean; batches: BatchItem[]; price?: number | string; }
-const { name, slug, isActive = true, batches, price } = Astro.props;
+interface Props { name: string; slug: string; isActive?: boolean; batches: BatchItem[]; price?: number | string; schedule?: boolean; updatedAt?: string; }
+const { name, slug, isActive = true, batches, price, schedule = false, updatedAt } = Astro.props;
 ---
 <section class="ce-schedules" id="jadwal-pelatihan" aria-labelledby="course-schedule-title">
   <div class="ce-container">
-    <div class="ce-section-heading"><div><p class="ce-kicker">RENCANAKAN PELATIHAN ANDA</p><h2 id="course-schedule-title">Jadwal {name}</h2><p>Pilih tanggal yang sesuai. Konfirmasikan ketersediaan kelas dengan tim kami.</p></div>{isActive && <a class="ce-text-link" href={`/jadwal/${slug}/`} aria-label={`Semua jadwal ${name}`}>Semua jadwal program ini<Icon name="arrow" size={17} /></a>}</div>
+    <div class="ce-section-heading"><div><p class="ce-kicker">RENCANAKAN PELATIHAN ANDA</p><h2 id="course-schedule-title">{schedule ? '📅 Batch Pendaftaran Terdekat' : `Jadwal ${name}`}</h2><p>Pilih tanggal yang sesuai. Konfirmasikan ketersediaan kelas dengan tim kami.{updatedAt && <span> Terakhir diperbarui: {updatedAt}</span>}</p></div>{isActive && !schedule && <a class="ce-text-link" href={`/jadwal/${slug}/`} aria-label={`Semua jadwal ${name}`}>Semua jadwal program ini<Icon name="arrow" size={17} /></a>}</div>
     <div class="ce-schedule-grid" data-course-name={name} data-course-price={price}>
       {batches.map((batch, index) => {
         const date = formatBatchRange(batch.start_date, batch.end_date);

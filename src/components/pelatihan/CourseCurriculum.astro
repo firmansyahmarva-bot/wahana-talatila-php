@@ -1,0 +1,9 @@
+---
+interface Props { items: any[]; heading?: string; }
+const { items, heading = 'Materi Pelatihan' } = Astro.props;
+---
+{items.length > 0 && <section class="pd-section" id="materi-pelatihan">
+  <p class="pd-section-eyebrow">Kurikulum</p>
+  <h2>{heading}</h2>
+  <ul class="pd-curriculum">{items.map((item, index) => <li><span class="pd-num">{String(index + 1).padStart(2, '0')}</span><span>{typeof item === 'string' ? item : (item.title || item.name || JSON.stringify(item))}</span></li>)}</ul>
+</section>}

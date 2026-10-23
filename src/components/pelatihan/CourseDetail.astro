@@ -1,14 +1,13 @@
 ---
-import Layout from '../../layouts/Layout.astro';
+import CourseFrame from './CourseFrame.astro';
+import CourseCurriculum from './CourseCurriculum.astro';
+import CourseGuide from './CourseGuide.astro';
+import { getCourseCurriculum } from '../../lib/trainingCatalog';
 import { getCollection } from 'astro:content';
 import { getCourseOgBanner, formatPrice, modeLabel, waUrl } from '../../lib/images';
 import { getTrainingFaqs } from '../../lib/trainingFaqs';
 import Icon from '../home/HomeIcon.astro';
-import CourseHero from './CourseHero.astro';
-import CourseSchedules from './CourseSchedules.astro';
-import CourseSectionNav from './CourseSectionNav.astro';
 import CourseFaq from './CourseFaq.astro';
-import CourseInhouse from './CourseInhouse.astro';
 import TrainingCard from '../TrainingCard.astro';
 import { getUpcomingBatches, formatDateIndo, formatIsoWithTz } from '../../lib/jadwal';
 
@@ -92,18 +91,7 @@ const pageDesc = data.meta_desc || data.description || data.name;
 const canonicalUrl = `https://wahanatotalita.com/pelatihan/${data.slug}/`;
 const htmlContent = data.long_content || '';
 
-// Parse curriculum items
-let curriculumList: string[] = [];
-if (Array.isArray(data.curriculum_data) && data.curriculum_data.length > 0) {
-  curriculumList = data.curriculum_data;
-} else if (data.curriculum) {
-  try {
-    const parsed = typeof data.curriculum === 'string' ? JSON.parse(data.curriculum) : data.curriculum;
-    if (Array.isArray(parsed)) curriculumList = parsed;
-  } catch (e) {
-    curriculumList = [];
-  }
-}
+const curriculumList = getCourseCurriculum(data);
 
 // Get course FAQs
 const faqs = getTrainingFaqs(data.name, data.slug, data.price);
@@ -197,22 +185,22 @@ const defaultWaMsg = data.wa_text || `Halo Wahana Totalita, saya ingin konsultas
 const inhouseWaMsg = `Halo Wahana Totalita, kami dari perusahaan ingin meminta penawaran in-house training resmi untuk topik: ${data.name}`;
 ---
 
-<Layout
+<CourseFrame
+  data={data}
   title={pageTitle}
   description={pageDesc}
   canonical={canonicalUrl}
   ogImage={courseOgBanner}
-  bodyClass="course-page"
-  bodyAttrs={{ 'data-training-slug': data.slug }}
-  pageCss={['/assets/css/course-experience.css']}
   schemas={schemas}
-  contactUrl={waUrl(defaultWaMsg)}
+  batches={courseBatches}
+  category={catName}
+  hubLink={hubLink}
+  certification={certRaw}
+  message={defaultWaMsg}
+  inhouseMessage={inhouseWaMsg}
+  hasCurriculum={curriculumList.length > 0}
+  hasFaq={faqs.length > 0}
 >
-  <div class="course-experience">
-    <CourseHero data={data} category={catName} hubLink={hubLink} certification={certRaw} message={defaultWaMsg} inhouseMessage={inhouseWaMsg} nextBatch={courseBatches[0]} />
-    <CourseSectionNav hasCurriculum={curriculumList.length > 0} hasFaq={faqs.length > 0} />
-    <CourseSchedules name={data.name} slug={data.slug} isActive={data.is_active !== 0} batches={courseBatches} price={data.price} />
-    <CourseInhouse name={data.name} message={inhouseWaMsg} />
     <section class="pd-body" id="tentang-program">
       <div class="ce-container pd-layout">
         <div class="pd-main">
@@ -234,21 +222,7 @@ const inhouseWaMsg = `Halo Wahana Totalita, kami dari perusahaan ingin meminta p
             <div class="pd-section pd-rich" set:html={htmlContent} />
           )}
 
-          <!-- CURRICULUM -->
-          {curriculumList.length > 0 && (
-            <div class="pd-section" id="materi-pelatihan">
-              <p class="pd-section-eyebrow">Kurikulum</p>
-              <h2>Materi Pelatihan</h2>
-              <ul class="pd-curriculum">
-                {curriculumList.map((item, idx) => (
-                  <li>
-                    <span class="pd-num">{String(idx + 1).padStart(2, '0')}</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+          <CourseCurriculum items={curriculumList} />
 
           <!-- PROOF BLOCK (DATA FROM REPO: ACCREDITATION, CLIENT LIST, INSTRUCTORS) -->
           <div class="pd-section pd-proof-block">
@@ -360,17 +334,7 @@ const inhouseWaMsg = `Halo Wahana Totalita, kami dari perusahaan ingin meminta p
 
 
         </div>
-        <aside class="ce-course-guide" aria-label="Panduan pendaftaran">
-          <div class="ce-guide-inner">
-            <span class="ce-kicker">LANGKAH BERIKUTNYA</span>
-            <h2>Siap mengikuti pelatihan?</h2>
-            <p>Tim kami membantu Anda memilih jadwal dan menyiapkan persyaratan peserta.</p>
-            <ol><li><span>01</span>Konfirmasikan jadwal &amp; biaya</li><li><span>02</span>Siapkan dokumen persyaratan</li><li><span>03</span>Daftar bersama tim kami</li></ol>
-            <a class="ce-button ce-button-primary" href={waUrl(defaultWaMsg)} target="_blank" rel="noopener noreferrer">Konsultasi program<Icon name="arrow" size={17} /></a>
-            <a class="ce-guide-company" href={waUrl(inhouseWaMsg)} target="_blank" rel="noopener noreferrer">Penawaran untuk perusahaan<Icon name="arrow" size={16} /></a>
-            <div class="ce-guide-price"><span>Investasi pelatihan</span><strong>{priceFormatted}</strong></div>
-          </div>
-        </aside>
+        <CourseGuide price={data.price} message={defaultWaMsg} inhouseMessage={inhouseWaMsg} />
       </div>
     </section>
     <!-- RELATED TRAININGS GRID (USES UNIFIED TRAININGCARD) -->
@@ -393,5 +357,4 @@ const inhouseWaMsg = `Halo Wahana Totalita, kami dari perusahaan ingin meminta p
     )}
 
 
-  </div>
-</Layout>
+</CourseFrame>

@@ -39,10 +39,23 @@ for (const [name, html] of coursePages) {
   const image = html.match(/<figure class="ce-hero-image"><img[^>]*src="([^\"]+)"/);
   assert.ok(image && fs.existsSync(path.join('public', image[1])), name + ' existing hero image');
 }
-console.log(`${coursePages.length} course pages have a complete hero, schedule and registration.`);
+console.log(`${coursePages.length} course and schedule pages have a complete hero, schedule and registration.`);
+const programSchedules = coursePages.filter(([name]) => name.startsWith('jadwal' + path.sep));
+for (const [name, html] of programSchedules) {
+  const courseFile = name.replace(/^jadwal/, 'pelatihan');
+  const course = pages[courseFile];
+  assert.ok(course, name + ' related course');
+  assert.equal(snapshot(html).h1[0], 'Jadwal ' + snapshot(course).h1[0], name + ' shared course name');
+  for (const pattern of [/<p class="ce-price">([\s\S]*?)<\/p>/, /<ul class="pd-curriculum">([\s\S]*?)<\/ul>/, /<strong data-course-next-date[^>]*>([\s\S]*?)<\/strong>/]) {
+    assert.equal(html.match(pattern)?.[1], course.match(pattern)?.[1], name + ' shared price, curriculum or next date');
+  }
+}
+console.log(`${programSchedules.length} schedule pages match course names, prices, curriculum and dates.`);
+if (process.argv.includes('--seo-only')) process.exit(0);
 const origin = 'http://course-preview.test';
 const browser = await chromium.launch({ headless: true });
 const routes = ['/pelatihan/ak3-bnsp/', '/pelatihan/pelatihan-ahli-k3-umum-sertifikasi-kemnaker-ri/', '/pelatihan/pelatihan-k3-operator-forklift-kelas-2-sertifikasi-kemnaker-ri/', '/pelatihan/pelatihan-damkar-paralel-kelas-dcba-sertifikasi-kemnaker-ri/', '/pelatihan/pelatihan-penanggung-jawab-operasional-instalasi-pengendalian-pencemaran-udara-poippu-offline/'];
+const scheduleRoutes = routes.map(route => route.replace('/pelatihan/', '/jadwal/'));
 const serveBuild = async route => {
       const url = new URL(route.request().url());
       if (url.origin !== origin) return route.abort();
@@ -59,21 +72,24 @@ try {
   for (const width of [320, 390, 768, 1024, 1440]) {
     const page = await browser.newPage({ viewport: { width, height: 1000 } });
     await page.route('**/*', serveBuild);
-    for (const route of routes) {
+    for (const route of [...routes, ...scheduleRoutes]) {
+      const isSchedule = route.startsWith('/jadwal/');
       const errors = [];
       const onError = error => errors.push(error.message);
       page.on('pageerror', onError);
       await page.goto(origin + route, { waitUntil: 'networkidle' });
       await page.evaluate(() => document.fonts.ready);
       assert.equal(await page.locator('h1').count(), 1);
-      assert.equal(await page.locator('.ce-schedules .ce-text-link').getAttribute('href'), route.replace('/pelatihan/', '/jadwal/'), 'Schedule directory stays on the current course');
+      if (!isSchedule) assert.equal(await page.locator('.ce-schedules .ce-text-link').getAttribute('href'), route.replace('/pelatihan/', '/jadwal/'), 'Schedule directory stays on the current course');
+      else assert.equal(await page.locator('.ce-guide-company[href="' + route.replace('/jadwal/', '/pelatihan/') + '"]').count(), 1, 'Schedule links to its course');
       for (const link of await page.locator('.ce-schedule-footer a').all()) {
         const url = new URL(await link.getAttribute('href'));
         assert.equal(url.hostname, 'wa.me', 'Every batch registers directly via WhatsApp');
         assert.ok(url.searchParams.get('text').includes('batch'), 'Registration includes the selected batch');
       }
-      const courseName = await page.locator('h1').textContent();
-      assert.equal(await page.locator('.pd-cta-box h2').textContent(), 'Daftar ' + courseName);
+      const heading = await page.locator('h1').textContent();
+      const courseName = isSchedule ? heading.replace(/^Jadwal /, '') : heading;
+      if (!isSchedule) assert.equal(await page.locator('.pd-cta-box h2').textContent(), 'Daftar ' + courseName);
       const inhouseMessage = new URL(await page.locator('.ce-inhouse-copy .ce-button').getAttribute('href')).searchParams.get('text');
       assert.ok(inhouseMessage.includes(courseName), 'In-house enquiry includes the course');
       const metrics = await page.evaluate(() => {
@@ -87,20 +103,23 @@ try {
       assert.ok(metrics.textSize >= 16);
       assert.equal(await page.locator('.home-wa-float').getAttribute('href'), await page.locator('.ce-registration > .ce-button').getAttribute('href'), 'Floating contact keeps the course context');
       for (const link of await page.locator('.ce-section-nav a').all()) assert.equal(await page.locator(await link.getAttribute('href')).count(), 1, `${route}: section anchor`);
-      await page.locator('.ce-faq-list details:first-child summary').click();
-      assert.equal(await page.locator('.ce-faq-list details:first-child').getAttribute('open'), '');
+      if (!isSchedule) {
+        await page.locator('.ce-faq-list details:first-child summary').click();
+        assert.equal(await page.locator('.ce-faq-list details:first-child').getAttribute('open'), '');
+      }
       await page.locator('.ce-section-nav a[href="#jadwal-pelatihan"]').click();
       await page.waitForFunction(() => document.querySelector('.ce-section-nav a[href="#jadwal-pelatihan"]')?.getAttribute('aria-current') === 'location');
       assert.equal(await page.locator('.ce-section-nav a[href="#jadwal-pelatihan"]').getAttribute('aria-current'), 'location');
       assert.equal(errors.length, 0, errors.join('\n'));
       page.off('pageerror', onError);
-      if (route === routes[0] && [390, 1440].includes(width)) {
+      if ((route === routes[0] || route === scheduleRoutes[0]) && [390, 1440].includes(width)) {
+        const prefix = isSchedule ? 'schedule' : 'course';
         await page.evaluate(() => { window.scrollTo({ top: 0, behavior: 'instant' }); document.activeElement?.blur(); });
         await page.waitForTimeout(100);
-        await page.screenshot({ path: `${output}/course-${width}.png` });
+        await page.screenshot({ path: `${output}/${prefix}-${width}.png` });
         await page.evaluate(() => document.querySelector('#tentang-program').scrollIntoView({block: 'start', behavior: 'instant'}));
         await page.waitForTimeout(100);
-        await page.screenshot({ path: `${output}/course-content-${width}.png` });
+        await page.screenshot({ path: `${output}/${prefix}-content-${width}.png` });
       }
       checks++;
     }

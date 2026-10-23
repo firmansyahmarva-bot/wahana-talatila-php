@@ -2,7 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import batchesRaw from '../../../data/training_batches.json';
-import trainingsRaw from '../../../data/trainings.json';
+import { trainingCatalog as trainingsRaw } from '../../lib/trainingCatalog';
 import { getUpcomingBatches } from '../../lib/jadwal';
 
 const trainingMap = new Map();
