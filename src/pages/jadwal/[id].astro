@@ -86,13 +86,16 @@ if (isProgramPage) {
 } else {
   pageTitle = `Jadwal ${trainingName} (${singleBatchDateStr}) — Wahana Totalita`;
   pageDesc = `Jadwal resmi pelatihan ${trainingName} tanggal ${singleBatchDateStr} (${mode.toUpperCase()}). Sertifikasi ${certification}. Kurikulum resmi & pendaftaran.`;
-  canonical = `https://wahanatotalita.com/jadwal/${batch.id}/`;
+  // Canonical consolidates numeric batch pages to the authoritative program schedule hub
+  canonical = trainingSlug
+    ? `https://wahanatotalita.com/jadwal/${trainingSlug}/`
+    : `https://wahanatotalita.com/jadwal/${batch.id}/`;
 }
 
 // WhatsApp inquiry message
 const waMsg = isProgramPage
   ? `Halo Wahana Totalita, saya ingin mendaftar pelatihan:\n*${trainingName}*\nMohon informasi jadwal terdekat (${firstBatch ? formatBatchRange(firstBatch.start_date, firstBatch.end_date) : 'Batch Terdekat'}) dan invoice pendaftaran.`
-  : `Halo Wahana Totalita, saya ingin mendaftar jadwal pelatihan:\n*${trainingName}*\nTanggal: ${singleBatchDateStr}\nMode: ${mode.toUpperCase()}\nURL batch: ${canonical}`;
+  : `Halo Wahana Totalita, saya ingin mendaftar jadwal pelatihan:\n*${trainingName}*\nTanggal: ${singleBatchDateStr}\nMode: ${mode.toUpperCase()}\nURL batch: https://wahanatotalita.com/jadwal/${batch.id}/`;
 
 // Event JSON-LD Schemas
 const eventSchemas = isProgramPage
