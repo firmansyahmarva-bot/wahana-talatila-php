@@ -1,4 +1,5 @@
 ---
+import AnalyticsHead from '../components/analytics/AnalyticsHead.astro';
 import { versionStylesheet } from '../lib/assetVersion';
 import HomeHeader from '../components/home/HomeHeader.astro';
 import HomeFooter from '../components/home/HomeFooter.astro';
@@ -173,6 +174,7 @@ const finalPageCss = pageCss !== undefined ? pageCss : currentConfig.defaultPage
   ))}
   <link rel="stylesheet" href={versionStylesheet('/assets/css/site-shell.css')} />
   <link rel="stylesheet" href={versionStylesheet('/assets/css/shared-ui.css')} />
+  <AnalyticsHead/>
 </head>
 <body class={[bodyClass, 'has-site-navigation'].filter(Boolean).join(' ') || undefined} {...bodyAttrs}>
   <HomeHeader lang={lang} contactUrl={contactUrl || currentConfig.waUrl || undefined} />
@@ -277,49 +279,6 @@ const finalPageCss = pageCss !== undefined ? pageCss : currentConfig.defaultPage
   </HomeFooter>
   <HomeContactDock lang={lang} contactUrl={contactUrl || currentConfig.waUrl || undefined} />
 
-  <!-- Shared Lead & CTA Tracking (WhatsApp & Registration Buttons) -->
-  <script is:inline>
-    (function () {
-      function extractCourseSlug(urlPath) {
-        var m = urlPath.match(/\/pelatihan\/([a-z0-9\-]+)/i);
-        return m ? m[1] : '';
-      }
-
-      document.addEventListener('click', function (e) {
-        var target = e.target && e.target.closest('a, button');
-        if (!target) return;
-
-        var href = target.getAttribute('href') || '';
-        var text = (target.textContent || '').trim().toLowerCase();
-        var isWa = href.indexOf('wa.me') !== -1 || href.indexOf('whatsapp.com') !== -1;
-        var isCta = isWa || text.indexOf('daftar') !== -1 || text.indexOf('konsultasi') !== -1 || href.indexOf('/jadwal/daftar') !== -1;
-
-        if (isCta) {
-          var currentPath = window.location.pathname;
-          var courseSlug = extractCourseSlug(currentPath);
-
-          if (typeof window.gtag === 'function') {
-            window.gtag('event', 'generate_lead', {
-              event_category: isWa ? 'whatsapp_click' : 'cta_click',
-              event_label: text || href,
-              page_path: currentPath,
-              course_slug: courseSlug,
-              transport_type: 'beacon'
-            });
-          }
-          if (window.dataLayer && Array.isArray(window.dataLayer)) {
-            window.dataLayer.push({
-              event: 'generate_lead',
-              lead_type: isWa ? 'whatsapp' : 'cta_button',
-              page_path: currentPath,
-              course_slug: courseSlug,
-              click_text: text,
-              click_url: href
-            });
-          }
-        }
-      }, { passive: true });
-    })();
-  </script>
+  <script is:inline src="/assets/js/analytics-leads.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,21 @@
+---
+import {analyticsConfig} from '../../lib/analyticsConfig';
+---
+{analyticsConfig.containerId&&<script is:inline define:vars={{analyticsConfig}}>
+(function(w,d){
+  var host=location.hostname.toLowerCase();
+  var debug=new URLSearchParams(location.search).get('analytics_debug')==='1';
+  // Local and staging previews stay out of production reports unless explicitly debugging.
+  if(host!=='wahanatotalita.com'&&host!=='www.wahanatotalita.com'&&!debug)return;
+  if(w.__wtAnalytics)return;
+  w.__wtAnalytics={debug:debug,measurementId:analyticsConfig.measurementId};
+  w.dataLayer=w.dataLayer||[];
+  w.gtag=w.gtag||function(){w.dataLayer.push(arguments);};
+  if(debug)w.gtag('set',{debug_mode:true});
+  w.dataLayer.push({'gtm.start':Date.now(),event:'gtm.js'});
+  var script=d.createElement('script');
+  script.async=true;
+  script.src='https://www.googletagmanager.com/gtm.js?id='+encodeURIComponent(analyticsConfig.containerId);
+  d.head.appendChild(script);
+})(window,document);
+</script>}
