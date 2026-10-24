@@ -1,0 +1,50 @@
+---
+import SurfaceCard from '../shared/SurfaceCard.astro';
+import ActionLink from '../shared/ActionLink.astro';
+import {waUrl} from '../../lib/images';
+const initial=waUrl('Halo Wahana Totalita, saya ingin membahas kebutuhan pendampingan CSMS perusahaan.');
+---
+<SurfaceCard class="csms-service-intake">
+ <h3>Siapkan pesan konsultasi</h3>
+ <p>Isi ringkasan, lalu periksa pesan sebelum membukanya di WhatsApp.</p>
+ <form id="csms-inquiry-form" hidden>
+  <label for="csms-company">Nama perusahaan <span aria-hidden="true">*</span></label><input id="csms-company" name="company" autocomplete="organization" maxlength="120" required/>
+  <label for="csms-owner">Pemilik pekerjaan / tujuan pengajuan <span aria-hidden="true">*</span></label><input id="csms-owner" name="owner" placeholder="Contoh: nama perusahaan atau unit pengguna jasa" maxlength="160" required/>
+  <label for="csms-work">Jenis pekerjaan <span aria-hidden="true">*</span></label><input id="csms-work" name="work" placeholder="Contoh: pemeliharaan mekanik" maxlength="200" required/>
+  <label for="csms-readiness">Kondisi dokumen saat ini <span aria-hidden="true">*</span></label><select id="csms-readiness" name="readiness" required><option value="">Pilih kondisi</option><option>Baru mulai menyiapkan</option><option>Sudah ada sebagian dokumen</option><option>Perlu menindaklanjuti temuan</option><option>Pembaruan / pengajuan kembali</option></select>
+  <label for="csms-deadline">Target pengajuan <span>(opsional)</span></label><input id="csms-deadline" name="deadline" type="date"/>
+  <button class="ui-action csms-service-prepare" type="submit">Siapkan ringkasan pesan <span aria-hidden="true">→</span></button>
+  <p class="csms-service-form-help">Data tidak dikirim atau disimpan oleh formulir ini. Anda akan memeriksa ringkasan, membuka WhatsApp, lalu mengirimnya sendiri.</p>
+ </form>
+ <div id="csms-inquiry-result" hidden><p role="status" aria-live="polite" id="csms-inquiry-status"></p><pre id="csms-inquiry-preview" class="csms-service-message"></pre><div id="csms-inquiry-link"><ActionLink href={initial} label="Buka pesan di WhatsApp" icon="whatsapp" external/></div></div>
+ <noscript><p>Untuk menyampaikan kebutuhan, hubungi tim melalui WhatsApp dan sertakan nama perusahaan, pengguna jasa serta jenis pekerjaan.</p><ActionLink href={initial} label="Hubungi tim CSMS" icon="whatsapp" external/></noscript>
+</SurfaceCard>
+<script>
+ const form=document.querySelector<HTMLFormElement>('#csms-inquiry-form');
+ const result=document.querySelector<HTMLElement>('#csms-inquiry-result');
+ const status=document.querySelector<HTMLElement>('#csms-inquiry-status');
+ const preview=document.querySelector<HTMLElement>('#csms-inquiry-preview');
+ const contact=document.querySelector<HTMLAnchorElement>('#csms-inquiry-link a');
+ if(form&&result&&status&&preview&&contact){
+  form.hidden=false;
+  form.addEventListener('input',()=>{result.hidden=true;});
+  form.addEventListener('submit',event=>{
+   event.preventDefault();
+   const data=new FormData(form);
+   const value=(name:string)=>String(data.get(name)||'').trim();
+   for(const name of ['company','owner','work']){
+    const input=form.elements.namedItem(name) as HTMLInputElement;
+    input.setCustomValidity(value(name)?'':'Isi kolom ini dengan informasi perusahaan Anda.');
+    if(!input.checkValidity()){input.reportValidity();return;}
+   }
+   const deadline=value('deadline');
+   const date=deadline?deadline.split('-').reverse().join('/'):'Belum ditentukan';
+   const message=['Halo Wahana Totalita, saya ingin konsultasi pendampingan CSMS.',`Perusahaan: ${value('company')}`,`Tujuan pengajuan/pemilik pekerjaan: ${value('owner')}`,`Jenis pekerjaan: ${value('work')}`,`Kondisi dokumen: ${value('readiness')}`,`Target pengajuan: ${date}`,'Mohon informasi kebutuhan review dan ruang lingkup pendampingan.'].join('\n');
+   preview.textContent=message;
+   contact.href=`https://wa.me/6287759151278?text=${encodeURIComponent(message)}`;
+   status.textContent='Ringkasan siap. Periksa pesan di bawah, lalu lanjutkan ke WhatsApp.';
+   result.hidden=false;
+  });
+  form.querySelectorAll('input').forEach(input=>input.addEventListener('input',()=>input.setCustomValidity('')));
+ }
+</script>
