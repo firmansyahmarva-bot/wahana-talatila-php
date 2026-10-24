@@ -1188,5 +1188,61 @@
     "title": "Voltase normal: pahami angka nominalnya",
     "width": 1200,
     "height": 630
+  },
+  "jenis-apar-dan-fungsinya": {
+    "src": "/images/articles/k3-guides/jenis-apar-dan-fungsinya.png",
+    "alt": "Peta pemilihan APAR: air untuk bahan padat sesuai rating, powder ABC atau BC dibedakan, CO2 sesuai label, dan media khusus untuk risiko tertentu.",
+    "title": "Jenis APAR: mulai dari label",
+    "width": 1200,
+    "height": 800
+  },
+  "rambu-k3": {
+    "src": "/images/articles/k3-guides/rambu-k3.png",
+    "alt": "Lima contoh rambu edukatif: larangan merokok merah, kewajiban helm biru, peringatan listrik segitiga kuning, P3K hijau, lokasi APAR merah.",
+    "title": "Baca bentuk, warna, dan simbol",
+    "width": 1200,
+    "height": 800
+  },
+  "5r-adalah": {
+    "src": "/images/articles/k3-guides/5r-adalah.png",
+    "alt": "Lima langkah 5R: Ringkas memilih barang; Rapi menentukan tempat; Resik membersihkan dan mencari sumber; Rawat membuat standar; Rajin memeriksa dan menindaklanjuti.",
+    "title": "5R: bukan bersih-bersih sekali",
+    "width": 1200,
+    "height": 800
+  },
+  "segitiga-api": {
+    "src": "/images/articles/k3-guides/segitiga-api.png",
+    "alt": "Diagram segitiga api: panas di puncak, bahan bakar dan oksigen di dua sudut bawah; tetrahedron menambahkan reaksi berantai kimia.",
+    "title": "Segitiga api: tiga unsur",
+    "width": 1200,
+    "height": 800
+  },
+  "near-miss": {
+    "src": "/images/articles/k3-guides/near-miss.png",
+    "alt": "Tiga panel: kotak tidak stabil tetapi belum jatuh; kotak jatuh dekat pekerja tanpa dampak; kotak mengenai pekerja dan terjadi cedera.",
+    "title": "Near miss atau kondisi bahaya?",
+    "width": 1200,
+    "height": 800
+  },
+  "cara-menggunakan-apar": {
+    "src": "/images/articles/k3-guides/cara-menggunakan-apar.png",
+    "alt": "Empat panel PASS: tarik pin, arahkan ke pangkal api, tekan tuas, sapukan. Syarat awal: alarm, alat sesuai, pengguna terlatih, jalan keluar aman.",
+    "title": "PASS: urutan memakai APAR",
+    "width": 1200,
+    "height": 800
+  },
+  "grounding-listrik": {
+    "src": "/images/articles/k3-guides/grounding-listrik.png",
+    "alt": "Skema konseptual TT: fase dan netral melewati RCD menuju beban; bodi terhubung PE ke elektroda instalasi, netral sumber dibumikan terpisah; jalur gangguan kembali melalui bumi.",
+    "title": "Grounding + proteksi: satu sistem",
+    "width": 1200,
+    "height": 800
+  },
+  "unsafe-action-unsafe-condition": {
+    "src": "/images/articles/k3-guides/unsafe-action-unsafe-condition.png",
+    "alt": "Perbandingan: tindakan orang melangkahi pembatas versus kondisi kotak menghalangi jalur; langkah perbaikan menelusuri fakta, penyebab, kontrol dan verifikasi.",
+    "title": "Tindakan atau kondisi tidak aman?",
+    "width": 1200,
+    "height": 800
   }
 }
