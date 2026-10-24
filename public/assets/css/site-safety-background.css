@@ -1,0 +1,39 @@
+/* One shared, non-interactive safety treatment. Keep all tuning here. */
+.site-safety-background {
+  --safety-edge-tint: var(--red-600);
+  --safety-edge-width: 12px;
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  user-select: none;
+  background: linear-gradient(to right,
+    color-mix(in srgb, var(--safety-edge-tint) 7%, transparent),
+    transparent var(--safety-edge-width),
+    transparent calc(100% - var(--safety-edge-width)),
+    color-mix(in srgb, var(--safety-edge-tint) 7%, transparent));
+  mix-blend-mode: multiply;
+}
+@media (min-width: 1280px) {
+  .site-safety-background {
+    /* The artwork ends before the existing 1240px reading area. */
+    --safety-edge-width: clamp(12px, calc((100vw - 1240px) / 2 - 16px), 340px);
+    inset-block-start: 78px;
+    background-image:
+      linear-gradient(to right,
+        color-mix(in srgb, var(--safety-edge-tint) 15%, transparent),
+        transparent 24%, transparent 76%,
+        color-mix(in srgb, var(--safety-edge-tint) 15%, transparent)),
+      url('/assets/img/theme/industrial-safety-edges-v1.webp');
+    background-size: 100% 100%, 100% auto;
+    background-position: center, center;
+    background-repeat: no-repeat;
+    mask-image: linear-gradient(to right,
+      var(--text) 0, transparent var(--safety-edge-width),
+      transparent calc(100% - var(--safety-edge-width)), var(--text) 100%);
+    opacity: .76;
+  }
+}
+@media print, (forced-colors: active) {
+  .site-safety-background { display: none; }
+}

@@ -1,5 +1,6 @@
 ---
 import AnalyticsHead from '../components/analytics/AnalyticsHead.astro';
+import SafetyBackground from '../components/shared/SafetyBackground.astro';
 import { versionStylesheet } from '../lib/assetVersion';
 import HomeHeader from '../components/home/HomeHeader.astro';
 import HomeFooter from '../components/home/HomeFooter.astro';
@@ -174,9 +175,11 @@ const finalPageCss = pageCss !== undefined ? pageCss : currentConfig.defaultPage
   ))}
   <link rel="stylesheet" href={versionStylesheet('/assets/css/site-shell.css')} />
   <link rel="stylesheet" href={versionStylesheet('/assets/css/shared-ui.css')} />
+  <link rel="stylesheet" href={versionStylesheet('/assets/css/site-safety-background.css')} />
   <AnalyticsHead/>
 </head>
 <body class={[bodyClass, 'has-site-navigation'].filter(Boolean).join(' ') || undefined} {...bodyAttrs}>
+  <SafetyBackground/>
   <HomeHeader lang={lang} contactUrl={contactUrl || currentConfig.waUrl || undefined} />
 
   <main id="konten-utama">
