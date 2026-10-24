@@ -1,32 +1,40 @@
 {
-    "id": 6,
-    "title": "Cara Perpanjang SKP Ahli K3 Umum Sebelum Kadaluarsa — Panduan 2026",
-    "slug": "cara-perpanjang-skp-ahli-k3-umum",
-    "meta_title": "Cara Perpanjang SKP Ahli K3 Umum Sebelum Kadaluarsa — Panduan 2026",
-    "meta_desc": "Panduan lengkap perpanjangan SKP Ahli K3 Umum KEMNAKER RI sebelum kadaluarsa. Syarat, biaya, dan prosedur resmi 2026.",
-    "keywords": "perpanjang skp k3 umum, renewal sertifikat k3, skp kadaluarsa, refreshing k3 umum",
-    "category": "K3",
-    "thumbnail": null,
-    "content": "<h2>Mengapa SKP Harus Diperpanjang?</h2>\n<p>SKP (Surat Keterangan Penunjukan) Ahli K3 Umum KEMNAKER RI memiliki masa berlaku <strong>3 tahun</strong>. Setelah kadaluarsa, Anda tidak lagi memiliki kewenangan hukum sebagai Ahli K3 di perusahaan. Ini bisa mengakibatkan pelanggaran regulasi dan risiko hukum bagi perusahaan Anda.</p>\n<h2>Kapan Harus Mulai Proses Perpanjangan?</h2>\n<p>Sangat disarankan memulai proses perpanjangan <strong>3 bulan sebelum tanggal kadaluarsa</strong>. Proses administratif penerbitan SKP baru dari KEMNAKER RI membutuhkan waktu 4-8 minggu, sehingga jangan menunggu terlalu lama.</p>\n<h2>Syarat Perpanjangan SKP</h2>\n<ul>\n<li>SKP lama (asli atau fotokopi)</li>\n<li>Fotokopi KTP terbaru</li>\n<li>Pas foto background merah terbaru 3x4 (4 lembar)</li>\n<li>Surat keterangan masih bekerja di bidang K3</li>\n<li>Bukti mengikuti refreshing K3 (pelatihan penyegaran)</li>\n<li>Laporan kegiatan K3 selama masa berlaku SKP sebelumnya</li>\n</ul>\n<h2>Prosedur Perpanjangan</h2>\n<ol>\n<li>Ikuti <strong>Refreshing K3 Umum</strong> (1-2 hari, online atau tatap muka)</li>\n<li>Siapkan semua dokumen persyaratan</li>\n<li>Ajukan permohonan perpanjangan ke Dinas Ketenagakerjaan setempat atau langsung ke KEMNAKER RI</li>\n<li>Tunggu proses verifikasi (4-8 minggu)</li>\n<li>Terima SKP baru yang berlaku 3 tahun ke depan</li>\n</ol>\n<p><strong>Baca juga:</strong> daftar <a href=\"/pelatihan/k3/\">kursus dan pembinaan pelatihan K3</a> untuk memvalidasi legalitas personil K3 perusahaan.</p>\n<h2>Bagaimana Jika Sudah Kadaluarsa?</h2>\n<p>Jika SKP sudah kadaluarsa, Anda <strong>tidak bisa</strong> memperpanjang — harus mengikuti pelatihan Ahli K3 Umum penuh dari awal. Ini jauh lebih mahal dan memakan waktu lebih lama. Oleh karena itu, tandai tanggal kadaluarsa Anda sekarang juga.</p>",
-    "faq_data": "[{\"q\":\"Berapa biaya refreshing K3 untuk perpanjangan SKP?\",\"a\":\"Biaya refreshing K3 Umum di Wahana Totalita mulai dari Rp 1.500.000\\/orang, sudah termasuk materi dan sertifikat kehadiran.\"},{\"q\":\"Apakah refreshing bisa dilakukan online?\",\"a\":\"Ya, kami menyediakan refreshing K3 Umum secara online via Zoom. Sertifikat tetap berlaku untuk perpanjangan SKP.\"},{\"q\":\"Apakah Wahana Totalita membantu proses pengajuan ke KEMNAKER?\",\"a\":\"Ya, kami membantu peserta dalam proses pengajuan dokumen perpanjangan SKP ke instansi terkait.\"}]",
-    "author": "Wahana Totalita Konsultan",
-    "status": "published",
-    "published_at": "2026-06-06 21:07:16",
-    "view_count": 110,
-    "created_at": "2026-06-06 21:07:16",
-    "updated_at": "2026-10-13 03:42:04",
-    "faq_list": [
-        {
-            "q": "Berapa biaya refreshing K3 untuk perpanjangan SKP?",
-            "a": "Biaya refreshing K3 Umum di Wahana Totalita mulai dari Rp 1.500.000/orang, sudah termasuk materi dan sertifikat kehadiran."
-        },
-        {
-            "q": "Apakah refreshing bisa dilakukan online?",
-            "a": "Ya, kami menyediakan refreshing K3 Umum secara online via Zoom. Sertifikat tetap berlaku untuk perpanjangan SKP."
-        },
-        {
-            "q": "Apakah Wahana Totalita membantu proses pengajuan ke KEMNAKER?",
-            "a": "Ya, kami membantu peserta dalam proses pengajuan dokumen perpanjangan SKP ke instansi terkait."
-        }
-    ]
+  "id": 6,
+  "title": "Cara Perpanjang SKP Ahli K3 Umum: Berkas dan Alur",
+  "slug": "cara-perpanjang-skp-ahli-k3-umum",
+  "meta_title": "Perpanjang SKP AK3U: Berkas & Alur | Wahana Totalita",
+  "meta_desc": "Siapkan perpanjangan SKP Ahli K3 Umum: cek tanggal, dokumen penunjukan lama, rekap kegiatan dan perubahan status perusahaan.",
+  "keywords": "perpanjang skp k3 umum, renewal sertifikat k3, skp kadaluarsa, refreshing k3 umum",
+  "category": "K3",
+  "thumbnail": null,
+  "content": "<p><strong>Perpanjangan SKP Ahli K3 Umum memerlukan permohonan dan bukti pelaksanaan tugas, bukan sekadar pembayaran kelas penyegaran.</strong> Mulailah dengan memeriksa keputusan penunjukan lama, tanggal berlaku, perusahaan serta riwayat kegiatan yang dapat dipertanggungjawabkan.</p><h2>Apa yang diperpanjang dan berapa masa berlakunya?</h2><p>Pasal 7 PER-02/MEN/1992 menyebut keputusan penunjukan berlaku tiga tahun dan dapat dimintakan perpanjangan. Pastikan dokumen yang Anda pegang benar-benar keputusan penunjukan, bukan hanya sertifikat pembinaan atau sertifikat kompetensi dari jalur lain.</p><p>Gunakan nama dokumen, nomor, penerbit dan tanggal yang tertera. Singkatan SKP di lapangan dapat dipakai secara tidak konsisten; jangan menyamakan seluruh sertifikat K3 hanya karena sama-sama berkaitan dengan pelatihan.</p><h2>Berkas perpanjangan yang disebut peraturan</h2><p>Pasal 7 merujuk lampiran permohonan Pasal 4 ayat (2), ditambah salinan keputusan lama, pernyataan pimpinan mengenai prestasi yang bersangkutan dan rekapitulasi laporan kegiatan. Tim Penilai dapat melakukan pengujian kembali kemampuan teknis.</p><p>Untuk daftar operasional terbaru, periksa proses yang digunakan dan pihak berwenang. Ukuran foto, format file atau lama pemrosesan tidak boleh dianggap sama untuk semua pengajuan hanya karena pernah diterima pada berkas sebelumnya.</p><table><caption>Checklist kerja sebelum permohonan</caption><thead><tr><th scope=\"col\">Bagian</th><th scope=\"col\">Yang ditelaah</th></tr></thead><tbody><tr><td>Keputusan lama</td><td>Nama, nomor, bidang, perusahaan dan tanggal</td></tr><tr><td>Data administrasi</td><td>Konsistensi identitas serta lampiran yang diminta</td></tr><tr><td>Keterangan perusahaan</td><td>Status bekerja dan pernyataan yang dapat dibuktikan</td></tr><tr><td>Kegiatan K3</td><td>Rekap kegiatan, bukti laporan dan hasil penugasan</td></tr><tr><td>Proses pengajuan</td><td>Pengaju, kanal resmi, bukti kirim dan tindak lanjut</td></tr></tbody></table><h2>Cara menyiapkan rekap kegiatan</h2><p>Susun kegiatan menurut periode dan jenis penugasan: inspeksi, pembinaan, penilaian risiko, rapat atau tindak lanjut insiden sesuai pekerjaan sebenarnya. Cantumkan bukti dan hasil, bukan hanya jumlah kehadiran. Jaga kerahasiaan data perusahaan saat menyiapkan lampiran.</p><p>Contoh pencatatan: tanggal, lokasi atau fungsi, tujuan, temuan, tindak lanjut dan nomor bukti. Jika terdapat kekosongan arsip, jelaskan kondisinya dan gunakan bukti yang memang tersedia. Jangan membuat catatan kegiatan palsu untuk melengkapi periode.</p><h2>Alur kerja perpanjangan</h2><p>Tentukan siapa yang mengurus dari sisi perusahaan agar data tidak dikirim berulang dengan versi berbeda. Gunakan daftar pelacakan berkas dan simpan komunikasi tentang kekurangan dokumen.</p><ol><li>Periksa kesesuaian keputusan serta kondisi pemegang saat ini.</li><li>Konfirmasikan daftar dan mekanisme pengajuan terbaru.</li><li>Lengkapi lampiran dan rekap kegiatan yang sah.</li><li>Ajukan melalui proses yang relevan dan simpan bukti penyampaian.</li><li>Tindak lanjuti verifikasi atau penilaian jika diminta.</li><li>Periksa data keputusan hasil proses sebelum digunakan.</li></ol><h2>Bagaimana jika sudah habis berlaku atau pindah perusahaan?</h2><p>Jangan menyimpulkan semua keterlambatan pasti mengharuskan pembinaan penuh dari awal. Minta penilaian terhadap kondisi dokumen dan status pemegang; jangan mengandalkan kewenangan dari keputusan yang masa berlakunya telah berakhir.</p><p>Perubahan perusahaan juga perlu ditelaah. Pasal 8 membahas keadaan keputusan tidak berlaku, termasuk pindah tugas ke perusahaan atau instansi lain. Jangan memperlakukan perubahan itu sebagai perpanjangan rutin tanpa pemeriksaan.</p><h2>Waktu, biaya dan langkah berikutnya</h2><p>Siapkan proses lebih awal berdasarkan tanggal dokumen serta estimasi yang dikonfirmasi pengurus. Panduan ini tidak menjanjikan waktu empat sampai delapan minggu atau menetapkan pelatihan ulang sebagai kewajiban universal.</p><p>Untuk konteks penunjukan, baca <a href=\"/artikel/ahli-k3-umum-ak3u-syarat-tugas-sertifikasi/\">peran dan jalur AK3U</a>. Bandingkan juga <a href=\"/artikel/cara-memperpanjang-sertifikat-k3-skp/\">pembahasan dokumen K3 lain</a> agar jenis pengajuan tidak tertukar. Informasi pembinaan tersedia pada <a href=\"/pelatihan/pelatihan-ahli-k3-umum-sertifikasi-kemnaker-ri/\">program Ahli K3 Umum</a>; tanyakan layanan perpanjangan secara terpisah.</p><h2>Sumber dan rujukan</h2><p><a href=\"https://jdih.kemnaker.go.id/asset/data_puu/PER_02_1992.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">Permenaker PER-02/MEN/1992: Penunjukan, kewajiban dan wewenang Ahli K3</a>. Rujukan ditelaah untuk pembaruan editorial 25 Oktober 2026.</p>",
+  "faq_data": "[{\"q\":\"Apakah SKP dan sertifikat kelas merupakan hal yang sama?\",\"a\":\"Tidak. Periksa apakah dokumen merupakan keputusan penunjukan atau bukti pembelajaran/kompetensi.\"},{\"q\":\"Apakah SKP kedaluwarsa selalu berarti harus ikut kelas penuh lagi?\",\"a\":\"Jangan disamaratakan. Minta pemeriksaan kondisi dokumen dan proses yang berlaku; keputusan lama yang berakhir tidak dapat dianggap masih aktif.\"},{\"q\":\"Apakah pindah perusahaan cukup menunggu perpanjangan?\",\"a\":\"Perubahan perusahaan perlu ditelaah sesuai ketentuan keputusan dan Pasal 8, bukan dianggap perpanjangan biasa.\"}]",
+  "author": "Wahana Totalita Konsultan",
+  "status": "published",
+  "published_at": "2026-06-06 21:07:16",
+  "view_count": 110,
+  "created_at": "2026-06-06 21:07:16",
+  "updated_at": "2026-10-25",
+  "faq_list": [
+    {
+      "q": "Apakah SKP dan sertifikat kelas merupakan hal yang sama?",
+      "a": "Tidak. Periksa apakah dokumen merupakan keputusan penunjukan atau bukti pembelajaran/kompetensi."
+    },
+    {
+      "q": "Apakah SKP kedaluwarsa selalu berarti harus ikut kelas penuh lagi?",
+      "a": "Jangan disamaratakan. Minta pemeriksaan kondisi dokumen dan proses yang berlaku; keputusan lama yang berakhir tidak dapat dianggap masih aktif."
+    },
+    {
+      "q": "Apakah pindah perusahaan cukup menunggu perpanjangan?",
+      "a": "Perubahan perusahaan perlu ditelaah sesuai ketentuan keputusan dan Pasal 8, bukan dianggap perpanjangan biasa."
+    }
+  ],
+  "related_article_slugs": [
+    "ahli-k3-umum-ak3u-syarat-tugas-sertifikasi",
+    "cara-memperpanjang-sertifikat-k3-skp",
+    "masa-berlaku-sertifikat-ahli-k3-umum-perpanjangan-skp"
+  ],
+  "related_training_slugs": [
+    "pelatihan-ahli-k3-umum-sertifikasi-kemnaker-ri"
+  ]
 }

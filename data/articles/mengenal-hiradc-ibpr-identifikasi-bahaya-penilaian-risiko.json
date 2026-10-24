@@ -1,40 +1,41 @@
 {
-    "id": 81,
-    "title": "Mengenal HIRADC / IBPR: Identifikasi Bahaya dan Penilaian Risiko",
-    "slug": "mengenal-hiradc-ibpr-identifikasi-bahaya-penilaian-risiko",
-    "meta_title": "Mengenal HIRADC / IBPR: Identifikasi Bahaya dan Penilaian Risiko",
-    "meta_desc": "Memahami HIRADC/IBPR: konsep, tahapan, matriks risiko, hierarki pengendalian, dan perannya dalam SMK3 serta ISO 45001.",
-    "keywords": "hiradc, ibpr, identifikasi bahaya, penilaian risiko, matriks risiko, manajemen risiko k3",
-    "category": "K3",
-    "thumbnail": null,
-    "content": "<p>Inti dari manajemen K3 yang baik adalah kemampuan mengenali bahaya dan menilai risikonya sebelum menimbulkan kecelakaan. Proses ini dikenal dengan HIRADC atau IBPR. Memahaminya penting bagi siapa pun yang menjalankan sistem manajemen K3 di perusahaan.</p><h2>Apa Itu HIRADC/IBPR?</h2><p>HIRADC (Hazard Identification, Risk Assessment and Determining Control) atau dalam bahasa Indonesia IBPR (Identifikasi Bahaya dan Penilaian Risiko) adalah proses sistematis untuk mengenali bahaya, menilai tingkat risikonya, dan menetapkan pengendalian. Ini adalah jantung dari manajemen risiko K3.</p><h2>Mengapa HIRADC Penting?</h2><p>Tanpa identifikasi bahaya yang baik, perusahaan tidak tahu risiko apa yang dihadapi dan tidak dapat mengendalikannya secara tepat. HIRADC membantu memprioritaskan sumber daya pada risiko paling penting, memenuhi persyaratan SMK3 dan ISO 45001, serta mencegah kecelakaan secara terencana.</p><h2>Tahapan HIRADC</h2><ol><li><strong>Identifikasi bahaya:</strong> kenali semua bahaya di setiap aktivitas</li><li><strong>Penilaian risiko:</strong> nilai berdasarkan kemungkinan dan keparahan</li><li><strong>Penentuan pengendalian:</strong> tetapkan tindakan sesuai hierarki</li><li><strong>Tinjau dan perbarui:</strong> lakukan evaluasi berkala</li></ol><h2>Memahami Matriks Risiko</h2><p>Risiko dihitung dari kombinasi <strong>kemungkinan (likelihood)</strong> terjadinya dan <strong>keparahan (severity)</strong> dampaknya. Hasilnya dipetakan dalam matriks risiko dan dikategorikan menjadi rendah, sedang, tinggi, hingga ekstrem. Kategori ini menentukan prioritas dan urgensi tindakan pengendalian.</p><h2>Hierarki Pengendalian Risiko</h2><p>Setelah risiko dinilai, pengendalian ditentukan dengan urutan: eliminasi, substitusi, rekayasa teknik, pengendalian administratif, dan alat pelindung diri. Pengendalian di tingkat atas lebih efektif karena menghilangkan atau mengurangi bahaya pada sumbernya.</p><h2>Perbedaan HIRADC dan JSA</h2><p>HIRADC bersifat menyeluruh untuk seluruh aktivitas/area perusahaan, sedangkan JSA fokus pada langkah-langkah satu pekerjaan tertentu. Keduanya saling melengkapi: HIRADC memberi gambaran besar, JSA memberi analisis detail per pekerjaan.</p><h2>Peran HIRADC dalam SMK3 dan ISO 45001</h2><p>HIRADC merupakan elemen penting dalam SMK3 PP 50/2012 maupun ISO 45001. Sistem manajemen K3 yang baik selalu didasarkan pada identifikasi bahaya dan penilaian risiko yang akurat. Tanpa HIRADC, program K3 menjadi tidak terarah.</p><h2>Kesimpulan</h2><p>HIRADC/IBPR adalah fondasi manajemen risiko K3 yang membantu perusahaan mengenali, menilai, dan mengendalikan bahaya secara sistematis. Dengan menerapkannya secara konsisten, perusahaan dapat mencegah kecelakaan dan memenuhi persyaratan sistem manajemen K3. Kemampuan menyusun HIRADC adalah kompetensi penting bagi setiap praktisi K3.</p><h2>Tingkatkan Kompetensi K3 Bersama Wahana Totalita</h2><p>Wahana Totalita Konsultan membantu Anda meraih sertifikasi K3 yang diakui nasional, dengan kelas online via Zoom maupun tatap muka di Yogyakarta, instruktur berpengalaman, dan jadwal rutin tiap bulan. Konsultasi gratis via <a href=\"https://wa.me/6281235036420\">WhatsApp 0812-3503-6420</a> atau kunjungi <a href=\"/\">wahanatotalita.com</a> untuk info program, jadwal, dan biaya terbaru.</p>",
-    "faq_data": "[{\"q\":\"Apa beda HIRADC dan JSA?\",\"a\":\"HIRADC bersifat menyeluruh untuk seluruh aktivitas, sedangkan JSA fokus pada langkah-langkah satu pekerjaan tertentu.\"},{\"q\":\"Bagaimana cara menilai risiko?\",\"a\":\"Dengan mengombinasikan tingkat kemungkinan dan keparahan menggunakan matriks risiko.\"},{\"q\":\"Apakah HIRADC wajib?\",\"a\":\"HIRADC merupakan elemen penting dalam SMK3 dan ISO 45001 sehingga sangat dianjurkan bahkan diwajibkan dalam banyak konteks.\"},{\"q\":\"Apa itu matriks risiko?\",\"a\":\"Alat untuk memetakan risiko berdasarkan kombinasi kemungkinan dan keparahan, sehingga risiko dapat diprioritaskan.\"},{\"q\":\"Siapa yang menyusun HIRADC?\",\"a\":\"Tim K3 bersama perwakilan area\\/pekerja agar identifikasi bahaya akurat dan pengendalian dapat diterapkan.\"}]",
-    "author": "Wahana Totalita Konsultan",
-    "status": "published",
-    "published_at": "2026-06-25 13:49:14",
-    "view_count": 173,
-    "created_at": "2026-06-25 13:49:14",
-    "updated_at": "2026-10-13 05:11:34",
-    "faq_list": [
-        {
-            "q": "Apa beda HIRADC dan JSA?",
-            "a": "HIRADC bersifat menyeluruh untuk seluruh aktivitas, sedangkan JSA fokus pada langkah-langkah satu pekerjaan tertentu."
-        },
-        {
-            "q": "Bagaimana cara menilai risiko?",
-            "a": "Dengan mengombinasikan tingkat kemungkinan dan keparahan menggunakan matriks risiko."
-        },
-        {
-            "q": "Apakah HIRADC wajib?",
-            "a": "HIRADC merupakan elemen penting dalam SMK3 dan ISO 45001 sehingga sangat dianjurkan bahkan diwajibkan dalam banyak konteks."
-        },
-        {
-            "q": "Apa itu matriks risiko?",
-            "a": "Alat untuk memetakan risiko berdasarkan kombinasi kemungkinan dan keparahan, sehingga risiko dapat diprioritaskan."
-        },
-        {
-            "q": "Siapa yang menyusun HIRADC?",
-            "a": "Tim K3 bersama perwakilan area/pekerja agar identifikasi bahaya akurat dan pengendalian dapat diterapkan."
-        }
-    ]
+  "id": 81,
+  "title": "HIRADC / IBPR: Pengertian, Contoh Tabel dan Cara Menyusun",
+  "slug": "mengenal-hiradc-ibpr-identifikasi-bahaya-penilaian-risiko",
+  "meta_title": "HIRADC / IBPR: Contoh Tabel & Tahapan | Wahana Totalita",
+  "meta_desc": "Pahami HIRADC dan IBPR melalui contoh bahaya, penilaian risiko serta pengendalian. Pelajari matriks, risiko sisa dan waktu peninjauan.",
+  "keywords": "hiradc, ibpr, identifikasi bahaya, penilaian risiko, matriks risiko, manajemen risiko k3",
+  "category": "K3",
+  "thumbnail": null,
+  "content": "<p><strong>HIRADC (Hazard Identification, Risk Assessment and Determining Controls) adalah proses mengenali bahaya, menilai risiko dan menentukan pengendalian.</strong> IBPR lazim digunakan untuk Identifikasi Bahaya dan Penilaian Risiko. Gunakan istilah serta format organisasi secara konsisten agar hasilnya dapat dipakai mengambil keputusan.</p><h2>Bedakan bahaya, risiko dan pengendalian</h2><p>Bahaya adalah sumber atau situasi yang berpotensi menimbulkan cedera atau gangguan kesehatan. Risiko berkaitan dengan kemungkinan serta keparahan akibat pada kondisi tertentu. Pengendalian merupakan tindakan untuk menghilangkan atau mengurangi risiko tersebut.</p><p>Contoh: pergerakan forklift adalah sumber bahaya dalam interaksi kendaraan dan pejalan kaki. Skenario kejadian dapat berupa tabrakan pada persimpangan dengan pandangan terbatas. Menulis “kecelakaan” sebagai satu-satunya bahaya tidak cukup menjelaskan apa yang perlu dikendalikan.</p><h2>Cara menyusun HIRADC dari kegiatan nyata</h2><p>Libatkan orang yang memahami pekerjaan, termasuk pekerja yang menjalankannya. Periksa aktivitas rutin, nonrutin, perubahan dan keadaan yang dapat berbeda dari rencana. Dokumen akan lebih berguna jika sesuai lokasi daripada menyalin daftar bahaya generik.</p><ol><li>Tentukan lingkup, area, aktivitas dan siapa yang mungkin terdampak.</li><li>Identifikasi sumber bahaya serta skenario paparan atau kejadian.</li><li>Catat pengendalian yang sudah ada dan periksa penerapannya.</li><li>Nilai risiko dengan kriteria organisasi yang telah disepakati.</li><li>Tentukan pengendalian tambahan, penanggung jawab dan tenggat.</li><li>Verifikasi pelaksanaan, nilai risiko sisa dan tinjau bila kondisi berubah.</li></ol><h2>Contoh tabel HIRADC yang dapat disesuaikan</h2><p>Tabel berikut adalah ilustrasi struktur, bukan penilaian lokasi tertentu. Nilai risiko tidak diisi karena membutuhkan kriteria serta data kondisi nyata. Pengendalian teknis harus ditetapkan melalui penilaian personel yang sesuai.</p><table><caption>Contoh register bahaya dan tindak lanjut</caption><thead><tr><th scope=\"col\">Aktivitas</th><th scope=\"col\">Bahaya dan skenario</th><th scope=\"col\">Arah pengendalian untuk dinilai</th><th scope=\"col\">Bukti tindak lanjut</th></tr></thead><tbody><tr><td>Perpindahan barang</td><td>Kendaraan dan pejalan kaki bertemu di titik pandangan terbatas</td><td>Tinjau pemisahan jalur, tata letak serta aturan pergerakan</td><td>Penanggung jawab, pemeriksaan lokasi dan evaluasi interaksi</td></tr><tr><td>Pembersihan area</td><td>Permukaan basah masih dilalui orang</td><td>Tinjau metode, pembatasan akses serta kesiapan membuka area</td><td>Kondisi aktual dan bukti pemeriksaan</td></tr><tr><td>Penggunaan bahan</td><td>Paparan saat pemindahan cairan</td><td>Tinjau bahan, proses dan pengendalian berdasarkan informasi bahaya</td><td>Bukti penilaian dan penerapan yang relevan</td></tr></tbody></table><h2>Matriks risiko: apakah harus 5 × 5?</h2><p>Tidak ada satu ukuran matriks yang otomatis tepat untuk semua organisasi. Tetapkan definisi kemungkinan, keparahan, kategori dan keputusan yang menyertainya. Jika memakai perkalian skor, jelaskan skala serta makna hasilnya.</p><p>Angka tidak menggantikan penilaian pengendalian. Jangan menurunkan skor hanya karena SOP telah ditulis atau APD telah dipesan. Periksa apakah tindakan benar-benar diterapkan dan efektif. Catat alasan bila penilaian berubah agar dapat ditinjau.</p><h2>Tentukan pengendalian menurut hierarki</h2><p>NIOSH menjelaskan urutan eliminasi, substitusi, rekayasa teknis, administratif dan APD. Pertimbangkan cara mengurangi bahaya di sumber sebelum mengandalkan tindakan yang sangat bergantung pada perilaku pemakai.</p><p>Untuk setiap usulan, tanyakan kelayakan, sumber daya, dampak baru dan siapa yang memeriksa hasilnya. Baca <a href=\"/artikel/alat-pelindung-diri-apd-k3-standar-indonesia/\">pemilihan APD</a> agar perlengkapan dipilih sebagai bagian dari pengendalian yang tepat.</p><h2>Risiko sisa dan waktu peninjauan</h2><p>Risiko sisa adalah risiko setelah mempertimbangkan pengendalian yang diterapkan. Nilai kembali berdasarkan bukti; jangan menulis semua hasil “rendah” hanya agar daftar terlihat selesai. Jika belum dapat diterima menurut kriteria organisasi, tentukan keputusan dan tindakan yang diperlukan.</p><p>Tinjau saat metode, alat, lokasi atau personel berubah, setelah insiden atau ketika inspeksi menunjukkan pengendalian tidak efektif. Tetapkan juga peninjauan terencana sesuai sistem perusahaan.</p><h2>Perbedaan HIRADC dan JSA</h2><p>HIRADC dapat memetakan risiko aktivitas atau area. JSA menguraikan langkah suatu tugas dan pengendalian pada tiap langkah. Keduanya dapat saling mengisi; ruang lingkup nyata ditetapkan organisasi, bukan dibatasi hanya oleh singkatannya.</p><p>Lihat <a href=\"/artikel/cara-membuat-jsa-job-safety-analysis/\">JSA: pengertian, contoh dan cara membuat</a> untuk analisis langkah tugas. Hubungkan penilaian dengan <a href=\"/artikel/inspeksi-k3-rutin-checklist/\">inspeksi rutin</a> dan <a href=\"/artikel/metode-investigasi-kecelakaan-kerja/\">pembelajaran investigasi</a>.</p><p>Untuk membangun dasar pengelolaan K3, lihat <a href=\"/pelatihan/pelatihan-ahli-k3-umum-sertifikasi-kemnaker-ri/\">pembinaan Ahli K3 Umum</a>. Rujukan HSE dan NIOSH digunakan sebagai panduan metode, bukan sebagai pengganti kewajiban hukum Indonesia.</p><h2>Sumber dan rujukan</h2><p><a href=\"https://www.hse.gov.uk/simple-health-safety/risk/index.htm\" target=\"_blank\" rel=\"noopener noreferrer\">HSE: Managing risks and risk assessment at work</a>; <a href=\"https://www.cdc.gov/niosh/hierarchy-of-controls/about/index.html\" target=\"_blank\" rel=\"noopener noreferrer\">NIOSH: Hierarchy of Controls</a>. Rujukan ditelaah untuk pembaruan editorial 25 Oktober 2026.</p>",
+  "faq_data": "[{\"q\":\"Apakah HIRADC harus memakai matriks 5 × 5?\",\"a\":\"Tidak otomatis. Gunakan kriteria yang ditetapkan organisasi dan jelaskan definisi serta keputusan pada tiap kategori.\"},{\"q\":\"Apakah SOP membuat risiko langsung rendah?\",\"a\":\"Tidak. Periksa apakah pengendalian diterapkan dan efektif sebelum menilai risiko sisa.\"},{\"q\":\"Apa beda HIRADC dengan JSA?\",\"a\":\"HIRADC memetakan bahaya dan risiko pada lingkup yang ditetapkan; JSA menguraikan langkah suatu tugas beserta pengendaliannya.\"}]",
+  "author": "Wahana Totalita Konsultan",
+  "status": "published",
+  "published_at": "2026-06-25 13:49:14",
+  "view_count": 173,
+  "created_at": "2026-06-25 13:49:14",
+  "updated_at": "2026-10-25",
+  "faq_list": [
+    {
+      "q": "Apakah HIRADC harus memakai matriks 5 × 5?",
+      "a": "Tidak otomatis. Gunakan kriteria yang ditetapkan organisasi dan jelaskan definisi serta keputusan pada tiap kategori."
+    },
+    {
+      "q": "Apakah SOP membuat risiko langsung rendah?",
+      "a": "Tidak. Periksa apakah pengendalian diterapkan dan efektif sebelum menilai risiko sisa."
+    },
+    {
+      "q": "Apa beda HIRADC dengan JSA?",
+      "a": "HIRADC memetakan bahaya dan risiko pada lingkup yang ditetapkan; JSA menguraikan langkah suatu tugas beserta pengendaliannya."
+    }
+  ],
+  "related_article_slugs": [
+    "cara-membuat-jsa-job-safety-analysis",
+    "alat-pelindung-diri-apd-k3-standar-indonesia",
+    "inspeksi-k3-rutin-checklist",
+    "metode-investigasi-kecelakaan-kerja"
+  ],
+  "related_training_slugs": [
+    "pelatihan-ahli-k3-umum-sertifikasi-kemnaker-ri"
+  ]
 }
