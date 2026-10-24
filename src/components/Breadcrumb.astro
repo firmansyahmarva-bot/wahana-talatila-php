@@ -44,6 +44,7 @@ const { items = [], variant = 'default', class: className = '' } = Astro.props;
     padding: 12px 0;
     border-bottom: 1px solid var(--border);
   }
+  :global(body.has-site-navigation) .bcr-bar { margin-top: 0; }
   .bcr-bar-course,
   .bcr-bar-article,
   .bcr-bar-article-cat {

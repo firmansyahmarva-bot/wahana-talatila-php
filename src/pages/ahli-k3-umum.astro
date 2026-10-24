@@ -1,4 +1,6 @@
 ---
+import TableScroll from '../components/shared/TableScroll.astro';
+import HeroSurface from '../components/shared/HeroSurface.astro';
 import Layout from '../layouts/Layout.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import { getCollection } from 'astro:content';
@@ -153,7 +155,7 @@ const schemas = [
   />
 
   <!-- HERO SECTION -->
-  <section class="ak-hero">
+  <HeroSurface class="ak-hero" appearance="soft">
     <div class="container ak-hero-inner">
       <div class="ak-eyebrow">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
@@ -211,7 +213,7 @@ const schemas = [
         </div>
       </div>
     </div>
-  </section>
+  </HeroSurface>
 
   <!-- 6-TRACK PROGRAM SELECTOR -->
   <section class="ak-section" id="jalur">
@@ -396,7 +398,7 @@ const schemas = [
       </div>
 
       <div class="ak-table-wrap">
-        <table class="ak-comp-table">
+        <TableScroll><table class="ak-comp-table">
           <thead>
             <tr>
               <th style="width:25%">Parameter Evaluasi</th>
@@ -442,7 +444,7 @@ const schemas = [
               <td>Sertifikat berlaku 3 tahun (perpanjangan via asesmen ulang)</td>
             </tr>
           </tbody>
-        </table>
+        </table></TableScroll>
       </div>
     </div>
   </section>

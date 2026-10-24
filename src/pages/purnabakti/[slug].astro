@@ -1,4 +1,6 @@
 ---
+import TableScroll from '../../components/shared/TableScroll.astro';
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
@@ -86,7 +88,7 @@ const schemas = [
   pageCss={['/assets/css/page/purnabakti-detail.css']}
 >
   <!-- HERO -->
-  <section class="mpp-detail-hero">
+  <HeroSurface class="mpp-detail-hero">
     <div class="container">
       <div style="font-size:13px; color:var(--slate-300); margin-bottom:12px;">
         <a href="/" style="color:var(--slate-300); text-decoration:none;">Beranda</a> &rsaquo; 
@@ -127,7 +129,7 @@ const schemas = [
         </a>
       </div>
     </div>
-  </section>
+  </HeroSurface>
 
   <!-- MAIN BODY -->
   <div class="container">
@@ -162,7 +164,7 @@ const schemas = [
               Materi disusun secara terstruktur dengan pendekatan partisipatif, studi kasus, simulasi finansial, dan praktik lapangan berbobot:
             </p>
 
-            <table class="mpp-syllabus-table">
+            <TableScroll><table class="mpp-syllabus-table">
               <thead>
                 <tr>
                   <th style="width:28%;">Mata Pelatihan</th>
@@ -181,7 +183,7 @@ const schemas = [
                   </tr>
                 ))}
               </tbody>
-            </table>
+            </table></TableScroll>
           </>
         )}
 

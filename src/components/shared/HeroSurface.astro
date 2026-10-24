@@ -1,0 +1,25 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+interface Props extends HTMLAttributes<'section'> {
+  as?: 'section' | 'div';
+  appearance?: 'brand' | 'photo' | 'soft';
+}
+const {as:Tag='section',appearance='brand',class:className,...attributes}=Astro.props;
+---
+<Tag {...attributes} class:list={['ui-hero-surface',`ui-hero-surface--${appearance}`,className]}><slot/></Tag>
+<style is:global>
+body.has-site-navigation .ui-hero-surface--soft {
+  background:radial-gradient(ellipse at 100% 5%,color-mix(in srgb,var(--danger) 6%,transparent),transparent 60%),linear-gradient(125deg,var(--surface),var(--slate-50));
+  color:var(--text);
+}
+.ui-hero-surface--soft h1 {color:var(--text);}
+
+body.has-site-navigation .ui-hero-surface--brand {
+  background:var(--hero-background, linear-gradient(125deg,var(--slate-900),var(--slate-800)));
+  color:var(--hero-ink,var(--on-brand));
+  border-color:color-mix(in srgb,var(--on-brand) 18%,transparent);
+}
+.ui-hero-surface--brand h1 {color:var(--hero-ink,var(--on-brand));font-family:var(--font-heading);line-height:1.2;letter-spacing:-.035em;}
+.ui-hero-surface--brand h1 em {color:inherit;}
+.ui-hero-surface--brand > :is(.container,.en-container,.zh-container) {position:relative;}
+</style>

@@ -1,4 +1,5 @@
 ---
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
@@ -86,7 +87,7 @@ const schemas = [
   pageCss={['/assets/css/page/perpanjangan-skp-detail.css']}
 >
   <!-- HERO -->
-  <section class="skpd-hero">
+  <HeroSurface class="skpd-hero">
     <div class="container">
       <div class="skpd-breadcrumbs">
         <a href="/">Beranda</a> &rsaquo;
@@ -121,7 +122,7 @@ const schemas = [
         )}
       </div>
     </div>
-  </section>
+  </HeroSurface>
 
   <!-- MAIN CONTENT & SIDEBAR -->
   <main class="container">

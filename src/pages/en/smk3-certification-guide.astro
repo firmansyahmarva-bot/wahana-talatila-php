@@ -1,4 +1,7 @@
 ---
+import TableScroll from '../../components/shared/TableScroll.astro';
+import SurfaceCard from '../../components/shared/SurfaceCard.astro';
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import EnLayout from '../../layouts/EnLayout.astro';
 import EnSidebar from '../../components/EnSidebar.astro';
 
@@ -14,7 +17,7 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
   canonical={canonical}
   schemas={schemas}
 >
-<section class="en-hero">
+<HeroSurface class="en-hero">
   <div class="en-container">
     <div class="en-breadcrumb">
       <a href="/">Home</a> &rsaquo; <a href="/en/">English OHS Hub</a> &rsaquo; <span>SMK3 Certification Guide</span>
@@ -51,12 +54,12 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
       </div>
     </div>
   </div>
-</section>
+</HeroSurface>
 
 <div class="en-container">
   <div class="en-body-grid">
     <main>
-      <section class="en-card">
+      <SurfaceCard as="section" class="en-card">
         <span class="en-sec-badge">Statutory Mandate</span>
         <h2 class="en-sec-title">Understanding Indonesia's SMK3 Management System</h2>
         <p class="en-text">
@@ -73,9 +76,9 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
             Major Indonesian state-owned enterprises (Pertamina, PLN, PTBA, MIND ID, Pelindo) and tier-one EPC consortia mandate an authentic Kemnaker-issued SMK3 Audit Certificate as a non-negotiable tender submission requirement. Bids without SMK3 are eliminated at the administrative gate.
           </p>
         </div>
-      </section>
+      </SurfaceCard>
 
-      <section class="en-card">
+      <SurfaceCard as="section" class="en-card">
         <span class="en-sec-badge">Audit Tiers &amp; Criteria</span>
         <h2 class="en-sec-title">The Three Statutory Audit Levels</h2>
         <p class="en-text">
@@ -83,7 +86,7 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
         </p>
 
         <div class="en-table-wrap">
-          <table class="en-table">
+          <TableScroll><table class="en-table">
             <thead>
               <tr>
                 <th>Audit Level</th>
@@ -112,11 +115,11 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
                 <td><strong>85-100%: Gold Flag Award (Bendera Emas)</strong> + Ministerial Certificate</td>
               </tr>
             </tbody>
-          </table>
+          </table></TableScroll>
         </div>
-      </section>
+      </SurfaceCard>
 
-      <section class="en-card">
+      <SurfaceCard as="section" class="en-card">
         <span class="en-sec-badge">Audit Execution</span>
         <h2 class="en-sec-title">Pre-Requisites for Passing the SMK3 Audit</h2>
         <p class="en-text">
@@ -129,7 +132,7 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
           <li>Valid Ministry operator permits (<a href="/en/heavy-equipment-operator-license-sio/">SIO licenses</a>) for all plant drivers.</li>
           <li>Internal SMK3 audit conducted at least once prior to the external audit.</li>
         </ul>
-      </section>
+      </SurfaceCard>
     </main>
 
     <EnSidebar currentSlug="smk3-certification-guide" />

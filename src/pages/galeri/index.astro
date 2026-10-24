@@ -1,4 +1,5 @@
 ---
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import Layout from '../../layouts/Layout.astro';
 import photos from '../../data/galeri.json';
 
@@ -13,10 +14,10 @@ const canonical = 'https://wahanatotalita.com/galeri/';
   canonical={canonical}
   pageCss={['/assets/css/page/galeri.css']}
 >
-  <section class="gal-hero container">
+  <HeroSurface class="gal-hero container">
     <h1>Galeri Kegiatan</h1>
     <p>Dokumentasi pelaksanaan pelatihan dan sertifikasi K3 di berbagai kota di Indonesia.</p>
-  </section>
+  </HeroSurface>
 
   <div class="container">
     {photos.length === 0 ? (

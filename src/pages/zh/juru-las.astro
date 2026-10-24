@@ -1,4 +1,7 @@
 ---
+import TableScroll from '../../components/shared/TableScroll.astro';
+import SurfaceCard from '../../components/shared/SurfaceCard.astro';
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import ZhLayout from '../../layouts/ZhLayout.astro';
 
 const pageTitle = "印尼承压管道与结构特种焊工 (Juru Las) 等级规范与实操考核指南 — Wahana Totalita";
@@ -84,7 +87,7 @@ const schemas = [
   canonical={canonical}
   schemas={schemas}
 >
-<section class="zh-hero">
+<HeroSurface class="zh-hero">
   <div class="zh-container">
     <div class="zh-breadcrumb">
       <a href="/zh/">首页</a> &rsaquo; <a href="/zh/">印尼安全生产合规专栏</a> &rsaquo; <span>特种焊工 (Juru Las) 等级与持证规范</span>
@@ -97,12 +100,12 @@ const schemas = [
       在印尼电厂、锅炉压力管道、钢结构桥梁及石化储罐作业，焊工持证有何严格限制？一文读懂印尼劳工部 Kelas 1、Kelas 2、Kelas 3 资质划分与 X 光射线实操抽检。
     </p>
   </div>
-</section>
+</HeroSurface>
 
 <div class="zh-container">
   <div class="zh-body-grid">
     <main>
-      <article class="zh-card">
+      <SurfaceCard as="article" class="zh-card">
         <span class="zh-sec-badge">焊接法规依据</span>
         <h2 class="zh-sec-title">一、印尼特种焊工的强制性法定监管背景</h2>
         <p class="zh-text">
@@ -111,13 +114,13 @@ const schemas = [
         <p class="zh-text">
           因此，印尼依据 <strong>《1982年第2号劳工部令关于特种焊工资质规范》(Permenaker No. 02/MEN/1982)</strong>，对所有从事受压元件、压力容器、锅炉及重载钢结构焊接的作业人员，实行极其严格的<strong>“等级持证与实操试件探伤准入制”</strong>。
         </p>
-      </article>
+      </SurfaceCard>
 
-      <article class="zh-card">
+      <SurfaceCard as="article" class="zh-card">
         <span class="zh-sec-badge">等级权限划分</span>
         <h2 class="zh-sec-title">二、印尼劳工部 Juru Las 焊工三级权限全景对比</h2>
         <div class="zh-table-wrap">
-          <table class="zh-table">
+          <TableScroll><table class="zh-table">
             <thead>
               <tr>
                 <th>资质等级</th>
@@ -146,28 +149,28 @@ const schemas = [
                 <td>外观目测检查 (VT) + 基础断裂/弯曲试验</td>
               </tr>
             </tbody>
-          </table>
+          </table></TableScroll>
         </div>
-      </article>
+      </SurfaceCard>
 
-      <article class="zh-card">
+      <SurfaceCard as="article" class="zh-card">
         <span class="zh-sec-badge">决策者防坑指南</span>
         <h2 class="zh-sec-title">三、中资企业现场特种焊接作业的 3 大合规要点</h2>
         <div class="zh-law-grid">
-          <div class="zh-law-card">
+          <SurfaceCard class="zh-law-card">
             <strong>1. 国内持证焊工必须完成印尼官方转换备案</strong>
             <p>中国国内特种设备焊工证在印尼法律上无直接行政效力。中方焊工骨干在现场施焊高压承压管线前，必须通过印尼 PJK3 培训机构协调开展印尼官方实操考核与证书备案。</p>
-          </div>
-          <div class="zh-law-card">
+          </SurfaceCard>
+          <SurfaceCard class="zh-law-card">
             <strong>2. 焊接工艺评定 (WPS &amp; PQR) 必须齐备</strong>
             <p>焊工持证仅是人有资质。对于高标准管道，现场施焊前还必须出具经印尼劳工部或第三方检验师签署的《焊接工艺规程》(WPS) 与《工艺评定报告》(PQR)。</p>
-          </div>
-          <div class="zh-law-card">
+          </SurfaceCard>
+          <SurfaceCard class="zh-law-card">
             <strong>3. 防火看火人 (Fire Watcher) 的同步配置</strong>
             <p>在带料生产的厂区、动火作业区域（Hot Work），施焊时必须依法配备专职防火看火人，持有便携灭火器并清理作业面半径 10 米内易燃杂物。</p>
-          </div>
+          </SurfaceCard>
         </div>
-      </article>
+      </SurfaceCard>
     </main>
         <aside class="zh-sticky-sidebar">
       <div class="zh-sb-box">

@@ -1,4 +1,7 @@
 ---
+import TableScroll from '../../components/shared/TableScroll.astro';
+import SurfaceCard from '../../components/shared/SurfaceCard.astro';
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import ZhLayout from '../../layouts/ZhLayout.astro';
 
 const pageTitle = "印尼注册安全官 (Ahli K3 Umum) 法定配置与 P2K3 委员会设立指引 — Wahana Totalita";
@@ -113,7 +116,7 @@ const schemas = [
   hreflangs={hreflangs}
   schemas={schemas}
 >
-<section class="zh-hero">
+<HeroSurface class="zh-hero">
   <div class="zh-container">
     <div class="zh-breadcrumb">
       <a href="/zh/">首页</a> &rsaquo; <a href="/zh/">印尼安全生产合规专栏</a> &rsaquo; <span>Ahli K3 Umum &amp; P2K3 设立指引</span>
@@ -126,34 +129,34 @@ const schemas = [
       为什么在印尼办厂施工必须配备印尼籍专职安全官？安全生产委员会 (P2K3) 如何合法设立与向劳工部备案？每季度向劳动监察局报送季报有哪些法定要点？
     </p>
   </div>
-</section>
+</HeroSurface>
 
 <div class="zh-container">
   <div class="zh-body-grid">
     <main>
-      <article class="zh-card">
+      <SurfaceCard as="article" class="zh-card">
         <span class="zh-sec-badge">法律硬性门槛</span>
         <h2 class="zh-sec-title">一、什么时候企业必须配备专职安全官 (Ahli K3 Umum)？</h2>
         <p class="zh-text">
           根据印尼 <strong>《1970年第1号安全生产法》第10条</strong> 及 <strong>劳工部第 02/MEN/1992 号条例</strong>，满足以下两项条件之一的企业，<strong>必须在组织架构中任命至少 1 名具备印尼劳工部正式任职许可（SKP: Surat Keputusan Penunjukan）的企业注册安全官（Ahli K3 Umum）</strong>：
         </p>
         <div class="zh-law-grid">
-          <div class="zh-law-card">
+          <SurfaceCard class="zh-law-card">
             <strong>条件 A：用工人数达到 100 人及以上</strong>
             <p>无论从事何种行业（包括普通制造、组装、仓储、建筑或商贸物流），只要雇佣员工总数达到 100 人，企业即触达法定设立门槛。</p>
-          </div>
-          <div class="zh-law-card">
+          </SurfaceCard>
+          <SurfaceCard class="zh-law-card">
             <strong>条件 B：不足 100 人但属于高危行业</strong>
             <p>用工虽不足 100 人，但存在火灾易燃物、高压爆炸品、有毒危险化学品、电弧高压、重型机械或高空作业（如冶炼厂、化工厂、矿山、高压电网、爆破工程），同样属于强制设立范围。</p>
-          </div>
+          </SurfaceCard>
         </div>
         <div class="zh-alert-box">
           <strong>未依法配置专职安全官的法律后果：</strong>
           <p>地方劳动监察局（Pengawas Ketenagakerjaan）在例行巡检或接到举报进厂核查时，第一项必查文件便是安全官的《劳工部委任书》（SKP）及《安全官执业证》（Kartu Kewenangan）。若未配置，监察局将签发限期整改通知书（Nota Pemeriksaan），逾期未整改企业将被处以行政罚款甚至暂扣生产许可。</p>
         </div>
-      </article>
+      </SurfaceCard>
 
-      <article class="zh-card">
+      <SurfaceCard as="article" class="zh-card">
         <span class="zh-sec-badge">机构设立实操</span>
         <h2 class="zh-sec-title">二、安全生产委员会 (P2K3) 的法定架构与运作规范</h2>
         <p class="zh-text">
@@ -165,7 +168,7 @@ const schemas = [
           <li><strong>P2K3 委员 (Anggota)：</strong> 由中印双方生产车间主管、工程部长、HR 人事主管及工会代表共同组成。</li>
         </ul>
         <div class="zh-table-wrap">
-          <table class="zh-table">
+          <TableScroll><table class="zh-table">
             <thead>
               <tr>
                 <th>设立与运维步骤</th>
@@ -194,11 +197,11 @@ const schemas = [
                 <td>每3个月报送一次</td>
               </tr>
             </tbody>
-          </table>
+          </table></TableScroll>
         </div>
-      </article>
+      </SurfaceCard>
 
-      <article class="zh-card">
+      <SurfaceCard as="article" class="zh-card">
         <span class="zh-sec-badge">决策层关键困惑</span>
         <h2 class="zh-sec-title">三、中资企业管理层关于安全官配置的高频问答</h2>
         <div class="zh-faq-item">
@@ -222,7 +225,7 @@ const schemas = [
             <p><strong>重要提示：</strong> SKP 是绑定在出资报名的具体企业法人名下的。如果企业新招聘了一名已经有 AK3U 的印尼员工，企业必须在劳工部办理“SKP 变更手续（Mutasi SKP）”，将其挂靠单位变更为贵公司，在法律层面上才算正式履职。</p>
           </div>
         </div>
-      </article>
+      </SurfaceCard>
     </main>
         <aside class="zh-sticky-sidebar">
       <div class="zh-sb-box">

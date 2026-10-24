@@ -1,4 +1,5 @@
 ---
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import Layout from '../../layouts/Layout.astro';
 import Faq from '../../components/Faq.astro';
 import SectionTitle from '../../components/SectionTitle.astro';
@@ -170,7 +171,7 @@ const toolFaqs = [
   pageCss={['/assets/css/page/tools.css']}
 >
   <!-- HERO -->
-  <section class="hub-hero">
+  <HeroSurface class="hub-hero">
     <div class="container">
       <div class="hero-badge">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
@@ -179,7 +180,7 @@ const toolFaqs = [
       <h1>Kumpulan Tools &amp; Kalkulator <span>K3 Online</span></h1>
       <p>Akses 11 alat bantu dan kalkulator keselamatan kerja profesional gratis: dari materi Safety Talk harian, perhitungan statistik K3 (FR/SR), JSA Builder, Matriks Risiko 5x5, hingga database regulasi resmi Kemnaker RI.</p>
     </div>
-  </section>
+  </HeroSurface>
 
   <!-- MAIN DIRECTORY -->
   <section class="hub-wrapper">

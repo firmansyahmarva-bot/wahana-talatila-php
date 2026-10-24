@@ -1,4 +1,6 @@
 ---
+import SurfaceCard from '../../components/shared/SurfaceCard.astro';
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import EnLayout from '../../layouts/EnLayout.astro';
 import EnSidebar from '../../components/EnSidebar.astro';
 
@@ -14,7 +16,7 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
   canonical={canonical}
   schemas={schemas}
 >
-<section class="en-hero">
+<HeroSurface class="en-hero">
   <div class="en-container">
     <div class="en-breadcrumb">
       <a href="/">Home</a> &rsaquo; <a href="/en/">English OHS Hub</a> &rsaquo; <span>Construction Safety (SMKK)</span>
@@ -51,12 +53,12 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
       </div>
     </div>
   </div>
-</section>
+</HeroSurface>
 
 <div class="en-container">
   <div class="en-body-grid">
     <main>
-      <section class="en-card">
+      <SurfaceCard as="section" class="en-card">
         <span class="en-sec-badge">PUPR Regulatory Architecture</span>
         <h2 class="en-sec-title">What is SMKK and How Does it Govern Projects?</h2>
         <p class="en-text">
@@ -69,7 +71,7 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
           <li><strong>Rencana Keselamatan Konstruksi (RKK):</strong> A comprehensive, legally binding project safety plan detailing engineering controls, hazard registers, traffic management, and emergency procedures submitted during tender bidding.</li>
           <li><strong>Dedicated SMKK Budget Line:</strong> Indonesian law prohibits contractors from absorbing safety costs into general overhead; safety costs (PPE, training, medical, equipment inspections) must be explicitly listed as a standalone Bill of Quantities item.</li>
         </ul>
-      </section>
+      </SurfaceCard>
     </main>
 
     <EnSidebar currentSlug="construction-safety-system-smkk" />

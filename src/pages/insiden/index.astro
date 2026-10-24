@@ -1,4 +1,5 @@
 ---
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
@@ -80,7 +81,7 @@ const schemas = [
   schemas={schemas}
   pageCss={['/assets/css/page/insiden.css']}
 >
-  <section class="insiden-hero">
+  <HeroSurface class="insiden-hero">
     <div class="container">
       <div style="margin-bottom:12px">
         <span class="live-badge"><span class="live-dot"></span> Pembaruan Berkala Analisis Kasus K3</span>
@@ -119,7 +120,7 @@ const schemas = [
         <button type="button" id="incidentSearchBtn">🔍 Cari</button>
       </div>
     </div>
-  </section>
+  </HeroSurface>
 
   <div class="filter-bar">
     <div class="container" style="display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between;">

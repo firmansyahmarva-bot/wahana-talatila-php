@@ -1,9 +1,6 @@
 ---
-import Breadcrumb from '../Breadcrumb.astro';
+import PageHero from '../shared/PageHero.astro';
 interface Props {title:string;description?:string;eyebrow?:string;items?:{name:string;href?:string}[];}
 const {title,description,eyebrow='PROGRAM & SERTIFIKASI',items=[{name:'Beranda',href:'/'},{name:title}]}=Astro.props;
 ---
-<div class="directory-header">
-  <Breadcrumb variant="default" {items}/>
-  <header class="ui-container dir-heading"><p class="ui-kicker">{eyebrow}</p><h1>{title}</h1>{description&&<p class="dir-intro">{description}</p>}<slot name="description"/><div class="dir-header-actions"><slot/></div></header>
-</div>
+<PageHero {title} {description} {eyebrow} {items}><slot name="description" slot="description"/><slot/></PageHero>

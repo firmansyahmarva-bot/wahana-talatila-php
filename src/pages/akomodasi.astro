@@ -1,4 +1,6 @@
 ---
+import TableScroll from '../components/shared/TableScroll.astro';
+import HeroSurface from '../components/shared/HeroSurface.astro';
 import Layout from '../layouts/Layout.astro';
 import SectionTitle from '../components/SectionTitle.astro';
 import Section from '../components/Section.astro';
@@ -110,7 +112,7 @@ const schemas = [
   schemas={schemas}
 >
   <!-- HERO -->
-  <section style="background:linear-gradient(135deg,var(--brand) 0%,var(--brand-mid) 100%);color:var(--surface);padding:60px 20px 50px;">
+  <HeroSurface style="background:linear-gradient(135deg,var(--brand) 0%,var(--brand-mid) 100%);color:var(--surface);padding:60px 20px 50px;">
     <div style="max-width:900px;margin:0 auto;">
       <nav aria-label="breadcrumb" style="font-size:0.85rem;opacity:0.8;margin-bottom:16px;">
         <a href="/" style="color:var(--info-border);text-decoration:none;">Beranda</a> &rsaquo;
@@ -135,7 +137,7 @@ const schemas = [
         Minta Penawaran Hotel
       </a>
     </div>
-  </section>
+  </HeroSurface>
 
   <main style="max-width:960px;margin:0 auto;padding:40px 20px 60px;">
 
@@ -164,7 +166,7 @@ const schemas = [
         Pemilihan kategori hotel untuk kegiatan dinas harus sesuai dengan <strong>Standar Biaya Masukan (SBM)</strong> yang ditetapkan Kementerian Keuangan setiap tahun berdasarkan golongan atau eselon pegawai. Kami membantu memastikan pilihan hotel sesuai ketentuan ini agar SPJ dapat dipertanggungjawabkan.
       </p>
       <div style="overflow-x:auto;">
-        <table style="width:100%;border-collapse:collapse;font-size:0.9rem;">
+        <TableScroll><table style="width:100%;border-collapse:collapse;font-size:0.9rem;">
           <thead>
             <tr style="background:var(--brand);color:var(--surface);">
               <th style="padding:10px 14px;text-align:left;">Kategori</th>
@@ -183,7 +185,7 @@ const schemas = [
               </tr>
             ))}
           </tbody>
-        </table>
+        </table></TableScroll>
       </div>
       <p style="color:var(--slate-500);font-size:0.82rem;margin-top:10px;font-style:italic;">* Kisaran tarif perkiraan, dapat berubah sesuai musim dan ketersediaan. Tarif SBM resmi mengacu pada Peraturan Menteri Keuangan yang berlaku di tahun berjalan.</p>
     </Section>

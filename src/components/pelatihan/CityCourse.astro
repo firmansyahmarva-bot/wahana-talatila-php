@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Breadcrumb from '../Breadcrumb.astro';
+import CityScheduleStrip from './CityScheduleStrip.astro';
 import DirectoryContext from '../directory/DirectoryContext.astro';
 import {waUrl} from '../../lib/images';
 
@@ -35,6 +36,10 @@ const schemas = Array.isArray(data.schemas) ? [...data.schemas] : [];
 let raw = (data.content || '').trim();
 raw = raw.replace(/<main\b[^>]*>/gi, '').replace(/<\/main>/gi, '');
 const htmlContent = raw;
+// Replace only the old schedule block; all programme copy remains untouched.
+const scheduleBlock = /<section\b[^>]*class=["'][^"']*\btc-live-schedules\b[^"']*["'][^>]*>[\s\S]*?<\/section>/.exec(htmlContent);
+const beforeSchedule = scheduleBlock ? htmlContent.slice(0,scheduleBlock.index) : htmlContent;
+const afterSchedule = scheduleBlock ? htmlContent.slice(scheduleBlock.index+scheduleBlock[0].length) : '';
 
 const cleanTitle = (data.title || '').split('—')[0].split('|')[0].trim();
 const breadcrumbElements: any[] = [
@@ -81,10 +86,7 @@ const cityPageCss = [
   '/assets/css/directory-city-program.css',
 ];
 
-const cityScripts = [
-  '/assets/js/training-schedule-feed.js',
-  '/assets/js/training-schedule-fallback.js',
-];
+
 ---
 
 <Layout
@@ -95,7 +97,6 @@ const cityScripts = [
   bodyClass="city-program-body"
   bodyAttrs={{ 'data-training-slug': trainingSlug, 'data-city': cityName }}
   pageCss={cityPageCss}
-  scripts={cityScripts}
   schemas={schemas}
 >
   <div class="city-program-page">
@@ -108,7 +109,9 @@ const cityScripts = [
         { name: programmaticTitle },
       ]}
     />
-    <Fragment set:html={htmlContent} />
+    <Fragment set:html={beforeSchedule} />
+    <CityScheduleStrip slug={trainingSlug} city={cityName} name={cleanTitle}/>
+    <Fragment set:html={afterSchedule} />
   </div>
   <DirectoryContext {cityName} citySlug={cityName ? (['bantul','sleman'].includes(cityName.toLowerCase())?'yogyakarta':cityName.toLowerCase()) : undefined}/>
 </Layout>

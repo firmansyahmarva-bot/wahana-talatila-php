@@ -1,4 +1,7 @@
 ---
+import TableScroll from '../../components/shared/TableScroll.astro';
+import SurfaceCard from '../../components/shared/SurfaceCard.astro';
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import EnLayout from '../../layouts/EnLayout.astro';
 import EnSidebar from '../../components/EnSidebar.astro';
 
@@ -14,7 +17,7 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
   canonical={canonical}
   schemas={schemas}
 >
-<section class="en-hero">
+<HeroSurface class="en-hero">
   <div class="en-container">
     <div class="en-breadcrumb">
       <a href="/">Home</a> &rsaquo; <a href="/en/">English OHS Hub</a> &rsaquo; <span>Certified Welder (Juru Las)</span>
@@ -51,12 +54,12 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
       </div>
     </div>
   </div>
-</section>
+</HeroSurface>
 
 <div class="en-container">
   <div class="en-body-grid">
     <main>
-      <section class="en-card">
+      <SurfaceCard as="section" class="en-card">
         <span class="en-sec-badge">Statutory Qualification</span>
         <h2 class="en-sec-title">The Three Statutory Welder Classes Explained</h2>
         <p class="en-text">
@@ -64,7 +67,7 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
         </p>
 
         <div class="en-table-wrap">
-          <table class="en-table">
+          <TableScroll><table class="en-table">
             <thead>
               <tr>
                 <th>Welder Class</th>
@@ -93,9 +96,9 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
                 <td>General Manufacturing, Warehousing Fabrication</td>
               </tr>
             </tbody>
-          </table>
+          </table></TableScroll>
         </div>
-      </section>
+      </SurfaceCard>
     </main>
 
     <EnSidebar currentSlug="certified-welder-regulations-indonesia" />

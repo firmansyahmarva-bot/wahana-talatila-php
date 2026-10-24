@@ -1,4 +1,6 @@
 ---
+import SurfaceCard from '../../components/shared/SurfaceCard.astro';
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import EnLayout from '../../layouts/EnLayout.astro';
 import EnSidebar from '../../components/EnSidebar.astro';
 
@@ -14,7 +16,7 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
   canonical={canonical}
   schemas={schemas}
 >
-<section class="en-hero">
+<HeroSurface class="en-hero">
   <div class="en-container">
     <div class="en-breadcrumb">
       <a href="/">Home</a> &rsaquo; <a href="/en/">English OHS Hub</a> &rsaquo; <span>Oil &amp; Gas Safety (Migas)</span>
@@ -51,12 +53,12 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
       </div>
     </div>
   </div>
-</section>
+</HeroSurface>
 
 <div class="en-container">
   <div class="en-body-grid">
     <main>
-      <section class="en-card">
+      <SurfaceCard as="section" class="en-card">
         <span class="en-sec-badge">Hydrocarbon Regulatory Framework</span>
         <h2 class="en-sec-title">Navigating Ditjen Migas Safety Oversight</h2>
         <p class="en-text">
@@ -70,7 +72,7 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
           <li><strong>CSMS Pre-Qualification:</strong> Achieving an approved score (usually >80%) under the operator's <a href="/en/csms-contractor-safety-management-system/">Contractor Safety Management System</a>.</li>
           <li><strong>Certified Personnel:</strong> Manning the project with personnel certified as <em>Operator K3 Migas</em>, <em>Pengawas K3 Migas</em>, or <em>Auditor SMK3</em>.</li>
         </ul>
-      </section>
+      </SurfaceCard>
     </main>
 
     <EnSidebar currentSlug="oil-gas-safety-migas-requirements" />

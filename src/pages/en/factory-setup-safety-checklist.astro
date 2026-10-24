@@ -1,4 +1,6 @@
 ---
+import SurfaceCard from '../../components/shared/SurfaceCard.astro';
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import EnLayout from '../../layouts/EnLayout.astro';
 import EnSidebar from '../../components/EnSidebar.astro';
 
@@ -14,7 +16,7 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
   canonical={canonical}
   schemas={schemas}
 >
-<section class="en-hero">
+<HeroSurface class="en-hero">
   <div class="en-container">
     <div class="en-breadcrumb">
       <a href="/">Home</a> &rsaquo; <a href="/en/">English OHS Hub</a> &rsaquo; <span>New Factory HSE Checklist</span>
@@ -51,53 +53,53 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
       </div>
     </div>
   </div>
-</section>
+</HeroSurface>
 
 <div class="en-container">
   <div class="en-body-grid">
     <main>
-      <section class="en-card">
+      <SurfaceCard as="section" class="en-card">
         <span class="en-sec-badge">Operational Checklist</span>
         <h2 class="en-sec-title">Phase-by-Phase Statutory HSE Implementation Plan</h2>
 
         <div class="en-law-grid">
-          <div class="en-law-card">
+          <SurfaceCard class="en-law-card">
             <strong>Phase 1: Civil Construction &amp; Groundbreaking</strong>
             <p>
               &bull; Secure <a href="/en/construction-safety-system-smkk/">SMKK approval</a> for main civil contractors.<br>
               &bull; Implement mandatory fall protection (<a href="/en/working-at-height-regulations/">TKBT/TKPK</a>).<br>
               &bull; Verify <a href="/en/heavy-equipment-operator-license-sio/">SIO operator permits</a> for excavators and piling rigs.
             </p>
-          </div>
+          </SurfaceCard>
 
-          <div class="en-law-card">
+          <SurfaceCard class="en-law-card">
             <strong>Phase 2: Machinery Installation &amp; Commissioning</strong>
             <p>
               &bull; Third-party statutory testing (<a href="/en/statutory-equipment-inspection-sia/">Riksa Uji / SIA</a>) for all cranes, gensets, and air compressors.<br>
               &bull; Hydrostatic and PSV pop tests for <a href="/en/boiler-pressure-vessel-certification/">steam boilers and receivers</a>.<br>
               &bull; Certified welder verification (<a href="/en/certified-welder-regulations-indonesia/">Juru Las Kelas 1/2</a>) for high-pressure piping.
             </p>
-          </div>
+          </SurfaceCard>
 
-          <div class="en-law-card">
+          <SurfaceCard class="en-law-card">
             <strong>Phase 3: Statutory Organization &amp; Staffing</strong>
             <p>
               &bull; Appoint and register a certified Indonesian <a href="/en/safety-officer-ak3-umum-requirements/">Ahli K3 Umum</a>.<br>
               &bull; Form and submit the bipartite <a href="/en/p2k3-safety-committee-requirements/">P2K3 Committee</a> to Disnaker.<br>
               &bull; Designate and train <a href="/en/workplace-fire-safety-classification/">Fire Wardens (Class D/C)</a>.
             </p>
-          </div>
+          </SurfaceCard>
 
-          <div class="en-law-card">
+          <SurfaceCard class="en-law-card">
             <strong>Phase 4: Commercial Operation Date (COD) &amp; Audits</strong>
             <p>
               &bull; Establish continuous <a href="/en/workplace-accident-reporting-procedure/">incident reporting protocols</a>.<br>
               &bull; Conduct annual <a href="/en/industrial-hygiene-officer-guide/">industrial hygiene measurements</a>.<br>
               &bull; Undergo official <a href="/en/smk3-certification-guide/">SMK3 national audits</a> for Gold Flag certification.
             </p>
-          </div>
+          </SurfaceCard>
         </div>
-      </section>
+      </SurfaceCard>
     </main>
 
     <EnSidebar currentSlug="factory-setup-safety-checklist" />

@@ -1,4 +1,6 @@
 ---
+import SurfaceCard from '../../components/shared/SurfaceCard.astro';
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import EnLayout from '../../layouts/EnLayout.astro';
 import EnSidebar from '../../components/EnSidebar.astro';
 
@@ -14,7 +16,7 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
   canonical={canonical}
   schemas={schemas}
 >
-<section class="en-hero">
+<HeroSurface class="en-hero">
   <div class="en-container">
     <div class="en-breadcrumb">
       <a href="/">Home</a> &rsaquo; <a href="/en/">English OHS Hub</a> &rsaquo; <span>Chemical Safety (K3 Kimia)</span>
@@ -51,12 +53,12 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
       </div>
     </div>
   </div>
-</section>
+</HeroSurface>
 
 <div class="en-container">
   <div class="en-body-grid">
     <main>
-      <section class="en-card">
+      <SurfaceCard as="section" class="en-card">
         <span class="en-sec-badge">Statutory Framework</span>
         <h2 class="en-sec-title">Hazard Potential Categorization in Indonesia</h2>
         <p class="en-text">
@@ -64,18 +66,18 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
         </p>
 
         <div class="en-law-grid">
-          <div class="en-law-card">
+          <SurfaceCard class="en-law-card">
             <strong>Major Hazard Potential (Potensi Bahaya Besar)</strong>
             <p>Chemical storage volumes exceed statutory NKT levels (e.g., >10 tons of toxic gases, >50 tons of highly flammable liquids). Mandates at least <strong>1 certified Ahli K3 Kimia</strong> and <strong>2 certified Petugas K3 Kimia per shift</strong>.</p>
-          </div>
-          <div class="en-law-card">
+          </SurfaceCard>
+          <SurfaceCard class="en-law-card">
             <strong>Medium Hazard Potential (Potensi Bahaya Menengah)</strong>
             <p>Chemical volumes below NKT levels but presenting workplace risks. Mandates at least <strong>1 certified Petugas K3 Kimia per non-shift operation</strong>.</p>
-          </div>
+          </SurfaceCard>
         </div>
-      </section>
+      </SurfaceCard>
 
-      <section class="en-card">
+      <SurfaceCard as="section" class="en-card">
         <span class="en-sec-badge">Technical Mandates</span>
         <h2 class="en-sec-title">Required Documentation for Disnaker Audits</h2>
         <ul style="padding-left: 20px; line-height: 1.8; color: var(--slate-700);">
@@ -83,7 +85,7 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
           <li><strong>Chemical Hazard Identification &amp; Risk Assessment (HIRADC / IBPR):</strong> Documented chemical exposure controls and toxic gas leak emergency procedures.</li>
           <li><strong>Statutory Waste &amp; Storage Licensing:</strong> Storage bunding compliance, safety shower inspections, and specialized PPE.</li>
         </ul>
-      </section>
+      </SurfaceCard>
     </main>
 
     <EnSidebar currentSlug="chemical-safety-officer-requirements" />

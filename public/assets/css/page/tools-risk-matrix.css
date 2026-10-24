@@ -5,13 +5,13 @@
   --orange: var(--accent);
   --orange-hover: var(--accent);
   --orange-light: var(--accent-light);
-  --slate-50: var(--slate-50);
-  --slate-100: var(--slate-100);
-  --slate-200: var(--slate-200);
-  --slate-300: var(--slate-300);
-  --slate-600: var(--slate-600);
-  --slate-700: var(--slate-700);
-  --slate-900: var(--slate-900);
+
+
+
+
+
+
+
   --radius-md: 12px;
   --radius-lg: 16px;
   --shadow-sm: 0 2px 8px color-mix(in srgb, var(--brand) 6%, transparent);

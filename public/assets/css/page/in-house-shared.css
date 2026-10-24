@@ -1,0 +1,198 @@
+
+
+/* Regional Enterprise Hubs Section */
+
+.ih-hubs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: 26px;
+}
+.ih-hub-badge {
+  display: inline-block;
+  background: var(--slate-100);
+  color: var(--brand);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  align-self: flex-start;
+}
+.ih-hub-areas {
+  font-size: 13.5px;
+  color: var(--slate-500);
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
+.ih-hub-programs {
+  margin: 0 0 22px;
+  padding: 0;
+  list-style: none;
+}
+.ih-hub-programs li {
+  font-size: 13.5px;
+  color: var(--slate-800);
+  padding: 5px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px dashed var(--slate-100);
+}
+.ih-hub-programs li::before {
+  content: "✔";
+  color: var(--success);
+  font-weight: bold;
+}
+
+/* Comparison Table Section */
+
+.ih-table-wrap {
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid var(--slate-200);
+}
+.ih-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 14.5px;
+}
+.ih-table th {
+  background: var(--brand);
+  color: var(--surface);
+  padding: 14px 18px;
+  font-weight: 700;
+}
+.ih-table td {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--slate-100);
+  color: var(--slate-700);
+}
+.ih-table tr:nth-child(even) td {
+  background: var(--slate-50);
+}
+.ih-table .highlight {
+  color: var(--brand);
+  font-weight: 700;
+}
+
+/* Steps Process Section */
+
+.ih-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+.ih-step-num {
+  width: 38px;
+  height: 38px;
+  background: var(--brand);
+  color: var(--surface);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 16px;
+  margin-bottom: 14px;
+}
+
+/* Regional Overview Details */
+.reg-logistics-bar {
+  background: var(--slate-900);
+  color: var(--slate-300);
+  padding: 20px 0;
+  font-size: 14px;
+  border-bottom: 1px solid var(--slate-800);
+}
+.reg-logistics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+.reg-logistics-item strong {
+  display: block;
+  color: var(--slate-50);
+  margin-bottom: 3px;
+  font-size: 14.5px;
+}
+
+/* Programs Section */
+
+.reg-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
+.reg-prog-cert {
+  font-size: 12px;
+  font-weight: 700;
+  background: var(--slate-100);
+  color: var(--brand);
+  padding: 4px 10px;
+  border-radius: 6px;
+  align-self: flex-start;
+  margin-bottom: 12px;
+}
+.reg-prog-topics {
+  margin: 0 0 18px;
+  padding: 0;
+  list-style: none;
+  font-size: 13.5px;
+}
+.reg-prog-topics li {
+  padding: 4px 0;
+  color: var(--slate-700);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.reg-prog-topics li::before {
+  content: "•";
+  color: var(--accent);
+  font-size: 18px;
+  line-height: 0;
+}
+
+/* Mobilization Specs Section */
+.reg-specs-box {
+  background: var(--surface);
+  border: 1px solid var(--slate-200);
+  border-radius: 14px;
+  padding: 34px;
+  margin: 40px 0 0;
+  box-shadow: 0 4px 16px color-mix(in srgb, var(--black) 3%, transparent);
+}
+.reg-specs-box h3 {
+  font-size: 21px;
+  color: var(--slate-900);
+  margin: 0 0 16px;
+  font-weight: 800;
+}
+.reg-specs-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 18px;
+  margin-top: 14px;
+}
+.reg-spec-item {
+  background: var(--slate-50);
+  padding: 16px 20px;
+  border-radius: 10px;
+  border-left: 4px solid var(--brand);
+}
+.reg-spec-item h4 {
+  font-size: 15px;
+  color: var(--slate-900);
+  margin: 0 0 6px;
+}
+.reg-spec-item p {
+  font-size: 13.5px;
+  color: var(--slate-500);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.inhouse-page .ih-table {min-width:640px;}
+.inhouse-page .ih-hub-programs {margin-bottom:24px;}

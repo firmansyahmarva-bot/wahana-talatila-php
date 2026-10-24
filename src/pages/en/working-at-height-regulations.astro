@@ -1,4 +1,6 @@
 ---
+import SurfaceCard from '../../components/shared/SurfaceCard.astro';
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import EnLayout from '../../layouts/EnLayout.astro';
 import EnSidebar from '../../components/EnSidebar.astro';
 
@@ -14,7 +16,7 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
   canonical={canonical}
   schemas={schemas}
 >
-<section class="en-hero">
+<HeroSurface class="en-hero">
   <div class="en-container">
     <div class="en-breadcrumb">
       <a href="/">Home</a> &rsaquo; <a href="/en/">English OHS Hub</a> &rsaquo; <span>Working at Height Regulations</span>
@@ -51,12 +53,12 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
       </div>
     </div>
   </div>
-</section>
+</HeroSurface>
 
 <div class="en-container">
   <div class="en-body-grid">
     <main>
-      <section class="en-card">
+      <SurfaceCard as="section" class="en-card">
         <span class="en-sec-badge">Statutory Threshold</span>
         <h2 class="en-sec-title">What Legally Defines Working at Height in Indonesia?</h2>
         <p class="en-text">
@@ -67,16 +69,16 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
         </p>
 
         <div class="en-law-grid">
-          <div class="en-law-card">
+          <SurfaceCard class="en-law-card">
             <strong>TKBT — Tenaga Kerja Bangunan Tinggi</strong>
             <p>For personnel working on scaffolds, permanent ladders, elevated walkways, and structural platforms. Divided into <strong>TKBT Tingkat 1</strong> (basic elevated work) and <strong>TKBT Tingkat 2</strong> (supervisors and rigging technicians).</p>
-          </div>
-          <div class="en-law-card">
+          </SurfaceCard>
+          <SurfaceCard class="en-law-card">
             <strong>TKPK — Tenaga Kerja Pada Ketinggian (Rope Access)</strong>
             <p>For personnel suspended by ropes without scaffolding (facade work, offshore flares, wind turbine blades). Divided into <strong>TKPK Tingkat 1</strong> (technician), <strong>Tingkat 2</strong> (advanced rigger), and <strong>Tingkat 3</strong> (rope access team leader &amp; rescuer).</p>
-          </div>
+          </SurfaceCard>
         </div>
-      </section>
+      </SurfaceCard>
     </main>
 
     <EnSidebar currentSlug="working-at-height-regulations" />

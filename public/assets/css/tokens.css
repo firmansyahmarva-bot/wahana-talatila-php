@@ -117,8 +117,8 @@
   --border-card:    rgba(226, 232, 240, 0.9);
 
   /* Communication Channels */
-  --whatsapp:       var(--wa-green);
-  --whatsapp-dark:  var(--wa-dark);
+  --whatsapp:       var(--green-800);
+  --whatsapp-dark:  var(--green-900);
 
   /* Status Tokens */
   --success:        var(--emerald-600);

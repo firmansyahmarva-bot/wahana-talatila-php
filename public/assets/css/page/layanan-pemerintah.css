@@ -101,7 +101,7 @@
   transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
 }
 .gov-btn-primary {
-  background: var(--success);
+  background: var(--whatsapp);
   color: var(--surface) !important;
   border: 1px solid var(--whatsapp-dark);
   box-shadow: 0 4px 14px color-mix(in srgb, var(--success) 40%, transparent);

@@ -1,4 +1,7 @@
 ---
+import TableScroll from '../../components/shared/TableScroll.astro';
+import SurfaceCard from '../../components/shared/SurfaceCard.astro';
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import ZhLayout from '../../layouts/ZhLayout.astro';
 
 const pageTitle = "印尼危化品与湿法冶炼(K3 Kimia)安全合规实操指南 — Wahana Totalita";
@@ -85,7 +88,7 @@ const schemas = [
   schemas={schemas}
 >
 <!-- HERO -->
-<section class="zh-hero">
+<HeroSurface class="zh-hero">
   <div class="zh-container">
     <div class="zh-breadcrumb">
       <a href="/zh/">中文合规首页</a> &gt; <span>冶炼与危化品安全 (K3 Kimia)</span>
@@ -101,12 +104,12 @@ const schemas = [
       <span>● 核心技术：印尼语 LDK / SDS 与风险评估</span>
     </div>
   </div>
-</section>
+</HeroSurface>
 
 <div class="zh-container">
   <div class="zh-body-grid">
     <main>
-      <article class="zh-card">
+      <SurfaceCard as="article" class="zh-card">
         <span class="zh-sec-badge">法定定级门槛</span>
         <h2 class="zh-sec-title">一、企业危化品危害等级评定 (Potensi Bahaya Kimia)</h2>
         <p class="zh-text">
@@ -114,7 +117,7 @@ const schemas = [
         </p>
 
         <div class="zh-table-wrap">
-          <table class="zh-table">
+          <TableScroll><table class="zh-table">
             <thead>
               <tr>
                 <th>企业危化品等级</th>
@@ -146,31 +149,31 @@ const schemas = [
                 <td>编制完备的 LDK 技术说明书，并在车间张贴印尼语警示标签。</td>
               </tr>
             </tbody>
-          </table>
+          </table></TableScroll>
         </div>
-      </article>
+      </SurfaceCard>
 
-      <article class="zh-card">
+      <SurfaceCard as="article" class="zh-card">
         <span class="zh-sec-badge">双语合规实务</span>
         <h2 class="zh-sec-title">二、中资企业高发的 3 大危化品合规雷区</h2>
         
         <div class="zh-law-grid">
-          <div class="zh-law-card">
+          <SurfaceCard class="zh-law-card">
             <strong>1. 中文/英文 MSDS 在印尼不具备完全合法性</strong>
             <p>印尼法规强制要求，现场化学品安全技术说明书必须采用<strong>印尼官方语言（Lembar Data Keselamatan: LDK）</strong>。仅有中文或英文说明书，劳动监察官在巡检时将直接开具违规罚单，因印尼籍本地一线工人无法正确阅读中文危化品防护指引。</p>
-          </div>
-          <div class="zh-law-card">
+          </SurfaceCard>
+          <SurfaceCard class="zh-law-card">
             <strong>2. 储罐与防渗围堰 (Secondary Containment) 违规</strong>
             <p>硫酸罐区、酸洗池必须配备容积不低于最大单罐储量 110% 的防腐防渗围堰，并配备联动紧急洗眼器与冲淋装置（Emergency Eyewash & Shower），且检测水压需符合要求。</p>
-          </div>
-          <div class="zh-law-card">
+          </SurfaceCard>
+          <SurfaceCard class="zh-law-card">
             <strong>3. 危险化学品运输与转运车辆资质缺失</strong>
             <p>厂区内部以及厂外运输酸液、液氯的槽车不仅需要交通部通行证，司机必须持有危险品运输上岗资质，槽车本身属于压力容器检验范畴，需持有有效检验合格证（SIA）。</p>
-          </div>
+          </SurfaceCard>
         </div>
-      </article>
+      </SurfaceCard>
 
-      <article class="zh-card">
+      <SurfaceCard as="article" class="zh-card">
         <span class="zh-sec-badge">专业考证规划</span>
         <h2 class="zh-sec-title">三、化学品安全人员 (Petugas vs Ahli K3 Kimia) 培训考证</h2>
         <p class="zh-text">
@@ -180,7 +183,7 @@ const schemas = [
           <li><strong>化学品安全员 (Petugas K3 Kimia)：</strong> 面向车间一线中印方班组长与工段长，培训时长 6 天，聚焦化学品分类、个人防护装备（PPE）选型、泄漏围堵与洗眼装置维护。</li>
           <li><strong>注册化学品安全官 (Ahli K3 Kimia)：</strong> 面向企业安全总监、工艺工程师，培训时长 12 天，深入化学品量化风险评估（QRA）、安全仪表联锁系统及重大危害事故控制计划编制。</li>
         </ul>
-      </article>
+      </SurfaceCard>
     </main>    <!-- RIGHT: STICKY CONTACT SIDEBAR -->
     <aside class="zh-sticky-sidebar">
       <div class="zh-sb-box">

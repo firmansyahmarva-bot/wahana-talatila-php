@@ -1,4 +1,7 @@
 ---
+import TableScroll from '../../components/shared/TableScroll.astro';
+import SurfaceCard from '../../components/shared/SurfaceCard.astro';
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import ZhLayout from '../../layouts/ZhLayout.astro';
 
 const pageTitle = "印尼特种设备操作员执照 (SIO) 与机械安全年检 (SIA) 合规全解 — Wahana Totalita";
@@ -84,7 +87,7 @@ const schemas = [
   canonical={canonical}
   schemas={schemas}
 >
-<section class="zh-hero">
+<HeroSurface class="zh-hero">
   <div class="zh-container">
     <div class="zh-breadcrumb">
       <a href="/zh/">首页</a> &rsaquo; <a href="/zh/">印尼安全生产合规专栏</a> &rsaquo; <span>特种设备 SIO 操作证与 SIA 准用年检</span>
@@ -97,34 +100,34 @@ const schemas = [
       为什么普通驾驶证无法在印尼工厂开叉车？从中国进口的吊车、行车、储气罐和锅炉如何合法办理开机准用证？全面解析人员证与设备证的双重法定监管。
     </p>
   </div>
-</section>
+</HeroSurface>
 
 <div class="zh-container">
   <div class="zh-body-grid">
     <main>
-      <article class="zh-card">
+      <SurfaceCard as="article" class="zh-card">
         <span class="zh-sec-badge">法规核心逻辑</span>
         <h2 class="zh-sec-title">一、特种作业“双证准入”：人员有 SIO + 设备有 SIA</h2>
         <p class="zh-text">
           在中资企业现场安全审计中，最容易导致重大违规停工的盲区，是对印尼“双证制度”的误解。印尼劳工部不仅监管<strong>“人有没有资格开”</strong>，同时严格监管<strong>“这台机器有没有资格运行”</strong>：
         </p>
         <div class="zh-law-grid">
-          <div class="zh-law-card">
+          <SurfaceCard class="zh-law-card">
             <strong>1. 人员持证：SIO (Surat Izin Operator)</strong>
             <p>由印尼劳工部颁发的个人特种作业执照。即使员工拥有中国特种设备操作证或印尼交警颁发的普通汽车驾照 (SIM)，在印尼工厂内部开叉车、开吊车仍属<strong>“非法无证驾驶”</strong>，必须换发或通过印尼培训取得 SIO。</p>
-          </div>
-          <div class="zh-law-card">
+          </SurfaceCard>
+          <SurfaceCard class="zh-law-card">
             <strong>2. 设备持证：SIA / Surat Keterangan K3</strong>
             <p>由具备劳工部检测检验资质的第三方机构 (PJK3 Riksa Uji) 对设备进行现场负荷、刹车系统及探伤测试后，由劳工局核发的设备安全合格证。每台特种设备均有唯一编号与年检标牌。</p>
-          </div>
+          </SurfaceCard>
         </div>
-      </article>
+      </SurfaceCard>
 
-      <article class="zh-card">
+      <SurfaceCard as="article" class="zh-card">
         <span class="zh-sec-badge">核心机种对照</span>
         <h2 class="zh-sec-title">二、工厂与工区核心特种设备持证标准</h2>
         <div class="zh-table-wrap">
-          <table class="zh-table">
+          <TableScroll><table class="zh-table">
             <thead>
               <tr>
                 <th>设备种类</th>
@@ -171,11 +174,11 @@ const schemas = [
                 <td>采矿矿山、土方工程施工准入</td>
               </tr>
             </tbody>
-          </table>
+          </table></TableScroll>
         </div>
-      </article>
+      </SurfaceCard>
 
-      <article class="zh-card">
+      <SurfaceCard as="article" class="zh-card">
         <span class="zh-sec-badge">设备进口实操</span>
         <h2 class="zh-sec-title">三、从国内进口机械设备，在印尼办理合法准用证的 4 个步骤</h2>
         <p class="zh-text">针对大量中资工程单位从中国国内集装箱发运过来的机械设备，合法开机的流程如下：</p>
@@ -185,7 +188,7 @@ const schemas = [
           <li><strong>出具技术检测报告 (Laporan Pemeriksaan)：</strong> 检验合格后，由印尼注册特种设备检验师签字盖章形成正式检测卷宗。</li>
           <li><strong>政府审批与牌照发放：</strong> 检验报告提交省劳工厅劳工监察局审批，核发《设备准用合格证明》（Surat Keterangan K3 / Buku Akte Pengesahan），并在设备机身上粘贴年检绿色合格防伪标牌。</li>
         </ol>
-      </article>
+      </SurfaceCard>
     </main>
         <aside class="zh-sticky-sidebar">
       <div class="zh-sb-box">

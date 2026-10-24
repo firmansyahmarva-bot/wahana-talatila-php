@@ -1,4 +1,5 @@
 ---
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
@@ -86,7 +87,7 @@ const schemas = [
   pageCss={['/assets/css/page/riksa-uji-detail.css']}
 >
   <!-- HERO -->
-  <section class="rud-hero">
+  <HeroSurface class="rud-hero">
     <div class="container">
       <div class="rud-breadcrumbs">
         <a href="/">Beranda</a> &rsaquo;
@@ -114,7 +115,7 @@ const schemas = [
         </div>
       </div>
     </div>
-  </section>
+  </HeroSurface>
 
   <!-- MAIN CONTENT & SIDEBAR -->
   <main class="container">

@@ -1,4 +1,6 @@
 ---
+import TableScroll from '../../components/shared/TableScroll.astro';
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import Layout from '../../layouts/Layout.astro';
 import Faq from '../../components/Faq.astro';
 import SectionTitle from '../../components/SectionTitle.astro';
@@ -77,11 +79,12 @@ const toolFaqs = [
   canonical={canonical}
   schemas={schemas}
   pageCss={['/assets/css/page/tools-kalkulator-kebisingan.css']}
+  scripts={['/assets/js/tool-kalkulator-kebisingan.js']}
 >
-<main class="noise-page" id="konten-utama">
+<div class="noise-page">
 
 <!-- HERO -->
-<section class="noise-hero">
+<HeroSurface class="noise-hero">
   <div class="container">
     <div class="hero-badge">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
@@ -96,7 +99,7 @@ const toolFaqs = [
       <span class="hero-tag">OSHA NRR Derating Earplug &amp; Earmuff</span>
     </div>
   </div>
-</section>
+</HeroSurface>
 
 <!-- MAIN WORKSPACE -->
 <section class="noise-wrapper">
@@ -117,7 +120,7 @@ const toolFaqs = [
             </button>
           </div>
 
-          <table class="noise-table" id="noiseTable">
+          <TableScroll><table class="noise-table" id="noiseTable">
             <thead>
               <tr>
                 <th>Area / Mesin Operasional</th>
@@ -130,7 +133,7 @@ const toolFaqs = [
             <tbody id="noiseBody">
               <!-- Dynamically populated -->
             </tbody>
-          </table>
+          </table></TableScroll>
 
           <!-- APD DERATING CALCULATOR -->
           <div class="apd-box">
@@ -229,7 +232,7 @@ const toolFaqs = [
       </p>
 
       <h3 style="color:var(--text);font-family: var(--font-heading);font-size:1.15rem;margin:22px 0 10px">Tabel Resmi Batas Waktu Pemaparan Kebisingan (Permenaker 5/2018)</h3>
-      <table class="ref-table">
+      <TableScroll><table class="ref-table">
         <thead>
           <tr>
             <th>Intensitas Kebisingan (dBA)</th>
@@ -248,7 +251,7 @@ const toolFaqs = [
           <tr><td>115 dBA</td><td><strong>28.12 Detik</strong></td><td>Bahaya Langsung Pendengaran</td></tr>
           <tr><td>140 dBA</td><td><strong>Tidak Boleh Terpapar (0 Detik)</strong></td><td>Batas Maksimum Mutlak (Impulsif)</td></tr>
         </tbody>
-      </table>
+      </table></TableScroll>
 
       <h3 style="color:var(--text);font-family: var(--font-heading);font-size:1.15rem;margin:22px 0 10px">Rumus Perhitungan Dosis Kebisingan Kumulatif</h3>
       <p class="editorial-p">
@@ -270,5 +273,5 @@ const toolFaqs = [
   </div>
 </section>
 
-</main>
+</div>
 </Layout>

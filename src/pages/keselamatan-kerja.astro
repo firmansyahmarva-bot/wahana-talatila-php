@@ -1,4 +1,6 @@
 ---
+import TableScroll from '../components/shared/TableScroll.astro';
+import HeroSurface from '../components/shared/HeroSurface.astro';
 import Layout from '../layouts/Layout.astro';
 import Faq from '../components/Faq.astro';
 
@@ -149,7 +151,7 @@ const schemas = [
   schemas={schemas}
   pageCss={['/assets/css/page/sector.css', '/assets/css/page/hub-master.css']}
 >
-  <section class="hero">
+  <HeroSurface class="hero">
     <div class="container inner">
       <div class="hero-badge">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
@@ -164,7 +166,7 @@ const schemas = [
         </a>
       </div>
     </div>
-  </section>
+  </HeroSurface>
 
   <div class="hub-wrapper">
     <div class="container hub-grid-layout">
@@ -201,14 +203,14 @@ const schemas = [
           <div class="container">
             <h2 class="section-title">Sertifikasi K3 yang Diakui di Indonesia</h2>
             <p class="section-subtitle">Dua lembaga utama penyelenggara sertifikasi kompetensi K3 nasional</p>
-            <table class="sert-table">
+            <TableScroll><table class="sert-table">
               <thead><tr><th>Jenis Sertifikasi</th><th>Lembaga</th><th>Berlaku</th></tr></thead>
               <tbody>
                 {sertifikasi.map((row) => (
                   <tr><td>{row.jenis}</td><td>{row.lembaga}</td><td>{row.berlaku}</td></tr>
                 ))}
               </tbody>
-            </table>
+            </table></TableScroll>
             <p class="intro-text" style="margin-top:16px">Kemnaker RI menerbitkan Surat Keputusan resmi untuk skema Ahli K3 Umum dan Ahli K3 Spesialis, sementara BNSP menyelenggarakan uji kompetensi berbasis skema profesi (SKKNI) untuk berbagai bidang K3 spesifik. Keduanya diakui dan dihargai secara luas di dunia industri Indonesia.</p>
           </div>
         </section>

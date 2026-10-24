@@ -1,4 +1,6 @@
 ---
+import TableScroll from '../../components/shared/TableScroll.astro';
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import Layout from '../../layouts/Layout.astro';
 import Faq from '../../components/Faq.astro';
 import SectionTitle from '../../components/SectionTitle.astro';
@@ -81,11 +83,12 @@ const toolFaqs = [
   canonical={canonical}
   schemas={schemas}
   pageCss={['/assets/css/page/tools-kalkulator-k3.css']}
+  scripts={['/assets/js/tool-kalkulator-k3.js']}
 >
-<main class="calc-page" id="konten-utama">
+<div class="calc-page">
 
 <!-- HERO -->
-<section class="calc-hero">
+<HeroSurface class="calc-hero">
   <div class="container">
     <div class="hero-badge">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
@@ -100,7 +103,7 @@ const toolFaqs = [
       <span class="hero-tag">Laporan Triwulan P2K3</span>
     </div>
   </div>
-</section>
+</HeroSurface>
 
 <!-- MAIN CALCULATOR -->
 <section class="calc-wrapper">
@@ -336,7 +339,7 @@ const toolFaqs = [
         Jika kecelakaan kerja mengakibatkan cacat permanen sebagian atau kematian, perhitungan hari hilang tidak dihitung berdasarkan hari kalender rawat inap, melainkan menggunakan tabel tarif pembebanan hari kerja hilang resmi berikut:
       </p>
 
-      <table class="ref-table">
+      <TableScroll><table class="ref-table">
         <thead>
           <tr>
             <th>Jenis Cedera / Cacat Permanen</th>
@@ -386,7 +389,7 @@ const toolFaqs = [
             <td>300 Hari</td>
           </tr>
         </tbody>
-      </table>
+      </table></TableScroll>
 
       <!-- FAQ ACCORDION -->
       <h3 style="color:var(--text);font-family: var(--font-heading);font-size:1.25rem;margin:32px 0 16px">Pertanyaan Sering Diajukan Seputar Statistik K3 (FAQ)</h3>
@@ -397,5 +400,5 @@ const toolFaqs = [
   </div>
 </section>
 
-</main>
+</div>
 </Layout>

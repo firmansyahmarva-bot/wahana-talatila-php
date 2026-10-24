@@ -1,4 +1,7 @@
 ---
+import TableScroll from '../../components/shared/TableScroll.astro';
+import SurfaceCard from '../../components/shared/SurfaceCard.astro';
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import EnLayout from '../../layouts/EnLayout.astro';
 import EnSidebar from '../../components/EnSidebar.astro';
 
@@ -14,7 +17,7 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
   canonical={canonical}
   schemas={schemas}
 >
-<section class="en-hero">
+<HeroSurface class="en-hero">
   <div class="en-container">
     <div class="en-breadcrumb">
       <a href="/">Home</a> &rsaquo; <a href="/en/">English OHS Hub</a> &rsaquo; <span>SMK3 vs ISO 45001</span>
@@ -51,12 +54,12 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
       </div>
     </div>
   </div>
-</section>
+</HeroSurface>
 
 <div class="en-container">
   <div class="en-body-grid">
     <main>
-      <section class="en-card">
+      <SurfaceCard as="section" class="en-card">
         <span class="en-sec-badge">Core Contrast</span>
         <h2 class="en-sec-title">The Fundamental Difference Between SMK3 and ISO 45001</h2>
         <p class="en-text">
@@ -67,7 +70,7 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
         </p>
 
         <div class="en-table-wrap">
-          <table class="en-table">
+          <TableScroll><table class="en-table">
             <thead>
               <tr>
                 <th>Feature</th>
@@ -107,11 +110,11 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
                 <td>Accredited Registrar Certificate</td>
               </tr>
             </tbody>
-          </table>
+          </table></TableScroll>
         </div>
-      </section>
+      </SurfaceCard>
 
-      <section class="en-card">
+      <SurfaceCard as="section" class="en-card">
         <span class="en-sec-badge">Integration Strategy</span>
         <h2 class="en-sec-title">Building an Integrated Dual Management System</h2>
         <p class="en-text">
@@ -122,7 +125,7 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
           <li>Embed Indonesian statutory requirements (<a href="/en/p2k3-safety-committee-requirements/">P2K3 structure</a>, <a href="/en/heavy-equipment-operator-license-sio/">SIO operator tracking</a>, <a href="/en/statutory-equipment-inspection-sia/">SIA equipment calibration</a>) into ISO operational control procedures.</li>
           <li>Conduct combined internal audits verifying both ISO clauses and Indonesian Kemnaker checkboxes.</li>
         </ul>
-      </section>
+      </SurfaceCard>
     </main>
 
     <EnSidebar currentSlug="smk3-vs-iso-45001" />

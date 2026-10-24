@@ -1,4 +1,7 @@
 ---
+import TableScroll from '../../components/shared/TableScroll.astro';
+import SurfaceCard from '../../components/shared/SurfaceCard.astro';
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import ZhLayout from '../../layouts/ZhLayout.astro';
 
 const pageTitle = "印尼矿山安全(SMKP Minerba)与KTT/POP/POM认证指南 — Wahana Totalita";
@@ -85,7 +88,7 @@ const schemas = [
   schemas={schemas}
 >
 <!-- HERO -->
-<section class="zh-hero">
+<HeroSurface class="zh-hero">
   <div class="zh-container">
     <div class="zh-breadcrumb">
       <a href="/zh/">中文合规首页</a> &gt; <span>矿山安全监管 (K3 Pertambangan)</span>
@@ -101,30 +104,30 @@ const schemas = [
       <span>● 执照层级：POP (初级) / POM (中级) / POU (高级)</span>
     </div>
   </div>
-</section>
+</HeroSurface>
 
 <div class="zh-container">
   <div class="zh-body-grid">
     <main>
-      <article class="zh-card">
+      <SurfaceCard as="article" class="zh-card">
         <span class="zh-sec-badge">矿山第一责任人</span>
         <h2 class="zh-sec-title">一、矿长 (KTT: Kepala Teknik Tambang) 官方任命制</h2>
         <p class="zh-text">
           在印尼开矿，采矿权持有企业（IUP）以及具备采矿服务资质的工程外包商（IUJP），<strong>依法必须任命一名全职在矿区常驻的矿长（KTT）或现场项目负责人（PJO: Penanggung Jawab Operasional）</strong>。
         </p>
         <div class="zh-law-grid">
-          <div class="zh-law-card">
+          <SurfaceCard class="zh-law-card">
             <strong>KTT 的法定权力与责任</strong>
             <p>KTT 是印尼能矿部唯一认可的现场最高技术与安全法定负责人。如果发生滑坡、重型卡车翻车坠崖等重大恶性事故，能矿部调查官员将直接传唤质询 KTT，严查其批准的采矿作业规程（SOP）是否存在漏洞。</p>
-          </div>
-          <div class="zh-law-card">
+          </SurfaceCard>
+          <SurfaceCard class="zh-law-card">
             <strong>KTT 任命前置条件</strong>
             <p>候选人必须具备采矿工程相关技术背景，且必须通过能矿部矿山监察局（Direktur Teknik dan Lingkungan Mineral dan Batubara）的面对面答辩评估（Uji Kelayakan），取得官方正式任职核准信（Surat Pengesahan KTT）。</p>
-          </div>
+          </SurfaceCard>
         </div>
-      </article>
+      </SurfaceCard>
 
-      <article class="zh-card">
+      <SurfaceCard as="article" class="zh-card">
         <span class="zh-sec-badge">一线管理执照</span>
         <h2 class="zh-sec-title">二、基层安全监护人三级认证体系 (POP / POM / POU)</h2>
         <p class="zh-text">
@@ -132,7 +135,7 @@ const schemas = [
         </p>
 
         <div class="zh-table-wrap">
-          <table class="zh-table">
+          <TableScroll><table class="zh-table">
             <thead>
               <tr>
                 <th>认证级别</th>
@@ -168,27 +171,27 @@ const schemas = [
                 <td>矿山安全中长期战略规划、重大地质灾害评估、采矿全生命周期环保与闭矿复垦规划。</td>
               </tr>
             </tbody>
-          </table>
+          </table></TableScroll>
         </div>
-      </article>
+      </SurfaceCard>
 
-      <article class="zh-card">
+      <SurfaceCard as="article" class="zh-card">
         <span class="zh-sec-badge">双轨运行体系</span>
         <h2 class="zh-sec-title">三、劳工部 SMK3 与 能矿部 SMKP 体系有何不同？</h2>
         <p class="zh-text">
           很多中资矿企常问：我们已经做了劳工部的 SMK3 认证，还需要做能矿部的 SMKP 吗？
         </p>
         <div class="zh-law-grid">
-          <div class="zh-law-card">
+          <SurfaceCard class="zh-law-card">
             <strong>SMK3（劳工部监管，PP 50/2012）</strong>
             <p>普适于印尼所有行业企业的通用职业健康安全管理体系。冶炼厂区、选矿厂车间等固定工业场地以此体系为主。</p>
-          </div>
-          <div class="zh-law-card">
+          </SurfaceCard>
+          <SurfaceCard class="zh-law-card">
             <strong>SMKP Minerba（能矿部监管，Kepmen 1827/2018）</strong>
             <p><strong>矿区不可替代的专属强制体系！</strong> 专注于露天采坑边坡稳定性、尾矿库坝体沉降监测、高落差重型运矿车防刹车失灵等矿业专属高危场景，每年必须向能矿部报送 SMKP 内部审计报告。</p>
-          </div>
+          </SurfaceCard>
         </div>
-      </article>
+      </SurfaceCard>
     </main>    <!-- RIGHT: STICKY CONTACT SIDEBAR -->
     <aside class="zh-sticky-sidebar">
       <div class="zh-sb-box">

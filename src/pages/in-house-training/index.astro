@@ -1,4 +1,13 @@
 ---
+import TableScroll from '../../components/shared/TableScroll.astro';
+import ContentSection from '../../components/shared/ContentSection.astro';
+import CallToAction from '../../components/shared/CallToAction.astro';
+
+import PageHero from '../../components/shared/PageHero.astro';
+import ActionLink from '../../components/shared/ActionLink.astro';
+import SurfaceCard from '../../components/shared/SurfaceCard.astro';
+import SectionHeading from '../../components/shared/SectionHeading.astro';
+
 import Layout from '../../layouts/Layout.astro';
 import Faq from '../../components/Faq.astro';
 
@@ -119,39 +128,26 @@ const schemas = [
   description={metaDesc}
   canonical={canonical}
   schemas={schemas}
-  pageCss={['/assets/css/page/in-house.css']}
+  pageCss={['/assets/css/page/in-house-shared.css']}
 >
-  <main>
+  <div class="inhouse-page">
     <!-- HERO -->
-    <section class="ih-hero">
-      <div class="container">
-        <div class="ih-badge">🏢 Solusi Korporasi &amp; Industri</div>
-        <h1>In-House Training K3 &amp; Sertifikasi On-Site di Lokasi Perusahaan Anda</h1>
-        <p class="lead">Latih seluruh tim kerja, pengawas, dan operator secara serentak langsung di site/fasilitas industri Anda. Sertifikasi resmi Kemnaker RI &amp; BNSP dengan biaya lebih efisien, kurikulum berbasis risiko riil, dan jadwal tanpa menghentikan shift produksi.</p>
-        <div class="ih-hero-cta">
-          <a href={waQuoteUrl} class="ih-btn-wa" target="_blank" rel="noopener">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-            Minta Proposal In-House (24 Jam)
-          </a>
-          <a href="#regional-hubs" class="ih-btn-secondary">
-            Lihat Hub Koridor Regional &darr;
-          </a>
-        </div>
-      </div>
-    </section>
+    <PageHero title={"In-House Training K3 & Sertifikasi On-Site di Lokasi Perusahaan Anda"} description={"Latih seluruh tim kerja, pengawas, dan operator secara serentak langsung di site/fasilitas industri Anda. Sertifikasi resmi Kemnaker RI & BNSP dengan biaya lebih efisien, kurikulum berbasis risiko riil, dan jadwal tanpa menghentikan shift produksi."} eyebrow={"🏢 Solusi Korporasi & Industri"}>
+<ActionLink href={waQuoteUrl} label={"Minta Proposal In-House (24 Jam)"} icon="whatsapp" external/>
+<ActionLink href="#regional-hubs" label={"Lihat Hub Koridor Regional ↓"} icon="arrow" secondary/>
+</PageHero>
 
     <!-- REGIONAL HUBS CARDS -->
-    <section id="regional-hubs" class="ih-hubs-wrap">
-      <div class="container">
-        <div class="ih-section-title">
+    <ContentSection id="regional-hubs" tone="subtle">
+        <SectionHeading class="ih-section-title">
           <p class="eyebrow">Hub Regional Strategis</p>
           <h2>Pusat Mobilisasi Pelatihan In-House Sektoral</h2>
-          <p style="color:var(--slate-500);font-size:15px;margin-top:8px;">Wahana Totalita menyediakan tim instruktur dan asesor bersertifikasi yang siap ditugaskan langsung ke koridor industri dan tambang strategis di Indonesia.</p>
-        </div>
+          <p>Wahana Totalita menyediakan tim instruktur dan asesor bersertifikasi yang siap ditugaskan langsung ke koridor industri dan tambang strategis di Indonesia.</p>
+        </SectionHeading>
 
         <div class="ih-hubs-grid">
           {regionalHubs.map((hub) => (
-            <div class="ih-hub-card">
+            <SurfaceCard class="ih-hub-card">
               <span class="ih-hub-badge">{hub.badge}</span>
               <h3 class="ih-hub-title">{hub.icon} {hub.title}</h3>
               <div class="ih-hub-areas"><strong>Cakupan Area:</strong> {hub.areas}</div>
@@ -161,23 +157,21 @@ const schemas = [
                   <li>{prog}</li>
                 ))}
               </ul>
-              <a href={hub.url} class="ih-hub-btn">Pelajari Detail Hub &amp; Penawaran &rarr;</a>
-            </div>
+              <ActionLink href={hub.url} label={"Pelajari Detail Hub & Penawaran →"}/>
+            </SurfaceCard>
           ))}
         </div>
-      </div>
-    </section>
+      </ContentSection>
 
     <!-- COMPARISON: IN-HOUSE VS PUBLIC -->
-    <section class="ih-compare-section">
-      <div class="container">
-        <div class="ih-section-title">
+    <ContentSection tone="default">
+        <SectionHeading class="ih-section-title">
           <p class="eyebrow">Efisiensi Anggaran &amp; Operasional</p>
           <h2>Mengapa In-House Training Lebih Menguntungkan untuk Korporasi?</h2>
-        </div>
+        </SectionHeading>
 
         <div class="ih-table-wrap">
-          <table class="ih-table">
+          <TableScroll><table class="ih-table">
             <thead>
               <tr>
                 <th style="width:25%;">Parameter Evaluasi</th>
@@ -212,66 +206,53 @@ const schemas = [
                 <td>Peserta bercampur dengan praktisi dari perusahaan kompetitor</td>
               </tr>
             </tbody>
-          </table>
+          </table></TableScroll>
         </div>
-      </div>
-    </section>
+      </ContentSection>
 
     <!-- 4 STEPS TO B2B PROCUREMENT -->
-    <section class="ih-steps-section">
-      <div class="container">
-        <div class="ih-section-title">
+    <ContentSection tone="subtle">
+        <SectionHeading class="ih-section-title">
           <p class="eyebrow">Alur Pengadaan Cepat</p>
           <h2>4 Langkah Pelaksanaan In-House Training</h2>
-        </div>
+        </SectionHeading>
 
         <div class="ih-steps-grid">
-          <div class="ih-step-card">
+          <SurfaceCard class="ih-step-card">
             <div class="ih-step-num">1</div>
             <h3>Konsultasi &amp; TNA</h3>
             <p>Sampaikan jumlah personel, target sertifikasi (Kemnaker/BNSP), serta kebutuhan khusus terkait shift kerja Anda via WhatsApp.</p>
-          </div>
-          <div class="ih-step-card">
+          </SurfaceCard>
+          <SurfaceCard class="ih-step-card">
             <div class="ih-step-num">2</div>
             <h3>Proposal &amp; Penawaran (24 Jam)</h3>
             <p>Kami mengirimkan dokumen teknis, profil instruktur, silabus modul, dan penawaran harga korporat resmi lengkap dengan NPWP &amp; legalitas PJK3.</p>
-          </div>
-          <div class="ih-step-card">
+          </SurfaceCard>
+          <SurfaceCard class="ih-step-card">
             <div class="ih-step-num">3</div>
             <h3>Mobilisasi &amp; Pelaksanaan</h3>
             <p>Instruktur senior dan asesor hadir di site/pabrik Anda untuk sesi teori, simulasi bahaya, dan uji praktik on-site sesuai SOP industri.</p>
-          </div>
-          <div class="ih-step-card">
+          </SurfaceCard>
+          <SurfaceCard class="ih-step-card">
             <div class="ih-step-num">4</div>
             <h3>Sertifikasi &amp; Laporan</h3>
             <p>Peserta yang lulus menerima sertifikat resmi ber-SKP/barcode, disertai laporan evaluasi hasil pelatihan untuk arsip manajemen.</p>
-          </div>
+          </SurfaceCard>
         </div>
-      </div>
-    </section>
+      </ContentSection>
 
     <!-- FAQ -->
-    <section class="section-faq" style="padding:60px 0;background:var(--surface);">
-      <div class="container">
-        <div class="ih-section-title">
+    <ContentSection tone="default">
+        <SectionHeading class="ih-section-title">
           <p class="eyebrow">FAQ Korporasi</p>
           <h2>Pertanyaan Umum Seputar In-House Training</h2>
-        </div>
-        <div class="faq-grid" style="max-width:860px;margin:0 auto;">
+        </SectionHeading>
+        <div class="faq-grid">
           <Faq items={faqs} variant="inhouse" />
         </div>
-      </div>
-    </section>
+      </ContentSection>
 
     <!-- FINAL B2B CTA -->
-    <section style="background:var(--brand);color:var(--surface);padding:50px 0;text-align:center;">
-      <div class="container">
-        <h2 style="color:var(--surface);font-size:28px;margin-bottom:12px;">Siap Mengadakan In-House Training di Perusahaan Anda?</h2>
-        <p style="color:var(--success-soft);font-size:16px;max-width:640px;margin:0 auto 24px;">Hubungi Account Executive Wahana Totalita sekarang untuk konsultasi jadwal, kustomisasi silabus, dan penawaran harga korporat dalam 1x24 jam.</p>
-        <a href={waQuoteUrl} class="ih-btn-wa" target="_blank" rel="noopener" style="font-size:16px;padding:14px 32px;display:inline-block;text-decoration:none;">
-          Hubungi via WhatsApp (+62 877-5915-1278)
-        </a>
-      </div>
-    </section>
-  </main>
+    <CallToAction title={"Siap Mengadakan In-House Training di Perusahaan Anda?"} description={"Hubungi Account Executive Wahana Totalita sekarang untuk konsultasi jadwal, kustomisasi silabus, dan penawaran harga korporat dalam 1x24 jam."} href={waQuoteUrl} label={"Hubungi via WhatsApp (+62 877-5915-1278)"}/>
+  </div>
 </Layout>

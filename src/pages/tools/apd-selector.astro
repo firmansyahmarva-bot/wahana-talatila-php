@@ -1,4 +1,5 @@
 ---
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import Layout from '../../layouts/Layout.astro';
 import Faq from '../../components/Faq.astro';
 import SectionTitle from '../../components/SectionTitle.astro';
@@ -78,11 +79,12 @@ const toolFaqs = [
   canonical={canonical}
   schemas={schemas}
   pageCss={['/assets/css/page/tools-apd-selector.css']}
+  scripts={['/assets/js/tool-apd-selector.js']}
 >
-<main class="apd-page" id="konten-utama">
+<div class="apd-page">
 
 <!-- HERO -->
-<section class="apd-hero">
+<HeroSurface class="apd-hero">
   <div class="container">
     <div class="hero-badge">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -97,7 +99,7 @@ const toolFaqs = [
       <span class="hero-tag">Kewajiban Pengusaha Menyediakan Cuma-Cuma</span>
     </div>
   </div>
-</section>
+</HeroSurface>
 
 <!-- MAIN WORKSPACE -->
 <section class="apd-wrapper">
@@ -163,7 +165,7 @@ const toolFaqs = [
   </div>
 </section>
 
-</main>
+</div>
 
 <script is:inline>
   function filterApd(cat, btn) {

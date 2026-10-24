@@ -1,4 +1,6 @@
 ---
+import TableScroll from '../../components/shared/TableScroll.astro';
+import SurfaceCard from '../../components/shared/SurfaceCard.astro';
 import Layout from '../../layouts/Layout.astro';
 import Faq from '../../components/Faq.astro';
 import { getCollection } from 'astro:content';
@@ -125,7 +127,7 @@ if (schemaFaqs.length > 0) {
         <!-- Left Main Content Column -->
         <article class="skkni-main-content">
           <!-- Section 1: Overview -->
-          <section class="skkni-section-card">
+          <SurfaceCard as="section" class="skkni-section-card">
             <h2 class="skkni-section-title">📖 Ringkasan & Ruang Lingkup Profesi</h2>
             <p style="font-size:1.02rem; line-height:1.75; color:var(--slate-700); margin-bottom:20px;">
               {item.ringkasan}
@@ -133,17 +135,17 @@ if (schemaFaqs.length > 0) {
             {item.content_html && (
               <div class="skkni-html-body" set:html={item.content_html} />
             )}
-          </section>
+          </SurfaceCard>
 
           <!-- Section 2: Units of Competence -->
           {item.unit_kompetensi && item.unit_kompetensi.length > 0 && (
-            <section class="skkni-section-card">
+            <SurfaceCard as="section" class="skkni-section-card">
               <h2 class="skkni-section-title">📋 Daftar Unit Kompetensi SKKNI (BNSP)</h2>
               <p style="font-size:0.92rem; color:var(--text-subtle); margin:0 0 16px;">
                 Kandidat wajib dinyatakan <em>Kompeten (K)</em> pada seluruh unit kompetensi berikut dalam uji asesmen LSP terlisensi BNSP:
               </p>
               <div class="units-table-wrapper">
-                <table class="units-table">
+                <TableScroll><table class="units-table">
                   <thead>
                     <tr>
                       <th style="width:40px;">No</th>
@@ -160,14 +162,14 @@ if (schemaFaqs.length > 0) {
                       </tr>
                     ))}
                   </tbody>
-                </table>
+                </table></TableScroll>
               </div>
-            </section>
+            </SurfaceCard>
           )}
 
           <!-- Section 3: Assessment Prerequisites -->
           {item.persyaratan_asesmen && (
-            <section class="skkni-section-card">
+            <SurfaceCard as="section" class="skkni-section-card">
               <h2 class="skkni-section-title">🎓 Persyaratan Peserta & Uji Asesmen</h2>
               <div class="info-block">
                 <p style="white-space:pre-line; margin:0;">{item.persyaratan_asesmen}</p>
@@ -175,22 +177,22 @@ if (schemaFaqs.length > 0) {
               <p style="font-size:0.88rem; color:var(--text-subtle); margin-top:12px;">
                 * Portofolio kerja dan bukti berkas pendukung wajib diverifikasi oleh Asesor Kompetensi sebelum pelaksanaan uji lisan/praktik.
               </p>
-            </section>
+            </SurfaceCard>
           )}
 
           <!-- Section 4: Operational Duties -->
           {item.deskripsi_tugas && (
-            <section class="skkni-section-card">
+            <SurfaceCard as="section" class="skkni-section-card">
               <h2 class="skkni-section-title">🛠️ Uraian Tugas & Tanggung Jawab Operasional</h2>
               <div class="info-block" style="border-left-color:var(--info);">
                 <p style="white-space:pre-line; margin:0;">{item.deskripsi_tugas}</p>
               </div>
-            </section>
+            </SurfaceCard>
           )}
 
           <!-- Section 5: Salary Benchmark & Career Path -->
           {(item.rentang_gaji || item.prospek_karir) && (
-            <section class="skkni-section-card">
+            <SurfaceCard as="section" class="skkni-section-card">
               <h2 class="skkni-section-title">💼 Benchmarking Gaji & Jenjang Karir</h2>
               <div class="career-grid">
                 {item.rentang_gaji && (
@@ -208,22 +210,22 @@ if (schemaFaqs.length > 0) {
                   </div>
                 )}
               </div>
-            </section>
+            </SurfaceCard>
           )}
 
           <!-- Section 6: FAQ -->
           {item.faqs && item.faqs.length > 0 && (
-            <section class="skkni-section-card">
+            <SurfaceCard as="section" class="skkni-section-card">
               <h2 class="skkni-section-title">❓ Tanya Jawab Seputar {item.judul}</h2>
               <Faq items={item.faqs} variant="skkni" icon="" />
-            </section>
+            </SurfaceCard>
           )}
         </article>
 
         <!-- Right Sidebar Column -->
         <aside class="skkni-sidebar">
           <!-- Quick Facts Card -->
-          <div class="skkni-sidebar-card">
+          <SurfaceCard class="skkni-sidebar-card">
             <h3 class="skkni-sidebar-title">📌 Informasi Kunci Profesi</h3>
             <div class="fact-row">
               <span class="fact-label">Dasar SKKNI</span>
@@ -245,10 +247,10 @@ if (schemaFaqs.length > 0) {
               <span class="fact-label">Lembaga Uji</span>
               <span class="fact-val">LSP Terlisensi BNSP</span>
             </div>
-          </div>
+          </SurfaceCard>
 
           <!-- WhatsApp Consultation Card -->
-          <div class="skkni-sidebar-card" style="background:linear-gradient(135deg, var(--brand-light) 0%, var(--success-soft) 100%); border-color:var(--success-border);">
+          <SurfaceCard class="skkni-sidebar-card" style="background:linear-gradient(135deg, var(--brand-light) 0%, var(--success-soft) 100%); border-color:var(--success-border);">
             <div style="font-size:1.8rem; margin-bottom:8px;">💬</div>
             <h3 style="font-size:1.15rem; font-weight:700; color:var(--success-dark); margin:0 0 8px;">Konsultasi Sertifikasi</h3>
             <p style="font-size:0.88rem; color:var(--success-dark); line-height:1.55; margin:0 0 16px;">
@@ -257,11 +259,11 @@ if (schemaFaqs.length > 0) {
             <a href={waUrl} target="_blank" rel="noopener noreferrer" class="wa-btn-card">
               Hubungi via WhatsApp &rarr;
             </a>
-          </div>
+          </SurfaceCard>
 
           <!-- Related Professions in Same Sector -->
           {related.length > 0 && (
-            <div class="skkni-sidebar-card">
+            <SurfaceCard class="skkni-sidebar-card">
               <h3 class="skkni-sidebar-title">🔗 Skema Terkait di Sektor Ini</h3>
               <div>
                 {related.map((rel) => (
@@ -271,7 +273,7 @@ if (schemaFaqs.length > 0) {
                   </a>
                 ))}
               </div>
-            </div>
+            </SurfaceCard>
           )}
 
           <!-- Hub Link -->

@@ -1,4 +1,6 @@
 ---
+import SurfaceCard from '../../components/shared/SurfaceCard.astro';
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import EnLayout from '../../layouts/EnLayout.astro';
 import EnSidebar from '../../components/EnSidebar.astro';
 
@@ -14,7 +16,7 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
   canonical={canonical}
   schemas={schemas}
 >
-<section class="en-hero">
+<HeroSurface class="en-hero">
   <div class="en-container">
     <div class="en-breadcrumb">
       <a href="/">Home</a> &rsaquo; <a href="/en/">English OHS Hub</a> &rsaquo; <span>Electrical Safety (K3 Listrik)</span>
@@ -51,12 +53,12 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
       </div>
     </div>
   </div>
-</section>
+</HeroSurface>
 
 <div class="en-container">
   <div class="en-body-grid">
     <main>
-      <section class="en-card">
+      <SurfaceCard as="section" class="en-card">
         <span class="en-sec-badge">Statutory Personnel Quotas</span>
         <h2 class="en-sec-title">When is an Electrical Safety Expert Legally Mandatory?</h2>
         <p class="en-text">
@@ -64,18 +66,18 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
         </p>
 
         <div class="en-law-grid">
-          <div class="en-law-card">
+          <SurfaceCard class="en-law-card">
             <strong>Power Capacity >200 kVA</strong>
             <p>Every industrial facility operating electrical generation or consumption capacity exceeding <strong>200 kVA</strong> must employ at least <strong>one certified Ahli K3 Listrik (Electrical OHS Expert)</strong> possessing an official Kemnaker appointment decree (SKP).</p>
-          </div>
-          <div class="en-law-card">
+          </SurfaceCard>
+          <SurfaceCard class="en-law-card">
             <strong>Maintenance &amp; High-Voltage Work</strong>
             <p>Technicians involved in electrical maintenance, distribution panels, and switchgear operation must hold a <strong>Teknisi K3 Listrik license</strong> issued by Kemnaker or BNSP.</p>
-          </div>
+          </SurfaceCard>
         </div>
-      </section>
+      </SurfaceCard>
 
-      <section class="en-card">
+      <SurfaceCard as="section" class="en-card">
         <span class="en-sec-badge">Inspection Mandates</span>
         <h2 class="en-sec-title">Annual Statutory Testing of Electrical Installations</h2>
         <p class="en-text">
@@ -86,7 +88,7 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
           <li><strong>Power Generators &amp; Transformers:</strong> Insulation resistance, dielectric oil analysis, and protective relay trip testing.</li>
           <li><strong>Thermographic Infrared Audits:</strong> Hotspot detection across main distribution boards (MDB) to prevent catastrophic factory fires.</li>
         </ul>
-      </section>
+      </SurfaceCard>
     </main>
 
     <EnSidebar currentSlug="electrical-safety-expert-requirements" />

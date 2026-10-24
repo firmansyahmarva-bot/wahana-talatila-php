@@ -1,4 +1,5 @@
 ---
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import Layout from '../../layouts/Layout.astro';
 import Faq from '../../components/Faq.astro';
 import talksList from '../../../data/tools_safety_talk.json';
@@ -61,12 +62,12 @@ const toolFaqs = [
 <link rel="manifest" href="/manifest.json">
 
 
-<main class="st-page" id="konten-utama">
+<div class="st-page">
 
 <!-- ══════════════════════════════════════════════════════════
      HERO SECTION (HIGH CONVERTING CTR + TRUST PROOFS)
      ══════════════════════════════════════════════════════════ -->
-<section class="st-hero">
+<HeroSurface class="st-hero">
   <div class="container">
     <div class="st-hero-grid">
       <div class="st-hero-content">
@@ -146,7 +147,7 @@ const toolFaqs = [
       </aside>
     </div>
   </div>
-</section>
+</HeroSurface>
 
 <!-- ══════════════════════════════════════════════════════════
      CATEGORY DISCOVERY TABS (SMOOTH STICKY BAR)
@@ -555,5 +556,5 @@ const toolFaqs = [
   window.resetFilter = resetFilter;
 </script>
 
-</main>
+</div>
 </Layout>

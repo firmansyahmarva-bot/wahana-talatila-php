@@ -1,4 +1,6 @@
 ---
+import TableScroll from '../../components/shared/TableScroll.astro';
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import ZhLayout from '../../layouts/ZhLayout.astro';
 
 const pageTitle = "从零建厂到合法投产：在印尼中资工厂安全生产(K3)全流程实操指南 — Wahana Totalita";
@@ -85,7 +87,7 @@ const schemas = [
   schemas={schemas}
 >
 <!-- HERO SECTION -->
-<section class="zh-hero">
+<HeroSurface class="zh-hero">
   <div class="zh-container">
     <div class="zh-breadcrumb">
       <a href="/zh/">首页</a> &rsaquo; <a href="/zh/">印尼安全生产合规专栏</a> &rsaquo; <span>从零建厂到投产全流程实操指南</span>
@@ -100,7 +102,7 @@ const schemas = [
       专为中资投资人、厂长、项目总指挥打造的实操时间轴。全面拆解从项目立项、土建安装、设备清关、第三方安全检验（Riksa Uji）、法定人员持证到正式点火开工的 5 个关键里程碑。
     </p>
   </div>
-</section>
+</HeroSurface>
 
 <!-- MAIN CONTENT + SIDEBAR -->
 <div class="zh-container">
@@ -240,7 +242,7 @@ const schemas = [
       <article class="zh-timeline-card" style="background:var(--surface);border-color:var(--success-border);">
         <h2 style="font-size:1.35rem;font-weight:800;color:var(--hub-dark);margin:0 0 10px;">五大里程碑一览对照表 (建议保存对照)</h2>
         <div class="zh-table-wrap">
-          <table class="zh-table">
+          <TableScroll><table class="zh-table">
             <thead>
               <tr>
                 <th>阶段</th>
@@ -281,7 +283,7 @@ const schemas = [
                 <td>丧失政府大型工程投标与供应商准入</td>
               </tr>
             </tbody>
-          </table>
+          </table></TableScroll>
         </div>
       </article>
 

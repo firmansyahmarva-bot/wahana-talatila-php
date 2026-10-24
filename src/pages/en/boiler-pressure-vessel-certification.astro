@@ -1,4 +1,7 @@
 ---
+import TableScroll from '../../components/shared/TableScroll.astro';
+import SurfaceCard from '../../components/shared/SurfaceCard.astro';
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import EnLayout from '../../layouts/EnLayout.astro';
 import EnSidebar from '../../components/EnSidebar.astro';
 
@@ -14,7 +17,7 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
   canonical={canonical}
   schemas={schemas}
 >
-<section class="en-hero">
+<HeroSurface class="en-hero">
   <div class="en-container">
     <div class="en-breadcrumb">
       <a href="/">Home</a> &rsaquo; <a href="/en/">English OHS Hub</a> &rsaquo; <span>Boilers &amp; Pressure Vessels</span>
@@ -51,12 +54,12 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
       </div>
     </div>
   </div>
-</section>
+</HeroSurface>
 
 <div class="en-container">
   <div class="en-body-grid">
     <main>
-      <section class="en-card">
+      <SurfaceCard as="section" class="en-card">
         <span class="en-sec-badge">Statutory Framework</span>
         <h2 class="en-sec-title">Understanding Indonesian Steam &amp; Pressure Vessel Laws</h2>
         <p class="en-text">
@@ -67,7 +70,7 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
         </p>
 
         <div class="en-table-wrap">
-          <table class="en-table">
+          <TableScroll><table class="en-table">
             <thead>
               <tr>
                 <th>Equipment Type</th>
@@ -96,9 +99,9 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
                 <td>Initial + Every 5 Years</td>
               </tr>
             </tbody>
-          </table>
+          </table></TableScroll>
         </div>
-      </section>
+      </SurfaceCard>
     </main>
 
     <EnSidebar currentSlug="boiler-pressure-vessel-certification" />

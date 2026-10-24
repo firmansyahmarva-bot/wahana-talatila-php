@@ -1,4 +1,7 @@
 ---
+import TableScroll from '../../components/shared/TableScroll.astro';
+import SurfaceCard from '../../components/shared/SurfaceCard.astro';
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import ZhLayout from '../../layouts/ZhLayout.astro';
 
 const pageTitle = "印尼国家职业安全健康体系 (SMK3) 审核与金牌认证 (Bendera Emas) 指南 — Wahana Totalita";
@@ -84,7 +87,7 @@ const schemas = [
   canonical={canonical}
   schemas={schemas}
 >
-<section class="zh-hero">
+<HeroSurface class="zh-hero">
   <div class="zh-container">
     <div class="zh-breadcrumb">
       <a href="/zh/">首页</a> &rsaquo; <a href="/zh/">印尼安全生产合规专栏</a> &rsaquo; <span>SMK3 安全体系审核与金牌认证</span>
@@ -97,19 +100,19 @@ const schemas = [
       已有 ISO 45001 为何在印尼还必须做 SMK3？64、122、166 项审核标准如何划分？为何参与印尼大型央企工程招投标及承包商安全准入 (CSMS) 必须出具金牌认证？
     </p>
   </div>
-</section>
+</HeroSurface>
 
 <div class="zh-container">
   <div class="zh-body-grid">
     <main>
-      <article class="zh-card">
+      <SurfaceCard as="article" class="zh-card">
         <span class="zh-sec-badge">核心认知厘清</span>
         <h2 class="zh-sec-title">一、SMK3 与 ISO 45001 的本质区别：法定强制 vs 商业自愿</h2>
         <p class="zh-text">
           很多中资企业在走出国门时已在国内取得了国际通用的 ISO 45001（或旧版 OHSAS 18001）认证，但在印尼承接 PLN（国家电力公司）、Pertamina（国家石油公司）或大型镍矿项目时，却常因<strong>“未出具印尼官方 SMK3 证书”</strong>而在初审阶段直接遭遇一票否决。
         </p>
         <div class="zh-table-wrap">
-          <table class="zh-table">
+          <TableScroll><table class="zh-table">
             <thead>
               <tr>
                 <th>对比维度</th>
@@ -139,11 +142,11 @@ const schemas = [
                 <td>部分标段作为参考辅助加分项</td>
               </tr>
             </tbody>
-          </table>
+          </table></TableScroll>
         </div>
-      </article>
+      </SurfaceCard>
 
-      <article class="zh-card">
+      <SurfaceCard as="article" class="zh-card">
         <span class="zh-sec-badge">审核分级标准</span>
         <h2 class="zh-sec-title">二、SMK3 审核的三级标准与金牌认证 (Bendera Emas) 门槛</h2>
         <p class="zh-text">
@@ -155,18 +158,18 @@ const schemas = [
           <li><strong>高级审核 (Tingkat Lanjutan - 166项准则)：</strong> <strong>冶炼厂、矿山、电厂、高压化学及大型 EPC 总包企业必须选择的完整标准。</strong></li>
         </ul>
         <div class="zh-law-grid">
-          <div class="zh-law-card">
+          <SurfaceCard class="zh-law-card">
             <strong>金牌荣誉：金旗与国家级证书 (Bendera Emas)</strong>
             <p>在高级 166 项审核中，合规符合率达到 <strong>85% ~ 100%</strong>，印尼劳工部将正式颁发金旗荣誉及最高等级 SMK3 国家合格证书，有效期为 3 年。</p>
-          </div>
-          <div class="zh-law-card">
+          </SurfaceCard>
+          <SurfaceCard class="zh-law-card">
             <strong>银牌标准：银旗证书 (Bendera Perak)</strong>
             <p>合规符合率在 <strong>60% ~ 84%</strong> 之间，颁发银旗及银牌证书，允许企业在限定时间内完善剩余非关键项。</p>
-          </div>
+          </SurfaceCard>
         </div>
-      </article>
+      </SurfaceCard>
 
-      <article class="zh-card">
+      <SurfaceCard as="article" class="zh-card">
         <span class="zh-sec-badge">辅导与认证流程</span>
         <h2 class="zh-sec-title">三、中资企业从零到通过 SMK3 审核的 5 步路径</h2>
         <p class="zh-text">Wahana Totalita 作为专业辅导机构，为中资企业提供全流程落地服务：</p>
@@ -177,7 +180,7 @@ const schemas = [
           <li><strong>正式外部独立审核：</strong> 协助对接印尼官方委任的国家审核机构开展现场审核答辩与实地检验。</li>
           <li><strong>闭环整改与证书颁发：</strong> 跟踪审核缺陷项整改闭环，由印尼劳工部正式签署下发证书及金旗。</li>
         </ol>
-      </article>
+      </SurfaceCard>
     </main>
         <aside class="zh-sticky-sidebar">
       <div class="zh-sb-box">

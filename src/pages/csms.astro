@@ -1,4 +1,6 @@
 ---
+import TableScroll from '../components/shared/TableScroll.astro';
+import SurfaceCard from '../components/shared/SurfaceCard.astro';
 import Layout from '../layouts/Layout.astro';
 
 const pageTitle = 'Panduan Lengkap CSMS Indonesia: 7 Elemen, Siklus K3LL Pertamina, & Lolos High Risk';
@@ -278,7 +280,7 @@ const schemas = [
             </p>
 
             <div class="table-responsive">
-              <table class="data-table">
+              <TableScroll><table class="data-table">
                 <thead>
                   <tr>
                     <th>Parameter</th>
@@ -319,7 +321,7 @@ const schemas = [
                     <td>Sertifikat ISO 45001:2018 Terakreditasi.</td>
                   </tr>
                 </tbody>
-              </table>
+              </table></TableScroll>
             </div>
 
             <div class="callout">
@@ -408,7 +410,7 @@ const schemas = [
             </p>
 
             <div class="table-responsive">
-              <table class="data-table">
+              <TableScroll><table class="data-table">
                 <thead>
                   <tr>
                     <th>Elemen CSMS</th>
@@ -453,7 +455,7 @@ const schemas = [
                     <td>Program audit K3 internal, notulen rapat tinjauan manajemen (Management Review), pelacakan tindakan perbaikan (CAPA), <strong>penyusunan laporan kinerja K3LL/CHSEMS periodik</strong>.</td>
                   </tr>
                 </tbody>
-              </table>
+              </table></TableScroll>
             </div>
 
             <h3>Ambangan Batas Kelulusan (Cut-off Score Thresholds)</h3>
@@ -476,29 +478,29 @@ const schemas = [
             </p>
 
             <div class="card-grid">
-              <div class="info-card" style="border-top:4px solid var(--danger)">
+              <SurfaceCard class="info-card" style="border-top:4px solid var(--danger)">
                 <div class="info-card-icon">🔥</div>
                 <div class="info-card-title">Risiko Tinggi (High Risk)</div>
                 <p class="info-card-desc">
                   Pekerjaan di area berbahaya tinggi dengan potensi Fatality atau kerusakan aset besar. Contoh: Pengeboran migas (drilling), pekerjaan panas di tangki hidrokarbon, pengangkatan berat (heavy lifting &gt;10 ton), pekerjaan di ruang terbatas (confined space), konstruksi di ketinggian &gt;5 meter, pekerjaan tegangan tinggi.
                 </p>
-              </div>
+              </SurfaceCard>
 
-              <div class="info-card" style="border-top:4px solid var(--warning)">
+              <SurfaceCard class="info-card" style="border-top:4px solid var(--warning)">
                 <div class="info-card-icon">⚙️</div>
                 <div class="info-card-title">Risiko Sedang (Medium Risk)</div>
                 <p class="info-card-desc">
                   Pekerjaan dengan potensi cedera berat namun terkendali. Contoh: Perbaikan mekanikal &amp; elektrikal umum, pekerjaan sipil gedung, fabrikasi pipa non-pressurized, transportasi logistik darat, pekerjaan pemeliharaan berkala di luar area proses utama.
                 </p>
-              </div>
+              </SurfaceCard>
 
-              <div class="info-card" style="border-top:4px solid var(--whatsapp-dark)">
+              <SurfaceCard class="info-card" style="border-top:4px solid var(--whatsapp-dark)">
                 <div class="info-card-icon">📋</div>
                 <div class="info-card-title">Risiko Rendah (Low Risk)</div>
                 <p class="info-card-desc">
                   Pekerjaan pendukung tanpa paparan bahaya industri langsung. Contoh: Jasa katering kantor, konsultan manajemen, penyediaan IT &amp; perangkat lunak, pekerjaan kebersihan kantor (janitorial), pengadaan alat tulis kantor (ATK).
                 </p>
-              </div>
+              </SurfaceCard>
             </div>
           </section>
 
@@ -597,37 +599,37 @@ const schemas = [
             </p>
 
             <div class="card-grid">
-              <div class="info-card">
+              <SurfaceCard class="info-card">
                 <div class="info-card-icon">🪪</div>
                 <div class="info-card-title">Permit to Work (PTW / SIKA)</div>
                 <p class="info-card-desc">
                   Setiap pekerjaan berisiko tinggi wajib memiliki Sistem Izin Kerja Aman yang disetujui oleh Area Owner dan Safety Inspector sebelum pekerjaan dimulai setiap harinya.
                 </p>
-              </div>
+              </SurfaceCard>
 
-              <div class="info-card">
+              <SurfaceCard class="info-card">
                 <div class="info-card-icon">🗣️</div>
                 <div class="info-card-title">Toolbox Meeting (TBM) &amp; PJSM</div>
                 <p class="info-card-desc">
                   Briefing keselamatan 5-10 menit sebelum shift kerja dimulai untuk mendiskusikan bahaya harian, kondisi cuaca, dan kesiapan APD personil.
                 </p>
-              </div>
+              </SurfaceCard>
 
-              <div class="info-card">
+              <SurfaceCard class="info-card">
                 <div class="info-card-icon">🔎</div>
                 <div class="info-card-title">Safety Patrol &amp; Interim Audit</div>
                 <p class="info-card-desc">
                   Inspeksi lapangan rutin oleh tim HSE Principal untuk memastikan kepatuhan prosedur. Pelanggaran akan menghasilkan Surat Temuan (NCR / Stop Work Authority).
                 </p>
-              </div>
+              </SurfaceCard>
 
-              <div class="info-card">
+              <SurfaceCard class="info-card">
                 <div class="info-card-icon">📊</div>
                 <div class="info-card-title">Pelaporan Kinerja HSE Bulanan</div>
                 <p class="info-card-desc">
                   Kontraktor wajib menyampaikan laporan bulanan yang mencakup rekapitulasi jam kerja, jumlah TBM, audit APD, inspeksi alat, dan statistik insiden.
                 </p>
-              </div>
+              </SurfaceCard>
             </div>
           </section>
 
@@ -639,7 +641,7 @@ const schemas = [
             </p>
 
             <div class="table-responsive">
-              <table class="data-table">
+              <TableScroll><table class="data-table">
                 <thead>
                   <tr>
                     <th>Kategori Kinerja Akhir</th>
@@ -669,7 +671,7 @@ const schemas = [
                     <td>Sertifikat CSMS dicabut, pemutusan kontrak kerja, dan pembekuan status vendor (Blacklist) selama 1-3 tahun.</td>
                   </tr>
                 </tbody>
-              </table>
+              </table></TableScroll>
             </div>
 
             <!-- SUBSECTION: PENYUSUNAN LAPORAN KINERJA CHSEMS UNTUK MANAJEMEN PUNCAK (TOP SEARCH QUERY!) -->
@@ -864,37 +866,37 @@ const schemas = [
             </p>
 
             <div class="card-grid">
-              <div class="info-card">
+              <SurfaceCard class="info-card">
                 <div class="info-card-icon">📂</div>
                 <div class="info-card-title">Pendampingan Dokumentasi CSMS</div>
                 <p class="info-card-desc">
                   Jasa penyusunan 7 Elemen Dokumen CSMS, pembuatan manual K3, penyusunan IBPR/HIRADC, SOP Pekerjaan Kritis, hingga pendampingan upload portal CSMS Principal.
                 </p>
-              </div>
+              </SurfaceCard>
 
-              <div class="info-card">
+              <SurfaceCard class="info-card">
                 <div class="info-card-icon">🎓</div>
                 <div class="info-card-title">Sertifikasi Ahli K3 Umum Kemnaker RI</div>
                 <p class="info-card-desc">
                   Program pelatihan dan pembinaan Ahli K3 Umum bersertifikat resmi Kemnaker RI untuk memenuhi syarat personil K3 wajib dalam kualifikasi CSMS.
                 </p>
-              </div>
+              </SurfaceCard>
 
-              <div class="info-card">
+              <SurfaceCard class="info-card">
                 <div class="info-card-icon">⛽</div>
                 <div class="info-card-title">Pelatihan K3 Migas &amp; Konstruksi</div>
                 <p class="info-card-desc">
                   Sertifikasi personil spesifik industri: Pengawas K3 Migas, Ahli K3 Konstruksi, Auditor SMK3, Pengawas Operasional Pertambangan (POP BNSP).
                 </p>
-              </div>
+              </SurfaceCard>
 
-              <div class="info-card">
+              <SurfaceCard class="info-card">
                 <div class="info-card-icon">📝</div>
                 <div class="info-card-title">Penyusunan Project HSE Plan Tender</div>
                 <p class="info-card-desc">
                   Jasa pembuatan proposal HSE Plan spesifik proyek untuk keperluan kelengkapan berkas tender di lingkungan BUMN &amp; Swasta.
                 </p>
-              </div>
+              </SurfaceCard>
             </div>
 
             <div class="mid-article-cta" style="margin-top:40px">

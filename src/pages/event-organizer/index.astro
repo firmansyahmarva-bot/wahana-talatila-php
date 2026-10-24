@@ -1,4 +1,6 @@
 ---
+import TableScroll from '../../components/shared/TableScroll.astro';
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
@@ -106,7 +108,7 @@ const schemas = [
   pageCss={['/assets/css/page/event-organizer.css']}
 >
   <!-- HERO -->
-  <section class="eo-hero">
+  <HeroSurface class="eo-hero">
     <div class="container">
       <div class="eo-hero-badges">
         <span class="eo-badge">
@@ -160,7 +162,7 @@ const schemas = [
         </span>
       </div>
     </div>
-  </section>
+  </HeroSurface>
 
   <!-- MAIN CONTENT -->
   <main class="container" style="padding-top: 36px; padding-bottom: 60px;">
@@ -363,7 +365,7 @@ const schemas = [
       </p>
 
       <div class="eo-table-wrap">
-        <table class="eo-table">
+        <TableScroll><table class="eo-table">
           <thead>
             <tr>
               <th style="width: 28%;">Parameter Penyelenggaraan</th>
@@ -408,7 +410,7 @@ const schemas = [
               <td>Terbatas pada satu kota lokal; biaya membengkak jika keluar daerah.</td>
             </tr>
           </tbody>
-        </table>
+        </table></TableScroll>
       </div>
     </section>
 

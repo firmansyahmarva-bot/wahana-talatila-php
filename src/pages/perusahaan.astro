@@ -1,4 +1,7 @@
 ---
+import ActionLink from '../components/shared/ActionLink.astro';
+import SurfaceCard from '../components/shared/SurfaceCard.astro';
+import HeroSurface from '../components/shared/HeroSurface.astro';
 import Layout from '../layouts/Layout.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 
@@ -287,15 +290,15 @@ const schemas = [
   />
 
   <!-- ═══ 1 · HERO ═══ -->
-  <section class="pr-hero">
+  <HeroSurface class="pr-hero" appearance="soft">
       <div class="container pr-hero-inner">
         <div class="pr-hero-copy">
           <span class="pr-eyebrow">Training K3 Perusahaan · In House &amp; Public</span>
           <h1>Training K3 &amp; Sertifikasi Resmi untuk <em>Perusahaan Anda</em> — di Seluruh Indonesia</h1>
           <p class="pr-lead">In house training K3, corporate HSE training, sertifikasi KEMNAKER RI &amp; BNSP, dan konsultasi ISO. Dipercaya 200+ perusahaan manufaktur, tambang, konstruksi, dan migas untuk memenuhi regulasi dan mencapai zero accident.</p>
           <div class="pr-hero-cta">
-            <a class="btn-primary pr-btn-lg" href={waProposal} target="_blank" rel="noopener">Minta Proposal</a>
-            <a class="btn-outline pr-btn-lg" href={waDiskusi} target="_blank" rel="noopener">Konsultasi Gratis</a>
+            <ActionLink href={waProposal} label="Minta Proposal" icon="whatsapp" external/>
+            <ActionLink href={waDiskusi} label="Konsultasi Gratis" icon="whatsapp" secondary external/>
           </div>
           <p class="pr-reassure">&#10003; Proposal dalam 24 jam &nbsp;·&nbsp; &#10003; Resmi KEMNAKER RI &amp; BNSP &nbsp;·&nbsp; &#10003; Tanpa komitmen</p>
         </div>
@@ -306,11 +309,11 @@ const schemas = [
             width="760"
             height="507"
             fetchpriority="high"
-            loading="eager" decoding="async" fetchpriority="high"
+            loading="eager" decoding="async"
           />
         </div>
       </div>
-    </section>
+    </HeroSurface>
 
     <!-- ═══ 2 · TRUST ═══ -->
     <section class="pr-trustband" aria-label="Kredibilitas Wahana Totalita">
@@ -351,13 +354,13 @@ const schemas = [
         </div>
         <div class="pr-grid pr-grid-3">
           {pains.map((p, i) => (
-            <div class="pr-card pr-problem" data-reveal="up" data-reveal-delay={(i % 4) + 1}>
+            <SurfaceCard class="pr-card pr-problem" data-reveal="up" data-reveal-delay={(i % 4) + 1}>
               <div class="pr-ic pr-ic-warn">
                 <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
               </div>
               <h3>{p.title}</h3>
               <p>{p.desc}</p>
-            </div>
+            </SurfaceCard>
           ))}
         </div>
       </div>
@@ -381,7 +384,7 @@ const schemas = [
         </div>
         <div class="pr-grid pr-grid-4">
           {services.map((sv, i) => (
-            <div class="pr-card pr-service" data-reveal="up" data-reveal-delay={(i % 4) + 1}>
+            <SurfaceCard class="pr-card pr-service" data-reveal="up" data-reveal-delay={(i % 4) + 1}>
               <div class="pr-ic">
                 <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
               </div>
@@ -390,7 +393,7 @@ const schemas = [
               <a class="pr-link" href={getWaService(sv.title)} target="_blank" rel="noopener">Pelajari Layanan
                 <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
               </a>
-            </div>
+            </SurfaceCard>
           ))}
         </div>
       </div>
@@ -399,16 +402,16 @@ const schemas = [
     <!-- ═══ 4.5 · TRUST: KLIEN & INSTRUKTUR ═══ -->
     <section class="pr-section">
       <div class="container" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;">
-        <div class="pr-card">
+        <SurfaceCard class="pr-card">
           <h2 style="font-size:1.35rem;margin-top:0;">Dipercaya oleh 70+ Perusahaan Besar</h2>
           <p>Sejak 2001, kami telah melayani lebih dari 70 perusahaan BUMN dan multinasional — dari sektor migas, pertambangan, perbankan, hingga manufaktur.</p>
           <a class="pr-link" href="/klien/">Lihat daftar klien kami &rarr;</a>
-        </div>
-        <div class="pr-card">
+        </SurfaceCard>
+        <SurfaceCard class="pr-card">
           <h2 style="font-size:1.35rem;margin-top:0;">Instruktur Berpengalaman</h2>
           <p>Program pelatihan kami didukung oleh jaringan instruktur K3 bersertifikat nasional, termasuk praktisi dari Pusdiklat Migas Cepu, akademisi bidang K3, dan pengawas ketenagakerjaan.</p>
           <a class="pr-link" href="/instruktur/">Kenali instruktur kami &rarr;</a>
-        </div>
+        </SurfaceCard>
       </div>
     </section>
 
@@ -422,13 +425,13 @@ const schemas = [
         </div>
         <div class="pr-grid pr-grid-4">
           {programs.map((pg, i) => (
-            <div class="pr-card pr-program" data-reveal="up" data-reveal-delay={(i % 4) + 1}>
+            <SurfaceCard class="pr-card pr-program" data-reveal="up" data-reveal-delay={(i % 4) + 1}>
               <h3>{pg.title}</h3>
               <p>{pg.desc}</p>
               <a class="pr-link" href={getWaService(pg.query)} target="_blank" rel="noopener">Minta Silabus &amp; Harga
                 <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
               </a>
-            </div>
+            </SurfaceCard>
           ))}
         </div>
       </div>
@@ -443,13 +446,13 @@ const schemas = [
         </div>
         <div class="pr-grid pr-grid-4">
           {reasons.map((r, i) => (
-            <div class="pr-card pr-reason" data-reveal="up" data-reveal-delay={(i % 4) + 1}>
+            <SurfaceCard class="pr-card pr-reason" data-reveal="up" data-reveal-delay={(i % 4) + 1}>
               <div class="pr-ic">
                 <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
               </div>
               <h3>{r.title}</h3>
               <p>{r.desc}</p>
-            </div>
+            </SurfaceCard>
           ))}
         </div>
       </div>

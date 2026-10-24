@@ -1,4 +1,6 @@
 ---
+import SurfaceCard from '../../components/shared/SurfaceCard.astro';
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import EnLayout from '../../layouts/EnLayout.astro';
 import EnSidebar from '../../components/EnSidebar.astro';
 
@@ -21,7 +23,7 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
   hreflangs={hreflangs}
   schemas={schemas}
 >
-<section class="en-hero">
+<HeroSurface class="en-hero">
   <div class="en-container">
     <div class="en-breadcrumb">
       <a href="/">Home</a> &rsaquo; <a href="/en/">English OHS Hub</a> &rsaquo; <span>Ahli K3 Umum Requirements</span>
@@ -58,12 +60,12 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
       </div>
     </div>
   </div>
-</section>
+</HeroSurface>
 
 <div class="en-container">
   <div class="en-body-grid">
     <main>
-      <section class="en-card">
+      <SurfaceCard as="section" class="en-card">
         <span class="en-sec-badge">Legal Requirement</span>
         <h2 class="en-sec-title">What is an Ahli K3 Umum (AK3U)?</h2>
         <p class="en-text">
@@ -79,26 +81,26 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
             When hiring an Indonesian safety officer who already holds an AK3U certificate, their statutory Appointment Decree (<em>Surat Keputusan Penunjukan - SKP</em>) remains tied to their previous employer. Your company must submit a formal <strong>SKP Mutation (Mutasi SKP)</strong> dossier to Kemnaker to transfer legal jurisdiction under your corporate entity name.
           </p>
         </div>
-      </section>
+      </SurfaceCard>
 
-      <section class="en-card">
+      <SurfaceCard as="section" class="en-card">
         <span class="en-sec-badge">Credential Components</span>
         <h2 class="en-sec-title">The Three Credentials of a Certified Ahli K3 Umum</h2>
         <div class="en-law-grid">
-          <div class="en-law-card">
+          <SurfaceCard class="en-law-card">
             <strong>1. Training Certificate (Sertifikat Pembinaan)</strong>
             <p>Issued upon successfully completing the rigorous 120-hour official Kemnaker training program. This educational credential is valid for life.</p>
-          </div>
-          <div class="en-law-card">
+          </SurfaceCard>
+          <SurfaceCard class="en-law-card">
             <strong>2. Appointment Decree (SKP Kemnaker)</strong>
             <p>The official ministerial decree appointing the individual as an acting government-recognized safety officer specifically at your company. Valid for 3 years.</p>
-          </div>
-          <div class="en-law-card">
+          </SurfaceCard>
+          <SurfaceCard class="en-law-card">
             <strong>3. Authority License (Lisensi K3)</strong>
             <p>The pocket license card carried by the safety officer, authorizing them to conduct internal site inspections and sign legal Disnaker reports. Valid for 3 years.</p>
-          </div>
+          </SurfaceCard>
         </div>
-      </section>
+      </SurfaceCard>
     </main>
 
     <EnSidebar currentSlug="safety-officer-ak3-umum-requirements" />

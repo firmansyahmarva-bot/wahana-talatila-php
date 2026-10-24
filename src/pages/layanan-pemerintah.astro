@@ -1,4 +1,6 @@
 ---
+import SurfaceCard from '../components/shared/SurfaceCard.astro';
+import HeroSurface from '../components/shared/HeroSurface.astro';
 import Layout from '../layouts/Layout.astro';
 
 const pageTitle = 'Vendor Pelatihan K3 Pemerintah & BUMN — Pengadaan Resmi LPSE';
@@ -46,7 +48,7 @@ const schemas = [
 <main id="konten-utama" class="gov-page">
 
   <!-- 1. HERO SECTION -->
-  <section class="gov-hero">
+  <HeroSurface class="gov-hero">
     <div class="container gov-hero-inner">
       <div class="gov-eyebrow">
         <span class="gov-eyebrow-icon">🏛️</span>
@@ -89,7 +91,7 @@ const schemas = [
         </div>
       </div>
     </div>
-  </section>
+  </HeroSurface>
 
   <!-- 2. TRUST BAR -->
   <div class="gov-trustbar">
@@ -125,29 +127,29 @@ const schemas = [
       </div>
 
       <div class="gov-pillars-grid">
-        <div class="gov-pillar-card">
+        <SurfaceCard class="gov-pillar-card">
           <div class="gov-pillar-icon">📋</div>
           <h3>Dokumen Kualifikasi Lengkap</h3>
           <p>NIB Berbasis Risiko, NPWP &amp; SK Pengukuhan PKP, SPT Tahunan terakhir, akta pendirian &amp; SK Kemenkumham, serta rekening giro atas nama PT untuk pencairan termin yang aman.</p>
-        </div>
+        </SurfaceCard>
 
-        <div class="gov-pillar-card">
+        <SurfaceCard class="gov-pillar-card">
           <div class="gov-pillar-icon">🎖️</div>
           <h3>Legalitas PJK3 &amp; Instruktur Ber-SKP</h3>
           <p>Memiliki Surat Keputusan Penunjukan (SKP) PJK3 dari Kementerian Ketenagakerjaan RI serta LSP BNSP. Dipandu oleh instruktur senior bersertifikat &amp; praktisi industri kawakan.</p>
-        </div>
+        </SurfaceCard>
 
-        <div class="gov-pillar-card">
+        <SurfaceCard class="gov-pillar-card">
           <div class="gov-pillar-icon">🏨</div>
           <h3>Paket All-In (One-Stop Procurement)</h3>
           <p>Mencakup biaya instruktur, ujian lisensi resmi, penginapan hotel representatif, katering dinas, modul pelatihan, APD praktikum, hingga transportasi rombongan peserta.</p>
-        </div>
+        </SurfaceCard>
 
-        <div class="gov-pillar-card">
+        <SurfaceCard class="gov-pillar-card">
           <div class="gov-pillar-icon">📑</div>
           <h3>Laporan SPJ &amp; BAST Rapi</h3>
           <p>Setiap kegiatan disertai Berita Acara Serah Terima (BAST), daftar hadir presensi, dokumentasi foto &amp; video, sertifikat resmi, dan laporan pertanggungjawaban untuk memudahkan audit.</p>
-        </div>
+        </SurfaceCard>
       </div>
     </div>
   </section>
@@ -309,7 +311,7 @@ const schemas = [
       </div>
 
       <div class="gov-mech-grid">
-        <div class="gov-mech-card">
+        <SurfaceCard class="gov-mech-card">
           <span class="gov-mech-badge">Cepat &amp; Praktis</span>
           <h3>Pengadaan Langsung (SPK)</h3>
           <p>Cocok untuk pelatihan dengan nilai pagu hingga Rp 200 juta. Kami siapkan draf SPH (Surat Penawaran Harga), RAB, dan dokumen legalitas perseroan dalam waktu 1x24 jam.</p>
@@ -317,9 +319,9 @@ const schemas = [
             <li><svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> SPH &amp; RAB rincian komponen</li>
             <li><svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Faktur Pajak &amp; bukti potong</li>
           </ul>
-        </div>
+        </SurfaceCard>
 
-        <div class="gov-mech-card">
+        <SurfaceCard class="gov-mech-card">
           <span class="gov-mech-badge">Sistem Elektronik</span>
           <h3>Tender LPSE &amp; E-Katalog</h3>
           <p>Siap mengikuti tahapan kualifikasi dan evaluasi teknis melalui portal SPSE / LPSE kementerian, pemprov, pemkab, pemkot, perguruan tinggi negeri (PTN), dan lembaga negara.</p>
@@ -327,9 +329,9 @@ const schemas = [
             <li><svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Dokumen kualifikasi SPSE lengkap</li>
             <li><svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Berpengalaman tender B2G</li>
           </ul>
-        </div>
+        </SurfaceCard>
 
-        <div class="gov-mech-card">
+        <SurfaceCard class="gov-mech-card">
           <span class="gov-mech-badge">Khusus Korporasi</span>
           <h3>Kontrak Pengadaan BUMN</h3>
           <p>Mendukung mekanisme pengadaan vendor BUMN (Pertamina, PLN, BUMN Karya, Pupuk Indonesia, dll.) melalui sistem vendor management (VMS) dan purchase order (PO).</p>
@@ -337,7 +339,7 @@ const schemas = [
             <li><svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Sesuai SOP procurement BUMN</li>
             <li><svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Verifikasi CSMS &amp; HSE plan</li>
           </ul>
-        </div>
+        </SurfaceCard>
       </div>
     </div>
   </section>

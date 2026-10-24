@@ -1,4 +1,6 @@
 ---
+import {getCourseBanner,getCourseBannerSrcSet} from '../lib/images';
+import HeroSurface from '../components/shared/HeroSurface.astro';
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
@@ -16,7 +18,7 @@ const metaDesc = 'Halaman yang Anda cari tidak ada atau sudah dipindahkan. Temuk
   description={metaDesc}
   pageCss={['/assets/css/page/404.css']}
 >
-  <section class="e404-hero">
+  <HeroSurface class="e404-hero">
     <div class="container">
       <p class="e404-code">404</p>
       <h1>Halaman Tidak Ditemukan</h1>
@@ -26,7 +28,7 @@ const metaDesc = 'Halaman yang Anda cari tidak ada atau sudah dipindahkan. Temuk
         <a href="https://wa.me/6287759151278?text=Halo%20Wahana%20Totalita%2C%20saya%20mencari%20informasi%20layanan%20K3" class="e404-btn-sec" target="_blank" rel="noopener noreferrer">💬 Hubungi Kami</a>
       </div>
     </div>
-  </section>
+  </HeroSurface>
 
   <section class="e404-suggest">
     <div class="container">
@@ -35,7 +37,9 @@ const metaDesc = 'Halaman yang Anda cari tidak ada atau sudah dipindahkan. Temuk
         {featured.map((t) => (
           <a href={`/pelatihan/${t.data.slug}/`} class="e404-card">
             <img
-              src={t.data.image_path || '/assets/img/default-training.jpg'}
+              src={getCourseBanner(t.data.slug,t.data.category_slug ?? 'k3')}
+              srcset={getCourseBannerSrcSet(t.data.slug)}
+              sizes="(max-width: 640px) 100vw, 400px"
               alt={t.data.name}
               loading="lazy" decoding="async"
               width="400"

@@ -1,0 +1,33 @@
+---
+import {getUpcomingBatches,formatBatchRange} from '../../lib/jadwal';
+import {trainingCatalog} from '../../lib/trainingCatalog';
+import {formatPrice,waUrl} from '../../lib/images';
+import ActionLink from '../shared/ActionLink.astro';
+interface Props {slug:string;city:string;name:string;}
+const {slug,city,name}=Astro.props;
+const training=trainingCatalog.find(item=>item.slug===slug);
+const courseName=training?.name||name;
+const batches=getUpcomingBatches(slug,city.toLowerCase(),4);
+const scheduleUrl=training?`/jadwal/${training.slug}/`:'/jadwal/';
+---
+<section class="tc-live-schedules" aria-label={`Jadwal ${courseName}`} data-generated-city-schedules>
+  <div class="tc-live-in">
+    <span class="tc-kicker">Jadwal pendaftaran</span>
+    <div class="tc-live-head"><div><h2>Batch pelatihan terbaru</h2><p>Pilih tanggal dan konfirmasikan ketersediaan kelas dengan tim kami.</p></div><a href={scheduleUrl}>Semua jadwal →</a></div>
+    <div class="tc-live-scroll">
+      {batches.map((batch,index)=>{
+        const date=formatBatchRange(batch.start_date,batch.end_date);
+        return <article class="tc-schedule-card" data-start-date={batch.start_date}>
+          <span>{index===0?'Batch terdekat':'Pilihan batch'}</span>
+          <b>{date}</b>
+          <small>{batch.mode==='online'?'Online via Zoom':batch.venue||city}</small>
+          <strong>{batch.price>0?formatPrice(batch.price):'Konfirmasi biaya pelatihan'}</strong>
+          <ActionLink href={waUrl(`Halo Wahana Totalita, saya ingin mendaftar ${courseName} untuk ${city}, batch ${date}. Mohon konfirmasi lokasi, ketersediaan kelas dan biaya.`)} label="Daftar WhatsApp" icon="whatsapp" external/>
+        </article>;
+      })}
+    </div>
+  </div>
+</section>
+<style>
+.tc-schedule-card :global(.ui-action) {margin-top:auto;}
+</style>

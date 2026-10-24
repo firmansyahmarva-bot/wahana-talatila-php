@@ -1,4 +1,5 @@
 ---
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import Layout from '../../layouts/Layout.astro';
 import data from '../../data/resources.json';
 
@@ -18,7 +19,7 @@ const totalDownloads = resources.reduce((acc, r) => acc + (r.download_count || 0
   canonical={canonical}
   pageCss={['/assets/css/page/resources.css']}
 >
-  <section class="resource-hero">
+  <HeroSurface class="resource-hero">
     <div class="container">
       <h1>📄 Resource Library K3</h1>
       <p>Download template dokumen K3 gratis — JSA, HIRADC, Checklist, SOP, Poster, Safety Talk &amp; panduan teknis HSE</p>
@@ -34,7 +35,7 @@ const totalDownloads = resources.reduce((acc, r) => acc + (r.download_count || 0
         <button type="button" id="resourceSearchBtn">🔍 Cari</button>
       </div>
     </div>
-  </section>
+  </HeroSurface>
 
   <nav class="filter-bar">
     <div class="filter-bar-inner">

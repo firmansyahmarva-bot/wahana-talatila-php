@@ -1,4 +1,7 @@
 ---
+import TableScroll from '../../components/shared/TableScroll.astro';
+import SurfaceCard from '../../components/shared/SurfaceCard.astro';
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import ZhLayout from '../../layouts/ZhLayout.astro';
 
 const pageTitle = "印尼工厂消防安全(K3 Kebakaran)与管网检测实操指南 — Wahana Totalita";
@@ -85,7 +88,7 @@ const schemas = [
   schemas={schemas}
 >
 <!-- HERO -->
-<section class="zh-hero">
+<HeroSurface class="zh-hero">
   <div class="zh-container">
     <div class="zh-breadcrumb">
       <a href="/zh/">中文合规首页</a> &gt; <span>工厂消防合规 (K3 Kebakaran)</span>
@@ -101,12 +104,12 @@ const schemas = [
       <span>● 设施检验：消防栓、灭火器、火灾报警与自动喷淋</span>
     </div>
   </div>
-</section>
+</HeroSurface>
 
 <div class="zh-container">
   <div class="zh-body-grid">
     <main>
-      <article class="zh-card">
+      <SurfaceCard as="article" class="zh-card">
         <span class="zh-sec-badge">人员架构法规</span>
         <h2 class="zh-sec-title">一、印尼企业消防应急队伍的四级法定配置</h2>
         <p class="zh-text">
@@ -114,7 +117,7 @@ const schemas = [
         </p>
 
         <div class="zh-table-wrap">
-          <table class="zh-table">
+          <TableScroll><table class="zh-table">
             <thead>
               <tr>
                 <th>人员等级</th>
@@ -144,11 +147,11 @@ const schemas = [
                 <td>超大型工厂、重化工及特大型冶炼综合体推荐专职配置。</td>
               </tr>
             </tbody>
-          </table>
+          </table></TableScroll>
         </div>
-      </article>
+      </SurfaceCard>
 
-      <article class="zh-card">
+      <SurfaceCard as="article" class="zh-card">
         <span class="zh-sec-badge">设施检验规范</span>
         <h2 class="zh-sec-title">二、工厂消防设施法定检验合格证明 (Riksa Uji Damkar)</h2>
         <p class="zh-text">
@@ -156,22 +159,22 @@ const schemas = [
         </p>
 
         <div class="zh-law-grid">
-          <div class="zh-law-card">
+          <SurfaceCard class="zh-law-card">
             <strong>1. 便携式手提灭火器 (APAR)</strong>
             <p>悬挂高度离地 1.2 米、无杂物遮挡。<strong>每年必须进行一次物理称重与药剂压力复验</strong>，干粉/二氧化碳/泡沫灭火器瓶身需加贴合格年检检验标贴。</p>
-          </div>
-          <div class="zh-law-card">
+          </SurfaceCard>
+          <SurfaceCard class="zh-law-card">
             <strong>2. 室内外消防栓管网系统 (Hydrant)</strong>
             <p>每 1~2 年开展水压试验（Hydrotest），核验消防管网静压与末端出水动压，确保主柴油消防泵能在断电时 30 秒内自动强启。</p>
-          </div>
-          <div class="zh-law-card">
+          </SurfaceCard>
+          <SurfaceCard class="zh-law-card">
             <strong>3. 火灾自动报警与喷淋系统 (Alarm & Sprinkler)</strong>
             <p>烟感/温感探头灵敏度测试、报警联动警铃音量测试，以及稳压水箱液位自动联锁保护功能检测。</p>
-          </div>
+          </SurfaceCard>
         </div>
-      </article>
+      </SurfaceCard>
 
-      <article class="zh-card">
+      <SurfaceCard as="article" class="zh-card">
         <span class="zh-sec-badge">商业保险利益</span>
         <h2 class="zh-sec-title">三、为什么消防合规直接决定外资财产保险理赔成败？</h2>
         <div class="zh-alert-box">
@@ -180,7 +183,7 @@ const schemas = [
             几乎所有跨国商业保险公司（包括中资企业常投保的人保、太保在印尼的承保分公司或印尼本地保险公司）在签署商业财产一切险（Property All Risks）条款中，均列明了“合规保证条款（Warranty of Compliance）”。若厂区发生火灾，保险公司公估人进场首要调查的就是：消防管网是否取得政府检验合格证（SIA）？现场操作人员是否持证？如果缺失，保险公司有充分法律依据拒绝支付千万级巨额赔偿！
           </p>
         </div>
-      </article>
+      </SurfaceCard>
     </main>    <!-- RIGHT: STICKY CONTACT SIDEBAR -->
     <aside class="zh-sticky-sidebar">
       <div class="zh-sb-box">

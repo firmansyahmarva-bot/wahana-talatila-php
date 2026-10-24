@@ -1,4 +1,6 @@
 ---
+import TableScroll from '../../components/shared/TableScroll.astro';
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import Layout from '../../layouts/Layout.astro';
 import Faq from '../../components/Faq.astro';
 import SectionTitle from '../../components/SectionTitle.astro';
@@ -77,11 +79,12 @@ const toolFaqs = [
   canonical={canonical}
   schemas={schemas}
   pageCss={['/assets/css/page/tools-laporan-insiden.css']}
+  scripts={['/assets/js/tool-laporan-insiden.js']}
 >
-<main class="inc-page" id="konten-utama">
+<div class="inc-page">
 
 <!-- HERO -->
-<section class="inc-hero">
+<HeroSurface class="inc-hero">
   <div class="container">
     <div class="hero-badge">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
@@ -96,7 +99,7 @@ const toolFaqs = [
       <span class="hero-tag">Matriks Tindakan Koreksi (CAPA)</span>
     </div>
   </div>
-</section>
+</HeroSurface>
 
 <!-- MAIN WORKSPACE -->
 <section class="inc-wrapper">
@@ -223,7 +226,7 @@ const toolFaqs = [
         </h2>
       </div>
 
-      <table class="capa-table">
+      <TableScroll><table class="capa-table">
         <thead>
           <tr>
             <th>Rencana Tindakan Korektif &amp; Preventif</th>
@@ -248,7 +251,7 @@ const toolFaqs = [
             <td>1 Minggu</td>
           </tr>
         </tbody>
-      </table>
+      </table></TableScroll>
 
       <!-- BUTTONS -->
       <div style="display:flex;gap:12px;margin-top:24px">
@@ -286,5 +289,5 @@ const toolFaqs = [
   </div>
 </section>
 
-</main>
+</div>
 </Layout>

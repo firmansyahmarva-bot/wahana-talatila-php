@@ -1,4 +1,5 @@
 ---
+import HeroSurface from '../components/shared/HeroSurface.astro';
 import Layout from '../layouts/Layout.astro';
 import Faq from '../components/Faq.astro';
 
@@ -76,14 +77,14 @@ const schemas = [
   schemas={schemas}
   pageCss={['/assets/css/page/ak3u-fresh-graduate.css']}
 >
-  <section class="hero">
+  <HeroSurface class="hero">
     <div class="container inner">
       <div class="hero-badge">🎓 Panduan Fresh Graduate</div>
       <h1>Ahli K3 Umum untuk Fresh Graduate: Bisa Langsung Ikut?</h1>
       <p class="hero-sub">Banyak fresh graduate bertanya apakah mereka bisa mengambil sertifikasi AK3U tanpa pengalaman kerja. Jawabannya: bisa.</p>
       <div><a href={waUrl} class="btn-wa" target="_blank" rel="noopener">💬 Tanya Jadwal Pelatihan</a></div>
     </div>
-  </section>
+  </HeroSurface>
 
   <section class="white">
     <div class="container">

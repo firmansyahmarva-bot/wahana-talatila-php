@@ -1,4 +1,11 @@
 ---
+import ContentSection from '../../components/shared/ContentSection.astro';
+import CallToAction from '../../components/shared/CallToAction.astro';
+import PageHero from '../../components/shared/PageHero.astro';
+import ActionLink from '../../components/shared/ActionLink.astro';
+import SurfaceCard from '../../components/shared/SurfaceCard.astro';
+import SectionHeading from '../../components/shared/SectionHeading.astro';
+
 import Layout from '../../layouts/Layout.astro';
 import Faq from '../../components/Faq.astro';
 
@@ -89,26 +96,14 @@ const schemas = [
   description={metaDesc}
   canonical={canonical}
   schemas={schemas}
-  pageCss={['/assets/css/page/in-house-morowali-weda-bay.css']}
+  pageCss={['/assets/css/page/in-house-shared.css']}
 >
-  <main>
+  <div class="inhouse-page">
     <!-- HERO -->
-    <section class="reg-hero">
-      <div class="container">
-        <div class="reg-badge-top">🔥 Koridor Smelter Nikel &amp; Remote Industrial Site</div>
-        <h1>In-House Training K3 Morowali &amp; Weda Bay: Smelter Nikel, Welder &amp; Confined Space</h1>
-        <p class="lead">Solusi sertifikasi kepatuhan hukum dan keselamatan kerja on-site untuk industri smelter nikel RKEF, pabrik HPAL, dan pembangkit listrik captive di Kawasan Industri IMIP Morowali (Bahodopi), IWIP Weda Bay (Halmahera Tengah), dan VDNI/OSS Konawe. Instruktur PJK3 resmi hadir langsung di site Anda.</p>
-        <div class="reg-cta-row">
-          <a href={waQuoteUrl} class="reg-btn-wa" target="_blank" rel="noopener">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-            Minta Proposal Morowali &amp; Weda Bay (24 Jam)
-          </a>
-          <a href="/in-house-training/" class="reg-btn-back">
-            &larr; Kembali ke Direktori In-House
-          </a>
-        </div>
-      </div>
-    </section>
+    <PageHero title={"In-House Training K3 Morowali & Weda Bay: Smelter Nikel, Welder & Confined Space"} description={"Solusi sertifikasi kepatuhan hukum dan keselamatan kerja on-site untuk industri smelter nikel RKEF, pabrik HPAL, dan pembangkit listrik captive di Kawasan Industri IMIP Morowali (Bahodopi), IWIP Weda Bay (Halmahera Tengah), dan VDNI/OSS Konawe. Instruktur PJK3 resmi hadir langsung di site Anda."} eyebrow={"🔥 Koridor Smelter Nikel & Remote Industrial Site"}>
+<ActionLink href={waQuoteUrl} label={"Minta Proposal Morowali & Weda Bay (24 Jam)"} icon="whatsapp" external/>
+<ActionLink href="/in-house-training/" label={"← Kembali ke Direktori In-House"} icon="arrow" secondary/>
+</PageHero>
 
     <!-- LOGISTICS BAR -->
     <div class="reg-logistics-bar">
@@ -135,17 +130,16 @@ const schemas = [
     </div>
 
     <!-- MAIN PROGRAMS GRID -->
-    <section class="reg-content-sec">
-      <div class="container">
-        <div style="max-width:760px;">
-          <p style="color:var(--accent-dark);font-weight:700;font-size:13.5px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;">Program Spesifik Smelter</p>
-          <h2 style="font-size:clamp(22px,3vw,30px);color:var(--slate-900);font-weight:800;margin:0 0 12px;">Sertifikasi Kepatuhan &amp; Keterampilan Kritis Smelter Nikel</h2>
-          <p style="color:var(--slate-500);font-size:15px;line-height:1.6;">Menjawab tingginya risiko kecelakaan kerja di lini pyrometallurgy dan hydrometallurgy, serta memenuhi standar audit keselamatan kerja Kementerian ESDM dan Kementerian Ketenagakerjaan RI.</p>
-        </div>
+    <ContentSection tone="subtle">
+        <SectionHeading>
+          <p class="eyebrow">Program Spesifik Smelter</p>
+          <h2>Sertifikasi Kepatuhan &amp; Keterampilan Kritis Smelter Nikel</h2>
+          <p>Menjawab tingginya risiko kecelakaan kerja di lini pyrometallurgy dan hydrometallurgy, serta memenuhi standar audit keselamatan kerja Kementerian ESDM dan Kementerian Ketenagakerjaan RI.</p>
+        </SectionHeading>
 
         <div class="reg-card-grid">
           <!-- Card 1 -->
-          <div class="reg-prog-card">
+          <SurfaceCard class="reg-prog-card">
             <span class="reg-prog-cert">BNSP &amp; KEMNAKER</span>
             <h3>Juru Las / Welder Fabrikasi Smelter (3G, 4G, 6G)</h3>
             <p>Sertifikasi pengelasan berkualifikasi tinggi untuk instalasi dan maintenance pipa steam bertekanan tinggi, ducting gas buang, dan tangki reaktor lelehan nikel.</p>
@@ -155,10 +149,10 @@ const schemas = [
               <li>Uji visual dan NDT (Non-Destructive Testing) langsung di workshop</li>
               <li>Sertifikat Kompetensi BNSP &amp; Lisensi K3 Juru Las Kemnaker</li>
             </ul>
-          </div>
+          </SurfaceCard>
 
           <!-- Card 2 -->
-          <div class="reg-prog-card">
+          <SurfaceCard class="reg-prog-card">
             <span class="reg-prog-cert">KEMNAKER RI</span>
             <h3>K3 Ruang Terbatas (Confined Space) Tanur &amp; Tangki Asam</h3>
             <p>Khusus personel maintenance furnace kiln, precipitator, baghouse, dan tangki asam sulfat pada unit HPAL dengan potensi gas SO2, CO, dan defisiensi oksigen.</p>
@@ -168,10 +162,10 @@ const schemas = [
               <li>Simulasi evakuasi darurat &amp; teknik pernapasan SCBA</li>
               <li>Sertifikat Petugas Madya &amp; Utama Ruang Terbatas Kemnaker</li>
             </ul>
-          </div>
+          </SurfaceCard>
 
           <!-- Card 3 -->
-          <div class="reg-prog-card">
+          <SurfaceCard class="reg-prog-card">
             <span class="reg-prog-cert">KEMNAKER RI</span>
             <h3>Overhead Crane &amp; Operator Handling Ladle Cair</h3>
             <p>Sertifikasi operator crane Permenaker No. 08/2020 untuk pengangkatan ladle lelehan ferronickel cair bersuhu di atas 1.500°C di area tapping hall.</p>
@@ -181,10 +175,10 @@ const schemas = [
               <li>Prosedur darurat pencegahan tumpahan lelehan panas (spill)</li>
               <li>Lisensi K3 Operator Crane Kelas 1 / Kelas 2 Kemnaker RI</li>
             </ul>
-          </div>
+          </SurfaceCard>
 
           <!-- Card 4 -->
-          <div class="reg-prog-card">
+          <SurfaceCard class="reg-prog-card">
             <span class="reg-prog-cert">PP 50/2012 &amp; DISNAKER</span>
             <h3>Audit Kepatuhan SMK3 &amp; Investigasi Insiden Smelter</h3>
             <p>Pendampingan audit sistematis SMK3 PP 50/2012 untuk manajemen smelter guna mencegah insiden fatalitas dan memenuhi rekomendasi investigasi pengawas.</p>
@@ -194,7 +188,7 @@ const schemas = [
               <li>Penyelarasan SOP operasional lokal dengan regulasi Indonesia</li>
               <li>Tersedia pendampingan laporan kepatuhan resmi</li>
             </ul>
-          </div>
+          </SurfaceCard>
         </div>
 
         <!-- MOBILIZATION SPECIFICATIONS -->
@@ -220,31 +214,20 @@ const schemas = [
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </ContentSection>
 
     <!-- FAQ -->
-    <section class="section-faq" style="padding:56px 0;background:var(--surface);">
-      <div class="container">
-        <div style="text-align:center;max-width:700px;margin:0 auto 36px;">
-          <p style="color:var(--accent-dark);font-weight:700;font-size:13.5px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;">FAQ Site Smelter Nikel</p>
-          <h2 style="font-size:clamp(22px,3vw,30px);color:var(--slate-900);font-weight:800;">Pertanyaan Seputar In-House Training di Morowali &amp; Weda Bay</h2>
-        </div>
-        <div class="faq-grid" style="max-width:840px;margin:0 auto;">
+    <ContentSection tone="default">
+        <SectionHeading>
+          <p class="eyebrow">FAQ Site Smelter Nikel</p>
+          <h2>Pertanyaan Seputar In-House Training di Morowali &amp; Weda Bay</h2>
+        </SectionHeading>
+        <div class="faq-grid">
           <Faq items={faqs} variant="inhouse" />
         </div>
-      </div>
-    </section>
+      </ContentSection>
 
     <!-- BOTTOM CTA -->
-    <section style="background:var(--slate-900);color:var(--surface);padding:50px 0;text-align:center;">
-      <div class="container">
-        <h2 style="color:var(--surface);font-size:26px;margin-bottom:12px;">Butuh Pelatihan In-House di Kawasan IMIP Morowali atau IWIP Weda Bay?</h2>
-        <p style="color:var(--accent-soft);font-size:15.5px;max-width:640px;margin:0 auto 24px;">Konsultasikan kebutuhan sertifikasi juru las, confined space, atau audit keselamatan smelter Anda bersama tim ahli Wahana Totalita. Proposal resmi dalam 24 jam.</p>
-        <a href={waQuoteUrl} class="reg-btn-wa" target="_blank" rel="noopener" style="font-size:15.5px;padding:14px 30px;display:inline-block;text-decoration:none;">
-          Konsultasi via WhatsApp (+62 877-5915-1278)
-        </a>
-      </div>
-    </section>
-  </main>
+    <CallToAction title={"Butuh Pelatihan In-House di Kawasan IMIP Morowali atau IWIP Weda Bay?"} description={"Konsultasikan kebutuhan sertifikasi juru las, confined space, atau audit keselamatan smelter Anda bersama tim ahli Wahana Totalita. Proposal resmi dalam 24 jam."} href={waQuoteUrl} label={"Konsultasi via WhatsApp (+62 877-5915-1278)"}/>
+  </div>
 </Layout>

@@ -1,4 +1,7 @@
 ---
+import TableScroll from '../../components/shared/TableScroll.astro';
+import SurfaceCard from '../../components/shared/SurfaceCard.astro';
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import ZhLayout from '../../layouts/ZhLayout.astro';
 
 const pageTitle = "印尼企业安全生产(K3)法规合规与官方认证指南 — Wahana Totalita";
@@ -126,7 +129,7 @@ const schemas = [
   isHome={true}
 >
 <!-- HERO SECTION -->
-<section class="zh-hero">
+<HeroSurface class="zh-hero">
   <div class="zh-container">
     <div class="zh-breadcrumb">
       <span>首页</span> &rsaquo; <span>印尼企业安全生产 (K3) 法定合规专栏</span>
@@ -167,7 +170,7 @@ const schemas = [
       </div>
     </div>
   </div>
-</section>
+</HeroSurface>
 
 <!-- MAIN CONTENT + SIDEBAR -->
 <div class="zh-container">
@@ -177,7 +180,7 @@ const schemas = [
     <main>
 
       <!-- SECTION 1: 核心法律底线 -->
-      <article class="zh-card">
+      <SurfaceCard as="article" class="zh-card">
         <span class="zh-sec-badge">核心法规监管</span>
         <h2 class="zh-sec-title">一、在印尼办厂与施工，必须清楚的 3 条安全法律红线</h2>
         <p class="zh-text">
@@ -185,18 +188,18 @@ const schemas = [
         </p>
 
         <div class="zh-law-grid">
-          <div class="zh-law-card">
+          <SurfaceCard class="zh-law-card">
             <strong>1. 《1970年第1号安全生产法》</strong>
             <p>全印尼K3法律总纲。赋予政府劳工监察人员随时无须提前通知直接进入厂区、工地检查的权力。若发现重大事故隐患，监察官有权当场签发停工整顿令（Stop-work order）。</p>
-          </div>
-          <div class="zh-law-card">
+          </SurfaceCard>
+          <SurfaceCard class="zh-law-card">
             <strong>2. 强制设岗门槛：满100人或高危企业</strong>
             <p>凡聘用员工满 100 人，或员工不满 100 人但生产过程存在火灾、爆炸、有毒有害化学品、粉尘、高压或重型机械等高风险因素的企业，<strong>必须依法设立安全生产委员会 (P2K3) 并配备持证安全官 (Ahli K3 Umum)</strong>。</p>
-          </div>
-          <div class="zh-law-card">
+          </SurfaceCard>
+          <SurfaceCard class="zh-law-card">
             <strong>3. 设备与人员的“双证准入”原则</strong>
             <p>特种作业不仅要求操作人员持有劳工部个人操作证（SIO），设备本身（如叉车、天车、锅炉、空压机、储气罐）还必须由具备资质的机构定期检验并持有政府出具的检验合格证（SIA / Riksa Uji）。</p>
-          </div>
+          </SurfaceCard>
         </div>
 
         <div class="zh-alert-box">
@@ -205,10 +208,10 @@ const schemas = [
             印尼法律严格追究企业最高现场负责人（General Manager / Project Director / Kepala Teknik Tambang）的安全连带责任。若因无证操作特种设备或未按法规开展年检导致重伤或亡人安全事故，企业面临的不仅是巨额赔偿，最高负责人还将面临印尼警方的刑事调查与被限制出境风险。
           </p>
         </div>
-      </article>
+      </SurfaceCard>
 
       <!-- SECTION 2: 常见特种作业持证对照表 -->
-      <article class="zh-card">
+      <SurfaceCard as="article" class="zh-card">
         <span class="zh-sec-badge">法定资质清单</span>
         <h2 class="zh-sec-title">二、中资企业现场高频特种岗位与法定证件对照表</h2>
         <p class="zh-text">
@@ -216,7 +219,7 @@ const schemas = [
         </p>
 
         <div class="zh-table-wrap">
-          <table class="zh-table">
+          <TableScroll><table class="zh-table">
             <thead>
               <tr>
                 <th>中文岗位名称</th>
@@ -269,12 +272,12 @@ const schemas = [
                 <td><span class="zh-tag-must">大型央企/矿业投标门槛</span></td>
               </tr>
             </tbody>
-          </table>
+          </table></TableScroll>
         </div>
-      </article>
+      </SurfaceCard>
 
       <!-- SECTION 3: 决策层高频问题解答 (BOSS FAQ) -->
-      <article class="zh-card">
+      <SurfaceCard as="article" class="zh-card">
         <span class="zh-sec-badge">决策者问答</span>
         <h2 class="zh-sec-title">三、中资企业管理层最关心的 5 大合规核心问题</h2>
         <p class="zh-text">针对企业主在实操中经常遇到的制度疑惑与误区，提供务实清晰的解答：</p>
@@ -356,10 +359,10 @@ const schemas = [
           </div>
         </div>
 
-      </article>
+      </SurfaceCard>
 
       <!-- SECTION 4: 华纳全能咨询支持体系 -->
-      <article class="zh-card" style="border-color:var(--success-border);background:var(--surface);">
+      <SurfaceCard as="article" class="zh-card" style="border-color:var(--success-border);background:var(--surface);">
         <span class="zh-sec-badge">专业服务支撑</span>
         <h2 class="zh-sec-title">四、Wahana Totalita 能够为中资企业提供哪些支持？</h2>
         <p class="zh-text">
@@ -367,79 +370,79 @@ const schemas = [
         </p>
 
         <div class="zh-law-grid">
-          <div class="zh-law-card" style="background:var(--surface);">
+          <SurfaceCard class="zh-law-card" style="background:var(--surface);">
             <strong style="color:var(--brand);">1. 现场合规差距诊断 (Gap Analysis)</strong>
             <p>对照印尼劳工部执法标准，全面梳理企业现场持证人员缺口、设备年检盲区及应急预案短板，出具可执行的整改规划书。</p>
-          </div>
-          <div class="zh-law-card" style="background:var(--surface);">
+          </SurfaceCard>
+          <SurfaceCard class="zh-law-card" style="background:var(--surface);">
             <strong style="color:var(--brand);">2. 驻厂定制化考证培训</strong>
             <p>针对冶炼、矿业、建筑及电厂实际工况量身定制内训大纲，提供具备双语对接经验的项目经理协助沟通，官方证书真实可查。</p>
-          </div>
-          <div class="zh-law-card" style="background:var(--surface);">
+          </SurfaceCard>
+          <SurfaceCard class="zh-law-card" style="background:var(--surface);">
             <strong style="color:var(--brand);">3. 特种设备法定检测协调 (Riksa Uji)</strong>
             <p>协助企业规范组织起重机、压力容器、锅炉等高危设备的法定第三方无损检测与官方牌照申领换发。</p>
-          </div>
-          <div class="zh-law-card" style="background:var(--surface);">
+          </SurfaceCard>
+          <SurfaceCard class="zh-law-card" style="background:var(--surface);">
             <strong style="color:var(--brand);">4. 财务与税务完全合规</strong>
             <p>提供印尼正规对公税务发票（Faktur Pajak）及官方培训资质合同，账务清晰合规，免除企业审计后顾之忧。</p>
-          </div>
+          </SurfaceCard>
         </div>
-      </article>
+      </SurfaceCard>
 
             <!-- SECTION 5: 核心合规专题指引与实操手册 -->
-      <article class="zh-card">
+      <SurfaceCard as="article" class="zh-card">
         <span class="zh-sec-badge">合规专题深入</span>
         <h2 class="zh-sec-title">五、中资企业安全生产法定合规专题专栏 (深度实操手册)</h2>
         <p class="zh-text">
           针对特定岗位配置、事故应急、危化品管理、矿山监管、设备年检及体系审核，我们为您整理了以下细分领域的专业实操手册与自查清单：
         </p>
         <div class="zh-law-grid">
-          <div class="zh-law-card" style="background:var(--success-bg);border-color:var(--success-border);grid-column:1/-1;">
+          <SurfaceCard class="zh-law-card" style="background:var(--success-bg);border-color:var(--success-border);grid-column:1/-1;">
             <strong style="font-size:16px;"><a href="/zh/factory-roadmap/" style="color:var(--brand);text-decoration:none;">★ 从零建厂到合法投产：在印尼办厂安全合规全流程实操指南 &rarr;</a></strong>
             <p>一文通晓从规划设计图审、土建施工持证、特种设备进口检验准用（SIA/Riksa Uji）、安全官AK3U配置到SMK3体系认证的五阶段完整全景路线图。</p>
-          </div>
-          <div class="zh-law-card" style="background:var(--success-bg);border-color:var(--warning-border);grid-column:1/-1;">
+          </SurfaceCard>
+          <SurfaceCard class="zh-law-card" style="background:var(--success-bg);border-color:var(--warning-border);grid-column:1/-1;">
             <strong style="font-size:16px;"><a href="/zh/checklist/" style="color:var(--accent-dark);text-decoration:none;">📋 中资企业在印尼安全生产法定合规自查排查清单 (Checklist) &rarr;</a></strong>
             <p>管理层对照自检工具：人员持证(AK3U/SIO)、设备年检(SIA)、组织批文(P2K3)与应急预案四大维度逐项打勾。</p>
-          </div>
-          <div class="zh-law-card" style="background:var(--success-bg);border-color:var(--success-border);">
+          </SurfaceCard>
+          <SurfaceCard class="zh-law-card" style="background:var(--success-bg);border-color:var(--success-border);">
             <strong style="font-size:15px;"><a href="/zh/kecelakaan-kerja/" style="color:var(--brand);text-decoration:none;">1. 工伤事故官方处置与调查应对 &rarr;</a></strong>
             <p>Permenaker 03/1998 法定 2×24 小时报案程序、BPJS 工伤社保赔付直付及警方与劳工监察局权责边界。</p>
-          </div>
-          <div class="zh-law-card" style="background:var(--success-bg);border-color:var(--success-border);">
+          </SurfaceCard>
+          <SurfaceCard class="zh-law-card" style="background:var(--success-bg);border-color:var(--success-border);">
             <strong style="font-size:15px;"><a href="/zh/k3-kimia/" style="color:var(--brand);text-decoration:none;">2. 湿法冶炼与危化品 (K3 Kimia) 合规 &rarr;</a></strong>
             <p>HPAL高压酸浸与RKEF火法冶炼硫酸/危化品安全员与高级安全官(Kepmenaker 187/1999)配比及印尼语LDK/SDS。</p>
-          </div>
-          <div class="zh-law-card" style="background:var(--success-bg);border-color:var(--success-border);">
+          </SurfaceCard>
+          <SurfaceCard class="zh-law-card" style="background:var(--success-bg);border-color:var(--success-border);">
             <strong style="font-size:15px;"><a href="/zh/k3-kebakaran/" style="color:var(--brand);text-decoration:none;">3. 工厂消防安全与管网检测 (Damkar) &rarr;</a></strong>
             <p>Kelas D/C/B/A 四级消防员法定配置(Kepmenaker 186/1999)、灭火器与消防栓管网第三方耐压检测与保险理赔合规。</p>
-          </div>
-          <div class="zh-law-card" style="background:var(--success-bg);border-color:var(--success-border);">
+          </SurfaceCard>
+          <SurfaceCard class="zh-law-card" style="background:var(--success-bg);border-color:var(--success-border);">
             <strong style="font-size:15px;"><a href="/zh/k3-pertambangan/" style="color:var(--brand);text-decoration:none;">4. 能矿部矿山安全监管 (SMKP & POP/POM) &rarr;</a></strong>
             <p>红土镍矿/煤矿矿长(KTT)法定任命、现场主管POP/POM国家执照及能矿部专属矿山安全管理体系。</p>
-          </div>
-          <div class="zh-law-card" style="background:var(--success-bg);border-color:var(--success-border);">
+          </SurfaceCard>
+          <SurfaceCard class="zh-law-card" style="background:var(--success-bg);border-color:var(--success-border);">
             <strong style="font-size:15px;"><a href="/zh/ahli-k3-umum/" style="color:var(--brand);text-decoration:none;">5. 注册安全官 (AK3U) 与 P2K3 设立指引 &rarr;</a></strong>
             <p>满100人强制设岗、企业安全生产委员会印尼劳工部官方备案与法定安全生产季报报送全流程。</p>
-          </div>
-          <div class="zh-law-card" style="background:var(--success-bg);border-color:var(--success-border);">
+          </SurfaceCard>
+          <SurfaceCard class="zh-law-card" style="background:var(--success-bg);border-color:var(--success-border);">
             <strong style="font-size:15px;"><a href="/zh/sio-alat-berat/" style="color:var(--brand);text-decoration:none;">6. 特种设备 SIO 操作证与 SIA 检验全解 &rarr;</a></strong>
             <p>叉车、天车、流动吊、锅炉与压力容器的个人持证与机械设备合法开机准用年检双重合规。</p>
-          </div>
-          <div class="zh-law-card" style="background:var(--success-bg);border-color:var(--success-border);">
+          </SurfaceCard>
+          <SurfaceCard class="zh-law-card" style="background:var(--success-bg);border-color:var(--success-border);">
             <strong style="font-size:15px;"><a href="/zh/smk3/" style="color:var(--brand);text-decoration:none;">7. SMK3 安全体系审核与金牌认证指南 &rarr;</a></strong>
             <p>PP 50/2012国家级法定安全体系、166项高级审核准则及大型央企/PLN/Pertamina招投标金牌门槛。</p>
-          </div>
-          <div class="zh-law-card" style="background:var(--success-bg);border-color:var(--success-border);">
+          </SurfaceCard>
+          <SurfaceCard class="zh-law-card" style="background:var(--success-bg);border-color:var(--success-border);">
             <strong style="font-size:15px;"><a href="/zh/juru-las/" style="color:var(--brand);text-decoration:none;">8. 承压管道与结构特种焊工等级规范 &rarr;</a></strong>
             <p>印尼劳工部 Kelas 1、Kelas 2、Kelas 3 资质划分、X射线探伤抽检及承压特种焊接规范。</p>
-          </div>
-          <div class="zh-law-card" style="background:var(--success-bg);border-color:var(--success-border);">
+          </SurfaceCard>
+          <SurfaceCard class="zh-law-card" style="background:var(--success-bg);border-color:var(--success-border);">
             <strong style="font-size:15px;"><a href="/zh/in-house-training/" style="color:var(--brand);text-decoration:none;">9. 偏远工区驻厂培训与双语考证方案 &rarr;</a></strong>
             <p>苏拉威西青山(IMIP)、德龙(VDNI)、纬达贝(IWIP)及矿山现场考官驻厂直考，省去高额差旅与停工损失。</p>
-          </div>
+          </SurfaceCard>
         </div>
-      </article>
+      </SurfaceCard>
 
     </main>
 

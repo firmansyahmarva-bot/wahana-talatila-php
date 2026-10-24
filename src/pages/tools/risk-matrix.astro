@@ -1,4 +1,6 @@
 ---
+import TableScroll from '../../components/shared/TableScroll.astro';
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import Layout from '../../layouts/Layout.astro';
 import Faq from '../../components/Faq.astro';
 import SectionTitle from '../../components/SectionTitle.astro';
@@ -81,11 +83,12 @@ const toolFaqs = [
   canonical={canonical}
   schemas={schemas}
   pageCss={['/assets/css/page/tools-risk-matrix.css']}
+  scripts={['/assets/js/tool-risk-matrix.js']}
 >
-<main class="rm-page" id="konten-utama">
+<div class="rm-page">
 
 <!-- HERO -->
-<section class="rm-hero">
+<HeroSurface class="rm-hero">
   <div class="container">
     <div class="hero-badge">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg>
@@ -100,7 +103,7 @@ const toolFaqs = [
       <span class="hero-tag">Tindakan Pengendalian ALARP</span>
     </div>
   </div>
-</section>
+</HeroSurface>
 
 <!-- MAIN MATRIX WORKSPACE -->
 <section class="rm-wrapper">
@@ -213,7 +216,7 @@ const toolFaqs = [
       </div>
 
       <div class="register-table-wrapper">
-        <table class="reg-table" id="regTable">
+        <TableScroll><table class="reg-table" id="regTable">
           <thead>
             <tr>
               <th style="width:36px;text-align:center">No</th>
@@ -229,7 +232,7 @@ const toolFaqs = [
           <tbody id="regBody">
             <!-- Dynamic items -->
           </tbody>
-        </table>
+        </table></TableScroll>
       </div>
     </div>
 
@@ -262,5 +265,5 @@ const toolFaqs = [
   </div>
 </section>
 
-</main>
+</div>
 </Layout>

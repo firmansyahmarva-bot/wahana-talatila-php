@@ -1,4 +1,6 @@
 ---
+import SurfaceCard from '../../components/shared/SurfaceCard.astro';
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import EnLayout from '../../layouts/EnLayout.astro';
 import EnSidebar from '../../components/EnSidebar.astro';
 
@@ -14,7 +16,7 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
   canonical={canonical}
   schemas={schemas}
 >
-<section class="en-hero">
+<HeroSurface class="en-hero">
   <div class="en-container">
     <div class="en-breadcrumb">
       <a href="/">Home</a> &rsaquo; <a href="/en/">English OHS Hub</a> &rsaquo; <span>Mining Safety (SMKP)</span>
@@ -51,12 +53,12 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
       </div>
     </div>
   </div>
-</section>
+</HeroSurface>
 
 <div class="en-container">
   <div class="en-body-grid">
     <main>
-      <section class="en-card">
+      <SurfaceCard as="section" class="en-card">
         <span class="en-sec-badge">ESDM Regulatory Domain</span>
         <h2 class="en-sec-title">Dual Jurisdiction: Kemnaker vs Ditjen Minerba</h2>
         <p class="en-text">
@@ -67,24 +69,24 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
         </p>
 
         <div class="en-law-grid">
-          <div class="en-law-card">
+          <SurfaceCard class="en-law-card">
             <strong>Head of Mining Engineering (KTT)</strong>
             <p>Every concession must appoint an approved <strong>Kepala Teknik Tambang (KTT)</strong> endorsed by the Chief Mine Inspector (KaIT) who holds supreme operational liability over the mine.</p>
-          </div>
-          <div class="en-law-card">
+          </SurfaceCard>
+          <SurfaceCard class="en-law-card">
             <strong>POP — Operational Supervisor</strong>
             <p><strong>Pengawas Operasional Pertama (POP)</strong>: Frontline pit supervisors, pit foremen, and shift leaders must pass government competency assessment.</p>
-          </div>
-          <div class="en-law-card">
+          </SurfaceCard>
+          <SurfaceCard class="en-law-card">
             <strong>POM — Middle Supervisor</strong>
             <p><strong>Pengawas Operasional Madya (POM)</strong>: Department superintendents and pit captains responsible for safety compliance across mining contractors.</p>
-          </div>
-          <div class="en-law-card">
+          </SurfaceCard>
+          <SurfaceCard class="en-law-card">
             <strong>POU — Senior Executive</strong>
             <p><strong>Pengawas Operasional Utama (POU)</strong>: Mining General Managers and Operations Directors responsible for strategic safety governance.</p>
-          </div>
+          </SurfaceCard>
         </div>
-      </section>
+      </SurfaceCard>
     </main>
 
     <EnSidebar currentSlug="mining-safety-regulations-smkp" />

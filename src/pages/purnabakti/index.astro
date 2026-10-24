@@ -1,4 +1,7 @@
 ---
+import TableScroll from '../../components/shared/TableScroll.astro';
+import SurfaceCard from '../../components/shared/SurfaceCard.astro';
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
@@ -109,7 +112,7 @@ const schemas = [
   pageCss={['/assets/css/page/purnabakti.css']}
 >
   <!-- HERO -->
-  <section class="mpp-hero">
+  <HeroSurface class="mpp-hero">
     <div class="container">
       <div class="mpp-badge">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
@@ -135,7 +138,7 @@ const schemas = [
         <span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Kunjungan Usaha Riil di Sleman &amp; Bantul</span>
       </div>
     </div>
-  </section>
+  </HeroSurface>
 
   <!-- 4 PILLARS EXPLANATION -->
   <section style="padding: 56px 0 40px; background: var(--surface);">
@@ -299,37 +302,37 @@ const schemas = [
       </div>
 
       <div class="mpp-lab-grid">
-        <div class="mpp-lab-card">
+        <SurfaceCard class="mpp-lab-card">
           <h4>Greenhouse Melon Hidroponik Presisi</h4>
           <p>
             Budidaya melon premium varietas Jepang dengan fertigasi otomatis di lahan terbatas. Panen per 75 hari dengan serapan pasar supermarket Jakarta &amp; Surabaya yang pasti.
           </p>
           <span class="mpp-lab-loc">&bull; Lokasi: Sleman, D.I. Yogyakarta</span>
-        </div>
+        </SurfaceCard>
 
-        <div class="mpp-lab-card">
+        <SurfaceCard class="mpp-lab-card">
           <h4>Peternakan Terintegrasi Kambing Etawa</h4>
           <p>
             Pengolahan susu kambing organik pasteurisasi, pakan silase hemat tenaga, dan pemanfaatan kotoran menjadi pupuk padat/cair bernilai ekonomis tinggi.
           </p>
           <span class="mpp-lab-loc">&bull; Lokasi: Lereng Merapi, Kaliurang</span>
-        </div>
+        </SurfaceCard>
 
-        <div class="mpp-lab-card">
+        <SurfaceCard class="mpp-lab-card">
           <h4>Budidaya Ikan Nila Bioflok Modern</h4>
           <p>
             Teknologi kolam bulat terpal hemat air dan hemat pakan di pekarangan rumah. Menghasilkan panen ikan segar higienis untuk rantai pasok restoran kuliner.
           </p>
           <span class="mpp-lab-loc">&bull; Lokasi: Bantul, D.I. Yogyakarta</span>
-        </div>
+        </SurfaceCard>
 
-        <div class="mpp-lab-card">
+        <SurfaceCard class="mpp-lab-card">
           <h4>Boutique Homestay &amp; Wisata Kuliner</h4>
           <p>
             Manajemen perhotelan mikro dan kafe bernuansa heritage asri. Kolaborasi dengan Online Travel Agent (OTA) untuk mendulang passive income tanpa stres operasional.
           </p>
           <span class="mpp-lab-loc">&bull; Lokasi: Kota Jogja &amp; Kulon Progo</span>
-        </div>
+        </SurfaceCard>
       </div>
     </div>
   </section>
@@ -348,7 +351,7 @@ const schemas = [
       </div>
 
       <div class="mpp-table-box">
-        <table class="mpp-table">
+        <TableScroll><table class="mpp-table">
           <thead>
             <tr>
               <th>Paket Pelatihan</th>
@@ -388,7 +391,7 @@ const schemas = [
               <td>Didukung Kuitansi Riil, SPK, BAST &amp; Bukti PPh 23/PPN</td>
             </tr>
           </tbody>
-        </table>
+        </table></TableScroll>
       </div>
     </div>
   </section>

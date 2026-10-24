@@ -1,4 +1,5 @@
 ---
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import Layout from '../../layouts/Layout.astro';
 import data from '../../data/resources.json';
 
@@ -32,7 +33,7 @@ const tagsArray = resource.tags ? resource.tags.split(',').map((t: string) => t.
   canonical={canonical}
   pageCss={['/assets/css/page/resources-detail.css']}
 >
-  <section class="detail-hero">
+  <HeroSurface class="detail-hero">
     <div class="container">
       <div class="detail-hero-inner">
         <div>
@@ -78,7 +79,7 @@ const tagsArray = resource.tags ? resource.tags.split(',').map((t: string) => t.
         </div>
       </div>
     </div>
-  </section>
+  </HeroSurface>
 
   <section class="detail-content" style="padding: 48px 0 80px;">
     <div class="container">

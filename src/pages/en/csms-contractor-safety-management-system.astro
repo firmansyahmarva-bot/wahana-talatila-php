@@ -1,4 +1,6 @@
 ---
+import SurfaceCard from '../../components/shared/SurfaceCard.astro';
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import EnLayout from '../../layouts/EnLayout.astro';
 import EnSidebar from '../../components/EnSidebar.astro';
 
@@ -14,7 +16,7 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
   canonical={canonical}
   schemas={schemas}
 >
-<section class="en-hero">
+<HeroSurface class="en-hero">
   <div class="en-container">
     <div class="en-breadcrumb">
       <a href="/">Home</a> &rsaquo; <a href="/en/">English OHS Hub</a> &rsaquo; <span>CSMS Pre-Qualification</span>
@@ -51,12 +53,12 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
       </div>
     </div>
   </div>
-</section>
+</HeroSurface>
 
 <div class="en-container">
   <div class="en-body-grid">
     <main>
-      <section class="en-card">
+      <SurfaceCard as="section" class="en-card">
         <span class="en-sec-badge">Tender Pre-Condition</span>
         <h2 class="en-sec-title">What is CSMS in the Indonesian Context?</h2>
         <p class="en-text">
@@ -65,30 +67,30 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
         <p class="en-text">
           If your company does not achieve the required threshold score (typically <strong>70% for medium risk</strong> and <strong>80-85% for high-risk projects</strong>) during the initial CSMS Pre-Qualification phase, your technical and commercial bid packets are disqualified automatically.
         </p>
-      </section>
+      </SurfaceCard>
 
-      <section class="en-card">
+      <SurfaceCard as="section" class="en-card">
         <span class="en-sec-badge">Evaluation Elements</span>
         <h2 class="en-sec-title">The Core Pillars of Indonesian CSMS Audits</h2>
         <div class="en-law-grid">
-          <div class="en-law-card">
+          <SurfaceCard class="en-law-card">
             <strong>1. Leadership &amp; Commitment</strong>
             <p>Signed HSE policy by the Board of Directors, executive field safety walkthrough logs, and allocated safety budgets.</p>
-          </div>
-          <div class="en-law-card">
+          </SurfaceCard>
+          <SurfaceCard class="en-law-card">
             <strong>2. Risk Management (HIRADC)</strong>
             <p>Job Safety Analysis (JSA) registers, Hazard Identification Risk Assessment (IBPR), and Standard Operating Procedures (SOP).</p>
-          </div>
-          <div class="en-law-card">
+          </SurfaceCard>
+          <SurfaceCard class="en-law-card">
             <strong>3. Statutory Competency</strong>
             <p>Documented records of certified Indonesian <a href="/en/safety-officer-ak3-umum-requirements/">Ahli K3 Umum</a>, certified <a href="/en/heavy-equipment-operator-license-sio/">SIO equipment operators</a>, and medical check-ups.</p>
-          </div>
-          <div class="en-law-card">
+          </SurfaceCard>
+          <SurfaceCard class="en-law-card">
             <strong>4. Equipment Inspection</strong>
             <p>Valid statutory testing certificates (<a href="/en/statutory-equipment-inspection-sia/">SIA</a>) for all heavy equipment, cranes, welding sets, and scaffolding to be mobilized.</p>
-          </div>
+          </SurfaceCard>
         </div>
-      </section>
+      </SurfaceCard>
     </main>
 
     <EnSidebar currentSlug="csms-contractor-safety-management-system" />

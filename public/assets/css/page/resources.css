@@ -12,7 +12,7 @@
 .filter-bar-inner{display:flex;gap:10px;flex-wrap:nowrap;padding:0 20px;min-width:max-content}
 .filter-chip{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:100px;border:2px solid var(--slate-300);background:var(--surface);cursor:pointer;text-decoration:none;color:var(--slate-800);font-size:.9rem;white-space:nowrap;transition:.2s}
 .filter-chip:hover,.filter-chip.active{background:var(--brand);color:var(--surface);border-color:var(--brand)}
-.resource-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;padding:40px 0}
+.resource-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%, 280px), 1fr));gap:24px;padding:40px 0}
 .resource-card{background:var(--surface);border-radius:12px;border:1px solid var(--border);overflow:hidden;transition:.2s;box-shadow:0 2px 8px color-mix(in srgb, var(--black) 6%, transparent)}
 .resource-card:hover{box-shadow:0 8px 24px color-mix(in srgb, var(--black) 12%, transparent);transform:translateY(-2px)}
 .resource-card-top{background:linear-gradient(135deg,var(--brand),var(--brand-mid));padding:24px 20px;text-align:center;color:var(--surface)}

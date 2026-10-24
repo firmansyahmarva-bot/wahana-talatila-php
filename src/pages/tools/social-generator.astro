@@ -1,4 +1,5 @@
 ---
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import Layout from '../../layouts/Layout.astro';
 import Faq from '../../components/Faq.astro';
 import SectionTitle from '../../components/SectionTitle.astro';
@@ -69,11 +70,12 @@ const toolFaqs = [
   canonical={canonical}
   schemas={schemas}
   pageCss={['/assets/css/page/tools-social-generator.css']}
+  scripts={['/assets/js/tool-social-generator.js']}
 >
-<main class="gen-page" id="konten-utama">
+<div class="gen-page">
 
 <!-- HERO -->
-<section class="gen-hero">
+<HeroSurface class="gen-hero">
   <div class="container">
     <div class="hero-badge">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
@@ -88,7 +90,7 @@ const toolFaqs = [
       <span class="hero-tag">Export PNG HD 100% Gratis</span>
     </div>
   </div>
-</section>
+</HeroSurface>
 
 <!-- MAIN WORKSPACE -->
 <section class="gen-wrapper">
@@ -197,5 +199,5 @@ const toolFaqs = [
   </div>
 </section>
 
-</main>
+</div>
 </Layout>

@@ -1,0 +1,11 @@
+---
+interface Props { id?: string; tone?: 'default' | 'subtle'; }
+const {id,tone='default'}=Astro.props;
+---
+<section {id} class:list={['ui-content-section',`ui-content-section--${tone}`]}><div class="ui-container"><slot/></div></section>
+<style>
+.ui-content-section {padding-block:64px;background:var(--surface);}
+.ui-content-section--subtle {background:var(--surface-subtle);}
+.ui-content-section :global(.faq-grid) {max-width:860px;margin-inline:auto;}
+@media(max-width:640px) {.ui-content-section {padding-block:40px;}}
+</style>

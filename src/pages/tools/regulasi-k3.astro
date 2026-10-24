@@ -1,4 +1,5 @@
 ---
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import Layout from '../../layouts/Layout.astro';
 import Faq from '../../components/Faq.astro';
 import regulasiList from '../../../data/tools_regulasi.json';
@@ -75,11 +76,12 @@ const toolFaqs = [
   canonical={canonical}
   schemas={schemas}
   pageCss={['/assets/css/page/tools-regulasi-k3.css']}
+  scripts={['/assets/js/tool-regulasi-k3.js']}
 >
-<main class="reg-page" id="konten-utama">
+<div class="reg-page">
 
 <!-- HERO -->
-<section class="reg-hero">
+<HeroSurface class="reg-hero">
   <div class="container">
     <div class="hero-badge">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
@@ -94,7 +96,7 @@ const toolFaqs = [
       <span class="hero-tag">Sanksi Hukum &amp; Pidana Ketenagakerjaan</span>
     </div>
   </div>
-</section>
+</HeroSurface>
 
 <!-- MAIN REGULATION REPOSITORY -->
 <section class="reg-wrapper">
@@ -159,5 +161,5 @@ const toolFaqs = [
   </div>
 </section>
 
-</main>
+</div>
 </Layout>

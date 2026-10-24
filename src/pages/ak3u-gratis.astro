@@ -1,4 +1,5 @@
 ---
+import HeroSurface from '../components/shared/HeroSurface.astro';
 import Layout from '../layouts/Layout.astro';
 import Faq from '../components/Faq.astro';
 import { getUpcomingBatches, formatBatchRange } from '../lib/jadwal';
@@ -84,14 +85,14 @@ const schemas = [
   schemas={schemas}
   pageCss={['/assets/css/page/ak3u-gratis.css']}
 >
-  <section class="hero">
+  <HeroSurface class="hero">
     <div class="container inner">
       <div class="hero-badge">📚 Materi Gratis</div>
       <h1>Belajar K3 Gratis: Panduan &amp; Simulasi Soal AK3U</h1>
       <p class="hero-sub">Materi belajar K3 gratis sebagai bentuk komitmen kami terhadap peningkatan budaya keselamatan di Indonesia.</p>
       <div><a href={waUrl} class="btn-wa" target="_blank" rel="noopener">💬 Tanya Pelatihan Resmi</a></div>
     </div>
-  </section>
+  </HeroSurface>
 
   <section class="white">
     <div class="container">

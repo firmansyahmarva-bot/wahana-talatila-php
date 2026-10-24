@@ -1,4 +1,6 @@
 ---
+import TableScroll from '../components/shared/TableScroll.astro';
+import HeroSurface from '../components/shared/HeroSurface.astro';
 import Layout from '../layouts/Layout.astro';
 import SectionTitle from '../components/SectionTitle.astro';
 import Section from '../components/Section.astro';
@@ -172,7 +174,7 @@ const schemas = [
   schemas={schemas}
 >
   <!-- HERO -->
-  <section style="background:linear-gradient(135deg,var(--brand) 0%,var(--brand-mid) 50%,var(--brand-dark) 100%);color:var(--surface);padding:60px 20px 50px;">
+  <HeroSurface style="background:linear-gradient(135deg,var(--brand) 0%,var(--brand-mid) 50%,var(--brand-dark) 100%);color:var(--surface);padding:60px 20px 50px;">
     <div style="max-width:900px;margin:0 auto;">
       <nav aria-label="breadcrumb" style="font-size:0.85rem;opacity:0.8;margin-bottom:16px;">
         <a href="/" style="color:var(--warning-border);text-decoration:none;">Beranda</a> &rsaquo;
@@ -194,7 +196,7 @@ const schemas = [
         Minta Proposal Wisata Karyawan
       </a>
     </div>
-  </section>
+  </HeroSurface>
 
   <main style="max-width:960px;margin:0 auto;padding:40px 20px 60px;">
 
@@ -305,7 +307,7 @@ const schemas = [
         Wahana Totalita memahami kompleksitas pengadaan pemerintah dan telah membangun sistem yang memudahkan proses dari perencanaan hingga pelaporan. Kami bukan sekadar travel agent — kami adalah mitra pengadaan yang memahami aturan main APBN/APBD.
       </p>
       <div style="overflow-x:auto;">
-        <table style="width:100%;border-collapse:collapse;font-size:0.92rem;">
+        <TableScroll><table style="width:100%;border-collapse:collapse;font-size:0.92rem;">
           <thead>
             <tr style="background:var(--brand);color:var(--surface);">
               <th style="padding:12px 16px;text-align:left;">Kebutuhan Instansi</th>
@@ -320,7 +322,7 @@ const schemas = [
               </tr>
             ))}
           </tbody>
-        </table>
+        </table></TableScroll>
       </div>
     </Section>
 

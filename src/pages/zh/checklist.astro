@@ -1,4 +1,7 @@
 ---
+import TableScroll from '../../components/shared/TableScroll.astro';
+import SurfaceCard from '../../components/shared/SurfaceCard.astro';
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import ZhLayout from '../../layouts/ZhLayout.astro';
 
 const pageTitle = "在印尼中资企业安全生产(K3)合规自查排查清单 (Checklist) — Wahana Totalita";
@@ -85,7 +88,7 @@ const schemas = [
   schemas={schemas}
 >
 <!-- HERO -->
-<section class="zh-hero">
+<HeroSurface class="zh-hero">
   <div class="zh-container">
     <div class="zh-breadcrumb">
       <a href="/zh/">中文合规首页</a> &gt; <span>安全合规自查排查清单 (Checklist)</span>
@@ -100,16 +103,16 @@ const schemas = [
       <span>● 适用对象：冶炼厂、矿山、电厂、建筑工地、制造工厂</span>
     </div>
   </div>
-</section>
+</HeroSurface>
 
 <div class="zh-container">
   <div class="zh-body-grid">
     <main>
-      <article class="zh-card">
+      <SurfaceCard as="article" class="zh-card">
         <span class="zh-sec-badge">模块一：法定人员配置自查</span>
         <h2 class="zh-sec-title">1. 法定关键安全岗位与人员持证排查 (Personnel Audit)</h2>
         <div class="zh-table-wrap">
-          <table class="zh-table">
+          <TableScroll><table class="zh-table">
             <thead>
               <tr>
                 <th style="width:40px;">序号</th>
@@ -156,15 +159,15 @@ const schemas = [
                 <td><input type="checkbox"> 符合Permenaker 09/2016</td>
               </tr>
             </tbody>
-          </table>
+          </table></TableScroll>
         </div>
-      </article>
+      </SurfaceCard>
 
-      <article class="zh-card">
+      <SurfaceCard as="article" class="zh-card">
         <span class="zh-sec-badge">模块二：特种设备合法牌照</span>
         <h2 class="zh-sec-title">2. 机械设备与压力管道法定检验合格证排查 (Machinery SIA)</h2>
         <div class="zh-table-wrap">
-          <table class="zh-table">
+          <TableScroll><table class="zh-table">
             <thead>
               <tr>
                 <th style="width:40px;">序号</th>
@@ -211,15 +214,15 @@ const schemas = [
                 <td><input type="checkbox"> 有效期内</td>
               </tr>
             </tbody>
-          </table>
+          </table></TableScroll>
         </div>
-      </article>
+      </SurfaceCard>
 
-      <article class="zh-card">
+      <SurfaceCard as="article" class="zh-card">
         <span class="zh-sec-badge">模块三：机构组织与日常报备</span>
         <h2 class="zh-sec-title">3. 法定安全组织与行政批文排查 (Organization & Reporting)</h2>
         <div class="zh-table-wrap">
-          <table class="zh-table">
+          <TableScroll><table class="zh-table">
             <thead>
               <tr>
                 <th style="width:40px;">序号</th>
@@ -248,11 +251,11 @@ const schemas = [
                 <td><input type="checkbox"> 无脱保漏保</td>
               </tr>
             </tbody>
-          </table>
+          </table></TableScroll>
         </div>
-      </article>
+      </SurfaceCard>
 
-      <article class="zh-card" style="border-color:var(--success-border);background:var(--surface);">
+      <SurfaceCard as="article" class="zh-card" style="border-color:var(--success-border);background:var(--surface);">
         <span class="zh-sec-badge">快速闭环整改服务</span>
         <h2 class="zh-sec-title">自查发现有未勾选的合规盲区？华纳为您提供全链条补全服务</h2>
         <p class="zh-text">
@@ -266,7 +269,7 @@ const schemas = [
             <span>联系华纳专家获取定制整改方案 &rarr;</span>
           </a>
         </div>
-      </article>
+      </SurfaceCard>
     </main>    <!-- RIGHT: STICKY CONTACT SIDEBAR -->
     <aside class="zh-sticky-sidebar">
       <div class="zh-sb-box">

@@ -1,4 +1,7 @@
 ---
+import TableScroll from '../../components/shared/TableScroll.astro';
+import SurfaceCard from '../../components/shared/SurfaceCard.astro';
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import EnLayout from '../../layouts/EnLayout.astro';
 import EnSidebar from '../../components/EnSidebar.astro';
 
@@ -14,7 +17,7 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
   canonical={canonical}
   schemas={schemas}
 >
-<section class="en-hero">
+<HeroSurface class="en-hero">
   <div class="en-container">
     <div class="en-breadcrumb">
       <a href="/">Home</a> &rsaquo; <a href="/en/">English OHS Hub</a> &rsaquo; <span>Heavy Equipment Operator License (SIO)</span>
@@ -51,12 +54,12 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
       </div>
     </div>
   </div>
-</section>
+</HeroSurface>
 
 <div class="en-container">
   <div class="en-body-grid">
     <main>
-      <section class="en-card">
+      <SurfaceCard as="section" class="en-card">
         <span class="en-sec-badge">Statutory Mandate</span>
         <h2 class="en-sec-title">What is an SIO and Why is it Legally Required?</h2>
         <p class="en-text">
@@ -69,13 +72,13 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
             During routine Disnaker labor inspections or client HSE audits on EPC sites, an uncertified equipment operator triggers an immediate equipment impoundment notice (<em>Nota Pembekuan</em>). In the event of an incident involving an unlicensed operator, insurance claims are denied and project management faces direct criminal prosecution under Law No. 1/1970.
           </p>
         </div>
-      </section>
+      </SurfaceCard>
 
-      <section class="en-card">
+      <SurfaceCard as="section" class="en-card">
         <span class="en-sec-badge">Equipment Classifications</span>
         <h2 class="en-sec-title">Common SIO License Categories &amp; Classes</h2>
         <div class="en-table-wrap">
-          <table class="en-table">
+          <TableScroll><table class="en-table">
             <thead>
               <tr>
                 <th>Machinery Type</th>
@@ -131,17 +134,17 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
                 <td>SIO / Lisensi Kemnaker</td>
               </tr>
             </tbody>
-          </table>
+          </table></TableScroll>
         </div>
-      </section>
+      </SurfaceCard>
 
-      <section class="en-card">
+      <SurfaceCard as="section" class="en-card">
         <span class="en-sec-badge">Statutory Machinery Companion</span>
         <h2 class="en-sec-title">Remember: SIO (Operator) Requires SIA (Equipment)</h2>
         <p class="en-text">
           Holding a certified operator is only half of the legal requirement. The machinery itself must possess a valid, active <a href="/en/statutory-equipment-inspection-sia/">Surat Izin Alat (SIA / Riksa Uji Certificate)</a> issued within the last 12 months. An authorized operator driving an uncertified machine remains an active compliance violation.
         </p>
-      </section>
+      </SurfaceCard>
     </main>
 
     <EnSidebar currentSlug="heavy-equipment-operator-license-sio" />

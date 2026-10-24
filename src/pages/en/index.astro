@@ -1,4 +1,7 @@
 ---
+import TableScroll from '../../components/shared/TableScroll.astro';
+import SurfaceCard from '../../components/shared/SurfaceCard.astro';
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import EnLayout from '../../layouts/EnLayout.astro';
 import EnSidebar from '../../components/EnSidebar.astro';
 
@@ -15,7 +18,7 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Organizati
   schemas={schemas}
   isHome={true}
 >
-<section class="en-hero">
+<HeroSurface class="en-hero">
   <div class="en-container">
     <div class="en-breadcrumb">
       <a href="/">Home</a> &rsaquo; <span>English OHS Compliance Hub</span>
@@ -59,12 +62,12 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Organizati
       </div>
     </div>
   </div>
-</section>
+</HeroSurface>
 
 <div class="en-container">
   <div class="en-body-grid">
     <main>
-      <section class="en-card">
+      <SurfaceCard as="section" class="en-card">
         <span class="en-sec-badge">Executive Summary</span>
         <h2 class="en-sec-title">Navigating Indonesia's Statutory Safety Architecture</h2>
         <p class="en-text">
@@ -80,33 +83,33 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Organizati
             Under Indonesian labor law, an overseas safety certificate or foreign engineering license holds zero statutory validity for workplace operations. All safety managers, crane operators, pressure vessel inspectors, and fire wardens must hold credentials directly issued or endorsed by Kemnaker or BNSP.
           </p>
         </div>
-      </section>
+      </SurfaceCard>
 
-      <section class="en-card">
+      <SurfaceCard as="section" class="en-card">
         <span class="en-sec-badge">Core Pillars of Indonesian K3 Compliance</span>
         <h2 class="en-sec-title">The Four Mandatory Statutory Obligations</h2>
         
         <div class="en-law-grid">
-          <div class="en-law-card">
+          <SurfaceCard class="en-law-card">
             <strong>1. Governance &amp; P2K3 Committee</strong>
             <p>Every facility with 100+ personnel or classified as high-hazard must formally register a joint safety committee (<em>Panitia Pembina K3</em>) chaired by executive leadership and serviced by an Indonesian certified Ahli K3 Umum.</p>
-          </div>
-          <div class="en-law-card">
+          </SurfaceCard>
+          <SurfaceCard class="en-law-card">
             <strong>2. SMK3 National Audit</strong>
             <p>Mandatory under Government Regulation PP No. 50/2012. Foreign contractors bidding on government, mining, or state enterprise (BUMN) tenders require an official Kemnaker SMK3 Audit Certificate (Gold Flag rating).</p>
-          </div>
-          <div class="en-law-card">
+          </SurfaceCard>
+          <SurfaceCard class="en-law-card">
             <strong>3. Licensed Operators (SIO)</strong>
             <p>Every operator of forklifts, mobile cranes, tower cranes, boilers, excavators, and scaffolding must possess a Ministry of Manpower Operator License (<em>Surat Izin Operator - SIO</em>).</p>
-          </div>
-          <div class="en-law-card">
+          </SurfaceCard>
+          <SurfaceCard class="en-law-card">
             <strong>4. Equipment Inspection (SIA)</strong>
             <p>Prior to commissioning, all lifting equipment, pressure vessels, power generators, electrical installations, and fire systems must undergo third-party statutory testing (<em>Riksa Uji</em>) by an authorized PJK3 body.</p>
-          </div>
+          </SurfaceCard>
         </div>
-      </section>
+      </SurfaceCard>
 
-      <section class="en-card">
+      <SurfaceCard as="section" class="en-card">
         <span class="en-sec-badge">Directory of Statutory Guides</span>
         <h2 class="en-sec-title">Explore Detailed Regulatory &amp; Operational Guides</h2>
         <p class="en-text">
@@ -114,7 +117,7 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Organizati
         </p>
 
         <div class="en-table-wrap">
-          <table class="en-table">
+          <TableScroll><table class="en-table">
             <thead>
               <tr>
                 <th>Compliance Subject</th>
@@ -251,11 +254,11 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Organizati
                 <td><span class="en-tag-opt">Checklist</span></td>
               </tr>
             </tbody>
-          </table>
+          </table></TableScroll>
         </div>
-      </section>
+      </SurfaceCard>
 
-      <section class="en-card">
+      <SurfaceCard as="section" class="en-card">
         <span class="en-sec-badge">Frequently Asked Questions</span>
         <h2 class="en-sec-title">Common Regulatory Questions from Foreign Investors</h2>
 
@@ -288,7 +291,7 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Organizati
             Under Law No. 1/1970 and updated Ministry of Manpower Regulation No. 11/2026, labor inspectors have the legal authority to seal equipment on site, issue formal stop-work orders, and refer repeated non-compliance for criminal prosecution. Furthermore, in the event of an industrial accident, corporate insurance policies are voided if machinery lacks statutory SIA certification.
           </div>
         </div>
-      </section>
+      </SurfaceCard>
     </main>
 
     <EnSidebar currentSlug="" />

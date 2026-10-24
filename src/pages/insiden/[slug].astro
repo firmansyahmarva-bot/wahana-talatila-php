@@ -1,4 +1,5 @@
 ---
+import SurfaceCard from '../../components/shared/SurfaceCard.astro';
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
@@ -259,7 +260,7 @@ const schemas = [
       <!-- Sidebar -->
       <aside>
         <!-- WhatsApp Assistance Card -->
-        <div class="sidebar-card" style="background: linear-gradient(135deg, var(--brand), var(--brand-dark)); color: var(--surface); border: none; box-shadow: var(--shadow-md);">
+        <SurfaceCard class="sidebar-card" style="background: linear-gradient(135deg, var(--brand), var(--brand-dark)); color: var(--surface); border: none; box-shadow: var(--shadow-md);">
           <h3 style="color: var(--surface); margin-top: 0; font-size: 1.1rem; font-weight: 800;">
             🛡️ Pendampingan &amp; Audit K3
           </h3>
@@ -274,11 +275,11 @@ const schemas = [
           >
             💬 Hubungi Konsultan K3
           </a>
-        </div>
+        </SurfaceCard>
 
         <!-- Related Incidents -->
         {relatedIncidents.length > 0 && (
-          <div class="sidebar-card">
+          <SurfaceCard class="sidebar-card">
             <h3 style="margin-top: 0; font-size: 1.05rem; font-weight: 800; color: var(--brand); border-bottom: 2px solid var(--border); padding-bottom: 8px;">
               🔗 Kasus Insiden Terkait
             </h3>
@@ -308,11 +309,11 @@ const schemas = [
                 Lihat Semua 200+ Insiden →
               </a>
             </div>
-          </div>
+          </SurfaceCard>
         )}
 
         <!-- Quick Safety Programs Links -->
-        <div class="sidebar-card">
+        <SurfaceCard class="sidebar-card">
           <h3 style="margin-top: 0; font-size: 1.05rem; font-weight: 800; color: var(--brand); border-bottom: 2px solid var(--border); padding-bottom: 8px;">
             🎓 Sertifikasi Prioritas K3
           </h3>
@@ -343,7 +344,7 @@ const schemas = [
               </a>
             </li>
           </ul>
-        </div>
+        </SurfaceCard>
       </aside>
     </div>
   </div>

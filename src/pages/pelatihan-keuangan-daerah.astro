@@ -1,4 +1,6 @@
 ---
+import TableScroll from '../components/shared/TableScroll.astro';
+import HeroSurface from '../components/shared/HeroSurface.astro';
 import Layout from '../layouts/Layout.astro';
 import SectionTitle from '../components/SectionTitle.astro';
 import Section from '../components/Section.astro';
@@ -91,7 +93,7 @@ const schemas = [
   canonical={canonical}
   schemas={schemas}
 >
-  <section style="background:linear-gradient(135deg,var(--brand-mid) 0%,var(--brand) 60%,var(--brand-dark) 100%);color:var(--surface);padding:60px 20px 50px;">
+  <HeroSurface style="background:linear-gradient(135deg,var(--brand-mid) 0%,var(--brand) 60%,var(--brand-dark) 100%);color:var(--surface);padding:60px 20px 50px;">
     <div class="container" style="max-width:960px;">
       <nav aria-label="breadcrumb" style="font-size:0.85rem;opacity:0.8;margin-bottom:16px;">
         <a href="/" style="color: var(--surface);text-decoration:none;">Beranda</a> › 
@@ -117,7 +119,7 @@ const schemas = [
         Konsultasi Program via WhatsApp
       </a>
     </div>
-  </section>
+  </HeroSurface>
 
   <main class="container" style="max-width:960px;padding:48px 20px 64px;">
     <!-- REGULASI -->
@@ -179,7 +181,7 @@ const schemas = [
         Komponen Laporan Keuangan Pemerintah (SAP PP 71/2010)
       </SectionTitle>
       <div style="overflow-x:auto;">
-        <table style="width:100%;border-collapse:collapse;font-size:0.9rem;border:1px solid var(--border);">
+        <TableScroll><table style="width:100%;border-collapse:collapse;font-size:0.9rem;border:1px solid var(--border);">
           <thead>
             <tr style="background:var(--brand);color:var(--surface);">
               <th style="padding:12px 14px;text-align:left;color: var(--on-brand);">Komponen Laporan</th>
@@ -198,7 +200,7 @@ const schemas = [
               </tr>
             ))}
           </tbody>
-        </table>
+        </table></TableScroll>
       </div>
     </Section>
 

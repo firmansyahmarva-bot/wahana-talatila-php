@@ -54,7 +54,7 @@ body {
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-dark);
   margin-bottom: 20px;
 }
 .ak-hero-title {
@@ -87,7 +87,7 @@ body {
   align-items: center;
   gap: 10px;
   background: var(--whatsapp);
-  color: var(--brand) !important;
+  color: var(--on-brand) !important;
   font-weight: 800;
   font-size: 16px;
   padding: 14px 28px;

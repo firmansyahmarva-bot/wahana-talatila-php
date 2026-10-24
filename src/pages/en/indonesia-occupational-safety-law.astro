@@ -1,4 +1,7 @@
 ---
+import TableScroll from '../../components/shared/TableScroll.astro';
+import SurfaceCard from '../../components/shared/SurfaceCard.astro';
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import EnLayout from '../../layouts/EnLayout.astro';
 import EnSidebar from '../../components/EnSidebar.astro';
 
@@ -14,7 +17,7 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
   canonical={canonical}
   schemas={schemas}
 >
-<section class="en-hero">
+<HeroSurface class="en-hero">
   <div class="en-container">
     <div class="en-breadcrumb">
       <a href="/">Home</a> &rsaquo; <a href="/en/">English OHS Hub</a> &rsaquo; <span>Law No. 1/1970 Legal Guide</span>
@@ -51,12 +54,12 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
       </div>
     </div>
   </div>
-</section>
+</HeroSurface>
 
 <div class="en-container">
   <div class="en-body-grid">
     <main>
-      <section class="en-card">
+      <SurfaceCard as="section" class="en-card">
         <span class="en-sec-badge">Statutory Foundation</span>
         <h2 class="en-sec-title">The Legal Basis of Workplace Safety in Indonesia</h2>
         <p class="en-text">
@@ -72,33 +75,33 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
             In Indonesia, compliance is not merely an abstract corporate liability. Under Law No. 1/1970, the individual registered as the legal director or operational head of a plant carries direct legal responsibility for workplace safety violations, including potential criminal sanctions.
           </p>
         </div>
-      </section>
+      </SurfaceCard>
 
-      <section class="en-card">
+      <SurfaceCard as="section" class="en-card">
         <span class="en-sec-badge">Key Legal Articles</span>
         <h2 class="en-sec-title">Critical Provisions of Law No. 1/1970 Explained</h2>
 
         <div class="en-law-grid">
-          <div class="en-law-card">
+          <SurfaceCard class="en-law-card">
             <strong>Article 3 — Safety Requirements</strong>
             <p>Mandates comprehensive controls to prevent fires, explosions, structural collapse, occupational poisonings, and excessive exposure to noise, vibration, or hazardous radiation.</p>
-          </div>
-          <div class="en-law-card">
+          </SurfaceCard>
+          <SurfaceCard class="en-law-card">
             <strong>Article 8 — Medical Surveillance</strong>
             <p>Mandates pre-employment, annual periodic, and special medical examinations (MCU) for all workers, conducted by doctors certified in occupational medicine (Hyperkes).</p>
-          </div>
-          <div class="en-law-card">
+          </SurfaceCard>
+          <SurfaceCard class="en-law-card">
             <strong>Article 9 — Worker Induction</strong>
             <p>Requires employers to thoroughly train and brief every new employee, contractor, and transfer worker regarding hazards, personal protective equipment (PPE), and emergency protocols.</p>
-          </div>
-          <div class="en-law-card">
+          </SurfaceCard>
+          <SurfaceCard class="en-law-card">
             <strong>Article 10 — The P2K3 Mandate</strong>
             <p>Empowers the Minister of Manpower to mandate the formation of an Occupational Safety and Health Committee (<em>Panitia Pembina K3</em>) in high-risk or large workplaces.</p>
-          </div>
+          </SurfaceCard>
         </div>
-      </section>
+      </SurfaceCard>
 
-      <section class="en-card">
+      <SurfaceCard as="section" class="en-card">
         <span class="en-sec-badge">Regulatory Enforcement</span>
         <h2 class="en-sec-title">Labor Inspectors &amp; Permenaker No. 11/2026 Enforcement</h2>
         <p class="en-text">
@@ -110,16 +113,16 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
           <li><strong>Stop-Work Notices (Nota Pengawasan):</strong> Issuance of binding legal corrective notices. Failure to remediate within statutory timeframes leads to prosecution under Indonesian civil and labor courts.</li>
           <li><strong>Accident Seizure:</strong> In fatal incidents, labor inspectors coordinate with Indonesian National Police (POLRI) forensics, freezing project sites during investigation.</li>
         </ul>
-      </section>
+      </SurfaceCard>
 
-      <section class="en-card">
+      <SurfaceCard as="section" class="en-card">
         <span class="en-sec-badge">Strategic Roadmap</span>
         <h2 class="en-sec-title">How Foreign Companies Ensure Complete Compliance</h2>
         <p class="en-text">
           To maintain an unblemished compliance standing with the Indonesian Ministry of Manpower, international enterprises must execute a five-point compliance protocol:
         </p>
         <div class="en-table-wrap">
-          <table class="en-table">
+          <TableScroll><table class="en-table">
             <thead>
               <tr>
                 <th>Compliance Step</th>
@@ -154,11 +157,11 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
                 <td>Undergo certified <a href="/en/smk3-certification-guide/">SMK3 national audits</a></td>
               </tr>
             </tbody>
-          </table>
+          </table></TableScroll>
         </div>
-      </section>
+      </SurfaceCard>
 
-      <section class="en-card">
+      <SurfaceCard as="section" class="en-card">
         <span class="en-sec-badge">Frequently Asked Questions</span>
         <h2 class="en-sec-title">Legal Q&amp;A on Indonesian Safety Laws</h2>
 
@@ -181,7 +184,7 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
             Ignoring an official Nota Pengawasan from Disnaker triggers immediate escalation: revocation of company operational permits via OSS (Online Single Submission), severe administrative fines, police intervention, and personal travel/immigration scrutiny for foreign corporate executives.
           </div>
         </div>
-      </section>
+      </SurfaceCard>
     </main>
 
     <EnSidebar currentSlug="indonesia-occupational-safety-law" />

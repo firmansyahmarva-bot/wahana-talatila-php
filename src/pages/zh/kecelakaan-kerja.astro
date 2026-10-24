@@ -1,4 +1,7 @@
 ---
+import TableScroll from '../../components/shared/TableScroll.astro';
+import SurfaceCard from '../../components/shared/SurfaceCard.astro';
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import ZhLayout from '../../layouts/ZhLayout.astro';
 
 const pageTitle = "印尼工厂工伤事故法定处置与劳动监察调查应对指南 — Wahana Totalita";
@@ -107,7 +110,7 @@ const schemas = [
   schemas={schemas}
 >
 <!-- HERO -->
-<section class="zh-hero">
+<HeroSurface class="zh-hero">
   <div class="zh-container">
     <div class="zh-breadcrumb">
       <a href="/zh/">中文合规首页</a> &gt; <span>工伤事故官方处置与调查应对</span>
@@ -123,13 +126,13 @@ const schemas = [
       <span>● 社保理赔：BPJS Ketenagakerjaan JKK</span>
     </div>
   </div>
-</section>
+</HeroSurface>
 
 <!-- BODY GRID -->
 <div class="zh-container">
   <div class="zh-body-grid">
     <main>
-      <article class="zh-card">
+      <SurfaceCard as="article" class="zh-card">
         <span class="zh-sec-badge">核心法定红线</span>
         <h2 class="zh-sec-title">一、2×24 小时强制报案：切勿延误或隐瞒不报</h2>
         <p class="zh-text">
@@ -137,14 +140,14 @@ const schemas = [
         </p>
 
         <div class="zh-law-grid">
-          <div class="zh-law-card">
+          <SurfaceCard class="zh-law-card">
             <strong>第一阶段：48小时初次通报 (Tahap I)</strong>
             <p>填写并提交官方 Form 3 KK2 A，如实陈述事故发生时间、地点、受害人身份、初步伤害原因及送医救治医院。此表格是后续启动政府工伤定性与社保赔偿的法定前置凭证。</p>
-          </div>
-          <div class="zh-law-card">
+          </SurfaceCard>
+          <SurfaceCard class="zh-law-card">
             <strong>第二阶段：事故调查与结案报告 (Tahap II)</strong>
             <p>在医疗终结或事故发生后根据调查进展提交 Form 3 KK2 B，附上内部事故根本原因调查报告（RCA）、整改纠正措施（CAPA）及主治医生证明。</p>
-          </div>
+          </SurfaceCard>
         </div>
 
         <div class="zh-alert-box">
@@ -153,9 +156,9 @@ const schemas = [
             部分企业误以为通过巨额私了赔偿家属即可平息事件。在印尼，一旦重伤或亡人信息通过社交媒体、医院系统或工会泄露，劳动监察局与警方将联合立案。企业若存在“隐瞒未报（Menutup-nutupi）”行为，最高现场中方负责人将直接被追究妨碍执法与过失责任，甚至导致项目现场被拉设警戒线长期强制停工。
           </p>
         </div>
-      </article>
+      </SurfaceCard>
 
-      <article class="zh-card">
+      <SurfaceCard as="article" class="zh-card">
         <span class="zh-sec-badge">双重执法应对</span>
         <h2 class="zh-sec-title">二、印尼警方 (Polri) 与 劳动监察局 (Pengawas) 的调查管辖界限</h2>
         <p class="zh-text">
@@ -163,7 +166,7 @@ const schemas = [
         </p>
 
         <div class="zh-table-wrap">
-          <table class="zh-table">
+          <TableScroll><table class="zh-table">
             <thead>
               <tr>
                 <th>调查机构</th>
@@ -194,7 +197,7 @@ const schemas = [
                 <td>下发停工整顿令（Nota Pemeriksaan / Stop Work）、行政罚款、企业安全资质降级。</td>
               </tr>
             </tbody>
-          </table>
+          </table></TableScroll>
         </div>
 
         <div class="zh-tip-box">
@@ -203,9 +206,9 @@ const schemas = [
             如果事发设备具备合法有效的政府检验合格证（SIA），操作人员持有正规劳工部操作证（SIO），企业内部有 P2K3 安全培训打卡记录，警方便很难定性为“管理层重大疏忽刑事犯罪（Kelalaian Berat）”，案件可作为一般生产意外依法通过工伤保险结算与行政整改结案。
           </p>
         </div>
-      </article>
+      </SurfaceCard>
 
-      <article class="zh-card">
+      <SurfaceCard as="article" class="zh-card">
         <span class="zh-sec-badge">社保索赔流程</span>
         <h2 class="zh-sec-title">三、BPJS Ketenagakerjaan 工伤社保 (JKK) 理赔全流程</h2>
         <p class="zh-text">
@@ -216,9 +219,9 @@ const schemas = [
           <li><strong>暂时丧失劳动能力工资补偿 (STMB)：</strong> 事故发生后前 6 个月，BPJS 补偿 100% 原工资金额，后 6 个月补偿 75%，直至康复或被鉴定为永久残疾。</li>
           <li><strong>法定因公死亡赔偿金：</strong> 因公死亡由 BPJS 支付相当于 48 个月基本工资的抚恤赔偿，另加安葬费（Rp 10.000.000）及两名子女直至大学毕业的奖学金资助（最高累计可达 Rp 174.000.000）。</li>
         </ul>
-      </article>
+      </SurfaceCard>
 
-      <article class="zh-card">
+      <SurfaceCard as="article" class="zh-card">
         <span class="zh-sec-badge">高管常见疑问</span>
         <h2 class="zh-sec-title">四、关于工伤处理的高频实务问答</h2>
         
@@ -241,7 +244,7 @@ const schemas = [
             <p><strong>有连带管理责任。</strong> 印尼劳工法规定，业主/总承包商对其施工红线内的所有作业安全负有法定监督义务。若分包商未为员工缴纳 BPJS 社保或工人无特种作业证，劳工局将直接向总包单位问责。总包必须严格落实承包商安全管理系统（CSMS），在进场前强制查验分包商工人的 SIO 证件与社保参保记录。</p>
           </div>
         </div>
-      </article>
+      </SurfaceCard>
     </main>    <!-- RIGHT: STICKY CONTACT SIDEBAR -->
     <aside class="zh-sticky-sidebar">
       <div class="zh-sb-box">

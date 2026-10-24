@@ -1,4 +1,5 @@
 ---
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import Layout from '../../layouts/Layout.astro';
 import jobs from '../../data/jobs.json';
 
@@ -17,7 +18,7 @@ function formatPrice(amount: number) {
   canonical={canonical}
   pageCss={['/assets/css/page/lowongan.css']}
 >
-  <section class="job-hero">
+  <HeroSurface class="job-hero">
     <div class="container">
       <h1>💼 Lowongan Kerja K3 &amp; HSE</h1>
       <p style="opacity:.9;max-width:580px;margin:0 auto 20px;">Temukan peluang karir profesional di bidang Keselamatan, Kesehatan Kerja &amp; Lingkungan Hidup di Indonesia</p>
@@ -27,7 +28,7 @@ function formatPrice(amount: number) {
         <button type="button" id="jobSearchBtn">🔍 Cari</button>
       </div>
     </div>
-  </section>
+  </HeroSurface>
 
   <div class="filter-bar">
     <div class="container" style="display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap;">

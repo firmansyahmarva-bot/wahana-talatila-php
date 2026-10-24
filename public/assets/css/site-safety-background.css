@@ -31,7 +31,7 @@
     mask-image: linear-gradient(to right,
       var(--text) 0, transparent var(--safety-edge-width),
       transparent calc(100% - var(--safety-edge-width)), var(--text) 100%);
-    opacity: .76;
+    opacity: .25;
   }
 }
 @media print, (forced-colors: active) {

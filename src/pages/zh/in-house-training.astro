@@ -1,4 +1,7 @@
 ---
+import TableScroll from '../../components/shared/TableScroll.astro';
+import SurfaceCard from '../../components/shared/SurfaceCard.astro';
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import ZhLayout from '../../layouts/ZhLayout.astro';
 
 const pageTitle = "在印尼中资工业园驻厂培训与中印双语实操考证解决方案 — Wahana Totalita";
@@ -84,7 +87,7 @@ const schemas = [
   canonical={canonical}
   schemas={schemas}
 >
-<section class="zh-hero">
+<HeroSurface class="zh-hero">
   <div class="zh-container">
     <div class="zh-breadcrumb">
       <a href="/zh/">首页</a> &rsaquo; <a href="/zh/">印尼安全生产合规专栏</a> &rsaquo; <span>偏远工区驻厂培训与双语考证方案</span>
@@ -97,38 +100,38 @@ const schemas = [
       针对苏拉威西青山(IMIP)、德龙(VDNI)、北马鲁古纬达贝(IWIP)及加里曼丹矿山企业面临的“送外考证成本高、停产工时损失大、语言沟通存在障碍”等痛点，提供一站式驻厂合规服务。
     </p>
   </div>
-</section>
+</HeroSurface>
 
 <div class="zh-container">
   <div class="zh-body-grid">
     <main>
-      <article class="zh-card">
+      <SurfaceCard as="article" class="zh-card">
         <span class="zh-sec-badge">偏远工区痛点</span>
         <h2 class="zh-sec-title">一、偏远岛屿中资企业送外考证面临的“三大高成本难题”</h2>
         <p class="zh-text">
           在苏拉威西、马鲁古或加里曼丹的冶炼和采矿企业，通常需要数以百计的叉车司机、起重工、安全员及焊工持证。若采用传统的“送往爪哇大城市公共班”模式，企业面临巨大隐形消耗：
         </p>
         <div class="zh-law-grid">
-          <div class="zh-law-card">
+          <SurfaceCard class="zh-law-card">
             <strong>1. 差旅与住宿综合成本极高</strong>
             <p>单次往返雅加达或泗水的机票、船票及两周差旅住宿费用，往往远超考证本身的学费数倍。</p>
-          </div>
-          <div class="zh-law-card">
+          </SurfaceCard>
+          <SurfaceCard class="zh-law-card">
             <strong>2. 关键岗位离岗导致生产停摆</strong>
             <p>核心特种作业员工离岗两周，班组轮班断档，直接影响现场炉前或堆场转运节奏。</p>
-          </div>
-          <div class="zh-law-card">
+          </SurfaceCard>
+          <SurfaceCard class="zh-law-card">
             <strong>3. 实操与现场设备脱节</strong>
             <p>外部培训机构的设备往往与冶炼厂、矿山的重型工况存在巨大代差，考完回到现场仍需重新适应。</p>
-          </div>
+          </SurfaceCard>
         </div>
-      </article>
+      </SurfaceCard>
 
-      <article class="zh-card">
+      <SurfaceCard as="article" class="zh-card">
         <span class="zh-sec-badge">驻厂内训模式</span>
         <h2 class="zh-sec-title">二、华纳全能咨询 (Wahana Totalita) 驻厂内训的核心优势</h2>
         <div class="zh-table-wrap">
-          <table class="zh-table">
+          <TableScroll><table class="zh-table">
             <thead>
               <tr>
                 <th>对比维度</th>
@@ -163,11 +166,11 @@ const schemas = [
                 <td>个人收据多，企业财税入账冲账繁琐</td>
               </tr>
             </tbody>
-          </table>
+          </table></TableScroll>
         </div>
-      </article>
+      </SurfaceCard>
 
-      <article class="zh-card">
+      <SurfaceCard as="article" class="zh-card">
         <span class="zh-sec-badge">落地执行保障</span>
         <h2 class="zh-sec-title">三、驻厂内训项目的 5 步交付闭环</h2>
         <ol style="padding-left:20px;color:var(--slate-700);font-size:14.5px;line-height:1.9;">
@@ -177,7 +180,7 @@ const schemas = [
           <li><strong>实机实操演练与国家考试：</strong> 在车间现场现有设备上组织安全规范操作考核及笔试面试。</li>
           <li><strong>官方证书建档与下发：</strong> 考试合格人员录入劳工部全国系统，官方实体执照直邮厂区。</li>
         </ol>
-      </article>
+      </SurfaceCard>
     </main>
         <aside class="zh-sticky-sidebar">
       <div class="zh-sb-box">

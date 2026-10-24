@@ -1,4 +1,6 @@
 ---
+import SurfaceCard from '../../components/shared/SurfaceCard.astro';
+import HeroSurface from '../../components/shared/HeroSurface.astro';
 import EnLayout from '../../layouts/EnLayout.astro';
 import EnSidebar from '../../components/EnSidebar.astro';
 
@@ -14,7 +16,7 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
   canonical={canonical}
   schemas={schemas}
 >
-<section class="en-hero">
+<HeroSurface class="en-hero">
   <div class="en-container">
     <div class="en-breadcrumb">
       <a href="/">Home</a> &rsaquo; <a href="/en/">English OHS Hub</a> &rsaquo; <span>Industrial Hygiene Guide</span>
@@ -51,12 +53,12 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
       </div>
     </div>
   </div>
-</section>
+</HeroSurface>
 
 <div class="en-container">
   <div class="en-body-grid">
     <main>
-      <section class="en-card">
+      <SurfaceCard as="section" class="en-card">
         <span class="en-sec-badge">Statutory Exposure Limits</span>
         <h2 class="en-sec-title">The Five Workplace Factors Governed by Law</h2>
         <p class="en-text">
@@ -64,32 +66,32 @@ const schemas = [{"@context":"https://schema.org","@graph":[{"@type":"Breadcrumb
         </p>
 
         <div class="en-law-grid">
-          <div class="en-law-card">
+          <SurfaceCard class="en-law-card">
             <strong>1. Physical Factors</strong>
             <p>Maximum allowable workplace noise of <strong>85 dBA for an 8-hour workday</strong>, heat stress (ISBB / WBGT), whole-body and hand-arm vibration, and statutory lux illumination standards.</p>
-          </div>
-          <div class="en-law-card">
+          </SurfaceCard>
+          <SurfaceCard class="en-law-card">
             <strong>2. Chemical Factors</strong>
             <p>Airborne respirable dust, toxic solvent vapors, heavy metal particulates, and acid mist concentrations.</p>
-          </div>
-          <div class="en-law-card">
+          </SurfaceCard>
+          <SurfaceCard class="en-law-card">
             <strong>3. Biological Factors</strong>
             <p>Workplace sanitation, air microbial flora testing, legionella testing in HVAC cooling towers, and food hygiene standards.</p>
-          </div>
-          <div class="en-law-card">
+          </SurfaceCard>
+          <SurfaceCard class="en-law-card">
             <strong>4. Ergonomic Factors</strong>
             <p>Manual handling limits (REBA / RULA assessments), repetitive strain evaluation, and workstation biomechanics.</p>
-          </div>
+          </SurfaceCard>
         </div>
-      </section>
+      </SurfaceCard>
 
-      <section class="en-card">
+      <SurfaceCard as="section" class="en-card">
         <span class="en-sec-badge">Testing &amp; Reporting</span>
         <h2 class="en-sec-title">Statutory Environmental Measurement Requirements</h2>
         <p class="en-text">
           Every operating factory must engage an accredited testing laboratory or licensed PJK3 body to perform official measurements at least <strong>once every 12 months</strong>. The resulting Work Environment Testing Report (<em>Laporan Pengujian Lingkungan Kerja</em>) must be submitted to the local labor inspectorate and integrated into the <a href="/en/p2k3-safety-committee-requirements/">P2K3 quarterly filing</a>.
         </p>
-      </section>
+      </SurfaceCard>
     </main>
 
     <EnSidebar currentSlug="industrial-hygiene-officer-guide" />

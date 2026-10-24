@@ -1,0 +1,25 @@
+---
+import HeroSurface from './HeroSurface.astro';
+import Breadcrumb from '../Breadcrumb.astro';
+interface Props { title:string; description?:string; eyebrow?:string; items?:{name:string;href?:string}[]; }
+const {title,description,eyebrow,items}=Astro.props;
+---
+<HeroSurface as="div" class="site-hero directory-header">
+{items && <Breadcrumb variant="default" {items}/>}
+<header class="ui-container dir-heading">
+{eyebrow && <p class="ui-kicker">{eyebrow}</p>}
+<h1>{title}</h1>
+{description && <p class="dir-intro">{description}</p>}
+<slot name="description"/>
+{Astro.slots.has('default') && <div class="dir-header-actions"><slot/></div>}
+</header>
+</HeroSurface>
+<style>
+.site-hero {background:var(--brand);color:var(--on-brand);}
+.dir-heading {padding-block:48px;}
+h1 {margin:20px 0 24px;font-family:var(--font-heading);font-size:clamp(32px,4.4vw,60px);font-weight:800;line-height:1.13;letter-spacing:-.045em;overflow-wrap:break-word;}
+.dir-intro {max-width:960px;margin:0;font-size:17px;line-height:1.85;}
+.ui-kicker {margin:0;}
+.dir-header-actions {display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:29px;}
+@media(max-width:640px) {.dir-heading {padding-block:32px;} h1 {font-size:clamp(28px,7.8vw,36px);} .dir-intro {font-size:15px;} .dir-header-actions :global(.ui-action) {width:100%;}}
+</style>
