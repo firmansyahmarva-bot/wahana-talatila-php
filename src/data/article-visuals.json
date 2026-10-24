@@ -1181,5 +1181,12 @@
     "title": "Ilustrasi edukatif logo K3",
     "width": 1200,
     "height": 1200
+  },
+  "spaning-listrik": {
+    "src": "/images/articles/spaning-listrik/voltase-normal.png",
+    "alt": "Perbandingan hitungan −10% dan +5%: nominal 220 V menghasilkan 198–231 V; nominal 230 V menghasilkan 207–241,5 V. Cocokkan ketentuan pelayanan dan spesifikasi alat.",
+    "title": "Voltase normal: pahami angka nominalnya",
+    "width": 1200,
+    "height": 630
   }
 }
