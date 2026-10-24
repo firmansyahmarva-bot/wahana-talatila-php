@@ -1,40 +1,40 @@
 {
-    "id": 101,
-    "title": "Cara Menghitung LTIR dan TRIR: Statistik Kinerja Kecelakaan Kerja",
-    "slug": "cara-menghitung-ltir-trir-statistik-kecelakaan",
-    "meta_title": "Cara Menghitung LTIR & TRIR (Rumus + Contoh) | Wahana Totalita",
-    "meta_desc": "Panduan menghitung LTIR dan TRIR sebagai indikator kinerja K3: pengertian, rumus, contoh perhitungan, dan cara menggunakannya untuk evaluasi.",
-    "keywords": "ltir, trir, statistik kecelakaan kerja, rumus ltir, indikator k3, frequency rate",
-    "category": "K3",
-    "thumbnail": null,
-    "content": "<p>Mengelola K3 tanpa data ibarat berjalan tanpa arah. Indikator seperti LTIR dan TRIR membantu perusahaan mengukur kinerja keselamatan secara objektif, membandingkannya antarperiode, dan menetapkan target perbaikan. Artikel ini menjelaskan cara menghitungnya beserta contoh.</p><h2>Mengapa Statistik Kecelakaan Penting?</h2><p>Statistik kecelakaan memberi gambaran objektif tentang kinerja K3 perusahaan. Dengan indikator yang terukur, manajemen dapat mengevaluasi efektivitas program, membandingkan dengan standar industri, dan mengambil keputusan berbasis data.</p><h2>Apa Itu LTIR?</h2><p>LTIR (Lost Time Injury Rate) mengukur tingkat cedera yang menyebabkan pekerja kehilangan waktu kerja (tidak bisa bekerja pada hari berikutnya). LTIR fokus pada kecelakaan yang cukup serius hingga berdampak pada hari kerja.</p><p>Rumus umum: <strong>LTIR = (jumlah Lost Time Injury x 1.000.000) / total jam kerja</strong>. Beberapa organisasi menggunakan faktor 200.000 sebagai pengali, tergantung standar yang dipakai.</p><h2>Apa Itu TRIR?</h2><p>TRIR (Total Recordable Incident Rate) mencakup seluruh insiden yang tercatat (recordable), termasuk cedera ringan yang memerlukan perawatan medis, bukan hanya yang menghilangkan waktu kerja.</p><p>Rumus umum: <strong>TRIR = (jumlah insiden tercatat x 200.000) / total jam kerja</strong>. Angka 200.000 mewakili 100 pekerja yang bekerja 40 jam per minggu selama 50 minggu setahun.</p><h2>Contoh Perhitungan TRIR</h2><p>Misalkan dalam setahun terdapat 2 insiden tercatat dengan total jam kerja 400.000 jam. Maka TRIR = (2 x 200.000) / 400.000 = 1,0. Semakin kecil nilai TRIR, semakin baik kinerja K3 perusahaan.</p><h2>Contoh Perhitungan LTIR</h2><p>Jika dalam setahun ada 1 kasus lost time injury dengan total jam kerja 500.000 jam dan pengali 1.000.000, maka LTIR = (1 x 1.000.000) / 500.000 = 2,0. Angka ini dapat dibandingkan antarperiode untuk melihat tren.</p><h2>Cara Menggunakan Indikator Ini</h2><p>LTIR dan TRIR digunakan untuk memantau tren keselamatan, menetapkan target tahunan, membandingkan antar unit atau dengan industri sejenis, serta mengevaluasi efektivitas program K3. Penting mencatat data kecelakaan dan jam kerja secara akurat agar indikator valid.</p><h2>Kesimpulan</h2><p>LTIR dan TRIR adalah indikator penting untuk mengukur kinerja K3 secara objektif. Dengan memahami rumus dan cara menghitungnya, perusahaan dapat memantau keselamatan berbasis data dan terus melakukan perbaikan. Wahana Totalita juga menyediakan kalkulator K3 gratis untuk membantu perhitungan ini.</p><h2>Tingkatkan Kompetensi K3 Bersama Wahana Totalita</h2><p>Wahana Totalita Konsultan menyediakan pelatihan dan sertifikasi K3 dengan instruktur berpengalaman, kelas online via Zoom maupun tatap muka di Yogyakarta, pelatihan in-house, dan jadwal rutin setiap bulan. Konsultasi gratis via <a href=\"https://wa.me/6281235036420\">WhatsApp 0812-3503-6420</a> atau kunjungi <a href=\"/\">wahanatotalita.com</a> untuk info program dan biaya.</p>",
-    "faq_data": "[{\"q\":\"Apa beda LTIR dan TRIR?\",\"a\":\"LTIR hanya menghitung cedera yang menyebabkan kehilangan waktu kerja, sedangkan TRIR mencakup semua insiden tercatat.\"},{\"q\":\"Dari mana angka 200.000?\",\"a\":\"Faktor 200.000 mewakili 100 pekerja yang bekerja 40 jam\\/minggu selama 50 minggu setahun.\"},{\"q\":\"Apakah Wahana Totalita punya kalkulator K3?\",\"a\":\"Ya, tersedia kalkulator LTIR\\/TRIR gratis di menu Tools K3 di situs kami.\"},{\"q\":\"Semakin kecil atau besar nilai TRIR yang baik?\",\"a\":\"Semakin kecil nilai TRIR, semakin baik, karena berarti lebih sedikit insiden per jam kerja.\"},{\"q\":\"Apa yang dibutuhkan untuk menghitung indikator ini?\",\"a\":\"Data jumlah insiden (sesuai jenis) dan total jam kerja yang dicatat secara akurat.\"}]",
-    "author": "Wahana Totalita Konsultan",
-    "status": "published",
-    "published_at": "2026-06-25 13:50:17",
-    "view_count": 198,
-    "created_at": "2026-06-25 13:50:17",
-    "updated_at": "2026-10-13 10:25:47",
-    "faq_list": [
-        {
-            "q": "Apa beda LTIR dan TRIR?",
-            "a": "LTIR hanya menghitung cedera yang menyebabkan kehilangan waktu kerja, sedangkan TRIR mencakup semua insiden tercatat."
-        },
-        {
-            "q": "Dari mana angka 200.000?",
-            "a": "Faktor 200.000 mewakili 100 pekerja yang bekerja 40 jam/minggu selama 50 minggu setahun."
-        },
-        {
-            "q": "Apakah Wahana Totalita punya kalkulator K3?",
-            "a": "Ya, tersedia kalkulator LTIR/TRIR gratis di menu Tools K3 di situs kami."
-        },
-        {
-            "q": "Semakin kecil atau besar nilai TRIR yang baik?",
-            "a": "Semakin kecil nilai TRIR, semakin baik, karena berarti lebih sedikit insiden per jam kerja."
-        },
-        {
-            "q": "Apa yang dibutuhkan untuk menghitung indikator ini?",
-            "a": "Data jumlah insiden (sesuai jenis) dan total jam kerja yang dicatat secara akurat."
-        }
-    ]
+  "id": 101,
+  "title": "Cara Menghitung LTIR dan TRIR: Rumus dan Contoh",
+  "slug": "cara-menghitung-ltir-trir-statistik-kecelakaan",
+  "meta_title": "Rumus LTIR & TRIR Beserta Contoh | Wahana Totalita",
+  "meta_desc": "Hitung LTIR dan TRIR dengan basis 200.000 jam kerja. Pahami pembilang, contoh perhitungan, beda LTIFR dan kesalahan pelaporan umum.",
+  "keywords": "ltir, trir, statistik kecelakaan kerja, rumus ltir, indikator k3, frequency rate",
+  "category": "K3",
+  "thumbnail": null,
+  "content": "<p><strong>Dengan basis 200.000 jam kerja, LTIR = jumlah kasus kehilangan waktu kerja × 200.000 ÷ total jam kerja; TRIR = jumlah kasus recordable × 200.000 ÷ total jam kerja.</strong> Tetapkan definisi kasus, periode dan lingkup tenaga kerja sebelum menghitung agar hasil dapat dibandingkan.</p><h2>Apa perbedaan LTIR dan TRIR?</h2><p>LTIR berfokus pada kasus kehilangan waktu kerja menurut definisi yang digunakan organisasi atau kontrak. TRIR mencakup seluruh kasus recordable menurut sistem pencatatan yang dipilih. Kasus kehilangan waktu dapat menjadi bagian dari total recordable; jangan menjumlahkannya kembali tanpa memeriksa klasifikasi.</p><p>OSHA menjelaskan perhitungan incidence rate menggunakan pengali 200.000. Jika menggunakan definisi recordable OSHA, ikuti pula kriteria pencatatannya. Jangan menyamakan semua kejadian pertolongan pertama dengan kasus recordable atau menerapkan definisi itu seolah-olah merupakan seluruh kewajiban pelaporan Indonesia.</p><table><caption>Rumus dengan basis yang dinyatakan</caption><thead><tr><th scope=\"col\">Indikator</th><th scope=\"col\">Pembilang</th><th scope=\"col\">Rumus</th></tr></thead><tbody><tr><td>LTIR berbasis 200.000 jam</td><td>Jumlah kasus kehilangan waktu</td><td>Kasus LTI × 200.000 / jam kerja</td></tr><tr><td>TRIR berbasis 200.000 jam</td><td>Total kasus recordable</td><td>Kasus recordable × 200.000 / jam kerja</td></tr></tbody></table><h2>Contoh perhitungan LTIR dan TRIR</h2><p>Contoh ilustratif: dalam satu periode, perusahaan mencatat 500.000 jam kerja, 2 kasus LTI dan 5 kasus recordable. Lima kasus recordable sudah termasuk dua kasus LTI. Dengan basis 200.000, hasilnya sebagai berikut.</p><ul><li>LTIR = 2 × 200.000 / 500.000 = <strong>0,8</strong>.</li><li>TRIR = 5 × 200.000 / 500.000 = <strong>2,0</strong>.</li></ul><p>Angka tersebut merupakan frekuensi kasus per basis jam kerja, bukan persentase pekerja yang mengalami kecelakaan. Contoh ini bukan data kinerja perusahaan tertentu.</p><h2>Bedakan LTIR dengan LTIFR berbasis satu juta jam</h2><p>Sebagian kontrak memakai LTIFR dengan pengali 1.000.000. Untuk data yang sama, 2 × 1.000.000 / 500.000 = 4,0. Hasil itu tidak boleh dibandingkan langsung dengan LTIR 0,8 tanpa menyamakan basis.</p><p>Gunakan nama indikator, definisi pembilang dan pengali yang tertulis dalam kontrak atau standar pelaporan. Bila dashboard hanya menulis “frequency rate”, tambahkan penjelasan basis dan cakupan datanya.</p><h2>Checklist validasi sebelum laporan disampaikan</h2><p>Pastikan jumlah jam kerja berasal dari populasi yang sama dengan kasus yang dihitung. Jika memasukkan jam kontraktor, tetapkan pula bagaimana kasus kontraktor dihitung. Gunakan periode yang konsisten dan jelaskan koreksi data jika terdapat perubahan klasifikasi.</p><ul><li>Hitung kasus, bukan jumlah hari absen, untuk pembilang rumus frekuensi ini.</li><li>Jangan mencampur jam bulanan dengan kasus tahunan.</li><li>Jangan memakai pembagi nol; tandai data sebagai belum dapat dihitung.</li><li>Pertahankan angka mentah dan aturan pembulatan agar dapat diaudit.</li><li>Jelaskan definisi kasus dan basis pengali di dekat grafik.</li></ul><h2>Gunakan indikator untuk perbaikan</h2><p>Nilai nol tidak membuktikan seluruh risiko telah dikendalikan. Lengkapi dengan pemeriksaan pengendalian, penutupan tindakan dan pembelajaran dari near miss. Bandingkan tren secara hati-hati bila ukuran tenaga kerja atau aktivitas berubah.</p><p>Baca <a href=\"/artikel/metode-investigasi-kecelakaan-kerja/\">metode investigasi insiden</a> untuk menindaklanjuti penyebab dan <a href=\"/artikel/kewajiban-p2k3-di-perusahaan/\">peran P2K3</a> untuk menghubungkan data dengan program perbaikan.</p><h2>Langkah berikutnya</h2><p>Untuk menyesuaikan pembelajaran dengan kebutuhan kerja, lihat <a href=\"/pelatihan/pelatihan-ahli-k3-umum-sertifikasi-kemnaker-ri/\">pembinaan Ahli K3 Umum</a>. Periksa persyaratan peserta, kegiatan praktik, skema dan dokumen keluaran sebelum mendaftar. Ketersediaan program tidak menjamin kelulusan asesmen atau penerbitan kewenangan.</p><h2>Sumber dan rujukan</h2><p>Rujukan diperiksa untuk pembaruan editorial 25 Oktober 2026. <a href=\"https://www.osha.gov/itadata\" target=\"_blank\" rel=\"noopener noreferrer\">OSHA: Injury Tracking Application dan perhitungan incidence rate</a>.</p>",
+  "faq_data": "[{\"q\":\"Apakah LTIR merupakan persentase?\",\"a\":\"Tidak. Rumus ini menghasilkan frekuensi kasus pada basis jam kerja yang dinyatakan.\"},{\"q\":\"Apakah pengali selalu 200.000?\",\"a\":\"Tidak untuk semua metrik. Beberapa kontrak memakai frekuensi berbasis satu juta jam; nyatakan basis sebelum membandingkan.\"},{\"q\":\"Apakah jumlah hari hilang dipakai sebagai kasus LTI?\",\"a\":\"Tidak. Jumlah kasus dan hari hilang merupakan ukuran berbeda.\"}]",
+  "author": "Wahana Totalita Konsultan",
+  "status": "published",
+  "published_at": "2026-06-25 13:50:17",
+  "view_count": 198,
+  "created_at": "2026-06-25 13:50:17",
+  "updated_at": "2026-10-25",
+  "faq_list": [
+    {
+      "q": "Apakah LTIR merupakan persentase?",
+      "a": "Tidak. Rumus ini menghasilkan frekuensi kasus pada basis jam kerja yang dinyatakan."
+    },
+    {
+      "q": "Apakah pengali selalu 200.000?",
+      "a": "Tidak untuk semua metrik. Beberapa kontrak memakai frekuensi berbasis satu juta jam; nyatakan basis sebelum membandingkan."
+    },
+    {
+      "q": "Apakah jumlah hari hilang dipakai sebagai kasus LTI?",
+      "a": "Tidak. Jumlah kasus dan hari hilang merupakan ukuran berbeda."
+    }
+  ],
+  "related_article_slugs": [
+    "metode-investigasi-kecelakaan-kerja",
+    "kewajiban-p2k3-di-perusahaan",
+    "inspeksi-k3-rutin-checklist"
+  ],
+  "related_training_slugs": [
+    "pelatihan-ahli-k3-umum-sertifikasi-kemnaker-ri"
+  ]
 }
