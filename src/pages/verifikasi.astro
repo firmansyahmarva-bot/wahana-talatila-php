@@ -1,0 +1,71 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/shared/PageHero.astro';
+import ContentSection from '../components/shared/ContentSection.astro';
+import SurfaceCard from '../components/shared/SurfaceCard.astro';
+import SectionHeading from '../components/shared/SectionHeading.astro';
+import ActionLink from '../components/shared/ActionLink.astro';
+---
+
+<Layout
+  title="Verifikasi Sertifikat BNSP & Kemnaker RI | Wahana Totalita"
+  description="Cek sertifikat kompetensi BNSP serta sertifikat, lisensi, dan SKP K3 Kemnaker melalui portal resmi. Ikuti panduan verifikasi sertifikat di sini."
+  canonical="https://wahanatotalita.com/verifikasi/"
+>
+  <PageHero
+    title="Verifikasi Sertifikat BNSP & Kemnaker RI"
+    description="Pilih lembaga penerbit yang tercantum pada dokumen Anda, lalu lakukan pengecekan melalui portal resminya."
+    eyebrow="Panduan sertifikasi"
+    items={[{ name: 'Beranda', href: '/' }, { name: 'Verifikasi Sertifikat' }]}
+  />
+
+  <ContentSection>
+    <SectionHeading>
+      <h2>Pilih portal verifikasi sertifikat</h2>
+      <p>Siapkan sertifikat atau lisensi Anda. Tombol berikut membuka situs resmi lembaga penerbit di tab baru.</p>
+    </SectionHeading>
+    <div class="verification-portals">
+      <SurfaceCard as="article">
+        <h3>Sertifikat Kompetensi BNSP</h3>
+        <p>Untuk sertifikat kompetensi yang diterbitkan melalui Lembaga Sertifikasi Profesi (LSP) berlisensi BNSP.</p>
+        <ol class="verification-steps">
+          <li>Buka portal verifikasi sertifikat BNSP.</li>
+          <li>Masukkan nomor blangko atau nomor sertifikat sesuai dokumen Anda, lalu lakukan pencarian.</li>
+          <li>Cocokkan detail sertifikat dan status validitas yang ditampilkan dengan dokumen Anda.</li>
+        </ol>
+        <ActionLink href="https://bnsp.go.id/check-certification" label="Cek Sertifikat BNSP" external />
+      </SurfaceCard>
+      <SurfaceCard as="article">
+        <h3>Sertifikat &amp; Lisensi K3 Kemnaker RI</h3>
+        <p>Untuk pengecekan sertifikat, lisensi, SKP, atau kartu kewenangan K3 melalui layanan TemanK3 Kemnaker RI.</p>
+        <ol class="verification-steps">
+          <li>Buka portal pencarian dokumen TemanK3.</li>
+          <li>Pilih jenis dokumen: sertifikat/lisensi, SKP ahli, SKP auditor, atau SKP dokter.</li>
+          <li>Isi data yang diminta. Pencarian sertifikat/lisensi menggunakan nama peserta dan tanggal lahir.</li>
+          <li>Cocokkan data pada hasil pencarian dengan dokumen Anda.</li>
+        </ol>
+        <ActionLink href="https://temank3.kemnaker.go.id/page/subcariskp" label="Cek Dokumen Kemnaker" external />
+      </SurfaceCard>
+    </div>
+  </ContentSection>
+
+  <ContentSection tone="subtle">
+    <SectionHeading>
+      <h2>Data sertifikat belum ditemukan?</h2>
+      <p>Periksa kembali penulisan nomor, nama, tanggal lahir, dan pilihan jenis dokumen. Untuk BNSP, data diperbarui secara berkala; jika tetap tidak ditemukan, hubungi LSP penerbit sertifikat. Untuk dokumen Kemnaker, konfirmasikan kepada penyelenggara pelatihan atau layanan TemanK3.</p>
+      <p>Hasil pencarian yang kosong saja belum cukup untuk menyimpulkan keaslian dokumen. Wahana Totalita membantu mengarahkan pengecekan; hasil verifikasi berasal dari lembaga penerbit.</p>
+    </SectionHeading>
+    <div class="verification-help">
+      <ActionLink href="https://wa.me/6287759151278?text=Halo%20Wahana%20Totalita%2C%20saya%20membutuhkan%20panduan%20verifikasi%20sertifikat." label="Minta Panduan Verifikasi" icon="whatsapp" external />
+      <ActionLink href="/perpanjangan-skp/" label="Panduan Perpanjangan SKP & Lisensi" secondary />
+    </div>
+  </ContentSection>
+</Layout>
+
+<style>
+  .verification-portals {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;}
+  .verification-steps {margin:8px 0 28px;padding-left:24px;color:var(--text);line-height:1.8;}
+  .verification-steps li + li {margin-top:10px;}
+  .verification-help {display:flex;flex-wrap:wrap;justify-content:center;gap:16px;}
+  @media(max-width:768px) {.verification-portals {grid-template-columns:1fr;}}
+</style>
