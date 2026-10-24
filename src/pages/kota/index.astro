@@ -1,8 +1,11 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
+import DirectoryHeader from '../../components/directory/DirectoryHeader.astro';
+import DirectoryExplorer from '../../components/directory/DirectoryExplorer.astro';
+import DirectoryLinkCard from '../../components/directory/DirectoryLinkCard.astro';
+import ActionLink from '../../components/shared/ActionLink.astro';
 
-const allCities = await getCollection('cities');
+
 
 // Fallback / enhanced list of primary training hubs
 const primaryCities = [
@@ -62,79 +65,8 @@ const schemas = [
   },
 ];
 ---
-
-<Layout
-  title={metaTitle}
-  description={metaDesc}
-  canonical={canonical}
-  schemas={schemas}
-  pageCss={['/assets/css/page/kota.css']}
->
-  <section style="background: linear-gradient(135deg, var(--brand), var(--brand-dark)); color: var(--surface); padding: 64px 20px 54px; text-align: center;">
-    <div class="container" style="max-width: 800px;">
-      <span style="display: inline-block; background: rgba(255,255,255,0.15); padding: 4px 14px; border-radius: 100px; font-size: 0.85rem; font-weight: 700; margin-bottom: 16px;">
-        📍 Jangkauan Nasional
-      </span>
-      <h1 style="font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 800; margin-bottom: 14px; color: var(--surface);">
-        Direktori Pelatihan K3 Kota-Kota Industri Indonesia
-      </h1>
-      <p style="font-size: 1.05rem; opacity: 0.9; line-height: 1.6; margin: 0 auto 28px;">
-        Wahana Totalita menyelenggarakan Public Training tatap muka &amp; online blended learning serta In-House Training bersertifikasi Kemnaker RI dan BNSP di berbagai pusat pertumbuhan ekonomi nasional.
-      </p>
-      <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
-        <a href="/jadwal/" style="background: var(--surface); color: var(--brand); padding: 12px 24px; border-radius: 8px; font-weight: 700; text-decoration: none;">
-          📅 Lihat Jadwal Terdekat
-        </a>
-        <a href="https://wa.me/6287759151278?text=Halo%20Wahana%20Totalita,%20saya%20ingin%20tanya%20jadwal%20pelatihan%20K3%20di%20kota%20saya" target="_blank" rel="noopener" style="background: var(--whatsapp); color: var(--on-brand); padding: 12px 24px; border-radius: 8px; font-weight: 700; text-decoration: none;">
-          💬 Konsultasi Jadwal Kota via WA
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section class="container" style="padding: 48px 20px 64px;">
-    <div style="margin-bottom: 32px; text-align: center;">
-      <h2 style="font-size: 1.6rem; font-weight: 800; color: var(--brand); margin-bottom: 8px;">
-        Pilih Kota Pelatihan K3 Anda
-      </h2>
-      <p style="color: var(--slate-600); font-size: 0.95rem;">
-        Klik kota di bawah untuk melihat rincian silabus, sertifikasi wajib di kawasan tersebut, dan jadwal pelaksanaan terdekat:
-      </p>
-    </div>
-
-    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
-      {primaryCities.map((city) => (
-        <a
-          href={`/pelatihan-k3-${city.slug}/`}
-          style="display: block; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; box-shadow: var(--shadow-sm);"
-          class="city-link-card"
-        >
-          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
-            <span style="font-size: 1.4rem;">📍</span>
-            <span style="background: var(--surface-subtle); color: var(--brand); font-size: 0.72rem; font-weight: 700; padding: 3px 8px; border-radius: 6px; border: 1px solid var(--border);">
-              {city.province}
-            </span>
-          </div>
-          <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--slate-900); margin: 0 0 6px;">
-            Pelatihan K3 {city.name}
-          </h3>
-          <p style="font-size: 0.85rem; color: var(--slate-600); margin: 0 0 14px; line-height: 1.4;">
-            {city.tag}
-          </p>
-          <div style="font-size: 0.82rem; font-weight: 700; color: var(--brand); display: flex; align-items: center; gap: 4px;">
-            <span>Lihat Program &amp; Jadwal</span>
-            <span>&rarr;</span>
-          </div>
-        </a>
-      ))}
-    </div>
-  </section>
-
-  <style>
-    .city-link-card:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-md) !important;
-      border-color: var(--brand-mid) !important;
-    }
-  </style>
+<Layout title={metaTitle} description={metaDesc} {canonical} {schemas} bodyClass="directory-page" pageCss={['/assets/css/directory-experience.css']}>
+  <DirectoryHeader title="Direktori Pelatihan K3 Kota-Kota Industri Indonesia" description="Wahana Totalita menyelenggarakan Public Training tatap muka & online blended learning serta In-House Training bersertifikasi Kemnaker RI dan BNSP di berbagai pusat pertumbuhan ekonomi nasional." eyebrow="JANGKAUAN NASIONAL" items={[{name:'Beranda',href:'/'},{name:'Lokasi Pelatihan K3'}]}><ActionLink href="/jadwal/" label="Lihat Jadwal Terdekat" icon="calendar"/><ActionLink href="https://wa.me/6287759151278?text=Halo%20Wahana%20Totalita,%20saya%20ingin%20tanya%20jadwal%20pelatihan%20K3%20di%20kota%20saya" label="Konsultasi Jadwal Kota via WA" icon="whatsapp" external secondary/></DirectoryHeader>
+  <section class="ui-container dir-section-intro"><h2>Pilih Kota Pelatihan K3 Anda</h2><p>Klik kota di bawah untuk melihat rincian silabus, sertifikasi wajib di kawasan tersebut, dan jadwal pelaksanaan terdekat:</p></section>
+  <DirectoryExplorer label="Cari kota atau kawasan industri" modes={false} sort={false}>{primaryCities.map(city=><DirectoryLinkCard title={`Pelatihan K3 ${city.name}`} href={`/pelatihan-k3-${city.slug}/`} tag={city.province} description={city.tag}/>)}</DirectoryExplorer>
 </Layout>

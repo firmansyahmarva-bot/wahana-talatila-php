@@ -1,0 +1,6 @@
+---
+import Icon from '../home/HomeIcon.astro';
+interface Props {title:string;href:string;description?:string;tag?:string;secondaryHref?:string;secondaryLabel?:string;messageUrl?:string;}
+const {title,href,description,tag,secondaryHref,secondaryLabel='Lihat Program & Jadwal',messageUrl}=Astro.props;
+---
+<article class="dir-link-card" data-name={title} data-search={`${title} ${description||''} ${tag||''}`}><span class="dir-link-tag">{tag}</span><h3><a {href}>{title}</a></h3>{description&&<p>{description}</p>}<div class="dir-link-actions"><a href={secondaryHref||href}>{secondaryLabel}<Icon name="arrow" size={16}/></a>{messageUrl&&<a class="dir-link-register" href={messageUrl} target="_blank" rel="noopener noreferrer">Daftar<Icon name="whatsapp" size={16}/></a>}</div></article>

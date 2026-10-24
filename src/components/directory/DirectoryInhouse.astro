@@ -1,0 +1,7 @@
+---
+import ActionLink from '../shared/ActionLink.astro';
+import {waUrl} from '../../lib/images';
+interface Props {title?:string;description?:string;message?:string;}
+const {title='Butuh Jadwal Khusus untuk Perusahaan?',description='Kami menyediakan pelatihan In-House K3 & Sertifikasi BNSP/Kemnaker langsung di lokasi pabrik, site proyek, atau kantor Anda dengan jadwal fleksibel.',message='Halo Wahana Totalita, kami ingin mengajukan proposal In-House Training K3 untuk perusahaan kami'}=Astro.props;
+---
+<section class="dir-inhouse ui-container"><div><p class="ui-kicker">PELATIHAN UNTUK TIM ANDA</p><h2>{title}</h2><p>{description}</p></div><ActionLink href={waUrl(message)} label="Minta Penawaran In-House" icon="whatsapp" external/></section>

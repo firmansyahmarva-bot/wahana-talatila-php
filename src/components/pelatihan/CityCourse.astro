@@ -1,6 +1,8 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Breadcrumb from '../Breadcrumb.astro';
+import DirectoryContext from '../directory/DirectoryContext.astro';
+import {waUrl} from '../../lib/images';
 
 interface Props {
   data: any;
@@ -75,7 +77,8 @@ const cityPageCss = [
   '/assets/css/page/training-city-remake.css',
   '/assets/css/page/training-content.css',
   '/assets/css/page/training-schedule-feed.css',
-  '/assets/css/page/training-fixes.css',
+  '/assets/css/directory-experience.css',
+  '/assets/css/directory-city-program.css',
 ];
 
 const cityScripts = [
@@ -85,6 +88,7 @@ const cityScripts = [
 ---
 
 <Layout
+  contactUrl={waUrl(`Halo Wahana Totalita, saya ingin konsultasi ${cleanTitle}. Mohon informasi jadwal, biaya dan persyaratan.`)}
   title={pageTitle}
   description={pageDesc}
   canonical={canonicalUrl}
@@ -106,4 +110,5 @@ const cityScripts = [
     />
     <Fragment set:html={htmlContent} />
   </div>
+  <DirectoryContext {cityName} citySlug={cityName ? (['bantul','sleman'].includes(cityName.toLowerCase())?'yogyakarta':cityName.toLowerCase()) : undefined}/>
 </Layout>

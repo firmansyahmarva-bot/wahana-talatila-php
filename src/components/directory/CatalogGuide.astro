@@ -1,0 +1,226 @@
+---
+import Faq from '../Faq.astro';
+import WaButton from '../WaButton.astro';
+interface Props {groups:{cat:any;trainings:any[]}[];totalPrograms:number;totalCategories:number;catalogFaqs:{q:string;a:string}[];hubIcons:Record<string,string>;}
+const {groups,totalPrograms,totalCategories,catalogFaqs,hubIcons}=Astro.props;
+---
+<div class="dir-guide">
+  <!-- CATEGORY DIRECTORY SECTION -->
+  <section class="section-services">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">Direktori Kategori</p>
+        <h2 class="section-title">Kategori Program Pelatihan</h2>
+        <p class="pcat-dir-intro">Pilih kategori <a href="/pelatihan/k3/">pelatihan K3</a> untuk melihat silabus lengkap, jadwal batch, dan sertifikasi resmi Kemnaker RI &amp; BNSP.</p>
+      </div>
+      <div class="services-grid">
+        {groups.map((group) => (
+          <a
+            href={`/pelatihan/${group.cat.slug}/`}
+            class="service-card"
+          >
+            <div class="service-card-icon">{hubIcons[group.cat.slug] || group.cat.icon || '📄'}</div>
+            <div class="service-card-title">{group.cat.name}</div>
+            <div class="service-card-desc">Daftar lengkap program pelatihan dan sertifikasi {group.cat.name} ({group.trainings.length} program).</div>
+            <div class="service-card-arrow">→</div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <section class="stats-bar">
+    <div class="container stats-inner">
+      <div class="stat-item">
+        <span class="stat-number">{totalPrograms}</span>
+        <span class="stat-label">Program Aktif</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-number">{totalCategories}</span>
+        <span class="stat-label">Kategori Pelatihan</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-number dir-guide-local-1">Kemnaker &amp; BNSP</span>
+        <span class="stat-label">Sertifikasi Resmi</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-number dir-guide-local-1">Online &amp; Offline</span>
+        <span class="stat-label">Mode Pelatihan</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- JALUR SERTIFIKASI: KEMNAKER VS BNSP -->
+  <section class="pcat-compare-section">
+    <div class="container">
+      <div class="section-header dir-guide-local-2">
+        <p class="section-eyebrow">Panduan Jalur Sertifikasi</p>
+        <h2 class="section-title">Memilih Antara Kemnaker RI dan BNSP</h2>
+        <p class="pcat-dir-intro">Pahami perbedaan legalitas, kewajiban regulasi, dan peruntukan sertifikasi agar Anda memilih program yang tepat bagi karir maupun kepatuhan perusahaan.</p>
+      </div>
+      <div class="pcat-compare-grid">
+        <!-- Kemnaker Card -->
+        <div class="pcat-compare-card pcat-compare-kemnaker">
+          <span class="pcat-comp-tag tag-kemnaker">Kewajiban Regulasi &amp; Lisensi Legal</span>
+          <h3>Sertifikasi Kemnaker RI</h3>
+          <p>Diterbitkan langsung melalui Kementerian Ketenagakerjaan RI, menghasilkan Surat Keputusan Penunjukan (SKP) dan Lisensi K3 (SIO/Buku Kerja).</p>
+          <ul class="pcat-comp-points">
+            <li><span class="icon">✅</span> <span><strong>Wajib Regulasi:</strong> Payung hukum UU No. 1/1970 untuk pemenuhan syarat audit Pengawas Ketenagakerjaan.</span></li>
+            <li><span class="icon">✅</span> <span><strong>Output Lisensi:</strong> Mendapatkan SKP dan Kartu Kewenangan Ahli/Operator resmi pemerintah.</span></li>
+            <li><span class="icon">✅</span> <span><strong>Contoh Skema:</strong> Ahli K3 Umum Kemnaker, Operator Forklift (Kelas 1 &amp; 2), Damkar (Kelas D/C/B/A), Operator Boiler &amp; Crane.</span></li>
+          </ul>
+        </div>
+        <!-- BNSP Card -->
+        <div class="pcat-compare-card pcat-compare-bnsp">
+          <span class="pcat-comp-tag tag-bnsp">Standar Kompetensi Kerja (SKKNI)</span>
+          <h3>Sertifikasi BNSP (Badan Nasional Sertifikasi Profesi)</h3>
+          <p>Diterbitkan melalui Lembaga Sertifikasi Profesi (LSP) berlisensi BNSP mengacu pada standar unit kompetensi SKKNI nasional.</p>
+          <ul class="pcat-comp-points">
+            <li><span class="icon">✅</span> <span><strong>Pengakuan Kompetensi:</strong> Berlogo Garuda Emas, mengukur keterampilan terstandar industri nasional.</span></li>
+            <li><span class="icon">✅</span> <span><strong>Syarat Tender &amp; Proyek:</strong> Kerap menjadi syarat teknis dalam dokumen lelang BUMN, kontraktor EPC, dan migas.</span></li>
+            <li><span class="icon">✅</span> <span><strong>Contoh Skema:</strong> Pengawas K3 Migas, POP/POM Pertambangan, Penanggung Jawab Air Limbah (POPAL), Auditor SMK3 &amp; ISO.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 LANGKAH PROSES PENDAFTARAN -->
+  <section class="pcat-steps-section">
+    <div class="container">
+      <div class="section-header dir-guide-local-2">
+        <p class="section-eyebrow">Alur Sertifikasi</p>
+        <h2 class="section-title">4 Langkah Mudah Mengikuti Pelatihan</h2>
+        <p class="pcat-dir-intro">Proses pendaftaran cepat, transparan, dan dibimbing langsung oleh tim konsultan kami dari awal hingga sertifikat resmi terbit.</p>
+      </div>
+      <div class="pcat-steps-grid">
+        <div class="pcat-step-card">
+          <div class="pcat-step-num">1</div>
+          <h3>Pilih Program &amp; Jadwal</h3>
+          <p>Cari program di katalog ini, lalu hubungi kami via WhatsApp untuk mendapatkan silabus dan tanggal batch terdekat.</p>
+        </div>
+        <div class="pcat-step-card">
+          <div class="pcat-step-num">2</div>
+          <h3>Registrasi Dokumen</h3>
+          <p>Kirim kelengkapan berkas persyaratan peserta (KTP, ijazah terakhir, pas foto, atau surat penugasan kerja).</p>
+        </div>
+        <div class="pcat-step-card">
+          <div class="pcat-step-num">3</div>
+          <h3>Pembinaan &amp; Praktik</h3>
+          <p>Ikuti sesi pembinaan materi interaktif dan simulasi studi kasus dipandu praktisi industri (Online Zoom atau Tatap Muka).</p>
+        </div>
+        <div class="pcat-step-card">
+          <div class="pcat-step-num">4</div>
+          <h3>Asesmen &amp; Sertifikat</h3>
+          <p>Uji kompetensi resmi. Sertifikat kelulusan fisik dan digital resmi ber-SKP/barcode diterbitkan dan dikirim ke alamat Anda.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IN-HOUSE B2B BANNER -->
+  <div class="pcat-b2b-box container dir-guide-local-3">
+    <div class="pcat-b2b-inner">
+      <div>
+        <h2>🏢 Solusi Pelatihan In-House untuk Perusahaan &amp; Industri</h2>
+        <p>Ingin melatih tim dalam jumlah besar tanpa mengganggu operasional harian pabrik, tambang, atau proyek Anda? Wahana Totalita menyediakan program in-house training dengan fleksibilitas penuh di seluruh Indonesia.</p>
+        <ul class="pcat-b2b-features">
+          <li><span>✔</span> Instruktur praktisi senior dikirim langsung ke lokasi site/fasilitas perusahaan Anda.</li>
+          <li><span>✔</span> Jadwal dan durasi pelatihan fleksibel disesuaikan dengan shift operasional kerja tim.</li>
+          <li><span>✔</span> Kurikulum disesuaikan dengan studi kasus dan potensi bahaya riil di tempat kerja.</li>
+          <li><span>✔</span> Penawaran harga corporate khusus dan efisien untuk rombongan minimal 5–10 peserta.</li>
+        </ul>
+      </div>
+      <div class="pcat-b2b-actions">
+        <WaButton
+          message="Halo Wahana Totalita, kami dari perusahaan ingin meminta penawaran in-house training."
+          label="Konsultasi In-House via WhatsApp"
+          variant="primary"
+          size="md"
+          class="btn-b2b-wa"
+        />
+        <a class="dir-guide-local-4" href="/in-house-training/">
+          Lihat Portal &amp; Hub Regional In-House &rarr;
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRUST & QUALITY GUARANTEE (WHY US) -->
+  <div class="pcat-trust-section container dir-guide-local-5">
+    <div class="section-header dir-guide-local-6">
+      <p class="section-eyebrow">Standar Kualitas</p>
+      <h2 class="section-title">Keunggulan Pelatihan Wahana Totalita</h2>
+    </div>
+    <div class="pcat-trust-grid">
+      <div class="pcat-trust-item">
+        <div class="pcat-trust-icon">🏛️</div>
+        <div>
+          <h4>PJK3 Resmi Berlisensi</h4>
+          <p>Terdaftar resmi di Kemnaker RI dengan SKP Penunjukan sah dan berlisensi LSP terakreditasi BNSP.</p>
+        </div>
+      </div>
+      <div class="pcat-trust-item">
+        <div class="pcat-trust-icon">👨‍🏫</div>
+        <div>
+          <h4>Instruktur Praktisi Senior</h4>
+          <p>Materi diampu langsung oleh praktisi berpengalaman 10+ tahun di sektor migas, tambang, dan industri.</p>
+        </div>
+      </div>
+      <div class="pcat-trust-item">
+        <div class="pcat-trust-icon">🔍</div>
+        <div>
+          <h4>Sertifikat Resmi &amp; Terverifikasi</h4>
+          <p>Sertifikat resmi ber-SKP atau berlogo Garuda Emas, dapat divalidasi keasliannya di portal resmi.</p>
+        </div>
+      </div>
+      <div class="pcat-trust-item">
+        <div class="pcat-trust-icon">🤝</div>
+        <div>
+          <h4>Dipercaya 500+ Korporasi</h4>
+          <p>Telah melatih dan menyertifikasi ribuan profesional dari berbagai BUMN, multinasional, dan swasta.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ SECTION -->
+  <section class="section-faq">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">FAQ</p>
+        <h2 class="section-title">Pertanyaan Umum Seputar Pelatihan K3</h2>
+      </div>
+      <Faq items={catalogFaqs} variant="catalog" />
+    </div>
+  </section>
+
+  <!-- FINAL WA BLOCK -->
+  <section class="pcat-final-wa-section container dir-guide-local-3">
+    <div class="stripe-wa-card dir-guide-local-7">
+      <div class="stripe-wa-header dir-guide-local-8">
+        <div class="stripe-wa-status dir-guide-local-9">
+          <span class="stripe-wa-dot"></span>
+          <span>LAYANAN KONSULTASI RESMI PJK3</span>
+        </div>
+        <h3 class="stripe-wa-title dir-guide-local-10">Butuh Rekomendasi Program Pelatihan atau Jadwal Khusus?</h3>
+        <p class="stripe-wa-sub dir-guide-local-11">Tim konsultan Wahana Totalita siap membantu menganalisis kebutuhan regulasi K3 di tempat kerja Anda serta memberikan penawaran terbaik.</p>
+      </div>
+      <div class="stripe-wa-body dir-guide-local-12">
+        <WaButton
+          message="Halo Wahana Totalita, saya ingin konsultasi mengenai program pelatihan K3 yang tepat untuk instansi/perusahaan saya."
+          label="Hubungi Konsultan Kami via WhatsApp"
+          variant="primary"
+          size="lg"
+        />
+        <span class="dir-guide-local-13">Layanan konsultasi resmi · Respon cepat Senin–Sabtu 08.00–17.00 WIB</span>
+      </div>
+    </div>
+  </section>
+
+
+</div>

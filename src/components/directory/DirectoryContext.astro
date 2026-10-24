@@ -1,0 +1,6 @@
+---
+import Icon from '../home/HomeIcon.astro';
+interface Props {cityName?:string;citySlug?:string;}
+const {cityName,citySlug}=Astro.props;
+---
+<nav class="dir-context ui-container" aria-label="Lanjutkan pencarian pelatihan"><div><p class="ui-kicker">PILIH LANGKAH BERIKUTNYA</p><h2>Temukan program dan jadwal yang sesuai</h2></div><div>{cityName&&citySlug&&<a href={`/pelatihan-k3-${citySlug}/`}>Program di {cityName}<Icon name="arrow" size={17}/></a>}<a href="/pelatihan/">Bandingkan program &amp; silabus<Icon name="arrow" size={17}/></a><a href="/jadwal/">Pilih tanggal pelatihan<Icon name="calendar" size={17}/></a><a href="/artikel/">Panduan memilih kompetensi<Icon name="document" size={17}/></a></div></nav>

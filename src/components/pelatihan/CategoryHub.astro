@@ -1,7 +1,8 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import TrainingCard from '../TrainingCard.astro';
-import PageHeader from '../PageHeader.astro';
+import DirectoryHeader from '../directory/DirectoryHeader.astro';
+import DirectoryExplorer from '../directory/DirectoryExplorer.astro';
 import { getUpcomingBatches, formatBatchRange } from '../../lib/jadwal';
 import { waUrl } from '../../lib/images';
 
@@ -172,78 +173,18 @@ if (isK3Hub) {
   description={pageDesc}
   canonical={canonicalUrl}
   bodyClass="category-page"
-  pageCss={['/assets/css/page/pelatihan-kategori.css']}
+  pageCss={['/assets/css/page/pelatihan-kategori.css','/assets/css/directory-experience.css','/assets/css/directory-category-content.css']}
   schemas={schemas}
 >
   <div class="category-page-wrapper">
     <!-- HERO BANNER -->
-    <PageHeader
-      title={pageH1}
-      breadcrumb={{
-        variant: 'category',
-        items: [
-          { name: 'Beranda', href: '/' },
-          { name: 'Pelatihan', href: '/pelatihan/' },
-          { name: data.category.name },
-        ],
-      }}
-      sectionClass="cat-hero-banner"
-      innerClass="cat-hero-inner"
-      titleClass="cat-hero-title"
-      style={`--cat-accent: ${data.category.accent_color || 'var(--accent)'}`}
-    >
-      <Fragment slot="eyebrow">
-        {data.category.icon && <span class="cat-hero-icon">{data.category.icon}</span>}
-      </Fragment>
-          <p class="cat-hero-sub" slot="subtitle">
+    <DirectoryHeader title={pageH1} eyebrow="PROGRAM KOMPETENSI & SERTIFIKASI" items={[{name:'Beranda',href:'/'},{name:'Pelatihan',href:'/pelatihan/'},{name:catName}]}><p slot="description" class="dir-intro">
             {isK3Hub ? (
               <>Pusat pembinaan kompetensi keselamatan dan kesehatan kerja (K3) berlisensi resmi <strong>Kemnaker RI</strong> dan <strong>BNSP</strong>. Tersedia kelas Online via Zoom, Tatap Muka di Training Center, dan In-House Training perusahaan di seluruh Indonesia.</>
             ) : (
               <>{data.trainings.length} program pelatihan bersertifikasi resmi Kemnaker RI &amp; BNSP, siap tatap muka di Yogyakarta maupun in-house di lokasi perusahaan Anda di seluruh Indonesia.</>
             )}
-          </p>
-          <div class="cat-hero-badges">
-            <span class="cat-hero-badge">🏛️ PJK3 Resmi Kemnaker RI</span>
-            <span class="cat-hero-badge">🏆 Lisensi BNSP Berbasis SKKNI</span>
-            <span class="cat-hero-badge">💻 Online Zoom &amp; Tatap Muka</span>
-            <span class="cat-hero-badge">🏢 In-House Training Seluruh Indonesia</span>
-          </div>
-    </PageHeader>
-
-    <!-- VISIBLE SEARCH & QUICK FILTER BAR -->
-    <section class="k3hub-search-section">
-      <div class="container">
-        <div class="k3hub-search-card">
-          <div class="k3hub-search-input-wrap">
-            <svg class="k3hub-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
-            <input
-              type="search"
-              id="k3hub-search-input"
-              class="k3hub-search-input"
-              placeholder={`Cari nama pelatihan ${catName} (contoh: Ahli K3 Umum, Forklift, Damkar, P3K, Ketinggian)...`}
-              aria-label="Pencarian Program Pelatihan"
-            />
-          </div>
-
-          <div class="k3hub-pills-bar">
-            <span class="k3hub-pills-label">Filter Cepat:</span>
-            <div class="k3hub-pills-wrap">
-              <button type="button" class="k3hub-pill active" data-filter="all">Semua Program</button>
-              <button type="button" class="k3hub-pill" data-filter="ahli k3">Ahli K3 Umum</button>
-              <button type="button" class="k3hub-pill" data-filter="forklift">Operator &amp; SIO</button>
-              <button type="button" class="k3hub-pill" data-filter="kebakaran">K3 Kebakaran</button>
-              <button type="button" class="k3hub-pill" data-filter="ketinggian">Ketinggian / TKBT</button>
-              <button type="button" class="k3hub-pill" data-filter="p3k">Petugas P3K</button>
-              <button type="button" class="k3hub-pill" data-filter="auditor">Auditor SMK3</button>
-              <button type="button" class="k3hub-pill" data-filter="online">Online Zoom</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+          </p><a href={hubLink} class="ui-action ui-action-secondary">Pelajari Panduan Regulasi &amp; Hub {catName} →</a><a href={`/artikel/${catSlug}/`} class="ui-action ui-action-secondary">Artikel &amp; panduan {catName}</a></DirectoryHeader>
 
     <main class="cat-section">
       <div class="container">
@@ -251,54 +192,30 @@ if (isK3Hub) {
         <div class="cat-top-meta">
           <span class="cat-count-pill">Menampilkan <strong id="k3hub-count">{data.trainings.length}</strong> Program Pelatihan</span>
           {hubLink && (
-            <a href={hubLink} class="cat-hub-link" style="margin-left: auto; font-weight: 700; text-decoration: none; color: var(--accent);">
+            <a href={hubLink} class="cat-hub-link dir-cat-local-1">
               Pelajari Panduan Regulasi &amp; Hub {catName} &rarr;
             </a>
           )}
         </div>
 
         <!-- PROGRAM LIST HEADER -->
-        <div class="cat-section-header" style="margin-top:12px;margin-bottom:20px;">
-          <h2 class="cat-section-title" style="font-size:1.6rem;font-weight:800;color:var(--brand);margin:0 0 6px;">
+        <div class="cat-section-header dir-cat-local-2">
+          <h2 class="cat-section-title dir-cat-local-3">
             Katalog Program Pelatihan K3 &amp; Sertifikasi Resmi
           </h2>
-          <p style="color:var(--text-muted);font-size:14.5px;margin:0;">
+          <p class="dir-cat-local-4">
             Temukan program sertifikasi kompetensi K3 yang sesuai dengan kebutuhan kualifikasi personalia dan kepatuhan regulasi perusahaan Anda.
           </p>
         </div>
 
-        <!-- EMPTY STATE (WHEN FILTER RESULTS IN 0) -->
-        <div id="k3hub-empty" class="k3hub-empty-state" style="display:none;">
-          <p class="k3hub-empty-title">Program pelatihan tidak ditemukan.</p>
-          <p class="k3hub-empty-sub">Coba gunakan kata kunci lain atau konsultasikan langsung jadwal dan silabus program yang Anda cari kepada konsultan kami via WhatsApp.</p>
-          <a
-            href={waUrl('Halo Wahana Totalita, saya ingin konsultasi program pelatihan K3 yang belum saya temukan di katalog website.')}
-            target="_blank"
-            rel="noopener"
-            class="k3hub-btn-wa"
-          >
-            Tanya Jadwal &amp; Program via WhatsApp &rarr;
-          </a>
-        </div>
-
-        <!-- TRAINING CARDS GRID -->
-        <div class="training-grid" id="training-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; margin-top: 16px;">
-          {data.trainings.map((t: any) => (
-            <TrainingCard
-              training={t}
-              headingLevel="h3"
-              categoryName={data.category.name}
-              categoryIcon={data.category.icon || ''}
-            />
-          ))}
-        </div>
+        <DirectoryExplorer>{data.trainings.map((t:any)=><TrainingCard training={t} headingLevel="h3"/>)}</DirectoryExplorer>
 
         {/* -------------------------------------------------------------
             K3 AUTHORITY CONTENT SECTION (300-700 WORDS SEO HUB CONTENT)
         ------------------------------------------------------------- */}
         {isK3Hub && (
           <div class="k3hub-content-wrap">
-            
+
             <!-- SECTION 1: OVERVIEW & WHY CHOOSE WAHANA TOTALITA -->
             <section class="k3hub-block">
               <h2 class="k3hub-h2">Pusat Pelatihan K3 Resmi Kemnaker RI &amp; Sertifikasi Profesi BNSP</h2>
@@ -352,7 +269,7 @@ if (isK3Hub) {
               <div class="k3hub-block-header">
                 <div>
                   <h2 class="k3hub-h2">Jadwal Pelatihan K3 2026 &amp; Batch Pendaftaran Terdekat</h2>
-                  <p class="k3hub-text" style="margin-bottom:0;">
+                  <p class="k3hub-text dir-cat-local-5">
                     Pilih tanggal pelaksanaan yang paling fleksibel untuk agenda kerja Anda. Seluruh jadwal dijamin pasti jalan (<em>guaranteed running</em>).
                   </p>
                 </div>
@@ -448,7 +365,7 @@ if (isK3Hub) {
                   </a>
                 ))}
               </div>
-              <p class="k3hub-text-sm" style="margin-top:14px;color:var(--text-muted);">
+              <p class="k3hub-text-sm dir-cat-local-6">
                 Memerlukan pelatihan di kota lain seperti <strong>Pelatihan K3 Cikarang</strong>, Solo, Malang, Palembang, atau Pekanbaru? Kami siap menyelenggarakan in-house training langsung di perusahaan Anda.
               </p>
             </section>
@@ -496,20 +413,20 @@ if (isK3Hub) {
 
         <!-- ARTICLES SECTION -->
         {data.articles && data.articles.length > 0 && (
-          <div class="cat-articles-section" style="margin-top: 60px;">
-            <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 24px; color: var(--brand);">
+          <div class="cat-articles-section dir-cat-local-7">
+            <h2 class="dir-cat-local-8">
               Panduan &amp; Artikel Terkait {data.category.name}
             </h2>
-            <div class="article-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
+            <div class="article-grid dir-cat-local-9">
               {data.articles.map((art: any) => (
-                <article class="article-card" style="background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px;">
-                  <h3 style="font-size: 1.05rem; font-weight: 700; line-height: 1.4; margin-bottom: 8px;">
-                    <a href={`/artikel/${art.slug}/`} style="color: var(--brand); text-decoration: none;">{art.title}</a>
+                <article class="article-card dir-cat-local-10">
+                  <h3 class="dir-cat-local-11">
+                    <a href={`/artikel/${art.slug}/`} class="dir-cat-local-12">{art.title}</a>
                   </h3>
-                  <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 12px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                  <p class="dir-cat-local-13">
                     {art.meta_desc || art.title}
                   </p>
-                  <a href={`/artikel/${art.slug}/`} style="font-size: 0.875rem; font-weight: 700; color: var(--accent); text-decoration: none;">
+                  <a href={`/artikel/${art.slug}/`} class="dir-cat-local-14">
                     Baca Panduan Lengkap &rarr;
                   </a>
                 </article>
@@ -521,519 +438,3 @@ if (isK3Hub) {
     </main>
   </div>
 </Layout>
-
-<!-- CLIENT-SIDE SEARCH & REAL-TIME FILTER SCRIPT -->
-<script is:inline>
-  (function () {
-    var searchInput = document.getElementById('k3hub-search-input');
-    var pills = document.querySelectorAll('.k3hub-pill');
-    var cards = document.querySelectorAll('#training-grid .training-card');
-    var countEl = document.getElementById('k3hub-count');
-    var emptyBox = document.getElementById('k3hub-empty');
-    var activeFilter = 'all';
-
-    function applyFilter() {
-      var query = (searchInput ? searchInput.value : '').toLowerCase().trim();
-      var visibleCount = 0;
-
-      cards.forEach(function (card) {
-        var text = (card.textContent || '').toLowerCase();
-        var mode = (card.dataset.mode || '').toLowerCase();
-
-        var matchesQuery = !query || text.indexOf(query) !== -1;
-        var matchesPill = true;
-        if (activeFilter !== 'all') {
-          if (activeFilter === 'online') {
-            matchesPill = mode.indexOf('online') !== -1 || text.indexOf('online') !== -1;
-          } else {
-            matchesPill = text.indexOf(activeFilter) !== -1;
-          }
-        }
-
-        var isVisible = matchesQuery && matchesPill;
-        card.style.display = isVisible ? '' : 'none';
-        if (isVisible) visibleCount++;
-      });
-
-      if (countEl) countEl.textContent = String(visibleCount);
-      if (emptyBox) emptyBox.style.display = visibleCount === 0 ? 'block' : 'none';
-    }
-
-    if (searchInput) {
-      searchInput.addEventListener('input', applyFilter);
-      searchInput.addEventListener('search', applyFilter);
-    }
-
-    pills.forEach(function (pill) {
-      pill.addEventListener('click', function () {
-        pills.forEach(function (p) {
-          p.classList.remove('active');
-        });
-        this.classList.add('active');
-        activeFilter = (this.dataset.filter || 'all').toLowerCase();
-        applyFilter();
-      });
-    });
-  })();
-</script>
-
-<style>
-  /* Search & Filter Bar */
-  .k3hub-search-section {
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    padding: 20px 0;
-    position: relative;
-    z-index: 2;
-  }
-  .k3hub-search-card {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    max-width: 980px;
-    margin: 0 auto;
-  }
-  .k3hub-search-input-wrap {
-    position: relative;
-    width: 100%;
-  }
-  .k3hub-search-icon {
-    position: absolute;
-    left: 18px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--slate-400);
-    pointer-events: none;
-  }
-  .k3hub-search-input {
-    width: 100%;
-    height: 52px;
-    padding: 0 20px 0 52px;
-    background: var(--slate-50);
-    border: 2px solid var(--border);
-    border-radius: var(--radius-lg);
-    font-size: 15px;
-    color: var(--text);
-    outline: none;
-    transition: all 0.2s ease;
-    box-sizing: border-box;
-  }
-  .k3hub-search-input:focus {
-    border-color: var(--brand);
-    background: var(--surface);
-    box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand) 12%, transparent);
-  }
-  .k3hub-pills-bar {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-  .k3hub-pills-label {
-    font-size: 12.5px;
-    font-weight: 700;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-  .k3hub-pills-wrap {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-  .k3hub-pill {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    color: var(--slate-700);
-    font-size: 13px;
-    font-weight: 600;
-    padding: 6px 14px;
-    border-radius: var(--radius-full);
-    cursor: pointer;
-    transition: all 0.15s ease;
-  }
-  .k3hub-pill:hover {
-    border-color: var(--brand);
-    color: var(--brand);
-  }
-  .k3hub-pill.active {
-    background: var(--brand);
-    border-color: var(--brand);
-    color: var(--on-brand);
-  }
-
-  /* Empty state */
-  .k3hub-empty-state {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 40px 24px;
-    text-align: center;
-    margin: 24px 0;
-  }
-  .k3hub-empty-title {
-    font-size: 18px;
-    font-weight: 800;
-    color: var(--brand);
-    margin-bottom: 8px;
-  }
-  .k3hub-empty-sub {
-    font-size: 14.5px;
-    color: var(--text-muted);
-    max-width: 580px;
-    margin: 0 auto 20px;
-    line-height: 1.6;
-  }
-  .k3hub-btn-wa {
-    display: inline-block;
-    background: var(--whatsapp);
-    color: var(--brand-dark);
-    font-weight: 800;
-    padding: 10px 22px;
-    border-radius: var(--radius);
-    text-decoration: none;
-    font-size: 14px;
-  }
-
-  /* Authority Content Sections */
-  .k3hub-content-wrap {
-    margin-top: 64px;
-    display: flex;
-    flex-direction: column;
-    gap: 48px;
-  }
-  .k3hub-block {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 32px 36px;
-    box-shadow: var(--shadow-sm);
-  }
-  .k3hub-block-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    flex-wrap: wrap;
-    gap: 16px;
-    margin-bottom: 24px;
-  }
-  .k3hub-h2 {
-    font-family: var(--font-heading);
-    font-size: clamp(1.35rem, 2.5vw, 1.7rem);
-    font-weight: 800;
-    color: var(--brand);
-    margin: 0 0 14px;
-    line-height: 1.3;
-  }
-  .k3hub-h3 {
-    font-family: var(--font-heading);
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: var(--brand);
-    margin: 0 0 10px;
-    line-height: 1.35;
-  }
-  .k3hub-text {
-    font-size: 15px;
-    line-height: 1.75;
-    color: var(--slate-700);
-    margin: 0 0 14px;
-  }
-  .k3hub-text-sm {
-    font-size: 14px;
-    line-height: 1.7;
-    color: var(--slate-600);
-    margin: 0 0 12px;
-  }
-  .k3hub-list {
-    margin: 0;
-    padding-left: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    font-size: 14.5px;
-    line-height: 1.65;
-    color: var(--slate-700);
-  }
-  .k3hub-link {
-    color: var(--accent);
-    text-decoration: none;
-    font-weight: 600;
-  }
-  .k3hub-link:hover {
-    text-decoration: underline;
-  }
-  .k3hub-link-btn {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--brand);
-    text-decoration: none;
-  }
-  .k3hub-link-btn:hover {
-    text-decoration: underline;
-  }
-
-  /* Dual cards */
-  .k3hub-dual-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 28px;
-    margin-top: 18px;
-  }
-  .k3hub-dual-card {
-    background: var(--slate-50);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 24px;
-  }
-
-  /* Batches Grid */
-  .k3hub-batches-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 16px;
-    margin-top: 20px;
-  }
-  .k3hub-batch-card {
-    background: var(--slate-50);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 18px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  .k3hub-batch-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
-  }
-  .k3hub-batch-mode {
-    font-size: 10px;
-    font-weight: 800;
-    background: var(--brand);
-    color: var(--on-brand);
-    padding: 2px 8px;
-    border-radius: var(--radius-full);
-  }
-  .k3hub-batch-cert {
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--accent);
-  }
-  .k3hub-batch-name {
-    font-size: 14.5px;
-    font-weight: 700;
-    color: var(--brand);
-    margin: 0 0 8px;
-    line-height: 1.35;
-  }
-  .k3hub-batch-date {
-    font-size: 13.5px;
-    font-weight: 700;
-    color: var(--slate-800);
-    margin-bottom: 4px;
-  }
-  .k3hub-batch-venue {
-    font-size: 12px;
-    color: var(--slate-600);
-    margin-bottom: 14px;
-  }
-  .k3hub-batch-cta {
-    display: block;
-    background: var(--brand);
-    color: var(--on-brand);
-    text-align: center;
-    padding: 8px 12px;
-    border-radius: var(--radius-sm);
-    font-size: 12.5px;
-    font-weight: 700;
-    text-decoration: none;
-    transition: opacity 0.2s;
-  }
-  .k3hub-batch-cta:hover {
-    opacity: 0.9;
-  }
-
-  /* Requirement Cards */
-  .k3hub-req-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 18px;
-    margin-top: 16px;
-  }
-  .k3hub-req-card {
-    background: var(--slate-50);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px;
-  }
-  .k3hub-req-title {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--brand);
-    margin: 0 0 8px;
-  }
-  .k3hub-req-desc {
-    font-size: 13.5px;
-    line-height: 1.6;
-    color: var(--slate-700);
-    margin: 0;
-  }
-
-  /* Cities Grid */
-  .k3hub-cities-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 14px;
-    margin-top: 18px;
-  }
-  .k3hub-city-card {
-    background: var(--slate-50);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 16px;
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: transform 0.15s ease, border-color 0.15s ease;
-  }
-  .k3hub-city-card:hover {
-    transform: translateY(-2px);
-    border-color: var(--brand);
-    background: var(--surface);
-  }
-  .k3hub-city-name {
-    font-size: 14.5px;
-    font-weight: 700;
-    color: var(--brand);
-    display: block;
-    margin-bottom: 4px;
-  }
-  .k3hub-city-note {
-    font-size: 12px;
-    color: var(--slate-600);
-    line-height: 1.45;
-    margin-bottom: 10px;
-    display: block;
-  }
-  .k3hub-city-link {
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--accent);
-    display: inline-block;
-  }
-
-  /* FAQs */
-  .k3hub-faq-list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    margin-top: 18px;
-  }
-  .k3hub-faq-item {
-    background: var(--slate-50);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px 24px;
-  }
-  .k3hub-faq-q {
-    font-family: var(--font-heading);
-    font-size: 15.5px;
-    font-weight: 700;
-    color: var(--brand);
-    margin: 0 0 10px;
-    line-height: 1.4;
-  }
-  .k3hub-faq-num {
-    color: var(--accent);
-  }
-  .k3hub-faq-a {
-    font-size: 14px;
-    line-height: 1.7;
-    color: var(--slate-700);
-    margin: 0;
-  }
-
-  /* Bottom CTA */
-  .k3hub-cta-banner {
-    background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand) 100%);
-    border-radius: var(--radius-lg);
-    padding: 44px 32px;
-    color: var(--surface);
-    text-align: center;
-    box-shadow: var(--shadow-md);
-  }
-  .k3hub-cta-inner {
-    max-width: 680px;
-    margin: 0 auto;
-  }
-  .k3hub-cta-title {
-    font-family: var(--font-heading);
-    font-size: clamp(1.4rem, 2.8vw, 1.9rem);
-    font-weight: 800;
-    color: var(--surface);
-    margin: 0 0 12px;
-    line-height: 1.25;
-  }
-  .k3hub-cta-sub {
-    font-size: 15px;
-    color: var(--slate-200);
-    line-height: 1.65;
-    margin: 0 0 24px;
-  }
-  .k3hub-cta-actions {
-    display: flex;
-    justify-content: center;
-    gap: 14px;
-    flex-wrap: wrap;
-  }
-  .k3hub-cta-btn-primary {
-    display: inline-flex;
-    align-items: center;
-    background: var(--whatsapp);
-    color: var(--brand-dark);
-    font-weight: 800;
-    font-size: 14.5px;
-    padding: 12px 26px;
-    border-radius: var(--radius-full);
-    text-decoration: none;
-    transition: transform 0.15s ease;
-  }
-  .k3hub-cta-btn-primary:hover {
-    transform: translateY(-2px);
-  }
-  .k3hub-cta-btn-secondary {
-    display: inline-flex;
-    align-items: center;
-    background: color-mix(in srgb, var(--surface) 15%, transparent);
-    color: var(--surface);
-    border: 1px solid color-mix(in srgb, var(--surface) 25%, transparent);
-    font-weight: 700;
-    font-size: 14.5px;
-    padding: 12px 24px;
-    border-radius: var(--radius-full);
-    text-decoration: none;
-    transition: background 0.15s ease;
-  }
-  .k3hub-cta-btn-secondary:hover {
-    background: color-mix(in srgb, var(--surface) 25%, transparent);
-  }
-
-  /* Responsive Adjustments */
-  @media (max-width: 768px) {
-    .k3hub-block {
-      padding: 24px 20px;
-    }
-    .k3hub-dual-grid {
-      grid-template-columns: 1fr;
-      gap: 18px;
-    }
-    .k3hub-pills-bar {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  }
-</style>

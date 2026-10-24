@@ -1,0 +1,30 @@
+/* Shared typography and layout for all existing city-course content exports. */
+body.city-program-body { font-family: 'Inter',sans-serif; color: var(--text); }
+.city-program-page { --n: var(--slate-900); --i: var(--text); --m: var(--text-muted); --o: var(--lead-action); }
+.city-program-page .w { width: min(1240px,calc(100% - 64px)); }
+body .city-program-page .bcr-bar { margin-top: 0; background: var(--surface); }
+body .city-program-page .bcr-inner { width: min(1240px,calc(100% - 64px)); max-width: none; padding-inline: 0; }
+.city-program-page .hero { background: var(--surface); color: var(--text); padding-block: 45px; border-bottom: 1px solid var(--border); }
+.city-program-page .hg { gap: 55px; }
+.city-program-page .hero h1 { color: var(--text); font-family: 'Plus Jakarta Sans',sans-serif; font-size: clamp(31px,3.5vw,47px); line-height: 1.2; letter-spacing: -.045em; margin-block: 20px; }
+.city-program-page .hero h1 span { color: var(--text); }
+.city-program-page .hero .lead { color: var(--text-muted); font-size: 16px; line-height: 1.9; }
+.city-program-page .hero .tag { background: var(--surface-subtle); border: 1px solid var(--border); color: var(--lead-action); border-radius: 5px; font-size: 10px; }
+.city-program-page .hero img { height: auto; aspect-ratio: 4 / 3; object-fit: cover; border: 1px solid var(--border); border-radius: 12px; box-shadow: none; }
+.city-program-page .hero .primary { background: var(--lead-action); color: var(--on-brand); box-shadow: none; border: 1px solid var(--lead-action); }
+.city-program-page .hero .ghost { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
+.city-program-page .btn { min-height: 46px; border-radius: 8px; font-size: 13px; font-weight: 650; }
+.city-program-page .sec { padding-block: 50px; }
+.city-program-page :is(.head h2,.copy h2,.tc-page-content h2) { font-family: 'Plus Jakarta Sans',sans-serif; color: var(--text); font-size: clamp(26px,3vw,34px); line-height: 1.4; letter-spacing: -.035em; }
+.city-program-page :is(.copy p,.tc-page-content p) { font-size: 16px; line-height: 1.9; color: var(--text-muted); }
+.city-program-page :is(.card,.city-live-card,.tc-content-box) { border-radius: 10px; box-shadow: none; padding: 23px; }
+.city-program-page .city-live-card:first-child { border: 1px solid var(--lead-action); }
+.city-program-page .city-live-link { background: var(--lead-action); color: var(--on-brand); min-height: 44px; }
+.city-program-page .tc-page-content { padding-block: 45px; }
+.city-program-page .cta { border-radius: 12px; background: var(--slate-900); box-shadow: none; }
+.city-program-page :is(a,summary):focus-visible { outline: 3px solid var(--lead-action); outline-offset: 3px; }
+@media(max-width:768px){.city-program-page .w,body .city-program-page .bcr-inner{width:calc(100% - 36px)}.city-program-page .hg{grid-template-columns:1fr;gap:30px}.city-program-page .hero{padding-block:30px}.city-program-page .hero img{max-height:340px}.city-program-page .head{display:block}.city-program-page .sec{padding-block:35px}.city-program-page .actions .btn{flex:1}.city-program-page .stats{grid-template-columns:repeat(2,minmax(0,1fr))}.city-program-page .sched,.city-program-page .grid4{grid-template-columns:1fr}.city-program-page .cta{width:calc(100% - 36px)}}
+@media(prefers-reduced-motion:reduce){.city-program-page *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+body .city-program-page .hero { min-height: 0; height: auto; display: block; }
+.city-program-page .hero .hg { margin-block: 0; }
+.city-program-page .faq details { box-shadow: none; border-radius: 8px; }

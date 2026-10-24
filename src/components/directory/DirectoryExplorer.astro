@@ -1,0 +1,24 @@
+---
+import Icon from '../home/HomeIcon.astro';
+interface Props {label?:string;categories?:{slug:string;name:string}[];modes?:boolean;months?:{value:string;label:string}[];sort?:boolean;}
+const {label='Cari program pelatihan',categories=[],modes=true,months=[],sort=true}=Astro.props;
+---
+<section class="dir-explorer ui-container" data-directory>
+  <form class="dir-filters" role="search" hidden>
+    <label class="dir-search"><span>{label}</span><span class="dir-input-wrap"><Icon name="search" size={18}/><input type="search" name="q" placeholder={label} autocomplete="off"/></span></label>
+    {categories.length>0&&<label><span>Kategori</span><select name="category"><option value="">Semua kategori</option>{categories.map(c=><option value={c.slug}>{c.name}</option>)}</select></label>}
+    {modes&&<label><span>Metode</span><select name="mode"><option value="">Semua metode</option><option value="online">Online</option><option value="offline">Tatap muka</option><option value="hybrid">Hybrid</option><option value="inhouse">In-house</option></select></label>}
+    {months.length>0&&<label><span>Bulan</span><select name="month"><option value="">Semua bulan</option>{months.map(month=><option value={month.value}>{month.label}</option>)}</select></label>}
+    {sort&&<label><span>Urutkan</span><select name="sort"><option value="default">Rekomendasi</option><option value="name">Nama A–Z</option><option value="price">Biaya terendah</option></select></label>}
+    <button type="reset" class="dir-reset">Reset</button>
+  </form>
+  <div class="dir-results-bar"><p data-dir-status role="status" aria-live="polite"></p><slot name="links"/></div>
+  <div class="dir-grid" data-dir-grid><slot/></div>
+  <div class="dir-empty" hidden><h2>Belum ada hasil yang sesuai</h2><p>Coba kata kunci lain atau reset filter untuk melihat semua pilihan.</p><button type="button" data-dir-reset class="ui-action ui-action-secondary">Reset pencarian</button></div>
+  <div class="dir-more-wrap"><button type="button" class="ui-action ui-action-secondary" data-dir-more hidden>Tampilkan lebih banyak<Icon name="arrow" size={17}/></button></div>
+  <noscript><p>Semua pilihan ditampilkan. Buka program untuk melihat jadwal, silabus dan pendaftaran.</p></noscript>
+</section>
+<script>
+  import {initDirectories} from '../../lib/directoryClient';
+  initDirectories();
+</script>

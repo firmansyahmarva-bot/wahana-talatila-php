@@ -87,6 +87,9 @@ export function modeLabel(mode?: string | null): string {
   if (!mode) return 'Tatap Muka / Online';
   const m = mode.toLowerCase();
   if (m === 'online') return 'Online Zoom';
+  if (m === 'both') return 'Online / Tatap Muka';
+  if (m === 'hybrid') return 'Hybrid';
+  if (m === 'inhouse' || m === 'in-house') return 'In-house';
   if (m === 'offline') return 'Tatap Muka';
   if (m === 'blended') return 'Blended (Online + Praktek)';
   return mode.charAt(0).toUpperCase() + mode.slice(1);

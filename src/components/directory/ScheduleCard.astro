@@ -1,0 +1,19 @@
+---
+import Icon from '../home/HomeIcon.astro';
+import ActionLink from '../shared/ActionLink.astro';
+import {formatPrice,waUrl,modeLabel} from '../../lib/images';
+import {formatBatchRange} from '../../lib/jadwal';
+interface Props {batch:any;}
+const {batch:b}=Astro.props;
+const date=formatBatchRange(b.start_date,b.end_date);
+const message=`Halo Wahana Totalita, saya ingin daftar batch: ${b.training_name} (Tanggal: ${date}, Mode: ${b.mode || 'Online'}). Mohon konfirmasi ketersediaan, biaya dan persyaratan.`;
+---
+<article class="dir-batch" data-search={b.training_name+' '+b.certification} data-name={b.training_name} data-mode={b.mode||'offline'} data-month={b.start_date?.slice(0,7)} data-price={b.price}>
+  <div class="dir-batch-tags"><span>{b.certification}</span><span>{modeLabel(b.mode)}</span></div>
+  <h2>{b.training_slug?<a href={`/jadwal/${b.training_slug}/`}>{b.training_name}</a>:b.training_name}</h2>
+  <div class="dir-batch-date"><Icon name="calendar" size={20}/><time datetime={b.start_date}>{date}</time></div>
+  <p class="dir-batch-place"><Icon name={b.mode==='online'?'monitor':'pin'} size={17}/>{b.mode==='online'?'Online via Zoom':b.venue||'Konfirmasi lokasi pelatihan'}<span> · {b.duration_days} hari</span></p>
+  <div class="dir-batch-price"><span>Investasi / peserta</span><strong>{b.price>0?formatPrice(b.price):'Hubungi tim kami'}</strong></div>
+  <div class="dir-batch-links">{b.training_slug&&<a href={`/pelatihan/${b.training_slug}/`}>Lihat silabus<Icon name="arrow" size={15}/></a>}{b.detail_url&&<a href={b.detail_url}>Detail batch<Icon name="arrow" size={15}/></a>}</div>
+  <ActionLink href={waUrl(message)} label="Daftar via WhatsApp" icon="whatsapp" external/>
+</article>

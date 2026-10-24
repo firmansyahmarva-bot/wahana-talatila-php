@@ -1,261 +1,46 @@
 ---
-import { getCourseBanner, getCourseBannerSrcSet, formatPrice, modeLabel } from '../lib/images';
-import WaButton from './WaButton.astro';
-
-interface Props {
-  training: any;
-  showWa?: boolean;
-  headingLevel?: 'h2' | 'h3' | 'h4';
-  categoryIcon?: string;
-  categoryName?: string;
-}
-
-const {
-  training,
-  showWa = true,
-  headingLevel = 'h3',
-  categoryIcon = '',
-  categoryName = '',
-} = Astro.props;
-
-const item = training && training.data ? training.data : training;
-const Heading = headingLevel;
-
-const imageSrc = getCourseBanner(item.slug, item.category_slug);
-const priceStr = formatPrice(item.price);
-const modeText = modeLabel(item.mode);
-const certText = item.certification || 'Kemnaker / BNSP';
-const waMessage = item.wa_text || `Halo Wahana Totalita, saya tertarik mendaftar program ${item.name}. Mohon informasi jadwal batch terdekat dan investasinya.`;
-const trainingUrl = `/pelatihan/${item.slug}/`;
+import {getCourseBanner,getCourseBannerSrcSet,formatPrice,modeLabel,waUrl} from '../lib/images';
+import {getTrainingNextDate} from '../lib/trainingSummary';
+import Icon from './home/HomeIcon.astro';
+interface Props {training:any;showWa?:boolean;headingLevel?:'h2'|'h3'|'h4';categoryIcon?:string;categoryName?:string;}
+const {training,showWa=true,headingLevel='h3'}=Astro.props;
+const item=training?.data||training,Heading=headingLevel;
+const next=getTrainingNextDate(item.slug);
+const trainingUrl=`/pelatihan/${item.slug}/`;
+const message=item.wa_text||`Halo Wahana Totalita, saya tertarik mendaftar program ${item.name}. Mohon informasi jadwal batch terdekat dan investasinya.`;
 ---
-
-<article
-  class="training-card tc-card"
-  data-cat={item.category_slug || ''}
-  data-mode={(item.mode || 'offline').toLowerCase()}
-  data-slug={item.slug}
->
-  <a href={trainingUrl} class="tc-card-img-wrap">
-    <img
-      src={imageSrc}
-      srcset={getCourseBannerSrcSet(item.slug)}
-      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
-      alt={`Pelatihan ${item.name} ${certText}`}
-      loading="lazy"
-      width="1822"
-      height="662"
-      decoding="async"
-      class="tc-card-img"
-    />
-  </a>
-
+<article class="training-card tc-card" data-cat={item.category_slug||''} data-mode={(item.mode||'offline').toLowerCase()} data-slug={item.slug} data-name={item.name} data-search={`${item.name} ${item.certification||''}`} data-price={item.price}>
+  <a href={trainingUrl} class="tc-card-img-wrap"><img src={getCourseBanner(item.slug,item.category_slug)} srcset={getCourseBannerSrcSet(item.slug)} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px" alt={`Pelatihan ${item.name} ${item.certification||'Kemnaker / BNSP'}`} loading="lazy" width="1822" height="662" decoding="async" class="tc-card-img"/></a>
   <div class="tc-card-body">
-    <div class="tc-card-badges">
-      <span class="badge-mode tc-card-badge-mode">{modeText}</span>
-      <span class="badge-cert tc-card-badge-cert">{certText}</span>
-    </div>
-
-    <Heading class="training-card-title tc-card-title">
-      <a href={trainingUrl} class="tc-card-title-link">{item.name}</a>
-    </Heading>
-
-    <div class="tc-card-footer">
-      <div class="tc-card-price-box">
-        <span class="tc-card-price-label">Investasi</span>
-        <span class="tc-card-price-val">{priceStr} <span class="tc-card-price-sub">/orang</span></span>
-      </div>
-
-      <div class="tc-card-actions">
-        <a href={trainingUrl} class="tc-card-syllabus-link">Lihat Silabus</a>
-        {showWa && (
-          <WaButton
-            message={waMessage}
-            label="Daftar"
-            variant="primary"
-            size="sm"
-            class="tc-card-wa-btn"
-          />
-        )}
-      </div>
-    </div>
+    <div class="tc-card-badges"><span>{modeLabel(item.mode)}</span><span>{item.certification||'Kemnaker / BNSP'}</span></div>
+    <Heading class="training-card-title tc-card-title"><a href={trainingUrl} class="tc-card-title-link">{item.name}</a></Heading>
+    <div class="tc-card-facts">{item.duration_days&&<span><Icon name="clock" size={16}/>{item.duration_days} hari</span>}{next&&<a href={`/jadwal/${item.slug}/`}><Icon name="calendar" size={16}/>{next}</a>}</div>
+    <div class="tc-card-footer"><div class="tc-card-price-box"><span class="tc-card-price-label">Investasi / peserta</span><strong class="tc-card-price-val">{Number(item.price)>0?formatPrice(item.price):'Konsultasi biaya'}</strong></div><div class="tc-card-actions"><a href={trainingUrl} class="tc-card-syllabus-link">Lihat Silabus<Icon name="arrow" size={15}/></a>{showWa&&<a href={waUrl(message)} target="_blank" rel="noopener noreferrer" class="tc-card-wa-btn"><Icon name="whatsapp" size={16}/>Daftar</a>}</div></div>
   </div>
 </article>
-
 <style>
-  .tc-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 2px 8px color-mix(in srgb, var(--brand) 4%, transparent);
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-  }
-  .tc-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 24px -4px color-mix(in srgb, var(--brand) 12%, transparent);
-    border-color: var(--brand);
-  }
-  .tc-card-img-wrap {
-    display: block;
-    position: relative;
-    overflow: hidden;
-    text-decoration: none;
-    aspect-ratio: 1822 / 662;
-    background: var(--surface-alt);
-  }
-  .tc-card-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.3s ease;
-  }
-  .tc-card:hover .tc-card-img {
-    transform: scale(1.03);
-  }
-  
-  .tc-card-body {
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-  }
-  .tc-card-badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: 10px;
-  }
-  .tc-card-badge-mode {
-    font-size: 11px;
-    font-weight: 600;
-    background: var(--surface-alt);
-    color: var(--slate-700);
-    padding: 3px 8px;
-    border-radius: 4px;
-    border: 1px solid var(--border);
-  }
-  .tc-card-badge-cert {
-    font-size: 11px;
-    font-weight: 700;
-    background: color-mix(in srgb, var(--brand) 10%, transparent);
-    color: var(--brand);
-    padding: 3px 8px;
-    border-radius: 4px;
-    border: 1px solid color-mix(in srgb, var(--brand) 20%, transparent);
-  }
-  .tc-card-title {
-    font-family: inherit;
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 1.4;
-    margin: 0 0 14px 0;
-    flex: 1;
-  }
-  .tc-card-title-link {
-    color: var(--brand);
-    text-decoration: none;
-    transition: color 0.15s ease;
-  }
-  .tc-card-title-link:hover {
-    color: var(--cta);
-  }
-  .tc-card-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    border-top: 1px solid var(--border);
-    padding-top: 12px;
-    margin-top: auto;
-  }
-  .tc-card-price-box {
-    display: flex;
-    flex-direction: column;
-  }
-  .tc-card-price-label {
-    font-size: 11px;
-    color: var(--text-subtle);
-    font-weight: 600;
-    text-transform: uppercase;
-  }
-  .tc-card-price-val {
-    font-size: 15px;
-    font-weight: 800;
-    color: var(--brand);
-  }
-  .tc-card-price-sub {
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--text-subtle);
-  }
-  .tc-card-actions {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .tc-card-syllabus-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 44px;
-    padding: 8px 12px;
-    font-size: 12.5px;
-    font-weight: 700;
-    color: var(--brand);
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    text-decoration: none;
-    box-sizing: border-box;
-    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
-  }
-  .tc-card-syllabus-link:hover {
-    background: var(--surface-alt);
-    border-color: var(--brand);
-  }
-  .tc-card-syllabus-link:focus-visible {
-    outline: 2px solid var(--cta);
-    outline-offset: 2px;
-  }
-  @media (max-width: 640px) {
-    .tc-card-body {
-      padding: 12px;
-    }
-    .tc-card-title {
-      font-size: 13.5px;
-      line-height: 1.35;
-      margin-bottom: 10px;
-      display: block;
-      -webkit-line-clamp: unset;
-      overflow: visible;
-    }
-    .tc-card-footer {
-      flex-direction: column;
-      align-items: stretch;
-      gap: 8px;
-      padding-top: 10px;
-    }
-    .tc-card-actions {
-      display: flex;
-      gap: 6px;
-      width: 100%;
-    }
-    .tc-card-syllabus-link {
-      flex: 1;
-      min-height: 36px;
-      padding: 6px 8px;
-      font-size: 11.5px;
-      text-align: center;
-    }
-    :global(.tc-card-wa-btn) {
-      flex: 1;
-      min-height: 36px;
-      padding: 6px 8px !important;
-      font-size: 11.5px !important;
-      justify-content: center;
-    }
-  }
+.tc-card { min-width: 0; display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+.tc-card:hover,.tc-card:focus-within { transform: translateY(-3px); border-color: color-mix(in srgb,var(--lead-action) 40%,var(--border)); box-shadow: var(--shadow-sm); }
+.tc-card-img-wrap { display: block; aspect-ratio: 1822 / 662; background: var(--surface-subtle); }
+.tc-card-img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.tc-card-body { display: flex; flex-direction: column; flex: 1; padding: 23px; }
+.tc-card-badges { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 17px; }
+.tc-card-badges span { padding: 4px 8px; border: 1px solid var(--border); border-radius: 4px; color: var(--text-muted); font-size: 10px; line-height: 1.5; }
+.tc-card-title { flex: 1; margin: 0 0 20px; font-family: 'Plus Jakarta Sans',sans-serif; font-size: 19px; font-weight: 750; line-height: 1.5; letter-spacing: -.035em; }
+.tc-card-title-link { color: var(--text); text-decoration: none; }
+.tc-card-facts { display: flex; flex-wrap: wrap; gap: 10px 18px; margin-bottom: 20px; color: var(--text-muted); font-size: 11px; line-height: 1.6; }
+.tc-card-facts a,.tc-card-facts span { display: inline-flex; align-items: center; gap: 7px; color: inherit; text-decoration: none; }
+.tc-card-facts a:hover { color: var(--lead-action); }
+.tc-card-footer { margin-top: auto; border-top: 1px solid var(--border); padding-top: 18px; }
+.tc-card-price-box { display: flex; flex-direction: column; gap: 3px; margin-bottom: 18px; }
+.tc-card-price-label { font-size: 10px; color: var(--text-subtle); }
+.tc-card-price-val { font-size: 20px; font-weight: 750; color: var(--text); line-height: 1.6; }
+.tc-card-actions { display: flex; align-items: stretch; gap: 10px; }
+.tc-card-actions a { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 44px; padding: 10px 12px; border: 1px solid var(--border); border-radius: 7px; color: var(--text); font-size: 12px; font-weight: 600; line-height: 1.5; text-decoration: none; }
+.tc-card-actions .tc-card-wa-btn { flex: 1; color: var(--on-brand); background: var(--lead-action); border-color: var(--lead-action); }
+.tc-card-actions a:hover { border-color: var(--lead-action); }
+.tc-card a:focus-visible { outline: 3px solid var(--lead-action); outline-offset: 3px; }
+.tc-card svg { flex-shrink: 0; }
+@media(max-width:640px){.tc-card-body{padding:20px}.tc-card-title{font-size:18px}}
+@media(prefers-reduced-motion:reduce){.tc-card{transition:none}.tc-card:hover,.tc-card:focus-within{transform:none}}
 </style>

@@ -1,0 +1,14 @@
+.dir-guide-local-1{font-size:15px}
+.dir-guide-local-2{margin-bottom:20px;}
+.dir-guide-local-3{margin-top:48px;margin-bottom:48px;}
+.dir-guide-local-4{color:var(--success-border); font-size:13.5px; text-decoration:underline; text-align:center; padding:4px;}
+.dir-guide-local-5{margin-bottom:48px;}
+.dir-guide-local-6{margin-bottom:10px;}
+.dir-guide-local-7{max-width:860px;margin:0 auto;text-align:center;}
+.dir-guide-local-8{text-align:center;}
+.dir-guide-local-9{justify-content:center;}
+.dir-guide-local-10{font-size:22px;margin:8px 0;}
+.dir-guide-local-11{margin:0 auto 16px;max-width:620px;}
+.dir-guide-local-12{display:flex;flex-direction:column;align-items:center;gap:12px;}
+.dir-guide-local-13{font-size:12.5px;color:var(--text-subtle);}
+.dir-guide .service-card{--accent:var(--lead-action);text-decoration:none}
