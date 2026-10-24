@@ -1,3 +1,5 @@
+import {getArticleVisual} from './articleVisuals';
+
 export const CATEGORY_TITLES: Record<string, { title: string; h1: string; desc: string }> = {
   k3: {
     title: 'Artikel & Panduan K3 Keselamatan Kerja | Wahana Totalita',
@@ -61,7 +63,8 @@ if (type === 'category') {
   pageTitle = data.meta_title || `${data.title} — Wahana Totalita`;
   pageDesc = data.meta_desc || data.title;
   canonicalUrl = `https://wahanatotalita.com/artikel/${data.slug}/`;
-  imageUrl = data.thumbnail || 'https://wahanatotalita.com/assets/img/og-cover.jpg';
+  const visual = getArticleVisual(data.slug);
+  imageUrl = visual ? `https://wahanatotalita.com${visual.src}` : data.thumbnail || 'https://wahanatotalita.com/assets/img/og-cover.jpg';
 
   schemas = [
     {

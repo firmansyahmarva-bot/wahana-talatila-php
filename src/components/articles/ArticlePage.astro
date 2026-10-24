@@ -8,10 +8,12 @@ import ArticleCard from './ArticleCard.astro';
 import ArticleToc from './ArticleToc.astro';
 import ArticleConversion from './ArticleConversion.astro';
 import {getArticleSeo} from '../../lib/articleSeo';
+import {getArticleVisual} from '../../lib/articleVisuals';
 import {getArticleCatalog,prepareArticleContent,readingMinutes,articleDate,topicFor,ARTICLE_TOPICS,type ArticleRecord} from '../../lib/articles';
 import {waUrl} from '../../lib/images';
 interface Props {data:ArticleRecord;}
 const {data}=Astro.props;const seo=getArticleSeo('article',data);
+const visual=getArticleVisual(data.slug);
 const catalog=await getArticleCatalog();const related=catalog.related(data);
 const content=prepareArticleContent(data.content || '');
 const topic=ARTICLE_TOPICS.find(topic=>topic.slug===topicFor(data))!;
@@ -26,7 +28,7 @@ const message=`Halo Wahana Totalita, saya membaca artikel "${data.title}" dan in
     <div class="ar-reading-grid ui-container">
       <aside class="ar-sidebar"><ArticleToc headings={content.headings}/><a class="ar-all-topics" href={`/artikel/${topic.slug}/`}>Jelajahi {topic.label}<Icon name="arrow" size={16}/></a></aside>
       <div class="ar-main">
-        {data.thumbnail&&<figure class="ar-article-image"><img src={data.thumbnail} alt={data.title} width="1200" height="600" loading="lazy" decoding="async"/></figure>}
+        {visual ? <figure class="ar-article-image"><a href={visual.src} target="_blank" rel="noopener" aria-label={`Buka ukuran penuh: ${visual.title}`}><img src={visual.src} alt={visual.alt} width={visual.width} height={visual.height} loading="eager" decoding="async"/></a></figure> : data.thumbnail&&<figure class="ar-article-image"><img src={data.thumbnail} alt={data.title} width="1200" height="600" loading="lazy" decoding="async"/></figure>}
         <div class="ar-prose article-body" id="article-content" set:html={content.html}/>
         {faqs.length>0&&<CourseFaq {faqs} name={data.title} heading="Pertanyaan Umum (FAQ)" id="article-faq"/>}
         <ArticleConversion title={data.title} scheduleUrl={related.trainings[0]?`/jadwal/${related.trainings[0].slug}/`:undefined}/>
